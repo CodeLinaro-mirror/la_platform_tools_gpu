@@ -2007,7 +2007,7 @@ var schemaArchitecture = &binary.Entity{
 	Package: "gles",
 	Name:    "Architecture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -2108,7 +2108,7 @@ var schemaBlendState = &binary.Entity{
 		{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "BlendColor", Type: &schema.Struct{Entity: schema.Of((*Color)(nil).Class())}},
+		{Declared: "BlendColor", Type: &schema.Struct{Entity: (*Color)(nil).Class().Schema()}},
 	},
 }
 
@@ -2147,7 +2147,7 @@ var schemaSliceInfo = &binary.Entity{
 	Package: "gles",
 	Name:    "SliceInfo",
 	Fields: []binary.Field{
-		{Declared: "Root", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "Root", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -2184,7 +2184,7 @@ var schemaU8ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "U8ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -2229,12 +2229,12 @@ var schemaBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "Buffer",
 	Fields: []binary.Field{
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "MappingAccess", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "MappingOffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		{Declared: "MappingData", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "MappingData", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2269,7 +2269,7 @@ var schemaBufferDataPointer = &binary.Entity{
 	Package: "gles",
 	Name:    "BufferDataPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2304,7 +2304,7 @@ var schemaBufferIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "BufferIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -2339,7 +2339,7 @@ var schemaBufferIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "BufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2374,7 +2374,7 @@ var schemaBufferIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "BufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2409,7 +2409,7 @@ var schemaCGLContextObj = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLContextObj",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2444,7 +2444,7 @@ var schemaCGLContextObjˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLContextObjˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -2479,7 +2479,7 @@ var schemaCGLContextObjᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLContextObjᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2514,7 +2514,7 @@ var schemaCGLPixelFormatObj = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLPixelFormatObj",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2557,10 +2557,10 @@ var schemaCGLCreateContext = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLCreateContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Pix", Type: &schema.Struct{Entity: schema.Of((*CGLPixelFormatObj)(nil).Class())}},
-		{Declared: "Share", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObjᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pix", Type: &schema.Struct{Entity: (*CGLPixelFormatObj)(nil).Class().Schema()}},
+		{Declared: "Share", Type: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*CGLContextObjᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
 	},
 }
@@ -2600,8 +2600,8 @@ var schemaCGLFlushDrawable = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLFlushDrawable",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
 	},
 }
@@ -2637,7 +2637,7 @@ var schemaCGSConnectionIDᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSConnectionIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2672,7 +2672,7 @@ var schemaCGSWindowIDᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSWindowIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2707,7 +2707,7 @@ var schemaCGSSurfaceIDᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSSurfaceIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2752,11 +2752,11 @@ var schemaCGLGetSurface = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLGetSurface",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
-		{Declared: "Cid", Type: &schema.Struct{Entity: schema.Of((*CGSConnectionIDᵖ)(nil).Class())}},
-		{Declared: "Wid", Type: &schema.Struct{Entity: schema.Of((*CGSWindowIDᵖ)(nil).Class())}},
-		{Declared: "Sid", Type: &schema.Struct{Entity: schema.Of((*CGSSurfaceIDᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}},
+		{Declared: "Cid", Type: &schema.Struct{Entity: (*CGSConnectionIDᵖ)(nil).Class().Schema()}},
+		{Declared: "Wid", Type: &schema.Struct{Entity: (*CGSWindowIDᵖ)(nil).Class().Schema()}},
+		{Declared: "Sid", Type: &schema.Struct{Entity: (*CGSSurfaceIDᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2796,8 +2796,8 @@ var schemaCGLSetCurrentContext = &binary.Entity{
 	Package: "gles",
 	Name:    "CGLSetCurrentContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
 	},
 }
@@ -2833,7 +2833,7 @@ var schemaCGSConnectionID = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSConnectionID",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2868,7 +2868,7 @@ var schemaCGSConnectionIDˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSConnectionIDˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -2903,7 +2903,7 @@ var schemaF64ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "F64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2948,11 +2948,11 @@ var schemaCGSGetSurfaceBounds = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSGetSurfaceBounds",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Cid", Type: &schema.Struct{Entity: schema.Of((*CGSConnectionID)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Cid", Type: &schema.Struct{Entity: (*CGSConnectionID)(nil).Class().Schema()}},
 		{Declared: "Wid", Type: &schema.Primitive{Name: "CGSWindowID", Method: schema.Int32}},
 		{Declared: "Sid", Type: &schema.Primitive{Name: "CGSSurfaceID", Method: schema.Int32}},
-		{Declared: "Bounds", Type: &schema.Struct{Entity: schema.Of((*F64ᵖ)(nil).Class())}},
+		{Declared: "Bounds", Type: &schema.Struct{Entity: (*F64ᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2988,7 +2988,7 @@ var schemaCGSSurfaceIDˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSSurfaceIDˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3023,7 +3023,7 @@ var schemaCGSWindowIDˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "CGSWindowIDˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3058,7 +3058,7 @@ var schemaCharˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Charˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3093,7 +3093,7 @@ var schemaCharᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Charᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -3132,7 +3132,7 @@ var schemaClearState = &binary.Entity{
 	Package: "gles",
 	Name:    "ClearState",
 	Fields: []binary.Field{
-		{Declared: "ClearColor", Type: &schema.Struct{Entity: schema.Of((*Color)(nil).Class())}},
+		{Declared: "ClearColor", Type: &schema.Struct{Entity: (*Color)(nil).Class().Schema()}},
 		{Declared: "ClearDepth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "ClearStencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -3323,8 +3323,8 @@ var schemaRasterizerState = &binary.Entity{
 		{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "StencilMask", Type: &schema.Map{Alias: "GLenumːGLuintᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}}},
-		{Declared: "Viewport", Type: &schema.Struct{Entity: schema.Of((*Rect)(nil).Class())}},
-		{Declared: "Scissor", Type: &schema.Struct{Entity: schema.Of((*Rect)(nil).Class())}},
+		{Declared: "Viewport", Type: &schema.Struct{Entity: (*Rect)(nil).Class().Schema()}},
+		{Declared: "Scissor", Type: &schema.Struct{Entity: (*Rect)(nil).Class().Schema()}},
 		{Declared: "FrontFace", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "CullFace", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "LineWidth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -3366,7 +3366,7 @@ var schemaVertexAttributeValue = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexAttributeValue",
 	Fields: []binary.Field{
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3458,7 +3458,7 @@ var schemaRenderbuffer = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -3504,7 +3504,7 @@ var schemaImage = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -3555,7 +3555,7 @@ var schemaCubemapLevel = &binary.Entity{
 	Package: "gles",
 	Name:    "CubemapLevel",
 	Fields: []binary.Field{
-		{Declared: "Faces", Type: &schema.Map{Alias: "GLenumːImageᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: schema.Of((*Image)(nil).Class())}}},
+		{Declared: "Faces", Type: &schema.Map{Alias: "GLenumːImageᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*Image)(nil).Class().Schema()}}},
 	},
 }
 
@@ -3647,8 +3647,8 @@ var schemaTexture = &binary.Entity{
 		{Declared: "ID", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Texture2D", Type: &schema.Map{Alias: "GLintːImageᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: schema.Of((*Image)(nil).Class())}}},
-		{Declared: "Cubemap", Type: &schema.Map{Alias: "GLintːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: schema.Of((*CubemapLevel)(nil).Class())}}},
+		{Declared: "Texture2D", Type: &schema.Map{Alias: "GLintːImageᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*Image)(nil).Class().Schema()}}},
+		{Declared: "Cubemap", Type: &schema.Map{Alias: "GLintːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*CubemapLevel)(nil).Class().Schema()}}},
 		{Declared: "MagFilter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "MinFilter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "WrapS", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -3752,7 +3752,7 @@ var schemaFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "Framebuffer",
 	Fields: []binary.Field{
-		{Declared: "Attachments", Type: &schema.Map{Alias: "GLenumːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: schema.Of((*FramebufferAttachmentInfo)(nil).Class())}}},
+		{Declared: "Attachments", Type: &schema.Map{Alias: "GLenumːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*FramebufferAttachmentInfo)(nil).Class().Schema()}}},
 	},
 }
 
@@ -3787,7 +3787,7 @@ var schemaGLcharˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3832,10 +3832,10 @@ var schemaShader = &binary.Entity{
 	Package: "gles",
 	Name:    "Shader",
 	Fields: []binary.Field{
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "InfoLog", Type: &schema.Struct{Entity: schema.Of((*GLcharˢ)(nil).Class())}},
+		{Declared: "InfoLog", Type: &schema.Struct{Entity: (*GLcharˢ)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -3876,7 +3876,7 @@ var schemaVertexAttribute = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexAttribute",
 	Fields: []binary.Field{
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*Charˢ)(nil).Class())}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*Charˢ)(nil).Class().Schema()}},
 		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -3919,7 +3919,7 @@ var schemaUniform = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 	},
 }
 
@@ -4024,11 +4024,11 @@ var schemaProgram = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "Shaders", Type: &schema.Map{Alias: "GLenumːShaderIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
-		{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Entity: schema.Of((*VertexAttribute)(nil).Class())}}},
-		{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Entity: schema.Of((*Uniform)(nil).Class())}}},
-		{Declared: "InfoLog", Type: &schema.Struct{Entity: schema.Of((*GLcharˢ)(nil).Class())}},
+		{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*VertexAttribute)(nil).Class().Schema()}}},
+		{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*Uniform)(nil).Class().Schema()}}},
+		{Declared: "InfoLog", Type: &schema.Struct{Entity: (*GLcharˢ)(nil).Class().Schema()}},
 	},
 }
 
@@ -4107,7 +4107,7 @@ var schemaVertexPointer = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4163,7 +4163,7 @@ var schemaVertexAttributeArray = &binary.Entity{
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pointer", Type: &schema.Struct{Entity: schema.Of((*VertexPointer)(nil).Class())}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*VertexPointer)(nil).Class().Schema()}},
 		{Declared: "RelativeOffset", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Integer", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binding", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
@@ -4247,8 +4247,8 @@ var schemaVertexArray = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexArray",
 	Fields: []binary.Field{
-		{Declared: "VertexBufferBindings", Type: &schema.Map{Alias: "VertexBufferBindingIndexːVertexBufferBindingʳᵐ", KeyType: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*VertexBufferBinding)(nil).Class())}}}},
-		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*VertexAttributeArray)(nil).Class())}}}},
+		{Declared: "VertexBufferBindings", Type: &schema.Map{Alias: "VertexBufferBindingIndexːVertexBufferBindingʳᵐ", KeyType: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*VertexBufferBinding)(nil).Class().Schema()}}}},
+		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*VertexAttributeArray)(nil).Class().Schema()}}}},
 	},
 }
 
@@ -4504,14 +4504,14 @@ var schemaObjects = &binary.Entity{
 	Package: "gles",
 	Name:    "Objects",
 	Fields: []binary.Field{
-		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Renderbuffer)(nil).Class())}}}},
-		{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Texture)(nil).Class())}}}},
-		{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Framebuffer)(nil).Class())}}}},
-		{Declared: "Buffers", Type: &schema.Map{Alias: "BufferIdːBufferʳᵐ", KeyType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Buffer)(nil).Class())}}}},
-		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderIdːShaderʳᵐ", KeyType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Shader)(nil).Class())}}}},
-		{Declared: "Programs", Type: &schema.Map{Alias: "ProgramIdːProgramʳᵐ", KeyType: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Program)(nil).Class())}}}},
-		{Declared: "VertexArrays", Type: &schema.Map{Alias: "VertexArrayIdːVertexArrayʳᵐ", KeyType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*VertexArray)(nil).Class())}}}},
-		{Declared: "Queries", Type: &schema.Map{Alias: "QueryIdːQueryʳᵐ", KeyType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Query)(nil).Class())}}}},
+		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Renderbuffer)(nil).Class().Schema()}}}},
+		{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Texture)(nil).Class().Schema()}}}},
+		{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Framebuffer)(nil).Class().Schema()}}}},
+		{Declared: "Buffers", Type: &schema.Map{Alias: "BufferIdːBufferʳᵐ", KeyType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Buffer)(nil).Class().Schema()}}}},
+		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderIdːShaderʳᵐ", KeyType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Shader)(nil).Class().Schema()}}}},
+		{Declared: "Programs", Type: &schema.Map{Alias: "ProgramIdːProgramʳᵐ", KeyType: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Program)(nil).Class().Schema()}}}},
+		{Declared: "VertexArrays", Type: &schema.Map{Alias: "VertexArrayIdːVertexArrayʳᵐ", KeyType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*VertexArray)(nil).Class().Schema()}}}},
+		{Declared: "Queries", Type: &schema.Map{Alias: "QueryIdːQueryʳᵐ", KeyType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Query)(nil).Class().Schema()}}}},
 	},
 }
 
@@ -4685,22 +4685,22 @@ var schemaContext = &binary.Entity{
 	Name:    "Context",
 	Fields: []binary.Field{
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
-		{Declared: "Info", Type: &schema.Struct{Entity: schema.Of((*ContextCreationInfo)(nil).Class())}},
-		{Declared: "Blending", Type: &schema.Struct{Entity: schema.Of((*BlendState)(nil).Class())}},
-		{Declared: "Rasterizing", Type: &schema.Struct{Entity: schema.Of((*RasterizerState)(nil).Class())}},
-		{Declared: "Clearing", Type: &schema.Struct{Entity: schema.Of((*ClearState)(nil).Class())}},
+		{Declared: "Info", Type: &schema.Struct{Entity: (*ContextCreationInfo)(nil).Class().Schema()}},
+		{Declared: "Blending", Type: &schema.Struct{Entity: (*BlendState)(nil).Class().Schema()}},
+		{Declared: "Rasterizing", Type: &schema.Struct{Entity: (*RasterizerState)(nil).Class().Schema()}},
+		{Declared: "Clearing", Type: &schema.Struct{Entity: (*ClearState)(nil).Class().Schema()}},
 		{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "GLenumːFramebufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
 		{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "GLenumːRenderbufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
 		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "GLenumːBufferIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
 		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		{Declared: "VertexAttributes", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeValueᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: schema.Of((*VertexAttributeValue)(nil).Class())}}},
-		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːTextureUnitʳᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*TextureUnit)(nil).Class())}}}},
+		{Declared: "VertexAttributes", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeValueᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*VertexAttributeValue)(nil).Class().Schema()}}},
+		{Declared: "TextureUnits", Type: &schema.Map{Alias: "GLenumːTextureUnitʳᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*TextureUnit)(nil).Class().Schema()}}}},
 		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Capabilities", Type: &schema.Map{Alias: "GLenumːboolᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
 		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PixelStorage", Type: &schema.Map{Alias: "GLenumːGLintᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}}},
-		{Declared: "Instances", Type: &schema.Struct{Entity: schema.Of((*Objects)(nil).Class())}},
+		{Declared: "Instances", Type: &schema.Struct{Entity: (*Objects)(nil).Class().Schema()}},
 	},
 }
 
@@ -4757,7 +4757,7 @@ var schemaContextInfo = &binary.Entity{
 	Package: "gles",
 	Name:    "ContextInfo",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -4803,7 +4803,7 @@ var schemaEGLConfig = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLConfig",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4838,7 +4838,7 @@ var schemaEGLContext = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLContext",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4873,7 +4873,7 @@ var schemaEGLDisplay = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLDisplay",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4908,7 +4908,7 @@ var schemaEGLSurface = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLSurface",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4943,7 +4943,7 @@ var schemaEGLintˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLintˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -4978,7 +4978,7 @@ var schemaEGLintᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "EGLintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5023,12 +5023,12 @@ var schemaEglCreateContext = &binary.Entity{
 	Package: "gles",
 	Name:    "EglCreateContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
-		{Declared: "Config", Type: &schema.Struct{Entity: schema.Of((*EGLConfig)(nil).Class())}},
-		{Declared: "ShareContext", Type: &schema.Struct{Entity: schema.Of((*EGLContext)(nil).Class())}},
-		{Declared: "AttribList", Type: &schema.Struct{Entity: schema.Of((*EGLintᵖ)(nil).Class())}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*EGLContext)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*EGLDisplay)(nil).Class().Schema()}},
+		{Declared: "Config", Type: &schema.Struct{Entity: (*EGLConfig)(nil).Class().Schema()}},
+		{Declared: "ShareContext", Type: &schema.Struct{Entity: (*EGLContext)(nil).Class().Schema()}},
+		{Declared: "AttribList", Type: &schema.Struct{Entity: (*EGLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*EGLContext)(nil).Class().Schema()}},
 	},
 }
 
@@ -5071,10 +5071,10 @@ var schemaEglInitialize = &binary.Entity{
 	Package: "gles",
 	Name:    "EglInitialize",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Dpy", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
-		{Declared: "Major", Type: &schema.Struct{Entity: schema.Of((*EGLintᵖ)(nil).Class())}},
-		{Declared: "Minor", Type: &schema.Struct{Entity: schema.Of((*EGLintᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Dpy", Type: &schema.Struct{Entity: (*EGLDisplay)(nil).Class().Schema()}},
+		{Declared: "Major", Type: &schema.Struct{Entity: (*EGLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Minor", Type: &schema.Struct{Entity: (*EGLintᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
@@ -5120,11 +5120,11 @@ var schemaEglMakeCurrent = &binary.Entity{
 	Package: "gles",
 	Name:    "EglMakeCurrent",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
-		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*EGLSurface)(nil).Class())}},
-		{Declared: "Read", Type: &schema.Struct{Entity: schema.Of((*EGLSurface)(nil).Class())}},
-		{Declared: "Context", Type: &schema.Struct{Entity: schema.Of((*EGLContext)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*EGLDisplay)(nil).Class().Schema()}},
+		{Declared: "Draw", Type: &schema.Struct{Entity: (*EGLSurface)(nil).Class().Schema()}},
+		{Declared: "Read", Type: &schema.Struct{Entity: (*EGLSurface)(nil).Class().Schema()}},
+		{Declared: "Context", Type: &schema.Struct{Entity: (*EGLContext)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
@@ -5170,11 +5170,11 @@ var schemaEglQuerySurface = &binary.Entity{
 	Package: "gles",
 	Name:    "EglQuerySurface",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
-		{Declared: "Surface", Type: &schema.Struct{Entity: schema.Of((*EGLSurface)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*EGLDisplay)(nil).Class().Schema()}},
+		{Declared: "Surface", Type: &schema.Struct{Entity: (*EGLSurface)(nil).Class().Schema()}},
 		{Declared: "Attribute", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*EGLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*EGLintᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
@@ -5210,7 +5210,7 @@ var schemaVoidᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5251,9 +5251,9 @@ var schemaEglSwapBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "EglSwapBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
-		{Declared: "Surface", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*EGLDisplay)(nil).Class().Schema()}},
+		{Declared: "Surface", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
@@ -5289,7 +5289,7 @@ var schemaF64ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "F64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5324,7 +5324,7 @@ var schemaFlushPostBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "FlushPostBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -5359,7 +5359,7 @@ var schemaFramebufferIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "FramebufferIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5394,7 +5394,7 @@ var schemaFramebufferIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "FramebufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5429,7 +5429,7 @@ var schemaFramebufferIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "FramebufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5464,7 +5464,7 @@ var schemaGLDEBUGPROC = &binary.Entity{
 	Package: "gles",
 	Name:    "GLDEBUGPROC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5499,7 +5499,7 @@ var schemaGLXContext = &binary.Entity{
 	Package: "gles",
 	Name:    "GLXContext",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5534,7 +5534,7 @@ var schemaGLXDrawable = &binary.Entity{
 	Package: "gles",
 	Name:    "GLXDrawable",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5569,7 +5569,7 @@ var schemaGLbooleanˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLbooleanˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5604,7 +5604,7 @@ var schemaGLbooleanᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLbooleanᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5639,7 +5639,7 @@ var schemaGLcharᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5674,7 +5674,7 @@ var schemaGLcharᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5709,7 +5709,7 @@ var schemaGLcharᶜᵖˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharᶜᵖˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5744,7 +5744,7 @@ var schemaGLcharᶜᵖᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharᶜᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5779,7 +5779,7 @@ var schemaGLcharᶜᵖᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLcharᶜᵖᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5814,7 +5814,7 @@ var schemaGLeglImageOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GLeglImageOES",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5849,7 +5849,7 @@ var schemaGLenumˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLenumˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5884,7 +5884,7 @@ var schemaGLenumᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLenumᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -5919,7 +5919,7 @@ var schemaGLenumᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLenumᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6071,7 +6071,7 @@ var schemaGLfloatˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLfloatˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6106,7 +6106,7 @@ var schemaGLfloatᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLfloatᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6141,7 +6141,7 @@ var schemaGLfloatᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLfloatᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6176,7 +6176,7 @@ var schemaGLint64ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLint64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6211,7 +6211,7 @@ var schemaGLint64ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLint64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6363,7 +6363,7 @@ var schemaGLintˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLintˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6398,7 +6398,7 @@ var schemaGLintᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6433,7 +6433,7 @@ var schemaGLintᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLintᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6468,7 +6468,7 @@ var schemaGLsizeiˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLsizeiˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6503,7 +6503,7 @@ var schemaGLsizeiᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLsizeiᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6538,7 +6538,7 @@ var schemaGLsizeiᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLsizeiᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6573,7 +6573,7 @@ var schemaGLubyteˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLubyteˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6608,7 +6608,7 @@ var schemaGLubyteᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLubyteᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6643,7 +6643,7 @@ var schemaGLubyteᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLubyteᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6678,7 +6678,7 @@ var schemaGLuint64ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuint64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6713,7 +6713,7 @@ var schemaGLuint64ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuint64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6748,7 +6748,7 @@ var schemaGLuint64ᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuint64ᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6900,7 +6900,7 @@ var schemaGLuintˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuintˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -6935,7 +6935,7 @@ var schemaGLuintᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -6970,7 +6970,7 @@ var schemaGLuintᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLuintᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -7005,7 +7005,7 @@ var schemaGLvoidˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLvoidˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -7040,7 +7040,7 @@ var schemaGLvoidᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "GLvoidᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -7079,7 +7079,7 @@ var schemaGlActiveShaderProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlActiveShaderProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -7122,7 +7122,7 @@ var schemaGlActiveShaderProgramEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlActiveShaderProgramEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -7161,7 +7161,7 @@ var schemaGlActiveTexture = &binary.Entity{
 	Package: "gles",
 	Name:    "GlActiveTexture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -7201,7 +7201,7 @@ var schemaGlAlphaFuncQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlAlphaFuncQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
 	},
@@ -7244,7 +7244,7 @@ var schemaGlApplyFramebufferAttachmentCMAAINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlApplyFramebufferAttachmentCMAAINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -7283,7 +7283,7 @@ var schemaGlAttachShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlAttachShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
@@ -7330,7 +7330,7 @@ var schemaGlBeginConditionalRenderNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginConditionalRenderNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -7369,7 +7369,7 @@ var schemaGlBeginPerfMonitorAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginPerfMonitorAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -7407,7 +7407,7 @@ var schemaGlBeginPerfQueryINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginPerfQueryINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -7447,7 +7447,7 @@ var schemaGlBeginQuery = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginQuery",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
@@ -7488,7 +7488,7 @@ var schemaGlBeginQueryEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginQueryEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
@@ -7529,7 +7529,7 @@ var schemaGlBeginTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBeginTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "PrimitiveMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -7571,7 +7571,7 @@ var schemaGlBindAttribLocation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindAttribLocation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -7613,7 +7613,7 @@ var schemaGlBindBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 	},
@@ -7656,7 +7656,7 @@ var schemaGlBindBufferBase = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindBufferBase",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -7704,7 +7704,7 @@ var schemaGlBindBufferRange = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindBufferRange",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -7752,7 +7752,7 @@ var schemaGlBindFragDataLocationEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindFragDataLocationEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Color", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -7804,7 +7804,7 @@ var schemaGlBindFragDataLocationIndexedEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindFragDataLocationIndexedEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ColorNumber", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -7847,7 +7847,7 @@ var schemaGlBindFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindFramebuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 	},
@@ -7898,7 +7898,7 @@ var schemaGlBindImageTexture = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindImageTexture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -7942,7 +7942,7 @@ var schemaGlBindProgramPipeline = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindProgramPipeline",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
 }
@@ -7982,7 +7982,7 @@ var schemaGlBindProgramPipelineEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindProgramPipelineEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
 }
@@ -8022,7 +8022,7 @@ var schemaGlBindRenderbuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindRenderbuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 	},
@@ -8063,7 +8063,7 @@ var schemaGlBindSampler = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindSampler",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 	},
@@ -8104,7 +8104,7 @@ var schemaGlBindTexture = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindTexture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 	},
@@ -8147,7 +8147,7 @@ var schemaGlBindTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "TransformFeedbackId", Method: schema.Uint32}},
 	},
@@ -8186,7 +8186,7 @@ var schemaGlBindVertexArray = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindVertexArray",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
 }
@@ -8224,7 +8224,7 @@ var schemaGlBindVertexArrayOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindVertexArrayOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
 }
@@ -8268,7 +8268,7 @@ var schemaGlBindVertexBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBindVertexBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -8307,7 +8307,7 @@ var schemaGlBlendBarrier = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendBarrier",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -8342,7 +8342,7 @@ var schemaGlBlendBarrierKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendBarrierKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -8377,7 +8377,7 @@ var schemaGlBlendBarrierNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendBarrierNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -8420,7 +8420,7 @@ var schemaGlBlendColor = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendColor",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -8461,7 +8461,7 @@ var schemaGlBlendEquation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Equation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -8503,7 +8503,7 @@ var schemaGlBlendEquationSeparate = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationSeparate",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Rgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8548,7 +8548,7 @@ var schemaGlBlendEquationSeparatei = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationSeparatei",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8598,7 +8598,7 @@ var schemaGlBlendEquationSeparateiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8648,7 +8648,7 @@ var schemaGlBlendEquationSeparateiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8690,7 +8690,7 @@ var schemaGlBlendEquationi = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationi",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8731,7 +8731,7 @@ var schemaGlBlendEquationiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8772,7 +8772,7 @@ var schemaGlBlendEquationiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendEquationiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8813,7 +8813,7 @@ var schemaGlBlendFunc = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFunc",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8858,7 +8858,7 @@ var schemaGlBlendFuncSeparate = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFuncSeparate",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8907,7 +8907,7 @@ var schemaGlBlendFuncSeparatei = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFuncSeparatei",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8959,7 +8959,7 @@ var schemaGlBlendFuncSeparateiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9011,7 +9011,7 @@ var schemaGlBlendFuncSeparateiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9057,7 +9057,7 @@ var schemaGlBlendFunci = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFunci",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9101,7 +9101,7 @@ var schemaGlBlendFunciEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFunciEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9145,7 +9145,7 @@ var schemaGlBlendFunciOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendFunciOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Dst", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9187,7 +9187,7 @@ var schemaGlBlendParameteriNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlendParameteriNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -9244,7 +9244,7 @@ var schemaGlBlitFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlitFramebuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcX1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9309,7 +9309,7 @@ var schemaGlBlitFramebufferANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlitFramebufferANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcX1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9374,7 +9374,7 @@ var schemaGlBlitFramebufferNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBlitFramebufferNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcX1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9427,10 +9427,10 @@ var schemaGlBufferData = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBufferData",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*BufferDataPointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*BufferDataPointer)(nil).Class().Schema()}},
 		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -9466,7 +9466,7 @@ var schemaVoidᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -9509,10 +9509,10 @@ var schemaGlBufferStorageEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBufferStorageEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
@@ -9556,11 +9556,11 @@ var schemaGlBufferSubData = &binary.Entity{
 	Package: "gles",
 	Name:    "GlBufferSubData",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*BufferDataPointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*BufferDataPointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -9601,7 +9601,7 @@ var schemaGlCheckFramebufferStatus = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCheckFramebufferStatus",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -9640,7 +9640,7 @@ var schemaGlClear = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClear",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
@@ -9684,7 +9684,7 @@ var schemaGlClearBufferfi = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearBufferfi",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -9729,10 +9729,10 @@ var schemaGlClearBufferfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearBufferfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -9773,10 +9773,10 @@ var schemaGlClearBufferiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearBufferiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -9817,10 +9817,10 @@ var schemaGlClearBufferuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearBufferuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -9863,7 +9863,7 @@ var schemaGlClearColor = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearColor",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "B", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -9904,7 +9904,7 @@ var schemaGlClearDepthf = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearDepthf",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
@@ -9942,7 +9942,7 @@ var schemaGlClearStencil = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClearStencil",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Stencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -9986,7 +9986,7 @@ var schemaGlClientWaitSync = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClientWaitSync",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Timeout", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -10033,7 +10033,7 @@ var schemaGlClientWaitSyncAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlClientWaitSyncAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Timeout", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -10080,7 +10080,7 @@ var schemaGlColorMask = &binary.Entity{
 	Package: "gles",
 	Name:    "GlColorMask",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Blue", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10129,7 +10129,7 @@ var schemaGlColorMaski = &binary.Entity{
 	Package: "gles",
 	Name:    "GlColorMaski",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10179,7 +10179,7 @@ var schemaGlColorMaskiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlColorMaskiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10229,7 +10229,7 @@ var schemaGlColorMaskiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlColorMaskiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10271,7 +10271,7 @@ var schemaGlCompileShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompileShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
@@ -10307,7 +10307,7 @@ var schemaTexturePointer = &binary.Entity{
 	Package: "gles",
 	Name:    "TexturePointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10358,7 +10358,7 @@ var schemaGlCompressedTexImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10366,7 +10366,7 @@ var schemaGlCompressedTexImage2D = &binary.Entity{
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10419,7 +10419,7 @@ var schemaGlCompressedTexImage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexImage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10428,7 +10428,7 @@ var schemaGlCompressedTexImage3D = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10483,7 +10483,7 @@ var schemaGlCompressedTexImage3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexImage3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10492,7 +10492,7 @@ var schemaGlCompressedTexImage3DOES = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10547,7 +10547,7 @@ var schemaGlCompressedTexSubImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10556,7 +10556,7 @@ var schemaGlCompressedTexSubImage2D = &binary.Entity{
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10615,7 +10615,7 @@ var schemaGlCompressedTexSubImage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10626,7 +10626,7 @@ var schemaGlCompressedTexSubImage3D = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10689,7 +10689,7 @@ var schemaGlCompressedTexSubImage3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10700,7 +10700,7 @@ var schemaGlCompressedTexSubImage3DOES = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ImageSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -10745,7 +10745,7 @@ var schemaGlCopyBufferSubData = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyBufferSubData",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ReadTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "WriteTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ReadOffset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -10795,7 +10795,7 @@ var schemaGlCopyBufferSubDataNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyBufferSubDataNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ReadTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "WriteTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ReadOffset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -10865,7 +10865,7 @@ var schemaGlCopyImageSubData = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyImageSubData",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10945,7 +10945,7 @@ var schemaGlCopyImageSubDataEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyImageSubDataEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11025,7 +11025,7 @@ var schemaGlCopyImageSubDataOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyImageSubDataOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11079,7 +11079,7 @@ var schemaGlCopyPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -11132,7 +11132,7 @@ var schemaGlCopyTexImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyTexImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11191,7 +11191,7 @@ var schemaGlCopyTexSubImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyTexSubImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11252,7 +11252,7 @@ var schemaGlCopyTexSubImage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11314,7 +11314,7 @@ var schemaGlCopyTexSubImage3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11368,7 +11368,7 @@ var schemaGlCopyTextureLevelsAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCopyTextureLevelsAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DestinationTexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SourceTexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SourceBaseLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11427,14 +11427,14 @@ var schemaGlCoverFillPathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverFillPathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -11473,7 +11473,7 @@ var schemaGlCoverFillPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverFillPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -11530,14 +11530,14 @@ var schemaGlCoverStrokePathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverStrokePathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -11576,7 +11576,7 @@ var schemaGlCoverStrokePathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverStrokePathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -11615,7 +11615,7 @@ var schemaGlCoverageMaskNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverageMaskNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -11653,7 +11653,7 @@ var schemaGlCoverageModulationNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverageModulationNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Components", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -11699,9 +11699,9 @@ var schemaGlCoverageModulationTableNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverageModulationTableNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -11738,7 +11738,7 @@ var schemaGlCoverageOperationNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCoverageOperationNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Operation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -11778,9 +11778,9 @@ var schemaGlCreatePerfQueryINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCreatePerfQueryINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "QueryHandle", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "QueryHandle", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -11817,7 +11817,7 @@ var schemaGlCreateProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCreateProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -11857,7 +11857,7 @@ var schemaGlCreateShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCreateShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
@@ -11902,10 +11902,10 @@ var schemaGlCreateShaderProgramv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCreateShaderProgramv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Strings", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖᶜᵖ)(nil).Class())}},
+		{Declared: "Strings", Type: &schema.Struct{Entity: (*GLcharᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -11951,10 +11951,10 @@ var schemaGlCreateShaderProgramvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCreateShaderProgramvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Strings", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖᵖ)(nil).Class())}},
+		{Declared: "Strings", Type: &schema.Struct{Entity: (*GLcharᶜᵖᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -11992,7 +11992,7 @@ var schemaGlCullFace = &binary.Entity{
 	Package: "gles",
 	Name:    "GlCullFace",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -12032,9 +12032,9 @@ var schemaGlDebugMessageCallback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageCallback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Callback", Type: &schema.Struct{Entity: schema.Of((*GLDEBUGPROC)(nil).Class())}},
-		{Declared: "UserParam", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Callback", Type: &schema.Struct{Entity: (*GLDEBUGPROC)(nil).Class().Schema()}},
+		{Declared: "UserParam", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12075,9 +12075,9 @@ var schemaGlDebugMessageCallbackKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageCallbackKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Callback", Type: &schema.Struct{Entity: schema.Of((*GLDEBUGPROC)(nil).Class())}},
-		{Declared: "UserParam", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Callback", Type: &schema.Struct{Entity: (*GLDEBUGPROC)(nil).Class().Schema()}},
+		{Declared: "UserParam", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12124,12 +12124,12 @@ var schemaGlDebugMessageControl = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageControl",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -12179,12 +12179,12 @@ var schemaGlDebugMessageControlKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageControlKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -12232,13 +12232,13 @@ var schemaGlDebugMessageInsert = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageInsert",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Message", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Message", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12287,13 +12287,13 @@ var schemaGlDebugMessageInsertKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDebugMessageInsertKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Severity", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Message", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Message", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12332,9 +12332,9 @@ var schemaGlDeleteBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᶜᵖ)(nil).Class())}},
+		{Declared: "Buffers", Type: &schema.Struct{Entity: (*BufferIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12373,9 +12373,9 @@ var schemaGlDeleteFencesNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteFencesNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Fences", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Fences", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12414,9 +12414,9 @@ var schemaGlDeleteFramebuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteFramebuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᶜᵖ)(nil).Class())}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*FramebufferIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12455,7 +12455,7 @@ var schemaGlDeletePathsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeletePathsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Range", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
@@ -12498,9 +12498,9 @@ var schemaGlDeletePerfMonitorsAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeletePerfMonitorsAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Monitors", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Monitors", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12537,7 +12537,7 @@ var schemaGlDeletePerfQueryINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeletePerfQueryINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -12575,7 +12575,7 @@ var schemaGlDeleteProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -12611,7 +12611,7 @@ var schemaPipelineIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "PipelineIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -12652,9 +12652,9 @@ var schemaGlDeleteProgramPipelines = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelines",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᶜᵖ)(nil).Class())}},
+		{Declared: "Pipelines", Type: &schema.Struct{Entity: (*PipelineIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12699,9 +12699,9 @@ var schemaGlDeleteProgramPipelinesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelinesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᶜᵖ)(nil).Class())}},
+		{Declared: "Pipelines", Type: &schema.Struct{Entity: (*PipelineIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12736,7 +12736,7 @@ var schemaQueryIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "QueryIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -12775,9 +12775,9 @@ var schemaGlDeleteQueries = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteQueries",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᶜᵖ)(nil).Class())}},
+		{Declared: "Queries", Type: &schema.Struct{Entity: (*QueryIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12816,9 +12816,9 @@ var schemaGlDeleteQueriesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteQueriesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᶜᵖ)(nil).Class())}},
+		{Declared: "Queries", Type: &schema.Struct{Entity: (*QueryIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12853,7 +12853,7 @@ var schemaRenderbufferIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "RenderbufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -12892,9 +12892,9 @@ var schemaGlDeleteRenderbuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteRenderbuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᶜᵖ)(nil).Class())}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*RenderbufferIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12929,7 +12929,7 @@ var schemaSamplerIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "SamplerIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -12968,9 +12968,9 @@ var schemaGlDeleteSamplers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteSamplers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Samplers", Type: &schema.Struct{Entity: schema.Of((*SamplerIdᶜᵖ)(nil).Class())}},
+		{Declared: "Samplers", Type: &schema.Struct{Entity: (*SamplerIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13007,7 +13007,7 @@ var schemaGlDeleteShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
@@ -13045,7 +13045,7 @@ var schemaGlDeleteSync = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteSync",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 	},
 }
@@ -13083,7 +13083,7 @@ var schemaGlDeleteSyncAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteSyncAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 	},
 }
@@ -13119,7 +13119,7 @@ var schemaTextureIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "TextureIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -13158,9 +13158,9 @@ var schemaGlDeleteTextures = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteTextures",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᶜᵖ)(nil).Class())}},
+		{Declared: "Textures", Type: &schema.Struct{Entity: (*TextureIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13197,7 +13197,7 @@ var schemaTransformFeedbackIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "TransformFeedbackIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -13242,9 +13242,9 @@ var schemaGlDeleteTransformFeedbacks = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteTransformFeedbacks",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*TransformFeedbackIdᶜᵖ)(nil).Class())}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*TransformFeedbackIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13279,7 +13279,7 @@ var schemaVertexArrayIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexArrayIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -13318,9 +13318,9 @@ var schemaGlDeleteVertexArrays = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteVertexArrays",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᶜᵖ)(nil).Class())}},
+		{Declared: "Arrays", Type: &schema.Struct{Entity: (*VertexArrayIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13361,9 +13361,9 @@ var schemaGlDeleteVertexArraysOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDeleteVertexArraysOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᶜᵖ)(nil).Class())}},
+		{Declared: "Arrays", Type: &schema.Struct{Entity: (*VertexArrayIdᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13400,7 +13400,7 @@ var schemaGlDepthFunc = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDepthFunc",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -13438,7 +13438,7 @@ var schemaGlDepthMask = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDepthMask",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -13480,10 +13480,10 @@ var schemaGlDepthRangeArrayfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDepthRangeArrayfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13524,7 +13524,7 @@ var schemaGlDepthRangeIndexedfNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDepthRangeIndexedfNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "F", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -13566,7 +13566,7 @@ var schemaGlDepthRangef = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDepthRangef",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Near", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Far", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -13607,7 +13607,7 @@ var schemaGlDetachShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDetachShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
@@ -13646,7 +13646,7 @@ var schemaGlDisable = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisable",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -13690,7 +13690,7 @@ var schemaGlDisableDriverControlQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisableDriverControlQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -13734,7 +13734,7 @@ var schemaGlDisableVertexAttribArray = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisableVertexAttribArray",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
 }
@@ -13774,7 +13774,7 @@ var schemaGlDisablei = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisablei",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -13815,7 +13815,7 @@ var schemaGlDisableiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisableiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -13856,7 +13856,7 @@ var schemaGlDisableiNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisableiNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -13897,7 +13897,7 @@ var schemaGlDisableiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDisableiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -13942,10 +13942,10 @@ var schemaGlDiscardFramebufferEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDiscardFramebufferEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Attachments", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Attachments", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -13986,7 +13986,7 @@ var schemaGlDispatchCompute = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDispatchCompute",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumGroupsX", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGroupsY", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGroupsZ", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -14028,7 +14028,7 @@ var schemaGlDispatchComputeIndirect = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDispatchComputeIndirect",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Indirect", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 	},
 }
@@ -14070,7 +14070,7 @@ var schemaGlDrawArrays = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArrays",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14112,9 +14112,9 @@ var schemaGlDrawArraysIndirect = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysIndirect",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indirect", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14157,7 +14157,7 @@ var schemaGlDrawArraysInstanced = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysInstanced",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14210,7 +14210,7 @@ var schemaGlDrawArraysInstancedANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14265,7 +14265,7 @@ var schemaGlDrawArraysInstancedBaseInstanceEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedBaseInstanceEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14315,7 +14315,7 @@ var schemaGlDrawArraysInstancedEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14364,7 +14364,7 @@ var schemaGlDrawArraysInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14407,9 +14407,9 @@ var schemaGlDrawBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Bufs", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14448,9 +14448,9 @@ var schemaGlDrawBuffersEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawBuffersEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Bufs", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14493,10 +14493,10 @@ var schemaGlDrawBuffersIndexedEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawBuffersIndexedEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Location", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Location", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14535,9 +14535,9 @@ var schemaGlDrawBuffersNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawBuffersNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Bufs", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14572,7 +14572,7 @@ var schemaIndicesPointer = &binary.Entity{
 	Package: "gles",
 	Name:    "IndicesPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -14615,11 +14615,11 @@ var schemaGlDrawElements = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElements",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -14666,11 +14666,11 @@ var schemaGlDrawElementsBaseVertex = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertex",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -14722,11 +14722,11 @@ var schemaGlDrawElementsBaseVertexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -14778,11 +14778,11 @@ var schemaGlDrawElementsBaseVertexOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -14824,10 +14824,10 @@ var schemaGlDrawElementsIndirect = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsIndirect",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indirect", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -14874,11 +14874,11 @@ var schemaGlDrawElementsInstanced = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstanced",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "InstanceCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -14930,11 +14930,11 @@ var schemaGlDrawElementsInstancedANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -14988,11 +14988,11 @@ var schemaGlDrawElementsInstancedBaseInstanceEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseInstanceEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Baseinstance", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15047,11 +15047,11 @@ var schemaGlDrawElementsInstancedBaseVertex = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertex",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "InstanceCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -15108,11 +15108,11 @@ var schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexBaseInstanceEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Baseinstance", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15168,11 +15168,11 @@ var schemaGlDrawElementsInstancedBaseVertexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -15227,11 +15227,11 @@ var schemaGlDrawElementsInstancedBaseVertexOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Instancecount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -15284,11 +15284,11 @@ var schemaGlDrawElementsInstancedEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -15336,11 +15336,11 @@ var schemaGlDrawElementsInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -15388,13 +15388,13 @@ var schemaGlDrawRangeElements = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawRangeElements",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -15449,13 +15449,13 @@ var schemaGlDrawRangeElementsBaseVertex = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertex",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "BaseVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -15511,13 +15511,13 @@ var schemaGlDrawRangeElementsBaseVertexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -15573,13 +15573,13 @@ var schemaGlDrawRangeElementsBaseVertexOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "End", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*IndicesPointer)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*IndicesPointer)(nil).Class().Schema()}},
 		{Declared: "Basevertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -15625,9 +15625,9 @@ var schemaGlEGLImageTargetRenderbufferStorageOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEGLImageTargetRenderbufferStorageOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Image", Type: &schema.Struct{Entity: schema.Of((*GLeglImageOES)(nil).Class())}},
+		{Declared: "Image", Type: &schema.Struct{Entity: (*GLeglImageOES)(nil).Class().Schema()}},
 	},
 }
 
@@ -15672,9 +15672,9 @@ var schemaGlEGLImageTargetTexture2DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEGLImageTargetTexture2DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Image", Type: &schema.Struct{Entity: schema.Of((*GLeglImageOES)(nil).Class())}},
+		{Declared: "Image", Type: &schema.Struct{Entity: (*GLeglImageOES)(nil).Class().Schema()}},
 	},
 }
 
@@ -15711,7 +15711,7 @@ var schemaGlEnable = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnable",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -15751,7 +15751,7 @@ var schemaGlEnableDriverControlQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnableDriverControlQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -15791,7 +15791,7 @@ var schemaGlEnableVertexAttribArray = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnableVertexAttribArray",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
 }
@@ -15831,7 +15831,7 @@ var schemaGlEnablei = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnablei",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15872,7 +15872,7 @@ var schemaGlEnableiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnableiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15913,7 +15913,7 @@ var schemaGlEnableiNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnableiNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15954,7 +15954,7 @@ var schemaGlEnableiOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEnableiOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15993,7 +15993,7 @@ var schemaGlEndConditionalRenderNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndConditionalRenderNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -16030,7 +16030,7 @@ var schemaGlEndPerfMonitorAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndPerfMonitorAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -16068,7 +16068,7 @@ var schemaGlEndPerfQueryINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndPerfQueryINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -16106,7 +16106,7 @@ var schemaGlEndQuery = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndQuery",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -16144,7 +16144,7 @@ var schemaGlEndQueryEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndQueryEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -16182,7 +16182,7 @@ var schemaGlEndTilingQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndTilingQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
@@ -16218,7 +16218,7 @@ var schemaGlEndTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlEndTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -16253,7 +16253,7 @@ var schemaVoidᵖᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -16298,9 +16298,9 @@ var schemaGlExtGetBufferPointervQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetBufferPointervQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16341,10 +16341,10 @@ var schemaGlExtGetBuffersQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetBuffersQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Buffers", Type: &schema.Struct{Entity: (*BufferIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumBuffers", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumBuffers", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16387,10 +16387,10 @@ var schemaGlExtGetFramebuffersQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetFramebuffersQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*FramebufferIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxFramebuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumFramebuffers", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumFramebuffers", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16439,11 +16439,11 @@ var schemaGlExtGetProgramBinarySourceQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetProgramBinarySourceQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shadertype", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Source", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Source", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16478,7 +16478,7 @@ var schemaProgramIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "ProgramIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -16519,10 +16519,10 @@ var schemaGlExtGetProgramsQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetProgramsQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Programs", Type: &schema.Struct{Entity: schema.Of((*ProgramIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Programs", Type: &schema.Struct{Entity: (*ProgramIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxPrograms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumPrograms", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumPrograms", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16557,7 +16557,7 @@ var schemaRenderbufferIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "RenderbufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -16600,10 +16600,10 @@ var schemaGlExtGetRenderbuffersQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetRenderbuffersQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*RenderbufferIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxRenderbuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumRenderbuffers", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumRenderbuffers", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16638,7 +16638,7 @@ var schemaShaderIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "ShaderIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -16679,10 +16679,10 @@ var schemaGlExtGetShadersQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetShadersQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Shaders", Type: &schema.Struct{Entity: schema.Of((*ShaderIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Shaders", Type: &schema.Struct{Entity: (*ShaderIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxShaders", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumShaders", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumShaders", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16733,12 +16733,12 @@ var schemaGlExtGetTexLevelParameterivQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetTexLevelParameterivQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16797,7 +16797,7 @@ var schemaGlExtGetTexSubImageQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetTexSubImageQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16808,7 +16808,7 @@ var schemaGlExtGetTexSubImageQCOM = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Texels", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Texels", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16843,7 +16843,7 @@ var schemaTextureIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "TextureIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -16884,10 +16884,10 @@ var schemaGlExtGetTexturesQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtGetTexturesQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Textures", Type: &schema.Struct{Entity: (*TextureIdᵖ)(nil).Class().Schema()}},
 		{Declared: "MaxTextures", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "NumTextures", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumTextures", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16928,7 +16928,7 @@ var schemaGlExtIsProgramBinaryQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtIsProgramBinaryQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -16977,7 +16977,7 @@ var schemaGlExtTexObjectStateOverrideiQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlExtTexObjectStateOverrideiQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -17021,7 +17021,7 @@ var schemaGlFenceSync = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFenceSync",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
@@ -17065,7 +17065,7 @@ var schemaGlFenceSyncAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFenceSyncAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
@@ -17103,7 +17103,7 @@ var schemaGlFinish = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFinish",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -17140,7 +17140,7 @@ var schemaGlFinishFenceNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFinishFenceNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -17176,7 +17176,7 @@ var schemaGlFlush = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFlush",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -17219,7 +17219,7 @@ var schemaGlFlushMappedBufferRange = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRange",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
@@ -17269,7 +17269,7 @@ var schemaGlFlushMappedBufferRangeEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRangeEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
@@ -17311,7 +17311,7 @@ var schemaGlFragmentCoverageColorNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFragmentCoverageColorNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Color", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -17355,7 +17355,7 @@ var schemaGlFramebufferParameteri = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferParameteri",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -17403,7 +17403,7 @@ var schemaGlFramebufferRenderbuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferRenderbuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17456,11 +17456,11 @@ var schemaGlFramebufferSampleLocationsfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferSampleLocationsfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -17503,7 +17503,7 @@ var schemaGlFramebufferTexture = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTexture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -17552,7 +17552,7 @@ var schemaGlFramebufferTexture2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTexture2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17610,7 +17610,7 @@ var schemaGlFramebufferTexture2DMultisampleEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Textarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17669,7 +17669,7 @@ var schemaGlFramebufferTexture2DMultisampleIMG = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleIMG",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Textarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17724,7 +17724,7 @@ var schemaGlFramebufferTexture3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTexture3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Textarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17775,7 +17775,7 @@ var schemaGlFramebufferTextureEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTextureEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -17826,7 +17826,7 @@ var schemaGlFramebufferTextureLayer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTextureLayer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -17884,7 +17884,7 @@ var schemaGlFramebufferTextureMultiviewOVR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTextureMultiviewOVR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -17935,7 +17935,7 @@ var schemaGlFramebufferTextureOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFramebufferTextureOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -17976,7 +17976,7 @@ var schemaGlFrontFace = &binary.Entity{
 	Package: "gles",
 	Name:    "GlFrontFace",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Orientation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -18016,9 +18016,9 @@ var schemaGlGenBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᵖ)(nil).Class())}},
+		{Declared: "Buffers", Type: &schema.Struct{Entity: (*BufferIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18057,9 +18057,9 @@ var schemaGlGenFencesNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenFencesNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Fences", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Fences", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18098,9 +18098,9 @@ var schemaGlGenFramebuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenFramebuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᵖ)(nil).Class())}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*FramebufferIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18139,7 +18139,7 @@ var schemaGlGenPathsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenPathsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Range", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -18180,9 +18180,9 @@ var schemaGlGenPerfMonitorsAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenPerfMonitorsAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Monitors", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Monitors", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18217,7 +18217,7 @@ var schemaPipelineIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "PipelineIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -18256,9 +18256,9 @@ var schemaGlGenProgramPipelines = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenProgramPipelines",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᵖ)(nil).Class())}},
+		{Declared: "Pipelines", Type: &schema.Struct{Entity: (*PipelineIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18299,9 +18299,9 @@ var schemaGlGenProgramPipelinesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenProgramPipelinesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᵖ)(nil).Class())}},
+		{Declared: "Pipelines", Type: &schema.Struct{Entity: (*PipelineIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18336,7 +18336,7 @@ var schemaQueryIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "QueryIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -18375,9 +18375,9 @@ var schemaGlGenQueries = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenQueries",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᵖ)(nil).Class())}},
+		{Declared: "Queries", Type: &schema.Struct{Entity: (*QueryIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18416,9 +18416,9 @@ var schemaGlGenQueriesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenQueriesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᵖ)(nil).Class())}},
+		{Declared: "Queries", Type: &schema.Struct{Entity: (*QueryIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18457,9 +18457,9 @@ var schemaGlGenRenderbuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenRenderbuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᵖ)(nil).Class())}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*RenderbufferIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18494,7 +18494,7 @@ var schemaSamplerIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "SamplerIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -18533,9 +18533,9 @@ var schemaGlGenSamplers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenSamplers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Samplers", Type: &schema.Struct{Entity: schema.Of((*SamplerIdᵖ)(nil).Class())}},
+		{Declared: "Samplers", Type: &schema.Struct{Entity: (*SamplerIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18574,9 +18574,9 @@ var schemaGlGenTextures = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenTextures",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᵖ)(nil).Class())}},
+		{Declared: "Textures", Type: &schema.Struct{Entity: (*TextureIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18611,7 +18611,7 @@ var schemaTransformFeedbackIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "TransformFeedbackIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -18652,9 +18652,9 @@ var schemaGlGenTransformFeedbacks = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenTransformFeedbacks",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*TransformFeedbackIdᵖ)(nil).Class())}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*TransformFeedbackIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18689,7 +18689,7 @@ var schemaVertexArrayIdᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexArrayIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -18728,9 +18728,9 @@ var schemaGlGenVertexArrays = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenVertexArrays",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᵖ)(nil).Class())}},
+		{Declared: "Arrays", Type: &schema.Struct{Entity: (*VertexArrayIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18769,9 +18769,9 @@ var schemaGlGenVertexArraysOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenVertexArraysOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᵖ)(nil).Class())}},
+		{Declared: "Arrays", Type: &schema.Struct{Entity: (*VertexArrayIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18808,7 +18808,7 @@ var schemaGlGenerateMipmap = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGenerateMipmap",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -18858,14 +18858,14 @@ var schemaGlGetActiveAttrib = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetActiveAttrib",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "VectorCount", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
-		{Declared: "Type", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "VectorCount", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18914,14 +18914,14 @@ var schemaGlGetActiveUniform = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetActiveUniform",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "UniformIndex", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "VectorCount", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
-		{Declared: "Type", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "VectorCount", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18972,12 +18972,12 @@ var schemaGlGetActiveUniformBlockName = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockName",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19022,11 +19022,11 @@ var schemaGlGetActiveUniformBlockiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
 		{Declared: "ParameterName", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Parameters", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Parameters", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19061,7 +19061,7 @@ var schemaUniformIndexᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "UniformIndexᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -19106,12 +19106,12 @@ var schemaGlGetActiveUniformsiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetActiveUniformsiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "UniformIndices", Type: &schema.Struct{Entity: schema.Of((*UniformIndexᶜᵖ)(nil).Class())}},
+		{Declared: "UniformIndices", Type: &schema.Struct{Entity: (*UniformIndexᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "ParameterName", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Parameters", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Parameters", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19154,11 +19154,11 @@ var schemaGlGetAttachedShaders = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetAttachedShaders",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "ShadersLengthWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Shaders", Type: &schema.Struct{Entity: schema.Of((*ShaderIdᵖ)(nil).Class())}},
+		{Declared: "ShadersLengthWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Shaders", Type: &schema.Struct{Entity: (*ShaderIdᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19199,7 +19199,7 @@ var schemaGlGetAttribLocation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetAttribLocation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -19243,10 +19243,10 @@ var schemaGlGetBooleani_v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBooleani_v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLbooleanᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLbooleanᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19285,9 +19285,9 @@ var schemaGlGetBooleanv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBooleanv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLbooleanᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLbooleanᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19330,10 +19330,10 @@ var schemaGlGetBufferParameteri64v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBufferParameteri64v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19374,10 +19374,10 @@ var schemaGlGetBufferParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBufferParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19418,10 +19418,10 @@ var schemaGlGetBufferPointerv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBufferPointerv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19462,10 +19462,10 @@ var schemaGlGetBufferPointervOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetBufferPointervOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19510,9 +19510,9 @@ var schemaGlGetCoverageModulationTableNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetCoverageModulationTableNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Bufsize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19565,15 +19565,15 @@ var schemaGlGetDebugMessageLog = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetDebugMessageLog",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Sources", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Types", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "Severities", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Lengths", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "MessageLog", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Sources", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Types", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "Severities", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Lengths", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "MessageLog", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -19629,15 +19629,15 @@ var schemaGlGetDebugMessageLogKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetDebugMessageLogKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Sources", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Types", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "Severities", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Lengths", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "MessageLog", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Sources", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Types", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Ids", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "Severities", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Lengths", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "MessageLog", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -19687,11 +19687,11 @@ var schemaGlGetDriverControlStringQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetDriverControlStringQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "DriverControlString", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "DriverControlString", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19734,10 +19734,10 @@ var schemaGlGetDriverControlsQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetDriverControlsQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Num", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Num", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "DriverControls", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "DriverControls", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19774,7 +19774,7 @@ var schemaGlGetError = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetError",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -19816,10 +19816,10 @@ var schemaGlGetFenceivNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFenceivNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19862,8 +19862,8 @@ var schemaGlGetFirstPerfQueryIdINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFirstPerfQueryIdINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "QueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "QueryId", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19904,10 +19904,10 @@ var schemaGlGetFloati_vNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFloati_vNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19946,9 +19946,9 @@ var schemaGlGetFloatv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFloatv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -19989,7 +19989,7 @@ var schemaGlGetFragDataIndexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFragDataIndexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -20033,7 +20033,7 @@ var schemaGlGetFragDataLocation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFragDataLocation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -20085,11 +20085,11 @@ var schemaGlGetFramebufferAttachmentParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFramebufferAttachmentParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20136,10 +20136,10 @@ var schemaGlGetFramebufferParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetFramebufferParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20178,7 +20178,7 @@ var schemaGlGetGraphicsResetStatus = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatus",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -20222,7 +20222,7 @@ var schemaGlGetGraphicsResetStatusEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -20266,7 +20266,7 @@ var schemaGlGetGraphicsResetStatusKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -20314,7 +20314,7 @@ var schemaGlGetImageHandleNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetImageHandleNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Layered", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -20361,10 +20361,10 @@ var schemaGlGetInteger64i_v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetInteger64i_v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20403,9 +20403,9 @@ var schemaGlGetInteger64v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetInteger64v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20444,9 +20444,9 @@ var schemaGlGetInteger64vAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetInteger64vAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20487,10 +20487,10 @@ var schemaGlGetIntegeri_v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetIntegeri_v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20531,10 +20531,10 @@ var schemaGlGetIntegeri_vEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetIntegeri_vEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20573,9 +20573,9 @@ var schemaGlGetIntegerv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetIntegerv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20628,13 +20628,13 @@ var schemaGlGetInternalformatSampleivNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetInternalformatSampleivNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20679,12 +20679,12 @@ var schemaGlGetInternalformativ = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetInternalformativ",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20725,10 +20725,10 @@ var schemaGlGetMultisamplefv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetMultisamplefv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Val", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Val", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20769,9 +20769,9 @@ var schemaGlGetNextPerfQueryIdINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetNextPerfQueryIdINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "NextQueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "NextQueryId", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20816,12 +20816,12 @@ var schemaGlGetObjectLabel = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetObjectLabel",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20866,12 +20866,12 @@ var schemaGlGetObjectLabelEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetObjectLabelEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20916,12 +20916,12 @@ var schemaGlGetObjectLabelKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetObjectLabelKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -20964,11 +20964,11 @@ var schemaGlGetObjectPtrLabel = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabel",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ptr", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21011,11 +21011,11 @@ var schemaGlGetObjectPtrLabelKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabelKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ptr", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21054,9 +21054,9 @@ var schemaGlGetPathCommandsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathCommandsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Commands", Type: &schema.Struct{Entity: schema.Of((*GLubyteᵖ)(nil).Class())}},
+		{Declared: "Commands", Type: &schema.Struct{Entity: (*GLubyteᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21095,9 +21095,9 @@ var schemaGlGetPathCoordsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathCoordsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21136,9 +21136,9 @@ var schemaGlGetPathDashArrayNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathDashArrayNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "DashArray", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "DashArray", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21181,7 +21181,7 @@ var schemaGlGetPathLengthNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathLengthNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "StartSegment", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "NumSegments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21230,12 +21230,12 @@ var schemaGlGetPathMetricRangeNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathMetricRangeNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MetricQueryMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Metrics", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Metrics", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21284,14 +21284,14 @@ var schemaGlGetPathMetricsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathMetricsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MetricQueryMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Metrics", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Metrics", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21332,10 +21332,10 @@ var schemaGlGetPathParameterfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathParameterfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21376,10 +21376,10 @@ var schemaGlGetPathParameterivNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathParameterivNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21432,16 +21432,16 @@ var schemaGlGetPathSpacingNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPathSpacingNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "PathListMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "AdvanceScale", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "KerningScale", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "ReturnedSpacing", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "ReturnedSpacing", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21500,18 +21500,18 @@ var schemaGlGetPerfCounterInfoINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfCounterInfoINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CounterId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CounterNameLength", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "CounterName", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "CounterName", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 		{Declared: "CounterDescLength", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "CounterDesc", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
-		{Declared: "CounterOffset", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "CounterDataSize", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "CounterTypeEnum", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "CounterDataTypeEnum", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "RawCounterMaxValue", Type: &schema.Struct{Entity: schema.Of((*GLuint64ᵖ)(nil).Class())}},
+		{Declared: "CounterDesc", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
+		{Declared: "CounterOffset", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "CounterDataSize", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "CounterTypeEnum", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "CounterDataTypeEnum", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "RawCounterMaxValue", Type: &schema.Struct{Entity: (*GLuint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21562,12 +21562,12 @@ var schemaGlGetPerfMonitorCounterDataAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterDataAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DataSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "BytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "BytesWritten", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21616,11 +21616,11 @@ var schemaGlGetPerfMonitorCounterInfoAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterInfoAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Counter", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21671,12 +21671,12 @@ var schemaGlGetPerfMonitorCounterStringAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterStringAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Counter", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "CounterString", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "CounterString", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21727,12 +21727,12 @@ var schemaGlGetPerfMonitorCountersAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCountersAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "NumCounters", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
-		{Declared: "MaxActiveCounters", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "NumCounters", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+		{Declared: "MaxActiveCounters", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 		{Declared: "CounterSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Counters", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Counters", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21781,11 +21781,11 @@ var schemaGlGetPerfMonitorGroupStringAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupStringAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "GroupString", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "GroupString", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21828,10 +21828,10 @@ var schemaGlGetPerfMonitorGroupsAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupsAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "NumGroups", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "NumGroups", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 		{Declared: "GroupsSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Groups", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Groups", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21878,12 +21878,12 @@ var schemaGlGetPerfQueryDataINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfQueryDataINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "DataSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*GLvoidᵖ)(nil).Class())}},
-		{Declared: "BytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*GLvoidᵖ)(nil).Class().Schema()}},
+		{Declared: "BytesWritten", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21928,9 +21928,9 @@ var schemaGlGetPerfQueryIdByNameINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfQueryIdByNameINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "QueryName", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
-		{Declared: "QueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "QueryName", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
+		{Declared: "QueryId", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21981,14 +21981,14 @@ var schemaGlGetPerfQueryInfoINTEL = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPerfQueryInfoINTEL",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "QueryNameLength", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "QueryName", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
-		{Declared: "DataSize", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "NoCounters", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "NoInstances", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
-		{Declared: "CapsMask", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "QueryName", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
+		{Declared: "DataSize", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "NoCounters", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "NoInstances", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+		{Declared: "CapsMask", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22027,9 +22027,9 @@ var schemaGlGetPointerv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPointerv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22068,9 +22068,9 @@ var schemaGlGetPointervKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetPointervKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22115,12 +22115,12 @@ var schemaGlGetProgramBinary = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramBinary",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "BinaryFormat", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "BinaryFormat", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22165,12 +22165,12 @@ var schemaGlGetProgramBinaryOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramBinaryOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "BytesWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "BinaryFormat", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "BytesWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "BinaryFormat", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22213,11 +22213,11 @@ var schemaGlGetProgramInfoLog = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramInfoLog",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Info", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Info", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22262,11 +22262,11 @@ var schemaGlGetProgramInterfaceiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramInterfaceiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22315,11 +22315,11 @@ var schemaGlGetProgramPipelineInfoLog = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLog",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "InfoLog", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "InfoLog", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22368,11 +22368,11 @@ var schemaGlGetProgramPipelineInfoLogEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLogEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "InfoLog", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "InfoLog", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22413,10 +22413,10 @@ var schemaGlGetProgramPipelineiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramPipelineiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22459,10 +22459,10 @@ var schemaGlGetProgramPipelineivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramPipelineivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22507,7 +22507,7 @@ var schemaGlGetProgramResourceIndex = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourceIndex",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -22560,7 +22560,7 @@ var schemaGlGetProgramResourceLocation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -22613,7 +22613,7 @@ var schemaGlGetProgramResourceLocationIndexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocationIndexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -22666,13 +22666,13 @@ var schemaGlGetProgramResourceName = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourceName",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22725,15 +22725,15 @@ var schemaGlGetProgramResourcefvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourcefvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "PropCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Props", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Props", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22784,15 +22784,15 @@ var schemaGlGetProgramResourceiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramResourceiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "PropCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Props", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Props", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22833,10 +22833,10 @@ var schemaGlGetProgramiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetProgramiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22871,7 +22871,7 @@ var schemaS64ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "S64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -22912,10 +22912,10 @@ var schemaGlGetQueryObjecti64v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*S64ᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*S64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -22958,10 +22958,10 @@ var schemaGlGetQueryObjecti64vEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64vEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23002,10 +23002,10 @@ var schemaGlGetQueryObjectivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjectivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23040,7 +23040,7 @@ var schemaU64ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "U64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -23081,10 +23081,10 @@ var schemaGlGetQueryObjectui64v = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64v",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*U64ᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*U64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23127,10 +23127,10 @@ var schemaGlGetQueryObjectui64vEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64vEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuint64ᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuint64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23171,10 +23171,10 @@ var schemaGlGetQueryObjectuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjectuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23215,10 +23215,10 @@ var schemaGlGetQueryObjectuivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryObjectuivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23259,10 +23259,10 @@ var schemaGlGetQueryiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23303,10 +23303,10 @@ var schemaGlGetQueryivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetQueryivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23353,10 +23353,10 @@ var schemaGlGetRenderbufferParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetRenderbufferParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23399,10 +23399,10 @@ var schemaGlGetSamplerParameterIiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23449,10 +23449,10 @@ var schemaGlGetSamplerParameterIivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23499,10 +23499,10 @@ var schemaGlGetSamplerParameterIivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23545,10 +23545,10 @@ var schemaGlGetSamplerParameterIuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23595,10 +23595,10 @@ var schemaGlGetSamplerParameterIuivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23645,10 +23645,10 @@ var schemaGlGetSamplerParameterIuivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23691,10 +23691,10 @@ var schemaGlGetSamplerParameterfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameterfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23737,10 +23737,10 @@ var schemaGlGetSamplerParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSamplerParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23783,11 +23783,11 @@ var schemaGlGetShaderInfoLog = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetShaderInfoLog",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Info", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Info", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23836,11 +23836,11 @@ var schemaGlGetShaderPrecisionFormat = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetShaderPrecisionFormat",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ShaderType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PrecisionType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Range", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
-		{Declared: "Precision", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Range", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Precision", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23883,11 +23883,11 @@ var schemaGlGetShaderSource = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetShaderSource",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Source", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Source", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23928,10 +23928,10 @@ var schemaGlGetShaderiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetShaderiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -23970,9 +23970,9 @@ var schemaGlGetString = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*GLubyteᶜᵖ)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*GLubyteᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24013,10 +24013,10 @@ var schemaGlGetStringi = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetStringi",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*GLubyteᶜᵖ)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*GLubyteᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24061,12 +24061,12 @@ var schemaGlGetSynciv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSynciv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24111,12 +24111,12 @@ var schemaGlGetSyncivAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetSyncivAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24161,11 +24161,11 @@ var schemaGlGetTexLevelParameterfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexLevelParameterfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24210,11 +24210,11 @@ var schemaGlGetTexLevelParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexLevelParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24255,10 +24255,10 @@ var schemaGlGetTexParameterIiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24301,10 +24301,10 @@ var schemaGlGetTexParameterIivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24347,10 +24347,10 @@ var schemaGlGetTexParameterIivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24391,10 +24391,10 @@ var schemaGlGetTexParameterIuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24437,10 +24437,10 @@ var schemaGlGetTexParameterIuivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24483,10 +24483,10 @@ var schemaGlGetTexParameterIuivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24527,10 +24527,10 @@ var schemaGlGetTexParameterfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameterfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24571,10 +24571,10 @@ var schemaGlGetTexParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTexParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24613,7 +24613,7 @@ var schemaGlGetTextureHandleNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTextureHandleNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
@@ -24662,7 +24662,7 @@ var schemaGlGetTextureSamplerHandleNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTextureSamplerHandleNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -24720,14 +24720,14 @@ var schemaGlGetTransformFeedbackVarying = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTransformFeedbackVarying",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Size", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Type", Type: &schema.Struct{Entity: schema.Of((*GLenumᵖ)(nil).Class())}},
-		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "Name", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24776,11 +24776,11 @@ var schemaGlGetTranslatedShaderSourceANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetTranslatedShaderSourceANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Bufsize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᵖ)(nil).Class())}},
-		{Declared: "Source", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLsizeiᵖ)(nil).Class().Schema()}},
+		{Declared: "Source", Type: &schema.Struct{Entity: (*GLcharᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24821,7 +24821,7 @@ var schemaGlGetUniformBlockIndex = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformBlockIndex",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
@@ -24859,7 +24859,7 @@ var schemaUniformIndexᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "UniformIndexᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -24902,11 +24902,11 @@ var schemaGlGetUniformIndices = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformIndices",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "UniformNames", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖᶜᵖ)(nil).Class())}},
-		{Declared: "UniformIndices", Type: &schema.Struct{Entity: schema.Of((*UniformIndexᵖ)(nil).Class())}},
+		{Declared: "UniformNames", Type: &schema.Struct{Entity: (*GLcharᶜᵖᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "UniformIndices", Type: &schema.Struct{Entity: (*UniformIndexᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24947,7 +24947,7 @@ var schemaGlGetUniformLocation = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformLocation",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -24991,10 +24991,10 @@ var schemaGlGetUniformfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25035,10 +25035,10 @@ var schemaGlGetUniformiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25079,10 +25079,10 @@ var schemaGlGetUniformuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetUniformuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25123,10 +25123,10 @@ var schemaGlGetVertexAttribIiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetVertexAttribIiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25167,10 +25167,10 @@ var schemaGlGetVertexAttribIuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetVertexAttribIuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25213,10 +25213,10 @@ var schemaGlGetVertexAttribPointerv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetVertexAttribPointerv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Pointer", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᵖᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25257,10 +25257,10 @@ var schemaGlGetVertexAttribfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetVertexAttribfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25301,10 +25301,10 @@ var schemaGlGetVertexAttribiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetVertexAttribiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25347,11 +25347,11 @@ var schemaGlGetnUniformfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25394,11 +25394,11 @@ var schemaGlGetnUniformfvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformfvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25441,11 +25441,11 @@ var schemaGlGetnUniformfvKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformfvKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25488,11 +25488,11 @@ var schemaGlGetnUniformiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25535,11 +25535,11 @@ var schemaGlGetnUniformivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25582,11 +25582,11 @@ var schemaGlGetnUniformivKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformivKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25629,11 +25629,11 @@ var schemaGlGetnUniformuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25676,11 +25676,11 @@ var schemaGlGetnUniformuivKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlGetnUniformuivKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25719,7 +25719,7 @@ var schemaGlHint = &binary.Entity{
 	Package: "gles",
 	Name:    "GlHint",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -25760,9 +25760,9 @@ var schemaGlInsertEventMarkerEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlInsertEventMarkerEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Marker", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Marker", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25805,7 +25805,7 @@ var schemaGlInterpolatePathsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlInterpolatePathsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "PathA", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "PathB", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -25852,10 +25852,10 @@ var schemaGlInvalidateFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlInvalidateFramebuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Attachments", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Attachments", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25910,10 +25910,10 @@ var schemaGlInvalidateSubFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlInvalidateSubFramebuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Attachments", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
+		{Declared: "Attachments", Type: &schema.Struct{Entity: (*GLenumᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -25956,7 +25956,7 @@ var schemaGlIsBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -25997,7 +25997,7 @@ var schemaGlIsEnabled = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsEnabled",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26040,7 +26040,7 @@ var schemaGlIsEnabledi = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsEnabledi",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26084,7 +26084,7 @@ var schemaGlIsEnablediEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsEnablediEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26128,7 +26128,7 @@ var schemaGlIsEnablediNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsEnablediNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26172,7 +26172,7 @@ var schemaGlIsEnablediOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsEnablediOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26214,7 +26214,7 @@ var schemaGlIsFenceNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsFenceNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26255,7 +26255,7 @@ var schemaGlIsFramebuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsFramebuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26298,7 +26298,7 @@ var schemaGlIsImageHandleResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsImageHandleResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26339,7 +26339,7 @@ var schemaGlIsPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26386,7 +26386,7 @@ var schemaGlIsPointInFillPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsPointInFillPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -26436,7 +26436,7 @@ var schemaGlIsPointInStrokePathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsPointInStrokePathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -26479,7 +26479,7 @@ var schemaGlIsProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26520,7 +26520,7 @@ var schemaGlIsProgramPipeline = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsProgramPipeline",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26561,7 +26561,7 @@ var schemaGlIsProgramPipelineEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsProgramPipelineEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26602,7 +26602,7 @@ var schemaGlIsQuery = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsQuery",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26643,7 +26643,7 @@ var schemaGlIsQueryEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsQueryEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26684,7 +26684,7 @@ var schemaGlIsRenderbuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsRenderbuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26725,7 +26725,7 @@ var schemaGlIsSampler = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsSampler",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26766,7 +26766,7 @@ var schemaGlIsShader = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsShader",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26807,7 +26807,7 @@ var schemaGlIsSync = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsSync",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26848,7 +26848,7 @@ var schemaGlIsSyncAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsSyncAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26889,7 +26889,7 @@ var schemaGlIsTexture = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsTexture",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26936,7 +26936,7 @@ var schemaGlIsTextureHandleResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsTextureHandleResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -26977,7 +26977,7 @@ var schemaGlIsTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "TransformFeedbackId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -27018,7 +27018,7 @@ var schemaGlIsVertexArray = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsVertexArray",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -27059,7 +27059,7 @@ var schemaGlIsVertexArrayOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlIsVertexArrayOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -27104,11 +27104,11 @@ var schemaGlLabelObjectEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlLabelObjectEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27145,7 +27145,7 @@ var schemaGlLineWidth = &binary.Entity{
 	Package: "gles",
 	Name:    "GlLineWidth",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
@@ -27183,7 +27183,7 @@ var schemaGlLinkProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlLinkProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -27227,7 +27227,7 @@ var schemaGlMakeImageHandleNonResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMakeImageHandleNonResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
 }
@@ -27273,7 +27273,7 @@ var schemaGlMakeImageHandleResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMakeImageHandleResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -27318,7 +27318,7 @@ var schemaGlMakeTextureHandleNonResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMakeTextureHandleNonResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
 }
@@ -27362,7 +27362,7 @@ var schemaGlMakeTextureHandleResidentNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMakeTextureHandleResidentNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
 }
@@ -27404,10 +27404,10 @@ var schemaGlMapBufferOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMapBufferOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27452,12 +27452,12 @@ var schemaGlMapBufferRange = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMapBufferRange",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27502,12 +27502,12 @@ var schemaGlMapBufferRangeEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMapBufferRangeEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27546,9 +27546,9 @@ var schemaGlMatrixLoad3x2fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixLoad3x2fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27587,9 +27587,9 @@ var schemaGlMatrixLoad3x3fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixLoad3x3fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27634,9 +27634,9 @@ var schemaGlMatrixLoadTranspose3x3fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixLoadTranspose3x3fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27675,9 +27675,9 @@ var schemaGlMatrixMult3x2fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixMult3x2fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27716,9 +27716,9 @@ var schemaGlMatrixMult3x3fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixMult3x3fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27763,9 +27763,9 @@ var schemaGlMatrixMultTranspose3x3fNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMatrixMultTranspose3x3fNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -27802,7 +27802,7 @@ var schemaGlMemoryBarrier = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMemoryBarrier",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Barriers", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
@@ -27842,7 +27842,7 @@ var schemaGlMemoryBarrierByRegion = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMemoryBarrierByRegion",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Barriers", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
@@ -27880,7 +27880,7 @@ var schemaGlMinSampleShading = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMinSampleShading",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
@@ -27918,7 +27918,7 @@ var schemaGlMinSampleShadingOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMinSampleShadingOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
 }
@@ -27962,10 +27962,10 @@ var schemaGlMultiDrawArraysEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawArraysEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "First", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
-		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
+		{Declared: "First", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Struct{Entity: (*GLsizeiᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -28015,9 +28015,9 @@ var schemaGlMultiDrawArraysIndirectEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawArraysIndirectEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indirect", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Drawcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
@@ -28054,7 +28054,7 @@ var schemaVoidᶜᵖᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᶜᵖᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -28107,13 +28107,13 @@ var schemaGlMultiDrawElementsBaseVertexEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
+		{Declared: "Count", Type: &schema.Struct{Entity: (*GLsizeiᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖᶜᵖ)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*Voidᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Basevertex", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Basevertex", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28166,13 +28166,13 @@ var schemaGlMultiDrawElementsBaseVertexOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
+		{Declared: "Count", Type: &schema.Struct{Entity: (*GLsizeiᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖᶜᵖ)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*Voidᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Basevertex", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Basevertex", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28217,11 +28217,11 @@ var schemaGlMultiDrawElementsEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawElementsEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
+		{Declared: "Count", Type: &schema.Struct{Entity: (*GLsizeiᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indices", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖᶜᵖ)(nil).Class())}},
+		{Declared: "Indices", Type: &schema.Struct{Entity: (*Voidᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Primcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -28273,10 +28273,10 @@ var schemaGlMultiDrawElementsIndirectEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlMultiDrawElementsIndirectEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Indirect", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Drawcount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
@@ -28327,11 +28327,11 @@ var schemaGlNamedFramebufferSampleLocationsfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlNamedFramebufferSampleLocationsfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28374,11 +28374,11 @@ var schemaGlObjectLabel = &binary.Entity{
 	Package: "gles",
 	Name:    "GlObjectLabel",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28421,11 +28421,11 @@ var schemaGlObjectLabelKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlObjectLabelKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28466,10 +28466,10 @@ var schemaGlObjectPtrLabel = &binary.Entity{
 	Package: "gles",
 	Name:    "GlObjectPtrLabel",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ptr", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28510,10 +28510,10 @@ var schemaGlObjectPtrLabelKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlObjectPtrLabelKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Ptr", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Label", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28552,7 +28552,7 @@ var schemaGlPatchParameteri = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPatchParameteri",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -28593,7 +28593,7 @@ var schemaGlPatchParameteriEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPatchParameteriEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -28634,7 +28634,7 @@ var schemaGlPatchParameteriOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPatchParameteriOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -28683,13 +28683,13 @@ var schemaGlPathCommandsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathCommandsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCommands", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Commands", Type: &schema.Struct{Entity: schema.Of((*GLubyteᶜᵖ)(nil).Class())}},
+		{Declared: "Commands", Type: &schema.Struct{Entity: (*GLubyteᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "NumCoords", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "CoordType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28732,11 +28732,11 @@ var schemaGlPathCoordsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathCoordsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCoords", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "CoordType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28773,7 +28773,7 @@ var schemaGlPathCoverDepthFuncNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathCoverDepthFuncNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -28815,10 +28815,10 @@ var schemaGlPathDashArrayNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathDashArrayNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "DashCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "DashArray", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "DashArray", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -28873,10 +28873,10 @@ var schemaGlPathGlyphIndexArrayNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathGlyphIndexArrayNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "FontName", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "FontName", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "FontStyle", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "FirstGlyphIndex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGlyphs", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28933,9 +28933,9 @@ var schemaGlPathGlyphIndexRangeNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathGlyphIndexRangeNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "FontName", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "FontName", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "FontStyle", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "PathParameterTemplate", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "EmScale", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -28993,10 +28993,10 @@ var schemaGlPathGlyphRangeNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathGlyphRangeNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "FontName", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "FontName", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "FontStyle", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "FirstGlyph", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGlyphs", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -29057,14 +29057,14 @@ var schemaGlPathGlyphsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathGlyphsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "FontName", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "FontName", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "FontStyle", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "NumGlyphs", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Charcodes", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Charcodes", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "HandleMissingGlyphs", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PathParameterTemplate", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "EmScale", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -29128,11 +29128,11 @@ var schemaGlPathMemoryGlyphIndexArrayNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathMemoryGlyphIndexArrayNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FontSize", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
-		{Declared: "FontData", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "FontData", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "FaceIndex", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "FirstGlyphIndex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGlyphs", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -29179,7 +29179,7 @@ var schemaGlPathParameterfNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathParameterfNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -29223,10 +29223,10 @@ var schemaGlPathParameterfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathParameterfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -29267,7 +29267,7 @@ var schemaGlPathParameteriNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathParameteriNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -29311,10 +29311,10 @@ var schemaGlPathParameterivNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathParameterivNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -29359,7 +29359,7 @@ var schemaGlPathStencilDepthOffsetNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathStencilDepthOffsetNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Factor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -29402,7 +29402,7 @@ var schemaGlPathStencilFuncNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathStencilFuncNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -29448,11 +29448,11 @@ var schemaGlPathStringNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathStringNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "PathString", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "PathString", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -29503,15 +29503,15 @@ var schemaGlPathSubCommandsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathSubCommandsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CommandStart", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "CommandsToDelete", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "NumCommands", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Commands", Type: &schema.Struct{Entity: schema.Of((*GLubyteᶜᵖ)(nil).Class())}},
+		{Declared: "Commands", Type: &schema.Struct{Entity: (*GLubyteᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "NumCoords", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "CoordType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -29556,12 +29556,12 @@ var schemaGlPathSubCoordsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPathSubCoordsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoordStart", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "NumCoords", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "CoordType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -29598,7 +29598,7 @@ var schemaGlPauseTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPauseTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -29637,7 +29637,7 @@ var schemaGlPixelStorei = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPixelStorei",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -29692,15 +29692,15 @@ var schemaGlPointAlongPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPointAlongPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "StartSegment", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "NumSegments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Distance", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
-		{Declared: "X", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
-		{Declared: "Y", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
-		{Declared: "TangentX", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
-		{Declared: "TangentY", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
+		{Declared: "X", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+		{Declared: "Y", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+		{Declared: "TangentX", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+		{Declared: "TangentY", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -29740,7 +29740,7 @@ var schemaGlPolygonModeNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPolygonModeNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -29781,7 +29781,7 @@ var schemaGlPolygonOffset = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPolygonOffset",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -29818,7 +29818,7 @@ var schemaGlPopDebugGroup = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPopDebugGroup",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -29853,7 +29853,7 @@ var schemaGlPopDebugGroupKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPopDebugGroupKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -29888,7 +29888,7 @@ var schemaGlPopGroupMarkerEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPopGroupMarkerEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -29939,7 +29939,7 @@ var schemaGlPrimitiveBoundingBox = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBox",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinZ", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30000,7 +30000,7 @@ var schemaGlPrimitiveBoundingBoxEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinZ", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30061,7 +30061,7 @@ var schemaGlPrimitiveBoundingBoxOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinZ", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30112,10 +30112,10 @@ var schemaGlProgramBinary = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramBinary",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -30159,10 +30159,10 @@ var schemaGlProgramBinaryOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramBinaryOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BinarySize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
@@ -30204,7 +30204,7 @@ var schemaGlProgramParameteri = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramParameteri",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -30248,7 +30248,7 @@ var schemaGlProgramParameteriEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramParameteriEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -30302,12 +30302,12 @@ var schemaGlProgramPathFragmentInputGenNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramPathFragmentInputGenNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "GenMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Components", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "Coeffs", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Coeffs", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30348,7 +30348,7 @@ var schemaGlProgramUniform1f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30392,7 +30392,7 @@ var schemaGlProgramUniform1fEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1fEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30438,11 +30438,11 @@ var schemaGlProgramUniform1fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30485,11 +30485,11 @@ var schemaGlProgramUniform1fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30530,7 +30530,7 @@ var schemaGlProgramUniform1i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -30574,7 +30574,7 @@ var schemaGlProgramUniform1iEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1iEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -30620,11 +30620,11 @@ var schemaGlProgramUniform1iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30667,11 +30667,11 @@ var schemaGlProgramUniform1ivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1ivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30712,7 +30712,7 @@ var schemaGlProgramUniform1ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -30756,7 +30756,7 @@ var schemaGlProgramUniform1uiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1uiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -30802,11 +30802,11 @@ var schemaGlProgramUniform1uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30851,11 +30851,11 @@ var schemaGlProgramUniform1uivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform1uivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -30898,7 +30898,7 @@ var schemaGlProgramUniform2f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30945,7 +30945,7 @@ var schemaGlProgramUniform2fEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2fEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30992,11 +30992,11 @@ var schemaGlProgramUniform2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31039,11 +31039,11 @@ var schemaGlProgramUniform2fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31086,7 +31086,7 @@ var schemaGlProgramUniform2i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -31133,7 +31133,7 @@ var schemaGlProgramUniform2iEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2iEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -31180,11 +31180,11 @@ var schemaGlProgramUniform2iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31227,11 +31227,11 @@ var schemaGlProgramUniform2ivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2ivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31274,7 +31274,7 @@ var schemaGlProgramUniform2ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -31321,7 +31321,7 @@ var schemaGlProgramUniform2uiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2uiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -31368,11 +31368,11 @@ var schemaGlProgramUniform2uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31417,11 +31417,11 @@ var schemaGlProgramUniform2uivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform2uivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31466,7 +31466,7 @@ var schemaGlProgramUniform3f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -31516,7 +31516,7 @@ var schemaGlProgramUniform3fEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3fEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -31564,11 +31564,11 @@ var schemaGlProgramUniform3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31611,11 +31611,11 @@ var schemaGlProgramUniform3fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31660,7 +31660,7 @@ var schemaGlProgramUniform3i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -31710,7 +31710,7 @@ var schemaGlProgramUniform3iEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3iEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -31758,11 +31758,11 @@ var schemaGlProgramUniform3iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31805,11 +31805,11 @@ var schemaGlProgramUniform3ivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3ivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -31854,7 +31854,7 @@ var schemaGlProgramUniform3ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -31904,7 +31904,7 @@ var schemaGlProgramUniform3uiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3uiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -31952,11 +31952,11 @@ var schemaGlProgramUniform3uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32001,11 +32001,11 @@ var schemaGlProgramUniform3uivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform3uivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32052,7 +32052,7 @@ var schemaGlProgramUniform4f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -32105,7 +32105,7 @@ var schemaGlProgramUniform4fEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4fEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -32154,11 +32154,11 @@ var schemaGlProgramUniform4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32201,11 +32201,11 @@ var schemaGlProgramUniform4fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32252,7 +32252,7 @@ var schemaGlProgramUniform4i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -32305,7 +32305,7 @@ var schemaGlProgramUniform4iEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4iEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -32354,11 +32354,11 @@ var schemaGlProgramUniform4iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32401,11 +32401,11 @@ var schemaGlProgramUniform4ivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4ivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32452,7 +32452,7 @@ var schemaGlProgramUniform4ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -32505,7 +32505,7 @@ var schemaGlProgramUniform4uiEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4uiEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "V0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -32554,11 +32554,11 @@ var schemaGlProgramUniform4uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32603,11 +32603,11 @@ var schemaGlProgramUniform4uivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniform4uivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32654,7 +32654,7 @@ var schemaGlProgramUniformHandleui64NV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64NV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -32706,11 +32706,11 @@ var schemaGlProgramUniformHandleui64vNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64vNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuint64ᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuint64ᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32757,12 +32757,12 @@ var schemaGlProgramUniformMatrix2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32813,12 +32813,12 @@ var schemaGlProgramUniformMatrix2fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32869,12 +32869,12 @@ var schemaGlProgramUniformMatrix2x3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32925,12 +32925,12 @@ var schemaGlProgramUniformMatrix2x3fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -32981,12 +32981,12 @@ var schemaGlProgramUniformMatrix2x4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33037,12 +33037,12 @@ var schemaGlProgramUniformMatrix2x4fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33089,12 +33089,12 @@ var schemaGlProgramUniformMatrix3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33145,12 +33145,12 @@ var schemaGlProgramUniformMatrix3fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33201,12 +33201,12 @@ var schemaGlProgramUniformMatrix3x2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33257,12 +33257,12 @@ var schemaGlProgramUniformMatrix3x2fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33313,12 +33313,12 @@ var schemaGlProgramUniformMatrix3x4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33369,12 +33369,12 @@ var schemaGlProgramUniformMatrix3x4fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33421,12 +33421,12 @@ var schemaGlProgramUniformMatrix4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33477,12 +33477,12 @@ var schemaGlProgramUniformMatrix4fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33533,12 +33533,12 @@ var schemaGlProgramUniformMatrix4x2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33589,12 +33589,12 @@ var schemaGlProgramUniformMatrix4x2fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33645,12 +33645,12 @@ var schemaGlProgramUniformMatrix4x3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33701,12 +33701,12 @@ var schemaGlProgramUniformMatrix4x3fvEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fvEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33749,11 +33749,11 @@ var schemaGlPushDebugGroup = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPushDebugGroup",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Message", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Message", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33796,11 +33796,11 @@ var schemaGlPushDebugGroupKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPushDebugGroupKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Message", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Message", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33839,9 +33839,9 @@ var schemaGlPushGroupMarkerEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlPushGroupMarkerEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Marker", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
+		{Declared: "Marker", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -33880,7 +33880,7 @@ var schemaGlQueryCounterEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlQueryCounterEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -33921,7 +33921,7 @@ var schemaGlRasterSamplesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRasterSamplesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Fixedsamplelocations", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -33960,7 +33960,7 @@ var schemaGlReadBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -34000,7 +34000,7 @@ var schemaGlReadBufferIndexedEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadBufferIndexedEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -34039,7 +34039,7 @@ var schemaGlReadBufferNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadBufferNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -34089,14 +34089,14 @@ var schemaGlReadPixels = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadPixels",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -34147,7 +34147,7 @@ var schemaGlReadnPixels = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadnPixels",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34155,7 +34155,7 @@ var schemaGlReadnPixels = &binary.Entity{
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -34206,7 +34206,7 @@ var schemaGlReadnPixelsEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadnPixelsEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34214,7 +34214,7 @@ var schemaGlReadnPixelsEXT = &binary.Entity{
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -34265,7 +34265,7 @@ var schemaGlReadnPixelsKHR = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReadnPixelsKHR",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34273,7 +34273,7 @@ var schemaGlReadnPixelsKHR = &binary.Entity{
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -34310,7 +34310,7 @@ var schemaGlReleaseShaderCompiler = &binary.Entity{
 	Package: "gles",
 	Name:    "GlReleaseShaderCompiler",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -34353,7 +34353,7 @@ var schemaGlRenderbufferStorage = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorage",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34408,7 +34408,7 @@ var schemaGlRenderbufferStorageMultisample = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisample",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34464,7 +34464,7 @@ var schemaGlRenderbufferStorageMultisampleANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34520,7 +34520,7 @@ var schemaGlRenderbufferStorageMultisampleAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34576,7 +34576,7 @@ var schemaGlRenderbufferStorageMultisampleEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34632,7 +34632,7 @@ var schemaGlRenderbufferStorageMultisampleIMG = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleIMG",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34688,7 +34688,7 @@ var schemaGlRenderbufferStorageMultisampleNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34728,7 +34728,7 @@ var schemaGlResolveDepthValuesNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlResolveDepthValuesNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -34769,7 +34769,7 @@ var schemaGlResolveMultisampleFramebufferAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlResolveMultisampleFramebufferAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -34806,7 +34806,7 @@ var schemaGlResumeTransformFeedback = &binary.Entity{
 	Package: "gles",
 	Name:    "GlResumeTransformFeedback",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -34845,7 +34845,7 @@ var schemaGlSampleCoverage = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSampleCoverage",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -34886,7 +34886,7 @@ var schemaGlSampleMaski = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSampleMaski",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MaskNumber", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
@@ -34929,10 +34929,10 @@ var schemaGlSamplerParameterIiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -34975,10 +34975,10 @@ var schemaGlSamplerParameterIivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35021,10 +35021,10 @@ var schemaGlSamplerParameterIivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35065,10 +35065,10 @@ var schemaGlSamplerParameterIuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35111,10 +35111,10 @@ var schemaGlSamplerParameterIuivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35157,10 +35157,10 @@ var schemaGlSamplerParameterIuivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35201,7 +35201,7 @@ var schemaGlSamplerParameterf = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterf",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -35245,10 +35245,10 @@ var schemaGlSamplerParameterfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameterfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35289,7 +35289,7 @@ var schemaGlSamplerParameteri = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameteri",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -35333,10 +35333,10 @@ var schemaGlSamplerParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSamplerParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Param", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35379,7 +35379,7 @@ var schemaGlScissor = &binary.Entity{
 	Package: "gles",
 	Name:    "GlScissor",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -35424,10 +35424,10 @@ var schemaGlScissorArrayvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlScissorArrayvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35472,7 +35472,7 @@ var schemaGlScissorIndexedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlScissorIndexedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Left", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Bottom", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -35516,9 +35516,9 @@ var schemaGlScissorIndexedvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlScissorIndexedvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35569,12 +35569,12 @@ var schemaGlSelectPerfMonitorCountersAMD = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSelectPerfMonitorCountersAMD",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Enable", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "CounterList", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
+		{Declared: "CounterList", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35613,7 +35613,7 @@ var schemaGlSetFenceNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSetFenceNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -35650,7 +35650,7 @@ var schemaShaderIdᶜᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "ShaderIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -35695,11 +35695,11 @@ var schemaGlShaderBinary = &binary.Entity{
 	Package: "gles",
 	Name:    "GlShaderBinary",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Shaders", Type: &schema.Struct{Entity: schema.Of((*ShaderIdᶜᵖ)(nil).Class())}},
+		{Declared: "Shaders", Type: &schema.Struct{Entity: (*ShaderIdᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Binary", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BinarySize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
@@ -35743,11 +35743,11 @@ var schemaGlShaderSource = &binary.Entity{
 	Package: "gles",
 	Name:    "GlShaderSource",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Source", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖᶜᵖ)(nil).Class())}},
-		{Declared: "Length", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Source", Type: &schema.Struct{Entity: (*GLcharᶜᵖᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Length", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35792,7 +35792,7 @@ var schemaGlStartTilingQCOM = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStartTilingQCOM",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -35854,15 +35854,15 @@ var schemaGlStencilFillPathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilFillPathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35903,7 +35903,7 @@ var schemaGlStencilFillPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilFillPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -35947,7 +35947,7 @@ var schemaGlStencilFunc = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilFunc",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -35993,7 +35993,7 @@ var schemaGlStencilFuncSeparate = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilFuncSeparate",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "ReferenceValue", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -36034,7 +36034,7 @@ var schemaGlStencilMask = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilMask",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
@@ -36074,7 +36074,7 @@ var schemaGlStencilMaskSeparate = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilMaskSeparate",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -36117,7 +36117,7 @@ var schemaGlStencilOp = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilOp",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Zfail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Zpass", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36163,7 +36163,7 @@ var schemaGlStencilOpSeparate = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilOpSeparate",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "StencilFail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36224,15 +36224,15 @@ var schemaGlStencilStrokePathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilStrokePathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -36273,7 +36273,7 @@ var schemaGlStencilStrokePathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilStrokePathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -36335,16 +36335,16 @@ var schemaGlStencilThenCoverFillPathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -36393,7 +36393,7 @@ var schemaGlStencilThenCoverFillPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -36456,16 +36456,16 @@ var schemaGlStencilThenCoverStrokePathInstancedNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathInstancedNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "PathBase", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -36514,7 +36514,7 @@ var schemaGlStencilThenCoverStrokePathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -36559,7 +36559,7 @@ var schemaGlSubpixelPrecisionBiasNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlSubpixelPrecisionBiasNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Xbits", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Ybits", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -36600,7 +36600,7 @@ var schemaGlTestFenceNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTestFenceNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -36643,7 +36643,7 @@ var schemaGlTexBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36687,7 +36687,7 @@ var schemaGlTexBufferEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBufferEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36731,7 +36731,7 @@ var schemaGlTexBufferOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBufferOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36779,7 +36779,7 @@ var schemaGlTexBufferRange = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBufferRange",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36829,7 +36829,7 @@ var schemaGlTexBufferRangeEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBufferRangeEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36879,7 +36879,7 @@ var schemaGlTexBufferRangeOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexBufferRangeOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -36937,7 +36937,7 @@ var schemaGlTexImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "InternalFormat", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -36946,7 +36946,7 @@ var schemaGlTexImage2D = &binary.Entity{
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -37001,7 +37001,7 @@ var schemaGlTexImage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexImage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37011,7 +37011,7 @@ var schemaGlTexImage3D = &binary.Entity{
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -37066,7 +37066,7 @@ var schemaGlTexImage3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexImage3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37076,7 +37076,7 @@ var schemaGlTexImage3DOES = &binary.Entity{
 		{Declared: "Border", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Pixels", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Pixels", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -37129,7 +37129,7 @@ var schemaGlTexPageCommitmentEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexPageCommitmentEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37179,10 +37179,10 @@ var schemaGlTexParameterIiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37223,10 +37223,10 @@ var schemaGlTexParameterIivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37267,10 +37267,10 @@ var schemaGlTexParameterIivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37311,10 +37311,10 @@ var schemaGlTexParameterIuiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIuiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37355,10 +37355,10 @@ var schemaGlTexParameterIuivEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIuivEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37399,10 +37399,10 @@ var schemaGlTexParameterIuivOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterIuivOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37443,7 +37443,7 @@ var schemaGlTexParameterf = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterf",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -37487,10 +37487,10 @@ var schemaGlTexParameterfv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameterfv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37531,7 +37531,7 @@ var schemaGlTexParameteri = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameteri",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37575,10 +37575,10 @@ var schemaGlTexParameteriv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexParameteriv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -37621,7 +37621,7 @@ var schemaGlTexStorage1DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage1DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37670,7 +37670,7 @@ var schemaGlTexStorage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37720,7 +37720,7 @@ var schemaGlTexStorage2DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage2DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37774,7 +37774,7 @@ var schemaGlTexStorage2DMultisample = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage2DMultisample",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37827,7 +37827,7 @@ var schemaGlTexStorage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37880,7 +37880,7 @@ var schemaGlTexStorage3DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage3DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37937,7 +37937,7 @@ var schemaGlTexStorage3DMultisample = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisample",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37999,7 +37999,7 @@ var schemaGlTexStorage3DMultisampleOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisampleOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38059,7 +38059,7 @@ var schemaGlTexSubImage2D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexSubImage2D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38068,7 +38068,7 @@ var schemaGlTexSubImage2D = &binary.Entity{
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -38125,7 +38125,7 @@ var schemaGlTexSubImage3D = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexSubImage3D",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38136,7 +38136,7 @@ var schemaGlTexSubImage3D = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -38193,7 +38193,7 @@ var schemaGlTexSubImage3DOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTexSubImage3DOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Xoffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38204,7 +38204,7 @@ var schemaGlTexSubImage3DOES = &binary.Entity{
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "Pixels", Type: &schema.Struct{Entity: schema.Of((*TexturePointer)(nil).Class())}},
+		{Declared: "Pixels", Type: &schema.Struct{Entity: (*TexturePointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -38249,7 +38249,7 @@ var schemaGlTextureStorage1DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTextureStorage1DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38301,7 +38301,7 @@ var schemaGlTextureStorage2DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTextureStorage2DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38356,7 +38356,7 @@ var schemaGlTextureStorage3DEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTextureStorage3DEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38414,7 +38414,7 @@ var schemaGlTextureViewEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTextureViewEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Origtexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -38473,7 +38473,7 @@ var schemaGlTextureViewOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTextureViewOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Origtexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -38530,10 +38530,10 @@ var schemaGlTransformFeedbackVaryings = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTransformFeedbackVaryings",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Varyings", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖᶜᵖ)(nil).Class())}},
+		{Declared: "Varyings", Type: &schema.Struct{Entity: (*GLcharᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "BufferMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -38577,11 +38577,11 @@ var schemaGlTransformPathNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlTransformPathNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TransformValues", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -38620,7 +38620,7 @@ var schemaGlUniform1f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -38663,10 +38663,10 @@ var schemaGlUniform1fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -38705,7 +38705,7 @@ var schemaGlUniform1i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -38748,10 +38748,10 @@ var schemaGlUniform1iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -38790,7 +38790,7 @@ var schemaGlUniform1ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -38833,10 +38833,10 @@ var schemaGlUniform1uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform1uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -38877,7 +38877,7 @@ var schemaGlUniform2f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -38921,10 +38921,10 @@ var schemaGlUniform2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -38965,7 +38965,7 @@ var schemaGlUniform2i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39009,10 +39009,10 @@ var schemaGlUniform2iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39053,7 +39053,7 @@ var schemaGlUniform2ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39097,10 +39097,10 @@ var schemaGlUniform2uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform2uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39143,7 +39143,7 @@ var schemaGlUniform3f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -39188,10 +39188,10 @@ var schemaGlUniform3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39234,7 +39234,7 @@ var schemaGlUniform3i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39279,10 +39279,10 @@ var schemaGlUniform3iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39325,7 +39325,7 @@ var schemaGlUniform3ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39370,10 +39370,10 @@ var schemaGlUniform3uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform3uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39418,7 +39418,7 @@ var schemaGlUniform4f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -39464,10 +39464,10 @@ var schemaGlUniform4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39512,7 +39512,7 @@ var schemaGlUniform4i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39558,10 +39558,10 @@ var schemaGlUniform4iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39606,7 +39606,7 @@ var schemaGlUniform4ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39652,10 +39652,10 @@ var schemaGlUniform4uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniform4uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39696,7 +39696,7 @@ var schemaGlUniformBlockBinding = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformBlockBinding",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
 		{Declared: "UniformBlockBinding", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39738,7 +39738,7 @@ var schemaGlUniformHandleui64NV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformHandleui64NV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
@@ -39781,10 +39781,10 @@ var schemaGlUniformHandleui64vNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformHandleui64vNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLuint64ᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLuint64ᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39827,11 +39827,11 @@ var schemaGlUniformMatrix2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39874,11 +39874,11 @@ var schemaGlUniformMatrix2x3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39921,11 +39921,11 @@ var schemaGlUniformMatrix2x3fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -39968,11 +39968,11 @@ var schemaGlUniformMatrix2x4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40015,11 +40015,11 @@ var schemaGlUniformMatrix2x4fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40062,11 +40062,11 @@ var schemaGlUniformMatrix3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40109,11 +40109,11 @@ var schemaGlUniformMatrix3x2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40156,11 +40156,11 @@ var schemaGlUniformMatrix3x2fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40203,11 +40203,11 @@ var schemaGlUniformMatrix3x4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40250,11 +40250,11 @@ var schemaGlUniformMatrix3x4fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40297,11 +40297,11 @@ var schemaGlUniformMatrix4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40344,11 +40344,11 @@ var schemaGlUniformMatrix4x2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40391,11 +40391,11 @@ var schemaGlUniformMatrix4x2fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40438,11 +40438,11 @@ var schemaGlUniformMatrix4x3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40485,11 +40485,11 @@ var schemaGlUniformMatrix4x3fvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Transpose", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40528,7 +40528,7 @@ var schemaGlUnmapBuffer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUnmapBuffer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -40569,7 +40569,7 @@ var schemaGlUnmapBufferOES = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUnmapBufferOES",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -40608,7 +40608,7 @@ var schemaGlUseProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUseProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -40650,7 +40650,7 @@ var schemaGlUseProgramStages = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUseProgramStages",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Stages", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -40694,7 +40694,7 @@ var schemaGlUseProgramStagesEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlUseProgramStagesEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Stages", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -40734,7 +40734,7 @@ var schemaGlValidateProgram = &binary.Entity{
 	Package: "gles",
 	Name:    "GlValidateProgram",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
@@ -40774,7 +40774,7 @@ var schemaGlValidateProgramPipeline = &binary.Entity{
 	Package: "gles",
 	Name:    "GlValidateProgramPipeline",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
 }
@@ -40818,7 +40818,7 @@ var schemaGlValidateProgramPipelineEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlValidateProgramPipelineEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
 }
@@ -40858,7 +40858,7 @@ var schemaGlVertexAttrib1f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib1f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -40899,9 +40899,9 @@ var schemaGlVertexAttrib1fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib1fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -40942,7 +40942,7 @@ var schemaGlVertexAttrib2f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib2f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -40984,9 +40984,9 @@ var schemaGlVertexAttrib2fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib2fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41029,7 +41029,7 @@ var schemaGlVertexAttrib3f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib3f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41072,9 +41072,9 @@ var schemaGlVertexAttrib3fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib3fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41119,7 +41119,7 @@ var schemaGlVertexAttrib4f = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib4f",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Value1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41163,9 +41163,9 @@ var schemaGlVertexAttrib4fv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttrib4fv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41204,7 +41204,7 @@ var schemaGlVertexAttribBinding = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribBinding",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
 	},
@@ -41245,7 +41245,7 @@ var schemaGlVertexAttribDivisor = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribDivisor",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -41292,7 +41292,7 @@ var schemaGlVertexAttribDivisorANGLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorANGLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -41335,7 +41335,7 @@ var schemaGlVertexAttribDivisorEXT = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorEXT",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -41378,7 +41378,7 @@ var schemaGlVertexAttribDivisorNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -41425,7 +41425,7 @@ var schemaGlVertexAttribFormat = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribFormat",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -41475,7 +41475,7 @@ var schemaGlVertexAttribI4i = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribI4i",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41519,9 +41519,9 @@ var schemaGlVertexAttribI4iv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribI4iv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41566,7 +41566,7 @@ var schemaGlVertexAttribI4ui = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribI4ui",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41610,9 +41610,9 @@ var schemaGlVertexAttribI4uiv = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribI4uiv",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
+		{Declared: "Values", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41655,7 +41655,7 @@ var schemaGlVertexAttribIFormat = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribIFormat",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -41704,12 +41704,12 @@ var schemaGlVertexAttribIPointer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribIPointer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*VertexPointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*VertexPointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -41756,13 +41756,13 @@ var schemaGlVertexAttribPointer = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexAttribPointer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Normalized", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*VertexPointer)(nil).Class())}},
+		{Declared: "Data", Type: &schema.Struct{Entity: (*VertexPointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -41801,7 +41801,7 @@ var schemaGlVertexBindingDivisor = &binary.Entity{
 	Package: "gles",
 	Name:    "GlVertexBindingDivisor",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -41846,7 +41846,7 @@ var schemaGlViewport = &binary.Entity{
 	Package: "gles",
 	Name:    "GlViewport",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -41891,10 +41891,10 @@ var schemaGlViewportArrayvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlViewportArrayvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -41939,7 +41939,7 @@ var schemaGlViewportIndexedfNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlViewportIndexedfNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41983,9 +41983,9 @@ var schemaGlViewportIndexedfvNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlViewportIndexedfvNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
-		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -42026,7 +42026,7 @@ var schemaGlWaitSync = &binary.Entity{
 	Package: "gles",
 	Name:    "GlWaitSync",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Timeout", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -42070,7 +42070,7 @@ var schemaGlWaitSyncAPPLE = &binary.Entity{
 	Package: "gles",
 	Name:    "GlWaitSyncAPPLE",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Timeout", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -42116,11 +42116,11 @@ var schemaGlWeightPathsNV = &binary.Entity{
 	Package: "gles",
 	Name:    "GlWeightPathsNV",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
-		{Declared: "Paths", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
-		{Declared: "Weights", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
+		{Declared: "Paths", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Weights", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -42165,12 +42165,12 @@ var schemaGlXCreateContext = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXCreateContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Dpy", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Vis", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "ShareList", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Dpy", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Vis", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "ShareList", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 		{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 	},
 }
 
@@ -42217,13 +42217,13 @@ var schemaGlXCreateNewContext = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXCreateNewContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Fbconfig", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Fbconfig", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Shared", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "Shared", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 		{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 	},
 }
 
@@ -42268,11 +42268,11 @@ var schemaGlXMakeContextCurrent = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXMakeContextCurrent",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
-		{Declared: "Read", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Draw", Type: &schema.Struct{Entity: (*GLXDrawable)(nil).Class().Schema()}},
+		{Declared: "Read", Type: &schema.Struct{Entity: (*GLXDrawable)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "Bool", Method: schema.Int64}},
 	},
 }
@@ -42316,10 +42316,10 @@ var schemaGlXMakeCurrent = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXMakeCurrent",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Drawable", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
-		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Drawable", Type: &schema.Struct{Entity: (*GLXDrawable)(nil).Class().Schema()}},
+		{Declared: "Ctx", Type: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "Bool", Method: schema.Int64}},
 	},
 }
@@ -42355,7 +42355,7 @@ var schemaIntᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Intᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -42400,11 +42400,11 @@ var schemaGlXQueryDrawable = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXQueryDrawable",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Draw", Type: &schema.Struct{Entity: (*GLXDrawable)(nil).Class().Schema()}},
 		{Declared: "Attribute", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
-		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*Intᵖ)(nil).Class())}},
+		{Declared: "Value", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -42444,9 +42444,9 @@ var schemaGlXSwapBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "GlXSwapBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
-		{Declared: "Drawable", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Display", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
+		{Declared: "Drawable", Type: &schema.Struct{Entity: (*GLXDrawable)(nil).Class().Schema()}},
 	},
 }
 
@@ -42481,7 +42481,7 @@ var schemaHDC = &binary.Entity{
 	Package: "gles",
 	Name:    "HDC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -42516,7 +42516,7 @@ var schemaHGLRC = &binary.Entity{
 	Package: "gles",
 	Name:    "HGLRC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -42551,7 +42551,7 @@ var schemaIntˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Intˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -42629,7 +42629,7 @@ var schemaMat2f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -42664,7 +42664,7 @@ var schemaMat2fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -42699,7 +42699,7 @@ var schemaMat2fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -42777,7 +42777,7 @@ var schemaMat2x3f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x3f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -42812,7 +42812,7 @@ var schemaMat2x3fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x3fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -42847,7 +42847,7 @@ var schemaMat2x3fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -42925,7 +42925,7 @@ var schemaMat2x4f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x4f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -42960,7 +42960,7 @@ var schemaMat2x4fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x4fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -42995,7 +42995,7 @@ var schemaMat2x4fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat2x4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43034,7 +43034,7 @@ var schemaMat3f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -43069,7 +43069,7 @@ var schemaMat3fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43104,7 +43104,7 @@ var schemaMat3fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43143,7 +43143,7 @@ var schemaMat3x2f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x2f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -43178,7 +43178,7 @@ var schemaMat3x2fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x2fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43213,7 +43213,7 @@ var schemaMat3x2fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43252,7 +43252,7 @@ var schemaMat3x4f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x4f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -43287,7 +43287,7 @@ var schemaMat3x4fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x4fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43322,7 +43322,7 @@ var schemaMat3x4fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat3x4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43361,7 +43361,7 @@ var schemaMat4f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -43396,7 +43396,7 @@ var schemaMat4fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43431,7 +43431,7 @@ var schemaMat4fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43470,7 +43470,7 @@ var schemaMat4x2f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x2f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -43505,7 +43505,7 @@ var schemaMat4x2fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x2fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43540,7 +43540,7 @@ var schemaMat4x2fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43579,7 +43579,7 @@ var schemaMat4x3f = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x3f",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -43614,7 +43614,7 @@ var schemaMat4x3fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x3fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43649,7 +43649,7 @@ var schemaMat4x3fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Mat4x3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -43684,7 +43684,7 @@ var schemaPipelineIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "PipelineIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43719,7 +43719,7 @@ var schemaProgramIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "ProgramIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43754,7 +43754,7 @@ var schemaQueryIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "QueryIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43789,7 +43789,7 @@ var schemaRenderbufferIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "RenderbufferIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43826,7 +43826,7 @@ var schemaReplayBindRenderer = &binary.Entity{
 	Package: "gles",
 	Name:    "ReplayBindRenderer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -43864,7 +43864,7 @@ var schemaReplayCreateRenderer = &binary.Entity{
 	Package: "gles",
 	Name:    "ReplayCreateRenderer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -43900,7 +43900,7 @@ var schemaS64ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "S64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43935,7 +43935,7 @@ var schemaSamplerIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "SamplerIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -43970,7 +43970,7 @@ var schemaShaderIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "ShaderIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44007,7 +44007,7 @@ var schemaStartTimer = &binary.Entity{
 	Package: "gles",
 	Name:    "StartTimer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -44167,11 +44167,11 @@ var schemaState = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
 		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
-		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
-		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Entity: schema.Of((*EGLContext)(nil).Class())}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
-		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Entity: schema.Of((*GLXContext)(nil).Class())}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
-		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
-		{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
+		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Context)(nil).Class().Schema()}}}},
+		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Entity: (*EGLContext)(nil).Class().Schema()}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Context)(nil).Class().Schema()}}}},
+		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Entity: (*GLXContext)(nil).Class().Schema()}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Context)(nil).Class().Schema()}}}},
+		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Entity: (*HGLRC)(nil).Class().Schema()}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Context)(nil).Class().Schema()}}}},
+		{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*Context)(nil).Class().Schema()}}}},
 	},
 }
 
@@ -44210,7 +44210,7 @@ var schemaStopTimer = &binary.Entity{
 	Package: "gles",
 	Name:    "StopTimer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -44249,7 +44249,7 @@ var schemaSwitchThread = &binary.Entity{
 	Package: "gles",
 	Name:    "SwitchThread",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ThreadID", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
 	},
 }
@@ -44285,7 +44285,7 @@ var schemaTextureIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "TextureIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44320,7 +44320,7 @@ var schemaTransformFeedbackIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "TransformFeedbackIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44355,7 +44355,7 @@ var schemaU16ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "U16ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44390,7 +44390,7 @@ var schemaU16ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "U16ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -44425,7 +44425,7 @@ var schemaU32ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "U32ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44460,7 +44460,7 @@ var schemaU32ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "U32ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -44495,7 +44495,7 @@ var schemaU64ˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "U64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44530,7 +44530,7 @@ var schemaU8ᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "U8ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -44565,7 +44565,7 @@ var schemaUniformIndexˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "UniformIndexˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44604,7 +44604,7 @@ var schemaVec2fː2ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2fː2ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -44643,7 +44643,7 @@ var schemaVec2fː3ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2fː3ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -44682,7 +44682,7 @@ var schemaVec2fː4ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2fː4ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec2f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -44717,7 +44717,7 @@ var schemaVec2fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44752,7 +44752,7 @@ var schemaVec2fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -44826,7 +44826,7 @@ var schemaVec2iˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2iˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44861,7 +44861,7 @@ var schemaVec2iᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -44935,7 +44935,7 @@ var schemaVec2uˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2uˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -44970,7 +44970,7 @@ var schemaVec2uᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec2uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45009,7 +45009,7 @@ var schemaVec3fː2ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3fː2ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -45048,7 +45048,7 @@ var schemaVec3fː3ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3fː3ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -45087,7 +45087,7 @@ var schemaVec3fː4ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3fː4ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec3f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -45122,7 +45122,7 @@ var schemaVec3fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45157,7 +45157,7 @@ var schemaVec3fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45231,7 +45231,7 @@ var schemaVec3iˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3iˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45266,7 +45266,7 @@ var schemaVec3iᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45340,7 +45340,7 @@ var schemaVec3uˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3uˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45375,7 +45375,7 @@ var schemaVec3uᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec3uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45414,7 +45414,7 @@ var schemaVec4fː2ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4fː2ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 2}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 2}},
 	},
 }
 
@@ -45453,7 +45453,7 @@ var schemaVec4fː3ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4fː3ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 3}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 3}},
 	},
 }
 
@@ -45492,7 +45492,7 @@ var schemaVec4fː4ᵃ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4fː4ᵃ",
 	Fields: []binary.Field{
-		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 4}},
+		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Vec4f)(nil).Class().Schema()}, Size: 4}},
 	},
 }
 
@@ -45527,7 +45527,7 @@ var schemaVec4fˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4fˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45562,7 +45562,7 @@ var schemaVec4fᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45636,7 +45636,7 @@ var schemaVec4iˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4iˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45671,7 +45671,7 @@ var schemaVec4iᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45745,7 +45745,7 @@ var schemaVec4uˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4uˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45780,7 +45780,7 @@ var schemaVec4uᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Vec4uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45815,7 +45815,7 @@ var schemaVertexArrayIdˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "VertexArrayIdˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45850,7 +45850,7 @@ var schemaVoidˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45885,7 +45885,7 @@ var schemaVoidᵖˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᵖˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45920,7 +45920,7 @@ var schemaVoidᶜᵖˢ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᶜᵖˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -45955,7 +45955,7 @@ var schemaVoidᶜᵖᵖ = &binary.Entity{
 	Package: "gles",
 	Name:    "Voidᶜᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -45994,9 +45994,9 @@ var schemaWglCreateContext = &binary.Entity{
 	Package: "gles",
 	Name:    "WglCreateContext",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Hdc", Type: &schema.Struct{Entity: (*HDC)(nil).Class().Schema()}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*HGLRC)(nil).Class().Schema()}},
 	},
 }
 
@@ -46045,11 +46045,11 @@ var schemaWglCreateContextAttribsARB = &binary.Entity{
 	Package: "gles",
 	Name:    "WglCreateContextAttribsARB",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
-		{Declared: "HShareContext", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
-		{Declared: "AttribList", Type: &schema.Struct{Entity: schema.Of((*Intᵖ)(nil).Class())}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Hdc", Type: &schema.Struct{Entity: (*HDC)(nil).Class().Schema()}},
+		{Declared: "HShareContext", Type: &schema.Struct{Entity: (*HGLRC)(nil).Class().Schema()}},
+		{Declared: "AttribList", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*HGLRC)(nil).Class().Schema()}},
 	},
 }
 
@@ -46090,9 +46090,9 @@ var schemaWglMakeCurrent = &binary.Entity{
 	Package: "gles",
 	Name:    "WglMakeCurrent",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
-		{Declared: "Hglrc", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Hdc", Type: &schema.Struct{Entity: (*HDC)(nil).Class().Schema()}},
+		{Declared: "Hglrc", Type: &schema.Struct{Entity: (*HGLRC)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "BOOL", Method: schema.Int64}},
 	},
 }
@@ -46130,8 +46130,8 @@ var schemaWglSwapBuffers = &binary.Entity{
 	Package: "gles",
 	Name:    "WglSwapBuffers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Hdc", Type: &schema.Struct{Entity: (*HDC)(nil).Class().Schema()}},
 	},
 }
 
@@ -46168,8 +46168,8 @@ var schemagenerate_types = &binary.Entity{
 	Package: "gles",
 	Name:    "generate_types",
 	Fields: []binary.Field{
-		{Declared: "U16_slice", Type: &schema.Struct{Entity: schema.Of((*U16ˢ)(nil).Class())}},
-		{Declared: "U32_slice", Type: &schema.Struct{Entity: schema.Of((*U32ˢ)(nil).Class())}},
+		{Declared: "U16_slice", Type: &schema.Struct{Entity: (*U16ˢ)(nil).Class().Schema()}},
+		{Declared: "U32_slice", Type: &schema.Struct{Entity: (*U32ˢ)(nil).Class().Schema()}},
 	},
 }
 

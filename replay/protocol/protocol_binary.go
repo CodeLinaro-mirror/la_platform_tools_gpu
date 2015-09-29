@@ -122,7 +122,7 @@ var schemaPayload = &binary.Entity{
 		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
-		{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*ResourceInfo)(nil).Class())}}},
+		{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*ResourceInfo)(nil).Class().Schema()}}},
 		{Declared: "Opcodes", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }

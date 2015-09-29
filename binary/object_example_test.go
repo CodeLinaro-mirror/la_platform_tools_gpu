@@ -35,6 +35,10 @@ func (*ExampleObject) Class() binary.Class {
 	return (*ExampleClass)(nil)
 }
 
+func (*ExampleClass) Schema() *binary.Entity {
+	return nil
+}
+
 func (*ExampleClass) ID() binary.ID {
 	return ExampleID
 }

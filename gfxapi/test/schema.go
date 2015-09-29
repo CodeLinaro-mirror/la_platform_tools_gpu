@@ -4,13 +4,10 @@
 
 package test
 
-import (
-	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
-)
+import "android.googlesource.com/platform/tools/gpu/atom"
 
 func init() {
-	sc_CmdClone := schema.Of((*CmdClone)(nil).Class())
+	sc_CmdClone := (*CmdClone)(nil).Class().Schema()
 	sc_CmdClone.Metadata = append(sc_CmdClone.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdClone",
@@ -19,7 +16,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdMake := schema.Of((*CmdMake)(nil).Class())
+	sc_CmdMake := (*CmdMake)(nil).Class().Schema()
 	sc_CmdMake.Metadata = append(sc_CmdMake.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdMake",
@@ -28,7 +25,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdCopy := schema.Of((*CmdCopy)(nil).Class())
+	sc_CmdCopy := (*CmdCopy)(nil).Class().Schema()
 	sc_CmdCopy.Metadata = append(sc_CmdCopy.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCopy",
@@ -37,7 +34,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdCharsliceToString := schema.Of((*CmdCharsliceToString)(nil).Class())
+	sc_CmdCharsliceToString := (*CmdCharsliceToString)(nil).Class().Schema()
 	sc_CmdCharsliceToString.Metadata = append(sc_CmdCharsliceToString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCharsliceToString",
@@ -46,7 +43,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdCharptrToString := schema.Of((*CmdCharptrToString)(nil).Class())
+	sc_CmdCharptrToString := (*CmdCharptrToString)(nil).Class().Schema()
 	sc_CmdCharptrToString.Metadata = append(sc_CmdCharptrToString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdCharptrToString",
@@ -55,7 +52,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdSliceCasts := schema.Of((*CmdSliceCasts)(nil).Class())
+	sc_CmdSliceCasts := (*CmdSliceCasts)(nil).Class().Schema()
 	sc_CmdSliceCasts.Metadata = append(sc_CmdSliceCasts.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdSliceCasts",
@@ -64,7 +61,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoid := schema.Of((*CmdVoid)(nil).Class())
+	sc_CmdVoid := (*CmdVoid)(nil).Class().Schema()
 	sc_CmdVoid.Metadata = append(sc_CmdVoid.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid",
@@ -73,7 +70,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdUnknownRet := schema.Of((*CmdUnknownRet)(nil).Class())
+	sc_CmdUnknownRet := (*CmdUnknownRet)(nil).Class().Schema()
 	sc_CmdUnknownRet.Metadata = append(sc_CmdUnknownRet.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownRet",
@@ -82,7 +79,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdUnknownWritePtr := schema.Of((*CmdUnknownWritePtr)(nil).Class())
+	sc_CmdUnknownWritePtr := (*CmdUnknownWritePtr)(nil).Class().Schema()
 	sc_CmdUnknownWritePtr.Metadata = append(sc_CmdUnknownWritePtr.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownWritePtr",
@@ -91,7 +88,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdUnknownWriteSlice := schema.Of((*CmdUnknownWriteSlice)(nil).Class())
+	sc_CmdUnknownWriteSlice := (*CmdUnknownWriteSlice)(nil).Class().Schema()
 	sc_CmdUnknownWriteSlice.Metadata = append(sc_CmdUnknownWriteSlice.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdUnknownWriteSlice",
@@ -100,7 +97,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidU8 := schema.Of((*CmdVoidU8)(nil).Class())
+	sc_CmdVoidU8 := (*CmdVoidU8)(nil).Class().Schema()
 	sc_CmdVoidU8.Metadata = append(sc_CmdVoidU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU8",
@@ -109,7 +106,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidS8 := schema.Of((*CmdVoidS8)(nil).Class())
+	sc_CmdVoidS8 := (*CmdVoidS8)(nil).Class().Schema()
 	sc_CmdVoidS8.Metadata = append(sc_CmdVoidS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS8",
@@ -118,7 +115,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidU16 := schema.Of((*CmdVoidU16)(nil).Class())
+	sc_CmdVoidU16 := (*CmdVoidU16)(nil).Class().Schema()
 	sc_CmdVoidU16.Metadata = append(sc_CmdVoidU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU16",
@@ -127,7 +124,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidS16 := schema.Of((*CmdVoidS16)(nil).Class())
+	sc_CmdVoidS16 := (*CmdVoidS16)(nil).Class().Schema()
 	sc_CmdVoidS16.Metadata = append(sc_CmdVoidS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS16",
@@ -136,7 +133,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidF32 := schema.Of((*CmdVoidF32)(nil).Class())
+	sc_CmdVoidF32 := (*CmdVoidF32)(nil).Class().Schema()
 	sc_CmdVoidF32.Metadata = append(sc_CmdVoidF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidF32",
@@ -145,7 +142,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidU32 := schema.Of((*CmdVoidU32)(nil).Class())
+	sc_CmdVoidU32 := (*CmdVoidU32)(nil).Class().Schema()
 	sc_CmdVoidU32.Metadata = append(sc_CmdVoidU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU32",
@@ -154,7 +151,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidS32 := schema.Of((*CmdVoidS32)(nil).Class())
+	sc_CmdVoidS32 := (*CmdVoidS32)(nil).Class().Schema()
 	sc_CmdVoidS32.Metadata = append(sc_CmdVoidS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS32",
@@ -163,7 +160,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidF64 := schema.Of((*CmdVoidF64)(nil).Class())
+	sc_CmdVoidF64 := (*CmdVoidF64)(nil).Class().Schema()
 	sc_CmdVoidF64.Metadata = append(sc_CmdVoidF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidF64",
@@ -172,7 +169,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidU64 := schema.Of((*CmdVoidU64)(nil).Class())
+	sc_CmdVoidU64 := (*CmdVoidU64)(nil).Class().Schema()
 	sc_CmdVoidU64.Metadata = append(sc_CmdVoidU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidU64",
@@ -181,7 +178,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidS64 := schema.Of((*CmdVoidS64)(nil).Class())
+	sc_CmdVoidS64 := (*CmdVoidS64)(nil).Class().Schema()
 	sc_CmdVoidS64.Metadata = append(sc_CmdVoidS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidS64",
@@ -190,7 +187,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidBool := schema.Of((*CmdVoidBool)(nil).Class())
+	sc_CmdVoidBool := (*CmdVoidBool)(nil).Class().Schema()
 	sc_CmdVoidBool.Metadata = append(sc_CmdVoidBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidBool",
@@ -199,7 +196,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidString := schema.Of((*CmdVoidString)(nil).Class())
+	sc_CmdVoidString := (*CmdVoidString)(nil).Class().Schema()
 	sc_CmdVoidString.Metadata = append(sc_CmdVoidString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidString",
@@ -208,7 +205,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoid3Strings := schema.Of((*CmdVoid3Strings)(nil).Class())
+	sc_CmdVoid3Strings := (*CmdVoid3Strings)(nil).Class().Schema()
 	sc_CmdVoid3Strings.Metadata = append(sc_CmdVoid3Strings.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3Strings",
@@ -217,7 +214,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoid3InArrays := schema.Of((*CmdVoid3InArrays)(nil).Class())
+	sc_CmdVoid3InArrays := (*CmdVoid3InArrays)(nil).Class().Schema()
 	sc_CmdVoid3InArrays.Metadata = append(sc_CmdVoid3InArrays.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3InArrays",
@@ -226,7 +223,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidInArrayOfPointers := schema.Of((*CmdVoidInArrayOfPointers)(nil).Class())
+	sc_CmdVoidInArrayOfPointers := (*CmdVoidInArrayOfPointers)(nil).Class().Schema()
 	sc_CmdVoidInArrayOfPointers.Metadata = append(sc_CmdVoidInArrayOfPointers.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidInArrayOfPointers",
@@ -235,7 +232,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadU8 := schema.Of((*CmdVoidReadU8)(nil).Class())
+	sc_CmdVoidReadU8 := (*CmdVoidReadU8)(nil).Class().Schema()
 	sc_CmdVoidReadU8.Metadata = append(sc_CmdVoidReadU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU8",
@@ -244,7 +241,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadS8 := schema.Of((*CmdVoidReadS8)(nil).Class())
+	sc_CmdVoidReadS8 := (*CmdVoidReadS8)(nil).Class().Schema()
 	sc_CmdVoidReadS8.Metadata = append(sc_CmdVoidReadS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS8",
@@ -253,7 +250,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadU16 := schema.Of((*CmdVoidReadU16)(nil).Class())
+	sc_CmdVoidReadU16 := (*CmdVoidReadU16)(nil).Class().Schema()
 	sc_CmdVoidReadU16.Metadata = append(sc_CmdVoidReadU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU16",
@@ -262,7 +259,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadS16 := schema.Of((*CmdVoidReadS16)(nil).Class())
+	sc_CmdVoidReadS16 := (*CmdVoidReadS16)(nil).Class().Schema()
 	sc_CmdVoidReadS16.Metadata = append(sc_CmdVoidReadS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS16",
@@ -271,7 +268,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadF32 := schema.Of((*CmdVoidReadF32)(nil).Class())
+	sc_CmdVoidReadF32 := (*CmdVoidReadF32)(nil).Class().Schema()
 	sc_CmdVoidReadF32.Metadata = append(sc_CmdVoidReadF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadF32",
@@ -280,7 +277,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadU32 := schema.Of((*CmdVoidReadU32)(nil).Class())
+	sc_CmdVoidReadU32 := (*CmdVoidReadU32)(nil).Class().Schema()
 	sc_CmdVoidReadU32.Metadata = append(sc_CmdVoidReadU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU32",
@@ -289,7 +286,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadS32 := schema.Of((*CmdVoidReadS32)(nil).Class())
+	sc_CmdVoidReadS32 := (*CmdVoidReadS32)(nil).Class().Schema()
 	sc_CmdVoidReadS32.Metadata = append(sc_CmdVoidReadS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS32",
@@ -298,7 +295,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadF64 := schema.Of((*CmdVoidReadF64)(nil).Class())
+	sc_CmdVoidReadF64 := (*CmdVoidReadF64)(nil).Class().Schema()
 	sc_CmdVoidReadF64.Metadata = append(sc_CmdVoidReadF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadF64",
@@ -307,7 +304,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadU64 := schema.Of((*CmdVoidReadU64)(nil).Class())
+	sc_CmdVoidReadU64 := (*CmdVoidReadU64)(nil).Class().Schema()
 	sc_CmdVoidReadU64.Metadata = append(sc_CmdVoidReadU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadU64",
@@ -316,7 +313,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadS64 := schema.Of((*CmdVoidReadS64)(nil).Class())
+	sc_CmdVoidReadS64 := (*CmdVoidReadS64)(nil).Class().Schema()
 	sc_CmdVoidReadS64.Metadata = append(sc_CmdVoidReadS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadS64",
@@ -325,7 +322,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadBool := schema.Of((*CmdVoidReadBool)(nil).Class())
+	sc_CmdVoidReadBool := (*CmdVoidReadBool)(nil).Class().Schema()
 	sc_CmdVoidReadBool.Metadata = append(sc_CmdVoidReadBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadBool",
@@ -334,7 +331,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidReadPtrs := schema.Of((*CmdVoidReadPtrs)(nil).Class())
+	sc_CmdVoidReadPtrs := (*CmdVoidReadPtrs)(nil).Class().Schema()
 	sc_CmdVoidReadPtrs.Metadata = append(sc_CmdVoidReadPtrs.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidReadPtrs",
@@ -343,7 +340,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteU8 := schema.Of((*CmdVoidWriteU8)(nil).Class())
+	sc_CmdVoidWriteU8 := (*CmdVoidWriteU8)(nil).Class().Schema()
 	sc_CmdVoidWriteU8.Metadata = append(sc_CmdVoidWriteU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU8",
@@ -352,7 +349,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteS8 := schema.Of((*CmdVoidWriteS8)(nil).Class())
+	sc_CmdVoidWriteS8 := (*CmdVoidWriteS8)(nil).Class().Schema()
 	sc_CmdVoidWriteS8.Metadata = append(sc_CmdVoidWriteS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS8",
@@ -361,7 +358,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteU16 := schema.Of((*CmdVoidWriteU16)(nil).Class())
+	sc_CmdVoidWriteU16 := (*CmdVoidWriteU16)(nil).Class().Schema()
 	sc_CmdVoidWriteU16.Metadata = append(sc_CmdVoidWriteU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU16",
@@ -370,7 +367,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteS16 := schema.Of((*CmdVoidWriteS16)(nil).Class())
+	sc_CmdVoidWriteS16 := (*CmdVoidWriteS16)(nil).Class().Schema()
 	sc_CmdVoidWriteS16.Metadata = append(sc_CmdVoidWriteS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS16",
@@ -379,7 +376,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteF32 := schema.Of((*CmdVoidWriteF32)(nil).Class())
+	sc_CmdVoidWriteF32 := (*CmdVoidWriteF32)(nil).Class().Schema()
 	sc_CmdVoidWriteF32.Metadata = append(sc_CmdVoidWriteF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteF32",
@@ -388,7 +385,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteU32 := schema.Of((*CmdVoidWriteU32)(nil).Class())
+	sc_CmdVoidWriteU32 := (*CmdVoidWriteU32)(nil).Class().Schema()
 	sc_CmdVoidWriteU32.Metadata = append(sc_CmdVoidWriteU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU32",
@@ -397,7 +394,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteS32 := schema.Of((*CmdVoidWriteS32)(nil).Class())
+	sc_CmdVoidWriteS32 := (*CmdVoidWriteS32)(nil).Class().Schema()
 	sc_CmdVoidWriteS32.Metadata = append(sc_CmdVoidWriteS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS32",
@@ -406,7 +403,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteF64 := schema.Of((*CmdVoidWriteF64)(nil).Class())
+	sc_CmdVoidWriteF64 := (*CmdVoidWriteF64)(nil).Class().Schema()
 	sc_CmdVoidWriteF64.Metadata = append(sc_CmdVoidWriteF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteF64",
@@ -415,7 +412,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteU64 := schema.Of((*CmdVoidWriteU64)(nil).Class())
+	sc_CmdVoidWriteU64 := (*CmdVoidWriteU64)(nil).Class().Schema()
 	sc_CmdVoidWriteU64.Metadata = append(sc_CmdVoidWriteU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteU64",
@@ -424,7 +421,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteS64 := schema.Of((*CmdVoidWriteS64)(nil).Class())
+	sc_CmdVoidWriteS64 := (*CmdVoidWriteS64)(nil).Class().Schema()
 	sc_CmdVoidWriteS64.Metadata = append(sc_CmdVoidWriteS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteS64",
@@ -433,7 +430,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWriteBool := schema.Of((*CmdVoidWriteBool)(nil).Class())
+	sc_CmdVoidWriteBool := (*CmdVoidWriteBool)(nil).Class().Schema()
 	sc_CmdVoidWriteBool.Metadata = append(sc_CmdVoidWriteBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWriteBool",
@@ -442,7 +439,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidWritePtrs := schema.Of((*CmdVoidWritePtrs)(nil).Class())
+	sc_CmdVoidWritePtrs := (*CmdVoidWritePtrs)(nil).Class().Schema()
 	sc_CmdVoidWritePtrs.Metadata = append(sc_CmdVoidWritePtrs.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidWritePtrs",
@@ -451,7 +448,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdU8 := schema.Of((*CmdU8)(nil).Class())
+	sc_CmdU8 := (*CmdU8)(nil).Class().Schema()
 	sc_CmdU8.Metadata = append(sc_CmdU8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU8",
@@ -460,7 +457,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdS8 := schema.Of((*CmdS8)(nil).Class())
+	sc_CmdS8 := (*CmdS8)(nil).Class().Schema()
 	sc_CmdS8.Metadata = append(sc_CmdS8.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS8",
@@ -469,7 +466,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdU16 := schema.Of((*CmdU16)(nil).Class())
+	sc_CmdU16 := (*CmdU16)(nil).Class().Schema()
 	sc_CmdU16.Metadata = append(sc_CmdU16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU16",
@@ -478,7 +475,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdS16 := schema.Of((*CmdS16)(nil).Class())
+	sc_CmdS16 := (*CmdS16)(nil).Class().Schema()
 	sc_CmdS16.Metadata = append(sc_CmdS16.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS16",
@@ -487,7 +484,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdF32 := schema.Of((*CmdF32)(nil).Class())
+	sc_CmdF32 := (*CmdF32)(nil).Class().Schema()
 	sc_CmdF32.Metadata = append(sc_CmdF32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdF32",
@@ -496,7 +493,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdU32 := schema.Of((*CmdU32)(nil).Class())
+	sc_CmdU32 := (*CmdU32)(nil).Class().Schema()
 	sc_CmdU32.Metadata = append(sc_CmdU32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU32",
@@ -505,7 +502,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdS32 := schema.Of((*CmdS32)(nil).Class())
+	sc_CmdS32 := (*CmdS32)(nil).Class().Schema()
 	sc_CmdS32.Metadata = append(sc_CmdS32.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS32",
@@ -514,7 +511,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdF64 := schema.Of((*CmdF64)(nil).Class())
+	sc_CmdF64 := (*CmdF64)(nil).Class().Schema()
 	sc_CmdF64.Metadata = append(sc_CmdF64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdF64",
@@ -523,7 +520,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdU64 := schema.Of((*CmdU64)(nil).Class())
+	sc_CmdU64 := (*CmdU64)(nil).Class().Schema()
 	sc_CmdU64.Metadata = append(sc_CmdU64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdU64",
@@ -532,7 +529,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdS64 := schema.Of((*CmdS64)(nil).Class())
+	sc_CmdS64 := (*CmdS64)(nil).Class().Schema()
 	sc_CmdS64.Metadata = append(sc_CmdS64.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdS64",
@@ -541,7 +538,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdBool := schema.Of((*CmdBool)(nil).Class())
+	sc_CmdBool := (*CmdBool)(nil).Class().Schema()
 	sc_CmdBool.Metadata = append(sc_CmdBool.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdBool",
@@ -550,7 +547,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdString := schema.Of((*CmdString)(nil).Class())
+	sc_CmdString := (*CmdString)(nil).Class().Schema()
 	sc_CmdString.Metadata = append(sc_CmdString.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdString",
@@ -559,7 +556,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdPointer := schema.Of((*CmdPointer)(nil).Class())
+	sc_CmdPointer := (*CmdPointer)(nil).Class().Schema()
 	sc_CmdPointer.Metadata = append(sc_CmdPointer.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdPointer",
@@ -568,7 +565,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoid3Remapped := schema.Of((*CmdVoid3Remapped)(nil).Class())
+	sc_CmdVoid3Remapped := (*CmdVoid3Remapped)(nil).Class().Schema()
 	sc_CmdVoid3Remapped.Metadata = append(sc_CmdVoid3Remapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoid3Remapped",
@@ -577,7 +574,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidInArrayOfRemapped := schema.Of((*CmdVoidInArrayOfRemapped)(nil).Class())
+	sc_CmdVoidInArrayOfRemapped := (*CmdVoidInArrayOfRemapped)(nil).Class().Schema()
 	sc_CmdVoidInArrayOfRemapped.Metadata = append(sc_CmdVoidInArrayOfRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidInArrayOfRemapped",
@@ -586,7 +583,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidOutArrayOfRemapped := schema.Of((*CmdVoidOutArrayOfRemapped)(nil).Class())
+	sc_CmdVoidOutArrayOfRemapped := (*CmdVoidOutArrayOfRemapped)(nil).Class().Schema()
 	sc_CmdVoidOutArrayOfRemapped.Metadata = append(sc_CmdVoidOutArrayOfRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidOutArrayOfRemapped",
@@ -595,7 +592,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidOutArrayOfUnknownRemapped := schema.Of((*CmdVoidOutArrayOfUnknownRemapped)(nil).Class())
+	sc_CmdVoidOutArrayOfUnknownRemapped := (*CmdVoidOutArrayOfUnknownRemapped)(nil).Class().Schema()
 	sc_CmdVoidOutArrayOfUnknownRemapped.Metadata = append(sc_CmdVoidOutArrayOfUnknownRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdVoidOutArrayOfUnknownRemapped",
@@ -604,7 +601,7 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdRemapped := schema.Of((*CmdRemapped)(nil).Class())
+	sc_CmdRemapped := (*CmdRemapped)(nil).Class().Schema()
 	sc_CmdRemapped.Metadata = append(sc_CmdRemapped.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "cmdRemapped",

@@ -167,8 +167,8 @@ var schemaGroup = &binary.Entity{
 	Name:    "Group",
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Range", Type: &schema.Struct{Entity: schema.Of((*Range)(nil).Class())}},
-		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Entity: schema.Of((*Group)(nil).Class())}}},
+		{Declared: "Range", Type: &schema.Struct{Entity: (*Range)(nil).Class().Schema()}},
+		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Entity: (*Group)(nil).Class().Schema()}}},
 	},
 }
 
@@ -299,7 +299,7 @@ var schemaObservation = &binary.Entity{
 	Package: "atom",
 	Name:    "Observation",
 	Fields: []binary.Field{
-		{Declared: "Range", Type: &schema.Struct{Entity: schema.Of((*memory.Range)(nil).Class())}},
+		{Declared: "Range", Type: &schema.Struct{Entity: (*memory.Range)(nil).Class().Schema()}},
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
@@ -353,8 +353,8 @@ var schemaObservations = &binary.Entity{
 	Package: "atom",
 	Name:    "Observations",
 	Fields: []binary.Field{
-		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Observation)(nil).Class())}}},
-		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Observation)(nil).Class())}}},
+		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Observation)(nil).Class().Schema()}}},
+		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Observation)(nil).Class().Schema()}}},
 	},
 }
 

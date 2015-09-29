@@ -265,7 +265,7 @@ var schemaSliceInfo = &binary.Entity{
 	Package: "test",
 	Name:    "SliceInfo",
 	Fields: []binary.Field{
-		{Declared: "Root", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "Root", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -302,7 +302,7 @@ var schemaBoolˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Boolˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -337,7 +337,7 @@ var schemaBoolᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Boolᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -372,7 +372,7 @@ var schemaCharˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Charˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -407,7 +407,7 @@ var schemaCharᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Charᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -442,7 +442,7 @@ var schemaCharᵖˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Charᵖˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -477,7 +477,7 @@ var schemaCharᵖᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Charᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -514,7 +514,7 @@ var schemaCmdBool = &binary.Entity{
 	Package: "test",
 	Name:    "CmdBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -552,8 +552,8 @@ var schemaCmdCharptrToString = &binary.Entity{
 	Package: "test",
 	Name:    "CmdCharptrToString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "S", Type: &schema.Struct{Entity: schema.Of((*Charᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "S", Type: &schema.Struct{Entity: (*Charᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -592,8 +592,8 @@ var schemaCmdCharsliceToString = &binary.Entity{
 	Package: "test",
 	Name:    "CmdCharsliceToString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "S", Type: &schema.Struct{Entity: schema.Of((*Charᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "S", Type: &schema.Struct{Entity: (*Charᵖ)(nil).Class().Schema()}},
 		{Declared: "Len", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -629,7 +629,7 @@ var schemaU8ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "U8ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -668,8 +668,8 @@ var schemaCmdClone = &binary.Entity{
 	Package: "test",
 	Name:    "CmdClone",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Src", Type: &schema.Struct{Entity: schema.Of((*U8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Src", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -709,8 +709,8 @@ var schemaCmdCopy = &binary.Entity{
 	Package: "test",
 	Name:    "CmdCopy",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Src", Type: &schema.Struct{Entity: schema.Of((*U8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Src", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -748,7 +748,7 @@ var schemaCmdF32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -786,7 +786,7 @@ var schemaCmdF64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -824,7 +824,7 @@ var schemaCmdMake = &binary.Entity{
 	Package: "test",
 	Name:    "CmdMake",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -860,7 +860,7 @@ var schemaVoidᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Voidᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -897,8 +897,8 @@ var schemaCmdPointer = &binary.Entity{
 	Package: "test",
 	Name:    "CmdPointer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Result", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -935,7 +935,7 @@ var schemaCmdRemapped = &binary.Entity{
 	Package: "test",
 	Name:    "CmdRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 	},
 }
@@ -973,7 +973,7 @@ var schemaCmdS16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -1011,7 +1011,7 @@ var schemaCmdS32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -1049,7 +1049,7 @@ var schemaCmdS64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -1087,7 +1087,7 @@ var schemaCmdS8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -1123,7 +1123,7 @@ var schemaU16ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "U16ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -1162,8 +1162,8 @@ var schemaCmdSliceCasts = &binary.Entity{
 	Package: "test",
 	Name:    "CmdSliceCasts",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "S", Type: &schema.Struct{Entity: schema.Of((*U16ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "S", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 		{Declared: "L", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1201,7 +1201,7 @@ var schemaCmdString = &binary.Entity{
 	Package: "test",
 	Name:    "CmdString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -1239,7 +1239,7 @@ var schemaCmdU16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -1277,7 +1277,7 @@ var schemaCmdU32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1315,7 +1315,7 @@ var schemaCmdU64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -1353,7 +1353,7 @@ var schemaCmdU8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -1391,7 +1391,7 @@ var schemaCmdUnknownRet = &binary.Entity{
 	Package: "test",
 	Name:    "CmdUnknownRet",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -1427,7 +1427,7 @@ var schemaIntᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Intᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -1464,8 +1464,8 @@ var schemaCmdUnknownWritePtr = &binary.Entity{
 	Package: "test",
 	Name:    "CmdUnknownWritePtr",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "P", Type: &schema.Struct{Entity: schema.Of((*Intᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "P", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -1502,8 +1502,8 @@ var schemaCmdUnknownWriteSlice = &binary.Entity{
 	Package: "test",
 	Name:    "CmdUnknownWriteSlice",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Intᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -1538,7 +1538,7 @@ var schemaCmdVoid = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoid",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
 }
 
@@ -1573,7 +1573,7 @@ var schemaU32ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "U32ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -1614,10 +1614,10 @@ var schemaCmdVoid3InArrays = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoid3InArrays",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U8ᵖ)(nil).Class())}},
-		{Declared: "B", Type: &schema.Struct{Entity: schema.Of((*U32ᵖ)(nil).Class())}},
-		{Declared: "C", Type: &schema.Struct{Entity: schema.Of((*Intᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
+		{Declared: "B", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
+		{Declared: "C", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -1658,7 +1658,7 @@ var schemaCmdVoid3Remapped = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoid3Remapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -1702,7 +1702,7 @@ var schemaCmdVoid3Strings = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoid3Strings",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -1742,7 +1742,7 @@ var schemaCmdVoidBool = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -1780,7 +1780,7 @@ var schemaCmdVoidF32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -1818,7 +1818,7 @@ var schemaCmdVoidF64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -1860,8 +1860,8 @@ var schemaCmdVoidInArrayOfPointers = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidInArrayOfPointers",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Charᵖᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Charᵖᵖ)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -1897,7 +1897,7 @@ var schemaRemappedᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "Remappedᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -1936,8 +1936,8 @@ var schemaCmdVoidInArrayOfRemapped = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidInArrayOfRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Remappedᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -1976,8 +1976,8 @@ var schemaCmdVoidOutArrayOfRemapped = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Remappedᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2020,8 +2020,8 @@ var schemaCmdVoidOutArrayOfUnknownRemapped = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidOutArrayOfUnknownRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Remappedᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2058,8 +2058,8 @@ var schemaCmdVoidReadBool = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Boolᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2094,7 +2094,7 @@ var schemaF32ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "F32ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2131,8 +2131,8 @@ var schemaCmdVoidReadF32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2167,7 +2167,7 @@ var schemaF64ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "F64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2204,8 +2204,8 @@ var schemaCmdVoidReadF64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2246,10 +2246,10 @@ var schemaCmdVoidReadPtrs = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadPtrs",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F32ᵖ)(nil).Class())}},
-		{Declared: "B", Type: &schema.Struct{Entity: schema.Of((*U16ᵖ)(nil).Class())}},
-		{Declared: "C", Type: &schema.Struct{Entity: schema.Of((*Boolᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
+		{Declared: "B", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
+		{Declared: "C", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2284,7 +2284,7 @@ var schemaS16ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "S16ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2321,8 +2321,8 @@ var schemaCmdVoidReadS16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S16ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S16ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2357,7 +2357,7 @@ var schemaS32ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "S32ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2394,8 +2394,8 @@ var schemaCmdVoidReadS32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2430,7 +2430,7 @@ var schemaS64ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "S64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2467,8 +2467,8 @@ var schemaCmdVoidReadS64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2503,7 +2503,7 @@ var schemaS8ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "S8ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2540,8 +2540,8 @@ var schemaCmdVoidReadS8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S8ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2578,8 +2578,8 @@ var schemaCmdVoidReadU16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U16ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2616,8 +2616,8 @@ var schemaCmdVoidReadU32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2652,7 +2652,7 @@ var schemaU64ᵖ = &binary.Entity{
 	Package: "test",
 	Name:    "U64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -2689,8 +2689,8 @@ var schemaCmdVoidReadU64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2727,8 +2727,8 @@ var schemaCmdVoidReadU8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidReadU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -2765,7 +2765,7 @@ var schemaCmdVoidS16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -2803,7 +2803,7 @@ var schemaCmdVoidS32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -2841,7 +2841,7 @@ var schemaCmdVoidS64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2879,7 +2879,7 @@ var schemaCmdVoidS8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -2917,7 +2917,7 @@ var schemaCmdVoidString = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -2955,7 +2955,7 @@ var schemaCmdVoidU16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -2993,7 +2993,7 @@ var schemaCmdVoidU32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -3031,7 +3031,7 @@ var schemaCmdVoidU64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -3069,7 +3069,7 @@ var schemaCmdVoidU8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -3107,8 +3107,8 @@ var schemaCmdVoidWriteBool = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Boolᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3145,8 +3145,8 @@ var schemaCmdVoidWriteF32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3183,8 +3183,8 @@ var schemaCmdVoidWriteF64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3225,10 +3225,10 @@ var schemaCmdVoidWritePtrs = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWritePtrs",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*F32ᵖ)(nil).Class())}},
-		{Declared: "B", Type: &schema.Struct{Entity: schema.Of((*U16ᵖ)(nil).Class())}},
-		{Declared: "C", Type: &schema.Struct{Entity: schema.Of((*Boolᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
+		{Declared: "B", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
+		{Declared: "C", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3265,8 +3265,8 @@ var schemaCmdVoidWriteS16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S16ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S16ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3303,8 +3303,8 @@ var schemaCmdVoidWriteS32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3341,8 +3341,8 @@ var schemaCmdVoidWriteS64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3379,8 +3379,8 @@ var schemaCmdVoidWriteS8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*S8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*S8ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3417,8 +3417,8 @@ var schemaCmdVoidWriteU16 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U16ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3455,8 +3455,8 @@ var schemaCmdVoidWriteU32 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U32ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3493,8 +3493,8 @@ var schemaCmdVoidWriteU64 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U64ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U64ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3531,8 +3531,8 @@ var schemaCmdVoidWriteU8 = &binary.Entity{
 	Package: "test",
 	Name:    "CmdVoidWriteU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*U8ᵖ)(nil).Class())}},
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -3567,7 +3567,7 @@ var schemaF32ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "F32ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3602,7 +3602,7 @@ var schemaF64ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "F64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3707,7 +3707,7 @@ var schemaIntˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Intˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3742,7 +3742,7 @@ var schemaRemappedˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Remappedˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3777,7 +3777,7 @@ var schemaS16ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "S16ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3812,7 +3812,7 @@ var schemaS32ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "S32ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3847,7 +3847,7 @@ var schemaS64ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "S64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3882,7 +3882,7 @@ var schemaS8ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "S8ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3917,7 +3917,7 @@ var schemaU8ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "U8ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3952,7 +3952,7 @@ var schemaU16ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "U16ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -3987,7 +3987,7 @@ var schemaU32ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "U32ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -4030,10 +4030,10 @@ var schemaState = &binary.Entity{
 	Package: "test",
 	Name:    "State",
 	Fields: []binary.Field{
-		{Declared: "U8s", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
-		{Declared: "U16s", Type: &schema.Struct{Entity: schema.Of((*U16ˢ)(nil).Class())}},
-		{Declared: "U32s", Type: &schema.Struct{Entity: schema.Of((*U32ˢ)(nil).Class())}},
-		{Declared: "Ints", Type: &schema.Struct{Entity: schema.Of((*Intˢ)(nil).Class())}},
+		{Declared: "U8s", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
+		{Declared: "U16s", Type: &schema.Struct{Entity: (*U16ˢ)(nil).Class().Schema()}},
+		{Declared: "U32s", Type: &schema.Struct{Entity: (*U32ˢ)(nil).Class().Schema()}},
+		{Declared: "Ints", Type: &schema.Struct{Entity: (*Intˢ)(nil).Class().Schema()}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -4071,8 +4071,8 @@ var schemaTester = &binary.Entity{
 	Package: "test",
 	Name:    "Tester",
 	Fields: []binary.Field{
-		{Declared: "A", Type: &schema.Struct{Entity: schema.Of((*Imported)(nil).Class())}},
-		{Declared: "B", Type: &schema.Struct{Entity: schema.Of((*Included)(nil).Class())}},
+		{Declared: "A", Type: &schema.Struct{Entity: (*Imported)(nil).Class().Schema()}},
+		{Declared: "B", Type: &schema.Struct{Entity: (*Included)(nil).Class().Schema()}},
 	},
 }
 
@@ -4107,7 +4107,7 @@ var schemaU64ˢ = &binary.Entity{
 	Package: "test",
 	Name:    "U64ˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -4142,6 +4142,6 @@ var schemaVoidˢ = &binary.Entity{
 	Package: "test",
 	Name:    "Voidˢ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }

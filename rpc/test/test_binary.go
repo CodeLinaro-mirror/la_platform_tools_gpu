@@ -110,7 +110,7 @@ var schemaListNode = &binary.Entity{
 	Name:    "ListNode",
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
+		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
 	},
 }
 
@@ -492,7 +492,7 @@ var schemacallSetStruct = &binary.Entity{
 	Package: "test",
 	Name:    "callSetStruct",
 	Fields: []binary.Field{
-		{Declared: "s", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
+		{Declared: "s", Type: &schema.Struct{Entity: (*Struct)(nil).Class().Schema()}},
 	},
 }
 
@@ -640,7 +640,7 @@ var schemaresultGetListNodeChain = &binary.Entity{
 	Package: "test",
 	Name:    "resultGetListNodeChain",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
 	},
 }
 
@@ -697,7 +697,7 @@ var schemaresultGetListNodeChainArray = &binary.Entity{
 	Package: "test",
 	Name:    "resultGetListNodeChainArray",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}}},
 	},
 }
 
@@ -777,7 +777,7 @@ var schemaresultGetSingleListNode = &binary.Entity{
 	Package: "test",
 	Name:    "resultGetSingleListNode",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
 	},
 }
 
@@ -812,7 +812,7 @@ var schemaresultGetStruct = &binary.Entity{
 	Package: "test",
 	Name:    "resultGetStruct",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
+		{Declared: "value", Type: &schema.Struct{Entity: (*Struct)(nil).Class().Schema()}},
 	},
 }
 
@@ -847,7 +847,7 @@ var schemaresultResolveResource = &binary.Entity{
 	Package: "test",
 	Name:    "resultResolveResource",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Resource)(nil).Class())}},
+		{Declared: "value", Type: &schema.Struct{Entity: (*Resource)(nil).Class().Schema()}},
 	},
 }
 

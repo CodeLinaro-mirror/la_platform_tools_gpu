@@ -123,7 +123,7 @@ func (s rpcServer) GetSchema(l log.Logger) (service.Schema, error) {
 	result := service.Schema{}
 	result.Classes = make([]*schema.ObjectClass, 0, registry.Global.Count())
 	all.GraphicsNamespace.Visit(func(c binary.Class) {
-		class := schema.Lookup(c.ID())
+		class := c.Schema()
 		if class != nil {
 			result.Classes = append(result.Classes, (*schema.ObjectClass)(class))
 		}
