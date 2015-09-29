@@ -254,8 +254,7 @@ func From(scanner *scan.Scanner) (Modules, error) {
 		}
 	}
 	for _, m = range result {
-		fakeStruct(structs, m.Source.Types, schemaPackage, "ObjectClass")
-		fakeStruct(structs, m.Source.Types, schemaPackage, "ConstantSet")
+		fakeStruct(structs, m.Source.Types, schemaPackage, "Message")
 		for _, s := range m.Structs {
 			for _, u := range s.unresolved {
 				if e, ok := structs[u.t]; ok {

@@ -22,14 +22,16 @@ import (
 
 	// Force the any package to be included so the boxers are registered.
 	_ "android.googlesource.com/platform/tools/gpu/binary/any"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 // Encoder creates a binary.Encoder that writes to the supplied binary.Writer.
 func Encoder(writer binary.Writer) binary.Encoder {
 	return &encoder{
-		Writer:  writer,
-		objects: map[binary.Object]uint32{},
-		ids:     map[binary.ID]uint32{},
+		Writer:   writer,
+		entities: map[*binary.Entity]uint32{},
+		objects:  map[binary.Object]uint32{},
+		ids:      map[binary.ID]uint32{},
 	}
 }
 
@@ -38,6 +40,7 @@ func Decoder(reader binary.Reader) *decoder {
 	return &decoder{
 		Reader:    reader,
 		Namespace: registry.Global,
+		entities:  map[uint32]*binary.Entity{},
 		objects:   map[uint32]binary.Object{},
 		ids:       map[uint32]binary.ID{},
 	}
@@ -45,13 +48,15 @@ func Decoder(reader binary.Reader) *decoder {
 
 type encoder struct {
 	binary.Writer
-	objects map[binary.Object]uint32
-	ids     map[binary.ID]uint32
+	entities map[*binary.Entity]uint32
+	objects  map[binary.Object]uint32
+	ids      map[binary.ID]uint32
 }
 
 type decoder struct {
 	binary.Reader
 	Namespace *registry.Namespace
+	entities  map[uint32]*binary.Entity
 	objects   map[uint32]binary.Object
 	ids       map[uint32]binary.ID
 }
@@ -81,6 +86,39 @@ func (d *decoder) ID() binary.ID {
 		d.SetError(fmt.Errorf("Unknown id sid %v", sid))
 	}
 	return id
+}
+
+func (e *encoder) Entity(s *binary.Entity) {
+	if s == nil {
+		e.Uint32(0)
+		return
+	}
+	if sid, found := e.entities[s]; found {
+		e.Uint32(sid << 1)
+	} else {
+		sid = uint32(len(e.entities)) + 1
+		e.entities[s] = sid
+		e.Uint32((sid << 1) | 1)
+		schema.EncodeEntity(e, s)
+	}
+}
+
+func (d *decoder) Entity() *binary.Entity {
+	v := d.Uint32()
+	if v == 0 {
+		return nil
+	}
+	sid := v >> 1
+	if (v & 1) != 0 {
+		s := &binary.Entity{}
+		schema.DecodeEntity(d, s)
+		return s
+	}
+	s, found := d.entities[sid]
+	if !found {
+		d.SetError(fmt.Errorf("Unknown entity sid %v", sid))
+	}
+	return s
 }
 
 func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }

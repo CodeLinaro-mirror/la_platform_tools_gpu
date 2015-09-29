@@ -19,6 +19,8 @@ type Encoder interface {
 	Writer
 	// ID writes a binary.ID to the stream.
 	ID(ID)
+	// Entity writes a binary.Entity to the stream.
+	Entity(*Entity)
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object)
 	// Variant encodes an Object with no sharing. The type of obj must have

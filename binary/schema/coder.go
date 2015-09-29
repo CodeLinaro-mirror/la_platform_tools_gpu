@@ -18,20 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
-)
-
-var Namespace = registry.NewNamespace()
-
-func init() {
-	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*ObjectClass)(nil).Class())
-	Namespace.Add((*ConstantSet)(nil).Class())
-}
-
-var (
-	binaryIDClass       = binary.ID{0xf1, 0xab, 0xae, 0xcf, 0xc3, 0x23, 0xf8, 0x65, 0xa1, 0xeb, 0xe0, 0x3a, 0xa1, 0xae, 0xb3, 0xab, 0x77, 0xb0, 0x57, 0xef}
-	binaryIDConstantSet = binary.ID{0x28, 0x8f, 0x6c, 0x88, 0x31, 0xd1, 0x04, 0x52, 0xb7, 0x5a, 0x25, 0x83, 0x01, 0x4e, 0x9a, 0x7c, 0x53, 0x03, 0x32, 0x9e}
 )
 
 // TypeTag denotes the schema type that follows.
@@ -58,7 +44,7 @@ func EncodeType(e binary.Encoder, t binary.Type) {
 		e.Uint8(uint8(t.Method))
 	case *Struct:
 		e.Uint8(uint8(StructTag))
-		e.ID(t.Entity.TypeID)
+		e.Entity(t.Entity)
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
 		EncodeType(e, t.Type)
@@ -99,7 +85,7 @@ func DecodeType(d binary.Decoder) binary.Type {
 		return t
 	case StructTag:
 		t := &Struct{}
-		t.Entity = d.Lookup(d.ID()).Schema()
+		t.Entity = d.Entity()
 		return t
 	case PointerTag:
 		t := &Pointer{}
@@ -189,40 +175,4 @@ func DecodeConstants(d binary.Decoder, c *ConstantSet) {
 		c.Entries[i].Name = d.String()
 		c.Entries[i].Value = c.Type.DecodeValue(d)
 	}
-}
-
-type binaryClassClass struct{}
-
-func (*ObjectClass) Class() binary.Class         { return (*binaryClassClass)(nil) }
-func (*binaryClassClass) ID() binary.ID          { return binaryIDClass }
-func (*binaryClassClass) New() binary.Object     { return &ObjectClass{} }
-func (*binaryClassClass) Schema() *binary.Entity { return nil }
-func (*binaryClassClass) Encode(e binary.Encoder, obj binary.Object) {
-	EncodeEntity(e, (*binary.Entity)(obj.(*ObjectClass)))
-}
-func (*binaryClassClass) Decode(d binary.Decoder) binary.Object {
-	c := &ObjectClass{}
-	DecodeEntity(d, (*binary.Entity)(c))
-	return c
-}
-func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) {
-	DecodeEntity(d, (*binary.Entity)(obj.(*ObjectClass)))
-}
-
-type binaryClassConstantSet struct{}
-
-func (*ConstantSet) Class() binary.Class               { return (*binaryClassConstantSet)(nil) }
-func (*binaryClassConstantSet) ID() binary.ID          { return binaryIDConstantSet }
-func (*binaryClassConstantSet) New() binary.Object     { return &ConstantSet{} }
-func (*binaryClassConstantSet) Schema() *binary.Entity { return nil }
-func (*binaryClassConstantSet) Encode(e binary.Encoder, obj binary.Object) {
-	EncodeConstants(e, obj.(*ConstantSet))
-}
-func (*binaryClassConstantSet) Decode(d binary.Decoder) binary.Object {
-	c := &ConstantSet{}
-	DecodeConstants(d, c)
-	return c
-}
-func (*binaryClassConstantSet) DecodeTo(d binary.Decoder, obj binary.Object) {
-	DecodeConstants(d, obj.(*ConstantSet))
 }

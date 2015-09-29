@@ -19,6 +19,8 @@ type Decoder interface {
 	Reader
 	// ID decodes a binary.ID from the stream.
 	ID() ID
+	// Entity supports reading a binary.Entity from the stream.
+	Entity() *Entity
 	// Value decodes an Object from the stream.
 	Value(Object)
 	// Variant decodes and returns an Object from the stream. The Class in the

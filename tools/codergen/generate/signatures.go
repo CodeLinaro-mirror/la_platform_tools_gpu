@@ -39,23 +39,20 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))
-	one := &bytes.Buffer{}
-	all := &bytes.Buffer{}
-	allEnc := cyclic.Encoder(vle.Writer(all))
+	buf := &bytes.Buffer{}
+	e := cyclic.Encoder(vle.Writer(buf))
 	total := 0
 	largest := 0
+	// pre write the entire schema so the lookup table is full
 	for _, s := range structs {
-		one.Reset()
-		e := cyclic.Encoder(vle.Writer(one))
-		// pre-encode the field types, so we get an accurate measure
-		for _, f := range s.Fields {
-			schema.EncodeType(e, f.Type)
-		}
-		start := one.Len()
-		// now encode the schema itself and measure the difference
+		e.Entity(&s.Entity)
+	}
+	all := buf.Len()
+	for _, s := range structs {
+		start := buf.Len()
+		// now encode the entity directly to bypass the table
 		schema.EncodeEntity(e, &s.Entity)
-		schema.EncodeEntity(allEnc, &s.Entity)
-		size := one.Len() - start
+		size := buf.Len() - start
 		total += size
 		if largest < size {
 			largest = size
@@ -68,7 +65,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, "Schema stats:")
 	fmt.Fprintln(w, "Count:", len(structs))
-	fmt.Fprintln(w, "All:", all.Len())
+	fmt.Fprintln(w, "All:", all)
 	fmt.Fprintln(w, "Total:", total)
 	fmt.Fprintln(w, "Average:", total/len(structs))
 	fmt.Fprintln(w, "Largest:", largest)

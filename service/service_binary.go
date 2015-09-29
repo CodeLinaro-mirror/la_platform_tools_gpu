@@ -30,7 +30,6 @@ func init() {
 	Namespace.Add((*Report)(nil).Class())
 	Namespace.Add((*ResourceInfo)(nil).Class())
 	Namespace.Add((*Resources)(nil).Class())
-	Namespace.Add((*Schema)(nil).Class())
 	Namespace.Add((*TimingInfo)(nil).Class())
 	Namespace.Add((*callFollow)(nil).Class())
 	Namespace.Add((*callGet)(nil).Class())
@@ -67,7 +66,6 @@ var (
 	binaryIDReport                    = binary.ID{0xf3, 0xaf, 0x1b, 0x45, 0x8c, 0x2c, 0xd3, 0x62, 0x85, 0x22, 0x4c, 0x08, 0x2d, 0xed, 0xa2, 0x03, 0x4d, 0xde, 0x5c, 0xe9}
 	binaryIDResourceInfo              = binary.ID{0x47, 0x7d, 0xa4, 0x58, 0xe4, 0xfa, 0xb3, 0x28, 0x31, 0xc5, 0x8d, 0x73, 0x4e, 0x13, 0xc7, 0xe0, 0xcc, 0x1f, 0xc2, 0x15}
 	binaryIDResources                 = binary.ID{0x7d, 0x72, 0xaf, 0x6f, 0x9b, 0x83, 0x95, 0x39, 0xbe, 0xfa, 0xdf, 0x53, 0x99, 0xfb, 0x89, 0x6d, 0x78, 0x78, 0x11, 0x68}
-	binaryIDSchema                    = binary.ID{0x40, 0x1b, 0x7e, 0x78, 0x5c, 0xbd, 0x11, 0x53, 0x85, 0xe7, 0x3c, 0x7e, 0xdd, 0x61, 0x93, 0x00, 0xe1, 0xa3, 0x76, 0x25}
 	binaryIDTimingInfo                = binary.ID{0xd3, 0x16, 0x54, 0xa7, 0xb9, 0xfe, 0x1a, 0x39, 0x2f, 0x59, 0x72, 0x8d, 0xae, 0x35, 0x09, 0xc2, 0x3d, 0x33, 0x99, 0x52}
 	binaryIDcallFollow                = binary.ID{0xe5, 0xe8, 0x3b, 0xb0, 0xe0, 0xd0, 0x75, 0x92, 0x7f, 0x8f, 0x7e, 0x4d, 0x4f, 0x41, 0xa8, 0x23, 0xf1, 0x20, 0x00, 0xbb}
 	binaryIDcallGet                   = binary.ID{0xb6, 0x0f, 0x94, 0xc9, 0x9d, 0x52, 0x82, 0xf4, 0x69, 0x7f, 0x80, 0xa7, 0x1c, 0xb6, 0x3c, 0xed, 0xd8, 0x3b, 0xee, 0x43}
@@ -569,68 +567,6 @@ var schemaResources = &binary.Entity{
 	Name:    "Resources",
 	Fields: []binary.Field{
 		{Declared: "Textures", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*ResourceInfo)(nil).Class().Schema()}}},
-	},
-}
-
-type binaryClassSchema struct{}
-
-func (*Schema) Class() binary.Class {
-	return (*binaryClassSchema)(nil)
-}
-func doEncodeSchema(e binary.Encoder, o *Schema) {
-	e.Uint32(uint32(len(o.Classes)))
-	for i := range o.Classes {
-		if o.Classes[i] != nil {
-			e.Object(o.Classes[i])
-		} else {
-			e.Object(nil)
-		}
-	}
-	e.Uint32(uint32(len(o.Constants)))
-	for i := range o.Constants {
-		e.Value(&o.Constants[i])
-	}
-}
-func doDecodeSchema(d binary.Decoder, o *Schema) {
-	if count := d.Uint32(); count > 0 {
-		o.Classes = make([]*schema.ObjectClass, count)
-		for i := range o.Classes {
-			if obj := d.Object(); obj != nil {
-				o.Classes[i] = obj.(*schema.ObjectClass)
-			} else {
-				o.Classes[i] = nil
-			}
-		}
-	}
-	if count := d.Uint32(); count > 0 {
-		o.Constants = make([]schema.ConstantSet, count)
-		for i := range o.Constants {
-			d.Value(&o.Constants[i])
-		}
-	}
-}
-func (*binaryClassSchema) ID() binary.ID      { return binaryIDSchema }
-func (*binaryClassSchema) New() binary.Object { return &Schema{} }
-func (*binaryClassSchema) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeSchema(e, obj.(*Schema))
-}
-func (*binaryClassSchema) Decode(d binary.Decoder) binary.Object {
-	obj := &Schema{}
-	doDecodeSchema(d, obj)
-	return obj
-}
-func (*binaryClassSchema) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeSchema(d, obj.(*Schema))
-}
-func (*binaryClassSchema) Schema() *binary.Entity { return schemaSchema }
-
-var schemaSchema = &binary.Entity{
-	TypeID:  binaryIDSchema,
-	Package: "service",
-	Name:    "Schema",
-	Fields: []binary.Field{
-		{Declared: "Classes", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*schema.ObjectClass)(nil).Class().Schema()}}}},
-		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*schema.ConstantSet)(nil).Class().Schema()}}},
 	},
 }
 
@@ -1458,7 +1394,7 @@ var schemaresultGetSchema = &binary.Entity{
 	Package: "service",
 	Name:    "resultGetSchema",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Struct{Entity: (*Schema)(nil).Class().Schema()}},
+		{Declared: "value", Type: &schema.Struct{Entity: (*schema.Message)(nil).Class().Schema()}},
 	},
 }
 

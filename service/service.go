@@ -37,7 +37,7 @@ type Service interface {
 	// The GetSchema returns the type and constant schema descriptions for all
 	// objects used in the api.
 	// This includes all the types included in or referenced from the atom stream.
-	GetSchema(l log.Logger) (Schema, error)
+	GetSchema(l log.Logger) (schema.Message, error)
 
 	// ImportCapture imports capture data emitted by the graphics spy, returning
 	// the new capture identifier.
@@ -89,13 +89,6 @@ const (
 	TimingPerDrawCall TimingFlags = 4 // Time each draw call.
 	TimingPerFrame    TimingFlags = 8 // Time each frame.
 )
-
-// Schema holds all the rtti information for dynamic types in the service.
-type Schema struct {
-	binary.Generate
-	Classes   []*schema.ObjectClass // The set of classes in the schema
-	Constants []schema.ConstantSet  // All the constants the schema includes
-}
 
 // Capture describes single capture file held by the server.
 type Capture struct {

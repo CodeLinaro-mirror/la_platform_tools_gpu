@@ -70,12 +70,12 @@ var schemaCubemapLevel = &binary.Entity{
 	Package: "gfxapi",
 	Name:    "CubemapLevel",
 	Fields: []binary.Field{
-		{Declared: "NegativeX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
-		{Declared: "PositiveX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
-		{Declared: "NegativeY", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
-		{Declared: "PositiveY", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
-		{Declared: "NegativeZ", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
-		{Declared: "PositiveZ", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "NegativeX", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
+		{Declared: "PositiveX", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
+		{Declared: "NegativeY", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
+		{Declared: "PositiveY", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
+		{Declared: "NegativeZ", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
+		{Declared: "PositiveZ", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
 	},
 }
 
@@ -118,7 +118,7 @@ var schemaCubemap = &binary.Entity{
 	Package: "gfxapi",
 	Name:    "Cubemap",
 	Fields: []binary.Field{
-		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*CubemapLevel)(nil).Class())}}},
+		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*CubemapLevel)(nil).Class().Schema()}}},
 	},
 }
 

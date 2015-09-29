@@ -7,6 +7,7 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/rpc"
@@ -93,7 +94,7 @@ func (c client) GetFramebufferDepth(device *path.Device, after *path.Atom, l log
 	return
 }
 
-func (c client) GetSchema(l log.Logger) (res Schema, err error) {
+func (c client) GetSchema(l log.Logger) (res schema.Message, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetSchema{}); err == nil {
 		res = val.(*resultGetSchema).value

@@ -20,8 +20,8 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 	"android.googlesource.com/platform/tools/gpu/process"
@@ -33,7 +33,7 @@ const mtu = 1024
 // Connect attempts to connect to an existing GAPIS process at the specified
 // address, returning the service interface and schema on success. If no GAPIS
 // instance can be found, then a new instance will be created.
-func Connect(address, data string, logger log.Logger) (service.Service, service.Schema, error) {
+func Connect(address, data string, logger log.Logger) (service.Service, schema.Message, error) {
 	args := []string{
 		"--rpc", address,
 		"--data", data,
@@ -42,21 +42,22 @@ func Connect(address, data string, logger log.Logger) (service.Service, service.
 
 	socket, err := process.ConnectStartIfNeeded(address, "gapis", args...)
 	if err != nil {
-		return nil, service.Schema{}, err
+		return nil, schema.Message{}, err
 	}
 
 	multiplexer := multiplexer.New(socket, socket, socket, mtu, logger, nil)
 	client := service.NewClient(multiplexer, nil)
 
-	schema, err := client.GetSchema(logger)
+	message, err := client.GetSchema(logger)
 	if err != nil {
-		return nil, service.Schema{}, fmt.Errorf("Error resolving schema: %v", err)
+		return nil, schema.Message{}, fmt.Errorf("Error resolving schema: %v", err)
 	}
 
 	namespace := registry.NewNamespace()
-	for _, class := range schema.Classes {
+	for _, entity := range message.Entities {
+		class := (*schema.ObjectClass)(entity)
 		// Find the atom metadata, if present
-		if meta := atom.FindMetadata((*binary.Entity)(class)); meta != nil {
+		if meta := atom.FindMetadata(entity); meta != nil {
 			namespace.Add(newAtomClass(class, meta))
 		} else {
 			namespace.Add(class)
@@ -66,5 +67,5 @@ func Connect(address, data string, logger log.Logger) (service.Service, service.
 	// Replace the current client with the schema aggregated namespace.
 	client = service.NewClient(multiplexer, registry.NewNamespace(registry.Global, namespace))
 
-	return client, schema, nil
+	return client, message, nil
 }

@@ -53,6 +53,14 @@ func (d *decoder) ID() binary.ID {
 	return id
 }
 
+func (e *encoder) Entity(*binary.Entity) {
+	panic(fmt.Errorf("Flat encoders do not support Schema objects"))
+}
+
+func (d *decoder) Entity() *binary.Entity {
+	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
+}
+
 func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
 func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) {

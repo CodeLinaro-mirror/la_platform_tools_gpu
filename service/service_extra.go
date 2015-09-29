@@ -7,6 +7,7 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
@@ -91,7 +92,7 @@ type callGetSchema struct {
 // Result GetSchema
 type resultGetSchema struct {
 	binary.Generate
-	value Schema
+	value schema.Message
 }
 
 // Call GetTimingInfo
