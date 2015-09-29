@@ -15,15 +15,16 @@
 package main
 
 import (
-	"android.googlesource.com/platform/tools/gpu/api"
-	"android.googlesource.com/platform/tools/gpu/api/resolver"
-	"android.googlesource.com/platform/tools/gpu/api/semantic"
-	"android.googlesource.com/platform/tools/gpu/parse"
 	"flag"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/api"
+	"android.googlesource.com/platform/tools/gpu/api/resolver"
+	"android.googlesource.com/platform/tools/gpu/api/semantic"
+	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
 var (
