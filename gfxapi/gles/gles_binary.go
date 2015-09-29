@@ -2000,13 +2000,13 @@ func (*binaryClassArchitecture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassArchitecture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeArchitecture(d, obj.(*Architecture))
 }
-func (*binaryClassArchitecture) Schema() *schema.Entity { return schemaArchitecture }
+func (*binaryClassArchitecture) Schema() *binary.Entity { return schemaArchitecture }
 
-var schemaArchitecture = &schema.Entity{
+var schemaArchitecture = &binary.Entity{
 	TypeID:  binaryIDArchitecture,
 	Package: "gles",
 	Name:    "Architecture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -2045,13 +2045,13 @@ func (*binaryClassColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeColor(d, obj.(*Color))
 }
-func (*binaryClassColor) Schema() *schema.Entity { return schemaColor }
+func (*binaryClassColor) Schema() *binary.Entity { return schemaColor }
 
-var schemaColor = &schema.Entity{
+var schemaColor = &binary.Entity{
 	TypeID:  binaryIDColor,
 	Package: "gles",
 	Name:    "Color",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -2095,13 +2095,13 @@ func (*binaryClassBlendState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBlendState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBlendState(d, obj.(*BlendState))
 }
-func (*binaryClassBlendState) Schema() *schema.Entity { return schemaBlendState }
+func (*binaryClassBlendState) Schema() *binary.Entity { return schemaBlendState }
 
-var schemaBlendState = &schema.Entity{
+var schemaBlendState = &binary.Entity{
 	TypeID:  binaryIDBlendState,
 	Package: "gles",
 	Name:    "BlendState",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -2140,13 +2140,13 @@ func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSliceInfo(d, obj.(*SliceInfo))
 }
-func (*binaryClassSliceInfo) Schema() *schema.Entity { return schemaSliceInfo }
+func (*binaryClassSliceInfo) Schema() *binary.Entity { return schemaSliceInfo }
 
-var schemaSliceInfo = &schema.Entity{
+var schemaSliceInfo = &binary.Entity{
 	TypeID:  binaryIDSliceInfo,
 	Package: "gles",
 	Name:    "SliceInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Root", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -2177,13 +2177,13 @@ func (*binaryClassU8ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ˢ(d, obj.(*U8ˢ))
 }
-func (*binaryClassU8ˢ) Schema() *schema.Entity { return schemaU8ˢ }
+func (*binaryClassU8ˢ) Schema() *binary.Entity { return schemaU8ˢ }
 
-var schemaU8ˢ = &schema.Entity{
+var schemaU8ˢ = &binary.Entity{
 	TypeID:  binaryIDU8ˢ,
 	Package: "gles",
 	Name:    "U8ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -2222,13 +2222,13 @@ func (*binaryClassBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBuffer(d, obj.(*Buffer))
 }
-func (*binaryClassBuffer) Schema() *schema.Entity { return schemaBuffer }
+func (*binaryClassBuffer) Schema() *binary.Entity { return schemaBuffer }
 
-var schemaBuffer = &schema.Entity{
+var schemaBuffer = &binary.Entity{
 	TypeID:  binaryIDBuffer,
 	Package: "gles",
 	Name:    "Buffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
 		{Declared: "Usage", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -2262,13 +2262,13 @@ func (*binaryClassBufferDataPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferDataPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferDataPointer(d, obj.(*BufferDataPointer))
 }
-func (*binaryClassBufferDataPointer) Schema() *schema.Entity { return schemaBufferDataPointer }
+func (*binaryClassBufferDataPointer) Schema() *binary.Entity { return schemaBufferDataPointer }
 
-var schemaBufferDataPointer = &schema.Entity{
+var schemaBufferDataPointer = &binary.Entity{
 	TypeID:  binaryIDBufferDataPointer,
 	Package: "gles",
 	Name:    "BufferDataPointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2297,13 +2297,13 @@ func (*binaryClassBufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdˢ(d, obj.(*BufferIdˢ))
 }
-func (*binaryClassBufferIdˢ) Schema() *schema.Entity { return schemaBufferIdˢ }
+func (*binaryClassBufferIdˢ) Schema() *binary.Entity { return schemaBufferIdˢ }
 
-var schemaBufferIdˢ = &schema.Entity{
+var schemaBufferIdˢ = &binary.Entity{
 	TypeID:  binaryIDBufferIdˢ,
 	Package: "gles",
 	Name:    "BufferIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -2332,13 +2332,13 @@ func (*binaryClassBufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdᵖ(d, obj.(*BufferIdᵖ))
 }
-func (*binaryClassBufferIdᵖ) Schema() *schema.Entity { return schemaBufferIdᵖ }
+func (*binaryClassBufferIdᵖ) Schema() *binary.Entity { return schemaBufferIdᵖ }
 
-var schemaBufferIdᵖ = &schema.Entity{
+var schemaBufferIdᵖ = &binary.Entity{
 	TypeID:  binaryIDBufferIdᵖ,
 	Package: "gles",
 	Name:    "BufferIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2367,13 +2367,13 @@ func (*binaryClassBufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBufferIdᶜᵖ(d, obj.(*BufferIdᶜᵖ))
 }
-func (*binaryClassBufferIdᶜᵖ) Schema() *schema.Entity { return schemaBufferIdᶜᵖ }
+func (*binaryClassBufferIdᶜᵖ) Schema() *binary.Entity { return schemaBufferIdᶜᵖ }
 
-var schemaBufferIdᶜᵖ = &schema.Entity{
+var schemaBufferIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDBufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "BufferIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2402,13 +2402,13 @@ func (*binaryClassCGLContextObj) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObj) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObj(d, obj.(*CGLContextObj))
 }
-func (*binaryClassCGLContextObj) Schema() *schema.Entity { return schemaCGLContextObj }
+func (*binaryClassCGLContextObj) Schema() *binary.Entity { return schemaCGLContextObj }
 
-var schemaCGLContextObj = &schema.Entity{
+var schemaCGLContextObj = &binary.Entity{
 	TypeID:  binaryIDCGLContextObj,
 	Package: "gles",
 	Name:    "CGLContextObj",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2437,13 +2437,13 @@ func (*binaryClassCGLContextObjˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObjˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObjˢ(d, obj.(*CGLContextObjˢ))
 }
-func (*binaryClassCGLContextObjˢ) Schema() *schema.Entity { return schemaCGLContextObjˢ }
+func (*binaryClassCGLContextObjˢ) Schema() *binary.Entity { return schemaCGLContextObjˢ }
 
-var schemaCGLContextObjˢ = &schema.Entity{
+var schemaCGLContextObjˢ = &binary.Entity{
 	TypeID:  binaryIDCGLContextObjˢ,
 	Package: "gles",
 	Name:    "CGLContextObjˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -2472,13 +2472,13 @@ func (*binaryClassCGLContextObjᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLContextObjᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLContextObjᵖ(d, obj.(*CGLContextObjᵖ))
 }
-func (*binaryClassCGLContextObjᵖ) Schema() *schema.Entity { return schemaCGLContextObjᵖ }
+func (*binaryClassCGLContextObjᵖ) Schema() *binary.Entity { return schemaCGLContextObjᵖ }
 
-var schemaCGLContextObjᵖ = &schema.Entity{
+var schemaCGLContextObjᵖ = &binary.Entity{
 	TypeID:  binaryIDCGLContextObjᵖ,
 	Package: "gles",
 	Name:    "CGLContextObjᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2507,13 +2507,13 @@ func (*binaryClassCGLPixelFormatObj) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLPixelFormatObj) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLPixelFormatObj(d, obj.(*CGLPixelFormatObj))
 }
-func (*binaryClassCGLPixelFormatObj) Schema() *schema.Entity { return schemaCGLPixelFormatObj }
+func (*binaryClassCGLPixelFormatObj) Schema() *binary.Entity { return schemaCGLPixelFormatObj }
 
-var schemaCGLPixelFormatObj = &schema.Entity{
+var schemaCGLPixelFormatObj = &binary.Entity{
 	TypeID:  binaryIDCGLPixelFormatObj,
 	Package: "gles",
 	Name:    "CGLPixelFormatObj",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2550,13 +2550,13 @@ func (*binaryClassCGLCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLCreateContext(d, obj.(*CGLCreateContext))
 }
-func (*binaryClassCGLCreateContext) Schema() *schema.Entity { return schemaCGLCreateContext }
+func (*binaryClassCGLCreateContext) Schema() *binary.Entity { return schemaCGLCreateContext }
 
-var schemaCGLCreateContext = &schema.Entity{
+var schemaCGLCreateContext = &binary.Entity{
 	TypeID:  binaryIDCGLCreateContext,
 	Package: "gles",
 	Name:    "CGLCreateContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pix", Type: &schema.Struct{Entity: schema.Of((*CGLPixelFormatObj)(nil).Class())}},
 		{Declared: "Share", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
@@ -2593,13 +2593,13 @@ func (*binaryClassCGLFlushDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLFlushDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLFlushDrawable(d, obj.(*CGLFlushDrawable))
 }
-func (*binaryClassCGLFlushDrawable) Schema() *schema.Entity { return schemaCGLFlushDrawable }
+func (*binaryClassCGLFlushDrawable) Schema() *binary.Entity { return schemaCGLFlushDrawable }
 
-var schemaCGLFlushDrawable = &schema.Entity{
+var schemaCGLFlushDrawable = &binary.Entity{
 	TypeID:  binaryIDCGLFlushDrawable,
 	Package: "gles",
 	Name:    "CGLFlushDrawable",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
@@ -2630,13 +2630,13 @@ func (*binaryClassCGSConnectionIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionIDᵖ(d, obj.(*CGSConnectionIDᵖ))
 }
-func (*binaryClassCGSConnectionIDᵖ) Schema() *schema.Entity { return schemaCGSConnectionIDᵖ }
+func (*binaryClassCGSConnectionIDᵖ) Schema() *binary.Entity { return schemaCGSConnectionIDᵖ }
 
-var schemaCGSConnectionIDᵖ = &schema.Entity{
+var schemaCGSConnectionIDᵖ = &binary.Entity{
 	TypeID:  binaryIDCGSConnectionIDᵖ,
 	Package: "gles",
 	Name:    "CGSConnectionIDᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2665,13 +2665,13 @@ func (*binaryClassCGSWindowIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSWindowIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSWindowIDᵖ(d, obj.(*CGSWindowIDᵖ))
 }
-func (*binaryClassCGSWindowIDᵖ) Schema() *schema.Entity { return schemaCGSWindowIDᵖ }
+func (*binaryClassCGSWindowIDᵖ) Schema() *binary.Entity { return schemaCGSWindowIDᵖ }
 
-var schemaCGSWindowIDᵖ = &schema.Entity{
+var schemaCGSWindowIDᵖ = &binary.Entity{
 	TypeID:  binaryIDCGSWindowIDᵖ,
 	Package: "gles",
 	Name:    "CGSWindowIDᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2700,13 +2700,13 @@ func (*binaryClassCGSSurfaceIDᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSSurfaceIDᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSSurfaceIDᵖ(d, obj.(*CGSSurfaceIDᵖ))
 }
-func (*binaryClassCGSSurfaceIDᵖ) Schema() *schema.Entity { return schemaCGSSurfaceIDᵖ }
+func (*binaryClassCGSSurfaceIDᵖ) Schema() *binary.Entity { return schemaCGSSurfaceIDᵖ }
 
-var schemaCGSSurfaceIDᵖ = &schema.Entity{
+var schemaCGSSurfaceIDᵖ = &binary.Entity{
 	TypeID:  binaryIDCGSSurfaceIDᵖ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2745,13 +2745,13 @@ func (*binaryClassCGLGetSurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLGetSurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLGetSurface(d, obj.(*CGLGetSurface))
 }
-func (*binaryClassCGLGetSurface) Schema() *schema.Entity { return schemaCGLGetSurface }
+func (*binaryClassCGLGetSurface) Schema() *binary.Entity { return schemaCGLGetSurface }
 
-var schemaCGLGetSurface = &schema.Entity{
+var schemaCGLGetSurface = &binary.Entity{
 	TypeID:  binaryIDCGLGetSurface,
 	Package: "gles",
 	Name:    "CGLGetSurface",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
 		{Declared: "Cid", Type: &schema.Struct{Entity: schema.Of((*CGSConnectionIDᵖ)(nil).Class())}},
@@ -2789,13 +2789,13 @@ func (*binaryClassCGLSetCurrentContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGLSetCurrentContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGLSetCurrentContext(d, obj.(*CGLSetCurrentContext))
 }
-func (*binaryClassCGLSetCurrentContext) Schema() *schema.Entity { return schemaCGLSetCurrentContext }
+func (*binaryClassCGLSetCurrentContext) Schema() *binary.Entity { return schemaCGLSetCurrentContext }
 
-var schemaCGLSetCurrentContext = &schema.Entity{
+var schemaCGLSetCurrentContext = &binary.Entity{
 	TypeID:  binaryIDCGLSetCurrentContext,
 	Package: "gles",
 	Name:    "CGLSetCurrentContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ctx", Type: &schema.Struct{Entity: schema.Of((*CGLContextObj)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
@@ -2826,13 +2826,13 @@ func (*binaryClassCGSConnectionID) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionID) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionID(d, obj.(*CGSConnectionID))
 }
-func (*binaryClassCGSConnectionID) Schema() *schema.Entity { return schemaCGSConnectionID }
+func (*binaryClassCGSConnectionID) Schema() *binary.Entity { return schemaCGSConnectionID }
 
-var schemaCGSConnectionID = &schema.Entity{
+var schemaCGSConnectionID = &binary.Entity{
 	TypeID:  binaryIDCGSConnectionID,
 	Package: "gles",
 	Name:    "CGSConnectionID",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2861,13 +2861,13 @@ func (*binaryClassCGSConnectionIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSConnectionIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSConnectionIDˢ(d, obj.(*CGSConnectionIDˢ))
 }
-func (*binaryClassCGSConnectionIDˢ) Schema() *schema.Entity { return schemaCGSConnectionIDˢ }
+func (*binaryClassCGSConnectionIDˢ) Schema() *binary.Entity { return schemaCGSConnectionIDˢ }
 
-var schemaCGSConnectionIDˢ = &schema.Entity{
+var schemaCGSConnectionIDˢ = &binary.Entity{
 	TypeID:  binaryIDCGSConnectionIDˢ,
 	Package: "gles",
 	Name:    "CGSConnectionIDˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -2896,13 +2896,13 @@ func (*binaryClassF64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ᵖ(d, obj.(*F64ᵖ))
 }
-func (*binaryClassF64ᵖ) Schema() *schema.Entity { return schemaF64ᵖ }
+func (*binaryClassF64ᵖ) Schema() *binary.Entity { return schemaF64ᵖ }
 
-var schemaF64ᵖ = &schema.Entity{
+var schemaF64ᵖ = &binary.Entity{
 	TypeID:  binaryIDF64ᵖ,
 	Package: "gles",
 	Name:    "F64ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -2941,13 +2941,13 @@ func (*binaryClassCGSGetSurfaceBounds) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSGetSurfaceBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSGetSurfaceBounds(d, obj.(*CGSGetSurfaceBounds))
 }
-func (*binaryClassCGSGetSurfaceBounds) Schema() *schema.Entity { return schemaCGSGetSurfaceBounds }
+func (*binaryClassCGSGetSurfaceBounds) Schema() *binary.Entity { return schemaCGSGetSurfaceBounds }
 
-var schemaCGSGetSurfaceBounds = &schema.Entity{
+var schemaCGSGetSurfaceBounds = &binary.Entity{
 	TypeID:  binaryIDCGSGetSurfaceBounds,
 	Package: "gles",
 	Name:    "CGSGetSurfaceBounds",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Cid", Type: &schema.Struct{Entity: schema.Of((*CGSConnectionID)(nil).Class())}},
 		{Declared: "Wid", Type: &schema.Primitive{Name: "CGSWindowID", Method: schema.Int32}},
@@ -2981,13 +2981,13 @@ func (*binaryClassCGSSurfaceIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSSurfaceIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSSurfaceIDˢ(d, obj.(*CGSSurfaceIDˢ))
 }
-func (*binaryClassCGSSurfaceIDˢ) Schema() *schema.Entity { return schemaCGSSurfaceIDˢ }
+func (*binaryClassCGSSurfaceIDˢ) Schema() *binary.Entity { return schemaCGSSurfaceIDˢ }
 
-var schemaCGSSurfaceIDˢ = &schema.Entity{
+var schemaCGSSurfaceIDˢ = &binary.Entity{
 	TypeID:  binaryIDCGSSurfaceIDˢ,
 	Package: "gles",
 	Name:    "CGSSurfaceIDˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -3016,13 +3016,13 @@ func (*binaryClassCGSWindowIDˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCGSWindowIDˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCGSWindowIDˢ(d, obj.(*CGSWindowIDˢ))
 }
-func (*binaryClassCGSWindowIDˢ) Schema() *schema.Entity { return schemaCGSWindowIDˢ }
+func (*binaryClassCGSWindowIDˢ) Schema() *binary.Entity { return schemaCGSWindowIDˢ }
 
-var schemaCGSWindowIDˢ = &schema.Entity{
+var schemaCGSWindowIDˢ = &binary.Entity{
 	TypeID:  binaryIDCGSWindowIDˢ,
 	Package: "gles",
 	Name:    "CGSWindowIDˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -3051,13 +3051,13 @@ func (*binaryClassCharˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharˢ(d, obj.(*Charˢ))
 }
-func (*binaryClassCharˢ) Schema() *schema.Entity { return schemaCharˢ }
+func (*binaryClassCharˢ) Schema() *binary.Entity { return schemaCharˢ }
 
-var schemaCharˢ = &schema.Entity{
+var schemaCharˢ = &binary.Entity{
 	TypeID:  binaryIDCharˢ,
 	Package: "gles",
 	Name:    "Charˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -3086,13 +3086,13 @@ func (*binaryClassCharᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖ(d, obj.(*Charᵖ))
 }
-func (*binaryClassCharᵖ) Schema() *schema.Entity { return schemaCharᵖ }
+func (*binaryClassCharᵖ) Schema() *binary.Entity { return schemaCharᵖ }
 
-var schemaCharᵖ = &schema.Entity{
+var schemaCharᵖ = &binary.Entity{
 	TypeID:  binaryIDCharᵖ,
 	Package: "gles",
 	Name:    "Charᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -3125,13 +3125,13 @@ func (*binaryClassClearState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassClearState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeClearState(d, obj.(*ClearState))
 }
-func (*binaryClassClearState) Schema() *schema.Entity { return schemaClearState }
+func (*binaryClassClearState) Schema() *binary.Entity { return schemaClearState }
 
-var schemaClearState = &schema.Entity{
+var schemaClearState = &binary.Entity{
 	TypeID:  binaryIDClearState,
 	Package: "gles",
 	Name:    "ClearState",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ClearColor", Type: &schema.Struct{Entity: schema.Of((*Color)(nil).Class())}},
 		{Declared: "ClearDepth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "ClearStencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -3174,13 +3174,13 @@ func (*binaryClassContextCreationInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContextCreationInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContextCreationInfo(d, obj.(*ContextCreationInfo))
 }
-func (*binaryClassContextCreationInfo) Schema() *schema.Entity { return schemaContextCreationInfo }
+func (*binaryClassContextCreationInfo) Schema() *binary.Entity { return schemaContextCreationInfo }
 
-var schemaContextCreationInfo = &schema.Entity{
+var schemaContextCreationInfo = &binary.Entity{
 	TypeID:  binaryIDContextCreationInfo,
 	Package: "gles",
 	Name:    "ContextCreationInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -3221,13 +3221,13 @@ func (*binaryClassRect) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRect(d, obj.(*Rect))
 }
-func (*binaryClassRect) Schema() *schema.Entity { return schemaRect }
+func (*binaryClassRect) Schema() *binary.Entity { return schemaRect }
 
-var schemaRect = &schema.Entity{
+var schemaRect = &binary.Entity{
 	TypeID:  binaryIDRect,
 	Package: "gles",
 	Name:    "Rect",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -3307,13 +3307,13 @@ func (*binaryClassRasterizerState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRasterizerState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRasterizerState(d, obj.(*RasterizerState))
 }
-func (*binaryClassRasterizerState) Schema() *schema.Entity { return schemaRasterizerState }
+func (*binaryClassRasterizerState) Schema() *binary.Entity { return schemaRasterizerState }
 
-var schemaRasterizerState = &schema.Entity{
+var schemaRasterizerState = &binary.Entity{
 	TypeID:  binaryIDRasterizerState,
 	Package: "gles",
 	Name:    "RasterizerState",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "DepthMask", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DepthNear", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -3359,13 +3359,13 @@ func (*binaryClassVertexAttributeValue) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttributeValue) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttributeValue(d, obj.(*VertexAttributeValue))
 }
-func (*binaryClassVertexAttributeValue) Schema() *schema.Entity { return schemaVertexAttributeValue }
+func (*binaryClassVertexAttributeValue) Schema() *binary.Entity { return schemaVertexAttributeValue }
 
-var schemaVertexAttributeValue = &schema.Entity{
+var schemaVertexAttributeValue = &binary.Entity{
 	TypeID:  binaryIDVertexAttributeValue,
 	Package: "gles",
 	Name:    "VertexAttributeValue",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
 	},
 }
@@ -3408,13 +3408,13 @@ func (*binaryClassTextureUnit) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureUnit) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureUnit(d, obj.(*TextureUnit))
 }
-func (*binaryClassTextureUnit) Schema() *schema.Entity { return schemaTextureUnit }
+func (*binaryClassTextureUnit) Schema() *binary.Entity { return schemaTextureUnit }
 
-var schemaTextureUnit = &schema.Entity{
+var schemaTextureUnit = &binary.Entity{
 	TypeID:  binaryIDTextureUnit,
 	Package: "gles",
 	Name:    "TextureUnit",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Bindings", Type: &schema.Map{Alias: "GLenumːTextureIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}},
 	},
 }
@@ -3449,13 +3449,13 @@ func (*binaryClassRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbuffer(d, obj.(*Renderbuffer))
 }
-func (*binaryClassRenderbuffer) Schema() *schema.Entity { return schemaRenderbuffer }
+func (*binaryClassRenderbuffer) Schema() *binary.Entity { return schemaRenderbuffer }
 
-var schemaRenderbuffer = &schema.Entity{
+var schemaRenderbuffer = &binary.Entity{
 	TypeID:  binaryIDRenderbuffer,
 	Package: "gles",
 	Name:    "Renderbuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
@@ -3495,13 +3495,13 @@ func (*binaryClassImage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImage(d, obj.(*Image))
 }
-func (*binaryClassImage) Schema() *schema.Entity { return schemaImage }
+func (*binaryClassImage) Schema() *binary.Entity { return schemaImage }
 
-var schemaImage = &schema.Entity{
+var schemaImage = &binary.Entity{
 	TypeID:  binaryIDImage,
 	Package: "gles",
 	Name:    "Image",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
@@ -3548,13 +3548,13 @@ func (*binaryClassCubemapLevel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCubemapLevel(d, obj.(*CubemapLevel))
 }
-func (*binaryClassCubemapLevel) Schema() *schema.Entity { return schemaCubemapLevel }
+func (*binaryClassCubemapLevel) Schema() *binary.Entity { return schemaCubemapLevel }
 
-var schemaCubemapLevel = &schema.Entity{
+var schemaCubemapLevel = &binary.Entity{
 	TypeID:  binaryIDCubemapLevel,
 	Package: "gles",
 	Name:    "CubemapLevel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Faces", Type: &schema.Map{Alias: "GLenumːImageᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: schema.Of((*Image)(nil).Class())}}},
 	},
 }
@@ -3637,13 +3637,13 @@ func (*binaryClassTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexture(d, obj.(*Texture))
 }
-func (*binaryClassTexture) Schema() *schema.Entity { return schemaTexture }
+func (*binaryClassTexture) Schema() *binary.Entity { return schemaTexture }
 
-var schemaTexture = &schema.Entity{
+var schemaTexture = &binary.Entity{
 	TypeID:  binaryIDTexture,
 	Package: "gles",
 	Name:    "Texture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -3691,15 +3691,15 @@ func (*binaryClassFramebufferAttachmentInfo) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassFramebufferAttachmentInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferAttachmentInfo(d, obj.(*FramebufferAttachmentInfo))
 }
-func (*binaryClassFramebufferAttachmentInfo) Schema() *schema.Entity {
+func (*binaryClassFramebufferAttachmentInfo) Schema() *binary.Entity {
 	return schemaFramebufferAttachmentInfo
 }
 
-var schemaFramebufferAttachmentInfo = &schema.Entity{
+var schemaFramebufferAttachmentInfo = &binary.Entity{
 	TypeID:  binaryIDFramebufferAttachmentInfo,
 	Package: "gles",
 	Name:    "FramebufferAttachmentInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TextureLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -3745,13 +3745,13 @@ func (*binaryClassFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebuffer(d, obj.(*Framebuffer))
 }
-func (*binaryClassFramebuffer) Schema() *schema.Entity { return schemaFramebuffer }
+func (*binaryClassFramebuffer) Schema() *binary.Entity { return schemaFramebuffer }
 
-var schemaFramebuffer = &schema.Entity{
+var schemaFramebuffer = &binary.Entity{
 	TypeID:  binaryIDFramebuffer,
 	Package: "gles",
 	Name:    "Framebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Attachments", Type: &schema.Map{Alias: "GLenumːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: schema.Of((*FramebufferAttachmentInfo)(nil).Class())}}},
 	},
 }
@@ -3780,13 +3780,13 @@ func (*binaryClassGLcharˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharˢ(d, obj.(*GLcharˢ))
 }
-func (*binaryClassGLcharˢ) Schema() *schema.Entity { return schemaGLcharˢ }
+func (*binaryClassGLcharˢ) Schema() *binary.Entity { return schemaGLcharˢ }
 
-var schemaGLcharˢ = &schema.Entity{
+var schemaGLcharˢ = &binary.Entity{
 	TypeID:  binaryIDGLcharˢ,
 	Package: "gles",
 	Name:    "GLcharˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -3825,13 +3825,13 @@ func (*binaryClassShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShader(d, obj.(*Shader))
 }
-func (*binaryClassShader) Schema() *schema.Entity { return schemaShader }
+func (*binaryClassShader) Schema() *binary.Entity { return schemaShader }
 
-var schemaShader = &schema.Entity{
+var schemaShader = &binary.Entity{
 	TypeID:  binaryIDShader,
 	Package: "gles",
 	Name:    "Shader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
 		{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -3869,13 +3869,13 @@ func (*binaryClassVertexAttribute) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttribute) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttribute(d, obj.(*VertexAttribute))
 }
-func (*binaryClassVertexAttribute) Schema() *schema.Entity { return schemaVertexAttribute }
+func (*binaryClassVertexAttribute) Schema() *binary.Entity { return schemaVertexAttribute }
 
-var schemaVertexAttribute = &schema.Entity{
+var schemaVertexAttribute = &binary.Entity{
 	TypeID:  binaryIDVertexAttribute,
 	Package: "gles",
 	Name:    "VertexAttribute",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Struct{Entity: schema.Of((*Charˢ)(nil).Class())}},
 		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -3910,13 +3910,13 @@ func (*binaryClassUniform) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassUniform) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeUniform(d, obj.(*Uniform))
 }
-func (*binaryClassUniform) Schema() *schema.Entity { return schemaUniform }
+func (*binaryClassUniform) Schema() *binary.Entity { return schemaUniform }
 
-var schemaUniform = &schema.Entity{
+var schemaUniform = &binary.Entity{
 	TypeID:  binaryIDUniform,
 	Package: "gles",
 	Name:    "Uniform",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
@@ -4015,13 +4015,13 @@ func (*binaryClassProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgram(d, obj.(*Program))
 }
-func (*binaryClassProgram) Schema() *schema.Entity { return schemaProgram }
+func (*binaryClassProgram) Schema() *binary.Entity { return schemaProgram }
 
-var schemaProgram = &schema.Entity{
+var schemaProgram = &binary.Entity{
 	TypeID:  binaryIDProgram,
 	Package: "gles",
 	Name:    "Program",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Shaders", Type: &schema.Map{Alias: "GLenumːShaderIdᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binary", Type: &schema.Struct{Entity: schema.Of((*U8ˢ)(nil).Class())}},
@@ -4062,13 +4062,13 @@ func (*binaryClassVertexBufferBinding) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexBufferBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexBufferBinding(d, obj.(*VertexBufferBinding))
 }
-func (*binaryClassVertexBufferBinding) Schema() *schema.Entity { return schemaVertexBufferBinding }
+func (*binaryClassVertexBufferBinding) Schema() *binary.Entity { return schemaVertexBufferBinding }
 
-var schemaVertexBufferBinding = &schema.Entity{
+var schemaVertexBufferBinding = &binary.Entity{
 	TypeID:  binaryIDVertexBufferBinding,
 	Package: "gles",
 	Name:    "VertexBufferBinding",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -4100,13 +4100,13 @@ func (*binaryClassVertexPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexPointer(d, obj.(*VertexPointer))
 }
-func (*binaryClassVertexPointer) Schema() *schema.Entity { return schemaVertexPointer }
+func (*binaryClassVertexPointer) Schema() *binary.Entity { return schemaVertexPointer }
 
-var schemaVertexPointer = &schema.Entity{
+var schemaVertexPointer = &binary.Entity{
 	TypeID:  binaryIDVertexPointer,
 	Package: "gles",
 	Name:    "VertexPointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -4151,13 +4151,13 @@ func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
 }
-func (*binaryClassVertexAttributeArray) Schema() *schema.Entity { return schemaVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) Schema() *binary.Entity { return schemaVertexAttributeArray }
 
-var schemaVertexAttributeArray = &schema.Entity{
+var schemaVertexAttributeArray = &binary.Entity{
 	TypeID:  binaryIDVertexAttributeArray,
 	Package: "gles",
 	Name:    "VertexAttributeArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -4240,13 +4240,13 @@ func (*binaryClassVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArray(d, obj.(*VertexArray))
 }
-func (*binaryClassVertexArray) Schema() *schema.Entity { return schemaVertexArray }
+func (*binaryClassVertexArray) Schema() *binary.Entity { return schemaVertexArray }
 
-var schemaVertexArray = &schema.Entity{
+var schemaVertexArray = &binary.Entity{
 	TypeID:  binaryIDVertexArray,
 	Package: "gles",
 	Name:    "VertexArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "VertexBufferBindings", Type: &schema.Map{Alias: "VertexBufferBindingIndexːVertexBufferBindingʳᵐ", KeyType: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*VertexBufferBinding)(nil).Class())}}}},
 		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*VertexAttributeArray)(nil).Class())}}}},
 	},
@@ -4274,13 +4274,13 @@ func (*binaryClassQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQuery(d, obj.(*Query))
 }
-func (*binaryClassQuery) Schema() *schema.Entity { return schemaQuery }
+func (*binaryClassQuery) Schema() *binary.Entity { return schemaQuery }
 
-var schemaQuery = &schema.Entity{
+var schemaQuery = &binary.Entity{
 	TypeID:  binaryIDQuery,
 	Package: "gles",
 	Name:    "Query",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassObjects struct{}
@@ -4497,13 +4497,13 @@ func (*binaryClassObjects) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObjects) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObjects(d, obj.(*Objects))
 }
-func (*binaryClassObjects) Schema() *schema.Entity { return schemaObjects }
+func (*binaryClassObjects) Schema() *binary.Entity { return schemaObjects }
 
-var schemaObjects = &schema.Entity{
+var schemaObjects = &binary.Entity{
 	TypeID:  binaryIDObjects,
 	Package: "gles",
 	Name:    "Objects",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Renderbuffer)(nil).Class())}}}},
 		{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Texture)(nil).Class())}}}},
 		{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Framebuffer)(nil).Class())}}}},
@@ -4677,13 +4677,13 @@ func (*binaryClassContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContext(d, obj.(*Context))
 }
-func (*binaryClassContext) Schema() *schema.Entity { return schemaContext }
+func (*binaryClassContext) Schema() *binary.Entity { return schemaContext }
 
-var schemaContext = &schema.Entity{
+var schemaContext = &binary.Entity{
 	TypeID:  binaryIDContext,
 	Package: "gles",
 	Name:    "Context",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
 		{Declared: "Info", Type: &schema.Struct{Entity: schema.Of((*ContextCreationInfo)(nil).Class())}},
 		{Declared: "Blending", Type: &schema.Struct{Entity: schema.Of((*BlendState)(nil).Class())}},
@@ -4750,13 +4750,13 @@ func (*binaryClassContextInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassContextInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeContextInfo(d, obj.(*ContextInfo))
 }
-func (*binaryClassContextInfo) Schema() *schema.Entity { return schemaContextInfo }
+func (*binaryClassContextInfo) Schema() *binary.Entity { return schemaContextInfo }
 
-var schemaContextInfo = &schema.Entity{
+var schemaContextInfo = &binary.Entity{
 	TypeID:  binaryIDContextInfo,
 	Package: "gles",
 	Name:    "ContextInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -4796,13 +4796,13 @@ func (*binaryClassEGLConfig) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLConfig) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLConfig(d, obj.(*EGLConfig))
 }
-func (*binaryClassEGLConfig) Schema() *schema.Entity { return schemaEGLConfig }
+func (*binaryClassEGLConfig) Schema() *binary.Entity { return schemaEGLConfig }
 
-var schemaEGLConfig = &schema.Entity{
+var schemaEGLConfig = &binary.Entity{
 	TypeID:  binaryIDEGLConfig,
 	Package: "gles",
 	Name:    "EGLConfig",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -4831,13 +4831,13 @@ func (*binaryClassEGLContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLContext(d, obj.(*EGLContext))
 }
-func (*binaryClassEGLContext) Schema() *schema.Entity { return schemaEGLContext }
+func (*binaryClassEGLContext) Schema() *binary.Entity { return schemaEGLContext }
 
-var schemaEGLContext = &schema.Entity{
+var schemaEGLContext = &binary.Entity{
 	TypeID:  binaryIDEGLContext,
 	Package: "gles",
 	Name:    "EGLContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -4866,13 +4866,13 @@ func (*binaryClassEGLDisplay) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLDisplay) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLDisplay(d, obj.(*EGLDisplay))
 }
-func (*binaryClassEGLDisplay) Schema() *schema.Entity { return schemaEGLDisplay }
+func (*binaryClassEGLDisplay) Schema() *binary.Entity { return schemaEGLDisplay }
 
-var schemaEGLDisplay = &schema.Entity{
+var schemaEGLDisplay = &binary.Entity{
 	TypeID:  binaryIDEGLDisplay,
 	Package: "gles",
 	Name:    "EGLDisplay",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -4901,13 +4901,13 @@ func (*binaryClassEGLSurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLSurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLSurface(d, obj.(*EGLSurface))
 }
-func (*binaryClassEGLSurface) Schema() *schema.Entity { return schemaEGLSurface }
+func (*binaryClassEGLSurface) Schema() *binary.Entity { return schemaEGLSurface }
 
-var schemaEGLSurface = &schema.Entity{
+var schemaEGLSurface = &binary.Entity{
 	TypeID:  binaryIDEGLSurface,
 	Package: "gles",
 	Name:    "EGLSurface",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -4936,13 +4936,13 @@ func (*binaryClassEGLintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLintˢ(d, obj.(*EGLintˢ))
 }
-func (*binaryClassEGLintˢ) Schema() *schema.Entity { return schemaEGLintˢ }
+func (*binaryClassEGLintˢ) Schema() *binary.Entity { return schemaEGLintˢ }
 
-var schemaEGLintˢ = &schema.Entity{
+var schemaEGLintˢ = &binary.Entity{
 	TypeID:  binaryIDEGLintˢ,
 	Package: "gles",
 	Name:    "EGLintˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -4971,13 +4971,13 @@ func (*binaryClassEGLintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEGLintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEGLintᵖ(d, obj.(*EGLintᵖ))
 }
-func (*binaryClassEGLintᵖ) Schema() *schema.Entity { return schemaEGLintᵖ }
+func (*binaryClassEGLintᵖ) Schema() *binary.Entity { return schemaEGLintᵖ }
 
-var schemaEGLintᵖ = &schema.Entity{
+var schemaEGLintᵖ = &binary.Entity{
 	TypeID:  binaryIDEGLintᵖ,
 	Package: "gles",
 	Name:    "EGLintᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5016,13 +5016,13 @@ func (*binaryClassEglCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglCreateContext(d, obj.(*EglCreateContext))
 }
-func (*binaryClassEglCreateContext) Schema() *schema.Entity { return schemaEglCreateContext }
+func (*binaryClassEglCreateContext) Schema() *binary.Entity { return schemaEglCreateContext }
 
-var schemaEglCreateContext = &schema.Entity{
+var schemaEglCreateContext = &binary.Entity{
 	TypeID:  binaryIDEglCreateContext,
 	Package: "gles",
 	Name:    "EglCreateContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
 		{Declared: "Config", Type: &schema.Struct{Entity: schema.Of((*EGLConfig)(nil).Class())}},
@@ -5064,13 +5064,13 @@ func (*binaryClassEglInitialize) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglInitialize) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglInitialize(d, obj.(*EglInitialize))
 }
-func (*binaryClassEglInitialize) Schema() *schema.Entity { return schemaEglInitialize }
+func (*binaryClassEglInitialize) Schema() *binary.Entity { return schemaEglInitialize }
 
-var schemaEglInitialize = &schema.Entity{
+var schemaEglInitialize = &binary.Entity{
 	TypeID:  binaryIDEglInitialize,
 	Package: "gles",
 	Name:    "EglInitialize",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Dpy", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
 		{Declared: "Major", Type: &schema.Struct{Entity: schema.Of((*EGLintᵖ)(nil).Class())}},
@@ -5113,13 +5113,13 @@ func (*binaryClassEglMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglMakeCurrent(d, obj.(*EglMakeCurrent))
 }
-func (*binaryClassEglMakeCurrent) Schema() *schema.Entity { return schemaEglMakeCurrent }
+func (*binaryClassEglMakeCurrent) Schema() *binary.Entity { return schemaEglMakeCurrent }
 
-var schemaEglMakeCurrent = &schema.Entity{
+var schemaEglMakeCurrent = &binary.Entity{
 	TypeID:  binaryIDEglMakeCurrent,
 	Package: "gles",
 	Name:    "EglMakeCurrent",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
 		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*EGLSurface)(nil).Class())}},
@@ -5163,13 +5163,13 @@ func (*binaryClassEglQuerySurface) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglQuerySurface) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglQuerySurface(d, obj.(*EglQuerySurface))
 }
-func (*binaryClassEglQuerySurface) Schema() *schema.Entity { return schemaEglQuerySurface }
+func (*binaryClassEglQuerySurface) Schema() *binary.Entity { return schemaEglQuerySurface }
 
-var schemaEglQuerySurface = &schema.Entity{
+var schemaEglQuerySurface = &binary.Entity{
 	TypeID:  binaryIDEglQuerySurface,
 	Package: "gles",
 	Name:    "EglQuerySurface",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
 		{Declared: "Surface", Type: &schema.Struct{Entity: schema.Of((*EGLSurface)(nil).Class())}},
@@ -5203,13 +5203,13 @@ func (*binaryClassVoidᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖ(d, obj.(*Voidᵖ))
 }
-func (*binaryClassVoidᵖ) Schema() *schema.Entity { return schemaVoidᵖ }
+func (*binaryClassVoidᵖ) Schema() *binary.Entity { return schemaVoidᵖ }
 
-var schemaVoidᵖ = &schema.Entity{
+var schemaVoidᵖ = &binary.Entity{
 	TypeID:  binaryIDVoidᵖ,
 	Package: "gles",
 	Name:    "Voidᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5244,13 +5244,13 @@ func (*binaryClassEglSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassEglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeEglSwapBuffers(d, obj.(*EglSwapBuffers))
 }
-func (*binaryClassEglSwapBuffers) Schema() *schema.Entity { return schemaEglSwapBuffers }
+func (*binaryClassEglSwapBuffers) Schema() *binary.Entity { return schemaEglSwapBuffers }
 
-var schemaEglSwapBuffers = &schema.Entity{
+var schemaEglSwapBuffers = &binary.Entity{
 	TypeID:  binaryIDEglSwapBuffers,
 	Package: "gles",
 	Name:    "EglSwapBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*EGLDisplay)(nil).Class())}},
 		{Declared: "Surface", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
@@ -5282,13 +5282,13 @@ func (*binaryClassF64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ˢ(d, obj.(*F64ˢ))
 }
-func (*binaryClassF64ˢ) Schema() *schema.Entity { return schemaF64ˢ }
+func (*binaryClassF64ˢ) Schema() *binary.Entity { return schemaF64ˢ }
 
-var schemaF64ˢ = &schema.Entity{
+var schemaF64ˢ = &binary.Entity{
 	TypeID:  binaryIDF64ˢ,
 	Package: "gles",
 	Name:    "F64ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -5317,13 +5317,13 @@ func (*binaryClassFlushPostBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFlushPostBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFlushPostBuffer(d, obj.(*FlushPostBuffer))
 }
-func (*binaryClassFlushPostBuffer) Schema() *schema.Entity { return schemaFlushPostBuffer }
+func (*binaryClassFlushPostBuffer) Schema() *binary.Entity { return schemaFlushPostBuffer }
 
-var schemaFlushPostBuffer = &schema.Entity{
+var schemaFlushPostBuffer = &binary.Entity{
 	TypeID:  binaryIDFlushPostBuffer,
 	Package: "gles",
 	Name:    "FlushPostBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -5352,13 +5352,13 @@ func (*binaryClassFramebufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdˢ(d, obj.(*FramebufferIdˢ))
 }
-func (*binaryClassFramebufferIdˢ) Schema() *schema.Entity { return schemaFramebufferIdˢ }
+func (*binaryClassFramebufferIdˢ) Schema() *binary.Entity { return schemaFramebufferIdˢ }
 
-var schemaFramebufferIdˢ = &schema.Entity{
+var schemaFramebufferIdˢ = &binary.Entity{
 	TypeID:  binaryIDFramebufferIdˢ,
 	Package: "gles",
 	Name:    "FramebufferIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -5387,13 +5387,13 @@ func (*binaryClassFramebufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdᵖ(d, obj.(*FramebufferIdᵖ))
 }
-func (*binaryClassFramebufferIdᵖ) Schema() *schema.Entity { return schemaFramebufferIdᵖ }
+func (*binaryClassFramebufferIdᵖ) Schema() *binary.Entity { return schemaFramebufferIdᵖ }
 
-var schemaFramebufferIdᵖ = &schema.Entity{
+var schemaFramebufferIdᵖ = &binary.Entity{
 	TypeID:  binaryIDFramebufferIdᵖ,
 	Package: "gles",
 	Name:    "FramebufferIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5422,13 +5422,13 @@ func (*binaryClassFramebufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassFramebufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferIdᶜᵖ(d, obj.(*FramebufferIdᶜᵖ))
 }
-func (*binaryClassFramebufferIdᶜᵖ) Schema() *schema.Entity { return schemaFramebufferIdᶜᵖ }
+func (*binaryClassFramebufferIdᶜᵖ) Schema() *binary.Entity { return schemaFramebufferIdᶜᵖ }
 
-var schemaFramebufferIdᶜᵖ = &schema.Entity{
+var schemaFramebufferIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDFramebufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "FramebufferIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5457,13 +5457,13 @@ func (*binaryClassGLDEBUGPROC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLDEBUGPROC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLDEBUGPROC(d, obj.(*GLDEBUGPROC))
 }
-func (*binaryClassGLDEBUGPROC) Schema() *schema.Entity { return schemaGLDEBUGPROC }
+func (*binaryClassGLDEBUGPROC) Schema() *binary.Entity { return schemaGLDEBUGPROC }
 
-var schemaGLDEBUGPROC = &schema.Entity{
+var schemaGLDEBUGPROC = &binary.Entity{
 	TypeID:  binaryIDGLDEBUGPROC,
 	Package: "gles",
 	Name:    "GLDEBUGPROC",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5492,13 +5492,13 @@ func (*binaryClassGLXContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLXContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLXContext(d, obj.(*GLXContext))
 }
-func (*binaryClassGLXContext) Schema() *schema.Entity { return schemaGLXContext }
+func (*binaryClassGLXContext) Schema() *binary.Entity { return schemaGLXContext }
 
-var schemaGLXContext = &schema.Entity{
+var schemaGLXContext = &binary.Entity{
 	TypeID:  binaryIDGLXContext,
 	Package: "gles",
 	Name:    "GLXContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5527,13 +5527,13 @@ func (*binaryClassGLXDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLXDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLXDrawable(d, obj.(*GLXDrawable))
 }
-func (*binaryClassGLXDrawable) Schema() *schema.Entity { return schemaGLXDrawable }
+func (*binaryClassGLXDrawable) Schema() *binary.Entity { return schemaGLXDrawable }
 
-var schemaGLXDrawable = &schema.Entity{
+var schemaGLXDrawable = &binary.Entity{
 	TypeID:  binaryIDGLXDrawable,
 	Package: "gles",
 	Name:    "GLXDrawable",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5562,13 +5562,13 @@ func (*binaryClassGLbooleanˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLbooleanˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLbooleanˢ(d, obj.(*GLbooleanˢ))
 }
-func (*binaryClassGLbooleanˢ) Schema() *schema.Entity { return schemaGLbooleanˢ }
+func (*binaryClassGLbooleanˢ) Schema() *binary.Entity { return schemaGLbooleanˢ }
 
-var schemaGLbooleanˢ = &schema.Entity{
+var schemaGLbooleanˢ = &binary.Entity{
 	TypeID:  binaryIDGLbooleanˢ,
 	Package: "gles",
 	Name:    "GLbooleanˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -5597,13 +5597,13 @@ func (*binaryClassGLbooleanᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLbooleanᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLbooleanᵖ(d, obj.(*GLbooleanᵖ))
 }
-func (*binaryClassGLbooleanᵖ) Schema() *schema.Entity { return schemaGLbooleanᵖ }
+func (*binaryClassGLbooleanᵖ) Schema() *binary.Entity { return schemaGLbooleanᵖ }
 
-var schemaGLbooleanᵖ = &schema.Entity{
+var schemaGLbooleanᵖ = &binary.Entity{
 	TypeID:  binaryIDGLbooleanᵖ,
 	Package: "gles",
 	Name:    "GLbooleanᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5632,13 +5632,13 @@ func (*binaryClassGLcharᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᵖ(d, obj.(*GLcharᵖ))
 }
-func (*binaryClassGLcharᵖ) Schema() *schema.Entity { return schemaGLcharᵖ }
+func (*binaryClassGLcharᵖ) Schema() *binary.Entity { return schemaGLcharᵖ }
 
-var schemaGLcharᵖ = &schema.Entity{
+var schemaGLcharᵖ = &binary.Entity{
 	TypeID:  binaryIDGLcharᵖ,
 	Package: "gles",
 	Name:    "GLcharᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5667,13 +5667,13 @@ func (*binaryClassGLcharᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖ(d, obj.(*GLcharᶜᵖ))
 }
-func (*binaryClassGLcharᶜᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖ }
+func (*binaryClassGLcharᶜᵖ) Schema() *binary.Entity { return schemaGLcharᶜᵖ }
 
-var schemaGLcharᶜᵖ = &schema.Entity{
+var schemaGLcharᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLcharᶜᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5702,13 +5702,13 @@ func (*binaryClassGLcharᶜᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖˢ(d, obj.(*GLcharᶜᵖˢ))
 }
-func (*binaryClassGLcharᶜᵖˢ) Schema() *schema.Entity { return schemaGLcharᶜᵖˢ }
+func (*binaryClassGLcharᶜᵖˢ) Schema() *binary.Entity { return schemaGLcharᶜᵖˢ }
 
-var schemaGLcharᶜᵖˢ = &schema.Entity{
+var schemaGLcharᶜᵖˢ = &binary.Entity{
 	TypeID:  binaryIDGLcharᶜᵖˢ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -5737,13 +5737,13 @@ func (*binaryClassGLcharᶜᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖᵖ(d, obj.(*GLcharᶜᵖᵖ))
 }
-func (*binaryClassGLcharᶜᵖᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖᵖ }
+func (*binaryClassGLcharᶜᵖᵖ) Schema() *binary.Entity { return schemaGLcharᶜᵖᵖ }
 
-var schemaGLcharᶜᵖᵖ = &schema.Entity{
+var schemaGLcharᶜᵖᵖ = &binary.Entity{
 	TypeID:  binaryIDGLcharᶜᵖᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5772,13 +5772,13 @@ func (*binaryClassGLcharᶜᵖᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLcharᶜᵖᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLcharᶜᵖᶜᵖ(d, obj.(*GLcharᶜᵖᶜᵖ))
 }
-func (*binaryClassGLcharᶜᵖᶜᵖ) Schema() *schema.Entity { return schemaGLcharᶜᵖᶜᵖ }
+func (*binaryClassGLcharᶜᵖᶜᵖ) Schema() *binary.Entity { return schemaGLcharᶜᵖᶜᵖ }
 
-var schemaGLcharᶜᵖᶜᵖ = &schema.Entity{
+var schemaGLcharᶜᵖᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLcharᶜᵖᶜᵖ,
 	Package: "gles",
 	Name:    "GLcharᶜᵖᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5807,13 +5807,13 @@ func (*binaryClassGLeglImageOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLeglImageOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLeglImageOES(d, obj.(*GLeglImageOES))
 }
-func (*binaryClassGLeglImageOES) Schema() *schema.Entity { return schemaGLeglImageOES }
+func (*binaryClassGLeglImageOES) Schema() *binary.Entity { return schemaGLeglImageOES }
 
-var schemaGLeglImageOES = &schema.Entity{
+var schemaGLeglImageOES = &binary.Entity{
 	TypeID:  binaryIDGLeglImageOES,
 	Package: "gles",
 	Name:    "GLeglImageOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5842,13 +5842,13 @@ func (*binaryClassGLenumˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumˢ(d, obj.(*GLenumˢ))
 }
-func (*binaryClassGLenumˢ) Schema() *schema.Entity { return schemaGLenumˢ }
+func (*binaryClassGLenumˢ) Schema() *binary.Entity { return schemaGLenumˢ }
 
-var schemaGLenumˢ = &schema.Entity{
+var schemaGLenumˢ = &binary.Entity{
 	TypeID:  binaryIDGLenumˢ,
 	Package: "gles",
 	Name:    "GLenumˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -5877,13 +5877,13 @@ func (*binaryClassGLenumᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumᵖ(d, obj.(*GLenumᵖ))
 }
-func (*binaryClassGLenumᵖ) Schema() *schema.Entity { return schemaGLenumᵖ }
+func (*binaryClassGLenumᵖ) Schema() *binary.Entity { return schemaGLenumᵖ }
 
-var schemaGLenumᵖ = &schema.Entity{
+var schemaGLenumᵖ = &binary.Entity{
 	TypeID:  binaryIDGLenumᵖ,
 	Package: "gles",
 	Name:    "GLenumᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5912,13 +5912,13 @@ func (*binaryClassGLenumᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLenumᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLenumᶜᵖ(d, obj.(*GLenumᶜᵖ))
 }
-func (*binaryClassGLenumᶜᵖ) Schema() *schema.Entity { return schemaGLenumᶜᵖ }
+func (*binaryClassGLenumᶜᵖ) Schema() *binary.Entity { return schemaGLenumᶜᵖ }
 
-var schemaGLenumᶜᵖ = &schema.Entity{
+var schemaGLenumᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLenumᶜᵖ,
 	Package: "gles",
 	Name:    "GLenumᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -5951,13 +5951,13 @@ func (*binaryClassGLfloatː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː2ᵃ(d, obj.(*GLfloatː2ᵃ))
 }
-func (*binaryClassGLfloatː2ᵃ) Schema() *schema.Entity { return schemaGLfloatː2ᵃ }
+func (*binaryClassGLfloatː2ᵃ) Schema() *binary.Entity { return schemaGLfloatː2ᵃ }
 
-var schemaGLfloatː2ᵃ = &schema.Entity{
+var schemaGLfloatː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLfloatː2ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 2}},
 	},
 }
@@ -5990,13 +5990,13 @@ func (*binaryClassGLfloatː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː3ᵃ(d, obj.(*GLfloatː3ᵃ))
 }
-func (*binaryClassGLfloatː3ᵃ) Schema() *schema.Entity { return schemaGLfloatː3ᵃ }
+func (*binaryClassGLfloatː3ᵃ) Schema() *binary.Entity { return schemaGLfloatː3ᵃ }
 
-var schemaGLfloatː3ᵃ = &schema.Entity{
+var schemaGLfloatː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLfloatː3ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 3}},
 	},
 }
@@ -6029,13 +6029,13 @@ func (*binaryClassGLfloatː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatː4ᵃ(d, obj.(*GLfloatː4ᵃ))
 }
-func (*binaryClassGLfloatː4ᵃ) Schema() *schema.Entity { return schemaGLfloatː4ᵃ }
+func (*binaryClassGLfloatː4ᵃ) Schema() *binary.Entity { return schemaGLfloatː4ᵃ }
 
-var schemaGLfloatː4ᵃ = &schema.Entity{
+var schemaGLfloatː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLfloatː4ᵃ,
 	Package: "gles",
 	Name:    "GLfloatː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 4}},
 	},
 }
@@ -6064,13 +6064,13 @@ func (*binaryClassGLfloatˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatˢ(d, obj.(*GLfloatˢ))
 }
-func (*binaryClassGLfloatˢ) Schema() *schema.Entity { return schemaGLfloatˢ }
+func (*binaryClassGLfloatˢ) Schema() *binary.Entity { return schemaGLfloatˢ }
 
-var schemaGLfloatˢ = &schema.Entity{
+var schemaGLfloatˢ = &binary.Entity{
 	TypeID:  binaryIDGLfloatˢ,
 	Package: "gles",
 	Name:    "GLfloatˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6099,13 +6099,13 @@ func (*binaryClassGLfloatᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatᵖ(d, obj.(*GLfloatᵖ))
 }
-func (*binaryClassGLfloatᵖ) Schema() *schema.Entity { return schemaGLfloatᵖ }
+func (*binaryClassGLfloatᵖ) Schema() *binary.Entity { return schemaGLfloatᵖ }
 
-var schemaGLfloatᵖ = &schema.Entity{
+var schemaGLfloatᵖ = &binary.Entity{
 	TypeID:  binaryIDGLfloatᵖ,
 	Package: "gles",
 	Name:    "GLfloatᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6134,13 +6134,13 @@ func (*binaryClassGLfloatᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLfloatᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLfloatᶜᵖ(d, obj.(*GLfloatᶜᵖ))
 }
-func (*binaryClassGLfloatᶜᵖ) Schema() *schema.Entity { return schemaGLfloatᶜᵖ }
+func (*binaryClassGLfloatᶜᵖ) Schema() *binary.Entity { return schemaGLfloatᶜᵖ }
 
-var schemaGLfloatᶜᵖ = &schema.Entity{
+var schemaGLfloatᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLfloatᶜᵖ,
 	Package: "gles",
 	Name:    "GLfloatᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6169,13 +6169,13 @@ func (*binaryClassGLint64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLint64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLint64ˢ(d, obj.(*GLint64ˢ))
 }
-func (*binaryClassGLint64ˢ) Schema() *schema.Entity { return schemaGLint64ˢ }
+func (*binaryClassGLint64ˢ) Schema() *binary.Entity { return schemaGLint64ˢ }
 
-var schemaGLint64ˢ = &schema.Entity{
+var schemaGLint64ˢ = &binary.Entity{
 	TypeID:  binaryIDGLint64ˢ,
 	Package: "gles",
 	Name:    "GLint64ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6204,13 +6204,13 @@ func (*binaryClassGLint64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLint64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLint64ᵖ(d, obj.(*GLint64ᵖ))
 }
-func (*binaryClassGLint64ᵖ) Schema() *schema.Entity { return schemaGLint64ᵖ }
+func (*binaryClassGLint64ᵖ) Schema() *binary.Entity { return schemaGLint64ᵖ }
 
-var schemaGLint64ᵖ = &schema.Entity{
+var schemaGLint64ᵖ = &binary.Entity{
 	TypeID:  binaryIDGLint64ᵖ,
 	Package: "gles",
 	Name:    "GLint64ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6243,13 +6243,13 @@ func (*binaryClassGLintː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː2ᵃ(d, obj.(*GLintː2ᵃ))
 }
-func (*binaryClassGLintː2ᵃ) Schema() *schema.Entity { return schemaGLintː2ᵃ }
+func (*binaryClassGLintː2ᵃ) Schema() *binary.Entity { return schemaGLintː2ᵃ }
 
-var schemaGLintː2ᵃ = &schema.Entity{
+var schemaGLintː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLintː2ᵃ,
 	Package: "gles",
 	Name:    "GLintː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 2}},
 	},
 }
@@ -6282,13 +6282,13 @@ func (*binaryClassGLintː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː3ᵃ(d, obj.(*GLintː3ᵃ))
 }
-func (*binaryClassGLintː3ᵃ) Schema() *schema.Entity { return schemaGLintː3ᵃ }
+func (*binaryClassGLintː3ᵃ) Schema() *binary.Entity { return schemaGLintː3ᵃ }
 
-var schemaGLintː3ᵃ = &schema.Entity{
+var schemaGLintː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLintː3ᵃ,
 	Package: "gles",
 	Name:    "GLintː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 3}},
 	},
 }
@@ -6321,13 +6321,13 @@ func (*binaryClassGLintː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintː4ᵃ(d, obj.(*GLintː4ᵃ))
 }
-func (*binaryClassGLintː4ᵃ) Schema() *schema.Entity { return schemaGLintː4ᵃ }
+func (*binaryClassGLintː4ᵃ) Schema() *binary.Entity { return schemaGLintː4ᵃ }
 
-var schemaGLintː4ᵃ = &schema.Entity{
+var schemaGLintː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLintː4ᵃ,
 	Package: "gles",
 	Name:    "GLintː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 4}},
 	},
 }
@@ -6356,13 +6356,13 @@ func (*binaryClassGLintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintˢ(d, obj.(*GLintˢ))
 }
-func (*binaryClassGLintˢ) Schema() *schema.Entity { return schemaGLintˢ }
+func (*binaryClassGLintˢ) Schema() *binary.Entity { return schemaGLintˢ }
 
-var schemaGLintˢ = &schema.Entity{
+var schemaGLintˢ = &binary.Entity{
 	TypeID:  binaryIDGLintˢ,
 	Package: "gles",
 	Name:    "GLintˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6391,13 +6391,13 @@ func (*binaryClassGLintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintᵖ(d, obj.(*GLintᵖ))
 }
-func (*binaryClassGLintᵖ) Schema() *schema.Entity { return schemaGLintᵖ }
+func (*binaryClassGLintᵖ) Schema() *binary.Entity { return schemaGLintᵖ }
 
-var schemaGLintᵖ = &schema.Entity{
+var schemaGLintᵖ = &binary.Entity{
 	TypeID:  binaryIDGLintᵖ,
 	Package: "gles",
 	Name:    "GLintᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6426,13 +6426,13 @@ func (*binaryClassGLintᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLintᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLintᶜᵖ(d, obj.(*GLintᶜᵖ))
 }
-func (*binaryClassGLintᶜᵖ) Schema() *schema.Entity { return schemaGLintᶜᵖ }
+func (*binaryClassGLintᶜᵖ) Schema() *binary.Entity { return schemaGLintᶜᵖ }
 
-var schemaGLintᶜᵖ = &schema.Entity{
+var schemaGLintᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLintᶜᵖ,
 	Package: "gles",
 	Name:    "GLintᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6461,13 +6461,13 @@ func (*binaryClassGLsizeiˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiˢ(d, obj.(*GLsizeiˢ))
 }
-func (*binaryClassGLsizeiˢ) Schema() *schema.Entity { return schemaGLsizeiˢ }
+func (*binaryClassGLsizeiˢ) Schema() *binary.Entity { return schemaGLsizeiˢ }
 
-var schemaGLsizeiˢ = &schema.Entity{
+var schemaGLsizeiˢ = &binary.Entity{
 	TypeID:  binaryIDGLsizeiˢ,
 	Package: "gles",
 	Name:    "GLsizeiˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6496,13 +6496,13 @@ func (*binaryClassGLsizeiᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiᵖ(d, obj.(*GLsizeiᵖ))
 }
-func (*binaryClassGLsizeiᵖ) Schema() *schema.Entity { return schemaGLsizeiᵖ }
+func (*binaryClassGLsizeiᵖ) Schema() *binary.Entity { return schemaGLsizeiᵖ }
 
-var schemaGLsizeiᵖ = &schema.Entity{
+var schemaGLsizeiᵖ = &binary.Entity{
 	TypeID:  binaryIDGLsizeiᵖ,
 	Package: "gles",
 	Name:    "GLsizeiᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6531,13 +6531,13 @@ func (*binaryClassGLsizeiᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLsizeiᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLsizeiᶜᵖ(d, obj.(*GLsizeiᶜᵖ))
 }
-func (*binaryClassGLsizeiᶜᵖ) Schema() *schema.Entity { return schemaGLsizeiᶜᵖ }
+func (*binaryClassGLsizeiᶜᵖ) Schema() *binary.Entity { return schemaGLsizeiᶜᵖ }
 
-var schemaGLsizeiᶜᵖ = &schema.Entity{
+var schemaGLsizeiᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLsizeiᶜᵖ,
 	Package: "gles",
 	Name:    "GLsizeiᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6566,13 +6566,13 @@ func (*binaryClassGLubyteˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteˢ(d, obj.(*GLubyteˢ))
 }
-func (*binaryClassGLubyteˢ) Schema() *schema.Entity { return schemaGLubyteˢ }
+func (*binaryClassGLubyteˢ) Schema() *binary.Entity { return schemaGLubyteˢ }
 
-var schemaGLubyteˢ = &schema.Entity{
+var schemaGLubyteˢ = &binary.Entity{
 	TypeID:  binaryIDGLubyteˢ,
 	Package: "gles",
 	Name:    "GLubyteˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6601,13 +6601,13 @@ func (*binaryClassGLubyteᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteᵖ(d, obj.(*GLubyteᵖ))
 }
-func (*binaryClassGLubyteᵖ) Schema() *schema.Entity { return schemaGLubyteᵖ }
+func (*binaryClassGLubyteᵖ) Schema() *binary.Entity { return schemaGLubyteᵖ }
 
-var schemaGLubyteᵖ = &schema.Entity{
+var schemaGLubyteᵖ = &binary.Entity{
 	TypeID:  binaryIDGLubyteᵖ,
 	Package: "gles",
 	Name:    "GLubyteᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6636,13 +6636,13 @@ func (*binaryClassGLubyteᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLubyteᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLubyteᶜᵖ(d, obj.(*GLubyteᶜᵖ))
 }
-func (*binaryClassGLubyteᶜᵖ) Schema() *schema.Entity { return schemaGLubyteᶜᵖ }
+func (*binaryClassGLubyteᶜᵖ) Schema() *binary.Entity { return schemaGLubyteᶜᵖ }
 
-var schemaGLubyteᶜᵖ = &schema.Entity{
+var schemaGLubyteᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLubyteᶜᵖ,
 	Package: "gles",
 	Name:    "GLubyteᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6671,13 +6671,13 @@ func (*binaryClassGLuint64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ˢ(d, obj.(*GLuint64ˢ))
 }
-func (*binaryClassGLuint64ˢ) Schema() *schema.Entity { return schemaGLuint64ˢ }
+func (*binaryClassGLuint64ˢ) Schema() *binary.Entity { return schemaGLuint64ˢ }
 
-var schemaGLuint64ˢ = &schema.Entity{
+var schemaGLuint64ˢ = &binary.Entity{
 	TypeID:  binaryIDGLuint64ˢ,
 	Package: "gles",
 	Name:    "GLuint64ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6706,13 +6706,13 @@ func (*binaryClassGLuint64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ᵖ(d, obj.(*GLuint64ᵖ))
 }
-func (*binaryClassGLuint64ᵖ) Schema() *schema.Entity { return schemaGLuint64ᵖ }
+func (*binaryClassGLuint64ᵖ) Schema() *binary.Entity { return schemaGLuint64ᵖ }
 
-var schemaGLuint64ᵖ = &schema.Entity{
+var schemaGLuint64ᵖ = &binary.Entity{
 	TypeID:  binaryIDGLuint64ᵖ,
 	Package: "gles",
 	Name:    "GLuint64ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6741,13 +6741,13 @@ func (*binaryClassGLuint64ᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuint64ᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuint64ᶜᵖ(d, obj.(*GLuint64ᶜᵖ))
 }
-func (*binaryClassGLuint64ᶜᵖ) Schema() *schema.Entity { return schemaGLuint64ᶜᵖ }
+func (*binaryClassGLuint64ᶜᵖ) Schema() *binary.Entity { return schemaGLuint64ᶜᵖ }
 
-var schemaGLuint64ᶜᵖ = &schema.Entity{
+var schemaGLuint64ᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLuint64ᶜᵖ,
 	Package: "gles",
 	Name:    "GLuint64ᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6780,13 +6780,13 @@ func (*binaryClassGLuintː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː2ᵃ(d, obj.(*GLuintː2ᵃ))
 }
-func (*binaryClassGLuintː2ᵃ) Schema() *schema.Entity { return schemaGLuintː2ᵃ }
+func (*binaryClassGLuintː2ᵃ) Schema() *binary.Entity { return schemaGLuintː2ᵃ }
 
-var schemaGLuintː2ᵃ = &schema.Entity{
+var schemaGLuintː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLuintː2ᵃ,
 	Package: "gles",
 	Name:    "GLuintː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 2}},
 	},
 }
@@ -6819,13 +6819,13 @@ func (*binaryClassGLuintː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː3ᵃ(d, obj.(*GLuintː3ᵃ))
 }
-func (*binaryClassGLuintː3ᵃ) Schema() *schema.Entity { return schemaGLuintː3ᵃ }
+func (*binaryClassGLuintː3ᵃ) Schema() *binary.Entity { return schemaGLuintː3ᵃ }
 
-var schemaGLuintː3ᵃ = &schema.Entity{
+var schemaGLuintː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLuintː3ᵃ,
 	Package: "gles",
 	Name:    "GLuintː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 3}},
 	},
 }
@@ -6858,13 +6858,13 @@ func (*binaryClassGLuintː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintː4ᵃ(d, obj.(*GLuintː4ᵃ))
 }
-func (*binaryClassGLuintː4ᵃ) Schema() *schema.Entity { return schemaGLuintː4ᵃ }
+func (*binaryClassGLuintː4ᵃ) Schema() *binary.Entity { return schemaGLuintː4ᵃ }
 
-var schemaGLuintː4ᵃ = &schema.Entity{
+var schemaGLuintː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDGLuintː4ᵃ,
 	Package: "gles",
 	Name:    "GLuintː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 4}},
 	},
 }
@@ -6893,13 +6893,13 @@ func (*binaryClassGLuintˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintˢ(d, obj.(*GLuintˢ))
 }
-func (*binaryClassGLuintˢ) Schema() *schema.Entity { return schemaGLuintˢ }
+func (*binaryClassGLuintˢ) Schema() *binary.Entity { return schemaGLuintˢ }
 
-var schemaGLuintˢ = &schema.Entity{
+var schemaGLuintˢ = &binary.Entity{
 	TypeID:  binaryIDGLuintˢ,
 	Package: "gles",
 	Name:    "GLuintˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -6928,13 +6928,13 @@ func (*binaryClassGLuintᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintᵖ(d, obj.(*GLuintᵖ))
 }
-func (*binaryClassGLuintᵖ) Schema() *schema.Entity { return schemaGLuintᵖ }
+func (*binaryClassGLuintᵖ) Schema() *binary.Entity { return schemaGLuintᵖ }
 
-var schemaGLuintᵖ = &schema.Entity{
+var schemaGLuintᵖ = &binary.Entity{
 	TypeID:  binaryIDGLuintᵖ,
 	Package: "gles",
 	Name:    "GLuintᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6963,13 +6963,13 @@ func (*binaryClassGLuintᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLuintᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLuintᶜᵖ(d, obj.(*GLuintᶜᵖ))
 }
-func (*binaryClassGLuintᶜᵖ) Schema() *schema.Entity { return schemaGLuintᶜᵖ }
+func (*binaryClassGLuintᶜᵖ) Schema() *binary.Entity { return schemaGLuintᶜᵖ }
 
-var schemaGLuintᶜᵖ = &schema.Entity{
+var schemaGLuintᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDGLuintᶜᵖ,
 	Package: "gles",
 	Name:    "GLuintᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -6998,13 +6998,13 @@ func (*binaryClassGLvoidˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLvoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLvoidˢ(d, obj.(*GLvoidˢ))
 }
-func (*binaryClassGLvoidˢ) Schema() *schema.Entity { return schemaGLvoidˢ }
+func (*binaryClassGLvoidˢ) Schema() *binary.Entity { return schemaGLvoidˢ }
 
-var schemaGLvoidˢ = &schema.Entity{
+var schemaGLvoidˢ = &binary.Entity{
 	TypeID:  binaryIDGLvoidˢ,
 	Package: "gles",
 	Name:    "GLvoidˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -7033,13 +7033,13 @@ func (*binaryClassGLvoidᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGLvoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGLvoidᵖ(d, obj.(*GLvoidᵖ))
 }
-func (*binaryClassGLvoidᵖ) Schema() *schema.Entity { return schemaGLvoidᵖ }
+func (*binaryClassGLvoidᵖ) Schema() *binary.Entity { return schemaGLvoidᵖ }
 
-var schemaGLvoidᵖ = &schema.Entity{
+var schemaGLvoidᵖ = &binary.Entity{
 	TypeID:  binaryIDGLvoidᵖ,
 	Package: "gles",
 	Name:    "GLvoidᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -7072,13 +7072,13 @@ func (*binaryClassGlActiveShaderProgram) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlActiveShaderProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveShaderProgram(d, obj.(*GlActiveShaderProgram))
 }
-func (*binaryClassGlActiveShaderProgram) Schema() *schema.Entity { return schemaGlActiveShaderProgram }
+func (*binaryClassGlActiveShaderProgram) Schema() *binary.Entity { return schemaGlActiveShaderProgram }
 
-var schemaGlActiveShaderProgram = &schema.Entity{
+var schemaGlActiveShaderProgram = &binary.Entity{
 	TypeID:  binaryIDGlActiveShaderProgram,
 	Package: "gles",
 	Name:    "GlActiveShaderProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -7113,15 +7113,15 @@ func (*binaryClassGlActiveShaderProgramEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlActiveShaderProgramEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveShaderProgramEXT(d, obj.(*GlActiveShaderProgramEXT))
 }
-func (*binaryClassGlActiveShaderProgramEXT) Schema() *schema.Entity {
+func (*binaryClassGlActiveShaderProgramEXT) Schema() *binary.Entity {
 	return schemaGlActiveShaderProgramEXT
 }
 
-var schemaGlActiveShaderProgramEXT = &schema.Entity{
+var schemaGlActiveShaderProgramEXT = &binary.Entity{
 	TypeID:  binaryIDGlActiveShaderProgramEXT,
 	Package: "gles",
 	Name:    "GlActiveShaderProgramEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
@@ -7154,13 +7154,13 @@ func (*binaryClassGlActiveTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlActiveTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlActiveTexture(d, obj.(*GlActiveTexture))
 }
-func (*binaryClassGlActiveTexture) Schema() *schema.Entity { return schemaGlActiveTexture }
+func (*binaryClassGlActiveTexture) Schema() *binary.Entity { return schemaGlActiveTexture }
 
-var schemaGlActiveTexture = &schema.Entity{
+var schemaGlActiveTexture = &binary.Entity{
 	TypeID:  binaryIDGlActiveTexture,
 	Package: "gles",
 	Name:    "GlActiveTexture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -7194,13 +7194,13 @@ func (*binaryClassGlAlphaFuncQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlAlphaFuncQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlAlphaFuncQCOM(d, obj.(*GlAlphaFuncQCOM))
 }
-func (*binaryClassGlAlphaFuncQCOM) Schema() *schema.Entity { return schemaGlAlphaFuncQCOM }
+func (*binaryClassGlAlphaFuncQCOM) Schema() *binary.Entity { return schemaGlAlphaFuncQCOM }
 
-var schemaGlAlphaFuncQCOM = &schema.Entity{
+var schemaGlAlphaFuncQCOM = &binary.Entity{
 	TypeID:  binaryIDGlAlphaFuncQCOM,
 	Package: "gles",
 	Name:    "GlAlphaFuncQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
@@ -7235,15 +7235,15 @@ func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Decode(d binary.Decoder
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
 }
-func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *schema.Entity {
+func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Schema() *binary.Entity {
 	return schemaGlApplyFramebufferAttachmentCMAAINTEL
 }
 
-var schemaGlApplyFramebufferAttachmentCMAAINTEL = &schema.Entity{
+var schemaGlApplyFramebufferAttachmentCMAAINTEL = &binary.Entity{
 	TypeID:  binaryIDGlApplyFramebufferAttachmentCMAAINTEL,
 	Package: "gles",
 	Name:    "GlApplyFramebufferAttachmentCMAAINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -7276,13 +7276,13 @@ func (*binaryClassGlAttachShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlAttachShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlAttachShader(d, obj.(*GlAttachShader))
 }
-func (*binaryClassGlAttachShader) Schema() *schema.Entity { return schemaGlAttachShader }
+func (*binaryClassGlAttachShader) Schema() *binary.Entity { return schemaGlAttachShader }
 
-var schemaGlAttachShader = &schema.Entity{
+var schemaGlAttachShader = &binary.Entity{
 	TypeID:  binaryIDGlAttachShader,
 	Package: "gles",
 	Name:    "GlAttachShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -7321,15 +7321,15 @@ func (*binaryClassGlBeginConditionalRenderNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlBeginConditionalRenderNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginConditionalRenderNV(d, obj.(*GlBeginConditionalRenderNV))
 }
-func (*binaryClassGlBeginConditionalRenderNV) Schema() *schema.Entity {
+func (*binaryClassGlBeginConditionalRenderNV) Schema() *binary.Entity {
 	return schemaGlBeginConditionalRenderNV
 }
 
-var schemaGlBeginConditionalRenderNV = &schema.Entity{
+var schemaGlBeginConditionalRenderNV = &binary.Entity{
 	TypeID:  binaryIDGlBeginConditionalRenderNV,
 	Package: "gles",
 	Name:    "GlBeginConditionalRenderNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -7362,13 +7362,13 @@ func (*binaryClassGlBeginPerfMonitorAMD) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBeginPerfMonitorAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginPerfMonitorAMD(d, obj.(*GlBeginPerfMonitorAMD))
 }
-func (*binaryClassGlBeginPerfMonitorAMD) Schema() *schema.Entity { return schemaGlBeginPerfMonitorAMD }
+func (*binaryClassGlBeginPerfMonitorAMD) Schema() *binary.Entity { return schemaGlBeginPerfMonitorAMD }
 
-var schemaGlBeginPerfMonitorAMD = &schema.Entity{
+var schemaGlBeginPerfMonitorAMD = &binary.Entity{
 	TypeID:  binaryIDGlBeginPerfMonitorAMD,
 	Package: "gles",
 	Name:    "GlBeginPerfMonitorAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -7400,13 +7400,13 @@ func (*binaryClassGlBeginPerfQueryINTEL) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBeginPerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginPerfQueryINTEL(d, obj.(*GlBeginPerfQueryINTEL))
 }
-func (*binaryClassGlBeginPerfQueryINTEL) Schema() *schema.Entity { return schemaGlBeginPerfQueryINTEL }
+func (*binaryClassGlBeginPerfQueryINTEL) Schema() *binary.Entity { return schemaGlBeginPerfQueryINTEL }
 
-var schemaGlBeginPerfQueryINTEL = &schema.Entity{
+var schemaGlBeginPerfQueryINTEL = &binary.Entity{
 	TypeID:  binaryIDGlBeginPerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlBeginPerfQueryINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -7440,13 +7440,13 @@ func (*binaryClassGlBeginQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBeginQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginQuery(d, obj.(*GlBeginQuery))
 }
-func (*binaryClassGlBeginQuery) Schema() *schema.Entity { return schemaGlBeginQuery }
+func (*binaryClassGlBeginQuery) Schema() *binary.Entity { return schemaGlBeginQuery }
 
-var schemaGlBeginQuery = &schema.Entity{
+var schemaGlBeginQuery = &binary.Entity{
 	TypeID:  binaryIDGlBeginQuery,
 	Package: "gles",
 	Name:    "GlBeginQuery",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -7481,13 +7481,13 @@ func (*binaryClassGlBeginQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBeginQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginQueryEXT(d, obj.(*GlBeginQueryEXT))
 }
-func (*binaryClassGlBeginQueryEXT) Schema() *schema.Entity { return schemaGlBeginQueryEXT }
+func (*binaryClassGlBeginQueryEXT) Schema() *binary.Entity { return schemaGlBeginQueryEXT }
 
-var schemaGlBeginQueryEXT = &schema.Entity{
+var schemaGlBeginQueryEXT = &binary.Entity{
 	TypeID:  binaryIDGlBeginQueryEXT,
 	Package: "gles",
 	Name:    "GlBeginQueryEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
@@ -7520,15 +7520,15 @@ func (*binaryClassGlBeginTransformFeedback) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBeginTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBeginTransformFeedback(d, obj.(*GlBeginTransformFeedback))
 }
-func (*binaryClassGlBeginTransformFeedback) Schema() *schema.Entity {
+func (*binaryClassGlBeginTransformFeedback) Schema() *binary.Entity {
 	return schemaGlBeginTransformFeedback
 }
 
-var schemaGlBeginTransformFeedback = &schema.Entity{
+var schemaGlBeginTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlBeginTransformFeedback,
 	Package: "gles",
 	Name:    "GlBeginTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "PrimitiveMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -7564,13 +7564,13 @@ func (*binaryClassGlBindAttribLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindAttribLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindAttribLocation(d, obj.(*GlBindAttribLocation))
 }
-func (*binaryClassGlBindAttribLocation) Schema() *schema.Entity { return schemaGlBindAttribLocation }
+func (*binaryClassGlBindAttribLocation) Schema() *binary.Entity { return schemaGlBindAttribLocation }
 
-var schemaGlBindAttribLocation = &schema.Entity{
+var schemaGlBindAttribLocation = &binary.Entity{
 	TypeID:  binaryIDGlBindAttribLocation,
 	Package: "gles",
 	Name:    "GlBindAttribLocation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
@@ -7606,13 +7606,13 @@ func (*binaryClassGlBindBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBuffer(d, obj.(*GlBindBuffer))
 }
-func (*binaryClassGlBindBuffer) Schema() *schema.Entity { return schemaGlBindBuffer }
+func (*binaryClassGlBindBuffer) Schema() *binary.Entity { return schemaGlBindBuffer }
 
-var schemaGlBindBuffer = &schema.Entity{
+var schemaGlBindBuffer = &binary.Entity{
 	TypeID:  binaryIDGlBindBuffer,
 	Package: "gles",
 	Name:    "GlBindBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -7649,13 +7649,13 @@ func (*binaryClassGlBindBufferBase) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBufferBase) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBufferBase(d, obj.(*GlBindBufferBase))
 }
-func (*binaryClassGlBindBufferBase) Schema() *schema.Entity { return schemaGlBindBufferBase }
+func (*binaryClassGlBindBufferBase) Schema() *binary.Entity { return schemaGlBindBufferBase }
 
-var schemaGlBindBufferBase = &schema.Entity{
+var schemaGlBindBufferBase = &binary.Entity{
 	TypeID:  binaryIDGlBindBufferBase,
 	Package: "gles",
 	Name:    "GlBindBufferBase",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
@@ -7697,13 +7697,13 @@ func (*binaryClassGlBindBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindBufferRange(d, obj.(*GlBindBufferRange))
 }
-func (*binaryClassGlBindBufferRange) Schema() *schema.Entity { return schemaGlBindBufferRange }
+func (*binaryClassGlBindBufferRange) Schema() *binary.Entity { return schemaGlBindBufferRange }
 
-var schemaGlBindBufferRange = &schema.Entity{
+var schemaGlBindBufferRange = &binary.Entity{
 	TypeID:  binaryIDGlBindBufferRange,
 	Package: "gles",
 	Name:    "GlBindBufferRange",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "BufferBindingIndex", Method: schema.Uint32}},
@@ -7743,15 +7743,15 @@ func (*binaryClassGlBindFragDataLocationEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlBindFragDataLocationEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFragDataLocationEXT(d, obj.(*GlBindFragDataLocationEXT))
 }
-func (*binaryClassGlBindFragDataLocationEXT) Schema() *schema.Entity {
+func (*binaryClassGlBindFragDataLocationEXT) Schema() *binary.Entity {
 	return schemaGlBindFragDataLocationEXT
 }
 
-var schemaGlBindFragDataLocationEXT = &schema.Entity{
+var schemaGlBindFragDataLocationEXT = &binary.Entity{
 	TypeID:  binaryIDGlBindFragDataLocationEXT,
 	Package: "gles",
 	Name:    "GlBindFragDataLocationEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Color", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -7795,15 +7795,15 @@ func (*binaryClassGlBindFragDataLocationIndexedEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlBindFragDataLocationIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFragDataLocationIndexedEXT(d, obj.(*GlBindFragDataLocationIndexedEXT))
 }
-func (*binaryClassGlBindFragDataLocationIndexedEXT) Schema() *schema.Entity {
+func (*binaryClassGlBindFragDataLocationIndexedEXT) Schema() *binary.Entity {
 	return schemaGlBindFragDataLocationIndexedEXT
 }
 
-var schemaGlBindFragDataLocationIndexedEXT = &schema.Entity{
+var schemaGlBindFragDataLocationIndexedEXT = &binary.Entity{
 	TypeID:  binaryIDGlBindFragDataLocationIndexedEXT,
 	Package: "gles",
 	Name:    "GlBindFragDataLocationIndexedEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ColorNumber", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -7840,13 +7840,13 @@ func (*binaryClassGlBindFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindFramebuffer(d, obj.(*GlBindFramebuffer))
 }
-func (*binaryClassGlBindFramebuffer) Schema() *schema.Entity { return schemaGlBindFramebuffer }
+func (*binaryClassGlBindFramebuffer) Schema() *binary.Entity { return schemaGlBindFramebuffer }
 
-var schemaGlBindFramebuffer = &schema.Entity{
+var schemaGlBindFramebuffer = &binary.Entity{
 	TypeID:  binaryIDGlBindFramebuffer,
 	Package: "gles",
 	Name:    "GlBindFramebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
@@ -7891,13 +7891,13 @@ func (*binaryClassGlBindImageTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindImageTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindImageTexture(d, obj.(*GlBindImageTexture))
 }
-func (*binaryClassGlBindImageTexture) Schema() *schema.Entity { return schemaGlBindImageTexture }
+func (*binaryClassGlBindImageTexture) Schema() *binary.Entity { return schemaGlBindImageTexture }
 
-var schemaGlBindImageTexture = &schema.Entity{
+var schemaGlBindImageTexture = &binary.Entity{
 	TypeID:  binaryIDGlBindImageTexture,
 	Package: "gles",
 	Name:    "GlBindImageTexture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -7935,13 +7935,13 @@ func (*binaryClassGlBindProgramPipeline) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlBindProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindProgramPipeline(d, obj.(*GlBindProgramPipeline))
 }
-func (*binaryClassGlBindProgramPipeline) Schema() *schema.Entity { return schemaGlBindProgramPipeline }
+func (*binaryClassGlBindProgramPipeline) Schema() *binary.Entity { return schemaGlBindProgramPipeline }
 
-var schemaGlBindProgramPipeline = &schema.Entity{
+var schemaGlBindProgramPipeline = &binary.Entity{
 	TypeID:  binaryIDGlBindProgramPipeline,
 	Package: "gles",
 	Name:    "GlBindProgramPipeline",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
@@ -7973,15 +7973,15 @@ func (*binaryClassGlBindProgramPipelineEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBindProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindProgramPipelineEXT(d, obj.(*GlBindProgramPipelineEXT))
 }
-func (*binaryClassGlBindProgramPipelineEXT) Schema() *schema.Entity {
+func (*binaryClassGlBindProgramPipelineEXT) Schema() *binary.Entity {
 	return schemaGlBindProgramPipelineEXT
 }
 
-var schemaGlBindProgramPipelineEXT = &schema.Entity{
+var schemaGlBindProgramPipelineEXT = &binary.Entity{
 	TypeID:  binaryIDGlBindProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlBindProgramPipelineEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
@@ -8015,13 +8015,13 @@ func (*binaryClassGlBindRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindRenderbuffer(d, obj.(*GlBindRenderbuffer))
 }
-func (*binaryClassGlBindRenderbuffer) Schema() *schema.Entity { return schemaGlBindRenderbuffer }
+func (*binaryClassGlBindRenderbuffer) Schema() *binary.Entity { return schemaGlBindRenderbuffer }
 
-var schemaGlBindRenderbuffer = &schema.Entity{
+var schemaGlBindRenderbuffer = &binary.Entity{
 	TypeID:  binaryIDGlBindRenderbuffer,
 	Package: "gles",
 	Name:    "GlBindRenderbuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
@@ -8056,13 +8056,13 @@ func (*binaryClassGlBindSampler) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindSampler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindSampler(d, obj.(*GlBindSampler))
 }
-func (*binaryClassGlBindSampler) Schema() *schema.Entity { return schemaGlBindSampler }
+func (*binaryClassGlBindSampler) Schema() *binary.Entity { return schemaGlBindSampler }
 
-var schemaGlBindSampler = &schema.Entity{
+var schemaGlBindSampler = &binary.Entity{
 	TypeID:  binaryIDGlBindSampler,
 	Package: "gles",
 	Name:    "GlBindSampler",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Unit", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
@@ -8097,13 +8097,13 @@ func (*binaryClassGlBindTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindTexture(d, obj.(*GlBindTexture))
 }
-func (*binaryClassGlBindTexture) Schema() *schema.Entity { return schemaGlBindTexture }
+func (*binaryClassGlBindTexture) Schema() *binary.Entity { return schemaGlBindTexture }
 
-var schemaGlBindTexture = &schema.Entity{
+var schemaGlBindTexture = &binary.Entity{
 	TypeID:  binaryIDGlBindTexture,
 	Package: "gles",
 	Name:    "GlBindTexture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
@@ -8138,15 +8138,15 @@ func (*binaryClassGlBindTransformFeedback) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBindTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindTransformFeedback(d, obj.(*GlBindTransformFeedback))
 }
-func (*binaryClassGlBindTransformFeedback) Schema() *schema.Entity {
+func (*binaryClassGlBindTransformFeedback) Schema() *binary.Entity {
 	return schemaGlBindTransformFeedback
 }
 
-var schemaGlBindTransformFeedback = &schema.Entity{
+var schemaGlBindTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlBindTransformFeedback,
 	Package: "gles",
 	Name:    "GlBindTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "TransformFeedbackId", Method: schema.Uint32}},
@@ -8179,13 +8179,13 @@ func (*binaryClassGlBindVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexArray(d, obj.(*GlBindVertexArray))
 }
-func (*binaryClassGlBindVertexArray) Schema() *schema.Entity { return schemaGlBindVertexArray }
+func (*binaryClassGlBindVertexArray) Schema() *binary.Entity { return schemaGlBindVertexArray }
 
-var schemaGlBindVertexArray = &schema.Entity{
+var schemaGlBindVertexArray = &binary.Entity{
 	TypeID:  binaryIDGlBindVertexArray,
 	Package: "gles",
 	Name:    "GlBindVertexArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
@@ -8217,13 +8217,13 @@ func (*binaryClassGlBindVertexArrayOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexArrayOES(d, obj.(*GlBindVertexArrayOES))
 }
-func (*binaryClassGlBindVertexArrayOES) Schema() *schema.Entity { return schemaGlBindVertexArrayOES }
+func (*binaryClassGlBindVertexArrayOES) Schema() *binary.Entity { return schemaGlBindVertexArrayOES }
 
-var schemaGlBindVertexArrayOES = &schema.Entity{
+var schemaGlBindVertexArrayOES = &binary.Entity{
 	TypeID:  binaryIDGlBindVertexArrayOES,
 	Package: "gles",
 	Name:    "GlBindVertexArrayOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
@@ -8261,13 +8261,13 @@ func (*binaryClassGlBindVertexBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBindVertexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBindVertexBuffer(d, obj.(*GlBindVertexBuffer))
 }
-func (*binaryClassGlBindVertexBuffer) Schema() *schema.Entity { return schemaGlBindVertexBuffer }
+func (*binaryClassGlBindVertexBuffer) Schema() *binary.Entity { return schemaGlBindVertexBuffer }
 
-var schemaGlBindVertexBuffer = &schema.Entity{
+var schemaGlBindVertexBuffer = &binary.Entity{
 	TypeID:  binaryIDGlBindVertexBuffer,
 	Package: "gles",
 	Name:    "GlBindVertexBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
@@ -8300,13 +8300,13 @@ func (*binaryClassGlBlendBarrier) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrier) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrier(d, obj.(*GlBlendBarrier))
 }
-func (*binaryClassGlBlendBarrier) Schema() *schema.Entity { return schemaGlBlendBarrier }
+func (*binaryClassGlBlendBarrier) Schema() *binary.Entity { return schemaGlBlendBarrier }
 
-var schemaGlBlendBarrier = &schema.Entity{
+var schemaGlBlendBarrier = &binary.Entity{
 	TypeID:  binaryIDGlBlendBarrier,
 	Package: "gles",
 	Name:    "GlBlendBarrier",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -8335,13 +8335,13 @@ func (*binaryClassGlBlendBarrierKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrierKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrierKHR(d, obj.(*GlBlendBarrierKHR))
 }
-func (*binaryClassGlBlendBarrierKHR) Schema() *schema.Entity { return schemaGlBlendBarrierKHR }
+func (*binaryClassGlBlendBarrierKHR) Schema() *binary.Entity { return schemaGlBlendBarrierKHR }
 
-var schemaGlBlendBarrierKHR = &schema.Entity{
+var schemaGlBlendBarrierKHR = &binary.Entity{
 	TypeID:  binaryIDGlBlendBarrierKHR,
 	Package: "gles",
 	Name:    "GlBlendBarrierKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -8370,13 +8370,13 @@ func (*binaryClassGlBlendBarrierNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendBarrierNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendBarrierNV(d, obj.(*GlBlendBarrierNV))
 }
-func (*binaryClassGlBlendBarrierNV) Schema() *schema.Entity { return schemaGlBlendBarrierNV }
+func (*binaryClassGlBlendBarrierNV) Schema() *binary.Entity { return schemaGlBlendBarrierNV }
 
-var schemaGlBlendBarrierNV = &schema.Entity{
+var schemaGlBlendBarrierNV = &binary.Entity{
 	TypeID:  binaryIDGlBlendBarrierNV,
 	Package: "gles",
 	Name:    "GlBlendBarrierNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -8413,13 +8413,13 @@ func (*binaryClassGlBlendColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendColor(d, obj.(*GlBlendColor))
 }
-func (*binaryClassGlBlendColor) Schema() *schema.Entity { return schemaGlBlendColor }
+func (*binaryClassGlBlendColor) Schema() *binary.Entity { return schemaGlBlendColor }
 
-var schemaGlBlendColor = &schema.Entity{
+var schemaGlBlendColor = &binary.Entity{
 	TypeID:  binaryIDGlBlendColor,
 	Package: "gles",
 	Name:    "GlBlendColor",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -8454,13 +8454,13 @@ func (*binaryClassGlBlendEquation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquation(d, obj.(*GlBlendEquation))
 }
-func (*binaryClassGlBlendEquation) Schema() *schema.Entity { return schemaGlBlendEquation }
+func (*binaryClassGlBlendEquation) Schema() *binary.Entity { return schemaGlBlendEquation }
 
-var schemaGlBlendEquation = &schema.Entity{
+var schemaGlBlendEquation = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquation,
 	Package: "gles",
 	Name:    "GlBlendEquation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Equation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -8494,15 +8494,15 @@ func (*binaryClassGlBlendEquationSeparate) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendEquationSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparate(d, obj.(*GlBlendEquationSeparate))
 }
-func (*binaryClassGlBlendEquationSeparate) Schema() *schema.Entity {
+func (*binaryClassGlBlendEquationSeparate) Schema() *binary.Entity {
 	return schemaGlBlendEquationSeparate
 }
 
-var schemaGlBlendEquationSeparate = &schema.Entity{
+var schemaGlBlendEquationSeparate = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparate,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparate",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Rgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8539,15 +8539,15 @@ func (*binaryClassGlBlendEquationSeparatei) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlBlendEquationSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparatei(d, obj.(*GlBlendEquationSeparatei))
 }
-func (*binaryClassGlBlendEquationSeparatei) Schema() *schema.Entity {
+func (*binaryClassGlBlendEquationSeparatei) Schema() *binary.Entity {
 	return schemaGlBlendEquationSeparatei
 }
 
-var schemaGlBlendEquationSeparatei = &schema.Entity{
+var schemaGlBlendEquationSeparatei = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparatei,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparatei",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8589,15 +8589,15 @@ func (*binaryClassGlBlendEquationSeparateiEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlBlendEquationSeparateiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparateiEXT(d, obj.(*GlBlendEquationSeparateiEXT))
 }
-func (*binaryClassGlBlendEquationSeparateiEXT) Schema() *schema.Entity {
+func (*binaryClassGlBlendEquationSeparateiEXT) Schema() *binary.Entity {
 	return schemaGlBlendEquationSeparateiEXT
 }
 
-var schemaGlBlendEquationSeparateiEXT = &schema.Entity{
+var schemaGlBlendEquationSeparateiEXT = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparateiEXT,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8639,15 +8639,15 @@ func (*binaryClassGlBlendEquationSeparateiOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlBlendEquationSeparateiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationSeparateiOES(d, obj.(*GlBlendEquationSeparateiOES))
 }
-func (*binaryClassGlBlendEquationSeparateiOES) Schema() *schema.Entity {
+func (*binaryClassGlBlendEquationSeparateiOES) Schema() *binary.Entity {
 	return schemaGlBlendEquationSeparateiOES
 }
 
-var schemaGlBlendEquationSeparateiOES = &schema.Entity{
+var schemaGlBlendEquationSeparateiOES = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationSeparateiOES,
 	Package: "gles",
 	Name:    "GlBlendEquationSeparateiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8683,13 +8683,13 @@ func (*binaryClassGlBlendEquationi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationi(d, obj.(*GlBlendEquationi))
 }
-func (*binaryClassGlBlendEquationi) Schema() *schema.Entity { return schemaGlBlendEquationi }
+func (*binaryClassGlBlendEquationi) Schema() *binary.Entity { return schemaGlBlendEquationi }
 
-var schemaGlBlendEquationi = &schema.Entity{
+var schemaGlBlendEquationi = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationi,
 	Package: "gles",
 	Name:    "GlBlendEquationi",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8724,13 +8724,13 @@ func (*binaryClassGlBlendEquationiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationiEXT(d, obj.(*GlBlendEquationiEXT))
 }
-func (*binaryClassGlBlendEquationiEXT) Schema() *schema.Entity { return schemaGlBlendEquationiEXT }
+func (*binaryClassGlBlendEquationiEXT) Schema() *binary.Entity { return schemaGlBlendEquationiEXT }
 
-var schemaGlBlendEquationiEXT = &schema.Entity{
+var schemaGlBlendEquationiEXT = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationiEXT,
 	Package: "gles",
 	Name:    "GlBlendEquationiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8765,13 +8765,13 @@ func (*binaryClassGlBlendEquationiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendEquationiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendEquationiOES(d, obj.(*GlBlendEquationiOES))
 }
-func (*binaryClassGlBlendEquationiOES) Schema() *schema.Entity { return schemaGlBlendEquationiOES }
+func (*binaryClassGlBlendEquationiOES) Schema() *binary.Entity { return schemaGlBlendEquationiOES }
 
-var schemaGlBlendEquationiOES = &schema.Entity{
+var schemaGlBlendEquationiOES = &binary.Entity{
 	TypeID:  binaryIDGlBlendEquationiOES,
 	Package: "gles",
 	Name:    "GlBlendEquationiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8806,13 +8806,13 @@ func (*binaryClassGlBlendFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunc(d, obj.(*GlBlendFunc))
 }
-func (*binaryClassGlBlendFunc) Schema() *schema.Entity { return schemaGlBlendFunc }
+func (*binaryClassGlBlendFunc) Schema() *binary.Entity { return schemaGlBlendFunc }
 
-var schemaGlBlendFunc = &schema.Entity{
+var schemaGlBlendFunc = &binary.Entity{
 	TypeID:  binaryIDGlBlendFunc,
 	Package: "gles",
 	Name:    "GlBlendFunc",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstFactor", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8851,13 +8851,13 @@ func (*binaryClassGlBlendFuncSeparate) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFuncSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparate(d, obj.(*GlBlendFuncSeparate))
 }
-func (*binaryClassGlBlendFuncSeparate) Schema() *schema.Entity { return schemaGlBlendFuncSeparate }
+func (*binaryClassGlBlendFuncSeparate) Schema() *binary.Entity { return schemaGlBlendFuncSeparate }
 
-var schemaGlBlendFuncSeparate = &schema.Entity{
+var schemaGlBlendFuncSeparate = &binary.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparate,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparate",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8900,13 +8900,13 @@ func (*binaryClassGlBlendFuncSeparatei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFuncSeparatei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparatei(d, obj.(*GlBlendFuncSeparatei))
 }
-func (*binaryClassGlBlendFuncSeparatei) Schema() *schema.Entity { return schemaGlBlendFuncSeparatei }
+func (*binaryClassGlBlendFuncSeparatei) Schema() *binary.Entity { return schemaGlBlendFuncSeparatei }
 
-var schemaGlBlendFuncSeparatei = &schema.Entity{
+var schemaGlBlendFuncSeparatei = &binary.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparatei,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparatei",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -8950,15 +8950,15 @@ func (*binaryClassGlBlendFuncSeparateiEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendFuncSeparateiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparateiEXT(d, obj.(*GlBlendFuncSeparateiEXT))
 }
-func (*binaryClassGlBlendFuncSeparateiEXT) Schema() *schema.Entity {
+func (*binaryClassGlBlendFuncSeparateiEXT) Schema() *binary.Entity {
 	return schemaGlBlendFuncSeparateiEXT
 }
 
-var schemaGlBlendFuncSeparateiEXT = &schema.Entity{
+var schemaGlBlendFuncSeparateiEXT = &binary.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparateiEXT,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9002,15 +9002,15 @@ func (*binaryClassGlBlendFuncSeparateiOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlBlendFuncSeparateiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFuncSeparateiOES(d, obj.(*GlBlendFuncSeparateiOES))
 }
-func (*binaryClassGlBlendFuncSeparateiOES) Schema() *schema.Entity {
+func (*binaryClassGlBlendFuncSeparateiOES) Schema() *binary.Entity {
 	return schemaGlBlendFuncSeparateiOES
 }
 
-var schemaGlBlendFuncSeparateiOES = &schema.Entity{
+var schemaGlBlendFuncSeparateiOES = &binary.Entity{
 	TypeID:  binaryIDGlBlendFuncSeparateiOES,
 	Package: "gles",
 	Name:    "GlBlendFuncSeparateiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9050,13 +9050,13 @@ func (*binaryClassGlBlendFunci) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunci) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunci(d, obj.(*GlBlendFunci))
 }
-func (*binaryClassGlBlendFunci) Schema() *schema.Entity { return schemaGlBlendFunci }
+func (*binaryClassGlBlendFunci) Schema() *binary.Entity { return schemaGlBlendFunci }
 
-var schemaGlBlendFunci = &schema.Entity{
+var schemaGlBlendFunci = &binary.Entity{
 	TypeID:  binaryIDGlBlendFunci,
 	Package: "gles",
 	Name:    "GlBlendFunci",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9094,13 +9094,13 @@ func (*binaryClassGlBlendFunciEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunciEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunciEXT(d, obj.(*GlBlendFunciEXT))
 }
-func (*binaryClassGlBlendFunciEXT) Schema() *schema.Entity { return schemaGlBlendFunciEXT }
+func (*binaryClassGlBlendFunciEXT) Schema() *binary.Entity { return schemaGlBlendFunciEXT }
 
-var schemaGlBlendFunciEXT = &schema.Entity{
+var schemaGlBlendFunciEXT = &binary.Entity{
 	TypeID:  binaryIDGlBlendFunciEXT,
 	Package: "gles",
 	Name:    "GlBlendFunciEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9138,13 +9138,13 @@ func (*binaryClassGlBlendFunciOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendFunciOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendFunciOES(d, obj.(*GlBlendFunciOES))
 }
-func (*binaryClassGlBlendFunciOES) Schema() *schema.Entity { return schemaGlBlendFunciOES }
+func (*binaryClassGlBlendFunciOES) Schema() *binary.Entity { return schemaGlBlendFunciOES }
 
-var schemaGlBlendFunciOES = &schema.Entity{
+var schemaGlBlendFunciOES = &binary.Entity{
 	TypeID:  binaryIDGlBlendFunciOES,
 	Package: "gles",
 	Name:    "GlBlendFunciOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buf", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9180,13 +9180,13 @@ func (*binaryClassGlBlendParameteriNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlendParameteriNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlendParameteriNV(d, obj.(*GlBlendParameteriNV))
 }
-func (*binaryClassGlBlendParameteriNV) Schema() *schema.Entity { return schemaGlBlendParameteriNV }
+func (*binaryClassGlBlendParameteriNV) Schema() *binary.Entity { return schemaGlBlendParameteriNV }
 
-var schemaGlBlendParameteriNV = &schema.Entity{
+var schemaGlBlendParameteriNV = &binary.Entity{
 	TypeID:  binaryIDGlBlendParameteriNV,
 	Package: "gles",
 	Name:    "GlBlendParameteriNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9237,13 +9237,13 @@ func (*binaryClassGlBlitFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlitFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebuffer(d, obj.(*GlBlitFramebuffer))
 }
-func (*binaryClassGlBlitFramebuffer) Schema() *schema.Entity { return schemaGlBlitFramebuffer }
+func (*binaryClassGlBlitFramebuffer) Schema() *binary.Entity { return schemaGlBlitFramebuffer }
 
-var schemaGlBlitFramebuffer = &schema.Entity{
+var schemaGlBlitFramebuffer = &binary.Entity{
 	TypeID:  binaryIDGlBlitFramebuffer,
 	Package: "gles",
 	Name:    "GlBlitFramebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9302,13 +9302,13 @@ func (*binaryClassGlBlitFramebufferANGLE) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlBlitFramebufferANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebufferANGLE(d, obj.(*GlBlitFramebufferANGLE))
 }
-func (*binaryClassGlBlitFramebufferANGLE) Schema() *schema.Entity { return schemaGlBlitFramebufferANGLE }
+func (*binaryClassGlBlitFramebufferANGLE) Schema() *binary.Entity { return schemaGlBlitFramebufferANGLE }
 
-var schemaGlBlitFramebufferANGLE = &schema.Entity{
+var schemaGlBlitFramebufferANGLE = &binary.Entity{
 	TypeID:  binaryIDGlBlitFramebufferANGLE,
 	Package: "gles",
 	Name:    "GlBlitFramebufferANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9367,13 +9367,13 @@ func (*binaryClassGlBlitFramebufferNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBlitFramebufferNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBlitFramebufferNV(d, obj.(*GlBlitFramebufferNV))
 }
-func (*binaryClassGlBlitFramebufferNV) Schema() *schema.Entity { return schemaGlBlitFramebufferNV }
+func (*binaryClassGlBlitFramebufferNV) Schema() *binary.Entity { return schemaGlBlitFramebufferNV }
 
-var schemaGlBlitFramebufferNV = &schema.Entity{
+var schemaGlBlitFramebufferNV = &binary.Entity{
 	TypeID:  binaryIDGlBlitFramebufferNV,
 	Package: "gles",
 	Name:    "GlBlitFramebufferNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcX0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "SrcY0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9420,13 +9420,13 @@ func (*binaryClassGlBufferData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferData(d, obj.(*GlBufferData))
 }
-func (*binaryClassGlBufferData) Schema() *schema.Entity { return schemaGlBufferData }
+func (*binaryClassGlBufferData) Schema() *binary.Entity { return schemaGlBufferData }
 
-var schemaGlBufferData = &schema.Entity{
+var schemaGlBufferData = &binary.Entity{
 	TypeID:  binaryIDGlBufferData,
 	Package: "gles",
 	Name:    "GlBufferData",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
@@ -9459,13 +9459,13 @@ func (*binaryClassVoidᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖ(d, obj.(*Voidᶜᵖ))
 }
-func (*binaryClassVoidᶜᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖ }
+func (*binaryClassVoidᶜᵖ) Schema() *binary.Entity { return schemaVoidᶜᵖ }
 
-var schemaVoidᶜᵖ = &schema.Entity{
+var schemaVoidᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDVoidᶜᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -9502,13 +9502,13 @@ func (*binaryClassGlBufferStorageEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferStorageEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferStorageEXT(d, obj.(*GlBufferStorageEXT))
 }
-func (*binaryClassGlBufferStorageEXT) Schema() *schema.Entity { return schemaGlBufferStorageEXT }
+func (*binaryClassGlBufferStorageEXT) Schema() *binary.Entity { return schemaGlBufferStorageEXT }
 
-var schemaGlBufferStorageEXT = &schema.Entity{
+var schemaGlBufferStorageEXT = &binary.Entity{
 	TypeID:  binaryIDGlBufferStorageEXT,
 	Package: "gles",
 	Name:    "GlBufferStorageEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizeiptr", Method: schema.Int32}},
@@ -9549,13 +9549,13 @@ func (*binaryClassGlBufferSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlBufferSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlBufferSubData(d, obj.(*GlBufferSubData))
 }
-func (*binaryClassGlBufferSubData) Schema() *schema.Entity { return schemaGlBufferSubData }
+func (*binaryClassGlBufferSubData) Schema() *binary.Entity { return schemaGlBufferSubData }
 
-var schemaGlBufferSubData = &schema.Entity{
+var schemaGlBufferSubData = &binary.Entity{
 	TypeID:  binaryIDGlBufferSubData,
 	Package: "gles",
 	Name:    "GlBufferSubData",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -9592,15 +9592,15 @@ func (*binaryClassGlCheckFramebufferStatus) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlCheckFramebufferStatus) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCheckFramebufferStatus(d, obj.(*GlCheckFramebufferStatus))
 }
-func (*binaryClassGlCheckFramebufferStatus) Schema() *schema.Entity {
+func (*binaryClassGlCheckFramebufferStatus) Schema() *binary.Entity {
 	return schemaGlCheckFramebufferStatus
 }
 
-var schemaGlCheckFramebufferStatus = &schema.Entity{
+var schemaGlCheckFramebufferStatus = &binary.Entity{
 	TypeID:  binaryIDGlCheckFramebufferStatus,
 	Package: "gles",
 	Name:    "GlCheckFramebufferStatus",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -9633,13 +9633,13 @@ func (*binaryClassGlClear) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClear) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClear(d, obj.(*GlClear))
 }
-func (*binaryClassGlClear) Schema() *schema.Entity { return schemaGlClear }
+func (*binaryClassGlClear) Schema() *binary.Entity { return schemaGlClear }
 
-var schemaGlClear = &schema.Entity{
+var schemaGlClear = &binary.Entity{
 	TypeID:  binaryIDGlClear,
 	Package: "gles",
 	Name:    "GlClear",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
@@ -9677,13 +9677,13 @@ func (*binaryClassGlClearBufferfi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferfi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferfi(d, obj.(*GlClearBufferfi))
 }
-func (*binaryClassGlClearBufferfi) Schema() *schema.Entity { return schemaGlClearBufferfi }
+func (*binaryClassGlClearBufferfi) Schema() *binary.Entity { return schemaGlClearBufferfi }
 
-var schemaGlClearBufferfi = &schema.Entity{
+var schemaGlClearBufferfi = &binary.Entity{
 	TypeID:  binaryIDGlClearBufferfi,
 	Package: "gles",
 	Name:    "GlClearBufferfi",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9722,13 +9722,13 @@ func (*binaryClassGlClearBufferfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferfv(d, obj.(*GlClearBufferfv))
 }
-func (*binaryClassGlClearBufferfv) Schema() *schema.Entity { return schemaGlClearBufferfv }
+func (*binaryClassGlClearBufferfv) Schema() *binary.Entity { return schemaGlClearBufferfv }
 
-var schemaGlClearBufferfv = &schema.Entity{
+var schemaGlClearBufferfv = &binary.Entity{
 	TypeID:  binaryIDGlClearBufferfv,
 	Package: "gles",
 	Name:    "GlClearBufferfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9766,13 +9766,13 @@ func (*binaryClassGlClearBufferiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferiv(d, obj.(*GlClearBufferiv))
 }
-func (*binaryClassGlClearBufferiv) Schema() *schema.Entity { return schemaGlClearBufferiv }
+func (*binaryClassGlClearBufferiv) Schema() *binary.Entity { return schemaGlClearBufferiv }
 
-var schemaGlClearBufferiv = &schema.Entity{
+var schemaGlClearBufferiv = &binary.Entity{
 	TypeID:  binaryIDGlClearBufferiv,
 	Package: "gles",
 	Name:    "GlClearBufferiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9810,13 +9810,13 @@ func (*binaryClassGlClearBufferuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearBufferuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearBufferuiv(d, obj.(*GlClearBufferuiv))
 }
-func (*binaryClassGlClearBufferuiv) Schema() *schema.Entity { return schemaGlClearBufferuiv }
+func (*binaryClassGlClearBufferuiv) Schema() *binary.Entity { return schemaGlClearBufferuiv }
 
-var schemaGlClearBufferuiv = &schema.Entity{
+var schemaGlClearBufferuiv = &binary.Entity{
 	TypeID:  binaryIDGlClearBufferuiv,
 	Package: "gles",
 	Name:    "GlClearBufferuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Drawbuffer", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -9856,13 +9856,13 @@ func (*binaryClassGlClearColor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearColor(d, obj.(*GlClearColor))
 }
-func (*binaryClassGlClearColor) Schema() *schema.Entity { return schemaGlClearColor }
+func (*binaryClassGlClearColor) Schema() *binary.Entity { return schemaGlClearColor }
 
-var schemaGlClearColor = &schema.Entity{
+var schemaGlClearColor = &binary.Entity{
 	TypeID:  binaryIDGlClearColor,
 	Package: "gles",
 	Name:    "GlClearColor",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "G", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -9897,13 +9897,13 @@ func (*binaryClassGlClearDepthf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearDepthf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearDepthf(d, obj.(*GlClearDepthf))
 }
-func (*binaryClassGlClearDepthf) Schema() *schema.Entity { return schemaGlClearDepthf }
+func (*binaryClassGlClearDepthf) Schema() *binary.Entity { return schemaGlClearDepthf }
 
-var schemaGlClearDepthf = &schema.Entity{
+var schemaGlClearDepthf = &binary.Entity{
 	TypeID:  binaryIDGlClearDepthf,
 	Package: "gles",
 	Name:    "GlClearDepthf",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Depth", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -9935,13 +9935,13 @@ func (*binaryClassGlClearStencil) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClearStencil) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClearStencil(d, obj.(*GlClearStencil))
 }
-func (*binaryClassGlClearStencil) Schema() *schema.Entity { return schemaGlClearStencil }
+func (*binaryClassGlClearStencil) Schema() *binary.Entity { return schemaGlClearStencil }
 
-var schemaGlClearStencil = &schema.Entity{
+var schemaGlClearStencil = &binary.Entity{
 	TypeID:  binaryIDGlClearStencil,
 	Package: "gles",
 	Name:    "GlClearStencil",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Stencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -9979,13 +9979,13 @@ func (*binaryClassGlClientWaitSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlClientWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClientWaitSync(d, obj.(*GlClientWaitSync))
 }
-func (*binaryClassGlClientWaitSync) Schema() *schema.Entity { return schemaGlClientWaitSync }
+func (*binaryClassGlClientWaitSync) Schema() *binary.Entity { return schemaGlClientWaitSync }
 
-var schemaGlClientWaitSync = &schema.Entity{
+var schemaGlClientWaitSync = &binary.Entity{
 	TypeID:  binaryIDGlClientWaitSync,
 	Package: "gles",
 	Name:    "GlClientWaitSync",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -10026,13 +10026,13 @@ func (*binaryClassGlClientWaitSyncAPPLE) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlClientWaitSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlClientWaitSyncAPPLE(d, obj.(*GlClientWaitSyncAPPLE))
 }
-func (*binaryClassGlClientWaitSyncAPPLE) Schema() *schema.Entity { return schemaGlClientWaitSyncAPPLE }
+func (*binaryClassGlClientWaitSyncAPPLE) Schema() *binary.Entity { return schemaGlClientWaitSyncAPPLE }
 
-var schemaGlClientWaitSyncAPPLE = &schema.Entity{
+var schemaGlClientWaitSyncAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlClientWaitSyncAPPLE,
 	Package: "gles",
 	Name:    "GlClientWaitSyncAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -10073,13 +10073,13 @@ func (*binaryClassGlColorMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMask(d, obj.(*GlColorMask))
 }
-func (*binaryClassGlColorMask) Schema() *schema.Entity { return schemaGlColorMask }
+func (*binaryClassGlColorMask) Schema() *binary.Entity { return schemaGlColorMask }
 
-var schemaGlColorMask = &schema.Entity{
+var schemaGlColorMask = &binary.Entity{
 	TypeID:  binaryIDGlColorMask,
 	Package: "gles",
 	Name:    "GlColorMask",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Red", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "Green", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10122,13 +10122,13 @@ func (*binaryClassGlColorMaski) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaski) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaski(d, obj.(*GlColorMaski))
 }
-func (*binaryClassGlColorMaski) Schema() *schema.Entity { return schemaGlColorMaski }
+func (*binaryClassGlColorMaski) Schema() *binary.Entity { return schemaGlColorMaski }
 
-var schemaGlColorMaski = &schema.Entity{
+var schemaGlColorMaski = &binary.Entity{
 	TypeID:  binaryIDGlColorMaski,
 	Package: "gles",
 	Name:    "GlColorMaski",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10172,13 +10172,13 @@ func (*binaryClassGlColorMaskiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaskiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaskiEXT(d, obj.(*GlColorMaskiEXT))
 }
-func (*binaryClassGlColorMaskiEXT) Schema() *schema.Entity { return schemaGlColorMaskiEXT }
+func (*binaryClassGlColorMaskiEXT) Schema() *binary.Entity { return schemaGlColorMaskiEXT }
 
-var schemaGlColorMaskiEXT = &schema.Entity{
+var schemaGlColorMaskiEXT = &binary.Entity{
 	TypeID:  binaryIDGlColorMaskiEXT,
 	Package: "gles",
 	Name:    "GlColorMaskiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10222,13 +10222,13 @@ func (*binaryClassGlColorMaskiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlColorMaskiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlColorMaskiOES(d, obj.(*GlColorMaskiOES))
 }
-func (*binaryClassGlColorMaskiOES) Schema() *schema.Entity { return schemaGlColorMaskiOES }
+func (*binaryClassGlColorMaskiOES) Schema() *binary.Entity { return schemaGlColorMaskiOES }
 
-var schemaGlColorMaskiOES = &schema.Entity{
+var schemaGlColorMaskiOES = &binary.Entity{
 	TypeID:  binaryIDGlColorMaskiOES,
 	Package: "gles",
 	Name:    "GlColorMaskiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "DrawBufferIndex", Method: schema.Uint32}},
 		{Declared: "R", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -10264,13 +10264,13 @@ func (*binaryClassGlCompileShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCompileShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompileShader(d, obj.(*GlCompileShader))
 }
-func (*binaryClassGlCompileShader) Schema() *schema.Entity { return schemaGlCompileShader }
+func (*binaryClassGlCompileShader) Schema() *binary.Entity { return schemaGlCompileShader }
 
-var schemaGlCompileShader = &schema.Entity{
+var schemaGlCompileShader = &binary.Entity{
 	TypeID:  binaryIDGlCompileShader,
 	Package: "gles",
 	Name:    "GlCompileShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
@@ -10300,13 +10300,13 @@ func (*binaryClassTexturePointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexturePointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexturePointer(d, obj.(*TexturePointer))
 }
-func (*binaryClassTexturePointer) Schema() *schema.Entity { return schemaTexturePointer }
+func (*binaryClassTexturePointer) Schema() *binary.Entity { return schemaTexturePointer }
 
-var schemaTexturePointer = &schema.Entity{
+var schemaTexturePointer = &binary.Entity{
 	TypeID:  binaryIDTexturePointer,
 	Package: "gles",
 	Name:    "TexturePointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -10351,13 +10351,13 @@ func (*binaryClassGlCompressedTexImage2D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCompressedTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage2D(d, obj.(*GlCompressedTexImage2D))
 }
-func (*binaryClassGlCompressedTexImage2D) Schema() *schema.Entity { return schemaGlCompressedTexImage2D }
+func (*binaryClassGlCompressedTexImage2D) Schema() *binary.Entity { return schemaGlCompressedTexImage2D }
 
-var schemaGlCompressedTexImage2D = &schema.Entity{
+var schemaGlCompressedTexImage2D = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10412,13 +10412,13 @@ func (*binaryClassGlCompressedTexImage3D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCompressedTexImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage3D(d, obj.(*GlCompressedTexImage3D))
 }
-func (*binaryClassGlCompressedTexImage3D) Schema() *schema.Entity { return schemaGlCompressedTexImage3D }
+func (*binaryClassGlCompressedTexImage3D) Schema() *binary.Entity { return schemaGlCompressedTexImage3D }
 
-var schemaGlCompressedTexImage3D = &schema.Entity{
+var schemaGlCompressedTexImage3D = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexImage3D,
 	Package: "gles",
 	Name:    "GlCompressedTexImage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10474,15 +10474,15 @@ func (*binaryClassGlCompressedTexImage3DOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexImage3DOES(d, obj.(*GlCompressedTexImage3DOES))
 }
-func (*binaryClassGlCompressedTexImage3DOES) Schema() *schema.Entity {
+func (*binaryClassGlCompressedTexImage3DOES) Schema() *binary.Entity {
 	return schemaGlCompressedTexImage3DOES
 }
 
-var schemaGlCompressedTexImage3DOES = &schema.Entity{
+var schemaGlCompressedTexImage3DOES = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexImage3DOES,
 	Package: "gles",
 	Name:    "GlCompressedTexImage3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10538,15 +10538,15 @@ func (*binaryClassGlCompressedTexSubImage2D) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage2D(d, obj.(*GlCompressedTexSubImage2D))
 }
-func (*binaryClassGlCompressedTexSubImage2D) Schema() *schema.Entity {
+func (*binaryClassGlCompressedTexSubImage2D) Schema() *binary.Entity {
 	return schemaGlCompressedTexSubImage2D
 }
 
-var schemaGlCompressedTexSubImage2D = &schema.Entity{
+var schemaGlCompressedTexSubImage2D = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10606,15 +10606,15 @@ func (*binaryClassGlCompressedTexSubImage3D) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCompressedTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage3D(d, obj.(*GlCompressedTexSubImage3D))
 }
-func (*binaryClassGlCompressedTexSubImage3D) Schema() *schema.Entity {
+func (*binaryClassGlCompressedTexSubImage3D) Schema() *binary.Entity {
 	return schemaGlCompressedTexSubImage3D
 }
 
-var schemaGlCompressedTexSubImage3D = &schema.Entity{
+var schemaGlCompressedTexSubImage3D = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage3D,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10680,15 +10680,15 @@ func (*binaryClassGlCompressedTexSubImage3DOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlCompressedTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCompressedTexSubImage3DOES(d, obj.(*GlCompressedTexSubImage3DOES))
 }
-func (*binaryClassGlCompressedTexSubImage3DOES) Schema() *schema.Entity {
+func (*binaryClassGlCompressedTexSubImage3DOES) Schema() *binary.Entity {
 	return schemaGlCompressedTexSubImage3DOES
 }
 
-var schemaGlCompressedTexSubImage3DOES = &schema.Entity{
+var schemaGlCompressedTexSubImage3DOES = &binary.Entity{
 	TypeID:  binaryIDGlCompressedTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlCompressedTexSubImage3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -10738,13 +10738,13 @@ func (*binaryClassGlCopyBufferSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyBufferSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyBufferSubData(d, obj.(*GlCopyBufferSubData))
 }
-func (*binaryClassGlCopyBufferSubData) Schema() *schema.Entity { return schemaGlCopyBufferSubData }
+func (*binaryClassGlCopyBufferSubData) Schema() *binary.Entity { return schemaGlCopyBufferSubData }
 
-var schemaGlCopyBufferSubData = &schema.Entity{
+var schemaGlCopyBufferSubData = &binary.Entity{
 	TypeID:  binaryIDGlCopyBufferSubData,
 	Package: "gles",
 	Name:    "GlCopyBufferSubData",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ReadTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "WriteTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10788,13 +10788,13 @@ func (*binaryClassGlCopyBufferSubDataNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyBufferSubDataNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyBufferSubDataNV(d, obj.(*GlCopyBufferSubDataNV))
 }
-func (*binaryClassGlCopyBufferSubDataNV) Schema() *schema.Entity { return schemaGlCopyBufferSubDataNV }
+func (*binaryClassGlCopyBufferSubDataNV) Schema() *binary.Entity { return schemaGlCopyBufferSubDataNV }
 
-var schemaGlCopyBufferSubDataNV = &schema.Entity{
+var schemaGlCopyBufferSubDataNV = &binary.Entity{
 	TypeID:  binaryIDGlCopyBufferSubDataNV,
 	Package: "gles",
 	Name:    "GlCopyBufferSubDataNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ReadTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "WriteTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10858,13 +10858,13 @@ func (*binaryClassGlCopyImageSubData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyImageSubData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubData(d, obj.(*GlCopyImageSubData))
 }
-func (*binaryClassGlCopyImageSubData) Schema() *schema.Entity { return schemaGlCopyImageSubData }
+func (*binaryClassGlCopyImageSubData) Schema() *binary.Entity { return schemaGlCopyImageSubData }
 
-var schemaGlCopyImageSubData = &schema.Entity{
+var schemaGlCopyImageSubData = &binary.Entity{
 	TypeID:  binaryIDGlCopyImageSubData,
 	Package: "gles",
 	Name:    "GlCopyImageSubData",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -10938,13 +10938,13 @@ func (*binaryClassGlCopyImageSubDataEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyImageSubDataEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubDataEXT(d, obj.(*GlCopyImageSubDataEXT))
 }
-func (*binaryClassGlCopyImageSubDataEXT) Schema() *schema.Entity { return schemaGlCopyImageSubDataEXT }
+func (*binaryClassGlCopyImageSubDataEXT) Schema() *binary.Entity { return schemaGlCopyImageSubDataEXT }
 
-var schemaGlCopyImageSubDataEXT = &schema.Entity{
+var schemaGlCopyImageSubDataEXT = &binary.Entity{
 	TypeID:  binaryIDGlCopyImageSubDataEXT,
 	Package: "gles",
 	Name:    "GlCopyImageSubDataEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11018,13 +11018,13 @@ func (*binaryClassGlCopyImageSubDataOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCopyImageSubDataOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyImageSubDataOES(d, obj.(*GlCopyImageSubDataOES))
 }
-func (*binaryClassGlCopyImageSubDataOES) Schema() *schema.Entity { return schemaGlCopyImageSubDataOES }
+func (*binaryClassGlCopyImageSubDataOES) Schema() *binary.Entity { return schemaGlCopyImageSubDataOES }
 
-var schemaGlCopyImageSubDataOES = &schema.Entity{
+var schemaGlCopyImageSubDataOES = &binary.Entity{
 	TypeID:  binaryIDGlCopyImageSubDataOES,
 	Package: "gles",
 	Name:    "GlCopyImageSubDataOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "SrcName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11072,13 +11072,13 @@ func (*binaryClassGlCopyPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyPathNV(d, obj.(*GlCopyPathNV))
 }
-func (*binaryClassGlCopyPathNV) Schema() *schema.Entity { return schemaGlCopyPathNV }
+func (*binaryClassGlCopyPathNV) Schema() *binary.Entity { return schemaGlCopyPathNV }
 
-var schemaGlCopyPathNV = &schema.Entity{
+var schemaGlCopyPathNV = &binary.Entity{
 	TypeID:  binaryIDGlCopyPathNV,
 	Package: "gles",
 	Name:    "GlCopyPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -11125,13 +11125,13 @@ func (*binaryClassGlCopyTexImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexImage2D(d, obj.(*GlCopyTexImage2D))
 }
-func (*binaryClassGlCopyTexImage2D) Schema() *schema.Entity { return schemaGlCopyTexImage2D }
+func (*binaryClassGlCopyTexImage2D) Schema() *binary.Entity { return schemaGlCopyTexImage2D }
 
-var schemaGlCopyTexImage2D = &schema.Entity{
+var schemaGlCopyTexImage2D = &binary.Entity{
 	TypeID:  binaryIDGlCopyTexImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11184,13 +11184,13 @@ func (*binaryClassGlCopyTexSubImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage2D(d, obj.(*GlCopyTexSubImage2D))
 }
-func (*binaryClassGlCopyTexSubImage2D) Schema() *schema.Entity { return schemaGlCopyTexSubImage2D }
+func (*binaryClassGlCopyTexSubImage2D) Schema() *binary.Entity { return schemaGlCopyTexSubImage2D }
 
-var schemaGlCopyTexSubImage2D = &schema.Entity{
+var schemaGlCopyTexSubImage2D = &binary.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage2D,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11245,13 +11245,13 @@ func (*binaryClassGlCopyTexSubImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCopyTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage3D(d, obj.(*GlCopyTexSubImage3D))
 }
-func (*binaryClassGlCopyTexSubImage3D) Schema() *schema.Entity { return schemaGlCopyTexSubImage3D }
+func (*binaryClassGlCopyTexSubImage3D) Schema() *binary.Entity { return schemaGlCopyTexSubImage3D }
 
-var schemaGlCopyTexSubImage3D = &schema.Entity{
+var schemaGlCopyTexSubImage3D = &binary.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage3D,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11307,13 +11307,13 @@ func (*binaryClassGlCopyTexSubImage3DOES) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCopyTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTexSubImage3DOES(d, obj.(*GlCopyTexSubImage3DOES))
 }
-func (*binaryClassGlCopyTexSubImage3DOES) Schema() *schema.Entity { return schemaGlCopyTexSubImage3DOES }
+func (*binaryClassGlCopyTexSubImage3DOES) Schema() *binary.Entity { return schemaGlCopyTexSubImage3DOES }
 
-var schemaGlCopyTexSubImage3DOES = &schema.Entity{
+var schemaGlCopyTexSubImage3DOES = &binary.Entity{
 	TypeID:  binaryIDGlCopyTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlCopyTexSubImage3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -11359,15 +11359,15 @@ func (*binaryClassGlCopyTextureLevelsAPPLE) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlCopyTextureLevelsAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCopyTextureLevelsAPPLE(d, obj.(*GlCopyTextureLevelsAPPLE))
 }
-func (*binaryClassGlCopyTextureLevelsAPPLE) Schema() *schema.Entity {
+func (*binaryClassGlCopyTextureLevelsAPPLE) Schema() *binary.Entity {
 	return schemaGlCopyTextureLevelsAPPLE
 }
 
-var schemaGlCopyTextureLevelsAPPLE = &schema.Entity{
+var schemaGlCopyTextureLevelsAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlCopyTextureLevelsAPPLE,
 	Package: "gles",
 	Name:    "GlCopyTextureLevelsAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DestinationTexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SourceTexture", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -11418,15 +11418,15 @@ func (*binaryClassGlCoverFillPathInstancedNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlCoverFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverFillPathInstancedNV(d, obj.(*GlCoverFillPathInstancedNV))
 }
-func (*binaryClassGlCoverFillPathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlCoverFillPathInstancedNV) Schema() *binary.Entity {
 	return schemaGlCoverFillPathInstancedNV
 }
 
-var schemaGlCoverFillPathInstancedNV = &schema.Entity{
+var schemaGlCoverFillPathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlCoverFillPathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11466,13 +11466,13 @@ func (*binaryClassGlCoverFillPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverFillPathNV(d, obj.(*GlCoverFillPathNV))
 }
-func (*binaryClassGlCoverFillPathNV) Schema() *schema.Entity { return schemaGlCoverFillPathNV }
+func (*binaryClassGlCoverFillPathNV) Schema() *binary.Entity { return schemaGlCoverFillPathNV }
 
-var schemaGlCoverFillPathNV = &schema.Entity{
+var schemaGlCoverFillPathNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverFillPathNV,
 	Package: "gles",
 	Name:    "GlCoverFillPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11521,15 +11521,15 @@ func (*binaryClassGlCoverStrokePathInstancedNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlCoverStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverStrokePathInstancedNV(d, obj.(*GlCoverStrokePathInstancedNV))
 }
-func (*binaryClassGlCoverStrokePathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlCoverStrokePathInstancedNV) Schema() *binary.Entity {
 	return schemaGlCoverStrokePathInstancedNV
 }
 
-var schemaGlCoverStrokePathInstancedNV = &schema.Entity{
+var schemaGlCoverStrokePathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlCoverStrokePathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11569,13 +11569,13 @@ func (*binaryClassGlCoverStrokePathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverStrokePathNV(d, obj.(*GlCoverStrokePathNV))
 }
-func (*binaryClassGlCoverStrokePathNV) Schema() *schema.Entity { return schemaGlCoverStrokePathNV }
+func (*binaryClassGlCoverStrokePathNV) Schema() *binary.Entity { return schemaGlCoverStrokePathNV }
 
-var schemaGlCoverStrokePathNV = &schema.Entity{
+var schemaGlCoverStrokePathNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverStrokePathNV,
 	Package: "gles",
 	Name:    "GlCoverStrokePathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoverMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -11608,13 +11608,13 @@ func (*binaryClassGlCoverageMaskNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCoverageMaskNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageMaskNV(d, obj.(*GlCoverageMaskNV))
 }
-func (*binaryClassGlCoverageMaskNV) Schema() *schema.Entity { return schemaGlCoverageMaskNV }
+func (*binaryClassGlCoverageMaskNV) Schema() *binary.Entity { return schemaGlCoverageMaskNV }
 
-var schemaGlCoverageMaskNV = &schema.Entity{
+var schemaGlCoverageMaskNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverageMaskNV,
 	Package: "gles",
 	Name:    "GlCoverageMaskNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -11646,13 +11646,13 @@ func (*binaryClassGlCoverageModulationNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCoverageModulationNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageModulationNV(d, obj.(*GlCoverageModulationNV))
 }
-func (*binaryClassGlCoverageModulationNV) Schema() *schema.Entity { return schemaGlCoverageModulationNV }
+func (*binaryClassGlCoverageModulationNV) Schema() *binary.Entity { return schemaGlCoverageModulationNV }
 
-var schemaGlCoverageModulationNV = &schema.Entity{
+var schemaGlCoverageModulationNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverageModulationNV,
 	Package: "gles",
 	Name:    "GlCoverageModulationNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Components", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -11690,15 +11690,15 @@ func (*binaryClassGlCoverageModulationTableNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlCoverageModulationTableNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageModulationTableNV(d, obj.(*GlCoverageModulationTableNV))
 }
-func (*binaryClassGlCoverageModulationTableNV) Schema() *schema.Entity {
+func (*binaryClassGlCoverageModulationTableNV) Schema() *binary.Entity {
 	return schemaGlCoverageModulationTableNV
 }
 
-var schemaGlCoverageModulationTableNV = &schema.Entity{
+var schemaGlCoverageModulationTableNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverageModulationTableNV,
 	Package: "gles",
 	Name:    "GlCoverageModulationTableNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -11731,13 +11731,13 @@ func (*binaryClassGlCoverageOperationNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlCoverageOperationNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCoverageOperationNV(d, obj.(*GlCoverageOperationNV))
 }
-func (*binaryClassGlCoverageOperationNV) Schema() *schema.Entity { return schemaGlCoverageOperationNV }
+func (*binaryClassGlCoverageOperationNV) Schema() *binary.Entity { return schemaGlCoverageOperationNV }
 
-var schemaGlCoverageOperationNV = &schema.Entity{
+var schemaGlCoverageOperationNV = &binary.Entity{
 	TypeID:  binaryIDGlCoverageOperationNV,
 	Package: "gles",
 	Name:    "GlCoverageOperationNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Operation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -11771,13 +11771,13 @@ func (*binaryClassGlCreatePerfQueryINTEL) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCreatePerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreatePerfQueryINTEL(d, obj.(*GlCreatePerfQueryINTEL))
 }
-func (*binaryClassGlCreatePerfQueryINTEL) Schema() *schema.Entity { return schemaGlCreatePerfQueryINTEL }
+func (*binaryClassGlCreatePerfQueryINTEL) Schema() *binary.Entity { return schemaGlCreatePerfQueryINTEL }
 
-var schemaGlCreatePerfQueryINTEL = &schema.Entity{
+var schemaGlCreatePerfQueryINTEL = &binary.Entity{
 	TypeID:  binaryIDGlCreatePerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlCreatePerfQueryINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "QueryHandle", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -11810,13 +11810,13 @@ func (*binaryClassGlCreateProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCreateProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateProgram(d, obj.(*GlCreateProgram))
 }
-func (*binaryClassGlCreateProgram) Schema() *schema.Entity { return schemaGlCreateProgram }
+func (*binaryClassGlCreateProgram) Schema() *binary.Entity { return schemaGlCreateProgram }
 
-var schemaGlCreateProgram = &schema.Entity{
+var schemaGlCreateProgram = &binary.Entity{
 	TypeID:  binaryIDGlCreateProgram,
 	Package: "gles",
 	Name:    "GlCreateProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -11850,13 +11850,13 @@ func (*binaryClassGlCreateShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCreateShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShader(d, obj.(*GlCreateShader))
 }
-func (*binaryClassGlCreateShader) Schema() *schema.Entity { return schemaGlCreateShader }
+func (*binaryClassGlCreateShader) Schema() *binary.Entity { return schemaGlCreateShader }
 
-var schemaGlCreateShader = &schema.Entity{
+var schemaGlCreateShader = &binary.Entity{
 	TypeID:  binaryIDGlCreateShader,
 	Package: "gles",
 	Name:    "GlCreateShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -11895,13 +11895,13 @@ func (*binaryClassGlCreateShaderProgramv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlCreateShaderProgramv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShaderProgramv(d, obj.(*GlCreateShaderProgramv))
 }
-func (*binaryClassGlCreateShaderProgramv) Schema() *schema.Entity { return schemaGlCreateShaderProgramv }
+func (*binaryClassGlCreateShaderProgramv) Schema() *binary.Entity { return schemaGlCreateShaderProgramv }
 
-var schemaGlCreateShaderProgramv = &schema.Entity{
+var schemaGlCreateShaderProgramv = &binary.Entity{
 	TypeID:  binaryIDGlCreateShaderProgramv,
 	Package: "gles",
 	Name:    "GlCreateShaderProgramv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -11942,15 +11942,15 @@ func (*binaryClassGlCreateShaderProgramvEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlCreateShaderProgramvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCreateShaderProgramvEXT(d, obj.(*GlCreateShaderProgramvEXT))
 }
-func (*binaryClassGlCreateShaderProgramvEXT) Schema() *schema.Entity {
+func (*binaryClassGlCreateShaderProgramvEXT) Schema() *binary.Entity {
 	return schemaGlCreateShaderProgramvEXT
 }
 
-var schemaGlCreateShaderProgramvEXT = &schema.Entity{
+var schemaGlCreateShaderProgramvEXT = &binary.Entity{
 	TypeID:  binaryIDGlCreateShaderProgramvEXT,
 	Package: "gles",
 	Name:    "GlCreateShaderProgramvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -11985,13 +11985,13 @@ func (*binaryClassGlCullFace) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlCullFace) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlCullFace(d, obj.(*GlCullFace))
 }
-func (*binaryClassGlCullFace) Schema() *schema.Entity { return schemaGlCullFace }
+func (*binaryClassGlCullFace) Schema() *binary.Entity { return schemaGlCullFace }
 
-var schemaGlCullFace = &schema.Entity{
+var schemaGlCullFace = &binary.Entity{
 	TypeID:  binaryIDGlCullFace,
 	Package: "gles",
 	Name:    "GlCullFace",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -12025,13 +12025,13 @@ func (*binaryClassGlDebugMessageCallback) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDebugMessageCallback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageCallback(d, obj.(*GlDebugMessageCallback))
 }
-func (*binaryClassGlDebugMessageCallback) Schema() *schema.Entity { return schemaGlDebugMessageCallback }
+func (*binaryClassGlDebugMessageCallback) Schema() *binary.Entity { return schemaGlDebugMessageCallback }
 
-var schemaGlDebugMessageCallback = &schema.Entity{
+var schemaGlDebugMessageCallback = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageCallback,
 	Package: "gles",
 	Name:    "GlDebugMessageCallback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Callback", Type: &schema.Struct{Entity: schema.Of((*GLDEBUGPROC)(nil).Class())}},
 		{Declared: "UserParam", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
@@ -12066,15 +12066,15 @@ func (*binaryClassGlDebugMessageCallbackKHR) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDebugMessageCallbackKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageCallbackKHR(d, obj.(*GlDebugMessageCallbackKHR))
 }
-func (*binaryClassGlDebugMessageCallbackKHR) Schema() *schema.Entity {
+func (*binaryClassGlDebugMessageCallbackKHR) Schema() *binary.Entity {
 	return schemaGlDebugMessageCallbackKHR
 }
 
-var schemaGlDebugMessageCallbackKHR = &schema.Entity{
+var schemaGlDebugMessageCallbackKHR = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageCallbackKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageCallbackKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Callback", Type: &schema.Struct{Entity: schema.Of((*GLDEBUGPROC)(nil).Class())}},
 		{Declared: "UserParam", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
@@ -12117,13 +12117,13 @@ func (*binaryClassGlDebugMessageControl) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDebugMessageControl) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageControl(d, obj.(*GlDebugMessageControl))
 }
-func (*binaryClassGlDebugMessageControl) Schema() *schema.Entity { return schemaGlDebugMessageControl }
+func (*binaryClassGlDebugMessageControl) Schema() *binary.Entity { return schemaGlDebugMessageControl }
 
-var schemaGlDebugMessageControl = &schema.Entity{
+var schemaGlDebugMessageControl = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageControl,
 	Package: "gles",
 	Name:    "GlDebugMessageControl",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -12170,15 +12170,15 @@ func (*binaryClassGlDebugMessageControlKHR) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDebugMessageControlKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageControlKHR(d, obj.(*GlDebugMessageControlKHR))
 }
-func (*binaryClassGlDebugMessageControlKHR) Schema() *schema.Entity {
+func (*binaryClassGlDebugMessageControlKHR) Schema() *binary.Entity {
 	return schemaGlDebugMessageControlKHR
 }
 
-var schemaGlDebugMessageControlKHR = &schema.Entity{
+var schemaGlDebugMessageControlKHR = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageControlKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageControlKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -12225,13 +12225,13 @@ func (*binaryClassGlDebugMessageInsert) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDebugMessageInsert) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageInsert(d, obj.(*GlDebugMessageInsert))
 }
-func (*binaryClassGlDebugMessageInsert) Schema() *schema.Entity { return schemaGlDebugMessageInsert }
+func (*binaryClassGlDebugMessageInsert) Schema() *binary.Entity { return schemaGlDebugMessageInsert }
 
-var schemaGlDebugMessageInsert = &schema.Entity{
+var schemaGlDebugMessageInsert = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageInsert,
 	Package: "gles",
 	Name:    "GlDebugMessageInsert",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -12278,15 +12278,15 @@ func (*binaryClassGlDebugMessageInsertKHR) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDebugMessageInsertKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDebugMessageInsertKHR(d, obj.(*GlDebugMessageInsertKHR))
 }
-func (*binaryClassGlDebugMessageInsertKHR) Schema() *schema.Entity {
+func (*binaryClassGlDebugMessageInsertKHR) Schema() *binary.Entity {
 	return schemaGlDebugMessageInsertKHR
 }
 
-var schemaGlDebugMessageInsertKHR = &schema.Entity{
+var schemaGlDebugMessageInsertKHR = &binary.Entity{
 	TypeID:  binaryIDGlDebugMessageInsertKHR,
 	Package: "gles",
 	Name:    "GlDebugMessageInsertKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -12325,13 +12325,13 @@ func (*binaryClassGlDeleteBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteBuffers(d, obj.(*GlDeleteBuffers))
 }
-func (*binaryClassGlDeleteBuffers) Schema() *schema.Entity { return schemaGlDeleteBuffers }
+func (*binaryClassGlDeleteBuffers) Schema() *binary.Entity { return schemaGlDeleteBuffers }
 
-var schemaGlDeleteBuffers = &schema.Entity{
+var schemaGlDeleteBuffers = &binary.Entity{
 	TypeID:  binaryIDGlDeleteBuffers,
 	Package: "gles",
 	Name:    "GlDeleteBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᶜᵖ)(nil).Class())}},
@@ -12366,13 +12366,13 @@ func (*binaryClassGlDeleteFencesNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteFencesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteFencesNV(d, obj.(*GlDeleteFencesNV))
 }
-func (*binaryClassGlDeleteFencesNV) Schema() *schema.Entity { return schemaGlDeleteFencesNV }
+func (*binaryClassGlDeleteFencesNV) Schema() *binary.Entity { return schemaGlDeleteFencesNV }
 
-var schemaGlDeleteFencesNV = &schema.Entity{
+var schemaGlDeleteFencesNV = &binary.Entity{
 	TypeID:  binaryIDGlDeleteFencesNV,
 	Package: "gles",
 	Name:    "GlDeleteFencesNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Fences", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
@@ -12407,13 +12407,13 @@ func (*binaryClassGlDeleteFramebuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteFramebuffers(d, obj.(*GlDeleteFramebuffers))
 }
-func (*binaryClassGlDeleteFramebuffers) Schema() *schema.Entity { return schemaGlDeleteFramebuffers }
+func (*binaryClassGlDeleteFramebuffers) Schema() *binary.Entity { return schemaGlDeleteFramebuffers }
 
-var schemaGlDeleteFramebuffers = &schema.Entity{
+var schemaGlDeleteFramebuffers = &binary.Entity{
 	TypeID:  binaryIDGlDeleteFramebuffers,
 	Package: "gles",
 	Name:    "GlDeleteFramebuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᶜᵖ)(nil).Class())}},
@@ -12448,13 +12448,13 @@ func (*binaryClassGlDeletePathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeletePathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePathsNV(d, obj.(*GlDeletePathsNV))
 }
-func (*binaryClassGlDeletePathsNV) Schema() *schema.Entity { return schemaGlDeletePathsNV }
+func (*binaryClassGlDeletePathsNV) Schema() *binary.Entity { return schemaGlDeletePathsNV }
 
-var schemaGlDeletePathsNV = &schema.Entity{
+var schemaGlDeletePathsNV = &binary.Entity{
 	TypeID:  binaryIDGlDeletePathsNV,
 	Package: "gles",
 	Name:    "GlDeletePathsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Range", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -12489,15 +12489,15 @@ func (*binaryClassGlDeletePerfMonitorsAMD) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDeletePerfMonitorsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePerfMonitorsAMD(d, obj.(*GlDeletePerfMonitorsAMD))
 }
-func (*binaryClassGlDeletePerfMonitorsAMD) Schema() *schema.Entity {
+func (*binaryClassGlDeletePerfMonitorsAMD) Schema() *binary.Entity {
 	return schemaGlDeletePerfMonitorsAMD
 }
 
-var schemaGlDeletePerfMonitorsAMD = &schema.Entity{
+var schemaGlDeletePerfMonitorsAMD = &binary.Entity{
 	TypeID:  binaryIDGlDeletePerfMonitorsAMD,
 	Package: "gles",
 	Name:    "GlDeletePerfMonitorsAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Monitors", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -12530,13 +12530,13 @@ func (*binaryClassGlDeletePerfQueryINTEL) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDeletePerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeletePerfQueryINTEL(d, obj.(*GlDeletePerfQueryINTEL))
 }
-func (*binaryClassGlDeletePerfQueryINTEL) Schema() *schema.Entity { return schemaGlDeletePerfQueryINTEL }
+func (*binaryClassGlDeletePerfQueryINTEL) Schema() *binary.Entity { return schemaGlDeletePerfQueryINTEL }
 
-var schemaGlDeletePerfQueryINTEL = &schema.Entity{
+var schemaGlDeletePerfQueryINTEL = &binary.Entity{
 	TypeID:  binaryIDGlDeletePerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlDeletePerfQueryINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -12568,13 +12568,13 @@ func (*binaryClassGlDeleteProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgram(d, obj.(*GlDeleteProgram))
 }
-func (*binaryClassGlDeleteProgram) Schema() *schema.Entity { return schemaGlDeleteProgram }
+func (*binaryClassGlDeleteProgram) Schema() *binary.Entity { return schemaGlDeleteProgram }
 
-var schemaGlDeleteProgram = &schema.Entity{
+var schemaGlDeleteProgram = &binary.Entity{
 	TypeID:  binaryIDGlDeleteProgram,
 	Package: "gles",
 	Name:    "GlDeleteProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -12604,13 +12604,13 @@ func (*binaryClassPipelineIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdᶜᵖ(d, obj.(*PipelineIdᶜᵖ))
 }
-func (*binaryClassPipelineIdᶜᵖ) Schema() *schema.Entity { return schemaPipelineIdᶜᵖ }
+func (*binaryClassPipelineIdᶜᵖ) Schema() *binary.Entity { return schemaPipelineIdᶜᵖ }
 
-var schemaPipelineIdᶜᵖ = &schema.Entity{
+var schemaPipelineIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDPipelineIdᶜᵖ,
 	Package: "gles",
 	Name:    "PipelineIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -12643,15 +12643,15 @@ func (*binaryClassGlDeleteProgramPipelines) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDeleteProgramPipelines) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgramPipelines(d, obj.(*GlDeleteProgramPipelines))
 }
-func (*binaryClassGlDeleteProgramPipelines) Schema() *schema.Entity {
+func (*binaryClassGlDeleteProgramPipelines) Schema() *binary.Entity {
 	return schemaGlDeleteProgramPipelines
 }
 
-var schemaGlDeleteProgramPipelines = &schema.Entity{
+var schemaGlDeleteProgramPipelines = &binary.Entity{
 	TypeID:  binaryIDGlDeleteProgramPipelines,
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelines",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᶜᵖ)(nil).Class())}},
@@ -12690,15 +12690,15 @@ func (*binaryClassGlDeleteProgramPipelinesEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDeleteProgramPipelinesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteProgramPipelinesEXT(d, obj.(*GlDeleteProgramPipelinesEXT))
 }
-func (*binaryClassGlDeleteProgramPipelinesEXT) Schema() *schema.Entity {
+func (*binaryClassGlDeleteProgramPipelinesEXT) Schema() *binary.Entity {
 	return schemaGlDeleteProgramPipelinesEXT
 }
 
-var schemaGlDeleteProgramPipelinesEXT = &schema.Entity{
+var schemaGlDeleteProgramPipelinesEXT = &binary.Entity{
 	TypeID:  binaryIDGlDeleteProgramPipelinesEXT,
 	Package: "gles",
 	Name:    "GlDeleteProgramPipelinesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᶜᵖ)(nil).Class())}},
@@ -12729,13 +12729,13 @@ func (*binaryClassQueryIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdᶜᵖ(d, obj.(*QueryIdᶜᵖ))
 }
-func (*binaryClassQueryIdᶜᵖ) Schema() *schema.Entity { return schemaQueryIdᶜᵖ }
+func (*binaryClassQueryIdᶜᵖ) Schema() *binary.Entity { return schemaQueryIdᶜᵖ }
 
-var schemaQueryIdᶜᵖ = &schema.Entity{
+var schemaQueryIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDQueryIdᶜᵖ,
 	Package: "gles",
 	Name:    "QueryIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -12768,13 +12768,13 @@ func (*binaryClassGlDeleteQueries) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteQueries) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteQueries(d, obj.(*GlDeleteQueries))
 }
-func (*binaryClassGlDeleteQueries) Schema() *schema.Entity { return schemaGlDeleteQueries }
+func (*binaryClassGlDeleteQueries) Schema() *binary.Entity { return schemaGlDeleteQueries }
 
-var schemaGlDeleteQueries = &schema.Entity{
+var schemaGlDeleteQueries = &binary.Entity{
 	TypeID:  binaryIDGlDeleteQueries,
 	Package: "gles",
 	Name:    "GlDeleteQueries",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᶜᵖ)(nil).Class())}},
@@ -12809,13 +12809,13 @@ func (*binaryClassGlDeleteQueriesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteQueriesEXT(d, obj.(*GlDeleteQueriesEXT))
 }
-func (*binaryClassGlDeleteQueriesEXT) Schema() *schema.Entity { return schemaGlDeleteQueriesEXT }
+func (*binaryClassGlDeleteQueriesEXT) Schema() *binary.Entity { return schemaGlDeleteQueriesEXT }
 
-var schemaGlDeleteQueriesEXT = &schema.Entity{
+var schemaGlDeleteQueriesEXT = &binary.Entity{
 	TypeID:  binaryIDGlDeleteQueriesEXT,
 	Package: "gles",
 	Name:    "GlDeleteQueriesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᶜᵖ)(nil).Class())}},
@@ -12846,13 +12846,13 @@ func (*binaryClassRenderbufferIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdᶜᵖ(d, obj.(*RenderbufferIdᶜᵖ))
 }
-func (*binaryClassRenderbufferIdᶜᵖ) Schema() *schema.Entity { return schemaRenderbufferIdᶜᵖ }
+func (*binaryClassRenderbufferIdᶜᵖ) Schema() *binary.Entity { return schemaRenderbufferIdᶜᵖ }
 
-var schemaRenderbufferIdᶜᵖ = &schema.Entity{
+var schemaRenderbufferIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDRenderbufferIdᶜᵖ,
 	Package: "gles",
 	Name:    "RenderbufferIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -12885,13 +12885,13 @@ func (*binaryClassGlDeleteRenderbuffers) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDeleteRenderbuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteRenderbuffers(d, obj.(*GlDeleteRenderbuffers))
 }
-func (*binaryClassGlDeleteRenderbuffers) Schema() *schema.Entity { return schemaGlDeleteRenderbuffers }
+func (*binaryClassGlDeleteRenderbuffers) Schema() *binary.Entity { return schemaGlDeleteRenderbuffers }
 
-var schemaGlDeleteRenderbuffers = &schema.Entity{
+var schemaGlDeleteRenderbuffers = &binary.Entity{
 	TypeID:  binaryIDGlDeleteRenderbuffers,
 	Package: "gles",
 	Name:    "GlDeleteRenderbuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᶜᵖ)(nil).Class())}},
@@ -12922,13 +12922,13 @@ func (*binaryClassSamplerIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdᶜᵖ(d, obj.(*SamplerIdᶜᵖ))
 }
-func (*binaryClassSamplerIdᶜᵖ) Schema() *schema.Entity { return schemaSamplerIdᶜᵖ }
+func (*binaryClassSamplerIdᶜᵖ) Schema() *binary.Entity { return schemaSamplerIdᶜᵖ }
 
-var schemaSamplerIdᶜᵖ = &schema.Entity{
+var schemaSamplerIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDSamplerIdᶜᵖ,
 	Package: "gles",
 	Name:    "SamplerIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -12961,13 +12961,13 @@ func (*binaryClassGlDeleteSamplers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSamplers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSamplers(d, obj.(*GlDeleteSamplers))
 }
-func (*binaryClassGlDeleteSamplers) Schema() *schema.Entity { return schemaGlDeleteSamplers }
+func (*binaryClassGlDeleteSamplers) Schema() *binary.Entity { return schemaGlDeleteSamplers }
 
-var schemaGlDeleteSamplers = &schema.Entity{
+var schemaGlDeleteSamplers = &binary.Entity{
 	TypeID:  binaryIDGlDeleteSamplers,
 	Package: "gles",
 	Name:    "GlDeleteSamplers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Samplers", Type: &schema.Struct{Entity: schema.Of((*SamplerIdᶜᵖ)(nil).Class())}},
@@ -13000,13 +13000,13 @@ func (*binaryClassGlDeleteShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteShader(d, obj.(*GlDeleteShader))
 }
-func (*binaryClassGlDeleteShader) Schema() *schema.Entity { return schemaGlDeleteShader }
+func (*binaryClassGlDeleteShader) Schema() *binary.Entity { return schemaGlDeleteShader }
 
-var schemaGlDeleteShader = &schema.Entity{
+var schemaGlDeleteShader = &binary.Entity{
 	TypeID:  binaryIDGlDeleteShader,
 	Package: "gles",
 	Name:    "GlDeleteShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
@@ -13038,13 +13038,13 @@ func (*binaryClassGlDeleteSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSync(d, obj.(*GlDeleteSync))
 }
-func (*binaryClassGlDeleteSync) Schema() *schema.Entity { return schemaGlDeleteSync }
+func (*binaryClassGlDeleteSync) Schema() *binary.Entity { return schemaGlDeleteSync }
 
-var schemaGlDeleteSync = &schema.Entity{
+var schemaGlDeleteSync = &binary.Entity{
 	TypeID:  binaryIDGlDeleteSync,
 	Package: "gles",
 	Name:    "GlDeleteSync",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 	},
@@ -13076,13 +13076,13 @@ func (*binaryClassGlDeleteSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteSyncAPPLE(d, obj.(*GlDeleteSyncAPPLE))
 }
-func (*binaryClassGlDeleteSyncAPPLE) Schema() *schema.Entity { return schemaGlDeleteSyncAPPLE }
+func (*binaryClassGlDeleteSyncAPPLE) Schema() *binary.Entity { return schemaGlDeleteSyncAPPLE }
 
-var schemaGlDeleteSyncAPPLE = &schema.Entity{
+var schemaGlDeleteSyncAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlDeleteSyncAPPLE,
 	Package: "gles",
 	Name:    "GlDeleteSyncAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 	},
@@ -13112,13 +13112,13 @@ func (*binaryClassTextureIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdᶜᵖ(d, obj.(*TextureIdᶜᵖ))
 }
-func (*binaryClassTextureIdᶜᵖ) Schema() *schema.Entity { return schemaTextureIdᶜᵖ }
+func (*binaryClassTextureIdᶜᵖ) Schema() *binary.Entity { return schemaTextureIdᶜᵖ }
 
-var schemaTextureIdᶜᵖ = &schema.Entity{
+var schemaTextureIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDTextureIdᶜᵖ,
 	Package: "gles",
 	Name:    "TextureIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -13151,13 +13151,13 @@ func (*binaryClassGlDeleteTextures) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteTextures) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteTextures(d, obj.(*GlDeleteTextures))
 }
-func (*binaryClassGlDeleteTextures) Schema() *schema.Entity { return schemaGlDeleteTextures }
+func (*binaryClassGlDeleteTextures) Schema() *binary.Entity { return schemaGlDeleteTextures }
 
-var schemaGlDeleteTextures = &schema.Entity{
+var schemaGlDeleteTextures = &binary.Entity{
 	TypeID:  binaryIDGlDeleteTextures,
 	Package: "gles",
 	Name:    "GlDeleteTextures",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᶜᵖ)(nil).Class())}},
@@ -13188,15 +13188,15 @@ func (*binaryClassTransformFeedbackIdᶜᵖ) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassTransformFeedbackIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdᶜᵖ(d, obj.(*TransformFeedbackIdᶜᵖ))
 }
-func (*binaryClassTransformFeedbackIdᶜᵖ) Schema() *schema.Entity {
+func (*binaryClassTransformFeedbackIdᶜᵖ) Schema() *binary.Entity {
 	return schemaTransformFeedbackIdᶜᵖ
 }
 
-var schemaTransformFeedbackIdᶜᵖ = &schema.Entity{
+var schemaTransformFeedbackIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDTransformFeedbackIdᶜᵖ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -13233,15 +13233,15 @@ func (*binaryClassGlDeleteTransformFeedbacks) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDeleteTransformFeedbacks) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteTransformFeedbacks(d, obj.(*GlDeleteTransformFeedbacks))
 }
-func (*binaryClassGlDeleteTransformFeedbacks) Schema() *schema.Entity {
+func (*binaryClassGlDeleteTransformFeedbacks) Schema() *binary.Entity {
 	return schemaGlDeleteTransformFeedbacks
 }
 
-var schemaGlDeleteTransformFeedbacks = &schema.Entity{
+var schemaGlDeleteTransformFeedbacks = &binary.Entity{
 	TypeID:  binaryIDGlDeleteTransformFeedbacks,
 	Package: "gles",
 	Name:    "GlDeleteTransformFeedbacks",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*TransformFeedbackIdᶜᵖ)(nil).Class())}},
@@ -13272,13 +13272,13 @@ func (*binaryClassVertexArrayIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdᶜᵖ(d, obj.(*VertexArrayIdᶜᵖ))
 }
-func (*binaryClassVertexArrayIdᶜᵖ) Schema() *schema.Entity { return schemaVertexArrayIdᶜᵖ }
+func (*binaryClassVertexArrayIdᶜᵖ) Schema() *binary.Entity { return schemaVertexArrayIdᶜᵖ }
 
-var schemaVertexArrayIdᶜᵖ = &schema.Entity{
+var schemaVertexArrayIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDVertexArrayIdᶜᵖ,
 	Package: "gles",
 	Name:    "VertexArrayIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -13311,13 +13311,13 @@ func (*binaryClassGlDeleteVertexArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDeleteVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteVertexArrays(d, obj.(*GlDeleteVertexArrays))
 }
-func (*binaryClassGlDeleteVertexArrays) Schema() *schema.Entity { return schemaGlDeleteVertexArrays }
+func (*binaryClassGlDeleteVertexArrays) Schema() *binary.Entity { return schemaGlDeleteVertexArrays }
 
-var schemaGlDeleteVertexArrays = &schema.Entity{
+var schemaGlDeleteVertexArrays = &binary.Entity{
 	TypeID:  binaryIDGlDeleteVertexArrays,
 	Package: "gles",
 	Name:    "GlDeleteVertexArrays",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᶜᵖ)(nil).Class())}},
@@ -13352,15 +13352,15 @@ func (*binaryClassGlDeleteVertexArraysOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDeleteVertexArraysOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDeleteVertexArraysOES(d, obj.(*GlDeleteVertexArraysOES))
 }
-func (*binaryClassGlDeleteVertexArraysOES) Schema() *schema.Entity {
+func (*binaryClassGlDeleteVertexArraysOES) Schema() *binary.Entity {
 	return schemaGlDeleteVertexArraysOES
 }
 
-var schemaGlDeleteVertexArraysOES = &schema.Entity{
+var schemaGlDeleteVertexArraysOES = &binary.Entity{
 	TypeID:  binaryIDGlDeleteVertexArraysOES,
 	Package: "gles",
 	Name:    "GlDeleteVertexArraysOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᶜᵖ)(nil).Class())}},
@@ -13393,13 +13393,13 @@ func (*binaryClassGlDepthFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthFunc(d, obj.(*GlDepthFunc))
 }
-func (*binaryClassGlDepthFunc) Schema() *schema.Entity { return schemaGlDepthFunc }
+func (*binaryClassGlDepthFunc) Schema() *binary.Entity { return schemaGlDepthFunc }
 
-var schemaGlDepthFunc = &schema.Entity{
+var schemaGlDepthFunc = &binary.Entity{
 	TypeID:  binaryIDGlDepthFunc,
 	Package: "gles",
 	Name:    "GlDepthFunc",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -13431,13 +13431,13 @@ func (*binaryClassGlDepthMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthMask(d, obj.(*GlDepthMask))
 }
-func (*binaryClassGlDepthMask) Schema() *schema.Entity { return schemaGlDepthMask }
+func (*binaryClassGlDepthMask) Schema() *binary.Entity { return schemaGlDepthMask }
 
-var schemaGlDepthMask = &schema.Entity{
+var schemaGlDepthMask = &binary.Entity{
 	TypeID:  binaryIDGlDepthMask,
 	Package: "gles",
 	Name:    "GlDepthMask",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Enabled", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
@@ -13473,13 +13473,13 @@ func (*binaryClassGlDepthRangeArrayfvNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDepthRangeArrayfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangeArrayfvNV(d, obj.(*GlDepthRangeArrayfvNV))
 }
-func (*binaryClassGlDepthRangeArrayfvNV) Schema() *schema.Entity { return schemaGlDepthRangeArrayfvNV }
+func (*binaryClassGlDepthRangeArrayfvNV) Schema() *binary.Entity { return schemaGlDepthRangeArrayfvNV }
 
-var schemaGlDepthRangeArrayfvNV = &schema.Entity{
+var schemaGlDepthRangeArrayfvNV = &binary.Entity{
 	TypeID:  binaryIDGlDepthRangeArrayfvNV,
 	Package: "gles",
 	Name:    "GlDepthRangeArrayfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -13517,13 +13517,13 @@ func (*binaryClassGlDepthRangeIndexedfNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDepthRangeIndexedfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangeIndexedfNV(d, obj.(*GlDepthRangeIndexedfNV))
 }
-func (*binaryClassGlDepthRangeIndexedfNV) Schema() *schema.Entity { return schemaGlDepthRangeIndexedfNV }
+func (*binaryClassGlDepthRangeIndexedfNV) Schema() *binary.Entity { return schemaGlDepthRangeIndexedfNV }
 
-var schemaGlDepthRangeIndexedfNV = &schema.Entity{
+var schemaGlDepthRangeIndexedfNV = &binary.Entity{
 	TypeID:  binaryIDGlDepthRangeIndexedfNV,
 	Package: "gles",
 	Name:    "GlDepthRangeIndexedfNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -13559,13 +13559,13 @@ func (*binaryClassGlDepthRangef) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDepthRangef) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDepthRangef(d, obj.(*GlDepthRangef))
 }
-func (*binaryClassGlDepthRangef) Schema() *schema.Entity { return schemaGlDepthRangef }
+func (*binaryClassGlDepthRangef) Schema() *binary.Entity { return schemaGlDepthRangef }
 
-var schemaGlDepthRangef = &schema.Entity{
+var schemaGlDepthRangef = &binary.Entity{
 	TypeID:  binaryIDGlDepthRangef,
 	Package: "gles",
 	Name:    "GlDepthRangef",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Near", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Far", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -13600,13 +13600,13 @@ func (*binaryClassGlDetachShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDetachShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDetachShader(d, obj.(*GlDetachShader))
 }
-func (*binaryClassGlDetachShader) Schema() *schema.Entity { return schemaGlDetachShader }
+func (*binaryClassGlDetachShader) Schema() *binary.Entity { return schemaGlDetachShader }
 
-var schemaGlDetachShader = &schema.Entity{
+var schemaGlDetachShader = &binary.Entity{
 	TypeID:  binaryIDGlDetachShader,
 	Package: "gles",
 	Name:    "GlDetachShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
@@ -13639,13 +13639,13 @@ func (*binaryClassGlDisable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisable(d, obj.(*GlDisable))
 }
-func (*binaryClassGlDisable) Schema() *schema.Entity { return schemaGlDisable }
+func (*binaryClassGlDisable) Schema() *binary.Entity { return schemaGlDisable }
 
-var schemaGlDisable = &schema.Entity{
+var schemaGlDisable = &binary.Entity{
 	TypeID:  binaryIDGlDisable,
 	Package: "gles",
 	Name:    "GlDisable",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -13681,15 +13681,15 @@ func (*binaryClassGlDisableDriverControlQCOM) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDisableDriverControlQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableDriverControlQCOM(d, obj.(*GlDisableDriverControlQCOM))
 }
-func (*binaryClassGlDisableDriverControlQCOM) Schema() *schema.Entity {
+func (*binaryClassGlDisableDriverControlQCOM) Schema() *binary.Entity {
 	return schemaGlDisableDriverControlQCOM
 }
 
-var schemaGlDisableDriverControlQCOM = &schema.Entity{
+var schemaGlDisableDriverControlQCOM = &binary.Entity{
 	TypeID:  binaryIDGlDisableDriverControlQCOM,
 	Package: "gles",
 	Name:    "GlDisableDriverControlQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -13725,15 +13725,15 @@ func (*binaryClassGlDisableVertexAttribArray) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDisableVertexAttribArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableVertexAttribArray(d, obj.(*GlDisableVertexAttribArray))
 }
-func (*binaryClassGlDisableVertexAttribArray) Schema() *schema.Entity {
+func (*binaryClassGlDisableVertexAttribArray) Schema() *binary.Entity {
 	return schemaGlDisableVertexAttribArray
 }
 
-var schemaGlDisableVertexAttribArray = &schema.Entity{
+var schemaGlDisableVertexAttribArray = &binary.Entity{
 	TypeID:  binaryIDGlDisableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlDisableVertexAttribArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
@@ -13767,13 +13767,13 @@ func (*binaryClassGlDisablei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisablei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisablei(d, obj.(*GlDisablei))
 }
-func (*binaryClassGlDisablei) Schema() *schema.Entity { return schemaGlDisablei }
+func (*binaryClassGlDisablei) Schema() *binary.Entity { return schemaGlDisablei }
 
-var schemaGlDisablei = &schema.Entity{
+var schemaGlDisablei = &binary.Entity{
 	TypeID:  binaryIDGlDisablei,
 	Package: "gles",
 	Name:    "GlDisablei",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -13808,13 +13808,13 @@ func (*binaryClassGlDisableiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiEXT(d, obj.(*GlDisableiEXT))
 }
-func (*binaryClassGlDisableiEXT) Schema() *schema.Entity { return schemaGlDisableiEXT }
+func (*binaryClassGlDisableiEXT) Schema() *binary.Entity { return schemaGlDisableiEXT }
 
-var schemaGlDisableiEXT = &schema.Entity{
+var schemaGlDisableiEXT = &binary.Entity{
 	TypeID:  binaryIDGlDisableiEXT,
 	Package: "gles",
 	Name:    "GlDisableiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -13849,13 +13849,13 @@ func (*binaryClassGlDisableiNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiNV(d, obj.(*GlDisableiNV))
 }
-func (*binaryClassGlDisableiNV) Schema() *schema.Entity { return schemaGlDisableiNV }
+func (*binaryClassGlDisableiNV) Schema() *binary.Entity { return schemaGlDisableiNV }
 
-var schemaGlDisableiNV = &schema.Entity{
+var schemaGlDisableiNV = &binary.Entity{
 	TypeID:  binaryIDGlDisableiNV,
 	Package: "gles",
 	Name:    "GlDisableiNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -13890,13 +13890,13 @@ func (*binaryClassGlDisableiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDisableiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDisableiOES(d, obj.(*GlDisableiOES))
 }
-func (*binaryClassGlDisableiOES) Schema() *schema.Entity { return schemaGlDisableiOES }
+func (*binaryClassGlDisableiOES) Schema() *binary.Entity { return schemaGlDisableiOES }
 
-var schemaGlDisableiOES = &schema.Entity{
+var schemaGlDisableiOES = &binary.Entity{
 	TypeID:  binaryIDGlDisableiOES,
 	Package: "gles",
 	Name:    "GlDisableiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -13933,15 +13933,15 @@ func (*binaryClassGlDiscardFramebufferEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDiscardFramebufferEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDiscardFramebufferEXT(d, obj.(*GlDiscardFramebufferEXT))
 }
-func (*binaryClassGlDiscardFramebufferEXT) Schema() *schema.Entity {
+func (*binaryClassGlDiscardFramebufferEXT) Schema() *binary.Entity {
 	return schemaGlDiscardFramebufferEXT
 }
 
-var schemaGlDiscardFramebufferEXT = &schema.Entity{
+var schemaGlDiscardFramebufferEXT = &binary.Entity{
 	TypeID:  binaryIDGlDiscardFramebufferEXT,
 	Package: "gles",
 	Name:    "GlDiscardFramebufferEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -13979,13 +13979,13 @@ func (*binaryClassGlDispatchCompute) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDispatchCompute) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDispatchCompute(d, obj.(*GlDispatchCompute))
 }
-func (*binaryClassGlDispatchCompute) Schema() *schema.Entity { return schemaGlDispatchCompute }
+func (*binaryClassGlDispatchCompute) Schema() *binary.Entity { return schemaGlDispatchCompute }
 
-var schemaGlDispatchCompute = &schema.Entity{
+var schemaGlDispatchCompute = &binary.Entity{
 	TypeID:  binaryIDGlDispatchCompute,
 	Package: "gles",
 	Name:    "GlDispatchCompute",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumGroupsX", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumGroupsY", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -14019,15 +14019,15 @@ func (*binaryClassGlDispatchComputeIndirect) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDispatchComputeIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDispatchComputeIndirect(d, obj.(*GlDispatchComputeIndirect))
 }
-func (*binaryClassGlDispatchComputeIndirect) Schema() *schema.Entity {
+func (*binaryClassGlDispatchComputeIndirect) Schema() *binary.Entity {
 	return schemaGlDispatchComputeIndirect
 }
 
-var schemaGlDispatchComputeIndirect = &schema.Entity{
+var schemaGlDispatchComputeIndirect = &binary.Entity{
 	TypeID:  binaryIDGlDispatchComputeIndirect,
 	Package: "gles",
 	Name:    "GlDispatchComputeIndirect",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Indirect", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
 	},
@@ -14063,13 +14063,13 @@ func (*binaryClassGlDrawArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArrays(d, obj.(*GlDrawArrays))
 }
-func (*binaryClassGlDrawArrays) Schema() *schema.Entity { return schemaGlDrawArrays }
+func (*binaryClassGlDrawArrays) Schema() *binary.Entity { return schemaGlDrawArrays }
 
-var schemaGlDrawArrays = &schema.Entity{
+var schemaGlDrawArrays = &binary.Entity{
 	TypeID:  binaryIDGlDrawArrays,
 	Package: "gles",
 	Name:    "GlDrawArrays",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14105,13 +14105,13 @@ func (*binaryClassGlDrawArraysIndirect) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawArraysIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysIndirect(d, obj.(*GlDrawArraysIndirect))
 }
-func (*binaryClassGlDrawArraysIndirect) Schema() *schema.Entity { return schemaGlDrawArraysIndirect }
+func (*binaryClassGlDrawArraysIndirect) Schema() *binary.Entity { return schemaGlDrawArraysIndirect }
 
-var schemaGlDrawArraysIndirect = &schema.Entity{
+var schemaGlDrawArraysIndirect = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysIndirect,
 	Package: "gles",
 	Name:    "GlDrawArraysIndirect",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
@@ -14150,13 +14150,13 @@ func (*binaryClassGlDrawArraysInstanced) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlDrawArraysInstanced) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstanced(d, obj.(*GlDrawArraysInstanced))
 }
-func (*binaryClassGlDrawArraysInstanced) Schema() *schema.Entity { return schemaGlDrawArraysInstanced }
+func (*binaryClassGlDrawArraysInstanced) Schema() *binary.Entity { return schemaGlDrawArraysInstanced }
 
-var schemaGlDrawArraysInstanced = &schema.Entity{
+var schemaGlDrawArraysInstanced = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysInstanced,
 	Package: "gles",
 	Name:    "GlDrawArraysInstanced",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14201,15 +14201,15 @@ func (*binaryClassGlDrawArraysInstancedANGLE) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDrawArraysInstancedANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedANGLE(d, obj.(*GlDrawArraysInstancedANGLE))
 }
-func (*binaryClassGlDrawArraysInstancedANGLE) Schema() *schema.Entity {
+func (*binaryClassGlDrawArraysInstancedANGLE) Schema() *binary.Entity {
 	return schemaGlDrawArraysInstancedANGLE
 }
 
-var schemaGlDrawArraysInstancedANGLE = &schema.Entity{
+var schemaGlDrawArraysInstancedANGLE = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedANGLE,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14256,15 +14256,15 @@ func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Decode(d binary.Decoder)
 func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedBaseInstanceEXT(d, obj.(*GlDrawArraysInstancedBaseInstanceEXT))
 }
-func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Schema() *binary.Entity {
 	return schemaGlDrawArraysInstancedBaseInstanceEXT
 }
 
-var schemaGlDrawArraysInstancedBaseInstanceEXT = &schema.Entity{
+var schemaGlDrawArraysInstancedBaseInstanceEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedBaseInstanceEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14306,15 +14306,15 @@ func (*binaryClassGlDrawArraysInstancedEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDrawArraysInstancedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedEXT(d, obj.(*GlDrawArraysInstancedEXT))
 }
-func (*binaryClassGlDrawArraysInstancedEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawArraysInstancedEXT) Schema() *binary.Entity {
 	return schemaGlDrawArraysInstancedEXT
 }
 
-var schemaGlDrawArraysInstancedEXT = &schema.Entity{
+var schemaGlDrawArraysInstancedEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedEXT,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14355,15 +14355,15 @@ func (*binaryClassGlDrawArraysInstancedNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawArraysInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawArraysInstancedNV(d, obj.(*GlDrawArraysInstancedNV))
 }
-func (*binaryClassGlDrawArraysInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlDrawArraysInstancedNV) Schema() *binary.Entity {
 	return schemaGlDrawArraysInstancedNV
 }
 
-var schemaGlDrawArraysInstancedNV = &schema.Entity{
+var schemaGlDrawArraysInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlDrawArraysInstancedNV,
 	Package: "gles",
 	Name:    "GlDrawArraysInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -14400,13 +14400,13 @@ func (*binaryClassGlDrawBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffers(d, obj.(*GlDrawBuffers))
 }
-func (*binaryClassGlDrawBuffers) Schema() *schema.Entity { return schemaGlDrawBuffers }
+func (*binaryClassGlDrawBuffers) Schema() *binary.Entity { return schemaGlDrawBuffers }
 
-var schemaGlDrawBuffers = &schema.Entity{
+var schemaGlDrawBuffers = &binary.Entity{
 	TypeID:  binaryIDGlDrawBuffers,
 	Package: "gles",
 	Name:    "GlDrawBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
@@ -14441,13 +14441,13 @@ func (*binaryClassGlDrawBuffersEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffersEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersEXT(d, obj.(*GlDrawBuffersEXT))
 }
-func (*binaryClassGlDrawBuffersEXT) Schema() *schema.Entity { return schemaGlDrawBuffersEXT }
+func (*binaryClassGlDrawBuffersEXT) Schema() *binary.Entity { return schemaGlDrawBuffersEXT }
 
-var schemaGlDrawBuffersEXT = &schema.Entity{
+var schemaGlDrawBuffersEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawBuffersEXT,
 	Package: "gles",
 	Name:    "GlDrawBuffersEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
@@ -14484,15 +14484,15 @@ func (*binaryClassGlDrawBuffersIndexedEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawBuffersIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersIndexedEXT(d, obj.(*GlDrawBuffersIndexedEXT))
 }
-func (*binaryClassGlDrawBuffersIndexedEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawBuffersIndexedEXT) Schema() *binary.Entity {
 	return schemaGlDrawBuffersIndexedEXT
 }
 
-var schemaGlDrawBuffersIndexedEXT = &schema.Entity{
+var schemaGlDrawBuffersIndexedEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawBuffersIndexedEXT,
 	Package: "gles",
 	Name:    "GlDrawBuffersIndexedEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Location", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
@@ -14528,13 +14528,13 @@ func (*binaryClassGlDrawBuffersNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawBuffersNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawBuffersNV(d, obj.(*GlDrawBuffersNV))
 }
-func (*binaryClassGlDrawBuffersNV) Schema() *schema.Entity { return schemaGlDrawBuffersNV }
+func (*binaryClassGlDrawBuffersNV) Schema() *binary.Entity { return schemaGlDrawBuffersNV }
 
-var schemaGlDrawBuffersNV = &schema.Entity{
+var schemaGlDrawBuffersNV = &binary.Entity{
 	TypeID:  binaryIDGlDrawBuffersNV,
 	Package: "gles",
 	Name:    "GlDrawBuffersNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Bufs", Type: &schema.Struct{Entity: schema.Of((*GLenumᶜᵖ)(nil).Class())}},
@@ -14565,13 +14565,13 @@ func (*binaryClassIndicesPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIndicesPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIndicesPointer(d, obj.(*IndicesPointer))
 }
-func (*binaryClassIndicesPointer) Schema() *schema.Entity { return schemaIndicesPointer }
+func (*binaryClassIndicesPointer) Schema() *binary.Entity { return schemaIndicesPointer }
 
-var schemaIndicesPointer = &schema.Entity{
+var schemaIndicesPointer = &binary.Entity{
 	TypeID:  binaryIDIndicesPointer,
 	Package: "gles",
 	Name:    "IndicesPointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -14608,13 +14608,13 @@ func (*binaryClassGlDrawElements) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawElements) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElements(d, obj.(*GlDrawElements))
 }
-func (*binaryClassGlDrawElements) Schema() *schema.Entity { return schemaGlDrawElements }
+func (*binaryClassGlDrawElements) Schema() *binary.Entity { return schemaGlDrawElements }
 
-var schemaGlDrawElements = &schema.Entity{
+var schemaGlDrawElements = &binary.Entity{
 	TypeID:  binaryIDGlDrawElements,
 	Package: "gles",
 	Name:    "GlDrawElements",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14657,15 +14657,15 @@ func (*binaryClassGlDrawElementsBaseVertex) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlDrawElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertex(d, obj.(*GlDrawElementsBaseVertex))
 }
-func (*binaryClassGlDrawElementsBaseVertex) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsBaseVertex) Schema() *binary.Entity {
 	return schemaGlDrawElementsBaseVertex
 }
 
-var schemaGlDrawElementsBaseVertex = &schema.Entity{
+var schemaGlDrawElementsBaseVertex = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14713,15 +14713,15 @@ func (*binaryClassGlDrawElementsBaseVertexEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDrawElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertexEXT(d, obj.(*GlDrawElementsBaseVertexEXT))
 }
-func (*binaryClassGlDrawElementsBaseVertexEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsBaseVertexEXT) Schema() *binary.Entity {
 	return schemaGlDrawElementsBaseVertexEXT
 }
 
-var schemaGlDrawElementsBaseVertexEXT = &schema.Entity{
+var schemaGlDrawElementsBaseVertexEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14769,15 +14769,15 @@ func (*binaryClassGlDrawElementsBaseVertexOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlDrawElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsBaseVertexOES(d, obj.(*GlDrawElementsBaseVertexOES))
 }
-func (*binaryClassGlDrawElementsBaseVertexOES) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsBaseVertexOES) Schema() *binary.Entity {
 	return schemaGlDrawElementsBaseVertexOES
 }
 
-var schemaGlDrawElementsBaseVertexOES = &schema.Entity{
+var schemaGlDrawElementsBaseVertexOES = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawElementsBaseVertexOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14817,13 +14817,13 @@ func (*binaryClassGlDrawElementsIndirect) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlDrawElementsIndirect) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsIndirect(d, obj.(*GlDrawElementsIndirect))
 }
-func (*binaryClassGlDrawElementsIndirect) Schema() *schema.Entity { return schemaGlDrawElementsIndirect }
+func (*binaryClassGlDrawElementsIndirect) Schema() *binary.Entity { return schemaGlDrawElementsIndirect }
 
-var schemaGlDrawElementsIndirect = &schema.Entity{
+var schemaGlDrawElementsIndirect = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsIndirect,
 	Package: "gles",
 	Name:    "GlDrawElementsIndirect",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -14865,15 +14865,15 @@ func (*binaryClassGlDrawElementsInstanced) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlDrawElementsInstanced) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstanced(d, obj.(*GlDrawElementsInstanced))
 }
-func (*binaryClassGlDrawElementsInstanced) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstanced) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstanced
 }
 
-var schemaGlDrawElementsInstanced = &schema.Entity{
+var schemaGlDrawElementsInstanced = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstanced,
 	Package: "gles",
 	Name:    "GlDrawElementsInstanced",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14921,15 +14921,15 @@ func (*binaryClassGlDrawElementsInstancedANGLE) Decode(d binary.Decoder) binary.
 func (*binaryClassGlDrawElementsInstancedANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedANGLE(d, obj.(*GlDrawElementsInstancedANGLE))
 }
-func (*binaryClassGlDrawElementsInstancedANGLE) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedANGLE) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedANGLE
 }
 
-var schemaGlDrawElementsInstancedANGLE = &schema.Entity{
+var schemaGlDrawElementsInstancedANGLE = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedANGLE,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -14979,15 +14979,15 @@ func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Decode(d binary.Decode
 func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseInstanceEXT(d, obj.(*GlDrawElementsInstancedBaseInstanceEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedBaseInstanceEXT
 }
 
-var schemaGlDrawElementsInstancedBaseInstanceEXT = &schema.Entity{
+var schemaGlDrawElementsInstancedBaseInstanceEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseInstanceEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15038,15 +15038,15 @@ func (*binaryClassGlDrawElementsInstancedBaseVertex) Decode(d binary.Decoder) bi
 func (*binaryClassGlDrawElementsInstancedBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertex(d, obj.(*GlDrawElementsInstancedBaseVertex))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedBaseVertex) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedBaseVertex
 }
 
-var schemaGlDrawElementsInstancedBaseVertex = &schema.Entity{
+var schemaGlDrawElementsInstancedBaseVertex = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "IndicesCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15099,15 +15099,15 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Decode(d bin
 func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(d, obj.(*GlDrawElementsInstancedBaseVertexBaseInstanceEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT
 }
 
-var schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT = &schema.Entity{
+var schemaGlDrawElementsInstancedBaseVertexBaseInstanceEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexBaseInstanceEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexBaseInstanceEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15159,15 +15159,15 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Decode(d binary.Decoder)
 func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexEXT(d, obj.(*GlDrawElementsInstancedBaseVertexEXT))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexEXT
 }
 
-var schemaGlDrawElementsInstancedBaseVertexEXT = &schema.Entity{
+var schemaGlDrawElementsInstancedBaseVertexEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15218,15 +15218,15 @@ func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Decode(d binary.Decoder)
 func (*binaryClassGlDrawElementsInstancedBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedBaseVertexOES(d, obj.(*GlDrawElementsInstancedBaseVertexOES))
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedBaseVertexOES
 }
 
-var schemaGlDrawElementsInstancedBaseVertexOES = &schema.Entity{
+var schemaGlDrawElementsInstancedBaseVertexOES = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedBaseVertexOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15275,15 +15275,15 @@ func (*binaryClassGlDrawElementsInstancedEXT) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlDrawElementsInstancedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedEXT(d, obj.(*GlDrawElementsInstancedEXT))
 }
-func (*binaryClassGlDrawElementsInstancedEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedEXT) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedEXT
 }
 
-var schemaGlDrawElementsInstancedEXT = &schema.Entity{
+var schemaGlDrawElementsInstancedEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedEXT,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15327,15 +15327,15 @@ func (*binaryClassGlDrawElementsInstancedNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlDrawElementsInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawElementsInstancedNV(d, obj.(*GlDrawElementsInstancedNV))
 }
-func (*binaryClassGlDrawElementsInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlDrawElementsInstancedNV) Schema() *binary.Entity {
 	return schemaGlDrawElementsInstancedNV
 }
 
-var schemaGlDrawElementsInstancedNV = &schema.Entity{
+var schemaGlDrawElementsInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlDrawElementsInstancedNV,
 	Package: "gles",
 	Name:    "GlDrawElementsInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -15381,13 +15381,13 @@ func (*binaryClassGlDrawRangeElements) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlDrawRangeElements) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElements(d, obj.(*GlDrawRangeElements))
 }
-func (*binaryClassGlDrawRangeElements) Schema() *schema.Entity { return schemaGlDrawRangeElements }
+func (*binaryClassGlDrawRangeElements) Schema() *binary.Entity { return schemaGlDrawRangeElements }
 
-var schemaGlDrawRangeElements = &schema.Entity{
+var schemaGlDrawRangeElements = &binary.Entity{
 	TypeID:  binaryIDGlDrawRangeElements,
 	Package: "gles",
 	Name:    "GlDrawRangeElements",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15440,15 +15440,15 @@ func (*binaryClassGlDrawRangeElementsBaseVertex) Decode(d binary.Decoder) binary
 func (*binaryClassGlDrawRangeElementsBaseVertex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertex(d, obj.(*GlDrawRangeElementsBaseVertex))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *schema.Entity {
+func (*binaryClassGlDrawRangeElementsBaseVertex) Schema() *binary.Entity {
 	return schemaGlDrawRangeElementsBaseVertex
 }
 
-var schemaGlDrawRangeElementsBaseVertex = &schema.Entity{
+var schemaGlDrawRangeElementsBaseVertex = &binary.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertex,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DrawMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15502,15 +15502,15 @@ func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlDrawRangeElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertexEXT(d, obj.(*GlDrawRangeElementsBaseVertexEXT))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Schema() *schema.Entity {
+func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Schema() *binary.Entity {
 	return schemaGlDrawRangeElementsBaseVertexEXT
 }
 
-var schemaGlDrawRangeElementsBaseVertexEXT = &schema.Entity{
+var schemaGlDrawRangeElementsBaseVertexEXT = &binary.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15564,15 +15564,15 @@ func (*binaryClassGlDrawRangeElementsBaseVertexOES) Decode(d binary.Decoder) bin
 func (*binaryClassGlDrawRangeElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlDrawRangeElementsBaseVertexOES(d, obj.(*GlDrawRangeElementsBaseVertexOES))
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexOES) Schema() *schema.Entity {
+func (*binaryClassGlDrawRangeElementsBaseVertexOES) Schema() *binary.Entity {
 	return schemaGlDrawRangeElementsBaseVertexOES
 }
 
-var schemaGlDrawRangeElementsBaseVertexOES = &schema.Entity{
+var schemaGlDrawRangeElementsBaseVertexOES = &binary.Entity{
 	TypeID:  binaryIDGlDrawRangeElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlDrawRangeElementsBaseVertexOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15616,15 +15616,15 @@ func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Decode(d binary.Decode
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEGLImageTargetRenderbufferStorageOES(d, obj.(*GlEGLImageTargetRenderbufferStorageOES))
 }
-func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Schema() *schema.Entity {
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Schema() *binary.Entity {
 	return schemaGlEGLImageTargetRenderbufferStorageOES
 }
 
-var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Entity{
+var schemaGlEGLImageTargetRenderbufferStorageOES = &binary.Entity{
 	TypeID:  binaryIDGlEGLImageTargetRenderbufferStorageOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetRenderbufferStorageOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Image", Type: &schema.Struct{Entity: schema.Of((*GLeglImageOES)(nil).Class())}},
@@ -15663,15 +15663,15 @@ func (*binaryClassGlEGLImageTargetTexture2DOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlEGLImageTargetTexture2DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEGLImageTargetTexture2DOES(d, obj.(*GlEGLImageTargetTexture2DOES))
 }
-func (*binaryClassGlEGLImageTargetTexture2DOES) Schema() *schema.Entity {
+func (*binaryClassGlEGLImageTargetTexture2DOES) Schema() *binary.Entity {
 	return schemaGlEGLImageTargetTexture2DOES
 }
 
-var schemaGlEGLImageTargetTexture2DOES = &schema.Entity{
+var schemaGlEGLImageTargetTexture2DOES = &binary.Entity{
 	TypeID:  binaryIDGlEGLImageTargetTexture2DOES,
 	Package: "gles",
 	Name:    "GlEGLImageTargetTexture2DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Image", Type: &schema.Struct{Entity: schema.Of((*GLeglImageOES)(nil).Class())}},
@@ -15704,13 +15704,13 @@ func (*binaryClassGlEnable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnable(d, obj.(*GlEnable))
 }
-func (*binaryClassGlEnable) Schema() *schema.Entity { return schemaGlEnable }
+func (*binaryClassGlEnable) Schema() *binary.Entity { return schemaGlEnable }
 
-var schemaGlEnable = &schema.Entity{
+var schemaGlEnable = &binary.Entity{
 	TypeID:  binaryIDGlEnable,
 	Package: "gles",
 	Name:    "GlEnable",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -15742,15 +15742,15 @@ func (*binaryClassGlEnableDriverControlQCOM) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlEnableDriverControlQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableDriverControlQCOM(d, obj.(*GlEnableDriverControlQCOM))
 }
-func (*binaryClassGlEnableDriverControlQCOM) Schema() *schema.Entity {
+func (*binaryClassGlEnableDriverControlQCOM) Schema() *binary.Entity {
 	return schemaGlEnableDriverControlQCOM
 }
 
-var schemaGlEnableDriverControlQCOM = &schema.Entity{
+var schemaGlEnableDriverControlQCOM = &binary.Entity{
 	TypeID:  binaryIDGlEnableDriverControlQCOM,
 	Package: "gles",
 	Name:    "GlEnableDriverControlQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -15782,15 +15782,15 @@ func (*binaryClassGlEnableVertexAttribArray) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlEnableVertexAttribArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableVertexAttribArray(d, obj.(*GlEnableVertexAttribArray))
 }
-func (*binaryClassGlEnableVertexAttribArray) Schema() *schema.Entity {
+func (*binaryClassGlEnableVertexAttribArray) Schema() *binary.Entity {
 	return schemaGlEnableVertexAttribArray
 }
 
-var schemaGlEnableVertexAttribArray = &schema.Entity{
+var schemaGlEnableVertexAttribArray = &binary.Entity{
 	TypeID:  binaryIDGlEnableVertexAttribArray,
 	Package: "gles",
 	Name:    "GlEnableVertexAttribArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
@@ -15824,13 +15824,13 @@ func (*binaryClassGlEnablei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnablei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnablei(d, obj.(*GlEnablei))
 }
-func (*binaryClassGlEnablei) Schema() *schema.Entity { return schemaGlEnablei }
+func (*binaryClassGlEnablei) Schema() *binary.Entity { return schemaGlEnablei }
 
-var schemaGlEnablei = &schema.Entity{
+var schemaGlEnablei = &binary.Entity{
 	TypeID:  binaryIDGlEnablei,
 	Package: "gles",
 	Name:    "GlEnablei",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15865,13 +15865,13 @@ func (*binaryClassGlEnableiEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiEXT(d, obj.(*GlEnableiEXT))
 }
-func (*binaryClassGlEnableiEXT) Schema() *schema.Entity { return schemaGlEnableiEXT }
+func (*binaryClassGlEnableiEXT) Schema() *binary.Entity { return schemaGlEnableiEXT }
 
-var schemaGlEnableiEXT = &schema.Entity{
+var schemaGlEnableiEXT = &binary.Entity{
 	TypeID:  binaryIDGlEnableiEXT,
 	Package: "gles",
 	Name:    "GlEnableiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15906,13 +15906,13 @@ func (*binaryClassGlEnableiNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiNV(d, obj.(*GlEnableiNV))
 }
-func (*binaryClassGlEnableiNV) Schema() *schema.Entity { return schemaGlEnableiNV }
+func (*binaryClassGlEnableiNV) Schema() *binary.Entity { return schemaGlEnableiNV }
 
-var schemaGlEnableiNV = &schema.Entity{
+var schemaGlEnableiNV = &binary.Entity{
 	TypeID:  binaryIDGlEnableiNV,
 	Package: "gles",
 	Name:    "GlEnableiNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15947,13 +15947,13 @@ func (*binaryClassGlEnableiOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEnableiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEnableiOES(d, obj.(*GlEnableiOES))
 }
-func (*binaryClassGlEnableiOES) Schema() *schema.Entity { return schemaGlEnableiOES }
+func (*binaryClassGlEnableiOES) Schema() *binary.Entity { return schemaGlEnableiOES }
 
-var schemaGlEnableiOES = &schema.Entity{
+var schemaGlEnableiOES = &binary.Entity{
 	TypeID:  binaryIDGlEnableiOES,
 	Package: "gles",
 	Name:    "GlEnableiOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -15984,15 +15984,15 @@ func (*binaryClassGlEndConditionalRenderNV) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlEndConditionalRenderNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndConditionalRenderNV(d, obj.(*GlEndConditionalRenderNV))
 }
-func (*binaryClassGlEndConditionalRenderNV) Schema() *schema.Entity {
+func (*binaryClassGlEndConditionalRenderNV) Schema() *binary.Entity {
 	return schemaGlEndConditionalRenderNV
 }
 
-var schemaGlEndConditionalRenderNV = &schema.Entity{
+var schemaGlEndConditionalRenderNV = &binary.Entity{
 	TypeID:  binaryIDGlEndConditionalRenderNV,
 	Package: "gles",
 	Name:    "GlEndConditionalRenderNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -16023,13 +16023,13 @@ func (*binaryClassGlEndPerfMonitorAMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndPerfMonitorAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndPerfMonitorAMD(d, obj.(*GlEndPerfMonitorAMD))
 }
-func (*binaryClassGlEndPerfMonitorAMD) Schema() *schema.Entity { return schemaGlEndPerfMonitorAMD }
+func (*binaryClassGlEndPerfMonitorAMD) Schema() *binary.Entity { return schemaGlEndPerfMonitorAMD }
 
-var schemaGlEndPerfMonitorAMD = &schema.Entity{
+var schemaGlEndPerfMonitorAMD = &binary.Entity{
 	TypeID:  binaryIDGlEndPerfMonitorAMD,
 	Package: "gles",
 	Name:    "GlEndPerfMonitorAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -16061,13 +16061,13 @@ func (*binaryClassGlEndPerfQueryINTEL) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndPerfQueryINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndPerfQueryINTEL(d, obj.(*GlEndPerfQueryINTEL))
 }
-func (*binaryClassGlEndPerfQueryINTEL) Schema() *schema.Entity { return schemaGlEndPerfQueryINTEL }
+func (*binaryClassGlEndPerfQueryINTEL) Schema() *binary.Entity { return schemaGlEndPerfQueryINTEL }
 
-var schemaGlEndPerfQueryINTEL = &schema.Entity{
+var schemaGlEndPerfQueryINTEL = &binary.Entity{
 	TypeID:  binaryIDGlEndPerfQueryINTEL,
 	Package: "gles",
 	Name:    "GlEndPerfQueryINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -16099,13 +16099,13 @@ func (*binaryClassGlEndQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndQuery(d, obj.(*GlEndQuery))
 }
-func (*binaryClassGlEndQuery) Schema() *schema.Entity { return schemaGlEndQuery }
+func (*binaryClassGlEndQuery) Schema() *binary.Entity { return schemaGlEndQuery }
 
-var schemaGlEndQuery = &schema.Entity{
+var schemaGlEndQuery = &binary.Entity{
 	TypeID:  binaryIDGlEndQuery,
 	Package: "gles",
 	Name:    "GlEndQuery",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -16137,13 +16137,13 @@ func (*binaryClassGlEndQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndQueryEXT(d, obj.(*GlEndQueryEXT))
 }
-func (*binaryClassGlEndQueryEXT) Schema() *schema.Entity { return schemaGlEndQueryEXT }
+func (*binaryClassGlEndQueryEXT) Schema() *binary.Entity { return schemaGlEndQueryEXT }
 
-var schemaGlEndQueryEXT = &schema.Entity{
+var schemaGlEndQueryEXT = &binary.Entity{
 	TypeID:  binaryIDGlEndQueryEXT,
 	Package: "gles",
 	Name:    "GlEndQueryEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -16175,13 +16175,13 @@ func (*binaryClassGlEndTilingQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlEndTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndTilingQCOM(d, obj.(*GlEndTilingQCOM))
 }
-func (*binaryClassGlEndTilingQCOM) Schema() *schema.Entity { return schemaGlEndTilingQCOM }
+func (*binaryClassGlEndTilingQCOM) Schema() *binary.Entity { return schemaGlEndTilingQCOM }
 
-var schemaGlEndTilingQCOM = &schema.Entity{
+var schemaGlEndTilingQCOM = &binary.Entity{
 	TypeID:  binaryIDGlEndTilingQCOM,
 	Package: "gles",
 	Name:    "GlEndTilingQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
@@ -16211,13 +16211,13 @@ func (*binaryClassGlEndTransformFeedback) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlEndTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlEndTransformFeedback(d, obj.(*GlEndTransformFeedback))
 }
-func (*binaryClassGlEndTransformFeedback) Schema() *schema.Entity { return schemaGlEndTransformFeedback }
+func (*binaryClassGlEndTransformFeedback) Schema() *binary.Entity { return schemaGlEndTransformFeedback }
 
-var schemaGlEndTransformFeedback = &schema.Entity{
+var schemaGlEndTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlEndTransformFeedback,
 	Package: "gles",
 	Name:    "GlEndTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -16246,13 +16246,13 @@ func (*binaryClassVoidᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖᵖ(d, obj.(*Voidᵖᵖ))
 }
-func (*binaryClassVoidᵖᵖ) Schema() *schema.Entity { return schemaVoidᵖᵖ }
+func (*binaryClassVoidᵖᵖ) Schema() *binary.Entity { return schemaVoidᵖᵖ }
 
-var schemaVoidᵖᵖ = &schema.Entity{
+var schemaVoidᵖᵖ = &binary.Entity{
 	TypeID:  binaryIDVoidᵖᵖ,
 	Package: "gles",
 	Name:    "Voidᵖᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -16289,15 +16289,15 @@ func (*binaryClassGlExtGetBufferPointervQCOM) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlExtGetBufferPointervQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetBufferPointervQCOM(d, obj.(*GlExtGetBufferPointervQCOM))
 }
-func (*binaryClassGlExtGetBufferPointervQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetBufferPointervQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetBufferPointervQCOM
 }
 
-var schemaGlExtGetBufferPointervQCOM = &schema.Entity{
+var schemaGlExtGetBufferPointervQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetBufferPointervQCOM,
 	Package: "gles",
 	Name:    "GlExtGetBufferPointervQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
@@ -16334,13 +16334,13 @@ func (*binaryClassGlExtGetBuffersQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetBuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetBuffersQCOM(d, obj.(*GlExtGetBuffersQCOM))
 }
-func (*binaryClassGlExtGetBuffersQCOM) Schema() *schema.Entity { return schemaGlExtGetBuffersQCOM }
+func (*binaryClassGlExtGetBuffersQCOM) Schema() *binary.Entity { return schemaGlExtGetBuffersQCOM }
 
-var schemaGlExtGetBuffersQCOM = &schema.Entity{
+var schemaGlExtGetBuffersQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetBuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetBuffersQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᵖ)(nil).Class())}},
 		{Declared: "MaxBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16378,15 +16378,15 @@ func (*binaryClassGlExtGetFramebuffersQCOM) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlExtGetFramebuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetFramebuffersQCOM(d, obj.(*GlExtGetFramebuffersQCOM))
 }
-func (*binaryClassGlExtGetFramebuffersQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetFramebuffersQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetFramebuffersQCOM
 }
 
-var schemaGlExtGetFramebuffersQCOM = &schema.Entity{
+var schemaGlExtGetFramebuffersQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetFramebuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetFramebuffersQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᵖ)(nil).Class())}},
 		{Declared: "MaxFramebuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16430,15 +16430,15 @@ func (*binaryClassGlExtGetProgramBinarySourceQCOM) Decode(d binary.Decoder) bina
 func (*binaryClassGlExtGetProgramBinarySourceQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetProgramBinarySourceQCOM(d, obj.(*GlExtGetProgramBinarySourceQCOM))
 }
-func (*binaryClassGlExtGetProgramBinarySourceQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetProgramBinarySourceQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetProgramBinarySourceQCOM
 }
 
-var schemaGlExtGetProgramBinarySourceQCOM = &schema.Entity{
+var schemaGlExtGetProgramBinarySourceQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetProgramBinarySourceQCOM,
 	Package: "gles",
 	Name:    "GlExtGetProgramBinarySourceQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Shadertype", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -16471,13 +16471,13 @@ func (*binaryClassProgramIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgramIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgramIdᵖ(d, obj.(*ProgramIdᵖ))
 }
-func (*binaryClassProgramIdᵖ) Schema() *schema.Entity { return schemaProgramIdᵖ }
+func (*binaryClassProgramIdᵖ) Schema() *binary.Entity { return schemaProgramIdᵖ }
 
-var schemaProgramIdᵖ = &schema.Entity{
+var schemaProgramIdᵖ = &binary.Entity{
 	TypeID:  binaryIDProgramIdᵖ,
 	Package: "gles",
 	Name:    "ProgramIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -16512,13 +16512,13 @@ func (*binaryClassGlExtGetProgramsQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetProgramsQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetProgramsQCOM(d, obj.(*GlExtGetProgramsQCOM))
 }
-func (*binaryClassGlExtGetProgramsQCOM) Schema() *schema.Entity { return schemaGlExtGetProgramsQCOM }
+func (*binaryClassGlExtGetProgramsQCOM) Schema() *binary.Entity { return schemaGlExtGetProgramsQCOM }
 
-var schemaGlExtGetProgramsQCOM = &schema.Entity{
+var schemaGlExtGetProgramsQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetProgramsQCOM,
 	Package: "gles",
 	Name:    "GlExtGetProgramsQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Programs", Type: &schema.Struct{Entity: schema.Of((*ProgramIdᵖ)(nil).Class())}},
 		{Declared: "MaxPrograms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16550,13 +16550,13 @@ func (*binaryClassRenderbufferIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdᵖ(d, obj.(*RenderbufferIdᵖ))
 }
-func (*binaryClassRenderbufferIdᵖ) Schema() *schema.Entity { return schemaRenderbufferIdᵖ }
+func (*binaryClassRenderbufferIdᵖ) Schema() *binary.Entity { return schemaRenderbufferIdᵖ }
 
-var schemaRenderbufferIdᵖ = &schema.Entity{
+var schemaRenderbufferIdᵖ = &binary.Entity{
 	TypeID:  binaryIDRenderbufferIdᵖ,
 	Package: "gles",
 	Name:    "RenderbufferIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -16591,15 +16591,15 @@ func (*binaryClassGlExtGetRenderbuffersQCOM) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlExtGetRenderbuffersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetRenderbuffersQCOM(d, obj.(*GlExtGetRenderbuffersQCOM))
 }
-func (*binaryClassGlExtGetRenderbuffersQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetRenderbuffersQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetRenderbuffersQCOM
 }
 
-var schemaGlExtGetRenderbuffersQCOM = &schema.Entity{
+var schemaGlExtGetRenderbuffersQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetRenderbuffersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetRenderbuffersQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᵖ)(nil).Class())}},
 		{Declared: "MaxRenderbuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16631,13 +16631,13 @@ func (*binaryClassShaderIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdᵖ(d, obj.(*ShaderIdᵖ))
 }
-func (*binaryClassShaderIdᵖ) Schema() *schema.Entity { return schemaShaderIdᵖ }
+func (*binaryClassShaderIdᵖ) Schema() *binary.Entity { return schemaShaderIdᵖ }
 
-var schemaShaderIdᵖ = &schema.Entity{
+var schemaShaderIdᵖ = &binary.Entity{
 	TypeID:  binaryIDShaderIdᵖ,
 	Package: "gles",
 	Name:    "ShaderIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -16672,13 +16672,13 @@ func (*binaryClassGlExtGetShadersQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetShadersQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetShadersQCOM(d, obj.(*GlExtGetShadersQCOM))
 }
-func (*binaryClassGlExtGetShadersQCOM) Schema() *schema.Entity { return schemaGlExtGetShadersQCOM }
+func (*binaryClassGlExtGetShadersQCOM) Schema() *binary.Entity { return schemaGlExtGetShadersQCOM }
 
-var schemaGlExtGetShadersQCOM = &schema.Entity{
+var schemaGlExtGetShadersQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetShadersQCOM,
 	Package: "gles",
 	Name:    "GlExtGetShadersQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shaders", Type: &schema.Struct{Entity: schema.Of((*ShaderIdᵖ)(nil).Class())}},
 		{Declared: "MaxShaders", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16724,15 +16724,15 @@ func (*binaryClassGlExtGetTexLevelParameterivQCOM) Decode(d binary.Decoder) bina
 func (*binaryClassGlExtGetTexLevelParameterivQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexLevelParameterivQCOM(d, obj.(*GlExtGetTexLevelParameterivQCOM))
 }
-func (*binaryClassGlExtGetTexLevelParameterivQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetTexLevelParameterivQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetTexLevelParameterivQCOM
 }
 
-var schemaGlExtGetTexLevelParameterivQCOM = &schema.Entity{
+var schemaGlExtGetTexLevelParameterivQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetTexLevelParameterivQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexLevelParameterivQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -16788,15 +16788,15 @@ func (*binaryClassGlExtGetTexSubImageQCOM) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlExtGetTexSubImageQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexSubImageQCOM(d, obj.(*GlExtGetTexSubImageQCOM))
 }
-func (*binaryClassGlExtGetTexSubImageQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtGetTexSubImageQCOM) Schema() *binary.Entity {
 	return schemaGlExtGetTexSubImageQCOM
 }
 
-var schemaGlExtGetTexSubImageQCOM = &schema.Entity{
+var schemaGlExtGetTexSubImageQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetTexSubImageQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexSubImageQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16836,13 +16836,13 @@ func (*binaryClassTextureIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdᵖ(d, obj.(*TextureIdᵖ))
 }
-func (*binaryClassTextureIdᵖ) Schema() *schema.Entity { return schemaTextureIdᵖ }
+func (*binaryClassTextureIdᵖ) Schema() *binary.Entity { return schemaTextureIdᵖ }
 
-var schemaTextureIdᵖ = &schema.Entity{
+var schemaTextureIdᵖ = &binary.Entity{
 	TypeID:  binaryIDTextureIdᵖ,
 	Package: "gles",
 	Name:    "TextureIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -16877,13 +16877,13 @@ func (*binaryClassGlExtGetTexturesQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlExtGetTexturesQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtGetTexturesQCOM(d, obj.(*GlExtGetTexturesQCOM))
 }
-func (*binaryClassGlExtGetTexturesQCOM) Schema() *schema.Entity { return schemaGlExtGetTexturesQCOM }
+func (*binaryClassGlExtGetTexturesQCOM) Schema() *binary.Entity { return schemaGlExtGetTexturesQCOM }
 
-var schemaGlExtGetTexturesQCOM = &schema.Entity{
+var schemaGlExtGetTexturesQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtGetTexturesQCOM,
 	Package: "gles",
 	Name:    "GlExtGetTexturesQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᵖ)(nil).Class())}},
 		{Declared: "MaxTextures", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -16919,15 +16919,15 @@ func (*binaryClassGlExtIsProgramBinaryQCOM) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlExtIsProgramBinaryQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtIsProgramBinaryQCOM(d, obj.(*GlExtIsProgramBinaryQCOM))
 }
-func (*binaryClassGlExtIsProgramBinaryQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtIsProgramBinaryQCOM) Schema() *binary.Entity {
 	return schemaGlExtIsProgramBinaryQCOM
 }
 
-var schemaGlExtIsProgramBinaryQCOM = &schema.Entity{
+var schemaGlExtIsProgramBinaryQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtIsProgramBinaryQCOM,
 	Package: "gles",
 	Name:    "GlExtIsProgramBinaryQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -16968,15 +16968,15 @@ func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Decode(d binary.Decoder) bin
 func (*binaryClassGlExtTexObjectStateOverrideiQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlExtTexObjectStateOverrideiQCOM(d, obj.(*GlExtTexObjectStateOverrideiQCOM))
 }
-func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Schema() *schema.Entity {
+func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Schema() *binary.Entity {
 	return schemaGlExtTexObjectStateOverrideiQCOM
 }
 
-var schemaGlExtTexObjectStateOverrideiQCOM = &schema.Entity{
+var schemaGlExtTexObjectStateOverrideiQCOM = &binary.Entity{
 	TypeID:  binaryIDGlExtTexObjectStateOverrideiQCOM,
 	Package: "gles",
 	Name:    "GlExtTexObjectStateOverrideiQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17014,13 +17014,13 @@ func (*binaryClassGlFenceSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFenceSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFenceSync(d, obj.(*GlFenceSync))
 }
-func (*binaryClassGlFenceSync) Schema() *schema.Entity { return schemaGlFenceSync }
+func (*binaryClassGlFenceSync) Schema() *binary.Entity { return schemaGlFenceSync }
 
-var schemaGlFenceSync = &schema.Entity{
+var schemaGlFenceSync = &binary.Entity{
 	TypeID:  binaryIDGlFenceSync,
 	Package: "gles",
 	Name:    "GlFenceSync",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -17058,13 +17058,13 @@ func (*binaryClassGlFenceSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFenceSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFenceSyncAPPLE(d, obj.(*GlFenceSyncAPPLE))
 }
-func (*binaryClassGlFenceSyncAPPLE) Schema() *schema.Entity { return schemaGlFenceSyncAPPLE }
+func (*binaryClassGlFenceSyncAPPLE) Schema() *binary.Entity { return schemaGlFenceSyncAPPLE }
 
-var schemaGlFenceSyncAPPLE = &schema.Entity{
+var schemaGlFenceSyncAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlFenceSyncAPPLE,
 	Package: "gles",
 	Name:    "GlFenceSyncAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -17096,13 +17096,13 @@ func (*binaryClassGlFinish) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFinish) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFinish(d, obj.(*GlFinish))
 }
-func (*binaryClassGlFinish) Schema() *schema.Entity { return schemaGlFinish }
+func (*binaryClassGlFinish) Schema() *binary.Entity { return schemaGlFinish }
 
-var schemaGlFinish = &schema.Entity{
+var schemaGlFinish = &binary.Entity{
 	TypeID:  binaryIDGlFinish,
 	Package: "gles",
 	Name:    "GlFinish",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -17133,13 +17133,13 @@ func (*binaryClassGlFinishFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFinishFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFinishFenceNV(d, obj.(*GlFinishFenceNV))
 }
-func (*binaryClassGlFinishFenceNV) Schema() *schema.Entity { return schemaGlFinishFenceNV }
+func (*binaryClassGlFinishFenceNV) Schema() *binary.Entity { return schemaGlFinishFenceNV }
 
-var schemaGlFinishFenceNV = &schema.Entity{
+var schemaGlFinishFenceNV = &binary.Entity{
 	TypeID:  binaryIDGlFinishFenceNV,
 	Package: "gles",
 	Name:    "GlFinishFenceNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -17169,13 +17169,13 @@ func (*binaryClassGlFlush) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFlush) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlush(d, obj.(*GlFlush))
 }
-func (*binaryClassGlFlush) Schema() *schema.Entity { return schemaGlFlush }
+func (*binaryClassGlFlush) Schema() *binary.Entity { return schemaGlFlush }
 
-var schemaGlFlush = &schema.Entity{
+var schemaGlFlush = &binary.Entity{
 	TypeID:  binaryIDGlFlush,
 	Package: "gles",
 	Name:    "GlFlush",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -17210,15 +17210,15 @@ func (*binaryClassGlFlushMappedBufferRange) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlFlushMappedBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlushMappedBufferRange(d, obj.(*GlFlushMappedBufferRange))
 }
-func (*binaryClassGlFlushMappedBufferRange) Schema() *schema.Entity {
+func (*binaryClassGlFlushMappedBufferRange) Schema() *binary.Entity {
 	return schemaGlFlushMappedBufferRange
 }
 
-var schemaGlFlushMappedBufferRange = &schema.Entity{
+var schemaGlFlushMappedBufferRange = &binary.Entity{
 	TypeID:  binaryIDGlFlushMappedBufferRange,
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRange",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -17260,15 +17260,15 @@ func (*binaryClassGlFlushMappedBufferRangeEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlFlushMappedBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFlushMappedBufferRangeEXT(d, obj.(*GlFlushMappedBufferRangeEXT))
 }
-func (*binaryClassGlFlushMappedBufferRangeEXT) Schema() *schema.Entity {
+func (*binaryClassGlFlushMappedBufferRangeEXT) Schema() *binary.Entity {
 	return schemaGlFlushMappedBufferRangeEXT
 }
 
-var schemaGlFlushMappedBufferRangeEXT = &schema.Entity{
+var schemaGlFlushMappedBufferRangeEXT = &binary.Entity{
 	TypeID:  binaryIDGlFlushMappedBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlFlushMappedBufferRangeEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -17302,15 +17302,15 @@ func (*binaryClassGlFragmentCoverageColorNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFragmentCoverageColorNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFragmentCoverageColorNV(d, obj.(*GlFragmentCoverageColorNV))
 }
-func (*binaryClassGlFragmentCoverageColorNV) Schema() *schema.Entity {
+func (*binaryClassGlFragmentCoverageColorNV) Schema() *binary.Entity {
 	return schemaGlFragmentCoverageColorNV
 }
 
-var schemaGlFragmentCoverageColorNV = &schema.Entity{
+var schemaGlFragmentCoverageColorNV = &binary.Entity{
 	TypeID:  binaryIDGlFragmentCoverageColorNV,
 	Package: "gles",
 	Name:    "GlFragmentCoverageColorNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Color", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -17346,15 +17346,15 @@ func (*binaryClassGlFramebufferParameteri) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferParameteri(d, obj.(*GlFramebufferParameteri))
 }
-func (*binaryClassGlFramebufferParameteri) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferParameteri) Schema() *binary.Entity {
 	return schemaGlFramebufferParameteri
 }
 
-var schemaGlFramebufferParameteri = &schema.Entity{
+var schemaGlFramebufferParameteri = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferParameteri,
 	Package: "gles",
 	Name:    "GlFramebufferParameteri",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17394,15 +17394,15 @@ func (*binaryClassGlFramebufferRenderbuffer) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferRenderbuffer(d, obj.(*GlFramebufferRenderbuffer))
 }
-func (*binaryClassGlFramebufferRenderbuffer) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferRenderbuffer) Schema() *binary.Entity {
 	return schemaGlFramebufferRenderbuffer
 }
 
-var schemaGlFramebufferRenderbuffer = &schema.Entity{
+var schemaGlFramebufferRenderbuffer = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferRenderbuffer,
 	Package: "gles",
 	Name:    "GlFramebufferRenderbuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17447,15 +17447,15 @@ func (*binaryClassGlFramebufferSampleLocationsfvNV) Decode(d binary.Decoder) bin
 func (*binaryClassGlFramebufferSampleLocationsfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferSampleLocationsfvNV(d, obj.(*GlFramebufferSampleLocationsfvNV))
 }
-func (*binaryClassGlFramebufferSampleLocationsfvNV) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferSampleLocationsfvNV) Schema() *binary.Entity {
 	return schemaGlFramebufferSampleLocationsfvNV
 }
 
-var schemaGlFramebufferSampleLocationsfvNV = &schema.Entity{
+var schemaGlFramebufferSampleLocationsfvNV = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferSampleLocationsfvNV,
 	Package: "gles",
 	Name:    "GlFramebufferSampleLocationsfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -17496,13 +17496,13 @@ func (*binaryClassGlFramebufferTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFramebufferTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture(d, obj.(*GlFramebufferTexture))
 }
-func (*binaryClassGlFramebufferTexture) Schema() *schema.Entity { return schemaGlFramebufferTexture }
+func (*binaryClassGlFramebufferTexture) Schema() *binary.Entity { return schemaGlFramebufferTexture }
 
-var schemaGlFramebufferTexture = &schema.Entity{
+var schemaGlFramebufferTexture = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTexture,
 	Package: "gles",
 	Name:    "GlFramebufferTexture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17545,13 +17545,13 @@ func (*binaryClassGlFramebufferTexture2D) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlFramebufferTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2D(d, obj.(*GlFramebufferTexture2D))
 }
-func (*binaryClassGlFramebufferTexture2D) Schema() *schema.Entity { return schemaGlFramebufferTexture2D }
+func (*binaryClassGlFramebufferTexture2D) Schema() *binary.Entity { return schemaGlFramebufferTexture2D }
 
-var schemaGlFramebufferTexture2D = &schema.Entity{
+var schemaGlFramebufferTexture2D = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2D,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17601,15 +17601,15 @@ func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Decode(d binary.Decoder)
 func (*binaryClassGlFramebufferTexture2DMultisampleEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2DMultisampleEXT(d, obj.(*GlFramebufferTexture2DMultisampleEXT))
 }
-func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Schema() *binary.Entity {
 	return schemaGlFramebufferTexture2DMultisampleEXT
 }
 
-var schemaGlFramebufferTexture2DMultisampleEXT = &schema.Entity{
+var schemaGlFramebufferTexture2DMultisampleEXT = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2DMultisampleEXT,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17660,15 +17660,15 @@ func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Decode(d binary.Decoder)
 func (*binaryClassGlFramebufferTexture2DMultisampleIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture2DMultisampleIMG(d, obj.(*GlFramebufferTexture2DMultisampleIMG))
 }
-func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Schema() *binary.Entity {
 	return schemaGlFramebufferTexture2DMultisampleIMG
 }
 
-var schemaGlFramebufferTexture2DMultisampleIMG = &schema.Entity{
+var schemaGlFramebufferTexture2DMultisampleIMG = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTexture2DMultisampleIMG,
 	Package: "gles",
 	Name:    "GlFramebufferTexture2DMultisampleIMG",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17715,15 +17715,15 @@ func (*binaryClassGlFramebufferTexture3DOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferTexture3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTexture3DOES(d, obj.(*GlFramebufferTexture3DOES))
 }
-func (*binaryClassGlFramebufferTexture3DOES) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTexture3DOES) Schema() *binary.Entity {
 	return schemaGlFramebufferTexture3DOES
 }
 
-var schemaGlFramebufferTexture3DOES = &schema.Entity{
+var schemaGlFramebufferTexture3DOES = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTexture3DOES,
 	Package: "gles",
 	Name:    "GlFramebufferTexture3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17766,15 +17766,15 @@ func (*binaryClassGlFramebufferTextureEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferTextureEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureEXT(d, obj.(*GlFramebufferTextureEXT))
 }
-func (*binaryClassGlFramebufferTextureEXT) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTextureEXT) Schema() *binary.Entity {
 	return schemaGlFramebufferTextureEXT
 }
 
-var schemaGlFramebufferTextureEXT = &schema.Entity{
+var schemaGlFramebufferTextureEXT = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTextureEXT,
 	Package: "gles",
 	Name:    "GlFramebufferTextureEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17817,15 +17817,15 @@ func (*binaryClassGlFramebufferTextureLayer) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlFramebufferTextureLayer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureLayer(d, obj.(*GlFramebufferTextureLayer))
 }
-func (*binaryClassGlFramebufferTextureLayer) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTextureLayer) Schema() *binary.Entity {
 	return schemaGlFramebufferTextureLayer
 }
 
-var schemaGlFramebufferTextureLayer = &schema.Entity{
+var schemaGlFramebufferTextureLayer = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTextureLayer,
 	Package: "gles",
 	Name:    "GlFramebufferTextureLayer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17875,15 +17875,15 @@ func (*binaryClassGlFramebufferTextureMultiviewOVR) Decode(d binary.Decoder) bin
 func (*binaryClassGlFramebufferTextureMultiviewOVR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureMultiviewOVR(d, obj.(*GlFramebufferTextureMultiviewOVR))
 }
-func (*binaryClassGlFramebufferTextureMultiviewOVR) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTextureMultiviewOVR) Schema() *binary.Entity {
 	return schemaGlFramebufferTextureMultiviewOVR
 }
 
-var schemaGlFramebufferTextureMultiviewOVR = &schema.Entity{
+var schemaGlFramebufferTextureMultiviewOVR = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTextureMultiviewOVR,
 	Package: "gles",
 	Name:    "GlFramebufferTextureMultiviewOVR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17926,15 +17926,15 @@ func (*binaryClassGlFramebufferTextureOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlFramebufferTextureOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFramebufferTextureOES(d, obj.(*GlFramebufferTextureOES))
 }
-func (*binaryClassGlFramebufferTextureOES) Schema() *schema.Entity {
+func (*binaryClassGlFramebufferTextureOES) Schema() *binary.Entity {
 	return schemaGlFramebufferTextureOES
 }
 
-var schemaGlFramebufferTextureOES = &schema.Entity{
+var schemaGlFramebufferTextureOES = &binary.Entity{
 	TypeID:  binaryIDGlFramebufferTextureOES,
 	Package: "gles",
 	Name:    "GlFramebufferTextureOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17969,13 +17969,13 @@ func (*binaryClassGlFrontFace) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlFrontFace) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlFrontFace(d, obj.(*GlFrontFace))
 }
-func (*binaryClassGlFrontFace) Schema() *schema.Entity { return schemaGlFrontFace }
+func (*binaryClassGlFrontFace) Schema() *binary.Entity { return schemaGlFrontFace }
 
-var schemaGlFrontFace = &schema.Entity{
+var schemaGlFrontFace = &binary.Entity{
 	TypeID:  binaryIDGlFrontFace,
 	Package: "gles",
 	Name:    "GlFrontFace",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Orientation", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -18009,13 +18009,13 @@ func (*binaryClassGlGenBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenBuffers(d, obj.(*GlGenBuffers))
 }
-func (*binaryClassGlGenBuffers) Schema() *schema.Entity { return schemaGlGenBuffers }
+func (*binaryClassGlGenBuffers) Schema() *binary.Entity { return schemaGlGenBuffers }
 
-var schemaGlGenBuffers = &schema.Entity{
+var schemaGlGenBuffers = &binary.Entity{
 	TypeID:  binaryIDGlGenBuffers,
 	Package: "gles",
 	Name:    "GlGenBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Buffers", Type: &schema.Struct{Entity: schema.Of((*BufferIdᵖ)(nil).Class())}},
@@ -18050,13 +18050,13 @@ func (*binaryClassGlGenFencesNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenFencesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenFencesNV(d, obj.(*GlGenFencesNV))
 }
-func (*binaryClassGlGenFencesNV) Schema() *schema.Entity { return schemaGlGenFencesNV }
+func (*binaryClassGlGenFencesNV) Schema() *binary.Entity { return schemaGlGenFencesNV }
 
-var schemaGlGenFencesNV = &schema.Entity{
+var schemaGlGenFencesNV = &binary.Entity{
 	TypeID:  binaryIDGlGenFencesNV,
 	Package: "gles",
 	Name:    "GlGenFencesNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Fences", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -18091,13 +18091,13 @@ func (*binaryClassGlGenFramebuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenFramebuffers(d, obj.(*GlGenFramebuffers))
 }
-func (*binaryClassGlGenFramebuffers) Schema() *schema.Entity { return schemaGlGenFramebuffers }
+func (*binaryClassGlGenFramebuffers) Schema() *binary.Entity { return schemaGlGenFramebuffers }
 
-var schemaGlGenFramebuffers = &schema.Entity{
+var schemaGlGenFramebuffers = &binary.Entity{
 	TypeID:  binaryIDGlGenFramebuffers,
 	Package: "gles",
 	Name:    "GlGenFramebuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Framebuffers", Type: &schema.Struct{Entity: schema.Of((*FramebufferIdᵖ)(nil).Class())}},
@@ -18132,13 +18132,13 @@ func (*binaryClassGlGenPathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenPathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenPathsNV(d, obj.(*GlGenPathsNV))
 }
-func (*binaryClassGlGenPathsNV) Schema() *schema.Entity { return schemaGlGenPathsNV }
+func (*binaryClassGlGenPathsNV) Schema() *binary.Entity { return schemaGlGenPathsNV }
 
-var schemaGlGenPathsNV = &schema.Entity{
+var schemaGlGenPathsNV = &binary.Entity{
 	TypeID:  binaryIDGlGenPathsNV,
 	Package: "gles",
 	Name:    "GlGenPathsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Range", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -18173,13 +18173,13 @@ func (*binaryClassGlGenPerfMonitorsAMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenPerfMonitorsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenPerfMonitorsAMD(d, obj.(*GlGenPerfMonitorsAMD))
 }
-func (*binaryClassGlGenPerfMonitorsAMD) Schema() *schema.Entity { return schemaGlGenPerfMonitorsAMD }
+func (*binaryClassGlGenPerfMonitorsAMD) Schema() *binary.Entity { return schemaGlGenPerfMonitorsAMD }
 
-var schemaGlGenPerfMonitorsAMD = &schema.Entity{
+var schemaGlGenPerfMonitorsAMD = &binary.Entity{
 	TypeID:  binaryIDGlGenPerfMonitorsAMD,
 	Package: "gles",
 	Name:    "GlGenPerfMonitorsAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Monitors", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -18210,13 +18210,13 @@ func (*binaryClassPipelineIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdᵖ(d, obj.(*PipelineIdᵖ))
 }
-func (*binaryClassPipelineIdᵖ) Schema() *schema.Entity { return schemaPipelineIdᵖ }
+func (*binaryClassPipelineIdᵖ) Schema() *binary.Entity { return schemaPipelineIdᵖ }
 
-var schemaPipelineIdᵖ = &schema.Entity{
+var schemaPipelineIdᵖ = &binary.Entity{
 	TypeID:  binaryIDPipelineIdᵖ,
 	Package: "gles",
 	Name:    "PipelineIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -18249,13 +18249,13 @@ func (*binaryClassGlGenProgramPipelines) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGenProgramPipelines) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenProgramPipelines(d, obj.(*GlGenProgramPipelines))
 }
-func (*binaryClassGlGenProgramPipelines) Schema() *schema.Entity { return schemaGlGenProgramPipelines }
+func (*binaryClassGlGenProgramPipelines) Schema() *binary.Entity { return schemaGlGenProgramPipelines }
 
-var schemaGlGenProgramPipelines = &schema.Entity{
+var schemaGlGenProgramPipelines = &binary.Entity{
 	TypeID:  binaryIDGlGenProgramPipelines,
 	Package: "gles",
 	Name:    "GlGenProgramPipelines",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᵖ)(nil).Class())}},
@@ -18290,15 +18290,15 @@ func (*binaryClassGlGenProgramPipelinesEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGenProgramPipelinesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenProgramPipelinesEXT(d, obj.(*GlGenProgramPipelinesEXT))
 }
-func (*binaryClassGlGenProgramPipelinesEXT) Schema() *schema.Entity {
+func (*binaryClassGlGenProgramPipelinesEXT) Schema() *binary.Entity {
 	return schemaGlGenProgramPipelinesEXT
 }
 
-var schemaGlGenProgramPipelinesEXT = &schema.Entity{
+var schemaGlGenProgramPipelinesEXT = &binary.Entity{
 	TypeID:  binaryIDGlGenProgramPipelinesEXT,
 	Package: "gles",
 	Name:    "GlGenProgramPipelinesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Pipelines", Type: &schema.Struct{Entity: schema.Of((*PipelineIdᵖ)(nil).Class())}},
@@ -18329,13 +18329,13 @@ func (*binaryClassQueryIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdᵖ(d, obj.(*QueryIdᵖ))
 }
-func (*binaryClassQueryIdᵖ) Schema() *schema.Entity { return schemaQueryIdᵖ }
+func (*binaryClassQueryIdᵖ) Schema() *binary.Entity { return schemaQueryIdᵖ }
 
-var schemaQueryIdᵖ = &schema.Entity{
+var schemaQueryIdᵖ = &binary.Entity{
 	TypeID:  binaryIDQueryIdᵖ,
 	Package: "gles",
 	Name:    "QueryIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -18368,13 +18368,13 @@ func (*binaryClassGlGenQueries) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenQueries) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenQueries(d, obj.(*GlGenQueries))
 }
-func (*binaryClassGlGenQueries) Schema() *schema.Entity { return schemaGlGenQueries }
+func (*binaryClassGlGenQueries) Schema() *binary.Entity { return schemaGlGenQueries }
 
-var schemaGlGenQueries = &schema.Entity{
+var schemaGlGenQueries = &binary.Entity{
 	TypeID:  binaryIDGlGenQueries,
 	Package: "gles",
 	Name:    "GlGenQueries",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᵖ)(nil).Class())}},
@@ -18409,13 +18409,13 @@ func (*binaryClassGlGenQueriesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenQueriesEXT(d, obj.(*GlGenQueriesEXT))
 }
-func (*binaryClassGlGenQueriesEXT) Schema() *schema.Entity { return schemaGlGenQueriesEXT }
+func (*binaryClassGlGenQueriesEXT) Schema() *binary.Entity { return schemaGlGenQueriesEXT }
 
-var schemaGlGenQueriesEXT = &schema.Entity{
+var schemaGlGenQueriesEXT = &binary.Entity{
 	TypeID:  binaryIDGlGenQueriesEXT,
 	Package: "gles",
 	Name:    "GlGenQueriesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Queries", Type: &schema.Struct{Entity: schema.Of((*QueryIdᵖ)(nil).Class())}},
@@ -18450,13 +18450,13 @@ func (*binaryClassGlGenRenderbuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenRenderbuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenRenderbuffers(d, obj.(*GlGenRenderbuffers))
 }
-func (*binaryClassGlGenRenderbuffers) Schema() *schema.Entity { return schemaGlGenRenderbuffers }
+func (*binaryClassGlGenRenderbuffers) Schema() *binary.Entity { return schemaGlGenRenderbuffers }
 
-var schemaGlGenRenderbuffers = &schema.Entity{
+var schemaGlGenRenderbuffers = &binary.Entity{
 	TypeID:  binaryIDGlGenRenderbuffers,
 	Package: "gles",
 	Name:    "GlGenRenderbuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: schema.Of((*RenderbufferIdᵖ)(nil).Class())}},
@@ -18487,13 +18487,13 @@ func (*binaryClassSamplerIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdᵖ(d, obj.(*SamplerIdᵖ))
 }
-func (*binaryClassSamplerIdᵖ) Schema() *schema.Entity { return schemaSamplerIdᵖ }
+func (*binaryClassSamplerIdᵖ) Schema() *binary.Entity { return schemaSamplerIdᵖ }
 
-var schemaSamplerIdᵖ = &schema.Entity{
+var schemaSamplerIdᵖ = &binary.Entity{
 	TypeID:  binaryIDSamplerIdᵖ,
 	Package: "gles",
 	Name:    "SamplerIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -18526,13 +18526,13 @@ func (*binaryClassGlGenSamplers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenSamplers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenSamplers(d, obj.(*GlGenSamplers))
 }
-func (*binaryClassGlGenSamplers) Schema() *schema.Entity { return schemaGlGenSamplers }
+func (*binaryClassGlGenSamplers) Schema() *binary.Entity { return schemaGlGenSamplers }
 
-var schemaGlGenSamplers = &schema.Entity{
+var schemaGlGenSamplers = &binary.Entity{
 	TypeID:  binaryIDGlGenSamplers,
 	Package: "gles",
 	Name:    "GlGenSamplers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Samplers", Type: &schema.Struct{Entity: schema.Of((*SamplerIdᵖ)(nil).Class())}},
@@ -18567,13 +18567,13 @@ func (*binaryClassGlGenTextures) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenTextures) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenTextures(d, obj.(*GlGenTextures))
 }
-func (*binaryClassGlGenTextures) Schema() *schema.Entity { return schemaGlGenTextures }
+func (*binaryClassGlGenTextures) Schema() *binary.Entity { return schemaGlGenTextures }
 
-var schemaGlGenTextures = &schema.Entity{
+var schemaGlGenTextures = &binary.Entity{
 	TypeID:  binaryIDGlGenTextures,
 	Package: "gles",
 	Name:    "GlGenTextures",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Textures", Type: &schema.Struct{Entity: schema.Of((*TextureIdᵖ)(nil).Class())}},
@@ -18604,13 +18604,13 @@ func (*binaryClassTransformFeedbackIdᵖ) Decode(d binary.Decoder) binary.Object
 func (*binaryClassTransformFeedbackIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdᵖ(d, obj.(*TransformFeedbackIdᵖ))
 }
-func (*binaryClassTransformFeedbackIdᵖ) Schema() *schema.Entity { return schemaTransformFeedbackIdᵖ }
+func (*binaryClassTransformFeedbackIdᵖ) Schema() *binary.Entity { return schemaTransformFeedbackIdᵖ }
 
-var schemaTransformFeedbackIdᵖ = &schema.Entity{
+var schemaTransformFeedbackIdᵖ = &binary.Entity{
 	TypeID:  binaryIDTransformFeedbackIdᵖ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -18643,15 +18643,15 @@ func (*binaryClassGlGenTransformFeedbacks) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGenTransformFeedbacks) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenTransformFeedbacks(d, obj.(*GlGenTransformFeedbacks))
 }
-func (*binaryClassGlGenTransformFeedbacks) Schema() *schema.Entity {
+func (*binaryClassGlGenTransformFeedbacks) Schema() *binary.Entity {
 	return schemaGlGenTransformFeedbacks
 }
 
-var schemaGlGenTransformFeedbacks = &schema.Entity{
+var schemaGlGenTransformFeedbacks = &binary.Entity{
 	TypeID:  binaryIDGlGenTransformFeedbacks,
 	Package: "gles",
 	Name:    "GlGenTransformFeedbacks",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Ids", Type: &schema.Struct{Entity: schema.Of((*TransformFeedbackIdᵖ)(nil).Class())}},
@@ -18682,13 +18682,13 @@ func (*binaryClassVertexArrayIdᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdᵖ(d, obj.(*VertexArrayIdᵖ))
 }
-func (*binaryClassVertexArrayIdᵖ) Schema() *schema.Entity { return schemaVertexArrayIdᵖ }
+func (*binaryClassVertexArrayIdᵖ) Schema() *binary.Entity { return schemaVertexArrayIdᵖ }
 
-var schemaVertexArrayIdᵖ = &schema.Entity{
+var schemaVertexArrayIdᵖ = &binary.Entity{
 	TypeID:  binaryIDVertexArrayIdᵖ,
 	Package: "gles",
 	Name:    "VertexArrayIdᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -18721,13 +18721,13 @@ func (*binaryClassGlGenVertexArrays) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenVertexArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenVertexArrays(d, obj.(*GlGenVertexArrays))
 }
-func (*binaryClassGlGenVertexArrays) Schema() *schema.Entity { return schemaGlGenVertexArrays }
+func (*binaryClassGlGenVertexArrays) Schema() *binary.Entity { return schemaGlGenVertexArrays }
 
-var schemaGlGenVertexArrays = &schema.Entity{
+var schemaGlGenVertexArrays = &binary.Entity{
 	TypeID:  binaryIDGlGenVertexArrays,
 	Package: "gles",
 	Name:    "GlGenVertexArrays",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᵖ)(nil).Class())}},
@@ -18762,13 +18762,13 @@ func (*binaryClassGlGenVertexArraysOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenVertexArraysOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenVertexArraysOES(d, obj.(*GlGenVertexArraysOES))
 }
-func (*binaryClassGlGenVertexArraysOES) Schema() *schema.Entity { return schemaGlGenVertexArraysOES }
+func (*binaryClassGlGenVertexArraysOES) Schema() *binary.Entity { return schemaGlGenVertexArraysOES }
 
-var schemaGlGenVertexArraysOES = &schema.Entity{
+var schemaGlGenVertexArraysOES = &binary.Entity{
 	TypeID:  binaryIDGlGenVertexArraysOES,
 	Package: "gles",
 	Name:    "GlGenVertexArraysOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Arrays", Type: &schema.Struct{Entity: schema.Of((*VertexArrayIdᵖ)(nil).Class())}},
@@ -18801,13 +18801,13 @@ func (*binaryClassGlGenerateMipmap) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGenerateMipmap) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGenerateMipmap(d, obj.(*GlGenerateMipmap))
 }
-func (*binaryClassGlGenerateMipmap) Schema() *schema.Entity { return schemaGlGenerateMipmap }
+func (*binaryClassGlGenerateMipmap) Schema() *binary.Entity { return schemaGlGenerateMipmap }
 
-var schemaGlGenerateMipmap = &schema.Entity{
+var schemaGlGenerateMipmap = &binary.Entity{
 	TypeID:  binaryIDGlGenerateMipmap,
 	Package: "gles",
 	Name:    "GlGenerateMipmap",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -18851,13 +18851,13 @@ func (*binaryClassGlGetActiveAttrib) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetActiveAttrib) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveAttrib(d, obj.(*GlGetActiveAttrib))
 }
-func (*binaryClassGlGetActiveAttrib) Schema() *schema.Entity { return schemaGlGetActiveAttrib }
+func (*binaryClassGlGetActiveAttrib) Schema() *binary.Entity { return schemaGlGetActiveAttrib }
 
-var schemaGlGetActiveAttrib = &schema.Entity{
+var schemaGlGetActiveAttrib = &binary.Entity{
 	TypeID:  binaryIDGlGetActiveAttrib,
 	Package: "gles",
 	Name:    "GlGetActiveAttrib",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
@@ -18907,13 +18907,13 @@ func (*binaryClassGlGetActiveUniform) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetActiveUniform) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniform(d, obj.(*GlGetActiveUniform))
 }
-func (*binaryClassGlGetActiveUniform) Schema() *schema.Entity { return schemaGlGetActiveUniform }
+func (*binaryClassGlGetActiveUniform) Schema() *binary.Entity { return schemaGlGetActiveUniform }
 
-var schemaGlGetActiveUniform = &schema.Entity{
+var schemaGlGetActiveUniform = &binary.Entity{
 	TypeID:  binaryIDGlGetActiveUniform,
 	Package: "gles",
 	Name:    "GlGetActiveUniform",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "UniformIndex", Method: schema.Uint32}},
@@ -18963,15 +18963,15 @@ func (*binaryClassGlGetActiveUniformBlockName) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetActiveUniformBlockName) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformBlockName(d, obj.(*GlGetActiveUniformBlockName))
 }
-func (*binaryClassGlGetActiveUniformBlockName) Schema() *schema.Entity {
+func (*binaryClassGlGetActiveUniformBlockName) Schema() *binary.Entity {
 	return schemaGlGetActiveUniformBlockName
 }
 
-var schemaGlGetActiveUniformBlockName = &schema.Entity{
+var schemaGlGetActiveUniformBlockName = &binary.Entity{
 	TypeID:  binaryIDGlGetActiveUniformBlockName,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockName",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
@@ -19013,15 +19013,15 @@ func (*binaryClassGlGetActiveUniformBlockiv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetActiveUniformBlockiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformBlockiv(d, obj.(*GlGetActiveUniformBlockiv))
 }
-func (*binaryClassGlGetActiveUniformBlockiv) Schema() *schema.Entity {
+func (*binaryClassGlGetActiveUniformBlockiv) Schema() *binary.Entity {
 	return schemaGlGetActiveUniformBlockiv
 }
 
-var schemaGlGetActiveUniformBlockiv = &schema.Entity{
+var schemaGlGetActiveUniformBlockiv = &binary.Entity{
 	TypeID:  binaryIDGlGetActiveUniformBlockiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformBlockiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
@@ -19054,13 +19054,13 @@ func (*binaryClassUniformIndexᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassUniformIndexᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeUniformIndexᶜᵖ(d, obj.(*UniformIndexᶜᵖ))
 }
-func (*binaryClassUniformIndexᶜᵖ) Schema() *schema.Entity { return schemaUniformIndexᶜᵖ }
+func (*binaryClassUniformIndexᶜᵖ) Schema() *binary.Entity { return schemaUniformIndexᶜᵖ }
 
-var schemaUniformIndexᶜᵖ = &schema.Entity{
+var schemaUniformIndexᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDUniformIndexᶜᵖ,
 	Package: "gles",
 	Name:    "UniformIndexᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -19099,13 +19099,13 @@ func (*binaryClassGlGetActiveUniformsiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetActiveUniformsiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetActiveUniformsiv(d, obj.(*GlGetActiveUniformsiv))
 }
-func (*binaryClassGlGetActiveUniformsiv) Schema() *schema.Entity { return schemaGlGetActiveUniformsiv }
+func (*binaryClassGlGetActiveUniformsiv) Schema() *binary.Entity { return schemaGlGetActiveUniformsiv }
 
-var schemaGlGetActiveUniformsiv = &schema.Entity{
+var schemaGlGetActiveUniformsiv = &binary.Entity{
 	TypeID:  binaryIDGlGetActiveUniformsiv,
 	Package: "gles",
 	Name:    "GlGetActiveUniformsiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19147,13 +19147,13 @@ func (*binaryClassGlGetAttachedShaders) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetAttachedShaders) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetAttachedShaders(d, obj.(*GlGetAttachedShaders))
 }
-func (*binaryClassGlGetAttachedShaders) Schema() *schema.Entity { return schemaGlGetAttachedShaders }
+func (*binaryClassGlGetAttachedShaders) Schema() *binary.Entity { return schemaGlGetAttachedShaders }
 
-var schemaGlGetAttachedShaders = &schema.Entity{
+var schemaGlGetAttachedShaders = &binary.Entity{
 	TypeID:  binaryIDGlGetAttachedShaders,
 	Package: "gles",
 	Name:    "GlGetAttachedShaders",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19192,13 +19192,13 @@ func (*binaryClassGlGetAttribLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetAttribLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetAttribLocation(d, obj.(*GlGetAttribLocation))
 }
-func (*binaryClassGlGetAttribLocation) Schema() *schema.Entity { return schemaGlGetAttribLocation }
+func (*binaryClassGlGetAttribLocation) Schema() *binary.Entity { return schemaGlGetAttribLocation }
 
-var schemaGlGetAttribLocation = &schema.Entity{
+var schemaGlGetAttribLocation = &binary.Entity{
 	TypeID:  binaryIDGlGetAttribLocation,
 	Package: "gles",
 	Name:    "GlGetAttribLocation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -19236,13 +19236,13 @@ func (*binaryClassGlGetBooleani_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBooleani_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBooleani_v(d, obj.(*GlGetBooleani_v))
 }
-func (*binaryClassGlGetBooleani_v) Schema() *schema.Entity { return schemaGlGetBooleani_v }
+func (*binaryClassGlGetBooleani_v) Schema() *binary.Entity { return schemaGlGetBooleani_v }
 
-var schemaGlGetBooleani_v = &schema.Entity{
+var schemaGlGetBooleani_v = &binary.Entity{
 	TypeID:  binaryIDGlGetBooleani_v,
 	Package: "gles",
 	Name:    "GlGetBooleani_v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -19278,13 +19278,13 @@ func (*binaryClassGlGetBooleanv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBooleanv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBooleanv(d, obj.(*GlGetBooleanv))
 }
-func (*binaryClassGlGetBooleanv) Schema() *schema.Entity { return schemaGlGetBooleanv }
+func (*binaryClassGlGetBooleanv) Schema() *binary.Entity { return schemaGlGetBooleanv }
 
-var schemaGlGetBooleanv = &schema.Entity{
+var schemaGlGetBooleanv = &binary.Entity{
 	TypeID:  binaryIDGlGetBooleanv,
 	Package: "gles",
 	Name:    "GlGetBooleanv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLbooleanᵖ)(nil).Class())}},
@@ -19321,15 +19321,15 @@ func (*binaryClassGlGetBufferParameteri64v) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetBufferParameteri64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferParameteri64v(d, obj.(*GlGetBufferParameteri64v))
 }
-func (*binaryClassGlGetBufferParameteri64v) Schema() *schema.Entity {
+func (*binaryClassGlGetBufferParameteri64v) Schema() *binary.Entity {
 	return schemaGlGetBufferParameteri64v
 }
 
-var schemaGlGetBufferParameteri64v = &schema.Entity{
+var schemaGlGetBufferParameteri64v = &binary.Entity{
 	TypeID:  binaryIDGlGetBufferParameteri64v,
 	Package: "gles",
 	Name:    "GlGetBufferParameteri64v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -19367,13 +19367,13 @@ func (*binaryClassGlGetBufferParameteriv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetBufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferParameteriv(d, obj.(*GlGetBufferParameteriv))
 }
-func (*binaryClassGlGetBufferParameteriv) Schema() *schema.Entity { return schemaGlGetBufferParameteriv }
+func (*binaryClassGlGetBufferParameteriv) Schema() *binary.Entity { return schemaGlGetBufferParameteriv }
 
-var schemaGlGetBufferParameteriv = &schema.Entity{
+var schemaGlGetBufferParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetBufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetBufferParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -19411,13 +19411,13 @@ func (*binaryClassGlGetBufferPointerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetBufferPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferPointerv(d, obj.(*GlGetBufferPointerv))
 }
-func (*binaryClassGlGetBufferPointerv) Schema() *schema.Entity { return schemaGlGetBufferPointerv }
+func (*binaryClassGlGetBufferPointerv) Schema() *binary.Entity { return schemaGlGetBufferPointerv }
 
-var schemaGlGetBufferPointerv = &schema.Entity{
+var schemaGlGetBufferPointerv = &binary.Entity{
 	TypeID:  binaryIDGlGetBufferPointerv,
 	Package: "gles",
 	Name:    "GlGetBufferPointerv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -19455,13 +19455,13 @@ func (*binaryClassGlGetBufferPointervOES) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetBufferPointervOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetBufferPointervOES(d, obj.(*GlGetBufferPointervOES))
 }
-func (*binaryClassGlGetBufferPointervOES) Schema() *schema.Entity { return schemaGlGetBufferPointervOES }
+func (*binaryClassGlGetBufferPointervOES) Schema() *binary.Entity { return schemaGlGetBufferPointervOES }
 
-var schemaGlGetBufferPointervOES = &schema.Entity{
+var schemaGlGetBufferPointervOES = &binary.Entity{
 	TypeID:  binaryIDGlGetBufferPointervOES,
 	Package: "gles",
 	Name:    "GlGetBufferPointervOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -19501,15 +19501,15 @@ func (*binaryClassGlGetCoverageModulationTableNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetCoverageModulationTableNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetCoverageModulationTableNV(d, obj.(*GlGetCoverageModulationTableNV))
 }
-func (*binaryClassGlGetCoverageModulationTableNV) Schema() *schema.Entity {
+func (*binaryClassGlGetCoverageModulationTableNV) Schema() *binary.Entity {
 	return schemaGlGetCoverageModulationTableNV
 }
 
-var schemaGlGetCoverageModulationTableNV = &schema.Entity{
+var schemaGlGetCoverageModulationTableNV = &binary.Entity{
 	TypeID:  binaryIDGlGetCoverageModulationTableNV,
 	Package: "gles",
 	Name:    "GlGetCoverageModulationTableNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Bufsize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
@@ -19558,13 +19558,13 @@ func (*binaryClassGlGetDebugMessageLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetDebugMessageLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDebugMessageLog(d, obj.(*GlGetDebugMessageLog))
 }
-func (*binaryClassGlGetDebugMessageLog) Schema() *schema.Entity { return schemaGlGetDebugMessageLog }
+func (*binaryClassGlGetDebugMessageLog) Schema() *binary.Entity { return schemaGlGetDebugMessageLog }
 
-var schemaGlGetDebugMessageLog = &schema.Entity{
+var schemaGlGetDebugMessageLog = &binary.Entity{
 	TypeID:  binaryIDGlGetDebugMessageLog,
 	Package: "gles",
 	Name:    "GlGetDebugMessageLog",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19620,15 +19620,15 @@ func (*binaryClassGlGetDebugMessageLogKHR) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetDebugMessageLogKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDebugMessageLogKHR(d, obj.(*GlGetDebugMessageLogKHR))
 }
-func (*binaryClassGlGetDebugMessageLogKHR) Schema() *schema.Entity {
+func (*binaryClassGlGetDebugMessageLogKHR) Schema() *binary.Entity {
 	return schemaGlGetDebugMessageLogKHR
 }
 
-var schemaGlGetDebugMessageLogKHR = &schema.Entity{
+var schemaGlGetDebugMessageLogKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetDebugMessageLogKHR,
 	Package: "gles",
 	Name:    "GlGetDebugMessageLogKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19678,15 +19678,15 @@ func (*binaryClassGlGetDriverControlStringQCOM) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetDriverControlStringQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDriverControlStringQCOM(d, obj.(*GlGetDriverControlStringQCOM))
 }
-func (*binaryClassGlGetDriverControlStringQCOM) Schema() *schema.Entity {
+func (*binaryClassGlGetDriverControlStringQCOM) Schema() *binary.Entity {
 	return schemaGlGetDriverControlStringQCOM
 }
 
-var schemaGlGetDriverControlStringQCOM = &schema.Entity{
+var schemaGlGetDriverControlStringQCOM = &binary.Entity{
 	TypeID:  binaryIDGlGetDriverControlStringQCOM,
 	Package: "gles",
 	Name:    "GlGetDriverControlStringQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "DriverControl", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19725,15 +19725,15 @@ func (*binaryClassGlGetDriverControlsQCOM) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetDriverControlsQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetDriverControlsQCOM(d, obj.(*GlGetDriverControlsQCOM))
 }
-func (*binaryClassGlGetDriverControlsQCOM) Schema() *schema.Entity {
+func (*binaryClassGlGetDriverControlsQCOM) Schema() *binary.Entity {
 	return schemaGlGetDriverControlsQCOM
 }
 
-var schemaGlGetDriverControlsQCOM = &schema.Entity{
+var schemaGlGetDriverControlsQCOM = &binary.Entity{
 	TypeID:  binaryIDGlGetDriverControlsQCOM,
 	Package: "gles",
 	Name:    "GlGetDriverControlsQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Num", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -19767,13 +19767,13 @@ func (*binaryClassGlGetError) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetError) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetError(d, obj.(*GlGetError))
 }
-func (*binaryClassGlGetError) Schema() *schema.Entity { return schemaGlGetError }
+func (*binaryClassGlGetError) Schema() *binary.Entity { return schemaGlGetError }
 
-var schemaGlGetError = &schema.Entity{
+var schemaGlGetError = &binary.Entity{
 	TypeID:  binaryIDGlGetError,
 	Package: "gles",
 	Name:    "GlGetError",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -19809,13 +19809,13 @@ func (*binaryClassGlGetFenceivNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFenceivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFenceivNV(d, obj.(*GlGetFenceivNV))
 }
-func (*binaryClassGlGetFenceivNV) Schema() *schema.Entity { return schemaGlGetFenceivNV }
+func (*binaryClassGlGetFenceivNV) Schema() *binary.Entity { return schemaGlGetFenceivNV }
 
-var schemaGlGetFenceivNV = &schema.Entity{
+var schemaGlGetFenceivNV = &binary.Entity{
 	TypeID:  binaryIDGlGetFenceivNV,
 	Package: "gles",
 	Name:    "GlGetFenceivNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -19853,15 +19853,15 @@ func (*binaryClassGlGetFirstPerfQueryIdINTEL) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlGetFirstPerfQueryIdINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFirstPerfQueryIdINTEL(d, obj.(*GlGetFirstPerfQueryIdINTEL))
 }
-func (*binaryClassGlGetFirstPerfQueryIdINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetFirstPerfQueryIdINTEL) Schema() *binary.Entity {
 	return schemaGlGetFirstPerfQueryIdINTEL
 }
 
-var schemaGlGetFirstPerfQueryIdINTEL = &schema.Entity{
+var schemaGlGetFirstPerfQueryIdINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetFirstPerfQueryIdINTEL,
 	Package: "gles",
 	Name:    "GlGetFirstPerfQueryIdINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
 	},
@@ -19897,13 +19897,13 @@ func (*binaryClassGlGetFloati_vNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFloati_vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFloati_vNV(d, obj.(*GlGetFloati_vNV))
 }
-func (*binaryClassGlGetFloati_vNV) Schema() *schema.Entity { return schemaGlGetFloati_vNV }
+func (*binaryClassGlGetFloati_vNV) Schema() *binary.Entity { return schemaGlGetFloati_vNV }
 
-var schemaGlGetFloati_vNV = &schema.Entity{
+var schemaGlGetFloati_vNV = &binary.Entity{
 	TypeID:  binaryIDGlGetFloati_vNV,
 	Package: "gles",
 	Name:    "GlGetFloati_vNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -19939,13 +19939,13 @@ func (*binaryClassGlGetFloatv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetFloatv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFloatv(d, obj.(*GlGetFloatv))
 }
-func (*binaryClassGlGetFloatv) Schema() *schema.Entity { return schemaGlGetFloatv }
+func (*binaryClassGlGetFloatv) Schema() *binary.Entity { return schemaGlGetFloatv }
 
-var schemaGlGetFloatv = &schema.Entity{
+var schemaGlGetFloatv = &binary.Entity{
 	TypeID:  binaryIDGlGetFloatv,
 	Package: "gles",
 	Name:    "GlGetFloatv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
@@ -19982,13 +19982,13 @@ func (*binaryClassGlGetFragDataIndexEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetFragDataIndexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFragDataIndexEXT(d, obj.(*GlGetFragDataIndexEXT))
 }
-func (*binaryClassGlGetFragDataIndexEXT) Schema() *schema.Entity { return schemaGlGetFragDataIndexEXT }
+func (*binaryClassGlGetFragDataIndexEXT) Schema() *binary.Entity { return schemaGlGetFragDataIndexEXT }
 
-var schemaGlGetFragDataIndexEXT = &schema.Entity{
+var schemaGlGetFragDataIndexEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetFragDataIndexEXT,
 	Package: "gles",
 	Name:    "GlGetFragDataIndexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -20026,13 +20026,13 @@ func (*binaryClassGlGetFragDataLocation) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetFragDataLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFragDataLocation(d, obj.(*GlGetFragDataLocation))
 }
-func (*binaryClassGlGetFragDataLocation) Schema() *schema.Entity { return schemaGlGetFragDataLocation }
+func (*binaryClassGlGetFragDataLocation) Schema() *binary.Entity { return schemaGlGetFragDataLocation }
 
-var schemaGlGetFragDataLocation = &schema.Entity{
+var schemaGlGetFragDataLocation = &binary.Entity{
 	TypeID:  binaryIDGlGetFragDataLocation,
 	Package: "gles",
 	Name:    "GlGetFragDataLocation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -20076,15 +20076,15 @@ func (*binaryClassGlGetFramebufferAttachmentParameteriv) Decode(d binary.Decoder
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFramebufferAttachmentParameteriv(d, obj.(*GlGetFramebufferAttachmentParameteriv))
 }
-func (*binaryClassGlGetFramebufferAttachmentParameteriv) Schema() *schema.Entity {
+func (*binaryClassGlGetFramebufferAttachmentParameteriv) Schema() *binary.Entity {
 	return schemaGlGetFramebufferAttachmentParameteriv
 }
 
-var schemaGlGetFramebufferAttachmentParameteriv = &schema.Entity{
+var schemaGlGetFramebufferAttachmentParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetFramebufferAttachmentParameteriv,
 	Package: "gles",
 	Name:    "GlGetFramebufferAttachmentParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -20127,15 +20127,15 @@ func (*binaryClassGlGetFramebufferParameteriv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetFramebufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetFramebufferParameteriv(d, obj.(*GlGetFramebufferParameteriv))
 }
-func (*binaryClassGlGetFramebufferParameteriv) Schema() *schema.Entity {
+func (*binaryClassGlGetFramebufferParameteriv) Schema() *binary.Entity {
 	return schemaGlGetFramebufferParameteriv
 }
 
-var schemaGlGetFramebufferParameteriv = &schema.Entity{
+var schemaGlGetFramebufferParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetFramebufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetFramebufferParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -20169,15 +20169,15 @@ func (*binaryClassGlGetGraphicsResetStatus) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetGraphicsResetStatus) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatus(d, obj.(*GlGetGraphicsResetStatus))
 }
-func (*binaryClassGlGetGraphicsResetStatus) Schema() *schema.Entity {
+func (*binaryClassGlGetGraphicsResetStatus) Schema() *binary.Entity {
 	return schemaGlGetGraphicsResetStatus
 }
 
-var schemaGlGetGraphicsResetStatus = &schema.Entity{
+var schemaGlGetGraphicsResetStatus = &binary.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatus,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatus",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -20213,15 +20213,15 @@ func (*binaryClassGlGetGraphicsResetStatusEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetGraphicsResetStatusEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatusEXT(d, obj.(*GlGetGraphicsResetStatusEXT))
 }
-func (*binaryClassGlGetGraphicsResetStatusEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetGraphicsResetStatusEXT) Schema() *binary.Entity {
 	return schemaGlGetGraphicsResetStatusEXT
 }
 
-var schemaGlGetGraphicsResetStatusEXT = &schema.Entity{
+var schemaGlGetGraphicsResetStatusEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatusEXT,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -20257,15 +20257,15 @@ func (*binaryClassGlGetGraphicsResetStatusKHR) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetGraphicsResetStatusKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetGraphicsResetStatusKHR(d, obj.(*GlGetGraphicsResetStatusKHR))
 }
-func (*binaryClassGlGetGraphicsResetStatusKHR) Schema() *schema.Entity {
+func (*binaryClassGlGetGraphicsResetStatusKHR) Schema() *binary.Entity {
 	return schemaGlGetGraphicsResetStatusKHR
 }
 
-var schemaGlGetGraphicsResetStatusKHR = &schema.Entity{
+var schemaGlGetGraphicsResetStatusKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetGraphicsResetStatusKHR,
 	Package: "gles",
 	Name:    "GlGetGraphicsResetStatusKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -20307,13 +20307,13 @@ func (*binaryClassGlGetImageHandleNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetImageHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetImageHandleNV(d, obj.(*GlGetImageHandleNV))
 }
-func (*binaryClassGlGetImageHandleNV) Schema() *schema.Entity { return schemaGlGetImageHandleNV }
+func (*binaryClassGlGetImageHandleNV) Schema() *binary.Entity { return schemaGlGetImageHandleNV }
 
-var schemaGlGetImageHandleNV = &schema.Entity{
+var schemaGlGetImageHandleNV = &binary.Entity{
 	TypeID:  binaryIDGlGetImageHandleNV,
 	Package: "gles",
 	Name:    "GlGetImageHandleNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -20354,13 +20354,13 @@ func (*binaryClassGlGetInteger64i_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64i_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64i_v(d, obj.(*GlGetInteger64i_v))
 }
-func (*binaryClassGlGetInteger64i_v) Schema() *schema.Entity { return schemaGlGetInteger64i_v }
+func (*binaryClassGlGetInteger64i_v) Schema() *binary.Entity { return schemaGlGetInteger64i_v }
 
-var schemaGlGetInteger64i_v = &schema.Entity{
+var schemaGlGetInteger64i_v = &binary.Entity{
 	TypeID:  binaryIDGlGetInteger64i_v,
 	Package: "gles",
 	Name:    "GlGetInteger64i_v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20396,13 +20396,13 @@ func (*binaryClassGlGetInteger64v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64v(d, obj.(*GlGetInteger64v))
 }
-func (*binaryClassGlGetInteger64v) Schema() *schema.Entity { return schemaGlGetInteger64v }
+func (*binaryClassGlGetInteger64v) Schema() *binary.Entity { return schemaGlGetInteger64v }
 
-var schemaGlGetInteger64v = &schema.Entity{
+var schemaGlGetInteger64v = &binary.Entity{
 	TypeID:  binaryIDGlGetInteger64v,
 	Package: "gles",
 	Name:    "GlGetInteger64v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
@@ -20437,13 +20437,13 @@ func (*binaryClassGlGetInteger64vAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetInteger64vAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInteger64vAPPLE(d, obj.(*GlGetInteger64vAPPLE))
 }
-func (*binaryClassGlGetInteger64vAPPLE) Schema() *schema.Entity { return schemaGlGetInteger64vAPPLE }
+func (*binaryClassGlGetInteger64vAPPLE) Schema() *binary.Entity { return schemaGlGetInteger64vAPPLE }
 
-var schemaGlGetInteger64vAPPLE = &schema.Entity{
+var schemaGlGetInteger64vAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlGetInteger64vAPPLE,
 	Package: "gles",
 	Name:    "GlGetInteger64vAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*GLint64ᵖ)(nil).Class())}},
@@ -20480,13 +20480,13 @@ func (*binaryClassGlGetIntegeri_v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegeri_v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegeri_v(d, obj.(*GlGetIntegeri_v))
 }
-func (*binaryClassGlGetIntegeri_v) Schema() *schema.Entity { return schemaGlGetIntegeri_v }
+func (*binaryClassGlGetIntegeri_v) Schema() *binary.Entity { return schemaGlGetIntegeri_v }
 
-var schemaGlGetIntegeri_v = &schema.Entity{
+var schemaGlGetIntegeri_v = &binary.Entity{
 	TypeID:  binaryIDGlGetIntegeri_v,
 	Package: "gles",
 	Name:    "GlGetIntegeri_v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20524,13 +20524,13 @@ func (*binaryClassGlGetIntegeri_vEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegeri_vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegeri_vEXT(d, obj.(*GlGetIntegeri_vEXT))
 }
-func (*binaryClassGlGetIntegeri_vEXT) Schema() *schema.Entity { return schemaGlGetIntegeri_vEXT }
+func (*binaryClassGlGetIntegeri_vEXT) Schema() *binary.Entity { return schemaGlGetIntegeri_vEXT }
 
-var schemaGlGetIntegeri_vEXT = &schema.Entity{
+var schemaGlGetIntegeri_vEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetIntegeri_vEXT,
 	Package: "gles",
 	Name:    "GlGetIntegeri_vEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20566,13 +20566,13 @@ func (*binaryClassGlGetIntegerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetIntegerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetIntegerv(d, obj.(*GlGetIntegerv))
 }
-func (*binaryClassGlGetIntegerv) Schema() *schema.Entity { return schemaGlGetIntegerv }
+func (*binaryClassGlGetIntegerv) Schema() *binary.Entity { return schemaGlGetIntegerv }
 
-var schemaGlGetIntegerv = &schema.Entity{
+var schemaGlGetIntegerv = &binary.Entity{
 	TypeID:  binaryIDGlGetIntegerv,
 	Package: "gles",
 	Name:    "GlGetIntegerv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
@@ -20619,15 +20619,15 @@ func (*binaryClassGlGetInternalformatSampleivNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlGetInternalformatSampleivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInternalformatSampleivNV(d, obj.(*GlGetInternalformatSampleivNV))
 }
-func (*binaryClassGlGetInternalformatSampleivNV) Schema() *schema.Entity {
+func (*binaryClassGlGetInternalformatSampleivNV) Schema() *binary.Entity {
 	return schemaGlGetInternalformatSampleivNV
 }
 
-var schemaGlGetInternalformatSampleivNV = &schema.Entity{
+var schemaGlGetInternalformatSampleivNV = &binary.Entity{
 	TypeID:  binaryIDGlGetInternalformatSampleivNV,
 	Package: "gles",
 	Name:    "GlGetInternalformatSampleivNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -20672,13 +20672,13 @@ func (*binaryClassGlGetInternalformativ) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetInternalformativ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetInternalformativ(d, obj.(*GlGetInternalformativ))
 }
-func (*binaryClassGlGetInternalformativ) Schema() *schema.Entity { return schemaGlGetInternalformativ }
+func (*binaryClassGlGetInternalformativ) Schema() *binary.Entity { return schemaGlGetInternalformativ }
 
-var schemaGlGetInternalformativ = &schema.Entity{
+var schemaGlGetInternalformativ = &binary.Entity{
 	TypeID:  binaryIDGlGetInternalformativ,
 	Package: "gles",
 	Name:    "GlGetInternalformativ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -20718,13 +20718,13 @@ func (*binaryClassGlGetMultisamplefv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetMultisamplefv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetMultisamplefv(d, obj.(*GlGetMultisamplefv))
 }
-func (*binaryClassGlGetMultisamplefv) Schema() *schema.Entity { return schemaGlGetMultisamplefv }
+func (*binaryClassGlGetMultisamplefv) Schema() *binary.Entity { return schemaGlGetMultisamplefv }
 
-var schemaGlGetMultisamplefv = &schema.Entity{
+var schemaGlGetMultisamplefv = &binary.Entity{
 	TypeID:  binaryIDGlGetMultisamplefv,
 	Package: "gles",
 	Name:    "GlGetMultisamplefv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20760,15 +20760,15 @@ func (*binaryClassGlGetNextPerfQueryIdINTEL) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetNextPerfQueryIdINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetNextPerfQueryIdINTEL(d, obj.(*GlGetNextPerfQueryIdINTEL))
 }
-func (*binaryClassGlGetNextPerfQueryIdINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetNextPerfQueryIdINTEL) Schema() *binary.Entity {
 	return schemaGlGetNextPerfQueryIdINTEL
 }
 
-var schemaGlGetNextPerfQueryIdINTEL = &schema.Entity{
+var schemaGlGetNextPerfQueryIdINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetNextPerfQueryIdINTEL,
 	Package: "gles",
 	Name:    "GlGetNextPerfQueryIdINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NextQueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -20809,13 +20809,13 @@ func (*binaryClassGlGetObjectLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabel(d, obj.(*GlGetObjectLabel))
 }
-func (*binaryClassGlGetObjectLabel) Schema() *schema.Entity { return schemaGlGetObjectLabel }
+func (*binaryClassGlGetObjectLabel) Schema() *binary.Entity { return schemaGlGetObjectLabel }
 
-var schemaGlGetObjectLabel = &schema.Entity{
+var schemaGlGetObjectLabel = &binary.Entity{
 	TypeID:  binaryIDGlGetObjectLabel,
 	Package: "gles",
 	Name:    "GlGetObjectLabel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20859,13 +20859,13 @@ func (*binaryClassGlGetObjectLabelEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabelEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabelEXT(d, obj.(*GlGetObjectLabelEXT))
 }
-func (*binaryClassGlGetObjectLabelEXT) Schema() *schema.Entity { return schemaGlGetObjectLabelEXT }
+func (*binaryClassGlGetObjectLabelEXT) Schema() *binary.Entity { return schemaGlGetObjectLabelEXT }
 
-var schemaGlGetObjectLabelEXT = &schema.Entity{
+var schemaGlGetObjectLabelEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetObjectLabelEXT,
 	Package: "gles",
 	Name:    "GlGetObjectLabelEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20909,13 +20909,13 @@ func (*binaryClassGlGetObjectLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectLabelKHR(d, obj.(*GlGetObjectLabelKHR))
 }
-func (*binaryClassGlGetObjectLabelKHR) Schema() *schema.Entity { return schemaGlGetObjectLabelKHR }
+func (*binaryClassGlGetObjectLabelKHR) Schema() *binary.Entity { return schemaGlGetObjectLabelKHR }
 
-var schemaGlGetObjectLabelKHR = &schema.Entity{
+var schemaGlGetObjectLabelKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetObjectLabelKHR,
 	Package: "gles",
 	Name:    "GlGetObjectLabelKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -20957,13 +20957,13 @@ func (*binaryClassGlGetObjectPtrLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectPtrLabel(d, obj.(*GlGetObjectPtrLabel))
 }
-func (*binaryClassGlGetObjectPtrLabel) Schema() *schema.Entity { return schemaGlGetObjectPtrLabel }
+func (*binaryClassGlGetObjectPtrLabel) Schema() *binary.Entity { return schemaGlGetObjectPtrLabel }
 
-var schemaGlGetObjectPtrLabel = &schema.Entity{
+var schemaGlGetObjectPtrLabel = &binary.Entity{
 	TypeID:  binaryIDGlGetObjectPtrLabel,
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21004,13 +21004,13 @@ func (*binaryClassGlGetObjectPtrLabelKHR) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetObjectPtrLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetObjectPtrLabelKHR(d, obj.(*GlGetObjectPtrLabelKHR))
 }
-func (*binaryClassGlGetObjectPtrLabelKHR) Schema() *schema.Entity { return schemaGlGetObjectPtrLabelKHR }
+func (*binaryClassGlGetObjectPtrLabelKHR) Schema() *binary.Entity { return schemaGlGetObjectPtrLabelKHR }
 
-var schemaGlGetObjectPtrLabelKHR = &schema.Entity{
+var schemaGlGetObjectPtrLabelKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetObjectPtrLabelKHR,
 	Package: "gles",
 	Name:    "GlGetObjectPtrLabelKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21047,13 +21047,13 @@ func (*binaryClassGlGetPathCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathCommandsNV(d, obj.(*GlGetPathCommandsNV))
 }
-func (*binaryClassGlGetPathCommandsNV) Schema() *schema.Entity { return schemaGlGetPathCommandsNV }
+func (*binaryClassGlGetPathCommandsNV) Schema() *binary.Entity { return schemaGlGetPathCommandsNV }
 
-var schemaGlGetPathCommandsNV = &schema.Entity{
+var schemaGlGetPathCommandsNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathCommandsNV,
 	Package: "gles",
 	Name:    "GlGetPathCommandsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Commands", Type: &schema.Struct{Entity: schema.Of((*GLubyteᵖ)(nil).Class())}},
@@ -21088,13 +21088,13 @@ func (*binaryClassGlGetPathCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathCoordsNV(d, obj.(*GlGetPathCoordsNV))
 }
-func (*binaryClassGlGetPathCoordsNV) Schema() *schema.Entity { return schemaGlGetPathCoordsNV }
+func (*binaryClassGlGetPathCoordsNV) Schema() *binary.Entity { return schemaGlGetPathCoordsNV }
 
-var schemaGlGetPathCoordsNV = &schema.Entity{
+var schemaGlGetPathCoordsNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathCoordsNV,
 	Package: "gles",
 	Name:    "GlGetPathCoordsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Coords", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
@@ -21129,13 +21129,13 @@ func (*binaryClassGlGetPathDashArrayNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathDashArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathDashArrayNV(d, obj.(*GlGetPathDashArrayNV))
 }
-func (*binaryClassGlGetPathDashArrayNV) Schema() *schema.Entity { return schemaGlGetPathDashArrayNV }
+func (*binaryClassGlGetPathDashArrayNV) Schema() *binary.Entity { return schemaGlGetPathDashArrayNV }
 
-var schemaGlGetPathDashArrayNV = &schema.Entity{
+var schemaGlGetPathDashArrayNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathDashArrayNV,
 	Package: "gles",
 	Name:    "GlGetPathDashArrayNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "DashArray", Type: &schema.Struct{Entity: schema.Of((*GLfloatᵖ)(nil).Class())}},
@@ -21174,13 +21174,13 @@ func (*binaryClassGlGetPathLengthNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathLengthNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathLengthNV(d, obj.(*GlGetPathLengthNV))
 }
-func (*binaryClassGlGetPathLengthNV) Schema() *schema.Entity { return schemaGlGetPathLengthNV }
+func (*binaryClassGlGetPathLengthNV) Schema() *binary.Entity { return schemaGlGetPathLengthNV }
 
-var schemaGlGetPathLengthNV = &schema.Entity{
+var schemaGlGetPathLengthNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathLengthNV,
 	Package: "gles",
 	Name:    "GlGetPathLengthNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "StartSegment", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21223,13 +21223,13 @@ func (*binaryClassGlGetPathMetricRangeNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathMetricRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathMetricRangeNV(d, obj.(*GlGetPathMetricRangeNV))
 }
-func (*binaryClassGlGetPathMetricRangeNV) Schema() *schema.Entity { return schemaGlGetPathMetricRangeNV }
+func (*binaryClassGlGetPathMetricRangeNV) Schema() *binary.Entity { return schemaGlGetPathMetricRangeNV }
 
-var schemaGlGetPathMetricRangeNV = &schema.Entity{
+var schemaGlGetPathMetricRangeNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathMetricRangeNV,
 	Package: "gles",
 	Name:    "GlGetPathMetricRangeNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MetricQueryMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -21277,13 +21277,13 @@ func (*binaryClassGlGetPathMetricsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathMetricsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathMetricsNV(d, obj.(*GlGetPathMetricsNV))
 }
-func (*binaryClassGlGetPathMetricsNV) Schema() *schema.Entity { return schemaGlGetPathMetricsNV }
+func (*binaryClassGlGetPathMetricsNV) Schema() *binary.Entity { return schemaGlGetPathMetricsNV }
 
-var schemaGlGetPathMetricsNV = &schema.Entity{
+var schemaGlGetPathMetricsNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathMetricsNV,
 	Package: "gles",
 	Name:    "GlGetPathMetricsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MetricQueryMask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21325,13 +21325,13 @@ func (*binaryClassGlGetPathParameterfvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathParameterfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathParameterfvNV(d, obj.(*GlGetPathParameterfvNV))
 }
-func (*binaryClassGlGetPathParameterfvNV) Schema() *schema.Entity { return schemaGlGetPathParameterfvNV }
+func (*binaryClassGlGetPathParameterfvNV) Schema() *binary.Entity { return schemaGlGetPathParameterfvNV }
 
-var schemaGlGetPathParameterfvNV = &schema.Entity{
+var schemaGlGetPathParameterfvNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathParameterfvNV,
 	Package: "gles",
 	Name:    "GlGetPathParameterfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -21369,13 +21369,13 @@ func (*binaryClassGlGetPathParameterivNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetPathParameterivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathParameterivNV(d, obj.(*GlGetPathParameterivNV))
 }
-func (*binaryClassGlGetPathParameterivNV) Schema() *schema.Entity { return schemaGlGetPathParameterivNV }
+func (*binaryClassGlGetPathParameterivNV) Schema() *binary.Entity { return schemaGlGetPathParameterivNV }
 
-var schemaGlGetPathParameterivNV = &schema.Entity{
+var schemaGlGetPathParameterivNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathParameterivNV,
 	Package: "gles",
 	Name:    "GlGetPathParameterivNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -21425,13 +21425,13 @@ func (*binaryClassGlGetPathSpacingNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPathSpacingNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPathSpacingNV(d, obj.(*GlGetPathSpacingNV))
 }
-func (*binaryClassGlGetPathSpacingNV) Schema() *schema.Entity { return schemaGlGetPathSpacingNV }
+func (*binaryClassGlGetPathSpacingNV) Schema() *binary.Entity { return schemaGlGetPathSpacingNV }
 
-var schemaGlGetPathSpacingNV = &schema.Entity{
+var schemaGlGetPathSpacingNV = &binary.Entity{
 	TypeID:  binaryIDGlGetPathSpacingNV,
 	Package: "gles",
 	Name:    "GlGetPathSpacingNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "PathListMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21491,15 +21491,15 @@ func (*binaryClassGlGetPerfCounterInfoINTEL) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetPerfCounterInfoINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfCounterInfoINTEL(d, obj.(*GlGetPerfCounterInfoINTEL))
 }
-func (*binaryClassGlGetPerfCounterInfoINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfCounterInfoINTEL) Schema() *binary.Entity {
 	return schemaGlGetPerfCounterInfoINTEL
 }
 
-var schemaGlGetPerfCounterInfoINTEL = &schema.Entity{
+var schemaGlGetPerfCounterInfoINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfCounterInfoINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfCounterInfoINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CounterId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -21553,15 +21553,15 @@ func (*binaryClassGlGetPerfMonitorCounterDataAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorCounterDataAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterDataAMD(d, obj.(*GlGetPerfMonitorCounterDataAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterDataAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorCounterDataAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorCounterDataAMD
 }
 
-var schemaGlGetPerfMonitorCounterDataAMD = &schema.Entity{
+var schemaGlGetPerfMonitorCounterDataAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterDataAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterDataAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -21607,15 +21607,15 @@ func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorCounterInfoAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterInfoAMD(d, obj.(*GlGetPerfMonitorCounterInfoAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorCounterInfoAMD
 }
 
-var schemaGlGetPerfMonitorCounterInfoAMD = &schema.Entity{
+var schemaGlGetPerfMonitorCounterInfoAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterInfoAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterInfoAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Counter", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -21662,15 +21662,15 @@ func (*binaryClassGlGetPerfMonitorCounterStringAMD) Decode(d binary.Decoder) bin
 func (*binaryClassGlGetPerfMonitorCounterStringAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCounterStringAMD(d, obj.(*GlGetPerfMonitorCounterStringAMD))
 }
-func (*binaryClassGlGetPerfMonitorCounterStringAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorCounterStringAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorCounterStringAMD
 }
 
-var schemaGlGetPerfMonitorCounterStringAMD = &schema.Entity{
+var schemaGlGetPerfMonitorCounterStringAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCounterStringAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCounterStringAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Counter", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -21718,15 +21718,15 @@ func (*binaryClassGlGetPerfMonitorCountersAMD) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetPerfMonitorCountersAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorCountersAMD(d, obj.(*GlGetPerfMonitorCountersAMD))
 }
-func (*binaryClassGlGetPerfMonitorCountersAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorCountersAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorCountersAMD
 }
 
-var schemaGlGetPerfMonitorCountersAMD = &schema.Entity{
+var schemaGlGetPerfMonitorCountersAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorCountersAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorCountersAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCounters", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
@@ -21772,15 +21772,15 @@ func (*binaryClassGlGetPerfMonitorGroupStringAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetPerfMonitorGroupStringAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorGroupStringAMD(d, obj.(*GlGetPerfMonitorGroupStringAMD))
 }
-func (*binaryClassGlGetPerfMonitorGroupStringAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorGroupStringAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorGroupStringAMD
 }
 
-var schemaGlGetPerfMonitorGroupStringAMD = &schema.Entity{
+var schemaGlGetPerfMonitorGroupStringAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorGroupStringAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupStringAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Group", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21819,15 +21819,15 @@ func (*binaryClassGlGetPerfMonitorGroupsAMD) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetPerfMonitorGroupsAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfMonitorGroupsAMD(d, obj.(*GlGetPerfMonitorGroupsAMD))
 }
-func (*binaryClassGlGetPerfMonitorGroupsAMD) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfMonitorGroupsAMD) Schema() *binary.Entity {
 	return schemaGlGetPerfMonitorGroupsAMD
 }
 
-var schemaGlGetPerfMonitorGroupsAMD = &schema.Entity{
+var schemaGlGetPerfMonitorGroupsAMD = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfMonitorGroupsAMD,
 	Package: "gles",
 	Name:    "GlGetPerfMonitorGroupsAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumGroups", Type: &schema.Struct{Entity: schema.Of((*GLintᵖ)(nil).Class())}},
 		{Declared: "GroupsSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -21869,15 +21869,15 @@ func (*binaryClassGlGetPerfQueryDataINTEL) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetPerfQueryDataINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryDataINTEL(d, obj.(*GlGetPerfQueryDataINTEL))
 }
-func (*binaryClassGlGetPerfQueryDataINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfQueryDataINTEL) Schema() *binary.Entity {
 	return schemaGlGetPerfQueryDataINTEL
 }
 
-var schemaGlGetPerfQueryDataINTEL = &schema.Entity{
+var schemaGlGetPerfQueryDataINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfQueryDataINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryDataINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryHandle", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -21919,15 +21919,15 @@ func (*binaryClassGlGetPerfQueryIdByNameINTEL) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetPerfQueryIdByNameINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryIdByNameINTEL(d, obj.(*GlGetPerfQueryIdByNameINTEL))
 }
-func (*binaryClassGlGetPerfQueryIdByNameINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfQueryIdByNameINTEL) Schema() *binary.Entity {
 	return schemaGlGetPerfQueryIdByNameINTEL
 }
 
-var schemaGlGetPerfQueryIdByNameINTEL = &schema.Entity{
+var schemaGlGetPerfQueryIdByNameINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfQueryIdByNameINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryIdByNameINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryName", Type: &schema.Struct{Entity: schema.Of((*GLcharᵖ)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Struct{Entity: schema.Of((*GLuintᵖ)(nil).Class())}},
@@ -21972,15 +21972,15 @@ func (*binaryClassGlGetPerfQueryInfoINTEL) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetPerfQueryInfoINTEL) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPerfQueryInfoINTEL(d, obj.(*GlGetPerfQueryInfoINTEL))
 }
-func (*binaryClassGlGetPerfQueryInfoINTEL) Schema() *schema.Entity {
+func (*binaryClassGlGetPerfQueryInfoINTEL) Schema() *binary.Entity {
 	return schemaGlGetPerfQueryInfoINTEL
 }
 
-var schemaGlGetPerfQueryInfoINTEL = &schema.Entity{
+var schemaGlGetPerfQueryInfoINTEL = &binary.Entity{
 	TypeID:  binaryIDGlGetPerfQueryInfoINTEL,
 	Package: "gles",
 	Name:    "GlGetPerfQueryInfoINTEL",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "QueryId", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "QueryNameLength", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -22020,13 +22020,13 @@ func (*binaryClassGlGetPointerv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPointerv(d, obj.(*GlGetPointerv))
 }
-func (*binaryClassGlGetPointerv) Schema() *schema.Entity { return schemaGlGetPointerv }
+func (*binaryClassGlGetPointerv) Schema() *binary.Entity { return schemaGlGetPointerv }
 
-var schemaGlGetPointerv = &schema.Entity{
+var schemaGlGetPointerv = &binary.Entity{
 	TypeID:  binaryIDGlGetPointerv,
 	Package: "gles",
 	Name:    "GlGetPointerv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
@@ -22061,13 +22061,13 @@ func (*binaryClassGlGetPointervKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetPointervKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetPointervKHR(d, obj.(*GlGetPointervKHR))
 }
-func (*binaryClassGlGetPointervKHR) Schema() *schema.Entity { return schemaGlGetPointervKHR }
+func (*binaryClassGlGetPointervKHR) Schema() *binary.Entity { return schemaGlGetPointervKHR }
 
-var schemaGlGetPointervKHR = &schema.Entity{
+var schemaGlGetPointervKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetPointervKHR,
 	Package: "gles",
 	Name:    "GlGetPointervKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: schema.Of((*Voidᵖᵖ)(nil).Class())}},
@@ -22108,13 +22108,13 @@ func (*binaryClassGlGetProgramBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramBinary(d, obj.(*GlGetProgramBinary))
 }
-func (*binaryClassGlGetProgramBinary) Schema() *schema.Entity { return schemaGlGetProgramBinary }
+func (*binaryClassGlGetProgramBinary) Schema() *binary.Entity { return schemaGlGetProgramBinary }
 
-var schemaGlGetProgramBinary = &schema.Entity{
+var schemaGlGetProgramBinary = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramBinary,
 	Package: "gles",
 	Name:    "GlGetProgramBinary",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -22158,13 +22158,13 @@ func (*binaryClassGlGetProgramBinaryOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramBinaryOES(d, obj.(*GlGetProgramBinaryOES))
 }
-func (*binaryClassGlGetProgramBinaryOES) Schema() *schema.Entity { return schemaGlGetProgramBinaryOES }
+func (*binaryClassGlGetProgramBinaryOES) Schema() *binary.Entity { return schemaGlGetProgramBinaryOES }
 
-var schemaGlGetProgramBinaryOES = &schema.Entity{
+var schemaGlGetProgramBinaryOES = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlGetProgramBinaryOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -22206,13 +22206,13 @@ func (*binaryClassGlGetProgramInfoLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramInfoLog(d, obj.(*GlGetProgramInfoLog))
 }
-func (*binaryClassGlGetProgramInfoLog) Schema() *schema.Entity { return schemaGlGetProgramInfoLog }
+func (*binaryClassGlGetProgramInfoLog) Schema() *binary.Entity { return schemaGlGetProgramInfoLog }
 
-var schemaGlGetProgramInfoLog = &schema.Entity{
+var schemaGlGetProgramInfoLog = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramInfoLog,
 	Package: "gles",
 	Name:    "GlGetProgramInfoLog",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -22253,15 +22253,15 @@ func (*binaryClassGlGetProgramInterfaceiv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetProgramInterfaceiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramInterfaceiv(d, obj.(*GlGetProgramInterfaceiv))
 }
-func (*binaryClassGlGetProgramInterfaceiv) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramInterfaceiv) Schema() *binary.Entity {
 	return schemaGlGetProgramInterfaceiv
 }
 
-var schemaGlGetProgramInterfaceiv = &schema.Entity{
+var schemaGlGetProgramInterfaceiv = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramInterfaceiv,
 	Package: "gles",
 	Name:    "GlGetProgramInterfaceiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22306,15 +22306,15 @@ func (*binaryClassGlGetProgramPipelineInfoLog) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetProgramPipelineInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineInfoLog(d, obj.(*GlGetProgramPipelineInfoLog))
 }
-func (*binaryClassGlGetProgramPipelineInfoLog) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramPipelineInfoLog) Schema() *binary.Entity {
 	return schemaGlGetProgramPipelineInfoLog
 }
 
-var schemaGlGetProgramPipelineInfoLog = &schema.Entity{
+var schemaGlGetProgramPipelineInfoLog = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineInfoLog,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLog",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -22359,15 +22359,15 @@ func (*binaryClassGlGetProgramPipelineInfoLogEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlGetProgramPipelineInfoLogEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineInfoLogEXT(d, obj.(*GlGetProgramPipelineInfoLogEXT))
 }
-func (*binaryClassGlGetProgramPipelineInfoLogEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramPipelineInfoLogEXT) Schema() *binary.Entity {
 	return schemaGlGetProgramPipelineInfoLogEXT
 }
 
-var schemaGlGetProgramPipelineInfoLogEXT = &schema.Entity{
+var schemaGlGetProgramPipelineInfoLogEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineInfoLogEXT,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineInfoLogEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -22406,13 +22406,13 @@ func (*binaryClassGlGetProgramPipelineiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetProgramPipelineiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineiv(d, obj.(*GlGetProgramPipelineiv))
 }
-func (*binaryClassGlGetProgramPipelineiv) Schema() *schema.Entity { return schemaGlGetProgramPipelineiv }
+func (*binaryClassGlGetProgramPipelineiv) Schema() *binary.Entity { return schemaGlGetProgramPipelineiv }
 
-var schemaGlGetProgramPipelineiv = &schema.Entity{
+var schemaGlGetProgramPipelineiv = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineiv,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22450,15 +22450,15 @@ func (*binaryClassGlGetProgramPipelineivEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetProgramPipelineivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramPipelineivEXT(d, obj.(*GlGetProgramPipelineivEXT))
 }
-func (*binaryClassGlGetProgramPipelineivEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramPipelineivEXT) Schema() *binary.Entity {
 	return schemaGlGetProgramPipelineivEXT
 }
 
-var schemaGlGetProgramPipelineivEXT = &schema.Entity{
+var schemaGlGetProgramPipelineivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramPipelineivEXT,
 	Package: "gles",
 	Name:    "GlGetProgramPipelineivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22498,15 +22498,15 @@ func (*binaryClassGlGetProgramResourceIndex) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetProgramResourceIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceIndex(d, obj.(*GlGetProgramResourceIndex))
 }
-func (*binaryClassGlGetProgramResourceIndex) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramResourceIndex) Schema() *binary.Entity {
 	return schemaGlGetProgramResourceIndex
 }
 
-var schemaGlGetProgramResourceIndex = &schema.Entity{
+var schemaGlGetProgramResourceIndex = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourceIndex,
 	Package: "gles",
 	Name:    "GlGetProgramResourceIndex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22551,15 +22551,15 @@ func (*binaryClassGlGetProgramResourceLocation) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetProgramResourceLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceLocation(d, obj.(*GlGetProgramResourceLocation))
 }
-func (*binaryClassGlGetProgramResourceLocation) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramResourceLocation) Schema() *binary.Entity {
 	return schemaGlGetProgramResourceLocation
 }
 
-var schemaGlGetProgramResourceLocation = &schema.Entity{
+var schemaGlGetProgramResourceLocation = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourceLocation,
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22604,15 +22604,15 @@ func (*binaryClassGlGetProgramResourceLocationIndexEXT) Decode(d binary.Decoder)
 func (*binaryClassGlGetProgramResourceLocationIndexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceLocationIndexEXT(d, obj.(*GlGetProgramResourceLocationIndexEXT))
 }
-func (*binaryClassGlGetProgramResourceLocationIndexEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramResourceLocationIndexEXT) Schema() *binary.Entity {
 	return schemaGlGetProgramResourceLocationIndexEXT
 }
 
-var schemaGlGetProgramResourceLocationIndexEXT = &schema.Entity{
+var schemaGlGetProgramResourceLocationIndexEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourceLocationIndexEXT,
 	Package: "gles",
 	Name:    "GlGetProgramResourceLocationIndexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22657,15 +22657,15 @@ func (*binaryClassGlGetProgramResourceName) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetProgramResourceName) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceName(d, obj.(*GlGetProgramResourceName))
 }
-func (*binaryClassGlGetProgramResourceName) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramResourceName) Schema() *binary.Entity {
 	return schemaGlGetProgramResourceName
 }
 
-var schemaGlGetProgramResourceName = &schema.Entity{
+var schemaGlGetProgramResourceName = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourceName,
 	Package: "gles",
 	Name:    "GlGetProgramResourceName",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22716,15 +22716,15 @@ func (*binaryClassGlGetProgramResourcefvNV) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetProgramResourcefvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourcefvNV(d, obj.(*GlGetProgramResourcefvNV))
 }
-func (*binaryClassGlGetProgramResourcefvNV) Schema() *schema.Entity {
+func (*binaryClassGlGetProgramResourcefvNV) Schema() *binary.Entity {
 	return schemaGlGetProgramResourcefvNV
 }
 
-var schemaGlGetProgramResourcefvNV = &schema.Entity{
+var schemaGlGetProgramResourcefvNV = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourcefvNV,
 	Package: "gles",
 	Name:    "GlGetProgramResourcefvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22777,13 +22777,13 @@ func (*binaryClassGlGetProgramResourceiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetProgramResourceiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramResourceiv(d, obj.(*GlGetProgramResourceiv))
 }
-func (*binaryClassGlGetProgramResourceiv) Schema() *schema.Entity { return schemaGlGetProgramResourceiv }
+func (*binaryClassGlGetProgramResourceiv) Schema() *binary.Entity { return schemaGlGetProgramResourceiv }
 
-var schemaGlGetProgramResourceiv = &schema.Entity{
+var schemaGlGetProgramResourceiv = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramResourceiv,
 	Package: "gles",
 	Name:    "GlGetProgramResourceiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "ProgramInterface", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22826,13 +22826,13 @@ func (*binaryClassGlGetProgramiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetProgramiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetProgramiv(d, obj.(*GlGetProgramiv))
 }
-func (*binaryClassGlGetProgramiv) Schema() *schema.Entity { return schemaGlGetProgramiv }
+func (*binaryClassGlGetProgramiv) Schema() *binary.Entity { return schemaGlGetProgramiv }
 
-var schemaGlGetProgramiv = &schema.Entity{
+var schemaGlGetProgramiv = &binary.Entity{
 	TypeID:  binaryIDGlGetProgramiv,
 	Package: "gles",
 	Name:    "GlGetProgramiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22864,13 +22864,13 @@ func (*binaryClassS64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ᵖ(d, obj.(*S64ᵖ))
 }
-func (*binaryClassS64ᵖ) Schema() *schema.Entity { return schemaS64ᵖ }
+func (*binaryClassS64ᵖ) Schema() *binary.Entity { return schemaS64ᵖ }
 
-var schemaS64ᵖ = &schema.Entity{
+var schemaS64ᵖ = &binary.Entity{
 	TypeID:  binaryIDS64ᵖ,
 	Package: "gles",
 	Name:    "S64ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -22905,13 +22905,13 @@ func (*binaryClassGlGetQueryObjecti64v) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryObjecti64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjecti64v(d, obj.(*GlGetQueryObjecti64v))
 }
-func (*binaryClassGlGetQueryObjecti64v) Schema() *schema.Entity { return schemaGlGetQueryObjecti64v }
+func (*binaryClassGlGetQueryObjecti64v) Schema() *binary.Entity { return schemaGlGetQueryObjecti64v }
 
-var schemaGlGetQueryObjecti64v = &schema.Entity{
+var schemaGlGetQueryObjecti64v = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjecti64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22949,15 +22949,15 @@ func (*binaryClassGlGetQueryObjecti64vEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetQueryObjecti64vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjecti64vEXT(d, obj.(*GlGetQueryObjecti64vEXT))
 }
-func (*binaryClassGlGetQueryObjecti64vEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetQueryObjecti64vEXT) Schema() *binary.Entity {
 	return schemaGlGetQueryObjecti64vEXT
 }
 
-var schemaGlGetQueryObjecti64vEXT = &schema.Entity{
+var schemaGlGetQueryObjecti64vEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjecti64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjecti64vEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -22995,13 +22995,13 @@ func (*binaryClassGlGetQueryObjectivEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetQueryObjectivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectivEXT(d, obj.(*GlGetQueryObjectivEXT))
 }
-func (*binaryClassGlGetQueryObjectivEXT) Schema() *schema.Entity { return schemaGlGetQueryObjectivEXT }
+func (*binaryClassGlGetQueryObjectivEXT) Schema() *binary.Entity { return schemaGlGetQueryObjectivEXT }
 
-var schemaGlGetQueryObjectivEXT = &schema.Entity{
+var schemaGlGetQueryObjectivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjectivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23033,13 +23033,13 @@ func (*binaryClassU64ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ᵖ(d, obj.(*U64ᵖ))
 }
-func (*binaryClassU64ᵖ) Schema() *schema.Entity { return schemaU64ᵖ }
+func (*binaryClassU64ᵖ) Schema() *binary.Entity { return schemaU64ᵖ }
 
-var schemaU64ᵖ = &schema.Entity{
+var schemaU64ᵖ = &binary.Entity{
 	TypeID:  binaryIDU64ᵖ,
 	Package: "gles",
 	Name:    "U64ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -23074,13 +23074,13 @@ func (*binaryClassGlGetQueryObjectui64v) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetQueryObjectui64v) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectui64v(d, obj.(*GlGetQueryObjectui64v))
 }
-func (*binaryClassGlGetQueryObjectui64v) Schema() *schema.Entity { return schemaGlGetQueryObjectui64v }
+func (*binaryClassGlGetQueryObjectui64v) Schema() *binary.Entity { return schemaGlGetQueryObjectui64v }
 
-var schemaGlGetQueryObjectui64v = &schema.Entity{
+var schemaGlGetQueryObjectui64v = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjectui64v,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64v",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23118,15 +23118,15 @@ func (*binaryClassGlGetQueryObjectui64vEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetQueryObjectui64vEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectui64vEXT(d, obj.(*GlGetQueryObjectui64vEXT))
 }
-func (*binaryClassGlGetQueryObjectui64vEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetQueryObjectui64vEXT) Schema() *binary.Entity {
 	return schemaGlGetQueryObjectui64vEXT
 }
 
-var schemaGlGetQueryObjectui64vEXT = &schema.Entity{
+var schemaGlGetQueryObjectui64vEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjectui64vEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectui64vEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23164,13 +23164,13 @@ func (*binaryClassGlGetQueryObjectuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryObjectuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectuiv(d, obj.(*GlGetQueryObjectuiv))
 }
-func (*binaryClassGlGetQueryObjectuiv) Schema() *schema.Entity { return schemaGlGetQueryObjectuiv }
+func (*binaryClassGlGetQueryObjectuiv) Schema() *binary.Entity { return schemaGlGetQueryObjectuiv }
 
-var schemaGlGetQueryObjectuiv = &schema.Entity{
+var schemaGlGetQueryObjectuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjectuiv,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23208,13 +23208,13 @@ func (*binaryClassGlGetQueryObjectuivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetQueryObjectuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryObjectuivEXT(d, obj.(*GlGetQueryObjectuivEXT))
 }
-func (*binaryClassGlGetQueryObjectuivEXT) Schema() *schema.Entity { return schemaGlGetQueryObjectuivEXT }
+func (*binaryClassGlGetQueryObjectuivEXT) Schema() *binary.Entity { return schemaGlGetQueryObjectuivEXT }
 
-var schemaGlGetQueryObjectuivEXT = &schema.Entity{
+var schemaGlGetQueryObjectuivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryObjectuivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryObjectuivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23252,13 +23252,13 @@ func (*binaryClassGlGetQueryiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryiv(d, obj.(*GlGetQueryiv))
 }
-func (*binaryClassGlGetQueryiv) Schema() *schema.Entity { return schemaGlGetQueryiv }
+func (*binaryClassGlGetQueryiv) Schema() *binary.Entity { return schemaGlGetQueryiv }
 
-var schemaGlGetQueryiv = &schema.Entity{
+var schemaGlGetQueryiv = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryiv,
 	Package: "gles",
 	Name:    "GlGetQueryiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23296,13 +23296,13 @@ func (*binaryClassGlGetQueryivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetQueryivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetQueryivEXT(d, obj.(*GlGetQueryivEXT))
 }
-func (*binaryClassGlGetQueryivEXT) Schema() *schema.Entity { return schemaGlGetQueryivEXT }
+func (*binaryClassGlGetQueryivEXT) Schema() *binary.Entity { return schemaGlGetQueryivEXT }
 
-var schemaGlGetQueryivEXT = &schema.Entity{
+var schemaGlGetQueryivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetQueryivEXT,
 	Package: "gles",
 	Name:    "GlGetQueryivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23344,15 +23344,15 @@ func (*binaryClassGlGetRenderbufferParameteriv) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetRenderbufferParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetRenderbufferParameteriv(d, obj.(*GlGetRenderbufferParameteriv))
 }
-func (*binaryClassGlGetRenderbufferParameteriv) Schema() *schema.Entity {
+func (*binaryClassGlGetRenderbufferParameteriv) Schema() *binary.Entity {
 	return schemaGlGetRenderbufferParameteriv
 }
 
-var schemaGlGetRenderbufferParameteriv = &schema.Entity{
+var schemaGlGetRenderbufferParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetRenderbufferParameteriv,
 	Package: "gles",
 	Name:    "GlGetRenderbufferParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23390,15 +23390,15 @@ func (*binaryClassGlGetSamplerParameterIiv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIiv(d, obj.(*GlGetSamplerParameterIiv))
 }
-func (*binaryClassGlGetSamplerParameterIiv) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIiv) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIiv
 }
 
-var schemaGlGetSamplerParameterIiv = &schema.Entity{
+var schemaGlGetSamplerParameterIiv = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIiv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23440,15 +23440,15 @@ func (*binaryClassGlGetSamplerParameterIivEXT) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetSamplerParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIivEXT(d, obj.(*GlGetSamplerParameterIivEXT))
 }
-func (*binaryClassGlGetSamplerParameterIivEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIivEXT) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIivEXT
 }
 
-var schemaGlGetSamplerParameterIivEXT = &schema.Entity{
+var schemaGlGetSamplerParameterIivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIivEXT,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23490,15 +23490,15 @@ func (*binaryClassGlGetSamplerParameterIivOES) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetSamplerParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIivOES(d, obj.(*GlGetSamplerParameterIivOES))
 }
-func (*binaryClassGlGetSamplerParameterIivOES) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIivOES) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIivOES
 }
 
-var schemaGlGetSamplerParameterIivOES = &schema.Entity{
+var schemaGlGetSamplerParameterIivOES = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIivOES,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23536,15 +23536,15 @@ func (*binaryClassGlGetSamplerParameterIuiv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuiv(d, obj.(*GlGetSamplerParameterIuiv))
 }
-func (*binaryClassGlGetSamplerParameterIuiv) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIuiv) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIuiv
 }
 
-var schemaGlGetSamplerParameterIuiv = &schema.Entity{
+var schemaGlGetSamplerParameterIuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuiv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23586,15 +23586,15 @@ func (*binaryClassGlGetSamplerParameterIuivEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetSamplerParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuivEXT(d, obj.(*GlGetSamplerParameterIuivEXT))
 }
-func (*binaryClassGlGetSamplerParameterIuivEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIuivEXT) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIuivEXT
 }
 
-var schemaGlGetSamplerParameterIuivEXT = &schema.Entity{
+var schemaGlGetSamplerParameterIuivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23636,15 +23636,15 @@ func (*binaryClassGlGetSamplerParameterIuivOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlGetSamplerParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterIuivOES(d, obj.(*GlGetSamplerParameterIuivOES))
 }
-func (*binaryClassGlGetSamplerParameterIuivOES) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterIuivOES) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterIuivOES
 }
 
-var schemaGlGetSamplerParameterIuivOES = &schema.Entity{
+var schemaGlGetSamplerParameterIuivOES = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterIuivOES,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterIuivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23682,15 +23682,15 @@ func (*binaryClassGlGetSamplerParameterfv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetSamplerParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameterfv(d, obj.(*GlGetSamplerParameterfv))
 }
-func (*binaryClassGlGetSamplerParameterfv) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameterfv) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameterfv
 }
 
-var schemaGlGetSamplerParameterfv = &schema.Entity{
+var schemaGlGetSamplerParameterfv = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameterfv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameterfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23728,15 +23728,15 @@ func (*binaryClassGlGetSamplerParameteriv) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetSamplerParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSamplerParameteriv(d, obj.(*GlGetSamplerParameteriv))
 }
-func (*binaryClassGlGetSamplerParameteriv) Schema() *schema.Entity {
+func (*binaryClassGlGetSamplerParameteriv) Schema() *binary.Entity {
 	return schemaGlGetSamplerParameteriv
 }
 
-var schemaGlGetSamplerParameteriv = &schema.Entity{
+var schemaGlGetSamplerParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetSamplerParameteriv,
 	Package: "gles",
 	Name:    "GlGetSamplerParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23776,13 +23776,13 @@ func (*binaryClassGlGetShaderInfoLog) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderInfoLog) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderInfoLog(d, obj.(*GlGetShaderInfoLog))
 }
-func (*binaryClassGlGetShaderInfoLog) Schema() *schema.Entity { return schemaGlGetShaderInfoLog }
+func (*binaryClassGlGetShaderInfoLog) Schema() *binary.Entity { return schemaGlGetShaderInfoLog }
 
-var schemaGlGetShaderInfoLog = &schema.Entity{
+var schemaGlGetShaderInfoLog = &binary.Entity{
 	TypeID:  binaryIDGlGetShaderInfoLog,
 	Package: "gles",
 	Name:    "GlGetShaderInfoLog",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -23827,15 +23827,15 @@ func (*binaryClassGlGetShaderPrecisionFormat) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlGetShaderPrecisionFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderPrecisionFormat(d, obj.(*GlGetShaderPrecisionFormat))
 }
-func (*binaryClassGlGetShaderPrecisionFormat) Schema() *schema.Entity {
+func (*binaryClassGlGetShaderPrecisionFormat) Schema() *binary.Entity {
 	return schemaGlGetShaderPrecisionFormat
 }
 
-var schemaGlGetShaderPrecisionFormat = &schema.Entity{
+var schemaGlGetShaderPrecisionFormat = &binary.Entity{
 	TypeID:  binaryIDGlGetShaderPrecisionFormat,
 	Package: "gles",
 	Name:    "GlGetShaderPrecisionFormat",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ShaderType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PrecisionType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23876,13 +23876,13 @@ func (*binaryClassGlGetShaderSource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderSource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderSource(d, obj.(*GlGetShaderSource))
 }
-func (*binaryClassGlGetShaderSource) Schema() *schema.Entity { return schemaGlGetShaderSource }
+func (*binaryClassGlGetShaderSource) Schema() *binary.Entity { return schemaGlGetShaderSource }
 
-var schemaGlGetShaderSource = &schema.Entity{
+var schemaGlGetShaderSource = &binary.Entity{
 	TypeID:  binaryIDGlGetShaderSource,
 	Package: "gles",
 	Name:    "GlGetShaderSource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "BufferLength", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -23921,13 +23921,13 @@ func (*binaryClassGlGetShaderiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetShaderiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetShaderiv(d, obj.(*GlGetShaderiv))
 }
-func (*binaryClassGlGetShaderiv) Schema() *schema.Entity { return schemaGlGetShaderiv }
+func (*binaryClassGlGetShaderiv) Schema() *binary.Entity { return schemaGlGetShaderiv }
 
-var schemaGlGetShaderiv = &schema.Entity{
+var schemaGlGetShaderiv = &binary.Entity{
 	TypeID:  binaryIDGlGetShaderiv,
 	Package: "gles",
 	Name:    "GlGetShaderiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -23963,13 +23963,13 @@ func (*binaryClassGlGetString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetString(d, obj.(*GlGetString))
 }
-func (*binaryClassGlGetString) Schema() *schema.Entity { return schemaGlGetString }
+func (*binaryClassGlGetString) Schema() *binary.Entity { return schemaGlGetString }
 
-var schemaGlGetString = &schema.Entity{
+var schemaGlGetString = &binary.Entity{
 	TypeID:  binaryIDGlGetString,
 	Package: "gles",
 	Name:    "GlGetString",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Param", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*GLubyteᶜᵖ)(nil).Class())}},
@@ -24006,13 +24006,13 @@ func (*binaryClassGlGetStringi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetStringi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetStringi(d, obj.(*GlGetStringi))
 }
-func (*binaryClassGlGetStringi) Schema() *schema.Entity { return schemaGlGetStringi }
+func (*binaryClassGlGetStringi) Schema() *binary.Entity { return schemaGlGetStringi }
 
-var schemaGlGetStringi = &schema.Entity{
+var schemaGlGetStringi = &binary.Entity{
 	TypeID:  binaryIDGlGetStringi,
 	Package: "gles",
 	Name:    "GlGetStringi",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -24054,13 +24054,13 @@ func (*binaryClassGlGetSynciv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetSynciv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSynciv(d, obj.(*GlGetSynciv))
 }
-func (*binaryClassGlGetSynciv) Schema() *schema.Entity { return schemaGlGetSynciv }
+func (*binaryClassGlGetSynciv) Schema() *binary.Entity { return schemaGlGetSynciv }
 
-var schemaGlGetSynciv = &schema.Entity{
+var schemaGlGetSynciv = &binary.Entity{
 	TypeID:  binaryIDGlGetSynciv,
 	Package: "gles",
 	Name:    "GlGetSynciv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24104,13 +24104,13 @@ func (*binaryClassGlGetSyncivAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetSyncivAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetSyncivAPPLE(d, obj.(*GlGetSyncivAPPLE))
 }
-func (*binaryClassGlGetSyncivAPPLE) Schema() *schema.Entity { return schemaGlGetSyncivAPPLE }
+func (*binaryClassGlGetSyncivAPPLE) Schema() *binary.Entity { return schemaGlGetSyncivAPPLE }
 
-var schemaGlGetSyncivAPPLE = &schema.Entity{
+var schemaGlGetSyncivAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlGetSyncivAPPLE,
 	Package: "gles",
 	Name:    "GlGetSyncivAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24152,15 +24152,15 @@ func (*binaryClassGlGetTexLevelParameterfv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexLevelParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexLevelParameterfv(d, obj.(*GlGetTexLevelParameterfv))
 }
-func (*binaryClassGlGetTexLevelParameterfv) Schema() *schema.Entity {
+func (*binaryClassGlGetTexLevelParameterfv) Schema() *binary.Entity {
 	return schemaGlGetTexLevelParameterfv
 }
 
-var schemaGlGetTexLevelParameterfv = &schema.Entity{
+var schemaGlGetTexLevelParameterfv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexLevelParameterfv,
 	Package: "gles",
 	Name:    "GlGetTexLevelParameterfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -24201,15 +24201,15 @@ func (*binaryClassGlGetTexLevelParameteriv) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexLevelParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexLevelParameteriv(d, obj.(*GlGetTexLevelParameteriv))
 }
-func (*binaryClassGlGetTexLevelParameteriv) Schema() *schema.Entity {
+func (*binaryClassGlGetTexLevelParameteriv) Schema() *binary.Entity {
 	return schemaGlGetTexLevelParameteriv
 }
 
-var schemaGlGetTexLevelParameteriv = &schema.Entity{
+var schemaGlGetTexLevelParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexLevelParameteriv,
 	Package: "gles",
 	Name:    "GlGetTexLevelParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -24248,13 +24248,13 @@ func (*binaryClassGlGetTexParameterIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIiv(d, obj.(*GlGetTexParameterIiv))
 }
-func (*binaryClassGlGetTexParameterIiv) Schema() *schema.Entity { return schemaGlGetTexParameterIiv }
+func (*binaryClassGlGetTexParameterIiv) Schema() *binary.Entity { return schemaGlGetTexParameterIiv }
 
-var schemaGlGetTexParameterIiv = &schema.Entity{
+var schemaGlGetTexParameterIiv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIiv,
 	Package: "gles",
 	Name:    "GlGetTexParameterIiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24292,15 +24292,15 @@ func (*binaryClassGlGetTexParameterIivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetTexParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIivEXT(d, obj.(*GlGetTexParameterIivEXT))
 }
-func (*binaryClassGlGetTexParameterIivEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetTexParameterIivEXT) Schema() *binary.Entity {
 	return schemaGlGetTexParameterIivEXT
 }
 
-var schemaGlGetTexParameterIivEXT = &schema.Entity{
+var schemaGlGetTexParameterIivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIivEXT,
 	Package: "gles",
 	Name:    "GlGetTexParameterIivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24338,15 +24338,15 @@ func (*binaryClassGlGetTexParameterIivOES) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlGetTexParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIivOES(d, obj.(*GlGetTexParameterIivOES))
 }
-func (*binaryClassGlGetTexParameterIivOES) Schema() *schema.Entity {
+func (*binaryClassGlGetTexParameterIivOES) Schema() *binary.Entity {
 	return schemaGlGetTexParameterIivOES
 }
 
-var schemaGlGetTexParameterIivOES = &schema.Entity{
+var schemaGlGetTexParameterIivOES = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIivOES,
 	Package: "gles",
 	Name:    "GlGetTexParameterIivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24384,13 +24384,13 @@ func (*binaryClassGlGetTexParameterIuiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuiv(d, obj.(*GlGetTexParameterIuiv))
 }
-func (*binaryClassGlGetTexParameterIuiv) Schema() *schema.Entity { return schemaGlGetTexParameterIuiv }
+func (*binaryClassGlGetTexParameterIuiv) Schema() *binary.Entity { return schemaGlGetTexParameterIuiv }
 
-var schemaGlGetTexParameterIuiv = &schema.Entity{
+var schemaGlGetTexParameterIuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuiv,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24428,15 +24428,15 @@ func (*binaryClassGlGetTexParameterIuivEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuivEXT(d, obj.(*GlGetTexParameterIuivEXT))
 }
-func (*binaryClassGlGetTexParameterIuivEXT) Schema() *schema.Entity {
+func (*binaryClassGlGetTexParameterIuivEXT) Schema() *binary.Entity {
 	return schemaGlGetTexParameterIuivEXT
 }
 
-var schemaGlGetTexParameterIuivEXT = &schema.Entity{
+var schemaGlGetTexParameterIuivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24474,15 +24474,15 @@ func (*binaryClassGlGetTexParameterIuivOES) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlGetTexParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterIuivOES(d, obj.(*GlGetTexParameterIuivOES))
 }
-func (*binaryClassGlGetTexParameterIuivOES) Schema() *schema.Entity {
+func (*binaryClassGlGetTexParameterIuivOES) Schema() *binary.Entity {
 	return schemaGlGetTexParameterIuivOES
 }
 
-var schemaGlGetTexParameterIuivOES = &schema.Entity{
+var schemaGlGetTexParameterIuivOES = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterIuivOES,
 	Package: "gles",
 	Name:    "GlGetTexParameterIuivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24520,13 +24520,13 @@ func (*binaryClassGlGetTexParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameterfv(d, obj.(*GlGetTexParameterfv))
 }
-func (*binaryClassGlGetTexParameterfv) Schema() *schema.Entity { return schemaGlGetTexParameterfv }
+func (*binaryClassGlGetTexParameterfv) Schema() *binary.Entity { return schemaGlGetTexParameterfv }
 
-var schemaGlGetTexParameterfv = &schema.Entity{
+var schemaGlGetTexParameterfv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameterfv,
 	Package: "gles",
 	Name:    "GlGetTexParameterfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24564,13 +24564,13 @@ func (*binaryClassGlGetTexParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTexParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTexParameteriv(d, obj.(*GlGetTexParameteriv))
 }
-func (*binaryClassGlGetTexParameteriv) Schema() *schema.Entity { return schemaGlGetTexParameteriv }
+func (*binaryClassGlGetTexParameteriv) Schema() *binary.Entity { return schemaGlGetTexParameteriv }
 
-var schemaGlGetTexParameteriv = &schema.Entity{
+var schemaGlGetTexParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlGetTexParameteriv,
 	Package: "gles",
 	Name:    "GlGetTexParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -24606,13 +24606,13 @@ func (*binaryClassGlGetTextureHandleNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetTextureHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTextureHandleNV(d, obj.(*GlGetTextureHandleNV))
 }
-func (*binaryClassGlGetTextureHandleNV) Schema() *schema.Entity { return schemaGlGetTextureHandleNV }
+func (*binaryClassGlGetTextureHandleNV) Schema() *binary.Entity { return schemaGlGetTextureHandleNV }
 
-var schemaGlGetTextureHandleNV = &schema.Entity{
+var schemaGlGetTextureHandleNV = &binary.Entity{
 	TypeID:  binaryIDGlGetTextureHandleNV,
 	Package: "gles",
 	Name:    "GlGetTextureHandleNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -24653,15 +24653,15 @@ func (*binaryClassGlGetTextureSamplerHandleNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlGetTextureSamplerHandleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTextureSamplerHandleNV(d, obj.(*GlGetTextureSamplerHandleNV))
 }
-func (*binaryClassGlGetTextureSamplerHandleNV) Schema() *schema.Entity {
+func (*binaryClassGlGetTextureSamplerHandleNV) Schema() *binary.Entity {
 	return schemaGlGetTextureSamplerHandleNV
 }
 
-var schemaGlGetTextureSamplerHandleNV = &schema.Entity{
+var schemaGlGetTextureSamplerHandleNV = &binary.Entity{
 	TypeID:  binaryIDGlGetTextureSamplerHandleNV,
 	Package: "gles",
 	Name:    "GlGetTextureSamplerHandleNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
@@ -24711,15 +24711,15 @@ func (*binaryClassGlGetTransformFeedbackVarying) Decode(d binary.Decoder) binary
 func (*binaryClassGlGetTransformFeedbackVarying) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTransformFeedbackVarying(d, obj.(*GlGetTransformFeedbackVarying))
 }
-func (*binaryClassGlGetTransformFeedbackVarying) Schema() *schema.Entity {
+func (*binaryClassGlGetTransformFeedbackVarying) Schema() *binary.Entity {
 	return schemaGlGetTransformFeedbackVarying
 }
 
-var schemaGlGetTransformFeedbackVarying = &schema.Entity{
+var schemaGlGetTransformFeedbackVarying = &binary.Entity{
 	TypeID:  binaryIDGlGetTransformFeedbackVarying,
 	Package: "gles",
 	Name:    "GlGetTransformFeedbackVarying",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -24767,15 +24767,15 @@ func (*binaryClassGlGetTranslatedShaderSourceANGLE) Decode(d binary.Decoder) bin
 func (*binaryClassGlGetTranslatedShaderSourceANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetTranslatedShaderSourceANGLE(d, obj.(*GlGetTranslatedShaderSourceANGLE))
 }
-func (*binaryClassGlGetTranslatedShaderSourceANGLE) Schema() *schema.Entity {
+func (*binaryClassGlGetTranslatedShaderSourceANGLE) Schema() *binary.Entity {
 	return schemaGlGetTranslatedShaderSourceANGLE
 }
 
-var schemaGlGetTranslatedShaderSourceANGLE = &schema.Entity{
+var schemaGlGetTranslatedShaderSourceANGLE = &binary.Entity{
 	TypeID:  binaryIDGlGetTranslatedShaderSourceANGLE,
 	Package: "gles",
 	Name:    "GlGetTranslatedShaderSourceANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Bufsize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -24814,13 +24814,13 @@ func (*binaryClassGlGetUniformBlockIndex) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlGetUniformBlockIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformBlockIndex(d, obj.(*GlGetUniformBlockIndex))
 }
-func (*binaryClassGlGetUniformBlockIndex) Schema() *schema.Entity { return schemaGlGetUniformBlockIndex }
+func (*binaryClassGlGetUniformBlockIndex) Schema() *binary.Entity { return schemaGlGetUniformBlockIndex }
 
-var schemaGlGetUniformBlockIndex = &schema.Entity{
+var schemaGlGetUniformBlockIndex = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformBlockIndex,
 	Package: "gles",
 	Name:    "GlGetUniformBlockIndex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -24852,13 +24852,13 @@ func (*binaryClassUniformIndexᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassUniformIndexᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeUniformIndexᵖ(d, obj.(*UniformIndexᵖ))
 }
-func (*binaryClassUniformIndexᵖ) Schema() *schema.Entity { return schemaUniformIndexᵖ }
+func (*binaryClassUniformIndexᵖ) Schema() *binary.Entity { return schemaUniformIndexᵖ }
 
-var schemaUniformIndexᵖ = &schema.Entity{
+var schemaUniformIndexᵖ = &binary.Entity{
 	TypeID:  binaryIDUniformIndexᵖ,
 	Package: "gles",
 	Name:    "UniformIndexᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -24895,13 +24895,13 @@ func (*binaryClassGlGetUniformIndices) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformIndices) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformIndices(d, obj.(*GlGetUniformIndices))
 }
-func (*binaryClassGlGetUniformIndices) Schema() *schema.Entity { return schemaGlGetUniformIndices }
+func (*binaryClassGlGetUniformIndices) Schema() *binary.Entity { return schemaGlGetUniformIndices }
 
-var schemaGlGetUniformIndices = &schema.Entity{
+var schemaGlGetUniformIndices = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformIndices,
 	Package: "gles",
 	Name:    "GlGetUniformIndices",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -24940,13 +24940,13 @@ func (*binaryClassGlGetUniformLocation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformLocation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformLocation(d, obj.(*GlGetUniformLocation))
 }
-func (*binaryClassGlGetUniformLocation) Schema() *schema.Entity { return schemaGlGetUniformLocation }
+func (*binaryClassGlGetUniformLocation) Schema() *binary.Entity { return schemaGlGetUniformLocation }
 
-var schemaGlGetUniformLocation = &schema.Entity{
+var schemaGlGetUniformLocation = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformLocation,
 	Package: "gles",
 	Name:    "GlGetUniformLocation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -24984,13 +24984,13 @@ func (*binaryClassGlGetUniformfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformfv(d, obj.(*GlGetUniformfv))
 }
-func (*binaryClassGlGetUniformfv) Schema() *schema.Entity { return schemaGlGetUniformfv }
+func (*binaryClassGlGetUniformfv) Schema() *binary.Entity { return schemaGlGetUniformfv }
 
-var schemaGlGetUniformfv = &schema.Entity{
+var schemaGlGetUniformfv = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformfv,
 	Package: "gles",
 	Name:    "GlGetUniformfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25028,13 +25028,13 @@ func (*binaryClassGlGetUniformiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformiv(d, obj.(*GlGetUniformiv))
 }
-func (*binaryClassGlGetUniformiv) Schema() *schema.Entity { return schemaGlGetUniformiv }
+func (*binaryClassGlGetUniformiv) Schema() *binary.Entity { return schemaGlGetUniformiv }
 
-var schemaGlGetUniformiv = &schema.Entity{
+var schemaGlGetUniformiv = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformiv,
 	Package: "gles",
 	Name:    "GlGetUniformiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25072,13 +25072,13 @@ func (*binaryClassGlGetUniformuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetUniformuiv(d, obj.(*GlGetUniformuiv))
 }
-func (*binaryClassGlGetUniformuiv) Schema() *schema.Entity { return schemaGlGetUniformuiv }
+func (*binaryClassGlGetUniformuiv) Schema() *binary.Entity { return schemaGlGetUniformuiv }
 
-var schemaGlGetUniformuiv = &schema.Entity{
+var schemaGlGetUniformuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetUniformuiv,
 	Package: "gles",
 	Name:    "GlGetUniformuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25116,13 +25116,13 @@ func (*binaryClassGlGetVertexAttribIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribIiv(d, obj.(*GlGetVertexAttribIiv))
 }
-func (*binaryClassGlGetVertexAttribIiv) Schema() *schema.Entity { return schemaGlGetVertexAttribIiv }
+func (*binaryClassGlGetVertexAttribIiv) Schema() *binary.Entity { return schemaGlGetVertexAttribIiv }
 
-var schemaGlGetVertexAttribIiv = &schema.Entity{
+var schemaGlGetVertexAttribIiv = &binary.Entity{
 	TypeID:  binaryIDGlGetVertexAttribIiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribIiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25160,13 +25160,13 @@ func (*binaryClassGlGetVertexAttribIuiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlGetVertexAttribIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribIuiv(d, obj.(*GlGetVertexAttribIuiv))
 }
-func (*binaryClassGlGetVertexAttribIuiv) Schema() *schema.Entity { return schemaGlGetVertexAttribIuiv }
+func (*binaryClassGlGetVertexAttribIuiv) Schema() *binary.Entity { return schemaGlGetVertexAttribIuiv }
 
-var schemaGlGetVertexAttribIuiv = &schema.Entity{
+var schemaGlGetVertexAttribIuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetVertexAttribIuiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribIuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25204,15 +25204,15 @@ func (*binaryClassGlGetVertexAttribPointerv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlGetVertexAttribPointerv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribPointerv(d, obj.(*GlGetVertexAttribPointerv))
 }
-func (*binaryClassGlGetVertexAttribPointerv) Schema() *schema.Entity {
+func (*binaryClassGlGetVertexAttribPointerv) Schema() *binary.Entity {
 	return schemaGlGetVertexAttribPointerv
 }
 
-var schemaGlGetVertexAttribPointerv = &schema.Entity{
+var schemaGlGetVertexAttribPointerv = &binary.Entity{
 	TypeID:  binaryIDGlGetVertexAttribPointerv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribPointerv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25250,13 +25250,13 @@ func (*binaryClassGlGetVertexAttribfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribfv(d, obj.(*GlGetVertexAttribfv))
 }
-func (*binaryClassGlGetVertexAttribfv) Schema() *schema.Entity { return schemaGlGetVertexAttribfv }
+func (*binaryClassGlGetVertexAttribfv) Schema() *binary.Entity { return schemaGlGetVertexAttribfv }
 
-var schemaGlGetVertexAttribfv = &schema.Entity{
+var schemaGlGetVertexAttribfv = &binary.Entity{
 	TypeID:  binaryIDGlGetVertexAttribfv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25294,13 +25294,13 @@ func (*binaryClassGlGetVertexAttribiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetVertexAttribiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetVertexAttribiv(d, obj.(*GlGetVertexAttribiv))
 }
-func (*binaryClassGlGetVertexAttribiv) Schema() *schema.Entity { return schemaGlGetVertexAttribiv }
+func (*binaryClassGlGetVertexAttribiv) Schema() *binary.Entity { return schemaGlGetVertexAttribiv }
 
-var schemaGlGetVertexAttribiv = &schema.Entity{
+var schemaGlGetVertexAttribiv = &binary.Entity{
 	TypeID:  binaryIDGlGetVertexAttribiv,
 	Package: "gles",
 	Name:    "GlGetVertexAttribiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25340,13 +25340,13 @@ func (*binaryClassGlGetnUniformfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfv(d, obj.(*GlGetnUniformfv))
 }
-func (*binaryClassGlGetnUniformfv) Schema() *schema.Entity { return schemaGlGetnUniformfv }
+func (*binaryClassGlGetnUniformfv) Schema() *binary.Entity { return schemaGlGetnUniformfv }
 
-var schemaGlGetnUniformfv = &schema.Entity{
+var schemaGlGetnUniformfv = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformfv,
 	Package: "gles",
 	Name:    "GlGetnUniformfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25387,13 +25387,13 @@ func (*binaryClassGlGetnUniformfvEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfvEXT(d, obj.(*GlGetnUniformfvEXT))
 }
-func (*binaryClassGlGetnUniformfvEXT) Schema() *schema.Entity { return schemaGlGetnUniformfvEXT }
+func (*binaryClassGlGetnUniformfvEXT) Schema() *binary.Entity { return schemaGlGetnUniformfvEXT }
 
-var schemaGlGetnUniformfvEXT = &schema.Entity{
+var schemaGlGetnUniformfvEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformfvEXT,
 	Package: "gles",
 	Name:    "GlGetnUniformfvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25434,13 +25434,13 @@ func (*binaryClassGlGetnUniformfvKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformfvKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformfvKHR(d, obj.(*GlGetnUniformfvKHR))
 }
-func (*binaryClassGlGetnUniformfvKHR) Schema() *schema.Entity { return schemaGlGetnUniformfvKHR }
+func (*binaryClassGlGetnUniformfvKHR) Schema() *binary.Entity { return schemaGlGetnUniformfvKHR }
 
-var schemaGlGetnUniformfvKHR = &schema.Entity{
+var schemaGlGetnUniformfvKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformfvKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformfvKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25481,13 +25481,13 @@ func (*binaryClassGlGetnUniformiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformiv(d, obj.(*GlGetnUniformiv))
 }
-func (*binaryClassGlGetnUniformiv) Schema() *schema.Entity { return schemaGlGetnUniformiv }
+func (*binaryClassGlGetnUniformiv) Schema() *binary.Entity { return schemaGlGetnUniformiv }
 
-var schemaGlGetnUniformiv = &schema.Entity{
+var schemaGlGetnUniformiv = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformiv,
 	Package: "gles",
 	Name:    "GlGetnUniformiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25528,13 +25528,13 @@ func (*binaryClassGlGetnUniformivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformivEXT(d, obj.(*GlGetnUniformivEXT))
 }
-func (*binaryClassGlGetnUniformivEXT) Schema() *schema.Entity { return schemaGlGetnUniformivEXT }
+func (*binaryClassGlGetnUniformivEXT) Schema() *binary.Entity { return schemaGlGetnUniformivEXT }
 
-var schemaGlGetnUniformivEXT = &schema.Entity{
+var schemaGlGetnUniformivEXT = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformivEXT,
 	Package: "gles",
 	Name:    "GlGetnUniformivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25575,13 +25575,13 @@ func (*binaryClassGlGetnUniformivKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformivKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformivKHR(d, obj.(*GlGetnUniformivKHR))
 }
-func (*binaryClassGlGetnUniformivKHR) Schema() *schema.Entity { return schemaGlGetnUniformivKHR }
+func (*binaryClassGlGetnUniformivKHR) Schema() *binary.Entity { return schemaGlGetnUniformivKHR }
 
-var schemaGlGetnUniformivKHR = &schema.Entity{
+var schemaGlGetnUniformivKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformivKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformivKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25622,13 +25622,13 @@ func (*binaryClassGlGetnUniformuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformuiv(d, obj.(*GlGetnUniformuiv))
 }
-func (*binaryClassGlGetnUniformuiv) Schema() *schema.Entity { return schemaGlGetnUniformuiv }
+func (*binaryClassGlGetnUniformuiv) Schema() *binary.Entity { return schemaGlGetnUniformuiv }
 
-var schemaGlGetnUniformuiv = &schema.Entity{
+var schemaGlGetnUniformuiv = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformuiv,
 	Package: "gles",
 	Name:    "GlGetnUniformuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25669,13 +25669,13 @@ func (*binaryClassGlGetnUniformuivKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlGetnUniformuivKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlGetnUniformuivKHR(d, obj.(*GlGetnUniformuivKHR))
 }
-func (*binaryClassGlGetnUniformuivKHR) Schema() *schema.Entity { return schemaGlGetnUniformuivKHR }
+func (*binaryClassGlGetnUniformuivKHR) Schema() *binary.Entity { return schemaGlGetnUniformuivKHR }
 
-var schemaGlGetnUniformuivKHR = &schema.Entity{
+var schemaGlGetnUniformuivKHR = &binary.Entity{
 	TypeID:  binaryIDGlGetnUniformuivKHR,
 	Package: "gles",
 	Name:    "GlGetnUniformuivKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -25712,13 +25712,13 @@ func (*binaryClassGlHint) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlHint) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlHint(d, obj.(*GlHint))
 }
-func (*binaryClassGlHint) Schema() *schema.Entity { return schemaGlHint }
+func (*binaryClassGlHint) Schema() *binary.Entity { return schemaGlHint }
 
-var schemaGlHint = &schema.Entity{
+var schemaGlHint = &binary.Entity{
 	TypeID:  binaryIDGlHint,
 	Package: "gles",
 	Name:    "GlHint",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -25753,13 +25753,13 @@ func (*binaryClassGlInsertEventMarkerEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlInsertEventMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInsertEventMarkerEXT(d, obj.(*GlInsertEventMarkerEXT))
 }
-func (*binaryClassGlInsertEventMarkerEXT) Schema() *schema.Entity { return schemaGlInsertEventMarkerEXT }
+func (*binaryClassGlInsertEventMarkerEXT) Schema() *binary.Entity { return schemaGlInsertEventMarkerEXT }
 
-var schemaGlInsertEventMarkerEXT = &schema.Entity{
+var schemaGlInsertEventMarkerEXT = &binary.Entity{
 	TypeID:  binaryIDGlInsertEventMarkerEXT,
 	Package: "gles",
 	Name:    "GlInsertEventMarkerEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Marker", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
@@ -25798,13 +25798,13 @@ func (*binaryClassGlInterpolatePathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlInterpolatePathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInterpolatePathsNV(d, obj.(*GlInterpolatePathsNV))
 }
-func (*binaryClassGlInterpolatePathsNV) Schema() *schema.Entity { return schemaGlInterpolatePathsNV }
+func (*binaryClassGlInterpolatePathsNV) Schema() *binary.Entity { return schemaGlInterpolatePathsNV }
 
-var schemaGlInterpolatePathsNV = &schema.Entity{
+var schemaGlInterpolatePathsNV = &binary.Entity{
 	TypeID:  binaryIDGlInterpolatePathsNV,
 	Package: "gles",
 	Name:    "GlInterpolatePathsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "PathA", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -25843,15 +25843,15 @@ func (*binaryClassGlInvalidateFramebuffer) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlInvalidateFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInvalidateFramebuffer(d, obj.(*GlInvalidateFramebuffer))
 }
-func (*binaryClassGlInvalidateFramebuffer) Schema() *schema.Entity {
+func (*binaryClassGlInvalidateFramebuffer) Schema() *binary.Entity {
 	return schemaGlInvalidateFramebuffer
 }
 
-var schemaGlInvalidateFramebuffer = &schema.Entity{
+var schemaGlInvalidateFramebuffer = &binary.Entity{
 	TypeID:  binaryIDGlInvalidateFramebuffer,
 	Package: "gles",
 	Name:    "GlInvalidateFramebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -25901,15 +25901,15 @@ func (*binaryClassGlInvalidateSubFramebuffer) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlInvalidateSubFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlInvalidateSubFramebuffer(d, obj.(*GlInvalidateSubFramebuffer))
 }
-func (*binaryClassGlInvalidateSubFramebuffer) Schema() *schema.Entity {
+func (*binaryClassGlInvalidateSubFramebuffer) Schema() *binary.Entity {
 	return schemaGlInvalidateSubFramebuffer
 }
 
-var schemaGlInvalidateSubFramebuffer = &schema.Entity{
+var schemaGlInvalidateSubFramebuffer = &binary.Entity{
 	TypeID:  binaryIDGlInvalidateSubFramebuffer,
 	Package: "gles",
 	Name:    "GlInvalidateSubFramebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -25949,13 +25949,13 @@ func (*binaryClassGlIsBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsBuffer(d, obj.(*GlIsBuffer))
 }
-func (*binaryClassGlIsBuffer) Schema() *schema.Entity { return schemaGlIsBuffer }
+func (*binaryClassGlIsBuffer) Schema() *binary.Entity { return schemaGlIsBuffer }
 
-var schemaGlIsBuffer = &schema.Entity{
+var schemaGlIsBuffer = &binary.Entity{
 	TypeID:  binaryIDGlIsBuffer,
 	Package: "gles",
 	Name:    "GlIsBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -25990,13 +25990,13 @@ func (*binaryClassGlIsEnabled) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnabled) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnabled(d, obj.(*GlIsEnabled))
 }
-func (*binaryClassGlIsEnabled) Schema() *schema.Entity { return schemaGlIsEnabled }
+func (*binaryClassGlIsEnabled) Schema() *binary.Entity { return schemaGlIsEnabled }
 
-var schemaGlIsEnabled = &schema.Entity{
+var schemaGlIsEnabled = &binary.Entity{
 	TypeID:  binaryIDGlIsEnabled,
 	Package: "gles",
 	Name:    "GlIsEnabled",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26033,13 +26033,13 @@ func (*binaryClassGlIsEnabledi) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnabledi) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnabledi(d, obj.(*GlIsEnabledi))
 }
-func (*binaryClassGlIsEnabledi) Schema() *schema.Entity { return schemaGlIsEnabledi }
+func (*binaryClassGlIsEnabledi) Schema() *binary.Entity { return schemaGlIsEnabledi }
 
-var schemaGlIsEnabledi = &schema.Entity{
+var schemaGlIsEnabledi = &binary.Entity{
 	TypeID:  binaryIDGlIsEnabledi,
 	Package: "gles",
 	Name:    "GlIsEnabledi",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -26077,13 +26077,13 @@ func (*binaryClassGlIsEnablediEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediEXT(d, obj.(*GlIsEnablediEXT))
 }
-func (*binaryClassGlIsEnablediEXT) Schema() *schema.Entity { return schemaGlIsEnablediEXT }
+func (*binaryClassGlIsEnablediEXT) Schema() *binary.Entity { return schemaGlIsEnablediEXT }
 
-var schemaGlIsEnablediEXT = &schema.Entity{
+var schemaGlIsEnablediEXT = &binary.Entity{
 	TypeID:  binaryIDGlIsEnablediEXT,
 	Package: "gles",
 	Name:    "GlIsEnablediEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -26121,13 +26121,13 @@ func (*binaryClassGlIsEnablediNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediNV(d, obj.(*GlIsEnablediNV))
 }
-func (*binaryClassGlIsEnablediNV) Schema() *schema.Entity { return schemaGlIsEnablediNV }
+func (*binaryClassGlIsEnablediNV) Schema() *binary.Entity { return schemaGlIsEnablediNV }
 
-var schemaGlIsEnablediNV = &schema.Entity{
+var schemaGlIsEnablediNV = &binary.Entity{
 	TypeID:  binaryIDGlIsEnablediNV,
 	Package: "gles",
 	Name:    "GlIsEnablediNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -26165,13 +26165,13 @@ func (*binaryClassGlIsEnablediOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsEnablediOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsEnablediOES(d, obj.(*GlIsEnablediOES))
 }
-func (*binaryClassGlIsEnablediOES) Schema() *schema.Entity { return schemaGlIsEnablediOES }
+func (*binaryClassGlIsEnablediOES) Schema() *binary.Entity { return schemaGlIsEnablediOES }
 
-var schemaGlIsEnablediOES = &schema.Entity{
+var schemaGlIsEnablediOES = &binary.Entity{
 	TypeID:  binaryIDGlIsEnablediOES,
 	Package: "gles",
 	Name:    "GlIsEnablediOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -26207,13 +26207,13 @@ func (*binaryClassGlIsFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsFenceNV(d, obj.(*GlIsFenceNV))
 }
-func (*binaryClassGlIsFenceNV) Schema() *schema.Entity { return schemaGlIsFenceNV }
+func (*binaryClassGlIsFenceNV) Schema() *binary.Entity { return schemaGlIsFenceNV }
 
-var schemaGlIsFenceNV = &schema.Entity{
+var schemaGlIsFenceNV = &binary.Entity{
 	TypeID:  binaryIDGlIsFenceNV,
 	Package: "gles",
 	Name:    "GlIsFenceNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26248,13 +26248,13 @@ func (*binaryClassGlIsFramebuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsFramebuffer(d, obj.(*GlIsFramebuffer))
 }
-func (*binaryClassGlIsFramebuffer) Schema() *schema.Entity { return schemaGlIsFramebuffer }
+func (*binaryClassGlIsFramebuffer) Schema() *binary.Entity { return schemaGlIsFramebuffer }
 
-var schemaGlIsFramebuffer = &schema.Entity{
+var schemaGlIsFramebuffer = &binary.Entity{
 	TypeID:  binaryIDGlIsFramebuffer,
 	Package: "gles",
 	Name:    "GlIsFramebuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26289,15 +26289,15 @@ func (*binaryClassGlIsImageHandleResidentNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlIsImageHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsImageHandleResidentNV(d, obj.(*GlIsImageHandleResidentNV))
 }
-func (*binaryClassGlIsImageHandleResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlIsImageHandleResidentNV) Schema() *binary.Entity {
 	return schemaGlIsImageHandleResidentNV
 }
 
-var schemaGlIsImageHandleResidentNV = &schema.Entity{
+var schemaGlIsImageHandleResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlIsImageHandleResidentNV,
 	Package: "gles",
 	Name:    "GlIsImageHandleResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26332,13 +26332,13 @@ func (*binaryClassGlIsPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPathNV(d, obj.(*GlIsPathNV))
 }
-func (*binaryClassGlIsPathNV) Schema() *schema.Entity { return schemaGlIsPathNV }
+func (*binaryClassGlIsPathNV) Schema() *binary.Entity { return schemaGlIsPathNV }
 
-var schemaGlIsPathNV = &schema.Entity{
+var schemaGlIsPathNV = &binary.Entity{
 	TypeID:  binaryIDGlIsPathNV,
 	Package: "gles",
 	Name:    "GlIsPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26379,13 +26379,13 @@ func (*binaryClassGlIsPointInFillPathNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlIsPointInFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPointInFillPathNV(d, obj.(*GlIsPointInFillPathNV))
 }
-func (*binaryClassGlIsPointInFillPathNV) Schema() *schema.Entity { return schemaGlIsPointInFillPathNV }
+func (*binaryClassGlIsPointInFillPathNV) Schema() *binary.Entity { return schemaGlIsPointInFillPathNV }
 
-var schemaGlIsPointInFillPathNV = &schema.Entity{
+var schemaGlIsPointInFillPathNV = &binary.Entity{
 	TypeID:  binaryIDGlIsPointInFillPathNV,
 	Package: "gles",
 	Name:    "GlIsPointInFillPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -26427,15 +26427,15 @@ func (*binaryClassGlIsPointInStrokePathNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlIsPointInStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsPointInStrokePathNV(d, obj.(*GlIsPointInStrokePathNV))
 }
-func (*binaryClassGlIsPointInStrokePathNV) Schema() *schema.Entity {
+func (*binaryClassGlIsPointInStrokePathNV) Schema() *binary.Entity {
 	return schemaGlIsPointInStrokePathNV
 }
 
-var schemaGlIsPointInStrokePathNV = &schema.Entity{
+var schemaGlIsPointInStrokePathNV = &binary.Entity{
 	TypeID:  binaryIDGlIsPointInStrokePathNV,
 	Package: "gles",
 	Name:    "GlIsPointInStrokePathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -26472,13 +26472,13 @@ func (*binaryClassGlIsProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgram(d, obj.(*GlIsProgram))
 }
-func (*binaryClassGlIsProgram) Schema() *schema.Entity { return schemaGlIsProgram }
+func (*binaryClassGlIsProgram) Schema() *binary.Entity { return schemaGlIsProgram }
 
-var schemaGlIsProgram = &schema.Entity{
+var schemaGlIsProgram = &binary.Entity{
 	TypeID:  binaryIDGlIsProgram,
 	Package: "gles",
 	Name:    "GlIsProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26513,13 +26513,13 @@ func (*binaryClassGlIsProgramPipeline) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgramPipeline(d, obj.(*GlIsProgramPipeline))
 }
-func (*binaryClassGlIsProgramPipeline) Schema() *schema.Entity { return schemaGlIsProgramPipeline }
+func (*binaryClassGlIsProgramPipeline) Schema() *binary.Entity { return schemaGlIsProgramPipeline }
 
-var schemaGlIsProgramPipeline = &schema.Entity{
+var schemaGlIsProgramPipeline = &binary.Entity{
 	TypeID:  binaryIDGlIsProgramPipeline,
 	Package: "gles",
 	Name:    "GlIsProgramPipeline",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26554,13 +26554,13 @@ func (*binaryClassGlIsProgramPipelineEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlIsProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsProgramPipelineEXT(d, obj.(*GlIsProgramPipelineEXT))
 }
-func (*binaryClassGlIsProgramPipelineEXT) Schema() *schema.Entity { return schemaGlIsProgramPipelineEXT }
+func (*binaryClassGlIsProgramPipelineEXT) Schema() *binary.Entity { return schemaGlIsProgramPipelineEXT }
 
-var schemaGlIsProgramPipelineEXT = &schema.Entity{
+var schemaGlIsProgramPipelineEXT = &binary.Entity{
 	TypeID:  binaryIDGlIsProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlIsProgramPipelineEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26595,13 +26595,13 @@ func (*binaryClassGlIsQuery) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsQuery) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsQuery(d, obj.(*GlIsQuery))
 }
-func (*binaryClassGlIsQuery) Schema() *schema.Entity { return schemaGlIsQuery }
+func (*binaryClassGlIsQuery) Schema() *binary.Entity { return schemaGlIsQuery }
 
-var schemaGlIsQuery = &schema.Entity{
+var schemaGlIsQuery = &binary.Entity{
 	TypeID:  binaryIDGlIsQuery,
 	Package: "gles",
 	Name:    "GlIsQuery",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26636,13 +26636,13 @@ func (*binaryClassGlIsQueryEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsQueryEXT(d, obj.(*GlIsQueryEXT))
 }
-func (*binaryClassGlIsQueryEXT) Schema() *schema.Entity { return schemaGlIsQueryEXT }
+func (*binaryClassGlIsQueryEXT) Schema() *binary.Entity { return schemaGlIsQueryEXT }
 
-var schemaGlIsQueryEXT = &schema.Entity{
+var schemaGlIsQueryEXT = &binary.Entity{
 	TypeID:  binaryIDGlIsQueryEXT,
 	Package: "gles",
 	Name:    "GlIsQueryEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26677,13 +26677,13 @@ func (*binaryClassGlIsRenderbuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsRenderbuffer(d, obj.(*GlIsRenderbuffer))
 }
-func (*binaryClassGlIsRenderbuffer) Schema() *schema.Entity { return schemaGlIsRenderbuffer }
+func (*binaryClassGlIsRenderbuffer) Schema() *binary.Entity { return schemaGlIsRenderbuffer }
 
-var schemaGlIsRenderbuffer = &schema.Entity{
+var schemaGlIsRenderbuffer = &binary.Entity{
 	TypeID:  binaryIDGlIsRenderbuffer,
 	Package: "gles",
 	Name:    "GlIsRenderbuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26718,13 +26718,13 @@ func (*binaryClassGlIsSampler) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSampler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSampler(d, obj.(*GlIsSampler))
 }
-func (*binaryClassGlIsSampler) Schema() *schema.Entity { return schemaGlIsSampler }
+func (*binaryClassGlIsSampler) Schema() *binary.Entity { return schemaGlIsSampler }
 
-var schemaGlIsSampler = &schema.Entity{
+var schemaGlIsSampler = &binary.Entity{
 	TypeID:  binaryIDGlIsSampler,
 	Package: "gles",
 	Name:    "GlIsSampler",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26759,13 +26759,13 @@ func (*binaryClassGlIsShader) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsShader) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsShader(d, obj.(*GlIsShader))
 }
-func (*binaryClassGlIsShader) Schema() *schema.Entity { return schemaGlIsShader }
+func (*binaryClassGlIsShader) Schema() *binary.Entity { return schemaGlIsShader }
 
-var schemaGlIsShader = &schema.Entity{
+var schemaGlIsShader = &binary.Entity{
 	TypeID:  binaryIDGlIsShader,
 	Package: "gles",
 	Name:    "GlIsShader",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26800,13 +26800,13 @@ func (*binaryClassGlIsSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSync(d, obj.(*GlIsSync))
 }
-func (*binaryClassGlIsSync) Schema() *schema.Entity { return schemaGlIsSync }
+func (*binaryClassGlIsSync) Schema() *binary.Entity { return schemaGlIsSync }
 
-var schemaGlIsSync = &schema.Entity{
+var schemaGlIsSync = &binary.Entity{
 	TypeID:  binaryIDGlIsSync,
 	Package: "gles",
 	Name:    "GlIsSync",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26841,13 +26841,13 @@ func (*binaryClassGlIsSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsSyncAPPLE(d, obj.(*GlIsSyncAPPLE))
 }
-func (*binaryClassGlIsSyncAPPLE) Schema() *schema.Entity { return schemaGlIsSyncAPPLE }
+func (*binaryClassGlIsSyncAPPLE) Schema() *binary.Entity { return schemaGlIsSyncAPPLE }
 
-var schemaGlIsSyncAPPLE = &schema.Entity{
+var schemaGlIsSyncAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlIsSyncAPPLE,
 	Package: "gles",
 	Name:    "GlIsSyncAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26882,13 +26882,13 @@ func (*binaryClassGlIsTexture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTexture(d, obj.(*GlIsTexture))
 }
-func (*binaryClassGlIsTexture) Schema() *schema.Entity { return schemaGlIsTexture }
+func (*binaryClassGlIsTexture) Schema() *binary.Entity { return schemaGlIsTexture }
 
-var schemaGlIsTexture = &schema.Entity{
+var schemaGlIsTexture = &binary.Entity{
 	TypeID:  binaryIDGlIsTexture,
 	Package: "gles",
 	Name:    "GlIsTexture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26927,15 +26927,15 @@ func (*binaryClassGlIsTextureHandleResidentNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlIsTextureHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTextureHandleResidentNV(d, obj.(*GlIsTextureHandleResidentNV))
 }
-func (*binaryClassGlIsTextureHandleResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlIsTextureHandleResidentNV) Schema() *binary.Entity {
 	return schemaGlIsTextureHandleResidentNV
 }
 
-var schemaGlIsTextureHandleResidentNV = &schema.Entity{
+var schemaGlIsTextureHandleResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlIsTextureHandleResidentNV,
 	Package: "gles",
 	Name:    "GlIsTextureHandleResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -26970,13 +26970,13 @@ func (*binaryClassGlIsTransformFeedback) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlIsTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsTransformFeedback(d, obj.(*GlIsTransformFeedback))
 }
-func (*binaryClassGlIsTransformFeedback) Schema() *schema.Entity { return schemaGlIsTransformFeedback }
+func (*binaryClassGlIsTransformFeedback) Schema() *binary.Entity { return schemaGlIsTransformFeedback }
 
-var schemaGlIsTransformFeedback = &schema.Entity{
+var schemaGlIsTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlIsTransformFeedback,
 	Package: "gles",
 	Name:    "GlIsTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "TransformFeedbackId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -27011,13 +27011,13 @@ func (*binaryClassGlIsVertexArray) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsVertexArray(d, obj.(*GlIsVertexArray))
 }
-func (*binaryClassGlIsVertexArray) Schema() *schema.Entity { return schemaGlIsVertexArray }
+func (*binaryClassGlIsVertexArray) Schema() *binary.Entity { return schemaGlIsVertexArray }
 
-var schemaGlIsVertexArray = &schema.Entity{
+var schemaGlIsVertexArray = &binary.Entity{
 	TypeID:  binaryIDGlIsVertexArray,
 	Package: "gles",
 	Name:    "GlIsVertexArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -27052,13 +27052,13 @@ func (*binaryClassGlIsVertexArrayOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlIsVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlIsVertexArrayOES(d, obj.(*GlIsVertexArrayOES))
 }
-func (*binaryClassGlIsVertexArrayOES) Schema() *schema.Entity { return schemaGlIsVertexArrayOES }
+func (*binaryClassGlIsVertexArrayOES) Schema() *binary.Entity { return schemaGlIsVertexArrayOES }
 
-var schemaGlIsVertexArrayOES = &schema.Entity{
+var schemaGlIsVertexArrayOES = &binary.Entity{
 	TypeID:  binaryIDGlIsVertexArrayOES,
 	Package: "gles",
 	Name:    "GlIsVertexArrayOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -27097,13 +27097,13 @@ func (*binaryClassGlLabelObjectEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLabelObjectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLabelObjectEXT(d, obj.(*GlLabelObjectEXT))
 }
-func (*binaryClassGlLabelObjectEXT) Schema() *schema.Entity { return schemaGlLabelObjectEXT }
+func (*binaryClassGlLabelObjectEXT) Schema() *binary.Entity { return schemaGlLabelObjectEXT }
 
-var schemaGlLabelObjectEXT = &schema.Entity{
+var schemaGlLabelObjectEXT = &binary.Entity{
 	TypeID:  binaryIDGlLabelObjectEXT,
 	Package: "gles",
 	Name:    "GlLabelObjectEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Object", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -27138,13 +27138,13 @@ func (*binaryClassGlLineWidth) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLineWidth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLineWidth(d, obj.(*GlLineWidth))
 }
-func (*binaryClassGlLineWidth) Schema() *schema.Entity { return schemaGlLineWidth }
+func (*binaryClassGlLineWidth) Schema() *binary.Entity { return schemaGlLineWidth }
 
-var schemaGlLineWidth = &schema.Entity{
+var schemaGlLineWidth = &binary.Entity{
 	TypeID:  binaryIDGlLineWidth,
 	Package: "gles",
 	Name:    "GlLineWidth",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -27176,13 +27176,13 @@ func (*binaryClassGlLinkProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlLinkProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlLinkProgram(d, obj.(*GlLinkProgram))
 }
-func (*binaryClassGlLinkProgram) Schema() *schema.Entity { return schemaGlLinkProgram }
+func (*binaryClassGlLinkProgram) Schema() *binary.Entity { return schemaGlLinkProgram }
 
-var schemaGlLinkProgram = &schema.Entity{
+var schemaGlLinkProgram = &binary.Entity{
 	TypeID:  binaryIDGlLinkProgram,
 	Package: "gles",
 	Name:    "GlLinkProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -27218,15 +27218,15 @@ func (*binaryClassGlMakeImageHandleNonResidentNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlMakeImageHandleNonResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeImageHandleNonResidentNV(d, obj.(*GlMakeImageHandleNonResidentNV))
 }
-func (*binaryClassGlMakeImageHandleNonResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlMakeImageHandleNonResidentNV) Schema() *binary.Entity {
 	return schemaGlMakeImageHandleNonResidentNV
 }
 
-var schemaGlMakeImageHandleNonResidentNV = &schema.Entity{
+var schemaGlMakeImageHandleNonResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlMakeImageHandleNonResidentNV,
 	Package: "gles",
 	Name:    "GlMakeImageHandleNonResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
@@ -27264,15 +27264,15 @@ func (*binaryClassGlMakeImageHandleResidentNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMakeImageHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeImageHandleResidentNV(d, obj.(*GlMakeImageHandleResidentNV))
 }
-func (*binaryClassGlMakeImageHandleResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlMakeImageHandleResidentNV) Schema() *binary.Entity {
 	return schemaGlMakeImageHandleResidentNV
 }
 
-var schemaGlMakeImageHandleResidentNV = &schema.Entity{
+var schemaGlMakeImageHandleResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlMakeImageHandleResidentNV,
 	Package: "gles",
 	Name:    "GlMakeImageHandleResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -27309,15 +27309,15 @@ func (*binaryClassGlMakeTextureHandleNonResidentNV) Decode(d binary.Decoder) bin
 func (*binaryClassGlMakeTextureHandleNonResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeTextureHandleNonResidentNV(d, obj.(*GlMakeTextureHandleNonResidentNV))
 }
-func (*binaryClassGlMakeTextureHandleNonResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlMakeTextureHandleNonResidentNV) Schema() *binary.Entity {
 	return schemaGlMakeTextureHandleNonResidentNV
 }
 
-var schemaGlMakeTextureHandleNonResidentNV = &schema.Entity{
+var schemaGlMakeTextureHandleNonResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlMakeTextureHandleNonResidentNV,
 	Package: "gles",
 	Name:    "GlMakeTextureHandleNonResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
@@ -27353,15 +27353,15 @@ func (*binaryClassGlMakeTextureHandleResidentNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlMakeTextureHandleResidentNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMakeTextureHandleResidentNV(d, obj.(*GlMakeTextureHandleResidentNV))
 }
-func (*binaryClassGlMakeTextureHandleResidentNV) Schema() *schema.Entity {
+func (*binaryClassGlMakeTextureHandleResidentNV) Schema() *binary.Entity {
 	return schemaGlMakeTextureHandleResidentNV
 }
 
-var schemaGlMakeTextureHandleResidentNV = &schema.Entity{
+var schemaGlMakeTextureHandleResidentNV = &binary.Entity{
 	TypeID:  binaryIDGlMakeTextureHandleResidentNV,
 	Package: "gles",
 	Name:    "GlMakeTextureHandleResidentNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Handle", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 	},
@@ -27397,13 +27397,13 @@ func (*binaryClassGlMapBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferOES(d, obj.(*GlMapBufferOES))
 }
-func (*binaryClassGlMapBufferOES) Schema() *schema.Entity { return schemaGlMapBufferOES }
+func (*binaryClassGlMapBufferOES) Schema() *binary.Entity { return schemaGlMapBufferOES }
 
-var schemaGlMapBufferOES = &schema.Entity{
+var schemaGlMapBufferOES = &binary.Entity{
 	TypeID:  binaryIDGlMapBufferOES,
 	Package: "gles",
 	Name:    "GlMapBufferOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Access", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -27445,13 +27445,13 @@ func (*binaryClassGlMapBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferRange(d, obj.(*GlMapBufferRange))
 }
-func (*binaryClassGlMapBufferRange) Schema() *schema.Entity { return schemaGlMapBufferRange }
+func (*binaryClassGlMapBufferRange) Schema() *binary.Entity { return schemaGlMapBufferRange }
 
-var schemaGlMapBufferRange = &schema.Entity{
+var schemaGlMapBufferRange = &binary.Entity{
 	TypeID:  binaryIDGlMapBufferRange,
 	Package: "gles",
 	Name:    "GlMapBufferRange",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -27495,13 +27495,13 @@ func (*binaryClassGlMapBufferRangeEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMapBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMapBufferRangeEXT(d, obj.(*GlMapBufferRangeEXT))
 }
-func (*binaryClassGlMapBufferRangeEXT) Schema() *schema.Entity { return schemaGlMapBufferRangeEXT }
+func (*binaryClassGlMapBufferRangeEXT) Schema() *binary.Entity { return schemaGlMapBufferRangeEXT }
 
-var schemaGlMapBufferRangeEXT = &schema.Entity{
+var schemaGlMapBufferRangeEXT = &binary.Entity{
 	TypeID:  binaryIDGlMapBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlMapBufferRangeEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Offset", Type: &schema.Primitive{Name: "GLintptr", Method: schema.Int32}},
@@ -27539,13 +27539,13 @@ func (*binaryClassGlMatrixLoad3x2fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixLoad3x2fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoad3x2fNV(d, obj.(*GlMatrixLoad3x2fNV))
 }
-func (*binaryClassGlMatrixLoad3x2fNV) Schema() *schema.Entity { return schemaGlMatrixLoad3x2fNV }
+func (*binaryClassGlMatrixLoad3x2fNV) Schema() *binary.Entity { return schemaGlMatrixLoad3x2fNV }
 
-var schemaGlMatrixLoad3x2fNV = &schema.Entity{
+var schemaGlMatrixLoad3x2fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixLoad3x2fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoad3x2fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27580,13 +27580,13 @@ func (*binaryClassGlMatrixLoad3x3fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixLoad3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoad3x3fNV(d, obj.(*GlMatrixLoad3x3fNV))
 }
-func (*binaryClassGlMatrixLoad3x3fNV) Schema() *schema.Entity { return schemaGlMatrixLoad3x3fNV }
+func (*binaryClassGlMatrixLoad3x3fNV) Schema() *binary.Entity { return schemaGlMatrixLoad3x3fNV }
 
-var schemaGlMatrixLoad3x3fNV = &schema.Entity{
+var schemaGlMatrixLoad3x3fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixLoad3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoad3x3fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27625,15 +27625,15 @@ func (*binaryClassGlMatrixLoadTranspose3x3fNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMatrixLoadTranspose3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixLoadTranspose3x3fNV(d, obj.(*GlMatrixLoadTranspose3x3fNV))
 }
-func (*binaryClassGlMatrixLoadTranspose3x3fNV) Schema() *schema.Entity {
+func (*binaryClassGlMatrixLoadTranspose3x3fNV) Schema() *binary.Entity {
 	return schemaGlMatrixLoadTranspose3x3fNV
 }
 
-var schemaGlMatrixLoadTranspose3x3fNV = &schema.Entity{
+var schemaGlMatrixLoadTranspose3x3fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixLoadTranspose3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixLoadTranspose3x3fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27668,13 +27668,13 @@ func (*binaryClassGlMatrixMult3x2fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixMult3x2fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMult3x2fNV(d, obj.(*GlMatrixMult3x2fNV))
 }
-func (*binaryClassGlMatrixMult3x2fNV) Schema() *schema.Entity { return schemaGlMatrixMult3x2fNV }
+func (*binaryClassGlMatrixMult3x2fNV) Schema() *binary.Entity { return schemaGlMatrixMult3x2fNV }
 
-var schemaGlMatrixMult3x2fNV = &schema.Entity{
+var schemaGlMatrixMult3x2fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixMult3x2fNV,
 	Package: "gles",
 	Name:    "GlMatrixMult3x2fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27709,13 +27709,13 @@ func (*binaryClassGlMatrixMult3x3fNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMatrixMult3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMult3x3fNV(d, obj.(*GlMatrixMult3x3fNV))
 }
-func (*binaryClassGlMatrixMult3x3fNV) Schema() *schema.Entity { return schemaGlMatrixMult3x3fNV }
+func (*binaryClassGlMatrixMult3x3fNV) Schema() *binary.Entity { return schemaGlMatrixMult3x3fNV }
 
-var schemaGlMatrixMult3x3fNV = &schema.Entity{
+var schemaGlMatrixMult3x3fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixMult3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixMult3x3fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27754,15 +27754,15 @@ func (*binaryClassGlMatrixMultTranspose3x3fNV) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlMatrixMultTranspose3x3fNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMatrixMultTranspose3x3fNV(d, obj.(*GlMatrixMultTranspose3x3fNV))
 }
-func (*binaryClassGlMatrixMultTranspose3x3fNV) Schema() *schema.Entity {
+func (*binaryClassGlMatrixMultTranspose3x3fNV) Schema() *binary.Entity {
 	return schemaGlMatrixMultTranspose3x3fNV
 }
 
-var schemaGlMatrixMultTranspose3x3fNV = &schema.Entity{
+var schemaGlMatrixMultTranspose3x3fNV = &binary.Entity{
 	TypeID:  binaryIDGlMatrixMultTranspose3x3fNV,
 	Package: "gles",
 	Name:    "GlMatrixMultTranspose3x3fNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -27795,13 +27795,13 @@ func (*binaryClassGlMemoryBarrier) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMemoryBarrier) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMemoryBarrier(d, obj.(*GlMemoryBarrier))
 }
-func (*binaryClassGlMemoryBarrier) Schema() *schema.Entity { return schemaGlMemoryBarrier }
+func (*binaryClassGlMemoryBarrier) Schema() *binary.Entity { return schemaGlMemoryBarrier }
 
-var schemaGlMemoryBarrier = &schema.Entity{
+var schemaGlMemoryBarrier = &binary.Entity{
 	TypeID:  binaryIDGlMemoryBarrier,
 	Package: "gles",
 	Name:    "GlMemoryBarrier",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Barriers", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
@@ -27833,15 +27833,15 @@ func (*binaryClassGlMemoryBarrierByRegion) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlMemoryBarrierByRegion) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMemoryBarrierByRegion(d, obj.(*GlMemoryBarrierByRegion))
 }
-func (*binaryClassGlMemoryBarrierByRegion) Schema() *schema.Entity {
+func (*binaryClassGlMemoryBarrierByRegion) Schema() *binary.Entity {
 	return schemaGlMemoryBarrierByRegion
 }
 
-var schemaGlMemoryBarrierByRegion = &schema.Entity{
+var schemaGlMemoryBarrierByRegion = &binary.Entity{
 	TypeID:  binaryIDGlMemoryBarrierByRegion,
 	Package: "gles",
 	Name:    "GlMemoryBarrierByRegion",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Barriers", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
@@ -27873,13 +27873,13 @@ func (*binaryClassGlMinSampleShading) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMinSampleShading) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMinSampleShading(d, obj.(*GlMinSampleShading))
 }
-func (*binaryClassGlMinSampleShading) Schema() *schema.Entity { return schemaGlMinSampleShading }
+func (*binaryClassGlMinSampleShading) Schema() *binary.Entity { return schemaGlMinSampleShading }
 
-var schemaGlMinSampleShading = &schema.Entity{
+var schemaGlMinSampleShading = &binary.Entity{
 	TypeID:  binaryIDGlMinSampleShading,
 	Package: "gles",
 	Name:    "GlMinSampleShading",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -27911,13 +27911,13 @@ func (*binaryClassGlMinSampleShadingOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlMinSampleShadingOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMinSampleShadingOES(d, obj.(*GlMinSampleShadingOES))
 }
-func (*binaryClassGlMinSampleShadingOES) Schema() *schema.Entity { return schemaGlMinSampleShadingOES }
+func (*binaryClassGlMinSampleShadingOES) Schema() *binary.Entity { return schemaGlMinSampleShadingOES }
 
-var schemaGlMinSampleShadingOES = &schema.Entity{
+var schemaGlMinSampleShadingOES = &binary.Entity{
 	TypeID:  binaryIDGlMinSampleShadingOES,
 	Package: "gles",
 	Name:    "GlMinSampleShadingOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 	},
@@ -27955,13 +27955,13 @@ func (*binaryClassGlMultiDrawArraysEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlMultiDrawArraysEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawArraysEXT(d, obj.(*GlMultiDrawArraysEXT))
 }
-func (*binaryClassGlMultiDrawArraysEXT) Schema() *schema.Entity { return schemaGlMultiDrawArraysEXT }
+func (*binaryClassGlMultiDrawArraysEXT) Schema() *binary.Entity { return schemaGlMultiDrawArraysEXT }
 
-var schemaGlMultiDrawArraysEXT = &schema.Entity{
+var schemaGlMultiDrawArraysEXT = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawArraysEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawArraysEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "First", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
@@ -28006,15 +28006,15 @@ func (*binaryClassGlMultiDrawArraysIndirectEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlMultiDrawArraysIndirectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawArraysIndirectEXT(d, obj.(*GlMultiDrawArraysIndirectEXT))
 }
-func (*binaryClassGlMultiDrawArraysIndirectEXT) Schema() *schema.Entity {
+func (*binaryClassGlMultiDrawArraysIndirectEXT) Schema() *binary.Entity {
 	return schemaGlMultiDrawArraysIndirectEXT
 }
 
-var schemaGlMultiDrawArraysIndirectEXT = &schema.Entity{
+var schemaGlMultiDrawArraysIndirectEXT = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawArraysIndirectEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawArraysIndirectEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Indirect", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
@@ -28047,13 +28047,13 @@ func (*binaryClassVoidᶜᵖᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖᶜᵖ(d, obj.(*Voidᶜᵖᶜᵖ))
 }
-func (*binaryClassVoidᶜᵖᶜᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖᶜᵖ }
+func (*binaryClassVoidᶜᵖᶜᵖ) Schema() *binary.Entity { return schemaVoidᶜᵖᶜᵖ }
 
-var schemaVoidᶜᵖᶜᵖ = &schema.Entity{
+var schemaVoidᶜᵖᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDVoidᶜᵖᶜᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -28098,15 +28098,15 @@ func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Decode(d binary.Decoder) bin
 func (*binaryClassGlMultiDrawElementsBaseVertexEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsBaseVertexEXT(d, obj.(*GlMultiDrawElementsBaseVertexEXT))
 }
-func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Schema() *schema.Entity {
+func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Schema() *binary.Entity {
 	return schemaGlMultiDrawElementsBaseVertexEXT
 }
 
-var schemaGlMultiDrawElementsBaseVertexEXT = &schema.Entity{
+var schemaGlMultiDrawElementsBaseVertexEXT = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsBaseVertexEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
@@ -28157,15 +28157,15 @@ func (*binaryClassGlMultiDrawElementsBaseVertexOES) Decode(d binary.Decoder) bin
 func (*binaryClassGlMultiDrawElementsBaseVertexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsBaseVertexOES(d, obj.(*GlMultiDrawElementsBaseVertexOES))
 }
-func (*binaryClassGlMultiDrawElementsBaseVertexOES) Schema() *schema.Entity {
+func (*binaryClassGlMultiDrawElementsBaseVertexOES) Schema() *binary.Entity {
 	return schemaGlMultiDrawElementsBaseVertexOES
 }
 
-var schemaGlMultiDrawElementsBaseVertexOES = &schema.Entity{
+var schemaGlMultiDrawElementsBaseVertexOES = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsBaseVertexOES,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsBaseVertexOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
@@ -28210,13 +28210,13 @@ func (*binaryClassGlMultiDrawElementsEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlMultiDrawElementsEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsEXT(d, obj.(*GlMultiDrawElementsEXT))
 }
-func (*binaryClassGlMultiDrawElementsEXT) Schema() *schema.Entity { return schemaGlMultiDrawElementsEXT }
+func (*binaryClassGlMultiDrawElementsEXT) Schema() *binary.Entity { return schemaGlMultiDrawElementsEXT }
 
-var schemaGlMultiDrawElementsEXT = &schema.Entity{
+var schemaGlMultiDrawElementsEXT = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Struct{Entity: schema.Of((*GLsizeiᶜᵖ)(nil).Class())}},
@@ -28264,15 +28264,15 @@ func (*binaryClassGlMultiDrawElementsIndirectEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlMultiDrawElementsIndirectEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlMultiDrawElementsIndirectEXT(d, obj.(*GlMultiDrawElementsIndirectEXT))
 }
-func (*binaryClassGlMultiDrawElementsIndirectEXT) Schema() *schema.Entity {
+func (*binaryClassGlMultiDrawElementsIndirectEXT) Schema() *binary.Entity {
 	return schemaGlMultiDrawElementsIndirectEXT
 }
 
-var schemaGlMultiDrawElementsIndirectEXT = &schema.Entity{
+var schemaGlMultiDrawElementsIndirectEXT = &binary.Entity{
 	TypeID:  binaryIDGlMultiDrawElementsIndirectEXT,
 	Package: "gles",
 	Name:    "GlMultiDrawElementsIndirectEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -28318,15 +28318,15 @@ func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Decode(d binary.Decoder
 func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlNamedFramebufferSampleLocationsfvNV(d, obj.(*GlNamedFramebufferSampleLocationsfvNV))
 }
-func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Schema() *schema.Entity {
+func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Schema() *binary.Entity {
 	return schemaGlNamedFramebufferSampleLocationsfvNV
 }
 
-var schemaGlNamedFramebufferSampleLocationsfvNV = &schema.Entity{
+var schemaGlNamedFramebufferSampleLocationsfvNV = &binary.Entity{
 	TypeID:  binaryIDGlNamedFramebufferSampleLocationsfvNV,
 	Package: "gles",
 	Name:    "GlNamedFramebufferSampleLocationsfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -28367,13 +28367,13 @@ func (*binaryClassGlObjectLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectLabel(d, obj.(*GlObjectLabel))
 }
-func (*binaryClassGlObjectLabel) Schema() *schema.Entity { return schemaGlObjectLabel }
+func (*binaryClassGlObjectLabel) Schema() *binary.Entity { return schemaGlObjectLabel }
 
-var schemaGlObjectLabel = &schema.Entity{
+var schemaGlObjectLabel = &binary.Entity{
 	TypeID:  binaryIDGlObjectLabel,
 	Package: "gles",
 	Name:    "GlObjectLabel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -28414,13 +28414,13 @@ func (*binaryClassGlObjectLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectLabelKHR(d, obj.(*GlObjectLabelKHR))
 }
-func (*binaryClassGlObjectLabelKHR) Schema() *schema.Entity { return schemaGlObjectLabelKHR }
+func (*binaryClassGlObjectLabelKHR) Schema() *binary.Entity { return schemaGlObjectLabelKHR }
 
-var schemaGlObjectLabelKHR = &schema.Entity{
+var schemaGlObjectLabelKHR = &binary.Entity{
 	TypeID:  binaryIDGlObjectLabelKHR,
 	Package: "gles",
 	Name:    "GlObjectLabelKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Identifier", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -28459,13 +28459,13 @@ func (*binaryClassGlObjectPtrLabel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectPtrLabel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectPtrLabel(d, obj.(*GlObjectPtrLabel))
 }
-func (*binaryClassGlObjectPtrLabel) Schema() *schema.Entity { return schemaGlObjectPtrLabel }
+func (*binaryClassGlObjectPtrLabel) Schema() *binary.Entity { return schemaGlObjectPtrLabel }
 
-var schemaGlObjectPtrLabel = &schema.Entity{
+var schemaGlObjectPtrLabel = &binary.Entity{
 	TypeID:  binaryIDGlObjectPtrLabel,
 	Package: "gles",
 	Name:    "GlObjectPtrLabel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28503,13 +28503,13 @@ func (*binaryClassGlObjectPtrLabelKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlObjectPtrLabelKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlObjectPtrLabelKHR(d, obj.(*GlObjectPtrLabelKHR))
 }
-func (*binaryClassGlObjectPtrLabelKHR) Schema() *schema.Entity { return schemaGlObjectPtrLabelKHR }
+func (*binaryClassGlObjectPtrLabelKHR) Schema() *binary.Entity { return schemaGlObjectPtrLabelKHR }
 
-var schemaGlObjectPtrLabelKHR = &schema.Entity{
+var schemaGlObjectPtrLabelKHR = &binary.Entity{
 	TypeID:  binaryIDGlObjectPtrLabelKHR,
 	Package: "gles",
 	Name:    "GlObjectPtrLabelKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Ptr", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28545,13 +28545,13 @@ func (*binaryClassGlPatchParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteri(d, obj.(*GlPatchParameteri))
 }
-func (*binaryClassGlPatchParameteri) Schema() *schema.Entity { return schemaGlPatchParameteri }
+func (*binaryClassGlPatchParameteri) Schema() *binary.Entity { return schemaGlPatchParameteri }
 
-var schemaGlPatchParameteri = &schema.Entity{
+var schemaGlPatchParameteri = &binary.Entity{
 	TypeID:  binaryIDGlPatchParameteri,
 	Package: "gles",
 	Name:    "GlPatchParameteri",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -28586,13 +28586,13 @@ func (*binaryClassGlPatchParameteriEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteriEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteriEXT(d, obj.(*GlPatchParameteriEXT))
 }
-func (*binaryClassGlPatchParameteriEXT) Schema() *schema.Entity { return schemaGlPatchParameteriEXT }
+func (*binaryClassGlPatchParameteriEXT) Schema() *binary.Entity { return schemaGlPatchParameteriEXT }
 
-var schemaGlPatchParameteriEXT = &schema.Entity{
+var schemaGlPatchParameteriEXT = &binary.Entity{
 	TypeID:  binaryIDGlPatchParameteriEXT,
 	Package: "gles",
 	Name:    "GlPatchParameteriEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -28627,13 +28627,13 @@ func (*binaryClassGlPatchParameteriOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPatchParameteriOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPatchParameteriOES(d, obj.(*GlPatchParameteriOES))
 }
-func (*binaryClassGlPatchParameteriOES) Schema() *schema.Entity { return schemaGlPatchParameteriOES }
+func (*binaryClassGlPatchParameteriOES) Schema() *binary.Entity { return schemaGlPatchParameteriOES }
 
-var schemaGlPatchParameteriOES = &schema.Entity{
+var schemaGlPatchParameteriOES = &binary.Entity{
 	TypeID:  binaryIDGlPatchParameteriOES,
 	Package: "gles",
 	Name:    "GlPatchParameteriOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -28676,13 +28676,13 @@ func (*binaryClassGlPathCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCommandsNV(d, obj.(*GlPathCommandsNV))
 }
-func (*binaryClassGlPathCommandsNV) Schema() *schema.Entity { return schemaGlPathCommandsNV }
+func (*binaryClassGlPathCommandsNV) Schema() *binary.Entity { return schemaGlPathCommandsNV }
 
-var schemaGlPathCommandsNV = &schema.Entity{
+var schemaGlPathCommandsNV = &binary.Entity{
 	TypeID:  binaryIDGlPathCommandsNV,
 	Package: "gles",
 	Name:    "GlPathCommandsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCommands", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28725,13 +28725,13 @@ func (*binaryClassGlPathCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCoordsNV(d, obj.(*GlPathCoordsNV))
 }
-func (*binaryClassGlPathCoordsNV) Schema() *schema.Entity { return schemaGlPathCoordsNV }
+func (*binaryClassGlPathCoordsNV) Schema() *binary.Entity { return schemaGlPathCoordsNV }
 
-var schemaGlPathCoordsNV = &schema.Entity{
+var schemaGlPathCoordsNV = &binary.Entity{
 	TypeID:  binaryIDGlPathCoordsNV,
 	Package: "gles",
 	Name:    "GlPathCoordsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumCoords", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28766,13 +28766,13 @@ func (*binaryClassGlPathCoverDepthFuncNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlPathCoverDepthFuncNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathCoverDepthFuncNV(d, obj.(*GlPathCoverDepthFuncNV))
 }
-func (*binaryClassGlPathCoverDepthFuncNV) Schema() *schema.Entity { return schemaGlPathCoverDepthFuncNV }
+func (*binaryClassGlPathCoverDepthFuncNV) Schema() *binary.Entity { return schemaGlPathCoverDepthFuncNV }
 
-var schemaGlPathCoverDepthFuncNV = &schema.Entity{
+var schemaGlPathCoverDepthFuncNV = &binary.Entity{
 	TypeID:  binaryIDGlPathCoverDepthFuncNV,
 	Package: "gles",
 	Name:    "GlPathCoverDepthFuncNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -28808,13 +28808,13 @@ func (*binaryClassGlPathDashArrayNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathDashArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathDashArrayNV(d, obj.(*GlPathDashArrayNV))
 }
-func (*binaryClassGlPathDashArrayNV) Schema() *schema.Entity { return schemaGlPathDashArrayNV }
+func (*binaryClassGlPathDashArrayNV) Schema() *binary.Entity { return schemaGlPathDashArrayNV }
 
-var schemaGlPathDashArrayNV = &schema.Entity{
+var schemaGlPathDashArrayNV = &binary.Entity{
 	TypeID:  binaryIDGlPathDashArrayNV,
 	Package: "gles",
 	Name:    "GlPathDashArrayNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "DashCount", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -28864,15 +28864,15 @@ func (*binaryClassGlPathGlyphIndexArrayNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlPathGlyphIndexArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphIndexArrayNV(d, obj.(*GlPathGlyphIndexArrayNV))
 }
-func (*binaryClassGlPathGlyphIndexArrayNV) Schema() *schema.Entity {
+func (*binaryClassGlPathGlyphIndexArrayNV) Schema() *binary.Entity {
 	return schemaGlPathGlyphIndexArrayNV
 }
 
-var schemaGlPathGlyphIndexArrayNV = &schema.Entity{
+var schemaGlPathGlyphIndexArrayNV = &binary.Entity{
 	TypeID:  binaryIDGlPathGlyphIndexArrayNV,
 	Package: "gles",
 	Name:    "GlPathGlyphIndexArrayNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -28924,15 +28924,15 @@ func (*binaryClassGlPathGlyphIndexRangeNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlPathGlyphIndexRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphIndexRangeNV(d, obj.(*GlPathGlyphIndexRangeNV))
 }
-func (*binaryClassGlPathGlyphIndexRangeNV) Schema() *schema.Entity {
+func (*binaryClassGlPathGlyphIndexRangeNV) Schema() *binary.Entity {
 	return schemaGlPathGlyphIndexRangeNV
 }
 
-var schemaGlPathGlyphIndexRangeNV = &schema.Entity{
+var schemaGlPathGlyphIndexRangeNV = &binary.Entity{
 	TypeID:  binaryIDGlPathGlyphIndexRangeNV,
 	Package: "gles",
 	Name:    "GlPathGlyphIndexRangeNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "FontName", Type: &schema.Struct{Entity: schema.Of((*Voidᶜᵖ)(nil).Class())}},
@@ -28986,13 +28986,13 @@ func (*binaryClassGlPathGlyphRangeNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathGlyphRangeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphRangeNV(d, obj.(*GlPathGlyphRangeNV))
 }
-func (*binaryClassGlPathGlyphRangeNV) Schema() *schema.Entity { return schemaGlPathGlyphRangeNV }
+func (*binaryClassGlPathGlyphRangeNV) Schema() *binary.Entity { return schemaGlPathGlyphRangeNV }
 
-var schemaGlPathGlyphRangeNV = &schema.Entity{
+var schemaGlPathGlyphRangeNV = &binary.Entity{
 	TypeID:  binaryIDGlPathGlyphRangeNV,
 	Package: "gles",
 	Name:    "GlPathGlyphRangeNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29050,13 +29050,13 @@ func (*binaryClassGlPathGlyphsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathGlyphsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathGlyphsNV(d, obj.(*GlPathGlyphsNV))
 }
-func (*binaryClassGlPathGlyphsNV) Schema() *schema.Entity { return schemaGlPathGlyphsNV }
+func (*binaryClassGlPathGlyphsNV) Schema() *binary.Entity { return schemaGlPathGlyphsNV }
 
-var schemaGlPathGlyphsNV = &schema.Entity{
+var schemaGlPathGlyphsNV = &binary.Entity{
 	TypeID:  binaryIDGlPathGlyphsNV,
 	Package: "gles",
 	Name:    "GlPathGlyphsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29119,15 +29119,15 @@ func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlPathMemoryGlyphIndexArrayNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathMemoryGlyphIndexArrayNV(d, obj.(*GlPathMemoryGlyphIndexArrayNV))
 }
-func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Schema() *schema.Entity {
+func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Schema() *binary.Entity {
 	return schemaGlPathMemoryGlyphIndexArrayNV
 }
 
-var schemaGlPathMemoryGlyphIndexArrayNV = &schema.Entity{
+var schemaGlPathMemoryGlyphIndexArrayNV = &binary.Entity{
 	TypeID:  binaryIDGlPathMemoryGlyphIndexArrayNV,
 	Package: "gles",
 	Name:    "GlPathMemoryGlyphIndexArrayNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "FirstPathName", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FontTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29172,13 +29172,13 @@ func (*binaryClassGlPathParameterfNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterfNV(d, obj.(*GlPathParameterfNV))
 }
-func (*binaryClassGlPathParameterfNV) Schema() *schema.Entity { return schemaGlPathParameterfNV }
+func (*binaryClassGlPathParameterfNV) Schema() *binary.Entity { return schemaGlPathParameterfNV }
 
-var schemaGlPathParameterfNV = &schema.Entity{
+var schemaGlPathParameterfNV = &binary.Entity{
 	TypeID:  binaryIDGlPathParameterfNV,
 	Package: "gles",
 	Name:    "GlPathParameterfNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29216,13 +29216,13 @@ func (*binaryClassGlPathParameterfvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterfvNV(d, obj.(*GlPathParameterfvNV))
 }
-func (*binaryClassGlPathParameterfvNV) Schema() *schema.Entity { return schemaGlPathParameterfvNV }
+func (*binaryClassGlPathParameterfvNV) Schema() *binary.Entity { return schemaGlPathParameterfvNV }
 
-var schemaGlPathParameterfvNV = &schema.Entity{
+var schemaGlPathParameterfvNV = &binary.Entity{
 	TypeID:  binaryIDGlPathParameterfvNV,
 	Package: "gles",
 	Name:    "GlPathParameterfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29260,13 +29260,13 @@ func (*binaryClassGlPathParameteriNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameteriNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameteriNV(d, obj.(*GlPathParameteriNV))
 }
-func (*binaryClassGlPathParameteriNV) Schema() *schema.Entity { return schemaGlPathParameteriNV }
+func (*binaryClassGlPathParameteriNV) Schema() *binary.Entity { return schemaGlPathParameteriNV }
 
-var schemaGlPathParameteriNV = &schema.Entity{
+var schemaGlPathParameteriNV = &binary.Entity{
 	TypeID:  binaryIDGlPathParameteriNV,
 	Package: "gles",
 	Name:    "GlPathParameteriNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29304,13 +29304,13 @@ func (*binaryClassGlPathParameterivNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathParameterivNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathParameterivNV(d, obj.(*GlPathParameterivNV))
 }
-func (*binaryClassGlPathParameterivNV) Schema() *schema.Entity { return schemaGlPathParameterivNV }
+func (*binaryClassGlPathParameterivNV) Schema() *binary.Entity { return schemaGlPathParameterivNV }
 
-var schemaGlPathParameterivNV = &schema.Entity{
+var schemaGlPathParameterivNV = &binary.Entity{
 	TypeID:  binaryIDGlPathParameterivNV,
 	Package: "gles",
 	Name:    "GlPathParameterivNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29350,15 +29350,15 @@ func (*binaryClassGlPathStencilDepthOffsetNV) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlPathStencilDepthOffsetNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStencilDepthOffsetNV(d, obj.(*GlPathStencilDepthOffsetNV))
 }
-func (*binaryClassGlPathStencilDepthOffsetNV) Schema() *schema.Entity {
+func (*binaryClassGlPathStencilDepthOffsetNV) Schema() *binary.Entity {
 	return schemaGlPathStencilDepthOffsetNV
 }
 
-var schemaGlPathStencilDepthOffsetNV = &schema.Entity{
+var schemaGlPathStencilDepthOffsetNV = &binary.Entity{
 	TypeID:  binaryIDGlPathStencilDepthOffsetNV,
 	Package: "gles",
 	Name:    "GlPathStencilDepthOffsetNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Factor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -29395,13 +29395,13 @@ func (*binaryClassGlPathStencilFuncNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathStencilFuncNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStencilFuncNV(d, obj.(*GlPathStencilFuncNV))
 }
-func (*binaryClassGlPathStencilFuncNV) Schema() *schema.Entity { return schemaGlPathStencilFuncNV }
+func (*binaryClassGlPathStencilFuncNV) Schema() *binary.Entity { return schemaGlPathStencilFuncNV }
 
-var schemaGlPathStencilFuncNV = &schema.Entity{
+var schemaGlPathStencilFuncNV = &binary.Entity{
 	TypeID:  binaryIDGlPathStencilFuncNV,
 	Package: "gles",
 	Name:    "GlPathStencilFuncNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -29441,13 +29441,13 @@ func (*binaryClassGlPathStringNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathStringNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathStringNV(d, obj.(*GlPathStringNV))
 }
-func (*binaryClassGlPathStringNV) Schema() *schema.Entity { return schemaGlPathStringNV }
+func (*binaryClassGlPathStringNV) Schema() *binary.Entity { return schemaGlPathStringNV }
 
-var schemaGlPathStringNV = &schema.Entity{
+var schemaGlPathStringNV = &binary.Entity{
 	TypeID:  binaryIDGlPathStringNV,
 	Package: "gles",
 	Name:    "GlPathStringNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29496,13 +29496,13 @@ func (*binaryClassGlPathSubCommandsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathSubCommandsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathSubCommandsNV(d, obj.(*GlPathSubCommandsNV))
 }
-func (*binaryClassGlPathSubCommandsNV) Schema() *schema.Entity { return schemaGlPathSubCommandsNV }
+func (*binaryClassGlPathSubCommandsNV) Schema() *binary.Entity { return schemaGlPathSubCommandsNV }
 
-var schemaGlPathSubCommandsNV = &schema.Entity{
+var schemaGlPathSubCommandsNV = &binary.Entity{
 	TypeID:  binaryIDGlPathSubCommandsNV,
 	Package: "gles",
 	Name:    "GlPathSubCommandsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CommandStart", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -29549,13 +29549,13 @@ func (*binaryClassGlPathSubCoordsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPathSubCoordsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPathSubCoordsNV(d, obj.(*GlPathSubCoordsNV))
 }
-func (*binaryClassGlPathSubCoordsNV) Schema() *schema.Entity { return schemaGlPathSubCoordsNV }
+func (*binaryClassGlPathSubCoordsNV) Schema() *binary.Entity { return schemaGlPathSubCoordsNV }
 
-var schemaGlPathSubCoordsNV = &schema.Entity{
+var schemaGlPathSubCoordsNV = &binary.Entity{
 	TypeID:  binaryIDGlPathSubCoordsNV,
 	Package: "gles",
 	Name:    "GlPathSubCoordsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "CoordStart", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -29589,15 +29589,15 @@ func (*binaryClassGlPauseTransformFeedback) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlPauseTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPauseTransformFeedback(d, obj.(*GlPauseTransformFeedback))
 }
-func (*binaryClassGlPauseTransformFeedback) Schema() *schema.Entity {
+func (*binaryClassGlPauseTransformFeedback) Schema() *binary.Entity {
 	return schemaGlPauseTransformFeedback
 }
 
-var schemaGlPauseTransformFeedback = &schema.Entity{
+var schemaGlPauseTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlPauseTransformFeedback,
 	Package: "gles",
 	Name:    "GlPauseTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -29630,13 +29630,13 @@ func (*binaryClassGlPixelStorei) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPixelStorei) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPixelStorei(d, obj.(*GlPixelStorei))
 }
-func (*binaryClassGlPixelStorei) Schema() *schema.Entity { return schemaGlPixelStorei }
+func (*binaryClassGlPixelStorei) Schema() *binary.Entity { return schemaGlPixelStorei }
 
-var schemaGlPixelStorei = &schema.Entity{
+var schemaGlPixelStorei = &binary.Entity{
 	TypeID:  binaryIDGlPixelStorei,
 	Package: "gles",
 	Name:    "GlPixelStorei",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -29685,13 +29685,13 @@ func (*binaryClassGlPointAlongPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPointAlongPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPointAlongPathNV(d, obj.(*GlPointAlongPathNV))
 }
-func (*binaryClassGlPointAlongPathNV) Schema() *schema.Entity { return schemaGlPointAlongPathNV }
+func (*binaryClassGlPointAlongPathNV) Schema() *binary.Entity { return schemaGlPointAlongPathNV }
 
-var schemaGlPointAlongPathNV = &schema.Entity{
+var schemaGlPointAlongPathNV = &binary.Entity{
 	TypeID:  binaryIDGlPointAlongPathNV,
 	Package: "gles",
 	Name:    "GlPointAlongPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "StartSegment", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -29733,13 +29733,13 @@ func (*binaryClassGlPolygonModeNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPolygonModeNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPolygonModeNV(d, obj.(*GlPolygonModeNV))
 }
-func (*binaryClassGlPolygonModeNV) Schema() *schema.Entity { return schemaGlPolygonModeNV }
+func (*binaryClassGlPolygonModeNV) Schema() *binary.Entity { return schemaGlPolygonModeNV }
 
-var schemaGlPolygonModeNV = &schema.Entity{
+var schemaGlPolygonModeNV = &binary.Entity{
 	TypeID:  binaryIDGlPolygonModeNV,
 	Package: "gles",
 	Name:    "GlPolygonModeNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -29774,13 +29774,13 @@ func (*binaryClassGlPolygonOffset) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPolygonOffset) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPolygonOffset(d, obj.(*GlPolygonOffset))
 }
-func (*binaryClassGlPolygonOffset) Schema() *schema.Entity { return schemaGlPolygonOffset }
+func (*binaryClassGlPolygonOffset) Schema() *binary.Entity { return schemaGlPolygonOffset }
 
-var schemaGlPolygonOffset = &schema.Entity{
+var schemaGlPolygonOffset = &binary.Entity{
 	TypeID:  binaryIDGlPolygonOffset,
 	Package: "gles",
 	Name:    "GlPolygonOffset",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -29811,13 +29811,13 @@ func (*binaryClassGlPopDebugGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopDebugGroup(d, obj.(*GlPopDebugGroup))
 }
-func (*binaryClassGlPopDebugGroup) Schema() *schema.Entity { return schemaGlPopDebugGroup }
+func (*binaryClassGlPopDebugGroup) Schema() *binary.Entity { return schemaGlPopDebugGroup }
 
-var schemaGlPopDebugGroup = &schema.Entity{
+var schemaGlPopDebugGroup = &binary.Entity{
 	TypeID:  binaryIDGlPopDebugGroup,
 	Package: "gles",
 	Name:    "GlPopDebugGroup",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -29846,13 +29846,13 @@ func (*binaryClassGlPopDebugGroupKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopDebugGroupKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopDebugGroupKHR(d, obj.(*GlPopDebugGroupKHR))
 }
-func (*binaryClassGlPopDebugGroupKHR) Schema() *schema.Entity { return schemaGlPopDebugGroupKHR }
+func (*binaryClassGlPopDebugGroupKHR) Schema() *binary.Entity { return schemaGlPopDebugGroupKHR }
 
-var schemaGlPopDebugGroupKHR = &schema.Entity{
+var schemaGlPopDebugGroupKHR = &binary.Entity{
 	TypeID:  binaryIDGlPopDebugGroupKHR,
 	Package: "gles",
 	Name:    "GlPopDebugGroupKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -29881,13 +29881,13 @@ func (*binaryClassGlPopGroupMarkerEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPopGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPopGroupMarkerEXT(d, obj.(*GlPopGroupMarkerEXT))
 }
-func (*binaryClassGlPopGroupMarkerEXT) Schema() *schema.Entity { return schemaGlPopGroupMarkerEXT }
+func (*binaryClassGlPopGroupMarkerEXT) Schema() *binary.Entity { return schemaGlPopGroupMarkerEXT }
 
-var schemaGlPopGroupMarkerEXT = &schema.Entity{
+var schemaGlPopGroupMarkerEXT = &binary.Entity{
 	TypeID:  binaryIDGlPopGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPopGroupMarkerEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -29932,13 +29932,13 @@ func (*binaryClassGlPrimitiveBoundingBox) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlPrimitiveBoundingBox) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBox(d, obj.(*GlPrimitiveBoundingBox))
 }
-func (*binaryClassGlPrimitiveBoundingBox) Schema() *schema.Entity { return schemaGlPrimitiveBoundingBox }
+func (*binaryClassGlPrimitiveBoundingBox) Schema() *binary.Entity { return schemaGlPrimitiveBoundingBox }
 
-var schemaGlPrimitiveBoundingBox = &schema.Entity{
+var schemaGlPrimitiveBoundingBox = &binary.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBox,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBox",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -29991,15 +29991,15 @@ func (*binaryClassGlPrimitiveBoundingBoxEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlPrimitiveBoundingBoxEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBoxEXT(d, obj.(*GlPrimitiveBoundingBoxEXT))
 }
-func (*binaryClassGlPrimitiveBoundingBoxEXT) Schema() *schema.Entity {
+func (*binaryClassGlPrimitiveBoundingBoxEXT) Schema() *binary.Entity {
 	return schemaGlPrimitiveBoundingBoxEXT
 }
 
-var schemaGlPrimitiveBoundingBoxEXT = &schema.Entity{
+var schemaGlPrimitiveBoundingBoxEXT = &binary.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBoxEXT,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30052,15 +30052,15 @@ func (*binaryClassGlPrimitiveBoundingBoxOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlPrimitiveBoundingBoxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPrimitiveBoundingBoxOES(d, obj.(*GlPrimitiveBoundingBoxOES))
 }
-func (*binaryClassGlPrimitiveBoundingBoxOES) Schema() *schema.Entity {
+func (*binaryClassGlPrimitiveBoundingBoxOES) Schema() *binary.Entity {
 	return schemaGlPrimitiveBoundingBoxOES
 }
 
-var schemaGlPrimitiveBoundingBoxOES = &schema.Entity{
+var schemaGlPrimitiveBoundingBoxOES = &binary.Entity{
 	TypeID:  binaryIDGlPrimitiveBoundingBoxOES,
 	Package: "gles",
 	Name:    "GlPrimitiveBoundingBoxOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MinX", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "MinY", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -30105,13 +30105,13 @@ func (*binaryClassGlProgramBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramBinary(d, obj.(*GlProgramBinary))
 }
-func (*binaryClassGlProgramBinary) Schema() *schema.Entity { return schemaGlProgramBinary }
+func (*binaryClassGlProgramBinary) Schema() *binary.Entity { return schemaGlProgramBinary }
 
-var schemaGlProgramBinary = &schema.Entity{
+var schemaGlProgramBinary = &binary.Entity{
 	TypeID:  binaryIDGlProgramBinary,
 	Package: "gles",
 	Name:    "GlProgramBinary",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -30152,13 +30152,13 @@ func (*binaryClassGlProgramBinaryOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramBinaryOES(d, obj.(*GlProgramBinaryOES))
 }
-func (*binaryClassGlProgramBinaryOES) Schema() *schema.Entity { return schemaGlProgramBinaryOES }
+func (*binaryClassGlProgramBinaryOES) Schema() *binary.Entity { return schemaGlProgramBinaryOES }
 
-var schemaGlProgramBinaryOES = &schema.Entity{
+var schemaGlProgramBinaryOES = &binary.Entity{
 	TypeID:  binaryIDGlProgramBinaryOES,
 	Package: "gles",
 	Name:    "GlProgramBinaryOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -30197,13 +30197,13 @@ func (*binaryClassGlProgramParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramParameteri(d, obj.(*GlProgramParameteri))
 }
-func (*binaryClassGlProgramParameteri) Schema() *schema.Entity { return schemaGlProgramParameteri }
+func (*binaryClassGlProgramParameteri) Schema() *binary.Entity { return schemaGlProgramParameteri }
 
-var schemaGlProgramParameteri = &schema.Entity{
+var schemaGlProgramParameteri = &binary.Entity{
 	TypeID:  binaryIDGlProgramParameteri,
 	Package: "gles",
 	Name:    "GlProgramParameteri",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -30241,13 +30241,13 @@ func (*binaryClassGlProgramParameteriEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramParameteriEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramParameteriEXT(d, obj.(*GlProgramParameteriEXT))
 }
-func (*binaryClassGlProgramParameteriEXT) Schema() *schema.Entity { return schemaGlProgramParameteriEXT }
+func (*binaryClassGlProgramParameteriEXT) Schema() *binary.Entity { return schemaGlProgramParameteriEXT }
 
-var schemaGlProgramParameteriEXT = &schema.Entity{
+var schemaGlProgramParameteriEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramParameteriEXT,
 	Package: "gles",
 	Name:    "GlProgramParameteriEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -30293,15 +30293,15 @@ func (*binaryClassGlProgramPathFragmentInputGenNV) Decode(d binary.Decoder) bina
 func (*binaryClassGlProgramPathFragmentInputGenNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramPathFragmentInputGenNV(d, obj.(*GlProgramPathFragmentInputGenNV))
 }
-func (*binaryClassGlProgramPathFragmentInputGenNV) Schema() *schema.Entity {
+func (*binaryClassGlProgramPathFragmentInputGenNV) Schema() *binary.Entity {
 	return schemaGlProgramPathFragmentInputGenNV
 }
 
-var schemaGlProgramPathFragmentInputGenNV = &schema.Entity{
+var schemaGlProgramPathFragmentInputGenNV = &binary.Entity{
 	TypeID:  binaryIDGlProgramPathFragmentInputGenNV,
 	Package: "gles",
 	Name:    "GlProgramPathFragmentInputGenNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -30341,13 +30341,13 @@ func (*binaryClassGlProgramUniform1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1f(d, obj.(*GlProgramUniform1f))
 }
-func (*binaryClassGlProgramUniform1f) Schema() *schema.Entity { return schemaGlProgramUniform1f }
+func (*binaryClassGlProgramUniform1f) Schema() *binary.Entity { return schemaGlProgramUniform1f }
 
-var schemaGlProgramUniform1f = &schema.Entity{
+var schemaGlProgramUniform1f = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1f,
 	Package: "gles",
 	Name:    "GlProgramUniform1f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30385,13 +30385,13 @@ func (*binaryClassGlProgramUniform1fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform1fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fEXT(d, obj.(*GlProgramUniform1fEXT))
 }
-func (*binaryClassGlProgramUniform1fEXT) Schema() *schema.Entity { return schemaGlProgramUniform1fEXT }
+func (*binaryClassGlProgramUniform1fEXT) Schema() *binary.Entity { return schemaGlProgramUniform1fEXT }
 
-var schemaGlProgramUniform1fEXT = &schema.Entity{
+var schemaGlProgramUniform1fEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1fEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30431,13 +30431,13 @@ func (*binaryClassGlProgramUniform1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fv(d, obj.(*GlProgramUniform1fv))
 }
-func (*binaryClassGlProgramUniform1fv) Schema() *schema.Entity { return schemaGlProgramUniform1fv }
+func (*binaryClassGlProgramUniform1fv) Schema() *binary.Entity { return schemaGlProgramUniform1fv }
 
-var schemaGlProgramUniform1fv = &schema.Entity{
+var schemaGlProgramUniform1fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1fv,
 	Package: "gles",
 	Name:    "GlProgramUniform1fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30478,13 +30478,13 @@ func (*binaryClassGlProgramUniform1fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1fvEXT(d, obj.(*GlProgramUniform1fvEXT))
 }
-func (*binaryClassGlProgramUniform1fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform1fvEXT }
+func (*binaryClassGlProgramUniform1fvEXT) Schema() *binary.Entity { return schemaGlProgramUniform1fvEXT }
 
-var schemaGlProgramUniform1fvEXT = &schema.Entity{
+var schemaGlProgramUniform1fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30523,13 +30523,13 @@ func (*binaryClassGlProgramUniform1i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1i(d, obj.(*GlProgramUniform1i))
 }
-func (*binaryClassGlProgramUniform1i) Schema() *schema.Entity { return schemaGlProgramUniform1i }
+func (*binaryClassGlProgramUniform1i) Schema() *binary.Entity { return schemaGlProgramUniform1i }
 
-var schemaGlProgramUniform1i = &schema.Entity{
+var schemaGlProgramUniform1i = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1i,
 	Package: "gles",
 	Name:    "GlProgramUniform1i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30567,13 +30567,13 @@ func (*binaryClassGlProgramUniform1iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform1iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1iEXT(d, obj.(*GlProgramUniform1iEXT))
 }
-func (*binaryClassGlProgramUniform1iEXT) Schema() *schema.Entity { return schemaGlProgramUniform1iEXT }
+func (*binaryClassGlProgramUniform1iEXT) Schema() *binary.Entity { return schemaGlProgramUniform1iEXT }
 
-var schemaGlProgramUniform1iEXT = &schema.Entity{
+var schemaGlProgramUniform1iEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1iEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30613,13 +30613,13 @@ func (*binaryClassGlProgramUniform1iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1iv(d, obj.(*GlProgramUniform1iv))
 }
-func (*binaryClassGlProgramUniform1iv) Schema() *schema.Entity { return schemaGlProgramUniform1iv }
+func (*binaryClassGlProgramUniform1iv) Schema() *binary.Entity { return schemaGlProgramUniform1iv }
 
-var schemaGlProgramUniform1iv = &schema.Entity{
+var schemaGlProgramUniform1iv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1iv,
 	Package: "gles",
 	Name:    "GlProgramUniform1iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30660,13 +30660,13 @@ func (*binaryClassGlProgramUniform1ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1ivEXT(d, obj.(*GlProgramUniform1ivEXT))
 }
-func (*binaryClassGlProgramUniform1ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform1ivEXT }
+func (*binaryClassGlProgramUniform1ivEXT) Schema() *binary.Entity { return schemaGlProgramUniform1ivEXT }
 
-var schemaGlProgramUniform1ivEXT = &schema.Entity{
+var schemaGlProgramUniform1ivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1ivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30705,13 +30705,13 @@ func (*binaryClassGlProgramUniform1ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1ui(d, obj.(*GlProgramUniform1ui))
 }
-func (*binaryClassGlProgramUniform1ui) Schema() *schema.Entity { return schemaGlProgramUniform1ui }
+func (*binaryClassGlProgramUniform1ui) Schema() *binary.Entity { return schemaGlProgramUniform1ui }
 
-var schemaGlProgramUniform1ui = &schema.Entity{
+var schemaGlProgramUniform1ui = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1ui,
 	Package: "gles",
 	Name:    "GlProgramUniform1ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30749,13 +30749,13 @@ func (*binaryClassGlProgramUniform1uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform1uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uiEXT(d, obj.(*GlProgramUniform1uiEXT))
 }
-func (*binaryClassGlProgramUniform1uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform1uiEXT }
+func (*binaryClassGlProgramUniform1uiEXT) Schema() *binary.Entity { return schemaGlProgramUniform1uiEXT }
 
-var schemaGlProgramUniform1uiEXT = &schema.Entity{
+var schemaGlProgramUniform1uiEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1uiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30795,13 +30795,13 @@ func (*binaryClassGlProgramUniform1uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform1uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uiv(d, obj.(*GlProgramUniform1uiv))
 }
-func (*binaryClassGlProgramUniform1uiv) Schema() *schema.Entity { return schemaGlProgramUniform1uiv }
+func (*binaryClassGlProgramUniform1uiv) Schema() *binary.Entity { return schemaGlProgramUniform1uiv }
 
-var schemaGlProgramUniform1uiv = &schema.Entity{
+var schemaGlProgramUniform1uiv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform1uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30842,15 +30842,15 @@ func (*binaryClassGlProgramUniform1uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform1uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform1uivEXT(d, obj.(*GlProgramUniform1uivEXT))
 }
-func (*binaryClassGlProgramUniform1uivEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniform1uivEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniform1uivEXT
 }
 
-var schemaGlProgramUniform1uivEXT = &schema.Entity{
+var schemaGlProgramUniform1uivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform1uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform1uivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30891,13 +30891,13 @@ func (*binaryClassGlProgramUniform2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2f(d, obj.(*GlProgramUniform2f))
 }
-func (*binaryClassGlProgramUniform2f) Schema() *schema.Entity { return schemaGlProgramUniform2f }
+func (*binaryClassGlProgramUniform2f) Schema() *binary.Entity { return schemaGlProgramUniform2f }
 
-var schemaGlProgramUniform2f = &schema.Entity{
+var schemaGlProgramUniform2f = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2f,
 	Package: "gles",
 	Name:    "GlProgramUniform2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30938,13 +30938,13 @@ func (*binaryClassGlProgramUniform2fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform2fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fEXT(d, obj.(*GlProgramUniform2fEXT))
 }
-func (*binaryClassGlProgramUniform2fEXT) Schema() *schema.Entity { return schemaGlProgramUniform2fEXT }
+func (*binaryClassGlProgramUniform2fEXT) Schema() *binary.Entity { return schemaGlProgramUniform2fEXT }
 
-var schemaGlProgramUniform2fEXT = &schema.Entity{
+var schemaGlProgramUniform2fEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2fEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -30985,13 +30985,13 @@ func (*binaryClassGlProgramUniform2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fv(d, obj.(*GlProgramUniform2fv))
 }
-func (*binaryClassGlProgramUniform2fv) Schema() *schema.Entity { return schemaGlProgramUniform2fv }
+func (*binaryClassGlProgramUniform2fv) Schema() *binary.Entity { return schemaGlProgramUniform2fv }
 
-var schemaGlProgramUniform2fv = &schema.Entity{
+var schemaGlProgramUniform2fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2fv,
 	Package: "gles",
 	Name:    "GlProgramUniform2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31032,13 +31032,13 @@ func (*binaryClassGlProgramUniform2fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2fvEXT(d, obj.(*GlProgramUniform2fvEXT))
 }
-func (*binaryClassGlProgramUniform2fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform2fvEXT }
+func (*binaryClassGlProgramUniform2fvEXT) Schema() *binary.Entity { return schemaGlProgramUniform2fvEXT }
 
-var schemaGlProgramUniform2fvEXT = &schema.Entity{
+var schemaGlProgramUniform2fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31079,13 +31079,13 @@ func (*binaryClassGlProgramUniform2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2i(d, obj.(*GlProgramUniform2i))
 }
-func (*binaryClassGlProgramUniform2i) Schema() *schema.Entity { return schemaGlProgramUniform2i }
+func (*binaryClassGlProgramUniform2i) Schema() *binary.Entity { return schemaGlProgramUniform2i }
 
-var schemaGlProgramUniform2i = &schema.Entity{
+var schemaGlProgramUniform2i = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2i,
 	Package: "gles",
 	Name:    "GlProgramUniform2i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31126,13 +31126,13 @@ func (*binaryClassGlProgramUniform2iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform2iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2iEXT(d, obj.(*GlProgramUniform2iEXT))
 }
-func (*binaryClassGlProgramUniform2iEXT) Schema() *schema.Entity { return schemaGlProgramUniform2iEXT }
+func (*binaryClassGlProgramUniform2iEXT) Schema() *binary.Entity { return schemaGlProgramUniform2iEXT }
 
-var schemaGlProgramUniform2iEXT = &schema.Entity{
+var schemaGlProgramUniform2iEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2iEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31173,13 +31173,13 @@ func (*binaryClassGlProgramUniform2iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2iv(d, obj.(*GlProgramUniform2iv))
 }
-func (*binaryClassGlProgramUniform2iv) Schema() *schema.Entity { return schemaGlProgramUniform2iv }
+func (*binaryClassGlProgramUniform2iv) Schema() *binary.Entity { return schemaGlProgramUniform2iv }
 
-var schemaGlProgramUniform2iv = &schema.Entity{
+var schemaGlProgramUniform2iv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2iv,
 	Package: "gles",
 	Name:    "GlProgramUniform2iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31220,13 +31220,13 @@ func (*binaryClassGlProgramUniform2ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2ivEXT(d, obj.(*GlProgramUniform2ivEXT))
 }
-func (*binaryClassGlProgramUniform2ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform2ivEXT }
+func (*binaryClassGlProgramUniform2ivEXT) Schema() *binary.Entity { return schemaGlProgramUniform2ivEXT }
 
-var schemaGlProgramUniform2ivEXT = &schema.Entity{
+var schemaGlProgramUniform2ivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2ivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31267,13 +31267,13 @@ func (*binaryClassGlProgramUniform2ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2ui(d, obj.(*GlProgramUniform2ui))
 }
-func (*binaryClassGlProgramUniform2ui) Schema() *schema.Entity { return schemaGlProgramUniform2ui }
+func (*binaryClassGlProgramUniform2ui) Schema() *binary.Entity { return schemaGlProgramUniform2ui }
 
-var schemaGlProgramUniform2ui = &schema.Entity{
+var schemaGlProgramUniform2ui = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2ui,
 	Package: "gles",
 	Name:    "GlProgramUniform2ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31314,13 +31314,13 @@ func (*binaryClassGlProgramUniform2uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform2uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uiEXT(d, obj.(*GlProgramUniform2uiEXT))
 }
-func (*binaryClassGlProgramUniform2uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform2uiEXT }
+func (*binaryClassGlProgramUniform2uiEXT) Schema() *binary.Entity { return schemaGlProgramUniform2uiEXT }
 
-var schemaGlProgramUniform2uiEXT = &schema.Entity{
+var schemaGlProgramUniform2uiEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2uiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31361,13 +31361,13 @@ func (*binaryClassGlProgramUniform2uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform2uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uiv(d, obj.(*GlProgramUniform2uiv))
 }
-func (*binaryClassGlProgramUniform2uiv) Schema() *schema.Entity { return schemaGlProgramUniform2uiv }
+func (*binaryClassGlProgramUniform2uiv) Schema() *binary.Entity { return schemaGlProgramUniform2uiv }
 
-var schemaGlProgramUniform2uiv = &schema.Entity{
+var schemaGlProgramUniform2uiv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform2uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31408,15 +31408,15 @@ func (*binaryClassGlProgramUniform2uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform2uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform2uivEXT(d, obj.(*GlProgramUniform2uivEXT))
 }
-func (*binaryClassGlProgramUniform2uivEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniform2uivEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniform2uivEXT
 }
 
-var schemaGlProgramUniform2uivEXT = &schema.Entity{
+var schemaGlProgramUniform2uivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform2uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform2uivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31459,13 +31459,13 @@ func (*binaryClassGlProgramUniform3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3f(d, obj.(*GlProgramUniform3f))
 }
-func (*binaryClassGlProgramUniform3f) Schema() *schema.Entity { return schemaGlProgramUniform3f }
+func (*binaryClassGlProgramUniform3f) Schema() *binary.Entity { return schemaGlProgramUniform3f }
 
-var schemaGlProgramUniform3f = &schema.Entity{
+var schemaGlProgramUniform3f = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3f,
 	Package: "gles",
 	Name:    "GlProgramUniform3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31509,13 +31509,13 @@ func (*binaryClassGlProgramUniform3fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform3fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fEXT(d, obj.(*GlProgramUniform3fEXT))
 }
-func (*binaryClassGlProgramUniform3fEXT) Schema() *schema.Entity { return schemaGlProgramUniform3fEXT }
+func (*binaryClassGlProgramUniform3fEXT) Schema() *binary.Entity { return schemaGlProgramUniform3fEXT }
 
-var schemaGlProgramUniform3fEXT = &schema.Entity{
+var schemaGlProgramUniform3fEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3fEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31557,13 +31557,13 @@ func (*binaryClassGlProgramUniform3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fv(d, obj.(*GlProgramUniform3fv))
 }
-func (*binaryClassGlProgramUniform3fv) Schema() *schema.Entity { return schemaGlProgramUniform3fv }
+func (*binaryClassGlProgramUniform3fv) Schema() *binary.Entity { return schemaGlProgramUniform3fv }
 
-var schemaGlProgramUniform3fv = &schema.Entity{
+var schemaGlProgramUniform3fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3fv,
 	Package: "gles",
 	Name:    "GlProgramUniform3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31604,13 +31604,13 @@ func (*binaryClassGlProgramUniform3fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3fvEXT(d, obj.(*GlProgramUniform3fvEXT))
 }
-func (*binaryClassGlProgramUniform3fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform3fvEXT }
+func (*binaryClassGlProgramUniform3fvEXT) Schema() *binary.Entity { return schemaGlProgramUniform3fvEXT }
 
-var schemaGlProgramUniform3fvEXT = &schema.Entity{
+var schemaGlProgramUniform3fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31653,13 +31653,13 @@ func (*binaryClassGlProgramUniform3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3i(d, obj.(*GlProgramUniform3i))
 }
-func (*binaryClassGlProgramUniform3i) Schema() *schema.Entity { return schemaGlProgramUniform3i }
+func (*binaryClassGlProgramUniform3i) Schema() *binary.Entity { return schemaGlProgramUniform3i }
 
-var schemaGlProgramUniform3i = &schema.Entity{
+var schemaGlProgramUniform3i = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3i,
 	Package: "gles",
 	Name:    "GlProgramUniform3i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31703,13 +31703,13 @@ func (*binaryClassGlProgramUniform3iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform3iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3iEXT(d, obj.(*GlProgramUniform3iEXT))
 }
-func (*binaryClassGlProgramUniform3iEXT) Schema() *schema.Entity { return schemaGlProgramUniform3iEXT }
+func (*binaryClassGlProgramUniform3iEXT) Schema() *binary.Entity { return schemaGlProgramUniform3iEXT }
 
-var schemaGlProgramUniform3iEXT = &schema.Entity{
+var schemaGlProgramUniform3iEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3iEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31751,13 +31751,13 @@ func (*binaryClassGlProgramUniform3iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3iv(d, obj.(*GlProgramUniform3iv))
 }
-func (*binaryClassGlProgramUniform3iv) Schema() *schema.Entity { return schemaGlProgramUniform3iv }
+func (*binaryClassGlProgramUniform3iv) Schema() *binary.Entity { return schemaGlProgramUniform3iv }
 
-var schemaGlProgramUniform3iv = &schema.Entity{
+var schemaGlProgramUniform3iv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3iv,
 	Package: "gles",
 	Name:    "GlProgramUniform3iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31798,13 +31798,13 @@ func (*binaryClassGlProgramUniform3ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3ivEXT(d, obj.(*GlProgramUniform3ivEXT))
 }
-func (*binaryClassGlProgramUniform3ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform3ivEXT }
+func (*binaryClassGlProgramUniform3ivEXT) Schema() *binary.Entity { return schemaGlProgramUniform3ivEXT }
 
-var schemaGlProgramUniform3ivEXT = &schema.Entity{
+var schemaGlProgramUniform3ivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3ivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31847,13 +31847,13 @@ func (*binaryClassGlProgramUniform3ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3ui(d, obj.(*GlProgramUniform3ui))
 }
-func (*binaryClassGlProgramUniform3ui) Schema() *schema.Entity { return schemaGlProgramUniform3ui }
+func (*binaryClassGlProgramUniform3ui) Schema() *binary.Entity { return schemaGlProgramUniform3ui }
 
-var schemaGlProgramUniform3ui = &schema.Entity{
+var schemaGlProgramUniform3ui = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3ui,
 	Package: "gles",
 	Name:    "GlProgramUniform3ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31897,13 +31897,13 @@ func (*binaryClassGlProgramUniform3uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform3uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uiEXT(d, obj.(*GlProgramUniform3uiEXT))
 }
-func (*binaryClassGlProgramUniform3uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform3uiEXT }
+func (*binaryClassGlProgramUniform3uiEXT) Schema() *binary.Entity { return schemaGlProgramUniform3uiEXT }
 
-var schemaGlProgramUniform3uiEXT = &schema.Entity{
+var schemaGlProgramUniform3uiEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3uiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31945,13 +31945,13 @@ func (*binaryClassGlProgramUniform3uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform3uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uiv(d, obj.(*GlProgramUniform3uiv))
 }
-func (*binaryClassGlProgramUniform3uiv) Schema() *schema.Entity { return schemaGlProgramUniform3uiv }
+func (*binaryClassGlProgramUniform3uiv) Schema() *binary.Entity { return schemaGlProgramUniform3uiv }
 
-var schemaGlProgramUniform3uiv = &schema.Entity{
+var schemaGlProgramUniform3uiv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform3uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -31992,15 +31992,15 @@ func (*binaryClassGlProgramUniform3uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform3uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform3uivEXT(d, obj.(*GlProgramUniform3uivEXT))
 }
-func (*binaryClassGlProgramUniform3uivEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniform3uivEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniform3uivEXT
 }
 
-var schemaGlProgramUniform3uivEXT = &schema.Entity{
+var schemaGlProgramUniform3uivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform3uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform3uivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32045,13 +32045,13 @@ func (*binaryClassGlProgramUniform4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4f(d, obj.(*GlProgramUniform4f))
 }
-func (*binaryClassGlProgramUniform4f) Schema() *schema.Entity { return schemaGlProgramUniform4f }
+func (*binaryClassGlProgramUniform4f) Schema() *binary.Entity { return schemaGlProgramUniform4f }
 
-var schemaGlProgramUniform4f = &schema.Entity{
+var schemaGlProgramUniform4f = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4f,
 	Package: "gles",
 	Name:    "GlProgramUniform4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32098,13 +32098,13 @@ func (*binaryClassGlProgramUniform4fEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform4fEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fEXT(d, obj.(*GlProgramUniform4fEXT))
 }
-func (*binaryClassGlProgramUniform4fEXT) Schema() *schema.Entity { return schemaGlProgramUniform4fEXT }
+func (*binaryClassGlProgramUniform4fEXT) Schema() *binary.Entity { return schemaGlProgramUniform4fEXT }
 
-var schemaGlProgramUniform4fEXT = &schema.Entity{
+var schemaGlProgramUniform4fEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4fEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4fEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32147,13 +32147,13 @@ func (*binaryClassGlProgramUniform4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fv(d, obj.(*GlProgramUniform4fv))
 }
-func (*binaryClassGlProgramUniform4fv) Schema() *schema.Entity { return schemaGlProgramUniform4fv }
+func (*binaryClassGlProgramUniform4fv) Schema() *binary.Entity { return schemaGlProgramUniform4fv }
 
-var schemaGlProgramUniform4fv = &schema.Entity{
+var schemaGlProgramUniform4fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4fv,
 	Package: "gles",
 	Name:    "GlProgramUniform4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32194,13 +32194,13 @@ func (*binaryClassGlProgramUniform4fvEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4fvEXT(d, obj.(*GlProgramUniform4fvEXT))
 }
-func (*binaryClassGlProgramUniform4fvEXT) Schema() *schema.Entity { return schemaGlProgramUniform4fvEXT }
+func (*binaryClassGlProgramUniform4fvEXT) Schema() *binary.Entity { return schemaGlProgramUniform4fvEXT }
 
-var schemaGlProgramUniform4fvEXT = &schema.Entity{
+var schemaGlProgramUniform4fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32245,13 +32245,13 @@ func (*binaryClassGlProgramUniform4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4i(d, obj.(*GlProgramUniform4i))
 }
-func (*binaryClassGlProgramUniform4i) Schema() *schema.Entity { return schemaGlProgramUniform4i }
+func (*binaryClassGlProgramUniform4i) Schema() *binary.Entity { return schemaGlProgramUniform4i }
 
-var schemaGlProgramUniform4i = &schema.Entity{
+var schemaGlProgramUniform4i = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4i,
 	Package: "gles",
 	Name:    "GlProgramUniform4i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32298,13 +32298,13 @@ func (*binaryClassGlProgramUniform4iEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlProgramUniform4iEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4iEXT(d, obj.(*GlProgramUniform4iEXT))
 }
-func (*binaryClassGlProgramUniform4iEXT) Schema() *schema.Entity { return schemaGlProgramUniform4iEXT }
+func (*binaryClassGlProgramUniform4iEXT) Schema() *binary.Entity { return schemaGlProgramUniform4iEXT }
 
-var schemaGlProgramUniform4iEXT = &schema.Entity{
+var schemaGlProgramUniform4iEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4iEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4iEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32347,13 +32347,13 @@ func (*binaryClassGlProgramUniform4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4iv(d, obj.(*GlProgramUniform4iv))
 }
-func (*binaryClassGlProgramUniform4iv) Schema() *schema.Entity { return schemaGlProgramUniform4iv }
+func (*binaryClassGlProgramUniform4iv) Schema() *binary.Entity { return schemaGlProgramUniform4iv }
 
-var schemaGlProgramUniform4iv = &schema.Entity{
+var schemaGlProgramUniform4iv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4iv,
 	Package: "gles",
 	Name:    "GlProgramUniform4iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32394,13 +32394,13 @@ func (*binaryClassGlProgramUniform4ivEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4ivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4ivEXT(d, obj.(*GlProgramUniform4ivEXT))
 }
-func (*binaryClassGlProgramUniform4ivEXT) Schema() *schema.Entity { return schemaGlProgramUniform4ivEXT }
+func (*binaryClassGlProgramUniform4ivEXT) Schema() *binary.Entity { return schemaGlProgramUniform4ivEXT }
 
-var schemaGlProgramUniform4ivEXT = &schema.Entity{
+var schemaGlProgramUniform4ivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4ivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4ivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32445,13 +32445,13 @@ func (*binaryClassGlProgramUniform4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4ui(d, obj.(*GlProgramUniform4ui))
 }
-func (*binaryClassGlProgramUniform4ui) Schema() *schema.Entity { return schemaGlProgramUniform4ui }
+func (*binaryClassGlProgramUniform4ui) Schema() *binary.Entity { return schemaGlProgramUniform4ui }
 
-var schemaGlProgramUniform4ui = &schema.Entity{
+var schemaGlProgramUniform4ui = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4ui,
 	Package: "gles",
 	Name:    "GlProgramUniform4ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32498,13 +32498,13 @@ func (*binaryClassGlProgramUniform4uiEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlProgramUniform4uiEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uiEXT(d, obj.(*GlProgramUniform4uiEXT))
 }
-func (*binaryClassGlProgramUniform4uiEXT) Schema() *schema.Entity { return schemaGlProgramUniform4uiEXT }
+func (*binaryClassGlProgramUniform4uiEXT) Schema() *binary.Entity { return schemaGlProgramUniform4uiEXT }
 
-var schemaGlProgramUniform4uiEXT = &schema.Entity{
+var schemaGlProgramUniform4uiEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4uiEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4uiEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32547,13 +32547,13 @@ func (*binaryClassGlProgramUniform4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlProgramUniform4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uiv(d, obj.(*GlProgramUniform4uiv))
 }
-func (*binaryClassGlProgramUniform4uiv) Schema() *schema.Entity { return schemaGlProgramUniform4uiv }
+func (*binaryClassGlProgramUniform4uiv) Schema() *binary.Entity { return schemaGlProgramUniform4uiv }
 
-var schemaGlProgramUniform4uiv = &schema.Entity{
+var schemaGlProgramUniform4uiv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4uiv,
 	Package: "gles",
 	Name:    "GlProgramUniform4uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32594,15 +32594,15 @@ func (*binaryClassGlProgramUniform4uivEXT) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlProgramUniform4uivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniform4uivEXT(d, obj.(*GlProgramUniform4uivEXT))
 }
-func (*binaryClassGlProgramUniform4uivEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniform4uivEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniform4uivEXT
 }
 
-var schemaGlProgramUniform4uivEXT = &schema.Entity{
+var schemaGlProgramUniform4uivEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniform4uivEXT,
 	Package: "gles",
 	Name:    "GlProgramUniform4uivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32645,15 +32645,15 @@ func (*binaryClassGlProgramUniformHandleui64NV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformHandleui64NV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformHandleui64NV(d, obj.(*GlProgramUniformHandleui64NV))
 }
-func (*binaryClassGlProgramUniformHandleui64NV) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformHandleui64NV) Schema() *binary.Entity {
 	return schemaGlProgramUniformHandleui64NV
 }
 
-var schemaGlProgramUniformHandleui64NV = &schema.Entity{
+var schemaGlProgramUniformHandleui64NV = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformHandleui64NV,
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64NV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32697,15 +32697,15 @@ func (*binaryClassGlProgramUniformHandleui64vNV) Decode(d binary.Decoder) binary
 func (*binaryClassGlProgramUniformHandleui64vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformHandleui64vNV(d, obj.(*GlProgramUniformHandleui64vNV))
 }
-func (*binaryClassGlProgramUniformHandleui64vNV) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformHandleui64vNV) Schema() *binary.Entity {
 	return schemaGlProgramUniformHandleui64vNV
 }
 
-var schemaGlProgramUniformHandleui64vNV = &schema.Entity{
+var schemaGlProgramUniformHandleui64vNV = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformHandleui64vNV,
 	Package: "gles",
 	Name:    "GlProgramUniformHandleui64vNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32748,15 +32748,15 @@ func (*binaryClassGlProgramUniformMatrix2fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2fv(d, obj.(*GlProgramUniformMatrix2fv))
 }
-func (*binaryClassGlProgramUniformMatrix2fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2fv
 }
 
-var schemaGlProgramUniformMatrix2fv = &schema.Entity{
+var schemaGlProgramUniformMatrix2fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32804,15 +32804,15 @@ func (*binaryClassGlProgramUniformMatrix2fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2fvEXT(d, obj.(*GlProgramUniformMatrix2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2fvEXT
 }
 
-var schemaGlProgramUniformMatrix2fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix2fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32860,15 +32860,15 @@ func (*binaryClassGlProgramUniformMatrix2x3fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix2x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x3fv(d, obj.(*GlProgramUniformMatrix2x3fv))
 }
-func (*binaryClassGlProgramUniformMatrix2x3fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2x3fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2x3fv
 }
 
-var schemaGlProgramUniformMatrix2x3fv = &schema.Entity{
+var schemaGlProgramUniformMatrix2x3fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32916,15 +32916,15 @@ func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix2x3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x3fvEXT(d, obj.(*GlProgramUniformMatrix2x3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2x3fvEXT
 }
 
-var schemaGlProgramUniformMatrix2x3fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix2x3fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x3fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -32972,15 +32972,15 @@ func (*binaryClassGlProgramUniformMatrix2x4fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix2x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x4fv(d, obj.(*GlProgramUniformMatrix2x4fv))
 }
-func (*binaryClassGlProgramUniformMatrix2x4fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2x4fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2x4fv
 }
 
-var schemaGlProgramUniformMatrix2x4fv = &schema.Entity{
+var schemaGlProgramUniformMatrix2x4fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33028,15 +33028,15 @@ func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix2x4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix2x4fvEXT(d, obj.(*GlProgramUniformMatrix2x4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix2x4fvEXT
 }
 
-var schemaGlProgramUniformMatrix2x4fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix2x4fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix2x4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix2x4fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33080,15 +33080,15 @@ func (*binaryClassGlProgramUniformMatrix3fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3fv(d, obj.(*GlProgramUniformMatrix3fv))
 }
-func (*binaryClassGlProgramUniformMatrix3fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3fv
 }
 
-var schemaGlProgramUniformMatrix3fv = &schema.Entity{
+var schemaGlProgramUniformMatrix3fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33136,15 +33136,15 @@ func (*binaryClassGlProgramUniformMatrix3fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3fvEXT(d, obj.(*GlProgramUniformMatrix3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3fvEXT
 }
 
-var schemaGlProgramUniformMatrix3fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix3fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33192,15 +33192,15 @@ func (*binaryClassGlProgramUniformMatrix3x2fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix3x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x2fv(d, obj.(*GlProgramUniformMatrix3x2fv))
 }
-func (*binaryClassGlProgramUniformMatrix3x2fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3x2fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3x2fv
 }
 
-var schemaGlProgramUniformMatrix3x2fv = &schema.Entity{
+var schemaGlProgramUniformMatrix3x2fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33248,15 +33248,15 @@ func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix3x2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x2fvEXT(d, obj.(*GlProgramUniformMatrix3x2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3x2fvEXT
 }
 
-var schemaGlProgramUniformMatrix3x2fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix3x2fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x2fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33304,15 +33304,15 @@ func (*binaryClassGlProgramUniformMatrix3x4fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix3x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x4fv(d, obj.(*GlProgramUniformMatrix3x4fv))
 }
-func (*binaryClassGlProgramUniformMatrix3x4fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3x4fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3x4fv
 }
 
-var schemaGlProgramUniformMatrix3x4fv = &schema.Entity{
+var schemaGlProgramUniformMatrix3x4fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33360,15 +33360,15 @@ func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix3x4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix3x4fvEXT(d, obj.(*GlProgramUniformMatrix3x4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix3x4fvEXT
 }
 
-var schemaGlProgramUniformMatrix3x4fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix3x4fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix3x4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix3x4fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33412,15 +33412,15 @@ func (*binaryClassGlProgramUniformMatrix4fv) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlProgramUniformMatrix4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4fv(d, obj.(*GlProgramUniformMatrix4fv))
 }
-func (*binaryClassGlProgramUniformMatrix4fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4fv
 }
 
-var schemaGlProgramUniformMatrix4fv = &schema.Entity{
+var schemaGlProgramUniformMatrix4fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33468,15 +33468,15 @@ func (*binaryClassGlProgramUniformMatrix4fvEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlProgramUniformMatrix4fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4fvEXT(d, obj.(*GlProgramUniformMatrix4fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4fvEXT
 }
 
-var schemaGlProgramUniformMatrix4fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix4fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33524,15 +33524,15 @@ func (*binaryClassGlProgramUniformMatrix4x2fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix4x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x2fv(d, obj.(*GlProgramUniformMatrix4x2fv))
 }
-func (*binaryClassGlProgramUniformMatrix4x2fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4x2fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4x2fv
 }
 
-var schemaGlProgramUniformMatrix4x2fv = &schema.Entity{
+var schemaGlProgramUniformMatrix4x2fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x2fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33580,15 +33580,15 @@ func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix4x2fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x2fvEXT(d, obj.(*GlProgramUniformMatrix4x2fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4x2fvEXT
 }
 
-var schemaGlProgramUniformMatrix4x2fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix4x2fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x2fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x2fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33636,15 +33636,15 @@ func (*binaryClassGlProgramUniformMatrix4x3fv) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlProgramUniformMatrix4x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x3fv(d, obj.(*GlProgramUniformMatrix4x3fv))
 }
-func (*binaryClassGlProgramUniformMatrix4x3fv) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4x3fv) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4x3fv
 }
 
-var schemaGlProgramUniformMatrix4x3fv = &schema.Entity{
+var schemaGlProgramUniformMatrix4x3fv = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x3fv,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33692,15 +33692,15 @@ func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Decode(d binary.Decoder) binar
 func (*binaryClassGlProgramUniformMatrix4x3fvEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlProgramUniformMatrix4x3fvEXT(d, obj.(*GlProgramUniformMatrix4x3fvEXT))
 }
-func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Schema() *schema.Entity {
+func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Schema() *binary.Entity {
 	return schemaGlProgramUniformMatrix4x3fvEXT
 }
 
-var schemaGlProgramUniformMatrix4x3fvEXT = &schema.Entity{
+var schemaGlProgramUniformMatrix4x3fvEXT = &binary.Entity{
 	TypeID:  binaryIDGlProgramUniformMatrix4x3fvEXT,
 	Package: "gles",
 	Name:    "GlProgramUniformMatrix4x3fvEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
@@ -33742,13 +33742,13 @@ func (*binaryClassGlPushDebugGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushDebugGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushDebugGroup(d, obj.(*GlPushDebugGroup))
 }
-func (*binaryClassGlPushDebugGroup) Schema() *schema.Entity { return schemaGlPushDebugGroup }
+func (*binaryClassGlPushDebugGroup) Schema() *binary.Entity { return schemaGlPushDebugGroup }
 
-var schemaGlPushDebugGroup = &schema.Entity{
+var schemaGlPushDebugGroup = &binary.Entity{
 	TypeID:  binaryIDGlPushDebugGroup,
 	Package: "gles",
 	Name:    "GlPushDebugGroup",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -33789,13 +33789,13 @@ func (*binaryClassGlPushDebugGroupKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushDebugGroupKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushDebugGroupKHR(d, obj.(*GlPushDebugGroupKHR))
 }
-func (*binaryClassGlPushDebugGroupKHR) Schema() *schema.Entity { return schemaGlPushDebugGroupKHR }
+func (*binaryClassGlPushDebugGroupKHR) Schema() *binary.Entity { return schemaGlPushDebugGroupKHR }
 
-var schemaGlPushDebugGroupKHR = &schema.Entity{
+var schemaGlPushDebugGroupKHR = &binary.Entity{
 	TypeID:  binaryIDGlPushDebugGroupKHR,
 	Package: "gles",
 	Name:    "GlPushDebugGroupKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Source", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -33832,13 +33832,13 @@ func (*binaryClassGlPushGroupMarkerEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlPushGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlPushGroupMarkerEXT(d, obj.(*GlPushGroupMarkerEXT))
 }
-func (*binaryClassGlPushGroupMarkerEXT) Schema() *schema.Entity { return schemaGlPushGroupMarkerEXT }
+func (*binaryClassGlPushGroupMarkerEXT) Schema() *binary.Entity { return schemaGlPushGroupMarkerEXT }
 
-var schemaGlPushGroupMarkerEXT = &schema.Entity{
+var schemaGlPushGroupMarkerEXT = &binary.Entity{
 	TypeID:  binaryIDGlPushGroupMarkerEXT,
 	Package: "gles",
 	Name:    "GlPushGroupMarkerEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Marker", Type: &schema.Struct{Entity: schema.Of((*GLcharᶜᵖ)(nil).Class())}},
@@ -33873,13 +33873,13 @@ func (*binaryClassGlQueryCounterEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlQueryCounterEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlQueryCounterEXT(d, obj.(*GlQueryCounterEXT))
 }
-func (*binaryClassGlQueryCounterEXT) Schema() *schema.Entity { return schemaGlQueryCounterEXT }
+func (*binaryClassGlQueryCounterEXT) Schema() *binary.Entity { return schemaGlQueryCounterEXT }
 
-var schemaGlQueryCounterEXT = &schema.Entity{
+var schemaGlQueryCounterEXT = &binary.Entity{
 	TypeID:  binaryIDGlQueryCounterEXT,
 	Package: "gles",
 	Name:    "GlQueryCounterEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -33914,13 +33914,13 @@ func (*binaryClassGlRasterSamplesEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlRasterSamplesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRasterSamplesEXT(d, obj.(*GlRasterSamplesEXT))
 }
-func (*binaryClassGlRasterSamplesEXT) Schema() *schema.Entity { return schemaGlRasterSamplesEXT }
+func (*binaryClassGlRasterSamplesEXT) Schema() *binary.Entity { return schemaGlRasterSamplesEXT }
 
-var schemaGlRasterSamplesEXT = &schema.Entity{
+var schemaGlRasterSamplesEXT = &binary.Entity{
 	TypeID:  binaryIDGlRasterSamplesEXT,
 	Package: "gles",
 	Name:    "GlRasterSamplesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Fixedsamplelocations", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -33953,13 +33953,13 @@ func (*binaryClassGlReadBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBuffer(d, obj.(*GlReadBuffer))
 }
-func (*binaryClassGlReadBuffer) Schema() *schema.Entity { return schemaGlReadBuffer }
+func (*binaryClassGlReadBuffer) Schema() *binary.Entity { return schemaGlReadBuffer }
 
-var schemaGlReadBuffer = &schema.Entity{
+var schemaGlReadBuffer = &binary.Entity{
 	TypeID:  binaryIDGlReadBuffer,
 	Package: "gles",
 	Name:    "GlReadBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -33993,13 +33993,13 @@ func (*binaryClassGlReadBufferIndexedEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlReadBufferIndexedEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBufferIndexedEXT(d, obj.(*GlReadBufferIndexedEXT))
 }
-func (*binaryClassGlReadBufferIndexedEXT) Schema() *schema.Entity { return schemaGlReadBufferIndexedEXT }
+func (*binaryClassGlReadBufferIndexedEXT) Schema() *binary.Entity { return schemaGlReadBufferIndexedEXT }
 
-var schemaGlReadBufferIndexedEXT = &schema.Entity{
+var schemaGlReadBufferIndexedEXT = &binary.Entity{
 	TypeID:  binaryIDGlReadBufferIndexedEXT,
 	Package: "gles",
 	Name:    "GlReadBufferIndexedEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Src", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -34032,13 +34032,13 @@ func (*binaryClassGlReadBufferNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadBufferNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadBufferNV(d, obj.(*GlReadBufferNV))
 }
-func (*binaryClassGlReadBufferNV) Schema() *schema.Entity { return schemaGlReadBufferNV }
+func (*binaryClassGlReadBufferNV) Schema() *binary.Entity { return schemaGlReadBufferNV }
 
-var schemaGlReadBufferNV = &schema.Entity{
+var schemaGlReadBufferNV = &binary.Entity{
 	TypeID:  binaryIDGlReadBufferNV,
 	Package: "gles",
 	Name:    "GlReadBufferNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
@@ -34082,13 +34082,13 @@ func (*binaryClassGlReadPixels) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadPixels) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadPixels(d, obj.(*GlReadPixels))
 }
-func (*binaryClassGlReadPixels) Schema() *schema.Entity { return schemaGlReadPixels }
+func (*binaryClassGlReadPixels) Schema() *binary.Entity { return schemaGlReadPixels }
 
-var schemaGlReadPixels = &schema.Entity{
+var schemaGlReadPixels = &binary.Entity{
 	TypeID:  binaryIDGlReadPixels,
 	Package: "gles",
 	Name:    "GlReadPixels",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -34140,13 +34140,13 @@ func (*binaryClassGlReadnPixels) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixels) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixels(d, obj.(*GlReadnPixels))
 }
-func (*binaryClassGlReadnPixels) Schema() *schema.Entity { return schemaGlReadnPixels }
+func (*binaryClassGlReadnPixels) Schema() *binary.Entity { return schemaGlReadnPixels }
 
-var schemaGlReadnPixels = &schema.Entity{
+var schemaGlReadnPixels = &binary.Entity{
 	TypeID:  binaryIDGlReadnPixels,
 	Package: "gles",
 	Name:    "GlReadnPixels",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -34199,13 +34199,13 @@ func (*binaryClassGlReadnPixelsEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixelsEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixelsEXT(d, obj.(*GlReadnPixelsEXT))
 }
-func (*binaryClassGlReadnPixelsEXT) Schema() *schema.Entity { return schemaGlReadnPixelsEXT }
+func (*binaryClassGlReadnPixelsEXT) Schema() *binary.Entity { return schemaGlReadnPixelsEXT }
 
-var schemaGlReadnPixelsEXT = &schema.Entity{
+var schemaGlReadnPixelsEXT = &binary.Entity{
 	TypeID:  binaryIDGlReadnPixelsEXT,
 	Package: "gles",
 	Name:    "GlReadnPixelsEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -34258,13 +34258,13 @@ func (*binaryClassGlReadnPixelsKHR) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlReadnPixelsKHR) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReadnPixelsKHR(d, obj.(*GlReadnPixelsKHR))
 }
-func (*binaryClassGlReadnPixelsKHR) Schema() *schema.Entity { return schemaGlReadnPixelsKHR }
+func (*binaryClassGlReadnPixelsKHR) Schema() *binary.Entity { return schemaGlReadnPixelsKHR }
 
-var schemaGlReadnPixelsKHR = &schema.Entity{
+var schemaGlReadnPixelsKHR = &binary.Entity{
 	TypeID:  binaryIDGlReadnPixelsKHR,
 	Package: "gles",
 	Name:    "GlReadnPixelsKHR",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -34301,15 +34301,15 @@ func (*binaryClassGlReleaseShaderCompiler) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlReleaseShaderCompiler) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlReleaseShaderCompiler(d, obj.(*GlReleaseShaderCompiler))
 }
-func (*binaryClassGlReleaseShaderCompiler) Schema() *schema.Entity {
+func (*binaryClassGlReleaseShaderCompiler) Schema() *binary.Entity {
 	return schemaGlReleaseShaderCompiler
 }
 
-var schemaGlReleaseShaderCompiler = &schema.Entity{
+var schemaGlReleaseShaderCompiler = &binary.Entity{
 	TypeID:  binaryIDGlReleaseShaderCompiler,
 	Package: "gles",
 	Name:    "GlReleaseShaderCompiler",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -34346,13 +34346,13 @@ func (*binaryClassGlRenderbufferStorage) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlRenderbufferStorage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorage(d, obj.(*GlRenderbufferStorage))
 }
-func (*binaryClassGlRenderbufferStorage) Schema() *schema.Entity { return schemaGlRenderbufferStorage }
+func (*binaryClassGlRenderbufferStorage) Schema() *binary.Entity { return schemaGlRenderbufferStorage }
 
-var schemaGlRenderbufferStorage = &schema.Entity{
+var schemaGlRenderbufferStorage = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorage,
 	Package: "gles",
 	Name:    "GlRenderbufferStorage",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34399,15 +34399,15 @@ func (*binaryClassGlRenderbufferStorageMultisample) Decode(d binary.Decoder) bin
 func (*binaryClassGlRenderbufferStorageMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisample(d, obj.(*GlRenderbufferStorageMultisample))
 }
-func (*binaryClassGlRenderbufferStorageMultisample) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisample) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisample
 }
 
-var schemaGlRenderbufferStorageMultisample = &schema.Entity{
+var schemaGlRenderbufferStorageMultisample = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisample,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisample",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34455,15 +34455,15 @@ func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Decode(d binary.Decoder
 func (*binaryClassGlRenderbufferStorageMultisampleANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleANGLE(d, obj.(*GlRenderbufferStorageMultisampleANGLE))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisampleANGLE
 }
 
-var schemaGlRenderbufferStorageMultisampleANGLE = &schema.Entity{
+var schemaGlRenderbufferStorageMultisampleANGLE = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleANGLE,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34511,15 +34511,15 @@ func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Decode(d binary.Decoder
 func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleAPPLE(d, obj.(*GlRenderbufferStorageMultisampleAPPLE))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisampleAPPLE
 }
 
-var schemaGlRenderbufferStorageMultisampleAPPLE = &schema.Entity{
+var schemaGlRenderbufferStorageMultisampleAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleAPPLE,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34567,15 +34567,15 @@ func (*binaryClassGlRenderbufferStorageMultisampleEXT) Decode(d binary.Decoder) 
 func (*binaryClassGlRenderbufferStorageMultisampleEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleEXT(d, obj.(*GlRenderbufferStorageMultisampleEXT))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleEXT) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisampleEXT) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisampleEXT
 }
 
-var schemaGlRenderbufferStorageMultisampleEXT = &schema.Entity{
+var schemaGlRenderbufferStorageMultisampleEXT = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleEXT,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34623,15 +34623,15 @@ func (*binaryClassGlRenderbufferStorageMultisampleIMG) Decode(d binary.Decoder) 
 func (*binaryClassGlRenderbufferStorageMultisampleIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleIMG(d, obj.(*GlRenderbufferStorageMultisampleIMG))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleIMG) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisampleIMG) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisampleIMG
 }
 
-var schemaGlRenderbufferStorageMultisampleIMG = &schema.Entity{
+var schemaGlRenderbufferStorageMultisampleIMG = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleIMG,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleIMG",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34679,15 +34679,15 @@ func (*binaryClassGlRenderbufferStorageMultisampleNV) Decode(d binary.Decoder) b
 func (*binaryClassGlRenderbufferStorageMultisampleNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlRenderbufferStorageMultisampleNV(d, obj.(*GlRenderbufferStorageMultisampleNV))
 }
-func (*binaryClassGlRenderbufferStorageMultisampleNV) Schema() *schema.Entity {
+func (*binaryClassGlRenderbufferStorageMultisampleNV) Schema() *binary.Entity {
 	return schemaGlRenderbufferStorageMultisampleNV
 }
 
-var schemaGlRenderbufferStorageMultisampleNV = &schema.Entity{
+var schemaGlRenderbufferStorageMultisampleNV = &binary.Entity{
 	TypeID:  binaryIDGlRenderbufferStorageMultisampleNV,
 	Package: "gles",
 	Name:    "GlRenderbufferStorageMultisampleNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -34721,13 +34721,13 @@ func (*binaryClassGlResolveDepthValuesNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlResolveDepthValuesNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResolveDepthValuesNV(d, obj.(*GlResolveDepthValuesNV))
 }
-func (*binaryClassGlResolveDepthValuesNV) Schema() *schema.Entity { return schemaGlResolveDepthValuesNV }
+func (*binaryClassGlResolveDepthValuesNV) Schema() *binary.Entity { return schemaGlResolveDepthValuesNV }
 
-var schemaGlResolveDepthValuesNV = &schema.Entity{
+var schemaGlResolveDepthValuesNV = &binary.Entity{
 	TypeID:  binaryIDGlResolveDepthValuesNV,
 	Package: "gles",
 	Name:    "GlResolveDepthValuesNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -34760,15 +34760,15 @@ func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Decode(d binary.Decoder)
 func (*binaryClassGlResolveMultisampleFramebufferAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResolveMultisampleFramebufferAPPLE(d, obj.(*GlResolveMultisampleFramebufferAPPLE))
 }
-func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Schema() *schema.Entity {
+func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Schema() *binary.Entity {
 	return schemaGlResolveMultisampleFramebufferAPPLE
 }
 
-var schemaGlResolveMultisampleFramebufferAPPLE = &schema.Entity{
+var schemaGlResolveMultisampleFramebufferAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlResolveMultisampleFramebufferAPPLE,
 	Package: "gles",
 	Name:    "GlResolveMultisampleFramebufferAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -34797,15 +34797,15 @@ func (*binaryClassGlResumeTransformFeedback) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlResumeTransformFeedback) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlResumeTransformFeedback(d, obj.(*GlResumeTransformFeedback))
 }
-func (*binaryClassGlResumeTransformFeedback) Schema() *schema.Entity {
+func (*binaryClassGlResumeTransformFeedback) Schema() *binary.Entity {
 	return schemaGlResumeTransformFeedback
 }
 
-var schemaGlResumeTransformFeedback = &schema.Entity{
+var schemaGlResumeTransformFeedback = &binary.Entity{
 	TypeID:  binaryIDGlResumeTransformFeedback,
 	Package: "gles",
 	Name:    "GlResumeTransformFeedback",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 	},
 }
@@ -34838,13 +34838,13 @@ func (*binaryClassGlSampleCoverage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSampleCoverage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSampleCoverage(d, obj.(*GlSampleCoverage))
 }
-func (*binaryClassGlSampleCoverage) Schema() *schema.Entity { return schemaGlSampleCoverage }
+func (*binaryClassGlSampleCoverage) Schema() *binary.Entity { return schemaGlSampleCoverage }
 
-var schemaGlSampleCoverage = &schema.Entity{
+var schemaGlSampleCoverage = &binary.Entity{
 	TypeID:  binaryIDGlSampleCoverage,
 	Package: "gles",
 	Name:    "GlSampleCoverage",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -34879,13 +34879,13 @@ func (*binaryClassGlSampleMaski) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSampleMaski) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSampleMaski(d, obj.(*GlSampleMaski))
 }
-func (*binaryClassGlSampleMaski) Schema() *schema.Entity { return schemaGlSampleMaski }
+func (*binaryClassGlSampleMaski) Schema() *binary.Entity { return schemaGlSampleMaski }
 
-var schemaGlSampleMaski = &schema.Entity{
+var schemaGlSampleMaski = &binary.Entity{
 	TypeID:  binaryIDGlSampleMaski,
 	Package: "gles",
 	Name:    "GlSampleMaski",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "MaskNumber", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -34922,13 +34922,13 @@ func (*binaryClassGlSamplerParameterIiv) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlSamplerParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIiv(d, obj.(*GlSamplerParameterIiv))
 }
-func (*binaryClassGlSamplerParameterIiv) Schema() *schema.Entity { return schemaGlSamplerParameterIiv }
+func (*binaryClassGlSamplerParameterIiv) Schema() *binary.Entity { return schemaGlSamplerParameterIiv }
 
-var schemaGlSamplerParameterIiv = &schema.Entity{
+var schemaGlSamplerParameterIiv = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIiv,
 	Package: "gles",
 	Name:    "GlSamplerParameterIiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -34966,15 +34966,15 @@ func (*binaryClassGlSamplerParameterIivEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlSamplerParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIivEXT(d, obj.(*GlSamplerParameterIivEXT))
 }
-func (*binaryClassGlSamplerParameterIivEXT) Schema() *schema.Entity {
+func (*binaryClassGlSamplerParameterIivEXT) Schema() *binary.Entity {
 	return schemaGlSamplerParameterIivEXT
 }
 
-var schemaGlSamplerParameterIivEXT = &schema.Entity{
+var schemaGlSamplerParameterIivEXT = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIivEXT,
 	Package: "gles",
 	Name:    "GlSamplerParameterIivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35012,15 +35012,15 @@ func (*binaryClassGlSamplerParameterIivOES) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlSamplerParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIivOES(d, obj.(*GlSamplerParameterIivOES))
 }
-func (*binaryClassGlSamplerParameterIivOES) Schema() *schema.Entity {
+func (*binaryClassGlSamplerParameterIivOES) Schema() *binary.Entity {
 	return schemaGlSamplerParameterIivOES
 }
 
-var schemaGlSamplerParameterIivOES = &schema.Entity{
+var schemaGlSamplerParameterIivOES = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIivOES,
 	Package: "gles",
 	Name:    "GlSamplerParameterIivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35058,13 +35058,13 @@ func (*binaryClassGlSamplerParameterIuiv) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlSamplerParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuiv(d, obj.(*GlSamplerParameterIuiv))
 }
-func (*binaryClassGlSamplerParameterIuiv) Schema() *schema.Entity { return schemaGlSamplerParameterIuiv }
+func (*binaryClassGlSamplerParameterIuiv) Schema() *binary.Entity { return schemaGlSamplerParameterIuiv }
 
-var schemaGlSamplerParameterIuiv = &schema.Entity{
+var schemaGlSamplerParameterIuiv = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuiv,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35102,15 +35102,15 @@ func (*binaryClassGlSamplerParameterIuivEXT) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSamplerParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuivEXT(d, obj.(*GlSamplerParameterIuivEXT))
 }
-func (*binaryClassGlSamplerParameterIuivEXT) Schema() *schema.Entity {
+func (*binaryClassGlSamplerParameterIuivEXT) Schema() *binary.Entity {
 	return schemaGlSamplerParameterIuivEXT
 }
 
-var schemaGlSamplerParameterIuivEXT = &schema.Entity{
+var schemaGlSamplerParameterIuivEXT = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35148,15 +35148,15 @@ func (*binaryClassGlSamplerParameterIuivOES) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSamplerParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterIuivOES(d, obj.(*GlSamplerParameterIuivOES))
 }
-func (*binaryClassGlSamplerParameterIuivOES) Schema() *schema.Entity {
+func (*binaryClassGlSamplerParameterIuivOES) Schema() *binary.Entity {
 	return schemaGlSamplerParameterIuivOES
 }
 
-var schemaGlSamplerParameterIuivOES = &schema.Entity{
+var schemaGlSamplerParameterIuivOES = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterIuivOES,
 	Package: "gles",
 	Name:    "GlSamplerParameterIuivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35194,13 +35194,13 @@ func (*binaryClassGlSamplerParameterf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameterf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterf(d, obj.(*GlSamplerParameterf))
 }
-func (*binaryClassGlSamplerParameterf) Schema() *schema.Entity { return schemaGlSamplerParameterf }
+func (*binaryClassGlSamplerParameterf) Schema() *binary.Entity { return schemaGlSamplerParameterf }
 
-var schemaGlSamplerParameterf = &schema.Entity{
+var schemaGlSamplerParameterf = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterf,
 	Package: "gles",
 	Name:    "GlSamplerParameterf",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35238,13 +35238,13 @@ func (*binaryClassGlSamplerParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameterfv(d, obj.(*GlSamplerParameterfv))
 }
-func (*binaryClassGlSamplerParameterfv) Schema() *schema.Entity { return schemaGlSamplerParameterfv }
+func (*binaryClassGlSamplerParameterfv) Schema() *binary.Entity { return schemaGlSamplerParameterfv }
 
-var schemaGlSamplerParameterfv = &schema.Entity{
+var schemaGlSamplerParameterfv = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameterfv,
 	Package: "gles",
 	Name:    "GlSamplerParameterfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35282,13 +35282,13 @@ func (*binaryClassGlSamplerParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameteri(d, obj.(*GlSamplerParameteri))
 }
-func (*binaryClassGlSamplerParameteri) Schema() *schema.Entity { return schemaGlSamplerParameteri }
+func (*binaryClassGlSamplerParameteri) Schema() *binary.Entity { return schemaGlSamplerParameteri }
 
-var schemaGlSamplerParameteri = &schema.Entity{
+var schemaGlSamplerParameteri = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameteri,
 	Package: "gles",
 	Name:    "GlSamplerParameteri",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35326,13 +35326,13 @@ func (*binaryClassGlSamplerParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSamplerParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSamplerParameteriv(d, obj.(*GlSamplerParameteriv))
 }
-func (*binaryClassGlSamplerParameteriv) Schema() *schema.Entity { return schemaGlSamplerParameteriv }
+func (*binaryClassGlSamplerParameteriv) Schema() *binary.Entity { return schemaGlSamplerParameteriv }
 
-var schemaGlSamplerParameteriv = &schema.Entity{
+var schemaGlSamplerParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlSamplerParameteriv,
 	Package: "gles",
 	Name:    "GlSamplerParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sampler", Type: &schema.Primitive{Name: "SamplerId", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35372,13 +35372,13 @@ func (*binaryClassGlScissor) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissor(d, obj.(*GlScissor))
 }
-func (*binaryClassGlScissor) Schema() *schema.Entity { return schemaGlScissor }
+func (*binaryClassGlScissor) Schema() *binary.Entity { return schemaGlScissor }
 
-var schemaGlScissor = &schema.Entity{
+var schemaGlScissor = &binary.Entity{
 	TypeID:  binaryIDGlScissor,
 	Package: "gles",
 	Name:    "GlScissor",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -35417,13 +35417,13 @@ func (*binaryClassGlScissorArrayvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorArrayvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorArrayvNV(d, obj.(*GlScissorArrayvNV))
 }
-func (*binaryClassGlScissorArrayvNV) Schema() *schema.Entity { return schemaGlScissorArrayvNV }
+func (*binaryClassGlScissorArrayvNV) Schema() *binary.Entity { return schemaGlScissorArrayvNV }
 
-var schemaGlScissorArrayvNV = &schema.Entity{
+var schemaGlScissorArrayvNV = &binary.Entity{
 	TypeID:  binaryIDGlScissorArrayvNV,
 	Package: "gles",
 	Name:    "GlScissorArrayvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -35465,13 +35465,13 @@ func (*binaryClassGlScissorIndexedNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorIndexedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorIndexedNV(d, obj.(*GlScissorIndexedNV))
 }
-func (*binaryClassGlScissorIndexedNV) Schema() *schema.Entity { return schemaGlScissorIndexedNV }
+func (*binaryClassGlScissorIndexedNV) Schema() *binary.Entity { return schemaGlScissorIndexedNV }
 
-var schemaGlScissorIndexedNV = &schema.Entity{
+var schemaGlScissorIndexedNV = &binary.Entity{
 	TypeID:  binaryIDGlScissorIndexedNV,
 	Package: "gles",
 	Name:    "GlScissorIndexedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Left", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -35509,13 +35509,13 @@ func (*binaryClassGlScissorIndexedvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlScissorIndexedvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlScissorIndexedvNV(d, obj.(*GlScissorIndexedvNV))
 }
-func (*binaryClassGlScissorIndexedvNV) Schema() *schema.Entity { return schemaGlScissorIndexedvNV }
+func (*binaryClassGlScissorIndexedvNV) Schema() *binary.Entity { return schemaGlScissorIndexedvNV }
 
-var schemaGlScissorIndexedvNV = &schema.Entity{
+var schemaGlScissorIndexedvNV = &binary.Entity{
 	TypeID:  binaryIDGlScissorIndexedvNV,
 	Package: "gles",
 	Name:    "GlScissorIndexedvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
@@ -35560,15 +35560,15 @@ func (*binaryClassGlSelectPerfMonitorCountersAMD) Decode(d binary.Decoder) binar
 func (*binaryClassGlSelectPerfMonitorCountersAMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSelectPerfMonitorCountersAMD(d, obj.(*GlSelectPerfMonitorCountersAMD))
 }
-func (*binaryClassGlSelectPerfMonitorCountersAMD) Schema() *schema.Entity {
+func (*binaryClassGlSelectPerfMonitorCountersAMD) Schema() *binary.Entity {
 	return schemaGlSelectPerfMonitorCountersAMD
 }
 
-var schemaGlSelectPerfMonitorCountersAMD = &schema.Entity{
+var schemaGlSelectPerfMonitorCountersAMD = &binary.Entity{
 	TypeID:  binaryIDGlSelectPerfMonitorCountersAMD,
 	Package: "gles",
 	Name:    "GlSelectPerfMonitorCountersAMD",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Monitor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Enable", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -35606,13 +35606,13 @@ func (*binaryClassGlSetFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlSetFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSetFenceNV(d, obj.(*GlSetFenceNV))
 }
-func (*binaryClassGlSetFenceNV) Schema() *schema.Entity { return schemaGlSetFenceNV }
+func (*binaryClassGlSetFenceNV) Schema() *binary.Entity { return schemaGlSetFenceNV }
 
-var schemaGlSetFenceNV = &schema.Entity{
+var schemaGlSetFenceNV = &binary.Entity{
 	TypeID:  binaryIDGlSetFenceNV,
 	Package: "gles",
 	Name:    "GlSetFenceNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35643,13 +35643,13 @@ func (*binaryClassShaderIdᶜᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdᶜᵖ(d, obj.(*ShaderIdᶜᵖ))
 }
-func (*binaryClassShaderIdᶜᵖ) Schema() *schema.Entity { return schemaShaderIdᶜᵖ }
+func (*binaryClassShaderIdᶜᵖ) Schema() *binary.Entity { return schemaShaderIdᶜᵖ }
 
-var schemaShaderIdᶜᵖ = &schema.Entity{
+var schemaShaderIdᶜᵖ = &binary.Entity{
 	TypeID:  binaryIDShaderIdᶜᵖ,
 	Package: "gles",
 	Name:    "ShaderIdᶜᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -35688,13 +35688,13 @@ func (*binaryClassGlShaderBinary) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlShaderBinary) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlShaderBinary(d, obj.(*GlShaderBinary))
 }
-func (*binaryClassGlShaderBinary) Schema() *schema.Entity { return schemaGlShaderBinary }
+func (*binaryClassGlShaderBinary) Schema() *binary.Entity { return schemaGlShaderBinary }
 
-var schemaGlShaderBinary = &schema.Entity{
+var schemaGlShaderBinary = &binary.Entity{
 	TypeID:  binaryIDGlShaderBinary,
 	Package: "gles",
 	Name:    "GlShaderBinary",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Shaders", Type: &schema.Struct{Entity: schema.Of((*ShaderIdᶜᵖ)(nil).Class())}},
@@ -35736,13 +35736,13 @@ func (*binaryClassGlShaderSource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlShaderSource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlShaderSource(d, obj.(*GlShaderSource))
 }
-func (*binaryClassGlShaderSource) Schema() *schema.Entity { return schemaGlShaderSource }
+func (*binaryClassGlShaderSource) Schema() *binary.Entity { return schemaGlShaderSource }
 
-var schemaGlShaderSource = &schema.Entity{
+var schemaGlShaderSource = &binary.Entity{
 	TypeID:  binaryIDGlShaderSource,
 	Package: "gles",
 	Name:    "GlShaderSource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -35785,13 +35785,13 @@ func (*binaryClassGlStartTilingQCOM) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStartTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStartTilingQCOM(d, obj.(*GlStartTilingQCOM))
 }
-func (*binaryClassGlStartTilingQCOM) Schema() *schema.Entity { return schemaGlStartTilingQCOM }
+func (*binaryClassGlStartTilingQCOM) Schema() *binary.Entity { return schemaGlStartTilingQCOM }
 
-var schemaGlStartTilingQCOM = &schema.Entity{
+var schemaGlStartTilingQCOM = &binary.Entity{
 	TypeID:  binaryIDGlStartTilingQCOM,
 	Package: "gles",
 	Name:    "GlStartTilingQCOM",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -35845,15 +35845,15 @@ func (*binaryClassGlStencilFillPathInstancedNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlStencilFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFillPathInstancedNV(d, obj.(*GlStencilFillPathInstancedNV))
 }
-func (*binaryClassGlStencilFillPathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilFillPathInstancedNV) Schema() *binary.Entity {
 	return schemaGlStencilFillPathInstancedNV
 }
 
-var schemaGlStencilFillPathInstancedNV = &schema.Entity{
+var schemaGlStencilFillPathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilFillPathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35896,13 +35896,13 @@ func (*binaryClassGlStencilFillPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFillPathNV(d, obj.(*GlStencilFillPathNV))
 }
-func (*binaryClassGlStencilFillPathNV) Schema() *schema.Entity { return schemaGlStencilFillPathNV }
+func (*binaryClassGlStencilFillPathNV) Schema() *binary.Entity { return schemaGlStencilFillPathNV }
 
-var schemaGlStencilFillPathNV = &schema.Entity{
+var schemaGlStencilFillPathNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilFillPathNV,
 	Package: "gles",
 	Name:    "GlStencilFillPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -35940,13 +35940,13 @@ func (*binaryClassGlStencilFunc) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFunc(d, obj.(*GlStencilFunc))
 }
-func (*binaryClassGlStencilFunc) Schema() *schema.Entity { return schemaGlStencilFunc }
+func (*binaryClassGlStencilFunc) Schema() *binary.Entity { return schemaGlStencilFunc }
 
-var schemaGlStencilFunc = &schema.Entity{
+var schemaGlStencilFunc = &binary.Entity{
 	TypeID:  binaryIDGlStencilFunc,
 	Package: "gles",
 	Name:    "GlStencilFunc",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -35986,13 +35986,13 @@ func (*binaryClassGlStencilFuncSeparate) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilFuncSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilFuncSeparate(d, obj.(*GlStencilFuncSeparate))
 }
-func (*binaryClassGlStencilFuncSeparate) Schema() *schema.Entity { return schemaGlStencilFuncSeparate }
+func (*binaryClassGlStencilFuncSeparate) Schema() *binary.Entity { return schemaGlStencilFuncSeparate }
 
-var schemaGlStencilFuncSeparate = &schema.Entity{
+var schemaGlStencilFuncSeparate = &binary.Entity{
 	TypeID:  binaryIDGlStencilFuncSeparate,
 	Package: "gles",
 	Name:    "GlStencilFuncSeparate",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Function", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36027,13 +36027,13 @@ func (*binaryClassGlStencilMask) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilMask) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilMask(d, obj.(*GlStencilMask))
 }
-func (*binaryClassGlStencilMask) Schema() *schema.Entity { return schemaGlStencilMask }
+func (*binaryClassGlStencilMask) Schema() *binary.Entity { return schemaGlStencilMask }
 
-var schemaGlStencilMask = &schema.Entity{
+var schemaGlStencilMask = &binary.Entity{
 	TypeID:  binaryIDGlStencilMask,
 	Package: "gles",
 	Name:    "GlStencilMask",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
@@ -36067,13 +36067,13 @@ func (*binaryClassGlStencilMaskSeparate) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilMaskSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilMaskSeparate(d, obj.(*GlStencilMaskSeparate))
 }
-func (*binaryClassGlStencilMaskSeparate) Schema() *schema.Entity { return schemaGlStencilMaskSeparate }
+func (*binaryClassGlStencilMaskSeparate) Schema() *binary.Entity { return schemaGlStencilMaskSeparate }
 
-var schemaGlStencilMaskSeparate = &schema.Entity{
+var schemaGlStencilMaskSeparate = &binary.Entity{
 	TypeID:  binaryIDGlStencilMaskSeparate,
 	Package: "gles",
 	Name:    "GlStencilMaskSeparate",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Mask", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -36110,13 +36110,13 @@ func (*binaryClassGlStencilOp) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilOp) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilOp(d, obj.(*GlStencilOp))
 }
-func (*binaryClassGlStencilOp) Schema() *schema.Entity { return schemaGlStencilOp }
+func (*binaryClassGlStencilOp) Schema() *binary.Entity { return schemaGlStencilOp }
 
-var schemaGlStencilOp = &schema.Entity{
+var schemaGlStencilOp = &binary.Entity{
 	TypeID:  binaryIDGlStencilOp,
 	Package: "gles",
 	Name:    "GlStencilOp",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Zfail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36156,13 +36156,13 @@ func (*binaryClassGlStencilOpSeparate) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlStencilOpSeparate) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilOpSeparate(d, obj.(*GlStencilOpSeparate))
 }
-func (*binaryClassGlStencilOpSeparate) Schema() *schema.Entity { return schemaGlStencilOpSeparate }
+func (*binaryClassGlStencilOpSeparate) Schema() *binary.Entity { return schemaGlStencilOpSeparate }
 
-var schemaGlStencilOpSeparate = &schema.Entity{
+var schemaGlStencilOpSeparate = &binary.Entity{
 	TypeID:  binaryIDGlStencilOpSeparate,
 	Package: "gles",
 	Name:    "GlStencilOpSeparate",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "StencilFail", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36215,15 +36215,15 @@ func (*binaryClassGlStencilStrokePathInstancedNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlStencilStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilStrokePathInstancedNV(d, obj.(*GlStencilStrokePathInstancedNV))
 }
-func (*binaryClassGlStencilStrokePathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilStrokePathInstancedNV) Schema() *binary.Entity {
 	return schemaGlStencilStrokePathInstancedNV
 }
 
-var schemaGlStencilStrokePathInstancedNV = &schema.Entity{
+var schemaGlStencilStrokePathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilStrokePathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36266,13 +36266,13 @@ func (*binaryClassGlStencilStrokePathNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlStencilStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilStrokePathNV(d, obj.(*GlStencilStrokePathNV))
 }
-func (*binaryClassGlStencilStrokePathNV) Schema() *schema.Entity { return schemaGlStencilStrokePathNV }
+func (*binaryClassGlStencilStrokePathNV) Schema() *binary.Entity { return schemaGlStencilStrokePathNV }
 
-var schemaGlStencilStrokePathNV = &schema.Entity{
+var schemaGlStencilStrokePathNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilStrokePathNV,
 	Package: "gles",
 	Name:    "GlStencilStrokePathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -36326,15 +36326,15 @@ func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Decode(d binary.Decoder
 func (*binaryClassGlStencilThenCoverFillPathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverFillPathInstancedNV(d, obj.(*GlStencilThenCoverFillPathInstancedNV))
 }
-func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Schema() *binary.Entity {
 	return schemaGlStencilThenCoverFillPathInstancedNV
 }
 
-var schemaGlStencilThenCoverFillPathInstancedNV = &schema.Entity{
+var schemaGlStencilThenCoverFillPathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilThenCoverFillPathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36384,15 +36384,15 @@ func (*binaryClassGlStencilThenCoverFillPathNV) Decode(d binary.Decoder) binary.
 func (*binaryClassGlStencilThenCoverFillPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverFillPathNV(d, obj.(*GlStencilThenCoverFillPathNV))
 }
-func (*binaryClassGlStencilThenCoverFillPathNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilThenCoverFillPathNV) Schema() *binary.Entity {
 	return schemaGlStencilThenCoverFillPathNV
 }
 
-var schemaGlStencilThenCoverFillPathNV = &schema.Entity{
+var schemaGlStencilThenCoverFillPathNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilThenCoverFillPathNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverFillPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "FillMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36447,15 +36447,15 @@ func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Decode(d binary.Decod
 func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverStrokePathInstancedNV(d, obj.(*GlStencilThenCoverStrokePathInstancedNV))
 }
-func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Schema() *binary.Entity {
 	return schemaGlStencilThenCoverStrokePathInstancedNV
 }
 
-var schemaGlStencilThenCoverStrokePathInstancedNV = &schema.Entity{
+var schemaGlStencilThenCoverStrokePathInstancedNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilThenCoverStrokePathInstancedNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathInstancedNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "PathNameType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36505,15 +36505,15 @@ func (*binaryClassGlStencilThenCoverStrokePathNV) Decode(d binary.Decoder) binar
 func (*binaryClassGlStencilThenCoverStrokePathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlStencilThenCoverStrokePathNV(d, obj.(*GlStencilThenCoverStrokePathNV))
 }
-func (*binaryClassGlStencilThenCoverStrokePathNV) Schema() *schema.Entity {
+func (*binaryClassGlStencilThenCoverStrokePathNV) Schema() *binary.Entity {
 	return schemaGlStencilThenCoverStrokePathNV
 }
 
-var schemaGlStencilThenCoverStrokePathNV = &schema.Entity{
+var schemaGlStencilThenCoverStrokePathNV = &binary.Entity{
 	TypeID:  binaryIDGlStencilThenCoverStrokePathNV,
 	Package: "gles",
 	Name:    "GlStencilThenCoverStrokePathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Path", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Reference", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -36550,15 +36550,15 @@ func (*binaryClassGlSubpixelPrecisionBiasNV) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlSubpixelPrecisionBiasNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlSubpixelPrecisionBiasNV(d, obj.(*GlSubpixelPrecisionBiasNV))
 }
-func (*binaryClassGlSubpixelPrecisionBiasNV) Schema() *schema.Entity {
+func (*binaryClassGlSubpixelPrecisionBiasNV) Schema() *binary.Entity {
 	return schemaGlSubpixelPrecisionBiasNV
 }
 
-var schemaGlSubpixelPrecisionBiasNV = &schema.Entity{
+var schemaGlSubpixelPrecisionBiasNV = &binary.Entity{
 	TypeID:  binaryIDGlSubpixelPrecisionBiasNV,
 	Package: "gles",
 	Name:    "GlSubpixelPrecisionBiasNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Xbits", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Ybits", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -36593,13 +36593,13 @@ func (*binaryClassGlTestFenceNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTestFenceNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTestFenceNV(d, obj.(*GlTestFenceNV))
 }
-func (*binaryClassGlTestFenceNV) Schema() *schema.Entity { return schemaGlTestFenceNV }
+func (*binaryClassGlTestFenceNV) Schema() *binary.Entity { return schemaGlTestFenceNV }
 
-var schemaGlTestFenceNV = &schema.Entity{
+var schemaGlTestFenceNV = &binary.Entity{
 	TypeID:  binaryIDGlTestFenceNV,
 	Package: "gles",
 	Name:    "GlTestFenceNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -36636,13 +36636,13 @@ func (*binaryClassGlTexBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBuffer(d, obj.(*GlTexBuffer))
 }
-func (*binaryClassGlTexBuffer) Schema() *schema.Entity { return schemaGlTexBuffer }
+func (*binaryClassGlTexBuffer) Schema() *binary.Entity { return schemaGlTexBuffer }
 
-var schemaGlTexBuffer = &schema.Entity{
+var schemaGlTexBuffer = &binary.Entity{
 	TypeID:  binaryIDGlTexBuffer,
 	Package: "gles",
 	Name:    "GlTexBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36680,13 +36680,13 @@ func (*binaryClassGlTexBufferEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferEXT(d, obj.(*GlTexBufferEXT))
 }
-func (*binaryClassGlTexBufferEXT) Schema() *schema.Entity { return schemaGlTexBufferEXT }
+func (*binaryClassGlTexBufferEXT) Schema() *binary.Entity { return schemaGlTexBufferEXT }
 
-var schemaGlTexBufferEXT = &schema.Entity{
+var schemaGlTexBufferEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexBufferEXT,
 	Package: "gles",
 	Name:    "GlTexBufferEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36724,13 +36724,13 @@ func (*binaryClassGlTexBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferOES(d, obj.(*GlTexBufferOES))
 }
-func (*binaryClassGlTexBufferOES) Schema() *schema.Entity { return schemaGlTexBufferOES }
+func (*binaryClassGlTexBufferOES) Schema() *binary.Entity { return schemaGlTexBufferOES }
 
-var schemaGlTexBufferOES = &schema.Entity{
+var schemaGlTexBufferOES = &binary.Entity{
 	TypeID:  binaryIDGlTexBufferOES,
 	Package: "gles",
 	Name:    "GlTexBufferOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36772,13 +36772,13 @@ func (*binaryClassGlTexBufferRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRange(d, obj.(*GlTexBufferRange))
 }
-func (*binaryClassGlTexBufferRange) Schema() *schema.Entity { return schemaGlTexBufferRange }
+func (*binaryClassGlTexBufferRange) Schema() *binary.Entity { return schemaGlTexBufferRange }
 
-var schemaGlTexBufferRange = &schema.Entity{
+var schemaGlTexBufferRange = &binary.Entity{
 	TypeID:  binaryIDGlTexBufferRange,
 	Package: "gles",
 	Name:    "GlTexBufferRange",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36822,13 +36822,13 @@ func (*binaryClassGlTexBufferRangeEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRangeEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRangeEXT(d, obj.(*GlTexBufferRangeEXT))
 }
-func (*binaryClassGlTexBufferRangeEXT) Schema() *schema.Entity { return schemaGlTexBufferRangeEXT }
+func (*binaryClassGlTexBufferRangeEXT) Schema() *binary.Entity { return schemaGlTexBufferRangeEXT }
 
-var schemaGlTexBufferRangeEXT = &schema.Entity{
+var schemaGlTexBufferRangeEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexBufferRangeEXT,
 	Package: "gles",
 	Name:    "GlTexBufferRangeEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36872,13 +36872,13 @@ func (*binaryClassGlTexBufferRangeOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexBufferRangeOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexBufferRangeOES(d, obj.(*GlTexBufferRangeOES))
 }
-func (*binaryClassGlTexBufferRangeOES) Schema() *schema.Entity { return schemaGlTexBufferRangeOES }
+func (*binaryClassGlTexBufferRangeOES) Schema() *binary.Entity { return schemaGlTexBufferRangeOES }
 
-var schemaGlTexBufferRangeOES = &schema.Entity{
+var schemaGlTexBufferRangeOES = &binary.Entity{
 	TypeID:  binaryIDGlTexBufferRangeOES,
 	Package: "gles",
 	Name:    "GlTexBufferRangeOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -36930,13 +36930,13 @@ func (*binaryClassGlTexImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage2D(d, obj.(*GlTexImage2D))
 }
-func (*binaryClassGlTexImage2D) Schema() *schema.Entity { return schemaGlTexImage2D }
+func (*binaryClassGlTexImage2D) Schema() *binary.Entity { return schemaGlTexImage2D }
 
-var schemaGlTexImage2D = &schema.Entity{
+var schemaGlTexImage2D = &binary.Entity{
 	TypeID:  binaryIDGlTexImage2D,
 	Package: "gles",
 	Name:    "GlTexImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -36994,13 +36994,13 @@ func (*binaryClassGlTexImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage3D(d, obj.(*GlTexImage3D))
 }
-func (*binaryClassGlTexImage3D) Schema() *schema.Entity { return schemaGlTexImage3D }
+func (*binaryClassGlTexImage3D) Schema() *binary.Entity { return schemaGlTexImage3D }
 
-var schemaGlTexImage3D = &schema.Entity{
+var schemaGlTexImage3D = &binary.Entity{
 	TypeID:  binaryIDGlTexImage3D,
 	Package: "gles",
 	Name:    "GlTexImage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37059,13 +37059,13 @@ func (*binaryClassGlTexImage3DOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexImage3DOES(d, obj.(*GlTexImage3DOES))
 }
-func (*binaryClassGlTexImage3DOES) Schema() *schema.Entity { return schemaGlTexImage3DOES }
+func (*binaryClassGlTexImage3DOES) Schema() *binary.Entity { return schemaGlTexImage3DOES }
 
-var schemaGlTexImage3DOES = &schema.Entity{
+var schemaGlTexImage3DOES = &binary.Entity{
 	TypeID:  binaryIDGlTexImage3DOES,
 	Package: "gles",
 	Name:    "GlTexImage3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37122,13 +37122,13 @@ func (*binaryClassGlTexPageCommitmentEXT) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlTexPageCommitmentEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexPageCommitmentEXT(d, obj.(*GlTexPageCommitmentEXT))
 }
-func (*binaryClassGlTexPageCommitmentEXT) Schema() *schema.Entity { return schemaGlTexPageCommitmentEXT }
+func (*binaryClassGlTexPageCommitmentEXT) Schema() *binary.Entity { return schemaGlTexPageCommitmentEXT }
 
-var schemaGlTexPageCommitmentEXT = &schema.Entity{
+var schemaGlTexPageCommitmentEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexPageCommitmentEXT,
 	Package: "gles",
 	Name:    "GlTexPageCommitmentEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -37172,13 +37172,13 @@ func (*binaryClassGlTexParameterIiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIiv(d, obj.(*GlTexParameterIiv))
 }
-func (*binaryClassGlTexParameterIiv) Schema() *schema.Entity { return schemaGlTexParameterIiv }
+func (*binaryClassGlTexParameterIiv) Schema() *binary.Entity { return schemaGlTexParameterIiv }
 
-var schemaGlTexParameterIiv = &schema.Entity{
+var schemaGlTexParameterIiv = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIiv,
 	Package: "gles",
 	Name:    "GlTexParameterIiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37216,13 +37216,13 @@ func (*binaryClassGlTexParameterIivEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIivEXT(d, obj.(*GlTexParameterIivEXT))
 }
-func (*binaryClassGlTexParameterIivEXT) Schema() *schema.Entity { return schemaGlTexParameterIivEXT }
+func (*binaryClassGlTexParameterIivEXT) Schema() *binary.Entity { return schemaGlTexParameterIivEXT }
 
-var schemaGlTexParameterIivEXT = &schema.Entity{
+var schemaGlTexParameterIivEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIivEXT,
 	Package: "gles",
 	Name:    "GlTexParameterIivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37260,13 +37260,13 @@ func (*binaryClassGlTexParameterIivOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIivOES(d, obj.(*GlTexParameterIivOES))
 }
-func (*binaryClassGlTexParameterIivOES) Schema() *schema.Entity { return schemaGlTexParameterIivOES }
+func (*binaryClassGlTexParameterIivOES) Schema() *binary.Entity { return schemaGlTexParameterIivOES }
 
-var schemaGlTexParameterIivOES = &schema.Entity{
+var schemaGlTexParameterIivOES = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIivOES,
 	Package: "gles",
 	Name:    "GlTexParameterIivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37304,13 +37304,13 @@ func (*binaryClassGlTexParameterIuiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterIuiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuiv(d, obj.(*GlTexParameterIuiv))
 }
-func (*binaryClassGlTexParameterIuiv) Schema() *schema.Entity { return schemaGlTexParameterIuiv }
+func (*binaryClassGlTexParameterIuiv) Schema() *binary.Entity { return schemaGlTexParameterIuiv }
 
-var schemaGlTexParameterIuiv = &schema.Entity{
+var schemaGlTexParameterIuiv = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIuiv,
 	Package: "gles",
 	Name:    "GlTexParameterIuiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37348,13 +37348,13 @@ func (*binaryClassGlTexParameterIuivEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTexParameterIuivEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuivEXT(d, obj.(*GlTexParameterIuivEXT))
 }
-func (*binaryClassGlTexParameterIuivEXT) Schema() *schema.Entity { return schemaGlTexParameterIuivEXT }
+func (*binaryClassGlTexParameterIuivEXT) Schema() *binary.Entity { return schemaGlTexParameterIuivEXT }
 
-var schemaGlTexParameterIuivEXT = &schema.Entity{
+var schemaGlTexParameterIuivEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIuivEXT,
 	Package: "gles",
 	Name:    "GlTexParameterIuivEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37392,13 +37392,13 @@ func (*binaryClassGlTexParameterIuivOES) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTexParameterIuivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterIuivOES(d, obj.(*GlTexParameterIuivOES))
 }
-func (*binaryClassGlTexParameterIuivOES) Schema() *schema.Entity { return schemaGlTexParameterIuivOES }
+func (*binaryClassGlTexParameterIuivOES) Schema() *binary.Entity { return schemaGlTexParameterIuivOES }
 
-var schemaGlTexParameterIuivOES = &schema.Entity{
+var schemaGlTexParameterIuivOES = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterIuivOES,
 	Package: "gles",
 	Name:    "GlTexParameterIuivOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37436,13 +37436,13 @@ func (*binaryClassGlTexParameterf) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterf) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterf(d, obj.(*GlTexParameterf))
 }
-func (*binaryClassGlTexParameterf) Schema() *schema.Entity { return schemaGlTexParameterf }
+func (*binaryClassGlTexParameterf) Schema() *binary.Entity { return schemaGlTexParameterf }
 
-var schemaGlTexParameterf = &schema.Entity{
+var schemaGlTexParameterf = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterf,
 	Package: "gles",
 	Name:    "GlTexParameterf",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37480,13 +37480,13 @@ func (*binaryClassGlTexParameterfv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameterfv(d, obj.(*GlTexParameterfv))
 }
-func (*binaryClassGlTexParameterfv) Schema() *schema.Entity { return schemaGlTexParameterfv }
+func (*binaryClassGlTexParameterfv) Schema() *binary.Entity { return schemaGlTexParameterfv }
 
-var schemaGlTexParameterfv = &schema.Entity{
+var schemaGlTexParameterfv = &binary.Entity{
 	TypeID:  binaryIDGlTexParameterfv,
 	Package: "gles",
 	Name:    "GlTexParameterfv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37524,13 +37524,13 @@ func (*binaryClassGlTexParameteri) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameteri) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameteri(d, obj.(*GlTexParameteri))
 }
-func (*binaryClassGlTexParameteri) Schema() *schema.Entity { return schemaGlTexParameteri }
+func (*binaryClassGlTexParameteri) Schema() *binary.Entity { return schemaGlTexParameteri }
 
-var schemaGlTexParameteri = &schema.Entity{
+var schemaGlTexParameteri = &binary.Entity{
 	TypeID:  binaryIDGlTexParameteri,
 	Package: "gles",
 	Name:    "GlTexParameteri",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37568,13 +37568,13 @@ func (*binaryClassGlTexParameteriv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexParameteriv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexParameteriv(d, obj.(*GlTexParameteriv))
 }
-func (*binaryClassGlTexParameteriv) Schema() *schema.Entity { return schemaGlTexParameteriv }
+func (*binaryClassGlTexParameteriv) Schema() *binary.Entity { return schemaGlTexParameteriv }
 
-var schemaGlTexParameteriv = &schema.Entity{
+var schemaGlTexParameteriv = &binary.Entity{
 	TypeID:  binaryIDGlTexParameteriv,
 	Package: "gles",
 	Name:    "GlTexParameteriv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -37614,13 +37614,13 @@ func (*binaryClassGlTexStorage1DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage1DEXT(d, obj.(*GlTexStorage1DEXT))
 }
-func (*binaryClassGlTexStorage1DEXT) Schema() *schema.Entity { return schemaGlTexStorage1DEXT }
+func (*binaryClassGlTexStorage1DEXT) Schema() *binary.Entity { return schemaGlTexStorage1DEXT }
 
-var schemaGlTexStorage1DEXT = &schema.Entity{
+var schemaGlTexStorage1DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage1DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37663,13 +37663,13 @@ func (*binaryClassGlTexStorage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2D(d, obj.(*GlTexStorage2D))
 }
-func (*binaryClassGlTexStorage2D) Schema() *schema.Entity { return schemaGlTexStorage2D }
+func (*binaryClassGlTexStorage2D) Schema() *binary.Entity { return schemaGlTexStorage2D }
 
-var schemaGlTexStorage2D = &schema.Entity{
+var schemaGlTexStorage2D = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage2D,
 	Package: "gles",
 	Name:    "GlTexStorage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37713,13 +37713,13 @@ func (*binaryClassGlTexStorage2DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2DEXT(d, obj.(*GlTexStorage2DEXT))
 }
-func (*binaryClassGlTexStorage2DEXT) Schema() *schema.Entity { return schemaGlTexStorage2DEXT }
+func (*binaryClassGlTexStorage2DEXT) Schema() *binary.Entity { return schemaGlTexStorage2DEXT }
 
-var schemaGlTexStorage2DEXT = &schema.Entity{
+var schemaGlTexStorage2DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage2DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37765,15 +37765,15 @@ func (*binaryClassGlTexStorage2DMultisample) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlTexStorage2DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage2DMultisample(d, obj.(*GlTexStorage2DMultisample))
 }
-func (*binaryClassGlTexStorage2DMultisample) Schema() *schema.Entity {
+func (*binaryClassGlTexStorage2DMultisample) Schema() *binary.Entity {
 	return schemaGlTexStorage2DMultisample
 }
 
-var schemaGlTexStorage2DMultisample = &schema.Entity{
+var schemaGlTexStorage2DMultisample = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage2DMultisample,
 	Package: "gles",
 	Name:    "GlTexStorage2DMultisample",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37820,13 +37820,13 @@ func (*binaryClassGlTexStorage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3D(d, obj.(*GlTexStorage3D))
 }
-func (*binaryClassGlTexStorage3D) Schema() *schema.Entity { return schemaGlTexStorage3D }
+func (*binaryClassGlTexStorage3D) Schema() *binary.Entity { return schemaGlTexStorage3D }
 
-var schemaGlTexStorage3D = &schema.Entity{
+var schemaGlTexStorage3D = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage3D,
 	Package: "gles",
 	Name:    "GlTexStorage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37873,13 +37873,13 @@ func (*binaryClassGlTexStorage3DEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DEXT(d, obj.(*GlTexStorage3DEXT))
 }
-func (*binaryClassGlTexStorage3DEXT) Schema() *schema.Entity { return schemaGlTexStorage3DEXT }
+func (*binaryClassGlTexStorage3DEXT) Schema() *binary.Entity { return schemaGlTexStorage3DEXT }
 
-var schemaGlTexStorage3DEXT = &schema.Entity{
+var schemaGlTexStorage3DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTexStorage3DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Levels", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37928,15 +37928,15 @@ func (*binaryClassGlTexStorage3DMultisample) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlTexStorage3DMultisample) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DMultisample(d, obj.(*GlTexStorage3DMultisample))
 }
-func (*binaryClassGlTexStorage3DMultisample) Schema() *schema.Entity {
+func (*binaryClassGlTexStorage3DMultisample) Schema() *binary.Entity {
 	return schemaGlTexStorage3DMultisample
 }
 
-var schemaGlTexStorage3DMultisample = &schema.Entity{
+var schemaGlTexStorage3DMultisample = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage3DMultisample,
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisample",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -37990,15 +37990,15 @@ func (*binaryClassGlTexStorage3DMultisampleOES) Decode(d binary.Decoder) binary.
 func (*binaryClassGlTexStorage3DMultisampleOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexStorage3DMultisampleOES(d, obj.(*GlTexStorage3DMultisampleOES))
 }
-func (*binaryClassGlTexStorage3DMultisampleOES) Schema() *schema.Entity {
+func (*binaryClassGlTexStorage3DMultisampleOES) Schema() *binary.Entity {
 	return schemaGlTexStorage3DMultisampleOES
 }
 
-var schemaGlTexStorage3DMultisampleOES = &schema.Entity{
+var schemaGlTexStorage3DMultisampleOES = &binary.Entity{
 	TypeID:  binaryIDGlTexStorage3DMultisampleOES,
 	Package: "gles",
 	Name:    "GlTexStorage3DMultisampleOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38052,13 +38052,13 @@ func (*binaryClassGlTexSubImage2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage2D(d, obj.(*GlTexSubImage2D))
 }
-func (*binaryClassGlTexSubImage2D) Schema() *schema.Entity { return schemaGlTexSubImage2D }
+func (*binaryClassGlTexSubImage2D) Schema() *binary.Entity { return schemaGlTexSubImage2D }
 
-var schemaGlTexSubImage2D = &schema.Entity{
+var schemaGlTexSubImage2D = &binary.Entity{
 	TypeID:  binaryIDGlTexSubImage2D,
 	Package: "gles",
 	Name:    "GlTexSubImage2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38118,13 +38118,13 @@ func (*binaryClassGlTexSubImage3D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage3D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage3D(d, obj.(*GlTexSubImage3D))
 }
-func (*binaryClassGlTexSubImage3D) Schema() *schema.Entity { return schemaGlTexSubImage3D }
+func (*binaryClassGlTexSubImage3D) Schema() *binary.Entity { return schemaGlTexSubImage3D }
 
-var schemaGlTexSubImage3D = &schema.Entity{
+var schemaGlTexSubImage3D = &binary.Entity{
 	TypeID:  binaryIDGlTexSubImage3D,
 	Package: "gles",
 	Name:    "GlTexSubImage3D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38186,13 +38186,13 @@ func (*binaryClassGlTexSubImage3DOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTexSubImage3DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTexSubImage3DOES(d, obj.(*GlTexSubImage3DOES))
 }
-func (*binaryClassGlTexSubImage3DOES) Schema() *schema.Entity { return schemaGlTexSubImage3DOES }
+func (*binaryClassGlTexSubImage3DOES) Schema() *binary.Entity { return schemaGlTexSubImage3DOES }
 
-var schemaGlTexSubImage3DOES = &schema.Entity{
+var schemaGlTexSubImage3DOES = &binary.Entity{
 	TypeID:  binaryIDGlTexSubImage3DOES,
 	Package: "gles",
 	Name:    "GlTexSubImage3DOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38242,13 +38242,13 @@ func (*binaryClassGlTextureStorage1DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage1DEXT(d, obj.(*GlTextureStorage1DEXT))
 }
-func (*binaryClassGlTextureStorage1DEXT) Schema() *schema.Entity { return schemaGlTextureStorage1DEXT }
+func (*binaryClassGlTextureStorage1DEXT) Schema() *binary.Entity { return schemaGlTextureStorage1DEXT }
 
-var schemaGlTextureStorage1DEXT = &schema.Entity{
+var schemaGlTextureStorage1DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTextureStorage1DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage1DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38294,13 +38294,13 @@ func (*binaryClassGlTextureStorage2DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage2DEXT(d, obj.(*GlTextureStorage2DEXT))
 }
-func (*binaryClassGlTextureStorage2DEXT) Schema() *schema.Entity { return schemaGlTextureStorage2DEXT }
+func (*binaryClassGlTextureStorage2DEXT) Schema() *binary.Entity { return schemaGlTextureStorage2DEXT }
 
-var schemaGlTextureStorage2DEXT = &schema.Entity{
+var schemaGlTextureStorage2DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTextureStorage2DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage2DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38349,13 +38349,13 @@ func (*binaryClassGlTextureStorage3DEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlTextureStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureStorage3DEXT(d, obj.(*GlTextureStorage3DEXT))
 }
-func (*binaryClassGlTextureStorage3DEXT) Schema() *schema.Entity { return schemaGlTextureStorage3DEXT }
+func (*binaryClassGlTextureStorage3DEXT) Schema() *binary.Entity { return schemaGlTextureStorage3DEXT }
 
-var schemaGlTextureStorage3DEXT = &schema.Entity{
+var schemaGlTextureStorage3DEXT = &binary.Entity{
 	TypeID:  binaryIDGlTextureStorage3DEXT,
 	Package: "gles",
 	Name:    "GlTextureStorage3DEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38407,13 +38407,13 @@ func (*binaryClassGlTextureViewEXT) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTextureViewEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureViewEXT(d, obj.(*GlTextureViewEXT))
 }
-func (*binaryClassGlTextureViewEXT) Schema() *schema.Entity { return schemaGlTextureViewEXT }
+func (*binaryClassGlTextureViewEXT) Schema() *binary.Entity { return schemaGlTextureViewEXT }
 
-var schemaGlTextureViewEXT = &schema.Entity{
+var schemaGlTextureViewEXT = &binary.Entity{
 	TypeID:  binaryIDGlTextureViewEXT,
 	Package: "gles",
 	Name:    "GlTextureViewEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38466,13 +38466,13 @@ func (*binaryClassGlTextureViewOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTextureViewOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTextureViewOES(d, obj.(*GlTextureViewOES))
 }
-func (*binaryClassGlTextureViewOES) Schema() *schema.Entity { return schemaGlTextureViewOES }
+func (*binaryClassGlTextureViewOES) Schema() *binary.Entity { return schemaGlTextureViewOES }
 
-var schemaGlTextureViewOES = &schema.Entity{
+var schemaGlTextureViewOES = &binary.Entity{
 	TypeID:  binaryIDGlTextureViewOES,
 	Package: "gles",
 	Name:    "GlTextureViewOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -38521,15 +38521,15 @@ func (*binaryClassGlTransformFeedbackVaryings) Decode(d binary.Decoder) binary.O
 func (*binaryClassGlTransformFeedbackVaryings) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTransformFeedbackVaryings(d, obj.(*GlTransformFeedbackVaryings))
 }
-func (*binaryClassGlTransformFeedbackVaryings) Schema() *schema.Entity {
+func (*binaryClassGlTransformFeedbackVaryings) Schema() *binary.Entity {
 	return schemaGlTransformFeedbackVaryings
 }
 
-var schemaGlTransformFeedbackVaryings = &schema.Entity{
+var schemaGlTransformFeedbackVaryings = &binary.Entity{
 	TypeID:  binaryIDGlTransformFeedbackVaryings,
 	Package: "gles",
 	Name:    "GlTransformFeedbackVaryings",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38570,13 +38570,13 @@ func (*binaryClassGlTransformPathNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlTransformPathNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlTransformPathNV(d, obj.(*GlTransformPathNV))
 }
-func (*binaryClassGlTransformPathNV) Schema() *schema.Entity { return schemaGlTransformPathNV }
+func (*binaryClassGlTransformPathNV) Schema() *binary.Entity { return schemaGlTransformPathNV }
 
-var schemaGlTransformPathNV = &schema.Entity{
+var schemaGlTransformPathNV = &binary.Entity{
 	TypeID:  binaryIDGlTransformPathNV,
 	Package: "gles",
 	Name:    "GlTransformPathNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "SrcPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -38613,13 +38613,13 @@ func (*binaryClassGlUniform1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1f(d, obj.(*GlUniform1f))
 }
-func (*binaryClassGlUniform1f) Schema() *schema.Entity { return schemaGlUniform1f }
+func (*binaryClassGlUniform1f) Schema() *binary.Entity { return schemaGlUniform1f }
 
-var schemaGlUniform1f = &schema.Entity{
+var schemaGlUniform1f = &binary.Entity{
 	TypeID:  binaryIDGlUniform1f,
 	Package: "gles",
 	Name:    "GlUniform1f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -38656,13 +38656,13 @@ func (*binaryClassGlUniform1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1fv(d, obj.(*GlUniform1fv))
 }
-func (*binaryClassGlUniform1fv) Schema() *schema.Entity { return schemaGlUniform1fv }
+func (*binaryClassGlUniform1fv) Schema() *binary.Entity { return schemaGlUniform1fv }
 
-var schemaGlUniform1fv = &schema.Entity{
+var schemaGlUniform1fv = &binary.Entity{
 	TypeID:  binaryIDGlUniform1fv,
 	Package: "gles",
 	Name:    "GlUniform1fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38698,13 +38698,13 @@ func (*binaryClassGlUniform1i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1i(d, obj.(*GlUniform1i))
 }
-func (*binaryClassGlUniform1i) Schema() *schema.Entity { return schemaGlUniform1i }
+func (*binaryClassGlUniform1i) Schema() *binary.Entity { return schemaGlUniform1i }
 
-var schemaGlUniform1i = &schema.Entity{
+var schemaGlUniform1i = &binary.Entity{
 	TypeID:  binaryIDGlUniform1i,
 	Package: "gles",
 	Name:    "GlUniform1i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -38741,13 +38741,13 @@ func (*binaryClassGlUniform1iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1iv(d, obj.(*GlUniform1iv))
 }
-func (*binaryClassGlUniform1iv) Schema() *schema.Entity { return schemaGlUniform1iv }
+func (*binaryClassGlUniform1iv) Schema() *binary.Entity { return schemaGlUniform1iv }
 
-var schemaGlUniform1iv = &schema.Entity{
+var schemaGlUniform1iv = &binary.Entity{
 	TypeID:  binaryIDGlUniform1iv,
 	Package: "gles",
 	Name:    "GlUniform1iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38783,13 +38783,13 @@ func (*binaryClassGlUniform1ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1ui(d, obj.(*GlUniform1ui))
 }
-func (*binaryClassGlUniform1ui) Schema() *schema.Entity { return schemaGlUniform1ui }
+func (*binaryClassGlUniform1ui) Schema() *binary.Entity { return schemaGlUniform1ui }
 
-var schemaGlUniform1ui = &schema.Entity{
+var schemaGlUniform1ui = &binary.Entity{
 	TypeID:  binaryIDGlUniform1ui,
 	Package: "gles",
 	Name:    "GlUniform1ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -38826,13 +38826,13 @@ func (*binaryClassGlUniform1uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform1uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform1uiv(d, obj.(*GlUniform1uiv))
 }
-func (*binaryClassGlUniform1uiv) Schema() *schema.Entity { return schemaGlUniform1uiv }
+func (*binaryClassGlUniform1uiv) Schema() *binary.Entity { return schemaGlUniform1uiv }
 
-var schemaGlUniform1uiv = &schema.Entity{
+var schemaGlUniform1uiv = &binary.Entity{
 	TypeID:  binaryIDGlUniform1uiv,
 	Package: "gles",
 	Name:    "GlUniform1uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38870,13 +38870,13 @@ func (*binaryClassGlUniform2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2f(d, obj.(*GlUniform2f))
 }
-func (*binaryClassGlUniform2f) Schema() *schema.Entity { return schemaGlUniform2f }
+func (*binaryClassGlUniform2f) Schema() *binary.Entity { return schemaGlUniform2f }
 
-var schemaGlUniform2f = &schema.Entity{
+var schemaGlUniform2f = &binary.Entity{
 	TypeID:  binaryIDGlUniform2f,
 	Package: "gles",
 	Name:    "GlUniform2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -38914,13 +38914,13 @@ func (*binaryClassGlUniform2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2fv(d, obj.(*GlUniform2fv))
 }
-func (*binaryClassGlUniform2fv) Schema() *schema.Entity { return schemaGlUniform2fv }
+func (*binaryClassGlUniform2fv) Schema() *binary.Entity { return schemaGlUniform2fv }
 
-var schemaGlUniform2fv = &schema.Entity{
+var schemaGlUniform2fv = &binary.Entity{
 	TypeID:  binaryIDGlUniform2fv,
 	Package: "gles",
 	Name:    "GlUniform2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -38958,13 +38958,13 @@ func (*binaryClassGlUniform2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2i(d, obj.(*GlUniform2i))
 }
-func (*binaryClassGlUniform2i) Schema() *schema.Entity { return schemaGlUniform2i }
+func (*binaryClassGlUniform2i) Schema() *binary.Entity { return schemaGlUniform2i }
 
-var schemaGlUniform2i = &schema.Entity{
+var schemaGlUniform2i = &binary.Entity{
 	TypeID:  binaryIDGlUniform2i,
 	Package: "gles",
 	Name:    "GlUniform2i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39002,13 +39002,13 @@ func (*binaryClassGlUniform2iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2iv(d, obj.(*GlUniform2iv))
 }
-func (*binaryClassGlUniform2iv) Schema() *schema.Entity { return schemaGlUniform2iv }
+func (*binaryClassGlUniform2iv) Schema() *binary.Entity { return schemaGlUniform2iv }
 
-var schemaGlUniform2iv = &schema.Entity{
+var schemaGlUniform2iv = &binary.Entity{
 	TypeID:  binaryIDGlUniform2iv,
 	Package: "gles",
 	Name:    "GlUniform2iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39046,13 +39046,13 @@ func (*binaryClassGlUniform2ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2ui(d, obj.(*GlUniform2ui))
 }
-func (*binaryClassGlUniform2ui) Schema() *schema.Entity { return schemaGlUniform2ui }
+func (*binaryClassGlUniform2ui) Schema() *binary.Entity { return schemaGlUniform2ui }
 
-var schemaGlUniform2ui = &schema.Entity{
+var schemaGlUniform2ui = &binary.Entity{
 	TypeID:  binaryIDGlUniform2ui,
 	Package: "gles",
 	Name:    "GlUniform2ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39090,13 +39090,13 @@ func (*binaryClassGlUniform2uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform2uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform2uiv(d, obj.(*GlUniform2uiv))
 }
-func (*binaryClassGlUniform2uiv) Schema() *schema.Entity { return schemaGlUniform2uiv }
+func (*binaryClassGlUniform2uiv) Schema() *binary.Entity { return schemaGlUniform2uiv }
 
-var schemaGlUniform2uiv = &schema.Entity{
+var schemaGlUniform2uiv = &binary.Entity{
 	TypeID:  binaryIDGlUniform2uiv,
 	Package: "gles",
 	Name:    "GlUniform2uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39136,13 +39136,13 @@ func (*binaryClassGlUniform3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3f(d, obj.(*GlUniform3f))
 }
-func (*binaryClassGlUniform3f) Schema() *schema.Entity { return schemaGlUniform3f }
+func (*binaryClassGlUniform3f) Schema() *binary.Entity { return schemaGlUniform3f }
 
-var schemaGlUniform3f = &schema.Entity{
+var schemaGlUniform3f = &binary.Entity{
 	TypeID:  binaryIDGlUniform3f,
 	Package: "gles",
 	Name:    "GlUniform3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -39181,13 +39181,13 @@ func (*binaryClassGlUniform3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3fv(d, obj.(*GlUniform3fv))
 }
-func (*binaryClassGlUniform3fv) Schema() *schema.Entity { return schemaGlUniform3fv }
+func (*binaryClassGlUniform3fv) Schema() *binary.Entity { return schemaGlUniform3fv }
 
-var schemaGlUniform3fv = &schema.Entity{
+var schemaGlUniform3fv = &binary.Entity{
 	TypeID:  binaryIDGlUniform3fv,
 	Package: "gles",
 	Name:    "GlUniform3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39227,13 +39227,13 @@ func (*binaryClassGlUniform3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3i(d, obj.(*GlUniform3i))
 }
-func (*binaryClassGlUniform3i) Schema() *schema.Entity { return schemaGlUniform3i }
+func (*binaryClassGlUniform3i) Schema() *binary.Entity { return schemaGlUniform3i }
 
-var schemaGlUniform3i = &schema.Entity{
+var schemaGlUniform3i = &binary.Entity{
 	TypeID:  binaryIDGlUniform3i,
 	Package: "gles",
 	Name:    "GlUniform3i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39272,13 +39272,13 @@ func (*binaryClassGlUniform3iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3iv(d, obj.(*GlUniform3iv))
 }
-func (*binaryClassGlUniform3iv) Schema() *schema.Entity { return schemaGlUniform3iv }
+func (*binaryClassGlUniform3iv) Schema() *binary.Entity { return schemaGlUniform3iv }
 
-var schemaGlUniform3iv = &schema.Entity{
+var schemaGlUniform3iv = &binary.Entity{
 	TypeID:  binaryIDGlUniform3iv,
 	Package: "gles",
 	Name:    "GlUniform3iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39318,13 +39318,13 @@ func (*binaryClassGlUniform3ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3ui(d, obj.(*GlUniform3ui))
 }
-func (*binaryClassGlUniform3ui) Schema() *schema.Entity { return schemaGlUniform3ui }
+func (*binaryClassGlUniform3ui) Schema() *binary.Entity { return schemaGlUniform3ui }
 
-var schemaGlUniform3ui = &schema.Entity{
+var schemaGlUniform3ui = &binary.Entity{
 	TypeID:  binaryIDGlUniform3ui,
 	Package: "gles",
 	Name:    "GlUniform3ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39363,13 +39363,13 @@ func (*binaryClassGlUniform3uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform3uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform3uiv(d, obj.(*GlUniform3uiv))
 }
-func (*binaryClassGlUniform3uiv) Schema() *schema.Entity { return schemaGlUniform3uiv }
+func (*binaryClassGlUniform3uiv) Schema() *binary.Entity { return schemaGlUniform3uiv }
 
-var schemaGlUniform3uiv = &schema.Entity{
+var schemaGlUniform3uiv = &binary.Entity{
 	TypeID:  binaryIDGlUniform3uiv,
 	Package: "gles",
 	Name:    "GlUniform3uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39411,13 +39411,13 @@ func (*binaryClassGlUniform4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4f(d, obj.(*GlUniform4f))
 }
-func (*binaryClassGlUniform4f) Schema() *schema.Entity { return schemaGlUniform4f }
+func (*binaryClassGlUniform4f) Schema() *binary.Entity { return schemaGlUniform4f }
 
-var schemaGlUniform4f = &schema.Entity{
+var schemaGlUniform4f = &binary.Entity{
 	TypeID:  binaryIDGlUniform4f,
 	Package: "gles",
 	Name:    "GlUniform4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -39457,13 +39457,13 @@ func (*binaryClassGlUniform4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4fv(d, obj.(*GlUniform4fv))
 }
-func (*binaryClassGlUniform4fv) Schema() *schema.Entity { return schemaGlUniform4fv }
+func (*binaryClassGlUniform4fv) Schema() *binary.Entity { return schemaGlUniform4fv }
 
-var schemaGlUniform4fv = &schema.Entity{
+var schemaGlUniform4fv = &binary.Entity{
 	TypeID:  binaryIDGlUniform4fv,
 	Package: "gles",
 	Name:    "GlUniform4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39505,13 +39505,13 @@ func (*binaryClassGlUniform4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4i(d, obj.(*GlUniform4i))
 }
-func (*binaryClassGlUniform4i) Schema() *schema.Entity { return schemaGlUniform4i }
+func (*binaryClassGlUniform4i) Schema() *binary.Entity { return schemaGlUniform4i }
 
-var schemaGlUniform4i = &schema.Entity{
+var schemaGlUniform4i = &binary.Entity{
 	TypeID:  binaryIDGlUniform4i,
 	Package: "gles",
 	Name:    "GlUniform4i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -39551,13 +39551,13 @@ func (*binaryClassGlUniform4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4iv(d, obj.(*GlUniform4iv))
 }
-func (*binaryClassGlUniform4iv) Schema() *schema.Entity { return schemaGlUniform4iv }
+func (*binaryClassGlUniform4iv) Schema() *binary.Entity { return schemaGlUniform4iv }
 
-var schemaGlUniform4iv = &schema.Entity{
+var schemaGlUniform4iv = &binary.Entity{
 	TypeID:  binaryIDGlUniform4iv,
 	Package: "gles",
 	Name:    "GlUniform4iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39599,13 +39599,13 @@ func (*binaryClassGlUniform4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4ui(d, obj.(*GlUniform4ui))
 }
-func (*binaryClassGlUniform4ui) Schema() *schema.Entity { return schemaGlUniform4ui }
+func (*binaryClassGlUniform4ui) Schema() *binary.Entity { return schemaGlUniform4ui }
 
-var schemaGlUniform4ui = &schema.Entity{
+var schemaGlUniform4ui = &binary.Entity{
 	TypeID:  binaryIDGlUniform4ui,
 	Package: "gles",
 	Name:    "GlUniform4ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -39645,13 +39645,13 @@ func (*binaryClassGlUniform4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniform4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniform4uiv(d, obj.(*GlUniform4uiv))
 }
-func (*binaryClassGlUniform4uiv) Schema() *schema.Entity { return schemaGlUniform4uiv }
+func (*binaryClassGlUniform4uiv) Schema() *binary.Entity { return schemaGlUniform4uiv }
 
-var schemaGlUniform4uiv = &schema.Entity{
+var schemaGlUniform4uiv = &binary.Entity{
 	TypeID:  binaryIDGlUniform4uiv,
 	Package: "gles",
 	Name:    "GlUniform4uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39689,13 +39689,13 @@ func (*binaryClassGlUniformBlockBinding) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUniformBlockBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformBlockBinding(d, obj.(*GlUniformBlockBinding))
 }
-func (*binaryClassGlUniformBlockBinding) Schema() *schema.Entity { return schemaGlUniformBlockBinding }
+func (*binaryClassGlUniformBlockBinding) Schema() *binary.Entity { return schemaGlUniformBlockBinding }
 
-var schemaGlUniformBlockBinding = &schema.Entity{
+var schemaGlUniformBlockBinding = &binary.Entity{
 	TypeID:  binaryIDGlUniformBlockBinding,
 	Package: "gles",
 	Name:    "GlUniformBlockBinding",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 		{Declared: "UniformBlockIndex", Type: &schema.Primitive{Name: "UniformBlockId", Method: schema.Uint32}},
@@ -39731,13 +39731,13 @@ func (*binaryClassGlUniformHandleui64NV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUniformHandleui64NV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformHandleui64NV(d, obj.(*GlUniformHandleui64NV))
 }
-func (*binaryClassGlUniformHandleui64NV) Schema() *schema.Entity { return schemaGlUniformHandleui64NV }
+func (*binaryClassGlUniformHandleui64NV) Schema() *binary.Entity { return schemaGlUniformHandleui64NV }
 
-var schemaGlUniformHandleui64NV = &schema.Entity{
+var schemaGlUniformHandleui64NV = &binary.Entity{
 	TypeID:  binaryIDGlUniformHandleui64NV,
 	Package: "gles",
 	Name:    "GlUniformHandleui64NV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
@@ -39774,13 +39774,13 @@ func (*binaryClassGlUniformHandleui64vNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformHandleui64vNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformHandleui64vNV(d, obj.(*GlUniformHandleui64vNV))
 }
-func (*binaryClassGlUniformHandleui64vNV) Schema() *schema.Entity { return schemaGlUniformHandleui64vNV }
+func (*binaryClassGlUniformHandleui64vNV) Schema() *binary.Entity { return schemaGlUniformHandleui64vNV }
 
-var schemaGlUniformHandleui64vNV = &schema.Entity{
+var schemaGlUniformHandleui64vNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformHandleui64vNV,
 	Package: "gles",
 	Name:    "GlUniformHandleui64vNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39820,13 +39820,13 @@ func (*binaryClassGlUniformMatrix2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2fv(d, obj.(*GlUniformMatrix2fv))
 }
-func (*binaryClassGlUniformMatrix2fv) Schema() *schema.Entity { return schemaGlUniformMatrix2fv }
+func (*binaryClassGlUniformMatrix2fv) Schema() *binary.Entity { return schemaGlUniformMatrix2fv }
 
-var schemaGlUniformMatrix2fv = &schema.Entity{
+var schemaGlUniformMatrix2fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39867,13 +39867,13 @@ func (*binaryClassGlUniformMatrix2x3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x3fv(d, obj.(*GlUniformMatrix2x3fv))
 }
-func (*binaryClassGlUniformMatrix2x3fv) Schema() *schema.Entity { return schemaGlUniformMatrix2x3fv }
+func (*binaryClassGlUniformMatrix2x3fv) Schema() *binary.Entity { return schemaGlUniformMatrix2x3fv }
 
-var schemaGlUniformMatrix2x3fv = &schema.Entity{
+var schemaGlUniformMatrix2x3fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39914,13 +39914,13 @@ func (*binaryClassGlUniformMatrix2x3fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix2x3fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x3fvNV(d, obj.(*GlUniformMatrix2x3fvNV))
 }
-func (*binaryClassGlUniformMatrix2x3fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix2x3fvNV }
+func (*binaryClassGlUniformMatrix2x3fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix2x3fvNV }
 
-var schemaGlUniformMatrix2x3fvNV = &schema.Entity{
+var schemaGlUniformMatrix2x3fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x3fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x3fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -39961,13 +39961,13 @@ func (*binaryClassGlUniformMatrix2x4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix2x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x4fv(d, obj.(*GlUniformMatrix2x4fv))
 }
-func (*binaryClassGlUniformMatrix2x4fv) Schema() *schema.Entity { return schemaGlUniformMatrix2x4fv }
+func (*binaryClassGlUniformMatrix2x4fv) Schema() *binary.Entity { return schemaGlUniformMatrix2x4fv }
 
-var schemaGlUniformMatrix2x4fv = &schema.Entity{
+var schemaGlUniformMatrix2x4fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40008,13 +40008,13 @@ func (*binaryClassGlUniformMatrix2x4fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix2x4fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix2x4fvNV(d, obj.(*GlUniformMatrix2x4fvNV))
 }
-func (*binaryClassGlUniformMatrix2x4fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix2x4fvNV }
+func (*binaryClassGlUniformMatrix2x4fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix2x4fvNV }
 
-var schemaGlUniformMatrix2x4fvNV = &schema.Entity{
+var schemaGlUniformMatrix2x4fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix2x4fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix2x4fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40055,13 +40055,13 @@ func (*binaryClassGlUniformMatrix3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3fv(d, obj.(*GlUniformMatrix3fv))
 }
-func (*binaryClassGlUniformMatrix3fv) Schema() *schema.Entity { return schemaGlUniformMatrix3fv }
+func (*binaryClassGlUniformMatrix3fv) Schema() *binary.Entity { return schemaGlUniformMatrix3fv }
 
-var schemaGlUniformMatrix3fv = &schema.Entity{
+var schemaGlUniformMatrix3fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40102,13 +40102,13 @@ func (*binaryClassGlUniformMatrix3x2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x2fv(d, obj.(*GlUniformMatrix3x2fv))
 }
-func (*binaryClassGlUniformMatrix3x2fv) Schema() *schema.Entity { return schemaGlUniformMatrix3x2fv }
+func (*binaryClassGlUniformMatrix3x2fv) Schema() *binary.Entity { return schemaGlUniformMatrix3x2fv }
 
-var schemaGlUniformMatrix3x2fv = &schema.Entity{
+var schemaGlUniformMatrix3x2fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40149,13 +40149,13 @@ func (*binaryClassGlUniformMatrix3x2fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix3x2fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x2fvNV(d, obj.(*GlUniformMatrix3x2fvNV))
 }
-func (*binaryClassGlUniformMatrix3x2fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix3x2fvNV }
+func (*binaryClassGlUniformMatrix3x2fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix3x2fvNV }
 
-var schemaGlUniformMatrix3x2fvNV = &schema.Entity{
+var schemaGlUniformMatrix3x2fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x2fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x2fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40196,13 +40196,13 @@ func (*binaryClassGlUniformMatrix3x4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix3x4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x4fv(d, obj.(*GlUniformMatrix3x4fv))
 }
-func (*binaryClassGlUniformMatrix3x4fv) Schema() *schema.Entity { return schemaGlUniformMatrix3x4fv }
+func (*binaryClassGlUniformMatrix3x4fv) Schema() *binary.Entity { return schemaGlUniformMatrix3x4fv }
 
-var schemaGlUniformMatrix3x4fv = &schema.Entity{
+var schemaGlUniformMatrix3x4fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40243,13 +40243,13 @@ func (*binaryClassGlUniformMatrix3x4fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix3x4fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix3x4fvNV(d, obj.(*GlUniformMatrix3x4fvNV))
 }
-func (*binaryClassGlUniformMatrix3x4fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix3x4fvNV }
+func (*binaryClassGlUniformMatrix3x4fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix3x4fvNV }
 
-var schemaGlUniformMatrix3x4fvNV = &schema.Entity{
+var schemaGlUniformMatrix3x4fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix3x4fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix3x4fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40290,13 +40290,13 @@ func (*binaryClassGlUniformMatrix4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4fv(d, obj.(*GlUniformMatrix4fv))
 }
-func (*binaryClassGlUniformMatrix4fv) Schema() *schema.Entity { return schemaGlUniformMatrix4fv }
+func (*binaryClassGlUniformMatrix4fv) Schema() *binary.Entity { return schemaGlUniformMatrix4fv }
 
-var schemaGlUniformMatrix4fv = &schema.Entity{
+var schemaGlUniformMatrix4fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix4fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40337,13 +40337,13 @@ func (*binaryClassGlUniformMatrix4x2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4x2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x2fv(d, obj.(*GlUniformMatrix4x2fv))
 }
-func (*binaryClassGlUniformMatrix4x2fv) Schema() *schema.Entity { return schemaGlUniformMatrix4x2fv }
+func (*binaryClassGlUniformMatrix4x2fv) Schema() *binary.Entity { return schemaGlUniformMatrix4x2fv }
 
-var schemaGlUniformMatrix4x2fv = &schema.Entity{
+var schemaGlUniformMatrix4x2fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x2fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40384,13 +40384,13 @@ func (*binaryClassGlUniformMatrix4x2fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix4x2fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x2fvNV(d, obj.(*GlUniformMatrix4x2fvNV))
 }
-func (*binaryClassGlUniformMatrix4x2fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix4x2fvNV }
+func (*binaryClassGlUniformMatrix4x2fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix4x2fvNV }
 
-var schemaGlUniformMatrix4x2fvNV = &schema.Entity{
+var schemaGlUniformMatrix4x2fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x2fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x2fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40431,13 +40431,13 @@ func (*binaryClassGlUniformMatrix4x3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUniformMatrix4x3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x3fv(d, obj.(*GlUniformMatrix4x3fv))
 }
-func (*binaryClassGlUniformMatrix4x3fv) Schema() *schema.Entity { return schemaGlUniformMatrix4x3fv }
+func (*binaryClassGlUniformMatrix4x3fv) Schema() *binary.Entity { return schemaGlUniformMatrix4x3fv }
 
-var schemaGlUniformMatrix4x3fv = &schema.Entity{
+var schemaGlUniformMatrix4x3fv = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x3fv,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40478,13 +40478,13 @@ func (*binaryClassGlUniformMatrix4x3fvNV) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlUniformMatrix4x3fvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUniformMatrix4x3fvNV(d, obj.(*GlUniformMatrix4x3fvNV))
 }
-func (*binaryClassGlUniformMatrix4x3fvNV) Schema() *schema.Entity { return schemaGlUniformMatrix4x3fvNV }
+func (*binaryClassGlUniformMatrix4x3fvNV) Schema() *binary.Entity { return schemaGlUniformMatrix4x3fvNV }
 
-var schemaGlUniformMatrix4x3fvNV = &schema.Entity{
+var schemaGlUniformMatrix4x3fvNV = &binary.Entity{
 	TypeID:  binaryIDGlUniformMatrix4x3fvNV,
 	Package: "gles",
 	Name:    "GlUniformMatrix4x3fvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -40521,13 +40521,13 @@ func (*binaryClassGlUnmapBuffer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUnmapBuffer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUnmapBuffer(d, obj.(*GlUnmapBuffer))
 }
-func (*binaryClassGlUnmapBuffer) Schema() *schema.Entity { return schemaGlUnmapBuffer }
+func (*binaryClassGlUnmapBuffer) Schema() *binary.Entity { return schemaGlUnmapBuffer }
 
-var schemaGlUnmapBuffer = &schema.Entity{
+var schemaGlUnmapBuffer = &binary.Entity{
 	TypeID:  binaryIDGlUnmapBuffer,
 	Package: "gles",
 	Name:    "GlUnmapBuffer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -40562,13 +40562,13 @@ func (*binaryClassGlUnmapBufferOES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUnmapBufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUnmapBufferOES(d, obj.(*GlUnmapBufferOES))
 }
-func (*binaryClassGlUnmapBufferOES) Schema() *schema.Entity { return schemaGlUnmapBufferOES }
+func (*binaryClassGlUnmapBufferOES) Schema() *binary.Entity { return schemaGlUnmapBufferOES }
 
-var schemaGlUnmapBufferOES = &schema.Entity{
+var schemaGlUnmapBufferOES = &binary.Entity{
 	TypeID:  binaryIDGlUnmapBufferOES,
 	Package: "gles",
 	Name:    "GlUnmapBufferOES",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
@@ -40601,13 +40601,13 @@ func (*binaryClassGlUseProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUseProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgram(d, obj.(*GlUseProgram))
 }
-func (*binaryClassGlUseProgram) Schema() *schema.Entity { return schemaGlUseProgram }
+func (*binaryClassGlUseProgram) Schema() *binary.Entity { return schemaGlUseProgram }
 
-var schemaGlUseProgram = &schema.Entity{
+var schemaGlUseProgram = &binary.Entity{
 	TypeID:  binaryIDGlUseProgram,
 	Package: "gles",
 	Name:    "GlUseProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -40643,13 +40643,13 @@ func (*binaryClassGlUseProgramStages) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlUseProgramStages) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgramStages(d, obj.(*GlUseProgramStages))
 }
-func (*binaryClassGlUseProgramStages) Schema() *schema.Entity { return schemaGlUseProgramStages }
+func (*binaryClassGlUseProgramStages) Schema() *binary.Entity { return schemaGlUseProgramStages }
 
-var schemaGlUseProgramStages = &schema.Entity{
+var schemaGlUseProgramStages = &binary.Entity{
 	TypeID:  binaryIDGlUseProgramStages,
 	Package: "gles",
 	Name:    "GlUseProgramStages",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Stages", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -40687,13 +40687,13 @@ func (*binaryClassGlUseProgramStagesEXT) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlUseProgramStagesEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlUseProgramStagesEXT(d, obj.(*GlUseProgramStagesEXT))
 }
-func (*binaryClassGlUseProgramStagesEXT) Schema() *schema.Entity { return schemaGlUseProgramStagesEXT }
+func (*binaryClassGlUseProgramStagesEXT) Schema() *binary.Entity { return schemaGlUseProgramStagesEXT }
 
-var schemaGlUseProgramStagesEXT = &schema.Entity{
+var schemaGlUseProgramStagesEXT = &binary.Entity{
 	TypeID:  binaryIDGlUseProgramStagesEXT,
 	Package: "gles",
 	Name:    "GlUseProgramStagesEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 		{Declared: "Stages", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -40727,13 +40727,13 @@ func (*binaryClassGlValidateProgram) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlValidateProgram) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgram(d, obj.(*GlValidateProgram))
 }
-func (*binaryClassGlValidateProgram) Schema() *schema.Entity { return schemaGlValidateProgram }
+func (*binaryClassGlValidateProgram) Schema() *binary.Entity { return schemaGlValidateProgram }
 
-var schemaGlValidateProgram = &schema.Entity{
+var schemaGlValidateProgram = &binary.Entity{
 	TypeID:  binaryIDGlValidateProgram,
 	Package: "gles",
 	Name:    "GlValidateProgram",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
@@ -40765,15 +40765,15 @@ func (*binaryClassGlValidateProgramPipeline) Decode(d binary.Decoder) binary.Obj
 func (*binaryClassGlValidateProgramPipeline) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgramPipeline(d, obj.(*GlValidateProgramPipeline))
 }
-func (*binaryClassGlValidateProgramPipeline) Schema() *schema.Entity {
+func (*binaryClassGlValidateProgramPipeline) Schema() *binary.Entity {
 	return schemaGlValidateProgramPipeline
 }
 
-var schemaGlValidateProgramPipeline = &schema.Entity{
+var schemaGlValidateProgramPipeline = &binary.Entity{
 	TypeID:  binaryIDGlValidateProgramPipeline,
 	Package: "gles",
 	Name:    "GlValidateProgramPipeline",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
@@ -40809,15 +40809,15 @@ func (*binaryClassGlValidateProgramPipelineEXT) Decode(d binary.Decoder) binary.
 func (*binaryClassGlValidateProgramPipelineEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlValidateProgramPipelineEXT(d, obj.(*GlValidateProgramPipelineEXT))
 }
-func (*binaryClassGlValidateProgramPipelineEXT) Schema() *schema.Entity {
+func (*binaryClassGlValidateProgramPipelineEXT) Schema() *binary.Entity {
 	return schemaGlValidateProgramPipelineEXT
 }
 
-var schemaGlValidateProgramPipelineEXT = &schema.Entity{
+var schemaGlValidateProgramPipelineEXT = &binary.Entity{
 	TypeID:  binaryIDGlValidateProgramPipelineEXT,
 	Package: "gles",
 	Name:    "GlValidateProgramPipelineEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Pipeline", Type: &schema.Primitive{Name: "PipelineId", Method: schema.Uint32}},
 	},
@@ -40851,13 +40851,13 @@ func (*binaryClassGlVertexAttrib1f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib1f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib1f(d, obj.(*GlVertexAttrib1f))
 }
-func (*binaryClassGlVertexAttrib1f) Schema() *schema.Entity { return schemaGlVertexAttrib1f }
+func (*binaryClassGlVertexAttrib1f) Schema() *binary.Entity { return schemaGlVertexAttrib1f }
 
-var schemaGlVertexAttrib1f = &schema.Entity{
+var schemaGlVertexAttrib1f = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib1f,
 	Package: "gles",
 	Name:    "GlVertexAttrib1f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -40892,13 +40892,13 @@ func (*binaryClassGlVertexAttrib1fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib1fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib1fv(d, obj.(*GlVertexAttrib1fv))
 }
-func (*binaryClassGlVertexAttrib1fv) Schema() *schema.Entity { return schemaGlVertexAttrib1fv }
+func (*binaryClassGlVertexAttrib1fv) Schema() *binary.Entity { return schemaGlVertexAttrib1fv }
 
-var schemaGlVertexAttrib1fv = &schema.Entity{
+var schemaGlVertexAttrib1fv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib1fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib1fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -40935,13 +40935,13 @@ func (*binaryClassGlVertexAttrib2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib2f(d, obj.(*GlVertexAttrib2f))
 }
-func (*binaryClassGlVertexAttrib2f) Schema() *schema.Entity { return schemaGlVertexAttrib2f }
+func (*binaryClassGlVertexAttrib2f) Schema() *binary.Entity { return schemaGlVertexAttrib2f }
 
-var schemaGlVertexAttrib2f = &schema.Entity{
+var schemaGlVertexAttrib2f = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib2f,
 	Package: "gles",
 	Name:    "GlVertexAttrib2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -40977,13 +40977,13 @@ func (*binaryClassGlVertexAttrib2fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib2fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib2fv(d, obj.(*GlVertexAttrib2fv))
 }
-func (*binaryClassGlVertexAttrib2fv) Schema() *schema.Entity { return schemaGlVertexAttrib2fv }
+func (*binaryClassGlVertexAttrib2fv) Schema() *binary.Entity { return schemaGlVertexAttrib2fv }
 
-var schemaGlVertexAttrib2fv = &schema.Entity{
+var schemaGlVertexAttrib2fv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib2fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib2fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -41022,13 +41022,13 @@ func (*binaryClassGlVertexAttrib3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib3f(d, obj.(*GlVertexAttrib3f))
 }
-func (*binaryClassGlVertexAttrib3f) Schema() *schema.Entity { return schemaGlVertexAttrib3f }
+func (*binaryClassGlVertexAttrib3f) Schema() *binary.Entity { return schemaGlVertexAttrib3f }
 
-var schemaGlVertexAttrib3f = &schema.Entity{
+var schemaGlVertexAttrib3f = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib3f,
 	Package: "gles",
 	Name:    "GlVertexAttrib3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41065,13 +41065,13 @@ func (*binaryClassGlVertexAttrib3fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib3fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib3fv(d, obj.(*GlVertexAttrib3fv))
 }
-func (*binaryClassGlVertexAttrib3fv) Schema() *schema.Entity { return schemaGlVertexAttrib3fv }
+func (*binaryClassGlVertexAttrib3fv) Schema() *binary.Entity { return schemaGlVertexAttrib3fv }
 
-var schemaGlVertexAttrib3fv = &schema.Entity{
+var schemaGlVertexAttrib3fv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib3fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib3fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -41112,13 +41112,13 @@ func (*binaryClassGlVertexAttrib4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib4f(d, obj.(*GlVertexAttrib4f))
 }
-func (*binaryClassGlVertexAttrib4f) Schema() *schema.Entity { return schemaGlVertexAttrib4f }
+func (*binaryClassGlVertexAttrib4f) Schema() *binary.Entity { return schemaGlVertexAttrib4f }
 
-var schemaGlVertexAttrib4f = &schema.Entity{
+var schemaGlVertexAttrib4f = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib4f,
 	Package: "gles",
 	Name:    "GlVertexAttrib4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41156,13 +41156,13 @@ func (*binaryClassGlVertexAttrib4fv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttrib4fv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttrib4fv(d, obj.(*GlVertexAttrib4fv))
 }
-func (*binaryClassGlVertexAttrib4fv) Schema() *schema.Entity { return schemaGlVertexAttrib4fv }
+func (*binaryClassGlVertexAttrib4fv) Schema() *binary.Entity { return schemaGlVertexAttrib4fv }
 
-var schemaGlVertexAttrib4fv = &schema.Entity{
+var schemaGlVertexAttrib4fv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttrib4fv,
 	Package: "gles",
 	Name:    "GlVertexAttrib4fv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -41197,13 +41197,13 @@ func (*binaryClassGlVertexAttribBinding) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribBinding) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribBinding(d, obj.(*GlVertexAttribBinding))
 }
-func (*binaryClassGlVertexAttribBinding) Schema() *schema.Entity { return schemaGlVertexAttribBinding }
+func (*binaryClassGlVertexAttribBinding) Schema() *binary.Entity { return schemaGlVertexAttribBinding }
 
-var schemaGlVertexAttribBinding = &schema.Entity{
+var schemaGlVertexAttribBinding = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribBinding,
 	Package: "gles",
 	Name:    "GlVertexAttribBinding",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
@@ -41238,13 +41238,13 @@ func (*binaryClassGlVertexAttribDivisor) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribDivisor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisor(d, obj.(*GlVertexAttribDivisor))
 }
-func (*binaryClassGlVertexAttribDivisor) Schema() *schema.Entity { return schemaGlVertexAttribDivisor }
+func (*binaryClassGlVertexAttribDivisor) Schema() *binary.Entity { return schemaGlVertexAttribDivisor }
 
-var schemaGlVertexAttribDivisor = &schema.Entity{
+var schemaGlVertexAttribDivisor = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisor,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisor",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41283,15 +41283,15 @@ func (*binaryClassGlVertexAttribDivisorANGLE) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassGlVertexAttribDivisorANGLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorANGLE(d, obj.(*GlVertexAttribDivisorANGLE))
 }
-func (*binaryClassGlVertexAttribDivisorANGLE) Schema() *schema.Entity {
+func (*binaryClassGlVertexAttribDivisorANGLE) Schema() *binary.Entity {
 	return schemaGlVertexAttribDivisorANGLE
 }
 
-var schemaGlVertexAttribDivisorANGLE = &schema.Entity{
+var schemaGlVertexAttribDivisorANGLE = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorANGLE,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorANGLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41326,15 +41326,15 @@ func (*binaryClassGlVertexAttribDivisorEXT) Decode(d binary.Decoder) binary.Obje
 func (*binaryClassGlVertexAttribDivisorEXT) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorEXT(d, obj.(*GlVertexAttribDivisorEXT))
 }
-func (*binaryClassGlVertexAttribDivisorEXT) Schema() *schema.Entity {
+func (*binaryClassGlVertexAttribDivisorEXT) Schema() *binary.Entity {
 	return schemaGlVertexAttribDivisorEXT
 }
 
-var schemaGlVertexAttribDivisorEXT = &schema.Entity{
+var schemaGlVertexAttribDivisorEXT = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorEXT,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorEXT",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41369,15 +41369,15 @@ func (*binaryClassGlVertexAttribDivisorNV) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassGlVertexAttribDivisorNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribDivisorNV(d, obj.(*GlVertexAttribDivisorNV))
 }
-func (*binaryClassGlVertexAttribDivisorNV) Schema() *schema.Entity {
+func (*binaryClassGlVertexAttribDivisorNV) Schema() *binary.Entity {
 	return schemaGlVertexAttribDivisorNV
 }
 
-var schemaGlVertexAttribDivisorNV = &schema.Entity{
+var schemaGlVertexAttribDivisorNV = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribDivisorNV,
 	Package: "gles",
 	Name:    "GlVertexAttribDivisorNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41418,13 +41418,13 @@ func (*binaryClassGlVertexAttribFormat) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribFormat(d, obj.(*GlVertexAttribFormat))
 }
-func (*binaryClassGlVertexAttribFormat) Schema() *schema.Entity { return schemaGlVertexAttribFormat }
+func (*binaryClassGlVertexAttribFormat) Schema() *binary.Entity { return schemaGlVertexAttribFormat }
 
-var schemaGlVertexAttribFormat = &schema.Entity{
+var schemaGlVertexAttribFormat = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribFormat,
 	Package: "gles",
 	Name:    "GlVertexAttribFormat",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41468,13 +41468,13 @@ func (*binaryClassGlVertexAttribI4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4i(d, obj.(*GlVertexAttribI4i))
 }
-func (*binaryClassGlVertexAttribI4i) Schema() *schema.Entity { return schemaGlVertexAttribI4i }
+func (*binaryClassGlVertexAttribI4i) Schema() *binary.Entity { return schemaGlVertexAttribI4i }
 
-var schemaGlVertexAttribI4i = &schema.Entity{
+var schemaGlVertexAttribI4i = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribI4i,
 	Package: "gles",
 	Name:    "GlVertexAttribI4i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41512,13 +41512,13 @@ func (*binaryClassGlVertexAttribI4iv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4iv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4iv(d, obj.(*GlVertexAttribI4iv))
 }
-func (*binaryClassGlVertexAttribI4iv) Schema() *schema.Entity { return schemaGlVertexAttribI4iv }
+func (*binaryClassGlVertexAttribI4iv) Schema() *binary.Entity { return schemaGlVertexAttribI4iv }
 
-var schemaGlVertexAttribI4iv = &schema.Entity{
+var schemaGlVertexAttribI4iv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribI4iv,
 	Package: "gles",
 	Name:    "GlVertexAttribI4iv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLintᶜᵖ)(nil).Class())}},
@@ -41559,13 +41559,13 @@ func (*binaryClassGlVertexAttribI4ui) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4ui) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4ui(d, obj.(*GlVertexAttribI4ui))
 }
-func (*binaryClassGlVertexAttribI4ui) Schema() *schema.Entity { return schemaGlVertexAttribI4ui }
+func (*binaryClassGlVertexAttribI4ui) Schema() *binary.Entity { return schemaGlVertexAttribI4ui }
 
-var schemaGlVertexAttribI4ui = &schema.Entity{
+var schemaGlVertexAttribI4ui = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribI4ui,
 	Package: "gles",
 	Name:    "GlVertexAttribI4ui",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41603,13 +41603,13 @@ func (*binaryClassGlVertexAttribI4uiv) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlVertexAttribI4uiv) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribI4uiv(d, obj.(*GlVertexAttribI4uiv))
 }
-func (*binaryClassGlVertexAttribI4uiv) Schema() *schema.Entity { return schemaGlVertexAttribI4uiv }
+func (*binaryClassGlVertexAttribI4uiv) Schema() *binary.Entity { return schemaGlVertexAttribI4uiv }
 
-var schemaGlVertexAttribI4uiv = &schema.Entity{
+var schemaGlVertexAttribI4uiv = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribI4uiv,
 	Package: "gles",
 	Name:    "GlVertexAttribI4uiv",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: schema.Of((*GLuintᶜᵖ)(nil).Class())}},
@@ -41648,13 +41648,13 @@ func (*binaryClassGlVertexAttribIFormat) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribIFormat) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribIFormat(d, obj.(*GlVertexAttribIFormat))
 }
-func (*binaryClassGlVertexAttribIFormat) Schema() *schema.Entity { return schemaGlVertexAttribIFormat }
+func (*binaryClassGlVertexAttribIFormat) Schema() *binary.Entity { return schemaGlVertexAttribIFormat }
 
-var schemaGlVertexAttribIFormat = &schema.Entity{
+var schemaGlVertexAttribIFormat = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribIFormat,
 	Package: "gles",
 	Name:    "GlVertexAttribIFormat",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41697,13 +41697,13 @@ func (*binaryClassGlVertexAttribIPointer) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlVertexAttribIPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribIPointer(d, obj.(*GlVertexAttribIPointer))
 }
-func (*binaryClassGlVertexAttribIPointer) Schema() *schema.Entity { return schemaGlVertexAttribIPointer }
+func (*binaryClassGlVertexAttribIPointer) Schema() *binary.Entity { return schemaGlVertexAttribIPointer }
 
-var schemaGlVertexAttribIPointer = &schema.Entity{
+var schemaGlVertexAttribIPointer = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribIPointer,
 	Package: "gles",
 	Name:    "GlVertexAttribIPointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41749,13 +41749,13 @@ func (*binaryClassGlVertexAttribPointer) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlVertexAttribPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexAttribPointer(d, obj.(*GlVertexAttribPointer))
 }
-func (*binaryClassGlVertexAttribPointer) Schema() *schema.Entity { return schemaGlVertexAttribPointer }
+func (*binaryClassGlVertexAttribPointer) Schema() *binary.Entity { return schemaGlVertexAttribPointer }
 
-var schemaGlVertexAttribPointer = &schema.Entity{
+var schemaGlVertexAttribPointer = &binary.Entity{
 	TypeID:  binaryIDGlVertexAttribPointer,
 	Package: "gles",
 	Name:    "GlVertexAttribPointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41794,13 +41794,13 @@ func (*binaryClassGlVertexBindingDivisor) Decode(d binary.Decoder) binary.Object
 func (*binaryClassGlVertexBindingDivisor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlVertexBindingDivisor(d, obj.(*GlVertexBindingDivisor))
 }
-func (*binaryClassGlVertexBindingDivisor) Schema() *schema.Entity { return schemaGlVertexBindingDivisor }
+func (*binaryClassGlVertexBindingDivisor) Schema() *binary.Entity { return schemaGlVertexBindingDivisor }
 
-var schemaGlVertexBindingDivisor = &schema.Entity{
+var schemaGlVertexBindingDivisor = &binary.Entity{
 	TypeID:  binaryIDGlVertexBindingDivisor,
 	Package: "gles",
 	Name:    "GlVertexBindingDivisor",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "BindingIndex", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
 		{Declared: "Divisor", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
@@ -41839,13 +41839,13 @@ func (*binaryClassGlViewport) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewport(d, obj.(*GlViewport))
 }
-func (*binaryClassGlViewport) Schema() *schema.Entity { return schemaGlViewport }
+func (*binaryClassGlViewport) Schema() *binary.Entity { return schemaGlViewport }
 
-var schemaGlViewport = &schema.Entity{
+var schemaGlViewport = &binary.Entity{
 	TypeID:  binaryIDGlViewport,
 	Package: "gles",
 	Name:    "GlViewport",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
@@ -41884,13 +41884,13 @@ func (*binaryClassGlViewportArrayvNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewportArrayvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportArrayvNV(d, obj.(*GlViewportArrayvNV))
 }
-func (*binaryClassGlViewportArrayvNV) Schema() *schema.Entity { return schemaGlViewportArrayvNV }
+func (*binaryClassGlViewportArrayvNV) Schema() *binary.Entity { return schemaGlViewportArrayvNV }
 
-var schemaGlViewportArrayvNV = &schema.Entity{
+var schemaGlViewportArrayvNV = &binary.Entity{
 	TypeID:  binaryIDGlViewportArrayvNV,
 	Package: "gles",
 	Name:    "GlViewportArrayvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "First", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -41932,13 +41932,13 @@ func (*binaryClassGlViewportIndexedfNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlViewportIndexedfNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportIndexedfNV(d, obj.(*GlViewportIndexedfNV))
 }
-func (*binaryClassGlViewportIndexedfNV) Schema() *schema.Entity { return schemaGlViewportIndexedfNV }
+func (*binaryClassGlViewportIndexedfNV) Schema() *binary.Entity { return schemaGlViewportIndexedfNV }
 
-var schemaGlViewportIndexedfNV = &schema.Entity{
+var schemaGlViewportIndexedfNV = &binary.Entity{
 	TypeID:  binaryIDGlViewportIndexedfNV,
 	Package: "gles",
 	Name:    "GlViewportIndexedfNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
@@ -41976,13 +41976,13 @@ func (*binaryClassGlViewportIndexedfvNV) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlViewportIndexedfvNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlViewportIndexedfvNV(d, obj.(*GlViewportIndexedfvNV))
 }
-func (*binaryClassGlViewportIndexedfvNV) Schema() *schema.Entity { return schemaGlViewportIndexedfvNV }
+func (*binaryClassGlViewportIndexedfvNV) Schema() *binary.Entity { return schemaGlViewportIndexedfvNV }
 
-var schemaGlViewportIndexedfvNV = &schema.Entity{
+var schemaGlViewportIndexedfvNV = &binary.Entity{
 	TypeID:  binaryIDGlViewportIndexedfvNV,
 	Package: "gles",
 	Name:    "GlViewportIndexedfvNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "V", Type: &schema.Struct{Entity: schema.Of((*GLfloatᶜᵖ)(nil).Class())}},
@@ -42019,13 +42019,13 @@ func (*binaryClassGlWaitSync) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWaitSync) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWaitSync(d, obj.(*GlWaitSync))
 }
-func (*binaryClassGlWaitSync) Schema() *schema.Entity { return schemaGlWaitSync }
+func (*binaryClassGlWaitSync) Schema() *binary.Entity { return schemaGlWaitSync }
 
-var schemaGlWaitSync = &schema.Entity{
+var schemaGlWaitSync = &binary.Entity{
 	TypeID:  binaryIDGlWaitSync,
 	Package: "gles",
 	Name:    "GlWaitSync",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "SyncFlags", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -42063,13 +42063,13 @@ func (*binaryClassGlWaitSyncAPPLE) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWaitSyncAPPLE) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWaitSyncAPPLE(d, obj.(*GlWaitSyncAPPLE))
 }
-func (*binaryClassGlWaitSyncAPPLE) Schema() *schema.Entity { return schemaGlWaitSyncAPPLE }
+func (*binaryClassGlWaitSyncAPPLE) Schema() *binary.Entity { return schemaGlWaitSyncAPPLE }
 
-var schemaGlWaitSyncAPPLE = &schema.Entity{
+var schemaGlWaitSyncAPPLE = &binary.Entity{
 	TypeID:  binaryIDGlWaitSyncAPPLE,
 	Package: "gles",
 	Name:    "GlWaitSyncAPPLE",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Sync", Type: &schema.Primitive{Name: "GLsync", Method: schema.Uint64}},
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
@@ -42109,13 +42109,13 @@ func (*binaryClassGlWeightPathsNV) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlWeightPathsNV) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlWeightPathsNV(d, obj.(*GlWeightPathsNV))
 }
-func (*binaryClassGlWeightPathsNV) Schema() *schema.Entity { return schemaGlWeightPathsNV }
+func (*binaryClassGlWeightPathsNV) Schema() *binary.Entity { return schemaGlWeightPathsNV }
 
-var schemaGlWeightPathsNV = &schema.Entity{
+var schemaGlWeightPathsNV = &binary.Entity{
 	TypeID:  binaryIDGlWeightPathsNV,
 	Package: "gles",
 	Name:    "GlWeightPathsNV",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ResultPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
@@ -42158,13 +42158,13 @@ func (*binaryClassGlXCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXCreateContext(d, obj.(*GlXCreateContext))
 }
-func (*binaryClassGlXCreateContext) Schema() *schema.Entity { return schemaGlXCreateContext }
+func (*binaryClassGlXCreateContext) Schema() *binary.Entity { return schemaGlXCreateContext }
 
-var schemaGlXCreateContext = &schema.Entity{
+var schemaGlXCreateContext = &binary.Entity{
 	TypeID:  binaryIDGlXCreateContext,
 	Package: "gles",
 	Name:    "GlXCreateContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Dpy", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Vis", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
@@ -42210,13 +42210,13 @@ func (*binaryClassGlXCreateNewContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXCreateNewContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXCreateNewContext(d, obj.(*GlXCreateNewContext))
 }
-func (*binaryClassGlXCreateNewContext) Schema() *schema.Entity { return schemaGlXCreateNewContext }
+func (*binaryClassGlXCreateNewContext) Schema() *binary.Entity { return schemaGlXCreateNewContext }
 
-var schemaGlXCreateNewContext = &schema.Entity{
+var schemaGlXCreateNewContext = &binary.Entity{
 	TypeID:  binaryIDGlXCreateNewContext,
 	Package: "gles",
 	Name:    "GlXCreateNewContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Fbconfig", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
@@ -42261,13 +42261,13 @@ func (*binaryClassGlXMakeContextCurrent) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassGlXMakeContextCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXMakeContextCurrent(d, obj.(*GlXMakeContextCurrent))
 }
-func (*binaryClassGlXMakeContextCurrent) Schema() *schema.Entity { return schemaGlXMakeContextCurrent }
+func (*binaryClassGlXMakeContextCurrent) Schema() *binary.Entity { return schemaGlXMakeContextCurrent }
 
-var schemaGlXMakeContextCurrent = &schema.Entity{
+var schemaGlXMakeContextCurrent = &binary.Entity{
 	TypeID:  binaryIDGlXMakeContextCurrent,
 	Package: "gles",
 	Name:    "GlXMakeContextCurrent",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
@@ -42309,13 +42309,13 @@ func (*binaryClassGlXMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXMakeCurrent(d, obj.(*GlXMakeCurrent))
 }
-func (*binaryClassGlXMakeCurrent) Schema() *schema.Entity { return schemaGlXMakeCurrent }
+func (*binaryClassGlXMakeCurrent) Schema() *binary.Entity { return schemaGlXMakeCurrent }
 
-var schemaGlXMakeCurrent = &schema.Entity{
+var schemaGlXMakeCurrent = &binary.Entity{
 	TypeID:  binaryIDGlXMakeCurrent,
 	Package: "gles",
 	Name:    "GlXMakeCurrent",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Drawable", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
@@ -42348,13 +42348,13 @@ func (*binaryClassIntᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntᵖ(d, obj.(*Intᵖ))
 }
-func (*binaryClassIntᵖ) Schema() *schema.Entity { return schemaIntᵖ }
+func (*binaryClassIntᵖ) Schema() *binary.Entity { return schemaIntᵖ }
 
-var schemaIntᵖ = &schema.Entity{
+var schemaIntᵖ = &binary.Entity{
 	TypeID:  binaryIDIntᵖ,
 	Package: "gles",
 	Name:    "Intᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -42393,13 +42393,13 @@ func (*binaryClassGlXQueryDrawable) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXQueryDrawable) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXQueryDrawable(d, obj.(*GlXQueryDrawable))
 }
-func (*binaryClassGlXQueryDrawable) Schema() *schema.Entity { return schemaGlXQueryDrawable }
+func (*binaryClassGlXQueryDrawable) Schema() *binary.Entity { return schemaGlXQueryDrawable }
 
-var schemaGlXQueryDrawable = &schema.Entity{
+var schemaGlXQueryDrawable = &binary.Entity{
 	TypeID:  binaryIDGlXQueryDrawable,
 	Package: "gles",
 	Name:    "GlXQueryDrawable",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Draw", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
@@ -42437,13 +42437,13 @@ func (*binaryClassGlXSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGlXSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGlXSwapBuffers(d, obj.(*GlXSwapBuffers))
 }
-func (*binaryClassGlXSwapBuffers) Schema() *schema.Entity { return schemaGlXSwapBuffers }
+func (*binaryClassGlXSwapBuffers) Schema() *binary.Entity { return schemaGlXSwapBuffers }
 
-var schemaGlXSwapBuffers = &schema.Entity{
+var schemaGlXSwapBuffers = &binary.Entity{
 	TypeID:  binaryIDGlXSwapBuffers,
 	Package: "gles",
 	Name:    "GlXSwapBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Display", Type: &schema.Struct{Entity: schema.Of((*Voidᵖ)(nil).Class())}},
 		{Declared: "Drawable", Type: &schema.Struct{Entity: schema.Of((*GLXDrawable)(nil).Class())}},
@@ -42474,13 +42474,13 @@ func (*binaryClassHDC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassHDC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHDC(d, obj.(*HDC))
 }
-func (*binaryClassHDC) Schema() *schema.Entity { return schemaHDC }
+func (*binaryClassHDC) Schema() *binary.Entity { return schemaHDC }
 
-var schemaHDC = &schema.Entity{
+var schemaHDC = &binary.Entity{
 	TypeID:  binaryIDHDC,
 	Package: "gles",
 	Name:    "HDC",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -42509,13 +42509,13 @@ func (*binaryClassHGLRC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassHGLRC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHGLRC(d, obj.(*HGLRC))
 }
-func (*binaryClassHGLRC) Schema() *schema.Entity { return schemaHGLRC }
+func (*binaryClassHGLRC) Schema() *binary.Entity { return schemaHGLRC }
 
-var schemaHGLRC = &schema.Entity{
+var schemaHGLRC = &binary.Entity{
 	TypeID:  binaryIDHGLRC,
 	Package: "gles",
 	Name:    "HGLRC",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -42544,13 +42544,13 @@ func (*binaryClassIntˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntˢ(d, obj.(*Intˢ))
 }
-func (*binaryClassIntˢ) Schema() *schema.Entity { return schemaIntˢ }
+func (*binaryClassIntˢ) Schema() *binary.Entity { return schemaIntˢ }
 
-var schemaIntˢ = &schema.Entity{
+var schemaIntˢ = &binary.Entity{
 	TypeID:  binaryIDIntˢ,
 	Package: "gles",
 	Name:    "Intˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -42583,13 +42583,13 @@ func (*binaryClassVec2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2f(d, obj.(*Vec2f))
 }
-func (*binaryClassVec2f) Schema() *schema.Entity { return schemaVec2f }
+func (*binaryClassVec2f) Schema() *binary.Entity { return schemaVec2f }
 
-var schemaVec2f = &schema.Entity{
+var schemaVec2f = &binary.Entity{
 	TypeID:  binaryIDVec2f,
 	Package: "gles",
 	Name:    "Vec2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 2}},
 	},
 }
@@ -42622,13 +42622,13 @@ func (*binaryClassMat2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2f(d, obj.(*Mat2f))
 }
-func (*binaryClassMat2f) Schema() *schema.Entity { return schemaMat2f }
+func (*binaryClassMat2f) Schema() *binary.Entity { return schemaMat2f }
 
-var schemaMat2f = &schema.Entity{
+var schemaMat2f = &binary.Entity{
 	TypeID:  binaryIDMat2f,
 	Package: "gles",
 	Name:    "Mat2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -42657,13 +42657,13 @@ func (*binaryClassMat2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2fˢ(d, obj.(*Mat2fˢ))
 }
-func (*binaryClassMat2fˢ) Schema() *schema.Entity { return schemaMat2fˢ }
+func (*binaryClassMat2fˢ) Schema() *binary.Entity { return schemaMat2fˢ }
 
-var schemaMat2fˢ = &schema.Entity{
+var schemaMat2fˢ = &binary.Entity{
 	TypeID:  binaryIDMat2fˢ,
 	Package: "gles",
 	Name:    "Mat2fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -42692,13 +42692,13 @@ func (*binaryClassMat2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2fᵖ(d, obj.(*Mat2fᵖ))
 }
-func (*binaryClassMat2fᵖ) Schema() *schema.Entity { return schemaMat2fᵖ }
+func (*binaryClassMat2fᵖ) Schema() *binary.Entity { return schemaMat2fᵖ }
 
-var schemaMat2fᵖ = &schema.Entity{
+var schemaMat2fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat2fᵖ,
 	Package: "gles",
 	Name:    "Mat2fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -42731,13 +42731,13 @@ func (*binaryClassVec3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3f(d, obj.(*Vec3f))
 }
-func (*binaryClassVec3f) Schema() *schema.Entity { return schemaVec3f }
+func (*binaryClassVec3f) Schema() *binary.Entity { return schemaVec3f }
 
-var schemaVec3f = &schema.Entity{
+var schemaVec3f = &binary.Entity{
 	TypeID:  binaryIDVec3f,
 	Package: "gles",
 	Name:    "Vec3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 3}},
 	},
 }
@@ -42770,13 +42770,13 @@ func (*binaryClassMat2x3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3f(d, obj.(*Mat2x3f))
 }
-func (*binaryClassMat2x3f) Schema() *schema.Entity { return schemaMat2x3f }
+func (*binaryClassMat2x3f) Schema() *binary.Entity { return schemaMat2x3f }
 
-var schemaMat2x3f = &schema.Entity{
+var schemaMat2x3f = &binary.Entity{
 	TypeID:  binaryIDMat2x3f,
 	Package: "gles",
 	Name:    "Mat2x3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -42805,13 +42805,13 @@ func (*binaryClassMat2x3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3fˢ(d, obj.(*Mat2x3fˢ))
 }
-func (*binaryClassMat2x3fˢ) Schema() *schema.Entity { return schemaMat2x3fˢ }
+func (*binaryClassMat2x3fˢ) Schema() *binary.Entity { return schemaMat2x3fˢ }
 
-var schemaMat2x3fˢ = &schema.Entity{
+var schemaMat2x3fˢ = &binary.Entity{
 	TypeID:  binaryIDMat2x3fˢ,
 	Package: "gles",
 	Name:    "Mat2x3fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -42840,13 +42840,13 @@ func (*binaryClassMat2x3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x3fᵖ(d, obj.(*Mat2x3fᵖ))
 }
-func (*binaryClassMat2x3fᵖ) Schema() *schema.Entity { return schemaMat2x3fᵖ }
+func (*binaryClassMat2x3fᵖ) Schema() *binary.Entity { return schemaMat2x3fᵖ }
 
-var schemaMat2x3fᵖ = &schema.Entity{
+var schemaMat2x3fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat2x3fᵖ,
 	Package: "gles",
 	Name:    "Mat2x3fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -42879,13 +42879,13 @@ func (*binaryClassVec4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4f(d, obj.(*Vec4f))
 }
-func (*binaryClassVec4f) Schema() *schema.Entity { return schemaVec4f }
+func (*binaryClassVec4f) Schema() *binary.Entity { return schemaVec4f }
 
-var schemaVec4f = &schema.Entity{
+var schemaVec4f = &binary.Entity{
 	TypeID:  binaryIDVec4f,
 	Package: "gles",
 	Name:    "Vec4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 4}},
 	},
 }
@@ -42918,13 +42918,13 @@ func (*binaryClassMat2x4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4f(d, obj.(*Mat2x4f))
 }
-func (*binaryClassMat2x4f) Schema() *schema.Entity { return schemaMat2x4f }
+func (*binaryClassMat2x4f) Schema() *binary.Entity { return schemaMat2x4f }
 
-var schemaMat2x4f = &schema.Entity{
+var schemaMat2x4f = &binary.Entity{
 	TypeID:  binaryIDMat2x4f,
 	Package: "gles",
 	Name:    "Mat2x4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -42953,13 +42953,13 @@ func (*binaryClassMat2x4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4fˢ(d, obj.(*Mat2x4fˢ))
 }
-func (*binaryClassMat2x4fˢ) Schema() *schema.Entity { return schemaMat2x4fˢ }
+func (*binaryClassMat2x4fˢ) Schema() *binary.Entity { return schemaMat2x4fˢ }
 
-var schemaMat2x4fˢ = &schema.Entity{
+var schemaMat2x4fˢ = &binary.Entity{
 	TypeID:  binaryIDMat2x4fˢ,
 	Package: "gles",
 	Name:    "Mat2x4fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -42988,13 +42988,13 @@ func (*binaryClassMat2x4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat2x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat2x4fᵖ(d, obj.(*Mat2x4fᵖ))
 }
-func (*binaryClassMat2x4fᵖ) Schema() *schema.Entity { return schemaMat2x4fᵖ }
+func (*binaryClassMat2x4fᵖ) Schema() *binary.Entity { return schemaMat2x4fᵖ }
 
-var schemaMat2x4fᵖ = &schema.Entity{
+var schemaMat2x4fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat2x4fᵖ,
 	Package: "gles",
 	Name:    "Mat2x4fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43027,13 +43027,13 @@ func (*binaryClassMat3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3f(d, obj.(*Mat3f))
 }
-func (*binaryClassMat3f) Schema() *schema.Entity { return schemaMat3f }
+func (*binaryClassMat3f) Schema() *binary.Entity { return schemaMat3f }
 
-var schemaMat3f = &schema.Entity{
+var schemaMat3f = &binary.Entity{
 	TypeID:  binaryIDMat3f,
 	Package: "gles",
 	Name:    "Mat3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -43062,13 +43062,13 @@ func (*binaryClassMat3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3fˢ(d, obj.(*Mat3fˢ))
 }
-func (*binaryClassMat3fˢ) Schema() *schema.Entity { return schemaMat3fˢ }
+func (*binaryClassMat3fˢ) Schema() *binary.Entity { return schemaMat3fˢ }
 
-var schemaMat3fˢ = &schema.Entity{
+var schemaMat3fˢ = &binary.Entity{
 	TypeID:  binaryIDMat3fˢ,
 	Package: "gles",
 	Name:    "Mat3fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43097,13 +43097,13 @@ func (*binaryClassMat3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3fᵖ(d, obj.(*Mat3fᵖ))
 }
-func (*binaryClassMat3fᵖ) Schema() *schema.Entity { return schemaMat3fᵖ }
+func (*binaryClassMat3fᵖ) Schema() *binary.Entity { return schemaMat3fᵖ }
 
-var schemaMat3fᵖ = &schema.Entity{
+var schemaMat3fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat3fᵖ,
 	Package: "gles",
 	Name:    "Mat3fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43136,13 +43136,13 @@ func (*binaryClassMat3x2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2f(d, obj.(*Mat3x2f))
 }
-func (*binaryClassMat3x2f) Schema() *schema.Entity { return schemaMat3x2f }
+func (*binaryClassMat3x2f) Schema() *binary.Entity { return schemaMat3x2f }
 
-var schemaMat3x2f = &schema.Entity{
+var schemaMat3x2f = &binary.Entity{
 	TypeID:  binaryIDMat3x2f,
 	Package: "gles",
 	Name:    "Mat3x2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -43171,13 +43171,13 @@ func (*binaryClassMat3x2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2fˢ(d, obj.(*Mat3x2fˢ))
 }
-func (*binaryClassMat3x2fˢ) Schema() *schema.Entity { return schemaMat3x2fˢ }
+func (*binaryClassMat3x2fˢ) Schema() *binary.Entity { return schemaMat3x2fˢ }
 
-var schemaMat3x2fˢ = &schema.Entity{
+var schemaMat3x2fˢ = &binary.Entity{
 	TypeID:  binaryIDMat3x2fˢ,
 	Package: "gles",
 	Name:    "Mat3x2fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43206,13 +43206,13 @@ func (*binaryClassMat3x2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x2fᵖ(d, obj.(*Mat3x2fᵖ))
 }
-func (*binaryClassMat3x2fᵖ) Schema() *schema.Entity { return schemaMat3x2fᵖ }
+func (*binaryClassMat3x2fᵖ) Schema() *binary.Entity { return schemaMat3x2fᵖ }
 
-var schemaMat3x2fᵖ = &schema.Entity{
+var schemaMat3x2fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat3x2fᵖ,
 	Package: "gles",
 	Name:    "Mat3x2fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43245,13 +43245,13 @@ func (*binaryClassMat3x4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4f(d, obj.(*Mat3x4f))
 }
-func (*binaryClassMat3x4f) Schema() *schema.Entity { return schemaMat3x4f }
+func (*binaryClassMat3x4f) Schema() *binary.Entity { return schemaMat3x4f }
 
-var schemaMat3x4f = &schema.Entity{
+var schemaMat3x4f = &binary.Entity{
 	TypeID:  binaryIDMat3x4f,
 	Package: "gles",
 	Name:    "Mat3x4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -43280,13 +43280,13 @@ func (*binaryClassMat3x4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4fˢ(d, obj.(*Mat3x4fˢ))
 }
-func (*binaryClassMat3x4fˢ) Schema() *schema.Entity { return schemaMat3x4fˢ }
+func (*binaryClassMat3x4fˢ) Schema() *binary.Entity { return schemaMat3x4fˢ }
 
-var schemaMat3x4fˢ = &schema.Entity{
+var schemaMat3x4fˢ = &binary.Entity{
 	TypeID:  binaryIDMat3x4fˢ,
 	Package: "gles",
 	Name:    "Mat3x4fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43315,13 +43315,13 @@ func (*binaryClassMat3x4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat3x4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat3x4fᵖ(d, obj.(*Mat3x4fᵖ))
 }
-func (*binaryClassMat3x4fᵖ) Schema() *schema.Entity { return schemaMat3x4fᵖ }
+func (*binaryClassMat3x4fᵖ) Schema() *binary.Entity { return schemaMat3x4fᵖ }
 
-var schemaMat3x4fᵖ = &schema.Entity{
+var schemaMat3x4fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat3x4fᵖ,
 	Package: "gles",
 	Name:    "Mat3x4fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43354,13 +43354,13 @@ func (*binaryClassMat4f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4f(d, obj.(*Mat4f))
 }
-func (*binaryClassMat4f) Schema() *schema.Entity { return schemaMat4f }
+func (*binaryClassMat4f) Schema() *binary.Entity { return schemaMat4f }
 
-var schemaMat4f = &schema.Entity{
+var schemaMat4f = &binary.Entity{
 	TypeID:  binaryIDMat4f,
 	Package: "gles",
 	Name:    "Mat4f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -43389,13 +43389,13 @@ func (*binaryClassMat4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4fˢ(d, obj.(*Mat4fˢ))
 }
-func (*binaryClassMat4fˢ) Schema() *schema.Entity { return schemaMat4fˢ }
+func (*binaryClassMat4fˢ) Schema() *binary.Entity { return schemaMat4fˢ }
 
-var schemaMat4fˢ = &schema.Entity{
+var schemaMat4fˢ = &binary.Entity{
 	TypeID:  binaryIDMat4fˢ,
 	Package: "gles",
 	Name:    "Mat4fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43424,13 +43424,13 @@ func (*binaryClassMat4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4fᵖ(d, obj.(*Mat4fᵖ))
 }
-func (*binaryClassMat4fᵖ) Schema() *schema.Entity { return schemaMat4fᵖ }
+func (*binaryClassMat4fᵖ) Schema() *binary.Entity { return schemaMat4fᵖ }
 
-var schemaMat4fᵖ = &schema.Entity{
+var schemaMat4fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat4fᵖ,
 	Package: "gles",
 	Name:    "Mat4fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43463,13 +43463,13 @@ func (*binaryClassMat4x2f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2f(d, obj.(*Mat4x2f))
 }
-func (*binaryClassMat4x2f) Schema() *schema.Entity { return schemaMat4x2f }
+func (*binaryClassMat4x2f) Schema() *binary.Entity { return schemaMat4x2f }
 
-var schemaMat4x2f = &schema.Entity{
+var schemaMat4x2f = &binary.Entity{
 	TypeID:  binaryIDMat4x2f,
 	Package: "gles",
 	Name:    "Mat4x2f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -43498,13 +43498,13 @@ func (*binaryClassMat4x2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2fˢ(d, obj.(*Mat4x2fˢ))
 }
-func (*binaryClassMat4x2fˢ) Schema() *schema.Entity { return schemaMat4x2fˢ }
+func (*binaryClassMat4x2fˢ) Schema() *binary.Entity { return schemaMat4x2fˢ }
 
-var schemaMat4x2fˢ = &schema.Entity{
+var schemaMat4x2fˢ = &binary.Entity{
 	TypeID:  binaryIDMat4x2fˢ,
 	Package: "gles",
 	Name:    "Mat4x2fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43533,13 +43533,13 @@ func (*binaryClassMat4x2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x2fᵖ(d, obj.(*Mat4x2fᵖ))
 }
-func (*binaryClassMat4x2fᵖ) Schema() *schema.Entity { return schemaMat4x2fᵖ }
+func (*binaryClassMat4x2fᵖ) Schema() *binary.Entity { return schemaMat4x2fᵖ }
 
-var schemaMat4x2fᵖ = &schema.Entity{
+var schemaMat4x2fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat4x2fᵖ,
 	Package: "gles",
 	Name:    "Mat4x2fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43572,13 +43572,13 @@ func (*binaryClassMat4x3f) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3f) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3f(d, obj.(*Mat4x3f))
 }
-func (*binaryClassMat4x3f) Schema() *schema.Entity { return schemaMat4x3f }
+func (*binaryClassMat4x3f) Schema() *binary.Entity { return schemaMat4x3f }
 
-var schemaMat4x3f = &schema.Entity{
+var schemaMat4x3f = &binary.Entity{
 	TypeID:  binaryIDMat4x3f,
 	Package: "gles",
 	Name:    "Mat4x3f",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -43607,13 +43607,13 @@ func (*binaryClassMat4x3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3fˢ(d, obj.(*Mat4x3fˢ))
 }
-func (*binaryClassMat4x3fˢ) Schema() *schema.Entity { return schemaMat4x3fˢ }
+func (*binaryClassMat4x3fˢ) Schema() *binary.Entity { return schemaMat4x3fˢ }
 
-var schemaMat4x3fˢ = &schema.Entity{
+var schemaMat4x3fˢ = &binary.Entity{
 	TypeID:  binaryIDMat4x3fˢ,
 	Package: "gles",
 	Name:    "Mat4x3fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43642,13 +43642,13 @@ func (*binaryClassMat4x3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMat4x3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMat4x3fᵖ(d, obj.(*Mat4x3fᵖ))
 }
-func (*binaryClassMat4x3fᵖ) Schema() *schema.Entity { return schemaMat4x3fᵖ }
+func (*binaryClassMat4x3fᵖ) Schema() *binary.Entity { return schemaMat4x3fᵖ }
 
-var schemaMat4x3fᵖ = &schema.Entity{
+var schemaMat4x3fᵖ = &binary.Entity{
 	TypeID:  binaryIDMat4x3fᵖ,
 	Package: "gles",
 	Name:    "Mat4x3fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -43677,13 +43677,13 @@ func (*binaryClassPipelineIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPipelineIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePipelineIdˢ(d, obj.(*PipelineIdˢ))
 }
-func (*binaryClassPipelineIdˢ) Schema() *schema.Entity { return schemaPipelineIdˢ }
+func (*binaryClassPipelineIdˢ) Schema() *binary.Entity { return schemaPipelineIdˢ }
 
-var schemaPipelineIdˢ = &schema.Entity{
+var schemaPipelineIdˢ = &binary.Entity{
 	TypeID:  binaryIDPipelineIdˢ,
 	Package: "gles",
 	Name:    "PipelineIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43712,13 +43712,13 @@ func (*binaryClassProgramIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassProgramIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeProgramIdˢ(d, obj.(*ProgramIdˢ))
 }
-func (*binaryClassProgramIdˢ) Schema() *schema.Entity { return schemaProgramIdˢ }
+func (*binaryClassProgramIdˢ) Schema() *binary.Entity { return schemaProgramIdˢ }
 
-var schemaProgramIdˢ = &schema.Entity{
+var schemaProgramIdˢ = &binary.Entity{
 	TypeID:  binaryIDProgramIdˢ,
 	Package: "gles",
 	Name:    "ProgramIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43747,13 +43747,13 @@ func (*binaryClassQueryIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassQueryIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeQueryIdˢ(d, obj.(*QueryIdˢ))
 }
-func (*binaryClassQueryIdˢ) Schema() *schema.Entity { return schemaQueryIdˢ }
+func (*binaryClassQueryIdˢ) Schema() *binary.Entity { return schemaQueryIdˢ }
 
-var schemaQueryIdˢ = &schema.Entity{
+var schemaQueryIdˢ = &binary.Entity{
 	TypeID:  binaryIDQueryIdˢ,
 	Package: "gles",
 	Name:    "QueryIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43782,13 +43782,13 @@ func (*binaryClassRenderbufferIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRenderbufferIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderbufferIdˢ(d, obj.(*RenderbufferIdˢ))
 }
-func (*binaryClassRenderbufferIdˢ) Schema() *schema.Entity { return schemaRenderbufferIdˢ }
+func (*binaryClassRenderbufferIdˢ) Schema() *binary.Entity { return schemaRenderbufferIdˢ }
 
-var schemaRenderbufferIdˢ = &schema.Entity{
+var schemaRenderbufferIdˢ = &binary.Entity{
 	TypeID:  binaryIDRenderbufferIdˢ,
 	Package: "gles",
 	Name:    "RenderbufferIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43819,13 +43819,13 @@ func (*binaryClassReplayBindRenderer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassReplayBindRenderer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReplayBindRenderer(d, obj.(*ReplayBindRenderer))
 }
-func (*binaryClassReplayBindRenderer) Schema() *schema.Entity { return schemaReplayBindRenderer }
+func (*binaryClassReplayBindRenderer) Schema() *binary.Entity { return schemaReplayBindRenderer }
 
-var schemaReplayBindRenderer = &schema.Entity{
+var schemaReplayBindRenderer = &binary.Entity{
 	TypeID:  binaryIDReplayBindRenderer,
 	Package: "gles",
 	Name:    "ReplayBindRenderer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -43857,13 +43857,13 @@ func (*binaryClassReplayCreateRenderer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassReplayCreateRenderer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReplayCreateRenderer(d, obj.(*ReplayCreateRenderer))
 }
-func (*binaryClassReplayCreateRenderer) Schema() *schema.Entity { return schemaReplayCreateRenderer }
+func (*binaryClassReplayCreateRenderer) Schema() *binary.Entity { return schemaReplayCreateRenderer }
 
-var schemaReplayCreateRenderer = &schema.Entity{
+var schemaReplayCreateRenderer = &binary.Entity{
 	TypeID:  binaryIDReplayCreateRenderer,
 	Package: "gles",
 	Name:    "ReplayCreateRenderer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -43893,13 +43893,13 @@ func (*binaryClassS64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassS64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ˢ(d, obj.(*S64ˢ))
 }
-func (*binaryClassS64ˢ) Schema() *schema.Entity { return schemaS64ˢ }
+func (*binaryClassS64ˢ) Schema() *binary.Entity { return schemaS64ˢ }
 
-var schemaS64ˢ = &schema.Entity{
+var schemaS64ˢ = &binary.Entity{
 	TypeID:  binaryIDS64ˢ,
 	Package: "gles",
 	Name:    "S64ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43928,13 +43928,13 @@ func (*binaryClassSamplerIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSamplerIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSamplerIdˢ(d, obj.(*SamplerIdˢ))
 }
-func (*binaryClassSamplerIdˢ) Schema() *schema.Entity { return schemaSamplerIdˢ }
+func (*binaryClassSamplerIdˢ) Schema() *binary.Entity { return schemaSamplerIdˢ }
 
-var schemaSamplerIdˢ = &schema.Entity{
+var schemaSamplerIdˢ = &binary.Entity{
 	TypeID:  binaryIDSamplerIdˢ,
 	Package: "gles",
 	Name:    "SamplerIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -43963,13 +43963,13 @@ func (*binaryClassShaderIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassShaderIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeShaderIdˢ(d, obj.(*ShaderIdˢ))
 }
-func (*binaryClassShaderIdˢ) Schema() *schema.Entity { return schemaShaderIdˢ }
+func (*binaryClassShaderIdˢ) Schema() *binary.Entity { return schemaShaderIdˢ }
 
-var schemaShaderIdˢ = &schema.Entity{
+var schemaShaderIdˢ = &binary.Entity{
 	TypeID:  binaryIDShaderIdˢ,
 	Package: "gles",
 	Name:    "ShaderIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44000,13 +44000,13 @@ func (*binaryClassStartTimer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassStartTimer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeStartTimer(d, obj.(*StartTimer))
 }
-func (*binaryClassStartTimer) Schema() *schema.Entity { return schemaStartTimer }
+func (*binaryClassStartTimer) Schema() *binary.Entity { return schemaStartTimer }
 
-var schemaStartTimer = &schema.Entity{
+var schemaStartTimer = &binary.Entity{
 	TypeID:  binaryIDStartTimer,
 	Package: "gles",
 	Name:    "StartTimer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
@@ -44158,13 +44158,13 @@ func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
 }
-func (*binaryClassState) Schema() *schema.Entity { return schemaState }
+func (*binaryClassState) Schema() *binary.Entity { return schemaState }
 
-var schemaState = &schema.Entity{
+var schemaState = &binary.Entity{
 	TypeID:  binaryIDState,
 	Package: "gles",
 	Name:    "State",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
 		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
 		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Context)(nil).Class())}}}},
@@ -44203,13 +44203,13 @@ func (*binaryClassStopTimer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassStopTimer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeStopTimer(d, obj.(*StopTimer))
 }
-func (*binaryClassStopTimer) Schema() *schema.Entity { return schemaStopTimer }
+func (*binaryClassStopTimer) Schema() *binary.Entity { return schemaStopTimer }
 
-var schemaStopTimer = &schema.Entity{
+var schemaStopTimer = &binary.Entity{
 	TypeID:  binaryIDStopTimer,
 	Package: "gles",
 	Name:    "StopTimer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -44242,13 +44242,13 @@ func (*binaryClassSwitchThread) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSwitchThread) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSwitchThread(d, obj.(*SwitchThread))
 }
-func (*binaryClassSwitchThread) Schema() *schema.Entity { return schemaSwitchThread }
+func (*binaryClassSwitchThread) Schema() *binary.Entity { return schemaSwitchThread }
 
-var schemaSwitchThread = &schema.Entity{
+var schemaSwitchThread = &binary.Entity{
 	TypeID:  binaryIDSwitchThread,
 	Package: "gles",
 	Name:    "SwitchThread",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "ThreadID", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint64}},
 	},
@@ -44278,13 +44278,13 @@ func (*binaryClassTextureIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTextureIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTextureIdˢ(d, obj.(*TextureIdˢ))
 }
-func (*binaryClassTextureIdˢ) Schema() *schema.Entity { return schemaTextureIdˢ }
+func (*binaryClassTextureIdˢ) Schema() *binary.Entity { return schemaTextureIdˢ }
 
-var schemaTextureIdˢ = &schema.Entity{
+var schemaTextureIdˢ = &binary.Entity{
 	TypeID:  binaryIDTextureIdˢ,
 	Package: "gles",
 	Name:    "TextureIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44313,13 +44313,13 @@ func (*binaryClassTransformFeedbackIdˢ) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassTransformFeedbackIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTransformFeedbackIdˢ(d, obj.(*TransformFeedbackIdˢ))
 }
-func (*binaryClassTransformFeedbackIdˢ) Schema() *schema.Entity { return schemaTransformFeedbackIdˢ }
+func (*binaryClassTransformFeedbackIdˢ) Schema() *binary.Entity { return schemaTransformFeedbackIdˢ }
 
-var schemaTransformFeedbackIdˢ = &schema.Entity{
+var schemaTransformFeedbackIdˢ = &binary.Entity{
 	TypeID:  binaryIDTransformFeedbackIdˢ,
 	Package: "gles",
 	Name:    "TransformFeedbackIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44348,13 +44348,13 @@ func (*binaryClassU16ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ˢ(d, obj.(*U16ˢ))
 }
-func (*binaryClassU16ˢ) Schema() *schema.Entity { return schemaU16ˢ }
+func (*binaryClassU16ˢ) Schema() *binary.Entity { return schemaU16ˢ }
 
-var schemaU16ˢ = &schema.Entity{
+var schemaU16ˢ = &binary.Entity{
 	TypeID:  binaryIDU16ˢ,
 	Package: "gles",
 	Name:    "U16ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44383,13 +44383,13 @@ func (*binaryClassU16ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ᵖ(d, obj.(*U16ᵖ))
 }
-func (*binaryClassU16ᵖ) Schema() *schema.Entity { return schemaU16ᵖ }
+func (*binaryClassU16ᵖ) Schema() *binary.Entity { return schemaU16ᵖ }
 
-var schemaU16ᵖ = &schema.Entity{
+var schemaU16ᵖ = &binary.Entity{
 	TypeID:  binaryIDU16ᵖ,
 	Package: "gles",
 	Name:    "U16ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -44418,13 +44418,13 @@ func (*binaryClassU32ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ˢ(d, obj.(*U32ˢ))
 }
-func (*binaryClassU32ˢ) Schema() *schema.Entity { return schemaU32ˢ }
+func (*binaryClassU32ˢ) Schema() *binary.Entity { return schemaU32ˢ }
 
-var schemaU32ˢ = &schema.Entity{
+var schemaU32ˢ = &binary.Entity{
 	TypeID:  binaryIDU32ˢ,
 	Package: "gles",
 	Name:    "U32ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44453,13 +44453,13 @@ func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
 }
-func (*binaryClassU32ᵖ) Schema() *schema.Entity { return schemaU32ᵖ }
+func (*binaryClassU32ᵖ) Schema() *binary.Entity { return schemaU32ᵖ }
 
-var schemaU32ᵖ = &schema.Entity{
+var schemaU32ᵖ = &binary.Entity{
 	TypeID:  binaryIDU32ᵖ,
 	Package: "gles",
 	Name:    "U32ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -44488,13 +44488,13 @@ func (*binaryClassU64ˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ˢ(d, obj.(*U64ˢ))
 }
-func (*binaryClassU64ˢ) Schema() *schema.Entity { return schemaU64ˢ }
+func (*binaryClassU64ˢ) Schema() *binary.Entity { return schemaU64ˢ }
 
-var schemaU64ˢ = &schema.Entity{
+var schemaU64ˢ = &binary.Entity{
 	TypeID:  binaryIDU64ˢ,
 	Package: "gles",
 	Name:    "U64ˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44523,13 +44523,13 @@ func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
 }
-func (*binaryClassU8ᵖ) Schema() *schema.Entity { return schemaU8ᵖ }
+func (*binaryClassU8ᵖ) Schema() *binary.Entity { return schemaU8ᵖ }
 
-var schemaU8ᵖ = &schema.Entity{
+var schemaU8ᵖ = &binary.Entity{
 	TypeID:  binaryIDU8ᵖ,
 	Package: "gles",
 	Name:    "U8ᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -44558,13 +44558,13 @@ func (*binaryClassUniformIndexˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassUniformIndexˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeUniformIndexˢ(d, obj.(*UniformIndexˢ))
 }
-func (*binaryClassUniformIndexˢ) Schema() *schema.Entity { return schemaUniformIndexˢ }
+func (*binaryClassUniformIndexˢ) Schema() *binary.Entity { return schemaUniformIndexˢ }
 
-var schemaUniformIndexˢ = &schema.Entity{
+var schemaUniformIndexˢ = &binary.Entity{
 	TypeID:  binaryIDUniformIndexˢ,
 	Package: "gles",
 	Name:    "UniformIndexˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44597,13 +44597,13 @@ func (*binaryClassVec2fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː2ᵃ(d, obj.(*Vec2fː2ᵃ))
 }
-func (*binaryClassVec2fː2ᵃ) Schema() *schema.Entity { return schemaVec2fː2ᵃ }
+func (*binaryClassVec2fː2ᵃ) Schema() *binary.Entity { return schemaVec2fː2ᵃ }
 
-var schemaVec2fː2ᵃ = &schema.Entity{
+var schemaVec2fː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec2fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -44636,13 +44636,13 @@ func (*binaryClassVec2fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː3ᵃ(d, obj.(*Vec2fː3ᵃ))
 }
-func (*binaryClassVec2fː3ᵃ) Schema() *schema.Entity { return schemaVec2fː3ᵃ }
+func (*binaryClassVec2fː3ᵃ) Schema() *binary.Entity { return schemaVec2fː3ᵃ }
 
-var schemaVec2fː3ᵃ = &schema.Entity{
+var schemaVec2fː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec2fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -44675,13 +44675,13 @@ func (*binaryClassVec2fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fː4ᵃ(d, obj.(*Vec2fː4ᵃ))
 }
-func (*binaryClassVec2fː4ᵃ) Schema() *schema.Entity { return schemaVec2fː4ᵃ }
+func (*binaryClassVec2fː4ᵃ) Schema() *binary.Entity { return schemaVec2fː4ᵃ }
 
-var schemaVec2fː4ᵃ = &schema.Entity{
+var schemaVec2fː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec2fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec2fː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec2f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -44710,13 +44710,13 @@ func (*binaryClassVec2fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fˢ(d, obj.(*Vec2fˢ))
 }
-func (*binaryClassVec2fˢ) Schema() *schema.Entity { return schemaVec2fˢ }
+func (*binaryClassVec2fˢ) Schema() *binary.Entity { return schemaVec2fˢ }
 
-var schemaVec2fˢ = &schema.Entity{
+var schemaVec2fˢ = &binary.Entity{
 	TypeID:  binaryIDVec2fˢ,
 	Package: "gles",
 	Name:    "Vec2fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44745,13 +44745,13 @@ func (*binaryClassVec2fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2fᵖ(d, obj.(*Vec2fᵖ))
 }
-func (*binaryClassVec2fᵖ) Schema() *schema.Entity { return schemaVec2fᵖ }
+func (*binaryClassVec2fᵖ) Schema() *binary.Entity { return schemaVec2fᵖ }
 
-var schemaVec2fᵖ = &schema.Entity{
+var schemaVec2fᵖ = &binary.Entity{
 	TypeID:  binaryIDVec2fᵖ,
 	Package: "gles",
 	Name:    "Vec2fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -44784,13 +44784,13 @@ func (*binaryClassVec2i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2i(d, obj.(*Vec2i))
 }
-func (*binaryClassVec2i) Schema() *schema.Entity { return schemaVec2i }
+func (*binaryClassVec2i) Schema() *binary.Entity { return schemaVec2i }
 
-var schemaVec2i = &schema.Entity{
+var schemaVec2i = &binary.Entity{
 	TypeID:  binaryIDVec2i,
 	Package: "gles",
 	Name:    "Vec2i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 2}},
 	},
 }
@@ -44819,13 +44819,13 @@ func (*binaryClassVec2iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2iˢ(d, obj.(*Vec2iˢ))
 }
-func (*binaryClassVec2iˢ) Schema() *schema.Entity { return schemaVec2iˢ }
+func (*binaryClassVec2iˢ) Schema() *binary.Entity { return schemaVec2iˢ }
 
-var schemaVec2iˢ = &schema.Entity{
+var schemaVec2iˢ = &binary.Entity{
 	TypeID:  binaryIDVec2iˢ,
 	Package: "gles",
 	Name:    "Vec2iˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44854,13 +44854,13 @@ func (*binaryClassVec2iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2iᵖ(d, obj.(*Vec2iᵖ))
 }
-func (*binaryClassVec2iᵖ) Schema() *schema.Entity { return schemaVec2iᵖ }
+func (*binaryClassVec2iᵖ) Schema() *binary.Entity { return schemaVec2iᵖ }
 
-var schemaVec2iᵖ = &schema.Entity{
+var schemaVec2iᵖ = &binary.Entity{
 	TypeID:  binaryIDVec2iᵖ,
 	Package: "gles",
 	Name:    "Vec2iᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -44893,13 +44893,13 @@ func (*binaryClassVec2u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2u(d, obj.(*Vec2u))
 }
-func (*binaryClassVec2u) Schema() *schema.Entity { return schemaVec2u }
+func (*binaryClassVec2u) Schema() *binary.Entity { return schemaVec2u }
 
-var schemaVec2u = &schema.Entity{
+var schemaVec2u = &binary.Entity{
 	TypeID:  binaryIDVec2u,
 	Package: "gles",
 	Name:    "Vec2u",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 2}},
 	},
 }
@@ -44928,13 +44928,13 @@ func (*binaryClassVec2uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2uˢ(d, obj.(*Vec2uˢ))
 }
-func (*binaryClassVec2uˢ) Schema() *schema.Entity { return schemaVec2uˢ }
+func (*binaryClassVec2uˢ) Schema() *binary.Entity { return schemaVec2uˢ }
 
-var schemaVec2uˢ = &schema.Entity{
+var schemaVec2uˢ = &binary.Entity{
 	TypeID:  binaryIDVec2uˢ,
 	Package: "gles",
 	Name:    "Vec2uˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -44963,13 +44963,13 @@ func (*binaryClassVec2uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec2uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec2uᵖ(d, obj.(*Vec2uᵖ))
 }
-func (*binaryClassVec2uᵖ) Schema() *schema.Entity { return schemaVec2uᵖ }
+func (*binaryClassVec2uᵖ) Schema() *binary.Entity { return schemaVec2uᵖ }
 
-var schemaVec2uᵖ = &schema.Entity{
+var schemaVec2uᵖ = &binary.Entity{
 	TypeID:  binaryIDVec2uᵖ,
 	Package: "gles",
 	Name:    "Vec2uᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45002,13 +45002,13 @@ func (*binaryClassVec3fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː2ᵃ(d, obj.(*Vec3fː2ᵃ))
 }
-func (*binaryClassVec3fː2ᵃ) Schema() *schema.Entity { return schemaVec3fː2ᵃ }
+func (*binaryClassVec3fː2ᵃ) Schema() *binary.Entity { return schemaVec3fː2ᵃ }
 
-var schemaVec3fː2ᵃ = &schema.Entity{
+var schemaVec3fː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec3fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -45041,13 +45041,13 @@ func (*binaryClassVec3fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː3ᵃ(d, obj.(*Vec3fː3ᵃ))
 }
-func (*binaryClassVec3fː3ᵃ) Schema() *schema.Entity { return schemaVec3fː3ᵃ }
+func (*binaryClassVec3fː3ᵃ) Schema() *binary.Entity { return schemaVec3fː3ᵃ }
 
-var schemaVec3fː3ᵃ = &schema.Entity{
+var schemaVec3fː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec3fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -45080,13 +45080,13 @@ func (*binaryClassVec3fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fː4ᵃ(d, obj.(*Vec3fː4ᵃ))
 }
-func (*binaryClassVec3fː4ᵃ) Schema() *schema.Entity { return schemaVec3fː4ᵃ }
+func (*binaryClassVec3fː4ᵃ) Schema() *binary.Entity { return schemaVec3fː4ᵃ }
 
-var schemaVec3fː4ᵃ = &schema.Entity{
+var schemaVec3fː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec3fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec3fː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec3f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -45115,13 +45115,13 @@ func (*binaryClassVec3fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fˢ(d, obj.(*Vec3fˢ))
 }
-func (*binaryClassVec3fˢ) Schema() *schema.Entity { return schemaVec3fˢ }
+func (*binaryClassVec3fˢ) Schema() *binary.Entity { return schemaVec3fˢ }
 
-var schemaVec3fˢ = &schema.Entity{
+var schemaVec3fˢ = &binary.Entity{
 	TypeID:  binaryIDVec3fˢ,
 	Package: "gles",
 	Name:    "Vec3fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45150,13 +45150,13 @@ func (*binaryClassVec3fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3fᵖ(d, obj.(*Vec3fᵖ))
 }
-func (*binaryClassVec3fᵖ) Schema() *schema.Entity { return schemaVec3fᵖ }
+func (*binaryClassVec3fᵖ) Schema() *binary.Entity { return schemaVec3fᵖ }
 
-var schemaVec3fᵖ = &schema.Entity{
+var schemaVec3fᵖ = &binary.Entity{
 	TypeID:  binaryIDVec3fᵖ,
 	Package: "gles",
 	Name:    "Vec3fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45189,13 +45189,13 @@ func (*binaryClassVec3i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3i(d, obj.(*Vec3i))
 }
-func (*binaryClassVec3i) Schema() *schema.Entity { return schemaVec3i }
+func (*binaryClassVec3i) Schema() *binary.Entity { return schemaVec3i }
 
-var schemaVec3i = &schema.Entity{
+var schemaVec3i = &binary.Entity{
 	TypeID:  binaryIDVec3i,
 	Package: "gles",
 	Name:    "Vec3i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 3}},
 	},
 }
@@ -45224,13 +45224,13 @@ func (*binaryClassVec3iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3iˢ(d, obj.(*Vec3iˢ))
 }
-func (*binaryClassVec3iˢ) Schema() *schema.Entity { return schemaVec3iˢ }
+func (*binaryClassVec3iˢ) Schema() *binary.Entity { return schemaVec3iˢ }
 
-var schemaVec3iˢ = &schema.Entity{
+var schemaVec3iˢ = &binary.Entity{
 	TypeID:  binaryIDVec3iˢ,
 	Package: "gles",
 	Name:    "Vec3iˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45259,13 +45259,13 @@ func (*binaryClassVec3iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3iᵖ(d, obj.(*Vec3iᵖ))
 }
-func (*binaryClassVec3iᵖ) Schema() *schema.Entity { return schemaVec3iᵖ }
+func (*binaryClassVec3iᵖ) Schema() *binary.Entity { return schemaVec3iᵖ }
 
-var schemaVec3iᵖ = &schema.Entity{
+var schemaVec3iᵖ = &binary.Entity{
 	TypeID:  binaryIDVec3iᵖ,
 	Package: "gles",
 	Name:    "Vec3iᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45298,13 +45298,13 @@ func (*binaryClassVec3u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3u(d, obj.(*Vec3u))
 }
-func (*binaryClassVec3u) Schema() *schema.Entity { return schemaVec3u }
+func (*binaryClassVec3u) Schema() *binary.Entity { return schemaVec3u }
 
-var schemaVec3u = &schema.Entity{
+var schemaVec3u = &binary.Entity{
 	TypeID:  binaryIDVec3u,
 	Package: "gles",
 	Name:    "Vec3u",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 3}},
 	},
 }
@@ -45333,13 +45333,13 @@ func (*binaryClassVec3uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3uˢ(d, obj.(*Vec3uˢ))
 }
-func (*binaryClassVec3uˢ) Schema() *schema.Entity { return schemaVec3uˢ }
+func (*binaryClassVec3uˢ) Schema() *binary.Entity { return schemaVec3uˢ }
 
-var schemaVec3uˢ = &schema.Entity{
+var schemaVec3uˢ = &binary.Entity{
 	TypeID:  binaryIDVec3uˢ,
 	Package: "gles",
 	Name:    "Vec3uˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45368,13 +45368,13 @@ func (*binaryClassVec3uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec3uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec3uᵖ(d, obj.(*Vec3uᵖ))
 }
-func (*binaryClassVec3uᵖ) Schema() *schema.Entity { return schemaVec3uᵖ }
+func (*binaryClassVec3uᵖ) Schema() *binary.Entity { return schemaVec3uᵖ }
 
-var schemaVec3uᵖ = &schema.Entity{
+var schemaVec3uᵖ = &binary.Entity{
 	TypeID:  binaryIDVec3uᵖ,
 	Package: "gles",
 	Name:    "Vec3uᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45407,13 +45407,13 @@ func (*binaryClassVec4fː2ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː2ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː2ᵃ(d, obj.(*Vec4fː2ᵃ))
 }
-func (*binaryClassVec4fː2ᵃ) Schema() *schema.Entity { return schemaVec4fː2ᵃ }
+func (*binaryClassVec4fː2ᵃ) Schema() *binary.Entity { return schemaVec4fː2ᵃ }
 
-var schemaVec4fː2ᵃ = &schema.Entity{
+var schemaVec4fː2ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec4fː2ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː2ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 2}},
 	},
 }
@@ -45446,13 +45446,13 @@ func (*binaryClassVec4fː3ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː3ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː3ᵃ(d, obj.(*Vec4fː3ᵃ))
 }
-func (*binaryClassVec4fː3ᵃ) Schema() *schema.Entity { return schemaVec4fː3ᵃ }
+func (*binaryClassVec4fː3ᵃ) Schema() *binary.Entity { return schemaVec4fː3ᵃ }
 
-var schemaVec4fː3ᵃ = &schema.Entity{
+var schemaVec4fː3ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec4fː3ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː3ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 3}},
 	},
 }
@@ -45485,13 +45485,13 @@ func (*binaryClassVec4fː4ᵃ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fː4ᵃ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fː4ᵃ(d, obj.(*Vec4fː4ᵃ))
 }
-func (*binaryClassVec4fː4ᵃ) Schema() *schema.Entity { return schemaVec4fː4ᵃ }
+func (*binaryClassVec4fː4ᵃ) Schema() *binary.Entity { return schemaVec4fː4ᵃ }
 
-var schemaVec4fː4ᵃ = &schema.Entity{
+var schemaVec4fː4ᵃ = &binary.Entity{
 	TypeID:  binaryIDVec4fː4ᵃ,
 	Package: "gles",
 	Name:    "Vec4fː4ᵃ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Vec4f)(nil).Class())}, Size: 4}},
 	},
 }
@@ -45520,13 +45520,13 @@ func (*binaryClassVec4fˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fˢ(d, obj.(*Vec4fˢ))
 }
-func (*binaryClassVec4fˢ) Schema() *schema.Entity { return schemaVec4fˢ }
+func (*binaryClassVec4fˢ) Schema() *binary.Entity { return schemaVec4fˢ }
 
-var schemaVec4fˢ = &schema.Entity{
+var schemaVec4fˢ = &binary.Entity{
 	TypeID:  binaryIDVec4fˢ,
 	Package: "gles",
 	Name:    "Vec4fˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45555,13 +45555,13 @@ func (*binaryClassVec4fᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4fᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4fᵖ(d, obj.(*Vec4fᵖ))
 }
-func (*binaryClassVec4fᵖ) Schema() *schema.Entity { return schemaVec4fᵖ }
+func (*binaryClassVec4fᵖ) Schema() *binary.Entity { return schemaVec4fᵖ }
 
-var schemaVec4fᵖ = &schema.Entity{
+var schemaVec4fᵖ = &binary.Entity{
 	TypeID:  binaryIDVec4fᵖ,
 	Package: "gles",
 	Name:    "Vec4fᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45594,13 +45594,13 @@ func (*binaryClassVec4i) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4i(d, obj.(*Vec4i))
 }
-func (*binaryClassVec4i) Schema() *schema.Entity { return schemaVec4i }
+func (*binaryClassVec4i) Schema() *binary.Entity { return schemaVec4i }
 
-var schemaVec4i = &schema.Entity{
+var schemaVec4i = &binary.Entity{
 	TypeID:  binaryIDVec4i,
 	Package: "gles",
 	Name:    "Vec4i",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 4}},
 	},
 }
@@ -45629,13 +45629,13 @@ func (*binaryClassVec4iˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4iˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4iˢ(d, obj.(*Vec4iˢ))
 }
-func (*binaryClassVec4iˢ) Schema() *schema.Entity { return schemaVec4iˢ }
+func (*binaryClassVec4iˢ) Schema() *binary.Entity { return schemaVec4iˢ }
 
-var schemaVec4iˢ = &schema.Entity{
+var schemaVec4iˢ = &binary.Entity{
 	TypeID:  binaryIDVec4iˢ,
 	Package: "gles",
 	Name:    "Vec4iˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45664,13 +45664,13 @@ func (*binaryClassVec4iᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4iᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4iᵖ(d, obj.(*Vec4iᵖ))
 }
-func (*binaryClassVec4iᵖ) Schema() *schema.Entity { return schemaVec4iᵖ }
+func (*binaryClassVec4iᵖ) Schema() *binary.Entity { return schemaVec4iᵖ }
 
-var schemaVec4iᵖ = &schema.Entity{
+var schemaVec4iᵖ = &binary.Entity{
 	TypeID:  binaryIDVec4iᵖ,
 	Package: "gles",
 	Name:    "Vec4iᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45703,13 +45703,13 @@ func (*binaryClassVec4u) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4u) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4u(d, obj.(*Vec4u))
 }
-func (*binaryClassVec4u) Schema() *schema.Entity { return schemaVec4u }
+func (*binaryClassVec4u) Schema() *binary.Entity { return schemaVec4u }
 
-var schemaVec4u = &schema.Entity{
+var schemaVec4u = &binary.Entity{
 	TypeID:  binaryIDVec4u,
 	Package: "gles",
 	Name:    "Vec4u",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}, Size: 4}},
 	},
 }
@@ -45738,13 +45738,13 @@ func (*binaryClassVec4uˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4uˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4uˢ(d, obj.(*Vec4uˢ))
 }
-func (*binaryClassVec4uˢ) Schema() *schema.Entity { return schemaVec4uˢ }
+func (*binaryClassVec4uˢ) Schema() *binary.Entity { return schemaVec4uˢ }
 
-var schemaVec4uˢ = &schema.Entity{
+var schemaVec4uˢ = &binary.Entity{
 	TypeID:  binaryIDVec4uˢ,
 	Package: "gles",
 	Name:    "Vec4uˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45773,13 +45773,13 @@ func (*binaryClassVec4uᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVec4uᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVec4uᵖ(d, obj.(*Vec4uᵖ))
 }
-func (*binaryClassVec4uᵖ) Schema() *schema.Entity { return schemaVec4uᵖ }
+func (*binaryClassVec4uᵖ) Schema() *binary.Entity { return schemaVec4uᵖ }
 
-var schemaVec4uᵖ = &schema.Entity{
+var schemaVec4uᵖ = &binary.Entity{
 	TypeID:  binaryIDVec4uᵖ,
 	Package: "gles",
 	Name:    "Vec4uᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45808,13 +45808,13 @@ func (*binaryClassVertexArrayIdˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVertexArrayIdˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVertexArrayIdˢ(d, obj.(*VertexArrayIdˢ))
 }
-func (*binaryClassVertexArrayIdˢ) Schema() *schema.Entity { return schemaVertexArrayIdˢ }
+func (*binaryClassVertexArrayIdˢ) Schema() *binary.Entity { return schemaVertexArrayIdˢ }
 
-var schemaVertexArrayIdˢ = &schema.Entity{
+var schemaVertexArrayIdˢ = &binary.Entity{
 	TypeID:  binaryIDVertexArrayIdˢ,
 	Package: "gles",
 	Name:    "VertexArrayIdˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45843,13 +45843,13 @@ func (*binaryClassVoidˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidˢ(d, obj.(*Voidˢ))
 }
-func (*binaryClassVoidˢ) Schema() *schema.Entity { return schemaVoidˢ }
+func (*binaryClassVoidˢ) Schema() *binary.Entity { return schemaVoidˢ }
 
-var schemaVoidˢ = &schema.Entity{
+var schemaVoidˢ = &binary.Entity{
 	TypeID:  binaryIDVoidˢ,
 	Package: "gles",
 	Name:    "Voidˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45878,13 +45878,13 @@ func (*binaryClassVoidᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖˢ(d, obj.(*Voidᵖˢ))
 }
-func (*binaryClassVoidᵖˢ) Schema() *schema.Entity { return schemaVoidᵖˢ }
+func (*binaryClassVoidᵖˢ) Schema() *binary.Entity { return schemaVoidᵖˢ }
 
-var schemaVoidᵖˢ = &schema.Entity{
+var schemaVoidᵖˢ = &binary.Entity{
 	TypeID:  binaryIDVoidᵖˢ,
 	Package: "gles",
 	Name:    "Voidᵖˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45913,13 +45913,13 @@ func (*binaryClassVoidᶜᵖˢ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖˢ(d, obj.(*Voidᶜᵖˢ))
 }
-func (*binaryClassVoidᶜᵖˢ) Schema() *schema.Entity { return schemaVoidᶜᵖˢ }
+func (*binaryClassVoidᶜᵖˢ) Schema() *binary.Entity { return schemaVoidᶜᵖˢ }
 
-var schemaVoidᶜᵖˢ = &schema.Entity{
+var schemaVoidᶜᵖˢ = &binary.Entity{
 	TypeID:  binaryIDVoidᶜᵖˢ,
 	Package: "gles",
 	Name:    "Voidᶜᵖˢ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*SliceInfo)(nil).Class())}},
 	},
 }
@@ -45948,13 +45948,13 @@ func (*binaryClassVoidᶜᵖᵖ) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassVoidᶜᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᶜᵖᵖ(d, obj.(*Voidᶜᵖᵖ))
 }
-func (*binaryClassVoidᶜᵖᵖ) Schema() *schema.Entity { return schemaVoidᶜᵖᵖ }
+func (*binaryClassVoidᶜᵖᵖ) Schema() *binary.Entity { return schemaVoidᶜᵖᵖ }
 
-var schemaVoidᶜᵖᵖ = &schema.Entity{
+var schemaVoidᶜᵖᵖ = &binary.Entity{
 	TypeID:  binaryIDVoidᶜᵖᵖ,
 	Package: "gles",
 	Name:    "Voidᶜᵖᵖ",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: schema.Of((*memory.Pointer)(nil).Class())}},
 	},
 }
@@ -45987,13 +45987,13 @@ func (*binaryClassWglCreateContext) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglCreateContext(d, obj.(*WglCreateContext))
 }
-func (*binaryClassWglCreateContext) Schema() *schema.Entity { return schemaWglCreateContext }
+func (*binaryClassWglCreateContext) Schema() *binary.Entity { return schemaWglCreateContext }
 
-var schemaWglCreateContext = &schema.Entity{
+var schemaWglCreateContext = &binary.Entity{
 	TypeID:  binaryIDWglCreateContext,
 	Package: "gles",
 	Name:    "WglCreateContext",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
 		{Declared: "Result", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
@@ -46036,15 +46036,15 @@ func (*binaryClassWglCreateContextAttribsARB) Decode(d binary.Decoder) binary.Ob
 func (*binaryClassWglCreateContextAttribsARB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglCreateContextAttribsARB(d, obj.(*WglCreateContextAttribsARB))
 }
-func (*binaryClassWglCreateContextAttribsARB) Schema() *schema.Entity {
+func (*binaryClassWglCreateContextAttribsARB) Schema() *binary.Entity {
 	return schemaWglCreateContextAttribsARB
 }
 
-var schemaWglCreateContextAttribsARB = &schema.Entity{
+var schemaWglCreateContextAttribsARB = &binary.Entity{
 	TypeID:  binaryIDWglCreateContextAttribsARB,
 	Package: "gles",
 	Name:    "WglCreateContextAttribsARB",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
 		{Declared: "HShareContext", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
@@ -46083,13 +46083,13 @@ func (*binaryClassWglMakeCurrent) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglMakeCurrent(d, obj.(*WglMakeCurrent))
 }
-func (*binaryClassWglMakeCurrent) Schema() *schema.Entity { return schemaWglMakeCurrent }
+func (*binaryClassWglMakeCurrent) Schema() *binary.Entity { return schemaWglMakeCurrent }
 
-var schemaWglMakeCurrent = &schema.Entity{
+var schemaWglMakeCurrent = &binary.Entity{
 	TypeID:  binaryIDWglMakeCurrent,
 	Package: "gles",
 	Name:    "WglMakeCurrent",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
 		{Declared: "Hglrc", Type: &schema.Struct{Entity: schema.Of((*HGLRC)(nil).Class())}},
@@ -46123,13 +46123,13 @@ func (*binaryClassWglSwapBuffers) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassWglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeWglSwapBuffers(d, obj.(*WglSwapBuffers))
 }
-func (*binaryClassWglSwapBuffers) Schema() *schema.Entity { return schemaWglSwapBuffers }
+func (*binaryClassWglSwapBuffers) Schema() *binary.Entity { return schemaWglSwapBuffers }
 
-var schemaWglSwapBuffers = &schema.Entity{
+var schemaWglSwapBuffers = &binary.Entity{
 	TypeID:  binaryIDWglSwapBuffers,
 	Package: "gles",
 	Name:    "WglSwapBuffers",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: schema.Of((*atom.Observations)(nil).Class())}},
 		{Declared: "Hdc", Type: &schema.Struct{Entity: schema.Of((*HDC)(nil).Class())}},
 	},
@@ -46161,13 +46161,13 @@ func (*binaryClassgenerate_types) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassgenerate_types) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodegenerate_types(d, obj.(*generate_types))
 }
-func (*binaryClassgenerate_types) Schema() *schema.Entity { return schemagenerate_types }
+func (*binaryClassgenerate_types) Schema() *binary.Entity { return schemagenerate_types }
 
-var schemagenerate_types = &schema.Entity{
+var schemagenerate_types = &binary.Entity{
 	TypeID:  binaryIDgenerate_types,
 	Package: "gles",
 	Name:    "generate_types",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "U16_slice", Type: &schema.Struct{Entity: schema.Of((*U16ˢ)(nil).Class())}},
 		{Declared: "U32_slice", Type: &schema.Struct{Entity: schema.Of((*U32ˢ)(nil).Class())}},
 	},

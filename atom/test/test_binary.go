@@ -53,13 +53,13 @@ func (*binaryClassAtomA) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomA(d, obj.(*AtomA))
 }
-func (*binaryClassAtomA) Schema() *schema.Entity { return schemaAtomA }
+func (*binaryClassAtomA) Schema() *binary.Entity { return schemaAtomA }
 
-var schemaAtomA = &schema.Entity{
+var schemaAtomA = &binary.Entity{
 	TypeID:  AtomAID,
 	Package: "test",
 	Name:    "AtomA",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "AtomFlags", Type: &schema.Primitive{Name: "atom.Flags", Method: schema.Uint32}},
 	},
@@ -91,13 +91,13 @@ func (*binaryClassAtomB) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomB(d, obj.(*AtomB))
 }
-func (*binaryClassAtomB) Schema() *schema.Entity { return schemaAtomB }
+func (*binaryClassAtomB) Schema() *binary.Entity { return schemaAtomB }
 
-var schemaAtomB = &schema.Entity{
+var schemaAtomB = &binary.Entity{
 	TypeID:  AtomBID,
 	Package: "test",
 	Name:    "AtomB",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
@@ -127,13 +127,13 @@ func (*binaryClassAtomC) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomC(d, obj.(*AtomC))
 }
-func (*binaryClassAtomC) Schema() *schema.Entity { return schemaAtomC }
+func (*binaryClassAtomC) Schema() *binary.Entity { return schemaAtomC }
 
-var schemaAtomC = &schema.Entity{
+var schemaAtomC = &binary.Entity{
 	TypeID:  AtomCID,
 	Package: "test",
 	Name:    "AtomC",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

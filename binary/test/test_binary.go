@@ -48,13 +48,13 @@ func (*binaryClassTypeA) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTypeA(d, obj.(*TypeA))
 }
-func (*binaryClassTypeA) Schema() *schema.Entity { return schemaTypeA }
+func (*binaryClassTypeA) Schema() *binary.Entity { return schemaTypeA }
 
-var schemaTypeA = &schema.Entity{
+var schemaTypeA = &binary.Entity{
 	TypeID:  TypeAID,
 	Package: "test",
 	Name:    "TypeA",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -83,13 +83,13 @@ func (*binaryClassTypeB) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTypeB(d, obj.(*TypeB))
 }
-func (*binaryClassTypeB) Schema() *schema.Entity { return schemaTypeB }
+func (*binaryClassTypeB) Schema() *binary.Entity { return schemaTypeB }
 
-var schemaTypeB = &schema.Entity{
+var schemaTypeB = &binary.Entity{
 	TypeID:  TypeBID,
 	Package: "test",
 	Name:    "TypeB",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

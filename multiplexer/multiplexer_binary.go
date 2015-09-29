@@ -50,13 +50,13 @@ func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
 }
-func (*binaryClassmsgCloseChannel) Schema() *schema.Entity { return schemamsgCloseChannel }
+func (*binaryClassmsgCloseChannel) Schema() *binary.Entity { return schemamsgCloseChannel }
 
-var schemamsgCloseChannel = &schema.Entity{
+var schemamsgCloseChannel = &binary.Entity{
 	TypeID:  binaryIDmsgCloseChannel,
 	Package: "multiplexer",
 	Name:    "msgCloseChannel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }
@@ -91,13 +91,13 @@ func (*binaryClassmsgData) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgData(d, obj.(*msgData))
 }
-func (*binaryClassmsgData) Schema() *schema.Entity { return schemamsgData }
+func (*binaryClassmsgData) Schema() *binary.Entity { return schemamsgData }
 
-var schemamsgData = &schema.Entity{
+var schemamsgData = &binary.Entity{
 	TypeID:  binaryIDmsgData,
 	Package: "multiplexer",
 	Name:    "msgData",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 		{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
@@ -127,13 +127,13 @@ func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
 }
-func (*binaryClassmsgOpenChannel) Schema() *schema.Entity { return schemamsgOpenChannel }
+func (*binaryClassmsgOpenChannel) Schema() *binary.Entity { return schemamsgOpenChannel }
 
-var schemamsgOpenChannel = &schema.Entity{
+var schemamsgOpenChannel = &binary.Entity{
 	TypeID:  binaryIDmsgOpenChannel,
 	Package: "multiplexer",
 	Name:    "msgOpenChannel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }

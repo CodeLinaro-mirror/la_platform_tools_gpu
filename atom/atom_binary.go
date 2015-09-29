@@ -72,13 +72,13 @@ func (*binaryClassFramebufferObservation) Decode(d binary.Decoder) binary.Object
 func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferObservation(d, obj.(*FramebufferObservation))
 }
-func (*binaryClassFramebufferObservation) Schema() *schema.Entity { return schemaFramebufferObservation }
+func (*binaryClassFramebufferObservation) Schema() *binary.Entity { return schemaFramebufferObservation }
 
-var schemaFramebufferObservation = &schema.Entity{
+var schemaFramebufferObservation = &binary.Entity{
 	TypeID:  binaryIDFramebufferObservation,
 	Package: "atom",
 	Name:    "FramebufferObservation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
@@ -111,13 +111,13 @@ func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))
 }
-func (*binaryClassRange) Schema() *schema.Entity { return schemaRange }
+func (*binaryClassRange) Schema() *binary.Entity { return schemaRange }
 
-var schemaRange = &schema.Entity{
+var schemaRange = &binary.Entity{
 	TypeID:  binaryIDRange,
 	Package: "atom",
 	Name:    "Range",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Start", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "End", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -159,13 +159,13 @@ func (*binaryClassGroup) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGroup(d, obj.(*Group))
 }
-func (*binaryClassGroup) Schema() *schema.Entity { return schemaGroup }
+func (*binaryClassGroup) Schema() *binary.Entity { return schemaGroup }
 
-var schemaGroup = &schema.Entity{
+var schemaGroup = &binary.Entity{
 	TypeID:  binaryIDGroup,
 	Package: "atom",
 	Name:    "Group",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Range", Type: &schema.Struct{Entity: schema.Of((*Range)(nil).Class())}},
 		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Entity: schema.Of((*Group)(nil).Class())}}},
@@ -208,13 +208,13 @@ func (*binaryClassList) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeList(d, obj.(*List))
 }
-func (*binaryClassList) Schema() *schema.Entity { return schemaList }
+func (*binaryClassList) Schema() *binary.Entity { return schemaList }
 
-var schemaList = &schema.Entity{
+var schemaList = &binary.Entity{
 	TypeID:  binaryIDList,
 	Package: "atom",
 	Name:    "List",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Atoms", Type: &schema.Slice{Alias: "", ValueType: &schema.Variant{Name: "Atom"}}},
 	},
 }
@@ -251,13 +251,13 @@ func (*binaryClassMetadata) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMetadata(d, obj.(*Metadata))
 }
-func (*binaryClassMetadata) Schema() *schema.Entity { return schemaMetadata }
+func (*binaryClassMetadata) Schema() *binary.Entity { return schemaMetadata }
 
-var schemaMetadata = &schema.Entity{
+var schemaMetadata = &binary.Entity{
 	TypeID:  binaryIDMetadata,
 	Package: "atom",
 	Name:    "Metadata",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "API", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
 		{Declared: "DisplayName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "EndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -292,13 +292,13 @@ func (*binaryClassObservation) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservation(d, obj.(*Observation))
 }
-func (*binaryClassObservation) Schema() *schema.Entity { return schemaObservation }
+func (*binaryClassObservation) Schema() *binary.Entity { return schemaObservation }
 
-var schemaObservation = &schema.Entity{
+var schemaObservation = &binary.Entity{
 	TypeID:  binaryIDObservation,
 	Package: "atom",
 	Name:    "Observation",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Range", Type: &schema.Struct{Entity: schema.Of((*memory.Range)(nil).Class())}},
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
@@ -346,13 +346,13 @@ func (*binaryClassObservations) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservations(d, obj.(*Observations))
 }
-func (*binaryClassObservations) Schema() *schema.Entity { return schemaObservations }
+func (*binaryClassObservations) Schema() *binary.Entity { return schemaObservations }
 
-var schemaObservations = &schema.Entity{
+var schemaObservations = &binary.Entity{
 	TypeID:  binaryIDObservations,
 	Package: "atom",
 	Name:    "Observations",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Observation)(nil).Class())}}},
 		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*Observation)(nil).Class())}}},
 	},
@@ -388,13 +388,13 @@ func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))
 }
-func (*binaryClassResource) Schema() *schema.Entity { return schemaResource }
+func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
-var schemaResource = &schema.Entity{
+var schemaResource = &binary.Entity{
 	TypeID:  binaryIDResource,
 	Package: "atom",
 	Name:    "Resource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},

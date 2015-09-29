@@ -55,13 +55,13 @@ func (*binaryClasstestStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestStruct(d, obj.(*testStruct))
 }
-func (*binaryClasstestStruct) Schema() *schema.Entity { return schematestStruct }
+func (*binaryClasstestStruct) Schema() *binary.Entity { return schematestStruct }
 
-var schematestStruct = &schema.Entity{
+var schematestStruct = &binary.Entity{
 	TypeID:  binaryIDtestStruct,
 	Package: "builder",
 	Name:    "testStruct",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*testStruct)(nil).Class())}}},
 	},
@@ -79,7 +79,7 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 	for i := range o.Sli {
 		e.Bool(o.Sli[i])
 	}
-	schema.Any{}.Encode(e, o.Any)
+	schema.Any{}.EncodeValue(e, o.Any)
 	if o.Ptr != nil {
 		e.Object(o.Ptr)
 	} else {
@@ -100,7 +100,7 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 			o.Sli[i] = bool(d.Bool())
 		}
 	}
-	o.Any = schema.Any{}.Decode(d)
+	o.Any = schema.Any{}.DecodeValue(d)
 	if obj := d.Object(); obj != nil {
 		o.Ptr = obj.(*testStruct)
 	} else {
@@ -131,13 +131,13 @@ func (*binaryClasstestAtom) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestAtom(d, obj.(*testAtom))
 }
-func (*binaryClasstestAtom) Schema() *schema.Entity { return schematestAtom }
+func (*binaryClasstestAtom) Schema() *binary.Entity { return schematestAtom }
 
-var schematestAtom = &schema.Entity{
+var schematestAtom = &binary.Entity{
 	TypeID:  binaryIDtestAtom,
 	Package: "builder",
 	Name:    "testAtom",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "api", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Sli", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},

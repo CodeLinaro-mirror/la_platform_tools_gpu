@@ -52,13 +52,13 @@ func (*binaryClassPointer) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePointer(d, obj.(*Pointer))
 }
-func (*binaryClassPointer) Schema() *schema.Entity { return schemaPointer }
+func (*binaryClassPointer) Schema() *binary.Entity { return schemaPointer }
 
-var schemaPointer = &schema.Entity{
+var schemaPointer = &binary.Entity{
 	TypeID:  binaryIDPointer,
 	Package: "memory",
 	Name:    "Pointer",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32}},
 	},
@@ -90,13 +90,13 @@ func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))
 }
-func (*binaryClassRange) Schema() *schema.Entity { return schemaRange }
+func (*binaryClassRange) Schema() *binary.Entity { return schemaRange }
 
-var schemaRange = &schema.Entity{
+var schemaRange = &binary.Entity{
 	TypeID:  binaryIDRange,
 	Package: "memory",
 	Name:    "Range",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},

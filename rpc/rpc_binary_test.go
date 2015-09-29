@@ -46,13 +46,13 @@ func (*binaryClassdelay) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodedelay(d, obj.(*delay))
 }
-func (*binaryClassdelay) Schema() *schema.Entity { return schemadelay }
+func (*binaryClassdelay) Schema() *binary.Entity { return schemadelay }
 
-var schemadelay = &schema.Entity{
+var schemadelay = &binary.Entity{
 	TypeID:  binaryIDdelay,
 	Package: "rpc",
 	Name:    "delay",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -81,13 +81,13 @@ func (*binaryClassrequest) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderequest(d, obj.(*request))
 }
-func (*binaryClassrequest) Schema() *schema.Entity { return schemarequest }
+func (*binaryClassrequest) Schema() *binary.Entity { return schemarequest }
 
-var schemarequest = &schema.Entity{
+var schemarequest = &binary.Entity{
 	TypeID:  binaryIDrequest,
 	Package: "rpc",
 	Name:    "request",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -116,13 +116,13 @@ func (*binaryClassresponse) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesponse(d, obj.(*response))
 }
-func (*binaryClassresponse) Schema() *schema.Entity { return schemaresponse }
+func (*binaryClassresponse) Schema() *binary.Entity { return schemaresponse }
 
-var schemaresponse = &schema.Entity{
+var schemaresponse = &binary.Entity{
 	TypeID:  binaryIDresponse,
 	Package: "rpc",
 	Name:    "response",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

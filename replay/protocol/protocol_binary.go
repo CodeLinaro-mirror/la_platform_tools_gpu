@@ -52,13 +52,13 @@ func (*binaryClassResourceInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResourceInfo(d, obj.(*ResourceInfo))
 }
-func (*binaryClassResourceInfo) Schema() *schema.Entity { return schemaResourceInfo }
+func (*binaryClassResourceInfo) Schema() *binary.Entity { return schemaResourceInfo }
 
-var schemaResourceInfo = &schema.Entity{
+var schemaResourceInfo = &binary.Entity{
 	TypeID:  binaryIDResourceInfo,
 	Package: "protocol",
 	Name:    "ResourceInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -112,13 +112,13 @@ func (*binaryClassPayload) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePayload(d, obj.(*Payload))
 }
-func (*binaryClassPayload) Schema() *schema.Entity { return schemaPayload }
+func (*binaryClassPayload) Schema() *binary.Entity { return schemaPayload }
 
-var schemaPayload = &schema.Entity{
+var schemaPayload = &binary.Entity{
 	TypeID:  binaryIDPayload,
 	Package: "protocol",
 	Name:    "Payload",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},

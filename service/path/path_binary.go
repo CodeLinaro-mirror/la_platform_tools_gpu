@@ -88,13 +88,13 @@ func (*binaryClassArrayIndex) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassArrayIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeArrayIndex(d, obj.(*ArrayIndex))
 }
-func (*binaryClassArrayIndex) Schema() *schema.Entity { return schemaArrayIndex }
+func (*binaryClassArrayIndex) Schema() *binary.Entity { return schemaArrayIndex }
 
-var schemaArrayIndex = &schema.Entity{
+var schemaArrayIndex = &binary.Entity{
 	TypeID:  binaryIDArrayIndex,
 	Package: "path",
 	Name:    "ArrayIndex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Array", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -107,7 +107,7 @@ func (*As) Class() binary.Class {
 }
 func doEncodeAs(e binary.Encoder, o *As) {
 	e.Object(o.Object)
-	schema.Any{}.Encode(e, o.Type)
+	schema.Any{}.EncodeValue(e, o.Type)
 }
 func doDecodeAs(d binary.Decoder, o *As) {
 	if obj := d.Object(); obj != nil {
@@ -115,7 +115,7 @@ func doDecodeAs(d binary.Decoder, o *As) {
 	} else {
 		o.Object = nil
 	}
-	o.Type = schema.Any{}.Decode(d)
+	o.Type = schema.Any{}.DecodeValue(d)
 }
 func (*binaryClassAs) ID() binary.ID      { return binaryIDAs }
 func (*binaryClassAs) New() binary.Object { return &As{} }
@@ -130,13 +130,13 @@ func (*binaryClassAs) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAs(d, obj.(*As))
 }
-func (*binaryClassAs) Schema() *schema.Entity { return schemaAs }
+func (*binaryClassAs) Schema() *binary.Entity { return schemaAs }
 
-var schemaAs = &schema.Entity{
+var schemaAs = &binary.Entity{
 	TypeID:  binaryIDAs,
 	Package: "path",
 	Name:    "As",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Type", Type: &schema.Any{}},
 	},
@@ -166,13 +166,13 @@ func (*binaryClassCapture) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCapture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCapture(d, obj.(*Capture))
 }
-func (*binaryClassCapture) Schema() *schema.Entity { return schemaCapture }
+func (*binaryClassCapture) Schema() *binary.Entity { return schemaCapture }
 
-var schemaCapture = &schema.Entity{
+var schemaCapture = &binary.Entity{
 	TypeID:  binaryIDCapture,
 	Package: "path",
 	Name:    "Capture",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
@@ -209,13 +209,13 @@ func (*binaryClassAtoms) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtoms) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtoms(d, obj.(*Atoms))
 }
-func (*binaryClassAtoms) Schema() *schema.Entity { return schemaAtoms }
+func (*binaryClassAtoms) Schema() *binary.Entity { return schemaAtoms }
 
-var schemaAtoms = &schema.Entity{
+var schemaAtoms = &binary.Entity{
 	TypeID:  binaryIDAtoms,
 	Package: "path",
 	Name:    "Atoms",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
@@ -254,13 +254,13 @@ func (*binaryClassAtom) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtom(d, obj.(*Atom))
 }
-func (*binaryClassAtom) Schema() *schema.Entity { return schemaAtom }
+func (*binaryClassAtom) Schema() *binary.Entity { return schemaAtom }
 
-var schemaAtom = &schema.Entity{
+var schemaAtom = &binary.Entity{
 	TypeID:  binaryIDAtom,
 	Package: "path",
 	Name:    "Atom",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Atoms", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atoms)(nil).Class())}}},
 		{Declared: "Index", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
@@ -290,13 +290,13 @@ func (*binaryClassBlob) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBlob(d, obj.(*Blob))
 }
-func (*binaryClassBlob) Schema() *schema.Entity { return schemaBlob }
+func (*binaryClassBlob) Schema() *binary.Entity { return schemaBlob }
 
-var schemaBlob = &schema.Entity{
+var schemaBlob = &binary.Entity{
 	TypeID:  binaryIDBlob,
 	Package: "path",
 	Name:    "Blob",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
@@ -325,13 +325,13 @@ func (*binaryClassDevice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassDevice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeDevice(d, obj.(*Device))
 }
-func (*binaryClassDevice) Schema() *schema.Entity { return schemaDevice }
+func (*binaryClassDevice) Schema() *binary.Entity { return schemaDevice }
 
-var schemaDevice = &schema.Entity{
+var schemaDevice = &binary.Entity{
 	TypeID:  binaryIDDevice,
 	Package: "path",
 	Name:    "Device",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
@@ -366,13 +366,13 @@ func (*binaryClassField) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassField) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeField(d, obj.(*Field))
 }
-func (*binaryClassField) Schema() *schema.Entity { return schemaField }
+func (*binaryClassField) Schema() *binary.Entity { return schemaField }
 
-var schemaField = &schema.Entity{
+var schemaField = &binary.Entity{
 	TypeID:  binaryIDField,
 	Package: "path",
 	Name:    "Field",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Struct", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -410,13 +410,13 @@ func (*binaryClassHierarchy) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHierarchy(d, obj.(*Hierarchy))
 }
-func (*binaryClassHierarchy) Schema() *schema.Entity { return schemaHierarchy }
+func (*binaryClassHierarchy) Schema() *binary.Entity { return schemaHierarchy }
 
-var schemaHierarchy = &schema.Entity{
+var schemaHierarchy = &binary.Entity{
 	TypeID:  binaryIDHierarchy,
 	Package: "path",
 	Name:    "Hierarchy",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
@@ -445,13 +445,13 @@ func (*binaryClassImageInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImageInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImageInfo(d, obj.(*ImageInfo))
 }
-func (*binaryClassImageInfo) Schema() *schema.Entity { return schemaImageInfo }
+func (*binaryClassImageInfo) Schema() *binary.Entity { return schemaImageInfo }
 
-var schemaImageInfo = &schema.Entity{
+var schemaImageInfo = &binary.Entity{
 	TypeID:  binaryIDImageInfo,
 	Package: "path",
 	Name:    "ImageInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
@@ -463,7 +463,7 @@ func (*MapIndex) Class() binary.Class {
 }
 func doEncodeMapIndex(e binary.Encoder, o *MapIndex) {
 	e.Object(o.Map)
-	schema.Any{}.Encode(e, o.Key)
+	schema.Any{}.EncodeValue(e, o.Key)
 }
 func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	if obj := d.Object(); obj != nil {
@@ -471,7 +471,7 @@ func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	} else {
 		o.Map = nil
 	}
-	o.Key = schema.Any{}.Decode(d)
+	o.Key = schema.Any{}.DecodeValue(d)
 }
 func (*binaryClassMapIndex) ID() binary.ID      { return binaryIDMapIndex }
 func (*binaryClassMapIndex) New() binary.Object { return &MapIndex{} }
@@ -486,13 +486,13 @@ func (*binaryClassMapIndex) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMapIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMapIndex(d, obj.(*MapIndex))
 }
-func (*binaryClassMapIndex) Schema() *schema.Entity { return schemaMapIndex }
+func (*binaryClassMapIndex) Schema() *binary.Entity { return schemaMapIndex }
 
-var schemaMapIndex = &schema.Entity{
+var schemaMapIndex = &binary.Entity{
 	TypeID:  binaryIDMapIndex,
 	Package: "path",
 	Name:    "MapIndex",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Map", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Key", Type: &schema.Any{}},
 	},
@@ -536,13 +536,13 @@ func (*binaryClassMemoryRange) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassMemoryRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMemoryRange(d, obj.(*MemoryRange))
 }
-func (*binaryClassMemoryRange) Schema() *schema.Entity { return schemaMemoryRange }
+func (*binaryClassMemoryRange) Schema() *binary.Entity { return schemaMemoryRange }
 
-var schemaMemoryRange = &schema.Entity{
+var schemaMemoryRange = &binary.Entity{
 	TypeID:  binaryIDMemoryRange,
 	Package: "path",
 	Name:    "MemoryRange",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -592,13 +592,13 @@ func (*binaryClassReport) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReport(d, obj.(*Report))
 }
-func (*binaryClassReport) Schema() *schema.Entity { return schemaReport }
+func (*binaryClassReport) Schema() *binary.Entity { return schemaReport }
 
-var schemaReport = &schema.Entity{
+var schemaReport = &binary.Entity{
 	TypeID:  binaryIDReport,
 	Package: "path",
 	Name:    "Report",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Device)(nil).Class())}}},
 	},
@@ -638,13 +638,13 @@ func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))
 }
-func (*binaryClassResource) Schema() *schema.Entity { return schemaResource }
+func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
-var schemaResource = &schema.Entity{
+var schemaResource = &binary.Entity{
 	TypeID:  binaryIDResource,
 	Package: "path",
 	Name:    "Resource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 	},
@@ -682,13 +682,13 @@ func (*binaryClassResources) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResources(d, obj.(*Resources))
 }
-func (*binaryClassResources) Schema() *schema.Entity { return schemaResources }
+func (*binaryClassResources) Schema() *binary.Entity { return schemaResources }
 
-var schemaResources = &schema.Entity{
+var schemaResources = &binary.Entity{
 	TypeID:  binaryIDResources,
 	Package: "path",
 	Name:    "Resources",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Capture)(nil).Class())}}},
 	},
 }
@@ -725,13 +725,13 @@ func (*binaryClassSlice) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSlice(d, obj.(*Slice))
 }
-func (*binaryClassSlice) Schema() *schema.Entity { return schemaSlice }
+func (*binaryClassSlice) Schema() *binary.Entity { return schemaSlice }
 
-var schemaSlice = &schema.Entity{
+var schemaSlice = &binary.Entity{
 	TypeID:  binaryIDSlice,
 	Package: "path",
 	Name:    "Slice",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Array", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "Start", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "End", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
@@ -770,13 +770,13 @@ func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
 }
-func (*binaryClassState) Schema() *schema.Entity { return schemaState }
+func (*binaryClassState) Schema() *binary.Entity { return schemaState }
 
-var schemaState = &schema.Entity{
+var schemaState = &binary.Entity{
 	TypeID:  binaryIDState,
 	Package: "path",
 	Name:    "State",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*Atom)(nil).Class())}}},
 	},
 }
@@ -813,13 +813,13 @@ func (*binaryClassThumbnail) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassThumbnail) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeThumbnail(d, obj.(*Thumbnail))
 }
-func (*binaryClassThumbnail) Schema() *schema.Entity { return schemaThumbnail }
+func (*binaryClassThumbnail) Schema() *binary.Entity { return schemaThumbnail }
 
-var schemaThumbnail = &schema.Entity{
+var schemaThumbnail = &binary.Entity{
 	TypeID:  binaryIDThumbnail,
 	Package: "path",
 	Name:    "Thumbnail",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
 		{Declared: "DesiredWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "DesiredHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -850,13 +850,13 @@ func (*binaryClassTimingInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTimingInfo(d, obj.(*TimingInfo))
 }
-func (*binaryClassTimingInfo) Schema() *schema.Entity { return schemaTimingInfo }
+func (*binaryClassTimingInfo) Schema() *binary.Entity { return schemaTimingInfo }
 
-var schemaTimingInfo = &schema.Entity{
+var schemaTimingInfo = &binary.Entity{
 	TypeID:  binaryIDTimingInfo,
 	Package: "path",
 	Name:    "TimingInfo",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }

@@ -48,7 +48,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type#float64"}}double{{end}}
 {{define "Cpp.Type#string"}}char*{{end}}
 {{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
-{{define "Cpp.Type.Struct"}}{{.Name | File.TypeName}}{{end}}
+{{define "Cpp.Type.Struct"}}{{.String | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
@@ -224,20 +224,20 @@ const go_binary_tmpl = `{{/*
   {{$wrap := gt (len .Name) (add $base 0)}}
   {{if File.Directive "Schema" true}}
     {{$wrap := gt (len .Name) (add $base 4)}}
-    func (*binaryClass{{.Name}}) Schema() *schema.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    func (*binaryClass{{.Name}}) Schema() *binary.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
       return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
     «}¶
     ¶
-    var schema{{.Name}} = &schema.Entity{»¶
+    var schema{{.Name}} = &binary.Entity{»¶
       TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
       Name:║"{{.Name}}",¶
       {{if .Identity}}Identity:║"{{.Identity}}",¶{{end}}
       {{if .Version}}Version:║"{{.Version}}",¶{{end}}
       {{if not (len .Fields)}}
-        Fields:║[]schema.Field{},¶
+        Fields:║[]binary.Field{},¶
       {{else}}
-        Fields: []schema.Field{»¶
+        Fields: []binary.Field{»¶
           {{range .Fields}}
             {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
           {{end}}
@@ -276,7 +276,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Encode.Any"}}
-  schema.Any{}.Encode(e, {{.Name}})¶
+  schema.Any{}.EncodeValue(e, {{.Name}})¶
 {{end}}
 
 {{define "Go.Encode_Length"}}
@@ -342,7 +342,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Decode.Any"}}
-  {{.Name}} = schema.Any{}.Decode(d)¶
+  {{.Name}} = schema.Any{}.DecodeValue(d)¶
 {{end}}
 
 {{define "Go.Decode_Length"}}
@@ -385,7 +385,7 @@ const go_binary_tmpl = `{{/*
 {{end}}
 
 {{define "Go.Schema.Primitive"}}&schema.Primitive{Name: "{{.Name}}", Method: schema.{{.Method}}}{{end}}
-{{define "Go.Schema.Struct"}}&schema.Struct{Entity: schema.Of((*{{.Name}})(nil).Class())}{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Entity: schema.Of((*{{.}})(nil).Class())}{{end}}
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}
@@ -609,6 +609,7 @@ const go_common_tmpl = `{{/*
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+{{define "Go.Type.Struct"}}{{.}}{{end}}
 
 {{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}
@@ -855,7 +856,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
 {{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Variant"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.variant());{{end}}
@@ -1144,7 +1145,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
 {{define "Java.Type#log.Severity"}}Severity{{end}}
 {{define "Java.Type.Primitive"}}{{Call "Java.PrimitiveType" .}}{{end}}
-{{define "Java.Type.Alias"}}{{.Typename}}{{end}}
+{{define "Java.Type.Alias"}}{{.}}{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}

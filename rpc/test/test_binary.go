@@ -102,13 +102,13 @@ func (*binaryClassListNode) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassListNode) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeListNode(d, obj.(*ListNode))
 }
-func (*binaryClassListNode) Schema() *schema.Entity { return schemaListNode }
+func (*binaryClassListNode) Schema() *binary.Entity { return schemaListNode }
 
-var schemaListNode = &schema.Entity{
+var schemaListNode = &binary.Entity{
 	TypeID:  binaryIDListNode,
 	Package: "test",
 	Name:    "ListNode",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
@@ -142,13 +142,13 @@ func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))
 }
-func (*binaryClassResource) Schema() *schema.Entity { return schemaResource }
+func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
-var schemaResource = &schema.Entity{
+var schemaResource = &binary.Entity{
 	TypeID:  binaryIDResource,
 	Package: "test",
 	Name:    "Resource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -183,13 +183,13 @@ func (*binaryClassStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeStruct(d, obj.(*Struct))
 }
-func (*binaryClassStruct) Schema() *schema.Entity { return schemaStruct }
+func (*binaryClassStruct) Schema() *binary.Entity { return schemaStruct }
 
-var schemaStruct = &schema.Entity{
+var schemaStruct = &binary.Entity{
 	TypeID:  binaryIDStruct,
 	Package: "test",
 	Name:    "Struct",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
@@ -222,13 +222,13 @@ func (*binaryClasscallAdd) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallAdd) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallAdd(d, obj.(*callAdd))
 }
-func (*binaryClasscallAdd) Schema() *schema.Entity { return schemacallAdd }
+func (*binaryClasscallAdd) Schema() *binary.Entity { return schemacallAdd }
 
-var schemacallAdd = &schema.Entity{
+var schemacallAdd = &binary.Entity{
 	TypeID:  binaryIDcallAdd,
 	Package: "test",
 	Name:    "callAdd",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -258,13 +258,13 @@ func (*binaryClasscallEnumToString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallEnumToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallEnumToString(d, obj.(*callEnumToString))
 }
-func (*binaryClasscallEnumToString) Schema() *schema.Entity { return schemacallEnumToString }
+func (*binaryClasscallEnumToString) Schema() *binary.Entity { return schemacallEnumToString }
 
-var schemacallEnumToString = &schema.Entity{
+var schemacallEnumToString = &binary.Entity{
 	TypeID:  binaryIDcallEnumToString,
 	Package: "test",
 	Name:    "callEnumToString",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
 }
@@ -291,13 +291,13 @@ func (*binaryClasscallGetListNodeChain) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallGetListNodeChain(d, obj.(*callGetListNodeChain))
 }
-func (*binaryClasscallGetListNodeChain) Schema() *schema.Entity { return schemacallGetListNodeChain }
+func (*binaryClasscallGetListNodeChain) Schema() *binary.Entity { return schemacallGetListNodeChain }
 
-var schemacallGetListNodeChain = &schema.Entity{
+var schemacallGetListNodeChain = &binary.Entity{
 	TypeID:  binaryIDcallGetListNodeChain,
 	Package: "test",
 	Name:    "callGetListNodeChain",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClasscallGetListNodeChainArray struct{}
@@ -322,15 +322,15 @@ func (*binaryClasscallGetListNodeChainArray) Decode(d binary.Decoder) binary.Obj
 func (*binaryClasscallGetListNodeChainArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallGetListNodeChainArray(d, obj.(*callGetListNodeChainArray))
 }
-func (*binaryClasscallGetListNodeChainArray) Schema() *schema.Entity {
+func (*binaryClasscallGetListNodeChainArray) Schema() *binary.Entity {
 	return schemacallGetListNodeChainArray
 }
 
-var schemacallGetListNodeChainArray = &schema.Entity{
+var schemacallGetListNodeChainArray = &binary.Entity{
 	TypeID:  binaryIDcallGetListNodeChainArray,
 	Package: "test",
 	Name:    "callGetListNodeChainArray",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClasscallGetResource struct{}
@@ -355,13 +355,13 @@ func (*binaryClasscallGetResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallGetResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallGetResource(d, obj.(*callGetResource))
 }
-func (*binaryClasscallGetResource) Schema() *schema.Entity { return schemacallGetResource }
+func (*binaryClasscallGetResource) Schema() *binary.Entity { return schemacallGetResource }
 
-var schemacallGetResource = &schema.Entity{
+var schemacallGetResource = &binary.Entity{
 	TypeID:  binaryIDcallGetResource,
 	Package: "test",
 	Name:    "callGetResource",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClasscallGetSingleListNode struct{}
@@ -386,13 +386,13 @@ func (*binaryClasscallGetSingleListNode) Decode(d binary.Decoder) binary.Object 
 func (*binaryClasscallGetSingleListNode) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallGetSingleListNode(d, obj.(*callGetSingleListNode))
 }
-func (*binaryClasscallGetSingleListNode) Schema() *schema.Entity { return schemacallGetSingleListNode }
+func (*binaryClasscallGetSingleListNode) Schema() *binary.Entity { return schemacallGetSingleListNode }
 
-var schemacallGetSingleListNode = &schema.Entity{
+var schemacallGetSingleListNode = &binary.Entity{
 	TypeID:  binaryIDcallGetSingleListNode,
 	Package: "test",
 	Name:    "callGetSingleListNode",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClasscallGetStruct struct{}
@@ -417,13 +417,13 @@ func (*binaryClasscallGetStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallGetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallGetStruct(d, obj.(*callGetStruct))
 }
-func (*binaryClasscallGetStruct) Schema() *schema.Entity { return schemacallGetStruct }
+func (*binaryClasscallGetStruct) Schema() *binary.Entity { return schemacallGetStruct }
 
-var schemacallGetStruct = &schema.Entity{
+var schemacallGetStruct = &binary.Entity{
 	TypeID:  binaryIDcallGetStruct,
 	Package: "test",
 	Name:    "callGetStruct",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClasscallResolveResource struct{}
@@ -450,13 +450,13 @@ func (*binaryClasscallResolveResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallResolveResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallResolveResource(d, obj.(*callResolveResource))
 }
-func (*binaryClasscallResolveResource) Schema() *schema.Entity { return schemacallResolveResource }
+func (*binaryClasscallResolveResource) Schema() *binary.Entity { return schemacallResolveResource }
 
-var schemacallResolveResource = &schema.Entity{
+var schemacallResolveResource = &binary.Entity{
 	TypeID:  binaryIDcallResolveResource,
 	Package: "test",
 	Name:    "callResolveResource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
@@ -485,13 +485,13 @@ func (*binaryClasscallSetStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallSetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallSetStruct(d, obj.(*callSetStruct))
 }
-func (*binaryClasscallSetStruct) Schema() *schema.Entity { return schemacallSetStruct }
+func (*binaryClasscallSetStruct) Schema() *binary.Entity { return schemacallSetStruct }
 
-var schemacallSetStruct = &schema.Entity{
+var schemacallSetStruct = &binary.Entity{
 	TypeID:  binaryIDcallSetStruct,
 	Package: "test",
 	Name:    "callSetStruct",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "s", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
 	},
 }
@@ -520,13 +520,13 @@ func (*binaryClasscallUseResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClasscallUseResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecallUseResource(d, obj.(*callUseResource))
 }
-func (*binaryClasscallUseResource) Schema() *schema.Entity { return schemacallUseResource }
+func (*binaryClasscallUseResource) Schema() *binary.Entity { return schemacallUseResource }
 
-var schemacallUseResource = &schema.Entity{
+var schemacallUseResource = &binary.Entity{
 	TypeID:  binaryIDcallUseResource,
 	Package: "test",
 	Name:    "callUseResource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
@@ -555,13 +555,13 @@ func (*binaryClassresultAdd) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultAdd) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultAdd(d, obj.(*resultAdd))
 }
-func (*binaryClassresultAdd) Schema() *schema.Entity { return schemaresultAdd }
+func (*binaryClassresultAdd) Schema() *binary.Entity { return schemaresultAdd }
 
-var schemaresultAdd = &schema.Entity{
+var schemaresultAdd = &binary.Entity{
 	TypeID:  binaryIDresultAdd,
 	Package: "test",
 	Name:    "resultAdd",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -590,13 +590,13 @@ func (*binaryClassresultEnumToString) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultEnumToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultEnumToString(d, obj.(*resultEnumToString))
 }
-func (*binaryClassresultEnumToString) Schema() *schema.Entity { return schemaresultEnumToString }
+func (*binaryClassresultEnumToString) Schema() *binary.Entity { return schemaresultEnumToString }
 
-var schemaresultEnumToString = &schema.Entity{
+var schemaresultEnumToString = &binary.Entity{
 	TypeID:  binaryIDresultEnumToString,
 	Package: "test",
 	Name:    "resultEnumToString",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -633,13 +633,13 @@ func (*binaryClassresultGetListNodeChain) Decode(d binary.Decoder) binary.Object
 func (*binaryClassresultGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultGetListNodeChain(d, obj.(*resultGetListNodeChain))
 }
-func (*binaryClassresultGetListNodeChain) Schema() *schema.Entity { return schemaresultGetListNodeChain }
+func (*binaryClassresultGetListNodeChain) Schema() *binary.Entity { return schemaresultGetListNodeChain }
 
-var schemaresultGetListNodeChain = &schema.Entity{
+var schemaresultGetListNodeChain = &binary.Entity{
 	TypeID:  binaryIDresultGetListNodeChain,
 	Package: "test",
 	Name:    "resultGetListNodeChain",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
 }
@@ -688,15 +688,15 @@ func (*binaryClassresultGetListNodeChainArray) Decode(d binary.Decoder) binary.O
 func (*binaryClassresultGetListNodeChainArray) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultGetListNodeChainArray(d, obj.(*resultGetListNodeChainArray))
 }
-func (*binaryClassresultGetListNodeChainArray) Schema() *schema.Entity {
+func (*binaryClassresultGetListNodeChainArray) Schema() *binary.Entity {
 	return schemaresultGetListNodeChainArray
 }
 
-var schemaresultGetListNodeChainArray = &schema.Entity{
+var schemaresultGetListNodeChainArray = &binary.Entity{
 	TypeID:  binaryIDresultGetListNodeChainArray,
 	Package: "test",
 	Name:    "resultGetListNodeChainArray",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}}},
 	},
 }
@@ -725,13 +725,13 @@ func (*binaryClassresultGetResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultGetResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultGetResource(d, obj.(*resultGetResource))
 }
-func (*binaryClassresultGetResource) Schema() *schema.Entity { return schemaresultGetResource }
+func (*binaryClassresultGetResource) Schema() *binary.Entity { return schemaresultGetResource }
 
-var schemaresultGetResource = &schema.Entity{
+var schemaresultGetResource = &binary.Entity{
 	TypeID:  binaryIDresultGetResource,
 	Package: "test",
 	Name:    "resultGetResource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
 }
@@ -768,15 +768,15 @@ func (*binaryClassresultGetSingleListNode) Decode(d binary.Decoder) binary.Objec
 func (*binaryClassresultGetSingleListNode) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultGetSingleListNode(d, obj.(*resultGetSingleListNode))
 }
-func (*binaryClassresultGetSingleListNode) Schema() *schema.Entity {
+func (*binaryClassresultGetSingleListNode) Schema() *binary.Entity {
 	return schemaresultGetSingleListNode
 }
 
-var schemaresultGetSingleListNode = &schema.Entity{
+var schemaresultGetSingleListNode = &binary.Entity{
 	TypeID:  binaryIDresultGetSingleListNode,
 	Package: "test",
 	Name:    "resultGetSingleListNode",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: schema.Of((*ListNode)(nil).Class())}}},
 	},
 }
@@ -805,13 +805,13 @@ func (*binaryClassresultGetStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultGetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultGetStruct(d, obj.(*resultGetStruct))
 }
-func (*binaryClassresultGetStruct) Schema() *schema.Entity { return schemaresultGetStruct }
+func (*binaryClassresultGetStruct) Schema() *binary.Entity { return schemaresultGetStruct }
 
-var schemaresultGetStruct = &schema.Entity{
+var schemaresultGetStruct = &binary.Entity{
 	TypeID:  binaryIDresultGetStruct,
 	Package: "test",
 	Name:    "resultGetStruct",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Struct)(nil).Class())}},
 	},
 }
@@ -840,13 +840,13 @@ func (*binaryClassresultResolveResource) Decode(d binary.Decoder) binary.Object 
 func (*binaryClassresultResolveResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultResolveResource(d, obj.(*resultResolveResource))
 }
-func (*binaryClassresultResolveResource) Schema() *schema.Entity { return schemaresultResolveResource }
+func (*binaryClassresultResolveResource) Schema() *binary.Entity { return schemaresultResolveResource }
 
-var schemaresultResolveResource = &schema.Entity{
+var schemaresultResolveResource = &binary.Entity{
 	TypeID:  binaryIDresultResolveResource,
 	Package: "test",
 	Name:    "resultResolveResource",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Struct{Entity: schema.Of((*Resource)(nil).Class())}},
 	},
 }
@@ -873,13 +873,13 @@ func (*binaryClassresultSetStruct) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultSetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultSetStruct(d, obj.(*resultSetStruct))
 }
-func (*binaryClassresultSetStruct) Schema() *schema.Entity { return schemaresultSetStruct }
+func (*binaryClassresultSetStruct) Schema() *binary.Entity { return schemaresultSetStruct }
 
-var schemaresultSetStruct = &schema.Entity{
+var schemaresultSetStruct = &binary.Entity{
 	TypeID:  binaryIDresultSetStruct,
 	Package: "test",
 	Name:    "resultSetStruct",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassresultUseResource struct{}
@@ -904,13 +904,13 @@ func (*binaryClassresultUseResource) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassresultUseResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesultUseResource(d, obj.(*resultUseResource))
 }
-func (*binaryClassresultUseResource) Schema() *schema.Entity { return schemaresultUseResource }
+func (*binaryClassresultUseResource) Schema() *binary.Entity { return schemaresultUseResource }
 
-var schemaresultUseResource = &schema.Entity{
+var schemaresultUseResource = &binary.Entity{
 	TypeID:  binaryIDresultUseResource,
 	Package: "test",
 	Name:    "resultUseResource",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 var ConstantValues schema.Constants

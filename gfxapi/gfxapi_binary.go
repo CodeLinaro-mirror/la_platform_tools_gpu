@@ -63,13 +63,13 @@ func (*binaryClassCubemapLevel) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCubemapLevel(d, obj.(*CubemapLevel))
 }
-func (*binaryClassCubemapLevel) Schema() *schema.Entity { return schemaCubemapLevel }
+func (*binaryClassCubemapLevel) Schema() *binary.Entity { return schemaCubemapLevel }
 
-var schemaCubemapLevel = &schema.Entity{
+var schemaCubemapLevel = &binary.Entity{
 	TypeID:  binaryIDCubemapLevel,
 	Package: "gfxapi",
 	Name:    "CubemapLevel",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "NegativeX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
 		{Declared: "PositiveX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
 		{Declared: "NegativeY", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
@@ -111,13 +111,13 @@ func (*binaryClassCubemap) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassCubemap) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCubemap(d, obj.(*Cubemap))
 }
-func (*binaryClassCubemap) Schema() *schema.Entity { return schemaCubemap }
+func (*binaryClassCubemap) Schema() *binary.Entity { return schemaCubemap }
 
-var schemaCubemap = &schema.Entity{
+var schemaCubemap = &binary.Entity{
 	TypeID:  binaryIDCubemap,
 	Package: "gfxapi",
 	Name:    "Cubemap",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*CubemapLevel)(nil).Class())}}},
 	},
 }
@@ -154,13 +154,13 @@ func (*binaryClassTexture2D) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTexture2D(d, obj.(*Texture2D))
 }
-func (*binaryClassTexture2D) Schema() *schema.Entity { return schemaTexture2D }
+func (*binaryClassTexture2D) Schema() *binary.Entity { return schemaTexture2D }
 
-var schemaTexture2D = &schema.Entity{
+var schemaTexture2D = &binary.Entity{
 	TypeID:  binaryIDTexture2D,
 	Package: "gfxapi",
 	Name:    "Texture2D",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}}},
 	},
 }

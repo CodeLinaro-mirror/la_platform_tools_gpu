@@ -85,13 +85,13 @@ func (*binaryClassImage) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImage(d, obj.(*Image))
 }
-func (*binaryClassImage) Schema() *schema.Entity { return schemaImage }
+func (*binaryClassImage) Schema() *binary.Entity { return schemaImage }
 
-var schemaImage = &schema.Entity{
+var schemaImage = &binary.Entity{
 	TypeID:  binaryIDImage,
 	Package: "image",
 	Name:    "Image",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -141,13 +141,13 @@ func (*binaryClassInfo) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeInfo(d, obj.(*Info))
 }
-func (*binaryClassInfo) Schema() *schema.Entity { return schemaInfo }
+func (*binaryClassInfo) Schema() *binary.Entity { return schemaInfo }
 
-var schemaInfo = &schema.Entity{
+var schemaInfo = &binary.Entity{
 	TypeID:  binaryIDInfo,
 	Package: "image",
 	Name:    "Info",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -197,13 +197,13 @@ func (*binaryClassLazyConverter) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassLazyConverter) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeLazyConverter(d, obj.(*LazyConverter))
 }
-func (*binaryClassLazyConverter) Schema() *schema.Entity { return schemaLazyConverter }
+func (*binaryClassLazyConverter) Schema() *binary.Entity { return schemaLazyConverter }
 
-var schemaLazyConverter = &schema.Entity{
+var schemaLazyConverter = &binary.Entity{
 	TypeID:  binaryIDLazyConverter,
 	Package: "image",
 	Name:    "LazyConverter",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -239,15 +239,15 @@ func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Decode(d binary.Decoder) binar
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d, obj.(*fmtATC_RGBA_EXPLICIT_ALPHA_AMD))
 }
-func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *schema.Entity {
+func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *binary.Entity {
 	return schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD
 }
 
-var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &schema.Entity{
+var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &binary.Entity{
 	TypeID:  binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtATC_RGB_AMD struct{}
@@ -272,13 +272,13 @@ func (*binaryClassfmtATC_RGB_AMD) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtATC_RGB_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGB_AMD(d, obj.(*fmtATC_RGB_AMD))
 }
-func (*binaryClassfmtATC_RGB_AMD) Schema() *schema.Entity { return schemafmtATC_RGB_AMD }
+func (*binaryClassfmtATC_RGB_AMD) Schema() *binary.Entity { return schemafmtATC_RGB_AMD }
 
-var schemafmtATC_RGB_AMD = &schema.Entity{
+var schemafmtATC_RGB_AMD = &binary.Entity{
 	TypeID:  binaryIDfmtATC_RGB_AMD,
 	Package: "image",
 	Name:    "fmtATC_RGB_AMD",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtAlpha struct{}
@@ -303,13 +303,13 @@ func (*binaryClassfmtAlpha) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtAlpha(d, obj.(*fmtAlpha))
 }
-func (*binaryClassfmtAlpha) Schema() *schema.Entity { return schemafmtAlpha }
+func (*binaryClassfmtAlpha) Schema() *binary.Entity { return schemafmtAlpha }
 
-var schemafmtAlpha = &schema.Entity{
+var schemafmtAlpha = &binary.Entity{
 	TypeID:  binaryIDfmtAlpha,
 	Package: "image",
 	Name:    "fmtAlpha",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtETC1_RGB8_OES struct{}
@@ -334,13 +334,13 @@ func (*binaryClassfmtETC1_RGB8_OES) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtETC1_RGB8_OES(d, obj.(*fmtETC1_RGB8_OES))
 }
-func (*binaryClassfmtETC1_RGB8_OES) Schema() *schema.Entity { return schemafmtETC1_RGB8_OES }
+func (*binaryClassfmtETC1_RGB8_OES) Schema() *binary.Entity { return schemafmtETC1_RGB8_OES }
 
-var schemafmtETC1_RGB8_OES = &schema.Entity{
+var schemafmtETC1_RGB8_OES = &binary.Entity{
 	TypeID:  binaryIDfmtETC1_RGB8_OES,
 	Package: "image",
 	Name:    "fmtETC1_RGB8_OES",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtFloat32 struct{}
@@ -365,13 +365,13 @@ func (*binaryClassfmtFloat32) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtFloat32(d, obj.(*fmtFloat32))
 }
-func (*binaryClassfmtFloat32) Schema() *schema.Entity { return schemafmtFloat32 }
+func (*binaryClassfmtFloat32) Schema() *binary.Entity { return schemafmtFloat32 }
 
-var schemafmtFloat32 = &schema.Entity{
+var schemafmtFloat32 = &binary.Entity{
 	TypeID:  binaryIDfmtFloat32,
 	Package: "image",
 	Name:    "fmtFloat32",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtLuminance struct{}
@@ -396,13 +396,13 @@ func (*binaryClassfmtLuminance) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtLuminance) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminance(d, obj.(*fmtLuminance))
 }
-func (*binaryClassfmtLuminance) Schema() *schema.Entity { return schemafmtLuminance }
+func (*binaryClassfmtLuminance) Schema() *binary.Entity { return schemafmtLuminance }
 
-var schemafmtLuminance = &schema.Entity{
+var schemafmtLuminance = &binary.Entity{
 	TypeID:  binaryIDfmtLuminance,
 	Package: "image",
 	Name:    "fmtLuminance",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtLuminanceAlpha struct{}
@@ -427,13 +427,13 @@ func (*binaryClassfmtLuminanceAlpha) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtLuminanceAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminanceAlpha(d, obj.(*fmtLuminanceAlpha))
 }
-func (*binaryClassfmtLuminanceAlpha) Schema() *schema.Entity { return schemafmtLuminanceAlpha }
+func (*binaryClassfmtLuminanceAlpha) Schema() *binary.Entity { return schemafmtLuminanceAlpha }
 
-var schemafmtLuminanceAlpha = &schema.Entity{
+var schemafmtLuminanceAlpha = &binary.Entity{
 	TypeID:  binaryIDfmtLuminanceAlpha,
 	Package: "image",
 	Name:    "fmtLuminanceAlpha",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtPNG struct{}
@@ -458,13 +458,13 @@ func (*binaryClassfmtPNG) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtPNG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtPNG(d, obj.(*fmtPNG))
 }
-func (*binaryClassfmtPNG) Schema() *schema.Entity { return schemafmtPNG }
+func (*binaryClassfmtPNG) Schema() *binary.Entity { return schemafmtPNG }
 
-var schemafmtPNG = &schema.Entity{
+var schemafmtPNG = &binary.Entity{
 	TypeID:  binaryIDfmtPNG,
 	Package: "image",
 	Name:    "fmtPNG",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtRGB struct{}
@@ -489,13 +489,13 @@ func (*binaryClassfmtRGB) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtRGB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGB(d, obj.(*fmtRGB))
 }
-func (*binaryClassfmtRGB) Schema() *schema.Entity { return schemafmtRGB }
+func (*binaryClassfmtRGB) Schema() *binary.Entity { return schemafmtRGB }
 
-var schemafmtRGB = &schema.Entity{
+var schemafmtRGB = &binary.Entity{
 	TypeID:  binaryIDfmtRGB,
 	Package: "image",
 	Name:    "fmtRGB",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }
 
 type binaryClassfmtRGBA struct{}
@@ -520,11 +520,11 @@ func (*binaryClassfmtRGBA) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassfmtRGBA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGBA(d, obj.(*fmtRGBA))
 }
-func (*binaryClassfmtRGBA) Schema() *schema.Entity { return schemafmtRGBA }
+func (*binaryClassfmtRGBA) Schema() *binary.Entity { return schemafmtRGBA }
 
-var schemafmtRGBA = &schema.Entity{
+var schemafmtRGBA = &binary.Entity{
 	TypeID:  binaryIDfmtRGBA,
 	Package: "image",
 	Name:    "fmtRGBA",
-	Fields:  []schema.Field{},
+	Fields:  []binary.Field{},
 }

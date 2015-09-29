@@ -46,13 +46,13 @@ func (*binaryClassError) Decode(d binary.Decoder) binary.Object {
 func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeError(d, obj.(*Error))
 }
-func (*binaryClassError) Schema() *schema.Entity { return schemaError }
+func (*binaryClassError) Schema() *binary.Entity { return schemaError }
 
-var schemaError = &schema.Entity{
+var schemaError = &binary.Entity{
 	TypeID:  binaryIDError,
 	Package: "rpc",
 	Name:    "Error",
-	Fields: []schema.Field{
+	Fields: []binary.Field{
 		{Declared: "message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
