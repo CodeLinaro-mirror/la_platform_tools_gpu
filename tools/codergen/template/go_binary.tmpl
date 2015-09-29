@@ -65,20 +65,20 @@
   {{$wrap := gt (len .Name) (add $base 0)}}
   {{if File.Directive "Schema" true}}
     {{$wrap := gt (len .Name) (add $base 4)}}
-    func (*binaryClass{{.Name}}) Schema() *schema.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+    func (*binaryClass{{.Name}}) Schema() *binary.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
       return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
     «}¶
     ¶
-    var schema{{.Name}} = &schema.Entity{»¶
+    var schema{{.Name}} = &binary.Entity{»¶
       TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
       Name:║"{{.Name}}",¶
       {{if .Identity}}Identity:║"{{.Identity}}",¶{{end}}
       {{if .Version}}Version:║"{{.Version}}",¶{{end}}
       {{if not (len .Fields)}}
-        Fields:║[]schema.Field{},¶
+        Fields:║[]binary.Field{},¶
       {{else}}
-        Fields: []schema.Field{»¶
+        Fields: []binary.Field{»¶
           {{range .Fields}}
             {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
           {{end}}
@@ -117,7 +117,7 @@
 {{end}}
 
 {{define "Go.Encode.Any"}}
-  schema.Any{}.Encode(e, {{.Name}})¶
+  schema.Any{}.EncodeValue(e, {{.Name}})¶
 {{end}}
 
 {{define "Go.Encode_Length"}}
@@ -183,7 +183,7 @@
 {{end}}
 
 {{define "Go.Decode.Any"}}
-  {{.Name}} = schema.Any{}.Decode(d)¶
+  {{.Name}} = schema.Any{}.DecodeValue(d)¶
 {{end}}
 
 {{define "Go.Decode_Length"}}
@@ -226,7 +226,7 @@
 {{end}}
 
 {{define "Go.Schema.Primitive"}}&schema.Primitive{Name: "{{.Name}}", Method: schema.{{.Method}}}{{end}}
-{{define "Go.Schema.Struct"}}&schema.Struct{Entity: schema.Of((*{{.Name}})(nil).Class())}{{end}}
+{{define "Go.Schema.Struct"}}&schema.Struct{Entity: schema.Of((*{{.}})(nil).Class())}{{end}}
 {{define "Go.Schema.Pointer"}}&schema.Pointer{Type: {{Call "Go.Schema" .Type}}}{{end}}
 {{define "Go.Schema.Interface"}}&schema.Interface{Name: "{{.Name}}"}{{end}}
 {{define "Go.Schema.Variant"}}&schema.Variant{Name: "{{.Name}}"}{{end}}

@@ -25,7 +25,7 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*Entity)(nil).Class())
+	Namespace.Add((*ObjectClass)(nil).Class())
 	Namespace.Add((*ConstantSet)(nil).Class())
 }
 
@@ -50,7 +50,7 @@ const (
 	MapTag
 )
 
-func EncodeType(e binary.Encoder, t Type) {
+func EncodeType(e binary.Encoder, t binary.Type) {
 	switch t := t.(type) {
 	case *Primitive:
 		e.Uint8(uint8(PrimitiveTag))
@@ -58,7 +58,7 @@ func EncodeType(e binary.Encoder, t Type) {
 		e.Uint8(uint8(t.Method))
 	case *Struct:
 		e.Uint8(uint8(StructTag))
-		e.ID(t.Entity.ID())
+		e.ID(t.Entity.TypeID)
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
 		EncodeType(e, t.Type)
@@ -89,7 +89,7 @@ func EncodeType(e binary.Encoder, t Type) {
 	}
 }
 
-func DecodeType(d binary.Decoder) Type {
+func DecodeType(d binary.Decoder) binary.Type {
 	tag := TypeTag(d.Uint8())
 	switch tag {
 	case PrimitiveTag:
@@ -137,7 +137,7 @@ func DecodeType(d binary.Decoder) Type {
 	}
 }
 
-func (c *Entity) EncodeEntity(e binary.Encoder) {
+func EncodeEntity(e binary.Encoder, c *binary.Entity) {
 	e.ID(c.TypeID)
 	e.String(c.Package)
 	e.String(c.Name)
@@ -155,14 +155,14 @@ func (c *Entity) EncodeEntity(e binary.Encoder) {
 	}
 }
 
-func (c *Entity) DecodeEntity(d binary.Decoder) {
+func DecodeEntity(d binary.Decoder, c *binary.Entity) {
 	c.TypeID = d.ID()
 	c.Package = d.String()
 	c.Name = d.String()
 	c.Identity = d.String()
 	c.Version = d.String()
 	c.Exported = d.Bool()
-	c.Fields = make(FieldList, d.Uint32())
+	c.Fields = make(binary.FieldList, d.Uint32())
 	for i := range c.Fields {
 		c.Fields[i].Declared = d.String()
 		c.Fields[i].Type = DecodeType(d)
@@ -173,39 +173,39 @@ func (c *Entity) DecodeEntity(d binary.Decoder) {
 	}
 }
 
-func encodeConstants(e binary.Encoder, c *ConstantSet) {
+func EncodeConstants(e binary.Encoder, c *ConstantSet) {
 	EncodeType(e, c.Type)
 	e.Uint32(uint32(len(c.Entries)))
 	for _, entry := range c.Entries {
 		e.String(entry.Name)
-		c.Type.Encode(e, entry.Value)
+		c.Type.EncodeValue(e, entry.Value)
 	}
 }
 
-func decodeConstants(d binary.Decoder, c *ConstantSet) {
+func DecodeConstants(d binary.Decoder, c *ConstantSet) {
 	c.Type = DecodeType(d)
 	c.Entries = make([]Constant, d.Uint32())
 	for i := range c.Entries {
 		c.Entries[i].Name = d.String()
-		c.Entries[i].Value = c.Type.Decode(d)
+		c.Entries[i].Value = c.Type.DecodeValue(d)
 	}
 }
 
 type binaryClassClass struct{}
 
-func (*Entity) Class() binary.Class          { return (*binaryClassClass)(nil) }
+func (*ObjectClass) Class() binary.Class     { return (*binaryClassClass)(nil) }
 func (*binaryClassClass) ID() binary.ID      { return binaryIDClass }
-func (*binaryClassClass) New() binary.Object { return &Entity{} }
+func (*binaryClassClass) New() binary.Object { return &ObjectClass{} }
 func (*binaryClassClass) Encode(e binary.Encoder, obj binary.Object) {
-	obj.(*Entity).EncodeEntity(e)
+	EncodeEntity(e, (*binary.Entity)(obj.(*ObjectClass)))
 }
 func (*binaryClassClass) Decode(d binary.Decoder) binary.Object {
-	c := &Entity{}
-	c.DecodeEntity(d)
+	c := &ObjectClass{}
+	DecodeEntity(d, (*binary.Entity)(c))
 	return c
 }
 func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) {
-	obj.(*Entity).DecodeEntity(d)
+	DecodeEntity(d, (*binary.Entity)(obj.(*ObjectClass)))
 }
 
 type binaryClassConstantSet struct{}
@@ -214,13 +214,13 @@ func (*ConstantSet) Class() binary.Class           { return (*binaryClassConstan
 func (*binaryClassConstantSet) ID() binary.ID      { return binaryIDConstantSet }
 func (*binaryClassConstantSet) New() binary.Object { return &ConstantSet{} }
 func (*binaryClassConstantSet) Encode(e binary.Encoder, obj binary.Object) {
-	encodeConstants(e, obj.(*ConstantSet))
+	EncodeConstants(e, obj.(*ConstantSet))
 }
 func (*binaryClassConstantSet) Decode(d binary.Decoder) binary.Object {
 	c := &ConstantSet{}
-	decodeConstants(d, c)
+	DecodeConstants(d, c)
 	return c
 }
 func (*binaryClassConstantSet) DecodeTo(d binary.Decoder, obj binary.Object) {
-	decodeConstants(d, obj.(*ConstantSet))
+	DecodeConstants(d, obj.(*ConstantSet))
 }

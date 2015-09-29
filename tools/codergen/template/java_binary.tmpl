@@ -69,7 +69,7 @@
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
 {{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
-{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type.Name}}();¶d.value({{.Name}});{{end}}
+{{define "Java.Decode.Struct"}}{{.Name}} = new {{File.ClassName .Type}}();¶d.value({{.Name}});{{end}}
 {{define "Java.Decode.Pointer"}}{{.Name}} = ({{Call "Java.Type" .Type}})d.object();{{end}}
 {{define "Java.Decode.Interface"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.object());{{end}}
 {{define "Java.Decode.Variant"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.variant());{{end}}

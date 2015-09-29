@@ -21,6 +21,7 @@ import (
 	"strconv"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"
@@ -29,7 +30,7 @@ import (
 
 const kStateAdapterNodeHeight = 18
 
-func createControls(appCtx *ApplicationContext, name string, p path.Path, t schema.Type, v interface{}) gxui.Control {
+func createControls(appCtx *ApplicationContext, name string, p path.Path, t binary.Type, v interface{}) gxui.Control {
 	layout := appCtx.theme.CreateLinearLayout()
 	layout.SetDirection(gxui.LeftToRight)
 
@@ -59,7 +60,7 @@ func createControls(appCtx *ApplicationContext, name string, p path.Path, t sche
 type StateAdapterNode struct {
 	appCtx   *ApplicationContext
 	name     string
-	ty       schema.Type
+	ty       binary.Type
 	value    interface{}
 	path     path.Value
 	item     string
@@ -73,7 +74,7 @@ func (l StateAdapterNodeList) Len() int           { return len(l) }
 func (l StateAdapterNodeList) Less(a, b int) bool { return l[a].name < l[b].name }
 func (l StateAdapterNodeList) Swap(a, b int)      { l[a], l[b] = l[b], l[a] }
 
-func (n *StateAdapterNode) add(name string, ty schema.Type, value interface{}, path path.Value) {
+func (n *StateAdapterNode) add(name string, ty binary.Type, value interface{}, path path.Value) {
 	n.children = append(n.children, &StateAdapterNode{
 		appCtx: n.appCtx,
 		name:   name,
@@ -100,7 +101,7 @@ func (n *StateAdapterNode) init() {
 			n.add(name, o.Type.Fields[i].Type, o.Fields[i], n.path.Field(name))
 		}
 	} else {
-		name := func(ty schema.Type, v interface{}) string {
+		name := func(ty binary.Type, v interface{}) string {
 			if c := findConstant(findConstants(ty, n.appCtx), v); c.Value != nil {
 				return c.Name
 			}

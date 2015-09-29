@@ -27,7 +27,7 @@ import (
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	schema.Entity
+	binary.Entity
 	Tags       Tags // The tags associated with the type.
 	Raw        *types.Struct
 	unresolved []unresolved // The set of unresolved schema.Struct objects.
@@ -41,7 +41,7 @@ type unresolved struct {
 func (m *Module) addStruct(n *types.TypeName) {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{
-		Entity: schema.Entity{
+		Entity: binary.Entity{
 			Name:     n.Name(),
 			Package:  m.Source.Types.Name(),
 			Exported: n.Exported(),
@@ -60,7 +60,7 @@ func (m *Module) addStruct(n *types.TypeName) {
 			s.Tags = tags
 			continue
 		}
-		f := schema.Field{}
+		f := binary.Field{}
 		if !decl.Anonymous() {
 			f.Declared = decl.Name()
 		}
@@ -96,6 +96,11 @@ func (s *Struct) IDName() string {
 	return s.Tag("id", "binaryID"+s.Name)
 }
 
+// ID returns the type id for the entity.
+func (s *Struct) ID() binary.ID {
+	return s.TypeID
+}
+
 // HasStructTag returns true if any struct in the module has the named tag.
 func (m *Module) HasStructTag(name string) bool {
 	for _, s := range m.Structs {
@@ -109,7 +114,7 @@ func (m *Module) HasStructTag(name string) bool {
 
 // UpdateID recalculates the struct ID from the current signature.
 func (s *Struct) UpdateID() {
-	s.TypeID = binary.NewID([]byte(s.Signature()))
+	s.TypeID = binary.NewID([]byte(Signature(&s.Entity)))
 }
 
 type sortEntry struct {
@@ -117,11 +122,11 @@ type sortEntry struct {
 	visited bool
 }
 
-func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
+func walkType(t binary.Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
 	switch t := t.(type) {
 	case *schema.Primitive:
 	case *schema.Struct:
-		i = walkStructs(t.Typename(), byname, structs, i)
+		i = walkStructs(t.String(), byname, structs, i)
 	case *schema.Interface:
 		i = walkStructs(t.Name, byname, structs, i)
 	case *schema.Variant:

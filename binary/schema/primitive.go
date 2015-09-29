@@ -97,19 +97,15 @@ func (p *Primitive) Native() string {
 	}
 }
 
-func (p *Primitive) Basename() string {
+func (p *Primitive) Representation() string {
 	return methodToBase[p.Method]
-}
-
-func (p *Primitive) Typename() string {
-	return p.Name
 }
 
 func (p *Primitive) String() string {
 	return p.Name
 }
 
-func (p *Primitive) Encode(e binary.Encoder, value interface{}) {
+func (p *Primitive) EncodeValue(e binary.Encoder, value interface{}) {
 	switch p.Method {
 	case ID:
 		e.ID(value.(binary.ID))
@@ -142,7 +138,7 @@ func (p *Primitive) Encode(e binary.Encoder, value interface{}) {
 	}
 }
 
-func (p *Primitive) Decode(d binary.Decoder) interface{} {
+func (p *Primitive) DecodeValue(d binary.Decoder) interface{} {
 	switch p.Method {
 	case ID:
 		return d.ID()

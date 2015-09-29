@@ -93,8 +93,8 @@ const (
 // Schema holds all the rtti information for dynamic types in the service.
 type Schema struct {
 	binary.Generate
-	Classes   []*schema.Entity     // The set of classes in the schema
-	Constants []schema.ConstantSet // All the constants the schema includes
+	Classes   []*schema.ObjectClass // The set of classes in the schema
+	Constants []schema.ConstantSet  // All the constants the schema includes
 }
 
 // Capture describes single capture file held by the server.

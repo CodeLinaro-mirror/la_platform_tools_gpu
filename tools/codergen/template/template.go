@@ -27,6 +27,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/reflow"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
@@ -141,10 +142,10 @@ func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Temp
 	try := []string{}
 
 	switch node := node.(type) {
-	case schema.Type:
-		try = append(try, fmt.Sprint(prefix, "#", node.Typename()))
-		if node.Typename() != node.Basename() {
-			try = append(try, fmt.Sprint(prefix, "#", node.Basename()))
+	case binary.Type:
+		try = append(try, fmt.Sprint(prefix, "#", node.String()))
+		if node.String() != node.Representation() {
+			try = append(try, fmt.Sprint(prefix, "#", node.Representation()))
 			if _, ok := node.(*schema.Primitive); ok {
 				try = append(try, fmt.Sprint(prefix, ".Alias"))
 			}

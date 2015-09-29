@@ -21,11 +21,7 @@ type Interface struct {
 	Name string // The simple name of the type.
 }
 
-func (i *Interface) Basename() string {
-	return i.Name
-}
-
-func (i *Interface) Typename() string {
+func (i *Interface) Representation() string {
 	return i.Name
 }
 
@@ -33,7 +29,7 @@ func (i *Interface) String() string {
 	return i.Name
 }
 
-func (i *Interface) Encode(e binary.Encoder, value interface{}) {
+func (i *Interface) EncodeValue(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
 		e.Object(value.(binary.Object))
 	} else {
@@ -41,7 +37,7 @@ func (i *Interface) Encode(e binary.Encoder, value interface{}) {
 	}
 }
 
-func (i *Interface) Decode(d binary.Decoder) interface{} {
+func (i *Interface) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
 }
 
@@ -50,11 +46,7 @@ type Variant struct {
 	Name string // The simple name of the type.
 }
 
-func (i *Variant) Basename() string {
-	return i.Name
-}
-
-func (i *Variant) Typename() string {
+func (i *Variant) Representation() string {
 	return i.Name
 }
 
@@ -62,7 +54,7 @@ func (i *Variant) String() string {
 	return i.Name
 }
 
-func (i *Variant) Encode(e binary.Encoder, value interface{}) {
+func (i *Variant) EncodeValue(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
 		e.Variant(value.(binary.Object))
 	} else {
@@ -70,6 +62,6 @@ func (i *Variant) Encode(e binary.Encoder, value interface{}) {
 	}
 }
 
-func (i *Variant) Decode(d binary.Decoder) interface{} {
+func (i *Variant) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
 }

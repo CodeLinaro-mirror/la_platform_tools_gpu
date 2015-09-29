@@ -20,11 +20,7 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // boxing and unboxing. The type is usually declared as an empty interface.
 type Any struct{}
 
-func (i *Any) Basename() string {
-	return "<any>"
-}
-
-func (i *Any) Typename() string {
+func (i *Any) Representation() string {
 	return "<any>"
 }
 
@@ -32,7 +28,7 @@ func (i *Any) String() string {
 	return "<any>"
 }
 
-func (Any) Encode(e binary.Encoder, value interface{}) {
+func (Any) EncodeValue(e binary.Encoder, value interface{}) {
 	if boxed, err := binary.Box(value); err != nil {
 		e.SetError(err)
 	} else {
@@ -40,7 +36,7 @@ func (Any) Encode(e binary.Encoder, value interface{}) {
 	}
 }
 
-func (Any) Decode(d binary.Decoder) interface{} {
+func (Any) DecodeValue(d binary.Decoder) interface{} {
 	boxed := d.Variant()
 	if d.Error() != nil {
 		return nil

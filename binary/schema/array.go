@@ -22,76 +22,68 @@ import (
 
 // Array is the Type descriptor for fixed size buffers of known type.
 type Array struct {
-	Alias     string // The alias this array type was given, if present
-	ValueType Type   // The value type stored in the array
-	Size      uint32 // The fixed size of the array
+	Alias     string      // The alias this array type was given, if present
+	ValueType binary.Type // The value type stored in the array
+	Size      uint32      // The fixed size of the array
 }
 
 // Slice is the Type descriptor for dynamically sized buffers of known type,
 // encoded with a preceding count.
 type Slice struct {
-	Alias     string // The alias this array type was given, if present
-	ValueType Type   // The value type stored in the slice.
+	Alias     string      // The alias this array type was given, if present
+	ValueType binary.Type // The value type stored in the slice.
 }
 
-func (a *Array) Basename() string {
-	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Basename())
-}
-
-func (a *Array) Typename() string {
-	if a.Alias != "" {
-		return a.Alias
-	}
-	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Typename())
+func (a *Array) Representation() string {
+	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Representation())
 }
 
 func (a *Array) String() string {
-	return a.Typename()
+	if a.Alias != "" {
+		return a.Alias
+	}
+	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType)
 }
 
-func (a *Array) Encode(e binary.Encoder, value interface{}) {
+func (a *Array) EncodeValue(e binary.Encoder, value interface{}) {
 	v := value.([]interface{})
 	for i := range v {
-		a.ValueType.Encode(e, v[i])
+		a.ValueType.EncodeValue(e, v[i])
 	}
 }
 
-func (a *Array) Decode(d binary.Decoder) interface{} {
+func (a *Array) DecodeValue(d binary.Decoder) interface{} {
 	v := make([]interface{}, a.Size)
 	for i := range v {
-		v[i] = a.ValueType.Decode(d)
+		v[i] = a.ValueType.DecodeValue(d)
 	}
 	return v
 }
 
-func (s *Slice) Basename() string {
-	return fmt.Sprintf("[]%s", s.ValueType.Basename())
-}
-
-func (s *Slice) Typename() string {
-	if s.Alias != "" {
-		return s.Alias
-	}
-	return fmt.Sprintf("[]%s", s.ValueType.Typename())
+func (s *Slice) Representation() string {
+	return fmt.Sprintf("[]%s", s.ValueType.Representation())
 }
 
 func (s *Slice) String() string {
-	return s.Typename()
+	if s.Alias != "" {
+		return s.Alias
+	}
+	return fmt.Sprintf("[]%s", s.ValueType)
 }
 
-func (s *Slice) Encode(e binary.Encoder, value interface{}) {
+func (s *Slice) EncodeValue(e binary.Encoder, value interface{}) {
 	v := value.([]interface{})
 	e.Uint32(uint32(len(v)))
 	for i := range v {
-		s.ValueType.Encode(e, v[i])
+		s.ValueType.EncodeValue(e, v[i])
 	}
 }
 
-func (s *Slice) Decode(d binary.Decoder) interface{} {
+func (s *Slice) DecodeValue(d binary.Decoder) interface{} {
 	size := d.Uint32()
 	v := make([]interface{}, size)
 	for i := range v {
-		v[i] = s.ValueType.Decode(d)
+		v[i] = s.ValueType.DecodeValue(d)
 	}
 	return v
 }

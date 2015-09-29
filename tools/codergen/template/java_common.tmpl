@@ -31,7 +31,7 @@
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
 {{define "Java.Type#log.Severity"}}Severity{{end}}
 {{define "Java.Type.Primitive"}}{{Call "Java.PrimitiveType" .}}{{end}}
-{{define "Java.Type.Alias"}}{{.Typename}}{{end}}
+{{define "Java.Type.Alias"}}{{.}}{{end}}
 {{define "Java.Type.Any"}}Object{{end}}
 {{define "Java.Type.Struct"}}{{File.ClassName .}}{{end}}
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}

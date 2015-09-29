@@ -14,9 +14,16 @@
 
 package schema
 
-var _ = []Type{
+import "android.googlesource.com/platform/tools/gpu/binary"
+
+var _ = []binary.Type{
+	(*Any)(nil),
 	(*Array)(nil),
+	(*Interface)(nil),
 	(*Map)(nil),
 	(*Pointer)(nil),
 	(*Primitive)(nil),
+	(*Slice)(nil),
+	(*Struct)(nil),
+	(*Variant)(nil),
 }

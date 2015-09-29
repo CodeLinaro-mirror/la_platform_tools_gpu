@@ -20,6 +20,7 @@ import (
 	"strconv"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service/path"
@@ -30,7 +31,7 @@ import (
 type parse func(s string) (interface{}, bool)
 type commit func(interface{})
 
-func findConstants(t schema.Type, appCtx *ApplicationContext) schema.ConstantSet {
+func findConstants(t binary.Type, appCtx *ApplicationContext) schema.ConstantSet {
 	if t == nil {
 		return schema.ConstantSet{}
 	}
@@ -159,7 +160,7 @@ func createFloatField(appCtx *ApplicationContext, p path.Path, v interface{}) gx
 	})
 }
 
-func createField(appCtx *ApplicationContext, p path.Path, t schema.Type, v interface{}) gxui.Control {
+func createField(appCtx *ApplicationContext, p path.Path, t binary.Type, v interface{}) gxui.Control {
 	var c gxui.Control
 
 	switch v := schema.Underlying(v).(type) {

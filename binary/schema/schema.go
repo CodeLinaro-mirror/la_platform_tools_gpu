@@ -16,9 +16,6 @@
 package schema
 
 import (
-	"fmt"
-	"io"
-
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
@@ -29,23 +26,14 @@ import (
 // binary: java.indent = "    "
 // binary: java.member_prefix = m
 
-// Type represents the common interface to all type objects in the schema.
-type Type interface {
-	String() string
-	Encode(e binary.Encoder, value interface{})
-	Decode(d binary.Decoder) interface{}
-	Typename() string
-	Basename() string
-}
-
 type schema interface {
-	Schema() *Entity
+	Schema() *binary.Entity
 }
 
 // Returns the schema class for a binary class, if it has one.
-func Of(class binary.Class) *Entity {
-	if s, ok := class.(*Entity); ok {
-		return s
+func Of(class binary.Class) *binary.Entity {
+	if s, ok := class.(*ObjectClass); ok {
+		return (*binary.Entity)(s)
 	}
 	if s, ok := class.(schema); ok {
 		return s.Schema()
@@ -55,37 +43,6 @@ func Of(class binary.Class) *Entity {
 
 // Lookup looks up a Class by the given type id.
 // If there is no match, it will return nil.
-func Lookup(id binary.ID) *Entity {
+func Lookup(id binary.ID) *binary.Entity {
 	return Of(registry.Global.Lookup(id))
-}
-
-func printTag(w io.Writer, t Type) {
-	switch t := t.(type) {
-	case *Primitive:
-		fmt.Fprint(w, t.Method)
-	case *Struct:
-		fmt.Fprint(w, "$")
-	case *Pointer:
-		fmt.Fprint(w, "*")
-		printTag(w, t.Type)
-	case *Interface:
-		fmt.Fprint(w, "?", t)
-	case *Variant:
-		fmt.Fprint(w, "&", t)
-	case *Any:
-		fmt.Fprint(w, "~", t)
-	case *Slice:
-		fmt.Fprint(w, "[]")
-		printTag(w, t.ValueType)
-	case *Array:
-		fmt.Fprint(w, "[", t.Size, "]")
-		printTag(w, t.ValueType)
-	case *Map:
-		fmt.Fprint(w, "map[")
-		printTag(w, t.KeyType)
-		fmt.Fprint(w, "]")
-		printTag(w, t.ValueType)
-	default:
-		panic(fmt.Errorf("Unknown type %T generating signature", t))
-	}
 }

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"sort"
 
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/binary"
 
 	"golang.org/x/tools/go/types"
 )
@@ -48,7 +48,7 @@ type Call struct {
 }
 
 // Params returns the schema field list that represent the method parameters.
-func (c Call) Params() schema.FieldList {
+func (c Call) Params() binary.FieldList {
 	return c.Struct.Entity.Fields
 }
 
@@ -58,7 +58,7 @@ type Result struct {
 }
 
 // Type returns the schema type of the return value if present, nil if not.
-func (r Result) Type() schema.Type {
+func (r Result) Type() binary.Type {
 	if len(r.Struct.Entity.Fields) < 1 {
 		return nil
 	}
@@ -66,15 +66,15 @@ func (r Result) Type() schema.Type {
 }
 
 // Params returns the schema field list that represent the method parameters.
-func (r Result) List() schema.FieldList {
+func (r Result) List() binary.FieldList {
 	return r.Struct.Entity.Fields
 }
 
 func serviceStruct(m *Module, name string, tuple *types.Tuple, count int) *Struct {
-	s := &Struct{Entity: schema.Entity{Name: name, Package: m.Source.Types.Name()}}
+	s := &Struct{Entity: binary.Entity{Name: name, Package: m.Source.Types.Name()}}
 	for i := 0; i < count; i++ {
 		entry := tuple.At(i)
-		s.Fields = append(s.Fields, schema.Field{
+		s.Fields = append(s.Fields, binary.Field{
 			Declared: entry.Name(),
 			Type:     m.fromType(entry.Type(), s, ""),
 		})

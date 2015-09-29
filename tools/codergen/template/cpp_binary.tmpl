@@ -26,7 +26,7 @@
 {{define "Cpp.Type#float64"}}double{{end}}
 {{define "Cpp.Type#string"}}char*{{end}}
 {{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
-{{define "Cpp.Type.Struct"}}{{.Name | File.TypeName}}{{end}}
+{{define "Cpp.Type.Struct"}}{{.String | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}

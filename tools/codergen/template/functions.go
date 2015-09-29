@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type variable struct {
@@ -26,7 +26,7 @@ type variable struct {
 	Type interface{}
 }
 
-func (*Templates) Var(t schema.Type, args ...interface{}) *variable {
+func (*Templates) Var(t binary.Type, args ...interface{}) *variable {
 	return &variable{
 		Name: fmt.Sprint(args...),
 		Type: t,

@@ -40,6 +40,7 @@
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
+{{define "Go.Type.Struct"}}{{.}}{{end}}
 
 {{define "Go.Import.Primitive"}}{{File.ImportOwner .}}{{end}}
 {{define "Go.Import.Struct"}}{{File.ImportOwner .}}{{end}}

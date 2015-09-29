@@ -66,7 +66,7 @@ func (a *Atom) ParameterCount() int {
 }
 
 // Parameter returns the index'th parameter Field and value.
-func (a *Atom) Parameter(index int) (schema.Field, interface{}) {
+func (a *Atom) Parameter(index int) (binary.Field, interface{}) {
 	index = a.class.parameters[index]
 	return a.object.Type.Fields[index], a.object.Fields[index]
 }
@@ -79,7 +79,7 @@ func (a *Atom) SetParameter(index int, value interface{}) {
 
 // Result returns the atom's return Field and value. If the atom does not have
 // a return value then nil, nil is returned.
-func (a *Atom) Result() (*schema.Field, interface{}) {
+func (a *Atom) Result() (*binary.Field, interface{}) {
 	if a.class.result < 0 {
 		return nil, nil
 	}
@@ -112,7 +112,7 @@ func (a *Atom) String() string {
 // atomClass is an implementation of binary.Class used for atoms described by
 // the schema.
 type atomClass struct {
-	base         *schema.Entity
+	base         *schema.ObjectClass
 	meta         *atom.Metadata
 	observations int   // index on fields, or -1
 	parameters   []int // indices on fields
@@ -121,12 +121,12 @@ type atomClass struct {
 
 var observationsId = (*atom.Observations)(nil).Class().ID()
 
-func newAtomClass(base *schema.Entity, meta *atom.Metadata) *atomClass {
+func newAtomClass(base *schema.ObjectClass, meta *atom.Metadata) *atomClass {
 	class := &atomClass{base: base, meta: meta, observations: -1}
 	// Find the observations, if present
 	for i, f := range base.Fields {
 		if s, ok := f.Type.(*schema.Struct); ok {
-			if s.Entity.ID() == observationsId {
+			if s.Entity.TypeID == observationsId {
 				class.observations = i
 				continue
 			}
@@ -140,16 +140,16 @@ func newAtomClass(base *schema.Entity, meta *atom.Metadata) *atomClass {
 	return class
 }
 
-func (c *atomClass) Schema() *schema.Entity {
-	return c.base
+func (c *atomClass) Schema() *binary.Entity {
+	return (*binary.Entity)(c.base)
 }
 
 func (c *atomClass) ID() binary.ID {
-	return c.base.ID()
+	return c.base.TypeID
 }
 
 func (c *atomClass) New() binary.Object {
-	return &Atom{class: c, object: c.base.New().(*schema.Object)}
+	return &Atom{class: c, object: &schema.Object{}}
 }
 
 func (c *atomClass) Encode(e binary.Encoder, object binary.Object) {

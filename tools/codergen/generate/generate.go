@@ -26,6 +26,7 @@ import (
 
 	"golang.org/x/tools/go/types"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
 )
@@ -103,7 +104,7 @@ func (m *Module) ModuleAndName(v interface{}) (*Module, string) {
 	case Result:
 		name = v.Struct.Name
 	case *schema.Struct:
-		name = v.Typename()
+		name = v.String()
 	case *schema.Interface:
 		name = v.Name
 	case *schema.Variant:
@@ -219,7 +220,7 @@ func fakeStruct(structs map[*types.Struct]*Struct, pkg *types.Package, module st
 	if _, found := structs[t]; found {
 		return
 	}
-	s := &Struct{Entity: schema.Entity{Package: module, Name: typename, Exported: true}}
+	s := &Struct{Entity: binary.Entity{Package: module, Name: typename, Exported: true}}
 	s.UpdateID()
 	structs[t] = s
 }
@@ -253,7 +254,7 @@ func From(scanner *scan.Scanner) (Modules, error) {
 		}
 	}
 	for _, m = range result {
-		fakeStruct(structs, m.Source.Types, schemaPackage, "Entity")
+		fakeStruct(structs, m.Source.Types, schemaPackage, "ObjectClass")
 		fakeStruct(structs, m.Source.Types, schemaPackage, "ConstantSet")
 		for _, s := range m.Structs {
 			for _, u := range s.unresolved {

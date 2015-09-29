@@ -20,6 +20,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
@@ -55,7 +56,7 @@ func Connect(address, data string, logger log.Logger) (service.Service, service.
 	namespace := registry.NewNamespace()
 	for _, class := range schema.Classes {
 		// Find the atom metadata, if present
-		if meta := atom.FindMetadata(class); meta != nil {
+		if meta := atom.FindMetadata((*binary.Entity)(class)); meta != nil {
 			namespace.Add(newAtomClass(class, meta))
 		} else {
 			namespace.Add(class)

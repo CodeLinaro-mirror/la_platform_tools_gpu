@@ -22,22 +22,18 @@ import (
 
 // Pointer is the Type descriptor for pointers.
 type Pointer struct {
-	Type Type // The pointed to type.
+	Type binary.Type // The pointed to type.
 }
 
-func (p *Pointer) Basename() string {
-	return fmt.Sprintf("*%s", p.Type.Basename())
-}
-
-func (p *Pointer) Typename() string {
-	return fmt.Sprintf("*%s", p.Type.Typename())
+func (p *Pointer) Representation() string {
+	return fmt.Sprintf("*%s", p.Type.Representation())
 }
 
 func (p *Pointer) String() string {
-	return p.Typename()
+	return fmt.Sprintf("*%s", p.Type)
 }
 
-func (p *Pointer) Encode(e binary.Encoder, value interface{}) {
+func (p *Pointer) EncodeValue(e binary.Encoder, value interface{}) {
 	if value != nil { // TODO proper nil test needed?
 		e.Object(value.(binary.Object))
 	} else {
@@ -45,6 +41,6 @@ func (p *Pointer) Encode(e binary.Encoder, value interface{}) {
 	}
 }
 
-func (p *Pointer) Decode(d binary.Decoder) interface{} {
+func (p *Pointer) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
 }

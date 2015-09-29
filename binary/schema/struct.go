@@ -22,37 +22,29 @@ import (
 
 // Struct is the Type descriptor for an binary.Object typed value.
 type Struct struct {
-	Relative string  // The relative name of the type.
-	Entity   *Entity // The schema entity this is a field of.
+	Relative string         // The relative name of the type.
+	Entity   *binary.Entity // The schema entity this is a field of.
 }
 
-func (s *Struct) Name() string {
-	return s.Typename()
-}
-
-func (s *Struct) Basename() string {
+func (s *Struct) Representation() string {
 	return s.Entity.Name
 }
 
-func (s *Struct) Typename() string {
+func (s *Struct) String() string {
 	if s.Relative != "" {
 		return s.Relative
 	}
 	return s.Entity.Name
 }
 
-func (s *Struct) String() string {
-	return s.Entity.Name
-}
-
-func (s *Struct) Encode(e binary.Encoder, value interface{}) {
+func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {
 	e.Value(value.(binary.Object))
 }
 
-func (s *Struct) Decode(d binary.Decoder) interface{} {
-	class := d.Lookup(s.Entity.ID())
+func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
+	class := d.Lookup(s.Entity.TypeID)
 	if class == nil {
-		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity.ID(), s))
+		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity.TypeID, s))
 	}
 	o := class.New()
 	if o == nil {

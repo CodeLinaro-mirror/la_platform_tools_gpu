@@ -19,7 +19,7 @@ import (
 	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gapis"
 	"github.com/google/gxui"
 )
@@ -146,7 +146,7 @@ func underlyingValue(v reflect.Value) reflect.Value {
 }
 
 type atomParameter struct {
-	field schema.Field
+	field binary.Field
 	value interface{}
 }
 
@@ -166,7 +166,7 @@ func atomParameters(a atom.Atom) []atomParameter {
 		p := make([]atomParameter, 0, c)
 		for i := 0; i < c; i++ {
 			if f := t.Field(i); !f.Anonymous {
-				f := schema.Field{Declared: f.Name}
+				f := binary.Field{Declared: f.Name}
 				p = append(p, atomParameter{field: f, value: v.Field(i).Interface()})
 			}
 		}
@@ -174,7 +174,7 @@ func atomParameters(a atom.Atom) []atomParameter {
 	}
 }
 
-func atomResult(a atom.Atom) (*schema.Field, interface{}) {
+func atomResult(a atom.Atom) (*binary.Field, interface{}) {
 	switch a := a.(type) {
 	case *gapis.Atom:
 		return a.Result()

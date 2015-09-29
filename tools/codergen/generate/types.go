@@ -67,8 +67,8 @@ func spaceToUnderscore(r rune) rune {
 	return r
 }
 
-// fromType creates a appropriate schema.Type object from a types.Type.
-func (m *Module) fromType(from types.Type, s *Struct, tags Tags) schema.Type {
+// fromType creates a appropriate binary.Type object from a types.Type.
+func (m *Module) fromType(from types.Type, s *Struct, tags Tags) binary.Type {
 	pkg := m.Source.Types
 	alias := ""
 	fullname := types.TypeString(from, types.RelativeTo(pkg)) // fully-qualified name including full package path

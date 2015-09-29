@@ -23,13 +23,14 @@ import (
 	"strings"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/scan"
 )
 
 var (
-	structType = &schema.Struct{Entity: &schema.Entity{Name: "TestObject"}}
-	fields     = []schema.Field{
+	structType = &schema.Struct{Entity: &binary.Entity{Name: "TestObject"}}
+	fields     = []binary.Field{
 		{Declared: "u8", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "u16", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 		{Declared: "u32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},

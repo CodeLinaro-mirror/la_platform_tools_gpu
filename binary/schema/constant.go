@@ -17,13 +17,15 @@ package schema
 import (
 	"fmt"
 	"reflect"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type Constants []ConstantSet
 
 type ConstantSet struct {
-	Type    Type       // The type of the constant.
-	Entries []Constant // The constant values
+	Type    binary.Type // The type of the constant.
+	Entries []Constant  // The constant values
 }
 
 type Constant struct {
@@ -35,7 +37,7 @@ func (c Constants) Len() int           { return len(c) }
 func (c Constants) Swap(i, j int)      { c[i], c[j] = c[j], c[i] }
 func (c Constants) Less(i, j int) bool { return c[i].Type.String() < c[j].Type.String() }
 
-func (c *Constants) Add(t Type, v Constant) {
+func (c *Constants) Add(t binary.Type, v Constant) {
 	for i := range *c {
 		s := &(*c)[i]
 		if s.Type.String() == t.String() {

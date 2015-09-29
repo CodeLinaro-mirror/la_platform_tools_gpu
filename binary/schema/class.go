@@ -14,109 +14,36 @@
 
 package schema
 
-import (
-	"bytes"
-	"fmt"
-	"strings"
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
-)
+type ObjectClass binary.Entity
 
-// Entity represents an encodable object type with a type ID.
-type Entity struct {
-	TypeID   binary.ID       // The unique type identifier for the class.
-	Package  string          // The package that declared the struct.
-	Name     string          // The display name of the class, does not affect the signature.
-	Identity string          // The true name of the class.
-	Version  string          // The version string of the class, if set.
-	Exported bool            // Whether the class is exported from it's package
-	Fields   FieldList       // Descriptions of the fields of the class.
-	Metadata []binary.Object // The metadata for the class.
-}
-
-// Field represents a name/type pair for a field in an Object.
-type Field struct {
-	Declared string // The name of the field, does not affect the signature.
-	Type     Type   // The type stored in the field.
-}
-
-// FieldList is a slice of fields.
-type FieldList []Field
-
-func trimPackage(n string) string {
-	i := strings.LastIndex(n, ".")
-	if i < 0 {
-		return n
-	}
-	return n[i+1:]
-}
-
-func (f Field) Name() string {
-	if f.Declared == "" {
-		return trimPackage(f.Type.String())
-	}
-	return f.Declared
-}
-
-// Find searches the field list of the field with the specified name, returning
-// the index of the field if found, otherwise -1.
-func (l FieldList) Find(name string) int {
-	for i, f := range l {
-		if f.Name() == name {
-			return i
-		}
-	}
-	return -1
-}
-
-func (c *Entity) ID() binary.ID {
+func (c *ObjectClass) ID() binary.ID {
 	return c.TypeID
 }
 
-func (c *Entity) New() binary.Object { return &Object{Type: c} }
+func (c *ObjectClass) New() binary.Object { return &Object{Type: c} }
 
-func (c *Entity) Encode(e binary.Encoder, object binary.Object) {
+func (c *ObjectClass) Encode(e binary.Encoder, object binary.Object) {
 	o := object.(*Object)
 	for i, f := range c.Fields {
-		f.Type.Encode(e, o.Fields[i])
+		f.Type.EncodeValue(e, o.Fields[i])
 	}
 }
 
-func (c *Entity) doDecode(d binary.Decoder, o *Object) {
+func (c *ObjectClass) doDecode(d binary.Decoder, o *Object) {
 	o.Fields = make([]interface{}, len(c.Fields))
 	for i, f := range c.Fields {
-		o.Fields[i] = f.Type.Decode(d)
+		o.Fields[i] = f.Type.DecodeValue(d)
 	}
 }
 
-func (c *Entity) Decode(d binary.Decoder) binary.Object {
+func (c *ObjectClass) Decode(d binary.Decoder) binary.Object {
 	o := &Object{Type: c}
 	c.doDecode(d, o)
 	return o
 }
 
-func (c *Entity) DecodeTo(d binary.Decoder, object binary.Object) {
+func (c *ObjectClass) DecodeTo(d binary.Decoder, object binary.Object) {
 	c.doDecode(d, object.(*Object))
-}
-
-func (e *Entity) Signature() string {
-	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Package, ".")
-	if e.Identity != "" {
-		fmt.Fprint(b, e.Identity)
-	} else {
-		fmt.Fprint(b, e.Name)
-	}
-	if e.Version != "" {
-		fmt.Fprint(b, "@", e.Version)
-	}
-	fmt.Fprint(b, "{")
-	for i, f := range e.Fields {
-		if i != 0 {
-			fmt.Fprint(b, ",")
-		}
-		printTag(b, f.Type)
-	}
-	fmt.Fprint(b, "}")
-	return b.String()
 }
