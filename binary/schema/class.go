@@ -24,6 +24,8 @@ func (c *ObjectClass) ID() binary.ID {
 
 func (c *ObjectClass) New() binary.Object { return &Object{Type: c} }
 
+func (c *ObjectClass) Schema() *binary.Entity { return (*binary.Entity)(c) }
+
 func (c *ObjectClass) Encode(e binary.Encoder, object binary.Object) {
 	o := object.(*Object)
 	for i, f := range c.Fields {

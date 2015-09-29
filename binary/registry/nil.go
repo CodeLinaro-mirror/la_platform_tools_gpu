@@ -31,3 +31,4 @@ func (*binaryClassNil) New() binary.Object                           { return ni
 func (*binaryClassNil) Encode(e binary.Encoder, obj binary.Object)   {}
 func (*binaryClassNil) Decode(d binary.Decoder) binary.Object        { return nil }
 func (*binaryClassNil) DecodeTo(d binary.Decoder, obj binary.Object) {}
+func (*binaryClassNil) Schema() *binary.Entity                       { return nil }

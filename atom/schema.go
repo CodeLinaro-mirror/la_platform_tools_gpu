@@ -16,7 +16,6 @@ package atom
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
@@ -45,5 +44,5 @@ func FindMetadata(class *binary.Entity) *Metadata {
 // Finds the atom metadata for the given atom.
 // Returns nil if the atom has no metadata.
 func MetadataOf(atom Atom) *Metadata {
-	return FindMetadata(schema.Of(atom.Class()))
+	return FindMetadata(atom.Class().Schema())
 }

@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -46,7 +45,7 @@ func (a *FramebufferObservation) Mutate(s *gfxapi.State, d database.Database, l 
 }
 
 func init() {
-	s := schema.Of((*FramebufferObservation)(nil).Class())
+	s := (*FramebufferObservation)(nil).Class().Schema()
 	s.Metadata = append(s.Metadata, &Metadata{
 		API:              gfxapi.ID{},
 		DisplayName:      "FramebufferObservation",

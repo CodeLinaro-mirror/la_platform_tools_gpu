@@ -99,7 +99,7 @@ func DecodeType(d binary.Decoder) binary.Type {
 		return t
 	case StructTag:
 		t := &Struct{}
-		t.Entity = Lookup(d.ID())
+		t.Entity = d.Lookup(d.ID()).Schema()
 		return t
 	case PointerTag:
 		t := &Pointer{}
@@ -193,9 +193,10 @@ func DecodeConstants(d binary.Decoder, c *ConstantSet) {
 
 type binaryClassClass struct{}
 
-func (*ObjectClass) Class() binary.Class     { return (*binaryClassClass)(nil) }
-func (*binaryClassClass) ID() binary.ID      { return binaryIDClass }
-func (*binaryClassClass) New() binary.Object { return &ObjectClass{} }
+func (*ObjectClass) Class() binary.Class         { return (*binaryClassClass)(nil) }
+func (*binaryClassClass) ID() binary.ID          { return binaryIDClass }
+func (*binaryClassClass) New() binary.Object     { return &ObjectClass{} }
+func (*binaryClassClass) Schema() *binary.Entity { return nil }
 func (*binaryClassClass) Encode(e binary.Encoder, obj binary.Object) {
 	EncodeEntity(e, (*binary.Entity)(obj.(*ObjectClass)))
 }
@@ -210,9 +211,10 @@ func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) {
 
 type binaryClassConstantSet struct{}
 
-func (*ConstantSet) Class() binary.Class           { return (*binaryClassConstantSet)(nil) }
-func (*binaryClassConstantSet) ID() binary.ID      { return binaryIDConstantSet }
-func (*binaryClassConstantSet) New() binary.Object { return &ConstantSet{} }
+func (*ConstantSet) Class() binary.Class               { return (*binaryClassConstantSet)(nil) }
+func (*binaryClassConstantSet) ID() binary.ID          { return binaryIDConstantSet }
+func (*binaryClassConstantSet) New() binary.Object     { return &ConstantSet{} }
+func (*binaryClassConstantSet) Schema() *binary.Entity { return nil }
 func (*binaryClassConstantSet) Encode(e binary.Encoder, obj binary.Object) {
 	EncodeConstants(e, obj.(*ConstantSet))
 }

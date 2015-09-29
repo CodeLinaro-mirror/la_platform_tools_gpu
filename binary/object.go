@@ -45,6 +45,9 @@ type Class interface {
 	// The object must be a type the Class understands, the implementation is
 	// allowed to panic if it is not.
 	DecodeTo(Decoder, Object)
+
+	// Returns the type descriptor for the class.
+	Schema() *Entity
 }
 
 // Generate is used to tag structures that need an auto generated Class.

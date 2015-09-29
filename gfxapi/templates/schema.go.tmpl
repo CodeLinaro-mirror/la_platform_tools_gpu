@@ -41,7 +41,7 @@
 */}}
 {{define "Atom"}}
   {{AssertType $ "Function"}}
-  sc_{{Template "Go.CmdName" $}} := schema.Of((*{{Template "Go.CmdName" $}})(nil).Class())
+  sc_{{Template "Go.CmdName" $}} := (*{{Template "Go.CmdName" $}})(nil).Class().Schema()
   sc_{{Template "Go.CmdName" $}}.Metadata = append(sc_{{Template "Go.CmdName" $}}.Metadata, &atom.Metadata{
     API: apiID,
     DisplayName: "{{Template "CmdName" $}}",
