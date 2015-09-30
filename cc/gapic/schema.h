@@ -60,7 +60,7 @@ class Field {
   std::unique_ptr<Type> mType;
 };
 
-class Entity : public Encodable {
+class Entity {
  public:
   Entity() = default;
 
@@ -96,21 +96,19 @@ class Entity : public Encodable {
       mFields(std::move(fields)),
       mMetadata(std::move(metadata)) {}
 
-  virtual const gapic::Id& Id() const {
-    static gapic::Id ID{ { 0xf1, 0xab, 0xae, 0xcf, 0xc3, 0x23, 0xf8, 0x65, 0xa1, 0xeb, 0xe0, 0x3a, 0xa1, 0xae, 0xb3, 0xab, 0x77, 0xb0, 0x57, 0xef, } };
-    return ID;
-  }
-
-  virtual void Encode(Encoder* e) const {
-    e->String(mPackage);
-    e->String(mIdentity);
-    e->String(mVersion);
-    e->Uint32(uint32_t(mFields.size()));
+  void encode(Encoder& e) const {
+    e.String(mPackage);
+    e.String(mIdentity);
+    e.String(mVersion);
+    e.Uint32(uint32_t(mFields.size()));
     for (const auto& f : mFields) {
-      f.encode(*e);
+      f.encode(e);
     }
   }
 
+  const gapic::Id& TypeId() const {
+    return mTypeId;
+  }
  private:
   gapic::Id mTypeId;
   std::string mPackage;
@@ -273,7 +271,7 @@ class Constant {
   uint32_t mValue;
 };
 
-class ConstantSet : public Encodable {
+class ConstantSet {
  public:
   ConstantSet() = default;
   ConstantSet(Primitive* type, std::initializer_list<Constant> entries) :
@@ -283,16 +281,11 @@ class ConstantSet : public Encodable {
     }
   }
 
-  virtual const gapic::Id& Id() const {
-    static gapic::Id ID{ { 0x28, 0x8f, 0x6c, 0x88, 0x31, 0xd1, 0x04, 0x52, 0xb7, 0x5a, 0x25, 0x83, 0x01, 0x4e, 0x9a, 0x7c, 0x53, 0x03, 0x32, 0x9e, } };
-    return ID;
-  }
-
-  virtual void Encode(Encoder* e) const {
-    mType->encode(*e);
-    e->Uint32(uint32_t(mEntries.size()));
+  void encode(Encoder& e) const {
+    mType->encode(e);
+    e.Uint32(uint32_t(mEntries.size()));
     for (const auto& entry : mEntries) {
-      entry.encode(*e);
+      entry.encode(e);
     }
   }
  private:

@@ -40,6 +40,7 @@ class Encodable {
 public:
     virtual void Encode(Encoder* to) const = 0;
     virtual const gapic::Id& Id() const = 0;
+    virtual const schema::Entity& Schema() const = 0;
 };
 
 template<class T>

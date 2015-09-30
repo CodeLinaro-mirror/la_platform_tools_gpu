@@ -154,13 +154,14 @@ void Encoder::Id(const gapic::Id& id) {
 }
 
 void Encoder::Entity(const schema::Entity& entity) {
-    auto ret = mTypeIds.insert(std::make_pair(entity.Id(), mTypeIds.size() + 1));
+    auto ret = mTypeIds.insert(
+        std::make_pair(entity.TypeId(), mTypeIds.size() + 1));
     uint32_t sid = ret.first->second;
     if (!ret.second) {
         Uint32(sid << 1);
     } else {
         Uint32((sid << 1) | 1);
-        entity.Encode(this);
+        entity.encode(*this);
     }
 }
 
@@ -170,10 +171,10 @@ void Encoder::Value(const Encodable& obj) {
 
 void Encoder::Variant(const Encodable* obj) {
     if (obj == nullptr) {
-        Id(gapic::Id());
+        Uint32(0);
         return;
     }
-    Id(obj->Id());
+    Entity(obj->Schema());
     Value(*obj);
 }
 
