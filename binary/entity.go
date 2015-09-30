@@ -14,7 +14,10 @@
 
 package binary
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // Entity represents the encodable type information for an object.
 // In it's compact form, the entity contains only the information strictly required to generate it's signature, and not
@@ -30,11 +33,21 @@ type Entity struct {
 	Metadata []Object  // The metadata for the class, not set in compact form
 }
 
+// Name returns the name of the Entity.
 func (e *Entity) Name() string {
 	if e.Display != "" {
 		return e.Display
 	}
 	return e.Identity
+}
+
+// Identifier can be used in approximately stable sorting lists of Entities.
+func (e *Entity) Identifier() string {
+	s := fmt.Sprint(e.Package, ".", e.Identity)
+	if e.Version == "" {
+		return s
+	}
+	return fmt.Sprint(s, '@', e.Version)
 }
 
 // FieldList is a slice of fields.

@@ -31,7 +31,7 @@ type byID []*Struct
 
 func (a byID) Len() int           { return len(a) }
 func (a byID) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a byID) Less(i, j int) bool { return a[i].TypeID.String() < a[j].TypeID.String() }
+func (a byID) Less(i, j int) bool { return a[i].Identifier() < a[j].Identifier() }
 
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}
@@ -73,11 +73,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 
 func Signature(e *binary.Entity) string {
 	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Package, ".", e.Identity)
-	if e.Version != "" {
-		fmt.Fprint(b, "@", e.Version)
-	}
-	fmt.Fprint(b, "{")
+	fmt.Fprint(b, e.Identifier(), "{")
 	for i, f := range e.Fields {
 		if i != 0 {
 			fmt.Fprint(b, ",")
