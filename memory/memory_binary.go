@@ -55,9 +55,9 @@ func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassPointer) Schema() *binary.Entity { return schemaPointer }
 
 var schemaPointer = &binary.Entity{
-	TypeID:  binaryIDPointer,
-	Package: "memory",
-	Name:    "Pointer",
+	TypeID:   binaryIDPointer,
+	Package:  "memory",
+	Identity: "Pointer",
 	Fields: []binary.Field{
 		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Pool", Type: &schema.Primitive{Name: "PoolID", Method: schema.Uint32}},
@@ -93,9 +93,9 @@ func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassRange) Schema() *binary.Entity { return schemaRange }
 
 var schemaRange = &binary.Entity{
-	TypeID:  binaryIDRange,
-	Package: "memory",
-	Name:    "Range",
+	TypeID:   binaryIDRange,
+	Package:  "memory",
+	Identity: "Range",
 	Fields: []binary.Field{
 		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},

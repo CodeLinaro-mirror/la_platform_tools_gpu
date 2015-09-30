@@ -104,9 +104,9 @@ func (*binaryClassBuildReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassBuildReport) Schema() *binary.Entity { return schemaBuildReport }
 
 var schemaBuildReport = &binary.Entity{
-	TypeID:  binaryIDBuildReport,
-	Package: "builder",
-	Name:    "BuildReport",
+	TypeID:   binaryIDBuildReport,
+	Package:  "builder",
+	Identity: "BuildReport",
 	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Capture)(nil).Class().Schema()}}},
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
@@ -144,9 +144,9 @@ func (*binaryClassFollow) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassFollow) Schema() *binary.Entity { return schemaFollow }
 
 var schemaFollow = &binary.Entity{
-	TypeID:  binaryIDFollow,
-	Package: "builder",
-	Name:    "Follow",
+	TypeID:   binaryIDFollow,
+	Package:  "builder",
+	Identity: "Follow",
 	Fields: []binary.Field{
 		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
 	},
@@ -183,9 +183,9 @@ func (*binaryClassGet) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGet) Schema() *binary.Entity { return schemaGet }
 
 var schemaGet = &binary.Entity{
-	TypeID:  binaryIDGet,
-	Package: "builder",
-	Name:    "Get",
+	TypeID:   binaryIDGet,
+	Package:  "builder",
+	Identity: "Get",
 	Fields: []binary.Field{
 		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
 	},
@@ -238,9 +238,9 @@ func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferColor) Schema() *binary.Entity { return schemaGetFramebufferColor }
 
 var schemaGetFramebufferColor = &binary.Entity{
-	TypeID:  binaryIDGetFramebufferColor,
-	Package: "builder",
-	Name:    "GetFramebufferColor",
+	TypeID:   binaryIDGetFramebufferColor,
+	Package:  "builder",
+	Identity: "GetFramebufferColor",
 	Fields: []binary.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Atom)(nil).Class().Schema()}}},
@@ -293,9 +293,9 @@ func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferDepth) Schema() *binary.Entity { return schemaGetFramebufferDepth }
 
 var schemaGetFramebufferDepth = &binary.Entity{
-	TypeID:  binaryIDGetFramebufferDepth,
-	Package: "builder",
-	Name:    "GetFramebufferDepth",
+	TypeID:   binaryIDGetFramebufferDepth,
+	Package:  "builder",
+	Identity: "GetFramebufferDepth",
 	Fields: []binary.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Atom)(nil).Class().Schema()}}},
@@ -337,9 +337,9 @@ func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetHierarchy) Schema() *binary.Entity { return schemaGetHierarchy }
 
 var schemaGetHierarchy = &binary.Entity{
-	TypeID:  binaryIDGetHierarchy,
-	Package: "builder",
-	Name:    "GetHierarchy",
+	TypeID:   binaryIDGetHierarchy,
+	Package:  "builder",
+	Identity: "GetHierarchy",
 	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Capture)(nil).Class().Schema()}}},
 	},
@@ -380,9 +380,9 @@ func (*binaryClassGetResourceData) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClassGetResourceData) Schema() *binary.Entity { return schemaGetResourceData }
 
 var schemaGetResourceData = &binary.Entity{
-	TypeID:  binaryIDGetResourceData,
-	Package: "builder",
-	Name:    "GetResourceData",
+	TypeID:   binaryIDGetResourceData,
+	Package:  "builder",
+	Identity: "GetResourceData",
 	Fields: []binary.Field{
 		{Declared: "Path", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Resource)(nil).Class().Schema()}}},
 	},
@@ -423,9 +423,9 @@ func (*binaryClassGetResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetResources) Schema() *binary.Entity { return schemaGetResources }
 
 var schemaGetResources = &binary.Entity{
-	TypeID:  binaryIDGetResources,
-	Package: "builder",
-	Name:    "GetResources",
+	TypeID:   binaryIDGetResources,
+	Package:  "builder",
+	Identity: "GetResources",
 	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Capture)(nil).Class().Schema()}}},
 	},
@@ -466,9 +466,9 @@ func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetState) Schema() *binary.Entity { return schemaGetState }
 
 var schemaGetState = &binary.Entity{
-	TypeID:  binaryIDGetState,
-	Package: "builder",
-	Name:    "GetState",
+	TypeID:   binaryIDGetState,
+	Package:  "builder",
+	Identity: "GetState",
 	Fields: []binary.Field{
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Atom)(nil).Class().Schema()}}},
 	},
@@ -521,9 +521,9 @@ func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetTimingInfo) Schema() *binary.Entity { return schemaGetTimingInfo }
 
 var schemaGetTimingInfo = &binary.Entity{
-	TypeID:  binaryIDGetTimingInfo,
-	Package: "builder",
-	Name:    "GetTimingInfo",
+	TypeID:   binaryIDGetTimingInfo,
+	Package:  "builder",
+	Identity: "GetTimingInfo",
 	Fields: []binary.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Capture)(nil).Class().Schema()}}},
@@ -560,9 +560,9 @@ func (*binaryClassIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassIndexLimits) Schema() *binary.Entity { return schemaIndexLimits }
 
 var schemaIndexLimits = &binary.Entity{
-	TypeID:  binaryIDIndexLimits,
-	Package: "builder",
-	Name:    "IndexLimits",
+	TypeID:   binaryIDIndexLimits,
+	Package:  "builder",
+	Identity: "IndexLimits",
 	Fields: []binary.Field{
 		{Declared: "Min", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Max", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -620,9 +620,9 @@ func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferColor) Schema() *binary.Entity { return schemaRenderFramebufferColor }
 
 var schemaRenderFramebufferColor = &binary.Entity{
-	TypeID:  binaryIDRenderFramebufferColor,
-	Package: "builder",
-	Name:    "RenderFramebufferColor",
+	TypeID:   binaryIDRenderFramebufferColor,
+	Package:  "builder",
+	Identity: "RenderFramebufferColor",
 	Fields: []binary.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Atom)(nil).Class().Schema()}}},
@@ -681,9 +681,9 @@ func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferDepth) Schema() *binary.Entity { return schemaRenderFramebufferDepth }
 
 var schemaRenderFramebufferDepth = &binary.Entity{
-	TypeID:  binaryIDRenderFramebufferDepth,
-	Package: "builder",
-	Name:    "RenderFramebufferDepth",
+	TypeID:   binaryIDRenderFramebufferDepth,
+	Package:  "builder",
+	Identity: "RenderFramebufferDepth",
 	Fields: []binary.Field{
 		{Declared: "Device", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Device)(nil).Class().Schema()}}},
 		{Declared: "After", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Atom)(nil).Class().Schema()}}},
@@ -725,9 +725,9 @@ func (*binaryClassSet) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassSet) Schema() *binary.Entity { return schemaSet }
 
 var schemaSet = &binary.Entity{
-	TypeID:  binaryIDSet,
-	Package: "builder",
-	Name:    "Set",
+	TypeID:   binaryIDSet,
+	Package:  "builder",
+	Identity: "Set",
 	Fields: []binary.Field{
 		{Declared: "Path", Type: &schema.Interface{Name: "path.Path"}},
 		{Declared: "Value", Type: &schema.Any{}},
@@ -767,9 +767,9 @@ func (*binaryClassatomFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemaatomFramebufferDimensions = &binary.Entity{
-	TypeID:  binaryIDatomFramebufferDimensions,
-	Package: "builder",
-	Name:    "atomFramebufferDimensions",
+	TypeID:   binaryIDatomFramebufferDimensions,
+	Package:  "builder",
+	Identity: "atomFramebufferDimensions",
 	Fields: []binary.Field{
 		{Declared: "From", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -810,9 +810,9 @@ func (*binaryClasscalcIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClasscalcIndexLimits) Schema() *binary.Entity { return schemacalcIndexLimits }
 
 var schemacalcIndexLimits = &binary.Entity{
-	TypeID:  binaryIDcalcIndexLimits,
-	Package: "builder",
-	Name:    "calcIndexLimits",
+	TypeID:   binaryIDcalcIndexLimits,
+	Package:  "builder",
+	Identity: "calcIndexLimits",
 	Fields: []binary.Field{
 		{Declared: "indexSize", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 		{Declared: "count", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
@@ -862,9 +862,9 @@ func (*binaryClasscaptureFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemacaptureFramebufferDimensions = &binary.Entity{
-	TypeID:  binaryIDcaptureFramebufferDimensions,
-	Package: "builder",
-	Name:    "captureFramebufferDimensions",
+	TypeID:   binaryIDcaptureFramebufferDimensions,
+	Package:  "builder",
+	Identity: "captureFramebufferDimensions",
 	Fields: []binary.Field{
 		{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*atomFramebufferDimensions)(nil).Class().Schema()}}},
 	},
@@ -911,9 +911,9 @@ func (*binaryClassgetCaptureFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemagetCaptureFramebufferDimensions = &binary.Entity{
-	TypeID:  binaryIDgetCaptureFramebufferDimensions,
-	Package: "builder",
-	Name:    "getCaptureFramebufferDimensions",
+	TypeID:   binaryIDgetCaptureFramebufferDimensions,
+	Package:  "builder",
+	Identity: "getCaptureFramebufferDimensions",
 	Fields: []binary.Field{
 		{Declared: "Capture", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*path.Capture)(nil).Class().Schema()}}},
 	},

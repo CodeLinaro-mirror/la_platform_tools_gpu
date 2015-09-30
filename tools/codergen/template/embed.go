@@ -231,8 +231,8 @@ const go_binary_tmpl = `{{/*
     var schema{{.Name}} = &binary.Entity{»¶
       TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
-      Name:║"{{.Name}}",¶
-      {{if .Identity}}Identity:║"{{.Identity}}",¶{{end}}
+      {{if .Display}}Display:║"{{.Display}}",¶{{end}}
+      Identity:║"{{.Identity}}",¶
       {{if .Version}}Version:║"{{.Version}}",¶{{end}}
       {{if not (len .Fields)}}
         Fields:║[]binary.Field{},¶

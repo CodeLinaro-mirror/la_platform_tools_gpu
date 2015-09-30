@@ -58,9 +58,9 @@ func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasstestStruct) Schema() *binary.Entity { return schematestStruct }
 
 var schematestStruct = &binary.Entity{
-	TypeID:  binaryIDtestStruct,
-	Package: "builder",
-	Name:    "testStruct",
+	TypeID:   binaryIDtestStruct,
+	Package:  "builder",
+	Identity: "testStruct",
 	Fields: []binary.Field{
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Ptr", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*testStruct)(nil).Class().Schema()}}},
@@ -134,9 +134,9 @@ func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasstestAtom) Schema() *binary.Entity { return schematestAtom }
 
 var schematestAtom = &binary.Entity{
-	TypeID:  binaryIDtestAtom,
-	Package: "builder",
-	Name:    "testAtom",
+	TypeID:   binaryIDtestAtom,
+	Package:  "builder",
+	Identity: "testAtom",
 	Fields: []binary.Field{
 		{Declared: "api", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},

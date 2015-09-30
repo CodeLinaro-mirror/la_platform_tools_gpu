@@ -51,9 +51,9 @@ func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTypeA) Schema() *binary.Entity { return schemaTypeA }
 
 var schemaTypeA = &binary.Entity{
-	TypeID:  TypeAID,
-	Package: "test",
-	Name:    "TypeA",
+	TypeID:   TypeAID,
+	Package:  "test",
+	Identity: "TypeA",
 	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -86,9 +86,9 @@ func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTypeB) Schema() *binary.Entity { return schemaTypeB }
 
 var schemaTypeB = &binary.Entity{
-	TypeID:  TypeBID,
-	Package: "test",
-	Name:    "TypeB",
+	TypeID:   TypeBID,
+	Package:  "test",
+	Identity: "TypeB",
 	Fields: []binary.Field{
 		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},

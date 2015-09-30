@@ -105,9 +105,9 @@ func (*binaryClassListNode) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassListNode) Schema() *binary.Entity { return schemaListNode }
 
 var schemaListNode = &binary.Entity{
-	TypeID:  binaryIDListNode,
-	Package: "test",
-	Name:    "ListNode",
+	TypeID:   binaryIDListNode,
+	Package:  "test",
+	Identity: "ListNode",
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
@@ -145,9 +145,9 @@ func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
 var schemaResource = &binary.Entity{
-	TypeID:  binaryIDResource,
-	Package: "test",
-	Name:    "Resource",
+	TypeID:   binaryIDResource,
+	Package:  "test",
+	Identity: "Resource",
 	Fields: []binary.Field{
 		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
@@ -186,9 +186,9 @@ func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassStruct) Schema() *binary.Entity { return schemaStruct }
 
 var schemaStruct = &binary.Entity{
-	TypeID:  binaryIDStruct,
-	Package: "test",
-	Name:    "Struct",
+	TypeID:   binaryIDStruct,
+	Package:  "test",
+	Identity: "Struct",
 	Fields: []binary.Field{
 		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -225,9 +225,9 @@ func (*binaryClasscallAdd) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasscallAdd) Schema() *binary.Entity { return schemacallAdd }
 
 var schemacallAdd = &binary.Entity{
-	TypeID:  binaryIDcallAdd,
-	Package: "test",
-	Name:    "callAdd",
+	TypeID:   binaryIDcallAdd,
+	Package:  "test",
+	Identity: "callAdd",
 	Fields: []binary.Field{
 		{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -261,9 +261,9 @@ func (*binaryClasscallEnumToString) DecodeTo(d binary.Decoder, obj binary.Object
 func (*binaryClasscallEnumToString) Schema() *binary.Entity { return schemacallEnumToString }
 
 var schemacallEnumToString = &binary.Entity{
-	TypeID:  binaryIDcallEnumToString,
-	Package: "test",
-	Name:    "callEnumToString",
+	TypeID:   binaryIDcallEnumToString,
+	Package:  "test",
+	Identity: "callEnumToString",
 	Fields: []binary.Field{
 		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
@@ -294,10 +294,10 @@ func (*binaryClasscallGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClasscallGetListNodeChain) Schema() *binary.Entity { return schemacallGetListNodeChain }
 
 var schemacallGetListNodeChain = &binary.Entity{
-	TypeID:  binaryIDcallGetListNodeChain,
-	Package: "test",
-	Name:    "callGetListNodeChain",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDcallGetListNodeChain,
+	Package:  "test",
+	Identity: "callGetListNodeChain",
+	Fields:   []binary.Field{},
 }
 
 type binaryClasscallGetListNodeChainArray struct{}
@@ -327,10 +327,10 @@ func (*binaryClasscallGetListNodeChainArray) Schema() *binary.Entity {
 }
 
 var schemacallGetListNodeChainArray = &binary.Entity{
-	TypeID:  binaryIDcallGetListNodeChainArray,
-	Package: "test",
-	Name:    "callGetListNodeChainArray",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDcallGetListNodeChainArray,
+	Package:  "test",
+	Identity: "callGetListNodeChainArray",
+	Fields:   []binary.Field{},
 }
 
 type binaryClasscallGetResource struct{}
@@ -358,10 +358,10 @@ func (*binaryClasscallGetResource) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClasscallGetResource) Schema() *binary.Entity { return schemacallGetResource }
 
 var schemacallGetResource = &binary.Entity{
-	TypeID:  binaryIDcallGetResource,
-	Package: "test",
-	Name:    "callGetResource",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDcallGetResource,
+	Package:  "test",
+	Identity: "callGetResource",
+	Fields:   []binary.Field{},
 }
 
 type binaryClasscallGetSingleListNode struct{}
@@ -389,10 +389,10 @@ func (*binaryClasscallGetSingleListNode) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClasscallGetSingleListNode) Schema() *binary.Entity { return schemacallGetSingleListNode }
 
 var schemacallGetSingleListNode = &binary.Entity{
-	TypeID:  binaryIDcallGetSingleListNode,
-	Package: "test",
-	Name:    "callGetSingleListNode",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDcallGetSingleListNode,
+	Package:  "test",
+	Identity: "callGetSingleListNode",
+	Fields:   []binary.Field{},
 }
 
 type binaryClasscallGetStruct struct{}
@@ -420,10 +420,10 @@ func (*binaryClasscallGetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasscallGetStruct) Schema() *binary.Entity { return schemacallGetStruct }
 
 var schemacallGetStruct = &binary.Entity{
-	TypeID:  binaryIDcallGetStruct,
-	Package: "test",
-	Name:    "callGetStruct",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDcallGetStruct,
+	Package:  "test",
+	Identity: "callGetStruct",
+	Fields:   []binary.Field{},
 }
 
 type binaryClasscallResolveResource struct{}
@@ -453,9 +453,9 @@ func (*binaryClasscallResolveResource) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClasscallResolveResource) Schema() *binary.Entity { return schemacallResolveResource }
 
 var schemacallResolveResource = &binary.Entity{
-	TypeID:  binaryIDcallResolveResource,
-	Package: "test",
-	Name:    "callResolveResource",
+	TypeID:   binaryIDcallResolveResource,
+	Package:  "test",
+	Identity: "callResolveResource",
 	Fields: []binary.Field{
 		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
@@ -488,9 +488,9 @@ func (*binaryClasscallSetStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasscallSetStruct) Schema() *binary.Entity { return schemacallSetStruct }
 
 var schemacallSetStruct = &binary.Entity{
-	TypeID:  binaryIDcallSetStruct,
-	Package: "test",
-	Name:    "callSetStruct",
+	TypeID:   binaryIDcallSetStruct,
+	Package:  "test",
+	Identity: "callSetStruct",
 	Fields: []binary.Field{
 		{Declared: "s", Type: &schema.Struct{Entity: (*Struct)(nil).Class().Schema()}},
 	},
@@ -523,9 +523,9 @@ func (*binaryClasscallUseResource) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClasscallUseResource) Schema() *binary.Entity { return schemacallUseResource }
 
 var schemacallUseResource = &binary.Entity{
-	TypeID:  binaryIDcallUseResource,
-	Package: "test",
-	Name:    "callUseResource",
+	TypeID:   binaryIDcallUseResource,
+	Package:  "test",
+	Identity: "callUseResource",
 	Fields: []binary.Field{
 		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
@@ -558,9 +558,9 @@ func (*binaryClassresultAdd) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassresultAdd) Schema() *binary.Entity { return schemaresultAdd }
 
 var schemaresultAdd = &binary.Entity{
-	TypeID:  binaryIDresultAdd,
-	Package: "test",
-	Name:    "resultAdd",
+	TypeID:   binaryIDresultAdd,
+	Package:  "test",
+	Identity: "resultAdd",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -593,9 +593,9 @@ func (*binaryClassresultEnumToString) DecodeTo(d binary.Decoder, obj binary.Obje
 func (*binaryClassresultEnumToString) Schema() *binary.Entity { return schemaresultEnumToString }
 
 var schemaresultEnumToString = &binary.Entity{
-	TypeID:  binaryIDresultEnumToString,
-	Package: "test",
-	Name:    "resultEnumToString",
+	TypeID:   binaryIDresultEnumToString,
+	Package:  "test",
+	Identity: "resultEnumToString",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
@@ -636,9 +636,9 @@ func (*binaryClassresultGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassresultGetListNodeChain) Schema() *binary.Entity { return schemaresultGetListNodeChain }
 
 var schemaresultGetListNodeChain = &binary.Entity{
-	TypeID:  binaryIDresultGetListNodeChain,
-	Package: "test",
-	Name:    "resultGetListNodeChain",
+	TypeID:   binaryIDresultGetListNodeChain,
+	Package:  "test",
+	Identity: "resultGetListNodeChain",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
 	},
@@ -693,9 +693,9 @@ func (*binaryClassresultGetListNodeChainArray) Schema() *binary.Entity {
 }
 
 var schemaresultGetListNodeChainArray = &binary.Entity{
-	TypeID:  binaryIDresultGetListNodeChainArray,
-	Package: "test",
-	Name:    "resultGetListNodeChainArray",
+	TypeID:   binaryIDresultGetListNodeChainArray,
+	Package:  "test",
+	Identity: "resultGetListNodeChainArray",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Slice{Alias: "", ValueType: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}}},
 	},
@@ -728,9 +728,9 @@ func (*binaryClassresultGetResource) DecodeTo(d binary.Decoder, obj binary.Objec
 func (*binaryClassresultGetResource) Schema() *binary.Entity { return schemaresultGetResource }
 
 var schemaresultGetResource = &binary.Entity{
-	TypeID:  binaryIDresultGetResource,
-	Package: "test",
-	Name:    "resultGetResource",
+	TypeID:   binaryIDresultGetResource,
+	Package:  "test",
+	Identity: "resultGetResource",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
 	},
@@ -773,9 +773,9 @@ func (*binaryClassresultGetSingleListNode) Schema() *binary.Entity {
 }
 
 var schemaresultGetSingleListNode = &binary.Entity{
-	TypeID:  binaryIDresultGetSingleListNode,
-	Package: "test",
-	Name:    "resultGetSingleListNode",
+	TypeID:   binaryIDresultGetSingleListNode,
+	Package:  "test",
+	Identity: "resultGetSingleListNode",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Entity: (*ListNode)(nil).Class().Schema()}}},
 	},
@@ -808,9 +808,9 @@ func (*binaryClassresultGetStruct) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClassresultGetStruct) Schema() *binary.Entity { return schemaresultGetStruct }
 
 var schemaresultGetStruct = &binary.Entity{
-	TypeID:  binaryIDresultGetStruct,
-	Package: "test",
-	Name:    "resultGetStruct",
+	TypeID:   binaryIDresultGetStruct,
+	Package:  "test",
+	Identity: "resultGetStruct",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Struct{Entity: (*Struct)(nil).Class().Schema()}},
 	},
@@ -843,9 +843,9 @@ func (*binaryClassresultResolveResource) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassresultResolveResource) Schema() *binary.Entity { return schemaresultResolveResource }
 
 var schemaresultResolveResource = &binary.Entity{
-	TypeID:  binaryIDresultResolveResource,
-	Package: "test",
-	Name:    "resultResolveResource",
+	TypeID:   binaryIDresultResolveResource,
+	Package:  "test",
+	Identity: "resultResolveResource",
 	Fields: []binary.Field{
 		{Declared: "value", Type: &schema.Struct{Entity: (*Resource)(nil).Class().Schema()}},
 	},
@@ -876,10 +876,10 @@ func (*binaryClassresultSetStruct) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClassresultSetStruct) Schema() *binary.Entity { return schemaresultSetStruct }
 
 var schemaresultSetStruct = &binary.Entity{
-	TypeID:  binaryIDresultSetStruct,
-	Package: "test",
-	Name:    "resultSetStruct",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDresultSetStruct,
+	Package:  "test",
+	Identity: "resultSetStruct",
+	Fields:   []binary.Field{},
 }
 
 type binaryClassresultUseResource struct{}
@@ -907,10 +907,10 @@ func (*binaryClassresultUseResource) DecodeTo(d binary.Decoder, obj binary.Objec
 func (*binaryClassresultUseResource) Schema() *binary.Entity { return schemaresultUseResource }
 
 var schemaresultUseResource = &binary.Entity{
-	TypeID:  binaryIDresultUseResource,
-	Package: "test",
-	Name:    "resultUseResource",
-	Fields:  []binary.Field{},
+	TypeID:   binaryIDresultUseResource,
+	Package:  "test",
+	Identity: "resultUseResource",
+	Fields:   []binary.Field{},
 }
 
 var ConstantValues schema.Constants

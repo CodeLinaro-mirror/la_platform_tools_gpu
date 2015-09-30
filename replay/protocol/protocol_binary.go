@@ -55,9 +55,9 @@ func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResourceInfo) Schema() *binary.Entity { return schemaResourceInfo }
 
 var schemaResourceInfo = &binary.Entity{
-	TypeID:  binaryIDResourceInfo,
-	Package: "protocol",
-	Name:    "ResourceInfo",
+	TypeID:   binaryIDResourceInfo,
+	Package:  "protocol",
+	Identity: "ResourceInfo",
 	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
@@ -115,9 +115,9 @@ func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassPayload) Schema() *binary.Entity { return schemaPayload }
 
 var schemaPayload = &binary.Entity{
-	TypeID:  binaryIDPayload,
-	Package: "protocol",
-	Name:    "Payload",
+	TypeID:   binaryIDPayload,
+	Package:  "protocol",
+	Identity: "Payload",
 	Fields: []binary.Field{
 		{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},

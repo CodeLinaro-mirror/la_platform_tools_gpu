@@ -53,9 +53,9 @@ func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassdirectCall) Schema() *binary.Entity { return schemadirectCall }
 
 var schemadirectCall = &binary.Entity{
-	TypeID:  binaryIDdirectCall,
-	Package: "gles",
-	Name:    "directCall",
+	TypeID:   binaryIDdirectCall,
+	Package:  "gles",
+	Identity: "directCall",
 	Fields: []binary.Field{
 		{Declared: "atom", Type: &schema.Interface{Name: "caller"}},
 	},

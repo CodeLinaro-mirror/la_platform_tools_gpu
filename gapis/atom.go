@@ -106,7 +106,7 @@ func (a *Atom) String() string {
 		_, v := a.Parameter(i)
 		params[i] = fmt.Sprintf("%v", v)
 	}
-	return fmt.Sprintf("%v(%v)", a.class.base.Name, strings.Join(params, ", "))
+	return fmt.Sprintf("%v(%v)", a.class.base.Name(), strings.Join(params, ", "))
 }
 
 // atomClass is an implementation of binary.Class used for atoms described by
@@ -166,12 +166,12 @@ func (c *atomClass) Decode(d binary.Decoder) binary.Object {
 	a.object = o.(*schema.Object)
 	if c.observations >= 0 {
 		if c.observations >= len(a.object.Fields) {
-			d.SetError(fmt.Errorf("Missing Observations field in %s", c.base.Name))
+			d.SetError(fmt.Errorf("Missing Observations field in %s", c.base.Name()))
 			return a
 		}
 		value := a.object.Fields[c.observations]
 		if observations, ok := value.(*atom.Observations); !ok {
-			d.SetError(fmt.Errorf("Observations field is of type %T in %s", value, c.base.Name))
+			d.SetError(fmt.Errorf("Observations field is of type %T in %s", value, c.base.Name()))
 			return a
 		} else {
 			a.observations = observations

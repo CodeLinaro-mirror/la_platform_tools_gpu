@@ -66,9 +66,9 @@ func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassCubemapLevel) Schema() *binary.Entity { return schemaCubemapLevel }
 
 var schemaCubemapLevel = &binary.Entity{
-	TypeID:  binaryIDCubemapLevel,
-	Package: "gfxapi",
-	Name:    "CubemapLevel",
+	TypeID:   binaryIDCubemapLevel,
+	Package:  "gfxapi",
+	Identity: "CubemapLevel",
 	Fields: []binary.Field{
 		{Declared: "NegativeX", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
 		{Declared: "PositiveX", Type: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}},
@@ -114,9 +114,9 @@ func (*binaryClassCubemap) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassCubemap) Schema() *binary.Entity { return schemaCubemap }
 
 var schemaCubemap = &binary.Entity{
-	TypeID:  binaryIDCubemap,
-	Package: "gfxapi",
-	Name:    "Cubemap",
+	TypeID:   binaryIDCubemap,
+	Package:  "gfxapi",
+	Identity: "Cubemap",
 	Fields: []binary.Field{
 		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*CubemapLevel)(nil).Class().Schema()}}},
 	},
@@ -157,9 +157,9 @@ func (*binaryClassTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTexture2D) Schema() *binary.Entity { return schemaTexture2D }
 
 var schemaTexture2D = &binary.Entity{
-	TypeID:  binaryIDTexture2D,
-	Package: "gfxapi",
-	Name:    "Texture2D",
+	TypeID:   binaryIDTexture2D,
+	Package:  "gfxapi",
+	Identity: "Texture2D",
 	Fields: []binary.Field{
 		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*image.Info)(nil).Class().Schema()}}},
 	},
