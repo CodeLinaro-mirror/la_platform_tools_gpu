@@ -1068,6 +1068,7 @@ const java_client_tmpl = `{{/*
     {{range .Service.Methods}}
       private class {{.Name}}Callable implements {{Call "Java.Callable" .Result.Type}} {»¶
         private final {{File.ClassName .Call}} myCall;¶
+        private final Exception stack = new StackException();¶
         ¶
         private {{.Name}}Callable({{template "Java.Parameters" .}}) {»¶
           myCall = new {{File.ClassName .Call}}();¶
@@ -1077,15 +1078,25 @@ const java_client_tmpl = `{{/*
         «}¶
         @Override¶
         public {{Call "Java.Value" .Result.Type}} call() throws Exception {»¶
-          {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
-            return result.getValue();¶
-          {{else}}
-            myBroadcaster.Send(myCall);¶
-            return null;¶
-          {{end}}
+          try {»¶
+            {{if .Result.Type}}{{File.ClassName .Result}} result = ({{File.ClassName .Result}})myBroadcaster.Send(myCall);¶
+              return result.getValue();¶
+            {{else}}
+              myBroadcaster.Send(myCall);¶
+              return null;¶
+            {{end}}
+          «} catch (Exception e) {»¶
+            throw (Exception)stack.initCause(e);¶
+          «}¶
         «}¶
       «}¶
     {{end}}
+    private static class StackException extends Exception {»¶
+      @Override¶
+      public String toString() {»¶
+        return String.valueOf(getCause());¶
+      «}¶
+    «}¶
   «}¶
 {{end}}
 
