@@ -42,7 +42,7 @@ func (m *Module) addStruct(n *types.TypeName) {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{
 		Entity: binary.Entity{
-			Name:     n.Name(),
+			Display:  n.Name(),
 			Package:  m.Source.Types.Name(),
 			Exported: n.Exported(),
 		},
@@ -66,7 +66,7 @@ func (m *Module) addStruct(n *types.TypeName) {
 		}
 		defer func() {
 			if r := recover(); r != nil && invalidStruct == nil {
-				invalidStruct = fmt.Errorf("Handling %v.%v gave error %v", s.Name, f.Name(), r)
+				invalidStruct = fmt.Errorf("Handling %v.%v gave error %v", s.Name(), f.Name(), r)
 			}
 		}()
 		f.Type = m.fromType(decl.Type(), s, tags)
@@ -76,7 +76,10 @@ func (m *Module) addStruct(n *types.TypeName) {
 		if invalidStruct != nil {
 			panic(invalidStruct)
 		}
-		s.Identity = s.Tag("identity", "")
+		s.Identity = s.Tag("identity", s.Display)
+		if s.Display == s.Identity {
+			s.Display = ""
+		}
 		s.Version = s.Tag("version", "")
 		m.Structs = append(m.Structs, s)
 	}
@@ -93,7 +96,7 @@ func (s *Struct) Tag(name string, missing string) string {
 
 // IDName returns the name to give the ID of the type.
 func (s *Struct) IDName() string {
-	return s.Tag("id", "binaryID"+s.Name)
+	return s.Tag("id", "binaryID"+s.Name())
 }
 
 // ID returns the type id for the entity.
@@ -162,8 +165,9 @@ func (m *Module) finaliseStructs() {
 	byname := make(map[string]*sortEntry, len(m.Structs))
 	for i, s := range m.Structs {
 		s.UpdateID()
-		names[i] = s.Name
-		byname[s.Name] = &sortEntry{s, false}
+		name := s.Name()
+		names[i] = name
+		byname[name] = &sortEntry{s, false}
 	}
 	names.Sort()
 	i := 0

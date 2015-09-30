@@ -20,12 +20,19 @@ import "strings"
 type Entity struct {
 	TypeID   ID        // The unique type identifier for the class.
 	Package  string    // The package that declared the struct.
-	Name     string    // The display name of the class, does not affect the signature.
+	Display  string    // The display name of the class, does not affect the signature.
 	Identity string    // The true name of the class.
 	Version  string    // The version string of the class, if set.
 	Exported bool      // Whether the class is exported from it's package
 	Fields   FieldList // Descriptions of the fields of the class.
 	Metadata []Object  // The metadata for the class.
+}
+
+func (e *Entity) Name() string {
+	if e.Display != "" {
+		return e.Display
+	}
+	return e.Identity
 }
 
 // FieldList is a slice of fields.

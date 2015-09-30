@@ -27,14 +27,14 @@ type Struct struct {
 }
 
 func (s *Struct) Representation() string {
-	return s.Entity.Name
+	return s.Entity.Name()
 }
 
 func (s *Struct) String() string {
 	if s.Relative != "" {
 		return s.Relative
 	}
-	return s.Entity.Name
+	return s.Entity.Name()
 }
 
 func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {

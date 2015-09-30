@@ -29,7 +29,7 @@ import (
 )
 
 var (
-	structType = &schema.Struct{Entity: &binary.Entity{Name: "TestObject"}}
+	structType = &schema.Struct{Entity: &binary.Entity{Identity: "TestObject"}}
 	fields     = []binary.Field{
 		{Declared: "u8", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 		{Declared: "u16", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
@@ -90,7 +90,7 @@ func parseStructs(source string) []*Struct {
 func parseStruct(t *testing.T, name string, source string) *Struct {
 	s := parseStructs(source)
 	for _, entry := range s {
-		if entry.Name == name {
+		if entry.Name() == name {
 			return entry
 		}
 	}
@@ -108,7 +108,7 @@ func TestEmpty(t *testing.T) {
 func TestDisable(t *testing.T) {
 	s := parseStructs("type MyStruct struct {binary.Generate `disable:\"true\"`}")
 	for _, entry := range s {
-		if entry.Name == "MyStruct" {
+		if entry.Identity == "MyStruct" {
 			t.Errorf("Generated disabled struct")
 		}
 	}

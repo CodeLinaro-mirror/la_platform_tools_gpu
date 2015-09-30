@@ -58,7 +58,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 			largest = size
 		}
 		fmt.Fprintln(w)
-		fmt.Fprintln(w, s.Name, ": size", size)
+		fmt.Fprintln(w, s.Name(), ": size", size)
 		fmt.Fprintln(w, s.TypeID)
 		fmt.Fprintln(w, Signature(&s.Entity))
 	}
@@ -73,12 +73,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 
 func Signature(e *binary.Entity) string {
 	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Package, ".")
-	if e.Identity != "" {
-		fmt.Fprint(b, e.Identity)
-	} else {
-		fmt.Fprint(b, e.Name)
-	}
+	fmt.Fprint(b, e.Package, ".", e.Identity)
 	if e.Version != "" {
 		fmt.Fprint(b, "@", e.Version)
 	}

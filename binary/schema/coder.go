@@ -126,7 +126,7 @@ func DecodeType(d binary.Decoder) binary.Type {
 func EncodeEntity(e binary.Encoder, c *binary.Entity) {
 	e.ID(c.TypeID)
 	e.String(c.Package)
-	e.String(c.Name)
+	e.String(c.Display)
 	e.String(c.Identity)
 	e.String(c.Version)
 	e.Bool(c.Exported)
@@ -144,7 +144,7 @@ func EncodeEntity(e binary.Encoder, c *binary.Entity) {
 func DecodeEntity(d binary.Decoder, c *binary.Entity) {
 	c.TypeID = d.ID()
 	c.Package = d.String()
-	c.Name = d.String()
+	c.Display = d.String()
 	c.Identity = d.String()
 	c.Version = d.String()
 	c.Exported = d.Bool()

@@ -98,11 +98,11 @@ func (m *Module) ModuleAndName(v interface{}) (*Module, string) {
 	case string:
 		name = v
 	case *Struct:
-		name = v.Name
+		name = v.Name()
 	case Call:
-		name = v.Struct.Name
+		name = v.Struct.Name()
 	case Result:
-		name = v.Struct.Name
+		name = v.Struct.Name()
 	case *schema.Struct:
 		name = v.String()
 	case *schema.Interface:
@@ -220,7 +220,7 @@ func fakeStruct(structs map[*types.Struct]*Struct, pkg *types.Package, module st
 	if _, found := structs[t]; found {
 		return
 	}
-	s := &Struct{Entity: binary.Entity{Package: module, Name: typename, Exported: true}}
+	s := &Struct{Entity: binary.Entity{Package: module, Identity: typename, Exported: true}}
 	s.UpdateID()
 	structs[t] = s
 }
@@ -260,7 +260,7 @@ func From(scanner *scan.Scanner) (Modules, error) {
 				if e, ok := structs[u.t]; ok {
 					u.s.Entity = &e.Entity
 				} else {
-					panic(fmt.Errorf("No match in %s for %s (%T)", s.Name, u.t.String(), u.t))
+					panic(fmt.Errorf("No match in %s for %s (%T)", s.Name(), u.t.String(), u.t))
 				}
 			}
 		}

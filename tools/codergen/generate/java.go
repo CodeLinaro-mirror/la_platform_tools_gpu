@@ -78,7 +78,7 @@ func Java(m *Module, info copyright.Info, gen chan Generate, path string) {
 		gen <- Generate{
 			Name:   "Java.File",
 			Arg:    JavaClass{JavaSettings: settings.clone(), Struct: s},
-			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name)+".java"),
+			Output: filepath.Join(path, source, pkgPath, settings.ClassName(s.Name())+".java"),
 			Indent: indent,
 		}
 		factory.Structs = append(factory.Structs, s)
@@ -163,7 +163,7 @@ func (settings JavaSettings) moduleAndName(v interface{}) (*Module, string, stri
 func (settings JavaSettings) findClass(v interface{}) (string, string) {
 	m, original, name := settings.moduleAndName(v)
 	for _, t := range m.Structs {
-		if t.Name == original {
+		if t.Name() == original {
 			if n := fmt.Sprint(t.Tags.Get("java")); n != "" {
 				name = n
 			} else {

@@ -71,7 +71,7 @@ func (r Result) List() binary.FieldList {
 }
 
 func serviceStruct(m *Module, name string, tuple *types.Tuple, count int) *Struct {
-	s := &Struct{Entity: binary.Entity{Name: name, Package: m.Source.Types.Name()}}
+	s := &Struct{Entity: binary.Entity{Identity: name, Package: m.Source.Types.Name()}}
 	for i := 0; i < count; i++ {
 		entry := tuple.At(i)
 		s.Fields = append(s.Fields, binary.Field{
