@@ -219,10 +219,6 @@ UniformIndexˢ
 0c5f44120a92674721c3c3423b7224409c68997b
 gles.UniformIndexˢ{$}
 
-Texture
-0c9a0c0fc949076f4bfbf3dec5b7eb19fbed91f2
-gfxapi.Texture{[]$}
-
 GlProgramUniformMatrix3fvEXT
 0c9b486e47b43d73b3053b8d1d753c1007b1bc1c
 gles.GlProgramUniformMatrix3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
@@ -3339,6 +3335,10 @@ GlRasterSamplesEXT
 ac0206860fde7b36ee0d3f7b0d50f39443013910
 gles.GlRasterSamplesEXT{$,Uint32,Uint8}
 
+Texture2D
+ac33ed5116614bef3eed363581668fedc340883a
+gfxapi.Texture2D{[]$}
+
 CmdVoidReadS8
 ac880383a4a3e1fc6e4618b9b57eb502491dfde7
 test.CmdVoidReadS8{$,$}
@@ -3543,6 +3543,10 @@ resultGet
 b659c859a68e353e187066827ef5d589a37c827a
 service.resultGet{~<any>}
 
+Cubemap
+b66b6c0827e52064477ee91b6c942b995b754445
+gfxapi.Cubemap{[]$}
+
 GlExtIsProgramBinaryQCOM
 b68b25ea483c10468d3f6a0371d959e79d9ef59e
 gles.GlExtIsProgramBinaryQCOM{$,Uint32,Uint8}
@@ -3682,6 +3686,10 @@ gles.GlSelectPerfMonitorCountersAMD{$,Uint32,Uint8,Uint32,Int32,$}
 GLDEBUGPROC
 bdd545b14f508ceb0f68265160dbb8cae5cf7625
 gles.GLDEBUGPROC{$}
+
+CubemapLevel
+be003e54de25c25896d5ed6531f85e7e722c057f
+gfxapi.CubemapLevel{$,$,$,$,$,$}
 
 GlProgramUniform1uiEXT
 be53cde8ce810a19f7343c470a61a386f7bffd75

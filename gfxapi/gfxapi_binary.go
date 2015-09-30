@@ -18,25 +18,122 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
-	Namespace.Add((*Texture)(nil).Class())
+	Namespace.Add((*CubemapLevel)(nil).Class())
+	Namespace.Add((*Cubemap)(nil).Class())
+	Namespace.Add((*Texture2D)(nil).Class())
 }
 
 var (
-	binaryIDTexture = binary.ID{0x0c, 0x9a, 0x0c, 0x0f, 0xc9, 0x49, 0x07, 0x6f, 0x4b, 0xfb, 0xf3, 0xde, 0xc5, 0xb7, 0xeb, 0x19, 0xfb, 0xed, 0x91, 0xf2}
+	binaryIDCubemapLevel = binary.ID{0xbe, 0x00, 0x3e, 0x54, 0xde, 0x25, 0xc2, 0x58, 0x96, 0xd5, 0xed, 0x65, 0x31, 0xf8, 0x5e, 0x7e, 0x72, 0x2c, 0x05, 0x7f}
+	binaryIDCubemap      = binary.ID{0xb6, 0x6b, 0x6c, 0x08, 0x27, 0xe5, 0x20, 0x64, 0x47, 0x7e, 0xe9, 0x1b, 0x6c, 0x94, 0x2b, 0x99, 0x5b, 0x75, 0x44, 0x45}
+	binaryIDTexture2D    = binary.ID{0xac, 0x33, 0xed, 0x51, 0x16, 0x61, 0x4b, 0xef, 0x3e, 0xed, 0x36, 0x35, 0x81, 0x66, 0x8f, 0xed, 0xc3, 0x40, 0x88, 0x3a}
 )
 
-type binaryClassTexture struct{}
+type binaryClassCubemapLevel struct{}
 
-func (*Texture) Class() binary.Class {
-	return (*binaryClassTexture)(nil)
+func (*CubemapLevel) Class() binary.Class {
+	return (*binaryClassCubemapLevel)(nil)
 }
-func doEncodeTexture(e binary.Encoder, o *Texture) {
+func doEncodeCubemapLevel(e binary.Encoder, o *CubemapLevel) {
+	e.Value(&o.NegativeX)
+	e.Value(&o.PositiveX)
+	e.Value(&o.NegativeY)
+	e.Value(&o.PositiveY)
+	e.Value(&o.NegativeZ)
+	e.Value(&o.PositiveZ)
+}
+func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) {
+	d.Value(&o.NegativeX)
+	d.Value(&o.PositiveX)
+	d.Value(&o.NegativeY)
+	d.Value(&o.PositiveY)
+	d.Value(&o.NegativeZ)
+	d.Value(&o.PositiveZ)
+}
+func (*binaryClassCubemapLevel) ID() binary.ID      { return binaryIDCubemapLevel }
+func (*binaryClassCubemapLevel) New() binary.Object { return &CubemapLevel{} }
+func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCubemapLevel(e, obj.(*CubemapLevel))
+}
+func (*binaryClassCubemapLevel) Decode(d binary.Decoder) binary.Object {
+	obj := &CubemapLevel{}
+	doDecodeCubemapLevel(d, obj)
+	return obj
+}
+func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCubemapLevel(d, obj.(*CubemapLevel))
+}
+func (*binaryClassCubemapLevel) Schema() *schema.Entity { return schemaCubemapLevel }
+
+var schemaCubemapLevel = &schema.Entity{
+	TypeID:  binaryIDCubemapLevel,
+	Package: "gfxapi",
+	Name:    "CubemapLevel",
+	Fields: []schema.Field{
+		{Declared: "NegativeX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "PositiveX", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "NegativeY", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "PositiveY", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "NegativeZ", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+		{Declared: "PositiveZ", Type: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}},
+	},
+}
+
+type binaryClassCubemap struct{}
+
+func (*Cubemap) Class() binary.Class {
+	return (*binaryClassCubemap)(nil)
+}
+func doEncodeCubemap(e binary.Encoder, o *Cubemap) {
 	e.Uint32(uint32(len(o.Levels)))
 	for i := range o.Levels {
 		e.Value(&o.Levels[i])
 	}
 }
-func doDecodeTexture(d binary.Decoder, o *Texture) {
+func doDecodeCubemap(d binary.Decoder, o *Cubemap) {
+	if count := d.Uint32(); count > 0 {
+		o.Levels = make([]CubemapLevel, count)
+		for i := range o.Levels {
+			d.Value(&o.Levels[i])
+		}
+	}
+}
+func (*binaryClassCubemap) ID() binary.ID      { return binaryIDCubemap }
+func (*binaryClassCubemap) New() binary.Object { return &Cubemap{} }
+func (*binaryClassCubemap) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCubemap(e, obj.(*Cubemap))
+}
+func (*binaryClassCubemap) Decode(d binary.Decoder) binary.Object {
+	obj := &Cubemap{}
+	doDecodeCubemap(d, obj)
+	return obj
+}
+func (*binaryClassCubemap) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCubemap(d, obj.(*Cubemap))
+}
+func (*binaryClassCubemap) Schema() *schema.Entity { return schemaCubemap }
+
+var schemaCubemap = &schema.Entity{
+	TypeID:  binaryIDCubemap,
+	Package: "gfxapi",
+	Name:    "Cubemap",
+	Fields: []schema.Field{
+		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*CubemapLevel)(nil).Class())}}},
+	},
+}
+
+type binaryClassTexture2D struct{}
+
+func (*Texture2D) Class() binary.Class {
+	return (*binaryClassTexture2D)(nil)
+}
+func doEncodeTexture2D(e binary.Encoder, o *Texture2D) {
+	e.Uint32(uint32(len(o.Levels)))
+	for i := range o.Levels {
+		e.Value(&o.Levels[i])
+	}
+}
+func doDecodeTexture2D(d binary.Decoder, o *Texture2D) {
 	if count := d.Uint32(); count > 0 {
 		o.Levels = make([]image.Info, count)
 		for i := range o.Levels {
@@ -44,25 +141,25 @@ func doDecodeTexture(d binary.Decoder, o *Texture) {
 		}
 	}
 }
-func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
-func (*binaryClassTexture) New() binary.Object { return &Texture{} }
-func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeTexture(e, obj.(*Texture))
+func (*binaryClassTexture2D) ID() binary.ID      { return binaryIDTexture2D }
+func (*binaryClassTexture2D) New() binary.Object { return &Texture2D{} }
+func (*binaryClassTexture2D) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeTexture2D(e, obj.(*Texture2D))
 }
-func (*binaryClassTexture) Decode(d binary.Decoder) binary.Object {
-	obj := &Texture{}
-	doDecodeTexture(d, obj)
+func (*binaryClassTexture2D) Decode(d binary.Decoder) binary.Object {
+	obj := &Texture2D{}
+	doDecodeTexture2D(d, obj)
 	return obj
 }
-func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeTexture(d, obj.(*Texture))
+func (*binaryClassTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeTexture2D(d, obj.(*Texture2D))
 }
-func (*binaryClassTexture) Schema() *schema.Entity { return schemaTexture }
+func (*binaryClassTexture2D) Schema() *schema.Entity { return schemaTexture2D }
 
-var schemaTexture = &schema.Entity{
-	TypeID:  binaryIDTexture,
+var schemaTexture2D = &schema.Entity{
+	TypeID:  binaryIDTexture2D,
 	Package: "gfxapi",
-	Name:    "Texture",
+	Name:    "Texture2D",
 	Fields: []schema.Field{
 		{Declared: "Levels", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: schema.Of((*image.Info)(nil).Class())}}},
 	},

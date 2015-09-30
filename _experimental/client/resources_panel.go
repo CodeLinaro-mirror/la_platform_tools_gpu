@@ -275,7 +275,7 @@ func (t updateResourceDesc) Run(c task.CancelSignal) {
 	if r, err := t.context.rpc.LoadResource(t.path); err == nil {
 		c.Check()
 		switch r := r.(type) {
-		case *gfxapi.Texture:
+		case *gfxapi.Texture2D:
 			s := fmt.Sprintf("%v %dx%d\n%d mips",
 				r.Levels[0].Format, r.Levels[0].Width, r.Levels[0].Height, len(r.Levels))
 			t.context.Run(func() {

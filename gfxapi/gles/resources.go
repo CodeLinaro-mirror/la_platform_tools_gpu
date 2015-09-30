@@ -24,6 +24,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
+// IsResource returns true if this instance should be considered as a resource.
+func (t *Texture) IsResource() bool {
+	return t.ID != 0
+}
+
 // ResourceName returns the UI name for the resource.
 func (t *Texture) ResourceName() string {
 	return fmt.Sprintf("Texture<%d>", t.ID)
@@ -38,17 +43,48 @@ func (t *Texture) ResourceType() gfxapi.ResourceType {
 func (t *Texture) ResourceData(s *gfxapi.State, d database.Database, l log.Logger) (interface{}, error) {
 	l = log.Enter(l, "Texture.Resource()")
 	switch t.Kind {
+	case TextureKind_UNDEFINED:
+		return nil, nil
+
 	case TextureKind_TEXTURE2D:
 		levels := make([]image.Info, len(t.Texture2D))
-		for levelIdx, level := range t.Texture2D {
-			levels[levelIdx] = image.Info{
+		for i, level := range t.Texture2D {
+			levels[i] = image.Info{
 				Format: imageFormat(level.Format),
 				Width:  uint32(level.Width),
 				Height: uint32(level.Height),
 				Data:   &path.Blob{ID: level.Data.ResourceID(s, d, l)},
 			}
 		}
-		return &gfxapi.Texture{Levels: levels}, nil
+		return &gfxapi.Texture2D{Levels: levels}, nil
+
+	case TextureKind_CUBEMAP:
+		levels := make([]gfxapi.CubemapLevel, len(t.Cubemap))
+		for i, level := range t.Cubemap {
+			for j, face := range level.Faces {
+				img := image.Info{
+					Format: imageFormat(face.Format),
+					Width:  uint32(face.Width),
+					Height: uint32(face.Height),
+					Data:   &path.Blob{ID: face.Data.ResourceID(s, d, l)},
+				}
+				switch j {
+				case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+					levels[i].NegativeX = img
+				case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+					levels[i].PositiveX = img
+				case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+					levels[i].NegativeY = img
+				case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+					levels[i].PositiveY = img
+				case GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+					levels[i].NegativeZ = img
+				case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+					levels[i].PositiveZ = img
+				}
+			}
+		}
+		return &gfxapi.Cubemap{Levels: levels}, nil
 
 	default:
 		return nil, fmt.Errorf("Unsupported texture kind %v", t.Kind)

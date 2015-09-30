@@ -15,38 +15,83 @@
 package gfxapi
 
 import (
-	"errors"
-
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-// Texture represents a texture resource.
-type Texture struct {
+// Texture2D represents a two-dimensional texture resource.
+type Texture2D struct {
 	binary.Generate
 	Levels []image.Info // The mip-map levels.
 }
 
+// Cubemap represents a cube-map texture resource.
+type Cubemap struct {
+	binary.Generate
+	Levels []CubemapLevel // The mip-map levels.
+}
+
+// CubemapLevel represents a single mip-map level of a cube-map texture resource.
+//
+//         .........
+//       .  +y   . :
+//     .........   :
+//     :       :+x :
+//     :  +z   : .
+//     :.......:
+//
+type CubemapLevel struct {
+	binary.Generate
+	NegativeX image.Info
+	PositiveX image.Info
+	NegativeY image.Info
+	PositiveY image.Info
+	NegativeZ image.Info
+	PositiveZ image.Info
+}
+
+type imageMatcher struct {
+	best          *image.Info
+	score         uint32
+	width, height uint32
+}
+
+func (m *imageMatcher) consider(i image.Info) {
+	if m.best == nil {
+		m.score = 0xffffffff
+	}
+	dw, dh := i.Width-m.width, i.Height-m.height
+	score := dw*dw + dh*dh
+	if m.score > score {
+		m.score = score
+		m.best = &i
+	}
+}
+
 // Thumbnail returns the image that most closely matches the desired size.
-func (t *Texture) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*image.Info, error) {
-	if len(t.Levels) == 0 {
-		return nil, errors.New("Texture has no levels")
+func (t *Texture2D) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*image.Info, error) {
+	m := imageMatcher{width: w, height: h}
+	for _, l := range t.Levels {
+		m.consider(l)
 	}
 
-	var best *image.Info
-	bestScore := uint32(0xffffffff)
+	return m.best, nil
+}
 
-	sqr := func(i uint32) uint32 { return i * i }
+// Thumbnail returns the image that most closely matches the desired size.
+func (t *Cubemap) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*image.Info, error) {
+	m := imageMatcher{width: w, height: h}
 
-	for _, level := range t.Levels {
-		score := sqr(level.Width-w) + sqr(level.Height-h)
-		if bestScore > score {
-			level := level
-			best, bestScore = &level, score
-		}
+	for _, l := range t.Levels {
+		m.consider(l.NegativeX)
+		m.consider(l.PositiveX)
+		m.consider(l.NegativeY)
+		m.consider(l.PositiveY)
+		m.consider(l.NegativeZ)
+		m.consider(l.PositiveZ)
 	}
 
-	return best, nil
+	return m.best, nil
 }
