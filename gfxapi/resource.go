@@ -35,6 +35,14 @@ type Resource interface {
 type ResourceType int
 
 const (
-	// TypeTexture represents the Texture resource type
-	TypeTexture = ResourceType(iota)
+	// TypeUnknown represents an unknown resource type
+	TypeUnknown = ResourceType(iota)
+	// TypeTexture1D represents the Texture1D resource type
+	TypeTexture1D
+	// TypeTexture2D represents the Texture2D resource type
+	TypeTexture2D
+	// TypeTexture3D represents the Texture2D resource type
+	TypeTexture3D
+	// TypeCubemap represents the Cubemap resource type
+	TypeCubemap
 )

@@ -204,12 +204,20 @@ func (v *FramebufferAttachment) Parse(s string) error {
 var _ResourceType_map = map[ResourceType]string{}
 
 func init() {
-	_ResourceType_map[0] = "TypeTexture"
+	_ResourceType_map[0] = "TypeUnknown"
+	_ResourceType_map[1] = "TypeTexture1D"
+	_ResourceType_map[2] = "TypeTexture2D"
+	_ResourceType_map[3] = "TypeTexture3D"
+	_ResourceType_map[4] = "TypeCubemap"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ResourceType", Method: schema.Int32},
 		Entries: []schema.Constant{
-			{Name: "TypeTexture", Value: int32(0)},
+			{Name: "TypeUnknown", Value: int32(0)},
+			{Name: "TypeTexture1D", Value: int32(1)},
+			{Name: "TypeTexture2D", Value: int32(2)},
+			{Name: "TypeTexture3D", Value: int32(3)},
+			{Name: "TypeCubemap", Value: int32(4)},
 		},
 	})
 }

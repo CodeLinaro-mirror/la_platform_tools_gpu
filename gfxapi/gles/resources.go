@@ -36,7 +36,14 @@ func (t *Texture) ResourceName() string {
 
 // ResourceType returns the type of this resource.
 func (t *Texture) ResourceType() gfxapi.ResourceType {
-	return gfxapi.TypeTexture
+	switch t.Kind {
+	case TextureKind_TEXTURE2D:
+		return gfxapi.TypeTexture2D
+	case TextureKind_CUBEMAP:
+		return gfxapi.TypeCubemap
+	default:
+		return gfxapi.TypeUnknown
+	}
 }
 
 // ResourceData returns the resource data given the current state.

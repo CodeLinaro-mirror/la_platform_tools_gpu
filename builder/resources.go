@@ -25,16 +25,22 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-type seenResource struct {
-	slice *[]service.ResourceInfo
-	index int
-}
-
 // GetResources is a Lazy that builds a list of all the resources used by the
 // specified capture.
 type GetResources struct {
 	binary.Generate
 	Capture *path.Capture
+}
+
+type trackedResource struct {
+	resource gfxapi.Resource
+	id       path.ResourceID
+	name     string
+	accesses []uint64
+}
+
+func genResourceID(createdAt uint64, name string) path.ResourceID {
+	return path.ResourceID(binary.NewID([]byte(fmt.Sprintf("%d %s", createdAt, name))))
 }
 
 // BuildLazy returns the *service.Resources resulting from the given
@@ -45,46 +51,59 @@ func (r *GetResources) BuildLazy(c interface{}, d database.Database, l log.Logge
 		return nil, err
 	}
 
-	seen := map[interface{}]seenResource{}
-	textures := []service.ResourceInfo{}
+	resources := []trackedResource{}
+	seen := map[gfxapi.Resource]int{}
 
-	var idGen resourceIDGenerator
+	var currentAtomIndex uint64
+
 	state := gfxapi.NewState()
 	state.OnResourceCreated = func(r gfxapi.Resource) {
-		ty := r.ResourceType()
+		name := r.ResourceName()
+		seen[r] = len(seen)
+		resources = append(resources, trackedResource{
+			resource: r,
+			id:       genResourceID(currentAtomIndex, name),
+			name:     name,
+		})
+	}
+	state.OnResourceAccessed = func(r gfxapi.Resource) {
+		if index, ok := seen[r]; ok { // Update the list of accesses
+			c := len(resources[index].accesses)
+			if c == 0 || resources[index].accesses[c-1] != currentAtomIndex {
+				resources[index].accesses = append(resources[index].accesses, currentAtomIndex)
+			}
+		}
+	}
+	for i, a := range atoms {
+		currentAtomIndex = uint64(i)
+		a.Mutate(state, d, l)
+	}
+
+	out := &service.Resources{}
+	for _, r := range resources {
+		ty := r.resource.ResourceType()
 		info := service.ResourceInfo{
-			ID:       idGen.gen(ty),
-			Name:     r.ResourceName(),
-			Accesses: []uint64{idGen.atomIndex},
+			ID:       r.id,
+			Name:     r.name,
+			Accesses: r.accesses,
 		}
 		switch ty {
-		case gfxapi.TypeTexture:
-			seen[r] = seenResource{slice: &textures, index: len(textures)}
-			textures = append(textures, info)
+		case gfxapi.TypeUnknown:
+			// We can't do anything with these objects.
+		case gfxapi.TypeTexture1D:
+			out.Textures1D = append(out.Textures1D, info)
+		case gfxapi.TypeTexture2D:
+			out.Textures2D = append(out.Textures2D, info)
+		case gfxapi.TypeTexture3D:
+			out.Textures3D = append(out.Textures3D, info)
+		case gfxapi.TypeCubemap:
+			out.Cubemaps = append(out.Cubemaps, info)
 		default:
 			panic(fmt.Errorf("Unknown resource type %v", ty))
 		}
 	}
-	state.OnResourceAccessed = func(r gfxapi.Resource) {
-		s, ok := seen[r]
-		if !ok {
-			panic(fmt.Errorf("Resource %T %v was accessed at atom %d, but never created",
-				r, r, idGen.atomIndex))
-		}
-		// Update the list of accesses
-		info := &(*s.slice)[s.index]
-		c := len(info.Accesses)
-		if c == 0 || info.Accesses[c-1] != idGen.atomIndex {
-			info.Accesses = append(info.Accesses, idGen.atomIndex)
-		}
-	}
 
-	for i, a := range atoms {
-		idGen.begin(uint64(i))
-		a.Mutate(state, d, l)
-	}
-
-	return &service.Resources{Textures: textures}, nil
+	return out, nil
 }
 
 // GetResourceData is a Lazy that retrieves a resource's data by path.
@@ -100,43 +119,21 @@ func (r *GetResourceData) BuildLazy(c interface{}, d database.Database, l log.Lo
 		return nil, err
 	}
 	id := r.Path.ID
-	var idGen resourceIDGenerator
+	var currentAtomIndex uint64
 	var resource gfxapi.Resource
 	state := gfxapi.NewState()
 	state.OnResourceCreated = func(r gfxapi.Resource) {
-		if idGen.gen(r.ResourceType()) == id {
+		if genResourceID(currentAtomIndex, r.ResourceName()) == id {
 			resource = r
 			state.OnResourceCreated = nil // found the resource, no need to keep searching.
 		}
 	}
 	for i, a := range atoms[:r.Path.After.Index+1] {
-		idGen.begin(uint64(i))
+		currentAtomIndex = uint64(i)
 		a.Mutate(state, d, l)
 	}
 	if resource != nil {
 		return resource.ResourceData(state, d, l)
 	}
 	return nil, fmt.Errorf("Resource with id %v not found", r.Path.ID)
-}
-
-type resourceIDGenerator struct {
-	atomIndex uint64                      // current atom index
-	resCount  map[gfxapi.ResourceType]int // reset each atom
-}
-
-func (g *resourceIDGenerator) begin(atomIndex uint64) {
-	g.atomIndex = atomIndex
-	g.resCount = nil
-}
-
-// gen calculates and returns a unique resource identifier for the resource with
-// the given type.
-func (g *resourceIDGenerator) gen(resType gfxapi.ResourceType) path.ResourceID {
-	if g.resCount == nil {
-		g.resCount = map[gfxapi.ResourceType]int{}
-	}
-	c := g.resCount[resType]
-	g.resCount[resType] = c + 1
-	id := binary.NewID([]byte(fmt.Sprintf("%d %d %d", g.atomIndex, resType, c)))
-	return path.ResourceID(id)
 }

@@ -176,7 +176,10 @@ type RenderSettings struct {
 // Resources contains the full list of resources used by a capture.
 type Resources struct {
 	binary.Generate
-	Textures []ResourceInfo
+	Textures1D []ResourceInfo
+	Textures2D []ResourceInfo
+	Textures3D []ResourceInfo
+	Cubemaps   []ResourceInfo
 }
 
 // ResourceInfo describes a single resource.

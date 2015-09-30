@@ -81,10 +81,10 @@ func (t updateResourcesAdapter) Run(c task.CancelSignal) {
 		log.E(appCtx.logger, "LoadResources returned: %v", err)
 		return
 	}
-	log.I(appCtx.logger, "Loaded %d resources", len(resources.Textures))
+	log.I(appCtx.logger, "Loaded %d resources", len(resources.Textures2D))
 	c.Check()
 	textures := resourceGroupNode{name: "Textures"}
-	for _, r := range resources.Textures {
+	for _, r := range resources.Textures2D {
 		textures.nodes = append(textures.nodes, resourceTreeNode{
 			context: t.context,
 			info:    r,

@@ -2351,10 +2351,6 @@ GlDrawArrays : size 100
 7cabb6a0f0d3e5e1a51fcb99d1680e619d3fb350
 gles.GlDrawArrays{$,Uint32,Int32,Int32}
 
-Resources : size 39
-7d72af6f9b839539befadf5399fb896d78781168
-service.Resources{[]$}
-
 CmdVoidOutArrayOfRemapped : size 57
 7da378a68ca6b2d2daf4e3b92f08cb33c91ad89d
 test.CmdVoidOutArrayOfRemapped{$,$}
@@ -3210,6 +3206,10 @@ gles.EglQuerySurface{$,$,$,Int64,$,Int64}
 GlInvalidateSubFramebuffer : size 162
 a764135d1ef5738d778e85fe0e142dbc5b9cd18d
 gles.GlInvalidateSubFramebuffer{$,Uint32,Int32,$,Int32,Int32,Int32,Int32}
+
+Resources : size 87
+a7924caeaff9c0f9670c82a68028d665f115753b
+service.Resources{[]$,[]$,[]$,[]$}
 
 GlTexParameterIivOES : size 88
 a7958658ad65debd5a117911d2d8ef0387cc3e4c
@@ -4961,7 +4961,7 @@ gles.Charᵖ{$}
 
 Schema stats:
 Count: 1240
-All: 130805
-Total: 103495
+All: 130853
+Total: 103543
 Average: 83
 Largest: 641
