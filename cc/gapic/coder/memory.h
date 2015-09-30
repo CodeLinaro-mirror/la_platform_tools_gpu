@@ -7,6 +7,7 @@
 #ifndef GAPIC_CODER_MEMORY_H
 #define GAPIC_CODER_MEMORY_H
 
+#include "gapic/schema.h"
 namespace gapic {
 
 class Encodable;
@@ -20,13 +21,30 @@ namespace memory {
         Pointer(uint64_t Address, uint32_t Pool) :
             mAddress(Address),
             mPool(Pool) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xaa, 0x47, 0x2f, 0xe5, 0xc7, 0x15, 0xbe, 0xf8, 0xf3, 0x63, 0x5a, 0x5c, 0x56, 0xc7, 0x23, 0x66, 0xb7, 0x85, 0x84, 0x59,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mAddress);
             e->Uint32(this->mPool);
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Pointer::StaticId(),
+                "memory",
+                "Pointer",
+                "",
+                "",
+                {
+                    schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+                    schema::Field{"Pool", new schema::Primitive{"PoolID", schema::Primitive::Uint32}},
+                },
+            };
+            return entity;
         }
 
         uint64_t mAddress;
@@ -39,13 +57,30 @@ namespace memory {
         Range(uint64_t Base, uint64_t Size) :
             mBase(Base),
             mSize(Size) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xfb, 0x3f, 0xff, 0x8c, 0x2d, 0xc4, 0x7b, 0xe0, 0xef, 0xe2, 0x95, 0x57, 0xae, 0x48, 0x62, 0x84, 0xb2, 0x98, 0xf6, 0xd6,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mBase);
             e->Uint64(this->mSize);
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Range::StaticId(),
+                "memory",
+                "Range",
+                "",
+                "",
+                {
+                    schema::Field{"Base", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+                    schema::Field{"Size", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+                },
+            };
+            return entity;
         }
 
         uint64_t mBase;

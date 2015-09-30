@@ -15,6 +15,7 @@
  */
 
 #include "encoder.h"
+#include "schema.h"
 #include "stream_writer.h"
 
 #include <cstring>
@@ -142,14 +143,24 @@ void Encoder::Data(const void* ptr, int32_t size) {
 }
 
 void Encoder::Id(const gapic::Id& id) {
-    auto it = mIds.find(id);
-    if (it != mIds.end()) {
-        Uint32(it->second << 1);
+    auto ret = mIds.insert(std::make_pair(id, mIds.size() + 1));
+    uint32_t sid = ret.first->second;
+    if (!ret.second) {
+        Uint32(sid << 1);
     } else {
-        uint32_t sid = mIds.size() + 1;
-        mIds[id] = sid;
         Uint32((sid << 1) | 1);
         mOutput->write(&id.data, 20);
+    }
+}
+
+void Encoder::Entity(const schema::Entity& entity) {
+    auto ret = mTypeIds.insert(std::make_pair(entity.Id(), mTypeIds.size() + 1));
+    uint32_t sid = ret.first->second;
+    if (!ret.second) {
+        Uint32(sid << 1);
+    } else {
+        Uint32((sid << 1) | 1);
+        entity.Encode(this);
     }
 }
 

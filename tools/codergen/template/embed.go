@@ -73,11 +73,15 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.ID"}}
+   static const gapic::Id& StaticId() {»¶
+      static gapic::Id ID{ {•
+        {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
+      ,  } };¶
+      return ID;¶
+  «}¶
+
   virtual const gapic::Id& Id() const {»¶
-    static gapic::Id ID{ {•
-      {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
-    ,  } };¶
-    return ID;¶
+    return StaticId();¶
   «}¶
 {{end}}
 
@@ -116,7 +120,52 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
+{{define "Cpp.Schema.Primitive"}}new schema::Primitive{"{{.Name}}", schema::Primitive::{{.Method}}}{{end}}
+{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.Name | File.TypeName}}::Schema()}{{end}}
+{{define "Cpp.Schema.Pointer"}}new schema::Pointer{ {{Call "Cpp.Schema" .Type}} }{{end}}
+{{define "Cpp.Schema.Interface"}}new schema::Interface{"{{.Name}}"}{{end}}
+{{define "Cpp.Schema.Variant"}}new schema::Variant{"{{.Name}}"}{{end}}
+{{define "Cpp.Schema.Any"}}new schema::Any{}{{end}}
+{{define "Cpp.Schema.Slice"}}new schema::Slice{"{{.Alias}}", {{Call "Cpp.Schema" .ValueType}}}{{end}}
+{{define "Cpp.Schema.Array"}}new schema::Array{"{{.Alias}}", {{Call "Cpp.Schema" .ValueType}}, {{.Size}}}{{end}}
+{{define "Cpp.Schema.Map"}}new schema::Map{"{{.Alias}}", {{Call "Cpp.Schema" .KeyType}}, {{Call "Cpp.Schema" .ValueType}}}{{end}}
+
+{{define "Cpp.SchemaMethod"}}
+    {{if File.Directive "Schema" true}}
+    static const schema::Entity& Schema() {»¶
+        static schema::Entity entity {»¶
+ 	   {{.Name | File.TypeName}}::StaticId(),¶
+	  "{{.Package}}",¶
+	  "{{.Name}}",¶
+          "{{.Identity}}",¶
+	  "{{.Version}}",¶
+	   {»¶
+	   {{range .Fields}}
+	      schema::Field{"{{.Declared}}", {{Call "Cpp.Schema" .Type}}},¶
+	   {{end}}
+	   «},¶
+        «};¶
+         return entity;¶
+    «}¶
+    {{end}}
+{{end}}
+
 {{define "HeaderGuard"}}GAPIC_CODER_{{.Namespace | Upper}}_H{{end}}
+
+{{define "Cpp.CantEncode.Map"}}
+// Can't encode map¶
+{{$cantEncode := true}}
+{{end}}
+
+{{define "Cpp.CantEncode"}}{{end}}
+
+{{define "Cpp.CantEncodeSchema"}}
+  {{if File.Directive "Schema" true}}
+    {{range .Fields}}
+      {{Call "Cpp.CantEncode" .Type}}
+    {{end}}
+  {{end}}
+{{end}}
 
 {{define "Cpp.File"}}
   §{{$.Copyright}}§
@@ -126,6 +175,9 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   #ifndef {{template "HeaderGuard" .}}¶
   #define {{template "HeaderGuard" .}}¶
   ¶
+  {{if and (File.Directive "Schema" true) (len .Structs)}}
+#include "gapic/schema.h"¶
+  {{end}}
   namespace gapic {¶
   ¶
   class Encodable;¶
@@ -134,18 +186,24 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   namespace coder {¶
   namespace {{.Namespace}} {»¶
   {{range .Structs}}
-    class {{.Name | File.TypeName}}: public Encodable {¶
-    public:»¶
-      {{template "Cpp.Constructor" .}}
-      {{template "Cpp.ID" .}}
-      {{template "Cpp.Encoder" .}}
+    {{if (Contains "map[" .Entity.Signature)}}
+       // Can't encode {{.Entity.Name}} contains maps: {{.Entity.Signature}}¶
+       ¶
+    {{else}}
+      class {{.Name | File.TypeName}}: public Encodable {¶
+      public:»¶
+	{{template "Cpp.Constructor" .}}
+	{{template "Cpp.ID" .}}
+	{{template "Cpp.Encoder" .}}
+	{{template "Cpp.SchemaMethod" .}}
+	¶
+	{{range .Fields}}
+	  {{Call "Cpp.Type" .Type}} m{{.Name}};¶
+	{{end}}
+	«
+      };¶
       ¶
-      {{range .Fields}}
-        {{Call "Cpp.Type" .Type}} m{{.Name}};¶
-      {{end}}
-      «
-    };¶
-    ¶
+    {{end}}
   {{end}}
   ¶
   ¶
