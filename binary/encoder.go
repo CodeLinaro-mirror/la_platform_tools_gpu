@@ -20,7 +20,8 @@ type Encoder interface {
 	// ID writes a binary.ID to the stream.
 	ID(ID)
 	// Entity writes a binary.Entity to the stream.
-	Entity(*Entity)
+	// See Entity for details of what is included in the compact form.
+	Entity(e *Entity, compact bool)
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object)
 	// Variant encodes an Object with no sharing. The type of obj must have

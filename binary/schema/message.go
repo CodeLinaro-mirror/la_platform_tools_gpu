@@ -47,7 +47,7 @@ func (*binaryClassMessage) Encode(e binary.Encoder, obj binary.Object) {
 	m := obj.(*Message)
 	e.Uint32(uint32(len(m.Entities)))
 	for _, entity := range m.Entities {
-		e.Entity(entity)
+		e.Entity(entity, false)
 	}
 	e.Uint32(uint32(len(m.Constants)))
 	for i := range m.Constants {
@@ -58,7 +58,7 @@ func (*binaryClassMessage) Encode(e binary.Encoder, obj binary.Object) {
 func doDecodeMessage(d binary.Decoder, m *Message) {
 	m.Entities = make([]*binary.Entity, d.Uint32())
 	for i := range m.Entities {
-		m.Entities[i] = d.Entity()
+		m.Entities[i] = d.Entity(false)
 	}
 	m.Constants = make([]ConstantSet, d.Uint32())
 	for i := range m.Constants {

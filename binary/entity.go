@@ -17,15 +17,17 @@ package binary
 import "strings"
 
 // Entity represents the encodable type information for an object.
+// In it's compact form, the entity contains only the information strictly required to generate it's signature, and not
+// any of metadata or display names.
 type Entity struct {
-	TypeID   ID        // The unique type identifier for the class.
+	TypeID   ID        // The unique type identifier for the class, obsolete
 	Package  string    // The package that declared the struct.
-	Display  string    // The display name of the class, does not affect the signature.
+	Display  string    // The display name of the class, not set in compact form.
 	Identity string    // The true name of the class.
 	Version  string    // The version string of the class, if set.
-	Exported bool      // Whether the class is exported from it's package
+	Exported bool      // Whether the class is exported from it's package, not set in compact form.
 	Fields   FieldList // Descriptions of the fields of the class.
-	Metadata []Object  // The metadata for the class.
+	Metadata []Object  // The metadata for the class, not set in compact form
 }
 
 func (e *Entity) Name() string {
@@ -40,7 +42,7 @@ type FieldList []Field
 
 // Field represents a name/type pair for a field in an Object.
 type Field struct {
-	Declared string // The name of the field, does not affect the signature.
+	Declared string // The name of the field, not set in compact form.
 	Type     Type   // The type stored in the field.
 }
 

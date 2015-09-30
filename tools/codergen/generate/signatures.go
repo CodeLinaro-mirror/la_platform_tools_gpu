@@ -45,13 +45,13 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 	largest := 0
 	// pre write the entire schema so the lookup table is full
 	for _, s := range structs {
-		e.Entity(&s.Entity)
+		e.Entity(&s.Entity, false)
 	}
 	all := buf.Len()
 	for _, s := range structs {
 		start := buf.Len()
 		// now encode the entity directly to bypass the table
-		schema.EncodeEntity(e, &s.Entity)
+		schema.EncodeEntity(e, &s.Entity, true)
 		size := buf.Len() - start
 		total += size
 		if largest < size {
