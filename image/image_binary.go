@@ -28,6 +28,7 @@ func init() {
 	Namespace.Add((*fmtLuminanceAlpha)(nil).Class())
 	Namespace.Add((*fmtPNG)(nil).Class())
 	Namespace.Add((*fmtRGB)(nil).Class())
+	Namespace.Add((*fmtRGB565)(nil).Class())
 	Namespace.Add((*fmtRGBA)(nil).Class())
 }
 
@@ -44,6 +45,7 @@ var (
 	binaryIDfmtLuminanceAlpha              = binary.ID{0x86, 0x8a, 0x2f, 0xf0, 0x80, 0xb2, 0x61, 0x1f, 0x57, 0xd0, 0x6e, 0x44, 0x5f, 0x02, 0x11, 0x60, 0x2b, 0x80, 0xe9, 0x18}
 	binaryIDfmtPNG                         = binary.ID{0xda, 0x58, 0x38, 0xf1, 0xa4, 0x9f, 0xa7, 0xd7, 0x64, 0x7e, 0x58, 0xb8, 0xd1, 0x74, 0x5c, 0x0f, 0xd9, 0x4e, 0x43, 0x06}
 	binaryIDfmtRGB                         = binary.ID{0x7b, 0x07, 0xb7, 0xcc, 0xb3, 0x24, 0xc1, 0x31, 0xf4, 0xfc, 0xbf, 0x4b, 0x3b, 0x28, 0x5c, 0xf7, 0xff, 0xd5, 0xa1, 0xc6}
+	binaryIDfmtRGB565                      = binary.ID{0xf1, 0x4e, 0x01, 0x87, 0x66, 0xdb, 0x56, 0x55, 0x5b, 0x8e, 0x1b, 0xb2, 0xb3, 0xa3, 0x97, 0x79, 0x5e, 0x6a, 0x0c, 0x89}
 	binaryIDfmtRGBA                        = binary.ID{0x02, 0x1e, 0x56, 0x1c, 0xb1, 0x1d, 0xa6, 0x8e, 0xdf, 0xae, 0x99, 0x0f, 0x91, 0xb3, 0x1e, 0x31, 0x9d, 0x36, 0x2e, 0x45}
 )
 
@@ -495,6 +497,37 @@ var schemafmtRGB = &binary.Entity{
 	TypeID:   binaryIDfmtRGB,
 	Package:  "image",
 	Identity: "fmtRGB",
+	Fields:   []binary.Field{},
+}
+
+type binaryClassfmtRGB565 struct{}
+
+func (*fmtRGB565) Class() binary.Class {
+	return (*binaryClassfmtRGB565)(nil)
+}
+func doEncodefmtRGB565(e binary.Encoder, o *fmtRGB565) {
+}
+func doDecodefmtRGB565(d binary.Decoder, o *fmtRGB565) {
+}
+func (*binaryClassfmtRGB565) ID() binary.ID      { return binaryIDfmtRGB565 }
+func (*binaryClassfmtRGB565) New() binary.Object { return &fmtRGB565{} }
+func (*binaryClassfmtRGB565) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtRGB565(e, obj.(*fmtRGB565))
+}
+func (*binaryClassfmtRGB565) Decode(d binary.Decoder) binary.Object {
+	obj := &fmtRGB565{}
+	doDecodefmtRGB565(d, obj)
+	return obj
+}
+func (*binaryClassfmtRGB565) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtRGB565(d, obj.(*fmtRGB565))
+}
+func (*binaryClassfmtRGB565) Schema() *binary.Entity { return schemafmtRGB565 }
+
+var schemafmtRGB565 = &binary.Entity{
+	TypeID:   binaryIDfmtRGB565,
+	Package:  "image",
+	Identity: "fmtRGB565",
 	Fields:   []binary.Field{},
 }
 
