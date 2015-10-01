@@ -4067,6 +4067,10 @@ Voidᶜᵖᶜᵖ : size 32
 ce3e261ad3d0e44f87d878790fda4ceab4833ded
 gles.Voidᶜᵖᶜᵖ{$}
 
+fmtRGBAF32 : size 24
+ceaf4143988ddb962bd3eeb001df474b9875634e
+image.fmtRGBAF32{}
+
 GlUniform2i : size 96
 cef587b5c36db3d4bec6f0c04ecbea31267e40d2
 gles.GlUniform2i{$,Int32,Int32,Int32}
@@ -4964,8 +4968,8 @@ ffc1be2517639418117dbf2196eede6549048b54
 gles.Charᵖ{$}
 
 Schema stats:
-Count: 1241
-All: 130898
-Total: 103566
+Count: 1242
+All: 130944
+Total: 103590
 Average: 83
 Largest: 641

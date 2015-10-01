@@ -30,6 +30,7 @@ func init() {
 	Namespace.Add((*fmtRGB)(nil).Class())
 	Namespace.Add((*fmtRGB565)(nil).Class())
 	Namespace.Add((*fmtRGBA)(nil).Class())
+	Namespace.Add((*fmtRGBAF32)(nil).Class())
 }
 
 var (
@@ -47,6 +48,7 @@ var (
 	binaryIDfmtRGB                         = binary.ID{0x7b, 0x07, 0xb7, 0xcc, 0xb3, 0x24, 0xc1, 0x31, 0xf4, 0xfc, 0xbf, 0x4b, 0x3b, 0x28, 0x5c, 0xf7, 0xff, 0xd5, 0xa1, 0xc6}
 	binaryIDfmtRGB565                      = binary.ID{0xf1, 0x4e, 0x01, 0x87, 0x66, 0xdb, 0x56, 0x55, 0x5b, 0x8e, 0x1b, 0xb2, 0xb3, 0xa3, 0x97, 0x79, 0x5e, 0x6a, 0x0c, 0x89}
 	binaryIDfmtRGBA                        = binary.ID{0x02, 0x1e, 0x56, 0x1c, 0xb1, 0x1d, 0xa6, 0x8e, 0xdf, 0xae, 0x99, 0x0f, 0x91, 0xb3, 0x1e, 0x31, 0x9d, 0x36, 0x2e, 0x45}
+	binaryIDfmtRGBAF32                     = binary.ID{0xce, 0xaf, 0x41, 0x43, 0x98, 0x8d, 0xdb, 0x96, 0x2b, 0xd3, 0xee, 0xb0, 0x01, 0xdf, 0x47, 0x4b, 0x98, 0x75, 0x63, 0x4e}
 )
 
 type binaryClassImage struct{}
@@ -559,5 +561,36 @@ var schemafmtRGBA = &binary.Entity{
 	TypeID:   binaryIDfmtRGBA,
 	Package:  "image",
 	Identity: "fmtRGBA",
+	Fields:   []binary.Field{},
+}
+
+type binaryClassfmtRGBAF32 struct{}
+
+func (*fmtRGBAF32) Class() binary.Class {
+	return (*binaryClassfmtRGBAF32)(nil)
+}
+func doEncodefmtRGBAF32(e binary.Encoder, o *fmtRGBAF32) {
+}
+func doDecodefmtRGBAF32(d binary.Decoder, o *fmtRGBAF32) {
+}
+func (*binaryClassfmtRGBAF32) ID() binary.ID      { return binaryIDfmtRGBAF32 }
+func (*binaryClassfmtRGBAF32) New() binary.Object { return &fmtRGBAF32{} }
+func (*binaryClassfmtRGBAF32) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtRGBAF32(e, obj.(*fmtRGBAF32))
+}
+func (*binaryClassfmtRGBAF32) Decode(d binary.Decoder) binary.Object {
+	obj := &fmtRGBAF32{}
+	doDecodefmtRGBAF32(d, obj)
+	return obj
+}
+func (*binaryClassfmtRGBAF32) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtRGBAF32(d, obj.(*fmtRGBAF32))
+}
+func (*binaryClassfmtRGBAF32) Schema() *binary.Entity { return schemafmtRGBAF32 }
+
+var schemafmtRGBAF32 = &binary.Entity{
+	TypeID:   binaryIDfmtRGBAF32,
+	Package:  "image",
+	Identity: "fmtRGBAF32",
 	Fields:   []binary.Field{},
 }

@@ -60,4 +60,18 @@ func (*fmtRGBA) Check(d []byte, w, h int) error { return checkSize(d, w, h, 32) 
 
 // RGBA returns a format containing an 8-bit red, green, blue and alpha channel
 // per pixel.
-func RGBA() Format { return &fmtRGBA{} }
+func RGBA() *fmtRGBA { return &fmtRGBA{} }
+
+// Resize returns a RGBA image resized from srcW x srcH to dstW x dstH.
+func (f *fmtRGBA) Resize(data []byte, srcW, srcH, dstW, dstH int) ([]byte, error) {
+	f32 := &fmtRGBAF32{}
+	data, err := Convert(data, srcW, srcH, f, f32)
+	if err != nil {
+		return nil, err
+	}
+	data, err = f32.Resize(data, srcW, srcH, dstW, dstH)
+	if err != nil {
+		return nil, err
+	}
+	return Convert(data, dstW, dstH, f32, f)
+}

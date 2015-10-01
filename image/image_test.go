@@ -21,7 +21,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
-var _ = path.Converter((*Info)(nil))
+var (
+	_ = path.Converter((*Info)(nil))
+	_ = []Resizer{(*fmtRGBA)(nil), (*fmtRGBAF32)(nil)}
+)
 
 func TestDifference(t *testing.T) {
 	fill := func(w, h uint32, r, g, b, a byte) *Image {
