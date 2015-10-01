@@ -30,7 +30,7 @@ type byID []*Struct
 
 func (a byID) Len() int           { return len(a) }
 func (a byID) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a byID) Less(i, j int) bool { return a[i].Identifier() < a[j].Identifier() }
+func (a byID) Less(i, j int) bool { return a[i].Signature() < a[j].Signature() }
 
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}

@@ -45,15 +45,6 @@ func (e *Entity) Name() string {
 	return e.Identity
 }
 
-// Identifier can be used in approximately stable sorting lists of Entities.
-func (e *Entity) Identifier() string {
-	s := fmt.Sprint(e.Package, ".", e.Identity)
-	if e.Version == "" {
-		return s
-	}
-	return fmt.Sprint(s, '@', e.Version)
-}
-
 // Signature returns a canonical string representations of an entities signature.
 // If two entities have the same Signature, the are assumed to represent the same type
 func (e *Entity) Signature() string {
