@@ -4715,6 +4715,10 @@ GlGetPointervKHR : size 69
 f140354724f2b28a3779e107aae64f8d844dd13b
 gles.GlGetPointervKHR{$,Uint32,$}
 
+fmtRGB565 : size 23
+f14e018766db56555b8e1bb2b3a397795e6a0c89
+image.fmtRGB565{}
+
 GlProgramUniformMatrix3x2fv : size 149
 f15e0daeafc7e87989d2ac45a487e9a247f1d6b7
 gles.GlProgramUniformMatrix3x2fv{$,Uint32,Int32,Int32,Uint8,$}
@@ -4960,8 +4964,8 @@ ffc1be2517639418117dbf2196eede6549048b54
 gles.Charᵖ{$}
 
 Schema stats:
-Count: 1240
-All: 130853
-Total: 103543
+Count: 1241
+All: 130898
+Total: 103566
 Average: 83
 Largest: 641
