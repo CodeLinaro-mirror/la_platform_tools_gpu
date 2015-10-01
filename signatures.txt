@@ -351,6 +351,10 @@ GlProgramUniform4fEXT : size 148
 119a88bbd71a992da637ebddbea624194c342d5d
 gles.GlProgramUniform4fEXT{$,Uint32,Int32,Float32,Float32,Float32,Float32}
 
+LazyResizer : size 131
+119ce3584870677a2a914831832626ebd1b73f9f
+image.LazyResizer{ID,?Format,Uint32,Uint32,Uint32,Uint32}
+
 ShaderIdᶜᵖ : size 30
 11c4ab91b8501acad9c7e0e4fa2d11efb4078d5e
 gles.ShaderIdᶜᵖ{$}
@@ -2287,6 +2291,10 @@ GlEndConditionalRenderNV : size 52
 799a1096203c7954e251ec02ed94bbd7c7628df4
 gles.GlEndConditionalRenderNV{$}
 
+Thumbnail : size 101
+799a2ef3d295ec0b8af17519226532f799542131
+path.Thumbnail{?Path,Uint32,Uint32,~<any>}
+
 GlDrawArraysInstancedANGLE : size 118
 799f19739ed881df67e6418fcc343957e86f793b
 gles.GlDrawArraysInstancedANGLE{$,Uint32,Int32,Int32,Int32}
@@ -4051,10 +4059,6 @@ GlDisableVertexAttribArray : size 83
 cd8dc2a70eae6e2fcd5444b4aa51eefa52a9a2eb
 gles.GlDisableVertexAttribArray{$,Uint32}
 
-Thumbnail : size 80
-ce00677d48c9d065e5db9afe703d90ef12195371
-path.Thumbnail{?Path,Uint32,Uint32}
-
 VertexArrayIdˢ : size 31
 ce0d6b9401e1b7c8cd66d2a6b71101b55d7d3abf
 gles.VertexArrayIdˢ{$}
@@ -4968,8 +4972,8 @@ ffc1be2517639418117dbf2196eede6549048b54
 gles.Charᵖ{$}
 
 Schema stats:
-Count: 1242
-All: 130944
-Total: 103590
+Count: 1243
+All: 131118
+Total: 103742
 Average: 83
 Largest: 641

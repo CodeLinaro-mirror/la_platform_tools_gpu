@@ -160,7 +160,7 @@ func (n resourceTreeNode) Create(theme gxui.Theme) gxui.Control {
 		r := n.context.resources.Capture.Atoms().Index(atomIndex).ResourceAfter(n.info.ID)
 		descriptionTask.Run(updateResourceDesc{n.context.appCtx, r, desc})
 
-		t := r.Thumbnail(resourceThumbnailWidth, resourceThumbnailHeight)
+		t := r.Thumbnail(resourceThumbnailWidth, resourceThumbnailHeight, image.RGBA())
 		thumbnailTask.Run(updateImage{n.context.appCtx, t, thumb})
 	}
 	l.OnAttach(update)

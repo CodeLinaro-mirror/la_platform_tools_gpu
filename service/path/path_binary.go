@@ -54,7 +54,7 @@ var (
 	binaryIDResources   = binary.ID{0x8f, 0x3f, 0x51, 0x6c, 0x3c, 0x7b, 0x9a, 0xf7, 0x1d, 0x0b, 0xf6, 0x5c, 0x98, 0x62, 0x05, 0xfe, 0x7b, 0x8f, 0xfc, 0x64}
 	binaryIDSlice       = binary.ID{0xca, 0xcb, 0x5c, 0x1a, 0xeb, 0xe8, 0xf0, 0xa9, 0xd2, 0x96, 0x88, 0xf8, 0x64, 0xd9, 0x94, 0x48, 0xea, 0xba, 0xfb, 0xb6}
 	binaryIDState       = binary.ID{0xc8, 0xee, 0x5d, 0x01, 0xe8, 0x84, 0xb9, 0x68, 0x58, 0x24, 0xb5, 0x43, 0x8f, 0xb2, 0x78, 0xbf, 0xb0, 0x1d, 0x3e, 0xc2}
-	binaryIDThumbnail   = binary.ID{0xce, 0x00, 0x67, 0x7d, 0x48, 0xc9, 0xd0, 0x65, 0xe5, 0xdb, 0x9a, 0xfe, 0x70, 0x3d, 0x90, 0xef, 0x12, 0x19, 0x53, 0x71}
+	binaryIDThumbnail   = binary.ID{0x79, 0x9a, 0x2e, 0xf3, 0xd2, 0x95, 0xec, 0x0b, 0x8a, 0xf1, 0x75, 0x19, 0x22, 0x65, 0x32, 0xf7, 0x99, 0x54, 0x21, 0x31}
 	binaryIDTimingInfo  = binary.ID{0x15, 0xe8, 0x5b, 0x9f, 0x7f, 0xd5, 0xa9, 0x21, 0x54, 0x98, 0x7f, 0xb9, 0x5c, 0x3d, 0x7c, 0xc2, 0x47, 0xd1, 0x26, 0x5a}
 )
 
@@ -788,8 +788,9 @@ func (*Thumbnail) Class() binary.Class {
 }
 func doEncodeThumbnail(e binary.Encoder, o *Thumbnail) {
 	e.Object(o.Object)
-	e.Uint32(o.DesiredWidth)
-	e.Uint32(o.DesiredHeight)
+	e.Uint32(o.DesiredMaxWidth)
+	e.Uint32(o.DesiredMaxHeight)
+	schema.Any{}.EncodeValue(e, o.DesiredFormat)
 }
 func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 	if obj := d.Object(); obj != nil {
@@ -797,8 +798,9 @@ func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 	} else {
 		o.Object = nil
 	}
-	o.DesiredWidth = uint32(d.Uint32())
-	o.DesiredHeight = uint32(d.Uint32())
+	o.DesiredMaxWidth = uint32(d.Uint32())
+	o.DesiredMaxHeight = uint32(d.Uint32())
+	o.DesiredFormat = schema.Any{}.DecodeValue(d)
 }
 func (*binaryClassThumbnail) ID() binary.ID      { return binaryIDThumbnail }
 func (*binaryClassThumbnail) New() binary.Object { return &Thumbnail{} }
@@ -821,8 +823,9 @@ var schemaThumbnail = &binary.Entity{
 	Identity: "Thumbnail",
 	Fields: []binary.Field{
 		{Declared: "Object", Type: &schema.Interface{Name: "Path"}},
-		{Declared: "DesiredWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "DesiredHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "DesiredMaxWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "DesiredMaxHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "DesiredFormat", Type: &schema.Any{}},
 	},
 }
 

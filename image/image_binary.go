@@ -19,6 +19,7 @@ func init() {
 	Namespace.Add((*Image)(nil).Class())
 	Namespace.Add((*Info)(nil).Class())
 	Namespace.Add((*LazyConverter)(nil).Class())
+	Namespace.Add((*LazyResizer)(nil).Class())
 	Namespace.Add((*fmtATC_RGBA_EXPLICIT_ALPHA_AMD)(nil).Class())
 	Namespace.Add((*fmtATC_RGB_AMD)(nil).Class())
 	Namespace.Add((*fmtAlpha)(nil).Class())
@@ -37,6 +38,7 @@ var (
 	binaryIDImage                          = binary.ID{0x9c, 0x28, 0x99, 0x0e, 0x76, 0x48, 0x60, 0xdb, 0x7d, 0xe6, 0xa8, 0x4f, 0xc1, 0xe1, 0x9f, 0xaf, 0x6b, 0x2b, 0xf8, 0x86}
 	binaryIDInfo                           = binary.ID{0xa0, 0xb9, 0x92, 0xdb, 0x20, 0x6b, 0x90, 0x5d, 0xe3, 0x70, 0x92, 0xbd, 0x48, 0x3e, 0x45, 0x3a, 0x05, 0x70, 0x9f, 0x1c}
 	binaryIDLazyConverter                  = binary.ID{0x24, 0xe0, 0xd6, 0x57, 0xa3, 0x49, 0xf8, 0x44, 0x78, 0x55, 0x38, 0x2f, 0xdf, 0x96, 0x38, 0x15, 0x23, 0x0d, 0x71, 0xfd}
+	binaryIDLazyResizer                    = binary.ID{0x11, 0x9c, 0xe3, 0x58, 0x48, 0x70, 0x67, 0x7a, 0x2a, 0x91, 0x48, 0x31, 0x83, 0x26, 0x26, 0xeb, 0xd1, 0xb7, 0x3f, 0x9f}
 	binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD = binary.ID{0x13, 0x31, 0x7f, 0x4d, 0xe1, 0x8e, 0x07, 0xc4, 0x5e, 0xea, 0x75, 0x34, 0xc1, 0xc4, 0x97, 0xb8, 0x94, 0x1b, 0x19, 0x84}
 	binaryIDfmtATC_RGB_AMD                 = binary.ID{0x99, 0x8f, 0x20, 0x9f, 0xb9, 0xa8, 0x32, 0x7e, 0xf7, 0xce, 0x01, 0x4e, 0x3a, 0xd9, 0x07, 0x79, 0x3d, 0x44, 0xcf, 0xf3}
 	binaryIDfmtAlpha                       = binary.ID{0x2a, 0xf1, 0xe7, 0xdd, 0xac, 0xf3, 0xcb, 0x06, 0xf4, 0x16, 0x82, 0x64, 0x81, 0x21, 0x9f, 0x51, 0xa3, 0x76, 0x4f, 0x64}
@@ -214,6 +216,60 @@ var schemaLazyConverter = &binary.Entity{
 		{Declared: "FormatFrom", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "FormatTo", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "StrideFrom", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+	},
+}
+
+type binaryClassLazyResizer struct{}
+
+func (*LazyResizer) Class() binary.Class {
+	return (*binaryClassLazyResizer)(nil)
+}
+func doEncodeLazyResizer(e binary.Encoder, o *LazyResizer) {
+	e.ID(o.Data)
+	e.Object(o.Format)
+	e.Uint32(o.SrcWidth)
+	e.Uint32(o.SrcHeight)
+	e.Uint32(o.DstWidth)
+	e.Uint32(o.DstHeight)
+}
+func doDecodeLazyResizer(d binary.Decoder, o *LazyResizer) {
+	o.Data = binary.ID(d.ID())
+	if obj := d.Object(); obj != nil {
+		o.Format = obj.(Format)
+	} else {
+		o.Format = nil
+	}
+	o.SrcWidth = uint32(d.Uint32())
+	o.SrcHeight = uint32(d.Uint32())
+	o.DstWidth = uint32(d.Uint32())
+	o.DstHeight = uint32(d.Uint32())
+}
+func (*binaryClassLazyResizer) ID() binary.ID      { return binaryIDLazyResizer }
+func (*binaryClassLazyResizer) New() binary.Object { return &LazyResizer{} }
+func (*binaryClassLazyResizer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeLazyResizer(e, obj.(*LazyResizer))
+}
+func (*binaryClassLazyResizer) Decode(d binary.Decoder) binary.Object {
+	obj := &LazyResizer{}
+	doDecodeLazyResizer(d, obj)
+	return obj
+}
+func (*binaryClassLazyResizer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeLazyResizer(d, obj.(*LazyResizer))
+}
+func (*binaryClassLazyResizer) Schema() *binary.Entity { return schemaLazyResizer }
+
+var schemaLazyResizer = &binary.Entity{
+	TypeID:   binaryIDLazyResizer,
+	Package:  "image",
+	Identity: "LazyResizer",
+	Fields: []binary.Field{
+		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
+		{Declared: "SrcWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "SrcHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "DstWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "DstHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 

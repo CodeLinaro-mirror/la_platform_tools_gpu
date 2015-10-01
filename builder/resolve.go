@@ -170,11 +170,7 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 			v[i] = resource
 
 		case *path.Thumbnail:
-			t, ok := v[i-1].(image.Thumbnailer)
-			if !ok {
-				return nil, fmt.Errorf("Type %T does not support thumbnailing", v[i-1])
-			}
-			img, err := t.Thumbnail(p.DesiredWidth, p.DesiredHeight, d, l)
+			img, err := resolveThumbnail(v[i-1], p, d, l)
 			if err != nil {
 				return nil, err
 			}
@@ -276,6 +272,60 @@ func resolveChain(paths []path.Path, d database.Database, l log.Logger) ([]inter
 	}
 
 	return v, nil
+}
+
+func resolveThumbnail(v interface{}, p *path.Thumbnail, d database.Database, l log.Logger) (*image.Info, error) {
+	t, ok := v.(image.Thumbnailer)
+	if !ok {
+		return nil, fmt.Errorf("Type %T does not support thumbnailing", v)
+	}
+
+	img, err := t.Thumbnail(p.DesiredMaxWidth, p.DesiredMaxHeight, d, l)
+	if err != nil {
+		return nil, err
+	}
+
+	if p.DesiredFormat != nil {
+		// Convert the image to the desired format.
+		if f, ok := p.DesiredFormat.(image.Format); ok {
+			if img.Format.Key() != f.Key() {
+				img, err = img.ConvertTo(f, d, l)
+				if err != nil {
+					return nil, err
+				}
+			}
+		} else {
+			return nil, fmt.Errorf("Cannot convert thumbnail to format %v", f)
+		}
+	}
+
+	if _, ok := img.Format.(image.Resizer); !ok {
+		// Image format does not support resizing - just return what we have.
+		return img, nil
+	}
+
+	// Image format supports resizing. See if the image should be.
+	scaleX, scaleY := float32(1), float32(1)
+	if p.DesiredMaxWidth > 0 && img.Width > p.DesiredMaxWidth {
+		scaleX = float32(p.DesiredMaxWidth) / float32(img.Width)
+	}
+	if p.DesiredMaxHeight > 0 && img.Height > p.DesiredMaxHeight {
+		scaleY = float32(p.DesiredMaxHeight) / float32(img.Height)
+	}
+	scale := scaleX // scale := min(scaleX, scaleY)
+	if scale > scaleY {
+		scale = scaleY
+	}
+
+	targetWidth := uint32(float32(img.Width) * scale)
+	targetHeight := uint32(float32(img.Height) * scale)
+
+	if targetWidth == img.Width && targetHeight == img.Height {
+		// Image is already at requested target size.
+		return img, err
+	}
+
+	return img.Resize(targetWidth, targetHeight, d, l)
 }
 
 func convert(val reflect.Value, ty reflect.Type) (reflect.Value, bool) {

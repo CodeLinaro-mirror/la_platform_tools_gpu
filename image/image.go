@@ -41,29 +41,58 @@ type Info struct {
 	Data            *path.Blob // The path to the pixel data of the image.
 }
 
-// Convert returns this image Info converted to format specified by p.
+// Convert returns this image Info converted to the format specified by p.
 func (i Info) Convert(p *path.As, d database.Database, l log.Logger) (interface{}, error) {
 	if f, ok := p.Type.(Format); ok {
-		id, err := database.Store(&LazyConverter{
-			Data:       i.Data.ID,
-			Width:      i.Width,
-			Height:     i.Height,
-			FormatFrom: i.Format,
-			FormatTo:   f,
-		}, d, l)
-		if err != nil {
-			return nil, fmt.Errorf("Failed to convert ImageInfo at %s to format %T: %v",
-				p.Path(), f, err)
-		}
-		return &Info{
-			Format: f,
-			Width:  i.Width,
-			Height: i.Height,
-			Data:   &path.Blob{ID: id},
-		}, nil
+		return i.ConvertTo(f, d, l)
+	} else {
+		return nil, fmt.Errorf("Cannot convert ImageInfo at %s to type %T", p.Path(), p.Type)
 	}
-	return nil, fmt.Errorf("Cannot convert ImageInfo at %s to type %T",
-		p.Path(), p.Type)
+}
+
+// ConvertTo returns this image Info converted to the format f.
+func (i Info) ConvertTo(f Format, d database.Database, l log.Logger) (*Info, error) {
+	id, err := database.Store(&LazyConverter{
+		Data:       i.Data.ID,
+		Width:      i.Width,
+		Height:     i.Height,
+		FormatFrom: i.Format,
+		FormatTo:   f,
+	}, d, l)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to convert ImageInfo to format %v: %v", f, err)
+	}
+	return &Info{
+		Format: f,
+		Width:  i.Width,
+		Height: i.Height,
+		Data:   &path.Blob{ID: id},
+	}, nil
+}
+
+// Resize returns this image Info resized to the specified dimensions.
+func (i Info) Resize(w, h uint32, d database.Database, l log.Logger) (*Info, error) {
+	if _, ok := i.Format.(Resizer); !ok {
+		return nil, fmt.Errorf("Image format %v does not support resizing", i.Format)
+	}
+
+	id, err := database.Store(&LazyResizer{
+		Data:      i.Data.ID,
+		Format:    i.Format,
+		SrcWidth:  i.Width,
+		SrcHeight: i.Height,
+		DstWidth:  w,
+		DstHeight: h,
+	}, d, l)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to resize ImageInfo to %v x %v: %v", w, h, err)
+	}
+	return &Info{
+		Format: i.Format,
+		Width:  w,
+		Height: h,
+		Data:   &path.Blob{ID: id},
+	}, nil
 }
 
 // Convert returns the Image converted to the format to.

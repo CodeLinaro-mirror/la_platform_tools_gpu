@@ -23,9 +23,16 @@ import (
 // Thumbnail is a path to the thumbnail for a given object.
 type Thumbnail struct {
 	binary.Generate
-	Object        Path   // The path to the thumbnail's object
-	DesiredWidth  uint32 // The desired width of the thumbnail image.
-	DesiredHeight uint32 // The desired height of the thumbnail image.
+	// The path to the thumbnail's object
+	Object Path
+	// The desired maximum width of the thumbnail image.
+	// If DesiredMaxWidth <= 0, then no limits will be placed on the width.
+	DesiredMaxWidth uint32
+	// The desired maximum height of the thumbnail image.
+	// If DesiredMaxHeight <= 0, then no limits will be placed on the height.
+	DesiredMaxHeight uint32
+	// If requested thumbnail format. If nil, then return the native format.
+	DesiredFormat interface{}
 }
 
 // String returns the string representation of the path.
@@ -33,7 +40,8 @@ func (n *Thumbnail) String() string { return n.Path() }
 
 // Path implements the Path interface.
 func (n *Thumbnail) Path() string {
-	return fmt.Sprintf("%v.Thumbnail<%dx%d>", n.Object, n.DesiredWidth, n.DesiredHeight)
+	return fmt.Sprintf("%v.Thumbnail<%v, %d x %d>", n.Object,
+		n.DesiredFormat, n.DesiredMaxWidth, n.DesiredMaxHeight)
 }
 
 // Base implements the Path interface, returning the path to the atom the state
@@ -45,9 +53,10 @@ func (n *Thumbnail) Base() Path {
 // Clone implements the Path interface, returning a deep-copy of this path.
 func (n *Thumbnail) Clone() Path {
 	return &Thumbnail{
-		Object:        n.Object.Clone(),
-		DesiredWidth:  n.DesiredWidth,
-		DesiredHeight: n.DesiredHeight,
+		Object:           n.Object.Clone(),
+		DesiredMaxWidth:  n.DesiredMaxWidth,
+		DesiredMaxHeight: n.DesiredMaxHeight,
+		DesiredFormat:    n.DesiredFormat,
 	}
 }
 
@@ -58,10 +67,6 @@ func (n *Thumbnail) Validate() error {
 		return fmt.Errorf("Thumbnail is nil")
 	case n.Object == nil:
 		return fmt.Errorf("Thumbnail.Resources is nil")
-	case n.DesiredWidth <= 0:
-		return fmt.Errorf("Thumbnail.DesiredWidth is not positive (%d)", n.DesiredWidth)
-	case n.DesiredHeight <= 0:
-		return fmt.Errorf("Thumbnail.DesiredHeight is not positive (%d)", n.DesiredHeight)
 	}
 	return n.Object.Validate()
 }
