@@ -98,11 +98,22 @@ func (p *Primitive) Native() string {
 }
 
 func (p *Primitive) Representation() string {
-	return methodToBase[p.Method]
+	return fmt.Sprintf("%r", p)
 }
 
 func (p *Primitive) String() string {
-	return p.Name
+	return fmt.Sprint(p)
+}
+
+func (p *Primitive) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprint(f, p.Method)
+	case 'r':
+		fmt.Fprint(f, methodToBase[p.Method])
+	default:
+		fmt.Fprint(f, p.Name)
+	}
 }
 
 func (p *Primitive) EncodeValue(e binary.Encoder, value interface{}) {

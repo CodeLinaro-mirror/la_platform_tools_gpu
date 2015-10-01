@@ -26,11 +26,22 @@ type Pointer struct {
 }
 
 func (p *Pointer) Representation() string {
-	return fmt.Sprintf("*%s", p.Type.Representation())
+	return fmt.Sprintf("%r", p)
 }
 
 func (p *Pointer) String() string {
-	return fmt.Sprintf("*%s", p.Type)
+	return fmt.Sprint(p)
+}
+
+func (p *Pointer) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprintf(f, "*%z", p.Type)
+	case 'r':
+		fmt.Fprintf(f, "*%r", p.Type)
+	default:
+		fmt.Fprintf(f, "*%v", p.Type)
+	}
 }
 
 func (p *Pointer) EncodeValue(e binary.Encoder, value interface{}) {

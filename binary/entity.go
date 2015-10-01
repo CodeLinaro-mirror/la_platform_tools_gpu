@@ -31,6 +31,10 @@ type Entity struct {
 	Exported bool      // Whether the class is exported from it's package, not set in compact form.
 	Fields   FieldList // Descriptions of the fields of the class.
 	Metadata []Object  // The metadata for the class, not set in compact form
+
+	// signature is the cached result of a call to Signature.
+	// It is never encoded to a stream.
+	signature string
 }
 
 // Name returns the name of the Entity.
@@ -50,6 +54,30 @@ func (e *Entity) Identifier() string {
 	return fmt.Sprint(s, '@', e.Version)
 }
 
+// Signature returns a canonical string representations of an entities signature.
+// If two entities have the same Signature, the are assumed to represent the same type
+func (e *Entity) Signature() string {
+	if e.signature == "" {
+		e.signature = fmt.Sprintf("%z", e)
+	}
+	return e.signature
+}
+
+func (e *Entity) Format(f fmt.State, c rune) {
+	fmt.Fprint(f, e.Package, ".", e.Identity)
+	if e.Version != "" {
+		fmt.Fprint(f, '@', e.Version)
+	}
+	fmt.Fprint(f, "{")
+	for i, field := range e.Fields {
+		if i != 0 {
+			fmt.Fprint(f, ",")
+		}
+		field.Type.Format(f, c)
+	}
+	fmt.Fprint(f, "}")
+}
+
 // FieldList is a slice of fields.
 type FieldList []Field
 
@@ -65,6 +93,7 @@ type Type interface {
 	Representation() string // The encoded representation of the type.
 	EncodeValue(e Encoder, value interface{})
 	DecodeValue(d Decoder) interface{}
+	Format(f fmt.State, c rune)
 }
 
 func trimPackage(n string) string {

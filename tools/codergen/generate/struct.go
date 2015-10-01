@@ -117,7 +117,7 @@ func (m *Module) HasStructTag(name string) bool {
 
 // UpdateID recalculates the struct ID from the current signature.
 func (s *Struct) UpdateID() {
-	s.TypeID = binary.NewID([]byte(Signature(&s.Entity)))
+	s.TypeID = binary.NewID([]byte(s.Entity.Signature()))
 }
 
 type sortEntry struct {

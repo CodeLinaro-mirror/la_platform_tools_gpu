@@ -14,7 +14,11 @@
 
 package schema
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 // Interface is the Type descriptor for a field who's underlying type is dynamic.
 type Interface struct {
@@ -22,11 +26,20 @@ type Interface struct {
 }
 
 func (i *Interface) Representation() string {
-	return i.Name
+	return fmt.Sprintf("%r", i)
 }
 
 func (i *Interface) String() string {
-	return i.Name
+	return fmt.Sprint(i)
+}
+
+func (i *Interface) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprint(f, "?", i.Name)
+	default:
+		fmt.Fprint(f, i.Name)
+	}
 }
 
 func (i *Interface) EncodeValue(e binary.Encoder, value interface{}) {
@@ -47,11 +60,20 @@ type Variant struct {
 }
 
 func (i *Variant) Representation() string {
-	return i.Name
+	return fmt.Sprintf("%r", i)
 }
 
 func (i *Variant) String() string {
-	return i.Name
+	return fmt.Sprint(i)
+}
+
+func (i *Variant) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprint(f, "&", i.Name)
+	default:
+		fmt.Fprint(f, i.Name)
+	}
 }
 
 func (i *Variant) EncodeValue(e binary.Encoder, value interface{}) {

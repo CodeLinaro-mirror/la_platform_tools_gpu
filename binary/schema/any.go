@@ -14,18 +14,31 @@
 
 package schema
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 // Any is the schema Type descriptor for a field who's underlying type requires
 // boxing and unboxing. The type is usually declared as an empty interface.
 type Any struct{}
 
 func (i *Any) Representation() string {
-	return "<any>"
+	return fmt.Sprintf("%r", i)
 }
 
 func (i *Any) String() string {
-	return "<any>"
+	return fmt.Sprint(i)
+}
+
+func (i *Any) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprint(f, "~<any>")
+	default:
+		fmt.Fprint(f, "<any>")
+	}
 }
 
 func (Any) EncodeValue(e binary.Encoder, value interface{}) {

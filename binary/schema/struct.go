@@ -27,14 +27,26 @@ type Struct struct {
 }
 
 func (s *Struct) Representation() string {
-	return s.Entity.Name()
+	return fmt.Sprintf("%r", s)
 }
 
 func (s *Struct) String() string {
-	if s.Relative != "" {
-		return s.Relative
+	return fmt.Sprint(s)
+}
+
+func (s *Struct) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprint(f, "$")
+	case 'r':
+		fmt.Fprint(f, s.Entity.Name())
+	default:
+		if s.Relative != "" {
+			fmt.Fprint(f, s.Relative)
+		} else {
+			fmt.Fprint(f, s.Entity.Name())
+		}
 	}
-	return s.Entity.Name()
 }
 
 func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {

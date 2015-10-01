@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"io"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
@@ -60,7 +59,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		fmt.Fprintln(w)
 		fmt.Fprintln(w, s.Name(), ": size", size)
 		fmt.Fprintln(w, s.TypeID)
-		fmt.Fprintln(w, Signature(&s.Entity))
+		fmt.Fprintln(w, s.Entity.Signature())
 	}
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, "Schema stats:")
@@ -69,48 +68,4 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 	fmt.Fprintln(w, "Total:", total)
 	fmt.Fprintln(w, "Average:", total/len(structs))
 	fmt.Fprintln(w, "Largest:", largest)
-}
-
-func Signature(e *binary.Entity) string {
-	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Identifier(), "{")
-	for i, f := range e.Fields {
-		if i != 0 {
-			fmt.Fprint(b, ",")
-		}
-		printTag(b, f.Type)
-	}
-	fmt.Fprint(b, "}")
-	return b.String()
-}
-
-func printTag(w io.Writer, t binary.Type) {
-	switch t := t.(type) {
-	case *schema.Primitive:
-		fmt.Fprint(w, t.Method)
-	case *schema.Struct:
-		fmt.Fprint(w, "$")
-	case *schema.Pointer:
-		fmt.Fprint(w, "*")
-		printTag(w, t.Type)
-	case *schema.Interface:
-		fmt.Fprint(w, "?", t)
-	case *schema.Variant:
-		fmt.Fprint(w, "&", t)
-	case *schema.Any:
-		fmt.Fprint(w, "~", t)
-	case *schema.Slice:
-		fmt.Fprint(w, "[]")
-		printTag(w, t.ValueType)
-	case *schema.Array:
-		fmt.Fprint(w, "[", t.Size, "]")
-		printTag(w, t.ValueType)
-	case *schema.Map:
-		fmt.Fprint(w, "map[")
-		printTag(w, t.KeyType)
-		fmt.Fprint(w, "]")
-		printTag(w, t.ValueType)
-	default:
-		panic(fmt.Errorf("Unknown type %T generating signature", t))
-	}
 }

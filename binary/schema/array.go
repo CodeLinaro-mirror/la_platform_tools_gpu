@@ -35,14 +35,26 @@ type Slice struct {
 }
 
 func (a *Array) Representation() string {
-	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType.Representation())
+	return fmt.Sprintf("%r", a)
 }
 
 func (a *Array) String() string {
-	if a.Alias != "" {
-		return a.Alias
+	return fmt.Sprint(a)
+}
+
+func (a *Array) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprintf(f, "[%d]%z", a.Size, a.ValueType)
+	case 'r':
+		fmt.Fprintf(f, "[%d]%r", a.Size, a.ValueType)
+	default:
+		if a.Alias != "" {
+			fmt.Fprint(f, a.Alias)
+		} else {
+			fmt.Fprintf(f, "[%d]%v", a.Size, a.ValueType)
+		}
 	}
-	return fmt.Sprintf("[%d]%s", a.Size, a.ValueType)
 }
 
 func (a *Array) EncodeValue(e binary.Encoder, value interface{}) {
@@ -61,14 +73,26 @@ func (a *Array) DecodeValue(d binary.Decoder) interface{} {
 }
 
 func (s *Slice) Representation() string {
-	return fmt.Sprintf("[]%s", s.ValueType.Representation())
+	return fmt.Sprintf("%r", s)
 }
 
 func (s *Slice) String() string {
-	if s.Alias != "" {
-		return s.Alias
+	return fmt.Sprint(s)
+}
+
+func (s *Slice) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z':
+		fmt.Fprintf(f, "[]%z", s.ValueType)
+	case 'r':
+		fmt.Fprintf(f, "[]%r", s.ValueType)
+	default:
+		if s.Alias != "" {
+			fmt.Fprint(f, s.Alias)
+		} else {
+			fmt.Fprintf(f, "[]%v", s.ValueType)
+		}
 	}
-	return fmt.Sprintf("[]%s", s.ValueType)
 }
 
 func (s *Slice) EncodeValue(e binary.Encoder, value interface{}) {
