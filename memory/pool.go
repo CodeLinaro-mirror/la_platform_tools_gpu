@@ -145,7 +145,7 @@ func (m poolSlice) Slice(rng Range) Slice {
 		panic(fmt.Errorf("%v.Slice(%v) - out of bounds", m.String(), rng))
 	}
 	rng.Base += m.rng.Base
-	return poolSlice{m.pool, rng, len(m.pool.writes)}
+	return poolSlice{m.pool, rng, m.at}
 }
 
 func (m poolSlice) ValidRanges() RangeList {
