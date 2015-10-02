@@ -49,20 +49,30 @@ func (e *Entity) Name() string {
 // If two entities have the same Signature, the are assumed to represent the same type
 func (e *Entity) Signature() string {
 	if e.signature == "" {
+		// Internally signature is implemented by the fmt.Formatter interface with the format specifier 'z'
 		e.signature = fmt.Sprintf("%z", e)
 	}
 	return e.signature
 }
 
+// Format implements the fmt.Formatter interface
 func (e *Entity) Format(f fmt.State, c rune) {
+	// if c is 'z' then we are printing in signature format.
+	// this is an internal implementation detail, the only code that should ever do this is the Signature method.
 	fmt.Fprint(f, e.Package, ".", e.Identity)
 	if e.Version != "" {
 		fmt.Fprint(f, '@', e.Version)
+	}
+	if c != 'z' && e.Display != "" {
+		fmt.Fprint(f, '(', e.Display, ")")
 	}
 	fmt.Fprint(f, "{")
 	for i, field := range e.Fields {
 		if i != 0 {
 			fmt.Fprint(f, ",")
+		}
+		if c != 'z' && field.Declared != "" {
+			fmt.Fprint(f, field.Declared, " ")
 		}
 		field.Type.Format(f, c)
 	}

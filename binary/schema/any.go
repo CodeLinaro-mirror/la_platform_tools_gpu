@@ -32,9 +32,10 @@ func (i *Any) String() string {
 	return fmt.Sprint(i)
 }
 
+// Format implements the fmt.Formatter interface
 func (i *Any) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprint(f, "~")
 	default:
 		fmt.Fprint(f, "<any>")

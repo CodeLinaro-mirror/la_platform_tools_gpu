@@ -42,11 +42,12 @@ func (a *Array) String() string {
 	return fmt.Sprint(a)
 }
 
+// Format implements the fmt.Formatter interface
 func (a *Array) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprintf(f, "[%d]%z", a.Size, a.ValueType)
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprintf(f, "[%d]%r", a.Size, a.ValueType)
 	default:
 		if a.Alias != "" {
@@ -80,11 +81,12 @@ func (s *Slice) String() string {
 	return fmt.Sprint(s)
 }
 
+// Format implements the fmt.Formatter interface
 func (s *Slice) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprintf(f, "[]%z", s.ValueType)
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprintf(f, "[]%r", s.ValueType)
 	default:
 		if s.Alias != "" {

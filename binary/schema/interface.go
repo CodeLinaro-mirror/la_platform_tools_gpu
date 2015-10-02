@@ -33,9 +33,10 @@ func (i *Interface) String() string {
 	return fmt.Sprint(i)
 }
 
+// Format implements the fmt.Formatter interface
 func (i *Interface) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprint(f, "?")
 	default:
 		fmt.Fprint(f, i.Name)
@@ -67,9 +68,10 @@ func (i *Variant) String() string {
 	return fmt.Sprint(i)
 }
 
+// Format implements the fmt.Formatter interface
 func (i *Variant) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprint(f, "&")
 	default:
 		fmt.Fprint(f, i.Name)

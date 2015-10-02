@@ -33,11 +33,12 @@ func (p *Pointer) String() string {
 	return fmt.Sprint(p)
 }
 
+// Format implements the fmt.Formatter interface
 func (p *Pointer) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprintf(f, "*%z", p.Type)
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprintf(f, "*%r", p.Type)
 	default:
 		fmt.Fprintf(f, "*%v", p.Type)

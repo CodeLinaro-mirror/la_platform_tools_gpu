@@ -34,11 +34,12 @@ func (s *Struct) String() string {
 	return fmt.Sprint(s)
 }
 
+// Format implements the fmt.Formatter interface
 func (s *Struct) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprint(f, "$")
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprint(f, s.Entity.Name())
 	default:
 		if s.Relative != "" {

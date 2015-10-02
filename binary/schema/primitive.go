@@ -105,11 +105,12 @@ func (p *Primitive) String() string {
 	return fmt.Sprint(p)
 }
 
+// Format implements the fmt.Formatter interface
 func (p *Primitive) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprint(f, p.Method)
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprint(f, methodToBase[p.Method])
 	default:
 		fmt.Fprint(f, p.Name)

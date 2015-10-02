@@ -35,11 +35,12 @@ func (m *Map) String() string {
 	return fmt.Sprint(m)
 }
 
+// Format implements the fmt.Formatter interface
 func (m *Map) Format(f fmt.State, c rune) {
 	switch c {
-	case 'z':
+	case 'z': // Private format specifier, supports Entity.Signature
 		fmt.Fprintf(f, "map[%z]%z", m.KeyType, m.ValueType)
-	case 'r':
+	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprintf(f, "map[%r]%r", m.KeyType, m.ValueType)
 	default:
 		if m.Alias != "" {
