@@ -1042,6 +1042,16 @@ const java_binary_tmpl = `{{/*
   «}¶
 {{end}}
 
+{{define "Java.Schema.Primitive"}}new Primitive("{{.Name}}", Method.{{.Method}}){{end}}
+{{define "Java.Schema.Struct"}}new Struct({{File.ClassName .}}.Klass.INSTANCE.entity()){{end}}
+{{define "Java.Schema.Pointer"}}new Pointer({{Call "Java.Schema" .Type}}){{end}}
+{{define "Java.Schema.Interface"}}new Interface("{{.Name}}"){{end}}
+{{define "Java.Schema.Variant"}}new Variant("{{.Name}}"){{end}}
+{{define "Java.Schema.Any"}}new AnyType(){{end}}
+{{define "Java.Schema.Slice"}}new Slice("{{.Alias}}", {{Call "Java.Schema" .ValueType}}){{end}}
+{{define "Java.Schema.Array"}}new Array("{{.Alias}}", {{Call "Java.Schema" .ValueType}}, {{.Size}}){{end}}
+{{define "Java.Schema.Map"}}new Map("{{.Alias}}", {{Call "Java.Schema" .KeyType}}, {{Call "Java.Schema" .ValueType}}){{end}}
+
 {{define "Java.ClassBody"}}
   ¶{{/*Newline after section marker*/}}
   {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
@@ -1054,13 +1064,20 @@ const java_binary_tmpl = `{{/*
   @Override @NotNull¶
   public BinaryClass klass() { return Klass.INSTANCE; }¶
   ¶
-  private static final byte[] IDBytes = {
-    {{range .Struct.ID}}{{ToS8 .}}, {{end}}
-  •};¶
-  public static final BinaryID ID = new BinaryID(IDBytes);¶
+  ¶
+  private static final Entity ENTITY = new Entity(
+    "{{.Struct.Package}}",
+    "{{.Struct.Identity}}",
+    "{{.Struct.Version}}",
+    "{{.Struct.Display}}",
+    new Field[]{»¶
+    {{range .Struct.Fields}}
+      new Field("{{.Declared}}", {{Call "Java.Schema" .Type}}),¶
+    {{end}}
+    «});¶
   ¶
   static {»¶
-    Namespace.register(ID, Klass.INSTANCE);¶
+    Namespace.register(Klass.INSTANCE);¶
   «}¶
   public static void register() {}¶
   //{{/*Comment the following section marker*/}}
@@ -1071,7 +1088,7 @@ const java_binary_tmpl = `{{/*
   INSTANCE;¶
   ¶
   @Override @NotNull¶
-  public BinaryID id() { return ID; }¶
+  public Entity entity() { return ENTITY; }¶
   ¶
   @Override @NotNull¶
   public BinaryObject create() { return new {{File.ClassName .Struct}}(); }¶
