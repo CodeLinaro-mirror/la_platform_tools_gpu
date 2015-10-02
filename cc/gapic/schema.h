@@ -53,7 +53,6 @@ class Field {
       : mDeclared(declared), mType(type) {}
 
   void encode(Encoder& e) const {
-    e.String(mDeclared);
     mType->encode(e);
   }
  private:
@@ -103,19 +102,12 @@ class Entity : public Encodable {
   }
 
   virtual void Encode(Encoder* e) const {
-    e->Id(mTypeId);
     e->String(mPackage);
-    e->String(mName);
     e->String(mIdentity);
     e->String(mVersion);
-    e->Bool(mExported);
     e->Uint32(uint32_t(mFields.size()));
     for (const auto& f : mFields) {
       f.encode(*e);
-    }
-    e->Uint32(uint32_t(mMetadata.size()));
-    for (const auto& m : mMetadata) {
-      e->Object(m.get());
     }
   }
 
@@ -153,9 +145,7 @@ class Primitive : public Type {
   Primitive(const std::string& name, Method method) : mName(name), mMethod(method) {}
 
   void encode(Encoder& e) const {
-    e.Uint8(uint8_t(Type::PrimitiveTag));
-    e.String(mName);
-    e.Uint8(uint8_t(mMethod));
+    e.Uint8(uint8_t(Type::PrimitiveTag) | (uint8_t(mMethod) << 4));
   }
  private:
   std::string mName;
@@ -194,7 +184,6 @@ class Interface : public Type {
 
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(InterfaceTag));
-    e.String(mName);
   }
  private:
   std::string mName;
@@ -206,7 +195,6 @@ class Variant : public Type {
 
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(VariantTag));
-    e.String(mName);
   }
  private:
   std::string mName;
@@ -227,7 +215,6 @@ class Slice : public Type {
       : mAlias(alias), mValueType(valueType) {}
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(SliceTag));
-    e.String(mAlias);
     mValueType->encode(e);
   }
  private:
@@ -241,7 +228,6 @@ class Array : public Type {
       : mAlias(alias), mValueType(valueType), mSize(size) {}
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(ArrayTag));
-    e.String(mAlias);
     e.Uint32(mSize);
     mValueType->encode(e);
   }
@@ -259,7 +245,6 @@ class Map : public Type {
         mValueType(valueType) {}
   void encode(Encoder& e) const {
       e.Uint8(uint8_t(MapTag));
-      e.String(mAlias);
       mKeyType->encode(e);
       mValueType->encode(e);
   }
