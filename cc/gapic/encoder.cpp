@@ -156,7 +156,7 @@ void Encoder::Entity(const schema::Entity* entity) {
     }
 }
 
-void Encoder::Value(const Encodable& obj) {
+void Encoder::Encode(const Encodable& obj) {
     obj.Encode(this);
 }
 
@@ -166,7 +166,7 @@ void Encoder::Variant(const Encodable* obj) {
         return;
     }
     Entity(obj->Schema());
-    Value(*obj);
+    Encode(*obj);
 }
 
 void Encoder::Object(const Encodable* obj) {

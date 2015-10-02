@@ -83,7 +83,35 @@ public:
     void Id(const gapic::Id&);
     void Entity(const schema::Entity*);
 
-    void Value(const Encodable& obj);
+    void Encode(bool b) { Bool(b); }
+    void Encode(int8_t v) { Int8(v); }
+    void Encode(uint8_t v) { Uint8(v); }
+    void Encode(uint16_t v) { Uint16(v); }
+    void Encode(float v) { Float32(v); }
+    void Encode(uint32_t v) { Uint32(v); }
+    void Encode(int32_t v) { Int32(v); }
+    void Encode(double v) { Float64(v); }
+    void Encode(uint64_t v) { Uint64(v); }
+    void Encode(const char* v) { String(v); }
+    void Encode(const std::string& v) { String(v); }
+    void Encode(const gapic::Id& id) { Id(id); }
+
+    template <class T>
+    void Encode(const Array<T>& arr) {
+        Uint32(arr.size());
+        for (int i = 0; i < arr.size(); ++i) {
+            Encode(arr[i]);
+        }
+    }
+
+    template <class T>
+    void Array(const T* array, uint32_t size) {
+        for (int i = 0; i < size; ++i) {
+            Encode(array[i]);
+        }
+    }
+
+    void Encode(const Encodable& obj);
     void Variant(const Encodable* obj);
     void Object(const Encodable* obj);
 
