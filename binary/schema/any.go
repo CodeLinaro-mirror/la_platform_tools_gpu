@@ -35,7 +35,7 @@ func (i *Any) String() string {
 func (i *Any) Format(f fmt.State, c rune) {
 	switch c {
 	case 'z':
-		fmt.Fprint(f, "~<any>")
+		fmt.Fprint(f, "~")
 	default:
 		fmt.Fprint(f, "<any>")
 	}

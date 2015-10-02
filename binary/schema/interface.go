@@ -36,7 +36,7 @@ func (i *Interface) String() string {
 func (i *Interface) Format(f fmt.State, c rune) {
 	switch c {
 	case 'z':
-		fmt.Fprint(f, "?", i.Name)
+		fmt.Fprint(f, "?")
 	default:
 		fmt.Fprint(f, i.Name)
 	}
@@ -70,7 +70,7 @@ func (i *Variant) String() string {
 func (i *Variant) Format(f fmt.State, c rune) {
 	switch c {
 	case 'z':
-		fmt.Fprint(f, "&", i.Name)
+		fmt.Fprint(f, "&")
 	default:
 		fmt.Fprint(f, i.Name)
 	}

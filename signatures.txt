@@ -64,12 +64,12 @@ int_ : size 12
 any.int_{Int32}
 
 objectSlice : size 20
-8d793c2f1da53f626cae65021df593d9fd9bde1f
-any.objectSlice{[]?binary.Object}
+4c82b4d3c567486d77df0f7892a169d7a3abfe70
+any.objectSlice{[]?}
 
 object_ : size 15
-baea35aeb1c70f48340b14afcac38e02e502cad9
-any.object_{?binary.Object}
+c9c9b7335220fe6a98ef65e171271b50184df873
+any.object_{?}
 
 stringSlice : size 20
 506c007cb41af7a1595a6e48a82f07617145b84a
@@ -120,8 +120,8 @@ Group : size 19
 atom.Group{String,$,[]$}
 
 List : size 14
-bf5f4f6c52708d453f26f0d1b7dac0215dad342e
-atom.List{[]&Atom}
+171261f8be6c49a120c0f47b18a41d36718b5bce
+atom.List{[]&}
 
 Metadata : size 21
 137d41cff5610f2591dce24ff323d2e5c6fda7a5
@@ -148,8 +148,8 @@ BuildReport : size 28
 builder.BuildReport{*$,*$}
 
 Follow : size 18
-041874eaa63efd4a35abb44c545770d52a716a20
-builder.Follow{?path.Path}
+cf6dac3d1ff6b25f0dbf133446ec1825ee0d7fde
+builder.Follow{?}
 
 GetFramebufferColor : size 38
 bd4532b5a274767668ac382dbd0f50f0b05a78d9
@@ -180,8 +180,8 @@ f8278e512df92e043a97a7f731b070c849bed6d3
 builder.GetTimingInfo{*$,*$,Int32}
 
 Get : size 15
-a3ec27dd8b0311536cd4178107b6dbc8a799e852
-builder.Get{?path.Path}
+4a94ecb6836d8a2d01c8ff18a769bafefe5a1439
+builder.Get{?}
 
 IndexLimits : size 24
 c41ade651902b40af63f1a9739b577d4fca58545
@@ -196,8 +196,8 @@ RenderFramebufferDepth : size 41
 builder.RenderFramebufferDepth{*$,*$,Uint32,Uint32}
 
 Set : size 16
-fbc298b7eb4430c290f09700b03b50d8bd2fa551
-builder.Set{?path.Path,~<any>}
+ae9e977e419c10e072499019c321d4fd1db0e3c8
+builder.Set{?,~}
 
 atomFramebufferDimensions : size 39
 a6c3ab5d01d4c9950f0185a6f8000e3df4dddb39
@@ -216,8 +216,8 @@ c63e407fe2a1e7e434c6e8c921cc2b6b2dcd5254
 builder.getCaptureFramebufferDimensions{*$}
 
 testAtom : size 30
-bb065efee59074c8d8ccb53376337f037b084599
-builder.testAtom{ID,String,[]Bool,~<any>,*$,map[String]String}
+b355fa4f97f03fb56eaa3d63bacfb2b7da5b2e5b
+builder.testAtom{ID,String,[]Bool,~,*$,map[String]String}
 
 testStruct : size 25
 54503385413b53859fede81998dc79d8357a99c2
@@ -4120,28 +4120,28 @@ WglSwapBuffers : size 27
 gles.WglSwapBuffers{$,$}
 
 directCall : size 19
-0feecbda52b57ed9a571ff51bcad3c13ec37879b
-gles.directCall{?caller}
+0580172d330d1565bd78ff6514b1b5238d6405ad
+gles.directCall{?}
 
 generate_types : size 28
 d187466bc94a8f94607bc7b05bb0ad9e52bdd9e7
 gles.generate_types{$,$}
 
 Image : size 19
-9c28990e764860db7de6a84fc1e19faf6b2bf886
-image.Image{?Format,Uint32,Uint32,[]Uint8}
+c3f824b1946aeba75f5259705acb5841fcb45266
+image.Image{?,Uint32,Uint32,[]Uint8}
 
 Info : size 20
-a0b992db206b905de37092bd483e453a05709f1c
-image.Info{?Format,Uint32,Uint32,*$}
+18ea86059dce55971b9416868a4ad85e7d672e09
+image.Info{?,Uint32,Uint32,*$}
 
 LazyConverter : size 28
-24e0d657a349f8447855382fdf963815230d71fd
-image.LazyConverter{ID,Uint32,Uint32,?Format,?Format,Int32}
+d90d748bab34663f283b4ca1376b368f59b8b7b2
+image.LazyConverter{ID,Uint32,Uint32,?,?,Int32}
 
 LazyResizer : size 26
-119ce3584870677a2a914831832626ebd1b73f9f
-image.LazyResizer{ID,?Format,Uint32,Uint32,Uint32,Uint32}
+77b9129fa423a06b389cf69d56a6f5b7fd5d4b29
+image.LazyResizer{ID,?,Uint32,Uint32,Uint32,Uint32}
 
 fmtATC_RGBA_EXPLICIT_ALPHA_AMD : size 39
 13317f4de18e07c45eea7534c1c497b8941b1984
@@ -4212,12 +4212,12 @@ msgOpenChannel : size 30
 multiplexer.msgOpenChannel{Uint32}
 
 ArrayIndex : size 20
-75b924e59a0f3bdbeecadb36a34f1e71911ccb52
-path.ArrayIndex{?Path,Uint64}
+f88e95da94414d8f56aea8dcaefd9723fe19048b
+path.ArrayIndex{?,Uint64}
 
 As : size 12
-e904bab50d8c80760735fb4feaa4d2509b961884
-path.As{?Path,~<any>}
+3553d713b9b42214f04deb4dfb376690908ee520
+path.As{?,~}
 
 Atoms : size 16
 8d0ee54649f21922cbd02639914fa738d46ac406
@@ -4240,8 +4240,8 @@ Device : size 15
 path.Device{ID}
 
 Field : size 15
-0988158e1060ee4f7c2ba3f563d7ee1f8a0a7ef2
-path.Field{?Path,String}
+77e853f3d8a786a1d87fd8365046f54b10c44237
+path.Field{?,String}
 
 Hierarchy : size 20
 9a6b6838a95bf9020265d6c35c9faa5cc3a55212
@@ -4252,8 +4252,8 @@ ca2aed2f8c2b9071f66b8447aaca7d48b413075e
 path.ImageInfo{ID}
 
 MapIndex : size 18
-8b2eac6c4b6be44bc9e4370308e67c88b3bd8e3b
-path.MapIndex{?Path,~<any>}
+3dcf16ceaac47f56662bca9cc4025ad80855698c
+path.MapIndex{?,~}
 
 MemoryRange : size 25
 35601c67db2ff5974cbd7417d7ecfd0d7bca0f59
@@ -4272,16 +4272,16 @@ ea1b8b7eb146a431be0e4ab0c197f59e4194ac23
 path.Resource{ID,*$}
 
 Slice : size 16
-cacb5c1aebe8f0a9d29688f864d99448eabafbb6
-path.Slice{?Path,Uint64,Uint64}
+062ea90cc3a47db9c161d11e22aa37537fbcebe9
+path.Slice{?,Uint64,Uint64}
 
 State : size 16
 c8ee5d01e884b9685824b5438fb278bfb01d3ec2
 path.State{*$}
 
 Thumbnail : size 21
-799a2ef3d295ec0b8af17519226532f799542131
-path.Thumbnail{?Path,Uint32,Uint32,~<any>}
+4f0b0e67a86e9a084a4e367791c86cf3762a83d4
+path.Thumbnail{?,Uint32,Uint32,~}
 
 TimingInfo : size 19
 15e85b9f7fd5a92154987fb95c3d7cc247d1265a
@@ -4356,8 +4356,8 @@ d31654a7b9fe1a392f59728dae3509c23d339952
 service.TimingInfo{[]$,[]$,[]$}
 
 callFollow : size 22
-e5e83bb0e0d075927f8f7e4d4f41a823f12000bb
-service.callFollow{?path.Path}
+4c2efa4bf6a99e8d66c8e856c5144e4bc7fc939f
+service.callFollow{?}
 
 callGetCaptures : size 26
 410d2d694e0cc9b92dee9d77ca06f783d173202c
@@ -4384,8 +4384,8 @@ callGetTimingInfo : size 35
 service.callGetTimingInfo{*$,*$,Int32}
 
 callGet : size 19
-b60f94c99d5282f4697f80a71cb63cedd83bee43
-service.callGet{?path.Path}
+6b6e321d9ad00a4fc8de02b826c6e98382fc569f
+service.callGet{?}
 
 callImportCapture : size 31
 8ab015c8b55bddf183ef872abd53c34c1aa31bf7
@@ -4396,12 +4396,12 @@ f2341e4467c2c5043a2ca44111486775704dfc0a
 service.callLoadCapture{String}
 
 callSet : size 20
-4d8cd5d50e03a666019f99e4c12499a7445be410
-service.callSet{?path.Path,~<any>}
+0481017959c927431a24b4bce9725258a4fa66d2
+service.callSet{?,~}
 
 resultFollow : size 24
-c4a362a9217d47efda12f551d0f08d51ba1cf502
-service.resultFollow{?path.Path}
+709b962eb7c991918139dda31e6c4a74c3b10ef4
+service.resultFollow{?}
 
 resultGetCaptures : size 32
 319de209ffd1b8e6edf1e55bd73a2027f864bf12
@@ -4428,8 +4428,8 @@ resultGetTimingInfo : size 34
 service.resultGetTimingInfo{*$}
 
 resultGet : size 21
-b659c859a68e353e187066827ef5d589a37c827a
-service.resultGet{~<any>}
+d31d7ba0dcbadcf2cea748d52cd985c2343bd9fd
+service.resultGet{~}
 
 resultImportCapture : size 33
 b198a6f202ec984db19bd52970e3beea086a56fa
@@ -4440,8 +4440,8 @@ c932acd784a67b1acd302feb75e5a4e5af4e4c8a
 service.resultLoadCapture{*$}
 
 resultSet : size 21
-5d89ea5c1aa129edac6a4c257ad3d68a87e7a2a0
-service.resultSet{?path.Path}
+7a7ae520226a1691f14faf34e519090eeb85c26e
+service.resultSet{?}
 
 AtomA : size 15
 1654072b4f204ed2c3d4ad1243bd722945a323b9

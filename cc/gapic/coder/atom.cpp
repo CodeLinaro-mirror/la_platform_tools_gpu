@@ -24,8 +24,8 @@ const schema::Entity& FramebufferObservation::StaticSchema() {
     static schema::Entity entity {
         FramebufferObservation::StaticId(),
         "atom",
-        "FramebufferObservation",
         "",
+        "FramebufferObservation",
         "",
         {
             schema::Field{"Width", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
@@ -46,8 +46,8 @@ const schema::Entity& Range::StaticSchema() {
     static schema::Entity entity {
         Range::StaticId(),
         "atom",
-        "Range",
         "",
+        "Range",
         "",
         {
             schema::Field{"Start", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
@@ -67,8 +67,8 @@ const schema::Entity& Group::StaticSchema() {
     static schema::Entity entity {
         Group::StaticId(),
         "atom",
-        "Group",
         "",
+        "Group",
         "",
         {
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
@@ -80,17 +80,17 @@ const schema::Entity& Group::StaticSchema() {
 }
 
 // List:
-// atom.List{[]&Atom}
+// atom.List{[]&}
 const gapic::Id& List::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x5f, 0x4f, 0x6c, 0x52, 0x70, 0x8d, 0x45, 0x3f, 0x26, 0xf0, 0xd1, 0xb7, 0xda, 0xc0, 0x21, 0x5d, 0xad, 0x34, 0x2e,  } };
+    static gapic::Id ID{ { 0x17, 0x12, 0x61, 0xf8, 0xbe, 0x6c, 0x49, 0xa1, 0x20, 0xc0, 0xf4, 0x7b, 0x18, 0xa4, 0x1d, 0x36, 0x71, 0x8b, 0x5b, 0xce,  } };
     return ID;
 }
 const schema::Entity& List::StaticSchema() {
     static schema::Entity entity {
         List::StaticId(),
         "atom",
-        "List",
         "",
+        "List",
         "",
         {
             schema::Field{"Atoms", new schema::Slice{"", new schema::Variant{"Atom"}}},
@@ -116,8 +116,8 @@ const schema::Entity& Metadata::StaticSchema() {
     static schema::Entity entity {
         Metadata::StaticId(),
         "atom",
-        "Metadata",
         "",
+        "Metadata",
         "",
         {
             schema::Field{"API", new schema::Primitive{"gfxapi.ID", schema::Primitive::ID}},
@@ -140,8 +140,8 @@ const schema::Entity& Observation::StaticSchema() {
     static schema::Entity entity {
         Observation::StaticId(),
         "atom",
-        "Observation",
         "",
+        "Observation",
         "",
         {
             schema::Field{"Range", new schema::Struct{"", memory::Range::Schema()}},
@@ -161,8 +161,8 @@ const schema::Entity& Observations::StaticSchema() {
     static schema::Entity entity {
         Observations::StaticId(),
         "atom",
-        "Observations",
         "",
+        "Observations",
         "",
         {
             schema::Field{"Reads", new schema::Slice{"", new schema::Struct{"", Observation::Schema()}}},
@@ -182,8 +182,8 @@ const schema::Entity& Resource::StaticSchema() {
     static schema::Entity entity {
         Resource::StaticId(),
         "atom",
-        "Resource",
         "",
+        "Resource",
         "",
         {
             schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},

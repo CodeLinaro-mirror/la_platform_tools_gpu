@@ -24,8 +24,8 @@ const schema::Entity& Pointer::StaticSchema() {
     static schema::Entity entity {
         Pointer::StaticId(),
         "memory",
-        "Pointer",
         "",
+        "Pointer",
         "",
         {
             schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
@@ -45,8 +45,8 @@ const schema::Entity& Range::StaticSchema() {
     static schema::Entity entity {
         Range::StaticId(),
         "memory",
-        "Range",
         "",
+        "Range",
         "",
         {
             schema::Field{"Base", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
