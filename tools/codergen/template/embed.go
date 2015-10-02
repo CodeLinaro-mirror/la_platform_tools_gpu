@@ -1069,15 +1069,15 @@ const java_binary_tmpl = `{{/*
     "{{.Struct.Package}}",
     "{{.Struct.Identity}}",
     "{{.Struct.Version}}",
-    "{{.Struct.Display}}",
-    new Field[]{»¶
-    {{range .Struct.Fields}}
-      new Field("{{.Declared}}", {{Call "Java.Schema" .Type}}),¶
-    {{end}}
-    «});¶
+    "{{.Struct.Display}}");¶
   ¶
   static {»¶
     Namespace.register(Klass.INSTANCE);¶
+    ENTITY.setFields(new Field[]{»¶
+      {{range .Struct.Fields}}
+        new Field("{{.Declared}}", {{Call "Java.Schema" .Type}}),¶
+      {{end}}
+    «});¶
   «}¶
   public static void register() {}¶
   //{{/*Comment the following section marker*/}}
