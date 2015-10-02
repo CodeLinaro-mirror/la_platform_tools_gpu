@@ -23,7 +23,7 @@ import (
 // Namespace represents a mapping of type identifiers to their Class.
 type Namespace struct {
 	fallbacks []*Namespace
-	classes   map[binary.ID]binary.Class
+	classes   map[string]binary.Class
 }
 
 var (
@@ -35,17 +35,24 @@ var (
 func NewNamespace(fallbacks ...*Namespace) *Namespace {
 	return &Namespace{
 		fallbacks: fallbacks,
-		classes:   map[binary.ID]binary.Class{},
+		classes:   map[string]binary.Class{},
 	}
 }
 
 // Add a new type to the Namespace.
 func (n *Namespace) Add(class binary.Class) {
-	id := class.ID()
-	if old, found := n.classes[id]; found {
-		panic(fmt.Errorf("Id %x for %s already as type %s", id, class, old))
+	if class == nil {
+		panic(fmt.Errorf("Attempt to add nil class to registry"))
 	}
-	n.classes[id] = class
+	entity := class.Schema()
+	if entity == nil {
+		panic(fmt.Errorf("Class %T has no schema", class))
+	}
+	signature := class.Schema().Signature()
+	if _, found := n.classes[signature]; found {
+		panic(fmt.Errorf("Class for %s already present", signature))
+	}
+	n.classes[signature] = class
 }
 
 // AddFallbacks appends new Namespaces to the fallback list of this Namespace.
@@ -55,12 +62,12 @@ func (n *Namespace) AddFallbacks(fallbacks ...*Namespace) {
 
 // Lookup looks up a Class by the given type id in the Namespace.
 // If there is no match, it will return nil.
-func (n *Namespace) Lookup(id binary.ID) binary.Class {
-	if class, found := n.classes[id]; found {
+func (n *Namespace) Lookup(signature string) binary.Class {
+	if class, found := n.classes[signature]; found {
 		return class
 	}
 	for _, f := range n.fallbacks {
-		if class := f.Lookup(id); class != nil {
+		if class := f.Lookup(signature); class != nil {
 			return class
 		}
 	}

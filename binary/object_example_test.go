@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
@@ -30,13 +31,20 @@ type ExampleObject struct{ Data string }
 type ExampleClass struct{}
 
 var ExampleID = binary.ID{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14}
+var ExampleEntity = &binary.Entity{
+	Package:  "binary_test",
+	Identity: "ExampleObject",
+	Fields: []binary.Field{
+		{Declared: "Data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 func (*ExampleObject) Class() binary.Class {
 	return (*ExampleClass)(nil)
 }
 
 func (*ExampleClass) Schema() *binary.Entity {
-	return nil
+	return ExampleEntity
 }
 
 func (*ExampleClass) ID() binary.ID {

@@ -35,6 +35,12 @@ func init() {
 
 var (
 	binaryIDMessage = binary.ID{0x28, 0x8f, 0x6c, 0x88, 0x31, 0xd1, 0x04, 0x52, 0xb7, 0x5a, 0x25, 0x83, 0x01, 0x4e, 0x9a, 0x7c, 0x53, 0x03, 0x32, 0x9e}
+	schemaMessage   = &binary.Entity{
+		TypeID:   binaryIDMessage,
+		Package:  "schema",
+		Identity: "Message",
+		Fields:   []binary.Field{},
+	}
 )
 
 type binaryClassMessage struct{}
@@ -42,7 +48,7 @@ type binaryClassMessage struct{}
 func (*Message) Class() binary.Class               { return (*binaryClassMessage)(nil) }
 func (*binaryClassMessage) ID() binary.ID          { return binaryIDMessage }
 func (*binaryClassMessage) New() binary.Object     { return &Message{} }
-func (*binaryClassMessage) Schema() *binary.Entity { return nil }
+func (*binaryClassMessage) Schema() *binary.Entity { return schemaMessage }
 func (*binaryClassMessage) Encode(e binary.Encoder, obj binary.Object) {
 	m := obj.(*Message)
 	e.Uint32(uint32(len(m.Entities)))

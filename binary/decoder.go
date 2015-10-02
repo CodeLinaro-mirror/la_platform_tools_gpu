@@ -32,6 +32,6 @@ type Decoder interface {
 	// single instance. The Class in the stream must have been previously
 	// registered with binary.registry.Add.
 	Object() Object
-	// Lookup the class that would be used to encode an id in this encoder.
-	Lookup(ID) Class
+	// Lookup the class that would be used to encode an entity in this encoder.
+	Lookup(*Entity) Class
 }

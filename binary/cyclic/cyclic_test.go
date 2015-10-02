@@ -76,7 +76,7 @@ func TestObject(t *testing.T) {
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
-			).ID(test.TypeAID).Add(
+			).Add(test.EntityA...).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
 			).Data,
@@ -87,7 +87,7 @@ func TestObject(t *testing.T) {
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
-			).ID(test.TypeAID).Add(
+			).Add(test.EntityA...).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
 
@@ -100,13 +100,13 @@ func TestObject(t *testing.T) {
 			Data: test.Bytes{}.Add(
 				0x03, // object sid + encoded
 				0x03, // type sid + encoded
-			).ID(test.TypeAID).Add(
+			).Add(test.EntityA...).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'A',
 
 				0x05, // object sid + encoded
 				0x05, // type sid + encoded
-			).ID(test.TypeBID).Add(
+			).Add(test.EntityB...).Add(
 				0x07,
 				'O', 'b', 'j', 'e', 'c', 't', 'B',
 

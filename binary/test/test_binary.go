@@ -20,8 +20,8 @@ func init() {
 }
 
 var (
-	TypeAID = binary.ID{0x00, 0x88, 0x92, 0x39, 0x9e, 0xb0, 0x74, 0xb1, 0x56, 0x33, 0x39, 0x72, 0x0d, 0xb0, 0xec, 0x96, 0xb2, 0x2a, 0xdb, 0x48}
-	TypeBID = binary.ID{0x39, 0x84, 0xd0, 0x69, 0x15, 0x4e, 0x18, 0x48, 0x68, 0xeb, 0x4d, 0xa8, 0x77, 0x67, 0x4f, 0x33, 0xe9, 0x0d, 0x13, 0x91}
+	binaryIDTypeA = binary.ID{0x00, 0x88, 0x92, 0x39, 0x9e, 0xb0, 0x74, 0xb1, 0x56, 0x33, 0x39, 0x72, 0x0d, 0xb0, 0xec, 0x96, 0xb2, 0x2a, 0xdb, 0x48}
+	binaryIDTypeB = binary.ID{0x39, 0x84, 0xd0, 0x69, 0x15, 0x4e, 0x18, 0x48, 0x68, 0xeb, 0x4d, 0xa8, 0x77, 0x67, 0x4f, 0x33, 0xe9, 0x0d, 0x13, 0x91}
 )
 
 type binaryClassTypeA struct{}
@@ -35,7 +35,7 @@ func doEncodeTypeA(e binary.Encoder, o *TypeA) {
 func doDecodeTypeA(d binary.Decoder, o *TypeA) {
 	o.Data = string(d.String())
 }
-func (*binaryClassTypeA) ID() binary.ID      { return TypeAID }
+func (*binaryClassTypeA) ID() binary.ID      { return binaryIDTypeA }
 func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeA(e, obj.(*TypeA))
@@ -51,7 +51,7 @@ func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTypeA) Schema() *binary.Entity { return schemaTypeA }
 
 var schemaTypeA = &binary.Entity{
-	TypeID:   TypeAID,
+	TypeID:   binaryIDTypeA,
 	Package:  "test",
 	Identity: "TypeA",
 	Fields: []binary.Field{
@@ -70,7 +70,7 @@ func doEncodeTypeB(e binary.Encoder, o *TypeB) {
 func doDecodeTypeB(d binary.Decoder, o *TypeB) {
 	o.Data = string(d.String())
 }
-func (*binaryClassTypeB) ID() binary.ID      { return TypeBID }
+func (*binaryClassTypeB) ID() binary.ID      { return binaryIDTypeB }
 func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeB(e, obj.(*TypeB))
@@ -86,7 +86,7 @@ func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTypeB) Schema() *binary.Entity { return schemaTypeB }
 
 var schemaTypeB = &binary.Entity{
-	TypeID:   TypeBID,
+	TypeID:   binaryIDTypeB,
 	Package:  "test",
 	Identity: "TypeB",
 	Fields: []binary.Field{

@@ -14,18 +14,10 @@
 
 package test
 
-import (
-	"android.googlesource.com/platform/tools/gpu/binary"
-)
-
 type Bytes struct {
 	Data []byte
 }
 
 func (b Bytes) Add(data ...byte) Bytes {
 	return Bytes{Data: append(b.Data, data...)}
-}
-
-func (b Bytes) ID(id binary.ID) Bytes {
-	return Bytes{Data: append(b.Data, id[:]...)}
 }

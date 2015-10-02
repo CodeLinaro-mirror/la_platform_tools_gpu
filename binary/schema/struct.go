@@ -55,9 +55,9 @@ func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {
 }
 
 func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
-	class := d.Lookup(s.Entity.TypeID)
+	class := d.Lookup(s.Entity)
 	if class == nil {
-		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity.TypeID, s))
+		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity, s))
 	}
 	o := class.New()
 	if o == nil {
