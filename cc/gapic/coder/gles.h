@@ -27,10 +27,10 @@ namespace gles {
             mIntegerSize(IntegerSize),
             mLittleEndian(LittleEndian) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPointerAlignment;
         uint32_t mPointerSize;
@@ -47,10 +47,10 @@ namespace gles {
             mBlue(Blue),
             mAlpha(Alpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float mRed;
         float mGreen;
         float mBlue;
@@ -69,10 +69,10 @@ namespace gles {
             mBlendEquationAlpha(BlendEquationAlpha),
             mBlendColor(BlendColor) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t mSrcRgbBlendFactor;
         uint32_t mSrcAlphaBlendFactor;
         uint32_t mDstRgbBlendFactor;
@@ -94,10 +94,10 @@ namespace gles {
             e->Uint64(this->mBase);
             e->Uint64(this->mCount);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mRoot;
         uint64_t mBase;
         uint64_t mCount;
@@ -111,10 +111,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -129,10 +129,10 @@ namespace gles {
             mMappingOffset(MappingOffset),
             mMappingData(MappingData) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         U8__S mData;
         int32_t mSize;
         uint32_t mUsage;
@@ -149,10 +149,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -164,10 +164,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -179,10 +179,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -194,10 +194,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -209,10 +209,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -224,10 +224,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -239,10 +239,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -254,10 +254,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -271,10 +271,10 @@ namespace gles {
             mCtx(Ctx),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         CGLPixelFormatObj mPix;
         CGLContextObj mShare;
@@ -294,10 +294,10 @@ namespace gles {
             e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         CGLContextObj mCtx;
         int64_t mResult;
@@ -311,10 +311,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -326,10 +326,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -341,10 +341,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -359,10 +359,10 @@ namespace gles {
             mSid(Sid),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         CGLContextObj mCtx;
         CGSConnectionID__P mCid;
@@ -383,10 +383,10 @@ namespace gles {
             e->Value(this->mCtx);
             e->Int64(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         CGLContextObj mCtx;
         int64_t mResult;
@@ -400,10 +400,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -415,10 +415,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -430,10 +430,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -448,10 +448,10 @@ namespace gles {
             mBounds(Bounds),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         CGSConnectionID mCid;
         int32_t mWid;
@@ -468,10 +468,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -483,10 +483,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -498,10 +498,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -513,10 +513,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -532,10 +532,10 @@ namespace gles {
             e->Float32(this->mClearDepth);
             e->Int32(this->mClearStencil);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Color mClearColor;
         float mClearDepth;
         int32_t mClearStencil;
@@ -553,10 +553,10 @@ namespace gles {
             mVersionMinor(VersionMinor),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         char* mName;
         char* mVendor;
         char* mExtensions;
@@ -575,10 +575,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t mX;
         int32_t mY;
         int32_t mWidth;
@@ -595,10 +595,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         U8__S mValue;
     };
 
@@ -613,10 +613,10 @@ namespace gles {
             mData(Data),
             mFormat(Format) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t mWidth;
         int32_t mHeight;
         U8__S mData;
@@ -633,10 +633,10 @@ namespace gles {
             mSize(Size),
             mFormat(Format) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t mWidth;
         int32_t mHeight;
         U8__S mData;
@@ -657,10 +657,10 @@ namespace gles {
             mTextureLevel(TextureLevel),
             mCubeMapFace(CubeMapFace) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t mObject;
         uint32_t mType;
         int32_t mTextureLevel;
@@ -677,10 +677,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -695,10 +695,10 @@ namespace gles {
             mSource(Source),
             mType(Type) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         U8__S mBinary;
         bool mCompiled;
         bool mDeletable;
@@ -719,10 +719,10 @@ namespace gles {
             e->Int32(this->mVectorCount);
             e->Uint32(this->mType);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Char__S mName;
         int32_t mVectorCount;
         uint32_t mType;
@@ -740,10 +740,10 @@ namespace gles {
             e->Uint32(this->mType);
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         char* mName;
         uint32_t mType;
         U8__S mValue;
@@ -760,10 +760,10 @@ namespace gles {
             mStride(Stride),
             mDivisor(Divisor) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t mBuffer;
         int32_t mOffset;
         int32_t mStride;
@@ -778,10 +778,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -799,10 +799,10 @@ namespace gles {
             mInteger(Integer),
             mBinding(Binding) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         bool mEnabled;
         int32_t mSize;
         uint32_t mType;
@@ -821,10 +821,10 @@ namespace gles {
         Query()  {}
         virtual void Encode(Encoder* e) const{
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
     };
 
     // Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
@@ -848,10 +848,10 @@ namespace gles {
             mResetViewportScissor(ResetViewportScissor),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         char* mName;
         char* mVendor;
@@ -874,10 +874,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -889,10 +889,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -904,10 +904,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -919,10 +919,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -934,10 +934,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -949,10 +949,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -967,10 +967,10 @@ namespace gles {
             mAttribList(AttribList),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLConfig mConfig;
@@ -989,10 +989,10 @@ namespace gles {
             mMinor(Minor),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         EGLDisplay mDpy;
         EGLint__P mMajor;
@@ -1011,10 +1011,10 @@ namespace gles {
             mContext(Context),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLSurface mDraw;
@@ -1034,10 +1034,10 @@ namespace gles {
             mValue(Value),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         EGLDisplay mDisplay;
         EGLSurface mSurface;
@@ -1054,10 +1054,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1070,10 +1070,10 @@ namespace gles {
             mSurface(Surface),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         EGLDisplay mDisplay;
         Void__P mSurface;
@@ -1088,10 +1088,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1103,10 +1103,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -1118,10 +1118,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1133,10 +1133,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1148,10 +1148,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1163,10 +1163,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1178,10 +1178,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1193,10 +1193,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1208,10 +1208,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1223,10 +1223,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1238,10 +1238,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1253,10 +1253,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1268,10 +1268,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1283,10 +1283,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1298,10 +1298,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1313,10 +1313,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1328,10 +1328,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1343,10 +1343,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1358,10 +1358,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1376,10 +1376,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -1394,10 +1394,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -1412,10 +1412,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -1427,10 +1427,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1442,10 +1442,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1457,10 +1457,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1472,10 +1472,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1487,10 +1487,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1505,10 +1505,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -1523,10 +1523,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -1541,10 +1541,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -1556,10 +1556,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1571,10 +1571,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1586,10 +1586,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1601,10 +1601,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1616,10 +1616,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1631,10 +1631,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1646,10 +1646,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1661,10 +1661,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1676,10 +1676,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1691,10 +1691,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1706,10 +1706,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1721,10 +1721,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1739,10 +1739,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -1757,10 +1757,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -1775,10 +1775,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -1790,10 +1790,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1805,10 +1805,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1820,10 +1820,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1835,10 +1835,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -1850,10 +1850,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -1869,10 +1869,10 @@ namespace gles {
             e->Uint32(this->mPipeline);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mProgram;
@@ -1890,10 +1890,10 @@ namespace gles {
             e->Uint32(this->mPipeline);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mProgram;
@@ -1909,10 +1909,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mUnit);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mUnit;
     };
@@ -1929,10 +1929,10 @@ namespace gles {
             e->Uint32(this->mFunc);
             e->Float32(this->mRef);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFunc;
         float mRef;
@@ -1946,10 +1946,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -1965,10 +1965,10 @@ namespace gles {
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mShader;
@@ -1986,10 +1986,10 @@ namespace gles {
             e->Uint32(this->mId);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mId;
         uint32_t mMode;
@@ -2005,10 +2005,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMonitor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMonitor;
     };
@@ -2023,10 +2023,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryHandle;
     };
@@ -2043,10 +2043,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mQuery;
@@ -2064,10 +2064,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mQuery);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mQuery;
@@ -2083,10 +2083,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPrimitiveMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPrimitiveMode;
     };
@@ -2100,10 +2100,10 @@ namespace gles {
             mLocation(Location),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mLocation;
@@ -2122,10 +2122,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mBuffer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mBuffer;
@@ -2140,10 +2140,10 @@ namespace gles {
             mIndex(Index),
             mBuffer(Buffer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -2161,10 +2161,10 @@ namespace gles {
             mOffset(Offset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -2182,10 +2182,10 @@ namespace gles {
             mColor(Color),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mColor;
@@ -2202,10 +2202,10 @@ namespace gles {
             mIndex(Index),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mColorNumber;
@@ -2225,10 +2225,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mFramebuffer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mFramebuffer;
@@ -2247,10 +2247,10 @@ namespace gles {
             mAccess(Access),
             mFormat(Format) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mUnit;
         uint32_t mTexture;
@@ -2271,10 +2271,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
     };
@@ -2289,10 +2289,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
     };
@@ -2309,10 +2309,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mRenderbuffer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mRenderbuffer;
@@ -2330,10 +2330,10 @@ namespace gles {
             e->Uint32(this->mUnit);
             e->Uint32(this->mSampler);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mUnit;
         uint32_t mSampler;
@@ -2351,10 +2351,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mTexture);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mTexture;
@@ -2372,10 +2372,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mId;
@@ -2391,10 +2391,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mArray;
     };
@@ -2409,10 +2409,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mArray;
     };
@@ -2427,10 +2427,10 @@ namespace gles {
             mOffset(Offset),
             mStride(Stride) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBindingIndex;
         uint32_t mBuffer;
@@ -2446,10 +2446,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -2461,10 +2461,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -2476,10 +2476,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -2493,10 +2493,10 @@ namespace gles {
             mBlue(Blue),
             mAlpha(Alpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mRed;
         float mGreen;
@@ -2514,10 +2514,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mEquation);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mEquation;
     };
@@ -2534,10 +2534,10 @@ namespace gles {
             e->Uint32(this->mRgb);
             e->Uint32(this->mAlpha);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mRgb;
         uint32_t mAlpha;
@@ -2552,10 +2552,10 @@ namespace gles {
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mModeRGB;
@@ -2571,10 +2571,10 @@ namespace gles {
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mModeRGB;
@@ -2590,10 +2590,10 @@ namespace gles {
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mModeRGB;
@@ -2612,10 +2612,10 @@ namespace gles {
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mMode;
@@ -2633,10 +2633,10 @@ namespace gles {
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mMode;
@@ -2654,10 +2654,10 @@ namespace gles {
             e->Uint32(this->mBuf);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mMode;
@@ -2675,10 +2675,10 @@ namespace gles {
             e->Uint32(this->mSrcFactor);
             e->Uint32(this->mDstFactor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrcFactor;
         uint32_t mDstFactor;
@@ -2694,10 +2694,10 @@ namespace gles {
             mSrcFactorAlpha(SrcFactorAlpha),
             mDstFactorAlpha(DstFactorAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrcFactorRgb;
         uint32_t mDstFactorRgb;
@@ -2716,10 +2716,10 @@ namespace gles {
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrcRGB;
@@ -2739,10 +2739,10 @@ namespace gles {
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrcRGB;
@@ -2762,10 +2762,10 @@ namespace gles {
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrcRGB;
@@ -2783,10 +2783,10 @@ namespace gles {
             mSrc(Src),
             mDst(Dst) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrc;
@@ -2802,10 +2802,10 @@ namespace gles {
             mSrc(Src),
             mDst(Dst) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrc;
@@ -2821,10 +2821,10 @@ namespace gles {
             mSrc(Src),
             mDst(Dst) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuf;
         uint32_t mSrc;
@@ -2843,10 +2843,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         int32_t mValue;
@@ -2868,10 +2868,10 @@ namespace gles {
             mMask(Mask),
             mFilter(Filter) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mSrcX0;
         int32_t mSrcY0;
@@ -2901,10 +2901,10 @@ namespace gles {
             mMask(Mask),
             mFilter(Filter) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mSrcX0;
         int32_t mSrcY0;
@@ -2934,10 +2934,10 @@ namespace gles {
             mMask(Mask),
             mFilter(Filter) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mSrcX0;
         int32_t mSrcY0;
@@ -2961,10 +2961,10 @@ namespace gles {
             mData(Data),
             mUsage(Usage) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSize;
@@ -2980,10 +2980,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -2997,10 +2997,10 @@ namespace gles {
             mData(Data),
             mFlag(Flag) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSize;
@@ -3018,10 +3018,10 @@ namespace gles {
             mSize(Size),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mOffset;
@@ -3041,10 +3041,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mResult;
@@ -3060,10 +3060,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMask;
     };
@@ -3078,10 +3078,10 @@ namespace gles {
             mDepth(Depth),
             mStencil(Stencil) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
@@ -3098,10 +3098,10 @@ namespace gles {
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
@@ -3117,10 +3117,10 @@ namespace gles {
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
@@ -3136,10 +3136,10 @@ namespace gles {
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuffer;
         int32_t mDrawbuffer;
@@ -3156,10 +3156,10 @@ namespace gles {
             mB(B),
             mA(A) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mR;
         float mG;
@@ -3177,10 +3177,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Float32(this->mDepth);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mDepth;
     };
@@ -3195,10 +3195,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Int32(this->mStencil);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mStencil;
     };
@@ -3213,10 +3213,10 @@ namespace gles {
             mTimeout(Timeout),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mSyncFlags;
@@ -3234,10 +3234,10 @@ namespace gles {
             mTimeout(Timeout),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mFlag;
@@ -3255,10 +3255,10 @@ namespace gles {
             mBlue(Blue),
             mAlpha(Alpha) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint8_t mRed;
         uint8_t mGreen;
@@ -3277,10 +3277,10 @@ namespace gles {
             mB(B),
             mA(A) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint8_t mR;
@@ -3300,10 +3300,10 @@ namespace gles {
             mB(B),
             mA(A) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint8_t mR;
@@ -3323,10 +3323,10 @@ namespace gles {
             mB(B),
             mA(A) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint8_t mR;
@@ -3345,10 +3345,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mShader);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
     };
@@ -3361,10 +3361,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -3382,10 +3382,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3412,10 +3412,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3443,10 +3443,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3474,10 +3474,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3507,10 +3507,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3542,10 +3542,10 @@ namespace gles {
             mImageSize(ImageSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3571,10 +3571,10 @@ namespace gles {
             mWriteOffset(WriteOffset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mReadTarget;
         uint32_t mWriteTarget;
@@ -3594,10 +3594,10 @@ namespace gles {
             mWriteOffset(WriteOffset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mReadTarget;
         uint32_t mWriteTarget;
@@ -3627,10 +3627,10 @@ namespace gles {
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
@@ -3670,10 +3670,10 @@ namespace gles {
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
@@ -3713,10 +3713,10 @@ namespace gles {
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrcName;
         uint32_t mSrcTarget;
@@ -3747,10 +3747,10 @@ namespace gles {
             e->Uint32(this->mResultPath);
             e->Uint32(this->mSrcPath);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResultPath;
         uint32_t mSrcPath;
@@ -3770,10 +3770,10 @@ namespace gles {
             mHeight(Height),
             mBorder(Border) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3799,10 +3799,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3829,10 +3829,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3860,10 +3860,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -3886,10 +3886,10 @@ namespace gles {
             mSourceBaseLevel(SourceBaseLevel),
             mSourceLevelCount(SourceLevelCount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDestinationTexture;
         uint32_t mSourceTexture;
@@ -3910,10 +3910,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -3936,10 +3936,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Uint32(this->mCoverMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mCoverMode;
@@ -3958,10 +3958,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -3984,10 +3984,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Uint32(this->mCoverMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mCoverMode;
@@ -4003,10 +4003,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint8(this->mMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint8_t mMask;
     };
@@ -4021,10 +4021,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mComponents);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mComponents;
     };
@@ -4041,10 +4041,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mV);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLfloat__CP mV;
@@ -4060,10 +4060,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mOperation);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mOperation;
     };
@@ -4080,10 +4080,10 @@ namespace gles {
             e->Uint32(this->mQueryId);
             e->Value(this->mQueryHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryId;
         GLuint__P mQueryHandle;
@@ -4099,10 +4099,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResult;
     };
@@ -4119,10 +4119,10 @@ namespace gles {
             e->Uint32(this->mType);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mType;
         uint32_t mResult;
@@ -4138,10 +4138,10 @@ namespace gles {
             mStrings(Strings),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mType;
         int32_t mCount;
@@ -4159,10 +4159,10 @@ namespace gles {
             mStrings(Strings),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mType;
         int32_t mCount;
@@ -4180,10 +4180,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
     };
@@ -4200,10 +4200,10 @@ namespace gles {
             e->Value(this->mCallback);
             e->Value(this->mUserParam);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLDEBUGPROC mCallback;
         Void__CP mUserParam;
@@ -4221,10 +4221,10 @@ namespace gles {
             e->Value(this->mCallback);
             e->Value(this->mUserParam);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLDEBUGPROC mCallback;
         Void__CP mUserParam;
@@ -4242,10 +4242,10 @@ namespace gles {
             mIds(Ids),
             mEnabled(Enabled) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mType;
@@ -4267,10 +4267,10 @@ namespace gles {
             mIds(Ids),
             mEnabled(Enabled) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mType;
@@ -4292,10 +4292,10 @@ namespace gles {
             mLength(Length),
             mMessage(Message) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mType;
@@ -4317,10 +4317,10 @@ namespace gles {
             mLength(Length),
             mMessage(Message) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mType;
@@ -4342,10 +4342,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mBuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         BufferId__CP mBuffers;
@@ -4363,10 +4363,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mFences);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLuint__CP mFences;
@@ -4384,10 +4384,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mFramebuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         FramebufferId__CP mFramebuffers;
@@ -4405,10 +4405,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Int32(this->mRange);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mRange;
@@ -4426,10 +4426,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mMonitors);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLuint__P mMonitors;
@@ -4445,10 +4445,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryHandle;
     };
@@ -4463,10 +4463,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
     };
@@ -4479,10 +4479,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4498,10 +4498,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mPipelines);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         PipelineId__CP mPipelines;
@@ -4519,10 +4519,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mPipelines);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         PipelineId__CP mPipelines;
@@ -4536,10 +4536,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4555,10 +4555,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mQueries);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         QueryId__CP mQueries;
@@ -4576,10 +4576,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mQueries);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         QueryId__CP mQueries;
@@ -4593,10 +4593,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4612,10 +4612,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mRenderbuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         RenderbufferId__CP mRenderbuffers;
@@ -4629,10 +4629,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4648,10 +4648,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mSamplers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         SamplerId__CP mSamplers;
@@ -4667,10 +4667,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mShader);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
     };
@@ -4685,10 +4685,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
     };
@@ -4703,10 +4703,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
     };
@@ -4719,10 +4719,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4738,10 +4738,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mTextures);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         TextureId__CP mTextures;
@@ -4755,10 +4755,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4774,10 +4774,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mIds);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         TransformFeedbackId__CP mIds;
@@ -4791,10 +4791,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -4810,10 +4810,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mArrays);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         VertexArrayId__CP mArrays;
@@ -4831,10 +4831,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mArrays);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         VertexArrayId__CP mArrays;
@@ -4850,10 +4850,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mFunction);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFunction;
     };
@@ -4868,10 +4868,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint8(this->mEnabled);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint8_t mEnabled;
     };
@@ -4885,10 +4885,10 @@ namespace gles {
             mCount(Count),
             mV(V) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirst;
         int32_t mCount;
@@ -4904,10 +4904,10 @@ namespace gles {
             mN(N),
             mF(F) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         float mN;
@@ -4926,10 +4926,10 @@ namespace gles {
             e->Float32(this->mNear);
             e->Float32(this->mFar);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mNear;
         float mFar;
@@ -4947,10 +4947,10 @@ namespace gles {
             e->Uint32(this->mProgram);
             e->Uint32(this->mShader);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mShader;
@@ -4966,10 +4966,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mCapability);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCapability;
     };
@@ -4984,10 +4984,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mDriverControl);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDriverControl;
     };
@@ -5002,10 +5002,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
     };
@@ -5022,10 +5022,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5043,10 +5043,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5064,10 +5064,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5085,10 +5085,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5103,10 +5103,10 @@ namespace gles {
             mNumAttachments(NumAttachments),
             mAttachments(Attachments) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mNumAttachments;
@@ -5122,10 +5122,10 @@ namespace gles {
             mNumGroupsY(NumGroupsY),
             mNumGroupsZ(NumGroupsZ) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mNumGroupsX;
         uint32_t mNumGroupsY;
@@ -5142,10 +5142,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Int32(this->mIndirect);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mIndirect;
     };
@@ -5159,10 +5159,10 @@ namespace gles {
             mFirstIndex(FirstIndex),
             mIndicesCount(IndicesCount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mFirstIndex;
@@ -5181,10 +5181,10 @@ namespace gles {
             e->Uint32(this->mDrawMode);
             e->Value(this->mIndirect);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         Void__CP mIndirect;
@@ -5200,10 +5200,10 @@ namespace gles {
             mIndicesCount(IndicesCount),
             mInstanceCount(InstanceCount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mFirstIndex;
@@ -5221,10 +5221,10 @@ namespace gles {
             mCount(Count),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mFirst;
@@ -5243,10 +5243,10 @@ namespace gles {
             mInstancecount(Instancecount),
             mBaseinstance(Baseinstance) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mFirst;
@@ -5265,10 +5265,10 @@ namespace gles {
             mCount(Count),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mStart;
@@ -5286,10 +5286,10 @@ namespace gles {
             mCount(Count),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mFirst;
@@ -5309,10 +5309,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mBufs);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLenum__CP mBufs;
@@ -5330,10 +5330,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mBufs);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLenum__CP mBufs;
@@ -5348,10 +5348,10 @@ namespace gles {
             mLocation(Location),
             mIndices(Indices) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLenum__CP mLocation;
@@ -5370,10 +5370,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mBufs);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLenum__CP mBufs;
@@ -5387,10 +5387,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -5404,10 +5404,10 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndices(Indices) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
@@ -5426,10 +5426,10 @@ namespace gles {
             mIndices(Indices),
             mBaseVertex(BaseVertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
@@ -5449,10 +5449,10 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5472,10 +5472,10 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5493,10 +5493,10 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndirect(Indirect) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         uint32_t mIndicesType;
@@ -5514,10 +5514,10 @@ namespace gles {
             mIndices(Indices),
             mInstanceCount(InstanceCount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
@@ -5537,10 +5537,10 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5561,10 +5561,10 @@ namespace gles {
             mInstancecount(Instancecount),
             mBaseinstance(Baseinstance) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5586,10 +5586,10 @@ namespace gles {
             mInstanceCount(InstanceCount),
             mBaseVertex(BaseVertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         int32_t mIndicesCount;
@@ -5612,10 +5612,10 @@ namespace gles {
             mBasevertex(Basevertex),
             mBaseinstance(Baseinstance) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5638,10 +5638,10 @@ namespace gles {
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5663,10 +5663,10 @@ namespace gles {
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5687,10 +5687,10 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5710,10 +5710,10 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         int32_t mCount;
@@ -5734,10 +5734,10 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndices(Indices) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         uint32_t mStart;
@@ -5760,10 +5760,10 @@ namespace gles {
             mIndices(Indices),
             mBaseVertex(BaseVertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDrawMode;
         uint32_t mStart;
@@ -5787,10 +5787,10 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         uint32_t mStart;
@@ -5814,10 +5814,10 @@ namespace gles {
             mIndices(Indices),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         uint32_t mStart;
@@ -5840,10 +5840,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Value(this->mImage);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         GLeglImageOES mImage;
@@ -5861,10 +5861,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Value(this->mImage);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         GLeglImageOES mImage;
@@ -5880,10 +5880,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mCapability);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCapability;
     };
@@ -5898,10 +5898,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mDriverControl);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDriverControl;
     };
@@ -5916,10 +5916,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
     };
@@ -5936,10 +5936,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5957,10 +5957,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5978,10 +5978,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -5999,10 +5999,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -6016,10 +6016,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -6033,10 +6033,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMonitor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMonitor;
     };
@@ -6051,10 +6051,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryHandle;
     };
@@ -6069,10 +6069,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
     };
@@ -6087,10 +6087,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
     };
@@ -6105,10 +6105,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPreserveMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPreserveMask;
     };
@@ -6121,10 +6121,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -6136,10 +6136,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -6155,10 +6155,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Value(this->mParams);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         Void__P__P mParams;
@@ -6173,10 +6173,10 @@ namespace gles {
             mMaxBuffers(MaxBuffers),
             mNumBuffers(NumBuffers) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         BufferId__P mBuffers;
         int32_t mMaxBuffers;
@@ -6192,10 +6192,10 @@ namespace gles {
             mMaxFramebuffers(MaxFramebuffers),
             mNumFramebuffers(NumFramebuffers) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         FramebufferId__P mFramebuffers;
         int32_t mMaxFramebuffers;
@@ -6212,10 +6212,10 @@ namespace gles {
             mSource(Source),
             mLength(Length) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mShadertype;
@@ -6231,10 +6231,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -6247,10 +6247,10 @@ namespace gles {
             mMaxPrograms(MaxPrograms),
             mNumPrograms(NumPrograms) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         ProgramId__P mPrograms;
         int32_t mMaxPrograms;
@@ -6265,10 +6265,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -6281,10 +6281,10 @@ namespace gles {
             mMaxRenderbuffers(MaxRenderbuffers),
             mNumRenderbuffers(NumRenderbuffers) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         RenderbufferId__P mRenderbuffers;
         int32_t mMaxRenderbuffers;
@@ -6299,10 +6299,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -6315,10 +6315,10 @@ namespace gles {
             mMaxShaders(MaxShaders),
             mNumShaders(NumShaders) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         ShaderId__P mShaders;
         int32_t mMaxShaders;
@@ -6336,10 +6336,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mFace;
@@ -6365,10 +6365,10 @@ namespace gles {
             mType(Type),
             mTexels(Texels) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -6391,10 +6391,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -6407,10 +6407,10 @@ namespace gles {
             mMaxTextures(MaxTextures),
             mNumTextures(NumTextures) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         TextureId__P mTextures;
         int32_t mMaxTextures;
@@ -6429,10 +6429,10 @@ namespace gles {
             e->Uint32(this->mProgram);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint8_t mResult;
@@ -6447,10 +6447,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -6466,10 +6466,10 @@ namespace gles {
             mSyncFlags(SyncFlags),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCondition;
         uint32_t mSyncFlags;
@@ -6485,10 +6485,10 @@ namespace gles {
             mFlag(Flag),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCondition;
         uint32_t mFlag;
@@ -6503,10 +6503,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -6520,10 +6520,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mFence);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFence;
     };
@@ -6536,10 +6536,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -6552,10 +6552,10 @@ namespace gles {
             mOffset(Offset),
             mLength(Length) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mOffset;
@@ -6571,10 +6571,10 @@ namespace gles {
             mOffset(Offset),
             mLength(Length) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mOffset;
@@ -6591,10 +6591,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mColor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mColor;
     };
@@ -6608,10 +6608,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -6628,10 +6628,10 @@ namespace gles {
             mRenderbufferTarget(RenderbufferTarget),
             mRenderbuffer(Renderbuffer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFramebufferTarget;
         uint32_t mFramebufferAttachment;
@@ -6649,10 +6649,10 @@ namespace gles {
             mCount(Count),
             mV(V) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mStart;
@@ -6670,10 +6670,10 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6692,10 +6692,10 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFramebufferTarget;
         uint32_t mFramebufferAttachment;
@@ -6716,10 +6716,10 @@ namespace gles {
             mLevel(Level),
             mSamples(Samples) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6741,10 +6741,10 @@ namespace gles {
             mLevel(Level),
             mSamples(Samples) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6766,10 +6766,10 @@ namespace gles {
             mLevel(Level),
             mZoffset(Zoffset) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6789,10 +6789,10 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6811,10 +6811,10 @@ namespace gles {
             mLevel(Level),
             mLayer(Layer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6835,10 +6835,10 @@ namespace gles {
             mBaseViewIndex(BaseViewIndex),
             mNumViews(NumViews) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6858,10 +6858,10 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAttachment;
@@ -6879,10 +6879,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mOrientation);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mOrientation;
     };
@@ -6899,10 +6899,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mBuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         BufferId__P mBuffers;
@@ -6920,10 +6920,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mFences);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLuint__P mFences;
@@ -6941,10 +6941,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mFramebuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         FramebufferId__P mFramebuffers;
@@ -6962,10 +6962,10 @@ namespace gles {
             e->Int32(this->mRange);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mRange;
         uint32_t mResult;
@@ -6983,10 +6983,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mMonitors);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         GLuint__P mMonitors;
@@ -7000,10 +7000,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7019,10 +7019,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mPipelines);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         PipelineId__P mPipelines;
@@ -7040,10 +7040,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mPipelines);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         PipelineId__P mPipelines;
@@ -7057,10 +7057,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7076,10 +7076,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mQueries);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         QueryId__P mQueries;
@@ -7097,10 +7097,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mQueries);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         QueryId__P mQueries;
@@ -7118,10 +7118,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mRenderbuffers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         RenderbufferId__P mRenderbuffers;
@@ -7135,10 +7135,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7154,10 +7154,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mSamplers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         SamplerId__P mSamplers;
@@ -7175,10 +7175,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mTextures);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         TextureId__P mTextures;
@@ -7192,10 +7192,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7211,10 +7211,10 @@ namespace gles {
             e->Int32(this->mN);
             e->Value(this->mIds);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mN;
         TransformFeedbackId__P mIds;
@@ -7228,10 +7228,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7247,10 +7247,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mArrays);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         VertexArrayId__P mArrays;
@@ -7268,10 +7268,10 @@ namespace gles {
             e->Int32(this->mCount);
             e->Value(this->mArrays);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         VertexArrayId__P mArrays;
@@ -7287,10 +7287,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
     };
@@ -7308,10 +7308,10 @@ namespace gles {
             mType(Type),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mLocation;
@@ -7335,10 +7335,10 @@ namespace gles {
             mType(Type),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mIndex;
@@ -7360,10 +7360,10 @@ namespace gles {
             mBufferBytesWritten(BufferBytesWritten),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
@@ -7382,10 +7382,10 @@ namespace gles {
             mParameterName(ParameterName),
             mParameters(Parameters) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
@@ -7401,10 +7401,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -7419,10 +7419,10 @@ namespace gles {
             mParameterName(ParameterName),
             mParameters(Parameters) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mUniformCount;
@@ -7441,10 +7441,10 @@ namespace gles {
             mShadersLengthWritten(ShadersLengthWritten),
             mShaders(Shaders) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mBufferLength;
@@ -7461,10 +7461,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mName;
@@ -7480,10 +7480,10 @@ namespace gles {
             mIndex(Index),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         uint32_t mIndex;
@@ -7502,10 +7502,10 @@ namespace gles {
             e->Uint32(this->mParam);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         GLboolean__P mValues;
@@ -7520,10 +7520,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -7539,10 +7539,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -7558,10 +7558,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -7577,10 +7577,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -7599,10 +7599,10 @@ namespace gles {
             e->Int32(this->mBufsize);
             e->Value(this->mV);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mBufsize;
         GLfloat__P mV;
@@ -7623,10 +7623,10 @@ namespace gles {
             mMessageLog(MessageLog),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCount;
         int32_t mBufSize;
@@ -7654,10 +7654,10 @@ namespace gles {
             mMessageLog(MessageLog),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCount;
         int32_t mBufSize;
@@ -7680,10 +7680,10 @@ namespace gles {
             mLength(Length),
             mDriverControlString(DriverControlString) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mDriverControl;
         int32_t mBufSize;
@@ -7700,10 +7700,10 @@ namespace gles {
             mSize(Size),
             mDriverControls(DriverControls) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLint__P mNum;
         int32_t mSize;
@@ -7720,10 +7720,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResult;
     };
@@ -7737,10 +7737,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFence;
         uint32_t mPname;
@@ -7757,10 +7757,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Value(this->mQueryId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLuint__P mQueryId;
     };
@@ -7774,10 +7774,10 @@ namespace gles {
             mIndex(Index),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -7796,10 +7796,10 @@ namespace gles {
             e->Uint32(this->mParam);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         GLfloat__P mValues;
@@ -7814,10 +7814,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mName;
@@ -7833,10 +7833,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mName;
@@ -7853,10 +7853,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFramebufferTarget;
         uint32_t mAttachment;
@@ -7873,10 +7873,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -7893,10 +7893,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResult;
     };
@@ -7911,10 +7911,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResult;
     };
@@ -7929,10 +7929,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResult;
     };
@@ -7949,10 +7949,10 @@ namespace gles {
             mFormat(Format),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         int32_t mLevel;
@@ -7971,10 +7971,10 @@ namespace gles {
             mIndex(Index),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         uint32_t mIndex;
@@ -7993,10 +7993,10 @@ namespace gles {
             e->Uint32(this->mParam);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         GLint64__P mValues;
@@ -8014,10 +8014,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Value(this->mParams);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         GLint64__P mParams;
@@ -8032,10 +8032,10 @@ namespace gles {
             mIndex(Index),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         uint32_t mIndex;
@@ -8051,10 +8051,10 @@ namespace gles {
             mIndex(Index),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -8073,10 +8073,10 @@ namespace gles {
             e->Uint32(this->mParam);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         GLint__P mValues;
@@ -8094,10 +8094,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -8118,10 +8118,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -8139,10 +8139,10 @@ namespace gles {
             mIndex(Index),
             mVal(Val) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         uint32_t mIndex;
@@ -8161,10 +8161,10 @@ namespace gles {
             e->Uint32(this->mQueryId);
             e->Value(this->mNextQueryId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryId;
         GLuint__P mNextQueryId;
@@ -8181,10 +8181,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIdentifier;
         uint32_t mName;
@@ -8204,10 +8204,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mType;
         uint32_t mObject;
@@ -8227,10 +8227,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIdentifier;
         uint32_t mName;
@@ -8249,10 +8249,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__CP mPtr;
         int32_t mBufSize;
@@ -8270,10 +8270,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__CP mPtr;
         int32_t mBufSize;
@@ -8293,10 +8293,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Value(this->mCommands);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         GLubyte__P mCommands;
@@ -8314,10 +8314,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Value(this->mCoords);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         GLfloat__P mCoords;
@@ -8335,10 +8335,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Value(this->mDashArray);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         GLfloat__P mDashArray;
@@ -8354,10 +8354,10 @@ namespace gles {
             mNumSegments(NumSegments),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mStartSegment;
@@ -8376,10 +8376,10 @@ namespace gles {
             mStride(Stride),
             mMetrics(Metrics) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMetricQueryMask;
         uint32_t mFirstPathName;
@@ -8401,10 +8401,10 @@ namespace gles {
             mStride(Stride),
             mMetrics(Metrics) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMetricQueryMask;
         int32_t mNumPaths;
@@ -8424,10 +8424,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -8443,10 +8443,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -8468,10 +8468,10 @@ namespace gles {
             mTransformType(TransformType),
             mReturnedSpacing(ReturnedSpacing) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPathListMode;
         int32_t mNumPaths;
@@ -8501,10 +8501,10 @@ namespace gles {
             mCounterDataTypeEnum(CounterDataTypeEnum),
             mRawCounterMaxValue(RawCounterMaxValue) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryId;
         uint32_t mCounterId;
@@ -8530,10 +8530,10 @@ namespace gles {
             mData(Data),
             mBytesWritten(BytesWritten) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMonitor;
         uint32_t mPname;
@@ -8552,10 +8552,10 @@ namespace gles {
             mPname(Pname),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mGroup;
         uint32_t mCounter;
@@ -8574,10 +8574,10 @@ namespace gles {
             mLength(Length),
             mCounterString(CounterString) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mGroup;
         uint32_t mCounter;
@@ -8597,10 +8597,10 @@ namespace gles {
             mCounterSize(CounterSize),
             mCounters(Counters) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mGroup;
         GLint__P mNumCounters;
@@ -8619,10 +8619,10 @@ namespace gles {
             mLength(Length),
             mGroupString(GroupString) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mGroup;
         int32_t mBufSize;
@@ -8639,10 +8639,10 @@ namespace gles {
             mGroupsSize(GroupsSize),
             mGroups(Groups) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLint__P mNumGroups;
         int32_t mGroupsSize;
@@ -8660,10 +8660,10 @@ namespace gles {
             mData(Data),
             mBytesWritten(BytesWritten) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryHandle;
         uint32_t mFlag;
@@ -8684,10 +8684,10 @@ namespace gles {
             e->Value(this->mQueryName);
             e->Value(this->mQueryId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         GLchar__P mQueryName;
         GLuint__P mQueryId;
@@ -8706,10 +8706,10 @@ namespace gles {
             mNoInstances(NoInstances),
             mCapsMask(CapsMask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQueryId;
         uint32_t mQueryNameLength;
@@ -8732,10 +8732,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Value(this->mParams);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         Void__P__P mParams;
@@ -8753,10 +8753,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Value(this->mParams);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         Void__P__P mParams;
@@ -8773,10 +8773,10 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mBufSize;
@@ -8796,10 +8796,10 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mBufferSize;
@@ -8818,10 +8818,10 @@ namespace gles {
             mStringLengthWritten(StringLengthWritten),
             mInfo(Info) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mBufferLength;
@@ -8839,10 +8839,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -8860,10 +8860,10 @@ namespace gles {
             mLength(Length),
             mInfoLog(InfoLog) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         int32_t mBufSize;
@@ -8881,10 +8881,10 @@ namespace gles {
             mLength(Length),
             mInfoLog(InfoLog) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         int32_t mBufSize;
@@ -8901,10 +8901,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mPname;
@@ -8920,10 +8920,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mPname;
@@ -8940,10 +8940,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -8961,10 +8961,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -8982,10 +8982,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -9005,10 +9005,10 @@ namespace gles {
             mLength(Length),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -9032,10 +9032,10 @@ namespace gles {
             mLength(Length),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -9061,10 +9061,10 @@ namespace gles {
             mLength(Length),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mProgramInterface;
@@ -9085,10 +9085,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mParameter;
@@ -9103,10 +9103,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -9119,10 +9119,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9138,10 +9138,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9157,10 +9157,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9175,10 +9175,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -9191,10 +9191,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9210,10 +9210,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9229,10 +9229,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9248,10 +9248,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mParameter;
@@ -9267,10 +9267,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -9286,10 +9286,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -9305,10 +9305,10 @@ namespace gles {
             mParameter(Parameter),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -9324,10 +9324,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9343,10 +9343,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9362,10 +9362,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9381,10 +9381,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9400,10 +9400,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9419,10 +9419,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9438,10 +9438,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9457,10 +9457,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -9477,10 +9477,10 @@ namespace gles {
             mStringLengthWritten(StringLengthWritten),
             mInfo(Info) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         int32_t mBufferLength;
@@ -9498,10 +9498,10 @@ namespace gles {
             mRange(Range),
             mPrecision(Precision) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShaderType;
         uint32_t mPrecisionType;
@@ -9519,10 +9519,10 @@ namespace gles {
             mStringLengthWritten(StringLengthWritten),
             mSource(Source) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         int32_t mBufferLength;
@@ -9539,10 +9539,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         uint32_t mParameter;
@@ -9561,10 +9561,10 @@ namespace gles {
             e->Uint32(this->mParam);
             e->Value(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParam;
         GLubyte__CP mResult;
@@ -9579,10 +9579,10 @@ namespace gles {
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mName;
         uint32_t mIndex;
@@ -9600,10 +9600,10 @@ namespace gles {
             mLength(Length),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mPname;
@@ -9623,10 +9623,10 @@ namespace gles {
             mLength(Length),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mPname;
@@ -9645,10 +9645,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -9666,10 +9666,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -9686,10 +9686,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9705,10 +9705,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9724,10 +9724,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9743,10 +9743,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9762,10 +9762,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9781,10 +9781,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -9800,10 +9800,10 @@ namespace gles {
             mParameter(Parameter),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -9819,10 +9819,10 @@ namespace gles {
             mParameter(Parameter),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -9841,10 +9841,10 @@ namespace gles {
             e->Uint32(this->mTexture);
             e->Uint64(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint64_t mResult;
@@ -9859,10 +9859,10 @@ namespace gles {
             mSampler(Sampler),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mSampler;
@@ -9882,10 +9882,10 @@ namespace gles {
             mType(Type),
             mName(Name) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mIndex;
@@ -9906,10 +9906,10 @@ namespace gles {
             mLength(Length),
             mSource(Source) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         int32_t mBufsize;
@@ -9926,10 +9926,10 @@ namespace gles {
             mUniformBlockName(UniformBlockName),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mUniformBlockName;
@@ -9944,10 +9944,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -9961,10 +9961,10 @@ namespace gles {
             mUniformNames(UniformNames),
             mUniformIndices(UniformIndices) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mUniformCount;
@@ -9981,10 +9981,10 @@ namespace gles {
             mName(Name),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         char* mName;
@@ -10000,10 +10000,10 @@ namespace gles {
             mLocation(Location),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10019,10 +10019,10 @@ namespace gles {
             mLocation(Location),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10038,10 +10038,10 @@ namespace gles {
             mLocation(Location),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10057,10 +10057,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mPname;
@@ -10076,10 +10076,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mPname;
@@ -10095,10 +10095,10 @@ namespace gles {
             mPname(Pname),
             mPointer(Pointer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mPname;
@@ -10114,10 +10114,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mPname;
@@ -10133,10 +10133,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mPname;
@@ -10153,10 +10153,10 @@ namespace gles {
             mBufSize(BufSize),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10174,10 +10174,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10195,10 +10195,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10216,10 +10216,10 @@ namespace gles {
             mBufSize(BufSize),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10237,10 +10237,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10258,10 +10258,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10279,10 +10279,10 @@ namespace gles {
             mBufSize(BufSize),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10300,10 +10300,10 @@ namespace gles {
             mBufSize(BufSize),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -10323,10 +10323,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mMode;
@@ -10344,10 +10344,10 @@ namespace gles {
             e->Int32(this->mLength);
             e->Value(this->mMarker);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLength;
         GLchar__CP mMarker;
@@ -10363,10 +10363,10 @@ namespace gles {
             mPathB(PathB),
             mWeight(Weight) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResultPath;
         uint32_t mPathA;
@@ -10383,10 +10383,10 @@ namespace gles {
             mCount(Count),
             mAttachments(Attachments) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mCount;
@@ -10406,10 +10406,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mNumAttachments;
@@ -10432,10 +10432,10 @@ namespace gles {
             e->Uint32(this->mBuffer);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBuffer;
         uint8_t mResult;
@@ -10453,10 +10453,10 @@ namespace gles {
             e->Uint32(this->mCapability);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCapability;
         uint8_t mResult;
@@ -10471,10 +10471,10 @@ namespace gles {
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -10490,10 +10490,10 @@ namespace gles {
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -10509,10 +10509,10 @@ namespace gles {
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -10528,10 +10528,10 @@ namespace gles {
             mIndex(Index),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mIndex;
@@ -10550,10 +10550,10 @@ namespace gles {
             e->Uint32(this->mFence);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFence;
         uint8_t mResult;
@@ -10571,10 +10571,10 @@ namespace gles {
             e->Uint32(this->mFramebuffer);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFramebuffer;
         uint8_t mResult;
@@ -10592,10 +10592,10 @@ namespace gles {
             e->Uint64(this->mHandle);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
         uint8_t mResult;
@@ -10613,10 +10613,10 @@ namespace gles {
             e->Uint32(this->mPath);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint8_t mResult;
@@ -10633,10 +10633,10 @@ namespace gles {
             mY(Y),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mMask;
@@ -10655,10 +10655,10 @@ namespace gles {
             mY(Y),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         float mX;
@@ -10678,10 +10678,10 @@ namespace gles {
             e->Uint32(this->mProgram);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint8_t mResult;
@@ -10699,10 +10699,10 @@ namespace gles {
             e->Uint32(this->mPipeline);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint8_t mResult;
@@ -10720,10 +10720,10 @@ namespace gles {
             e->Uint32(this->mPipeline);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint8_t mResult;
@@ -10741,10 +10741,10 @@ namespace gles {
             e->Uint32(this->mQuery);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint8_t mResult;
@@ -10762,10 +10762,10 @@ namespace gles {
             e->Uint32(this->mQuery);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint8_t mResult;
@@ -10783,10 +10783,10 @@ namespace gles {
             e->Uint32(this->mRenderbuffer);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mRenderbuffer;
         uint8_t mResult;
@@ -10804,10 +10804,10 @@ namespace gles {
             e->Uint32(this->mSampler);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint8_t mResult;
@@ -10825,10 +10825,10 @@ namespace gles {
             e->Uint32(this->mShader);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         uint8_t mResult;
@@ -10846,10 +10846,10 @@ namespace gles {
             e->Uint64(this->mSync);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint8_t mResult;
@@ -10867,10 +10867,10 @@ namespace gles {
             e->Uint64(this->mSync);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint8_t mResult;
@@ -10888,10 +10888,10 @@ namespace gles {
             e->Uint32(this->mTexture);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint8_t mResult;
@@ -10909,10 +10909,10 @@ namespace gles {
             e->Uint64(this->mHandle);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
         uint8_t mResult;
@@ -10930,10 +10930,10 @@ namespace gles {
             e->Uint32(this->mId);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mId;
         uint8_t mResult;
@@ -10951,10 +10951,10 @@ namespace gles {
             e->Uint32(this->mArray);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mArray;
         uint8_t mResult;
@@ -10972,10 +10972,10 @@ namespace gles {
             e->Uint32(this->mArray);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mArray;
         uint8_t mResult;
@@ -10991,10 +10991,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mType;
         uint32_t mObject;
@@ -11012,10 +11012,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Float32(this->mWidth);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mWidth;
     };
@@ -11030,10 +11030,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
     };
@@ -11048,10 +11048,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
     };
@@ -11068,10 +11068,10 @@ namespace gles {
             e->Uint64(this->mHandle);
             e->Uint32(this->mAccess);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
         uint32_t mAccess;
@@ -11087,10 +11087,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
     };
@@ -11105,10 +11105,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mHandle;
     };
@@ -11122,10 +11122,10 @@ namespace gles {
             mAccess(Access),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mAccess;
@@ -11143,10 +11143,10 @@ namespace gles {
             mAccess(Access),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mOffset;
@@ -11166,10 +11166,10 @@ namespace gles {
             mAccess(Access),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mOffset;
@@ -11190,10 +11190,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11211,10 +11211,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11232,10 +11232,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11253,10 +11253,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11274,10 +11274,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11295,10 +11295,10 @@ namespace gles {
             e->Uint32(this->mMatrixMode);
             e->Value(this->mM);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
@@ -11314,10 +11314,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mBarriers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBarriers;
     };
@@ -11332,10 +11332,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mBarriers);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBarriers;
     };
@@ -11350,10 +11350,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Float32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mValue;
     };
@@ -11368,10 +11368,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Float32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mValue;
     };
@@ -11386,10 +11386,10 @@ namespace gles {
             mCount(Count),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         GLint__CP mFirst;
@@ -11407,10 +11407,10 @@ namespace gles {
             mDrawcount(Drawcount),
             mStride(Stride) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         Void__CP mIndirect;
@@ -11426,10 +11426,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -11445,10 +11445,10 @@ namespace gles {
             mPrimcount(Primcount),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         GLsizei__CP mCount;
@@ -11470,10 +11470,10 @@ namespace gles {
             mPrimcount(Primcount),
             mBasevertex(Basevertex) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         GLsizei__CP mCount;
@@ -11494,10 +11494,10 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         GLsizei__CP mCount;
@@ -11517,10 +11517,10 @@ namespace gles {
             mDrawcount(Drawcount),
             mStride(Stride) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
         uint32_t mType;
@@ -11539,10 +11539,10 @@ namespace gles {
             mCount(Count),
             mV(V) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFramebuffer;
         uint32_t mStart;
@@ -11560,10 +11560,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIdentifier;
         uint32_t mName;
@@ -11581,10 +11581,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIdentifier;
         uint32_t mName;
@@ -11601,10 +11601,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__CP mPtr;
         int32_t mLength;
@@ -11620,10 +11620,10 @@ namespace gles {
             mLength(Length),
             mLabel(Label) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__CP mPtr;
         int32_t mLength;
@@ -11642,10 +11642,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         int32_t mValue;
@@ -11663,10 +11663,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         int32_t mValue;
@@ -11684,10 +11684,10 @@ namespace gles {
             e->Uint32(this->mPname);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPname;
         int32_t mValue;
@@ -11705,10 +11705,10 @@ namespace gles {
             mCoordType(CoordType),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mNumCommands;
@@ -11728,10 +11728,10 @@ namespace gles {
             mCoordType(CoordType),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mNumCoords;
@@ -11749,10 +11749,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mFunc);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFunc;
     };
@@ -11766,10 +11766,10 @@ namespace gles {
             mDashCount(DashCount),
             mDashArray(DashArray) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mDashCount;
@@ -11791,10 +11791,10 @@ namespace gles {
             mEmScale(EmScale),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
@@ -11820,10 +11820,10 @@ namespace gles {
             mBaseAndCount(BaseAndCount),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFontTarget;
         Void__CP mFontName;
@@ -11849,10 +11849,10 @@ namespace gles {
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
@@ -11881,10 +11881,10 @@ namespace gles {
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
@@ -11914,10 +11914,10 @@ namespace gles {
             mEmScale(EmScale),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirstPathName;
         uint32_t mFontTarget;
@@ -11940,10 +11940,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -11959,10 +11959,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -11978,10 +11978,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -11997,10 +11997,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mPname;
@@ -12019,10 +12019,10 @@ namespace gles {
             e->Float32(this->mFactor);
             e->Float32(this->mUnits);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mFactor;
         float mUnits;
@@ -12037,10 +12037,10 @@ namespace gles {
             mRef(Ref),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFunc;
         int32_t mRef;
@@ -12057,10 +12057,10 @@ namespace gles {
             mLength(Length),
             mPathString(PathString) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mFormat;
@@ -12082,10 +12082,10 @@ namespace gles {
             mCoordType(CoordType),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mCommandStart;
@@ -12108,10 +12108,10 @@ namespace gles {
             mCoordType(CoordType),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mCoordStart;
@@ -12128,10 +12128,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -12147,10 +12147,10 @@ namespace gles {
             e->Uint32(this->mParameter);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mParameter;
         int32_t mValue;
@@ -12171,10 +12171,10 @@ namespace gles {
             mTangentY(TangentY),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mStartSegment;
@@ -12199,10 +12199,10 @@ namespace gles {
             e->Uint32(this->mFace);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFace;
         uint32_t mMode;
@@ -12220,10 +12220,10 @@ namespace gles {
             e->Float32(this->mScaleFactor);
             e->Float32(this->mUnits);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mScaleFactor;
         float mUnits;
@@ -12237,10 +12237,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -12252,10 +12252,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -12267,10 +12267,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -12288,10 +12288,10 @@ namespace gles {
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mMinX;
         float mMinY;
@@ -12317,10 +12317,10 @@ namespace gles {
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mMinX;
         float mMinY;
@@ -12346,10 +12346,10 @@ namespace gles {
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mMinX;
         float mMinY;
@@ -12371,10 +12371,10 @@ namespace gles {
             mBinary(Binary),
             mLength(Length) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mBinaryFormat;
@@ -12392,10 +12392,10 @@ namespace gles {
             mBinary(Binary),
             mBinarySize(BinarySize) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mBinaryFormat;
@@ -12412,10 +12412,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mPname;
@@ -12431,10 +12431,10 @@ namespace gles {
             mPname(Pname),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mPname;
@@ -12452,10 +12452,10 @@ namespace gles {
             mComponents(Components),
             mCoeffs(Coeffs) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12473,10 +12473,10 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12492,10 +12492,10 @@ namespace gles {
             mLocation(Location),
             mV0(V0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12512,10 +12512,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12533,10 +12533,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12553,10 +12553,10 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12572,10 +12572,10 @@ namespace gles {
             mLocation(Location),
             mV0(V0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12592,10 +12592,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12613,10 +12613,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12633,10 +12633,10 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12652,10 +12652,10 @@ namespace gles {
             mLocation(Location),
             mV0(V0) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12672,10 +12672,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12693,10 +12693,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12714,10 +12714,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12735,10 +12735,10 @@ namespace gles {
             mV0(V0),
             mV1(V1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12756,10 +12756,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12777,10 +12777,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12798,10 +12798,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12819,10 +12819,10 @@ namespace gles {
             mV0(V0),
             mV1(V1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12840,10 +12840,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12861,10 +12861,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12882,10 +12882,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12903,10 +12903,10 @@ namespace gles {
             mV0(V0),
             mV1(V1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12924,10 +12924,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12945,10 +12945,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12967,10 +12967,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -12990,10 +12990,10 @@ namespace gles {
             mV1(V1),
             mV2(V2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13012,10 +13012,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13033,10 +13033,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13055,10 +13055,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13078,10 +13078,10 @@ namespace gles {
             mV1(V1),
             mV2(V2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13100,10 +13100,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13121,10 +13121,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13143,10 +13143,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13166,10 +13166,10 @@ namespace gles {
             mV1(V1),
             mV2(V2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13188,10 +13188,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13209,10 +13209,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13232,10 +13232,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13257,10 +13257,10 @@ namespace gles {
             mV2(V2),
             mV3(V3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13280,10 +13280,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13301,10 +13301,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13324,10 +13324,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13349,10 +13349,10 @@ namespace gles {
             mV2(V2),
             mV3(V3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13372,10 +13372,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13393,10 +13393,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13416,10 +13416,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13441,10 +13441,10 @@ namespace gles {
             mV2(V2),
             mV3(V3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13464,10 +13464,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13485,10 +13485,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13505,10 +13505,10 @@ namespace gles {
             mLocation(Location),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13525,10 +13525,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13547,10 +13547,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13570,10 +13570,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13593,10 +13593,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13616,10 +13616,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13639,10 +13639,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13662,10 +13662,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13685,10 +13685,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13708,10 +13708,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13731,10 +13731,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13754,10 +13754,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13777,10 +13777,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13800,10 +13800,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13823,10 +13823,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13846,10 +13846,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13869,10 +13869,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13892,10 +13892,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13915,10 +13915,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13938,10 +13938,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mLocation;
@@ -13960,10 +13960,10 @@ namespace gles {
             mLength(Length),
             mMessage(Message) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mId;
@@ -13981,10 +13981,10 @@ namespace gles {
             mLength(Length),
             mMessage(Message) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSource;
         uint32_t mId;
@@ -14004,10 +14004,10 @@ namespace gles {
             e->Int32(this->mLength);
             e->Value(this->mMarker);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLength;
         GLchar__CP mMarker;
@@ -14025,10 +14025,10 @@ namespace gles {
             e->Uint32(this->mQuery);
             e->Uint32(this->mTarget);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mTarget;
@@ -14046,10 +14046,10 @@ namespace gles {
             e->Uint32(this->mSamples);
             e->Uint8(this->mFixedsamplelocations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSamples;
         uint8_t mFixedsamplelocations;
@@ -14065,10 +14065,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mSrc);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrc;
     };
@@ -14085,10 +14085,10 @@ namespace gles {
             e->Uint32(this->mSrc);
             e->Int32(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSrc;
         int32_t mIndex;
@@ -14104,10 +14104,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMode);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMode;
     };
@@ -14125,10 +14125,10 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -14153,10 +14153,10 @@ namespace gles {
             mBufSize(BufSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -14182,10 +14182,10 @@ namespace gles {
             mBufSize(BufSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -14211,10 +14211,10 @@ namespace gles {
             mBufSize(BufSize),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -14234,10 +14234,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -14251,10 +14251,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mFormat;
@@ -14273,10 +14273,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14296,10 +14296,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14319,10 +14319,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14342,10 +14342,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14365,10 +14365,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14388,10 +14388,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -14408,10 +14408,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -14423,10 +14423,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -14438,10 +14438,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
     };
 
@@ -14457,10 +14457,10 @@ namespace gles {
             e->Float32(this->mValue);
             e->Uint8(this->mInvert);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mValue;
         uint8_t mInvert;
@@ -14478,10 +14478,10 @@ namespace gles {
             e->Uint32(this->mMaskNumber);
             e->Uint32(this->mMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMaskNumber;
         uint32_t mMask;
@@ -14496,10 +14496,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14515,10 +14515,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14534,10 +14534,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14553,10 +14553,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14572,10 +14572,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14591,10 +14591,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14610,10 +14610,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14629,10 +14629,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14648,10 +14648,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14667,10 +14667,10 @@ namespace gles {
             mPname(Pname),
             mParam(Param) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mSampler;
         uint32_t mPname;
@@ -14687,10 +14687,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -14707,10 +14707,10 @@ namespace gles {
             mCount(Count),
             mV(V) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirst;
         int32_t mCount;
@@ -14728,10 +14728,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         int32_t mLeft;
@@ -14752,10 +14752,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Value(this->mV);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         GLint__CP mV;
@@ -14772,10 +14772,10 @@ namespace gles {
             mNumCounters(NumCounters),
             mCounterList(CounterList) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMonitor;
         uint8_t mEnable;
@@ -14796,10 +14796,10 @@ namespace gles {
             e->Uint32(this->mFence);
             e->Uint32(this->mCondition);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFence;
         uint32_t mCondition;
@@ -14813,10 +14813,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -14831,10 +14831,10 @@ namespace gles {
             mBinary(Binary),
             mBinarySize(BinarySize) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mCount;
         ShaderId__CP mShaders;
@@ -14853,10 +14853,10 @@ namespace gles {
             mSource(Source),
             mLength(Length) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mShader;
         int32_t mCount;
@@ -14875,10 +14875,10 @@ namespace gles {
             mHeight(Height),
             mPreserveMask(PreserveMask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mX;
         uint32_t mY;
@@ -14901,10 +14901,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -14925,10 +14925,10 @@ namespace gles {
             mFillMode(FillMode),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mFillMode;
@@ -14944,10 +14944,10 @@ namespace gles {
             mRef(Ref),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFunc;
         int32_t mRef;
@@ -14964,10 +14964,10 @@ namespace gles {
             mReferenceValue(ReferenceValue),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFace;
         uint32_t mFunction;
@@ -14985,10 +14985,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mMask;
     };
@@ -15005,10 +15005,10 @@ namespace gles {
             e->Uint32(this->mFace);
             e->Uint32(this->mMask);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFace;
         uint32_t mMask;
@@ -15023,10 +15023,10 @@ namespace gles {
             mZfail(Zfail),
             mZpass(Zpass) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFail;
         uint32_t mZfail;
@@ -15043,10 +15043,10 @@ namespace gles {
             mStencilPassDepthFail(StencilPassDepthFail),
             mStencilPassDepthPass(StencilPassDepthPass) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFace;
         uint32_t mStencilFail;
@@ -15068,10 +15068,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -15092,10 +15092,10 @@ namespace gles {
             mReference(Reference),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mReference;
@@ -15117,10 +15117,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -15143,10 +15143,10 @@ namespace gles {
             mMask(Mask),
             mCoverMode(CoverMode) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         uint32_t mFillMode;
@@ -15169,10 +15169,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mNumPaths;
         uint32_t mPathNameType;
@@ -15195,10 +15195,10 @@ namespace gles {
             mMask(Mask),
             mCoverMode(CoverMode) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPath;
         int32_t mReference;
@@ -15218,10 +15218,10 @@ namespace gles {
             e->Uint32(this->mXbits);
             e->Uint32(this->mYbits);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mXbits;
         uint32_t mYbits;
@@ -15239,10 +15239,10 @@ namespace gles {
             e->Uint32(this->mFence);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFence;
         uint8_t mResult;
@@ -15257,10 +15257,10 @@ namespace gles {
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15276,10 +15276,10 @@ namespace gles {
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15295,10 +15295,10 @@ namespace gles {
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15316,10 +15316,10 @@ namespace gles {
             mOffset(Offset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15339,10 +15339,10 @@ namespace gles {
             mOffset(Offset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15362,10 +15362,10 @@ namespace gles {
             mOffset(Offset),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mInternalformat;
@@ -15389,10 +15389,10 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15421,10 +15421,10 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15454,10 +15454,10 @@ namespace gles {
             mType(Type),
             mPixels(Pixels) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15486,10 +15486,10 @@ namespace gles {
             mDepth(Depth),
             mCommit(Commit) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15511,10 +15511,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15530,10 +15530,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15549,10 +15549,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15568,10 +15568,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15587,10 +15587,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15606,10 +15606,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15625,10 +15625,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -15644,10 +15644,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15663,10 +15663,10 @@ namespace gles {
             mParameter(Parameter),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mParameter;
@@ -15682,10 +15682,10 @@ namespace gles {
             mPname(Pname),
             mParams(Params) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint32_t mPname;
@@ -15702,10 +15702,10 @@ namespace gles {
             mFormat(Format),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevels;
@@ -15724,10 +15724,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevels;
@@ -15747,10 +15747,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevels;
@@ -15771,10 +15771,10 @@ namespace gles {
             mHeight(Height),
             mFixedsamplelocations(Fixedsamplelocations) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -15796,10 +15796,10 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevels;
@@ -15821,10 +15821,10 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevels;
@@ -15847,10 +15847,10 @@ namespace gles {
             mDepth(Depth),
             mFixedsamplelocations(Fixedsamplelocations) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -15874,10 +15874,10 @@ namespace gles {
             mDepth(Depth),
             mFixedsamplelocations(Fixedsamplelocations) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mSamples;
@@ -15903,10 +15903,10 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15936,10 +15936,10 @@ namespace gles {
             mType(Type),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -15971,10 +15971,10 @@ namespace gles {
             mType(Type),
             mPixels(Pixels) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         int32_t mLevel;
@@ -16000,10 +16000,10 @@ namespace gles {
             mFormat(Format),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mTarget;
@@ -16024,10 +16024,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mTarget;
@@ -16050,10 +16050,10 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mTarget;
@@ -16078,10 +16078,10 @@ namespace gles {
             mMinlayer(Minlayer),
             mNumlayers(Numlayers) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mTarget;
@@ -16107,10 +16107,10 @@ namespace gles {
             mMinlayer(Minlayer),
             mNumlayers(Numlayers) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTexture;
         uint32_t mTarget;
@@ -16132,10 +16132,10 @@ namespace gles {
             mVaryings(Varyings),
             mBufferMode(BufferMode) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         int32_t mCount;
@@ -16153,10 +16153,10 @@ namespace gles {
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResultPath;
         uint32_t mSrcPath;
@@ -16176,10 +16176,10 @@ namespace gles {
             e->Int32(this->mLocation);
             e->Float32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         float mValue;
@@ -16194,10 +16194,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16216,10 +16216,10 @@ namespace gles {
             e->Int32(this->mLocation);
             e->Int32(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mValue;
@@ -16234,10 +16234,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16256,10 +16256,10 @@ namespace gles {
             e->Int32(this->mLocation);
             e->Uint32(this->mValue0);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16274,10 +16274,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16293,10 +16293,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         float mValue0;
@@ -16312,10 +16312,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16331,10 +16331,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mValue0;
@@ -16350,10 +16350,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16369,10 +16369,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16388,10 +16388,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16408,10 +16408,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         float mValue0;
@@ -16428,10 +16428,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16448,10 +16448,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mValue0;
@@ -16468,10 +16468,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16488,10 +16488,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16508,10 +16508,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16529,10 +16529,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         float mValue0;
@@ -16550,10 +16550,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16571,10 +16571,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mValue0;
@@ -16592,10 +16592,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16613,10 +16613,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         uint32_t mValue0;
@@ -16634,10 +16634,10 @@ namespace gles {
             mCount(Count),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16653,10 +16653,10 @@ namespace gles {
             mUniformBlockIndex(UniformBlockIndex),
             mUniformBlockBinding(UniformBlockBinding) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
         uint32_t mUniformBlockIndex;
@@ -16675,10 +16675,10 @@ namespace gles {
             e->Int32(this->mLocation);
             e->Uint64(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         uint64_t mValue;
@@ -16693,10 +16693,10 @@ namespace gles {
             mCount(Count),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16713,10 +16713,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16734,10 +16734,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16755,10 +16755,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16776,10 +16776,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16797,10 +16797,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16818,10 +16818,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16839,10 +16839,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16860,10 +16860,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16881,10 +16881,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16902,10 +16902,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16923,10 +16923,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16944,10 +16944,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16965,10 +16965,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -16986,10 +16986,10 @@ namespace gles {
             mTranspose(Transpose),
             mValues(Values) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -17007,10 +17007,10 @@ namespace gles {
             mTranspose(Transpose),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mLocation;
         int32_t mCount;
@@ -17030,10 +17030,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint8_t mResult;
@@ -17051,10 +17051,10 @@ namespace gles {
             e->Uint32(this->mTarget);
             e->Uint8(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mTarget;
         uint8_t mResult;
@@ -17070,10 +17070,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
     };
@@ -17087,10 +17087,10 @@ namespace gles {
             mStages(Stages),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mStages;
@@ -17106,10 +17106,10 @@ namespace gles {
             mStages(Stages),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
         uint32_t mStages;
@@ -17126,10 +17126,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
     };
@@ -17144,10 +17144,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
     };
@@ -17162,10 +17162,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mPipeline;
     };
@@ -17182,10 +17182,10 @@ namespace gles {
             e->Uint32(this->mLocation);
             e->Float32(this->mValue0);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         float mValue0;
@@ -17203,10 +17203,10 @@ namespace gles {
             e->Uint32(this->mLocation);
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         GLfloat__CP mValue;
@@ -17221,10 +17221,10 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         float mValue0;
@@ -17243,10 +17243,10 @@ namespace gles {
             e->Uint32(this->mLocation);
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         GLfloat__CP mValue;
@@ -17262,10 +17262,10 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         float mValue0;
@@ -17285,10 +17285,10 @@ namespace gles {
             e->Uint32(this->mLocation);
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         GLfloat__CP mValue;
@@ -17305,10 +17305,10 @@ namespace gles {
             mValue2(Value2),
             mValue3(Value3) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         float mValue0;
@@ -17329,10 +17329,10 @@ namespace gles {
             e->Uint32(this->mLocation);
             e->Value(this->mValue);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         GLfloat__CP mValue;
@@ -17350,10 +17350,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Uint32(this->mBindingIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mBindingIndex;
@@ -17371,10 +17371,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mDivisor;
@@ -17392,10 +17392,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mDivisor;
@@ -17413,10 +17413,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mDivisor;
@@ -17434,10 +17434,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Uint32(this->mDivisor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mDivisor;
@@ -17454,10 +17454,10 @@ namespace gles {
             mNormalized(Normalized),
             mRelativeoffset(Relativeoffset) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         int32_t mSize;
@@ -17477,10 +17477,10 @@ namespace gles {
             mZ(Z),
             mW(W) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         int32_t mX;
@@ -17501,10 +17501,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         GLint__CP mValues;
@@ -17521,10 +17521,10 @@ namespace gles {
             mZ(Z),
             mW(W) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         uint32_t mX;
@@ -17545,10 +17545,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Value(this->mValues);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         GLuint__CP mValues;
@@ -17564,10 +17564,10 @@ namespace gles {
             mType(Type),
             mRelativeoffset(Relativeoffset) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         int32_t mSize;
@@ -17586,10 +17586,10 @@ namespace gles {
             mStride(Stride),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         int32_t mSize;
@@ -17610,10 +17610,10 @@ namespace gles {
             mStride(Stride),
             mData(Data) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mLocation;
         int32_t mSize;
@@ -17635,10 +17635,10 @@ namespace gles {
             e->Uint32(this->mBindingIndex);
             e->Uint32(this->mDivisor);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mBindingIndex;
         uint32_t mDivisor;
@@ -17654,10 +17654,10 @@ namespace gles {
             mWidth(Width),
             mHeight(Height) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mX;
         int32_t mY;
@@ -17674,10 +17674,10 @@ namespace gles {
             mCount(Count),
             mV(V) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mFirst;
         int32_t mCount;
@@ -17695,10 +17695,10 @@ namespace gles {
             mW(W),
             mH(H) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         float mX;
@@ -17719,10 +17719,10 @@ namespace gles {
             e->Uint32(this->mIndex);
             e->Value(this->mV);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mIndex;
         GLfloat__CP mV;
@@ -17737,10 +17737,10 @@ namespace gles {
             mSyncFlags(SyncFlags),
             mTimeout(Timeout) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mSyncFlags;
@@ -17756,10 +17756,10 @@ namespace gles {
             mFlag(Flag),
             mTimeout(Timeout) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mSync;
         uint32_t mFlag;
@@ -17776,10 +17776,10 @@ namespace gles {
             mPaths(Paths),
             mWeights(Weights) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mResultPath;
         int32_t mNumPaths;
@@ -17798,10 +17798,10 @@ namespace gles {
             mDirect(Direct),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDpy;
         Void__P mVis;
@@ -17822,10 +17822,10 @@ namespace gles {
             mDirect(Direct),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDisplay;
         Void__P mFbconfig;
@@ -17846,10 +17846,10 @@ namespace gles {
             mCtx(Ctx),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDisplay;
         GLXDrawable mDraw;
@@ -17868,10 +17868,10 @@ namespace gles {
             mCtx(Ctx),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDisplay;
         GLXDrawable mDrawable;
@@ -17887,10 +17887,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -17905,10 +17905,10 @@ namespace gles {
             mValue(Value),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDisplay;
         GLXDrawable mDraw;
@@ -17929,10 +17929,10 @@ namespace gles {
             e->Value(this->mDisplay);
             e->Value(this->mDrawable);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         Void__P mDisplay;
         GLXDrawable mDrawable;
@@ -17946,10 +17946,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -17961,10 +17961,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -17976,10 +17976,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -17994,10 +17994,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -18012,10 +18012,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18027,10 +18027,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18042,10 +18042,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18060,10 +18060,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -18078,10 +18078,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -18093,10 +18093,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18108,10 +18108,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18126,10 +18126,10 @@ namespace gles {
                 e->Float32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         float* mElements;
     };
 
@@ -18144,10 +18144,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -18159,10 +18159,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18174,10 +18174,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18192,10 +18192,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -18207,10 +18207,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18222,10 +18222,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18240,10 +18240,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18255,10 +18255,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18270,10 +18270,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18288,10 +18288,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -18303,10 +18303,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18318,10 +18318,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18336,10 +18336,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -18351,10 +18351,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18366,10 +18366,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18384,10 +18384,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18399,10 +18399,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18414,10 +18414,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18432,10 +18432,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -18447,10 +18447,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18462,10 +18462,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18477,10 +18477,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18492,10 +18492,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18507,10 +18507,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18522,10 +18522,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18539,10 +18539,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mId;
     };
@@ -18557,10 +18557,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint32(this->mId);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mId;
     };
@@ -18573,10 +18573,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18588,10 +18588,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18603,10 +18603,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18620,10 +18620,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint8(this->mIndex);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint8_t mIndex;
     };
@@ -18642,10 +18642,10 @@ namespace gles {
             e->Uint8(this->mIndex);
             e->Uint64(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint8_t mIndex;
         uint64_t mResult;
@@ -18661,10 +18661,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Uint64(this->mThreadID);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint64_t mThreadID;
     };
@@ -18677,10 +18677,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18692,10 +18692,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18707,10 +18707,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18722,10 +18722,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18737,10 +18737,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18752,10 +18752,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18767,10 +18767,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18782,10 +18782,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18797,10 +18797,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18815,10 +18815,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18833,10 +18833,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18851,10 +18851,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec2f* mElements;
     };
 
@@ -18866,10 +18866,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18881,10 +18881,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18899,10 +18899,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -18914,10 +18914,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18929,10 +18929,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18947,10 +18947,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -18962,10 +18962,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -18977,10 +18977,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -18995,10 +18995,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -19013,10 +19013,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -19031,10 +19031,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec3f* mElements;
     };
 
@@ -19046,10 +19046,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19061,10 +19061,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19079,10 +19079,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -19094,10 +19094,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19109,10 +19109,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19127,10 +19127,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -19142,10 +19142,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19157,10 +19157,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19175,10 +19175,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -19193,10 +19193,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -19211,10 +19211,10 @@ namespace gles {
                 e->Value(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Vec4f* mElements;
     };
 
@@ -19226,10 +19226,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19241,10 +19241,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19259,10 +19259,10 @@ namespace gles {
                 e->Int32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         int32_t* mElements;
     };
 
@@ -19274,10 +19274,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19289,10 +19289,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19307,10 +19307,10 @@ namespace gles {
                 e->Uint32(this->mElements[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t* mElements;
     };
 
@@ -19322,10 +19322,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19337,10 +19337,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19352,10 +19352,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19367,10 +19367,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19382,10 +19382,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19397,10 +19397,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
     };
 
@@ -19412,10 +19412,10 @@ namespace gles {
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Pointer mPointer;
     };
 
@@ -19431,10 +19431,10 @@ namespace gles {
             e->Value(this->mHdc);
             e->Value(this->mResult);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         HDC mHdc;
         HGLRC mResult;
@@ -19450,10 +19450,10 @@ namespace gles {
             mAttribList(AttribList),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         HDC mHdc;
         HGLRC mHShareContext;
@@ -19470,10 +19470,10 @@ namespace gles {
             mHglrc(Hglrc),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         HDC mHdc;
         HGLRC mHglrc;
@@ -19490,10 +19490,10 @@ namespace gles {
             e->Value(this->mobservations);
             e->Value(this->mHdc);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         HDC mHdc;
     };
@@ -19508,10 +19508,10 @@ namespace gles {
             e->Value(this->mU16_slice);
             e->Value(this->mU32_slice);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         U16__S mU16_slice;
         U32__S mU32_slice;
     };

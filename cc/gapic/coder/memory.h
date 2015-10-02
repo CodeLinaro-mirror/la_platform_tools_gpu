@@ -25,10 +25,10 @@ namespace memory {
             e->Uint64(this->mAddress);
             e->Uint32(this->mPool);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint64_t mAddress;
         uint32_t mPool;
     };
@@ -43,10 +43,10 @@ namespace memory {
             e->Uint64(this->mBase);
             e->Uint64(this->mSize);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint64_t mBase;
         uint64_t mSize;
     };

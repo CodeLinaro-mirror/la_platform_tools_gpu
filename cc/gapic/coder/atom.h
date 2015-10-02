@@ -29,10 +29,10 @@ namespace atom {
             e->Uint32(this->mData.size());
             e->Data(this->mData.data(), this->mData.size());
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint32_t mWidth;
         uint32_t mHeight;
         Array<uint8_t> mData;
@@ -48,10 +48,10 @@ namespace atom {
             e->Uint64(this->mStart);
             e->Uint64(this->mEnd);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         uint64_t mStart;
         uint64_t mEnd;
     };
@@ -71,10 +71,10 @@ namespace atom {
                 e->Value(this->mSubGroups[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         char* mName;
         Range mRange;
         Array<Group> mSubGroups;
@@ -91,10 +91,10 @@ namespace atom {
                 e->Variant(this->mAtoms[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Array<gapic::Encodable*> mAtoms;
     };
 
@@ -108,10 +108,10 @@ namespace atom {
             mDrawCall(DrawCall),
             mDocumentationUrl(DocumentationUrl) {}
         virtual void Encode(Encoder* e) const;
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         gapic::Id mAPI;
         char* mDisplayName;
         bool mEndOfFrame;
@@ -129,10 +129,10 @@ namespace atom {
             e->Value(this->mRange);
             e->Id(this->mID);
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         memory::Range mRange;
         gapic::Id mID;
     };
@@ -153,10 +153,10 @@ namespace atom {
                 e->Value(this->mWrites[i]);
             }
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         Array<Observation> mReads;
         Array<Observation> mWrites;
     };
@@ -172,10 +172,10 @@ namespace atom {
             e->Uint32(this->mData.size());
             e->Data(this->mData.data(), this->mData.size());
         }
-        virtual const schema::Entity& Schema() const {
+        virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
-        static const schema::Entity& StaticSchema();
+        static const schema::Entity* StaticSchema();
         gapic::Id mID;
         Array<uint8_t> mData;
     };

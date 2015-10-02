@@ -16,7 +16,7 @@ namespace coder {
 namespace memory {
 // Pointer:
 // memory.Pointer{Uint64,Uint32}
-const schema::Entity& Pointer::StaticSchema() {
+const schema::Entity* Pointer::StaticSchema() {
     static schema::Entity entity {
         "memory",
         "",
@@ -27,12 +27,12 @@ const schema::Entity& Pointer::StaticSchema() {
             schema::Field{"Pool", new schema::Primitive{"PoolID", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Range:
 // memory.Range{Uint64,Uint64}
-const schema::Entity& Range::StaticSchema() {
+const schema::Entity* Range::StaticSchema() {
     static schema::Entity entity {
         "memory",
         "",
@@ -43,7 +43,7 @@ const schema::Entity& Range::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 

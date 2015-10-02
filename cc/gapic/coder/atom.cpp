@@ -16,7 +16,7 @@ namespace coder {
 namespace atom {
 // FramebufferObservation:
 // atom.FramebufferObservation{Uint32,Uint32,[]Uint8}
-const schema::Entity& FramebufferObservation::StaticSchema() {
+const schema::Entity* FramebufferObservation::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -28,12 +28,12 @@ const schema::Entity& FramebufferObservation::StaticSchema() {
             schema::Field{"Data", new schema::Slice{"", new schema::Primitive{"byte", schema::Primitive::Uint8}}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Range:
 // atom.Range{Uint64,Uint64}
-const schema::Entity& Range::StaticSchema() {
+const schema::Entity* Range::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -44,12 +44,12 @@ const schema::Entity& Range::StaticSchema() {
             schema::Field{"End", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Group:
 // atom.Group{String,$,[]$}
-const schema::Entity& Group::StaticSchema() {
+const schema::Entity* Group::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -57,16 +57,16 @@ const schema::Entity& Group::StaticSchema() {
         "",
         {
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Range", new schema::Struct{"", Range::StaticSchema()}},
-            schema::Field{"SubGroups", new schema::Slice{"GroupList", new schema::Struct{"", Group::StaticSchema()}}},
+            schema::Field{"Range", new schema::Struct{ Range::StaticSchema()}},
+            schema::Field{"SubGroups", new schema::Slice{"GroupList", new schema::Struct{ Group::StaticSchema()}}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // List:
 // atom.List{[]&}
-const schema::Entity& List::StaticSchema() {
+const schema::Entity* List::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -76,7 +76,7 @@ const schema::Entity& List::StaticSchema() {
             schema::Field{"Atoms", new schema::Slice{"", new schema::Variant{"Atom"}}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Metadata:
@@ -88,7 +88,7 @@ void Metadata::Encode(Encoder* e) const {
     e->Bool(this->mDrawCall);
     e->String(this->mDocumentationUrl);
 }
-const schema::Entity& Metadata::StaticSchema() {
+const schema::Entity* Metadata::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -102,44 +102,44 @@ const schema::Entity& Metadata::StaticSchema() {
             schema::Field{"DocumentationUrl", new schema::Primitive{"string", schema::Primitive::String}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Observation:
 // atom.Observation{$,ID}
-const schema::Entity& Observation::StaticSchema() {
+const schema::Entity* Observation::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
         "Observation",
         "",
         {
-            schema::Field{"Range", new schema::Struct{"", memory::Range::StaticSchema()}},
+            schema::Field{"Range", new schema::Struct{ memory::Range::StaticSchema()}},
             schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Observations:
 // atom.Observations{[]$,[]$}
-const schema::Entity& Observations::StaticSchema() {
+const schema::Entity* Observations::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
         "Observations",
         "",
         {
-            schema::Field{"Reads", new schema::Slice{"", new schema::Struct{"", Observation::StaticSchema()}}},
-            schema::Field{"Writes", new schema::Slice{"", new schema::Struct{"", Observation::StaticSchema()}}},
+            schema::Field{"Reads", new schema::Slice{"", new schema::Struct{ Observation::StaticSchema()}}},
+            schema::Field{"Writes", new schema::Slice{"", new schema::Struct{ Observation::StaticSchema()}}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Resource:
 // atom.Resource{ID,[]Uint8}
-const schema::Entity& Resource::StaticSchema() {
+const schema::Entity* Resource::StaticSchema() {
     static schema::Entity entity {
         "atom",
         "",
@@ -150,7 +150,7 @@ const schema::Entity& Resource::StaticSchema() {
             schema::Field{"Data", new schema::Slice{"", new schema::Primitive{"byte", schema::Primitive::Uint8}}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 

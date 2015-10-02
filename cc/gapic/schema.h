@@ -128,16 +128,15 @@ class Primitive : public Type {
 
 class Struct : public Type {
  public:
-  Struct(const std::string& relative, const Entity& entity)
-      : mRelative(relative), mEntity(entity) {}
+  Struct(const Entity* entity)
+      : mEntity(entity) {}
 
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(StructTag));
     e.Entity(mEntity);
   }
  private:
-  std::string mRelative;
-  const Entity& mEntity;
+  const Entity* mEntity;
 };
 
 class Pointer : public Type {

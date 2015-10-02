@@ -23,21 +23,21 @@ void Architecture::Encode(Encoder* e) const {
     e->Uint32(this->mIntegerSize);
     e->Bool(this->mLittleEndian);
 }
-const schema::Entity& Architecture::StaticSchema() {
+const schema::Entity* Architecture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Architecture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"PointerAlignment", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
             schema::Field{"PointerSize", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
             schema::Field{"IntegerSize", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
             schema::Field{"LittleEndian", new schema::Primitive{"bool", schema::Primitive::Bool}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Color:
@@ -48,7 +48,7 @@ void Color::Encode(Encoder* e) const {
     e->Float32(this->mBlue);
     e->Float32(this->mAlpha);
 }
-const schema::Entity& Color::StaticSchema() {
+const schema::Entity* Color::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -61,7 +61,7 @@ const schema::Entity& Color::StaticSchema() {
             schema::Field{"Alpha", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // BlendState:
@@ -75,7 +75,7 @@ void BlendState::Encode(Encoder* e) const {
     e->Uint32(this->mBlendEquationAlpha);
     e->Value(this->mBlendColor);
 }
-const schema::Entity& BlendState::StaticSchema() {
+const schema::Entity* BlendState::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -88,42 +88,42 @@ const schema::Entity& BlendState::StaticSchema() {
             schema::Field{"DstAlphaBlendFactor", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BlendEquationRgb", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BlendEquationAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"BlendColor", new schema::Struct{"", Color::StaticSchema()}},
+            schema::Field{"BlendColor", new schema::Struct{ Color::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // SliceInfo:
 // gles.SliceInfo{$,Uint64,Uint64}
-const schema::Entity& SliceInfo::StaticSchema() {
+const schema::Entity* SliceInfo::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "SliceInfo",
         "",
         {
-            schema::Field{"Root", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"Root", new schema::Struct{ memory::Pointer::StaticSchema()}},
             schema::Field{"Base", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
             schema::Field{"Count", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U8ˢ:
 // gles.U8ˢ{$}
-const schema::Entity& U8__S::StaticSchema() {
+const schema::Entity* U8__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U8ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Buffer:
@@ -136,142 +136,142 @@ void Buffer::Encode(Encoder* e) const {
     e->Int32(this->mMappingOffset);
     e->Value(this->mMappingData);
 }
-const schema::Entity& Buffer::StaticSchema() {
+const schema::Entity* Buffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Buffer",
         "",
         {
-            schema::Field{"Data", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
             schema::Field{"Usage", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"MappingAccess", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"MappingOffset", new schema::Primitive{"int32", schema::Primitive::Int32}},
-            schema::Field{"MappingData", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"MappingData", new schema::Struct{ U8__S::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // BufferDataPointer:
 // gles.BufferDataPointer{$}
-const schema::Entity& BufferDataPointer::StaticSchema() {
+const schema::Entity* BufferDataPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "BufferDataPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // BufferIdˢ:
 // gles.BufferIdˢ{$}
-const schema::Entity& BufferId__S::StaticSchema() {
+const schema::Entity* BufferId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "BufferIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // BufferIdᵖ:
 // gles.BufferIdᵖ{$}
-const schema::Entity& BufferId__P::StaticSchema() {
+const schema::Entity* BufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "BufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // BufferIdᶜᵖ:
 // gles.BufferIdᶜᵖ{$}
-const schema::Entity& BufferId__CP::StaticSchema() {
+const schema::Entity* BufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "BufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLContextObj:
 // gles.CGLContextObj{$}
-const schema::Entity& CGLContextObj::StaticSchema() {
+const schema::Entity* CGLContextObj::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLContextObj",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLContextObjˢ:
 // gles.CGLContextObjˢ{$}
-const schema::Entity& CGLContextObj__S::StaticSchema() {
+const schema::Entity* CGLContextObj__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLContextObjˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLContextObjᵖ:
 // gles.CGLContextObjᵖ{$}
-const schema::Entity& CGLContextObj__P::StaticSchema() {
+const schema::Entity* CGLContextObj__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLContextObjᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLPixelFormatObj:
 // gles.CGLPixelFormatObj{$}
-const schema::Entity& CGLPixelFormatObj::StaticSchema() {
+const schema::Entity* CGLPixelFormatObj::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLPixelFormatObj",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLCreateContext:
@@ -283,83 +283,83 @@ void CGLCreateContext::Encode(Encoder* e) const {
     e->Value(this->mCtx);
     e->Int64(this->mResult);
 }
-const schema::Entity& CGLCreateContext::StaticSchema() {
+const schema::Entity* CGLCreateContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLCreateContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Pix", new schema::Struct{"", CGLPixelFormatObj::StaticSchema()}},
-            schema::Field{"Share", new schema::Struct{"", CGLContextObj::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", CGLContextObj__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Pix", new schema::Struct{ CGLPixelFormatObj::StaticSchema()}},
+            schema::Field{"Share", new schema::Struct{ CGLContextObj::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ CGLContextObj__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"CGLError", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLFlushDrawable:
 // gles.CGLFlushDrawable{$,$,Int64}
-const schema::Entity& CGLFlushDrawable::StaticSchema() {
+const schema::Entity* CGLFlushDrawable::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLFlushDrawable",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", CGLContextObj::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ CGLContextObj::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"CGLError", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSConnectionIDᵖ:
 // gles.CGSConnectionIDᵖ{$}
-const schema::Entity& CGSConnectionID__P::StaticSchema() {
+const schema::Entity* CGSConnectionID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSConnectionIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSWindowIDᵖ:
 // gles.CGSWindowIDᵖ{$}
-const schema::Entity& CGSWindowID__P::StaticSchema() {
+const schema::Entity* CGSWindowID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSWindowIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSSurfaceIDᵖ:
 // gles.CGSSurfaceIDᵖ{$}
-const schema::Entity& CGSSurfaceID__P::StaticSchema() {
+const schema::Entity* CGSSurfaceID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSSurfaceIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLGetSurface:
@@ -372,84 +372,84 @@ void CGLGetSurface::Encode(Encoder* e) const {
     e->Value(this->mSid);
     e->Int64(this->mResult);
 }
-const schema::Entity& CGLGetSurface::StaticSchema() {
+const schema::Entity* CGLGetSurface::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLGetSurface",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", CGLContextObj::StaticSchema()}},
-            schema::Field{"Cid", new schema::Struct{"", CGSConnectionID__P::StaticSchema()}},
-            schema::Field{"Wid", new schema::Struct{"", CGSWindowID__P::StaticSchema()}},
-            schema::Field{"Sid", new schema::Struct{"", CGSSurfaceID__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ CGLContextObj::StaticSchema()}},
+            schema::Field{"Cid", new schema::Struct{ CGSConnectionID__P::StaticSchema()}},
+            schema::Field{"Wid", new schema::Struct{ CGSWindowID__P::StaticSchema()}},
+            schema::Field{"Sid", new schema::Struct{ CGSSurfaceID__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"int64", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGLSetCurrentContext:
 // gles.CGLSetCurrentContext{$,$,Int64}
-const schema::Entity& CGLSetCurrentContext::StaticSchema() {
+const schema::Entity* CGLSetCurrentContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGLSetCurrentContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", CGLContextObj::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ CGLContextObj::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"CGLError", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSConnectionID:
 // gles.CGSConnectionID{$}
-const schema::Entity& CGSConnectionID::StaticSchema() {
+const schema::Entity* CGSConnectionID::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSConnectionID",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSConnectionIDˢ:
 // gles.CGSConnectionIDˢ{$}
-const schema::Entity& CGSConnectionID__S::StaticSchema() {
+const schema::Entity* CGSConnectionID__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSConnectionIDˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // F64ᵖ:
 // gles.F64ᵖ{$}
-const schema::Entity& F64__P::StaticSchema() {
+const schema::Entity* F64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "F64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSGetSurfaceBounds:
@@ -462,99 +462,99 @@ void CGSGetSurfaceBounds::Encode(Encoder* e) const {
     e->Value(this->mBounds);
     e->Int64(this->mResult);
 }
-const schema::Entity& CGSGetSurfaceBounds::StaticSchema() {
+const schema::Entity* CGSGetSurfaceBounds::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSGetSurfaceBounds",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Cid", new schema::Struct{"", CGSConnectionID::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Cid", new schema::Struct{ CGSConnectionID::StaticSchema()}},
             schema::Field{"Wid", new schema::Primitive{"CGSWindowID", schema::Primitive::Int32}},
             schema::Field{"Sid", new schema::Primitive{"CGSSurfaceID", schema::Primitive::Int32}},
-            schema::Field{"Bounds", new schema::Struct{"", F64__P::StaticSchema()}},
+            schema::Field{"Bounds", new schema::Struct{ F64__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"int64", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSSurfaceIDˢ:
 // gles.CGSSurfaceIDˢ{$}
-const schema::Entity& CGSSurfaceID__S::StaticSchema() {
+const schema::Entity* CGSSurfaceID__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSSurfaceIDˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // CGSWindowIDˢ:
 // gles.CGSWindowIDˢ{$}
-const schema::Entity& CGSWindowID__S::StaticSchema() {
+const schema::Entity* CGSWindowID__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "CGSWindowIDˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Charˢ:
 // gles.Charˢ{$}
-const schema::Entity& Char__S::StaticSchema() {
+const schema::Entity* Char__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Charˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Charᵖ:
 // gles.Charᵖ{$}
-const schema::Entity& Char__P::StaticSchema() {
+const schema::Entity* Char__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Charᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ClearState:
 // gles.ClearState{$,Float32,Int32}
-const schema::Entity& ClearState::StaticSchema() {
+const schema::Entity* ClearState::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ClearState",
         "",
         {
-            schema::Field{"ClearColor", new schema::Struct{"", Color::StaticSchema()}},
+            schema::Field{"ClearColor", new schema::Struct{ Color::StaticSchema()}},
             schema::Field{"ClearDepth", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"ClearStencil", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ContextCreationInfo:
@@ -568,7 +568,7 @@ void ContextCreationInfo::Encode(Encoder* e) const {
     e->Int32(this->mVersionMinor);
     e->Bool(this->mPreserveBuffersOnSwap);
 }
-const schema::Entity& ContextCreationInfo::StaticSchema() {
+const schema::Entity* ContextCreationInfo::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -584,7 +584,7 @@ const schema::Entity& ContextCreationInfo::StaticSchema() {
             schema::Field{"PreserveBuffersOnSwap", new schema::Primitive{"bool", schema::Primitive::Bool}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Rect:
@@ -595,7 +595,7 @@ void Rect::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& Rect::StaticSchema() {
+const schema::Entity* Rect::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -608,24 +608,24 @@ const schema::Entity& Rect::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode RasterizerState contains maps: gles.RasterizerState{Uint8,Uint32,Float32,Float32,Uint8,Uint8,Uint8,Uint8,map[Uint32]Uint32,$,$,Uint32,Uint32,Float32,Float32,Float32,Float32,Uint8}
 
 // VertexAttributeValue:
 // gles.VertexAttributeValue{$}
-const schema::Entity& VertexAttributeValue::StaticSchema() {
+const schema::Entity* VertexAttributeValue::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexAttributeValue",
         "",
         {
-            schema::Field{"Value", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ U8__S::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode TextureUnit contains maps: gles.TextureUnit{map[Uint32]Uint32}
@@ -638,7 +638,7 @@ void Renderbuffer::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Uint32(this->mFormat);
 }
-const schema::Entity& Renderbuffer::StaticSchema() {
+const schema::Entity* Renderbuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -647,11 +647,11 @@ const schema::Entity& Renderbuffer::StaticSchema() {
         {
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Image:
@@ -663,7 +663,7 @@ void Image::Encode(Encoder* e) const {
     e->Uint32(this->mSize);
     e->Uint32(this->mFormat);
 }
-const schema::Entity& Image::StaticSchema() {
+const schema::Entity* Image::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -672,12 +672,12 @@ const schema::Entity& Image::StaticSchema() {
         {
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"Size", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode CubemapLevel contains maps: gles.CubemapLevel{map[Uint32]$}
@@ -692,7 +692,7 @@ void FramebufferAttachmentInfo::Encode(Encoder* e) const {
     e->Int32(this->mTextureLevel);
     e->Uint32(this->mCubeMapFace);
 }
-const schema::Entity& FramebufferAttachmentInfo::StaticSchema() {
+const schema::Entity* FramebufferAttachmentInfo::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -705,24 +705,24 @@ const schema::Entity& FramebufferAttachmentInfo::StaticSchema() {
             schema::Field{"CubeMapFace", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode Framebuffer contains maps: gles.Framebuffer{map[Uint32]$}
 
 // GLcharˢ:
 // gles.GLcharˢ{$}
-const schema::Entity& GLchar__S::StaticSchema() {
+const schema::Entity* GLchar__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Shader:
@@ -735,44 +735,44 @@ void Shader::Encode(Encoder* e) const {
     e->String(this->mSource);
     e->Uint32(this->mType);
 }
-const schema::Entity& Shader::StaticSchema() {
+const schema::Entity* Shader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Shader",
         "",
         {
-            schema::Field{"Binary", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"Compiled", new schema::Primitive{"bool", schema::Primitive::Bool}},
             schema::Field{"Deletable", new schema::Primitive{"bool", schema::Primitive::Bool}},
-            schema::Field{"InfoLog", new schema::Struct{"", GLchar__S::StaticSchema()}},
+            schema::Field{"InfoLog", new schema::Struct{ GLchar__S::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexAttribute:
 // gles.VertexAttribute{$,Int32,Uint32}
-const schema::Entity& VertexAttribute::StaticSchema() {
+const schema::Entity* VertexAttribute::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexAttribute",
         "",
         {
-            schema::Field{"Name", new schema::Struct{"", Char__S::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ Char__S::StaticSchema()}},
             schema::Field{"VectorCount", new schema::Primitive{"int32", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Uniform:
 // gles.Uniform{String,Uint32,$}
-const schema::Entity& Uniform::StaticSchema() {
+const schema::Entity* Uniform::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -781,10 +781,10 @@ const schema::Entity& Uniform::StaticSchema() {
         {
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", U8__S::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ U8__S::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode Program contains maps: gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
@@ -797,7 +797,7 @@ void VertexBufferBinding::Encode(Encoder* e) const {
     e->Int32(this->mStride);
     e->Uint32(this->mDivisor);
 }
-const schema::Entity& VertexBufferBinding::StaticSchema() {
+const schema::Entity* VertexBufferBinding::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -810,22 +810,22 @@ const schema::Entity& VertexBufferBinding::StaticSchema() {
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexPointer:
 // gles.VertexPointer{$}
-const schema::Entity& VertexPointer::StaticSchema() {
+const schema::Entity* VertexPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexAttributeArray:
@@ -841,7 +841,7 @@ void VertexAttributeArray::Encode(Encoder* e) const {
     e->Bool(this->mInteger);
     e->Uint32(this->mBinding);
 }
-const schema::Entity& VertexAttributeArray::StaticSchema() {
+const schema::Entity* VertexAttributeArray::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -853,20 +853,20 @@ const schema::Entity& VertexAttributeArray::StaticSchema() {
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Normalized", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Pointer", new schema::Struct{"", VertexPointer::StaticSchema()}},
+            schema::Field{"Pointer", new schema::Struct{ VertexPointer::StaticSchema()}},
             schema::Field{"RelativeOffset", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Integer", new schema::Primitive{"bool", schema::Primitive::Bool}},
             schema::Field{"Binding", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode VertexArray contains maps: gles.VertexArray{map[Uint32]*$,map[Uint32]*$}
 
 // Query:
 // gles.Query{}
-const schema::Entity& Query::StaticSchema() {
+const schema::Entity* Query::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -875,7 +875,7 @@ const schema::Entity& Query::StaticSchema() {
         {
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
@@ -898,14 +898,14 @@ void ContextInfo::Encode(Encoder* e) const {
     e->Bool(this->mResetViewportScissor);
     e->Bool(this->mPreserveBuffersOnSwap);
 }
-const schema::Entity& ContextInfo::StaticSchema() {
+const schema::Entity* ContextInfo::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ContextInfo",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Vendor", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Extensions", new schema::Primitive{"string", schema::Primitive::String}},
@@ -919,97 +919,97 @@ const schema::Entity& ContextInfo::StaticSchema() {
             schema::Field{"PreserveBuffersOnSwap", new schema::Primitive{"bool", schema::Primitive::Bool}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLConfig:
 // gles.EGLConfig{$}
-const schema::Entity& EGLConfig::StaticSchema() {
+const schema::Entity* EGLConfig::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLConfig",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLContext:
 // gles.EGLContext{$}
-const schema::Entity& EGLContext::StaticSchema() {
+const schema::Entity* EGLContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLContext",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLDisplay:
 // gles.EGLDisplay{$}
-const schema::Entity& EGLDisplay::StaticSchema() {
+const schema::Entity* EGLDisplay::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLDisplay",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLSurface:
 // gles.EGLSurface{$}
-const schema::Entity& EGLSurface::StaticSchema() {
+const schema::Entity* EGLSurface::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLSurface",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLintˢ:
 // gles.EGLintˢ{$}
-const schema::Entity& EGLint__S::StaticSchema() {
+const schema::Entity* EGLint__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLintˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EGLintᵖ:
 // gles.EGLintᵖ{$}
-const schema::Entity& EGLint__P::StaticSchema() {
+const schema::Entity* EGLint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EGLintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EglCreateContext:
@@ -1022,22 +1022,22 @@ void EglCreateContext::Encode(Encoder* e) const {
     e->Value(this->mAttribList);
     e->Value(this->mResult);
 }
-const schema::Entity& EglCreateContext::StaticSchema() {
+const schema::Entity* EglCreateContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EglCreateContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", EGLDisplay::StaticSchema()}},
-            schema::Field{"Config", new schema::Struct{"", EGLConfig::StaticSchema()}},
-            schema::Field{"ShareContext", new schema::Struct{"", EGLContext::StaticSchema()}},
-            schema::Field{"AttribList", new schema::Struct{"", EGLint__P::StaticSchema()}},
-            schema::Field{"Result", new schema::Struct{"", EGLContext::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ EGLDisplay::StaticSchema()}},
+            schema::Field{"Config", new schema::Struct{ EGLConfig::StaticSchema()}},
+            schema::Field{"ShareContext", new schema::Struct{ EGLContext::StaticSchema()}},
+            schema::Field{"AttribList", new schema::Struct{ EGLint__P::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ EGLContext::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EglInitialize:
@@ -1049,21 +1049,21 @@ void EglInitialize::Encode(Encoder* e) const {
     e->Value(this->mMinor);
     e->Int64(this->mResult);
 }
-const schema::Entity& EglInitialize::StaticSchema() {
+const schema::Entity* EglInitialize::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EglInitialize",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Dpy", new schema::Struct{"", EGLDisplay::StaticSchema()}},
-            schema::Field{"Major", new schema::Struct{"", EGLint__P::StaticSchema()}},
-            schema::Field{"Minor", new schema::Struct{"", EGLint__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Dpy", new schema::Struct{ EGLDisplay::StaticSchema()}},
+            schema::Field{"Major", new schema::Struct{ EGLint__P::StaticSchema()}},
+            schema::Field{"Minor", new schema::Struct{ EGLint__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"EGLBoolean", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EglMakeCurrent:
@@ -1076,22 +1076,22 @@ void EglMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mContext);
     e->Int64(this->mResult);
 }
-const schema::Entity& EglMakeCurrent::StaticSchema() {
+const schema::Entity* EglMakeCurrent::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EglMakeCurrent",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", EGLDisplay::StaticSchema()}},
-            schema::Field{"Draw", new schema::Struct{"", EGLSurface::StaticSchema()}},
-            schema::Field{"Read", new schema::Struct{"", EGLSurface::StaticSchema()}},
-            schema::Field{"Context", new schema::Struct{"", EGLContext::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ EGLDisplay::StaticSchema()}},
+            schema::Field{"Draw", new schema::Struct{ EGLSurface::StaticSchema()}},
+            schema::Field{"Read", new schema::Struct{ EGLSurface::StaticSchema()}},
+            schema::Field{"Context", new schema::Struct{ EGLContext::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"EGLBoolean", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EglQuerySurface:
@@ -1104,37 +1104,37 @@ void EglQuerySurface::Encode(Encoder* e) const {
     e->Value(this->mValue);
     e->Int64(this->mResult);
 }
-const schema::Entity& EglQuerySurface::StaticSchema() {
+const schema::Entity* EglQuerySurface::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EglQuerySurface",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", EGLDisplay::StaticSchema()}},
-            schema::Field{"Surface", new schema::Struct{"", EGLSurface::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ EGLDisplay::StaticSchema()}},
+            schema::Field{"Surface", new schema::Struct{ EGLSurface::StaticSchema()}},
             schema::Field{"Attribute", new schema::Primitive{"EGLint", schema::Primitive::Int64}},
-            schema::Field{"Value", new schema::Struct{"", EGLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ EGLint__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"EGLBoolean", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᵖ:
 // gles.Voidᵖ{$}
-const schema::Entity& Void__P::StaticSchema() {
+const schema::Entity* Void__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // EglSwapBuffers:
@@ -1145,310 +1145,310 @@ void EglSwapBuffers::Encode(Encoder* e) const {
     e->Value(this->mSurface);
     e->Int64(this->mResult);
 }
-const schema::Entity& EglSwapBuffers::StaticSchema() {
+const schema::Entity* EglSwapBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "EglSwapBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", EGLDisplay::StaticSchema()}},
-            schema::Field{"Surface", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ EGLDisplay::StaticSchema()}},
+            schema::Field{"Surface", new schema::Struct{ Void__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"EGLBoolean", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // F64ˢ:
 // gles.F64ˢ{$}
-const schema::Entity& F64__S::StaticSchema() {
+const schema::Entity* F64__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "F64ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // FlushPostBuffer:
 // gles.FlushPostBuffer{$}
-const schema::Entity& FlushPostBuffer::StaticSchema() {
+const schema::Entity* FlushPostBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "FlushPostBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // FramebufferIdˢ:
 // gles.FramebufferIdˢ{$}
-const schema::Entity& FramebufferId__S::StaticSchema() {
+const schema::Entity* FramebufferId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "FramebufferIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // FramebufferIdᵖ:
 // gles.FramebufferIdᵖ{$}
-const schema::Entity& FramebufferId__P::StaticSchema() {
+const schema::Entity* FramebufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "FramebufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // FramebufferIdᶜᵖ:
 // gles.FramebufferIdᶜᵖ{$}
-const schema::Entity& FramebufferId__CP::StaticSchema() {
+const schema::Entity* FramebufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "FramebufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLDEBUGPROC:
 // gles.GLDEBUGPROC{$}
-const schema::Entity& GLDEBUGPROC::StaticSchema() {
+const schema::Entity* GLDEBUGPROC::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLDEBUGPROC",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLXContext:
 // gles.GLXContext{$}
-const schema::Entity& GLXContext::StaticSchema() {
+const schema::Entity* GLXContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLXContext",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLXDrawable:
 // gles.GLXDrawable{$}
-const schema::Entity& GLXDrawable::StaticSchema() {
+const schema::Entity* GLXDrawable::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLXDrawable",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLbooleanˢ:
 // gles.GLbooleanˢ{$}
-const schema::Entity& GLboolean__S::StaticSchema() {
+const schema::Entity* GLboolean__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLbooleanˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLbooleanᵖ:
 // gles.GLbooleanᵖ{$}
-const schema::Entity& GLboolean__P::StaticSchema() {
+const schema::Entity* GLboolean__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLbooleanᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLcharᵖ:
 // gles.GLcharᵖ{$}
-const schema::Entity& GLchar__P::StaticSchema() {
+const schema::Entity* GLchar__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLcharᶜᵖ:
 // gles.GLcharᶜᵖ{$}
-const schema::Entity& GLchar__CP::StaticSchema() {
+const schema::Entity* GLchar__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLcharᶜᵖˢ:
 // gles.GLcharᶜᵖˢ{$}
-const schema::Entity& GLchar__CP__S::StaticSchema() {
+const schema::Entity* GLchar__CP__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharᶜᵖˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLcharᶜᵖᵖ:
 // gles.GLcharᶜᵖᵖ{$}
-const schema::Entity& GLchar__CP__P::StaticSchema() {
+const schema::Entity* GLchar__CP__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharᶜᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLcharᶜᵖᶜᵖ:
 // gles.GLcharᶜᵖᶜᵖ{$}
-const schema::Entity& GLchar__CP__CP::StaticSchema() {
+const schema::Entity* GLchar__CP__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLcharᶜᵖᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLeglImageOES:
 // gles.GLeglImageOES{$}
-const schema::Entity& GLeglImageOES::StaticSchema() {
+const schema::Entity* GLeglImageOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLeglImageOES",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLenumˢ:
 // gles.GLenumˢ{$}
-const schema::Entity& GLenum__S::StaticSchema() {
+const schema::Entity* GLenum__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLenumˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLenumᵖ:
 // gles.GLenumᵖ{$}
-const schema::Entity& GLenum__P::StaticSchema() {
+const schema::Entity* GLenum__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLenumᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLenumᶜᵖ:
 // gles.GLenumᶜᵖ{$}
-const schema::Entity& GLenum__CP::StaticSchema() {
+const schema::Entity* GLenum__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLenumᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatː2ᵃ:
 // gles.GLfloatː2ᵃ{[2]Float32}
-const schema::Entity& GLfloat__2__A::StaticSchema() {
+const schema::Entity* GLfloat__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1458,12 +1458,12 @@ const schema::Entity& GLfloat__2__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatː3ᵃ:
 // gles.GLfloatː3ᵃ{[3]Float32}
-const schema::Entity& GLfloat__3__A::StaticSchema() {
+const schema::Entity* GLfloat__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1473,12 +1473,12 @@ const schema::Entity& GLfloat__3__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatː4ᵃ:
 // gles.GLfloatː4ᵃ{[4]Float32}
-const schema::Entity& GLfloat__4__A::StaticSchema() {
+const schema::Entity* GLfloat__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1488,87 +1488,87 @@ const schema::Entity& GLfloat__4__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatˢ:
 // gles.GLfloatˢ{$}
-const schema::Entity& GLfloat__S::StaticSchema() {
+const schema::Entity* GLfloat__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLfloatˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatᵖ:
 // gles.GLfloatᵖ{$}
-const schema::Entity& GLfloat__P::StaticSchema() {
+const schema::Entity* GLfloat__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLfloatᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLfloatᶜᵖ:
 // gles.GLfloatᶜᵖ{$}
-const schema::Entity& GLfloat__CP::StaticSchema() {
+const schema::Entity* GLfloat__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLfloatᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLint64ˢ:
 // gles.GLint64ˢ{$}
-const schema::Entity& GLint64__S::StaticSchema() {
+const schema::Entity* GLint64__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLint64ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLint64ᵖ:
 // gles.GLint64ᵖ{$}
-const schema::Entity& GLint64__P::StaticSchema() {
+const schema::Entity* GLint64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLint64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintː2ᵃ:
 // gles.GLintː2ᵃ{[2]Int32}
-const schema::Entity& GLint__2__A::StaticSchema() {
+const schema::Entity* GLint__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1578,12 +1578,12 @@ const schema::Entity& GLint__2__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintː3ᵃ:
 // gles.GLintː3ᵃ{[3]Int32}
-const schema::Entity& GLint__3__A::StaticSchema() {
+const schema::Entity* GLint__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1593,12 +1593,12 @@ const schema::Entity& GLint__3__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintː4ᵃ:
 // gles.GLintː4ᵃ{[4]Int32}
-const schema::Entity& GLint__4__A::StaticSchema() {
+const schema::Entity* GLint__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1608,192 +1608,192 @@ const schema::Entity& GLint__4__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintˢ:
 // gles.GLintˢ{$}
-const schema::Entity& GLint__S::StaticSchema() {
+const schema::Entity* GLint__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLintˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintᵖ:
 // gles.GLintᵖ{$}
-const schema::Entity& GLint__P::StaticSchema() {
+const schema::Entity* GLint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLintᶜᵖ:
 // gles.GLintᶜᵖ{$}
-const schema::Entity& GLint__CP::StaticSchema() {
+const schema::Entity* GLint__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLintᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLsizeiˢ:
 // gles.GLsizeiˢ{$}
-const schema::Entity& GLsizei__S::StaticSchema() {
+const schema::Entity* GLsizei__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLsizeiˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLsizeiᵖ:
 // gles.GLsizeiᵖ{$}
-const schema::Entity& GLsizei__P::StaticSchema() {
+const schema::Entity* GLsizei__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLsizeiᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLsizeiᶜᵖ:
 // gles.GLsizeiᶜᵖ{$}
-const schema::Entity& GLsizei__CP::StaticSchema() {
+const schema::Entity* GLsizei__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLsizeiᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLubyteˢ:
 // gles.GLubyteˢ{$}
-const schema::Entity& GLubyte__S::StaticSchema() {
+const schema::Entity* GLubyte__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLubyteˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLubyteᵖ:
 // gles.GLubyteᵖ{$}
-const schema::Entity& GLubyte__P::StaticSchema() {
+const schema::Entity* GLubyte__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLubyteᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLubyteᶜᵖ:
 // gles.GLubyteᶜᵖ{$}
-const schema::Entity& GLubyte__CP::StaticSchema() {
+const schema::Entity* GLubyte__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLubyteᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuint64ˢ:
 // gles.GLuint64ˢ{$}
-const schema::Entity& GLuint64__S::StaticSchema() {
+const schema::Entity* GLuint64__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuint64ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuint64ᵖ:
 // gles.GLuint64ᵖ{$}
-const schema::Entity& GLuint64__P::StaticSchema() {
+const schema::Entity* GLuint64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuint64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuint64ᶜᵖ:
 // gles.GLuint64ᶜᵖ{$}
-const schema::Entity& GLuint64__CP::StaticSchema() {
+const schema::Entity* GLuint64__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuint64ᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintː2ᵃ:
 // gles.GLuintː2ᵃ{[2]Uint32}
-const schema::Entity& GLuint__2__A::StaticSchema() {
+const schema::Entity* GLuint__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1803,12 +1803,12 @@ const schema::Entity& GLuint__2__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintː3ᵃ:
 // gles.GLuintː3ᵃ{[3]Uint32}
-const schema::Entity& GLuint__3__A::StaticSchema() {
+const schema::Entity* GLuint__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1818,12 +1818,12 @@ const schema::Entity& GLuint__3__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintː4ᵃ:
 // gles.GLuintː4ᵃ{[4]Uint32}
-const schema::Entity& GLuint__4__A::StaticSchema() {
+const schema::Entity* GLuint__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -1833,280 +1833,280 @@ const schema::Entity& GLuint__4__A::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintˢ:
 // gles.GLuintˢ{$}
-const schema::Entity& GLuint__S::StaticSchema() {
+const schema::Entity* GLuint__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuintˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintᵖ:
 // gles.GLuintᵖ{$}
-const schema::Entity& GLuint__P::StaticSchema() {
+const schema::Entity* GLuint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLuintᶜᵖ:
 // gles.GLuintᶜᵖ{$}
-const schema::Entity& GLuint__CP::StaticSchema() {
+const schema::Entity* GLuint__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLuintᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLvoidˢ:
 // gles.GLvoidˢ{$}
-const schema::Entity& GLvoid__S::StaticSchema() {
+const schema::Entity* GLvoid__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLvoidˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GLvoidᵖ:
 // gles.GLvoidᵖ{$}
-const schema::Entity& GLvoid__P::StaticSchema() {
+const schema::Entity* GLvoid__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GLvoidᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlActiveShaderProgram:
 // gles.GlActiveShaderProgram{$,Uint32,Uint32}
-const schema::Entity& GlActiveShaderProgram::StaticSchema() {
+const schema::Entity* GlActiveShaderProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlActiveShaderProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlActiveShaderProgramEXT:
 // gles.GlActiveShaderProgramEXT{$,Uint32,Uint32}
-const schema::Entity& GlActiveShaderProgramEXT::StaticSchema() {
+const schema::Entity* GlActiveShaderProgramEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlActiveShaderProgramEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlActiveTexture:
 // gles.GlActiveTexture{$,Uint32}
-const schema::Entity& GlActiveTexture::StaticSchema() {
+const schema::Entity* GlActiveTexture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlActiveTexture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Unit", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlAlphaFuncQCOM:
 // gles.GlAlphaFuncQCOM{$,Uint32,Float32}
-const schema::Entity& GlAlphaFuncQCOM::StaticSchema() {
+const schema::Entity* GlAlphaFuncQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlAlphaFuncQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Func", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Ref", new schema::Primitive{"GLclampf", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlApplyFramebufferAttachmentCMAAINTEL:
 // gles.GlApplyFramebufferAttachmentCMAAINTEL{$}
-const schema::Entity& GlApplyFramebufferAttachmentCMAAINTEL::StaticSchema() {
+const schema::Entity* GlApplyFramebufferAttachmentCMAAINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlApplyFramebufferAttachmentCMAAINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlAttachShader:
 // gles.GlAttachShader{$,Uint32,Uint32}
-const schema::Entity& GlAttachShader::StaticSchema() {
+const schema::Entity* GlAttachShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlAttachShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginConditionalRenderNV:
 // gles.GlBeginConditionalRenderNV{$,Uint32,Uint32}
-const schema::Entity& GlBeginConditionalRenderNV::StaticSchema() {
+const schema::Entity* GlBeginConditionalRenderNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginConditionalRenderNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Id", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginPerfMonitorAMD:
 // gles.GlBeginPerfMonitorAMD{$,Uint32}
-const schema::Entity& GlBeginPerfMonitorAMD::StaticSchema() {
+const schema::Entity* GlBeginPerfMonitorAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginPerfMonitorAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Monitor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginPerfQueryINTEL:
 // gles.GlBeginPerfQueryINTEL{$,Uint32}
-const schema::Entity& GlBeginPerfQueryINTEL::StaticSchema() {
+const schema::Entity* GlBeginPerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginPerfQueryINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryHandle", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginQuery:
 // gles.GlBeginQuery{$,Uint32,Uint32}
-const schema::Entity& GlBeginQuery::StaticSchema() {
+const schema::Entity* GlBeginQuery::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginQuery",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginQueryEXT:
 // gles.GlBeginQueryEXT{$,Uint32,Uint32}
-const schema::Entity& GlBeginQueryEXT::StaticSchema() {
+const schema::Entity* GlBeginQueryEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginQueryEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBeginTransformFeedback:
 // gles.GlBeginTransformFeedback{$,Uint32}
-const schema::Entity& GlBeginTransformFeedback::StaticSchema() {
+const schema::Entity* GlBeginTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBeginTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"PrimitiveMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindAttribLocation:
@@ -2117,37 +2117,37 @@ void GlBindAttribLocation::Encode(Encoder* e) const {
     e->Uint32(this->mLocation);
     e->String(this->mName);
 }
-const schema::Entity& GlBindAttribLocation::StaticSchema() {
+const schema::Entity* GlBindAttribLocation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindAttribLocation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindBuffer:
 // gles.GlBindBuffer{$,Uint32,Uint32}
-const schema::Entity& GlBindBuffer::StaticSchema() {
+const schema::Entity* GlBindBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindBufferBase:
@@ -2158,20 +2158,20 @@ void GlBindBufferBase::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Uint32(this->mBuffer);
 }
-const schema::Entity& GlBindBufferBase::StaticSchema() {
+const schema::Entity* GlBindBufferBase::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindBufferBase",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"BufferBindingIndex", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindBufferRange:
@@ -2184,14 +2184,14 @@ void GlBindBufferRange::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlBindBufferRange::StaticSchema() {
+const schema::Entity* GlBindBufferRange::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindBufferRange",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"BufferBindingIndex", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
@@ -2199,7 +2199,7 @@ const schema::Entity& GlBindBufferRange::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindFragDataLocationEXT:
@@ -2210,20 +2210,20 @@ void GlBindFragDataLocationEXT::Encode(Encoder* e) const {
     e->Uint32(this->mColor);
     e->String(this->mName);
 }
-const schema::Entity& GlBindFragDataLocationEXT::StaticSchema() {
+const schema::Entity* GlBindFragDataLocationEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindFragDataLocationEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Color", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindFragDataLocationIndexedEXT:
@@ -2235,38 +2235,38 @@ void GlBindFragDataLocationIndexedEXT::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->String(this->mName);
 }
-const schema::Entity& GlBindFragDataLocationIndexedEXT::StaticSchema() {
+const schema::Entity* GlBindFragDataLocationIndexedEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindFragDataLocationIndexedEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ColorNumber", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindFramebuffer:
 // gles.GlBindFramebuffer{$,Uint32,Uint32}
-const schema::Entity& GlBindFramebuffer::StaticSchema() {
+const schema::Entity* GlBindFramebuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindFramebuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Framebuffer", new schema::Primitive{"FramebufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindImageTexture:
@@ -2281,14 +2281,14 @@ void GlBindImageTexture::Encode(Encoder* e) const {
     e->Uint32(this->mAccess);
     e->Uint32(this->mFormat);
 }
-const schema::Entity& GlBindImageTexture::StaticSchema() {
+const schema::Entity* GlBindImageTexture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindImageTexture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Unit", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -2298,139 +2298,139 @@ const schema::Entity& GlBindImageTexture::StaticSchema() {
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindProgramPipeline:
 // gles.GlBindProgramPipeline{$,Uint32}
-const schema::Entity& GlBindProgramPipeline::StaticSchema() {
+const schema::Entity* GlBindProgramPipeline::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindProgramPipeline",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindProgramPipelineEXT:
 // gles.GlBindProgramPipelineEXT{$,Uint32}
-const schema::Entity& GlBindProgramPipelineEXT::StaticSchema() {
+const schema::Entity* GlBindProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindProgramPipelineEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindRenderbuffer:
 // gles.GlBindRenderbuffer{$,Uint32,Uint32}
-const schema::Entity& GlBindRenderbuffer::StaticSchema() {
+const schema::Entity* GlBindRenderbuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindRenderbuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Renderbuffer", new schema::Primitive{"RenderbufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindSampler:
 // gles.GlBindSampler{$,Uint32,Uint32}
-const schema::Entity& GlBindSampler::StaticSchema() {
+const schema::Entity* GlBindSampler::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindSampler",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Unit", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindTexture:
 // gles.GlBindTexture{$,Uint32,Uint32}
-const schema::Entity& GlBindTexture::StaticSchema() {
+const schema::Entity* GlBindTexture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindTexture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindTransformFeedback:
 // gles.GlBindTransformFeedback{$,Uint32,Uint32}
-const schema::Entity& GlBindTransformFeedback::StaticSchema() {
+const schema::Entity* GlBindTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Id", new schema::Primitive{"TransformFeedbackId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindVertexArray:
 // gles.GlBindVertexArray{$,Uint32}
-const schema::Entity& GlBindVertexArray::StaticSchema() {
+const schema::Entity* GlBindVertexArray::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindVertexArray",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Array", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindVertexArrayOES:
 // gles.GlBindVertexArrayOES{$,Uint32}
-const schema::Entity& GlBindVertexArrayOES::StaticSchema() {
+const schema::Entity* GlBindVertexArrayOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindVertexArrayOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Array", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBindVertexBuffer:
@@ -2442,66 +2442,66 @@ void GlBindVertexBuffer::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mStride);
 }
-const schema::Entity& GlBindVertexBuffer::StaticSchema() {
+const schema::Entity* GlBindVertexBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBindVertexBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"BindingIndex", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendBarrier:
 // gles.GlBlendBarrier{$}
-const schema::Entity& GlBlendBarrier::StaticSchema() {
+const schema::Entity* GlBlendBarrier::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendBarrier",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendBarrierKHR:
 // gles.GlBlendBarrierKHR{$}
-const schema::Entity& GlBlendBarrierKHR::StaticSchema() {
+const schema::Entity* GlBlendBarrierKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendBarrierKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendBarrierNV:
 // gles.GlBlendBarrierNV{$}
-const schema::Entity& GlBlendBarrierNV::StaticSchema() {
+const schema::Entity* GlBlendBarrierNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendBarrierNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendColor:
@@ -2513,54 +2513,54 @@ void GlBlendColor::Encode(Encoder* e) const {
     e->Float32(this->mBlue);
     e->Float32(this->mAlpha);
 }
-const schema::Entity& GlBlendColor::StaticSchema() {
+const schema::Entity* GlBlendColor::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendColor",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Red", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Green", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Blue", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Alpha", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquation:
 // gles.GlBlendEquation{$,Uint32}
-const schema::Entity& GlBlendEquation::StaticSchema() {
+const schema::Entity* GlBlendEquation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Equation", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationSeparate:
 // gles.GlBlendEquationSeparate{$,Uint32,Uint32}
-const schema::Entity& GlBlendEquationSeparate::StaticSchema() {
+const schema::Entity* GlBlendEquationSeparate::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationSeparate",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Rgb", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Alpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationSeparatei:
@@ -2571,20 +2571,20 @@ void GlBlendEquationSeparatei::Encode(Encoder* e) const {
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
 }
-const schema::Entity& GlBlendEquationSeparatei::StaticSchema() {
+const schema::Entity* GlBlendEquationSeparatei::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationSeparatei",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"ModeRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ModeAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationSeparateiEXT:
@@ -2595,20 +2595,20 @@ void GlBlendEquationSeparateiEXT::Encode(Encoder* e) const {
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
 }
-const schema::Entity& GlBlendEquationSeparateiEXT::StaticSchema() {
+const schema::Entity* GlBlendEquationSeparateiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationSeparateiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"ModeRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ModeAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationSeparateiOES:
@@ -2619,88 +2619,88 @@ void GlBlendEquationSeparateiOES::Encode(Encoder* e) const {
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
 }
-const schema::Entity& GlBlendEquationSeparateiOES::StaticSchema() {
+const schema::Entity* GlBlendEquationSeparateiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationSeparateiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"ModeRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ModeAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationi:
 // gles.GlBlendEquationi{$,Uint32,Uint32}
-const schema::Entity& GlBlendEquationi::StaticSchema() {
+const schema::Entity* GlBlendEquationi::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationi",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationiEXT:
 // gles.GlBlendEquationiEXT{$,Uint32,Uint32}
-const schema::Entity& GlBlendEquationiEXT::StaticSchema() {
+const schema::Entity* GlBlendEquationiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendEquationiOES:
 // gles.GlBlendEquationiOES{$,Uint32,Uint32}
-const schema::Entity& GlBlendEquationiOES::StaticSchema() {
+const schema::Entity* GlBlendEquationiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendEquationiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFunc:
 // gles.GlBlendFunc{$,Uint32,Uint32}
-const schema::Entity& GlBlendFunc::StaticSchema() {
+const schema::Entity* GlBlendFunc::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFunc",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcFactor", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstFactor", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFuncSeparate:
@@ -2712,21 +2712,21 @@ void GlBlendFuncSeparate::Encode(Encoder* e) const {
     e->Uint32(this->mSrcFactorAlpha);
     e->Uint32(this->mDstFactorAlpha);
 }
-const schema::Entity& GlBlendFuncSeparate::StaticSchema() {
+const schema::Entity* GlBlendFuncSeparate::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFuncSeparate",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcFactorRgb", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstFactorRgb", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"SrcFactorAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstFactorAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFuncSeparatei:
@@ -2739,14 +2739,14 @@ void GlBlendFuncSeparatei::Encode(Encoder* e) const {
     e->Uint32(this->mSrcAlpha);
     e->Uint32(this->mDstAlpha);
 }
-const schema::Entity& GlBlendFuncSeparatei::StaticSchema() {
+const schema::Entity* GlBlendFuncSeparatei::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFuncSeparatei",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"SrcRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -2754,7 +2754,7 @@ const schema::Entity& GlBlendFuncSeparatei::StaticSchema() {
             schema::Field{"DstAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFuncSeparateiEXT:
@@ -2767,14 +2767,14 @@ void GlBlendFuncSeparateiEXT::Encode(Encoder* e) const {
     e->Uint32(this->mSrcAlpha);
     e->Uint32(this->mDstAlpha);
 }
-const schema::Entity& GlBlendFuncSeparateiEXT::StaticSchema() {
+const schema::Entity* GlBlendFuncSeparateiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFuncSeparateiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"SrcRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -2782,7 +2782,7 @@ const schema::Entity& GlBlendFuncSeparateiEXT::StaticSchema() {
             schema::Field{"DstAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFuncSeparateiOES:
@@ -2795,14 +2795,14 @@ void GlBlendFuncSeparateiOES::Encode(Encoder* e) const {
     e->Uint32(this->mSrcAlpha);
     e->Uint32(this->mDstAlpha);
 }
-const schema::Entity& GlBlendFuncSeparateiOES::StaticSchema() {
+const schema::Entity* GlBlendFuncSeparateiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFuncSeparateiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"SrcRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DstRGB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -2810,7 +2810,7 @@ const schema::Entity& GlBlendFuncSeparateiOES::StaticSchema() {
             schema::Field{"DstAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFunci:
@@ -2821,20 +2821,20 @@ void GlBlendFunci::Encode(Encoder* e) const {
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
 }
-const schema::Entity& GlBlendFunci::StaticSchema() {
+const schema::Entity* GlBlendFunci::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFunci",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Src", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Dst", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFunciEXT:
@@ -2845,20 +2845,20 @@ void GlBlendFunciEXT::Encode(Encoder* e) const {
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
 }
-const schema::Entity& GlBlendFunciEXT::StaticSchema() {
+const schema::Entity* GlBlendFunciEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFunciEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Src", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Dst", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendFunciOES:
@@ -2869,37 +2869,37 @@ void GlBlendFunciOES::Encode(Encoder* e) const {
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
 }
-const schema::Entity& GlBlendFunciOES::StaticSchema() {
+const schema::Entity* GlBlendFunciOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendFunciOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buf", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"Src", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Dst", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlendParameteriNV:
 // gles.GlBlendParameteriNV{$,Uint32,Int32}
-const schema::Entity& GlBlendParameteriNV::StaticSchema() {
+const schema::Entity* GlBlendParameteriNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlendParameteriNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlitFramebuffer:
@@ -2917,14 +2917,14 @@ void GlBlitFramebuffer::Encode(Encoder* e) const {
     e->Uint32(this->mMask);
     e->Uint32(this->mFilter);
 }
-const schema::Entity& GlBlitFramebuffer::StaticSchema() {
+const schema::Entity* GlBlitFramebuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlitFramebuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcX0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcY0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcX1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -2937,7 +2937,7 @@ const schema::Entity& GlBlitFramebuffer::StaticSchema() {
             schema::Field{"Filter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlitFramebufferANGLE:
@@ -2955,14 +2955,14 @@ void GlBlitFramebufferANGLE::Encode(Encoder* e) const {
     e->Uint32(this->mMask);
     e->Uint32(this->mFilter);
 }
-const schema::Entity& GlBlitFramebufferANGLE::StaticSchema() {
+const schema::Entity* GlBlitFramebufferANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlitFramebufferANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcX0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcY0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcX1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -2975,7 +2975,7 @@ const schema::Entity& GlBlitFramebufferANGLE::StaticSchema() {
             schema::Field{"Filter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBlitFramebufferNV:
@@ -2993,14 +2993,14 @@ void GlBlitFramebufferNV::Encode(Encoder* e) const {
     e->Uint32(this->mMask);
     e->Uint32(this->mFilter);
 }
-const schema::Entity& GlBlitFramebufferNV::StaticSchema() {
+const schema::Entity* GlBlitFramebufferNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBlitFramebufferNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcX0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcY0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SrcX1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3013,7 +3013,7 @@ const schema::Entity& GlBlitFramebufferNV::StaticSchema() {
             schema::Field{"Filter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBufferData:
@@ -3025,36 +3025,36 @@ void GlBufferData::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Uint32(this->mUsage);
 }
-const schema::Entity& GlBufferData::StaticSchema() {
+const schema::Entity* GlBufferData::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBufferData",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", BufferDataPointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ BufferDataPointer::StaticSchema()}},
             schema::Field{"Usage", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᶜᵖ:
 // gles.Voidᶜᵖ{$}
-const schema::Entity& Void__CP::StaticSchema() {
+const schema::Entity* Void__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBufferStorageEXT:
@@ -3066,21 +3066,21 @@ void GlBufferStorageEXT::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Uint32(this->mFlag);
 }
-const schema::Entity& GlBufferStorageEXT::StaticSchema() {
+const schema::Entity* GlBufferStorageEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBufferStorageEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Flag", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlBufferSubData:
@@ -3092,54 +3092,54 @@ void GlBufferSubData::Encode(Encoder* e) const {
     e->Int32(this->mSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlBufferSubData::StaticSchema() {
+const schema::Entity* GlBufferSubData::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlBufferSubData",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", BufferDataPointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ BufferDataPointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCheckFramebufferStatus:
 // gles.GlCheckFramebufferStatus{$,Uint32,Uint32}
-const schema::Entity& GlCheckFramebufferStatus::StaticSchema() {
+const schema::Entity* GlCheckFramebufferStatus::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCheckFramebufferStatus",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClear:
 // gles.GlClear{$,Uint32}
-const schema::Entity& GlClear::StaticSchema() {
+const schema::Entity* GlClear::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClear",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearBufferfi:
@@ -3151,21 +3151,21 @@ void GlClearBufferfi::Encode(Encoder* e) const {
     e->Float32(this->mDepth);
     e->Int32(this->mStencil);
 }
-const schema::Entity& GlClearBufferfi::StaticSchema() {
+const schema::Entity* GlClearBufferfi::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearBufferfi",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buffer", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Drawbuffer", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Depth", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Stencil", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearBufferfv:
@@ -3176,20 +3176,20 @@ void GlClearBufferfv::Encode(Encoder* e) const {
     e->Int32(this->mDrawbuffer);
     e->Value(this->mValue);
 }
-const schema::Entity& GlClearBufferfv::StaticSchema() {
+const schema::Entity* GlClearBufferfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearBufferfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buffer", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Drawbuffer", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearBufferiv:
@@ -3200,20 +3200,20 @@ void GlClearBufferiv::Encode(Encoder* e) const {
     e->Int32(this->mDrawbuffer);
     e->Value(this->mValue);
 }
-const schema::Entity& GlClearBufferiv::StaticSchema() {
+const schema::Entity* GlClearBufferiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearBufferiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buffer", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Drawbuffer", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearBufferuiv:
@@ -3224,20 +3224,20 @@ void GlClearBufferuiv::Encode(Encoder* e) const {
     e->Int32(this->mDrawbuffer);
     e->Value(this->mValue);
 }
-const schema::Entity& GlClearBufferuiv::StaticSchema() {
+const schema::Entity* GlClearBufferuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearBufferuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buffer", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Drawbuffer", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearColor:
@@ -3249,53 +3249,53 @@ void GlClearColor::Encode(Encoder* e) const {
     e->Float32(this->mB);
     e->Float32(this->mA);
 }
-const schema::Entity& GlClearColor::StaticSchema() {
+const schema::Entity* GlClearColor::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearColor",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"R", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"G", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"B", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"A", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearDepthf:
 // gles.GlClearDepthf{$,Float32}
-const schema::Entity& GlClearDepthf::StaticSchema() {
+const schema::Entity* GlClearDepthf::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearDepthf",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Depth", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClearStencil:
 // gles.GlClearStencil{$,Int32}
-const schema::Entity& GlClearStencil::StaticSchema() {
+const schema::Entity* GlClearStencil::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClearStencil",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Stencil", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClientWaitSync:
@@ -3307,21 +3307,21 @@ void GlClientWaitSync::Encode(Encoder* e) const {
     e->Uint64(this->mTimeout);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlClientWaitSync::StaticSchema() {
+const schema::Entity* GlClientWaitSync::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClientWaitSync",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"SyncFlags", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Timeout", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlClientWaitSyncAPPLE:
@@ -3333,21 +3333,21 @@ void GlClientWaitSyncAPPLE::Encode(Encoder* e) const {
     e->Uint64(this->mTimeout);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlClientWaitSyncAPPLE::StaticSchema() {
+const schema::Entity* GlClientWaitSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlClientWaitSyncAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Flag", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Timeout", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlColorMask:
@@ -3359,21 +3359,21 @@ void GlColorMask::Encode(Encoder* e) const {
     e->Uint8(this->mBlue);
     e->Uint8(this->mAlpha);
 }
-const schema::Entity& GlColorMask::StaticSchema() {
+const schema::Entity* GlColorMask::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlColorMask",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Red", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Green", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Blue", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Alpha", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlColorMaski:
@@ -3386,14 +3386,14 @@ void GlColorMaski::Encode(Encoder* e) const {
     e->Uint8(this->mB);
     e->Uint8(this->mA);
 }
-const schema::Entity& GlColorMaski::StaticSchema() {
+const schema::Entity* GlColorMaski::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlColorMaski",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"R", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"G", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
@@ -3401,7 +3401,7 @@ const schema::Entity& GlColorMaski::StaticSchema() {
             schema::Field{"A", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlColorMaskiEXT:
@@ -3414,14 +3414,14 @@ void GlColorMaskiEXT::Encode(Encoder* e) const {
     e->Uint8(this->mB);
     e->Uint8(this->mA);
 }
-const schema::Entity& GlColorMaskiEXT::StaticSchema() {
+const schema::Entity* GlColorMaskiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlColorMaskiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"R", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"G", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
@@ -3429,7 +3429,7 @@ const schema::Entity& GlColorMaskiEXT::StaticSchema() {
             schema::Field{"A", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlColorMaskiOES:
@@ -3442,14 +3442,14 @@ void GlColorMaskiOES::Encode(Encoder* e) const {
     e->Uint8(this->mB);
     e->Uint8(this->mA);
 }
-const schema::Entity& GlColorMaskiOES::StaticSchema() {
+const schema::Entity* GlColorMaskiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlColorMaskiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"DrawBufferIndex", schema::Primitive::Uint32}},
             schema::Field{"R", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"G", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
@@ -3457,38 +3457,38 @@ const schema::Entity& GlColorMaskiOES::StaticSchema() {
             schema::Field{"A", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompileShader:
 // gles.GlCompileShader{$,Uint32}
-const schema::Entity& GlCompileShader::StaticSchema() {
+const schema::Entity* GlCompileShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompileShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TexturePointer:
 // gles.TexturePointer{$}
-const schema::Entity& TexturePointer::StaticSchema() {
+const schema::Entity* TexturePointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TexturePointer",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexImage2D:
@@ -3504,14 +3504,14 @@ void GlCompressedTexImage2D::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexImage2D::StaticSchema() {
+const schema::Entity* GlCompressedTexImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -3519,10 +3519,10 @@ const schema::Entity& GlCompressedTexImage2D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexImage3D:
@@ -3539,14 +3539,14 @@ void GlCompressedTexImage3D::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexImage3D::StaticSchema() {
+const schema::Entity* GlCompressedTexImage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexImage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -3555,10 +3555,10 @@ const schema::Entity& GlCompressedTexImage3D::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexImage3DOES:
@@ -3575,14 +3575,14 @@ void GlCompressedTexImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexImage3DOES::StaticSchema() {
+const schema::Entity* GlCompressedTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexImage3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -3591,10 +3591,10 @@ const schema::Entity& GlCompressedTexImage3DOES::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexSubImage2D:
@@ -3611,14 +3611,14 @@ void GlCompressedTexSubImage2D::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexSubImage2D::StaticSchema() {
+const schema::Entity* GlCompressedTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexSubImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3627,10 +3627,10 @@ const schema::Entity& GlCompressedTexSubImage2D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexSubImage3D:
@@ -3649,14 +3649,14 @@ void GlCompressedTexSubImage3D::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexSubImage3D::StaticSchema() {
+const schema::Entity* GlCompressedTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexSubImage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3667,10 +3667,10 @@ const schema::Entity& GlCompressedTexSubImage3D::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCompressedTexSubImage3DOES:
@@ -3689,14 +3689,14 @@ void GlCompressedTexSubImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mImageSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlCompressedTexSubImage3DOES::StaticSchema() {
+const schema::Entity* GlCompressedTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCompressedTexSubImage3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3707,10 +3707,10 @@ const schema::Entity& GlCompressedTexSubImage3DOES::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ImageSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyBufferSubData:
@@ -3723,14 +3723,14 @@ void GlCopyBufferSubData::Encode(Encoder* e) const {
     e->Int32(this->mWriteOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlCopyBufferSubData::StaticSchema() {
+const schema::Entity* GlCopyBufferSubData::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyBufferSubData",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ReadTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"WriteTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ReadOffset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
@@ -3738,7 +3738,7 @@ const schema::Entity& GlCopyBufferSubData::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyBufferSubDataNV:
@@ -3751,14 +3751,14 @@ void GlCopyBufferSubDataNV::Encode(Encoder* e) const {
     e->Int32(this->mWriteOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlCopyBufferSubDataNV::StaticSchema() {
+const schema::Entity* GlCopyBufferSubDataNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyBufferSubDataNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ReadTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"WriteTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ReadOffset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
@@ -3766,7 +3766,7 @@ const schema::Entity& GlCopyBufferSubDataNV::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyImageSubData:
@@ -3789,14 +3789,14 @@ void GlCopyImageSubData::Encode(Encoder* e) const {
     e->Int32(this->mSrcHeight);
     e->Int32(this->mSrcDepth);
 }
-const schema::Entity& GlCopyImageSubData::StaticSchema() {
+const schema::Entity* GlCopyImageSubData::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyImageSubData",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SrcTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"SrcLevel", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3814,7 +3814,7 @@ const schema::Entity& GlCopyImageSubData::StaticSchema() {
             schema::Field{"SrcDepth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyImageSubDataEXT:
@@ -3837,14 +3837,14 @@ void GlCopyImageSubDataEXT::Encode(Encoder* e) const {
     e->Int32(this->mSrcHeight);
     e->Int32(this->mSrcDepth);
 }
-const schema::Entity& GlCopyImageSubDataEXT::StaticSchema() {
+const schema::Entity* GlCopyImageSubDataEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyImageSubDataEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SrcTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"SrcLevel", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3862,7 +3862,7 @@ const schema::Entity& GlCopyImageSubDataEXT::StaticSchema() {
             schema::Field{"SrcDepth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyImageSubDataOES:
@@ -3885,14 +3885,14 @@ void GlCopyImageSubDataOES::Encode(Encoder* e) const {
     e->Int32(this->mSrcHeight);
     e->Int32(this->mSrcDepth);
 }
-const schema::Entity& GlCopyImageSubDataOES::StaticSchema() {
+const schema::Entity* GlCopyImageSubDataOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyImageSubDataOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"SrcName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SrcTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"SrcLevel", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3910,24 +3910,24 @@ const schema::Entity& GlCopyImageSubDataOES::StaticSchema() {
             schema::Field{"SrcDepth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyPathNV:
 // gles.GlCopyPathNV{$,Uint32,Uint32}
-const schema::Entity& GlCopyPathNV::StaticSchema() {
+const schema::Entity* GlCopyPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ResultPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SrcPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyTexImage2D:
@@ -3943,14 +3943,14 @@ void GlCopyTexImage2D::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Int32(this->mBorder);
 }
-const schema::Entity& GlCopyTexImage2D::StaticSchema() {
+const schema::Entity* GlCopyTexImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyTexImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -3961,7 +3961,7 @@ const schema::Entity& GlCopyTexImage2D::StaticSchema() {
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyTexSubImage2D:
@@ -3977,14 +3977,14 @@ void GlCopyTexSubImage2D::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlCopyTexSubImage2D::StaticSchema() {
+const schema::Entity* GlCopyTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyTexSubImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -3995,7 +3995,7 @@ const schema::Entity& GlCopyTexSubImage2D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyTexSubImage3D:
@@ -4012,14 +4012,14 @@ void GlCopyTexSubImage3D::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlCopyTexSubImage3D::StaticSchema() {
+const schema::Entity* GlCopyTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyTexSubImage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -4031,7 +4031,7 @@ const schema::Entity& GlCopyTexSubImage3D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyTexSubImage3DOES:
@@ -4048,14 +4048,14 @@ void GlCopyTexSubImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlCopyTexSubImage3DOES::StaticSchema() {
+const schema::Entity* GlCopyTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyTexSubImage3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -4067,7 +4067,7 @@ const schema::Entity& GlCopyTexSubImage3DOES::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCopyTextureLevelsAPPLE:
@@ -4079,21 +4079,21 @@ void GlCopyTextureLevelsAPPLE::Encode(Encoder* e) const {
     e->Int32(this->mSourceBaseLevel);
     e->Int32(this->mSourceLevelCount);
 }
-const schema::Entity& GlCopyTextureLevelsAPPLE::StaticSchema() {
+const schema::Entity* GlCopyTextureLevelsAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCopyTextureLevelsAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DestinationTexture", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SourceTexture", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SourceBaseLevel", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"SourceLevelCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverFillPathInstancedNV:
@@ -4108,41 +4108,41 @@ void GlCoverFillPathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlCoverFillPathInstancedNV::StaticSchema() {
+const schema::Entity* GlCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverFillPathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverFillPathNV:
 // gles.GlCoverFillPathNV{$,Uint32,Uint32}
-const schema::Entity& GlCoverFillPathNV::StaticSchema() {
+const schema::Entity* GlCoverFillPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverFillPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverStrokePathInstancedNV:
@@ -4157,156 +4157,156 @@ void GlCoverStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlCoverStrokePathInstancedNV::StaticSchema() {
+const schema::Entity* GlCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverStrokePathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverStrokePathNV:
 // gles.GlCoverStrokePathNV{$,Uint32,Uint32}
-const schema::Entity& GlCoverStrokePathNV::StaticSchema() {
+const schema::Entity* GlCoverStrokePathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverStrokePathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverageMaskNV:
 // gles.GlCoverageMaskNV{$,Uint8}
-const schema::Entity& GlCoverageMaskNV::StaticSchema() {
+const schema::Entity* GlCoverageMaskNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverageMaskNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mask", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverageModulationNV:
 // gles.GlCoverageModulationNV{$,Uint32}
-const schema::Entity& GlCoverageModulationNV::StaticSchema() {
+const schema::Entity* GlCoverageModulationNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverageModulationNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Components", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverageModulationTableNV:
 // gles.GlCoverageModulationTableNV{$,Int32,$}
-const schema::Entity& GlCoverageModulationTableNV::StaticSchema() {
+const schema::Entity* GlCoverageModulationTableNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverageModulationTableNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCoverageOperationNV:
 // gles.GlCoverageOperationNV{$,Uint32}
-const schema::Entity& GlCoverageOperationNV::StaticSchema() {
+const schema::Entity* GlCoverageOperationNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCoverageOperationNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Operation", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCreatePerfQueryINTEL:
 // gles.GlCreatePerfQueryINTEL{$,Uint32,$}
-const schema::Entity& GlCreatePerfQueryINTEL::StaticSchema() {
+const schema::Entity* GlCreatePerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCreatePerfQueryINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryId", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"QueryHandle", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"QueryHandle", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCreateProgram:
 // gles.GlCreateProgram{$,Uint32}
-const schema::Entity& GlCreateProgram::StaticSchema() {
+const schema::Entity* GlCreateProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCreateProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCreateShader:
 // gles.GlCreateShader{$,Uint32,Uint32}
-const schema::Entity& GlCreateShader::StaticSchema() {
+const schema::Entity* GlCreateShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCreateShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCreateShaderProgramv:
@@ -4318,21 +4318,21 @@ void GlCreateShaderProgramv::Encode(Encoder* e) const {
     e->Value(this->mStrings);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlCreateShaderProgramv::StaticSchema() {
+const schema::Entity* GlCreateShaderProgramv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCreateShaderProgramv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Strings", new schema::Struct{"", GLchar__CP__CP::StaticSchema()}},
+            schema::Field{"Strings", new schema::Struct{ GLchar__CP__CP::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCreateShaderProgramvEXT:
@@ -4344,71 +4344,71 @@ void GlCreateShaderProgramvEXT::Encode(Encoder* e) const {
     e->Value(this->mStrings);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlCreateShaderProgramvEXT::StaticSchema() {
+const schema::Entity* GlCreateShaderProgramvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCreateShaderProgramvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Strings", new schema::Struct{"", GLchar__CP__P::StaticSchema()}},
+            schema::Field{"Strings", new schema::Struct{ GLchar__CP__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlCullFace:
 // gles.GlCullFace{$,Uint32}
-const schema::Entity& GlCullFace::StaticSchema() {
+const schema::Entity* GlCullFace::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlCullFace",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageCallback:
 // gles.GlDebugMessageCallback{$,$,$}
-const schema::Entity& GlDebugMessageCallback::StaticSchema() {
+const schema::Entity* GlDebugMessageCallback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageCallback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Callback", new schema::Struct{"", GLDEBUGPROC::StaticSchema()}},
-            schema::Field{"UserParam", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Callback", new schema::Struct{ GLDEBUGPROC::StaticSchema()}},
+            schema::Field{"UserParam", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageCallbackKHR:
 // gles.GlDebugMessageCallbackKHR{$,$,$}
-const schema::Entity& GlDebugMessageCallbackKHR::StaticSchema() {
+const schema::Entity* GlDebugMessageCallbackKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageCallbackKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Callback", new schema::Struct{"", GLDEBUGPROC::StaticSchema()}},
-            schema::Field{"UserParam", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Callback", new schema::Struct{ GLDEBUGPROC::StaticSchema()}},
+            schema::Field{"UserParam", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageControl:
@@ -4422,23 +4422,23 @@ void GlDebugMessageControl::Encode(Encoder* e) const {
     e->Value(this->mIds);
     e->Uint8(this->mEnabled);
 }
-const schema::Entity& GlDebugMessageControl::StaticSchema() {
+const schema::Entity* GlDebugMessageControl::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageControl",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Severity", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Ids", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ GLuint__CP::StaticSchema()}},
             schema::Field{"Enabled", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageControlKHR:
@@ -4452,23 +4452,23 @@ void GlDebugMessageControlKHR::Encode(Encoder* e) const {
     e->Value(this->mIds);
     e->Uint8(this->mEnabled);
 }
-const schema::Entity& GlDebugMessageControlKHR::StaticSchema() {
+const schema::Entity* GlDebugMessageControlKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageControlKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Severity", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Ids", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ GLuint__CP::StaticSchema()}},
             schema::Field{"Enabled", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageInsert:
@@ -4482,23 +4482,23 @@ void GlDebugMessageInsert::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mMessage);
 }
-const schema::Entity& GlDebugMessageInsert::StaticSchema() {
+const schema::Entity* GlDebugMessageInsert::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageInsert",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Id", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Severity", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Message", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Message", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDebugMessageInsertKHR:
@@ -4512,495 +4512,495 @@ void GlDebugMessageInsertKHR::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mMessage);
 }
-const schema::Entity& GlDebugMessageInsertKHR::StaticSchema() {
+const schema::Entity* GlDebugMessageInsertKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDebugMessageInsertKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Id", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Severity", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Message", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Message", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteBuffers:
 // gles.GlDeleteBuffers{$,Int32,$}
-const schema::Entity& GlDeleteBuffers::StaticSchema() {
+const schema::Entity* GlDeleteBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Buffers", new schema::Struct{"", BufferId__CP::StaticSchema()}},
+            schema::Field{"Buffers", new schema::Struct{ BufferId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteFencesNV:
 // gles.GlDeleteFencesNV{$,Int32,$}
-const schema::Entity& GlDeleteFencesNV::StaticSchema() {
+const schema::Entity* GlDeleteFencesNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteFencesNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Fences", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Fences", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteFramebuffers:
 // gles.GlDeleteFramebuffers{$,Int32,$}
-const schema::Entity& GlDeleteFramebuffers::StaticSchema() {
+const schema::Entity* GlDeleteFramebuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteFramebuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Framebuffers", new schema::Struct{"", FramebufferId__CP::StaticSchema()}},
+            schema::Field{"Framebuffers", new schema::Struct{ FramebufferId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeletePathsNV:
 // gles.GlDeletePathsNV{$,Uint32,Int32}
-const schema::Entity& GlDeletePathsNV::StaticSchema() {
+const schema::Entity* GlDeletePathsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeletePathsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Range", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeletePerfMonitorsAMD:
 // gles.GlDeletePerfMonitorsAMD{$,Int32,$}
-const schema::Entity& GlDeletePerfMonitorsAMD::StaticSchema() {
+const schema::Entity* GlDeletePerfMonitorsAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeletePerfMonitorsAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Monitors", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Monitors", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeletePerfQueryINTEL:
 // gles.GlDeletePerfQueryINTEL{$,Uint32}
-const schema::Entity& GlDeletePerfQueryINTEL::StaticSchema() {
+const schema::Entity* GlDeletePerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeletePerfQueryINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryHandle", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteProgram:
 // gles.GlDeleteProgram{$,Uint32}
-const schema::Entity& GlDeleteProgram::StaticSchema() {
+const schema::Entity* GlDeleteProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // PipelineIdᶜᵖ:
 // gles.PipelineIdᶜᵖ{$}
-const schema::Entity& PipelineId__CP::StaticSchema() {
+const schema::Entity* PipelineId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "PipelineIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteProgramPipelines:
 // gles.GlDeleteProgramPipelines{$,Int32,$}
-const schema::Entity& GlDeleteProgramPipelines::StaticSchema() {
+const schema::Entity* GlDeleteProgramPipelines::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteProgramPipelines",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Pipelines", new schema::Struct{"", PipelineId__CP::StaticSchema()}},
+            schema::Field{"Pipelines", new schema::Struct{ PipelineId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteProgramPipelinesEXT:
 // gles.GlDeleteProgramPipelinesEXT{$,Int32,$}
-const schema::Entity& GlDeleteProgramPipelinesEXT::StaticSchema() {
+const schema::Entity* GlDeleteProgramPipelinesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteProgramPipelinesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Pipelines", new schema::Struct{"", PipelineId__CP::StaticSchema()}},
+            schema::Field{"Pipelines", new schema::Struct{ PipelineId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // QueryIdᶜᵖ:
 // gles.QueryIdᶜᵖ{$}
-const schema::Entity& QueryId__CP::StaticSchema() {
+const schema::Entity* QueryId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "QueryIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteQueries:
 // gles.GlDeleteQueries{$,Int32,$}
-const schema::Entity& GlDeleteQueries::StaticSchema() {
+const schema::Entity* GlDeleteQueries::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteQueries",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Queries", new schema::Struct{"", QueryId__CP::StaticSchema()}},
+            schema::Field{"Queries", new schema::Struct{ QueryId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteQueriesEXT:
 // gles.GlDeleteQueriesEXT{$,Int32,$}
-const schema::Entity& GlDeleteQueriesEXT::StaticSchema() {
+const schema::Entity* GlDeleteQueriesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteQueriesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Queries", new schema::Struct{"", QueryId__CP::StaticSchema()}},
+            schema::Field{"Queries", new schema::Struct{ QueryId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // RenderbufferIdᶜᵖ:
 // gles.RenderbufferIdᶜᵖ{$}
-const schema::Entity& RenderbufferId__CP::StaticSchema() {
+const schema::Entity* RenderbufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "RenderbufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteRenderbuffers:
 // gles.GlDeleteRenderbuffers{$,Int32,$}
-const schema::Entity& GlDeleteRenderbuffers::StaticSchema() {
+const schema::Entity* GlDeleteRenderbuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteRenderbuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Renderbuffers", new schema::Struct{"", RenderbufferId__CP::StaticSchema()}},
+            schema::Field{"Renderbuffers", new schema::Struct{ RenderbufferId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // SamplerIdᶜᵖ:
 // gles.SamplerIdᶜᵖ{$}
-const schema::Entity& SamplerId__CP::StaticSchema() {
+const schema::Entity* SamplerId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "SamplerIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteSamplers:
 // gles.GlDeleteSamplers{$,Int32,$}
-const schema::Entity& GlDeleteSamplers::StaticSchema() {
+const schema::Entity* GlDeleteSamplers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteSamplers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Samplers", new schema::Struct{"", SamplerId__CP::StaticSchema()}},
+            schema::Field{"Samplers", new schema::Struct{ SamplerId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteShader:
 // gles.GlDeleteShader{$,Uint32}
-const schema::Entity& GlDeleteShader::StaticSchema() {
+const schema::Entity* GlDeleteShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteSync:
 // gles.GlDeleteSync{$,Uint64}
-const schema::Entity& GlDeleteSync::StaticSchema() {
+const schema::Entity* GlDeleteSync::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteSync",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteSyncAPPLE:
 // gles.GlDeleteSyncAPPLE{$,Uint64}
-const schema::Entity& GlDeleteSyncAPPLE::StaticSchema() {
+const schema::Entity* GlDeleteSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteSyncAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TextureIdᶜᵖ:
 // gles.TextureIdᶜᵖ{$}
-const schema::Entity& TextureId__CP::StaticSchema() {
+const schema::Entity* TextureId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TextureIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteTextures:
 // gles.GlDeleteTextures{$,Int32,$}
-const schema::Entity& GlDeleteTextures::StaticSchema() {
+const schema::Entity* GlDeleteTextures::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteTextures",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Textures", new schema::Struct{"", TextureId__CP::StaticSchema()}},
+            schema::Field{"Textures", new schema::Struct{ TextureId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TransformFeedbackIdᶜᵖ:
 // gles.TransformFeedbackIdᶜᵖ{$}
-const schema::Entity& TransformFeedbackId__CP::StaticSchema() {
+const schema::Entity* TransformFeedbackId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TransformFeedbackIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteTransformFeedbacks:
 // gles.GlDeleteTransformFeedbacks{$,Int32,$}
-const schema::Entity& GlDeleteTransformFeedbacks::StaticSchema() {
+const schema::Entity* GlDeleteTransformFeedbacks::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteTransformFeedbacks",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Ids", new schema::Struct{"", TransformFeedbackId__CP::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ TransformFeedbackId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexArrayIdᶜᵖ:
 // gles.VertexArrayIdᶜᵖ{$}
-const schema::Entity& VertexArrayId__CP::StaticSchema() {
+const schema::Entity* VertexArrayId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexArrayIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteVertexArrays:
 // gles.GlDeleteVertexArrays{$,Int32,$}
-const schema::Entity& GlDeleteVertexArrays::StaticSchema() {
+const schema::Entity* GlDeleteVertexArrays::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteVertexArrays",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Arrays", new schema::Struct{"", VertexArrayId__CP::StaticSchema()}},
+            schema::Field{"Arrays", new schema::Struct{ VertexArrayId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDeleteVertexArraysOES:
 // gles.GlDeleteVertexArraysOES{$,Int32,$}
-const schema::Entity& GlDeleteVertexArraysOES::StaticSchema() {
+const schema::Entity* GlDeleteVertexArraysOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDeleteVertexArraysOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Arrays", new schema::Struct{"", VertexArrayId__CP::StaticSchema()}},
+            schema::Field{"Arrays", new schema::Struct{ VertexArrayId__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDepthFunc:
 // gles.GlDepthFunc{$,Uint32}
-const schema::Entity& GlDepthFunc::StaticSchema() {
+const schema::Entity* GlDepthFunc::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDepthFunc",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Function", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDepthMask:
 // gles.GlDepthMask{$,Uint8}
-const schema::Entity& GlDepthMask::StaticSchema() {
+const schema::Entity* GlDepthMask::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDepthMask",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Enabled", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDepthRangeArrayfvNV:
@@ -5011,20 +5011,20 @@ void GlDepthRangeArrayfvNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mV);
 }
-const schema::Entity& GlDepthRangeArrayfvNV::StaticSchema() {
+const schema::Entity* GlDepthRangeArrayfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDepthRangeArrayfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"First", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDepthRangeIndexedfNV:
@@ -5035,170 +5035,170 @@ void GlDepthRangeIndexedfNV::Encode(Encoder* e) const {
     e->Float32(this->mN);
     e->Float32(this->mF);
 }
-const schema::Entity& GlDepthRangeIndexedfNV::StaticSchema() {
+const schema::Entity* GlDepthRangeIndexedfNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDepthRangeIndexedfNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"N", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"F", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDepthRangef:
 // gles.GlDepthRangef{$,Float32,Float32}
-const schema::Entity& GlDepthRangef::StaticSchema() {
+const schema::Entity* GlDepthRangef::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDepthRangef",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Near", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Far", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDetachShader:
 // gles.GlDetachShader{$,Uint32,Uint32}
-const schema::Entity& GlDetachShader::StaticSchema() {
+const schema::Entity* GlDetachShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDetachShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisable:
 // gles.GlDisable{$,Uint32}
-const schema::Entity& GlDisable::StaticSchema() {
+const schema::Entity* GlDisable::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisable",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Capability", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisableDriverControlQCOM:
 // gles.GlDisableDriverControlQCOM{$,Uint32}
-const schema::Entity& GlDisableDriverControlQCOM::StaticSchema() {
+const schema::Entity* GlDisableDriverControlQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisableDriverControlQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DriverControl", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisableVertexAttribArray:
 // gles.GlDisableVertexAttribArray{$,Uint32}
-const schema::Entity& GlDisableVertexAttribArray::StaticSchema() {
+const schema::Entity* GlDisableVertexAttribArray::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisableVertexAttribArray",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisablei:
 // gles.GlDisablei{$,Uint32,Uint32}
-const schema::Entity& GlDisablei::StaticSchema() {
+const schema::Entity* GlDisablei::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisablei",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisableiEXT:
 // gles.GlDisableiEXT{$,Uint32,Uint32}
-const schema::Entity& GlDisableiEXT::StaticSchema() {
+const schema::Entity* GlDisableiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisableiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisableiNV:
 // gles.GlDisableiNV{$,Uint32,Uint32}
-const schema::Entity& GlDisableiNV::StaticSchema() {
+const schema::Entity* GlDisableiNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisableiNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDisableiOES:
 // gles.GlDisableiOES{$,Uint32,Uint32}
-const schema::Entity& GlDisableiOES::StaticSchema() {
+const schema::Entity* GlDisableiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDisableiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDiscardFramebufferEXT:
@@ -5209,20 +5209,20 @@ void GlDiscardFramebufferEXT::Encode(Encoder* e) const {
     e->Int32(this->mNumAttachments);
     e->Value(this->mAttachments);
 }
-const schema::Entity& GlDiscardFramebufferEXT::StaticSchema() {
+const schema::Entity* GlDiscardFramebufferEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDiscardFramebufferEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"NumAttachments", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Attachments", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Attachments", new schema::Struct{ GLenum__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDispatchCompute:
@@ -5233,36 +5233,36 @@ void GlDispatchCompute::Encode(Encoder* e) const {
     e->Uint32(this->mNumGroupsY);
     e->Uint32(this->mNumGroupsZ);
 }
-const schema::Entity& GlDispatchCompute::StaticSchema() {
+const schema::Entity* GlDispatchCompute::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDispatchCompute",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumGroupsX", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumGroupsY", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumGroupsZ", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDispatchComputeIndirect:
 // gles.GlDispatchComputeIndirect{$,Int32}
-const schema::Entity& GlDispatchComputeIndirect::StaticSchema() {
+const schema::Entity* GlDispatchComputeIndirect::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDispatchComputeIndirect",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Indirect", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArrays:
@@ -5273,37 +5273,37 @@ void GlDrawArrays::Encode(Encoder* e) const {
     e->Int32(this->mFirstIndex);
     e->Int32(this->mIndicesCount);
 }
-const schema::Entity& GlDrawArrays::StaticSchema() {
+const schema::Entity* GlDrawArrays::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArrays",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"FirstIndex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysIndirect:
 // gles.GlDrawArraysIndirect{$,Uint32,$}
-const schema::Entity& GlDrawArraysIndirect::StaticSchema() {
+const schema::Entity* GlDrawArraysIndirect::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysIndirect",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indirect", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indirect", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysInstanced:
@@ -5315,21 +5315,21 @@ void GlDrawArraysInstanced::Encode(Encoder* e) const {
     e->Int32(this->mIndicesCount);
     e->Int32(this->mInstanceCount);
 }
-const schema::Entity& GlDrawArraysInstanced::StaticSchema() {
+const schema::Entity* GlDrawArraysInstanced::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysInstanced",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"FirstIndex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"InstanceCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysInstancedANGLE:
@@ -5341,21 +5341,21 @@ void GlDrawArraysInstancedANGLE::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawArraysInstancedANGLE::StaticSchema() {
+const schema::Entity* GlDrawArraysInstancedANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysInstancedANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"First", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysInstancedBaseInstanceEXT:
@@ -5368,14 +5368,14 @@ void GlDrawArraysInstancedBaseInstanceEXT::Encode(Encoder* e) const {
     e->Int32(this->mInstancecount);
     e->Uint32(this->mBaseinstance);
 }
-const schema::Entity& GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
+const schema::Entity* GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysInstancedBaseInstanceEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"First", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -5383,7 +5383,7 @@ const schema::Entity& GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
             schema::Field{"Baseinstance", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysInstancedEXT:
@@ -5395,21 +5395,21 @@ void GlDrawArraysInstancedEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawArraysInstancedEXT::StaticSchema() {
+const schema::Entity* GlDrawArraysInstancedEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysInstancedEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawArraysInstancedNV:
@@ -5421,55 +5421,55 @@ void GlDrawArraysInstancedNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawArraysInstancedNV::StaticSchema() {
+const schema::Entity* GlDrawArraysInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawArraysInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"First", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawBuffers:
 // gles.GlDrawBuffers{$,Int32,$}
-const schema::Entity& GlDrawBuffers::StaticSchema() {
+const schema::Entity* GlDrawBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Bufs", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Bufs", new schema::Struct{ GLenum__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawBuffersEXT:
 // gles.GlDrawBuffersEXT{$,Int32,$}
-const schema::Entity& GlDrawBuffersEXT::StaticSchema() {
+const schema::Entity* GlDrawBuffersEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawBuffersEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Bufs", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Bufs", new schema::Struct{ GLenum__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawBuffersIndexedEXT:
@@ -5480,52 +5480,52 @@ void GlDrawBuffersIndexedEXT::Encode(Encoder* e) const {
     e->Value(this->mLocation);
     e->Value(this->mIndices);
 }
-const schema::Entity& GlDrawBuffersIndexedEXT::StaticSchema() {
+const schema::Entity* GlDrawBuffersIndexedEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawBuffersIndexedEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"Location", new schema::Struct{"", GLenum__CP::StaticSchema()}},
-            schema::Field{"Indices", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Location", new schema::Struct{ GLenum__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawBuffersNV:
 // gles.GlDrawBuffersNV{$,Int32,$}
-const schema::Entity& GlDrawBuffersNV::StaticSchema() {
+const schema::Entity* GlDrawBuffersNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawBuffersNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Bufs", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Bufs", new schema::Struct{ GLenum__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // IndicesPointer:
 // gles.IndicesPointer{$}
-const schema::Entity& IndicesPointer::StaticSchema() {
+const schema::Entity* IndicesPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "IndicesPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElements:
@@ -5537,21 +5537,21 @@ void GlDrawElements::Encode(Encoder* e) const {
     e->Uint32(this->mIndicesType);
     e->Value(this->mIndices);
 }
-const schema::Entity& GlDrawElements::StaticSchema() {
+const schema::Entity* GlDrawElements::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElements",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsBaseVertex:
@@ -5564,22 +5564,22 @@ void GlDrawElementsBaseVertex::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBaseVertex);
 }
-const schema::Entity& GlDrawElementsBaseVertex::StaticSchema() {
+const schema::Entity* GlDrawElementsBaseVertex::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsBaseVertex",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"BaseVertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsBaseVertexEXT:
@@ -5592,22 +5592,22 @@ void GlDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawElementsBaseVertexEXT::StaticSchema() {
+const schema::Entity* GlDrawElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsBaseVertexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsBaseVertexOES:
@@ -5620,22 +5620,22 @@ void GlDrawElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawElementsBaseVertexOES::StaticSchema() {
+const schema::Entity* GlDrawElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsBaseVertexOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsIndirect:
@@ -5646,20 +5646,20 @@ void GlDrawElementsIndirect::Encode(Encoder* e) const {
     e->Uint32(this->mIndicesType);
     e->Value(this->mIndirect);
 }
-const schema::Entity& GlDrawElementsIndirect::StaticSchema() {
+const schema::Entity* GlDrawElementsIndirect::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsIndirect",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indirect", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indirect", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstanced:
@@ -5672,22 +5672,22 @@ void GlDrawElementsInstanced::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mInstanceCount);
 }
-const schema::Entity& GlDrawElementsInstanced::StaticSchema() {
+const schema::Entity* GlDrawElementsInstanced::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstanced",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"InstanceCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedANGLE:
@@ -5700,22 +5700,22 @@ void GlDrawElementsInstancedANGLE::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawElementsInstancedANGLE::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedBaseInstanceEXT:
@@ -5729,23 +5729,23 @@ void GlDrawElementsInstancedBaseInstanceEXT::Encode(Encoder* e) const {
     e->Int32(this->mInstancecount);
     e->Uint32(this->mBaseinstance);
 }
-const schema::Entity& GlDrawElementsInstancedBaseInstanceEXT::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedBaseInstanceEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Instancecount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Baseinstance", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedBaseVertex:
@@ -5759,23 +5759,23 @@ void GlDrawElementsInstancedBaseVertex::Encode(Encoder* e) const {
     e->Int32(this->mInstanceCount);
     e->Int32(this->mBaseVertex);
 }
-const schema::Entity& GlDrawElementsInstancedBaseVertex::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedBaseVertex::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertex",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"InstanceCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"BaseVertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedBaseVertexBaseInstanceEXT:
@@ -5790,24 +5790,24 @@ void GlDrawElementsInstancedBaseVertexBaseInstanceEXT::Encode(Encoder* e) const 
     e->Int32(this->mBasevertex);
     e->Uint32(this->mBaseinstance);
 }
-const schema::Entity& GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexBaseInstanceEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Instancecount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Baseinstance", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedBaseVertexEXT:
@@ -5821,23 +5821,23 @@ void GlDrawElementsInstancedBaseVertexEXT::Encode(Encoder* e) const {
     e->Int32(this->mInstancecount);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawElementsInstancedBaseVertexEXT::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Instancecount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedBaseVertexOES:
@@ -5851,23 +5851,23 @@ void GlDrawElementsInstancedBaseVertexOES::Encode(Encoder* e) const {
     e->Int32(this->mInstancecount);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawElementsInstancedBaseVertexOES::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Instancecount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedEXT:
@@ -5880,22 +5880,22 @@ void GlDrawElementsInstancedEXT::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawElementsInstancedEXT::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawElementsInstancedNV:
@@ -5908,22 +5908,22 @@ void GlDrawElementsInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlDrawElementsInstancedNV::StaticSchema() {
+const schema::Entity* GlDrawElementsInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawElementsInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawRangeElements:
@@ -5937,23 +5937,23 @@ void GlDrawRangeElements::Encode(Encoder* e) const {
     e->Uint32(this->mIndicesType);
     e->Value(this->mIndices);
 }
-const schema::Entity& GlDrawRangeElements::StaticSchema() {
+const schema::Entity* GlDrawRangeElements::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawRangeElements",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"End", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawRangeElementsBaseVertex:
@@ -5968,24 +5968,24 @@ void GlDrawRangeElementsBaseVertex::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBaseVertex);
 }
-const schema::Entity& GlDrawRangeElementsBaseVertex::StaticSchema() {
+const schema::Entity* GlDrawRangeElementsBaseVertex::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawRangeElementsBaseVertex",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DrawMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"End", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"IndicesCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"IndicesType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"BaseVertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawRangeElementsBaseVertexEXT:
@@ -6000,24 +6000,24 @@ void GlDrawRangeElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
+const schema::Entity* GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawRangeElementsBaseVertexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"End", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlDrawRangeElementsBaseVertexOES:
@@ -6032,316 +6032,316 @@ void GlDrawRangeElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mBasevertex);
 }
-const schema::Entity& GlDrawRangeElementsBaseVertexOES::StaticSchema() {
+const schema::Entity* GlDrawRangeElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlDrawRangeElementsBaseVertexOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"End", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", IndicesPointer::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ IndicesPointer::StaticSchema()}},
             schema::Field{"Basevertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEGLImageTargetRenderbufferStorageOES:
 // gles.GlEGLImageTargetRenderbufferStorageOES{$,Uint32,$}
-const schema::Entity& GlEGLImageTargetRenderbufferStorageOES::StaticSchema() {
+const schema::Entity* GlEGLImageTargetRenderbufferStorageOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEGLImageTargetRenderbufferStorageOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Image", new schema::Struct{"", GLeglImageOES::StaticSchema()}},
+            schema::Field{"Image", new schema::Struct{ GLeglImageOES::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEGLImageTargetTexture2DOES:
 // gles.GlEGLImageTargetTexture2DOES{$,Uint32,$}
-const schema::Entity& GlEGLImageTargetTexture2DOES::StaticSchema() {
+const schema::Entity* GlEGLImageTargetTexture2DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEGLImageTargetTexture2DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Image", new schema::Struct{"", GLeglImageOES::StaticSchema()}},
+            schema::Field{"Image", new schema::Struct{ GLeglImageOES::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnable:
 // gles.GlEnable{$,Uint32}
-const schema::Entity& GlEnable::StaticSchema() {
+const schema::Entity* GlEnable::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnable",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Capability", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnableDriverControlQCOM:
 // gles.GlEnableDriverControlQCOM{$,Uint32}
-const schema::Entity& GlEnableDriverControlQCOM::StaticSchema() {
+const schema::Entity* GlEnableDriverControlQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnableDriverControlQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DriverControl", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnableVertexAttribArray:
 // gles.GlEnableVertexAttribArray{$,Uint32}
-const schema::Entity& GlEnableVertexAttribArray::StaticSchema() {
+const schema::Entity* GlEnableVertexAttribArray::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnableVertexAttribArray",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnablei:
 // gles.GlEnablei{$,Uint32,Uint32}
-const schema::Entity& GlEnablei::StaticSchema() {
+const schema::Entity* GlEnablei::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnablei",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnableiEXT:
 // gles.GlEnableiEXT{$,Uint32,Uint32}
-const schema::Entity& GlEnableiEXT::StaticSchema() {
+const schema::Entity* GlEnableiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnableiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnableiNV:
 // gles.GlEnableiNV{$,Uint32,Uint32}
-const schema::Entity& GlEnableiNV::StaticSchema() {
+const schema::Entity* GlEnableiNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnableiNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEnableiOES:
 // gles.GlEnableiOES{$,Uint32,Uint32}
-const schema::Entity& GlEnableiOES::StaticSchema() {
+const schema::Entity* GlEnableiOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEnableiOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndConditionalRenderNV:
 // gles.GlEndConditionalRenderNV{$}
-const schema::Entity& GlEndConditionalRenderNV::StaticSchema() {
+const schema::Entity* GlEndConditionalRenderNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndConditionalRenderNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndPerfMonitorAMD:
 // gles.GlEndPerfMonitorAMD{$,Uint32}
-const schema::Entity& GlEndPerfMonitorAMD::StaticSchema() {
+const schema::Entity* GlEndPerfMonitorAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndPerfMonitorAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Monitor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndPerfQueryINTEL:
 // gles.GlEndPerfQueryINTEL{$,Uint32}
-const schema::Entity& GlEndPerfQueryINTEL::StaticSchema() {
+const schema::Entity* GlEndPerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndPerfQueryINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryHandle", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndQuery:
 // gles.GlEndQuery{$,Uint32}
-const schema::Entity& GlEndQuery::StaticSchema() {
+const schema::Entity* GlEndQuery::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndQuery",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndQueryEXT:
 // gles.GlEndQueryEXT{$,Uint32}
-const schema::Entity& GlEndQueryEXT::StaticSchema() {
+const schema::Entity* GlEndQueryEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndQueryEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndTilingQCOM:
 // gles.GlEndTilingQCOM{$,Uint32}
-const schema::Entity& GlEndTilingQCOM::StaticSchema() {
+const schema::Entity* GlEndTilingQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndTilingQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"PreserveMask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlEndTransformFeedback:
 // gles.GlEndTransformFeedback{$}
-const schema::Entity& GlEndTransformFeedback::StaticSchema() {
+const schema::Entity* GlEndTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlEndTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᵖᵖ:
 // gles.Voidᵖᵖ{$}
-const schema::Entity& Void__P__P::StaticSchema() {
+const schema::Entity* Void__P__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetBufferPointervQCOM:
 // gles.GlExtGetBufferPointervQCOM{$,Uint32,$}
-const schema::Entity& GlExtGetBufferPointervQCOM::StaticSchema() {
+const schema::Entity* GlExtGetBufferPointervQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetBufferPointervQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetBuffersQCOM:
@@ -6352,20 +6352,20 @@ void GlExtGetBuffersQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxBuffers);
     e->Value(this->mNumBuffers);
 }
-const schema::Entity& GlExtGetBuffersQCOM::StaticSchema() {
+const schema::Entity* GlExtGetBuffersQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetBuffersQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Buffers", new schema::Struct{"", BufferId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Buffers", new schema::Struct{ BufferId__P::StaticSchema()}},
             schema::Field{"MaxBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumBuffers", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumBuffers", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetFramebuffersQCOM:
@@ -6376,20 +6376,20 @@ void GlExtGetFramebuffersQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxFramebuffers);
     e->Value(this->mNumFramebuffers);
 }
-const schema::Entity& GlExtGetFramebuffersQCOM::StaticSchema() {
+const schema::Entity* GlExtGetFramebuffersQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetFramebuffersQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Framebuffers", new schema::Struct{"", FramebufferId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Framebuffers", new schema::Struct{ FramebufferId__P::StaticSchema()}},
             schema::Field{"MaxFramebuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumFramebuffers", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumFramebuffers", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetProgramBinarySourceQCOM:
@@ -6401,36 +6401,36 @@ void GlExtGetProgramBinarySourceQCOM::Encode(Encoder* e) const {
     e->Value(this->mSource);
     e->Value(this->mLength);
 }
-const schema::Entity& GlExtGetProgramBinarySourceQCOM::StaticSchema() {
+const schema::Entity* GlExtGetProgramBinarySourceQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetProgramBinarySourceQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Shadertype", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Source", new schema::Struct{"", GLchar__P::StaticSchema()}},
-            schema::Field{"Length", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Source", new schema::Struct{ GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ProgramIdᵖ:
 // gles.ProgramIdᵖ{$}
-const schema::Entity& ProgramId__P::StaticSchema() {
+const schema::Entity* ProgramId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ProgramIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetProgramsQCOM:
@@ -6441,35 +6441,35 @@ void GlExtGetProgramsQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxPrograms);
     e->Value(this->mNumPrograms);
 }
-const schema::Entity& GlExtGetProgramsQCOM::StaticSchema() {
+const schema::Entity* GlExtGetProgramsQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetProgramsQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Programs", new schema::Struct{"", ProgramId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Programs", new schema::Struct{ ProgramId__P::StaticSchema()}},
             schema::Field{"MaxPrograms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumPrograms", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumPrograms", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // RenderbufferIdᵖ:
 // gles.RenderbufferIdᵖ{$}
-const schema::Entity& RenderbufferId__P::StaticSchema() {
+const schema::Entity* RenderbufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "RenderbufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetRenderbuffersQCOM:
@@ -6480,35 +6480,35 @@ void GlExtGetRenderbuffersQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxRenderbuffers);
     e->Value(this->mNumRenderbuffers);
 }
-const schema::Entity& GlExtGetRenderbuffersQCOM::StaticSchema() {
+const schema::Entity* GlExtGetRenderbuffersQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetRenderbuffersQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Renderbuffers", new schema::Struct{"", RenderbufferId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Renderbuffers", new schema::Struct{ RenderbufferId__P::StaticSchema()}},
             schema::Field{"MaxRenderbuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumRenderbuffers", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumRenderbuffers", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ShaderIdᵖ:
 // gles.ShaderIdᵖ{$}
-const schema::Entity& ShaderId__P::StaticSchema() {
+const schema::Entity* ShaderId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ShaderIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetShadersQCOM:
@@ -6519,20 +6519,20 @@ void GlExtGetShadersQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxShaders);
     e->Value(this->mNumShaders);
 }
-const schema::Entity& GlExtGetShadersQCOM::StaticSchema() {
+const schema::Entity* GlExtGetShadersQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetShadersQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Shaders", new schema::Struct{"", ShaderId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Shaders", new schema::Struct{ ShaderId__P::StaticSchema()}},
             schema::Field{"MaxShaders", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumShaders", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumShaders", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetTexLevelParameterivQCOM:
@@ -6545,22 +6545,22 @@ void GlExtGetTexLevelParameterivQCOM::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlExtGetTexLevelParameterivQCOM::StaticSchema() {
+const schema::Entity* GlExtGetTexLevelParameterivQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetTexLevelParameterivQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Face", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetTexSubImageQCOM:
@@ -6579,14 +6579,14 @@ void GlExtGetTexSubImageQCOM::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mTexels);
 }
-const schema::Entity& GlExtGetTexSubImageQCOM::StaticSchema() {
+const schema::Entity* GlExtGetTexSubImageQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetTexSubImageQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -6597,25 +6597,25 @@ const schema::Entity& GlExtGetTexSubImageQCOM::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Texels", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Texels", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TextureIdᵖ:
 // gles.TextureIdᵖ{$}
-const schema::Entity& TextureId__P::StaticSchema() {
+const schema::Entity* TextureId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TextureIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtGetTexturesQCOM:
@@ -6626,37 +6626,37 @@ void GlExtGetTexturesQCOM::Encode(Encoder* e) const {
     e->Int32(this->mMaxTextures);
     e->Value(this->mNumTextures);
 }
-const schema::Entity& GlExtGetTexturesQCOM::StaticSchema() {
+const schema::Entity* GlExtGetTexturesQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtGetTexturesQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Textures", new schema::Struct{"", TextureId__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Textures", new schema::Struct{ TextureId__P::StaticSchema()}},
             schema::Field{"MaxTextures", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"NumTextures", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumTextures", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtIsProgramBinaryQCOM:
 // gles.GlExtIsProgramBinaryQCOM{$,Uint32,Uint8}
-const schema::Entity& GlExtIsProgramBinaryQCOM::StaticSchema() {
+const schema::Entity* GlExtIsProgramBinaryQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtIsProgramBinaryQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlExtTexObjectStateOverrideiQCOM:
@@ -6667,20 +6667,20 @@ void GlExtTexObjectStateOverrideiQCOM::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
 }
-const schema::Entity& GlExtTexObjectStateOverrideiQCOM::StaticSchema() {
+const schema::Entity* GlExtTexObjectStateOverrideiQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlExtTexObjectStateOverrideiQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Param", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFenceSync:
@@ -6691,20 +6691,20 @@ void GlFenceSync::Encode(Encoder* e) const {
     e->Uint32(this->mSyncFlags);
     e->Uint64(this->mResult);
 }
-const schema::Entity& GlFenceSync::StaticSchema() {
+const schema::Entity* GlFenceSync::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFenceSync",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Condition", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"SyncFlags", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFenceSyncAPPLE:
@@ -6715,66 +6715,66 @@ void GlFenceSyncAPPLE::Encode(Encoder* e) const {
     e->Uint32(this->mFlag);
     e->Uint64(this->mResult);
 }
-const schema::Entity& GlFenceSyncAPPLE::StaticSchema() {
+const schema::Entity* GlFenceSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFenceSyncAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Condition", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Flag", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFinish:
 // gles.GlFinish{$}
-const schema::Entity& GlFinish::StaticSchema() {
+const schema::Entity* GlFinish::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFinish",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFinishFenceNV:
 // gles.GlFinishFenceNV{$,Uint32}
-const schema::Entity& GlFinishFenceNV::StaticSchema() {
+const schema::Entity* GlFinishFenceNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFinishFenceNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fence", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFlush:
 // gles.GlFlush{$}
-const schema::Entity& GlFlush::StaticSchema() {
+const schema::Entity* GlFlush::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFlush",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFlushMappedBufferRange:
@@ -6785,20 +6785,20 @@ void GlFlushMappedBufferRange::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
 }
-const schema::Entity& GlFlushMappedBufferRange::StaticSchema() {
+const schema::Entity* GlFlushMappedBufferRange::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFlushMappedBufferRange",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Length", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFlushMappedBufferRangeEXT:
@@ -6809,36 +6809,36 @@ void GlFlushMappedBufferRangeEXT::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
 }
-const schema::Entity& GlFlushMappedBufferRangeEXT::StaticSchema() {
+const schema::Entity* GlFlushMappedBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFlushMappedBufferRangeEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Length", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFragmentCoverageColorNV:
 // gles.GlFragmentCoverageColorNV{$,Uint32}
-const schema::Entity& GlFragmentCoverageColorNV::StaticSchema() {
+const schema::Entity* GlFragmentCoverageColorNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFragmentCoverageColorNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Color", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferParameteri:
@@ -6849,20 +6849,20 @@ void GlFramebufferParameteri::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
 }
-const schema::Entity& GlFramebufferParameteri::StaticSchema() {
+const schema::Entity* GlFramebufferParameteri::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferParameteri",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Param", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferRenderbuffer:
@@ -6874,21 +6874,21 @@ void GlFramebufferRenderbuffer::Encode(Encoder* e) const {
     e->Uint32(this->mRenderbufferTarget);
     e->Uint32(this->mRenderbuffer);
 }
-const schema::Entity& GlFramebufferRenderbuffer::StaticSchema() {
+const schema::Entity* GlFramebufferRenderbuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferRenderbuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FramebufferTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"FramebufferAttachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"RenderbufferTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Renderbuffer", new schema::Primitive{"RenderbufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferSampleLocationsfvNV:
@@ -6900,21 +6900,21 @@ void GlFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mV);
 }
-const schema::Entity& GlFramebufferSampleLocationsfvNV::StaticSchema() {
+const schema::Entity* GlFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferSampleLocationsfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTexture:
@@ -6926,21 +6926,21 @@ void GlFramebufferTexture::Encode(Encoder* e) const {
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
 }
-const schema::Entity& GlFramebufferTexture::StaticSchema() {
+const schema::Entity* GlFramebufferTexture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTexture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTexture2D:
@@ -6953,14 +6953,14 @@ void GlFramebufferTexture2D::Encode(Encoder* e) const {
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
 }
-const schema::Entity& GlFramebufferTexture2D::StaticSchema() {
+const schema::Entity* GlFramebufferTexture2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTexture2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FramebufferTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"FramebufferAttachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"TextureTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -6968,7 +6968,7 @@ const schema::Entity& GlFramebufferTexture2D::StaticSchema() {
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTexture2DMultisampleEXT:
@@ -6982,14 +6982,14 @@ void GlFramebufferTexture2DMultisampleEXT::Encode(Encoder* e) const {
     e->Int32(this->mLevel);
     e->Int32(this->mSamples);
 }
-const schema::Entity& GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
+const schema::Entity* GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTexture2DMultisampleEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Textarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -6998,7 +6998,7 @@ const schema::Entity& GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTexture2DMultisampleIMG:
@@ -7012,14 +7012,14 @@ void GlFramebufferTexture2DMultisampleIMG::Encode(Encoder* e) const {
     e->Int32(this->mLevel);
     e->Int32(this->mSamples);
 }
-const schema::Entity& GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
+const schema::Entity* GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTexture2DMultisampleIMG",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Textarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -7028,7 +7028,7 @@ const schema::Entity& GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTexture3DOES:
@@ -7042,14 +7042,14 @@ void GlFramebufferTexture3DOES::Encode(Encoder* e) const {
     e->Int32(this->mLevel);
     e->Int32(this->mZoffset);
 }
-const schema::Entity& GlFramebufferTexture3DOES::StaticSchema() {
+const schema::Entity* GlFramebufferTexture3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTexture3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Textarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -7058,7 +7058,7 @@ const schema::Entity& GlFramebufferTexture3DOES::StaticSchema() {
             schema::Field{"Zoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTextureEXT:
@@ -7070,21 +7070,21 @@ void GlFramebufferTextureEXT::Encode(Encoder* e) const {
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
 }
-const schema::Entity& GlFramebufferTextureEXT::StaticSchema() {
+const schema::Entity* GlFramebufferTextureEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTextureEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTextureLayer:
@@ -7097,14 +7097,14 @@ void GlFramebufferTextureLayer::Encode(Encoder* e) const {
     e->Int32(this->mLevel);
     e->Int32(this->mLayer);
 }
-const schema::Entity& GlFramebufferTextureLayer::StaticSchema() {
+const schema::Entity* GlFramebufferTextureLayer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTextureLayer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
@@ -7112,7 +7112,7 @@ const schema::Entity& GlFramebufferTextureLayer::StaticSchema() {
             schema::Field{"Layer", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTextureMultiviewOVR:
@@ -7126,14 +7126,14 @@ void GlFramebufferTextureMultiviewOVR::Encode(Encoder* e) const {
     e->Int32(this->mBaseViewIndex);
     e->Int32(this->mNumViews);
 }
-const schema::Entity& GlFramebufferTextureMultiviewOVR::StaticSchema() {
+const schema::Entity* GlFramebufferTextureMultiviewOVR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTextureMultiviewOVR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
@@ -7142,7 +7142,7 @@ const schema::Entity& GlFramebufferTextureMultiviewOVR::StaticSchema() {
             schema::Field{"NumViews", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFramebufferTextureOES:
@@ -7154,383 +7154,383 @@ void GlFramebufferTextureOES::Encode(Encoder* e) const {
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
 }
-const schema::Entity& GlFramebufferTextureOES::StaticSchema() {
+const schema::Entity* GlFramebufferTextureOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFramebufferTextureOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlFrontFace:
 // gles.GlFrontFace{$,Uint32}
-const schema::Entity& GlFrontFace::StaticSchema() {
+const schema::Entity* GlFrontFace::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlFrontFace",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Orientation", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenBuffers:
 // gles.GlGenBuffers{$,Int32,$}
-const schema::Entity& GlGenBuffers::StaticSchema() {
+const schema::Entity* GlGenBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Buffers", new schema::Struct{"", BufferId__P::StaticSchema()}},
+            schema::Field{"Buffers", new schema::Struct{ BufferId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenFencesNV:
 // gles.GlGenFencesNV{$,Int32,$}
-const schema::Entity& GlGenFencesNV::StaticSchema() {
+const schema::Entity* GlGenFencesNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenFencesNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Fences", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Fences", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenFramebuffers:
 // gles.GlGenFramebuffers{$,Int32,$}
-const schema::Entity& GlGenFramebuffers::StaticSchema() {
+const schema::Entity* GlGenFramebuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenFramebuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Framebuffers", new schema::Struct{"", FramebufferId__P::StaticSchema()}},
+            schema::Field{"Framebuffers", new schema::Struct{ FramebufferId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenPathsNV:
 // gles.GlGenPathsNV{$,Int32,Uint32}
-const schema::Entity& GlGenPathsNV::StaticSchema() {
+const schema::Entity* GlGenPathsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenPathsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Range", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Result", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenPerfMonitorsAMD:
 // gles.GlGenPerfMonitorsAMD{$,Int32,$}
-const schema::Entity& GlGenPerfMonitorsAMD::StaticSchema() {
+const schema::Entity* GlGenPerfMonitorsAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenPerfMonitorsAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Monitors", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Monitors", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // PipelineIdᵖ:
 // gles.PipelineIdᵖ{$}
-const schema::Entity& PipelineId__P::StaticSchema() {
+const schema::Entity* PipelineId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "PipelineIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenProgramPipelines:
 // gles.GlGenProgramPipelines{$,Int32,$}
-const schema::Entity& GlGenProgramPipelines::StaticSchema() {
+const schema::Entity* GlGenProgramPipelines::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenProgramPipelines",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Pipelines", new schema::Struct{"", PipelineId__P::StaticSchema()}},
+            schema::Field{"Pipelines", new schema::Struct{ PipelineId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenProgramPipelinesEXT:
 // gles.GlGenProgramPipelinesEXT{$,Int32,$}
-const schema::Entity& GlGenProgramPipelinesEXT::StaticSchema() {
+const schema::Entity* GlGenProgramPipelinesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenProgramPipelinesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Pipelines", new schema::Struct{"", PipelineId__P::StaticSchema()}},
+            schema::Field{"Pipelines", new schema::Struct{ PipelineId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // QueryIdᵖ:
 // gles.QueryIdᵖ{$}
-const schema::Entity& QueryId__P::StaticSchema() {
+const schema::Entity* QueryId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "QueryIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenQueries:
 // gles.GlGenQueries{$,Int32,$}
-const schema::Entity& GlGenQueries::StaticSchema() {
+const schema::Entity* GlGenQueries::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenQueries",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Queries", new schema::Struct{"", QueryId__P::StaticSchema()}},
+            schema::Field{"Queries", new schema::Struct{ QueryId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenQueriesEXT:
 // gles.GlGenQueriesEXT{$,Int32,$}
-const schema::Entity& GlGenQueriesEXT::StaticSchema() {
+const schema::Entity* GlGenQueriesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenQueriesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Queries", new schema::Struct{"", QueryId__P::StaticSchema()}},
+            schema::Field{"Queries", new schema::Struct{ QueryId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenRenderbuffers:
 // gles.GlGenRenderbuffers{$,Int32,$}
-const schema::Entity& GlGenRenderbuffers::StaticSchema() {
+const schema::Entity* GlGenRenderbuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenRenderbuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Renderbuffers", new schema::Struct{"", RenderbufferId__P::StaticSchema()}},
+            schema::Field{"Renderbuffers", new schema::Struct{ RenderbufferId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // SamplerIdᵖ:
 // gles.SamplerIdᵖ{$}
-const schema::Entity& SamplerId__P::StaticSchema() {
+const schema::Entity* SamplerId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "SamplerIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenSamplers:
 // gles.GlGenSamplers{$,Int32,$}
-const schema::Entity& GlGenSamplers::StaticSchema() {
+const schema::Entity* GlGenSamplers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenSamplers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Samplers", new schema::Struct{"", SamplerId__P::StaticSchema()}},
+            schema::Field{"Samplers", new schema::Struct{ SamplerId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenTextures:
 // gles.GlGenTextures{$,Int32,$}
-const schema::Entity& GlGenTextures::StaticSchema() {
+const schema::Entity* GlGenTextures::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenTextures",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Textures", new schema::Struct{"", TextureId__P::StaticSchema()}},
+            schema::Field{"Textures", new schema::Struct{ TextureId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TransformFeedbackIdᵖ:
 // gles.TransformFeedbackIdᵖ{$}
-const schema::Entity& TransformFeedbackId__P::StaticSchema() {
+const schema::Entity* TransformFeedbackId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TransformFeedbackIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenTransformFeedbacks:
 // gles.GlGenTransformFeedbacks{$,Int32,$}
-const schema::Entity& GlGenTransformFeedbacks::StaticSchema() {
+const schema::Entity* GlGenTransformFeedbacks::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenTransformFeedbacks",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"N", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Ids", new schema::Struct{"", TransformFeedbackId__P::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ TransformFeedbackId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexArrayIdᵖ:
 // gles.VertexArrayIdᵖ{$}
-const schema::Entity& VertexArrayId__P::StaticSchema() {
+const schema::Entity* VertexArrayId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexArrayIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenVertexArrays:
 // gles.GlGenVertexArrays{$,Int32,$}
-const schema::Entity& GlGenVertexArrays::StaticSchema() {
+const schema::Entity* GlGenVertexArrays::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenVertexArrays",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Arrays", new schema::Struct{"", VertexArrayId__P::StaticSchema()}},
+            schema::Field{"Arrays", new schema::Struct{ VertexArrayId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenVertexArraysOES:
 // gles.GlGenVertexArraysOES{$,Int32,$}
-const schema::Entity& GlGenVertexArraysOES::StaticSchema() {
+const schema::Entity* GlGenVertexArraysOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenVertexArraysOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Arrays", new schema::Struct{"", VertexArrayId__P::StaticSchema()}},
+            schema::Field{"Arrays", new schema::Struct{ VertexArrayId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGenerateMipmap:
 // gles.GlGenerateMipmap{$,Uint32}
-const schema::Entity& GlGenerateMipmap::StaticSchema() {
+const schema::Entity* GlGenerateMipmap::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGenerateMipmap",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetActiveAttrib:
@@ -7545,24 +7545,24 @@ void GlGetActiveAttrib::Encode(Encoder* e) const {
     e->Value(this->mType);
     e->Value(this->mName);
 }
-const schema::Entity& GlGetActiveAttrib::StaticSchema() {
+const schema::Entity* GlGetActiveAttrib::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetActiveAttrib",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"BufferSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"BufferBytesWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"VectorCount", new schema::Struct{"", GLint__P::StaticSchema()}},
-            schema::Field{"Type", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Name", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"BufferBytesWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"VectorCount", new schema::Struct{ GLint__P::StaticSchema()}},
+            schema::Field{"Type", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetActiveUniform:
@@ -7577,24 +7577,24 @@ void GlGetActiveUniform::Encode(Encoder* e) const {
     e->Value(this->mType);
     e->Value(this->mName);
 }
-const schema::Entity& GlGetActiveUniform::StaticSchema() {
+const schema::Entity* GlGetActiveUniform::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetActiveUniform",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"UniformIndex", schema::Primitive::Uint32}},
             schema::Field{"BufferSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"BufferBytesWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"VectorCount", new schema::Struct{"", GLint__P::StaticSchema()}},
-            schema::Field{"Type", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Name", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"BufferBytesWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"VectorCount", new schema::Struct{ GLint__P::StaticSchema()}},
+            schema::Field{"Type", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetActiveUniformBlockName:
@@ -7607,22 +7607,22 @@ void GlGetActiveUniformBlockName::Encode(Encoder* e) const {
     e->Value(this->mBufferBytesWritten);
     e->Value(this->mName);
 }
-const schema::Entity& GlGetActiveUniformBlockName::StaticSchema() {
+const schema::Entity* GlGetActiveUniformBlockName::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetActiveUniformBlockName",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformBlockIndex", new schema::Primitive{"UniformBlockId", schema::Primitive::Uint32}},
             schema::Field{"BufferSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"BufferBytesWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Name", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"BufferBytesWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetActiveUniformBlockiv:
@@ -7634,36 +7634,36 @@ void GlGetActiveUniformBlockiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameterName);
     e->Value(this->mParameters);
 }
-const schema::Entity& GlGetActiveUniformBlockiv::StaticSchema() {
+const schema::Entity* GlGetActiveUniformBlockiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetActiveUniformBlockiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformBlockIndex", new schema::Primitive{"UniformBlockId", schema::Primitive::Uint32}},
             schema::Field{"ParameterName", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Parameters", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Parameters", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // UniformIndexᶜᵖ:
 // gles.UniformIndexᶜᵖ{$}
-const schema::Entity& UniformIndex__CP::StaticSchema() {
+const schema::Entity* UniformIndex__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "UniformIndexᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetActiveUniformsiv:
@@ -7676,22 +7676,22 @@ void GlGetActiveUniformsiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameterName);
     e->Value(this->mParameters);
 }
-const schema::Entity& GlGetActiveUniformsiv::StaticSchema() {
+const schema::Entity* GlGetActiveUniformsiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetActiveUniformsiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"UniformIndices", new schema::Struct{"", UniformIndex__CP::StaticSchema()}},
+            schema::Field{"UniformIndices", new schema::Struct{ UniformIndex__CP::StaticSchema()}},
             schema::Field{"ParameterName", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Parameters", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Parameters", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetAttachedShaders:
@@ -7703,21 +7703,21 @@ void GlGetAttachedShaders::Encode(Encoder* e) const {
     e->Value(this->mShadersLengthWritten);
     e->Value(this->mShaders);
 }
-const schema::Entity& GlGetAttachedShaders::StaticSchema() {
+const schema::Entity* GlGetAttachedShaders::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetAttachedShaders",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BufferLength", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"ShadersLengthWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Shaders", new schema::Struct{"", ShaderId__P::StaticSchema()}},
+            schema::Field{"ShadersLengthWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Shaders", new schema::Struct{ ShaderId__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetAttribLocation:
@@ -7728,20 +7728,20 @@ void GlGetAttribLocation::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetAttribLocation::StaticSchema() {
+const schema::Entity* GlGetAttribLocation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetAttribLocation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBooleani_v:
@@ -7752,37 +7752,37 @@ void GlGetBooleani_v::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetBooleani_v::StaticSchema() {
+const schema::Entity* GlGetBooleani_v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBooleani_v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLboolean__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLboolean__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBooleanv:
 // gles.GlGetBooleanv{$,Uint32,$}
-const schema::Entity& GlGetBooleanv::StaticSchema() {
+const schema::Entity* GlGetBooleanv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBooleanv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLboolean__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLboolean__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBufferParameteri64v:
@@ -7793,20 +7793,20 @@ void GlGetBufferParameteri64v::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetBufferParameteri64v::StaticSchema() {
+const schema::Entity* GlGetBufferParameteri64v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBufferParameteri64v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint64__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBufferParameteriv:
@@ -7817,20 +7817,20 @@ void GlGetBufferParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetBufferParameteriv::StaticSchema() {
+const schema::Entity* GlGetBufferParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBufferParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBufferPointerv:
@@ -7841,20 +7841,20 @@ void GlGetBufferPointerv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetBufferPointerv::StaticSchema() {
+const schema::Entity* GlGetBufferPointerv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBufferPointerv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetBufferPointervOES:
@@ -7865,37 +7865,37 @@ void GlGetBufferPointervOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetBufferPointervOES::StaticSchema() {
+const schema::Entity* GlGetBufferPointervOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetBufferPointervOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetCoverageModulationTableNV:
 // gles.GlGetCoverageModulationTableNV{$,Int32,$}
-const schema::Entity& GlGetCoverageModulationTableNV::StaticSchema() {
+const schema::Entity* GlGetCoverageModulationTableNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetCoverageModulationTableNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Bufsize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetDebugMessageLog:
@@ -7912,26 +7912,26 @@ void GlGetDebugMessageLog::Encode(Encoder* e) const {
     e->Value(this->mMessageLog);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlGetDebugMessageLog::StaticSchema() {
+const schema::Entity* GlGetDebugMessageLog::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetDebugMessageLog",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Sources", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Types", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Ids", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"Severities", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Lengths", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"MessageLog", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Sources", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Types", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"Severities", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Lengths", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"MessageLog", new schema::Struct{ GLchar__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetDebugMessageLogKHR:
@@ -7948,26 +7948,26 @@ void GlGetDebugMessageLogKHR::Encode(Encoder* e) const {
     e->Value(this->mMessageLog);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlGetDebugMessageLogKHR::StaticSchema() {
+const schema::Entity* GlGetDebugMessageLogKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetDebugMessageLogKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Sources", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Types", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Ids", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"Severities", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Lengths", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"MessageLog", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Sources", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Types", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Ids", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"Severities", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Lengths", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"MessageLog", new schema::Struct{ GLchar__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetDriverControlStringQCOM:
@@ -7979,21 +7979,21 @@ void GlGetDriverControlStringQCOM::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mDriverControlString);
 }
-const schema::Entity& GlGetDriverControlStringQCOM::StaticSchema() {
+const schema::Entity* GlGetDriverControlStringQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetDriverControlStringQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"DriverControl", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"DriverControlString", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"DriverControlString", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetDriverControlsQCOM:
@@ -8004,36 +8004,36 @@ void GlGetDriverControlsQCOM::Encode(Encoder* e) const {
     e->Int32(this->mSize);
     e->Value(this->mDriverControls);
 }
-const schema::Entity& GlGetDriverControlsQCOM::StaticSchema() {
+const schema::Entity* GlGetDriverControlsQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetDriverControlsQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Num", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Num", new schema::Struct{ GLint__P::StaticSchema()}},
             schema::Field{"Size", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"DriverControls", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"DriverControls", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetError:
 // gles.GlGetError{$,Uint32}
-const schema::Entity& GlGetError::StaticSchema() {
+const schema::Entity* GlGetError::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetError",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFenceivNV:
@@ -8044,36 +8044,36 @@ void GlGetFenceivNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetFenceivNV::StaticSchema() {
+const schema::Entity* GlGetFenceivNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFenceivNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fence", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFirstPerfQueryIdINTEL:
 // gles.GlGetFirstPerfQueryIdINTEL{$,$}
-const schema::Entity& GlGetFirstPerfQueryIdINTEL::StaticSchema() {
+const schema::Entity* GlGetFirstPerfQueryIdINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFirstPerfQueryIdINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"QueryId", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"QueryId", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFloati_vNV:
@@ -8084,37 +8084,37 @@ void GlGetFloati_vNV::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mData);
 }
-const schema::Entity& GlGetFloati_vNV::StaticSchema() {
+const schema::Entity* GlGetFloati_vNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFloati_vNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFloatv:
 // gles.GlGetFloatv{$,Uint32,$}
-const schema::Entity& GlGetFloatv::StaticSchema() {
+const schema::Entity* GlGetFloatv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFloatv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFragDataIndexEXT:
@@ -8125,20 +8125,20 @@ void GlGetFragDataIndexEXT::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetFragDataIndexEXT::StaticSchema() {
+const schema::Entity* GlGetFragDataIndexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFragDataIndexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFragDataLocation:
@@ -8149,20 +8149,20 @@ void GlGetFragDataLocation::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetFragDataLocation::StaticSchema() {
+const schema::Entity* GlGetFragDataLocation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFragDataLocation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFramebufferAttachmentParameteriv:
@@ -8174,21 +8174,21 @@ void GlGetFramebufferAttachmentParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetFramebufferAttachmentParameteriv::StaticSchema() {
+const schema::Entity* GlGetFramebufferAttachmentParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFramebufferAttachmentParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FramebufferTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Attachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetFramebufferParameteriv:
@@ -8199,68 +8199,68 @@ void GlGetFramebufferParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetFramebufferParameteriv::StaticSchema() {
+const schema::Entity* GlGetFramebufferParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetFramebufferParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetGraphicsResetStatus:
 // gles.GlGetGraphicsResetStatus{$,Uint32}
-const schema::Entity& GlGetGraphicsResetStatus::StaticSchema() {
+const schema::Entity* GlGetGraphicsResetStatus::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetGraphicsResetStatus",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetGraphicsResetStatusEXT:
 // gles.GlGetGraphicsResetStatusEXT{$,Uint32}
-const schema::Entity& GlGetGraphicsResetStatusEXT::StaticSchema() {
+const schema::Entity* GlGetGraphicsResetStatusEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetGraphicsResetStatusEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetGraphicsResetStatusKHR:
 // gles.GlGetGraphicsResetStatusKHR{$,Uint32}
-const schema::Entity& GlGetGraphicsResetStatusKHR::StaticSchema() {
+const schema::Entity* GlGetGraphicsResetStatusKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetGraphicsResetStatusKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetImageHandleNV:
@@ -8274,14 +8274,14 @@ void GlGetImageHandleNV::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Uint64(this->mResult);
 }
-const schema::Entity& GlGetImageHandleNV::StaticSchema() {
+const schema::Entity* GlGetImageHandleNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetImageHandleNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Layered", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
@@ -8290,7 +8290,7 @@ const schema::Entity& GlGetImageHandleNV::StaticSchema() {
             schema::Field{"Result", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetInteger64i_v:
@@ -8301,54 +8301,54 @@ void GlGetInteger64i_v::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetInteger64i_v::StaticSchema() {
+const schema::Entity* GlGetInteger64i_v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetInteger64i_v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint64__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetInteger64v:
 // gles.GlGetInteger64v{$,Uint32,$}
-const schema::Entity& GlGetInteger64v::StaticSchema() {
+const schema::Entity* GlGetInteger64v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetInteger64v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint64__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetInteger64vAPPLE:
 // gles.GlGetInteger64vAPPLE{$,Uint32,$}
-const schema::Entity& GlGetInteger64vAPPLE::StaticSchema() {
+const schema::Entity* GlGetInteger64vAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetInteger64vAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint64__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetIntegeri_v:
@@ -8359,20 +8359,20 @@ void GlGetIntegeri_v::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetIntegeri_v::StaticSchema() {
+const schema::Entity* GlGetIntegeri_v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetIntegeri_v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetIntegeri_vEXT:
@@ -8383,37 +8383,37 @@ void GlGetIntegeri_vEXT::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mData);
 }
-const schema::Entity& GlGetIntegeri_vEXT::StaticSchema() {
+const schema::Entity* GlGetIntegeri_vEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetIntegeri_vEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetIntegerv:
 // gles.GlGetIntegerv{$,Uint32,$}
-const schema::Entity& GlGetIntegerv::StaticSchema() {
+const schema::Entity* GlGetIntegerv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetIntegerv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetInternalformatSampleivNV:
@@ -8427,23 +8427,23 @@ void GlGetInternalformatSampleivNV::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetInternalformatSampleivNV::StaticSchema() {
+const schema::Entity* GlGetInternalformatSampleivNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetInternalformatSampleivNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetInternalformativ:
@@ -8456,22 +8456,22 @@ void GlGetInternalformativ::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetInternalformativ::StaticSchema() {
+const schema::Entity* GlGetInternalformativ::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetInternalformativ",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetMultisamplefv:
@@ -8482,37 +8482,37 @@ void GlGetMultisamplefv::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mVal);
 }
-const schema::Entity& GlGetMultisamplefv::StaticSchema() {
+const schema::Entity* GlGetMultisamplefv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetMultisamplefv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Val", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Val", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetNextPerfQueryIdINTEL:
 // gles.GlGetNextPerfQueryIdINTEL{$,Uint32,$}
-const schema::Entity& GlGetNextPerfQueryIdINTEL::StaticSchema() {
+const schema::Entity* GlGetNextPerfQueryIdINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetNextPerfQueryIdINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryId", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"NextQueryId", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"NextQueryId", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetObjectLabel:
@@ -8525,22 +8525,22 @@ void GlGetObjectLabel::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlGetObjectLabel::StaticSchema() {
+const schema::Entity* GlGetObjectLabel::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetObjectLabel",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Identifier", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetObjectLabelEXT:
@@ -8553,22 +8553,22 @@ void GlGetObjectLabelEXT::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlGetObjectLabelEXT::StaticSchema() {
+const schema::Entity* GlGetObjectLabelEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetObjectLabelEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Object", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetObjectLabelKHR:
@@ -8581,22 +8581,22 @@ void GlGetObjectLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlGetObjectLabelKHR::StaticSchema() {
+const schema::Entity* GlGetObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetObjectLabelKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Identifier", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetObjectPtrLabel:
@@ -8608,21 +8608,21 @@ void GlGetObjectPtrLabel::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlGetObjectPtrLabel::StaticSchema() {
+const schema::Entity* GlGetObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetObjectPtrLabel",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ptr", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ptr", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetObjectPtrLabelKHR:
@@ -8634,72 +8634,72 @@ void GlGetObjectPtrLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlGetObjectPtrLabelKHR::StaticSchema() {
+const schema::Entity* GlGetObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetObjectPtrLabelKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ptr", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ptr", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathCommandsNV:
 // gles.GlGetPathCommandsNV{$,Uint32,$}
-const schema::Entity& GlGetPathCommandsNV::StaticSchema() {
+const schema::Entity* GlGetPathCommandsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathCommandsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Commands", new schema::Struct{"", GLubyte__P::StaticSchema()}},
+            schema::Field{"Commands", new schema::Struct{ GLubyte__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathCoordsNV:
 // gles.GlGetPathCoordsNV{$,Uint32,$}
-const schema::Entity& GlGetPathCoordsNV::StaticSchema() {
+const schema::Entity* GlGetPathCoordsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathCoordsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Coords", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Coords", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathDashArrayNV:
 // gles.GlGetPathDashArrayNV{$,Uint32,$}
-const schema::Entity& GlGetPathDashArrayNV::StaticSchema() {
+const schema::Entity* GlGetPathDashArrayNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathDashArrayNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"DashArray", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"DashArray", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathLengthNV:
@@ -8711,21 +8711,21 @@ void GlGetPathLengthNV::Encode(Encoder* e) const {
     e->Int32(this->mNumSegments);
     e->Float32(this->mResult);
 }
-const schema::Entity& GlGetPathLengthNV::StaticSchema() {
+const schema::Entity* GlGetPathLengthNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathLengthNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"StartSegment", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"NumSegments", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Result", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathMetricRangeNV:
@@ -8738,22 +8738,22 @@ void GlGetPathMetricRangeNV::Encode(Encoder* e) const {
     e->Int32(this->mStride);
     e->Value(this->mMetrics);
 }
-const schema::Entity& GlGetPathMetricRangeNV::StaticSchema() {
+const schema::Entity* GlGetPathMetricRangeNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathMetricRangeNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MetricQueryMask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"FirstPathName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Metrics", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Metrics", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathMetricsNV:
@@ -8768,24 +8768,24 @@ void GlGetPathMetricsNV::Encode(Encoder* e) const {
     e->Int32(this->mStride);
     e->Value(this->mMetrics);
 }
-const schema::Entity& GlGetPathMetricsNV::StaticSchema() {
+const schema::Entity* GlGetPathMetricsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathMetricsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MetricQueryMask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Metrics", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Metrics", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathParameterfvNV:
@@ -8796,20 +8796,20 @@ void GlGetPathParameterfvNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetPathParameterfvNV::StaticSchema() {
+const schema::Entity* GlGetPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathParameterfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathParameterivNV:
@@ -8820,20 +8820,20 @@ void GlGetPathParameterivNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetPathParameterivNV::StaticSchema() {
+const schema::Entity* GlGetPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathParameterivNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPathSpacingNV:
@@ -8850,26 +8850,26 @@ void GlGetPathSpacingNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mReturnedSpacing);
 }
-const schema::Entity& GlGetPathSpacingNV::StaticSchema() {
+const schema::Entity* GlGetPathSpacingNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPathSpacingNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"PathListMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"AdvanceScale", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"KerningScale", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"ReturnedSpacing", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"ReturnedSpacing", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfCounterInfoINTEL:
@@ -8888,28 +8888,28 @@ void GlGetPerfCounterInfoINTEL::Encode(Encoder* e) const {
     e->Value(this->mCounterDataTypeEnum);
     e->Value(this->mRawCounterMaxValue);
 }
-const schema::Entity& GlGetPerfCounterInfoINTEL::StaticSchema() {
+const schema::Entity* GlGetPerfCounterInfoINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfCounterInfoINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryId", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CounterId", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CounterNameLength", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"CounterName", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"CounterName", new schema::Struct{ GLchar__P::StaticSchema()}},
             schema::Field{"CounterDescLength", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"CounterDesc", new schema::Struct{"", GLchar__P::StaticSchema()}},
-            schema::Field{"CounterOffset", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"CounterDataSize", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"CounterTypeEnum", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"CounterDataTypeEnum", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"RawCounterMaxValue", new schema::Struct{"", GLuint64__P::StaticSchema()}},
+            schema::Field{"CounterDesc", new schema::Struct{ GLchar__P::StaticSchema()}},
+            schema::Field{"CounterOffset", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"CounterDataSize", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"CounterTypeEnum", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"CounterDataTypeEnum", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"RawCounterMaxValue", new schema::Struct{ GLuint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorCounterDataAMD:
@@ -8922,22 +8922,22 @@ void GlGetPerfMonitorCounterDataAMD::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Value(this->mBytesWritten);
 }
-const schema::Entity& GlGetPerfMonitorCounterDataAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorCounterDataAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorCounterDataAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Monitor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"DataSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"BytesWritten", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"BytesWritten", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorCounterInfoAMD:
@@ -8949,21 +8949,21 @@ void GlGetPerfMonitorCounterInfoAMD::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mData);
 }
-const schema::Entity& GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorCounterInfoAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Group", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Counter", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorCounterStringAMD:
@@ -8976,22 +8976,22 @@ void GlGetPerfMonitorCounterStringAMD::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mCounterString);
 }
-const schema::Entity& GlGetPerfMonitorCounterStringAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorCounterStringAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorCounterStringAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Group", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Counter", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"CounterString", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"CounterString", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorCountersAMD:
@@ -9004,22 +9004,22 @@ void GlGetPerfMonitorCountersAMD::Encode(Encoder* e) const {
     e->Int32(this->mCounterSize);
     e->Value(this->mCounters);
 }
-const schema::Entity& GlGetPerfMonitorCountersAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorCountersAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Group", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"NumCounters", new schema::Struct{"", GLint__P::StaticSchema()}},
-            schema::Field{"MaxActiveCounters", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"NumCounters", new schema::Struct{ GLint__P::StaticSchema()}},
+            schema::Field{"MaxActiveCounters", new schema::Struct{ GLint__P::StaticSchema()}},
             schema::Field{"CounterSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Counters", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Counters", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorGroupStringAMD:
@@ -9031,21 +9031,21 @@ void GlGetPerfMonitorGroupStringAMD::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mGroupString);
 }
-const schema::Entity& GlGetPerfMonitorGroupStringAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorGroupStringAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorGroupStringAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Group", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"GroupString", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"GroupString", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfMonitorGroupsAMD:
@@ -9056,20 +9056,20 @@ void GlGetPerfMonitorGroupsAMD::Encode(Encoder* e) const {
     e->Int32(this->mGroupsSize);
     e->Value(this->mGroups);
 }
-const schema::Entity& GlGetPerfMonitorGroupsAMD::StaticSchema() {
+const schema::Entity* GlGetPerfMonitorGroupsAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfMonitorGroupsAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"NumGroups", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"NumGroups", new schema::Struct{ GLint__P::StaticSchema()}},
             schema::Field{"GroupsSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Groups", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Groups", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfQueryDataINTEL:
@@ -9082,39 +9082,39 @@ void GlGetPerfQueryDataINTEL::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Value(this->mBytesWritten);
 }
-const schema::Entity& GlGetPerfQueryDataINTEL::StaticSchema() {
+const schema::Entity* GlGetPerfQueryDataINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfQueryDataINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryHandle", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Flag", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"DataSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", GLvoid__P::StaticSchema()}},
-            schema::Field{"BytesWritten", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ GLvoid__P::StaticSchema()}},
+            schema::Field{"BytesWritten", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfQueryIdByNameINTEL:
 // gles.GlGetPerfQueryIdByNameINTEL{$,$,$}
-const schema::Entity& GlGetPerfQueryIdByNameINTEL::StaticSchema() {
+const schema::Entity* GlGetPerfQueryIdByNameINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfQueryIdByNameINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"QueryName", new schema::Struct{"", GLchar__P::StaticSchema()}},
-            schema::Field{"QueryId", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"QueryName", new schema::Struct{ GLchar__P::StaticSchema()}},
+            schema::Field{"QueryId", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPerfQueryInfoINTEL:
@@ -9129,58 +9129,58 @@ void GlGetPerfQueryInfoINTEL::Encode(Encoder* e) const {
     e->Value(this->mNoInstances);
     e->Value(this->mCapsMask);
 }
-const schema::Entity& GlGetPerfQueryInfoINTEL::StaticSchema() {
+const schema::Entity* GlGetPerfQueryInfoINTEL::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPerfQueryInfoINTEL",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"QueryId", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"QueryNameLength", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"QueryName", new schema::Struct{"", GLchar__P::StaticSchema()}},
-            schema::Field{"DataSize", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"NoCounters", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"NoInstances", new schema::Struct{"", GLuint__P::StaticSchema()}},
-            schema::Field{"CapsMask", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"QueryName", new schema::Struct{ GLchar__P::StaticSchema()}},
+            schema::Field{"DataSize", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"NoCounters", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"NoInstances", new schema::Struct{ GLuint__P::StaticSchema()}},
+            schema::Field{"CapsMask", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPointerv:
 // gles.GlGetPointerv{$,Uint32,$}
-const schema::Entity& GlGetPointerv::StaticSchema() {
+const schema::Entity* GlGetPointerv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPointerv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetPointervKHR:
 // gles.GlGetPointervKHR{$,Uint32,$}
-const schema::Entity& GlGetPointervKHR::StaticSchema() {
+const schema::Entity* GlGetPointervKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetPointervKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramBinary:
@@ -9193,22 +9193,22 @@ void GlGetProgramBinary::Encode(Encoder* e) const {
     e->Value(this->mBinaryFormat);
     e->Value(this->mBinary);
 }
-const schema::Entity& GlGetProgramBinary::StaticSchema() {
+const schema::Entity* GlGetProgramBinary::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramBinary",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"BinaryFormat", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Binary", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"BinaryFormat", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramBinaryOES:
@@ -9221,22 +9221,22 @@ void GlGetProgramBinaryOES::Encode(Encoder* e) const {
     e->Value(this->mBinaryFormat);
     e->Value(this->mBinary);
 }
-const schema::Entity& GlGetProgramBinaryOES::StaticSchema() {
+const schema::Entity* GlGetProgramBinaryOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramBinaryOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BufferSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"BytesWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"BinaryFormat", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Binary", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"BytesWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"BinaryFormat", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramInfoLog:
@@ -9248,21 +9248,21 @@ void GlGetProgramInfoLog::Encode(Encoder* e) const {
     e->Value(this->mStringLengthWritten);
     e->Value(this->mInfo);
 }
-const schema::Entity& GlGetProgramInfoLog::StaticSchema() {
+const schema::Entity* GlGetProgramInfoLog::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramInfoLog",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BufferLength", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"StringLengthWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Info", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"StringLengthWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Info", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramInterfaceiv:
@@ -9274,21 +9274,21 @@ void GlGetProgramInterfaceiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetProgramInterfaceiv::StaticSchema() {
+const schema::Entity* GlGetProgramInterfaceiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramInterfaceiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramPipelineInfoLog:
@@ -9300,21 +9300,21 @@ void GlGetProgramPipelineInfoLog::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mInfoLog);
 }
-const schema::Entity& GlGetProgramPipelineInfoLog::StaticSchema() {
+const schema::Entity* GlGetProgramPipelineInfoLog::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramPipelineInfoLog",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"InfoLog", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"InfoLog", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramPipelineInfoLogEXT:
@@ -9326,21 +9326,21 @@ void GlGetProgramPipelineInfoLogEXT::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mInfoLog);
 }
-const schema::Entity& GlGetProgramPipelineInfoLogEXT::StaticSchema() {
+const schema::Entity* GlGetProgramPipelineInfoLogEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramPipelineInfoLogEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"InfoLog", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"InfoLog", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramPipelineiv:
@@ -9351,20 +9351,20 @@ void GlGetProgramPipelineiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetProgramPipelineiv::StaticSchema() {
+const schema::Entity* GlGetProgramPipelineiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramPipelineiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramPipelineivEXT:
@@ -9375,20 +9375,20 @@ void GlGetProgramPipelineivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetProgramPipelineivEXT::StaticSchema() {
+const schema::Entity* GlGetProgramPipelineivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramPipelineivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourceIndex:
@@ -9400,21 +9400,21 @@ void GlGetProgramResourceIndex::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlGetProgramResourceIndex::StaticSchema() {
+const schema::Entity* GlGetProgramResourceIndex::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourceIndex",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourceLocation:
@@ -9426,21 +9426,21 @@ void GlGetProgramResourceLocation::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetProgramResourceLocation::StaticSchema() {
+const schema::Entity* GlGetProgramResourceLocation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourceLocation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourceLocationIndexEXT:
@@ -9452,21 +9452,21 @@ void GlGetProgramResourceLocationIndexEXT::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetProgramResourceLocationIndexEXT::StaticSchema() {
+const schema::Entity* GlGetProgramResourceLocationIndexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourceLocationIndexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourceName:
@@ -9480,23 +9480,23 @@ void GlGetProgramResourceName::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mName);
 }
-const schema::Entity& GlGetProgramResourceName::StaticSchema() {
+const schema::Entity* GlGetProgramResourceName::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourceName",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Name", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourcefvNV:
@@ -9512,25 +9512,25 @@ void GlGetProgramResourcefvNV::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetProgramResourcefvNV::StaticSchema() {
+const schema::Entity* GlGetProgramResourcefvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourcefvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"PropCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Props", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Props", new schema::Struct{ GLenum__CP::StaticSchema()}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramResourceiv:
@@ -9546,25 +9546,25 @@ void GlGetProgramResourceiv::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetProgramResourceiv::StaticSchema() {
+const schema::Entity* GlGetProgramResourceiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramResourceiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"ProgramInterface", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"PropCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Props", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Props", new schema::Struct{ GLenum__CP::StaticSchema()}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetProgramiv:
@@ -9575,35 +9575,35 @@ void GlGetProgramiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetProgramiv::StaticSchema() {
+const schema::Entity* GlGetProgramiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetProgramiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // S64ᵖ:
 // gles.S64ᵖ{$}
-const schema::Entity& S64__P::StaticSchema() {
+const schema::Entity* S64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "S64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjecti64v:
@@ -9614,20 +9614,20 @@ void GlGetQueryObjecti64v::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjecti64v::StaticSchema() {
+const schema::Entity* GlGetQueryObjecti64v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjecti64v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", S64__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ S64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjecti64vEXT:
@@ -9638,20 +9638,20 @@ void GlGetQueryObjecti64vEXT::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjecti64vEXT::StaticSchema() {
+const schema::Entity* GlGetQueryObjecti64vEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjecti64vEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint64__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjectivEXT:
@@ -9662,35 +9662,35 @@ void GlGetQueryObjectivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjectivEXT::StaticSchema() {
+const schema::Entity* GlGetQueryObjectivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjectivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U64ᵖ:
 // gles.U64ᵖ{$}
-const schema::Entity& U64__P::StaticSchema() {
+const schema::Entity* U64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjectui64v:
@@ -9701,20 +9701,20 @@ void GlGetQueryObjectui64v::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjectui64v::StaticSchema() {
+const schema::Entity* GlGetQueryObjectui64v::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjectui64v",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", U64__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ U64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjectui64vEXT:
@@ -9725,20 +9725,20 @@ void GlGetQueryObjectui64vEXT::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjectui64vEXT::StaticSchema() {
+const schema::Entity* GlGetQueryObjectui64vEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjectui64vEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint64__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint64__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjectuiv:
@@ -9749,20 +9749,20 @@ void GlGetQueryObjectuiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjectuiv::StaticSchema() {
+const schema::Entity* GlGetQueryObjectuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjectuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryObjectuivEXT:
@@ -9773,20 +9773,20 @@ void GlGetQueryObjectuivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryObjectuivEXT::StaticSchema() {
+const schema::Entity* GlGetQueryObjectuivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryObjectuivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryiv:
@@ -9797,20 +9797,20 @@ void GlGetQueryiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryiv::StaticSchema() {
+const schema::Entity* GlGetQueryiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetQueryivEXT:
@@ -9821,20 +9821,20 @@ void GlGetQueryivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetQueryivEXT::StaticSchema() {
+const schema::Entity* GlGetQueryivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetQueryivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetRenderbufferParameteriv:
@@ -9845,20 +9845,20 @@ void GlGetRenderbufferParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetRenderbufferParameteriv::StaticSchema() {
+const schema::Entity* GlGetRenderbufferParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetRenderbufferParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIiv:
@@ -9869,20 +9869,20 @@ void GlGetSamplerParameterIiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIiv::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIivEXT:
@@ -9893,20 +9893,20 @@ void GlGetSamplerParameterIivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIivEXT::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIivOES:
@@ -9917,20 +9917,20 @@ void GlGetSamplerParameterIivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIivOES::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIuiv:
@@ -9941,20 +9941,20 @@ void GlGetSamplerParameterIuiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIuiv::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIuivEXT:
@@ -9965,20 +9965,20 @@ void GlGetSamplerParameterIuivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIuivEXT::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIuivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterIuivOES:
@@ -9989,20 +9989,20 @@ void GlGetSamplerParameterIuivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterIuivOES::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterIuivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameterfv:
@@ -10013,20 +10013,20 @@ void GlGetSamplerParameterfv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameterfv::StaticSchema() {
+const schema::Entity* GlGetSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameterfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSamplerParameteriv:
@@ -10037,20 +10037,20 @@ void GlGetSamplerParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetSamplerParameteriv::StaticSchema() {
+const schema::Entity* GlGetSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSamplerParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetShaderInfoLog:
@@ -10062,21 +10062,21 @@ void GlGetShaderInfoLog::Encode(Encoder* e) const {
     e->Value(this->mStringLengthWritten);
     e->Value(this->mInfo);
 }
-const schema::Entity& GlGetShaderInfoLog::StaticSchema() {
+const schema::Entity* GlGetShaderInfoLog::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetShaderInfoLog",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"BufferLength", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"StringLengthWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Info", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"StringLengthWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Info", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetShaderPrecisionFormat:
@@ -10088,21 +10088,21 @@ void GlGetShaderPrecisionFormat::Encode(Encoder* e) const {
     e->Value(this->mRange);
     e->Value(this->mPrecision);
 }
-const schema::Entity& GlGetShaderPrecisionFormat::StaticSchema() {
+const schema::Entity* GlGetShaderPrecisionFormat::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetShaderPrecisionFormat",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ShaderType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"PrecisionType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Range", new schema::Struct{"", GLint__P::StaticSchema()}},
-            schema::Field{"Precision", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Range", new schema::Struct{ GLint__P::StaticSchema()}},
+            schema::Field{"Precision", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetShaderSource:
@@ -10114,21 +10114,21 @@ void GlGetShaderSource::Encode(Encoder* e) const {
     e->Value(this->mStringLengthWritten);
     e->Value(this->mSource);
 }
-const schema::Entity& GlGetShaderSource::StaticSchema() {
+const schema::Entity* GlGetShaderSource::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetShaderSource",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"BufferLength", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"StringLengthWritten", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Source", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"StringLengthWritten", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Source", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetShaderiv:
@@ -10139,37 +10139,37 @@ void GlGetShaderiv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValue);
 }
-const schema::Entity& GlGetShaderiv::StaticSchema() {
+const schema::Entity* GlGetShaderiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetShaderiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetString:
 // gles.GlGetString{$,Uint32,$}
-const schema::Entity& GlGetString::StaticSchema() {
+const schema::Entity* GlGetString::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetString",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Param", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Result", new schema::Struct{"", GLubyte__CP::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ GLubyte__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetStringi:
@@ -10180,20 +10180,20 @@ void GlGetStringi::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Value(this->mResult);
 }
-const schema::Entity& GlGetStringi::StaticSchema() {
+const schema::Entity* GlGetStringi::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetStringi",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Name", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"Result", new schema::Struct{"", GLubyte__CP::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ GLubyte__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSynciv:
@@ -10206,22 +10206,22 @@ void GlGetSynciv::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetSynciv::StaticSchema() {
+const schema::Entity* GlGetSynciv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSynciv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetSyncivAPPLE:
@@ -10234,22 +10234,22 @@ void GlGetSyncivAPPLE::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetSyncivAPPLE::StaticSchema() {
+const schema::Entity* GlGetSyncivAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetSyncivAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexLevelParameterfv:
@@ -10261,21 +10261,21 @@ void GlGetTexLevelParameterfv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexLevelParameterfv::StaticSchema() {
+const schema::Entity* GlGetTexLevelParameterfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexLevelParameterfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexLevelParameteriv:
@@ -10287,21 +10287,21 @@ void GlGetTexLevelParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexLevelParameteriv::StaticSchema() {
+const schema::Entity* GlGetTexLevelParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexLevelParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIiv:
@@ -10312,20 +10312,20 @@ void GlGetTexParameterIiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIiv::StaticSchema() {
+const schema::Entity* GlGetTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIivEXT:
@@ -10336,20 +10336,20 @@ void GlGetTexParameterIivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIivEXT::StaticSchema() {
+const schema::Entity* GlGetTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIivOES:
@@ -10360,20 +10360,20 @@ void GlGetTexParameterIivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIivOES::StaticSchema() {
+const schema::Entity* GlGetTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIuiv:
@@ -10384,20 +10384,20 @@ void GlGetTexParameterIuiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIuiv::StaticSchema() {
+const schema::Entity* GlGetTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIuivEXT:
@@ -10408,20 +10408,20 @@ void GlGetTexParameterIuivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIuivEXT::StaticSchema() {
+const schema::Entity* GlGetTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIuivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterIuivOES:
@@ -10432,20 +10432,20 @@ void GlGetTexParameterIuivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetTexParameterIuivOES::StaticSchema() {
+const schema::Entity* GlGetTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterIuivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameterfv:
@@ -10456,20 +10456,20 @@ void GlGetTexParameterfv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetTexParameterfv::StaticSchema() {
+const schema::Entity* GlGetTexParameterfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameterfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTexParameteriv:
@@ -10480,37 +10480,37 @@ void GlGetTexParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetTexParameteriv::StaticSchema() {
+const schema::Entity* GlGetTexParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTexParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTextureHandleNV:
 // gles.GlGetTextureHandleNV{$,Uint32,Uint64}
-const schema::Entity& GlGetTextureHandleNV::StaticSchema() {
+const schema::Entity* GlGetTextureHandleNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTextureHandleNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTextureSamplerHandleNV:
@@ -10521,20 +10521,20 @@ void GlGetTextureSamplerHandleNV::Encode(Encoder* e) const {
     e->Uint32(this->mSampler);
     e->Uint64(this->mResult);
 }
-const schema::Entity& GlGetTextureSamplerHandleNV::StaticSchema() {
+const schema::Entity* GlGetTextureSamplerHandleNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTextureSamplerHandleNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTransformFeedbackVarying:
@@ -10549,24 +10549,24 @@ void GlGetTransformFeedbackVarying::Encode(Encoder* e) const {
     e->Value(this->mType);
     e->Value(this->mName);
 }
-const schema::Entity& GlGetTransformFeedbackVarying::StaticSchema() {
+const schema::Entity* GlGetTransformFeedbackVarying::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTransformFeedbackVarying",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Size", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Type", new schema::Struct{"", GLenum__P::StaticSchema()}},
-            schema::Field{"Name", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Size", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Type", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"Name", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetTranslatedShaderSourceANGLE:
@@ -10578,21 +10578,21 @@ void GlGetTranslatedShaderSourceANGLE::Encode(Encoder* e) const {
     e->Value(this->mLength);
     e->Value(this->mSource);
 }
-const schema::Entity& GlGetTranslatedShaderSourceANGLE::StaticSchema() {
+const schema::Entity* GlGetTranslatedShaderSourceANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetTranslatedShaderSourceANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"Bufsize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Length", new schema::Struct{"", GLsizei__P::StaticSchema()}},
-            schema::Field{"Source", new schema::Struct{"", GLchar__P::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLsizei__P::StaticSchema()}},
+            schema::Field{"Source", new schema::Struct{ GLchar__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformBlockIndex:
@@ -10603,35 +10603,35 @@ void GlGetUniformBlockIndex::Encode(Encoder* e) const {
     e->String(this->mUniformBlockName);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlGetUniformBlockIndex::StaticSchema() {
+const schema::Entity* GlGetUniformBlockIndex::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformBlockIndex",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformBlockName", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"UniformBlockId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // UniformIndexᵖ:
 // gles.UniformIndexᵖ{$}
-const schema::Entity& UniformIndex__P::StaticSchema() {
+const schema::Entity* UniformIndex__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "UniformIndexᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformIndices:
@@ -10643,21 +10643,21 @@ void GlGetUniformIndices::Encode(Encoder* e) const {
     e->Value(this->mUniformNames);
     e->Value(this->mUniformIndices);
 }
-const schema::Entity& GlGetUniformIndices::StaticSchema() {
+const schema::Entity* GlGetUniformIndices::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformIndices",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"UniformNames", new schema::Struct{"", GLchar__CP__CP::StaticSchema()}},
-            schema::Field{"UniformIndices", new schema::Struct{"", UniformIndex__P::StaticSchema()}},
+            schema::Field{"UniformNames", new schema::Struct{ GLchar__CP__CP::StaticSchema()}},
+            schema::Field{"UniformIndices", new schema::Struct{ UniformIndex__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformLocation:
@@ -10668,20 +10668,20 @@ void GlGetUniformLocation::Encode(Encoder* e) const {
     e->String(this->mName);
     e->Int32(this->mResult);
 }
-const schema::Entity& GlGetUniformLocation::StaticSchema() {
+const schema::Entity* GlGetUniformLocation::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformLocation",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Result", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformfv:
@@ -10692,20 +10692,20 @@ void GlGetUniformfv::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetUniformfv::StaticSchema() {
+const schema::Entity* GlGetUniformfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformiv:
@@ -10716,20 +10716,20 @@ void GlGetUniformiv::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetUniformiv::StaticSchema() {
+const schema::Entity* GlGetUniformiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetUniformuiv:
@@ -10740,20 +10740,20 @@ void GlGetUniformuiv::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetUniformuiv::StaticSchema() {
+const schema::Entity* GlGetUniformuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetUniformuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetVertexAttribIiv:
@@ -10764,20 +10764,20 @@ void GlGetVertexAttribIiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetVertexAttribIiv::StaticSchema() {
+const schema::Entity* GlGetVertexAttribIiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetVertexAttribIiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetVertexAttribIuiv:
@@ -10788,20 +10788,20 @@ void GlGetVertexAttribIuiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetVertexAttribIuiv::StaticSchema() {
+const schema::Entity* GlGetVertexAttribIuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetVertexAttribIuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetVertexAttribPointerv:
@@ -10812,20 +10812,20 @@ void GlGetVertexAttribPointerv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mPointer);
 }
-const schema::Entity& GlGetVertexAttribPointerv::StaticSchema() {
+const schema::Entity* GlGetVertexAttribPointerv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetVertexAttribPointerv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Pointer", new schema::Struct{"", Void__P__P::StaticSchema()}},
+            schema::Field{"Pointer", new schema::Struct{ Void__P__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetVertexAttribfv:
@@ -10836,20 +10836,20 @@ void GlGetVertexAttribfv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetVertexAttribfv::StaticSchema() {
+const schema::Entity* GlGetVertexAttribfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetVertexAttribfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetVertexAttribiv:
@@ -10860,20 +10860,20 @@ void GlGetVertexAttribiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetVertexAttribiv::StaticSchema() {
+const schema::Entity* GlGetVertexAttribiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetVertexAttribiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformfv:
@@ -10885,21 +10885,21 @@ void GlGetnUniformfv::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetnUniformfv::StaticSchema() {
+const schema::Entity* GlGetnUniformfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformfvEXT:
@@ -10911,21 +10911,21 @@ void GlGetnUniformfvEXT::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetnUniformfvEXT::StaticSchema() {
+const schema::Entity* GlGetnUniformfvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformfvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformfvKHR:
@@ -10937,21 +10937,21 @@ void GlGetnUniformfvKHR::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetnUniformfvKHR::StaticSchema() {
+const schema::Entity* GlGetnUniformfvKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformfvKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformiv:
@@ -10963,21 +10963,21 @@ void GlGetnUniformiv::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetnUniformiv::StaticSchema() {
+const schema::Entity* GlGetnUniformiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformivEXT:
@@ -10989,21 +10989,21 @@ void GlGetnUniformivEXT::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetnUniformivEXT::StaticSchema() {
+const schema::Entity* GlGetnUniformivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformivKHR:
@@ -11015,21 +11015,21 @@ void GlGetnUniformivKHR::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetnUniformivKHR::StaticSchema() {
+const schema::Entity* GlGetnUniformivKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformivKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformuiv:
@@ -11041,21 +11041,21 @@ void GlGetnUniformuiv::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mValues);
 }
-const schema::Entity& GlGetnUniformuiv::StaticSchema() {
+const schema::Entity* GlGetnUniformuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlGetnUniformuivKHR:
@@ -11067,55 +11067,55 @@ void GlGetnUniformuivKHR::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mParams);
 }
-const schema::Entity& GlGetnUniformuivKHR::StaticSchema() {
+const schema::Entity* GlGetnUniformuivKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlGetnUniformuivKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlHint:
 // gles.GlHint{$,Uint32,Uint32}
-const schema::Entity& GlHint::StaticSchema() {
+const schema::Entity* GlHint::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlHint",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlInsertEventMarkerEXT:
 // gles.GlInsertEventMarkerEXT{$,Int32,$}
-const schema::Entity& GlInsertEventMarkerEXT::StaticSchema() {
+const schema::Entity* GlInsertEventMarkerEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlInsertEventMarkerEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Marker", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Marker", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlInterpolatePathsNV:
@@ -11127,21 +11127,21 @@ void GlInterpolatePathsNV::Encode(Encoder* e) const {
     e->Uint32(this->mPathB);
     e->Float32(this->mWeight);
 }
-const schema::Entity& GlInterpolatePathsNV::StaticSchema() {
+const schema::Entity* GlInterpolatePathsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlInterpolatePathsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ResultPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"PathA", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"PathB", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Weight", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlInvalidateFramebuffer:
@@ -11152,20 +11152,20 @@ void GlInvalidateFramebuffer::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mAttachments);
 }
-const schema::Entity& GlInvalidateFramebuffer::StaticSchema() {
+const schema::Entity* GlInvalidateFramebuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlInvalidateFramebuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Attachments", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Attachments", new schema::Struct{ GLenum__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlInvalidateSubFramebuffer:
@@ -11180,58 +11180,58 @@ void GlInvalidateSubFramebuffer::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlInvalidateSubFramebuffer::StaticSchema() {
+const schema::Entity* GlInvalidateSubFramebuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlInvalidateSubFramebuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"NumAttachments", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Attachments", new schema::Struct{"", GLenum__CP::StaticSchema()}},
+            schema::Field{"Attachments", new schema::Struct{ GLenum__CP::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsBuffer:
 // gles.GlIsBuffer{$,Uint32,Uint8}
-const schema::Entity& GlIsBuffer::StaticSchema() {
+const schema::Entity* GlIsBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsEnabled:
 // gles.GlIsEnabled{$,Uint32,Uint8}
-const schema::Entity& GlIsEnabled::StaticSchema() {
+const schema::Entity* GlIsEnabled::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsEnabled",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Capability", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsEnabledi:
@@ -11242,20 +11242,20 @@ void GlIsEnabledi::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsEnabledi::StaticSchema() {
+const schema::Entity* GlIsEnabledi::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsEnabledi",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsEnablediEXT:
@@ -11266,20 +11266,20 @@ void GlIsEnablediEXT::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsEnablediEXT::StaticSchema() {
+const schema::Entity* GlIsEnablediEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsEnablediEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsEnablediNV:
@@ -11290,20 +11290,20 @@ void GlIsEnablediNV::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsEnablediNV::StaticSchema() {
+const schema::Entity* GlIsEnablediNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsEnablediNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsEnablediOES:
@@ -11314,88 +11314,88 @@ void GlIsEnablediOES::Encode(Encoder* e) const {
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsEnablediOES::StaticSchema() {
+const schema::Entity* GlIsEnablediOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsEnablediOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsFenceNV:
 // gles.GlIsFenceNV{$,Uint32,Uint8}
-const schema::Entity& GlIsFenceNV::StaticSchema() {
+const schema::Entity* GlIsFenceNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsFenceNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fence", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsFramebuffer:
 // gles.GlIsFramebuffer{$,Uint32,Uint8}
-const schema::Entity& GlIsFramebuffer::StaticSchema() {
+const schema::Entity* GlIsFramebuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsFramebuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Framebuffer", new schema::Primitive{"FramebufferId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsImageHandleResidentNV:
 // gles.GlIsImageHandleResidentNV{$,Uint64,Uint8}
-const schema::Entity& GlIsImageHandleResidentNV::StaticSchema() {
+const schema::Entity* GlIsImageHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsImageHandleResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsPathNV:
 // gles.GlIsPathNV{$,Uint32,Uint8}
-const schema::Entity& GlIsPathNV::StaticSchema() {
+const schema::Entity* GlIsPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsPointInFillPathNV:
@@ -11408,14 +11408,14 @@ void GlIsPointInFillPathNV::Encode(Encoder* e) const {
     e->Float32(this->mY);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsPointInFillPathNV::StaticSchema() {
+const schema::Entity* GlIsPointInFillPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsPointInFillPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"X", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -11423,7 +11423,7 @@ const schema::Entity& GlIsPointInFillPathNV::StaticSchema() {
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsPointInStrokePathNV:
@@ -11435,276 +11435,276 @@ void GlIsPointInStrokePathNV::Encode(Encoder* e) const {
     e->Float32(this->mY);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlIsPointInStrokePathNV::StaticSchema() {
+const schema::Entity* GlIsPointInStrokePathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsPointInStrokePathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"X", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Y", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsProgram:
 // gles.GlIsProgram{$,Uint32,Uint8}
-const schema::Entity& GlIsProgram::StaticSchema() {
+const schema::Entity* GlIsProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsProgramPipeline:
 // gles.GlIsProgramPipeline{$,Uint32,Uint8}
-const schema::Entity& GlIsProgramPipeline::StaticSchema() {
+const schema::Entity* GlIsProgramPipeline::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsProgramPipeline",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsProgramPipelineEXT:
 // gles.GlIsProgramPipelineEXT{$,Uint32,Uint8}
-const schema::Entity& GlIsProgramPipelineEXT::StaticSchema() {
+const schema::Entity* GlIsProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsProgramPipelineEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsQuery:
 // gles.GlIsQuery{$,Uint32,Uint8}
-const schema::Entity& GlIsQuery::StaticSchema() {
+const schema::Entity* GlIsQuery::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsQuery",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsQueryEXT:
 // gles.GlIsQueryEXT{$,Uint32,Uint8}
-const schema::Entity& GlIsQueryEXT::StaticSchema() {
+const schema::Entity* GlIsQueryEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsQueryEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsRenderbuffer:
 // gles.GlIsRenderbuffer{$,Uint32,Uint8}
-const schema::Entity& GlIsRenderbuffer::StaticSchema() {
+const schema::Entity* GlIsRenderbuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsRenderbuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Renderbuffer", new schema::Primitive{"RenderbufferId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsSampler:
 // gles.GlIsSampler{$,Uint32,Uint8}
-const schema::Entity& GlIsSampler::StaticSchema() {
+const schema::Entity* GlIsSampler::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsSampler",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsShader:
 // gles.GlIsShader{$,Uint32,Uint8}
-const schema::Entity& GlIsShader::StaticSchema() {
+const schema::Entity* GlIsShader::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsShader",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsSync:
 // gles.GlIsSync{$,Uint64,Uint8}
-const schema::Entity& GlIsSync::StaticSchema() {
+const schema::Entity* GlIsSync::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsSync",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsSyncAPPLE:
 // gles.GlIsSyncAPPLE{$,Uint64,Uint8}
-const schema::Entity& GlIsSyncAPPLE::StaticSchema() {
+const schema::Entity* GlIsSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsSyncAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsTexture:
 // gles.GlIsTexture{$,Uint32,Uint8}
-const schema::Entity& GlIsTexture::StaticSchema() {
+const schema::Entity* GlIsTexture::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsTexture",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsTextureHandleResidentNV:
 // gles.GlIsTextureHandleResidentNV{$,Uint64,Uint8}
-const schema::Entity& GlIsTextureHandleResidentNV::StaticSchema() {
+const schema::Entity* GlIsTextureHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsTextureHandleResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsTransformFeedback:
 // gles.GlIsTransformFeedback{$,Uint32,Uint8}
-const schema::Entity& GlIsTransformFeedback::StaticSchema() {
+const schema::Entity* GlIsTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Id", new schema::Primitive{"TransformFeedbackId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsVertexArray:
 // gles.GlIsVertexArray{$,Uint32,Uint8}
-const schema::Entity& GlIsVertexArray::StaticSchema() {
+const schema::Entity* GlIsVertexArray::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsVertexArray",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Array", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlIsVertexArrayOES:
 // gles.GlIsVertexArrayOES{$,Uint32,Uint8}
-const schema::Entity& GlIsVertexArrayOES::StaticSchema() {
+const schema::Entity* GlIsVertexArrayOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlIsVertexArrayOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Array", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlLabelObjectEXT:
@@ -11716,118 +11716,118 @@ void GlLabelObjectEXT::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlLabelObjectEXT::StaticSchema() {
+const schema::Entity* GlLabelObjectEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlLabelObjectEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Object", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlLineWidth:
 // gles.GlLineWidth{$,Float32}
-const schema::Entity& GlLineWidth::StaticSchema() {
+const schema::Entity* GlLineWidth::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlLineWidth",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Width", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlLinkProgram:
 // gles.GlLinkProgram{$,Uint32}
-const schema::Entity& GlLinkProgram::StaticSchema() {
+const schema::Entity* GlLinkProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlLinkProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMakeImageHandleNonResidentNV:
 // gles.GlMakeImageHandleNonResidentNV{$,Uint64}
-const schema::Entity& GlMakeImageHandleNonResidentNV::StaticSchema() {
+const schema::Entity* GlMakeImageHandleNonResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMakeImageHandleNonResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMakeImageHandleResidentNV:
 // gles.GlMakeImageHandleResidentNV{$,Uint64,Uint32}
-const schema::Entity& GlMakeImageHandleResidentNV::StaticSchema() {
+const schema::Entity* GlMakeImageHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMakeImageHandleResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
             schema::Field{"Access", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMakeTextureHandleNonResidentNV:
 // gles.GlMakeTextureHandleNonResidentNV{$,Uint64}
-const schema::Entity& GlMakeTextureHandleNonResidentNV::StaticSchema() {
+const schema::Entity* GlMakeTextureHandleNonResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMakeTextureHandleNonResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMakeTextureHandleResidentNV:
 // gles.GlMakeTextureHandleResidentNV{$,Uint64}
-const schema::Entity& GlMakeTextureHandleResidentNV::StaticSchema() {
+const schema::Entity* GlMakeTextureHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMakeTextureHandleResidentNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Handle", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMapBufferOES:
@@ -11838,20 +11838,20 @@ void GlMapBufferOES::Encode(Encoder* e) const {
     e->Uint32(this->mAccess);
     e->Value(this->mResult);
 }
-const schema::Entity& GlMapBufferOES::StaticSchema() {
+const schema::Entity* GlMapBufferOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMapBufferOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Access", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Result", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMapBufferRange:
@@ -11864,22 +11864,22 @@ void GlMapBufferRange::Encode(Encoder* e) const {
     e->Uint32(this->mAccess);
     e->Value(this->mResult);
 }
-const schema::Entity& GlMapBufferRange::StaticSchema() {
+const schema::Entity* GlMapBufferRange::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMapBufferRange",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Length", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
             schema::Field{"Access", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
-            schema::Field{"Result", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMapBufferRangeEXT:
@@ -11892,188 +11892,188 @@ void GlMapBufferRangeEXT::Encode(Encoder* e) const {
     e->Uint32(this->mAccess);
     e->Value(this->mResult);
 }
-const schema::Entity& GlMapBufferRangeEXT::StaticSchema() {
+const schema::Entity* GlMapBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMapBufferRangeEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Offset", new schema::Primitive{"GLintptr", schema::Primitive::Int32}},
             schema::Field{"Length", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
             schema::Field{"Access", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
-            schema::Field{"Result", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixLoad3x2fNV:
 // gles.GlMatrixLoad3x2fNV{$,Uint32,$}
-const schema::Entity& GlMatrixLoad3x2fNV::StaticSchema() {
+const schema::Entity* GlMatrixLoad3x2fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixLoad3x2fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixLoad3x3fNV:
 // gles.GlMatrixLoad3x3fNV{$,Uint32,$}
-const schema::Entity& GlMatrixLoad3x3fNV::StaticSchema() {
+const schema::Entity* GlMatrixLoad3x3fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixLoad3x3fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixLoadTranspose3x3fNV:
 // gles.GlMatrixLoadTranspose3x3fNV{$,Uint32,$}
-const schema::Entity& GlMatrixLoadTranspose3x3fNV::StaticSchema() {
+const schema::Entity* GlMatrixLoadTranspose3x3fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixLoadTranspose3x3fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixMult3x2fNV:
 // gles.GlMatrixMult3x2fNV{$,Uint32,$}
-const schema::Entity& GlMatrixMult3x2fNV::StaticSchema() {
+const schema::Entity* GlMatrixMult3x2fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixMult3x2fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixMult3x3fNV:
 // gles.GlMatrixMult3x3fNV{$,Uint32,$}
-const schema::Entity& GlMatrixMult3x3fNV::StaticSchema() {
+const schema::Entity* GlMatrixMult3x3fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixMult3x3fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMatrixMultTranspose3x3fNV:
 // gles.GlMatrixMultTranspose3x3fNV{$,Uint32,$}
-const schema::Entity& GlMatrixMultTranspose3x3fNV::StaticSchema() {
+const schema::Entity* GlMatrixMultTranspose3x3fNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMatrixMultTranspose3x3fNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MatrixMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"M", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"M", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMemoryBarrier:
 // gles.GlMemoryBarrier{$,Uint32}
-const schema::Entity& GlMemoryBarrier::StaticSchema() {
+const schema::Entity* GlMemoryBarrier::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMemoryBarrier",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Barriers", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMemoryBarrierByRegion:
 // gles.GlMemoryBarrierByRegion{$,Uint32}
-const schema::Entity& GlMemoryBarrierByRegion::StaticSchema() {
+const schema::Entity* GlMemoryBarrierByRegion::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMemoryBarrierByRegion",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Barriers", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMinSampleShading:
 // gles.GlMinSampleShading{$,Float32}
-const schema::Entity& GlMinSampleShading::StaticSchema() {
+const schema::Entity* GlMinSampleShading::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMinSampleShading",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMinSampleShadingOES:
 // gles.GlMinSampleShadingOES{$,Float32}
-const schema::Entity& GlMinSampleShadingOES::StaticSchema() {
+const schema::Entity* GlMinSampleShadingOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMinSampleShadingOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawArraysEXT:
@@ -12085,21 +12085,21 @@ void GlMultiDrawArraysEXT::Encode(Encoder* e) const {
     e->Value(this->mCount);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlMultiDrawArraysEXT::StaticSchema() {
+const schema::Entity* GlMultiDrawArraysEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawArraysEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"First", new schema::Struct{"", GLint__CP::StaticSchema()}},
-            schema::Field{"Count", new schema::Struct{"", GLsizei__CP::StaticSchema()}},
+            schema::Field{"First", new schema::Struct{ GLint__CP::StaticSchema()}},
+            schema::Field{"Count", new schema::Struct{ GLsizei__CP::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawArraysIndirectEXT:
@@ -12111,36 +12111,36 @@ void GlMultiDrawArraysIndirectEXT::Encode(Encoder* e) const {
     e->Int32(this->mDrawcount);
     e->Int32(this->mStride);
 }
-const schema::Entity& GlMultiDrawArraysIndirectEXT::StaticSchema() {
+const schema::Entity* GlMultiDrawArraysIndirectEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawArraysIndirectEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indirect", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indirect", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Drawcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᶜᵖᶜᵖ:
 // gles.Voidᶜᵖᶜᵖ{$}
-const schema::Entity& Void__CP__CP::StaticSchema() {
+const schema::Entity* Void__CP__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᶜᵖᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawElementsBaseVertexEXT:
@@ -12154,23 +12154,23 @@ void GlMultiDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Int32(this->mPrimcount);
     e->Value(this->mBasevertex);
 }
-const schema::Entity& GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
+const schema::Entity* GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawElementsBaseVertexEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Count", new schema::Struct{"", GLsizei__CP::StaticSchema()}},
+            schema::Field{"Count", new schema::Struct{ GLsizei__CP::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", Void__CP__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ Void__CP__CP::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Basevertex", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Basevertex", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawElementsBaseVertexOES:
@@ -12184,23 +12184,23 @@ void GlMultiDrawElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Int32(this->mPrimcount);
     e->Value(this->mBasevertex);
 }
-const schema::Entity& GlMultiDrawElementsBaseVertexOES::StaticSchema() {
+const schema::Entity* GlMultiDrawElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawElementsBaseVertexOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Count", new schema::Struct{"", GLsizei__CP::StaticSchema()}},
+            schema::Field{"Count", new schema::Struct{ GLsizei__CP::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", Void__CP__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ Void__CP__CP::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Basevertex", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Basevertex", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawElementsEXT:
@@ -12213,22 +12213,22 @@ void GlMultiDrawElementsEXT::Encode(Encoder* e) const {
     e->Value(this->mIndices);
     e->Int32(this->mPrimcount);
 }
-const schema::Entity& GlMultiDrawElementsEXT::StaticSchema() {
+const schema::Entity* GlMultiDrawElementsEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawElementsEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Count", new schema::Struct{"", GLsizei__CP::StaticSchema()}},
+            schema::Field{"Count", new schema::Struct{ GLsizei__CP::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indices", new schema::Struct{"", Void__CP__CP::StaticSchema()}},
+            schema::Field{"Indices", new schema::Struct{ Void__CP__CP::StaticSchema()}},
             schema::Field{"Primcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlMultiDrawElementsIndirectEXT:
@@ -12241,22 +12241,22 @@ void GlMultiDrawElementsIndirectEXT::Encode(Encoder* e) const {
     e->Int32(this->mDrawcount);
     e->Int32(this->mStride);
 }
-const schema::Entity& GlMultiDrawElementsIndirectEXT::StaticSchema() {
+const schema::Entity* GlMultiDrawElementsIndirectEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlMultiDrawElementsIndirectEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Indirect", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Indirect", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Drawcount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlNamedFramebufferSampleLocationsfvNV:
@@ -12268,21 +12268,21 @@ void GlNamedFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mV);
 }
-const schema::Entity& GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
+const schema::Entity* GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlNamedFramebufferSampleLocationsfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Framebuffer", new schema::Primitive{"FramebufferId", schema::Primitive::Uint32}},
             schema::Field{"Start", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlObjectLabel:
@@ -12294,21 +12294,21 @@ void GlObjectLabel::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlObjectLabel::StaticSchema() {
+const schema::Entity* GlObjectLabel::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlObjectLabel",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Identifier", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlObjectLabelKHR:
@@ -12320,21 +12320,21 @@ void GlObjectLabelKHR::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlObjectLabelKHR::StaticSchema() {
+const schema::Entity* GlObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlObjectLabelKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Identifier", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Name", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlObjectPtrLabel:
@@ -12345,20 +12345,20 @@ void GlObjectPtrLabel::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlObjectPtrLabel::StaticSchema() {
+const schema::Entity* GlObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlObjectPtrLabel",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ptr", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ptr", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlObjectPtrLabelKHR:
@@ -12369,71 +12369,71 @@ void GlObjectPtrLabelKHR::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mLabel);
 }
-const schema::Entity& GlObjectPtrLabelKHR::StaticSchema() {
+const schema::Entity* GlObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlObjectPtrLabelKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Ptr", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Ptr", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Label", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Label", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPatchParameteri:
 // gles.GlPatchParameteri{$,Uint32,Int32}
-const schema::Entity& GlPatchParameteri::StaticSchema() {
+const schema::Entity* GlPatchParameteri::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPatchParameteri",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPatchParameteriEXT:
 // gles.GlPatchParameteriEXT{$,Uint32,Int32}
-const schema::Entity& GlPatchParameteriEXT::StaticSchema() {
+const schema::Entity* GlPatchParameteriEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPatchParameteriEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPatchParameteriOES:
 // gles.GlPatchParameteriOES{$,Uint32,Int32}
-const schema::Entity& GlPatchParameteriOES::StaticSchema() {
+const schema::Entity* GlPatchParameteriOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPatchParameteriOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathCommandsNV:
@@ -12447,23 +12447,23 @@ void GlPathCommandsNV::Encode(Encoder* e) const {
     e->Uint32(this->mCoordType);
     e->Value(this->mCoords);
 }
-const schema::Entity& GlPathCommandsNV::StaticSchema() {
+const schema::Entity* GlPathCommandsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathCommandsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumCommands", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Commands", new schema::Struct{"", GLubyte__CP::StaticSchema()}},
+            schema::Field{"Commands", new schema::Struct{ GLubyte__CP::StaticSchema()}},
             schema::Field{"NumCoords", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"CoordType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Coords", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Coords", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathCoordsNV:
@@ -12475,37 +12475,37 @@ void GlPathCoordsNV::Encode(Encoder* e) const {
     e->Uint32(this->mCoordType);
     e->Value(this->mCoords);
 }
-const schema::Entity& GlPathCoordsNV::StaticSchema() {
+const schema::Entity* GlPathCoordsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathCoordsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumCoords", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"CoordType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Coords", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Coords", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathCoverDepthFuncNV:
 // gles.GlPathCoverDepthFuncNV{$,Uint32}
-const schema::Entity& GlPathCoverDepthFuncNV::StaticSchema() {
+const schema::Entity* GlPathCoverDepthFuncNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathCoverDepthFuncNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Func", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathDashArrayNV:
@@ -12516,20 +12516,20 @@ void GlPathDashArrayNV::Encode(Encoder* e) const {
     e->Int32(this->mDashCount);
     e->Value(this->mDashArray);
 }
-const schema::Entity& GlPathDashArrayNV::StaticSchema() {
+const schema::Entity* GlPathDashArrayNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathDashArrayNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"DashCount", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"DashArray", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"DashArray", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathGlyphIndexArrayNV:
@@ -12546,17 +12546,17 @@ void GlPathGlyphIndexArrayNV::Encode(Encoder* e) const {
     e->Float32(this->mEmScale);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlPathGlyphIndexArrayNV::StaticSchema() {
+const schema::Entity* GlPathGlyphIndexArrayNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathGlyphIndexArrayNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FirstPathName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FontTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"FontName", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"FontName", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"FontStyle", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"FirstGlyphIndex", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumGlyphs", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -12565,7 +12565,7 @@ const schema::Entity& GlPathGlyphIndexArrayNV::StaticSchema() {
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathGlyphIndexRangeNV:
@@ -12580,16 +12580,16 @@ void GlPathGlyphIndexRangeNV::Encode(Encoder* e) const {
     e->Uint32(this->mBaseAndCount);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlPathGlyphIndexRangeNV::StaticSchema() {
+const schema::Entity* GlPathGlyphIndexRangeNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathGlyphIndexRangeNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FontTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"FontName", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"FontName", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"FontStyle", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"PathParameterTemplate", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"EmScale", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -12597,7 +12597,7 @@ const schema::Entity& GlPathGlyphIndexRangeNV::StaticSchema() {
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathGlyphRangeNV:
@@ -12614,17 +12614,17 @@ void GlPathGlyphRangeNV::Encode(Encoder* e) const {
     e->Uint32(this->mPathParameterTemplate);
     e->Float32(this->mEmScale);
 }
-const schema::Entity& GlPathGlyphRangeNV::StaticSchema() {
+const schema::Entity* GlPathGlyphRangeNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathGlyphRangeNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FirstPathName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FontTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"FontName", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"FontName", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"FontStyle", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"FirstGlyph", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumGlyphs", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -12633,7 +12633,7 @@ const schema::Entity& GlPathGlyphRangeNV::StaticSchema() {
             schema::Field{"EmScale", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathGlyphsNV:
@@ -12651,27 +12651,27 @@ void GlPathGlyphsNV::Encode(Encoder* e) const {
     e->Uint32(this->mPathParameterTemplate);
     e->Float32(this->mEmScale);
 }
-const schema::Entity& GlPathGlyphsNV::StaticSchema() {
+const schema::Entity* GlPathGlyphsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathGlyphsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FirstPathName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FontTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"FontName", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"FontName", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"FontStyle", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"NumGlyphs", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Charcodes", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Charcodes", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"HandleMissingGlyphs", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"PathParameterTemplate", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"EmScale", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathMemoryGlyphIndexArrayNV:
@@ -12689,18 +12689,18 @@ void GlPathMemoryGlyphIndexArrayNV::Encode(Encoder* e) const {
     e->Float32(this->mEmScale);
     e->Uint32(this->mResult);
 }
-const schema::Entity& GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
+const schema::Entity* GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathMemoryGlyphIndexArrayNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"FirstPathName", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FontTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"FontSize", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
-            schema::Field{"FontData", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"FontData", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"FaceIndex", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"FirstGlyphIndex", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumGlyphs", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -12709,7 +12709,7 @@ const schema::Entity& GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
             schema::Field{"Result", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathParameterfNV:
@@ -12720,20 +12720,20 @@ void GlPathParameterfNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Float32(this->mValue);
 }
-const schema::Entity& GlPathParameterfNV::StaticSchema() {
+const schema::Entity* GlPathParameterfNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathParameterfNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathParameterfvNV:
@@ -12744,20 +12744,20 @@ void GlPathParameterfvNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mValue);
 }
-const schema::Entity& GlPathParameterfvNV::StaticSchema() {
+const schema::Entity* GlPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathParameterfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathParameteriNV:
@@ -12768,20 +12768,20 @@ void GlPathParameteriNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
 }
-const schema::Entity& GlPathParameteriNV::StaticSchema() {
+const schema::Entity* GlPathParameteriNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathParameteriNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathParameterivNV:
@@ -12792,37 +12792,37 @@ void GlPathParameterivNV::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mValue);
 }
-const schema::Entity& GlPathParameterivNV::StaticSchema() {
+const schema::Entity* GlPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathParameterivNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathStencilDepthOffsetNV:
 // gles.GlPathStencilDepthOffsetNV{$,Float32,Float32}
-const schema::Entity& GlPathStencilDepthOffsetNV::StaticSchema() {
+const schema::Entity* GlPathStencilDepthOffsetNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathStencilDepthOffsetNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Factor", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Units", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathStencilFuncNV:
@@ -12833,20 +12833,20 @@ void GlPathStencilFuncNV::Encode(Encoder* e) const {
     e->Int32(this->mRef);
     e->Uint32(this->mMask);
 }
-const schema::Entity& GlPathStencilFuncNV::StaticSchema() {
+const schema::Entity* GlPathStencilFuncNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathStencilFuncNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Func", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Ref", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathStringNV:
@@ -12858,21 +12858,21 @@ void GlPathStringNV::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mPathString);
 }
-const schema::Entity& GlPathStringNV::StaticSchema() {
+const schema::Entity* GlPathStringNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathStringNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"PathString", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"PathString", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathSubCommandsNV:
@@ -12888,25 +12888,25 @@ void GlPathSubCommandsNV::Encode(Encoder* e) const {
     e->Uint32(this->mCoordType);
     e->Value(this->mCoords);
 }
-const schema::Entity& GlPathSubCommandsNV::StaticSchema() {
+const schema::Entity* GlPathSubCommandsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathSubCommandsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CommandStart", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"CommandsToDelete", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"NumCommands", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Commands", new schema::Struct{"", GLubyte__CP::StaticSchema()}},
+            schema::Field{"Commands", new schema::Struct{ GLubyte__CP::StaticSchema()}},
             schema::Field{"NumCoords", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"CoordType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Coords", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Coords", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPathSubCoordsNV:
@@ -12919,54 +12919,54 @@ void GlPathSubCoordsNV::Encode(Encoder* e) const {
     e->Uint32(this->mCoordType);
     e->Value(this->mCoords);
 }
-const schema::Entity& GlPathSubCoordsNV::StaticSchema() {
+const schema::Entity* GlPathSubCoordsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPathSubCoordsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoordStart", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"NumCoords", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"CoordType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Coords", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Coords", new schema::Struct{ Void__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPauseTransformFeedback:
 // gles.GlPauseTransformFeedback{$}
-const schema::Entity& GlPauseTransformFeedback::StaticSchema() {
+const schema::Entity* GlPauseTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPauseTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPixelStorei:
 // gles.GlPixelStorei{$,Uint32,Int32}
-const schema::Entity& GlPixelStorei::StaticSchema() {
+const schema::Entity* GlPixelStorei::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPixelStorei",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPointAlongPathNV:
@@ -12983,105 +12983,105 @@ void GlPointAlongPathNV::Encode(Encoder* e) const {
     e->Value(this->mTangentY);
     e->Uint8(this->mResult);
 }
-const schema::Entity& GlPointAlongPathNV::StaticSchema() {
+const schema::Entity* GlPointAlongPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPointAlongPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"StartSegment", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"NumSegments", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Distance", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
-            schema::Field{"X", new schema::Struct{"", GLfloat__P::StaticSchema()}},
-            schema::Field{"Y", new schema::Struct{"", GLfloat__P::StaticSchema()}},
-            schema::Field{"TangentX", new schema::Struct{"", GLfloat__P::StaticSchema()}},
-            schema::Field{"TangentY", new schema::Struct{"", GLfloat__P::StaticSchema()}},
+            schema::Field{"X", new schema::Struct{ GLfloat__P::StaticSchema()}},
+            schema::Field{"Y", new schema::Struct{ GLfloat__P::StaticSchema()}},
+            schema::Field{"TangentX", new schema::Struct{ GLfloat__P::StaticSchema()}},
+            schema::Field{"TangentY", new schema::Struct{ GLfloat__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPolygonModeNV:
 // gles.GlPolygonModeNV{$,Uint32,Uint32}
-const schema::Entity& GlPolygonModeNV::StaticSchema() {
+const schema::Entity* GlPolygonModeNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPolygonModeNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Face", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPolygonOffset:
 // gles.GlPolygonOffset{$,Float32,Float32}
-const schema::Entity& GlPolygonOffset::StaticSchema() {
+const schema::Entity* GlPolygonOffset::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPolygonOffset",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ScaleFactor", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Units", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPopDebugGroup:
 // gles.GlPopDebugGroup{$}
-const schema::Entity& GlPopDebugGroup::StaticSchema() {
+const schema::Entity* GlPopDebugGroup::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPopDebugGroup",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPopDebugGroupKHR:
 // gles.GlPopDebugGroupKHR{$}
-const schema::Entity& GlPopDebugGroupKHR::StaticSchema() {
+const schema::Entity* GlPopDebugGroupKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPopDebugGroupKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPopGroupMarkerEXT:
 // gles.GlPopGroupMarkerEXT{$}
-const schema::Entity& GlPopGroupMarkerEXT::StaticSchema() {
+const schema::Entity* GlPopGroupMarkerEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPopGroupMarkerEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPrimitiveBoundingBox:
@@ -13097,14 +13097,14 @@ void GlPrimitiveBoundingBox::Encode(Encoder* e) const {
     e->Float32(this->mMaxZ);
     e->Float32(this->mMaxW);
 }
-const schema::Entity& GlPrimitiveBoundingBox::StaticSchema() {
+const schema::Entity* GlPrimitiveBoundingBox::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPrimitiveBoundingBox",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MinX", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinY", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinZ", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -13115,7 +13115,7 @@ const schema::Entity& GlPrimitiveBoundingBox::StaticSchema() {
             schema::Field{"MaxW", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPrimitiveBoundingBoxEXT:
@@ -13131,14 +13131,14 @@ void GlPrimitiveBoundingBoxEXT::Encode(Encoder* e) const {
     e->Float32(this->mMaxZ);
     e->Float32(this->mMaxW);
 }
-const schema::Entity& GlPrimitiveBoundingBoxEXT::StaticSchema() {
+const schema::Entity* GlPrimitiveBoundingBoxEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPrimitiveBoundingBoxEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MinX", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinY", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinZ", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -13149,7 +13149,7 @@ const schema::Entity& GlPrimitiveBoundingBoxEXT::StaticSchema() {
             schema::Field{"MaxW", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPrimitiveBoundingBoxOES:
@@ -13165,14 +13165,14 @@ void GlPrimitiveBoundingBoxOES::Encode(Encoder* e) const {
     e->Float32(this->mMaxZ);
     e->Float32(this->mMaxW);
 }
-const schema::Entity& GlPrimitiveBoundingBoxOES::StaticSchema() {
+const schema::Entity* GlPrimitiveBoundingBoxOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPrimitiveBoundingBoxOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MinX", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinY", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"MinZ", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -13183,7 +13183,7 @@ const schema::Entity& GlPrimitiveBoundingBoxOES::StaticSchema() {
             schema::Field{"MaxW", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramBinary:
@@ -13195,21 +13195,21 @@ void GlProgramBinary::Encode(Encoder* e) const {
     e->Value(this->mBinary);
     e->Int32(this->mLength);
 }
-const schema::Entity& GlProgramBinary::StaticSchema() {
+const schema::Entity* GlProgramBinary::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramBinary",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BinaryFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Binary", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramBinaryOES:
@@ -13221,21 +13221,21 @@ void GlProgramBinaryOES::Encode(Encoder* e) const {
     e->Value(this->mBinary);
     e->Int32(this->mBinarySize);
 }
-const schema::Entity& GlProgramBinaryOES::StaticSchema() {
+const schema::Entity* GlProgramBinaryOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramBinaryOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"BinaryFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Binary", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"BinarySize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramParameteri:
@@ -13246,20 +13246,20 @@ void GlProgramParameteri::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
 }
-const schema::Entity& GlProgramParameteri::StaticSchema() {
+const schema::Entity* GlProgramParameteri::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramParameteri",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramParameteriEXT:
@@ -13270,20 +13270,20 @@ void GlProgramParameteriEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
 }
-const schema::Entity& GlProgramParameteriEXT::StaticSchema() {
+const schema::Entity* GlProgramParameteriEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramParameteriEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramPathFragmentInputGenNV:
@@ -13296,22 +13296,22 @@ void GlProgramPathFragmentInputGenNV::Encode(Encoder* e) const {
     e->Int32(this->mComponents);
     e->Value(this->mCoeffs);
 }
-const schema::Entity& GlProgramPathFragmentInputGenNV::StaticSchema() {
+const schema::Entity* GlProgramPathFragmentInputGenNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramPathFragmentInputGenNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"GenMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Components", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"Coeffs", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Coeffs", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1f:
@@ -13322,20 +13322,20 @@ void GlProgramUniform1f::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
 }
-const schema::Entity& GlProgramUniform1f::StaticSchema() {
+const schema::Entity* GlProgramUniform1f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1fEXT:
@@ -13346,20 +13346,20 @@ void GlProgramUniform1fEXT::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Float32(this->mV0);
 }
-const schema::Entity& GlProgramUniform1fEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1fEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1fEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1fv:
@@ -13371,21 +13371,21 @@ void GlProgramUniform1fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform1fv::StaticSchema() {
+const schema::Entity* GlProgramUniform1fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1fvEXT:
@@ -13397,21 +13397,21 @@ void GlProgramUniform1fvEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform1fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1i:
@@ -13422,20 +13422,20 @@ void GlProgramUniform1i::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
 }
-const schema::Entity& GlProgramUniform1i::StaticSchema() {
+const schema::Entity* GlProgramUniform1i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1iEXT:
@@ -13446,20 +13446,20 @@ void GlProgramUniform1iEXT::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Int32(this->mV0);
 }
-const schema::Entity& GlProgramUniform1iEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1iEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1iEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1iv:
@@ -13471,21 +13471,21 @@ void GlProgramUniform1iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform1iv::StaticSchema() {
+const schema::Entity* GlProgramUniform1iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1ivEXT:
@@ -13497,21 +13497,21 @@ void GlProgramUniform1ivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform1ivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1ivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1ivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1ui:
@@ -13522,20 +13522,20 @@ void GlProgramUniform1ui::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
 }
-const schema::Entity& GlProgramUniform1ui::StaticSchema() {
+const schema::Entity* GlProgramUniform1ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1uiEXT:
@@ -13546,20 +13546,20 @@ void GlProgramUniform1uiEXT::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Uint32(this->mV0);
 }
-const schema::Entity& GlProgramUniform1uiEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1uiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1uiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1uiv:
@@ -13571,21 +13571,21 @@ void GlProgramUniform1uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform1uiv::StaticSchema() {
+const schema::Entity* GlProgramUniform1uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform1uivEXT:
@@ -13597,21 +13597,21 @@ void GlProgramUniform1uivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform1uivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform1uivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform1uivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2f:
@@ -13623,21 +13623,21 @@ void GlProgramUniform2f::Encode(Encoder* e) const {
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
 }
-const schema::Entity& GlProgramUniform2f::StaticSchema() {
+const schema::Entity* GlProgramUniform2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2fEXT:
@@ -13649,21 +13649,21 @@ void GlProgramUniform2fEXT::Encode(Encoder* e) const {
     e->Float32(this->mV0);
     e->Float32(this->mV1);
 }
-const schema::Entity& GlProgramUniform2fEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2fEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2fEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"V1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2fv:
@@ -13675,21 +13675,21 @@ void GlProgramUniform2fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform2fv::StaticSchema() {
+const schema::Entity* GlProgramUniform2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2fvEXT:
@@ -13701,21 +13701,21 @@ void GlProgramUniform2fvEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform2fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2i:
@@ -13727,21 +13727,21 @@ void GlProgramUniform2i::Encode(Encoder* e) const {
     e->Int32(this->mValue0);
     e->Int32(this->mValue1);
 }
-const schema::Entity& GlProgramUniform2i::StaticSchema() {
+const schema::Entity* GlProgramUniform2i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2iEXT:
@@ -13753,21 +13753,21 @@ void GlProgramUniform2iEXT::Encode(Encoder* e) const {
     e->Int32(this->mV0);
     e->Int32(this->mV1);
 }
-const schema::Entity& GlProgramUniform2iEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2iEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2iEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"V1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2iv:
@@ -13779,21 +13779,21 @@ void GlProgramUniform2iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform2iv::StaticSchema() {
+const schema::Entity* GlProgramUniform2iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2ivEXT:
@@ -13805,21 +13805,21 @@ void GlProgramUniform2ivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform2ivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2ivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2ivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2ui:
@@ -13831,21 +13831,21 @@ void GlProgramUniform2ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue0);
     e->Uint32(this->mValue1);
 }
-const schema::Entity& GlProgramUniform2ui::StaticSchema() {
+const schema::Entity* GlProgramUniform2ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Value1", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2uiEXT:
@@ -13857,21 +13857,21 @@ void GlProgramUniform2uiEXT::Encode(Encoder* e) const {
     e->Uint32(this->mV0);
     e->Uint32(this->mV1);
 }
-const schema::Entity& GlProgramUniform2uiEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2uiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2uiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"V1", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2uiv:
@@ -13883,21 +13883,21 @@ void GlProgramUniform2uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform2uiv::StaticSchema() {
+const schema::Entity* GlProgramUniform2uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform2uivEXT:
@@ -13909,21 +13909,21 @@ void GlProgramUniform2uivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform2uivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform2uivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform2uivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3f:
@@ -13936,14 +13936,14 @@ void GlProgramUniform3f::Encode(Encoder* e) const {
     e->Float32(this->mValue1);
     e->Float32(this->mValue2);
 }
-const schema::Entity& GlProgramUniform3f::StaticSchema() {
+const schema::Entity* GlProgramUniform3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -13951,7 +13951,7 @@ const schema::Entity& GlProgramUniform3f::StaticSchema() {
             schema::Field{"Value2", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3fEXT:
@@ -13964,14 +13964,14 @@ void GlProgramUniform3fEXT::Encode(Encoder* e) const {
     e->Float32(this->mV1);
     e->Float32(this->mV2);
 }
-const schema::Entity& GlProgramUniform3fEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3fEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3fEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -13979,7 +13979,7 @@ const schema::Entity& GlProgramUniform3fEXT::StaticSchema() {
             schema::Field{"V2", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3fv:
@@ -13991,21 +13991,21 @@ void GlProgramUniform3fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform3fv::StaticSchema() {
+const schema::Entity* GlProgramUniform3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3fvEXT:
@@ -14017,21 +14017,21 @@ void GlProgramUniform3fvEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform3fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3i:
@@ -14044,14 +14044,14 @@ void GlProgramUniform3i::Encode(Encoder* e) const {
     e->Int32(this->mValue1);
     e->Int32(this->mValue2);
 }
-const schema::Entity& GlProgramUniform3i::StaticSchema() {
+const schema::Entity* GlProgramUniform3i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -14059,7 +14059,7 @@ const schema::Entity& GlProgramUniform3i::StaticSchema() {
             schema::Field{"Value2", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3iEXT:
@@ -14072,14 +14072,14 @@ void GlProgramUniform3iEXT::Encode(Encoder* e) const {
     e->Int32(this->mV1);
     e->Int32(this->mV2);
 }
-const schema::Entity& GlProgramUniform3iEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3iEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3iEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -14087,7 +14087,7 @@ const schema::Entity& GlProgramUniform3iEXT::StaticSchema() {
             schema::Field{"V2", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3iv:
@@ -14099,21 +14099,21 @@ void GlProgramUniform3iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform3iv::StaticSchema() {
+const schema::Entity* GlProgramUniform3iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3ivEXT:
@@ -14125,21 +14125,21 @@ void GlProgramUniform3ivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform3ivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3ivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3ivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3ui:
@@ -14152,14 +14152,14 @@ void GlProgramUniform3ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue1);
     e->Uint32(this->mValue2);
 }
-const schema::Entity& GlProgramUniform3ui::StaticSchema() {
+const schema::Entity* GlProgramUniform3ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -14167,7 +14167,7 @@ const schema::Entity& GlProgramUniform3ui::StaticSchema() {
             schema::Field{"Value2", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3uiEXT:
@@ -14180,14 +14180,14 @@ void GlProgramUniform3uiEXT::Encode(Encoder* e) const {
     e->Uint32(this->mV1);
     e->Uint32(this->mV2);
 }
-const schema::Entity& GlProgramUniform3uiEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3uiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3uiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -14195,7 +14195,7 @@ const schema::Entity& GlProgramUniform3uiEXT::StaticSchema() {
             schema::Field{"V2", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3uiv:
@@ -14207,21 +14207,21 @@ void GlProgramUniform3uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform3uiv::StaticSchema() {
+const schema::Entity* GlProgramUniform3uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform3uivEXT:
@@ -14233,21 +14233,21 @@ void GlProgramUniform3uivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform3uivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform3uivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform3uivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4f:
@@ -14261,14 +14261,14 @@ void GlProgramUniform4f::Encode(Encoder* e) const {
     e->Float32(this->mValue2);
     e->Float32(this->mValue3);
 }
-const schema::Entity& GlProgramUniform4f::StaticSchema() {
+const schema::Entity* GlProgramUniform4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -14277,7 +14277,7 @@ const schema::Entity& GlProgramUniform4f::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4fEXT:
@@ -14291,14 +14291,14 @@ void GlProgramUniform4fEXT::Encode(Encoder* e) const {
     e->Float32(this->mV2);
     e->Float32(this->mV3);
 }
-const schema::Entity& GlProgramUniform4fEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4fEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4fEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -14307,7 +14307,7 @@ const schema::Entity& GlProgramUniform4fEXT::StaticSchema() {
             schema::Field{"V3", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4fv:
@@ -14319,21 +14319,21 @@ void GlProgramUniform4fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform4fv::StaticSchema() {
+const schema::Entity* GlProgramUniform4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4fvEXT:
@@ -14345,21 +14345,21 @@ void GlProgramUniform4fvEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform4fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4i:
@@ -14373,14 +14373,14 @@ void GlProgramUniform4i::Encode(Encoder* e) const {
     e->Int32(this->mValue2);
     e->Int32(this->mValue3);
 }
-const schema::Entity& GlProgramUniform4i::StaticSchema() {
+const schema::Entity* GlProgramUniform4i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -14389,7 +14389,7 @@ const schema::Entity& GlProgramUniform4i::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4iEXT:
@@ -14403,14 +14403,14 @@ void GlProgramUniform4iEXT::Encode(Encoder* e) const {
     e->Int32(this->mV2);
     e->Int32(this->mV3);
 }
-const schema::Entity& GlProgramUniform4iEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4iEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4iEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -14419,7 +14419,7 @@ const schema::Entity& GlProgramUniform4iEXT::StaticSchema() {
             schema::Field{"V3", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4iv:
@@ -14431,21 +14431,21 @@ void GlProgramUniform4iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform4iv::StaticSchema() {
+const schema::Entity* GlProgramUniform4iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4ivEXT:
@@ -14457,21 +14457,21 @@ void GlProgramUniform4ivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform4ivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4ivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4ivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4ui:
@@ -14485,14 +14485,14 @@ void GlProgramUniform4ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue2);
     e->Uint32(this->mValue3);
 }
-const schema::Entity& GlProgramUniform4ui::StaticSchema() {
+const schema::Entity* GlProgramUniform4ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -14501,7 +14501,7 @@ const schema::Entity& GlProgramUniform4ui::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4uiEXT:
@@ -14515,14 +14515,14 @@ void GlProgramUniform4uiEXT::Encode(Encoder* e) const {
     e->Uint32(this->mV2);
     e->Uint32(this->mV3);
 }
-const schema::Entity& GlProgramUniform4uiEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4uiEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4uiEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"V0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -14531,7 +14531,7 @@ const schema::Entity& GlProgramUniform4uiEXT::StaticSchema() {
             schema::Field{"V3", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4uiv:
@@ -14543,21 +14543,21 @@ void GlProgramUniform4uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniform4uiv::StaticSchema() {
+const schema::Entity* GlProgramUniform4uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniform4uivEXT:
@@ -14569,21 +14569,21 @@ void GlProgramUniform4uivEXT::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniform4uivEXT::StaticSchema() {
+const schema::Entity* GlProgramUniform4uivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniform4uivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformHandleui64NV:
@@ -14594,20 +14594,20 @@ void GlProgramUniformHandleui64NV::Encode(Encoder* e) const {
     e->Int32(this->mLocation);
     e->Uint64(this->mValue);
 }
-const schema::Entity& GlProgramUniformHandleui64NV::StaticSchema() {
+const schema::Entity* GlProgramUniformHandleui64NV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformHandleui64NV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformHandleui64vNV:
@@ -14619,21 +14619,21 @@ void GlProgramUniformHandleui64vNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformHandleui64vNV::StaticSchema() {
+const schema::Entity* GlProgramUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformHandleui64vNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint64__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint64__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2fv:
@@ -14646,22 +14646,22 @@ void GlProgramUniformMatrix2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix2fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2fvEXT:
@@ -14674,22 +14674,22 @@ void GlProgramUniformMatrix2fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix2fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2x3fv:
@@ -14702,22 +14702,22 @@ void GlProgramUniformMatrix2x3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix2x3fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2x3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2x3fvEXT:
@@ -14730,22 +14730,22 @@ void GlProgramUniformMatrix2x3fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2x3fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2x4fv:
@@ -14758,22 +14758,22 @@ void GlProgramUniformMatrix2x4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix2x4fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2x4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix2x4fvEXT:
@@ -14786,22 +14786,22 @@ void GlProgramUniformMatrix2x4fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix2x4fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3fv:
@@ -14814,22 +14814,22 @@ void GlProgramUniformMatrix3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix3fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3fvEXT:
@@ -14842,22 +14842,22 @@ void GlProgramUniformMatrix3fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix3fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3x2fv:
@@ -14870,22 +14870,22 @@ void GlProgramUniformMatrix3x2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix3x2fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3x2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3x2fvEXT:
@@ -14898,22 +14898,22 @@ void GlProgramUniformMatrix3x2fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3x2fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3x4fv:
@@ -14926,22 +14926,22 @@ void GlProgramUniformMatrix3x4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix3x4fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3x4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix3x4fvEXT:
@@ -14954,22 +14954,22 @@ void GlProgramUniformMatrix3x4fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix3x4fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4fv:
@@ -14982,22 +14982,22 @@ void GlProgramUniformMatrix4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix4fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4fvEXT:
@@ -15010,22 +15010,22 @@ void GlProgramUniformMatrix4fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix4fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4x2fv:
@@ -15038,22 +15038,22 @@ void GlProgramUniformMatrix4x2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix4x2fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4x2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4x2fvEXT:
@@ -15066,22 +15066,22 @@ void GlProgramUniformMatrix4x2fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4x2fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4x3fv:
@@ -15094,22 +15094,22 @@ void GlProgramUniformMatrix4x3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlProgramUniformMatrix4x3fv::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4x3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlProgramUniformMatrix4x3fvEXT:
@@ -15122,22 +15122,22 @@ void GlProgramUniformMatrix4x3fvEXT::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
+const schema::Entity* GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlProgramUniformMatrix4x3fvEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPushDebugGroup:
@@ -15149,21 +15149,21 @@ void GlPushDebugGroup::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mMessage);
 }
-const schema::Entity& GlPushDebugGroup::StaticSchema() {
+const schema::Entity* GlPushDebugGroup::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPushDebugGroup",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Id", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Message", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Message", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPushDebugGroupKHR:
@@ -15175,121 +15175,121 @@ void GlPushDebugGroupKHR::Encode(Encoder* e) const {
     e->Int32(this->mLength);
     e->Value(this->mMessage);
 }
-const schema::Entity& GlPushDebugGroupKHR::StaticSchema() {
+const schema::Entity* GlPushDebugGroupKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPushDebugGroupKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Source", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Id", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Message", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Message", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlPushGroupMarkerEXT:
 // gles.GlPushGroupMarkerEXT{$,Int32,$}
-const schema::Entity& GlPushGroupMarkerEXT::StaticSchema() {
+const schema::Entity* GlPushGroupMarkerEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlPushGroupMarkerEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Length", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Marker", new schema::Struct{"", GLchar__CP::StaticSchema()}},
+            schema::Field{"Marker", new schema::Struct{ GLchar__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlQueryCounterEXT:
 // gles.GlQueryCounterEXT{$,Uint32,Uint32}
-const schema::Entity& GlQueryCounterEXT::StaticSchema() {
+const schema::Entity* GlQueryCounterEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlQueryCounterEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Query", new schema::Primitive{"QueryId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRasterSamplesEXT:
 // gles.GlRasterSamplesEXT{$,Uint32,Uint8}
-const schema::Entity& GlRasterSamplesEXT::StaticSchema() {
+const schema::Entity* GlRasterSamplesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRasterSamplesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Samples", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Fixedsamplelocations", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadBuffer:
 // gles.GlReadBuffer{$,Uint32}
-const schema::Entity& GlReadBuffer::StaticSchema() {
+const schema::Entity* GlReadBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Src", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadBufferIndexedEXT:
 // gles.GlReadBufferIndexedEXT{$,Uint32,Int32}
-const schema::Entity& GlReadBufferIndexedEXT::StaticSchema() {
+const schema::Entity* GlReadBufferIndexedEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadBufferIndexedEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Src", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Index", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadBufferNV:
 // gles.GlReadBufferNV{$,Uint32}
-const schema::Entity& GlReadBufferNV::StaticSchema() {
+const schema::Entity* GlReadBufferNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadBufferNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadPixels:
@@ -15304,24 +15304,24 @@ void GlReadPixels::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mData);
 }
-const schema::Entity& GlReadPixels::StaticSchema() {
+const schema::Entity* GlReadPixels::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadPixels",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadnPixels:
@@ -15337,14 +15337,14 @@ void GlReadnPixels::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlReadnPixels::StaticSchema() {
+const schema::Entity* GlReadnPixels::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadnPixels",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -15352,10 +15352,10 @@ const schema::Entity& GlReadnPixels::StaticSchema() {
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadnPixelsEXT:
@@ -15371,14 +15371,14 @@ void GlReadnPixelsEXT::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlReadnPixelsEXT::StaticSchema() {
+const schema::Entity* GlReadnPixelsEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadnPixelsEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -15386,10 +15386,10 @@ const schema::Entity& GlReadnPixelsEXT::StaticSchema() {
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReadnPixelsKHR:
@@ -15405,14 +15405,14 @@ void GlReadnPixelsKHR::Encode(Encoder* e) const {
     e->Int32(this->mBufSize);
     e->Value(this->mData);
 }
-const schema::Entity& GlReadnPixelsKHR::StaticSchema() {
+const schema::Entity* GlReadnPixelsKHR::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReadnPixelsKHR",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -15420,25 +15420,25 @@ const schema::Entity& GlReadnPixelsKHR::StaticSchema() {
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BufSize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ Void__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlReleaseShaderCompiler:
 // gles.GlReleaseShaderCompiler{$}
-const schema::Entity& GlReleaseShaderCompiler::StaticSchema() {
+const schema::Entity* GlReleaseShaderCompiler::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlReleaseShaderCompiler",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorage:
@@ -15450,21 +15450,21 @@ void GlRenderbufferStorage::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorage::StaticSchema() {
+const schema::Entity* GlRenderbufferStorage::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorage",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisample:
@@ -15477,14 +15477,14 @@ void GlRenderbufferStorageMultisample::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisample::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisample::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisample",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15492,7 +15492,7 @@ const schema::Entity& GlRenderbufferStorageMultisample::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisampleANGLE:
@@ -15505,14 +15505,14 @@ void GlRenderbufferStorageMultisampleANGLE::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisampleANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15520,7 +15520,7 @@ const schema::Entity& GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisampleAPPLE:
@@ -15533,14 +15533,14 @@ void GlRenderbufferStorageMultisampleAPPLE::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisampleAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15548,7 +15548,7 @@ const schema::Entity& GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisampleEXT:
@@ -15561,14 +15561,14 @@ void GlRenderbufferStorageMultisampleEXT::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisampleEXT::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisampleEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisampleEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15576,7 +15576,7 @@ const schema::Entity& GlRenderbufferStorageMultisampleEXT::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisampleIMG:
@@ -15589,14 +15589,14 @@ void GlRenderbufferStorageMultisampleIMG::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisampleIMG::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisampleIMG::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisampleIMG",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15604,7 +15604,7 @@ const schema::Entity& GlRenderbufferStorageMultisampleIMG::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlRenderbufferStorageMultisampleNV:
@@ -15617,14 +15617,14 @@ void GlRenderbufferStorageMultisampleNV::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlRenderbufferStorageMultisampleNV::StaticSchema() {
+const schema::Entity* GlRenderbufferStorageMultisampleNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlRenderbufferStorageMultisampleNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -15632,86 +15632,86 @@ const schema::Entity& GlRenderbufferStorageMultisampleNV::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlResolveDepthValuesNV:
 // gles.GlResolveDepthValuesNV{$}
-const schema::Entity& GlResolveDepthValuesNV::StaticSchema() {
+const schema::Entity* GlResolveDepthValuesNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlResolveDepthValuesNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlResolveMultisampleFramebufferAPPLE:
 // gles.GlResolveMultisampleFramebufferAPPLE{$}
-const schema::Entity& GlResolveMultisampleFramebufferAPPLE::StaticSchema() {
+const schema::Entity* GlResolveMultisampleFramebufferAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlResolveMultisampleFramebufferAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlResumeTransformFeedback:
 // gles.GlResumeTransformFeedback{$}
-const schema::Entity& GlResumeTransformFeedback::StaticSchema() {
+const schema::Entity* GlResumeTransformFeedback::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlResumeTransformFeedback",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSampleCoverage:
 // gles.GlSampleCoverage{$,Float32,Uint8}
-const schema::Entity& GlSampleCoverage::StaticSchema() {
+const schema::Entity* GlSampleCoverage::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSampleCoverage",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Invert", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSampleMaski:
 // gles.GlSampleMaski{$,Uint32,Uint32}
-const schema::Entity& GlSampleMaski::StaticSchema() {
+const schema::Entity* GlSampleMaski::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSampleMaski",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"MaskNumber", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIiv:
@@ -15722,20 +15722,20 @@ void GlSamplerParameterIiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIiv::StaticSchema() {
+const schema::Entity* GlSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIivEXT:
@@ -15746,20 +15746,20 @@ void GlSamplerParameterIivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIivEXT::StaticSchema() {
+const schema::Entity* GlSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIivOES:
@@ -15770,20 +15770,20 @@ void GlSamplerParameterIivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIivOES::StaticSchema() {
+const schema::Entity* GlSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIuiv:
@@ -15794,20 +15794,20 @@ void GlSamplerParameterIuiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIuiv::StaticSchema() {
+const schema::Entity* GlSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIuivEXT:
@@ -15818,20 +15818,20 @@ void GlSamplerParameterIuivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIuivEXT::StaticSchema() {
+const schema::Entity* GlSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIuivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterIuivOES:
@@ -15842,20 +15842,20 @@ void GlSamplerParameterIuivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterIuivOES::StaticSchema() {
+const schema::Entity* GlSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterIuivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterf:
@@ -15866,20 +15866,20 @@ void GlSamplerParameterf::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
 }
-const schema::Entity& GlSamplerParameterf::StaticSchema() {
+const schema::Entity* GlSamplerParameterf::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterf",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Param", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameterfv:
@@ -15890,20 +15890,20 @@ void GlSamplerParameterfv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameterfv::StaticSchema() {
+const schema::Entity* GlSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameterfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameteri:
@@ -15914,20 +15914,20 @@ void GlSamplerParameteri::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
 }
-const schema::Entity& GlSamplerParameteri::StaticSchema() {
+const schema::Entity* GlSamplerParameteri::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameteri",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Param", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSamplerParameteriv:
@@ -15938,20 +15938,20 @@ void GlSamplerParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParam);
 }
-const schema::Entity& GlSamplerParameteriv::StaticSchema() {
+const schema::Entity* GlSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSamplerParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sampler", new schema::Primitive{"SamplerId", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Param", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Param", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlScissor:
@@ -15963,21 +15963,21 @@ void GlScissor::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlScissor::StaticSchema() {
+const schema::Entity* GlScissor::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlScissor",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlScissorArrayvNV:
@@ -15988,20 +15988,20 @@ void GlScissorArrayvNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mV);
 }
-const schema::Entity& GlScissorArrayvNV::StaticSchema() {
+const schema::Entity* GlScissorArrayvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlScissorArrayvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"First", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlScissorIndexedNV:
@@ -16014,14 +16014,14 @@ void GlScissorIndexedNV::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlScissorIndexedNV::StaticSchema() {
+const schema::Entity* GlScissorIndexedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlScissorIndexedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Left", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Bottom", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -16029,24 +16029,24 @@ const schema::Entity& GlScissorIndexedNV::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlScissorIndexedvNV:
 // gles.GlScissorIndexedvNV{$,Uint32,$}
-const schema::Entity& GlScissorIndexedvNV::StaticSchema() {
+const schema::Entity* GlScissorIndexedvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlScissorIndexedvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"V", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSelectPerfMonitorCountersAMD:
@@ -16059,54 +16059,54 @@ void GlSelectPerfMonitorCountersAMD::Encode(Encoder* e) const {
     e->Int32(this->mNumCounters);
     e->Value(this->mCounterList);
 }
-const schema::Entity& GlSelectPerfMonitorCountersAMD::StaticSchema() {
+const schema::Entity* GlSelectPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSelectPerfMonitorCountersAMD",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Monitor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Enable", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Group", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"CounterList", new schema::Struct{"", GLuint__P::StaticSchema()}},
+            schema::Field{"CounterList", new schema::Struct{ GLuint__P::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSetFenceNV:
 // gles.GlSetFenceNV{$,Uint32,Uint32}
-const schema::Entity& GlSetFenceNV::StaticSchema() {
+const schema::Entity* GlSetFenceNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSetFenceNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fence", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Condition", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ShaderIdᶜᵖ:
 // gles.ShaderIdᶜᵖ{$}
-const schema::Entity& ShaderId__CP::StaticSchema() {
+const schema::Entity* ShaderId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ShaderIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlShaderBinary:
@@ -16119,22 +16119,22 @@ void GlShaderBinary::Encode(Encoder* e) const {
     e->Value(this->mBinary);
     e->Int32(this->mBinarySize);
 }
-const schema::Entity& GlShaderBinary::StaticSchema() {
+const schema::Entity* GlShaderBinary::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlShaderBinary",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Shaders", new schema::Struct{"", ShaderId__CP::StaticSchema()}},
+            schema::Field{"Shaders", new schema::Struct{ ShaderId__CP::StaticSchema()}},
             schema::Field{"BinaryFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Binary", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Binary", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"BinarySize", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlShaderSource:
@@ -16146,21 +16146,21 @@ void GlShaderSource::Encode(Encoder* e) const {
     e->Value(this->mSource);
     e->Value(this->mLength);
 }
-const schema::Entity& GlShaderSource::StaticSchema() {
+const schema::Entity* GlShaderSource::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlShaderSource",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Shader", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Source", new schema::Struct{"", GLchar__CP__CP::StaticSchema()}},
-            schema::Field{"Length", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Source", new schema::Struct{ GLchar__CP__CP::StaticSchema()}},
+            schema::Field{"Length", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStartTilingQCOM:
@@ -16173,14 +16173,14 @@ void GlStartTilingQCOM::Encode(Encoder* e) const {
     e->Uint32(this->mHeight);
     e->Uint32(this->mPreserveMask);
 }
-const schema::Entity& GlStartTilingQCOM::StaticSchema() {
+const schema::Entity* GlStartTilingQCOM::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStartTilingQCOM",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Y", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Width", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -16188,7 +16188,7 @@ const schema::Entity& GlStartTilingQCOM::StaticSchema() {
             schema::Field{"PreserveMask", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilFillPathInstancedNV:
@@ -16204,25 +16204,25 @@ void GlStencilFillPathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlStencilFillPathInstancedNV::StaticSchema() {
+const schema::Entity* GlStencilFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilFillPathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FillMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilFillPathNV:
@@ -16233,20 +16233,20 @@ void GlStencilFillPathNV::Encode(Encoder* e) const {
     e->Uint32(this->mFillMode);
     e->Uint32(this->mMask);
 }
-const schema::Entity& GlStencilFillPathNV::StaticSchema() {
+const schema::Entity* GlStencilFillPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilFillPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FillMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilFunc:
@@ -16257,20 +16257,20 @@ void GlStencilFunc::Encode(Encoder* e) const {
     e->Int32(this->mRef);
     e->Uint32(this->mMask);
 }
-const schema::Entity& GlStencilFunc::StaticSchema() {
+const schema::Entity* GlStencilFunc::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilFunc",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Func", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Ref", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilFuncSeparate:
@@ -16282,54 +16282,54 @@ void GlStencilFuncSeparate::Encode(Encoder* e) const {
     e->Int32(this->mReferenceValue);
     e->Uint32(this->mMask);
 }
-const schema::Entity& GlStencilFuncSeparate::StaticSchema() {
+const schema::Entity* GlStencilFuncSeparate::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilFuncSeparate",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Face", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Function", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"ReferenceValue", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilMask:
 // gles.GlStencilMask{$,Uint32}
-const schema::Entity& GlStencilMask::StaticSchema() {
+const schema::Entity* GlStencilMask::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilMask",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilMaskSeparate:
 // gles.GlStencilMaskSeparate{$,Uint32,Uint32}
-const schema::Entity& GlStencilMaskSeparate::StaticSchema() {
+const schema::Entity* GlStencilMaskSeparate::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilMaskSeparate",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Face", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilOp:
@@ -16340,20 +16340,20 @@ void GlStencilOp::Encode(Encoder* e) const {
     e->Uint32(this->mZfail);
     e->Uint32(this->mZpass);
 }
-const schema::Entity& GlStencilOp::StaticSchema() {
+const schema::Entity* GlStencilOp::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilOp",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fail", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Zfail", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Zpass", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilOpSeparate:
@@ -16365,21 +16365,21 @@ void GlStencilOpSeparate::Encode(Encoder* e) const {
     e->Uint32(this->mStencilPassDepthFail);
     e->Uint32(this->mStencilPassDepthPass);
 }
-const schema::Entity& GlStencilOpSeparate::StaticSchema() {
+const schema::Entity* GlStencilOpSeparate::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilOpSeparate",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Face", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"StencilFail", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"StencilPassDepthFail", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"StencilPassDepthPass", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilStrokePathInstancedNV:
@@ -16395,25 +16395,25 @@ void GlStencilStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlStencilStrokePathInstancedNV::StaticSchema() {
+const schema::Entity* GlStencilStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilStrokePathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Reference", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilStrokePathNV:
@@ -16424,20 +16424,20 @@ void GlStencilStrokePathNV::Encode(Encoder* e) const {
     e->Int32(this->mReference);
     e->Uint32(this->mMask);
 }
-const schema::Entity& GlStencilStrokePathNV::StaticSchema() {
+const schema::Entity* GlStencilStrokePathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilStrokePathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Reference", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilThenCoverFillPathInstancedNV:
@@ -16454,26 +16454,26 @@ void GlStencilThenCoverFillPathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
+const schema::Entity* GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilThenCoverFillPathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FillMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilThenCoverFillPathNV:
@@ -16485,21 +16485,21 @@ void GlStencilThenCoverFillPathNV::Encode(Encoder* e) const {
     e->Uint32(this->mMask);
     e->Uint32(this->mCoverMode);
 }
-const schema::Entity& GlStencilThenCoverFillPathNV::StaticSchema() {
+const schema::Entity* GlStencilThenCoverFillPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilThenCoverFillPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"FillMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilThenCoverStrokePathInstancedNV:
@@ -16516,26 +16516,26 @@ void GlStencilThenCoverStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
+const schema::Entity* GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilThenCoverStrokePathInstancedNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"PathNameType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Paths", new schema::Struct{"", Void__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ Void__CP::StaticSchema()}},
             schema::Field{"PathBase", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Reference", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlStencilThenCoverStrokePathNV:
@@ -16547,55 +16547,55 @@ void GlStencilThenCoverStrokePathNV::Encode(Encoder* e) const {
     e->Uint32(this->mMask);
     e->Uint32(this->mCoverMode);
 }
-const schema::Entity& GlStencilThenCoverStrokePathNV::StaticSchema() {
+const schema::Entity* GlStencilThenCoverStrokePathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlStencilThenCoverStrokePathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Path", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Reference", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Mask", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"CoverMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlSubpixelPrecisionBiasNV:
 // gles.GlSubpixelPrecisionBiasNV{$,Uint32,Uint32}
-const schema::Entity& GlSubpixelPrecisionBiasNV::StaticSchema() {
+const schema::Entity* GlSubpixelPrecisionBiasNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlSubpixelPrecisionBiasNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Xbits", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Ybits", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTestFenceNV:
 // gles.GlTestFenceNV{$,Uint32,Uint8}
-const schema::Entity& GlTestFenceNV::StaticSchema() {
+const schema::Entity* GlTestFenceNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTestFenceNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Fence", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBuffer:
@@ -16606,20 +16606,20 @@ void GlTexBuffer::Encode(Encoder* e) const {
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
 }
-const schema::Entity& GlTexBuffer::StaticSchema() {
+const schema::Entity* GlTexBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBufferEXT:
@@ -16630,20 +16630,20 @@ void GlTexBufferEXT::Encode(Encoder* e) const {
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
 }
-const schema::Entity& GlTexBufferEXT::StaticSchema() {
+const schema::Entity* GlTexBufferEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBufferEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBufferOES:
@@ -16654,20 +16654,20 @@ void GlTexBufferOES::Encode(Encoder* e) const {
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
 }
-const schema::Entity& GlTexBufferOES::StaticSchema() {
+const schema::Entity* GlTexBufferOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBufferOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBufferRange:
@@ -16680,14 +16680,14 @@ void GlTexBufferRange::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlTexBufferRange::StaticSchema() {
+const schema::Entity* GlTexBufferRange::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBufferRange",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
@@ -16695,7 +16695,7 @@ const schema::Entity& GlTexBufferRange::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBufferRangeEXT:
@@ -16708,14 +16708,14 @@ void GlTexBufferRangeEXT::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlTexBufferRangeEXT::StaticSchema() {
+const schema::Entity* GlTexBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBufferRangeEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
@@ -16723,7 +16723,7 @@ const schema::Entity& GlTexBufferRangeEXT::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexBufferRangeOES:
@@ -16736,14 +16736,14 @@ void GlTexBufferRangeOES::Encode(Encoder* e) const {
     e->Int32(this->mOffset);
     e->Int32(this->mSize);
 }
-const schema::Entity& GlTexBufferRangeOES::StaticSchema() {
+const schema::Entity* GlTexBufferRangeOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexBufferRangeOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Buffer", new schema::Primitive{"BufferId", schema::Primitive::Uint32}},
@@ -16751,7 +16751,7 @@ const schema::Entity& GlTexBufferRangeOES::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"GLsizeiptr", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexImage2D:
@@ -16768,14 +16768,14 @@ void GlTexImage2D::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mData);
 }
-const schema::Entity& GlTexImage2D::StaticSchema() {
+const schema::Entity* GlTexImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"InternalFormat", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -16784,10 +16784,10 @@ const schema::Entity& GlTexImage2D::StaticSchema() {
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexImage3D:
@@ -16805,14 +16805,14 @@ void GlTexImage3D::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mData);
 }
-const schema::Entity& GlTexImage3D::StaticSchema() {
+const schema::Entity* GlTexImage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexImage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -16822,10 +16822,10 @@ const schema::Entity& GlTexImage3D::StaticSchema() {
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexImage3DOES:
@@ -16843,14 +16843,14 @@ void GlTexImage3DOES::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mPixels);
 }
-const schema::Entity& GlTexImage3DOES::StaticSchema() {
+const schema::Entity* GlTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexImage3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -16860,10 +16860,10 @@ const schema::Entity& GlTexImage3DOES::StaticSchema() {
             schema::Field{"Border", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Pixels", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Pixels", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexPageCommitmentEXT:
@@ -16880,14 +16880,14 @@ void GlTexPageCommitmentEXT::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint8(this->mCommit);
 }
-const schema::Entity& GlTexPageCommitmentEXT::StaticSchema() {
+const schema::Entity* GlTexPageCommitmentEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexPageCommitmentEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -16899,7 +16899,7 @@ const schema::Entity& GlTexPageCommitmentEXT::StaticSchema() {
             schema::Field{"Commit", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIiv:
@@ -16910,20 +16910,20 @@ void GlTexParameterIiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIiv::StaticSchema() {
+const schema::Entity* GlTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIivEXT:
@@ -16934,20 +16934,20 @@ void GlTexParameterIivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIivEXT::StaticSchema() {
+const schema::Entity* GlTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIivOES:
@@ -16958,20 +16958,20 @@ void GlTexParameterIivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIivOES::StaticSchema() {
+const schema::Entity* GlTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIuiv:
@@ -16982,20 +16982,20 @@ void GlTexParameterIuiv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIuiv::StaticSchema() {
+const schema::Entity* GlTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIuiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIuivEXT:
@@ -17006,20 +17006,20 @@ void GlTexParameterIuivEXT::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIuivEXT::StaticSchema() {
+const schema::Entity* GlTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIuivEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterIuivOES:
@@ -17030,20 +17030,20 @@ void GlTexParameterIuivOES::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterIuivOES::StaticSchema() {
+const schema::Entity* GlTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterIuivOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterf:
@@ -17054,20 +17054,20 @@ void GlTexParameterf::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Float32(this->mValue);
 }
-const schema::Entity& GlTexParameterf::StaticSchema() {
+const schema::Entity* GlTexParameterf::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterf",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameterfv:
@@ -17078,20 +17078,20 @@ void GlTexParameterfv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameterfv::StaticSchema() {
+const schema::Entity* GlTexParameterfv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameterfv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameteri:
@@ -17102,20 +17102,20 @@ void GlTexParameteri::Encode(Encoder* e) const {
     e->Uint32(this->mParameter);
     e->Int32(this->mValue);
 }
-const schema::Entity& GlTexParameteri::StaticSchema() {
+const schema::Entity* GlTexParameteri::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameteri",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Parameter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexParameteriv:
@@ -17126,20 +17126,20 @@ void GlTexParameteriv::Encode(Encoder* e) const {
     e->Uint32(this->mPname);
     e->Value(this->mParams);
 }
-const schema::Entity& GlTexParameteriv::StaticSchema() {
+const schema::Entity* GlTexParameteriv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexParameteriv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Pname", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Params", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Params", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage1DEXT:
@@ -17151,21 +17151,21 @@ void GlTexStorage1DEXT::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Int32(this->mWidth);
 }
-const schema::Entity& GlTexStorage1DEXT::StaticSchema() {
+const schema::Entity* GlTexStorage1DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage1DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage2D:
@@ -17178,14 +17178,14 @@ void GlTexStorage2D::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlTexStorage2D::StaticSchema() {
+const schema::Entity* GlTexStorage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17193,7 +17193,7 @@ const schema::Entity& GlTexStorage2D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage2DEXT:
@@ -17206,14 +17206,14 @@ void GlTexStorage2DEXT::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlTexStorage2DEXT::StaticSchema() {
+const schema::Entity* GlTexStorage2DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage2DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17221,7 +17221,7 @@ const schema::Entity& GlTexStorage2DEXT::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage2DMultisample:
@@ -17235,14 +17235,14 @@ void GlTexStorage2DMultisample::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Uint8(this->mFixedsamplelocations);
 }
-const schema::Entity& GlTexStorage2DMultisample::StaticSchema() {
+const schema::Entity* GlTexStorage2DMultisample::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage2DMultisample",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17251,7 +17251,7 @@ const schema::Entity& GlTexStorage2DMultisample::StaticSchema() {
             schema::Field{"Fixedsamplelocations", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage3D:
@@ -17265,14 +17265,14 @@ void GlTexStorage3D::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Int32(this->mDepth);
 }
-const schema::Entity& GlTexStorage3D::StaticSchema() {
+const schema::Entity* GlTexStorage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17281,7 +17281,7 @@ const schema::Entity& GlTexStorage3D::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage3DEXT:
@@ -17295,14 +17295,14 @@ void GlTexStorage3DEXT::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Int32(this->mDepth);
 }
-const schema::Entity& GlTexStorage3DEXT::StaticSchema() {
+const schema::Entity* GlTexStorage3DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage3DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17311,7 +17311,7 @@ const schema::Entity& GlTexStorage3DEXT::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage3DMultisample:
@@ -17326,14 +17326,14 @@ void GlTexStorage3DMultisample::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint8(this->mFixedsamplelocations);
 }
-const schema::Entity& GlTexStorage3DMultisample::StaticSchema() {
+const schema::Entity* GlTexStorage3DMultisample::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage3DMultisample",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17343,7 +17343,7 @@ const schema::Entity& GlTexStorage3DMultisample::StaticSchema() {
             schema::Field{"Fixedsamplelocations", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexStorage3DMultisampleOES:
@@ -17358,14 +17358,14 @@ void GlTexStorage3DMultisampleOES::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint8(this->mFixedsamplelocations);
 }
-const schema::Entity& GlTexStorage3DMultisampleOES::StaticSchema() {
+const schema::Entity* GlTexStorage3DMultisampleOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexStorage3DMultisampleOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Samples", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Internalformat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -17375,7 +17375,7 @@ const schema::Entity& GlTexStorage3DMultisampleOES::StaticSchema() {
             schema::Field{"Fixedsamplelocations", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexSubImage2D:
@@ -17392,14 +17392,14 @@ void GlTexSubImage2D::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mData);
 }
-const schema::Entity& GlTexSubImage2D::StaticSchema() {
+const schema::Entity* GlTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexSubImage2D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -17408,10 +17408,10 @@ const schema::Entity& GlTexSubImage2D::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexSubImage3D:
@@ -17430,14 +17430,14 @@ void GlTexSubImage3D::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mData);
 }
-const schema::Entity& GlTexSubImage3D::StaticSchema() {
+const schema::Entity* GlTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexSubImage3D",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -17448,10 +17448,10 @@ const schema::Entity& GlTexSubImage3D::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Data", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTexSubImage3DOES:
@@ -17470,14 +17470,14 @@ void GlTexSubImage3DOES::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Value(this->mPixels);
 }
-const schema::Entity& GlTexSubImage3DOES::StaticSchema() {
+const schema::Entity* GlTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTexSubImage3DOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Xoffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -17488,10 +17488,10 @@ const schema::Entity& GlTexSubImage3DOES::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"Pixels", new schema::Struct{"", TexturePointer::StaticSchema()}},
+            schema::Field{"Pixels", new schema::Struct{ TexturePointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTextureStorage1DEXT:
@@ -17504,14 +17504,14 @@ void GlTextureStorage1DEXT::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Int32(this->mWidth);
 }
-const schema::Entity& GlTextureStorage1DEXT::StaticSchema() {
+const schema::Entity* GlTextureStorage1DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTextureStorage1DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -17519,7 +17519,7 @@ const schema::Entity& GlTextureStorage1DEXT::StaticSchema() {
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTextureStorage2DEXT:
@@ -17533,14 +17533,14 @@ void GlTextureStorage2DEXT::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlTextureStorage2DEXT::StaticSchema() {
+const schema::Entity* GlTextureStorage2DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTextureStorage2DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -17549,7 +17549,7 @@ const schema::Entity& GlTextureStorage2DEXT::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTextureStorage3DEXT:
@@ -17564,14 +17564,14 @@ void GlTextureStorage3DEXT::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Int32(this->mDepth);
 }
-const schema::Entity& GlTextureStorage3DEXT::StaticSchema() {
+const schema::Entity* GlTextureStorage3DEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTextureStorage3DEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Levels", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
@@ -17581,7 +17581,7 @@ const schema::Entity& GlTextureStorage3DEXT::StaticSchema() {
             schema::Field{"Depth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTextureViewEXT:
@@ -17597,14 +17597,14 @@ void GlTextureViewEXT::Encode(Encoder* e) const {
     e->Uint32(this->mMinlayer);
     e->Uint32(this->mNumlayers);
 }
-const schema::Entity& GlTextureViewEXT::StaticSchema() {
+const schema::Entity* GlTextureViewEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTextureViewEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Origtexture", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -17615,7 +17615,7 @@ const schema::Entity& GlTextureViewEXT::StaticSchema() {
             schema::Field{"Numlayers", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTextureViewOES:
@@ -17631,14 +17631,14 @@ void GlTextureViewOES::Encode(Encoder* e) const {
     e->Uint32(this->mMinlayer);
     e->Uint32(this->mNumlayers);
 }
-const schema::Entity& GlTextureViewOES::StaticSchema() {
+const schema::Entity* GlTextureViewOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTextureViewOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Origtexture", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -17649,7 +17649,7 @@ const schema::Entity& GlTextureViewOES::StaticSchema() {
             schema::Field{"Numlayers", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTransformFeedbackVaryings:
@@ -17661,21 +17661,21 @@ void GlTransformFeedbackVaryings::Encode(Encoder* e) const {
     e->Value(this->mVaryings);
     e->Uint32(this->mBufferMode);
 }
-const schema::Entity& GlTransformFeedbackVaryings::StaticSchema() {
+const schema::Entity* GlTransformFeedbackVaryings::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTransformFeedbackVaryings",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Varyings", new schema::Struct{"", GLchar__CP__CP::StaticSchema()}},
+            schema::Field{"Varyings", new schema::Struct{ GLchar__CP__CP::StaticSchema()}},
             schema::Field{"BufferMode", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlTransformPathNV:
@@ -17687,38 +17687,38 @@ void GlTransformPathNV::Encode(Encoder* e) const {
     e->Uint32(this->mTransformType);
     e->Value(this->mTransformValues);
 }
-const schema::Entity& GlTransformPathNV::StaticSchema() {
+const schema::Entity* GlTransformPathNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlTransformPathNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ResultPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"SrcPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"TransformType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
-            schema::Field{"TransformValues", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"TransformValues", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1f:
 // gles.GlUniform1f{$,Int32,Float32}
-const schema::Entity& GlUniform1f::StaticSchema() {
+const schema::Entity* GlUniform1f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1fv:
@@ -17729,37 +17729,37 @@ void GlUniform1fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform1fv::StaticSchema() {
+const schema::Entity* GlUniform1fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1i:
 // gles.GlUniform1i{$,Int32,Int32}
-const schema::Entity& GlUniform1i::StaticSchema() {
+const schema::Entity* GlUniform1i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1iv:
@@ -17770,37 +17770,37 @@ void GlUniform1iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform1iv::StaticSchema() {
+const schema::Entity* GlUniform1iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1ui:
 // gles.GlUniform1ui{$,Int32,Uint32}
-const schema::Entity& GlUniform1ui::StaticSchema() {
+const schema::Entity* GlUniform1ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform1uiv:
@@ -17811,20 +17811,20 @@ void GlUniform1uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform1uiv::StaticSchema() {
+const schema::Entity* GlUniform1uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform1uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2f:
@@ -17835,20 +17835,20 @@ void GlUniform2f::Encode(Encoder* e) const {
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
 }
-const schema::Entity& GlUniform2f::StaticSchema() {
+const schema::Entity* GlUniform2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2fv:
@@ -17859,20 +17859,20 @@ void GlUniform2fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform2fv::StaticSchema() {
+const schema::Entity* GlUniform2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2i:
@@ -17883,20 +17883,20 @@ void GlUniform2i::Encode(Encoder* e) const {
     e->Int32(this->mValue0);
     e->Int32(this->mValue1);
 }
-const schema::Entity& GlUniform2i::StaticSchema() {
+const schema::Entity* GlUniform2i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2iv:
@@ -17907,20 +17907,20 @@ void GlUniform2iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform2iv::StaticSchema() {
+const schema::Entity* GlUniform2iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2ui:
@@ -17931,20 +17931,20 @@ void GlUniform2ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue0);
     e->Uint32(this->mValue1);
 }
-const schema::Entity& GlUniform2ui::StaticSchema() {
+const schema::Entity* GlUniform2ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Value1", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform2uiv:
@@ -17955,20 +17955,20 @@ void GlUniform2uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform2uiv::StaticSchema() {
+const schema::Entity* GlUniform2uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform2uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3f:
@@ -17980,21 +17980,21 @@ void GlUniform3f::Encode(Encoder* e) const {
     e->Float32(this->mValue1);
     e->Float32(this->mValue2);
 }
-const schema::Entity& GlUniform3f::StaticSchema() {
+const schema::Entity* GlUniform3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value2", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3fv:
@@ -18005,20 +18005,20 @@ void GlUniform3fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform3fv::StaticSchema() {
+const schema::Entity* GlUniform3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3i:
@@ -18030,21 +18030,21 @@ void GlUniform3i::Encode(Encoder* e) const {
     e->Int32(this->mValue1);
     e->Int32(this->mValue2);
 }
-const schema::Entity& GlUniform3i::StaticSchema() {
+const schema::Entity* GlUniform3i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value2", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3iv:
@@ -18055,20 +18055,20 @@ void GlUniform3iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform3iv::StaticSchema() {
+const schema::Entity* GlUniform3iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3ui:
@@ -18080,21 +18080,21 @@ void GlUniform3ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue1);
     e->Uint32(this->mValue2);
 }
-const schema::Entity& GlUniform3ui::StaticSchema() {
+const schema::Entity* GlUniform3ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Value1", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Value2", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform3uiv:
@@ -18105,20 +18105,20 @@ void GlUniform3uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform3uiv::StaticSchema() {
+const schema::Entity* GlUniform3uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform3uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4f:
@@ -18131,14 +18131,14 @@ void GlUniform4f::Encode(Encoder* e) const {
     e->Float32(this->mValue2);
     e->Float32(this->mValue3);
 }
-const schema::Entity& GlUniform4f::StaticSchema() {
+const schema::Entity* GlUniform4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -18146,7 +18146,7 @@ const schema::Entity& GlUniform4f::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4fv:
@@ -18157,20 +18157,20 @@ void GlUniform4fv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform4fv::StaticSchema() {
+const schema::Entity* GlUniform4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4i:
@@ -18183,14 +18183,14 @@ void GlUniform4i::Encode(Encoder* e) const {
     e->Int32(this->mValue2);
     e->Int32(this->mValue3);
 }
-const schema::Entity& GlUniform4i::StaticSchema() {
+const schema::Entity* GlUniform4i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value1", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -18198,7 +18198,7 @@ const schema::Entity& GlUniform4i::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4iv:
@@ -18209,20 +18209,20 @@ void GlUniform4iv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform4iv::StaticSchema() {
+const schema::Entity* GlUniform4iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4ui:
@@ -18235,14 +18235,14 @@ void GlUniform4ui::Encode(Encoder* e) const {
     e->Uint32(this->mValue2);
     e->Uint32(this->mValue3);
 }
-const schema::Entity& GlUniform4ui::StaticSchema() {
+const schema::Entity* GlUniform4ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value0", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Value1", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -18250,7 +18250,7 @@ const schema::Entity& GlUniform4ui::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniform4uiv:
@@ -18261,20 +18261,20 @@ void GlUniform4uiv::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniform4uiv::StaticSchema() {
+const schema::Entity* GlUniform4uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniform4uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformBlockBinding:
@@ -18285,37 +18285,37 @@ void GlUniformBlockBinding::Encode(Encoder* e) const {
     e->Uint32(this->mUniformBlockIndex);
     e->Uint32(this->mUniformBlockBinding);
 }
-const schema::Entity& GlUniformBlockBinding::StaticSchema() {
+const schema::Entity* GlUniformBlockBinding::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformBlockBinding",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
             schema::Field{"UniformBlockIndex", new schema::Primitive{"UniformBlockId", schema::Primitive::Uint32}},
             schema::Field{"UniformBlockBinding", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformHandleui64NV:
 // gles.GlUniformHandleui64NV{$,Int32,Uint64}
-const schema::Entity& GlUniformHandleui64NV::StaticSchema() {
+const schema::Entity* GlUniformHandleui64NV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformHandleui64NV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Value", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformHandleui64vNV:
@@ -18326,20 +18326,20 @@ void GlUniformHandleui64vNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformHandleui64vNV::StaticSchema() {
+const schema::Entity* GlUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformHandleui64vNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Value", new schema::Struct{"", GLuint64__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLuint64__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix2fv:
@@ -18351,21 +18351,21 @@ void GlUniformMatrix2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix2fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix2x3fv:
@@ -18377,21 +18377,21 @@ void GlUniformMatrix2x3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix2x3fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix2x3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix2x3fvNV:
@@ -18403,21 +18403,21 @@ void GlUniformMatrix2x3fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix2x3fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix2x3fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix2x3fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix2x4fv:
@@ -18429,21 +18429,21 @@ void GlUniformMatrix2x4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix2x4fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix2x4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix2x4fvNV:
@@ -18455,21 +18455,21 @@ void GlUniformMatrix2x4fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix2x4fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix2x4fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix2x4fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix3fv:
@@ -18481,21 +18481,21 @@ void GlUniformMatrix3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix3fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix3x2fv:
@@ -18507,21 +18507,21 @@ void GlUniformMatrix3x2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix3x2fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix3x2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix3x2fvNV:
@@ -18533,21 +18533,21 @@ void GlUniformMatrix3x2fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix3x2fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix3x2fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix3x2fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix3x4fv:
@@ -18559,21 +18559,21 @@ void GlUniformMatrix3x4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix3x4fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix3x4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix3x4fvNV:
@@ -18585,21 +18585,21 @@ void GlUniformMatrix3x4fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix3x4fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix3x4fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix3x4fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix4fv:
@@ -18611,21 +18611,21 @@ void GlUniformMatrix4fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix4fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix4x2fv:
@@ -18637,21 +18637,21 @@ void GlUniformMatrix4x2fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix4x2fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix4x2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix4x2fvNV:
@@ -18663,21 +18663,21 @@ void GlUniformMatrix4x2fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix4x2fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix4x2fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix4x2fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix4x3fv:
@@ -18689,21 +18689,21 @@ void GlUniformMatrix4x3fv::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValues);
 }
-const schema::Entity& GlUniformMatrix4x3fv::StaticSchema() {
+const schema::Entity* GlUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix4x3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Values", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUniformMatrix4x3fvNV:
@@ -18715,71 +18715,71 @@ void GlUniformMatrix4x3fvNV::Encode(Encoder* e) const {
     e->Uint8(this->mTranspose);
     e->Value(this->mValue);
 }
-const schema::Entity& GlUniformMatrix4x3fvNV::StaticSchema() {
+const schema::Entity* GlUniformMatrix4x3fvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUniformMatrix4x3fvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Transpose", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUnmapBuffer:
 // gles.GlUnmapBuffer{$,Uint32,Uint8}
-const schema::Entity& GlUnmapBuffer::StaticSchema() {
+const schema::Entity* GlUnmapBuffer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUnmapBuffer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUnmapBufferOES:
 // gles.GlUnmapBufferOES{$,Uint32,Uint8}
-const schema::Entity& GlUnmapBufferOES::StaticSchema() {
+const schema::Entity* GlUnmapBufferOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUnmapBufferOES",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Target", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Result", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUseProgram:
 // gles.GlUseProgram{$,Uint32}
-const schema::Entity& GlUseProgram::StaticSchema() {
+const schema::Entity* GlUseProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUseProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUseProgramStages:
@@ -18790,20 +18790,20 @@ void GlUseProgramStages::Encode(Encoder* e) const {
     e->Uint32(this->mStages);
     e->Uint32(this->mProgram);
 }
-const schema::Entity& GlUseProgramStages::StaticSchema() {
+const schema::Entity* GlUseProgramStages::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUseProgramStages",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Stages", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlUseProgramStagesEXT:
@@ -18814,102 +18814,102 @@ void GlUseProgramStagesEXT::Encode(Encoder* e) const {
     e->Uint32(this->mStages);
     e->Uint32(this->mProgram);
 }
-const schema::Entity& GlUseProgramStagesEXT::StaticSchema() {
+const schema::Entity* GlUseProgramStagesEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlUseProgramStagesEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
             schema::Field{"Stages", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlValidateProgram:
 // gles.GlValidateProgram{$,Uint32}
-const schema::Entity& GlValidateProgram::StaticSchema() {
+const schema::Entity* GlValidateProgram::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlValidateProgram",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Program", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlValidateProgramPipeline:
 // gles.GlValidateProgramPipeline{$,Uint32}
-const schema::Entity& GlValidateProgramPipeline::StaticSchema() {
+const schema::Entity* GlValidateProgramPipeline::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlValidateProgramPipeline",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlValidateProgramPipelineEXT:
 // gles.GlValidateProgramPipelineEXT{$,Uint32}
-const schema::Entity& GlValidateProgramPipelineEXT::StaticSchema() {
+const schema::Entity* GlValidateProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlValidateProgramPipelineEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Pipeline", new schema::Primitive{"PipelineId", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib1f:
 // gles.GlVertexAttrib1f{$,Uint32,Float32}
-const schema::Entity& GlVertexAttrib1f::StaticSchema() {
+const schema::Entity* GlVertexAttrib1f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib1f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib1fv:
 // gles.GlVertexAttrib1fv{$,Uint32,$}
-const schema::Entity& GlVertexAttrib1fv::StaticSchema() {
+const schema::Entity* GlVertexAttrib1fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib1fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib2f:
@@ -18920,37 +18920,37 @@ void GlVertexAttrib2f::Encode(Encoder* e) const {
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
 }
-const schema::Entity& GlVertexAttrib2f::StaticSchema() {
+const schema::Entity* GlVertexAttrib2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib2f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib2fv:
 // gles.GlVertexAttrib2fv{$,Uint32,$}
-const schema::Entity& GlVertexAttrib2fv::StaticSchema() {
+const schema::Entity* GlVertexAttrib2fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib2fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib3f:
@@ -18962,38 +18962,38 @@ void GlVertexAttrib3f::Encode(Encoder* e) const {
     e->Float32(this->mValue1);
     e->Float32(this->mValue2);
 }
-const schema::Entity& GlVertexAttrib3f::StaticSchema() {
+const schema::Entity* GlVertexAttrib3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib3f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value2", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib3fv:
 // gles.GlVertexAttrib3fv{$,Uint32,$}
-const schema::Entity& GlVertexAttrib3fv::StaticSchema() {
+const schema::Entity* GlVertexAttrib3fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib3fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib4f:
@@ -19006,14 +19006,14 @@ void GlVertexAttrib4f::Encode(Encoder* e) const {
     e->Float32(this->mValue2);
     e->Float32(this->mValue3);
 }
-const schema::Entity& GlVertexAttrib4f::StaticSchema() {
+const schema::Entity* GlVertexAttrib4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib4f",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Value0", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Value1", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -19021,109 +19021,109 @@ const schema::Entity& GlVertexAttrib4f::StaticSchema() {
             schema::Field{"Value3", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttrib4fv:
 // gles.GlVertexAttrib4fv{$,Uint32,$}
-const schema::Entity& GlVertexAttrib4fv::StaticSchema() {
+const schema::Entity* GlVertexAttrib4fv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttrib4fv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Value", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribBinding:
 // gles.GlVertexAttribBinding{$,Uint32,Uint32}
-const schema::Entity& GlVertexAttribBinding::StaticSchema() {
+const schema::Entity* GlVertexAttribBinding::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribBinding",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"BindingIndex", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribDivisor:
 // gles.GlVertexAttribDivisor{$,Uint32,Uint32}
-const schema::Entity& GlVertexAttribDivisor::StaticSchema() {
+const schema::Entity* GlVertexAttribDivisor::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribDivisor",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribDivisorANGLE:
 // gles.GlVertexAttribDivisorANGLE{$,Uint32,Uint32}
-const schema::Entity& GlVertexAttribDivisorANGLE::StaticSchema() {
+const schema::Entity* GlVertexAttribDivisorANGLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribDivisorANGLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribDivisorEXT:
 // gles.GlVertexAttribDivisorEXT{$,Uint32,Uint32}
-const schema::Entity& GlVertexAttribDivisorEXT::StaticSchema() {
+const schema::Entity* GlVertexAttribDivisorEXT::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribDivisorEXT",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribDivisorNV:
 // gles.GlVertexAttribDivisorNV{$,Uint32,Uint32}
-const schema::Entity& GlVertexAttribDivisorNV::StaticSchema() {
+const schema::Entity* GlVertexAttribDivisorNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribDivisorNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribFormat:
@@ -19136,14 +19136,14 @@ void GlVertexAttribFormat::Encode(Encoder* e) const {
     e->Uint8(this->mNormalized);
     e->Uint32(this->mRelativeoffset);
 }
-const schema::Entity& GlVertexAttribFormat::StaticSchema() {
+const schema::Entity* GlVertexAttribFormat::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribFormat",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -19151,7 +19151,7 @@ const schema::Entity& GlVertexAttribFormat::StaticSchema() {
             schema::Field{"Relativeoffset", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribI4i:
@@ -19164,14 +19164,14 @@ void GlVertexAttribI4i::Encode(Encoder* e) const {
     e->Int32(this->mZ);
     e->Int32(this->mW);
 }
-const schema::Entity& GlVertexAttribI4i::StaticSchema() {
+const schema::Entity* GlVertexAttribI4i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribI4i",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
@@ -19179,24 +19179,24 @@ const schema::Entity& GlVertexAttribI4i::StaticSchema() {
             schema::Field{"W", new schema::Primitive{"GLint", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribI4iv:
 // gles.GlVertexAttribI4iv{$,Uint32,$}
-const schema::Entity& GlVertexAttribI4iv::StaticSchema() {
+const schema::Entity* GlVertexAttribI4iv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribI4iv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribI4ui:
@@ -19209,14 +19209,14 @@ void GlVertexAttribI4ui::Encode(Encoder* e) const {
     e->Uint32(this->mZ);
     e->Uint32(this->mW);
 }
-const schema::Entity& GlVertexAttribI4ui::StaticSchema() {
+const schema::Entity* GlVertexAttribI4ui::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribI4ui",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"X", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Y", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
@@ -19224,24 +19224,24 @@ const schema::Entity& GlVertexAttribI4ui::StaticSchema() {
             schema::Field{"W", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribI4uiv:
 // gles.GlVertexAttribI4uiv{$,Uint32,$}
-const schema::Entity& GlVertexAttribI4uiv::StaticSchema() {
+const schema::Entity* GlVertexAttribI4uiv::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribI4uiv",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
-            schema::Field{"Values", new schema::Struct{"", GLuint__CP::StaticSchema()}},
+            schema::Field{"Values", new schema::Struct{ GLuint__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribIFormat:
@@ -19253,21 +19253,21 @@ void GlVertexAttribIFormat::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Uint32(this->mRelativeoffset);
 }
-const schema::Entity& GlVertexAttribIFormat::StaticSchema() {
+const schema::Entity* GlVertexAttribIFormat::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribIFormat",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Relativeoffset", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribIPointer:
@@ -19280,22 +19280,22 @@ void GlVertexAttribIPointer::Encode(Encoder* e) const {
     e->Int32(this->mStride);
     e->Value(this->mData);
 }
-const schema::Entity& GlVertexAttribIPointer::StaticSchema() {
+const schema::Entity* GlVertexAttribIPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribIPointer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", VertexPointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ VertexPointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexAttribPointer:
@@ -19309,40 +19309,40 @@ void GlVertexAttribPointer::Encode(Encoder* e) const {
     e->Int32(this->mStride);
     e->Value(this->mData);
 }
-const schema::Entity& GlVertexAttribPointer::StaticSchema() {
+const schema::Entity* GlVertexAttribPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexAttribPointer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Location", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
             schema::Field{"Size", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"Normalized", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
             schema::Field{"Stride", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Data", new schema::Struct{"", VertexPointer::StaticSchema()}},
+            schema::Field{"Data", new schema::Struct{ VertexPointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlVertexBindingDivisor:
 // gles.GlVertexBindingDivisor{$,Uint32,Uint32}
-const schema::Entity& GlVertexBindingDivisor::StaticSchema() {
+const schema::Entity* GlVertexBindingDivisor::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlVertexBindingDivisor",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"BindingIndex", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}},
             schema::Field{"Divisor", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlViewport:
@@ -19354,21 +19354,21 @@ void GlViewport::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
 }
-const schema::Entity& GlViewport::StaticSchema() {
+const schema::Entity* GlViewport::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlViewport",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"X", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Y", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlViewportArrayvNV:
@@ -19379,20 +19379,20 @@ void GlViewportArrayvNV::Encode(Encoder* e) const {
     e->Int32(this->mCount);
     e->Value(this->mV);
 }
-const schema::Entity& GlViewportArrayvNV::StaticSchema() {
+const schema::Entity* GlViewportArrayvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlViewportArrayvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"First", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"Count", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlViewportIndexedfNV:
@@ -19405,14 +19405,14 @@ void GlViewportIndexedfNV::Encode(Encoder* e) const {
     e->Float32(this->mW);
     e->Float32(this->mH);
 }
-const schema::Entity& GlViewportIndexedfNV::StaticSchema() {
+const schema::Entity* GlViewportIndexedfNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlViewportIndexedfNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"X", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
             schema::Field{"Y", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
@@ -19420,24 +19420,24 @@ const schema::Entity& GlViewportIndexedfNV::StaticSchema() {
             schema::Field{"H", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlViewportIndexedfvNV:
 // gles.GlViewportIndexedfvNV{$,Uint32,$}
-const schema::Entity& GlViewportIndexedfvNV::StaticSchema() {
+const schema::Entity* GlViewportIndexedfvNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlViewportIndexedfvNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
-            schema::Field{"V", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"V", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlWaitSync:
@@ -19448,20 +19448,20 @@ void GlWaitSync::Encode(Encoder* e) const {
     e->Uint32(this->mSyncFlags);
     e->Uint64(this->mTimeout);
 }
-const schema::Entity& GlWaitSync::StaticSchema() {
+const schema::Entity* GlWaitSync::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlWaitSync",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"SyncFlags", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Timeout", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlWaitSyncAPPLE:
@@ -19472,20 +19472,20 @@ void GlWaitSyncAPPLE::Encode(Encoder* e) const {
     e->Uint32(this->mFlag);
     e->Uint64(this->mTimeout);
 }
-const schema::Entity& GlWaitSyncAPPLE::StaticSchema() {
+const schema::Entity* GlWaitSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlWaitSyncAPPLE",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Sync", new schema::Primitive{"GLsync", schema::Primitive::Uint64}},
             schema::Field{"Flag", new schema::Primitive{"GLbitfield", schema::Primitive::Uint32}},
             schema::Field{"Timeout", new schema::Primitive{"GLuint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlWeightPathsNV:
@@ -19497,21 +19497,21 @@ void GlWeightPathsNV::Encode(Encoder* e) const {
     e->Value(this->mPaths);
     e->Value(this->mWeights);
 }
-const schema::Entity& GlWeightPathsNV::StaticSchema() {
+const schema::Entity* GlWeightPathsNV::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlWeightPathsNV",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ResultPath", new schema::Primitive{"GLuint", schema::Primitive::Uint32}},
             schema::Field{"NumPaths", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
-            schema::Field{"Paths", new schema::Struct{"", GLuint__CP::StaticSchema()}},
-            schema::Field{"Weights", new schema::Struct{"", GLfloat__CP::StaticSchema()}},
+            schema::Field{"Paths", new schema::Struct{ GLuint__CP::StaticSchema()}},
+            schema::Field{"Weights", new schema::Struct{ GLfloat__CP::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXCreateContext:
@@ -19524,22 +19524,22 @@ void GlXCreateContext::Encode(Encoder* e) const {
     e->Bool(this->mDirect);
     e->Value(this->mResult);
 }
-const schema::Entity& GlXCreateContext::StaticSchema() {
+const schema::Entity* GlXCreateContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXCreateContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Dpy", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Vis", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"ShareList", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Dpy", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Vis", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"ShareList", new schema::Struct{ GLXContext::StaticSchema()}},
             schema::Field{"Direct", new schema::Primitive{"bool", schema::Primitive::Bool}},
-            schema::Field{"Result", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ GLXContext::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXCreateNewContext:
@@ -19553,23 +19553,23 @@ void GlXCreateNewContext::Encode(Encoder* e) const {
     e->Bool(this->mDirect);
     e->Value(this->mResult);
 }
-const schema::Entity& GlXCreateNewContext::StaticSchema() {
+const schema::Entity* GlXCreateNewContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXCreateNewContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Fbconfig", new schema::Struct{"", Void__P::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Fbconfig", new schema::Struct{ Void__P::StaticSchema()}},
             schema::Field{"Type", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
-            schema::Field{"Shared", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"Shared", new schema::Struct{ GLXContext::StaticSchema()}},
             schema::Field{"Direct", new schema::Primitive{"bool", schema::Primitive::Bool}},
-            schema::Field{"Result", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ GLXContext::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXMakeContextCurrent:
@@ -19582,22 +19582,22 @@ void GlXMakeContextCurrent::Encode(Encoder* e) const {
     e->Value(this->mCtx);
     e->Int64(this->mResult);
 }
-const schema::Entity& GlXMakeContextCurrent::StaticSchema() {
+const schema::Entity* GlXMakeContextCurrent::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXMakeContextCurrent",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Draw", new schema::Struct{"", GLXDrawable::StaticSchema()}},
-            schema::Field{"Read", new schema::Struct{"", GLXDrawable::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Draw", new schema::Struct{ GLXDrawable::StaticSchema()}},
+            schema::Field{"Read", new schema::Struct{ GLXDrawable::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ GLXContext::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"Bool", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXMakeCurrent:
@@ -19609,36 +19609,36 @@ void GlXMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mCtx);
     e->Int64(this->mResult);
 }
-const schema::Entity& GlXMakeCurrent::StaticSchema() {
+const schema::Entity* GlXMakeCurrent::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXMakeCurrent",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Drawable", new schema::Struct{"", GLXDrawable::StaticSchema()}},
-            schema::Field{"Ctx", new schema::Struct{"", GLXContext::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Drawable", new schema::Struct{ GLXDrawable::StaticSchema()}},
+            schema::Field{"Ctx", new schema::Struct{ GLXContext::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"Bool", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Intᵖ:
 // gles.Intᵖ{$}
-const schema::Entity& Int__P::StaticSchema() {
+const schema::Entity* Int__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Intᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXQueryDrawable:
@@ -19651,89 +19651,89 @@ void GlXQueryDrawable::Encode(Encoder* e) const {
     e->Value(this->mValue);
     e->Int64(this->mResult);
 }
-const schema::Entity& GlXQueryDrawable::StaticSchema() {
+const schema::Entity* GlXQueryDrawable::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXQueryDrawable",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Draw", new schema::Struct{"", GLXDrawable::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Draw", new schema::Struct{ GLXDrawable::StaticSchema()}},
             schema::Field{"Attribute", new schema::Primitive{"int64", schema::Primitive::Int64}},
-            schema::Field{"Value", new schema::Struct{"", Int__P::StaticSchema()}},
+            schema::Field{"Value", new schema::Struct{ Int__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"int64", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // GlXSwapBuffers:
 // gles.GlXSwapBuffers{$,$,$}
-const schema::Entity& GlXSwapBuffers::StaticSchema() {
+const schema::Entity* GlXSwapBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "GlXSwapBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Display", new schema::Struct{"", Void__P::StaticSchema()}},
-            schema::Field{"Drawable", new schema::Struct{"", GLXDrawable::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Display", new schema::Struct{ Void__P::StaticSchema()}},
+            schema::Field{"Drawable", new schema::Struct{ GLXDrawable::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // HDC:
 // gles.HDC{$}
-const schema::Entity& HDC::StaticSchema() {
+const schema::Entity* HDC::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "HDC",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // HGLRC:
 // gles.HGLRC{$}
-const schema::Entity& HGLRC::StaticSchema() {
+const schema::Entity* HGLRC::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "HGLRC",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Intˢ:
 // gles.Intˢ{$}
-const schema::Entity& Int__S::StaticSchema() {
+const schema::Entity* Int__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Intˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2f:
 // gles.Vec2f{[2]Float32}
-const schema::Entity& Vec2f::StaticSchema() {
+const schema::Entity* Vec2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -19743,57 +19743,57 @@ const schema::Entity& Vec2f::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2f:
 // gles.Mat2f{[2]$}
-const schema::Entity& Mat2f::StaticSchema() {
+const schema::Entity* Mat2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2fˢ:
 // gles.Mat2fˢ{$}
-const schema::Entity& Mat2f__S::StaticSchema() {
+const schema::Entity* Mat2f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2fᵖ:
 // gles.Mat2fᵖ{$}
-const schema::Entity& Mat2f__P::StaticSchema() {
+const schema::Entity* Mat2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3f:
 // gles.Vec3f{[3]Float32}
-const schema::Entity& Vec3f::StaticSchema() {
+const schema::Entity* Vec3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -19803,57 +19803,57 @@ const schema::Entity& Vec3f::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x3f:
 // gles.Mat2x3f{[2]$}
-const schema::Entity& Mat2x3f::StaticSchema() {
+const schema::Entity* Mat2x3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x3f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x3fˢ:
 // gles.Mat2x3fˢ{$}
-const schema::Entity& Mat2x3f__S::StaticSchema() {
+const schema::Entity* Mat2x3f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x3fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x3fᵖ:
 // gles.Mat2x3fᵖ{$}
-const schema::Entity& Mat2x3f__P::StaticSchema() {
+const schema::Entity* Mat2x3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4f:
 // gles.Vec4f{[4]Float32}
-const schema::Entity& Vec4f::StaticSchema() {
+const schema::Entity* Vec4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -19863,725 +19863,725 @@ const schema::Entity& Vec4f::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x4f:
 // gles.Mat2x4f{[2]$}
-const schema::Entity& Mat2x4f::StaticSchema() {
+const schema::Entity* Mat2x4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x4f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x4fˢ:
 // gles.Mat2x4fˢ{$}
-const schema::Entity& Mat2x4f__S::StaticSchema() {
+const schema::Entity* Mat2x4f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x4fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat2x4fᵖ:
 // gles.Mat2x4fᵖ{$}
-const schema::Entity& Mat2x4f__P::StaticSchema() {
+const schema::Entity* Mat2x4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat2x4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3f:
 // gles.Mat3f{[3]$}
-const schema::Entity& Mat3f::StaticSchema() {
+const schema::Entity* Mat3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3fˢ:
 // gles.Mat3fˢ{$}
-const schema::Entity& Mat3f__S::StaticSchema() {
+const schema::Entity* Mat3f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3fᵖ:
 // gles.Mat3fᵖ{$}
-const schema::Entity& Mat3f__P::StaticSchema() {
+const schema::Entity* Mat3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x2f:
 // gles.Mat3x2f{[3]$}
-const schema::Entity& Mat3x2f::StaticSchema() {
+const schema::Entity* Mat3x2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x2f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x2fˢ:
 // gles.Mat3x2fˢ{$}
-const schema::Entity& Mat3x2f__S::StaticSchema() {
+const schema::Entity* Mat3x2f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x2fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x2fᵖ:
 // gles.Mat3x2fᵖ{$}
-const schema::Entity& Mat3x2f__P::StaticSchema() {
+const schema::Entity* Mat3x2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x4f:
 // gles.Mat3x4f{[3]$}
-const schema::Entity& Mat3x4f::StaticSchema() {
+const schema::Entity* Mat3x4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x4f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x4fˢ:
 // gles.Mat3x4fˢ{$}
-const schema::Entity& Mat3x4f__S::StaticSchema() {
+const schema::Entity* Mat3x4f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x4fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat3x4fᵖ:
 // gles.Mat3x4fᵖ{$}
-const schema::Entity& Mat3x4f__P::StaticSchema() {
+const schema::Entity* Mat3x4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat3x4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4f:
 // gles.Mat4f{[4]$}
-const schema::Entity& Mat4f::StaticSchema() {
+const schema::Entity* Mat4f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4fˢ:
 // gles.Mat4fˢ{$}
-const schema::Entity& Mat4f__S::StaticSchema() {
+const schema::Entity* Mat4f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4fᵖ:
 // gles.Mat4fᵖ{$}
-const schema::Entity& Mat4f__P::StaticSchema() {
+const schema::Entity* Mat4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x2f:
 // gles.Mat4x2f{[4]$}
-const schema::Entity& Mat4x2f::StaticSchema() {
+const schema::Entity* Mat4x2f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x2f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x2fˢ:
 // gles.Mat4x2fˢ{$}
-const schema::Entity& Mat4x2f__S::StaticSchema() {
+const schema::Entity* Mat4x2f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x2fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x2fᵖ:
 // gles.Mat4x2fᵖ{$}
-const schema::Entity& Mat4x2f__P::StaticSchema() {
+const schema::Entity* Mat4x2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x3f:
 // gles.Mat4x3f{[4]$}
-const schema::Entity& Mat4x3f::StaticSchema() {
+const schema::Entity* Mat4x3f::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x3f",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x3fˢ:
 // gles.Mat4x3fˢ{$}
-const schema::Entity& Mat4x3f__S::StaticSchema() {
+const schema::Entity* Mat4x3f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x3fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Mat4x3fᵖ:
 // gles.Mat4x3fᵖ{$}
-const schema::Entity& Mat4x3f__P::StaticSchema() {
+const schema::Entity* Mat4x3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Mat4x3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // PipelineIdˢ:
 // gles.PipelineIdˢ{$}
-const schema::Entity& PipelineId__S::StaticSchema() {
+const schema::Entity* PipelineId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "PipelineIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ProgramIdˢ:
 // gles.ProgramIdˢ{$}
-const schema::Entity& ProgramId__S::StaticSchema() {
+const schema::Entity* ProgramId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ProgramIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // QueryIdˢ:
 // gles.QueryIdˢ{$}
-const schema::Entity& QueryId__S::StaticSchema() {
+const schema::Entity* QueryId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "QueryIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // RenderbufferIdˢ:
 // gles.RenderbufferIdˢ{$}
-const schema::Entity& RenderbufferId__S::StaticSchema() {
+const schema::Entity* RenderbufferId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "RenderbufferIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ReplayBindRenderer:
 // gles.ReplayBindRenderer{$,Uint32}
-const schema::Entity& ReplayBindRenderer::StaticSchema() {
+const schema::Entity* ReplayBindRenderer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ReplayBindRenderer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Id", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ReplayCreateRenderer:
 // gles.ReplayCreateRenderer{$,Uint32}
-const schema::Entity& ReplayCreateRenderer::StaticSchema() {
+const schema::Entity* ReplayCreateRenderer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ReplayCreateRenderer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Id", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // S64ˢ:
 // gles.S64ˢ{$}
-const schema::Entity& S64__S::StaticSchema() {
+const schema::Entity* S64__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "S64ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // SamplerIdˢ:
 // gles.SamplerIdˢ{$}
-const schema::Entity& SamplerId__S::StaticSchema() {
+const schema::Entity* SamplerId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "SamplerIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // ShaderIdˢ:
 // gles.ShaderIdˢ{$}
-const schema::Entity& ShaderId__S::StaticSchema() {
+const schema::Entity* ShaderId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "ShaderIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // StartTimer:
 // gles.StartTimer{$,Uint8}
-const schema::Entity& StartTimer::StaticSchema() {
+const schema::Entity* StartTimer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "StartTimer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"uint8", schema::Primitive::Uint8}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Can't encode State contains maps: gles.State{Uint32,Uint64,map[Uint64]*$,map[$]*$,map[$]*$,map[$]*$,map[$]*$}
 
 // StopTimer:
 // gles.StopTimer{$,Uint8,Uint64}
-const schema::Entity& StopTimer::StaticSchema() {
+const schema::Entity* StopTimer::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "StopTimer",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"Index", new schema::Primitive{"uint8", schema::Primitive::Uint8}},
             schema::Field{"Result", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // SwitchThread:
 // gles.SwitchThread{$,Uint64}
-const schema::Entity& SwitchThread::StaticSchema() {
+const schema::Entity* SwitchThread::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "SwitchThread",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
             schema::Field{"ThreadID", new schema::Primitive{"ThreadID", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TextureIdˢ:
 // gles.TextureIdˢ{$}
-const schema::Entity& TextureId__S::StaticSchema() {
+const schema::Entity* TextureId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TextureIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // TransformFeedbackIdˢ:
 // gles.TransformFeedbackIdˢ{$}
-const schema::Entity& TransformFeedbackId__S::StaticSchema() {
+const schema::Entity* TransformFeedbackId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "TransformFeedbackIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U16ˢ:
 // gles.U16ˢ{$}
-const schema::Entity& U16__S::StaticSchema() {
+const schema::Entity* U16__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U16ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U16ᵖ:
 // gles.U16ᵖ{$}
-const schema::Entity& U16__P::StaticSchema() {
+const schema::Entity* U16__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U16ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U32ˢ:
 // gles.U32ˢ{$}
-const schema::Entity& U32__S::StaticSchema() {
+const schema::Entity* U32__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U32ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U32ᵖ:
 // gles.U32ᵖ{$}
-const schema::Entity& U32__P::StaticSchema() {
+const schema::Entity* U32__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U32ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U64ˢ:
 // gles.U64ˢ{$}
-const schema::Entity& U64__S::StaticSchema() {
+const schema::Entity* U64__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U64ˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // U8ᵖ:
 // gles.U8ᵖ{$}
-const schema::Entity& U8__P::StaticSchema() {
+const schema::Entity* U8__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "U8ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // UniformIndexˢ:
 // gles.UniformIndexˢ{$}
-const schema::Entity& UniformIndex__S::StaticSchema() {
+const schema::Entity* UniformIndex__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "UniformIndexˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2fː2ᵃ:
 // gles.Vec2fː2ᵃ{[2]$}
-const schema::Entity& Vec2f__2__A::StaticSchema() {
+const schema::Entity* Vec2f__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2fː2ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2fː3ᵃ:
 // gles.Vec2fː3ᵃ{[3]$}
-const schema::Entity& Vec2f__3__A::StaticSchema() {
+const schema::Entity* Vec2f__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2fː3ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2fː4ᵃ:
 // gles.Vec2fː4ᵃ{[4]$}
-const schema::Entity& Vec2f__4__A::StaticSchema() {
+const schema::Entity* Vec2f__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2fː4ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec2f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec2f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2fˢ:
 // gles.Vec2fˢ{$}
-const schema::Entity& Vec2f__S::StaticSchema() {
+const schema::Entity* Vec2f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2fᵖ:
 // gles.Vec2fᵖ{$}
-const schema::Entity& Vec2f__P::StaticSchema() {
+const schema::Entity* Vec2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2i:
 // gles.Vec2i{[2]Int32}
-const schema::Entity& Vec2i::StaticSchema() {
+const schema::Entity* Vec2i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20591,42 +20591,42 @@ const schema::Entity& Vec2i::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2iˢ:
 // gles.Vec2iˢ{$}
-const schema::Entity& Vec2i__S::StaticSchema() {
+const schema::Entity* Vec2i__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2iˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2iᵖ:
 // gles.Vec2iᵖ{$}
-const schema::Entity& Vec2i__P::StaticSchema() {
+const schema::Entity* Vec2i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2u:
 // gles.Vec2u{[2]Uint32}
-const schema::Entity& Vec2u::StaticSchema() {
+const schema::Entity* Vec2u::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20636,117 +20636,117 @@ const schema::Entity& Vec2u::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2uˢ:
 // gles.Vec2uˢ{$}
-const schema::Entity& Vec2u__S::StaticSchema() {
+const schema::Entity* Vec2u__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2uˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec2uᵖ:
 // gles.Vec2uᵖ{$}
-const schema::Entity& Vec2u__P::StaticSchema() {
+const schema::Entity* Vec2u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec2uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3fː2ᵃ:
 // gles.Vec3fː2ᵃ{[2]$}
-const schema::Entity& Vec3f__2__A::StaticSchema() {
+const schema::Entity* Vec3f__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3fː2ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3fː3ᵃ:
 // gles.Vec3fː3ᵃ{[3]$}
-const schema::Entity& Vec3f__3__A::StaticSchema() {
+const schema::Entity* Vec3f__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3fː3ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3fː4ᵃ:
 // gles.Vec3fː4ᵃ{[4]$}
-const schema::Entity& Vec3f__4__A::StaticSchema() {
+const schema::Entity* Vec3f__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3fː4ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec3f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec3f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3fˢ:
 // gles.Vec3fˢ{$}
-const schema::Entity& Vec3f__S::StaticSchema() {
+const schema::Entity* Vec3f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3fᵖ:
 // gles.Vec3fᵖ{$}
-const schema::Entity& Vec3f__P::StaticSchema() {
+const schema::Entity* Vec3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3i:
 // gles.Vec3i{[3]Int32}
-const schema::Entity& Vec3i::StaticSchema() {
+const schema::Entity* Vec3i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20756,42 +20756,42 @@ const schema::Entity& Vec3i::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3iˢ:
 // gles.Vec3iˢ{$}
-const schema::Entity& Vec3i__S::StaticSchema() {
+const schema::Entity* Vec3i__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3iˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3iᵖ:
 // gles.Vec3iᵖ{$}
-const schema::Entity& Vec3i__P::StaticSchema() {
+const schema::Entity* Vec3i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3u:
 // gles.Vec3u{[3]Uint32}
-const schema::Entity& Vec3u::StaticSchema() {
+const schema::Entity* Vec3u::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20801,117 +20801,117 @@ const schema::Entity& Vec3u::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3uˢ:
 // gles.Vec3uˢ{$}
-const schema::Entity& Vec3u__S::StaticSchema() {
+const schema::Entity* Vec3u__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3uˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec3uᵖ:
 // gles.Vec3uᵖ{$}
-const schema::Entity& Vec3u__P::StaticSchema() {
+const schema::Entity* Vec3u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec3uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4fː2ᵃ:
 // gles.Vec4fː2ᵃ{[2]$}
-const schema::Entity& Vec4f__2__A::StaticSchema() {
+const schema::Entity* Vec4f__2__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4fː2ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 2}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 2}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4fː3ᵃ:
 // gles.Vec4fː3ᵃ{[3]$}
-const schema::Entity& Vec4f__3__A::StaticSchema() {
+const schema::Entity* Vec4f__3__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4fː3ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 3}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 3}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4fː4ᵃ:
 // gles.Vec4fː4ᵃ{[4]$}
-const schema::Entity& Vec4f__4__A::StaticSchema() {
+const schema::Entity* Vec4f__4__A::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4fː4ᵃ",
         "",
         {
-            schema::Field{"Elements", new schema::Array{"", new schema::Struct{"", Vec4f::StaticSchema()}, 4}},
+            schema::Field{"Elements", new schema::Array{"", new schema::Struct{ Vec4f::StaticSchema()}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4fˢ:
 // gles.Vec4fˢ{$}
-const schema::Entity& Vec4f__S::StaticSchema() {
+const schema::Entity* Vec4f__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4fˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4fᵖ:
 // gles.Vec4fᵖ{$}
-const schema::Entity& Vec4f__P::StaticSchema() {
+const schema::Entity* Vec4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4i:
 // gles.Vec4i{[4]Int32}
-const schema::Entity& Vec4i::StaticSchema() {
+const schema::Entity* Vec4i::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20921,42 +20921,42 @@ const schema::Entity& Vec4i::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4iˢ:
 // gles.Vec4iˢ{$}
-const schema::Entity& Vec4i__S::StaticSchema() {
+const schema::Entity* Vec4i__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4iˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4iᵖ:
 // gles.Vec4iᵖ{$}
-const schema::Entity& Vec4i__P::StaticSchema() {
+const schema::Entity* Vec4i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4u:
 // gles.Vec4u{[4]Uint32}
-const schema::Entity& Vec4u::StaticSchema() {
+const schema::Entity* Vec4u::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
@@ -20966,129 +20966,129 @@ const schema::Entity& Vec4u::StaticSchema() {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLuint", schema::Primitive::Uint32}, 4}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4uˢ:
 // gles.Vec4uˢ{$}
-const schema::Entity& Vec4u__S::StaticSchema() {
+const schema::Entity* Vec4u__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4uˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Vec4uᵖ:
 // gles.Vec4uᵖ{$}
-const schema::Entity& Vec4u__P::StaticSchema() {
+const schema::Entity* Vec4u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Vec4uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // VertexArrayIdˢ:
 // gles.VertexArrayIdˢ{$}
-const schema::Entity& VertexArrayId__S::StaticSchema() {
+const schema::Entity* VertexArrayId__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "VertexArrayIdˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidˢ:
 // gles.Voidˢ{$}
-const schema::Entity& Void__S::StaticSchema() {
+const schema::Entity* Void__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᵖˢ:
 // gles.Voidᵖˢ{$}
-const schema::Entity& Void__P__S::StaticSchema() {
+const schema::Entity* Void__P__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᵖˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᶜᵖˢ:
 // gles.Voidᶜᵖˢ{$}
-const schema::Entity& Void__CP__S::StaticSchema() {
+const schema::Entity* Void__CP__S::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᶜᵖˢ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", SliceInfo::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Voidᶜᵖᵖ:
 // gles.Voidᶜᵖᵖ{$}
-const schema::Entity& Void__CP__P::StaticSchema() {
+const schema::Entity* Void__CP__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "Voidᶜᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{"", memory::Pointer::StaticSchema()}},
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // WglCreateContext:
 // gles.WglCreateContext{$,$,$}
-const schema::Entity& WglCreateContext::StaticSchema() {
+const schema::Entity* WglCreateContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "WglCreateContext",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Hdc", new schema::Struct{"", HDC::StaticSchema()}},
-            schema::Field{"Result", new schema::Struct{"", HGLRC::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Hdc", new schema::Struct{ HDC::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ HGLRC::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // WglCreateContextAttribsARB:
@@ -21100,21 +21100,21 @@ void WglCreateContextAttribsARB::Encode(Encoder* e) const {
     e->Value(this->mAttribList);
     e->Value(this->mResult);
 }
-const schema::Entity& WglCreateContextAttribsARB::StaticSchema() {
+const schema::Entity* WglCreateContextAttribsARB::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "WglCreateContextAttribsARB",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Hdc", new schema::Struct{"", HDC::StaticSchema()}},
-            schema::Field{"HShareContext", new schema::Struct{"", HGLRC::StaticSchema()}},
-            schema::Field{"AttribList", new schema::Struct{"", Int__P::StaticSchema()}},
-            schema::Field{"Result", new schema::Struct{"", HGLRC::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Hdc", new schema::Struct{ HDC::StaticSchema()}},
+            schema::Field{"HShareContext", new schema::Struct{ HGLRC::StaticSchema()}},
+            schema::Field{"AttribList", new schema::Struct{ Int__P::StaticSchema()}},
+            schema::Field{"Result", new schema::Struct{ HGLRC::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // WglMakeCurrent:
@@ -21125,52 +21125,52 @@ void WglMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mHglrc);
     e->Int64(this->mResult);
 }
-const schema::Entity& WglMakeCurrent::StaticSchema() {
+const schema::Entity* WglMakeCurrent::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "WglMakeCurrent",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Hdc", new schema::Struct{"", HDC::StaticSchema()}},
-            schema::Field{"Hglrc", new schema::Struct{"", HGLRC::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Hdc", new schema::Struct{ HDC::StaticSchema()}},
+            schema::Field{"Hglrc", new schema::Struct{ HGLRC::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"BOOL", schema::Primitive::Int64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // WglSwapBuffers:
 // gles.WglSwapBuffers{$,$}
-const schema::Entity& WglSwapBuffers::StaticSchema() {
+const schema::Entity* WglSwapBuffers::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "WglSwapBuffers",
         "",
         {
-            schema::Field{"observations", new schema::Struct{"", atom::Observations::StaticSchema()}},
-            schema::Field{"Hdc", new schema::Struct{"", HDC::StaticSchema()}},
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"Hdc", new schema::Struct{ HDC::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // generate_types:
 // gles.generate_types{$,$}
-const schema::Entity& generate_types::StaticSchema() {
+const schema::Entity* generate_types::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
         "generate_types",
         "",
         {
-            schema::Field{"U16_slice", new schema::Struct{"", U16__S::StaticSchema()}},
-            schema::Field{"U32_slice", new schema::Struct{"", U32__S::StaticSchema()}},
+            schema::Field{"U16_slice", new schema::Struct{ U16__S::StaticSchema()}},
+            schema::Field{"U32_slice", new schema::Struct{ U32__S::StaticSchema()}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 

@@ -154,7 +154,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "Cpp.Schema.Primitive"}}new schema::Primitive{"{{.Name}}", schema::Primitive::{{.Method}}}{{end}}
-{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.String | File.TypeName}}::StaticSchema()}{{end}}
+{{define "Cpp.Schema.Struct"}}new schema::Struct{ {{.String | File.TypeName}}::StaticSchema()}{{end}}
 {{define "Cpp.Schema.Pointer"}}new schema::Pointer{ {{Call "Cpp.Schema" .Type}} }{{end}}
 {{define "Cpp.Schema.Interface"}}new schema::Interface{"{{.Name}}"}{{end}}
 {{define "Cpp.Schema.Variant"}}new schema::Variant{"{{.Name}}"}{{end}}
@@ -165,16 +165,16 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.HeaderSchema"}}
     {{if File.Directive "Schema" true}}
-    virtual const schema::Entity& Schema() const {»¶
+    virtual const schema::Entity* Schema() const {»¶
         return StaticSchema();¶
     «}¶
-    static const schema::Entity& StaticSchema();
+    static const schema::Entity* StaticSchema();
     {{end}}
 {{end}}
 
 {{define "Cpp.SchemaMethod"}}
     {{if File.Directive "Schema" true}}
-    const schema::Entity& {{.Name | File.TypeName}}::StaticSchema() {»¶
+    const schema::Entity* {{.Name | File.TypeName}}::StaticSchema() {»¶
         static schema::Entity entity {»¶
 	  "{{.Package}}",¶
 	  "{{.Display}}",¶
@@ -186,7 +186,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 	   {{end}}
 	   «},¶
         «};¶
-         return entity;¶
+         return &entity;¶
     «}¶
     {{end}}
 {{end}}

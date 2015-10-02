@@ -39,7 +39,7 @@ class Encoder;
 class Encodable {
 public:
     virtual void Encode(Encoder* to) const = 0;
-    virtual const schema::Entity& Schema() const = 0;
+    virtual const schema::Entity* Schema() const = 0;
 };
 
 template<class T>
@@ -81,7 +81,7 @@ public:
     }
     void Data(const void* ptr, int32_t size);
     void Id(const gapic::Id&);
-    void Entity(const schema::Entity&);
+    void Entity(const schema::Entity*);
 
     void Value(const Encodable& obj);
     void Variant(const Encodable* obj);
@@ -89,7 +89,7 @@ public:
 
 private:
     std::unordered_map<gapic::Id, uint32_t> mIds;
-    std::unordered_map<gapic::Id, uint32_t> mTypeIds;
+    std::unordered_map<const schema::Entity*, uint32_t> mEntities;
     std::shared_ptr<StreamWriter> mOutput;
     uint32_t mLastObjectId;
 };
