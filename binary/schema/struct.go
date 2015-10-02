@@ -22,19 +22,32 @@ import (
 
 // Struct is the Type descriptor for an binary.Object typed value.
 type Struct struct {
-	Relative string         // The relative name of the type.
+	Relative string         // The relative go import name of the type, only useful to codergen.
 	Entity   *binary.Entity // The schema entity this is a field of.
 }
 
 func (s *Struct) Representation() string {
-	return s.Entity.Name()
+	return fmt.Sprintf("%r", s)
 }
 
 func (s *Struct) String() string {
-	if s.Relative != "" {
-		return s.Relative
+	return fmt.Sprint(s)
+}
+
+// Format implements the fmt.Formatter interface
+func (s *Struct) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z': // Private format specifier, supports Entity.Signature
+		fmt.Fprint(f, "$")
+	case 'r': // Private format specifier, supports Type.Representation
+		fmt.Fprint(f, s.Entity.Name())
+	default:
+		if s.Relative != "" {
+			fmt.Fprint(f, s.Relative)
+		} else {
+			fmt.Fprint(f, s.Entity.Name())
+		}
 	}
-	return s.Entity.Name()
 }
 
 func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {

@@ -28,14 +28,27 @@ type Map struct {
 }
 
 func (m *Map) Representation() string {
-	return fmt.Sprintf("map[%s]%s", m.KeyType.Representation(), m.ValueType.Representation())
+	return fmt.Sprintf("%r", m)
 }
 
 func (m *Map) String() string {
-	if m.Alias != "" {
-		return m.Alias
+	return fmt.Sprint(m)
+}
+
+// Format implements the fmt.Formatter interface
+func (m *Map) Format(f fmt.State, c rune) {
+	switch c {
+	case 'z': // Private format specifier, supports Entity.Signature
+		fmt.Fprintf(f, "map[%z]%z", m.KeyType, m.ValueType)
+	case 'r': // Private format specifier, supports Type.Representation
+		fmt.Fprintf(f, "map[%r]%r", m.KeyType, m.ValueType)
+	default:
+		if m.Alias != "" {
+			fmt.Fprint(f, m.Alias)
+		} else {
+			fmt.Fprintf(f, "map[%v]%v", m.KeyType, m.ValueType)
+		}
 	}
-	return fmt.Sprintf("map[%s]%s", m.KeyType, m.ValueType)
 }
 
 func (m *Map) EncodeValue(e binary.Encoder, value interface{}) {

@@ -36,131 +36,172 @@ const (
 	MapTag
 )
 
-func EncodeType(e binary.Encoder, t binary.Type) {
+func EncodeType(e binary.Encoder, t binary.Type, compact bool) {
 	switch t := t.(type) {
 	case *Primitive:
-		e.Uint8(uint8(PrimitiveTag))
-		e.String(t.Name)
-		e.Uint8(uint8(t.Method))
+		e.Uint8(uint8(PrimitiveTag) | (uint8(t.Method) << 4))
+		if !compact {
+			e.String(t.Name)
+		}
 	case *Struct:
 		e.Uint8(uint8(StructTag))
-		e.Entity(t.Entity)
+		e.Entity(t.Entity, compact)
+		if !compact {
+			e.String(t.Relative)
+		}
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
-		EncodeType(e, t.Type)
+		EncodeType(e, t.Type, compact)
 	case *Interface:
 		e.Uint8(uint8(InterfaceTag))
-		e.String(t.Name)
+		if !compact {
+			e.String(t.Name)
+		}
 	case *Variant:
 		e.Uint8(uint8(VariantTag))
-		e.String(t.Name)
+		if !compact {
+			e.String(t.Name)
+		}
 	case *Any:
 		e.Uint8(uint8(AnyTag))
 	case *Slice:
 		e.Uint8(uint8(SliceTag))
-		e.String(t.Alias)
-		EncodeType(e, t.ValueType)
+		EncodeType(e, t.ValueType, compact)
+		if !compact {
+			e.String(t.Alias)
+		}
 	case *Array:
 		e.Uint8(uint8(ArrayTag))
-		e.String(t.Alias)
 		e.Uint32(t.Size)
-		EncodeType(e, t.ValueType)
+		EncodeType(e, t.ValueType, compact)
+		if !compact {
+			e.String(t.Alias)
+		}
 	case *Map:
 		e.Uint8(uint8(MapTag))
-		e.String(t.Alias)
-		EncodeType(e, t.KeyType)
-		EncodeType(e, t.ValueType)
+		EncodeType(e, t.KeyType, compact)
+		EncodeType(e, t.ValueType, compact)
+		if !compact {
+			e.String(t.Alias)
+		}
 	default:
 		panic(fmt.Errorf("Encode unknown type %T", t))
 	}
 }
 
-func DecodeType(d binary.Decoder) binary.Type {
+func DecodeType(d binary.Decoder, compact bool) binary.Type {
 	tag := TypeTag(d.Uint8())
-	switch tag {
+	switch tag & 0xf {
 	case PrimitiveTag:
 		t := &Primitive{}
-		t.Name = d.String()
-		t.Method = Method(d.Uint8())
+		t.Method = Method(tag >> 4)
+		if !compact {
+			t.Name = d.String()
+		}
 		return t
 	case StructTag:
 		t := &Struct{}
-		t.Entity = d.Entity()
+		t.Entity = d.Entity(compact)
+		if !compact {
+			t.Relative = d.String()
+		}
 		return t
 	case PointerTag:
 		t := &Pointer{}
-		t.Type = DecodeType(d)
+		t.Type = DecodeType(d, compact)
 		return t
 	case InterfaceTag:
 		t := &Interface{}
-		t.Name = d.String()
+		if !compact {
+			t.Name = d.String()
+		}
 		return t
 	case VariantTag:
 		t := &Variant{}
-		t.Name = d.String()
+		if !compact {
+			t.Name = d.String()
+		}
 		return t
 	case AnyTag:
 		return &Any{}
 	case SliceTag:
 		t := &Slice{}
-		t.Alias = d.String()
-		t.ValueType = DecodeType(d)
+		t.ValueType = DecodeType(d, compact)
+		if !compact {
+			t.Alias = d.String()
+		}
 		return t
 	case ArrayTag:
 		t := &Array{}
-		t.Alias = d.String()
 		t.Size = d.Uint32()
-		t.ValueType = DecodeType(d)
+		t.ValueType = DecodeType(d, compact)
+		if !compact {
+			t.Alias = d.String()
+		}
 		return t
 	case MapTag:
 		t := &Map{}
-		t.Alias = d.String()
-		t.KeyType = DecodeType(d)
-		t.ValueType = DecodeType(d)
+		t.KeyType = DecodeType(d, compact)
+		t.ValueType = DecodeType(d, compact)
+		if !compact {
+			t.Alias = d.String()
+		}
 		return t
 	default:
 		panic(fmt.Errorf("Decode unknown type %v", tag))
 	}
 }
 
-func EncodeEntity(e binary.Encoder, c *binary.Entity) {
-	e.ID(c.TypeID)
+func EncodeEntity(e binary.Encoder, c *binary.Entity, compact bool) {
 	e.String(c.Package)
-	e.String(c.Display)
 	e.String(c.Identity)
 	e.String(c.Version)
-	e.Bool(c.Exported)
+	if !compact {
+		e.String(c.Display)
+		e.ID(c.TypeID)
+		e.Bool(c.Exported)
+	}
 	e.Uint32(uint32(len(c.Fields)))
 	for _, f := range c.Fields {
-		e.String(f.Declared)
-		EncodeType(e, f.Type)
+		EncodeType(e, f.Type, compact)
+		if !compact {
+			e.String(f.Declared)
+		}
 	}
-	e.Uint32(uint32(len(c.Metadata)))
-	for _, m := range c.Metadata {
-		e.Object(m)
+	if !compact {
+		e.Uint32(uint32(len(c.Metadata)))
+		for _, m := range c.Metadata {
+			e.Object(m)
+		}
 	}
 }
 
-func DecodeEntity(d binary.Decoder, c *binary.Entity) {
-	c.TypeID = d.ID()
+func DecodeEntity(d binary.Decoder, c *binary.Entity, compact bool) {
 	c.Package = d.String()
-	c.Display = d.String()
 	c.Identity = d.String()
 	c.Version = d.String()
-	c.Exported = d.Bool()
+	if !compact {
+		c.Display = d.String()
+		c.TypeID = d.ID()
+		c.Exported = d.Bool()
+	}
 	c.Fields = make(binary.FieldList, d.Uint32())
 	for i := range c.Fields {
-		c.Fields[i].Declared = d.String()
-		c.Fields[i].Type = DecodeType(d)
+		c.Fields[i].Type = DecodeType(d, compact)
+		if !compact {
+			c.Fields[i].Declared = d.String()
+		}
 	}
-	c.Metadata = make([]binary.Object, d.Uint32())
-	for i := range c.Metadata {
-		c.Metadata[i] = d.Object()
+	if !compact {
+		c.Metadata = make([]binary.Object, d.Uint32())
+		for i := range c.Metadata {
+			c.Metadata[i] = d.Object()
+		}
 	}
 }
 
 func EncodeConstants(e binary.Encoder, c *ConstantSet) {
-	EncodeType(e, c.Type)
+	EncodeType(e, c.Type, false)
 	e.Uint32(uint32(len(c.Entries)))
 	for _, entry := range c.Entries {
 		e.String(entry.Name)
@@ -169,7 +210,7 @@ func EncodeConstants(e binary.Encoder, c *ConstantSet) {
 }
 
 func DecodeConstants(d binary.Decoder, c *ConstantSet) {
-	c.Type = DecodeType(d)
+	c.Type = DecodeType(d, false)
 	c.Entries = make([]Constant, d.Uint32())
 	for i := range c.Entries {
 		c.Entries[i].Name = d.String()

@@ -19,19 +19,63 @@ import (
 	"fmt"
 	"io"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 
 	"sort"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type byID []*Struct
 
 func (a byID) Len() int           { return len(a) }
 func (a byID) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a byID) Less(i, j int) bool { return a[i].TypeID.String() < a[j].TypeID.String() }
+func (a byID) Less(i, j int) bool { return a[i].Signature() < a[j].Signature() }
+
+type stream struct {
+	name    string
+	b       bytes.Buffer
+	e       binary.Encoder
+	d       binary.Decoder
+	compact bool
+	size    int
+}
+
+func newStream(compact bool) *stream {
+	s := &stream{compact: compact}
+	if compact {
+		s.name = "compact"
+	} else {
+		s.name = "full"
+	}
+	s.e = cyclic.Encoder(vle.Writer(&s.b))
+	s.d = cyclic.Decoder(vle.Reader(&s.b))
+	return s
+}
+
+func (s *stream) test(e *binary.Entity) {
+	s.e.Entity(e, s.compact)
+	s.size += s.b.Len()
+	if s.e.Error() != nil {
+		panic(fmt.Errorf("Failed encoding %s entity for %q, %v", s.name, e.Signature(), s.e.Error()))
+	}
+	got := s.d.Entity(s.compact)
+	if got == nil || s.d.Error() != nil {
+		panic(fmt.Errorf("Failed reading %s entity for %q, %v", s.name, e.Signature(), s.d.Error()))
+	}
+	if e.Signature() != got.Signature() {
+		panic(fmt.Errorf("Signature of %s entity did not match, expected %q got %q", s.name, e.Signature(), got.Signature()))
+	}
+	if !s.compact {
+		es := fmt.Sprint(e)
+		gots := fmt.Sprint(got)
+		if es != gots {
+			panic(fmt.Errorf("Full encoding did not match, expected %#v got %#v", es, gots))
+		}
+	}
+}
 
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}
@@ -39,20 +83,20 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))
-	buf := &bytes.Buffer{}
-	e := cyclic.Encoder(vle.Writer(buf))
+	full := newStream(false)
+	compact := newStream(true)
 	total := 0
 	largest := 0
-	// pre write the entire schema so the lookup table is full
+	// pre write the entire schema so the lookup table is full, and verify the encode/decode behaviour while doing it
 	for _, s := range structs {
-		e.Entity(&s.Entity)
+		full.test(&s.Entity)
+		compact.test(&s.Entity)
 	}
-	all := buf.Len()
 	for _, s := range structs {
-		start := buf.Len()
+		start := compact.b.Len()
 		// now encode the entity directly to bypass the table
-		schema.EncodeEntity(e, &s.Entity)
-		size := buf.Len() - start
+		schema.EncodeEntity(compact.e, &s.Entity, true)
+		size := compact.b.Len() - start
 		total += size
 		if largest < size {
 			largest = size
@@ -60,61 +104,14 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		fmt.Fprintln(w)
 		fmt.Fprintln(w, s.Name(), ": size", size)
 		fmt.Fprintln(w, s.TypeID)
-		fmt.Fprintln(w, Signature(&s.Entity))
+		fmt.Fprintln(w, s.Entity.Signature())
 	}
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, "Schema stats:")
 	fmt.Fprintln(w, "Count:", len(structs))
-	fmt.Fprintln(w, "All:", all)
 	fmt.Fprintln(w, "Total:", total)
+	fmt.Fprintln(w, "Compact:", compact.size)
+	fmt.Fprintln(w, "Full:", full.size)
 	fmt.Fprintln(w, "Average:", total/len(structs))
 	fmt.Fprintln(w, "Largest:", largest)
-}
-
-func Signature(e *binary.Entity) string {
-	b := &bytes.Buffer{}
-	fmt.Fprint(b, e.Package, ".", e.Identity)
-	if e.Version != "" {
-		fmt.Fprint(b, "@", e.Version)
-	}
-	fmt.Fprint(b, "{")
-	for i, f := range e.Fields {
-		if i != 0 {
-			fmt.Fprint(b, ",")
-		}
-		printTag(b, f.Type)
-	}
-	fmt.Fprint(b, "}")
-	return b.String()
-}
-
-func printTag(w io.Writer, t binary.Type) {
-	switch t := t.(type) {
-	case *schema.Primitive:
-		fmt.Fprint(w, t.Method)
-	case *schema.Struct:
-		fmt.Fprint(w, "$")
-	case *schema.Pointer:
-		fmt.Fprint(w, "*")
-		printTag(w, t.Type)
-	case *schema.Interface:
-		fmt.Fprint(w, "?", t)
-	case *schema.Variant:
-		fmt.Fprint(w, "&", t)
-	case *schema.Any:
-		fmt.Fprint(w, "~", t)
-	case *schema.Slice:
-		fmt.Fprint(w, "[]")
-		printTag(w, t.ValueType)
-	case *schema.Array:
-		fmt.Fprint(w, "[", t.Size, "]")
-		printTag(w, t.ValueType)
-	case *schema.Map:
-		fmt.Fprint(w, "map[")
-		printTag(w, t.KeyType)
-		fmt.Fprint(w, "]")
-		printTag(w, t.ValueType)
-	default:
-		panic(fmt.Errorf("Unknown type %T generating signature", t))
-	}
 }

@@ -88,7 +88,7 @@ func (d *decoder) ID() binary.ID {
 	return id
 }
 
-func (e *encoder) Entity(s *binary.Entity) {
+func (e *encoder) Entity(s *binary.Entity, compact bool) {
 	if s == nil {
 		e.Uint32(0)
 		return
@@ -99,11 +99,11 @@ func (e *encoder) Entity(s *binary.Entity) {
 		sid = uint32(len(e.entities)) + 1
 		e.entities[s] = sid
 		e.Uint32((sid << 1) | 1)
-		schema.EncodeEntity(e, s)
+		schema.EncodeEntity(e, s, compact)
 	}
 }
 
-func (d *decoder) Entity() *binary.Entity {
+func (d *decoder) Entity(compact bool) *binary.Entity {
 	v := d.Uint32()
 	if v == 0 {
 		return nil
@@ -111,7 +111,8 @@ func (d *decoder) Entity() *binary.Entity {
 	sid := v >> 1
 	if (v & 1) != 0 {
 		s := &binary.Entity{}
-		schema.DecodeEntity(d, s)
+		d.entities[sid] = s
+		schema.DecodeEntity(d, s, compact)
 		return s
 	}
 	s, found := d.entities[sid]
