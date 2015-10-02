@@ -15,11 +15,11 @@
 package vle
 
 import (
-	"fmt"
 	"io"
 	"math"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/errors"
 )
 
 // Reader creates a binary.Reader that reads from the provided io.Reader.
@@ -221,7 +221,7 @@ func (w *writer) Error() error {
 
 func (r *reader) SetError(err error) error {
 	if r.err != nil {
-		err = fmt.Errorf("Error %v whilst in error state %v", err, r.err)
+		err = errors.Newf("Error %v whilst in error state %v", err, r.err)
 	}
 	r.err = err
 	return err
@@ -229,7 +229,7 @@ func (r *reader) SetError(err error) error {
 
 func (w *writer) SetError(err error) error {
 	if w.err != nil {
-		err = fmt.Errorf("Error %v whilst in error state %v", err, w.err)
+		err = errors.Newf("Error %v whilst in error state %v", err, w.err)
 	}
 	w.err = err
 	return err
