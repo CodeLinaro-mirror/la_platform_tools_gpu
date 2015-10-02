@@ -16,13 +16,8 @@ namespace coder {
 namespace atom {
 // FramebufferObservation:
 // atom.FramebufferObservation{Uint32,Uint32,[]Uint8}
-const gapic::Id& FramebufferObservation::StaticId() {
-    static gapic::Id ID{ { 0x00, 0x8f, 0x27, 0x0c, 0x45, 0x41, 0xb2, 0xe9, 0xb9, 0xa2, 0xd1, 0x56, 0xbf, 0xcc, 0xb0, 0x3d, 0xc7, 0xa8, 0xd7, 0x49,  } };
-    return ID;
-}
 const schema::Entity& FramebufferObservation::StaticSchema() {
     static schema::Entity entity {
-        FramebufferObservation::StaticId(),
         "atom",
         "",
         "FramebufferObservation",
@@ -38,13 +33,8 @@ const schema::Entity& FramebufferObservation::StaticSchema() {
 
 // Range:
 // atom.Range{Uint64,Uint64}
-const gapic::Id& Range::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x66, 0xc9, 0x90, 0x1c, 0x26, 0xf0, 0x77, 0x79, 0x1f, 0x74, 0x69, 0x45, 0x35, 0x19, 0xc0, 0x14, 0xca, 0xd3, 0xb4,  } };
-    return ID;
-}
 const schema::Entity& Range::StaticSchema() {
     static schema::Entity entity {
-        Range::StaticId(),
         "atom",
         "",
         "Range",
@@ -59,13 +49,8 @@ const schema::Entity& Range::StaticSchema() {
 
 // Group:
 // atom.Group{String,$,[]$}
-const gapic::Id& Group::StaticId() {
-    static gapic::Id ID{ { 0x05, 0x6a, 0x33, 0xef, 0x32, 0xd6, 0xb5, 0x7d, 0x29, 0x5c, 0xb3, 0xa0, 0x64, 0xde, 0x29, 0x08, 0xa1, 0x86, 0x56, 0xe7,  } };
-    return ID;
-}
 const schema::Entity& Group::StaticSchema() {
     static schema::Entity entity {
-        Group::StaticId(),
         "atom",
         "",
         "Group",
@@ -81,13 +66,8 @@ const schema::Entity& Group::StaticSchema() {
 
 // List:
 // atom.List{[]&}
-const gapic::Id& List::StaticId() {
-    static gapic::Id ID{ { 0x17, 0x12, 0x61, 0xf8, 0xbe, 0x6c, 0x49, 0xa1, 0x20, 0xc0, 0xf4, 0x7b, 0x18, 0xa4, 0x1d, 0x36, 0x71, 0x8b, 0x5b, 0xce,  } };
-    return ID;
-}
 const schema::Entity& List::StaticSchema() {
     static schema::Entity entity {
-        List::StaticId(),
         "atom",
         "",
         "List",
@@ -101,10 +81,6 @@ const schema::Entity& List::StaticSchema() {
 
 // Metadata:
 // atom.Metadata{ID,String,Bool,Bool,String}
-const gapic::Id& Metadata::StaticId() {
-    static gapic::Id ID{ { 0x13, 0x7d, 0x41, 0xcf, 0xf5, 0x61, 0x0f, 0x25, 0x91, 0xdc, 0xe2, 0x4f, 0xf3, 0x23, 0xd2, 0xe5, 0xc6, 0xfd, 0xa7, 0xa5,  } };
-    return ID;
-}
 void Metadata::Encode(Encoder* e) const {
     e->Id(this->mAPI);
     e->String(this->mDisplayName);
@@ -114,7 +90,6 @@ void Metadata::Encode(Encoder* e) const {
 }
 const schema::Entity& Metadata::StaticSchema() {
     static schema::Entity entity {
-        Metadata::StaticId(),
         "atom",
         "",
         "Metadata",
@@ -132,13 +107,8 @@ const schema::Entity& Metadata::StaticSchema() {
 
 // Observation:
 // atom.Observation{$,ID}
-const gapic::Id& Observation::StaticId() {
-    static gapic::Id ID{ { 0xf7, 0xbd, 0x56, 0xf9, 0x88, 0x54, 0x3a, 0xc2, 0x93, 0x5d, 0x67, 0x99, 0x1e, 0xed, 0xaa, 0x19, 0x9a, 0xde, 0xca, 0x04,  } };
-    return ID;
-}
 const schema::Entity& Observation::StaticSchema() {
     static schema::Entity entity {
-        Observation::StaticId(),
         "atom",
         "",
         "Observation",
@@ -153,13 +123,8 @@ const schema::Entity& Observation::StaticSchema() {
 
 // Observations:
 // atom.Observations{[]$,[]$}
-const gapic::Id& Observations::StaticId() {
-    static gapic::Id ID{ { 0xe6, 0xfc, 0xbb, 0x47, 0xfe, 0xac, 0x86, 0xab, 0x0e, 0x02, 0x8a, 0xcb, 0x08, 0xcf, 0x86, 0x30, 0xf0, 0x1e, 0x3a, 0xa0,  } };
-    return ID;
-}
 const schema::Entity& Observations::StaticSchema() {
     static schema::Entity entity {
-        Observations::StaticId(),
         "atom",
         "",
         "Observations",
@@ -174,13 +139,8 @@ const schema::Entity& Observations::StaticSchema() {
 
 // Resource:
 // atom.Resource{ID,[]Uint8}
-const gapic::Id& Resource::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0xa8, 0x7a, 0xce, 0xbd, 0x8d, 0xec, 0x19, 0xf9, 0x33, 0x0c, 0x8c, 0x80, 0x64, 0xf0, 0xe9, 0x9b, 0x3a, 0x8c, 0xd4,  } };
-    return ID;
-}
 const schema::Entity& Resource::StaticSchema() {
     static schema::Entity entity {
-        Resource::StaticId(),
         "atom",
         "",
         "Resource",

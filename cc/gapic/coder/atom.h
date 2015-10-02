@@ -23,10 +23,6 @@ namespace atom {
             mWidth(Width),
             mHeight(Height),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mWidth);
             e->Uint32(this->mHeight);
@@ -48,10 +44,6 @@ namespace atom {
         Range(uint64_t Start, uint64_t End) :
             mStart(Start),
             mEnd(End) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint64(this->mStart);
             e->Uint64(this->mEnd);
@@ -71,10 +63,6 @@ namespace atom {
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->String(this->mName);
             e->Value(this->mRange);
@@ -97,10 +85,6 @@ namespace atom {
         List() = default;
         List(Array<gapic::Encodable*> Atoms) :
             mAtoms(Atoms) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mAtoms.size());
             for (int i = 0; i < this->mAtoms.size(); i++) {
@@ -123,10 +107,6 @@ namespace atom {
             mEndOfFrame(EndOfFrame),
             mDrawCall(DrawCall),
             mDocumentationUrl(DocumentationUrl) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -145,10 +125,6 @@ namespace atom {
         Observation(memory::Range Range, gapic::Id ID) :
             mRange(Range),
             mID(ID) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mRange);
             e->Id(this->mID);
@@ -167,10 +143,6 @@ namespace atom {
         Observations(Array<Observation> Reads, Array<Observation> Writes) :
             mReads(Reads),
             mWrites(Writes) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mReads.size());
             for (int i = 0; i < this->mReads.size(); i++) {
@@ -195,10 +167,6 @@ namespace atom {
         Resource(gapic::Id ID, Array<uint8_t> Data) :
             mID(ID),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Id(this->mID);
             e->Uint32(this->mData.size());

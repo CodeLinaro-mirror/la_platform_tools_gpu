@@ -64,37 +64,18 @@ class Entity {
  public:
   Entity() = default;
 
-  Entity(const gapic::Id& id,
-         const std::string& package,
+  Entity(const std::string& package,
          const std::string& name,
          const std::string& identity,
          const std::string& version,
          std::initializer_list<Field> fields)
       :
-      mTypeId(id),
       mPackage(package),
       mName(name),
       mIdentity(identity),
       mVersion(version),
       mExported(true),
       mFields(std::move(fields)) {}
-
-  Entity(const gapic::Id& id,
-         const std::string& package,
-         const std::string& name,
-         const std::string& identity,
-         const std::string& version,
-         std::initializer_list<Field> fields,
-         std::initializer_list<std::unique_ptr<Encodable>> metadata)
-      :
-      mTypeId(id),
-      mPackage(package),
-      mName(name),
-      mIdentity(identity),
-      mVersion(version),
-      mExported(true),
-      mFields(std::move(fields)),
-      mMetadata(std::move(metadata)) {}
 
   void encode(Encoder& e) const {
     e.String(mPackage);
@@ -105,12 +86,7 @@ class Entity {
       f.encode(e);
     }
   }
-
-  const gapic::Id& TypeId() const {
-    return mTypeId;
-  }
  private:
-  gapic::Id mTypeId;
   std::string mPackage;
   std::string mName;
   std::string mIdentity;

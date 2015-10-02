@@ -26,10 +26,6 @@ namespace gles {
             mPointerSize(PointerSize),
             mIntegerSize(IntegerSize),
             mLittleEndian(LittleEndian) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -50,10 +46,6 @@ namespace gles {
             mGreen(Green),
             mBlue(Blue),
             mAlpha(Alpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -76,10 +68,6 @@ namespace gles {
             mBlendEquationRgb(BlendEquationRgb),
             mBlendEquationAlpha(BlendEquationAlpha),
             mBlendColor(BlendColor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -101,10 +89,6 @@ namespace gles {
             mRoot(Root),
             mBase(Base),
             mCount(Count) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mRoot);
             e->Uint64(this->mBase);
@@ -124,10 +108,6 @@ namespace gles {
         U8__S() = default;
         U8__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -148,10 +128,6 @@ namespace gles {
             mMappingAccess(MappingAccess),
             mMappingOffset(MappingOffset),
             mMappingData(MappingData) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -170,10 +146,6 @@ namespace gles {
         BufferDataPointer() = default;
         BufferDataPointer(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -189,10 +161,6 @@ namespace gles {
         BufferId__S() = default;
         BufferId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -208,10 +176,6 @@ namespace gles {
         BufferId__P() = default;
         BufferId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -227,10 +191,6 @@ namespace gles {
         BufferId__CP() = default;
         BufferId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -246,10 +206,6 @@ namespace gles {
         CGLContextObj() = default;
         CGLContextObj(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -265,10 +221,6 @@ namespace gles {
         CGLContextObj__S() = default;
         CGLContextObj__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -284,10 +236,6 @@ namespace gles {
         CGLContextObj__P() = default;
         CGLContextObj__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -303,10 +251,6 @@ namespace gles {
         CGLPixelFormatObj() = default;
         CGLPixelFormatObj(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -326,10 +270,6 @@ namespace gles {
             mShare(Share),
             mCtx(Ctx),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -349,10 +289,6 @@ namespace gles {
             mobservations(observations),
             mCtx(Ctx),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mCtx);
@@ -372,10 +308,6 @@ namespace gles {
         CGSConnectionID__P() = default;
         CGSConnectionID__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -391,10 +323,6 @@ namespace gles {
         CGSWindowID__P() = default;
         CGSWindowID__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -410,10 +338,6 @@ namespace gles {
         CGSSurfaceID__P() = default;
         CGSSurfaceID__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -434,10 +358,6 @@ namespace gles {
             mWid(Wid),
             mSid(Sid),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -458,10 +378,6 @@ namespace gles {
             mobservations(observations),
             mCtx(Ctx),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mCtx);
@@ -481,10 +397,6 @@ namespace gles {
         CGSConnectionID() = default;
         CGSConnectionID(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -500,10 +412,6 @@ namespace gles {
         CGSConnectionID__S() = default;
         CGSConnectionID__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -519,10 +427,6 @@ namespace gles {
         F64__P() = default;
         F64__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -543,10 +447,6 @@ namespace gles {
             mSid(Sid),
             mBounds(Bounds),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -565,10 +465,6 @@ namespace gles {
         CGSSurfaceID__S() = default;
         CGSSurfaceID__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -584,10 +480,6 @@ namespace gles {
         CGSWindowID__S() = default;
         CGSWindowID__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -603,10 +495,6 @@ namespace gles {
         Char__S() = default;
         Char__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -622,10 +510,6 @@ namespace gles {
         Char__P() = default;
         Char__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -643,10 +527,6 @@ namespace gles {
             mClearColor(ClearColor),
             mClearDepth(ClearDepth),
             mClearStencil(ClearStencil) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mClearColor);
             e->Float32(this->mClearDepth);
@@ -672,10 +552,6 @@ namespace gles {
             mVersionMajor(VersionMajor),
             mVersionMinor(VersionMinor),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -698,10 +574,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -720,10 +592,6 @@ namespace gles {
         VertexAttributeValue() = default;
         VertexAttributeValue(U8__S Value) :
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mValue);
         }
@@ -744,10 +612,6 @@ namespace gles {
             mHeight(Height),
             mData(Data),
             mFormat(Format) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -768,10 +632,6 @@ namespace gles {
             mData(Data),
             mSize(Size),
             mFormat(Format) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -796,10 +656,6 @@ namespace gles {
             mType(Type),
             mTextureLevel(TextureLevel),
             mCubeMapFace(CubeMapFace) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -818,10 +674,6 @@ namespace gles {
         GLchar__S() = default;
         GLchar__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -842,10 +694,6 @@ namespace gles {
             mInfoLog(InfoLog),
             mSource(Source),
             mType(Type) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -866,10 +714,6 @@ namespace gles {
             mName(Name),
             mVectorCount(VectorCount),
             mType(Type) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mName);
             e->Int32(this->mVectorCount);
@@ -891,10 +735,6 @@ namespace gles {
             mName(Name),
             mType(Type),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->String(this->mName);
             e->Uint32(this->mType);
@@ -919,10 +759,6 @@ namespace gles {
             mOffset(Offset),
             mStride(Stride),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -939,10 +775,6 @@ namespace gles {
         VertexPointer() = default;
         VertexPointer(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -966,10 +798,6 @@ namespace gles {
             mRelativeOffset(RelativeOffset),
             mInteger(Integer),
             mBinding(Binding) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -991,10 +819,6 @@ namespace gles {
     class Query: public Encodable {
     public:
         Query()  {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
         }
         virtual const schema::Entity& Schema() const {
@@ -1023,10 +847,6 @@ namespace gles {
             mBackbufferStencilFmt(BackbufferStencilFmt),
             mResetViewportScissor(ResetViewportScissor),
             mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1051,10 +871,6 @@ namespace gles {
         EGLConfig() = default;
         EGLConfig(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1070,10 +886,6 @@ namespace gles {
         EGLContext() = default;
         EGLContext(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1089,10 +901,6 @@ namespace gles {
         EGLDisplay() = default;
         EGLDisplay(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1108,10 +916,6 @@ namespace gles {
         EGLSurface() = default;
         EGLSurface(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1127,10 +931,6 @@ namespace gles {
         EGLint__S() = default;
         EGLint__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1146,10 +946,6 @@ namespace gles {
         EGLint__P() = default;
         EGLint__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1170,10 +966,6 @@ namespace gles {
             mShareContext(ShareContext),
             mAttribList(AttribList),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1196,10 +988,6 @@ namespace gles {
             mMajor(Major),
             mMinor(Minor),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1222,10 +1010,6 @@ namespace gles {
             mRead(Read),
             mContext(Context),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1249,10 +1033,6 @@ namespace gles {
             mAttribute(Attribute),
             mValue(Value),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1271,10 +1051,6 @@ namespace gles {
         Void__P() = default;
         Void__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1293,10 +1069,6 @@ namespace gles {
             mDisplay(Display),
             mSurface(Surface),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -1313,10 +1085,6 @@ namespace gles {
         F64__S() = default;
         F64__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1332,10 +1100,6 @@ namespace gles {
         FlushPostBuffer() = default;
         FlushPostBuffer(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -1351,10 +1115,6 @@ namespace gles {
         FramebufferId__S() = default;
         FramebufferId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1370,10 +1130,6 @@ namespace gles {
         FramebufferId__P() = default;
         FramebufferId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1389,10 +1145,6 @@ namespace gles {
         FramebufferId__CP() = default;
         FramebufferId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1408,10 +1160,6 @@ namespace gles {
         GLDEBUGPROC() = default;
         GLDEBUGPROC(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1427,10 +1175,6 @@ namespace gles {
         GLXContext() = default;
         GLXContext(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1446,10 +1190,6 @@ namespace gles {
         GLXDrawable() = default;
         GLXDrawable(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1465,10 +1205,6 @@ namespace gles {
         GLboolean__S() = default;
         GLboolean__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1484,10 +1220,6 @@ namespace gles {
         GLboolean__P() = default;
         GLboolean__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1503,10 +1235,6 @@ namespace gles {
         GLchar__P() = default;
         GLchar__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1522,10 +1250,6 @@ namespace gles {
         GLchar__CP() = default;
         GLchar__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1541,10 +1265,6 @@ namespace gles {
         GLchar__CP__S() = default;
         GLchar__CP__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1560,10 +1280,6 @@ namespace gles {
         GLchar__CP__P() = default;
         GLchar__CP__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1579,10 +1295,6 @@ namespace gles {
         GLchar__CP__CP() = default;
         GLchar__CP__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1598,10 +1310,6 @@ namespace gles {
         GLeglImageOES() = default;
         GLeglImageOES(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1617,10 +1325,6 @@ namespace gles {
         GLenum__S() = default;
         GLenum__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1636,10 +1340,6 @@ namespace gles {
         GLenum__P() = default;
         GLenum__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1655,10 +1355,6 @@ namespace gles {
         GLenum__CP() = default;
         GLenum__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1674,10 +1370,6 @@ namespace gles {
         GLfloat__2__A() = default;
         GLfloat__2__A(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -1696,10 +1388,6 @@ namespace gles {
         GLfloat__3__A() = default;
         GLfloat__3__A(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -1718,10 +1406,6 @@ namespace gles {
         GLfloat__4__A() = default;
         GLfloat__4__A(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -1740,10 +1424,6 @@ namespace gles {
         GLfloat__S() = default;
         GLfloat__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1759,10 +1439,6 @@ namespace gles {
         GLfloat__P() = default;
         GLfloat__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1778,10 +1454,6 @@ namespace gles {
         GLfloat__CP() = default;
         GLfloat__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1797,10 +1469,6 @@ namespace gles {
         GLint64__S() = default;
         GLint64__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1816,10 +1484,6 @@ namespace gles {
         GLint64__P() = default;
         GLint64__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1835,10 +1499,6 @@ namespace gles {
         GLint__2__A() = default;
         GLint__2__A(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -1857,10 +1517,6 @@ namespace gles {
         GLint__3__A() = default;
         GLint__3__A(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -1879,10 +1535,6 @@ namespace gles {
         GLint__4__A() = default;
         GLint__4__A(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -1901,10 +1553,6 @@ namespace gles {
         GLint__S() = default;
         GLint__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1920,10 +1568,6 @@ namespace gles {
         GLint__P() = default;
         GLint__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1939,10 +1583,6 @@ namespace gles {
         GLint__CP() = default;
         GLint__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1958,10 +1598,6 @@ namespace gles {
         GLsizei__S() = default;
         GLsizei__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -1977,10 +1613,6 @@ namespace gles {
         GLsizei__P() = default;
         GLsizei__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -1996,10 +1628,6 @@ namespace gles {
         GLsizei__CP() = default;
         GLsizei__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2015,10 +1643,6 @@ namespace gles {
         GLubyte__S() = default;
         GLubyte__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -2034,10 +1658,6 @@ namespace gles {
         GLubyte__P() = default;
         GLubyte__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2053,10 +1673,6 @@ namespace gles {
         GLubyte__CP() = default;
         GLubyte__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2072,10 +1688,6 @@ namespace gles {
         GLuint64__S() = default;
         GLuint64__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -2091,10 +1703,6 @@ namespace gles {
         GLuint64__P() = default;
         GLuint64__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2110,10 +1718,6 @@ namespace gles {
         GLuint64__CP() = default;
         GLuint64__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2129,10 +1733,6 @@ namespace gles {
         GLuint__2__A() = default;
         GLuint__2__A(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -2151,10 +1751,6 @@ namespace gles {
         GLuint__3__A() = default;
         GLuint__3__A(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -2173,10 +1769,6 @@ namespace gles {
         GLuint__4__A() = default;
         GLuint__4__A(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -2195,10 +1787,6 @@ namespace gles {
         GLuint__S() = default;
         GLuint__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -2214,10 +1802,6 @@ namespace gles {
         GLuint__P() = default;
         GLuint__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2233,10 +1817,6 @@ namespace gles {
         GLuint__CP() = default;
         GLuint__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2252,10 +1832,6 @@ namespace gles {
         GLvoid__S() = default;
         GLvoid__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -2271,10 +1847,6 @@ namespace gles {
         GLvoid__P() = default;
         GLvoid__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -2292,10 +1864,6 @@ namespace gles {
             mobservations(observations),
             mPipeline(Pipeline),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -2317,10 +1885,6 @@ namespace gles {
             mobservations(observations),
             mPipeline(Pipeline),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -2341,10 +1905,6 @@ namespace gles {
         GlActiveTexture(atom::Observations observations, uint32_t Unit) :
             mobservations(observations),
             mUnit(Unit) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mUnit);
@@ -2364,10 +1924,6 @@ namespace gles {
             mobservations(observations),
             mFunc(Func),
             mRef(Ref) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFunc);
@@ -2387,10 +1943,6 @@ namespace gles {
         GlApplyFramebufferAttachmentCMAAINTEL() = default;
         GlApplyFramebufferAttachmentCMAAINTEL(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -2408,10 +1960,6 @@ namespace gles {
             mobservations(observations),
             mProgram(Program),
             mShader(Shader) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -2433,10 +1981,6 @@ namespace gles {
             mobservations(observations),
             mId(Id),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mId);
@@ -2457,10 +2001,6 @@ namespace gles {
         GlBeginPerfMonitorAMD(atom::Observations observations, uint32_t Monitor) :
             mobservations(observations),
             mMonitor(Monitor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMonitor);
@@ -2479,10 +2019,6 @@ namespace gles {
         GlBeginPerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
             mobservations(observations),
             mQueryHandle(QueryHandle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
@@ -2502,10 +2038,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mQuery(Query) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2527,10 +2059,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mQuery(Query) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2551,10 +2079,6 @@ namespace gles {
         GlBeginTransformFeedback(atom::Observations observations, uint32_t PrimitiveMode) :
             mobservations(observations),
             mPrimitiveMode(PrimitiveMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPrimitiveMode);
@@ -2575,10 +2099,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2597,10 +2117,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mBuffer(Buffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2623,10 +2139,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mBuffer(Buffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2648,10 +2160,6 @@ namespace gles {
             mBuffer(Buffer),
             mOffset(Offset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2673,10 +2181,6 @@ namespace gles {
             mProgram(Program),
             mColor(Color),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2697,10 +2201,6 @@ namespace gles {
             mColorNumber(ColorNumber),
             mIndex(Index),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2720,10 +2220,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2750,10 +2246,6 @@ namespace gles {
             mLayer(Layer),
             mAccess(Access),
             mFormat(Format) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2775,10 +2267,6 @@ namespace gles {
         GlBindProgramPipeline(atom::Observations observations, uint32_t Pipeline) :
             mobservations(observations),
             mPipeline(Pipeline) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -2797,10 +2285,6 @@ namespace gles {
         GlBindProgramPipelineEXT(atom::Observations observations, uint32_t Pipeline) :
             mobservations(observations),
             mPipeline(Pipeline) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -2820,10 +2304,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2845,10 +2325,6 @@ namespace gles {
             mobservations(observations),
             mUnit(Unit),
             mSampler(Sampler) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mUnit);
@@ -2870,10 +2346,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mTexture(Texture) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2895,10 +2367,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mId(Id) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -2919,10 +2387,6 @@ namespace gles {
         GlBindVertexArray(atom::Observations observations, uint32_t Array) :
             mobservations(observations),
             mArray(Array) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
@@ -2941,10 +2405,6 @@ namespace gles {
         GlBindVertexArrayOES(atom::Observations observations, uint32_t Array) :
             mobservations(observations),
             mArray(Array) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
@@ -2966,10 +2426,6 @@ namespace gles {
             mBuffer(Buffer),
             mOffset(Offset),
             mStride(Stride) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -2987,10 +2443,6 @@ namespace gles {
         GlBlendBarrier() = default;
         GlBlendBarrier(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -3006,10 +2458,6 @@ namespace gles {
         GlBlendBarrierKHR() = default;
         GlBlendBarrierKHR(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -3025,10 +2473,6 @@ namespace gles {
         GlBlendBarrierNV() = default;
         GlBlendBarrierNV(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -3048,10 +2492,6 @@ namespace gles {
             mGreen(Green),
             mBlue(Blue),
             mAlpha(Alpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3070,10 +2510,6 @@ namespace gles {
         GlBlendEquation(atom::Observations observations, uint32_t Equation) :
             mobservations(observations),
             mEquation(Equation) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mEquation);
@@ -3093,10 +2529,6 @@ namespace gles {
             mobservations(observations),
             mRgb(Rgb),
             mAlpha(Alpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mRgb);
@@ -3119,10 +2551,6 @@ namespace gles {
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3142,10 +2570,6 @@ namespace gles {
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3165,10 +2589,6 @@ namespace gles {
             mBuf(Buf),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3187,10 +2607,6 @@ namespace gles {
             mobservations(observations),
             mBuf(Buf),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBuf);
@@ -3212,10 +2628,6 @@ namespace gles {
             mobservations(observations),
             mBuf(Buf),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBuf);
@@ -3237,10 +2649,6 @@ namespace gles {
             mobservations(observations),
             mBuf(Buf),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBuf);
@@ -3262,10 +2670,6 @@ namespace gles {
             mobservations(observations),
             mSrcFactor(SrcFactor),
             mDstFactor(DstFactor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mSrcFactor);
@@ -3289,10 +2693,6 @@ namespace gles {
             mDstFactorRgb(DstFactorRgb),
             mSrcFactorAlpha(SrcFactorAlpha),
             mDstFactorAlpha(DstFactorAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3315,10 +2715,6 @@ namespace gles {
             mDstRGB(DstRGB),
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3342,10 +2738,6 @@ namespace gles {
             mDstRGB(DstRGB),
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3369,10 +2761,6 @@ namespace gles {
             mDstRGB(DstRGB),
             mSrcAlpha(SrcAlpha),
             mDstAlpha(DstAlpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3394,10 +2782,6 @@ namespace gles {
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3417,10 +2801,6 @@ namespace gles {
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3440,10 +2820,6 @@ namespace gles {
             mBuf(Buf),
             mSrc(Src),
             mDst(Dst) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3462,10 +2838,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -3495,10 +2867,6 @@ namespace gles {
             mDstY1(DstY1),
             mMask(Mask),
             mFilter(Filter) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3532,10 +2900,6 @@ namespace gles {
             mDstY1(DstY1),
             mMask(Mask),
             mFilter(Filter) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3569,10 +2933,6 @@ namespace gles {
             mDstY1(DstY1),
             mMask(Mask),
             mFilter(Filter) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3600,10 +2960,6 @@ namespace gles {
             mSize(Size),
             mData(Data),
             mUsage(Usage) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3621,10 +2977,6 @@ namespace gles {
         Void__CP() = default;
         Void__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -3644,10 +2996,6 @@ namespace gles {
             mSize(Size),
             mData(Data),
             mFlag(Flag) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3669,10 +3017,6 @@ namespace gles {
             mOffset(Offset),
             mSize(Size),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3692,10 +3036,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -3716,10 +3056,6 @@ namespace gles {
         GlClear(atom::Observations observations, uint32_t Mask) :
             mobservations(observations),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMask);
@@ -3741,10 +3077,6 @@ namespace gles {
             mDrawbuffer(Drawbuffer),
             mDepth(Depth),
             mStencil(Stencil) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3765,10 +3097,6 @@ namespace gles {
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3788,10 +3116,6 @@ namespace gles {
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3811,10 +3135,6 @@ namespace gles {
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3835,10 +3155,6 @@ namespace gles {
             mG(G),
             mB(B),
             mA(A) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3857,10 +3173,6 @@ namespace gles {
         GlClearDepthf(atom::Observations observations, float Depth) :
             mobservations(observations),
             mDepth(Depth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mDepth);
@@ -3879,10 +3191,6 @@ namespace gles {
         GlClearStencil(atom::Observations observations, int32_t Stencil) :
             mobservations(observations),
             mStencil(Stencil) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mStencil);
@@ -3904,10 +3212,6 @@ namespace gles {
             mSyncFlags(SyncFlags),
             mTimeout(Timeout),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3929,10 +3233,6 @@ namespace gles {
             mFlag(Flag),
             mTimeout(Timeout),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3954,10 +3254,6 @@ namespace gles {
             mGreen(Green),
             mBlue(Blue),
             mAlpha(Alpha) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -3980,10 +3276,6 @@ namespace gles {
             mG(G),
             mB(B),
             mA(A) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4007,10 +3299,6 @@ namespace gles {
             mG(G),
             mB(B),
             mA(A) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4034,10 +3322,6 @@ namespace gles {
             mG(G),
             mB(B),
             mA(A) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4057,10 +3341,6 @@ namespace gles {
         GlCompileShader(atom::Observations observations, uint32_t Shader) :
             mobservations(observations),
             mShader(Shader) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mShader);
@@ -4078,10 +3358,6 @@ namespace gles {
         TexturePointer() = default;
         TexturePointer(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -4105,10 +3381,6 @@ namespace gles {
             mBorder(Border),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4139,10 +3411,6 @@ namespace gles {
             mBorder(Border),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4174,10 +3442,6 @@ namespace gles {
             mBorder(Border),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4209,10 +3473,6 @@ namespace gles {
             mFormat(Format),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4246,10 +3506,6 @@ namespace gles {
             mFormat(Format),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4285,10 +3541,6 @@ namespace gles {
             mFormat(Format),
             mImageSize(ImageSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4318,10 +3570,6 @@ namespace gles {
             mReadOffset(ReadOffset),
             mWriteOffset(WriteOffset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4345,10 +3593,6 @@ namespace gles {
             mReadOffset(ReadOffset),
             mWriteOffset(WriteOffset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4382,10 +3626,6 @@ namespace gles {
             mSrcWidth(SrcWidth),
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4429,10 +3669,6 @@ namespace gles {
             mSrcWidth(SrcWidth),
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4476,10 +3712,6 @@ namespace gles {
             mSrcWidth(SrcWidth),
             mSrcHeight(SrcHeight),
             mSrcDepth(SrcDepth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4510,10 +3742,6 @@ namespace gles {
             mobservations(observations),
             mResultPath(ResultPath),
             mSrcPath(SrcPath) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResultPath);
@@ -4541,10 +3769,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mBorder(Border) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4574,10 +3798,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4608,10 +3828,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4643,10 +3859,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4673,10 +3885,6 @@ namespace gles {
             mSourceTexture(SourceTexture),
             mSourceBaseLevel(SourceBaseLevel),
             mSourceLevelCount(SourceLevelCount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4701,10 +3909,6 @@ namespace gles {
             mCoverMode(CoverMode),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4727,10 +3931,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mCoverMode(CoverMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -4757,10 +3957,6 @@ namespace gles {
             mCoverMode(CoverMode),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4783,10 +3979,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mCoverMode(CoverMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -4807,10 +3999,6 @@ namespace gles {
         GlCoverageMaskNV(atom::Observations observations, uint8_t Mask) :
             mobservations(observations),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint8(this->mMask);
@@ -4829,10 +4017,6 @@ namespace gles {
         GlCoverageModulationNV(atom::Observations observations, uint32_t Components) :
             mobservations(observations),
             mComponents(Components) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mComponents);
@@ -4852,10 +4036,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -4876,10 +4056,6 @@ namespace gles {
         GlCoverageOperationNV(atom::Observations observations, uint32_t Operation) :
             mobservations(observations),
             mOperation(Operation) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mOperation);
@@ -4899,10 +4075,6 @@ namespace gles {
             mobservations(observations),
             mQueryId(QueryId),
             mQueryHandle(QueryHandle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQueryId);
@@ -4923,10 +4095,6 @@ namespace gles {
         GlCreateProgram(atom::Observations observations, uint32_t Result) :
             mobservations(observations),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
@@ -4946,10 +4114,6 @@ namespace gles {
             mobservations(observations),
             mType(Type),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mType);
@@ -4973,10 +4137,6 @@ namespace gles {
             mCount(Count),
             mStrings(Strings),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -4998,10 +4158,6 @@ namespace gles {
             mCount(Count),
             mStrings(Strings),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5020,10 +4176,6 @@ namespace gles {
         GlCullFace(atom::Observations observations, uint32_t Mode) :
             mobservations(observations),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMode);
@@ -5043,10 +4195,6 @@ namespace gles {
             mobservations(observations),
             mCallback(Callback),
             mUserParam(UserParam) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mCallback);
@@ -5068,10 +4216,6 @@ namespace gles {
             mobservations(observations),
             mCallback(Callback),
             mUserParam(UserParam) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mCallback);
@@ -5097,10 +4241,6 @@ namespace gles {
             mCount(Count),
             mIds(Ids),
             mEnabled(Enabled) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5126,10 +4266,6 @@ namespace gles {
             mCount(Count),
             mIds(Ids),
             mEnabled(Enabled) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5155,10 +4291,6 @@ namespace gles {
             mSeverity(Severity),
             mLength(Length),
             mMessage(Message) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5184,10 +4316,6 @@ namespace gles {
             mSeverity(Severity),
             mLength(Length),
             mMessage(Message) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5209,10 +4337,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mBuffers(Buffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5234,10 +4358,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mFences(Fences) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -5259,10 +4379,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5284,10 +4400,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mRange(Range) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -5309,10 +4421,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mMonitors(Monitors) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -5333,10 +4441,6 @@ namespace gles {
         GlDeletePerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
             mobservations(observations),
             mQueryHandle(QueryHandle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
@@ -5355,10 +4459,6 @@ namespace gles {
         GlDeleteProgram(atom::Observations observations, uint32_t Program) :
             mobservations(observations),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -5376,10 +4476,6 @@ namespace gles {
         PipelineId__CP() = default;
         PipelineId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5397,10 +4493,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mPipelines(Pipelines) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -5422,10 +4514,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mPipelines(Pipelines) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -5445,10 +4533,6 @@ namespace gles {
         QueryId__CP() = default;
         QueryId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5466,10 +4550,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5491,10 +4571,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5514,10 +4590,6 @@ namespace gles {
         RenderbufferId__CP() = default;
         RenderbufferId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5535,10 +4607,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5558,10 +4626,6 @@ namespace gles {
         SamplerId__CP() = default;
         SamplerId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5579,10 +4643,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mSamplers(Samplers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5603,10 +4663,6 @@ namespace gles {
         GlDeleteShader(atom::Observations observations, uint32_t Shader) :
             mobservations(observations),
             mShader(Shader) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mShader);
@@ -5625,10 +4681,6 @@ namespace gles {
         GlDeleteSync(atom::Observations observations, uint64_t Sync) :
             mobservations(observations),
             mSync(Sync) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
@@ -5647,10 +4699,6 @@ namespace gles {
         GlDeleteSyncAPPLE(atom::Observations observations, uint64_t Sync) :
             mobservations(observations),
             mSync(Sync) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
@@ -5668,10 +4716,6 @@ namespace gles {
         TextureId__CP() = default;
         TextureId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5689,10 +4733,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mTextures(Textures) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5712,10 +4752,6 @@ namespace gles {
         TransformFeedbackId__CP() = default;
         TransformFeedbackId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5733,10 +4769,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mIds(Ids) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -5756,10 +4788,6 @@ namespace gles {
         VertexArrayId__CP() = default;
         VertexArrayId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -5777,10 +4805,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5802,10 +4826,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -5826,10 +4846,6 @@ namespace gles {
         GlDepthFunc(atom::Observations observations, uint32_t Function) :
             mobservations(observations),
             mFunction(Function) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFunction);
@@ -5848,10 +4864,6 @@ namespace gles {
         GlDepthMask(atom::Observations observations, uint8_t Enabled) :
             mobservations(observations),
             mEnabled(Enabled) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint8(this->mEnabled);
@@ -5872,10 +4884,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5895,10 +4903,6 @@ namespace gles {
             mIndex(Index),
             mN(N),
             mF(F) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -5917,10 +4921,6 @@ namespace gles {
             mobservations(observations),
             mNear(Near),
             mFar(Far) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mNear);
@@ -5942,10 +4942,6 @@ namespace gles {
             mobservations(observations),
             mProgram(Program),
             mShader(Shader) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -5966,10 +4962,6 @@ namespace gles {
         GlDisable(atom::Observations observations, uint32_t Capability) :
             mobservations(observations),
             mCapability(Capability) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mCapability);
@@ -5988,10 +4980,6 @@ namespace gles {
         GlDisableDriverControlQCOM(atom::Observations observations, uint32_t DriverControl) :
             mobservations(observations),
             mDriverControl(DriverControl) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mDriverControl);
@@ -6010,10 +4998,6 @@ namespace gles {
         GlDisableVertexAttribArray(atom::Observations observations, uint32_t Location) :
             mobservations(observations),
             mLocation(Location) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -6033,10 +5017,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -6058,10 +5038,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -6083,10 +5059,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -6108,10 +5080,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -6134,10 +5102,6 @@ namespace gles {
             mTarget(Target),
             mNumAttachments(NumAttachments),
             mAttachments(Attachments) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6157,10 +5121,6 @@ namespace gles {
             mNumGroupsX(NumGroupsX),
             mNumGroupsY(NumGroupsY),
             mNumGroupsZ(NumGroupsZ) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6178,10 +5138,6 @@ namespace gles {
         GlDispatchComputeIndirect(atom::Observations observations, int32_t Indirect) :
             mobservations(observations),
             mIndirect(Indirect) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mIndirect);
@@ -6202,10 +5158,6 @@ namespace gles {
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
             mIndicesCount(IndicesCount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6224,10 +5176,6 @@ namespace gles {
             mobservations(observations),
             mDrawMode(DrawMode),
             mIndirect(Indirect) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mDrawMode);
@@ -6251,10 +5199,6 @@ namespace gles {
             mFirstIndex(FirstIndex),
             mIndicesCount(IndicesCount),
             mInstanceCount(InstanceCount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6276,10 +5220,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6302,10 +5242,6 @@ namespace gles {
             mCount(Count),
             mInstancecount(Instancecount),
             mBaseinstance(Baseinstance) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6328,10 +5264,6 @@ namespace gles {
             mStart(Start),
             mCount(Count),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6353,10 +5285,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6376,10 +5304,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mBufs(Bufs) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -6401,10 +5325,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mBufs(Bufs) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -6427,10 +5347,6 @@ namespace gles {
             mN(N),
             mLocation(Location),
             mIndices(Indices) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6449,10 +5365,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mBufs(Bufs) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -6472,10 +5384,6 @@ namespace gles {
         IndicesPointer() = default;
         IndicesPointer(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -6495,10 +5403,6 @@ namespace gles {
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
             mIndices(Indices) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6521,10 +5425,6 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndices(Indices),
             mBaseVertex(BaseVertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6548,10 +5448,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6575,10 +5471,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6600,10 +5492,6 @@ namespace gles {
             mDrawMode(DrawMode),
             mIndicesType(IndicesType),
             mIndirect(Indirect) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6625,10 +5513,6 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndices(Indices),
             mInstanceCount(InstanceCount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6652,10 +5536,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6680,10 +5560,6 @@ namespace gles {
             mIndices(Indices),
             mInstancecount(Instancecount),
             mBaseinstance(Baseinstance) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6709,10 +5585,6 @@ namespace gles {
             mIndices(Indices),
             mInstanceCount(InstanceCount),
             mBaseVertex(BaseVertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6739,10 +5611,6 @@ namespace gles {
             mInstancecount(Instancecount),
             mBasevertex(Basevertex),
             mBaseinstance(Baseinstance) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6769,10 +5637,6 @@ namespace gles {
             mIndices(Indices),
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6798,10 +5662,6 @@ namespace gles {
             mIndices(Indices),
             mInstancecount(Instancecount),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6826,10 +5686,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6853,10 +5709,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6881,10 +5733,6 @@ namespace gles {
             mIndicesCount(IndicesCount),
             mIndicesType(IndicesType),
             mIndices(Indices) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6911,10 +5759,6 @@ namespace gles {
             mIndicesType(IndicesType),
             mIndices(Indices),
             mBaseVertex(BaseVertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6942,10 +5786,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6973,10 +5813,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -6999,10 +5835,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mImage(Image) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7024,10 +5856,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mImage(Image) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7048,10 +5876,6 @@ namespace gles {
         GlEnable(atom::Observations observations, uint32_t Capability) :
             mobservations(observations),
             mCapability(Capability) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mCapability);
@@ -7070,10 +5894,6 @@ namespace gles {
         GlEnableDriverControlQCOM(atom::Observations observations, uint32_t DriverControl) :
             mobservations(observations),
             mDriverControl(DriverControl) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mDriverControl);
@@ -7092,10 +5912,6 @@ namespace gles {
         GlEnableVertexAttribArray(atom::Observations observations, uint32_t Location) :
             mobservations(observations),
             mLocation(Location) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -7115,10 +5931,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7140,10 +5952,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7165,10 +5973,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7190,10 +5994,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7213,10 +6013,6 @@ namespace gles {
         GlEndConditionalRenderNV() = default;
         GlEndConditionalRenderNV(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -7233,10 +6029,6 @@ namespace gles {
         GlEndPerfMonitorAMD(atom::Observations observations, uint32_t Monitor) :
             mobservations(observations),
             mMonitor(Monitor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMonitor);
@@ -7255,10 +6047,6 @@ namespace gles {
         GlEndPerfQueryINTEL(atom::Observations observations, uint32_t QueryHandle) :
             mobservations(observations),
             mQueryHandle(QueryHandle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQueryHandle);
@@ -7277,10 +6065,6 @@ namespace gles {
         GlEndQuery(atom::Observations observations, uint32_t Target) :
             mobservations(observations),
             mTarget(Target) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7299,10 +6083,6 @@ namespace gles {
         GlEndQueryEXT(atom::Observations observations, uint32_t Target) :
             mobservations(observations),
             mTarget(Target) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7321,10 +6101,6 @@ namespace gles {
         GlEndTilingQCOM(atom::Observations observations, uint32_t PreserveMask) :
             mobservations(observations),
             mPreserveMask(PreserveMask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPreserveMask);
@@ -7342,10 +6118,6 @@ namespace gles {
         GlEndTransformFeedback() = default;
         GlEndTransformFeedback(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -7361,10 +6133,6 @@ namespace gles {
         Void__P__P() = default;
         Void__P__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -7382,10 +6150,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -7408,10 +6172,6 @@ namespace gles {
             mBuffers(Buffers),
             mMaxBuffers(MaxBuffers),
             mNumBuffers(NumBuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7431,10 +6191,6 @@ namespace gles {
             mFramebuffers(Framebuffers),
             mMaxFramebuffers(MaxFramebuffers),
             mNumFramebuffers(NumFramebuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7455,10 +6211,6 @@ namespace gles {
             mShadertype(Shadertype),
             mSource(Source),
             mLength(Length) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7476,10 +6228,6 @@ namespace gles {
         ProgramId__P() = default;
         ProgramId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -7498,10 +6246,6 @@ namespace gles {
             mPrograms(Programs),
             mMaxPrograms(MaxPrograms),
             mNumPrograms(NumPrograms) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7518,10 +6262,6 @@ namespace gles {
         RenderbufferId__P() = default;
         RenderbufferId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -7540,10 +6280,6 @@ namespace gles {
             mRenderbuffers(Renderbuffers),
             mMaxRenderbuffers(MaxRenderbuffers),
             mNumRenderbuffers(NumRenderbuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7560,10 +6296,6 @@ namespace gles {
         ShaderId__P() = default;
         ShaderId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -7582,10 +6314,6 @@ namespace gles {
             mShaders(Shaders),
             mMaxShaders(MaxShaders),
             mNumShaders(NumShaders) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7607,10 +6335,6 @@ namespace gles {
             mLevel(Level),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7640,10 +6364,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mTexels(Texels) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7668,10 +6388,6 @@ namespace gles {
         TextureId__P() = default;
         TextureId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -7690,10 +6406,6 @@ namespace gles {
             mTextures(Textures),
             mMaxTextures(MaxTextures),
             mNumTextures(NumTextures) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7712,10 +6424,6 @@ namespace gles {
             mobservations(observations),
             mProgram(Program),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -7738,10 +6446,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7761,10 +6465,6 @@ namespace gles {
             mCondition(Condition),
             mSyncFlags(SyncFlags),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7784,10 +6484,6 @@ namespace gles {
             mCondition(Condition),
             mFlag(Flag),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7804,10 +6500,6 @@ namespace gles {
         GlFinish() = default;
         GlFinish(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -7824,10 +6516,6 @@ namespace gles {
         GlFinishFenceNV(atom::Observations observations, uint32_t Fence) :
             mobservations(observations),
             mFence(Fence) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFence);
@@ -7845,10 +6533,6 @@ namespace gles {
         GlFlush() = default;
         GlFlush(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -7867,10 +6551,6 @@ namespace gles {
             mTarget(Target),
             mOffset(Offset),
             mLength(Length) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7890,10 +6570,6 @@ namespace gles {
             mTarget(Target),
             mOffset(Offset),
             mLength(Length) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7911,10 +6587,6 @@ namespace gles {
         GlFragmentCoverageColorNV(atom::Observations observations, uint32_t Color) :
             mobservations(observations),
             mColor(Color) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mColor);
@@ -7935,10 +6607,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7959,10 +6627,6 @@ namespace gles {
             mFramebufferAttachment(FramebufferAttachment),
             mRenderbufferTarget(RenderbufferTarget),
             mRenderbuffer(Renderbuffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -7984,10 +6648,6 @@ namespace gles {
             mStart(Start),
             mCount(Count),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8009,10 +6669,6 @@ namespace gles {
             mAttachment(Attachment),
             mTexture(Texture),
             mLevel(Level) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8035,10 +6691,6 @@ namespace gles {
             mTextureTarget(TextureTarget),
             mTexture(Texture),
             mLevel(Level) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8063,10 +6715,6 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level),
             mSamples(Samples) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8092,10 +6740,6 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level),
             mSamples(Samples) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8121,10 +6765,6 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level),
             mZoffset(Zoffset) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8148,10 +6788,6 @@ namespace gles {
             mAttachment(Attachment),
             mTexture(Texture),
             mLevel(Level) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8174,10 +6810,6 @@ namespace gles {
             mTexture(Texture),
             mLevel(Level),
             mLayer(Layer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8202,10 +6834,6 @@ namespace gles {
             mLevel(Level),
             mBaseViewIndex(BaseViewIndex),
             mNumViews(NumViews) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8229,10 +6857,6 @@ namespace gles {
             mAttachment(Attachment),
             mTexture(Texture),
             mLevel(Level) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8251,10 +6875,6 @@ namespace gles {
         GlFrontFace(atom::Observations observations, uint32_t Orientation) :
             mobservations(observations),
             mOrientation(Orientation) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mOrientation);
@@ -8274,10 +6894,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mBuffers(Buffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8299,10 +6915,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mFences(Fences) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -8324,10 +6936,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8349,10 +6957,6 @@ namespace gles {
             mobservations(observations),
             mRange(Range),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mRange);
@@ -8374,10 +6978,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mMonitors(Monitors) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -8397,10 +6997,6 @@ namespace gles {
         PipelineId__P() = default;
         PipelineId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8418,10 +7014,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mPipelines(Pipelines) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -8443,10 +7035,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mPipelines(Pipelines) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -8466,10 +7054,6 @@ namespace gles {
         QueryId__P() = default;
         QueryId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8487,10 +7071,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8512,10 +7092,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mQueries(Queries) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8537,10 +7113,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8560,10 +7132,6 @@ namespace gles {
         SamplerId__P() = default;
         SamplerId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8581,10 +7149,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mSamplers(Samplers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8606,10 +7170,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mTextures(Textures) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8629,10 +7189,6 @@ namespace gles {
         TransformFeedbackId__P() = default;
         TransformFeedbackId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8650,10 +7206,6 @@ namespace gles {
             mobservations(observations),
             mN(N),
             mIds(Ids) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mN);
@@ -8673,10 +7225,6 @@ namespace gles {
         VertexArrayId__P() = default;
         VertexArrayId__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8694,10 +7242,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8719,10 +7263,6 @@ namespace gles {
             mobservations(observations),
             mCount(Count),
             mArrays(Arrays) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mCount);
@@ -8743,10 +7283,6 @@ namespace gles {
         GlGenerateMipmap(atom::Observations observations, uint32_t Target) :
             mobservations(observations),
             mTarget(Target) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -8771,10 +7307,6 @@ namespace gles {
             mVectorCount(VectorCount),
             mType(Type),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8802,10 +7334,6 @@ namespace gles {
             mVectorCount(VectorCount),
             mType(Type),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8831,10 +7359,6 @@ namespace gles {
             mBufferSize(BufferSize),
             mBufferBytesWritten(BufferBytesWritten),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8857,10 +7381,6 @@ namespace gles {
             mUniformBlockIndex(UniformBlockIndex),
             mParameterName(ParameterName),
             mParameters(Parameters) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8878,10 +7398,6 @@ namespace gles {
         UniformIndex__CP() = default;
         UniformIndex__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -8902,10 +7418,6 @@ namespace gles {
             mUniformIndices(UniformIndices),
             mParameterName(ParameterName),
             mParameters(Parameters) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8928,10 +7440,6 @@ namespace gles {
             mBufferLength(BufferLength),
             mShadersLengthWritten(ShadersLengthWritten),
             mShaders(Shaders) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8952,10 +7460,6 @@ namespace gles {
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8975,10 +7479,6 @@ namespace gles {
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -8997,10 +7497,6 @@ namespace gles {
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParam);
@@ -9023,10 +7519,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9046,10 +7538,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9069,10 +7557,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9092,10 +7576,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9114,10 +7594,6 @@ namespace gles {
             mobservations(observations),
             mBufsize(Bufsize),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mBufsize);
@@ -9146,10 +7622,6 @@ namespace gles {
             mLengths(Lengths),
             mMessageLog(MessageLog),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9181,10 +7653,6 @@ namespace gles {
             mLengths(Lengths),
             mMessageLog(MessageLog),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9211,10 +7679,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mDriverControlString(DriverControlString) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9235,10 +7699,6 @@ namespace gles {
             mNum(Num),
             mSize(Size),
             mDriverControls(DriverControls) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9256,10 +7716,6 @@ namespace gles {
         GlGetError(atom::Observations observations, uint32_t Result) :
             mobservations(observations),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
@@ -9280,10 +7736,6 @@ namespace gles {
             mFence(Fence),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9301,10 +7753,6 @@ namespace gles {
         GlGetFirstPerfQueryIdINTEL(atom::Observations observations, GLuint__P QueryId) :
             mobservations(observations),
             mQueryId(QueryId) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mQueryId);
@@ -9325,10 +7773,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9347,10 +7791,6 @@ namespace gles {
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParam);
@@ -9373,10 +7813,6 @@ namespace gles {
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9396,10 +7832,6 @@ namespace gles {
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9420,10 +7852,6 @@ namespace gles {
             mAttachment(Attachment),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9444,10 +7872,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9465,10 +7889,6 @@ namespace gles {
         GlGetGraphicsResetStatus(atom::Observations observations, uint32_t Result) :
             mobservations(observations),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
@@ -9487,10 +7907,6 @@ namespace gles {
         GlGetGraphicsResetStatusEXT(atom::Observations observations, uint32_t Result) :
             mobservations(observations),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
@@ -9509,10 +7925,6 @@ namespace gles {
         GlGetGraphicsResetStatusKHR(atom::Observations observations, uint32_t Result) :
             mobservations(observations),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mResult);
@@ -9536,10 +7948,6 @@ namespace gles {
             mLayer(Layer),
             mFormat(Format),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9562,10 +7970,6 @@ namespace gles {
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9584,10 +7988,6 @@ namespace gles {
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParam);
@@ -9609,10 +8009,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -9635,10 +8031,6 @@ namespace gles {
             mParam(Param),
             mIndex(Index),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9658,10 +8050,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9680,10 +8068,6 @@ namespace gles {
             mobservations(observations),
             mParam(Param),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParam);
@@ -9709,10 +8093,6 @@ namespace gles {
             mPname(Pname),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9737,10 +8117,6 @@ namespace gles {
             mPname(Pname),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9762,10 +8138,6 @@ namespace gles {
             mPname(Pname),
             mIndex(Index),
             mVal(Val) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9784,10 +8156,6 @@ namespace gles {
             mobservations(observations),
             mQueryId(QueryId),
             mNextQueryId(NextQueryId) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQueryId);
@@ -9812,10 +8180,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9839,10 +8203,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9866,10 +8226,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9892,10 +8248,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9917,10 +8269,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -9940,10 +8288,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mCommands(Commands) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -9965,10 +8309,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mCoords(Coords) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -9990,10 +8330,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mDashArray(DashArray) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -10017,10 +8353,6 @@ namespace gles {
             mStartSegment(StartSegment),
             mNumSegments(NumSegments),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10043,10 +8375,6 @@ namespace gles {
             mNumPaths(NumPaths),
             mStride(Stride),
             mMetrics(Metrics) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10072,10 +8400,6 @@ namespace gles {
             mPathBase(PathBase),
             mStride(Stride),
             mMetrics(Metrics) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10099,10 +8423,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10122,10 +8442,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10151,10 +8467,6 @@ namespace gles {
             mKerningScale(KerningScale),
             mTransformType(TransformType),
             mReturnedSpacing(ReturnedSpacing) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10188,10 +8500,6 @@ namespace gles {
             mCounterTypeEnum(CounterTypeEnum),
             mCounterDataTypeEnum(CounterDataTypeEnum),
             mRawCounterMaxValue(RawCounterMaxValue) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10221,10 +8529,6 @@ namespace gles {
             mDataSize(DataSize),
             mData(Data),
             mBytesWritten(BytesWritten) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10247,10 +8551,6 @@ namespace gles {
             mCounter(Counter),
             mPname(Pname),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10273,10 +8573,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mCounterString(CounterString) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10300,10 +8596,6 @@ namespace gles {
             mMaxActiveCounters(MaxActiveCounters),
             mCounterSize(CounterSize),
             mCounters(Counters) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10326,10 +8618,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mGroupString(GroupString) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10350,10 +8638,6 @@ namespace gles {
             mNumGroups(NumGroups),
             mGroupsSize(GroupsSize),
             mGroups(Groups) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10375,10 +8659,6 @@ namespace gles {
             mDataSize(DataSize),
             mData(Data),
             mBytesWritten(BytesWritten) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10399,10 +8679,6 @@ namespace gles {
             mobservations(observations),
             mQueryName(QueryName),
             mQueryId(QueryId) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mQueryName);
@@ -10429,10 +8705,6 @@ namespace gles {
             mNoCounters(NoCounters),
             mNoInstances(NoInstances),
             mCapsMask(CapsMask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10455,10 +8727,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -10480,10 +8748,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -10508,10 +8772,6 @@ namespace gles {
             mLength(Length),
             mBinaryFormat(BinaryFormat),
             mBinary(Binary) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10535,10 +8795,6 @@ namespace gles {
             mBytesWritten(BytesWritten),
             mBinaryFormat(BinaryFormat),
             mBinary(Binary) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10561,10 +8817,6 @@ namespace gles {
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
             mInfo(Info) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10586,10 +8838,6 @@ namespace gles {
             mProgramInterface(ProgramInterface),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10611,10 +8859,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mInfoLog(InfoLog) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10636,10 +8880,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mInfoLog(InfoLog) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10660,10 +8900,6 @@ namespace gles {
             mPipeline(Pipeline),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10683,10 +8919,6 @@ namespace gles {
             mPipeline(Pipeline),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10707,10 +8939,6 @@ namespace gles {
             mProgramInterface(ProgramInterface),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10732,10 +8960,6 @@ namespace gles {
             mProgramInterface(ProgramInterface),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10757,10 +8981,6 @@ namespace gles {
             mProgramInterface(ProgramInterface),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10784,10 +9004,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10815,10 +9031,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10848,10 +9060,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10876,10 +9084,6 @@ namespace gles {
             mProgram(Program),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10896,10 +9100,6 @@ namespace gles {
         S64__P() = default;
         S64__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -10918,10 +9118,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10941,10 +9137,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10964,10 +9156,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -10984,10 +9172,6 @@ namespace gles {
         U64__P() = default;
         U64__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -11006,10 +9190,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11029,10 +9209,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11052,10 +9228,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11075,10 +9247,6 @@ namespace gles {
             mQuery(Query),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11098,10 +9266,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11121,10 +9285,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11144,10 +9304,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11167,10 +9323,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11190,10 +9342,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11213,10 +9361,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11236,10 +9380,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11259,10 +9399,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11282,10 +9418,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11305,10 +9437,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11328,10 +9456,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11352,10 +9476,6 @@ namespace gles {
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
             mInfo(Info) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11377,10 +9497,6 @@ namespace gles {
             mPrecisionType(PrecisionType),
             mRange(Range),
             mPrecision(Precision) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11402,10 +9518,6 @@ namespace gles {
             mBufferLength(BufferLength),
             mStringLengthWritten(StringLengthWritten),
             mSource(Source) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11426,10 +9538,6 @@ namespace gles {
             mShader(Shader),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11448,10 +9556,6 @@ namespace gles {
             mobservations(observations),
             mParam(Param),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParam);
@@ -11474,10 +9578,6 @@ namespace gles {
             mName(Name),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11499,10 +9599,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11526,10 +9622,6 @@ namespace gles {
             mBufSize(BufSize),
             mLength(Length),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11552,10 +9644,6 @@ namespace gles {
             mLevel(Level),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11577,10 +9665,6 @@ namespace gles {
             mLevel(Level),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11601,10 +9685,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11624,10 +9704,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11647,10 +9723,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11670,10 +9742,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11693,10 +9761,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11716,10 +9780,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11739,10 +9799,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11762,10 +9818,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11784,10 +9836,6 @@ namespace gles {
             mobservations(observations),
             mTexture(Texture),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTexture);
@@ -11810,10 +9858,6 @@ namespace gles {
             mTexture(Texture),
             mSampler(Sampler),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11837,10 +9881,6 @@ namespace gles {
             mSize(Size),
             mType(Type),
             mName(Name) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11865,10 +9905,6 @@ namespace gles {
             mBufsize(Bufsize),
             mLength(Length),
             mSource(Source) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11889,10 +9925,6 @@ namespace gles {
             mProgram(Program),
             mUniformBlockName(UniformBlockName),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11909,10 +9941,6 @@ namespace gles {
         UniformIndex__P() = default;
         UniformIndex__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -11932,10 +9960,6 @@ namespace gles {
             mUniformCount(UniformCount),
             mUniformNames(UniformNames),
             mUniformIndices(UniformIndices) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11956,10 +9980,6 @@ namespace gles {
             mProgram(Program),
             mName(Name),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -11979,10 +9999,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12002,10 +10018,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12025,10 +10037,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12048,10 +10056,6 @@ namespace gles {
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12071,10 +10075,6 @@ namespace gles {
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12094,10 +10094,6 @@ namespace gles {
             mIndex(Index),
             mPname(Pname),
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12117,10 +10113,6 @@ namespace gles {
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12140,10 +10132,6 @@ namespace gles {
             mIndex(Index),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12164,10 +10152,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12189,10 +10173,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12214,10 +10194,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12239,10 +10215,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12264,10 +10236,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12289,10 +10257,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12314,10 +10278,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12339,10 +10299,6 @@ namespace gles {
             mLocation(Location),
             mBufSize(BufSize),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12362,10 +10318,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -12387,10 +10339,6 @@ namespace gles {
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLength);
@@ -12414,10 +10362,6 @@ namespace gles {
             mPathA(PathA),
             mPathB(PathB),
             mWeight(Weight) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12438,10 +10382,6 @@ namespace gles {
             mTarget(Target),
             mCount(Count),
             mAttachments(Attachments) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12465,10 +10405,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12491,10 +10427,6 @@ namespace gles {
             mobservations(observations),
             mBuffer(Buffer),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBuffer);
@@ -12516,10 +10448,6 @@ namespace gles {
             mobservations(observations),
             mCapability(Capability),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mCapability);
@@ -12542,10 +10470,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12565,10 +10489,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12588,10 +10508,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12611,10 +10527,6 @@ namespace gles {
             mTarget(Target),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12633,10 +10545,6 @@ namespace gles {
             mobservations(observations),
             mFence(Fence),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFence);
@@ -12658,10 +10566,6 @@ namespace gles {
             mobservations(observations),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFramebuffer);
@@ -12683,10 +10587,6 @@ namespace gles {
             mobservations(observations),
             mHandle(Handle),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -12708,10 +10608,6 @@ namespace gles {
             mobservations(observations),
             mPath(Path),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPath);
@@ -12736,10 +10632,6 @@ namespace gles {
             mX(X),
             mY(Y),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12762,10 +10654,6 @@ namespace gles {
             mX(X),
             mY(Y),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -12785,10 +10673,6 @@ namespace gles {
             mobservations(observations),
             mProgram(Program),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -12810,10 +10694,6 @@ namespace gles {
             mobservations(observations),
             mPipeline(Pipeline),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -12835,10 +10715,6 @@ namespace gles {
             mobservations(observations),
             mPipeline(Pipeline),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -12860,10 +10736,6 @@ namespace gles {
             mobservations(observations),
             mQuery(Query),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQuery);
@@ -12885,10 +10757,6 @@ namespace gles {
             mobservations(observations),
             mQuery(Query),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQuery);
@@ -12910,10 +10778,6 @@ namespace gles {
             mobservations(observations),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mRenderbuffer);
@@ -12935,10 +10799,6 @@ namespace gles {
             mobservations(observations),
             mSampler(Sampler),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mSampler);
@@ -12960,10 +10820,6 @@ namespace gles {
             mobservations(observations),
             mShader(Shader),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mShader);
@@ -12985,10 +10841,6 @@ namespace gles {
             mobservations(observations),
             mSync(Sync),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
@@ -13010,10 +10862,6 @@ namespace gles {
             mobservations(observations),
             mSync(Sync),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mSync);
@@ -13035,10 +10883,6 @@ namespace gles {
             mobservations(observations),
             mTexture(Texture),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTexture);
@@ -13060,10 +10904,6 @@ namespace gles {
             mobservations(observations),
             mHandle(Handle),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -13085,10 +10925,6 @@ namespace gles {
             mobservations(observations),
             mId(Id),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mId);
@@ -13110,10 +10946,6 @@ namespace gles {
             mobservations(observations),
             mArray(Array),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
@@ -13135,10 +10967,6 @@ namespace gles {
             mobservations(observations),
             mArray(Array),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mArray);
@@ -13162,10 +10990,6 @@ namespace gles {
             mObject(Object),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13184,10 +11008,6 @@ namespace gles {
         GlLineWidth(atom::Observations observations, float Width) :
             mobservations(observations),
             mWidth(Width) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mWidth);
@@ -13206,10 +11026,6 @@ namespace gles {
         GlLinkProgram(atom::Observations observations, uint32_t Program) :
             mobservations(observations),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -13228,10 +11044,6 @@ namespace gles {
         GlMakeImageHandleNonResidentNV(atom::Observations observations, uint64_t Handle) :
             mobservations(observations),
             mHandle(Handle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -13251,10 +11063,6 @@ namespace gles {
             mobservations(observations),
             mHandle(Handle),
             mAccess(Access) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -13275,10 +11083,6 @@ namespace gles {
         GlMakeTextureHandleNonResidentNV(atom::Observations observations, uint64_t Handle) :
             mobservations(observations),
             mHandle(Handle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -13297,10 +11101,6 @@ namespace gles {
         GlMakeTextureHandleResidentNV(atom::Observations observations, uint64_t Handle) :
             mobservations(observations),
             mHandle(Handle) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mHandle);
@@ -13321,10 +11121,6 @@ namespace gles {
             mTarget(Target),
             mAccess(Access),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13346,10 +11142,6 @@ namespace gles {
             mLength(Length),
             mAccess(Access),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13373,10 +11165,6 @@ namespace gles {
             mLength(Length),
             mAccess(Access),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13397,10 +11185,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13422,10 +11206,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13447,10 +11227,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13472,10 +11248,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13497,10 +11269,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13522,10 +11290,6 @@ namespace gles {
             mobservations(observations),
             mMatrixMode(MatrixMode),
             mM(M) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMatrixMode);
@@ -13546,10 +11310,6 @@ namespace gles {
         GlMemoryBarrier(atom::Observations observations, uint32_t Barriers) :
             mobservations(observations),
             mBarriers(Barriers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBarriers);
@@ -13568,10 +11328,6 @@ namespace gles {
         GlMemoryBarrierByRegion(atom::Observations observations, uint32_t Barriers) :
             mobservations(observations),
             mBarriers(Barriers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBarriers);
@@ -13590,10 +11346,6 @@ namespace gles {
         GlMinSampleShading(atom::Observations observations, float Value) :
             mobservations(observations),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mValue);
@@ -13612,10 +11364,6 @@ namespace gles {
         GlMinSampleShadingOES(atom::Observations observations, float Value) :
             mobservations(observations),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mValue);
@@ -13637,10 +11385,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13662,10 +11406,6 @@ namespace gles {
             mIndirect(Indirect),
             mDrawcount(Drawcount),
             mStride(Stride) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13683,10 +11423,6 @@ namespace gles {
         Void__CP__CP() = default;
         Void__CP__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -13708,10 +11444,6 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13737,10 +11469,6 @@ namespace gles {
             mIndices(Indices),
             mPrimcount(Primcount),
             mBasevertex(Basevertex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13765,10 +11493,6 @@ namespace gles {
             mType(Type),
             mIndices(Indices),
             mPrimcount(Primcount) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13792,10 +11516,6 @@ namespace gles {
             mIndirect(Indirect),
             mDrawcount(Drawcount),
             mStride(Stride) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13818,10 +11538,6 @@ namespace gles {
             mStart(Start),
             mCount(Count),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13843,10 +11559,6 @@ namespace gles {
             mName(Name),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13868,10 +11580,6 @@ namespace gles {
             mName(Name),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13892,10 +11600,6 @@ namespace gles {
             mPtr(Ptr),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13915,10 +11619,6 @@ namespace gles {
             mPtr(Ptr),
             mLength(Length),
             mLabel(Label) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -13937,10 +11637,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -13962,10 +11658,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -13987,10 +11679,6 @@ namespace gles {
             mobservations(observations),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPname);
@@ -14016,10 +11704,6 @@ namespace gles {
             mNumCoords(NumCoords),
             mCoordType(CoordType),
             mCoords(Coords) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14043,10 +11727,6 @@ namespace gles {
             mNumCoords(NumCoords),
             mCoordType(CoordType),
             mCoords(Coords) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14065,10 +11745,6 @@ namespace gles {
         GlPathCoverDepthFuncNV(atom::Observations observations, uint32_t Func) :
             mobservations(observations),
             mFunc(Func) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFunc);
@@ -14089,10 +11765,6 @@ namespace gles {
             mPath(Path),
             mDashCount(DashCount),
             mDashArray(DashArray) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14118,10 +11790,6 @@ namespace gles {
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14151,10 +11819,6 @@ namespace gles {
             mEmScale(EmScale),
             mBaseAndCount(BaseAndCount),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14184,10 +11848,6 @@ namespace gles {
             mHandleMissingGlyphs(HandleMissingGlyphs),
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14220,10 +11880,6 @@ namespace gles {
             mHandleMissingGlyphs(HandleMissingGlyphs),
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14257,10 +11913,6 @@ namespace gles {
             mPathParameterTemplate(PathParameterTemplate),
             mEmScale(EmScale),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14287,10 +11939,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14310,10 +11958,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14333,10 +11977,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14356,10 +11996,6 @@ namespace gles {
             mPath(Path),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14378,10 +12014,6 @@ namespace gles {
             mobservations(observations),
             mFactor(Factor),
             mUnits(Units) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mFactor);
@@ -14404,10 +12036,6 @@ namespace gles {
             mFunc(Func),
             mRef(Ref),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14428,10 +12056,6 @@ namespace gles {
             mFormat(Format),
             mLength(Length),
             mPathString(PathString) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14457,10 +12081,6 @@ namespace gles {
             mNumCoords(NumCoords),
             mCoordType(CoordType),
             mCoords(Coords) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14487,10 +12107,6 @@ namespace gles {
             mNumCoords(NumCoords),
             mCoordType(CoordType),
             mCoords(Coords) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14509,10 +12125,6 @@ namespace gles {
         GlPauseTransformFeedback() = default;
         GlPauseTransformFeedback(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -14530,10 +12142,6 @@ namespace gles {
             mobservations(observations),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mParameter);
@@ -14562,10 +12170,6 @@ namespace gles {
             mTangentX(TangentX),
             mTangentY(TangentY),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14590,10 +12194,6 @@ namespace gles {
             mobservations(observations),
             mFace(Face),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFace);
@@ -14615,10 +12215,6 @@ namespace gles {
             mobservations(observations),
             mScaleFactor(ScaleFactor),
             mUnits(Units) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mScaleFactor);
@@ -14638,10 +12234,6 @@ namespace gles {
         GlPopDebugGroup() = default;
         GlPopDebugGroup(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -14657,10 +12249,6 @@ namespace gles {
         GlPopDebugGroupKHR() = default;
         GlPopDebugGroupKHR(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -14676,10 +12264,6 @@ namespace gles {
         GlPopGroupMarkerEXT() = default;
         GlPopGroupMarkerEXT(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -14703,10 +12287,6 @@ namespace gles {
             mMaxY(MaxY),
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14736,10 +12316,6 @@ namespace gles {
             mMaxY(MaxY),
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14769,10 +12345,6 @@ namespace gles {
             mMaxY(MaxY),
             mMaxZ(MaxZ),
             mMaxW(MaxW) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14798,10 +12370,6 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
             mLength(Length) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14823,10 +12391,6 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
             mBinarySize(BinarySize) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14847,10 +12411,6 @@ namespace gles {
             mProgram(Program),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14870,10 +12430,6 @@ namespace gles {
             mProgram(Program),
             mPname(Pname),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14895,10 +12451,6 @@ namespace gles {
             mGenMode(GenMode),
             mComponents(Components),
             mCoeffs(Coeffs) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14920,10 +12472,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14943,10 +12491,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14967,10 +12511,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -14992,10 +12532,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15016,10 +12552,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15039,10 +12571,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15063,10 +12591,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15088,10 +12612,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15112,10 +12632,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValue0(Value0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15135,10 +12651,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mV0(V0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15159,10 +12671,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15184,10 +12692,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15209,10 +12713,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15234,10 +12734,6 @@ namespace gles {
             mLocation(Location),
             mV0(V0),
             mV1(V1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15259,10 +12755,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15284,10 +12776,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15309,10 +12797,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15334,10 +12818,6 @@ namespace gles {
             mLocation(Location),
             mV0(V0),
             mV1(V1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15359,10 +12839,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15384,10 +12860,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15409,10 +12881,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15434,10 +12902,6 @@ namespace gles {
             mLocation(Location),
             mV0(V0),
             mV1(V1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15459,10 +12923,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15484,10 +12944,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15510,10 +12966,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15537,10 +12989,6 @@ namespace gles {
             mV0(V0),
             mV1(V1),
             mV2(V2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15563,10 +13011,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15588,10 +13032,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15614,10 +13054,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15641,10 +13077,6 @@ namespace gles {
             mV0(V0),
             mV1(V1),
             mV2(V2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15667,10 +13099,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15692,10 +13120,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15718,10 +13142,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15745,10 +13165,6 @@ namespace gles {
             mV0(V0),
             mV1(V1),
             mV2(V2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15771,10 +13187,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15796,10 +13208,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15823,10 +13231,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15852,10 +13256,6 @@ namespace gles {
             mV1(V1),
             mV2(V2),
             mV3(V3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15879,10 +13279,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15904,10 +13300,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15931,10 +13323,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15960,10 +13348,6 @@ namespace gles {
             mV1(V1),
             mV2(V2),
             mV3(V3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -15987,10 +13371,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16012,10 +13392,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16039,10 +13415,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16068,10 +13440,6 @@ namespace gles {
             mV1(V1),
             mV2(V2),
             mV3(V3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16095,10 +13463,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16120,10 +13484,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16144,10 +13504,6 @@ namespace gles {
             mProgram(Program),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16168,10 +13524,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16194,10 +13546,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16221,10 +13569,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16248,10 +13592,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16275,10 +13615,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16302,10 +13638,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16329,10 +13661,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16356,10 +13684,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16383,10 +13707,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16410,10 +13730,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16437,10 +13753,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16464,10 +13776,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16491,10 +13799,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16518,10 +13822,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16545,10 +13845,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16572,10 +13868,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16599,10 +13891,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16626,10 +13914,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16653,10 +13937,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16679,10 +13959,6 @@ namespace gles {
             mId(Id),
             mLength(Length),
             mMessage(Message) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16704,10 +13980,6 @@ namespace gles {
             mId(Id),
             mLength(Length),
             mMessage(Message) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16727,10 +13999,6 @@ namespace gles {
             mobservations(observations),
             mLength(Length),
             mMarker(Marker) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLength);
@@ -16752,10 +14020,6 @@ namespace gles {
             mobservations(observations),
             mQuery(Query),
             mTarget(Target) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mQuery);
@@ -16777,10 +14041,6 @@ namespace gles {
             mobservations(observations),
             mSamples(Samples),
             mFixedsamplelocations(Fixedsamplelocations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mSamples);
@@ -16801,10 +14061,6 @@ namespace gles {
         GlReadBuffer(atom::Observations observations, uint32_t Src) :
             mobservations(observations),
             mSrc(Src) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mSrc);
@@ -16824,10 +14080,6 @@ namespace gles {
             mobservations(observations),
             mSrc(Src),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mSrc);
@@ -16848,10 +14100,6 @@ namespace gles {
         GlReadBufferNV(atom::Observations observations, uint32_t Mode) :
             mobservations(observations),
             mMode(Mode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMode);
@@ -16876,10 +14124,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16908,10 +14152,6 @@ namespace gles {
             mType(Type),
             mBufSize(BufSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16941,10 +14181,6 @@ namespace gles {
             mType(Type),
             mBufSize(BufSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16974,10 +14210,6 @@ namespace gles {
             mType(Type),
             mBufSize(BufSize),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -16999,10 +14231,6 @@ namespace gles {
         GlReleaseShaderCompiler() = default;
         GlReleaseShaderCompiler(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -17022,10 +14250,6 @@ namespace gles {
             mFormat(Format),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17048,10 +14272,6 @@ namespace gles {
             mFormat(Format),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17075,10 +14295,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17102,10 +14318,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17129,10 +14341,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17156,10 +14364,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17183,10 +14387,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17205,10 +14405,6 @@ namespace gles {
         GlResolveDepthValuesNV() = default;
         GlResolveDepthValuesNV(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -17224,10 +14420,6 @@ namespace gles {
         GlResolveMultisampleFramebufferAPPLE() = default;
         GlResolveMultisampleFramebufferAPPLE(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -17243,10 +14435,6 @@ namespace gles {
         GlResumeTransformFeedback() = default;
         GlResumeTransformFeedback(atom::Observations observations) :
             mobservations(observations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
         }
@@ -17264,10 +14452,6 @@ namespace gles {
             mobservations(observations),
             mValue(Value),
             mInvert(Invert) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Float32(this->mValue);
@@ -17289,10 +14473,6 @@ namespace gles {
             mobservations(observations),
             mMaskNumber(MaskNumber),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMaskNumber);
@@ -17315,10 +14495,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17338,10 +14514,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17361,10 +14533,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17384,10 +14552,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17407,10 +14571,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17430,10 +14590,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17453,10 +14609,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17476,10 +14628,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17499,10 +14647,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17522,10 +14666,6 @@ namespace gles {
             mSampler(Sampler),
             mPname(Pname),
             mParam(Param) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17546,10 +14686,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17570,10 +14706,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17595,10 +14727,6 @@ namespace gles {
             mBottom(Bottom),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17619,10 +14747,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -17647,10 +14771,6 @@ namespace gles {
             mGroup(Group),
             mNumCounters(NumCounters),
             mCounterList(CounterList) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17671,10 +14791,6 @@ namespace gles {
             mobservations(observations),
             mFence(Fence),
             mCondition(Condition) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFence);
@@ -17694,10 +14810,6 @@ namespace gles {
         ShaderId__CP() = default;
         ShaderId__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -17718,10 +14830,6 @@ namespace gles {
             mBinaryFormat(BinaryFormat),
             mBinary(Binary),
             mBinarySize(BinarySize) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17744,10 +14852,6 @@ namespace gles {
             mCount(Count),
             mSource(Source),
             mLength(Length) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17770,10 +14874,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mPreserveMask(PreserveMask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17800,10 +14900,6 @@ namespace gles {
             mMask(Mask),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17828,10 +14924,6 @@ namespace gles {
             mPath(Path),
             mFillMode(FillMode),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17851,10 +14943,6 @@ namespace gles {
             mFunc(Func),
             mRef(Ref),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17875,10 +14963,6 @@ namespace gles {
             mFunction(Function),
             mReferenceValue(ReferenceValue),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17897,10 +14981,6 @@ namespace gles {
         GlStencilMask(atom::Observations observations, uint32_t Mask) :
             mobservations(observations),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mMask);
@@ -17920,10 +15000,6 @@ namespace gles {
             mobservations(observations),
             mFace(Face),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFace);
@@ -17946,10 +15022,6 @@ namespace gles {
             mFail(Fail),
             mZfail(Zfail),
             mZpass(Zpass) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17970,10 +15042,6 @@ namespace gles {
             mStencilFail(StencilFail),
             mStencilPassDepthFail(StencilPassDepthFail),
             mStencilPassDepthPass(StencilPassDepthPass) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -17999,10 +15067,6 @@ namespace gles {
             mMask(Mask),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18027,10 +15091,6 @@ namespace gles {
             mPath(Path),
             mReference(Reference),
             mMask(Mask) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18056,10 +15116,6 @@ namespace gles {
             mCoverMode(CoverMode),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18086,10 +15142,6 @@ namespace gles {
             mFillMode(FillMode),
             mMask(Mask),
             mCoverMode(CoverMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18116,10 +15168,6 @@ namespace gles {
             mCoverMode(CoverMode),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18146,10 +15194,6 @@ namespace gles {
             mReference(Reference),
             mMask(Mask),
             mCoverMode(CoverMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18169,10 +15213,6 @@ namespace gles {
             mobservations(observations),
             mXbits(Xbits),
             mYbits(Ybits) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mXbits);
@@ -18194,10 +15234,6 @@ namespace gles {
             mobservations(observations),
             mFence(Fence),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mFence);
@@ -18220,10 +15256,6 @@ namespace gles {
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18243,10 +15275,6 @@ namespace gles {
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18266,10 +15294,6 @@ namespace gles {
             mTarget(Target),
             mInternalformat(Internalformat),
             mBuffer(Buffer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18291,10 +15315,6 @@ namespace gles {
             mBuffer(Buffer),
             mOffset(Offset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18318,10 +15338,6 @@ namespace gles {
             mBuffer(Buffer),
             mOffset(Offset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18345,10 +15361,6 @@ namespace gles {
             mBuffer(Buffer),
             mOffset(Offset),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18376,10 +15388,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18412,10 +15420,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18449,10 +15453,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mPixels(Pixels) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18485,10 +15485,6 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth),
             mCommit(Commit) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18514,10 +15510,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18537,10 +15529,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18560,10 +15548,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18583,10 +15567,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18606,10 +15586,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18629,10 +15605,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18652,10 +15624,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18675,10 +15643,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18698,10 +15662,6 @@ namespace gles {
             mTarget(Target),
             mParameter(Parameter),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18721,10 +15681,6 @@ namespace gles {
             mTarget(Target),
             mPname(Pname),
             mParams(Params) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18745,10 +15701,6 @@ namespace gles {
             mLevels(Levels),
             mFormat(Format),
             mWidth(Width) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18771,10 +15723,6 @@ namespace gles {
             mInternalformat(Internalformat),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18798,10 +15746,6 @@ namespace gles {
             mFormat(Format),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18826,10 +15770,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mFixedsamplelocations(Fixedsamplelocations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18855,10 +15795,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mDepth(Depth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18884,10 +15820,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mDepth(Depth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18914,10 +15846,6 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth),
             mFixedsamplelocations(Fixedsamplelocations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18945,10 +15873,6 @@ namespace gles {
             mHeight(Height),
             mDepth(Depth),
             mFixedsamplelocations(Fixedsamplelocations) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -18978,10 +15902,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19015,10 +15935,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19054,10 +15970,6 @@ namespace gles {
             mFormat(Format),
             mType(Type),
             mPixels(Pixels) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19087,10 +15999,6 @@ namespace gles {
             mLevels(Levels),
             mFormat(Format),
             mWidth(Width) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19115,10 +16023,6 @@ namespace gles {
             mFormat(Format),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19145,10 +16049,6 @@ namespace gles {
             mWidth(Width),
             mHeight(Height),
             mDepth(Depth) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19177,10 +16077,6 @@ namespace gles {
             mNumlevels(Numlevels),
             mMinlayer(Minlayer),
             mNumlayers(Numlayers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19210,10 +16106,6 @@ namespace gles {
             mNumlevels(Numlevels),
             mMinlayer(Minlayer),
             mNumlayers(Numlayers) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19239,10 +16131,6 @@ namespace gles {
             mCount(Count),
             mVaryings(Varyings),
             mBufferMode(BufferMode) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19264,10 +16152,6 @@ namespace gles {
             mSrcPath(SrcPath),
             mTransformType(TransformType),
             mTransformValues(TransformValues) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19287,10 +16171,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLocation);
@@ -19313,10 +16193,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19335,10 +16211,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLocation);
@@ -19361,10 +16233,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19383,10 +16251,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLocation);
@@ -19409,10 +16273,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19432,10 +16292,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19455,10 +16311,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19478,10 +16330,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19501,10 +16349,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19524,10 +16368,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19547,10 +16387,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19571,10 +16407,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19595,10 +16427,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19619,10 +16447,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19643,10 +16467,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19667,10 +16487,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19691,10 +16507,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19716,10 +16528,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19741,10 +16549,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19766,10 +16570,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19791,10 +16591,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19816,10 +16612,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19841,10 +16633,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19864,10 +16652,6 @@ namespace gles {
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
             mUniformBlockBinding(UniformBlockBinding) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19886,10 +16670,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Int32(this->mLocation);
@@ -19912,10 +16692,6 @@ namespace gles {
             mLocation(Location),
             mCount(Count),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19936,10 +16712,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19961,10 +16733,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -19986,10 +16754,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20011,10 +16775,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20036,10 +16796,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20061,10 +16817,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20086,10 +16838,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20111,10 +16859,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20136,10 +16880,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20161,10 +16901,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20186,10 +16922,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20211,10 +16943,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20236,10 +16964,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20261,10 +16985,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20286,10 +17006,6 @@ namespace gles {
             mCount(Count),
             mTranspose(Transpose),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20309,10 +17025,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -20334,10 +17046,6 @@ namespace gles {
             mobservations(observations),
             mTarget(Target),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mTarget);
@@ -20358,10 +17066,6 @@ namespace gles {
         GlUseProgram(atom::Observations observations, uint32_t Program) :
             mobservations(observations),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -20382,10 +17086,6 @@ namespace gles {
             mPipeline(Pipeline),
             mStages(Stages),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20405,10 +17105,6 @@ namespace gles {
             mPipeline(Pipeline),
             mStages(Stages),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20426,10 +17122,6 @@ namespace gles {
         GlValidateProgram(atom::Observations observations, uint32_t Program) :
             mobservations(observations),
             mProgram(Program) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mProgram);
@@ -20448,10 +17140,6 @@ namespace gles {
         GlValidateProgramPipeline(atom::Observations observations, uint32_t Pipeline) :
             mobservations(observations),
             mPipeline(Pipeline) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -20470,10 +17158,6 @@ namespace gles {
         GlValidateProgramPipelineEXT(atom::Observations observations, uint32_t Pipeline) :
             mobservations(observations),
             mPipeline(Pipeline) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mPipeline);
@@ -20493,10 +17177,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue0(Value0) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -20518,10 +17198,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -20544,10 +17220,6 @@ namespace gles {
             mLocation(Location),
             mValue0(Value0),
             mValue1(Value1) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20566,10 +17238,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -20593,10 +17261,6 @@ namespace gles {
             mValue0(Value0),
             mValue1(Value1),
             mValue2(Value2) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20616,10 +17280,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -20644,10 +17304,6 @@ namespace gles {
             mValue1(Value1),
             mValue2(Value2),
             mValue3(Value3) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20668,10 +17324,6 @@ namespace gles {
             mobservations(observations),
             mLocation(Location),
             mValue(Value) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mLocation);
@@ -20693,10 +17345,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mBindingIndex(BindingIndex) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20718,10 +17366,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20743,10 +17387,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20768,10 +17408,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20793,10 +17429,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20821,10 +17453,6 @@ namespace gles {
             mType(Type),
             mNormalized(Normalized),
             mRelativeoffset(Relativeoffset) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20848,10 +17476,6 @@ namespace gles {
             mY(Y),
             mZ(Z),
             mW(W) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20872,10 +17496,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20900,10 +17520,6 @@ namespace gles {
             mY(Y),
             mZ(Z),
             mW(W) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20924,10 +17540,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mValues(Values) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -20951,10 +17563,6 @@ namespace gles {
             mSize(Size),
             mType(Type),
             mRelativeoffset(Relativeoffset) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -20977,10 +17585,6 @@ namespace gles {
             mType(Type),
             mStride(Stride),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21005,10 +17609,6 @@ namespace gles {
             mNormalized(Normalized),
             mStride(Stride),
             mData(Data) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21030,10 +17630,6 @@ namespace gles {
             mobservations(observations),
             mBindingIndex(BindingIndex),
             mDivisor(Divisor) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mBindingIndex);
@@ -21057,10 +17653,6 @@ namespace gles {
             mY(Y),
             mWidth(Width),
             mHeight(Height) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21081,10 +17673,6 @@ namespace gles {
             mFirst(First),
             mCount(Count),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21106,10 +17694,6 @@ namespace gles {
             mY(Y),
             mW(W),
             mH(H) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21130,10 +17714,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mV(V) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mIndex);
@@ -21156,10 +17736,6 @@ namespace gles {
             mSync(Sync),
             mSyncFlags(SyncFlags),
             mTimeout(Timeout) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21179,10 +17755,6 @@ namespace gles {
             mSync(Sync),
             mFlag(Flag),
             mTimeout(Timeout) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21203,10 +17775,6 @@ namespace gles {
             mNumPaths(NumPaths),
             mPaths(Paths),
             mWeights(Weights) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21229,10 +17797,6 @@ namespace gles {
             mShareList(ShareList),
             mDirect(Direct),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21257,10 +17821,6 @@ namespace gles {
             mShared(Shared),
             mDirect(Direct),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21285,10 +17845,6 @@ namespace gles {
             mRead(Read),
             mCtx(Ctx),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21311,10 +17867,6 @@ namespace gles {
             mDrawable(Drawable),
             mCtx(Ctx),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21332,10 +17884,6 @@ namespace gles {
         Int__P() = default;
         Int__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21356,10 +17904,6 @@ namespace gles {
             mAttribute(Attribute),
             mValue(Value),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -21380,10 +17924,6 @@ namespace gles {
             mobservations(observations),
             mDisplay(Display),
             mDrawable(Drawable) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mDisplay);
@@ -21403,10 +17943,6 @@ namespace gles {
         HDC() = default;
         HDC(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21422,10 +17958,6 @@ namespace gles {
         HGLRC() = default;
         HGLRC(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21441,10 +17973,6 @@ namespace gles {
         Int__S() = default;
         Int__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21460,10 +17988,6 @@ namespace gles {
         Vec2f() = default;
         Vec2f(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -21482,10 +18006,6 @@ namespace gles {
         Mat2f() = default;
         Mat2f(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -21504,10 +18024,6 @@ namespace gles {
         Mat2f__S() = default;
         Mat2f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21523,10 +18039,6 @@ namespace gles {
         Mat2f__P() = default;
         Mat2f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21542,10 +18054,6 @@ namespace gles {
         Vec3f() = default;
         Vec3f(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -21564,10 +18072,6 @@ namespace gles {
         Mat2x3f() = default;
         Mat2x3f(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -21586,10 +18090,6 @@ namespace gles {
         Mat2x3f__S() = default;
         Mat2x3f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21605,10 +18105,6 @@ namespace gles {
         Mat2x3f__P() = default;
         Mat2x3f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21624,10 +18120,6 @@ namespace gles {
         Vec4f() = default;
         Vec4f(float* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -21646,10 +18138,6 @@ namespace gles {
         Mat2x4f() = default;
         Mat2x4f(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -21668,10 +18156,6 @@ namespace gles {
         Mat2x4f__S() = default;
         Mat2x4f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21687,10 +18171,6 @@ namespace gles {
         Mat2x4f__P() = default;
         Mat2x4f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21706,10 +18186,6 @@ namespace gles {
         Mat3f() = default;
         Mat3f(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -21728,10 +18204,6 @@ namespace gles {
         Mat3f__S() = default;
         Mat3f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21747,10 +18219,6 @@ namespace gles {
         Mat3f__P() = default;
         Mat3f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21766,10 +18234,6 @@ namespace gles {
         Mat3x2f() = default;
         Mat3x2f(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -21788,10 +18252,6 @@ namespace gles {
         Mat3x2f__S() = default;
         Mat3x2f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21807,10 +18267,6 @@ namespace gles {
         Mat3x2f__P() = default;
         Mat3x2f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21826,10 +18282,6 @@ namespace gles {
         Mat3x4f() = default;
         Mat3x4f(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -21848,10 +18300,6 @@ namespace gles {
         Mat3x4f__S() = default;
         Mat3x4f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21867,10 +18315,6 @@ namespace gles {
         Mat3x4f__P() = default;
         Mat3x4f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21886,10 +18330,6 @@ namespace gles {
         Mat4f() = default;
         Mat4f(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -21908,10 +18348,6 @@ namespace gles {
         Mat4f__S() = default;
         Mat4f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21927,10 +18363,6 @@ namespace gles {
         Mat4f__P() = default;
         Mat4f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -21946,10 +18378,6 @@ namespace gles {
         Mat4x2f() = default;
         Mat4x2f(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -21968,10 +18396,6 @@ namespace gles {
         Mat4x2f__S() = default;
         Mat4x2f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -21987,10 +18411,6 @@ namespace gles {
         Mat4x2f__P() = default;
         Mat4x2f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22006,10 +18426,6 @@ namespace gles {
         Mat4x3f() = default;
         Mat4x3f(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -22028,10 +18444,6 @@ namespace gles {
         Mat4x3f__S() = default;
         Mat4x3f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22047,10 +18459,6 @@ namespace gles {
         Mat4x3f__P() = default;
         Mat4x3f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22066,10 +18474,6 @@ namespace gles {
         PipelineId__S() = default;
         PipelineId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22085,10 +18489,6 @@ namespace gles {
         ProgramId__S() = default;
         ProgramId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22104,10 +18504,6 @@ namespace gles {
         QueryId__S() = default;
         QueryId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22123,10 +18519,6 @@ namespace gles {
         RenderbufferId__S() = default;
         RenderbufferId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22143,10 +18535,6 @@ namespace gles {
         ReplayBindRenderer(atom::Observations observations, uint32_t Id) :
             mobservations(observations),
             mId(Id) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mId);
@@ -22165,10 +18553,6 @@ namespace gles {
         ReplayCreateRenderer(atom::Observations observations, uint32_t Id) :
             mobservations(observations),
             mId(Id) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint32(this->mId);
@@ -22186,10 +18570,6 @@ namespace gles {
         S64__S() = default;
         S64__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22205,10 +18585,6 @@ namespace gles {
         SamplerId__S() = default;
         SamplerId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22224,10 +18600,6 @@ namespace gles {
         ShaderId__S() = default;
         ShaderId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22244,10 +18616,6 @@ namespace gles {
         StartTimer(atom::Observations observations, uint8_t Index) :
             mobservations(observations),
             mIndex(Index) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint8(this->mIndex);
@@ -22269,10 +18637,6 @@ namespace gles {
             mobservations(observations),
             mIndex(Index),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint8(this->mIndex);
@@ -22293,10 +18657,6 @@ namespace gles {
         SwitchThread(atom::Observations observations, uint64_t ThreadID) :
             mobservations(observations),
             mThreadID(ThreadID) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Uint64(this->mThreadID);
@@ -22314,10 +18674,6 @@ namespace gles {
         TextureId__S() = default;
         TextureId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22333,10 +18689,6 @@ namespace gles {
         TransformFeedbackId__S() = default;
         TransformFeedbackId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22352,10 +18704,6 @@ namespace gles {
         U16__S() = default;
         U16__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22371,10 +18719,6 @@ namespace gles {
         U16__P() = default;
         U16__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22390,10 +18734,6 @@ namespace gles {
         U32__S() = default;
         U32__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22409,10 +18749,6 @@ namespace gles {
         U32__P() = default;
         U32__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22428,10 +18764,6 @@ namespace gles {
         U64__S() = default;
         U64__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22447,10 +18779,6 @@ namespace gles {
         U8__P() = default;
         U8__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22466,10 +18794,6 @@ namespace gles {
         UniformIndex__S() = default;
         UniformIndex__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22485,10 +18809,6 @@ namespace gles {
         Vec2f__2__A() = default;
         Vec2f__2__A(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -22507,10 +18827,6 @@ namespace gles {
         Vec2f__3__A() = default;
         Vec2f__3__A(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -22529,10 +18845,6 @@ namespace gles {
         Vec2f__4__A() = default;
         Vec2f__4__A(Vec2f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -22551,10 +18863,6 @@ namespace gles {
         Vec2f__S() = default;
         Vec2f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22570,10 +18878,6 @@ namespace gles {
         Vec2f__P() = default;
         Vec2f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22589,10 +18893,6 @@ namespace gles {
         Vec2i() = default;
         Vec2i(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -22611,10 +18911,6 @@ namespace gles {
         Vec2i__S() = default;
         Vec2i__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22630,10 +18926,6 @@ namespace gles {
         Vec2i__P() = default;
         Vec2i__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22649,10 +18941,6 @@ namespace gles {
         Vec2u() = default;
         Vec2u(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -22671,10 +18959,6 @@ namespace gles {
         Vec2u__S() = default;
         Vec2u__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22690,10 +18974,6 @@ namespace gles {
         Vec2u__P() = default;
         Vec2u__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22709,10 +18989,6 @@ namespace gles {
         Vec3f__2__A() = default;
         Vec3f__2__A(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -22731,10 +19007,6 @@ namespace gles {
         Vec3f__3__A() = default;
         Vec3f__3__A(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -22753,10 +19025,6 @@ namespace gles {
         Vec3f__4__A() = default;
         Vec3f__4__A(Vec3f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -22775,10 +19043,6 @@ namespace gles {
         Vec3f__S() = default;
         Vec3f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22794,10 +19058,6 @@ namespace gles {
         Vec3f__P() = default;
         Vec3f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22813,10 +19073,6 @@ namespace gles {
         Vec3i() = default;
         Vec3i(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -22835,10 +19091,6 @@ namespace gles {
         Vec3i__S() = default;
         Vec3i__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22854,10 +19106,6 @@ namespace gles {
         Vec3i__P() = default;
         Vec3i__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22873,10 +19121,6 @@ namespace gles {
         Vec3u() = default;
         Vec3u(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -22895,10 +19139,6 @@ namespace gles {
         Vec3u__S() = default;
         Vec3u__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -22914,10 +19154,6 @@ namespace gles {
         Vec3u__P() = default;
         Vec3u__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -22933,10 +19169,6 @@ namespace gles {
         Vec4f__2__A() = default;
         Vec4f__2__A(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 2; i++) {
@@ -22955,10 +19187,6 @@ namespace gles {
         Vec4f__3__A() = default;
         Vec4f__3__A(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 3; i++) {
@@ -22977,10 +19205,6 @@ namespace gles {
         Vec4f__4__A() = default;
         Vec4f__4__A(Vec4f* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -22999,10 +19223,6 @@ namespace gles {
         Vec4f__S() = default;
         Vec4f__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23018,10 +19238,6 @@ namespace gles {
         Vec4f__P() = default;
         Vec4f__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -23037,10 +19253,6 @@ namespace gles {
         Vec4i() = default;
         Vec4i(int32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -23059,10 +19271,6 @@ namespace gles {
         Vec4i__S() = default;
         Vec4i__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23078,10 +19286,6 @@ namespace gles {
         Vec4i__P() = default;
         Vec4i__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -23097,10 +19301,6 @@ namespace gles {
         Vec4u() = default;
         Vec4u(uint32_t* Elements) :
             mElements(Elements) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             
             for (int i = 0; i < 4; i++) {
@@ -23119,10 +19319,6 @@ namespace gles {
         Vec4u__S() = default;
         Vec4u__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23138,10 +19334,6 @@ namespace gles {
         Vec4u__P() = default;
         Vec4u__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -23157,10 +19349,6 @@ namespace gles {
         VertexArrayId__S() = default;
         VertexArrayId__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23176,10 +19364,6 @@ namespace gles {
         Void__S() = default;
         Void__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23195,10 +19379,6 @@ namespace gles {
         Void__P__S() = default;
         Void__P__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23214,10 +19394,6 @@ namespace gles {
         Void__CP__S() = default;
         Void__CP__S(SliceInfo SliceInfo) :
             mSliceInfo(SliceInfo) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mSliceInfo);
         }
@@ -23233,10 +19409,6 @@ namespace gles {
         Void__CP__P() = default;
         Void__CP__P(memory::Pointer Pointer) :
             mPointer(Pointer) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
         }
@@ -23254,10 +19426,6 @@ namespace gles {
             mobservations(observations),
             mHdc(Hdc),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mHdc);
@@ -23281,10 +19449,6 @@ namespace gles {
             mHShareContext(HShareContext),
             mAttribList(AttribList),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -23305,10 +19469,6 @@ namespace gles {
             mHdc(Hdc),
             mHglrc(Hglrc),
             mResult(Result) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity& Schema() const {
             return StaticSchema();
@@ -23326,10 +19486,6 @@ namespace gles {
         WglSwapBuffers(atom::Observations observations, HDC Hdc) :
             mobservations(observations),
             mHdc(Hdc) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
             e->Value(this->mHdc);
@@ -23348,10 +19504,6 @@ namespace gles {
         generate_types(U16__S U16_slice, U32__S U32_slice) :
             mU16_slice(U16_slice),
             mU32_slice(U32_slice) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Value(this->mU16_slice);
             e->Value(this->mU32_slice);

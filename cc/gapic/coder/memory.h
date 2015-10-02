@@ -21,10 +21,6 @@ namespace memory {
         Pointer(uint64_t Address, uint32_t Pool) :
             mAddress(Address),
             mPool(Pool) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint64(this->mAddress);
             e->Uint32(this->mPool);
@@ -43,10 +39,6 @@ namespace memory {
         Range(uint64_t Base, uint64_t Size) :
             mBase(Base),
             mSize(Size) {}
-        static const gapic::Id& StaticId();
-        virtual const gapic::Id& Id() const {
-            return StaticId();
-        }
         virtual void Encode(Encoder* e) const{
             e->Uint64(this->mBase);
             e->Uint64(this->mSize);

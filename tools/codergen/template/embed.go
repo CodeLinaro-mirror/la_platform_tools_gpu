@@ -103,23 +103,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   •{}¶
 {{end}}
 
-{{define "Cpp.HeaderID"}}
-  static const gapic::Id& StaticId();¶
-
-  virtual const gapic::Id& Id() const {»¶
-    return StaticId();¶
-  «}¶
-{{end}}
-
-{{define "Cpp.ID"}}
-   const gapic::Id& {{.Name | File.TypeName}}::StaticId() {»¶
-      static gapic::Id ID{ {•
-        {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
-      ,  } };¶
-      return ID;¶
-  «}¶
-{{end}}
-
 {{define "Cpp.HeaderEncoder"}}
   virtual void Encode(Encoder* e) const
   {{if gt (len .Fields) 3}}
@@ -193,7 +176,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
     {{if File.Directive "Schema" true}}
     const schema::Entity& {{.Name | File.TypeName}}::StaticSchema() {»¶
         static schema::Entity entity {»¶
- 	   {{.Name | File.TypeName}}::StaticId(),¶
 	  "{{.Package}}",¶
 	  "{{.Display}}",¶
           "{{.Identity}}",¶
@@ -260,7 +242,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
       class {{.Name | File.TypeName}}: public Encodable {¶
       public:»¶
 	{{template "Cpp.Constructor" .}}
-	{{template "Cpp.HeaderID" .}}
 	{{template "Cpp.HeaderEncoder" .}}
 	{{template "Cpp.HeaderSchema" .}}
 	¶
@@ -305,7 +286,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
     {{else}}
         // {{.Entity.Name}}:¶
 	// {{.Entity.Signature}}¶
-	{{template "Cpp.ID" .}}
 	{{template "Cpp.Encoder" .}}
 	{{template "Cpp.SchemaMethod" .}}
 	¶

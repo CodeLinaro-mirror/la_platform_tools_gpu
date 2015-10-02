@@ -16,10 +16,6 @@ namespace coder {
 namespace gles {
 // Architecture:
 // gles.Architecture{$,Uint32,Uint32,Uint32,Bool}
-const gapic::Id& Architecture::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xb6, 0x32, 0x23, 0x96, 0x4e, 0x7e, 0x88, 0x79, 0x77, 0x31, 0xb4, 0xda, 0x06, 0x93, 0xa1, 0x62, 0xe6, 0xee, 0x7d,  } };
-    return ID;
-}
 void Architecture::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPointerAlignment);
@@ -29,7 +25,6 @@ void Architecture::Encode(Encoder* e) const {
 }
 const schema::Entity& Architecture::StaticSchema() {
     static schema::Entity entity {
-        Architecture::StaticId(),
         "gles",
         "",
         "Architecture",
@@ -47,10 +42,6 @@ const schema::Entity& Architecture::StaticSchema() {
 
 // Color:
 // gles.Color{Float32,Float32,Float32,Float32}
-const gapic::Id& Color::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x45, 0x95, 0x12, 0x8a, 0x94, 0x52, 0x3b, 0x8f, 0xaf, 0xa1, 0x9e, 0x47, 0xc0, 0xf9, 0x5e, 0xa5, 0x50, 0x32, 0x4c,  } };
-    return ID;
-}
 void Color::Encode(Encoder* e) const {
     e->Float32(this->mRed);
     e->Float32(this->mGreen);
@@ -59,7 +50,6 @@ void Color::Encode(Encoder* e) const {
 }
 const schema::Entity& Color::StaticSchema() {
     static schema::Entity entity {
-        Color::StaticId(),
         "gles",
         "",
         "Color",
@@ -76,10 +66,6 @@ const schema::Entity& Color::StaticSchema() {
 
 // BlendState:
 // gles.BlendState{Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,$}
-const gapic::Id& BlendState::StaticId() {
-    static gapic::Id ID{ { 0x17, 0xe2, 0xfe, 0x38, 0xcb, 0xfc, 0x5a, 0x27, 0x70, 0xfa, 0xaa, 0x04, 0x3c, 0x69, 0x7c, 0x01, 0xa9, 0xc3, 0xd9, 0xa3,  } };
-    return ID;
-}
 void BlendState::Encode(Encoder* e) const {
     e->Uint32(this->mSrcRgbBlendFactor);
     e->Uint32(this->mSrcAlphaBlendFactor);
@@ -91,7 +77,6 @@ void BlendState::Encode(Encoder* e) const {
 }
 const schema::Entity& BlendState::StaticSchema() {
     static schema::Entity entity {
-        BlendState::StaticId(),
         "gles",
         "",
         "BlendState",
@@ -111,13 +96,8 @@ const schema::Entity& BlendState::StaticSchema() {
 
 // SliceInfo:
 // gles.SliceInfo{$,Uint64,Uint64}
-const gapic::Id& SliceInfo::StaticId() {
-    static gapic::Id ID{ { 0x29, 0xf7, 0xc6, 0xd5, 0x61, 0xda, 0xa9, 0x29, 0x44, 0x0b, 0x08, 0x9e, 0x4c, 0x2f, 0xda, 0xb2, 0x0d, 0xd9, 0x16, 0x3a,  } };
-    return ID;
-}
 const schema::Entity& SliceInfo::StaticSchema() {
     static schema::Entity entity {
-        SliceInfo::StaticId(),
         "gles",
         "",
         "SliceInfo",
@@ -133,13 +113,8 @@ const schema::Entity& SliceInfo::StaticSchema() {
 
 // U8ˢ:
 // gles.U8ˢ{$}
-const gapic::Id& U8__S::StaticId() {
-    static gapic::Id ID{ { 0xe0, 0xe1, 0xbf, 0x43, 0xd6, 0x2f, 0x62, 0x1b, 0xf7, 0x5e, 0x58, 0xb3, 0xda, 0x1a, 0x89, 0xec, 0xb7, 0x9b, 0xd4, 0x09,  } };
-    return ID;
-}
 const schema::Entity& U8__S::StaticSchema() {
     static schema::Entity entity {
-        U8__S::StaticId(),
         "gles",
         "",
         "U8ˢ",
@@ -153,10 +128,6 @@ const schema::Entity& U8__S::StaticSchema() {
 
 // Buffer:
 // gles.Buffer{$,Int32,Uint32,Uint32,Int32,$}
-const gapic::Id& Buffer::StaticId() {
-    static gapic::Id ID{ { 0x39, 0xaa, 0xfc, 0x2a, 0x28, 0x32, 0x1b, 0x66, 0x5b, 0x09, 0x60, 0x22, 0xb2, 0x4c, 0x8b, 0x43, 0xa9, 0x7a, 0x09, 0x44,  } };
-    return ID;
-}
 void Buffer::Encode(Encoder* e) const {
     e->Value(this->mData);
     e->Int32(this->mSize);
@@ -167,7 +138,6 @@ void Buffer::Encode(Encoder* e) const {
 }
 const schema::Entity& Buffer::StaticSchema() {
     static schema::Entity entity {
-        Buffer::StaticId(),
         "gles",
         "",
         "Buffer",
@@ -186,13 +156,8 @@ const schema::Entity& Buffer::StaticSchema() {
 
 // BufferDataPointer:
 // gles.BufferDataPointer{$}
-const gapic::Id& BufferDataPointer::StaticId() {
-    static gapic::Id ID{ { 0x70, 0x65, 0x2f, 0x63, 0x16, 0xc1, 0x9b, 0x4d, 0x2b, 0xd2, 0x51, 0xbb, 0x9f, 0x5a, 0xbc, 0x2f, 0xfd, 0x77, 0x4a, 0xdc,  } };
-    return ID;
-}
 const schema::Entity& BufferDataPointer::StaticSchema() {
     static schema::Entity entity {
-        BufferDataPointer::StaticId(),
         "gles",
         "",
         "BufferDataPointer",
@@ -206,13 +171,8 @@ const schema::Entity& BufferDataPointer::StaticSchema() {
 
 // BufferIdˢ:
 // gles.BufferIdˢ{$}
-const gapic::Id& BufferId__S::StaticId() {
-    static gapic::Id ID{ { 0xd9, 0x70, 0xf4, 0x81, 0x00, 0x8d, 0xbf, 0x37, 0x6a, 0x8b, 0x77, 0xd0, 0x67, 0x91, 0x11, 0x7b, 0x27, 0x29, 0x4d, 0x7e,  } };
-    return ID;
-}
 const schema::Entity& BufferId__S::StaticSchema() {
     static schema::Entity entity {
-        BufferId__S::StaticId(),
         "gles",
         "",
         "BufferIdˢ",
@@ -226,13 +186,8 @@ const schema::Entity& BufferId__S::StaticSchema() {
 
 // BufferIdᵖ:
 // gles.BufferIdᵖ{$}
-const gapic::Id& BufferId__P::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x10, 0xbf, 0xeb, 0xca, 0x0f, 0x5c, 0xec, 0x11, 0x6d, 0xba, 0x01, 0x65, 0x07, 0xab, 0xd0, 0xd9, 0x8c, 0x52, 0x5b,  } };
-    return ID;
-}
 const schema::Entity& BufferId__P::StaticSchema() {
     static schema::Entity entity {
-        BufferId__P::StaticId(),
         "gles",
         "",
         "BufferIdᵖ",
@@ -246,13 +201,8 @@ const schema::Entity& BufferId__P::StaticSchema() {
 
 // BufferIdᶜᵖ:
 // gles.BufferIdᶜᵖ{$}
-const gapic::Id& BufferId__CP::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x4c, 0xf0, 0x9c, 0xa6, 0x91, 0xd6, 0xe2, 0x1d, 0x3c, 0x95, 0xc5, 0x58, 0x1f, 0xf4, 0xbd, 0x8d, 0xf6, 0x6f, 0x67,  } };
-    return ID;
-}
 const schema::Entity& BufferId__CP::StaticSchema() {
     static schema::Entity entity {
-        BufferId__CP::StaticId(),
         "gles",
         "",
         "BufferIdᶜᵖ",
@@ -266,13 +216,8 @@ const schema::Entity& BufferId__CP::StaticSchema() {
 
 // CGLContextObj:
 // gles.CGLContextObj{$}
-const gapic::Id& CGLContextObj::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0x90, 0x50, 0xf1, 0x38, 0x97, 0xb6, 0x7b, 0x9d, 0xce, 0xde, 0x34, 0x29, 0x76, 0xab, 0x81, 0x72, 0x27, 0x1d, 0x88,  } };
-    return ID;
-}
 const schema::Entity& CGLContextObj::StaticSchema() {
     static schema::Entity entity {
-        CGLContextObj::StaticId(),
         "gles",
         "",
         "CGLContextObj",
@@ -286,13 +231,8 @@ const schema::Entity& CGLContextObj::StaticSchema() {
 
 // CGLContextObjˢ:
 // gles.CGLContextObjˢ{$}
-const gapic::Id& CGLContextObj__S::StaticId() {
-    static gapic::Id ID{ { 0xea, 0x60, 0xeb, 0xc0, 0x20, 0x2c, 0x9f, 0x39, 0xcb, 0x75, 0x86, 0xe1, 0x74, 0x29, 0xab, 0x0a, 0x2f, 0x2e, 0x6f, 0x1b,  } };
-    return ID;
-}
 const schema::Entity& CGLContextObj__S::StaticSchema() {
     static schema::Entity entity {
-        CGLContextObj__S::StaticId(),
         "gles",
         "",
         "CGLContextObjˢ",
@@ -306,13 +246,8 @@ const schema::Entity& CGLContextObj__S::StaticSchema() {
 
 // CGLContextObjᵖ:
 // gles.CGLContextObjᵖ{$}
-const gapic::Id& CGLContextObj__P::StaticId() {
-    static gapic::Id ID{ { 0x8a, 0x22, 0x3d, 0x1f, 0x44, 0x3a, 0x71, 0x26, 0xaf, 0x1e, 0x19, 0xa8, 0x5f, 0x4e, 0xe1, 0xcb, 0x22, 0x9c, 0xa5, 0xcb,  } };
-    return ID;
-}
 const schema::Entity& CGLContextObj__P::StaticSchema() {
     static schema::Entity entity {
-        CGLContextObj__P::StaticId(),
         "gles",
         "",
         "CGLContextObjᵖ",
@@ -326,13 +261,8 @@ const schema::Entity& CGLContextObj__P::StaticSchema() {
 
 // CGLPixelFormatObj:
 // gles.CGLPixelFormatObj{$}
-const gapic::Id& CGLPixelFormatObj::StaticId() {
-    static gapic::Id ID{ { 0x0c, 0xc1, 0x97, 0x07, 0xa6, 0xbc, 0x10, 0xc3, 0x20, 0x92, 0x55, 0x48, 0x1c, 0xcf, 0x7a, 0xf6, 0x7c, 0x5c, 0x1f, 0x2e,  } };
-    return ID;
-}
 const schema::Entity& CGLPixelFormatObj::StaticSchema() {
     static schema::Entity entity {
-        CGLPixelFormatObj::StaticId(),
         "gles",
         "",
         "CGLPixelFormatObj",
@@ -346,10 +276,6 @@ const schema::Entity& CGLPixelFormatObj::StaticSchema() {
 
 // CGLCreateContext:
 // gles.CGLCreateContext{$,$,$,$,Int64}
-const gapic::Id& CGLCreateContext::StaticId() {
-    static gapic::Id ID{ { 0xdf, 0xa8, 0x0b, 0x42, 0x26, 0xa9, 0x37, 0x16, 0x62, 0x89, 0x69, 0x9c, 0xc6, 0xba, 0x91, 0xe8, 0xf5, 0x28, 0xfd, 0x62,  } };
-    return ID;
-}
 void CGLCreateContext::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPix);
@@ -359,7 +285,6 @@ void CGLCreateContext::Encode(Encoder* e) const {
 }
 const schema::Entity& CGLCreateContext::StaticSchema() {
     static schema::Entity entity {
-        CGLCreateContext::StaticId(),
         "gles",
         "",
         "CGLCreateContext",
@@ -377,13 +302,8 @@ const schema::Entity& CGLCreateContext::StaticSchema() {
 
 // CGLFlushDrawable:
 // gles.CGLFlushDrawable{$,$,Int64}
-const gapic::Id& CGLFlushDrawable::StaticId() {
-    static gapic::Id ID{ { 0x05, 0x68, 0x29, 0xb1, 0xdd, 0x3e, 0x24, 0x68, 0x6f, 0x7d, 0x4a, 0xd0, 0xe2, 0xb3, 0xbe, 0x88, 0x33, 0xa9, 0xbd, 0x88,  } };
-    return ID;
-}
 const schema::Entity& CGLFlushDrawable::StaticSchema() {
     static schema::Entity entity {
-        CGLFlushDrawable::StaticId(),
         "gles",
         "",
         "CGLFlushDrawable",
@@ -399,13 +319,8 @@ const schema::Entity& CGLFlushDrawable::StaticSchema() {
 
 // CGSConnectionIDᵖ:
 // gles.CGSConnectionIDᵖ{$}
-const gapic::Id& CGSConnectionID__P::StaticId() {
-    static gapic::Id ID{ { 0x0b, 0xd2, 0x44, 0x09, 0x1b, 0xf6, 0xa7, 0xe5, 0x8c, 0xa4, 0x4a, 0x52, 0x68, 0xd8, 0x5e, 0xf8, 0x1a, 0xae, 0x24, 0x0b,  } };
-    return ID;
-}
 const schema::Entity& CGSConnectionID__P::StaticSchema() {
     static schema::Entity entity {
-        CGSConnectionID__P::StaticId(),
         "gles",
         "",
         "CGSConnectionIDᵖ",
@@ -419,13 +334,8 @@ const schema::Entity& CGSConnectionID__P::StaticSchema() {
 
 // CGSWindowIDᵖ:
 // gles.CGSWindowIDᵖ{$}
-const gapic::Id& CGSWindowID__P::StaticId() {
-    static gapic::Id ID{ { 0x18, 0xb4, 0x53, 0x95, 0xb1, 0x1a, 0x4a, 0x27, 0x2d, 0x41, 0x7e, 0x7f, 0xd2, 0x67, 0xe3, 0xdd, 0x32, 0xd8, 0x86, 0xb7,  } };
-    return ID;
-}
 const schema::Entity& CGSWindowID__P::StaticSchema() {
     static schema::Entity entity {
-        CGSWindowID__P::StaticId(),
         "gles",
         "",
         "CGSWindowIDᵖ",
@@ -439,13 +349,8 @@ const schema::Entity& CGSWindowID__P::StaticSchema() {
 
 // CGSSurfaceIDᵖ:
 // gles.CGSSurfaceIDᵖ{$}
-const gapic::Id& CGSSurfaceID__P::StaticId() {
-    static gapic::Id ID{ { 0x94, 0x9f, 0x71, 0x90, 0xfe, 0xc6, 0x06, 0xa2, 0x63, 0x11, 0xa4, 0xbe, 0x5c, 0xbd, 0xaf, 0x5a, 0x42, 0x0f, 0xe3, 0xed,  } };
-    return ID;
-}
 const schema::Entity& CGSSurfaceID__P::StaticSchema() {
     static schema::Entity entity {
-        CGSSurfaceID__P::StaticId(),
         "gles",
         "",
         "CGSSurfaceIDᵖ",
@@ -459,10 +364,6 @@ const schema::Entity& CGSSurfaceID__P::StaticSchema() {
 
 // CGLGetSurface:
 // gles.CGLGetSurface{$,$,$,$,$,Int64}
-const gapic::Id& CGLGetSurface::StaticId() {
-    static gapic::Id ID{ { 0x48, 0x91, 0x79, 0xb9, 0xc9, 0x18, 0xc0, 0x60, 0x1d, 0x01, 0x95, 0xe0, 0x54, 0xcb, 0x77, 0xb2, 0x34, 0x0a, 0xfa, 0xa7,  } };
-    return ID;
-}
 void CGLGetSurface::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mCtx);
@@ -473,7 +374,6 @@ void CGLGetSurface::Encode(Encoder* e) const {
 }
 const schema::Entity& CGLGetSurface::StaticSchema() {
     static schema::Entity entity {
-        CGLGetSurface::StaticId(),
         "gles",
         "",
         "CGLGetSurface",
@@ -492,13 +392,8 @@ const schema::Entity& CGLGetSurface::StaticSchema() {
 
 // CGLSetCurrentContext:
 // gles.CGLSetCurrentContext{$,$,Int64}
-const gapic::Id& CGLSetCurrentContext::StaticId() {
-    static gapic::Id ID{ { 0x9b, 0x96, 0xe5, 0x6f, 0x4e, 0x85, 0xa6, 0xcd, 0xa5, 0xfb, 0x88, 0x2e, 0x2e, 0xa2, 0x06, 0x05, 0x0a, 0xfb, 0xec, 0x57,  } };
-    return ID;
-}
 const schema::Entity& CGLSetCurrentContext::StaticSchema() {
     static schema::Entity entity {
-        CGLSetCurrentContext::StaticId(),
         "gles",
         "",
         "CGLSetCurrentContext",
@@ -514,13 +409,8 @@ const schema::Entity& CGLSetCurrentContext::StaticSchema() {
 
 // CGSConnectionID:
 // gles.CGSConnectionID{$}
-const gapic::Id& CGSConnectionID::StaticId() {
-    static gapic::Id ID{ { 0x22, 0xb0, 0x94, 0x14, 0x83, 0x5d, 0x64, 0x0d, 0x41, 0x5e, 0x14, 0xa5, 0x86, 0x6e, 0x15, 0x29, 0x13, 0x6f, 0x58, 0x70,  } };
-    return ID;
-}
 const schema::Entity& CGSConnectionID::StaticSchema() {
     static schema::Entity entity {
-        CGSConnectionID::StaticId(),
         "gles",
         "",
         "CGSConnectionID",
@@ -534,13 +424,8 @@ const schema::Entity& CGSConnectionID::StaticSchema() {
 
 // CGSConnectionIDˢ:
 // gles.CGSConnectionIDˢ{$}
-const gapic::Id& CGSConnectionID__S::StaticId() {
-    static gapic::Id ID{ { 0xa5, 0x2f, 0xb7, 0x39, 0x85, 0x67, 0xdc, 0x0d, 0x59, 0x2d, 0xad, 0xdc, 0x66, 0xa9, 0x94, 0xdd, 0xd9, 0x56, 0xbb, 0x14,  } };
-    return ID;
-}
 const schema::Entity& CGSConnectionID__S::StaticSchema() {
     static schema::Entity entity {
-        CGSConnectionID__S::StaticId(),
         "gles",
         "",
         "CGSConnectionIDˢ",
@@ -554,13 +439,8 @@ const schema::Entity& CGSConnectionID__S::StaticSchema() {
 
 // F64ᵖ:
 // gles.F64ᵖ{$}
-const gapic::Id& F64__P::StaticId() {
-    static gapic::Id ID{ { 0x4b, 0x16, 0x7f, 0x34, 0x50, 0x11, 0xb4, 0xe8, 0x26, 0xb3, 0x97, 0xa9, 0x36, 0xa8, 0x89, 0x5d, 0x92, 0x0f, 0x01, 0x39,  } };
-    return ID;
-}
 const schema::Entity& F64__P::StaticSchema() {
     static schema::Entity entity {
-        F64__P::StaticId(),
         "gles",
         "",
         "F64ᵖ",
@@ -574,10 +454,6 @@ const schema::Entity& F64__P::StaticSchema() {
 
 // CGSGetSurfaceBounds:
 // gles.CGSGetSurfaceBounds{$,$,Int32,Int32,$,Int64}
-const gapic::Id& CGSGetSurfaceBounds::StaticId() {
-    static gapic::Id ID{ { 0x17, 0x35, 0x33, 0x71, 0x15, 0x5e, 0x73, 0x3b, 0x65, 0xf4, 0x93, 0x98, 0x57, 0x8b, 0x27, 0x4d, 0x59, 0x50, 0x1e, 0x3a,  } };
-    return ID;
-}
 void CGSGetSurfaceBounds::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mCid);
@@ -588,7 +464,6 @@ void CGSGetSurfaceBounds::Encode(Encoder* e) const {
 }
 const schema::Entity& CGSGetSurfaceBounds::StaticSchema() {
     static schema::Entity entity {
-        CGSGetSurfaceBounds::StaticId(),
         "gles",
         "",
         "CGSGetSurfaceBounds",
@@ -607,13 +482,8 @@ const schema::Entity& CGSGetSurfaceBounds::StaticSchema() {
 
 // CGSSurfaceIDˢ:
 // gles.CGSSurfaceIDˢ{$}
-const gapic::Id& CGSSurfaceID__S::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x4c, 0x13, 0x33, 0xd1, 0x42, 0x46, 0x1b, 0xf2, 0x04, 0x39, 0xdd, 0x16, 0x49, 0xb2, 0x21, 0xe8, 0xeb, 0xf7, 0x73,  } };
-    return ID;
-}
 const schema::Entity& CGSSurfaceID__S::StaticSchema() {
     static schema::Entity entity {
-        CGSSurfaceID__S::StaticId(),
         "gles",
         "",
         "CGSSurfaceIDˢ",
@@ -627,13 +497,8 @@ const schema::Entity& CGSSurfaceID__S::StaticSchema() {
 
 // CGSWindowIDˢ:
 // gles.CGSWindowIDˢ{$}
-const gapic::Id& CGSWindowID__S::StaticId() {
-    static gapic::Id ID{ { 0xb3, 0x94, 0xd1, 0x9e, 0x12, 0x00, 0x02, 0x96, 0x75, 0x1a, 0x5e, 0xbd, 0x5e, 0x1e, 0x42, 0x87, 0x01, 0xf7, 0xaf, 0xd9,  } };
-    return ID;
-}
 const schema::Entity& CGSWindowID__S::StaticSchema() {
     static schema::Entity entity {
-        CGSWindowID__S::StaticId(),
         "gles",
         "",
         "CGSWindowIDˢ",
@@ -647,13 +512,8 @@ const schema::Entity& CGSWindowID__S::StaticSchema() {
 
 // Charˢ:
 // gles.Charˢ{$}
-const gapic::Id& Char__S::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x92, 0xb7, 0x5e, 0x61, 0x2a, 0xd1, 0x25, 0xdb, 0x78, 0x47, 0x6e, 0xb1, 0x8e, 0x95, 0xdc, 0x2d, 0x2f, 0x8d, 0xde,  } };
-    return ID;
-}
 const schema::Entity& Char__S::StaticSchema() {
     static schema::Entity entity {
-        Char__S::StaticId(),
         "gles",
         "",
         "Charˢ",
@@ -667,13 +527,8 @@ const schema::Entity& Char__S::StaticSchema() {
 
 // Charᵖ:
 // gles.Charᵖ{$}
-const gapic::Id& Char__P::StaticId() {
-    static gapic::Id ID{ { 0xff, 0xc1, 0xbe, 0x25, 0x17, 0x63, 0x94, 0x18, 0x11, 0x7d, 0xbf, 0x21, 0x96, 0xee, 0xde, 0x65, 0x49, 0x04, 0x8b, 0x54,  } };
-    return ID;
-}
 const schema::Entity& Char__P::StaticSchema() {
     static schema::Entity entity {
-        Char__P::StaticId(),
         "gles",
         "",
         "Charᵖ",
@@ -687,13 +542,8 @@ const schema::Entity& Char__P::StaticSchema() {
 
 // ClearState:
 // gles.ClearState{$,Float32,Int32}
-const gapic::Id& ClearState::StaticId() {
-    static gapic::Id ID{ { 0xb6, 0xc1, 0x4c, 0x9b, 0x34, 0x1a, 0xe0, 0x18, 0xc0, 0xfd, 0x36, 0x61, 0x2a, 0x7f, 0x20, 0xc3, 0x6c, 0x66, 0x99, 0x6f,  } };
-    return ID;
-}
 const schema::Entity& ClearState::StaticSchema() {
     static schema::Entity entity {
-        ClearState::StaticId(),
         "gles",
         "",
         "ClearState",
@@ -709,10 +559,6 @@ const schema::Entity& ClearState::StaticSchema() {
 
 // ContextCreationInfo:
 // gles.ContextCreationInfo{String,String,String,String,Int32,Int32,Bool}
-const gapic::Id& ContextCreationInfo::StaticId() {
-    static gapic::Id ID{ { 0x8d, 0x86, 0xe3, 0x53, 0xea, 0x25, 0x47, 0xdb, 0x92, 0x4c, 0x5a, 0xba, 0xda, 0xa4, 0xa0, 0x3a, 0x36, 0xde, 0x7f, 0xd5,  } };
-    return ID;
-}
 void ContextCreationInfo::Encode(Encoder* e) const {
     e->String(this->mName);
     e->String(this->mVendor);
@@ -724,7 +570,6 @@ void ContextCreationInfo::Encode(Encoder* e) const {
 }
 const schema::Entity& ContextCreationInfo::StaticSchema() {
     static schema::Entity entity {
-        ContextCreationInfo::StaticId(),
         "gles",
         "",
         "ContextCreationInfo",
@@ -744,10 +589,6 @@ const schema::Entity& ContextCreationInfo::StaticSchema() {
 
 // Rect:
 // gles.Rect{Int32,Int32,Int32,Int32}
-const gapic::Id& Rect::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0x5c, 0xe3, 0x0d, 0xcb, 0x9a, 0x8c, 0x32, 0x0d, 0x95, 0xfa, 0x6d, 0xc7, 0x0d, 0x56, 0x43, 0x15, 0xc7, 0x91, 0xf2,  } };
-    return ID;
-}
 void Rect::Encode(Encoder* e) const {
     e->Int32(this->mX);
     e->Int32(this->mY);
@@ -756,7 +597,6 @@ void Rect::Encode(Encoder* e) const {
 }
 const schema::Entity& Rect::StaticSchema() {
     static schema::Entity entity {
-        Rect::StaticId(),
         "gles",
         "",
         "Rect",
@@ -775,13 +615,8 @@ const schema::Entity& Rect::StaticSchema() {
 
 // VertexAttributeValue:
 // gles.VertexAttributeValue{$}
-const gapic::Id& VertexAttributeValue::StaticId() {
-    static gapic::Id ID{ { 0x6b, 0x22, 0x22, 0x08, 0x86, 0x20, 0x6b, 0x80, 0x00, 0x0b, 0x83, 0x70, 0x9c, 0xec, 0xd5, 0x6a, 0x60, 0x60, 0x10, 0x56,  } };
-    return ID;
-}
 const schema::Entity& VertexAttributeValue::StaticSchema() {
     static schema::Entity entity {
-        VertexAttributeValue::StaticId(),
         "gles",
         "",
         "VertexAttributeValue",
@@ -797,10 +632,6 @@ const schema::Entity& VertexAttributeValue::StaticSchema() {
 
 // Renderbuffer:
 // gles.Renderbuffer{Int32,Int32,$,Uint32}
-const gapic::Id& Renderbuffer::StaticId() {
-    static gapic::Id ID{ { 0xd1, 0xae, 0x4b, 0xbc, 0x5c, 0x88, 0x16, 0x54, 0x75, 0xe6, 0x2b, 0xb0, 0x16, 0x9c, 0x6d, 0xd1, 0xaa, 0x4c, 0x8a, 0x09,  } };
-    return ID;
-}
 void Renderbuffer::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
@@ -809,7 +640,6 @@ void Renderbuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& Renderbuffer::StaticSchema() {
     static schema::Entity entity {
-        Renderbuffer::StaticId(),
         "gles",
         "",
         "Renderbuffer",
@@ -826,10 +656,6 @@ const schema::Entity& Renderbuffer::StaticSchema() {
 
 // Image:
 // gles.Image{Int32,Int32,$,Uint32,Uint32}
-const gapic::Id& Image::StaticId() {
-    static gapic::Id ID{ { 0x7e, 0x24, 0x0c, 0xea, 0xf6, 0xdd, 0x9b, 0x38, 0x3a, 0x54, 0xa3, 0xbb, 0x4a, 0x8b, 0xd4, 0xc9, 0xe7, 0x37, 0xe5, 0xa8,  } };
-    return ID;
-}
 void Image::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
@@ -839,7 +665,6 @@ void Image::Encode(Encoder* e) const {
 }
 const schema::Entity& Image::StaticSchema() {
     static schema::Entity entity {
-        Image::StaticId(),
         "gles",
         "",
         "Image",
@@ -861,10 +686,6 @@ const schema::Entity& Image::StaticSchema() {
 
 // FramebufferAttachmentInfo:
 // gles.FramebufferAttachmentInfo{Uint32,Uint32,Int32,Uint32}
-const gapic::Id& FramebufferAttachmentInfo::StaticId() {
-    static gapic::Id ID{ { 0x8c, 0xd9, 0x78, 0xc2, 0xf6, 0x8c, 0x82, 0x17, 0x88, 0xd6, 0xbe, 0x7f, 0xe0, 0xc2, 0x74, 0xdb, 0x7f, 0xea, 0xcf, 0x9b,  } };
-    return ID;
-}
 void FramebufferAttachmentInfo::Encode(Encoder* e) const {
     e->Uint32(this->mObject);
     e->Uint32(this->mType);
@@ -873,7 +694,6 @@ void FramebufferAttachmentInfo::Encode(Encoder* e) const {
 }
 const schema::Entity& FramebufferAttachmentInfo::StaticSchema() {
     static schema::Entity entity {
-        FramebufferAttachmentInfo::StaticId(),
         "gles",
         "",
         "FramebufferAttachmentInfo",
@@ -892,13 +712,8 @@ const schema::Entity& FramebufferAttachmentInfo::StaticSchema() {
 
 // GLcharˢ:
 // gles.GLcharˢ{$}
-const gapic::Id& GLchar__S::StaticId() {
-    static gapic::Id ID{ { 0x85, 0xbf, 0xd1, 0xa9, 0x88, 0xcf, 0x8b, 0xf8, 0xf9, 0x30, 0x73, 0xd7, 0xaf, 0x32, 0x25, 0xf1, 0xbd, 0xa1, 0xf7, 0x9d,  } };
-    return ID;
-}
 const schema::Entity& GLchar__S::StaticSchema() {
     static schema::Entity entity {
-        GLchar__S::StaticId(),
         "gles",
         "",
         "GLcharˢ",
@@ -912,10 +727,6 @@ const schema::Entity& GLchar__S::StaticSchema() {
 
 // Shader:
 // gles.Shader{$,Bool,Bool,$,String,Uint32}
-const gapic::Id& Shader::StaticId() {
-    static gapic::Id ID{ { 0xa0, 0xae, 0x39, 0x4d, 0xfc, 0xa6, 0x35, 0x3e, 0xf7, 0x9c, 0x7e, 0x6a, 0x63, 0xe2, 0xc8, 0x9f, 0xda, 0x45, 0xd6, 0x69,  } };
-    return ID;
-}
 void Shader::Encode(Encoder* e) const {
     e->Value(this->mBinary);
     e->Bool(this->mCompiled);
@@ -926,7 +737,6 @@ void Shader::Encode(Encoder* e) const {
 }
 const schema::Entity& Shader::StaticSchema() {
     static schema::Entity entity {
-        Shader::StaticId(),
         "gles",
         "",
         "Shader",
@@ -945,13 +755,8 @@ const schema::Entity& Shader::StaticSchema() {
 
 // VertexAttribute:
 // gles.VertexAttribute{$,Int32,Uint32}
-const gapic::Id& VertexAttribute::StaticId() {
-    static gapic::Id ID{ { 0x5d, 0x04, 0xf0, 0xde, 0x8e, 0x4d, 0xe5, 0x43, 0x02, 0x21, 0xb2, 0x77, 0x99, 0x0e, 0x4e, 0x87, 0x2f, 0x99, 0x97, 0x2f,  } };
-    return ID;
-}
 const schema::Entity& VertexAttribute::StaticSchema() {
     static schema::Entity entity {
-        VertexAttribute::StaticId(),
         "gles",
         "",
         "VertexAttribute",
@@ -967,13 +772,8 @@ const schema::Entity& VertexAttribute::StaticSchema() {
 
 // Uniform:
 // gles.Uniform{String,Uint32,$}
-const gapic::Id& Uniform::StaticId() {
-    static gapic::Id ID{ { 0x66, 0x89, 0x8b, 0x4d, 0xe7, 0x12, 0x40, 0x89, 0x3b, 0x85, 0x8b, 0x19, 0xab, 0xce, 0x34, 0xee, 0x29, 0xd0, 0x84, 0x7a,  } };
-    return ID;
-}
 const schema::Entity& Uniform::StaticSchema() {
     static schema::Entity entity {
-        Uniform::StaticId(),
         "gles",
         "",
         "Uniform",
@@ -991,10 +791,6 @@ const schema::Entity& Uniform::StaticSchema() {
 
 // VertexBufferBinding:
 // gles.VertexBufferBinding{Uint32,Int32,Int32,Uint32}
-const gapic::Id& VertexBufferBinding::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0xda, 0x5a, 0xb1, 0x05, 0xb7, 0x2d, 0xb0, 0xaf, 0x22, 0x30, 0x90, 0xae, 0x37, 0xcb, 0x63, 0xbd, 0xdd, 0x49, 0x77,  } };
-    return ID;
-}
 void VertexBufferBinding::Encode(Encoder* e) const {
     e->Uint32(this->mBuffer);
     e->Int32(this->mOffset);
@@ -1003,7 +799,6 @@ void VertexBufferBinding::Encode(Encoder* e) const {
 }
 const schema::Entity& VertexBufferBinding::StaticSchema() {
     static schema::Entity entity {
-        VertexBufferBinding::StaticId(),
         "gles",
         "",
         "VertexBufferBinding",
@@ -1020,13 +815,8 @@ const schema::Entity& VertexBufferBinding::StaticSchema() {
 
 // VertexPointer:
 // gles.VertexPointer{$}
-const gapic::Id& VertexPointer::StaticId() {
-    static gapic::Id ID{ { 0x60, 0x45, 0x91, 0xc1, 0x7d, 0xf0, 0xba, 0xcc, 0x9d, 0xb8, 0xa8, 0x13, 0x04, 0x2d, 0x81, 0x86, 0x1a, 0x03, 0x9b, 0x29,  } };
-    return ID;
-}
 const schema::Entity& VertexPointer::StaticSchema() {
     static schema::Entity entity {
-        VertexPointer::StaticId(),
         "gles",
         "",
         "VertexPointer",
@@ -1040,10 +830,6 @@ const schema::Entity& VertexPointer::StaticSchema() {
 
 // VertexAttributeArray:
 // gles.VertexAttributeArray{Bool,Int32,Uint32,Uint8,Int32,$,Uint32,Bool,Uint32}
-const gapic::Id& VertexAttributeArray::StaticId() {
-    static gapic::Id ID{ { 0x47, 0x38, 0x23, 0x18, 0xf5, 0xab, 0xa6, 0xb7, 0x95, 0x27, 0x66, 0x05, 0xce, 0x72, 0x06, 0xc1, 0x0c, 0x60, 0xe1, 0x40,  } };
-    return ID;
-}
 void VertexAttributeArray::Encode(Encoder* e) const {
     e->Bool(this->mEnabled);
     e->Int32(this->mSize);
@@ -1057,7 +843,6 @@ void VertexAttributeArray::Encode(Encoder* e) const {
 }
 const schema::Entity& VertexAttributeArray::StaticSchema() {
     static schema::Entity entity {
-        VertexAttributeArray::StaticId(),
         "gles",
         "",
         "VertexAttributeArray",
@@ -1081,13 +866,8 @@ const schema::Entity& VertexAttributeArray::StaticSchema() {
 
 // Query:
 // gles.Query{}
-const gapic::Id& Query::StaticId() {
-    static gapic::Id ID{ { 0x82, 0xc5, 0xee, 0x88, 0x17, 0x9b, 0xe1, 0xee, 0x0a, 0x5f, 0x22, 0x31, 0x0d, 0x1e, 0xa6, 0xf8, 0x7c, 0x4c, 0x3e, 0xe9,  } };
-    return ID;
-}
 const schema::Entity& Query::StaticSchema() {
     static schema::Entity entity {
-        Query::StaticId(),
         "gles",
         "",
         "Query",
@@ -1104,10 +884,6 @@ const schema::Entity& Query::StaticSchema() {
 
 // ContextInfo:
 // gles.ContextInfo{$,String,String,String,String,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
-const gapic::Id& ContextInfo::StaticId() {
-    static gapic::Id ID{ { 0x40, 0x5b, 0x01, 0x21, 0x9a, 0x80, 0x6b, 0x4f, 0xde, 0xa5, 0x9f, 0x3a, 0x57, 0xcb, 0x92, 0x95, 0x94, 0xea, 0x6b, 0xbf,  } };
-    return ID;
-}
 void ContextInfo::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->String(this->mName);
@@ -1124,7 +900,6 @@ void ContextInfo::Encode(Encoder* e) const {
 }
 const schema::Entity& ContextInfo::StaticSchema() {
     static schema::Entity entity {
-        ContextInfo::StaticId(),
         "gles",
         "",
         "ContextInfo",
@@ -1149,13 +924,8 @@ const schema::Entity& ContextInfo::StaticSchema() {
 
 // EGLConfig:
 // gles.EGLConfig{$}
-const gapic::Id& EGLConfig::StaticId() {
-    static gapic::Id ID{ { 0xe9, 0x55, 0x94, 0xac, 0x47, 0xfb, 0xab, 0xb2, 0xa1, 0xfb, 0xb7, 0x21, 0x98, 0x95, 0xc7, 0xae, 0x71, 0x39, 0xa1, 0xd6,  } };
-    return ID;
-}
 const schema::Entity& EGLConfig::StaticSchema() {
     static schema::Entity entity {
-        EGLConfig::StaticId(),
         "gles",
         "",
         "EGLConfig",
@@ -1169,13 +939,8 @@ const schema::Entity& EGLConfig::StaticSchema() {
 
 // EGLContext:
 // gles.EGLContext{$}
-const gapic::Id& EGLContext::StaticId() {
-    static gapic::Id ID{ { 0x99, 0x8e, 0x74, 0xfc, 0x59, 0xd7, 0xd2, 0x82, 0xdc, 0x12, 0xd3, 0xfe, 0x2e, 0x28, 0x8b, 0x27, 0x7e, 0x69, 0xaa, 0xeb,  } };
-    return ID;
-}
 const schema::Entity& EGLContext::StaticSchema() {
     static schema::Entity entity {
-        EGLContext::StaticId(),
         "gles",
         "",
         "EGLContext",
@@ -1189,13 +954,8 @@ const schema::Entity& EGLContext::StaticSchema() {
 
 // EGLDisplay:
 // gles.EGLDisplay{$}
-const gapic::Id& EGLDisplay::StaticId() {
-    static gapic::Id ID{ { 0x67, 0xdb, 0x29, 0xcc, 0xdb, 0xa3, 0x66, 0xa8, 0xd1, 0xc3, 0x6a, 0x6a, 0x8c, 0x69, 0xf9, 0x2d, 0x05, 0x0b, 0xdd, 0x75,  } };
-    return ID;
-}
 const schema::Entity& EGLDisplay::StaticSchema() {
     static schema::Entity entity {
-        EGLDisplay::StaticId(),
         "gles",
         "",
         "EGLDisplay",
@@ -1209,13 +969,8 @@ const schema::Entity& EGLDisplay::StaticSchema() {
 
 // EGLSurface:
 // gles.EGLSurface{$}
-const gapic::Id& EGLSurface::StaticId() {
-    static gapic::Id ID{ { 0x03, 0x37, 0x7d, 0xd4, 0xbc, 0x35, 0xb2, 0x1e, 0x10, 0xc6, 0xa6, 0x12, 0x3c, 0xc0, 0xc1, 0xd9, 0x82, 0x2a, 0x60, 0x7e,  } };
-    return ID;
-}
 const schema::Entity& EGLSurface::StaticSchema() {
     static schema::Entity entity {
-        EGLSurface::StaticId(),
         "gles",
         "",
         "EGLSurface",
@@ -1229,13 +984,8 @@ const schema::Entity& EGLSurface::StaticSchema() {
 
 // EGLintˢ:
 // gles.EGLintˢ{$}
-const gapic::Id& EGLint__S::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x88, 0x97, 0x2b, 0x05, 0xa9, 0x25, 0xed, 0xd6, 0x99, 0xcf, 0x18, 0x70, 0xd8, 0xb0, 0x74, 0x0c, 0x53, 0xf7, 0x86,  } };
-    return ID;
-}
 const schema::Entity& EGLint__S::StaticSchema() {
     static schema::Entity entity {
-        EGLint__S::StaticId(),
         "gles",
         "",
         "EGLintˢ",
@@ -1249,13 +999,8 @@ const schema::Entity& EGLint__S::StaticSchema() {
 
 // EGLintᵖ:
 // gles.EGLintᵖ{$}
-const gapic::Id& EGLint__P::StaticId() {
-    static gapic::Id ID{ { 0x97, 0x31, 0x8c, 0x42, 0x94, 0xd7, 0x1a, 0x11, 0x96, 0x93, 0x13, 0x94, 0x51, 0x7b, 0x4f, 0x81, 0x1a, 0xb3, 0x62, 0x2b,  } };
-    return ID;
-}
 const schema::Entity& EGLint__P::StaticSchema() {
     static schema::Entity entity {
-        EGLint__P::StaticId(),
         "gles",
         "",
         "EGLintᵖ",
@@ -1269,10 +1014,6 @@ const schema::Entity& EGLint__P::StaticSchema() {
 
 // EglCreateContext:
 // gles.EglCreateContext{$,$,$,$,$,$}
-const gapic::Id& EglCreateContext::StaticId() {
-    static gapic::Id ID{ { 0x3a, 0xf7, 0x0e, 0x14, 0x96, 0xa9, 0x28, 0xb1, 0xc3, 0x4d, 0x78, 0x4e, 0xea, 0xcd, 0xf7, 0xbb, 0x32, 0x92, 0x51, 0xf1,  } };
-    return ID;
-}
 void EglCreateContext::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -1283,7 +1024,6 @@ void EglCreateContext::Encode(Encoder* e) const {
 }
 const schema::Entity& EglCreateContext::StaticSchema() {
     static schema::Entity entity {
-        EglCreateContext::StaticId(),
         "gles",
         "",
         "EglCreateContext",
@@ -1302,10 +1042,6 @@ const schema::Entity& EglCreateContext::StaticSchema() {
 
 // EglInitialize:
 // gles.EglInitialize{$,$,$,$,Int64}
-const gapic::Id& EglInitialize::StaticId() {
-    static gapic::Id ID{ { 0x09, 0x24, 0xac, 0x34, 0x34, 0xcc, 0x35, 0xdb, 0xba, 0xda, 0x9d, 0x43, 0x16, 0xe6, 0xb0, 0xd8, 0xb4, 0xa3, 0xaf, 0x18,  } };
-    return ID;
-}
 void EglInitialize::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDpy);
@@ -1315,7 +1051,6 @@ void EglInitialize::Encode(Encoder* e) const {
 }
 const schema::Entity& EglInitialize::StaticSchema() {
     static schema::Entity entity {
-        EglInitialize::StaticId(),
         "gles",
         "",
         "EglInitialize",
@@ -1333,10 +1068,6 @@ const schema::Entity& EglInitialize::StaticSchema() {
 
 // EglMakeCurrent:
 // gles.EglMakeCurrent{$,$,$,$,$,Int64}
-const gapic::Id& EglMakeCurrent::StaticId() {
-    static gapic::Id ID{ { 0x42, 0xc5, 0xc3, 0x03, 0x8a, 0x05, 0x54, 0x42, 0x64, 0xa4, 0xde, 0x95, 0x78, 0xcb, 0xdf, 0x8c, 0x13, 0x36, 0x2c, 0xc9,  } };
-    return ID;
-}
 void EglMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -1347,7 +1078,6 @@ void EglMakeCurrent::Encode(Encoder* e) const {
 }
 const schema::Entity& EglMakeCurrent::StaticSchema() {
     static schema::Entity entity {
-        EglMakeCurrent::StaticId(),
         "gles",
         "",
         "EglMakeCurrent",
@@ -1366,10 +1096,6 @@ const schema::Entity& EglMakeCurrent::StaticSchema() {
 
 // EglQuerySurface:
 // gles.EglQuerySurface{$,$,$,Int64,$,Int64}
-const gapic::Id& EglQuerySurface::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0x44, 0xa1, 0xc7, 0x49, 0x5d, 0xa3, 0x42, 0x9b, 0xd8, 0x97, 0x1b, 0x25, 0xa0, 0x7d, 0xe2, 0xda, 0x69, 0xf7, 0xb5,  } };
-    return ID;
-}
 void EglQuerySurface::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -1380,7 +1106,6 @@ void EglQuerySurface::Encode(Encoder* e) const {
 }
 const schema::Entity& EglQuerySurface::StaticSchema() {
     static schema::Entity entity {
-        EglQuerySurface::StaticId(),
         "gles",
         "",
         "EglQuerySurface",
@@ -1399,13 +1124,8 @@ const schema::Entity& EglQuerySurface::StaticSchema() {
 
 // Voidᵖ:
 // gles.Voidᵖ{$}
-const gapic::Id& Void__P::StaticId() {
-    static gapic::Id ID{ { 0x5e, 0xab, 0x79, 0xd5, 0x79, 0x54, 0xdb, 0x61, 0x71, 0x7a, 0xce, 0x69, 0x73, 0x83, 0xdd, 0xbe, 0xb5, 0x9a, 0x59, 0x2d,  } };
-    return ID;
-}
 const schema::Entity& Void__P::StaticSchema() {
     static schema::Entity entity {
-        Void__P::StaticId(),
         "gles",
         "",
         "Voidᵖ",
@@ -1419,10 +1139,6 @@ const schema::Entity& Void__P::StaticSchema() {
 
 // EglSwapBuffers:
 // gles.EglSwapBuffers{$,$,$,Int64}
-const gapic::Id& EglSwapBuffers::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0xc5, 0x4f, 0x78, 0x4b, 0x50, 0x4d, 0x9f, 0x98, 0x8e, 0x8b, 0xdf, 0xc6, 0x58, 0xda, 0xa2, 0x8b, 0x5e, 0xe4, 0x6e,  } };
-    return ID;
-}
 void EglSwapBuffers::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -1431,7 +1147,6 @@ void EglSwapBuffers::Encode(Encoder* e) const {
 }
 const schema::Entity& EglSwapBuffers::StaticSchema() {
     static schema::Entity entity {
-        EglSwapBuffers::StaticId(),
         "gles",
         "",
         "EglSwapBuffers",
@@ -1448,13 +1163,8 @@ const schema::Entity& EglSwapBuffers::StaticSchema() {
 
 // F64ˢ:
 // gles.F64ˢ{$}
-const gapic::Id& F64__S::StaticId() {
-    static gapic::Id ID{ { 0xe4, 0x20, 0x52, 0x90, 0x11, 0x14, 0xfb, 0xf5, 0x16, 0x34, 0x6a, 0xa3, 0x9c, 0xa4, 0x01, 0xc9, 0x0f, 0xba, 0xb0, 0xe9,  } };
-    return ID;
-}
 const schema::Entity& F64__S::StaticSchema() {
     static schema::Entity entity {
-        F64__S::StaticId(),
         "gles",
         "",
         "F64ˢ",
@@ -1468,13 +1178,8 @@ const schema::Entity& F64__S::StaticSchema() {
 
 // FlushPostBuffer:
 // gles.FlushPostBuffer{$}
-const gapic::Id& FlushPostBuffer::StaticId() {
-    static gapic::Id ID{ { 0xd9, 0xf7, 0x42, 0x04, 0x13, 0xed, 0x79, 0x8e, 0xbb, 0x02, 0x84, 0x6b, 0x7a, 0x41, 0x3f, 0xc9, 0x37, 0xb7, 0x9c, 0x89,  } };
-    return ID;
-}
 const schema::Entity& FlushPostBuffer::StaticSchema() {
     static schema::Entity entity {
-        FlushPostBuffer::StaticId(),
         "gles",
         "",
         "FlushPostBuffer",
@@ -1488,13 +1193,8 @@ const schema::Entity& FlushPostBuffer::StaticSchema() {
 
 // FramebufferIdˢ:
 // gles.FramebufferIdˢ{$}
-const gapic::Id& FramebufferId__S::StaticId() {
-    static gapic::Id ID{ { 0xb8, 0xb2, 0x28, 0x42, 0x40, 0x40, 0xca, 0x9e, 0x5f, 0xa9, 0xff, 0x2e, 0xec, 0xef, 0x6b, 0xf9, 0x29, 0x77, 0xe2, 0x45,  } };
-    return ID;
-}
 const schema::Entity& FramebufferId__S::StaticSchema() {
     static schema::Entity entity {
-        FramebufferId__S::StaticId(),
         "gles",
         "",
         "FramebufferIdˢ",
@@ -1508,13 +1208,8 @@ const schema::Entity& FramebufferId__S::StaticSchema() {
 
 // FramebufferIdᵖ:
 // gles.FramebufferIdᵖ{$}
-const gapic::Id& FramebufferId__P::StaticId() {
-    static gapic::Id ID{ { 0x9a, 0xff, 0x91, 0xfb, 0xae, 0x79, 0x48, 0xf7, 0x50, 0xb4, 0x47, 0xc5, 0xb6, 0xa6, 0x1c, 0x71, 0x4d, 0xfd, 0x6a, 0xdc,  } };
-    return ID;
-}
 const schema::Entity& FramebufferId__P::StaticSchema() {
     static schema::Entity entity {
-        FramebufferId__P::StaticId(),
         "gles",
         "",
         "FramebufferIdᵖ",
@@ -1528,13 +1223,8 @@ const schema::Entity& FramebufferId__P::StaticSchema() {
 
 // FramebufferIdᶜᵖ:
 // gles.FramebufferIdᶜᵖ{$}
-const gapic::Id& FramebufferId__CP::StaticId() {
-    static gapic::Id ID{ { 0x68, 0x98, 0x01, 0x48, 0x6d, 0x20, 0x6a, 0xeb, 0x59, 0xbb, 0xb2, 0xec, 0xb5, 0x13, 0x2c, 0x26, 0xad, 0x5e, 0x42, 0x64,  } };
-    return ID;
-}
 const schema::Entity& FramebufferId__CP::StaticSchema() {
     static schema::Entity entity {
-        FramebufferId__CP::StaticId(),
         "gles",
         "",
         "FramebufferIdᶜᵖ",
@@ -1548,13 +1238,8 @@ const schema::Entity& FramebufferId__CP::StaticSchema() {
 
 // GLDEBUGPROC:
 // gles.GLDEBUGPROC{$}
-const gapic::Id& GLDEBUGPROC::StaticId() {
-    static gapic::Id ID{ { 0xbd, 0xd5, 0x45, 0xb1, 0x4f, 0x50, 0x8c, 0xeb, 0x0f, 0x68, 0x26, 0x51, 0x60, 0xdb, 0xb8, 0xca, 0xe5, 0xcf, 0x76, 0x25,  } };
-    return ID;
-}
 const schema::Entity& GLDEBUGPROC::StaticSchema() {
     static schema::Entity entity {
-        GLDEBUGPROC::StaticId(),
         "gles",
         "",
         "GLDEBUGPROC",
@@ -1568,13 +1253,8 @@ const schema::Entity& GLDEBUGPROC::StaticSchema() {
 
 // GLXContext:
 // gles.GLXContext{$}
-const gapic::Id& GLXContext::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x24, 0xb9, 0x9f, 0x85, 0x9b, 0x27, 0x35, 0xa1, 0x1d, 0xcb, 0x38, 0xf5, 0xa7, 0x9d, 0x81, 0x0a, 0x28, 0x13, 0x00,  } };
-    return ID;
-}
 const schema::Entity& GLXContext::StaticSchema() {
     static schema::Entity entity {
-        GLXContext::StaticId(),
         "gles",
         "",
         "GLXContext",
@@ -1588,13 +1268,8 @@ const schema::Entity& GLXContext::StaticSchema() {
 
 // GLXDrawable:
 // gles.GLXDrawable{$}
-const gapic::Id& GLXDrawable::StaticId() {
-    static gapic::Id ID{ { 0x6c, 0xd5, 0xff, 0xc8, 0x85, 0xfd, 0x1e, 0x7b, 0x66, 0x33, 0xab, 0xb7, 0xe7, 0xc6, 0xdb, 0x7d, 0x24, 0x26, 0xf5, 0xe5,  } };
-    return ID;
-}
 const schema::Entity& GLXDrawable::StaticSchema() {
     static schema::Entity entity {
-        GLXDrawable::StaticId(),
         "gles",
         "",
         "GLXDrawable",
@@ -1608,13 +1283,8 @@ const schema::Entity& GLXDrawable::StaticSchema() {
 
 // GLbooleanˢ:
 // gles.GLbooleanˢ{$}
-const gapic::Id& GLboolean__S::StaticId() {
-    static gapic::Id ID{ { 0xe6, 0x6c, 0xba, 0x31, 0xd7, 0xce, 0x0b, 0xda, 0x54, 0x2e, 0xe6, 0xa1, 0x84, 0xa9, 0x6a, 0xbd, 0xab, 0xb1, 0x92, 0x24,  } };
-    return ID;
-}
 const schema::Entity& GLboolean__S::StaticSchema() {
     static schema::Entity entity {
-        GLboolean__S::StaticId(),
         "gles",
         "",
         "GLbooleanˢ",
@@ -1628,13 +1298,8 @@ const schema::Entity& GLboolean__S::StaticSchema() {
 
 // GLbooleanᵖ:
 // gles.GLbooleanᵖ{$}
-const gapic::Id& GLboolean__P::StaticId() {
-    static gapic::Id ID{ { 0x85, 0x51, 0x50, 0x9c, 0x9e, 0xd5, 0xa6, 0xd8, 0x27, 0xe1, 0x35, 0x9f, 0xe0, 0x05, 0x42, 0xd9, 0x27, 0x55, 0xfa, 0x64,  } };
-    return ID;
-}
 const schema::Entity& GLboolean__P::StaticSchema() {
     static schema::Entity entity {
-        GLboolean__P::StaticId(),
         "gles",
         "",
         "GLbooleanᵖ",
@@ -1648,13 +1313,8 @@ const schema::Entity& GLboolean__P::StaticSchema() {
 
 // GLcharᵖ:
 // gles.GLcharᵖ{$}
-const gapic::Id& GLchar__P::StaticId() {
-    static gapic::Id ID{ { 0x6e, 0x27, 0x79, 0x11, 0xe5, 0xd4, 0x10, 0x92, 0xd1, 0x86, 0xaa, 0xb1, 0x04, 0xdd, 0xdc, 0xc6, 0xb7, 0x1a, 0xae, 0xf1,  } };
-    return ID;
-}
 const schema::Entity& GLchar__P::StaticSchema() {
     static schema::Entity entity {
-        GLchar__P::StaticId(),
         "gles",
         "",
         "GLcharᵖ",
@@ -1668,13 +1328,8 @@ const schema::Entity& GLchar__P::StaticSchema() {
 
 // GLcharᶜᵖ:
 // gles.GLcharᶜᵖ{$}
-const gapic::Id& GLchar__CP::StaticId() {
-    static gapic::Id ID{ { 0x23, 0x54, 0xe4, 0xf2, 0x20, 0xc4, 0x14, 0xf9, 0x0f, 0xbb, 0xbb, 0x10, 0x40, 0x58, 0x5f, 0x9f, 0x30, 0x74, 0xb4, 0x5b,  } };
-    return ID;
-}
 const schema::Entity& GLchar__CP::StaticSchema() {
     static schema::Entity entity {
-        GLchar__CP::StaticId(),
         "gles",
         "",
         "GLcharᶜᵖ",
@@ -1688,13 +1343,8 @@ const schema::Entity& GLchar__CP::StaticSchema() {
 
 // GLcharᶜᵖˢ:
 // gles.GLcharᶜᵖˢ{$}
-const gapic::Id& GLchar__CP__S::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x0c, 0xbd, 0x52, 0xb4, 0x73, 0x4d, 0x31, 0x58, 0xce, 0x00, 0x61, 0xe0, 0x42, 0x05, 0x51, 0x47, 0x8e, 0x82, 0x1c,  } };
-    return ID;
-}
 const schema::Entity& GLchar__CP__S::StaticSchema() {
     static schema::Entity entity {
-        GLchar__CP__S::StaticId(),
         "gles",
         "",
         "GLcharᶜᵖˢ",
@@ -1708,13 +1358,8 @@ const schema::Entity& GLchar__CP__S::StaticSchema() {
 
 // GLcharᶜᵖᵖ:
 // gles.GLcharᶜᵖᵖ{$}
-const gapic::Id& GLchar__CP__P::StaticId() {
-    static gapic::Id ID{ { 0xb3, 0x67, 0xed, 0x90, 0xd8, 0x9a, 0x23, 0xd4, 0x24, 0x3c, 0x5f, 0x33, 0x69, 0x3e, 0x5b, 0x57, 0xfa, 0x3f, 0x26, 0x34,  } };
-    return ID;
-}
 const schema::Entity& GLchar__CP__P::StaticSchema() {
     static schema::Entity entity {
-        GLchar__CP__P::StaticId(),
         "gles",
         "",
         "GLcharᶜᵖᵖ",
@@ -1728,13 +1373,8 @@ const schema::Entity& GLchar__CP__P::StaticSchema() {
 
 // GLcharᶜᵖᶜᵖ:
 // gles.GLcharᶜᵖᶜᵖ{$}
-const gapic::Id& GLchar__CP__CP::StaticId() {
-    static gapic::Id ID{ { 0x74, 0x2b, 0x4f, 0x60, 0x5e, 0x4e, 0x08, 0xf8, 0x96, 0x1f, 0x6f, 0xf2, 0x06, 0xbf, 0xc0, 0xd0, 0xf3, 0xe6, 0xa6, 0x44,  } };
-    return ID;
-}
 const schema::Entity& GLchar__CP__CP::StaticSchema() {
     static schema::Entity entity {
-        GLchar__CP__CP::StaticId(),
         "gles",
         "",
         "GLcharᶜᵖᶜᵖ",
@@ -1748,13 +1388,8 @@ const schema::Entity& GLchar__CP__CP::StaticSchema() {
 
 // GLeglImageOES:
 // gles.GLeglImageOES{$}
-const gapic::Id& GLeglImageOES::StaticId() {
-    static gapic::Id ID{ { 0x14, 0x50, 0xe8, 0xe5, 0x00, 0x70, 0xc8, 0xfd, 0xac, 0x03, 0xc3, 0x51, 0x52, 0x52, 0x33, 0xf1, 0x17, 0x8c, 0xb3, 0xd6,  } };
-    return ID;
-}
 const schema::Entity& GLeglImageOES::StaticSchema() {
     static schema::Entity entity {
-        GLeglImageOES::StaticId(),
         "gles",
         "",
         "GLeglImageOES",
@@ -1768,13 +1403,8 @@ const schema::Entity& GLeglImageOES::StaticSchema() {
 
 // GLenumˢ:
 // gles.GLenumˢ{$}
-const gapic::Id& GLenum__S::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x7b, 0xf8, 0x35, 0x3c, 0x67, 0x69, 0x4d, 0x2b, 0x7d, 0xa7, 0x03, 0xc1, 0x04, 0x9c, 0xec, 0x40, 0xde, 0x63, 0x08,  } };
-    return ID;
-}
 const schema::Entity& GLenum__S::StaticSchema() {
     static schema::Entity entity {
-        GLenum__S::StaticId(),
         "gles",
         "",
         "GLenumˢ",
@@ -1788,13 +1418,8 @@ const schema::Entity& GLenum__S::StaticSchema() {
 
 // GLenumᵖ:
 // gles.GLenumᵖ{$}
-const gapic::Id& GLenum__P::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0xa5, 0x89, 0x9e, 0x18, 0xf5, 0x86, 0x76, 0x3b, 0xef, 0xe4, 0xcd, 0xc7, 0x33, 0x72, 0xaf, 0x1a, 0x3e, 0xb3, 0xc0,  } };
-    return ID;
-}
 const schema::Entity& GLenum__P::StaticSchema() {
     static schema::Entity entity {
-        GLenum__P::StaticId(),
         "gles",
         "",
         "GLenumᵖ",
@@ -1808,13 +1433,8 @@ const schema::Entity& GLenum__P::StaticSchema() {
 
 // GLenumᶜᵖ:
 // gles.GLenumᶜᵖ{$}
-const gapic::Id& GLenum__CP::StaticId() {
-    static gapic::Id ID{ { 0x9a, 0xfd, 0xc7, 0x34, 0xd6, 0x10, 0x2d, 0xe7, 0x7a, 0xad, 0x2e, 0xf9, 0x2c, 0x76, 0xaf, 0x0f, 0xcd, 0x44, 0xb7, 0x32,  } };
-    return ID;
-}
 const schema::Entity& GLenum__CP::StaticSchema() {
     static schema::Entity entity {
-        GLenum__CP::StaticId(),
         "gles",
         "",
         "GLenumᶜᵖ",
@@ -1828,13 +1448,8 @@ const schema::Entity& GLenum__CP::StaticSchema() {
 
 // GLfloatː2ᵃ:
 // gles.GLfloatː2ᵃ{[2]Float32}
-const gapic::Id& GLfloat__2__A::StaticId() {
-    static gapic::Id ID{ { 0x6b, 0x9a, 0x1f, 0xe7, 0x95, 0xd1, 0x42, 0x2a, 0x95, 0xf2, 0x43, 0xa4, 0x71, 0x50, 0xa2, 0xfb, 0xf0, 0x6e, 0x7c, 0xcf,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__2__A::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__2__A::StaticId(),
         "gles",
         "",
         "GLfloatː2ᵃ",
@@ -1848,13 +1463,8 @@ const schema::Entity& GLfloat__2__A::StaticSchema() {
 
 // GLfloatː3ᵃ:
 // gles.GLfloatː3ᵃ{[3]Float32}
-const gapic::Id& GLfloat__3__A::StaticId() {
-    static gapic::Id ID{ { 0xde, 0x5b, 0xf8, 0x27, 0x70, 0x3c, 0x37, 0xcd, 0x26, 0xc7, 0x89, 0xbe, 0xcb, 0xc5, 0x72, 0x37, 0x3d, 0xc6, 0xd7, 0x14,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__3__A::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__3__A::StaticId(),
         "gles",
         "",
         "GLfloatː3ᵃ",
@@ -1868,13 +1478,8 @@ const schema::Entity& GLfloat__3__A::StaticSchema() {
 
 // GLfloatː4ᵃ:
 // gles.GLfloatː4ᵃ{[4]Float32}
-const gapic::Id& GLfloat__4__A::StaticId() {
-    static gapic::Id ID{ { 0x7a, 0xfa, 0x4c, 0xb4, 0x53, 0xfb, 0x70, 0x7b, 0x64, 0x31, 0x7a, 0x50, 0x8a, 0x1a, 0xb8, 0x70, 0x20, 0xb7, 0x66, 0xab,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__4__A::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__4__A::StaticId(),
         "gles",
         "",
         "GLfloatː4ᵃ",
@@ -1888,13 +1493,8 @@ const schema::Entity& GLfloat__4__A::StaticSchema() {
 
 // GLfloatˢ:
 // gles.GLfloatˢ{$}
-const gapic::Id& GLfloat__S::StaticId() {
-    static gapic::Id ID{ { 0xb5, 0xe1, 0xb0, 0xd5, 0x89, 0xfc, 0x4d, 0xab, 0xb7, 0xeb, 0x50, 0x9c, 0xf8, 0x04, 0x58, 0xdb, 0x1f, 0xec, 0x2d, 0x3e,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__S::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__S::StaticId(),
         "gles",
         "",
         "GLfloatˢ",
@@ -1908,13 +1508,8 @@ const schema::Entity& GLfloat__S::StaticSchema() {
 
 // GLfloatᵖ:
 // gles.GLfloatᵖ{$}
-const gapic::Id& GLfloat__P::StaticId() {
-    static gapic::Id ID{ { 0x54, 0xc9, 0x72, 0x0c, 0xee, 0x74, 0xb2, 0x3e, 0xd4, 0x63, 0x1b, 0x78, 0xc0, 0x4a, 0x8a, 0x06, 0xd4, 0xa4, 0x0f, 0x29,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__P::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__P::StaticId(),
         "gles",
         "",
         "GLfloatᵖ",
@@ -1928,13 +1523,8 @@ const schema::Entity& GLfloat__P::StaticSchema() {
 
 // GLfloatᶜᵖ:
 // gles.GLfloatᶜᵖ{$}
-const gapic::Id& GLfloat__CP::StaticId() {
-    static gapic::Id ID{ { 0xc9, 0x56, 0xc9, 0xc9, 0x9b, 0x83, 0x41, 0x51, 0x1b, 0x27, 0x64, 0x21, 0x9a, 0x90, 0x33, 0xce, 0x7a, 0x83, 0x41, 0x40,  } };
-    return ID;
-}
 const schema::Entity& GLfloat__CP::StaticSchema() {
     static schema::Entity entity {
-        GLfloat__CP::StaticId(),
         "gles",
         "",
         "GLfloatᶜᵖ",
@@ -1948,13 +1538,8 @@ const schema::Entity& GLfloat__CP::StaticSchema() {
 
 // GLint64ˢ:
 // gles.GLint64ˢ{$}
-const gapic::Id& GLint64__S::StaticId() {
-    static gapic::Id ID{ { 0x0f, 0x31, 0x94, 0xc7, 0x84, 0x50, 0x34, 0x42, 0xb2, 0xd9, 0xf7, 0x20, 0x8a, 0xc0, 0x54, 0x15, 0x24, 0xf3, 0x9c, 0xfa,  } };
-    return ID;
-}
 const schema::Entity& GLint64__S::StaticSchema() {
     static schema::Entity entity {
-        GLint64__S::StaticId(),
         "gles",
         "",
         "GLint64ˢ",
@@ -1968,13 +1553,8 @@ const schema::Entity& GLint64__S::StaticSchema() {
 
 // GLint64ᵖ:
 // gles.GLint64ᵖ{$}
-const gapic::Id& GLint64__P::StaticId() {
-    static gapic::Id ID{ { 0x57, 0xf8, 0x4e, 0xe0, 0xa2, 0x42, 0x88, 0x40, 0x0c, 0x5c, 0x1f, 0xdf, 0x2c, 0x1d, 0xa5, 0xdd, 0x9b, 0x4e, 0x8d, 0x97,  } };
-    return ID;
-}
 const schema::Entity& GLint64__P::StaticSchema() {
     static schema::Entity entity {
-        GLint64__P::StaticId(),
         "gles",
         "",
         "GLint64ᵖ",
@@ -1988,13 +1568,8 @@ const schema::Entity& GLint64__P::StaticSchema() {
 
 // GLintː2ᵃ:
 // gles.GLintː2ᵃ{[2]Int32}
-const gapic::Id& GLint__2__A::StaticId() {
-    static gapic::Id ID{ { 0x3f, 0x53, 0xaf, 0xfc, 0x59, 0x08, 0x89, 0xe0, 0x13, 0x9a, 0xfd, 0x84, 0x57, 0xee, 0x56, 0xed, 0xe7, 0xd5, 0xb4, 0xaa,  } };
-    return ID;
-}
 const schema::Entity& GLint__2__A::StaticSchema() {
     static schema::Entity entity {
-        GLint__2__A::StaticId(),
         "gles",
         "",
         "GLintː2ᵃ",
@@ -2008,13 +1583,8 @@ const schema::Entity& GLint__2__A::StaticSchema() {
 
 // GLintː3ᵃ:
 // gles.GLintː3ᵃ{[3]Int32}
-const gapic::Id& GLint__3__A::StaticId() {
-    static gapic::Id ID{ { 0xfe, 0x2d, 0x33, 0x60, 0x91, 0x58, 0xf0, 0x9f, 0x28, 0x2e, 0x6b, 0xaf, 0xba, 0x76, 0x6e, 0x4c, 0x67, 0xb3, 0x25, 0xb8,  } };
-    return ID;
-}
 const schema::Entity& GLint__3__A::StaticSchema() {
     static schema::Entity entity {
-        GLint__3__A::StaticId(),
         "gles",
         "",
         "GLintː3ᵃ",
@@ -2028,13 +1598,8 @@ const schema::Entity& GLint__3__A::StaticSchema() {
 
 // GLintː4ᵃ:
 // gles.GLintː4ᵃ{[4]Int32}
-const gapic::Id& GLint__4__A::StaticId() {
-    static gapic::Id ID{ { 0x74, 0x88, 0xe9, 0x63, 0x22, 0x0b, 0x19, 0x5c, 0x37, 0xe5, 0x98, 0xf4, 0x0a, 0x2e, 0xd3, 0xd3, 0xf6, 0xfb, 0x25, 0xdf,  } };
-    return ID;
-}
 const schema::Entity& GLint__4__A::StaticSchema() {
     static schema::Entity entity {
-        GLint__4__A::StaticId(),
         "gles",
         "",
         "GLintː4ᵃ",
@@ -2048,13 +1613,8 @@ const schema::Entity& GLint__4__A::StaticSchema() {
 
 // GLintˢ:
 // gles.GLintˢ{$}
-const gapic::Id& GLint__S::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0x5e, 0x81, 0x91, 0x8e, 0xb1, 0xd7, 0xc0, 0x63, 0x33, 0xe5, 0xb1, 0x28, 0xc3, 0x6f, 0x11, 0xea, 0x8c, 0x48, 0x03,  } };
-    return ID;
-}
 const schema::Entity& GLint__S::StaticSchema() {
     static schema::Entity entity {
-        GLint__S::StaticId(),
         "gles",
         "",
         "GLintˢ",
@@ -2068,13 +1628,8 @@ const schema::Entity& GLint__S::StaticSchema() {
 
 // GLintᵖ:
 // gles.GLintᵖ{$}
-const gapic::Id& GLint__P::StaticId() {
-    static gapic::Id ID{ { 0x7a, 0x80, 0xcc, 0x98, 0x20, 0xaf, 0x70, 0x54, 0xea, 0xc6, 0xea, 0x42, 0x4e, 0x52, 0xba, 0xc1, 0xe4, 0x16, 0xb6, 0xbe,  } };
-    return ID;
-}
 const schema::Entity& GLint__P::StaticSchema() {
     static schema::Entity entity {
-        GLint__P::StaticId(),
         "gles",
         "",
         "GLintᵖ",
@@ -2088,13 +1643,8 @@ const schema::Entity& GLint__P::StaticSchema() {
 
 // GLintᶜᵖ:
 // gles.GLintᶜᵖ{$}
-const gapic::Id& GLint__CP::StaticId() {
-    static gapic::Id ID{ { 0x5a, 0x95, 0x56, 0x56, 0x46, 0x9b, 0x24, 0xc9, 0x1d, 0x80, 0x77, 0xb4, 0x62, 0x82, 0x8e, 0xb3, 0x89, 0x30, 0x5a, 0xb2,  } };
-    return ID;
-}
 const schema::Entity& GLint__CP::StaticSchema() {
     static schema::Entity entity {
-        GLint__CP::StaticId(),
         "gles",
         "",
         "GLintᶜᵖ",
@@ -2108,13 +1658,8 @@ const schema::Entity& GLint__CP::StaticSchema() {
 
 // GLsizeiˢ:
 // gles.GLsizeiˢ{$}
-const gapic::Id& GLsizei__S::StaticId() {
-    static gapic::Id ID{ { 0xf9, 0x6e, 0xf4, 0xe9, 0xe9, 0x9f, 0xa4, 0xbb, 0x94, 0x25, 0x6b, 0xda, 0x34, 0x73, 0x41, 0xb5, 0x65, 0xf6, 0x3d, 0x00,  } };
-    return ID;
-}
 const schema::Entity& GLsizei__S::StaticSchema() {
     static schema::Entity entity {
-        GLsizei__S::StaticId(),
         "gles",
         "",
         "GLsizeiˢ",
@@ -2128,13 +1673,8 @@ const schema::Entity& GLsizei__S::StaticSchema() {
 
 // GLsizeiᵖ:
 // gles.GLsizeiᵖ{$}
-const gapic::Id& GLsizei__P::StaticId() {
-    static gapic::Id ID{ { 0x33, 0x5a, 0x9d, 0xfb, 0x24, 0xd9, 0x1f, 0x35, 0x2c, 0x60, 0xcf, 0x06, 0x65, 0x65, 0x1a, 0xdb, 0x67, 0x73, 0x22, 0x0d,  } };
-    return ID;
-}
 const schema::Entity& GLsizei__P::StaticSchema() {
     static schema::Entity entity {
-        GLsizei__P::StaticId(),
         "gles",
         "",
         "GLsizeiᵖ",
@@ -2148,13 +1688,8 @@ const schema::Entity& GLsizei__P::StaticSchema() {
 
 // GLsizeiᶜᵖ:
 // gles.GLsizeiᶜᵖ{$}
-const gapic::Id& GLsizei__CP::StaticId() {
-    static gapic::Id ID{ { 0x28, 0x64, 0x21, 0xcc, 0x59, 0x8d, 0xdd, 0x2e, 0xd8, 0x99, 0xc5, 0xb8, 0xd2, 0x89, 0xa1, 0x55, 0x7b, 0x74, 0x5f, 0x2b,  } };
-    return ID;
-}
 const schema::Entity& GLsizei__CP::StaticSchema() {
     static schema::Entity entity {
-        GLsizei__CP::StaticId(),
         "gles",
         "",
         "GLsizeiᶜᵖ",
@@ -2168,13 +1703,8 @@ const schema::Entity& GLsizei__CP::StaticSchema() {
 
 // GLubyteˢ:
 // gles.GLubyteˢ{$}
-const gapic::Id& GLubyte__S::StaticId() {
-    static gapic::Id ID{ { 0x58, 0x9a, 0x1c, 0xbb, 0x4c, 0x72, 0x08, 0x7e, 0xfd, 0x78, 0xd0, 0xca, 0x62, 0xfd, 0xf9, 0xa5, 0x83, 0x45, 0x50, 0x9d,  } };
-    return ID;
-}
 const schema::Entity& GLubyte__S::StaticSchema() {
     static schema::Entity entity {
-        GLubyte__S::StaticId(),
         "gles",
         "",
         "GLubyteˢ",
@@ -2188,13 +1718,8 @@ const schema::Entity& GLubyte__S::StaticSchema() {
 
 // GLubyteᵖ:
 // gles.GLubyteᵖ{$}
-const gapic::Id& GLubyte__P::StaticId() {
-    static gapic::Id ID{ { 0x52, 0x89, 0xf6, 0x21, 0x8f, 0x59, 0x08, 0x79, 0xac, 0xb6, 0x73, 0x04, 0xd2, 0xb6, 0xc1, 0xff, 0x03, 0x0a, 0x4a, 0x57,  } };
-    return ID;
-}
 const schema::Entity& GLubyte__P::StaticSchema() {
     static schema::Entity entity {
-        GLubyte__P::StaticId(),
         "gles",
         "",
         "GLubyteᵖ",
@@ -2208,13 +1733,8 @@ const schema::Entity& GLubyte__P::StaticSchema() {
 
 // GLubyteᶜᵖ:
 // gles.GLubyteᶜᵖ{$}
-const gapic::Id& GLubyte__CP::StaticId() {
-    static gapic::Id ID{ { 0x27, 0x7e, 0x8d, 0x02, 0xe9, 0xa3, 0x6e, 0x66, 0x89, 0xcc, 0x7b, 0x48, 0x34, 0x3b, 0x75, 0x3d, 0x2b, 0x10, 0x5d, 0x43,  } };
-    return ID;
-}
 const schema::Entity& GLubyte__CP::StaticSchema() {
     static schema::Entity entity {
-        GLubyte__CP::StaticId(),
         "gles",
         "",
         "GLubyteᶜᵖ",
@@ -2228,13 +1748,8 @@ const schema::Entity& GLubyte__CP::StaticSchema() {
 
 // GLuint64ˢ:
 // gles.GLuint64ˢ{$}
-const gapic::Id& GLuint64__S::StaticId() {
-    static gapic::Id ID{ { 0xe1, 0x0c, 0x47, 0xf8, 0x89, 0xb2, 0xc4, 0x6c, 0x14, 0xc3, 0x72, 0x55, 0x6d, 0xf5, 0x36, 0x0d, 0x48, 0x96, 0x1d, 0x7d,  } };
-    return ID;
-}
 const schema::Entity& GLuint64__S::StaticSchema() {
     static schema::Entity entity {
-        GLuint64__S::StaticId(),
         "gles",
         "",
         "GLuint64ˢ",
@@ -2248,13 +1763,8 @@ const schema::Entity& GLuint64__S::StaticSchema() {
 
 // GLuint64ᵖ:
 // gles.GLuint64ᵖ{$}
-const gapic::Id& GLuint64__P::StaticId() {
-    static gapic::Id ID{ { 0xe1, 0x32, 0x35, 0x07, 0x38, 0x42, 0xdc, 0xa9, 0xdc, 0xe5, 0x7a, 0x16, 0xdf, 0x4f, 0xe4, 0x81, 0xe9, 0x14, 0x22, 0x51,  } };
-    return ID;
-}
 const schema::Entity& GLuint64__P::StaticSchema() {
     static schema::Entity entity {
-        GLuint64__P::StaticId(),
         "gles",
         "",
         "GLuint64ᵖ",
@@ -2268,13 +1778,8 @@ const schema::Entity& GLuint64__P::StaticSchema() {
 
 // GLuint64ᶜᵖ:
 // gles.GLuint64ᶜᵖ{$}
-const gapic::Id& GLuint64__CP::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x62, 0x82, 0x2e, 0xda, 0x82, 0xb7, 0x51, 0x46, 0x2f, 0x35, 0x3a, 0x08, 0xdd, 0x12, 0xd0, 0xfe, 0x17, 0x1c, 0xcc,  } };
-    return ID;
-}
 const schema::Entity& GLuint64__CP::StaticSchema() {
     static schema::Entity entity {
-        GLuint64__CP::StaticId(),
         "gles",
         "",
         "GLuint64ᶜᵖ",
@@ -2288,13 +1793,8 @@ const schema::Entity& GLuint64__CP::StaticSchema() {
 
 // GLuintː2ᵃ:
 // gles.GLuintː2ᵃ{[2]Uint32}
-const gapic::Id& GLuint__2__A::StaticId() {
-    static gapic::Id ID{ { 0x95, 0x2c, 0xd1, 0x05, 0x31, 0xd0, 0xcb, 0x80, 0x65, 0x09, 0xf7, 0xfb, 0xed, 0xd8, 0xf4, 0x6a, 0xed, 0x64, 0x72, 0x58,  } };
-    return ID;
-}
 const schema::Entity& GLuint__2__A::StaticSchema() {
     static schema::Entity entity {
-        GLuint__2__A::StaticId(),
         "gles",
         "",
         "GLuintː2ᵃ",
@@ -2308,13 +1808,8 @@ const schema::Entity& GLuint__2__A::StaticSchema() {
 
 // GLuintː3ᵃ:
 // gles.GLuintː3ᵃ{[3]Uint32}
-const gapic::Id& GLuint__3__A::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0xe8, 0x11, 0x30, 0xbd, 0xdb, 0x9b, 0x38, 0x32, 0x71, 0xa6, 0xed, 0x37, 0x7e, 0x73, 0xaa, 0x40, 0x85, 0x2e, 0xc4,  } };
-    return ID;
-}
 const schema::Entity& GLuint__3__A::StaticSchema() {
     static schema::Entity entity {
-        GLuint__3__A::StaticId(),
         "gles",
         "",
         "GLuintː3ᵃ",
@@ -2328,13 +1823,8 @@ const schema::Entity& GLuint__3__A::StaticSchema() {
 
 // GLuintː4ᵃ:
 // gles.GLuintː4ᵃ{[4]Uint32}
-const gapic::Id& GLuint__4__A::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0xc3, 0xeb, 0xf9, 0xf5, 0x53, 0x5f, 0xa3, 0x45, 0xf7, 0xe0, 0x8e, 0x49, 0x02, 0x7d, 0xac, 0x9c, 0x84, 0xe5, 0x10,  } };
-    return ID;
-}
 const schema::Entity& GLuint__4__A::StaticSchema() {
     static schema::Entity entity {
-        GLuint__4__A::StaticId(),
         "gles",
         "",
         "GLuintː4ᵃ",
@@ -2348,13 +1838,8 @@ const schema::Entity& GLuint__4__A::StaticSchema() {
 
 // GLuintˢ:
 // gles.GLuintˢ{$}
-const gapic::Id& GLuint__S::StaticId() {
-    static gapic::Id ID{ { 0x7b, 0x5f, 0x85, 0x5c, 0x5f, 0xe1, 0xdf, 0x4d, 0x2e, 0x04, 0xaa, 0x8c, 0xe2, 0x80, 0x15, 0x89, 0x16, 0xc0, 0x0c, 0xb0,  } };
-    return ID;
-}
 const schema::Entity& GLuint__S::StaticSchema() {
     static schema::Entity entity {
-        GLuint__S::StaticId(),
         "gles",
         "",
         "GLuintˢ",
@@ -2368,13 +1853,8 @@ const schema::Entity& GLuint__S::StaticSchema() {
 
 // GLuintᵖ:
 // gles.GLuintᵖ{$}
-const gapic::Id& GLuint__P::StaticId() {
-    static gapic::Id ID{ { 0x13, 0x0d, 0xff, 0x2e, 0x82, 0x3f, 0x58, 0x9b, 0x1a, 0x46, 0x25, 0xa2, 0x6a, 0x56, 0x07, 0x55, 0x27, 0x92, 0x00, 0xad,  } };
-    return ID;
-}
 const schema::Entity& GLuint__P::StaticSchema() {
     static schema::Entity entity {
-        GLuint__P::StaticId(),
         "gles",
         "",
         "GLuintᵖ",
@@ -2388,13 +1868,8 @@ const schema::Entity& GLuint__P::StaticSchema() {
 
 // GLuintᶜᵖ:
 // gles.GLuintᶜᵖ{$}
-const gapic::Id& GLuint__CP::StaticId() {
-    static gapic::Id ID{ { 0xaa, 0x42, 0xc9, 0x31, 0x23, 0xc6, 0x84, 0x96, 0x16, 0x7f, 0xa1, 0x05, 0xe1, 0x21, 0xbd, 0xbc, 0xaa, 0x55, 0x38, 0x22,  } };
-    return ID;
-}
 const schema::Entity& GLuint__CP::StaticSchema() {
     static schema::Entity entity {
-        GLuint__CP::StaticId(),
         "gles",
         "",
         "GLuintᶜᵖ",
@@ -2408,13 +1883,8 @@ const schema::Entity& GLuint__CP::StaticSchema() {
 
 // GLvoidˢ:
 // gles.GLvoidˢ{$}
-const gapic::Id& GLvoid__S::StaticId() {
-    static gapic::Id ID{ { 0xa6, 0xd7, 0xeb, 0x4b, 0x78, 0xc2, 0x7c, 0x08, 0xdd, 0xfe, 0x13, 0x81, 0x46, 0xf2, 0x5c, 0xca, 0xa8, 0x3e, 0x45, 0xcc,  } };
-    return ID;
-}
 const schema::Entity& GLvoid__S::StaticSchema() {
     static schema::Entity entity {
-        GLvoid__S::StaticId(),
         "gles",
         "",
         "GLvoidˢ",
@@ -2428,13 +1898,8 @@ const schema::Entity& GLvoid__S::StaticSchema() {
 
 // GLvoidᵖ:
 // gles.GLvoidᵖ{$}
-const gapic::Id& GLvoid__P::StaticId() {
-    static gapic::Id ID{ { 0x64, 0x32, 0xa2, 0xaf, 0xc5, 0xb6, 0xa4, 0x37, 0x89, 0x2c, 0x15, 0xf1, 0x64, 0x91, 0x7e, 0xb8, 0x80, 0xa6, 0xe7, 0x54,  } };
-    return ID;
-}
 const schema::Entity& GLvoid__P::StaticSchema() {
     static schema::Entity entity {
-        GLvoid__P::StaticId(),
         "gles",
         "",
         "GLvoidᵖ",
@@ -2448,13 +1913,8 @@ const schema::Entity& GLvoid__P::StaticSchema() {
 
 // GlActiveShaderProgram:
 // gles.GlActiveShaderProgram{$,Uint32,Uint32}
-const gapic::Id& GlActiveShaderProgram::StaticId() {
-    static gapic::Id ID{ { 0xd2, 0x19, 0x81, 0x32, 0xc9, 0x28, 0x28, 0x03, 0x84, 0x93, 0x88, 0xaa, 0x4f, 0x01, 0x93, 0xd1, 0xda, 0xf6, 0xb1, 0x7e,  } };
-    return ID;
-}
 const schema::Entity& GlActiveShaderProgram::StaticSchema() {
     static schema::Entity entity {
-        GlActiveShaderProgram::StaticId(),
         "gles",
         "",
         "GlActiveShaderProgram",
@@ -2470,13 +1930,8 @@ const schema::Entity& GlActiveShaderProgram::StaticSchema() {
 
 // GlActiveShaderProgramEXT:
 // gles.GlActiveShaderProgramEXT{$,Uint32,Uint32}
-const gapic::Id& GlActiveShaderProgramEXT::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xdc, 0x60, 0x5e, 0x2c, 0x68, 0x76, 0x2e, 0x5b, 0x48, 0x6d, 0x87, 0x6d, 0x62, 0x0a, 0x3f, 0xd2, 0x22, 0xcd, 0x7b,  } };
-    return ID;
-}
 const schema::Entity& GlActiveShaderProgramEXT::StaticSchema() {
     static schema::Entity entity {
-        GlActiveShaderProgramEXT::StaticId(),
         "gles",
         "",
         "GlActiveShaderProgramEXT",
@@ -2492,13 +1947,8 @@ const schema::Entity& GlActiveShaderProgramEXT::StaticSchema() {
 
 // GlActiveTexture:
 // gles.GlActiveTexture{$,Uint32}
-const gapic::Id& GlActiveTexture::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0x5a, 0x72, 0x87, 0xae, 0xa5, 0x01, 0xd9, 0x99, 0x6c, 0xb6, 0x5f, 0xa1, 0x7a, 0x8e, 0xc2, 0x99, 0x25, 0xf8, 0xc1,  } };
-    return ID;
-}
 const schema::Entity& GlActiveTexture::StaticSchema() {
     static schema::Entity entity {
-        GlActiveTexture::StaticId(),
         "gles",
         "",
         "GlActiveTexture",
@@ -2513,13 +1963,8 @@ const schema::Entity& GlActiveTexture::StaticSchema() {
 
 // GlAlphaFuncQCOM:
 // gles.GlAlphaFuncQCOM{$,Uint32,Float32}
-const gapic::Id& GlAlphaFuncQCOM::StaticId() {
-    static gapic::Id ID{ { 0x3c, 0xc8, 0xe0, 0xc0, 0x21, 0xc4, 0x53, 0x8c, 0xee, 0x88, 0x62, 0x1b, 0xbe, 0xac, 0x40, 0x0d, 0x49, 0x63, 0xf1, 0xe4,  } };
-    return ID;
-}
 const schema::Entity& GlAlphaFuncQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlAlphaFuncQCOM::StaticId(),
         "gles",
         "",
         "GlAlphaFuncQCOM",
@@ -2535,13 +1980,8 @@ const schema::Entity& GlAlphaFuncQCOM::StaticSchema() {
 
 // GlApplyFramebufferAttachmentCMAAINTEL:
 // gles.GlApplyFramebufferAttachmentCMAAINTEL{$}
-const gapic::Id& GlApplyFramebufferAttachmentCMAAINTEL::StaticId() {
-    static gapic::Id ID{ { 0xb0, 0xe1, 0xd1, 0x7e, 0x1c, 0x63, 0x7c, 0x57, 0x29, 0xe5, 0x70, 0x4b, 0x5a, 0x36, 0x3c, 0x62, 0x8c, 0x00, 0x3d, 0xdb,  } };
-    return ID;
-}
 const schema::Entity& GlApplyFramebufferAttachmentCMAAINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlApplyFramebufferAttachmentCMAAINTEL::StaticId(),
         "gles",
         "",
         "GlApplyFramebufferAttachmentCMAAINTEL",
@@ -2555,13 +1995,8 @@ const schema::Entity& GlApplyFramebufferAttachmentCMAAINTEL::StaticSchema() {
 
 // GlAttachShader:
 // gles.GlAttachShader{$,Uint32,Uint32}
-const gapic::Id& GlAttachShader::StaticId() {
-    static gapic::Id ID{ { 0xa6, 0xce, 0xb8, 0xc5, 0x0c, 0xbb, 0x1d, 0xf1, 0x9b, 0x76, 0xe1, 0x51, 0x68, 0x96, 0x33, 0x86, 0xab, 0x2a, 0xc5, 0xa9,  } };
-    return ID;
-}
 const schema::Entity& GlAttachShader::StaticSchema() {
     static schema::Entity entity {
-        GlAttachShader::StaticId(),
         "gles",
         "",
         "GlAttachShader",
@@ -2577,13 +2012,8 @@ const schema::Entity& GlAttachShader::StaticSchema() {
 
 // GlBeginConditionalRenderNV:
 // gles.GlBeginConditionalRenderNV{$,Uint32,Uint32}
-const gapic::Id& GlBeginConditionalRenderNV::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0xc4, 0x44, 0x09, 0xc7, 0xf0, 0x6b, 0x59, 0x84, 0x5e, 0x8f, 0xaf, 0x45, 0xcf, 0x71, 0x90, 0x48, 0x99, 0x00, 0xf1,  } };
-    return ID;
-}
 const schema::Entity& GlBeginConditionalRenderNV::StaticSchema() {
     static schema::Entity entity {
-        GlBeginConditionalRenderNV::StaticId(),
         "gles",
         "",
         "GlBeginConditionalRenderNV",
@@ -2599,13 +2029,8 @@ const schema::Entity& GlBeginConditionalRenderNV::StaticSchema() {
 
 // GlBeginPerfMonitorAMD:
 // gles.GlBeginPerfMonitorAMD{$,Uint32}
-const gapic::Id& GlBeginPerfMonitorAMD::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x2e, 0x7a, 0xe4, 0xe6, 0x48, 0x7c, 0xcd, 0xb7, 0x3e, 0xec, 0x3a, 0xd9, 0xa2, 0x91, 0xc5, 0xb0, 0x1e, 0x34, 0xcf,  } };
-    return ID;
-}
 const schema::Entity& GlBeginPerfMonitorAMD::StaticSchema() {
     static schema::Entity entity {
-        GlBeginPerfMonitorAMD::StaticId(),
         "gles",
         "",
         "GlBeginPerfMonitorAMD",
@@ -2620,13 +2045,8 @@ const schema::Entity& GlBeginPerfMonitorAMD::StaticSchema() {
 
 // GlBeginPerfQueryINTEL:
 // gles.GlBeginPerfQueryINTEL{$,Uint32}
-const gapic::Id& GlBeginPerfQueryINTEL::StaticId() {
-    static gapic::Id ID{ { 0xd0, 0xd6, 0xca, 0xe8, 0x44, 0x8e, 0x08, 0x42, 0xd8, 0x12, 0xc8, 0xc6, 0xac, 0x31, 0x96, 0x49, 0xae, 0xa5, 0xbc, 0x54,  } };
-    return ID;
-}
 const schema::Entity& GlBeginPerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlBeginPerfQueryINTEL::StaticId(),
         "gles",
         "",
         "GlBeginPerfQueryINTEL",
@@ -2641,13 +2061,8 @@ const schema::Entity& GlBeginPerfQueryINTEL::StaticSchema() {
 
 // GlBeginQuery:
 // gles.GlBeginQuery{$,Uint32,Uint32}
-const gapic::Id& GlBeginQuery::StaticId() {
-    static gapic::Id ID{ { 0x04, 0xb5, 0xf1, 0x1f, 0xe0, 0xac, 0xe3, 0xcd, 0x29, 0xee, 0x69, 0xe3, 0x9d, 0x47, 0xeb, 0x7d, 0xca, 0x46, 0xc7, 0x2d,  } };
-    return ID;
-}
 const schema::Entity& GlBeginQuery::StaticSchema() {
     static schema::Entity entity {
-        GlBeginQuery::StaticId(),
         "gles",
         "",
         "GlBeginQuery",
@@ -2663,13 +2078,8 @@ const schema::Entity& GlBeginQuery::StaticSchema() {
 
 // GlBeginQueryEXT:
 // gles.GlBeginQueryEXT{$,Uint32,Uint32}
-const gapic::Id& GlBeginQueryEXT::StaticId() {
-    static gapic::Id ID{ { 0x26, 0xfb, 0xdb, 0x0a, 0x52, 0x98, 0x98, 0xb0, 0x4c, 0xc6, 0x1b, 0x3a, 0x55, 0xfd, 0x32, 0x60, 0x28, 0x22, 0xfe, 0xe5,  } };
-    return ID;
-}
 const schema::Entity& GlBeginQueryEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBeginQueryEXT::StaticId(),
         "gles",
         "",
         "GlBeginQueryEXT",
@@ -2685,13 +2095,8 @@ const schema::Entity& GlBeginQueryEXT::StaticSchema() {
 
 // GlBeginTransformFeedback:
 // gles.GlBeginTransformFeedback{$,Uint32}
-const gapic::Id& GlBeginTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0x7a, 0x60, 0x0a, 0xf0, 0x59, 0x94, 0xcb, 0x13, 0x89, 0xf5, 0x9b, 0xf8, 0x34, 0xad, 0x5b, 0x13, 0xf7, 0x31, 0xa8, 0x40,  } };
-    return ID;
-}
 const schema::Entity& GlBeginTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlBeginTransformFeedback::StaticId(),
         "gles",
         "",
         "GlBeginTransformFeedback",
@@ -2706,10 +2111,6 @@ const schema::Entity& GlBeginTransformFeedback::StaticSchema() {
 
 // GlBindAttribLocation:
 // gles.GlBindAttribLocation{$,Uint32,Uint32,String}
-const gapic::Id& GlBindAttribLocation::StaticId() {
-    static gapic::Id ID{ { 0xe8, 0xf5, 0x86, 0x75, 0xe1, 0x80, 0x36, 0x41, 0xe7, 0x61, 0xca, 0x93, 0x05, 0x3a, 0xff, 0xcf, 0x5e, 0x55, 0x91, 0x8e,  } };
-    return ID;
-}
 void GlBindAttribLocation::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -2718,7 +2119,6 @@ void GlBindAttribLocation::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindAttribLocation::StaticSchema() {
     static schema::Entity entity {
-        GlBindAttribLocation::StaticId(),
         "gles",
         "",
         "GlBindAttribLocation",
@@ -2735,13 +2135,8 @@ const schema::Entity& GlBindAttribLocation::StaticSchema() {
 
 // GlBindBuffer:
 // gles.GlBindBuffer{$,Uint32,Uint32}
-const gapic::Id& GlBindBuffer::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0x7e, 0x1e, 0xf2, 0xde, 0xd3, 0x3a, 0xaf, 0x7c, 0xfc, 0x95, 0x2f, 0x9b, 0xbd, 0x08, 0xe1, 0xb1, 0x41, 0xcf, 0x09,  } };
-    return ID;
-}
 const schema::Entity& GlBindBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlBindBuffer::StaticId(),
         "gles",
         "",
         "GlBindBuffer",
@@ -2757,10 +2152,6 @@ const schema::Entity& GlBindBuffer::StaticSchema() {
 
 // GlBindBufferBase:
 // gles.GlBindBufferBase{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBindBufferBase::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0x3c, 0x55, 0x66, 0x00, 0xd3, 0xbd, 0xed, 0xd8, 0x51, 0x5d, 0x92, 0x76, 0xe1, 0xac, 0xa6, 0x35, 0xed, 0x15, 0xc0,  } };
-    return ID;
-}
 void GlBindBufferBase::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -2769,7 +2160,6 @@ void GlBindBufferBase::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindBufferBase::StaticSchema() {
     static schema::Entity entity {
-        GlBindBufferBase::StaticId(),
         "gles",
         "",
         "GlBindBufferBase",
@@ -2786,10 +2176,6 @@ const schema::Entity& GlBindBufferBase::StaticSchema() {
 
 // GlBindBufferRange:
 // gles.GlBindBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlBindBufferRange::StaticId() {
-    static gapic::Id ID{ { 0x1d, 0x6e, 0x62, 0xb5, 0x3d, 0xc6, 0xdf, 0xb1, 0x55, 0x4d, 0x26, 0x87, 0x8f, 0x36, 0x6c, 0xec, 0xe5, 0xc8, 0x24, 0x5e,  } };
-    return ID;
-}
 void GlBindBufferRange::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -2800,7 +2186,6 @@ void GlBindBufferRange::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindBufferRange::StaticSchema() {
     static schema::Entity entity {
-        GlBindBufferRange::StaticId(),
         "gles",
         "",
         "GlBindBufferRange",
@@ -2819,10 +2204,6 @@ const schema::Entity& GlBindBufferRange::StaticSchema() {
 
 // GlBindFragDataLocationEXT:
 // gles.GlBindFragDataLocationEXT{$,Uint32,Uint32,String}
-const gapic::Id& GlBindFragDataLocationEXT::StaticId() {
-    static gapic::Id ID{ { 0x22, 0xba, 0x2a, 0xdf, 0x28, 0xd1, 0x41, 0x3a, 0xf7, 0x9c, 0x6a, 0x52, 0xe1, 0x30, 0xd3, 0x72, 0x78, 0xfa, 0x8c, 0x92,  } };
-    return ID;
-}
 void GlBindFragDataLocationEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -2831,7 +2212,6 @@ void GlBindFragDataLocationEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindFragDataLocationEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBindFragDataLocationEXT::StaticId(),
         "gles",
         "",
         "GlBindFragDataLocationEXT",
@@ -2848,10 +2228,6 @@ const schema::Entity& GlBindFragDataLocationEXT::StaticSchema() {
 
 // GlBindFragDataLocationIndexedEXT:
 // gles.GlBindFragDataLocationIndexedEXT{$,Uint32,Uint32,Uint32,String}
-const gapic::Id& GlBindFragDataLocationIndexedEXT::StaticId() {
-    static gapic::Id ID{ { 0x92, 0xab, 0x63, 0x24, 0x50, 0xf4, 0x01, 0x0a, 0xcd, 0x76, 0xff, 0xa6, 0x97, 0x2b, 0xb5, 0xce, 0x32, 0x2e, 0xf2, 0x33,  } };
-    return ID;
-}
 void GlBindFragDataLocationIndexedEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -2861,7 +2237,6 @@ void GlBindFragDataLocationIndexedEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindFragDataLocationIndexedEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBindFragDataLocationIndexedEXT::StaticId(),
         "gles",
         "",
         "GlBindFragDataLocationIndexedEXT",
@@ -2879,13 +2254,8 @@ const schema::Entity& GlBindFragDataLocationIndexedEXT::StaticSchema() {
 
 // GlBindFramebuffer:
 // gles.GlBindFramebuffer{$,Uint32,Uint32}
-const gapic::Id& GlBindFramebuffer::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0xbf, 0x51, 0x24, 0xf8, 0xd0, 0x8b, 0xec, 0xb9, 0x40, 0x6a, 0x1d, 0x57, 0xbb, 0x58, 0xfd, 0x66, 0xde, 0x7b, 0x29,  } };
-    return ID;
-}
 const schema::Entity& GlBindFramebuffer::StaticSchema() {
     static schema::Entity entity {
-        GlBindFramebuffer::StaticId(),
         "gles",
         "",
         "GlBindFramebuffer",
@@ -2901,10 +2271,6 @@ const schema::Entity& GlBindFramebuffer::StaticSchema() {
 
 // GlBindImageTexture:
 // gles.GlBindImageTexture{$,Uint32,Uint32,Int32,Uint8,Int32,Uint32,Uint32}
-const gapic::Id& GlBindImageTexture::StaticId() {
-    static gapic::Id ID{ { 0x67, 0xe0, 0x71, 0x3c, 0x15, 0x56, 0x4b, 0x00, 0x6b, 0x2b, 0x9b, 0xc2, 0x22, 0x5d, 0xb4, 0x91, 0xd1, 0x8f, 0x96, 0x92,  } };
-    return ID;
-}
 void GlBindImageTexture::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mUnit);
@@ -2917,7 +2283,6 @@ void GlBindImageTexture::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindImageTexture::StaticSchema() {
     static schema::Entity entity {
-        GlBindImageTexture::StaticId(),
         "gles",
         "",
         "GlBindImageTexture",
@@ -2938,13 +2303,8 @@ const schema::Entity& GlBindImageTexture::StaticSchema() {
 
 // GlBindProgramPipeline:
 // gles.GlBindProgramPipeline{$,Uint32}
-const gapic::Id& GlBindProgramPipeline::StaticId() {
-    static gapic::Id ID{ { 0x9a, 0xf7, 0xda, 0x48, 0x1a, 0x59, 0x0c, 0x07, 0x52, 0x8d, 0x3f, 0x0f, 0x15, 0xd3, 0x0f, 0xa4, 0x3b, 0xb0, 0x3a, 0x73,  } };
-    return ID;
-}
 const schema::Entity& GlBindProgramPipeline::StaticSchema() {
     static schema::Entity entity {
-        GlBindProgramPipeline::StaticId(),
         "gles",
         "",
         "GlBindProgramPipeline",
@@ -2959,13 +2319,8 @@ const schema::Entity& GlBindProgramPipeline::StaticSchema() {
 
 // GlBindProgramPipelineEXT:
 // gles.GlBindProgramPipelineEXT{$,Uint32}
-const gapic::Id& GlBindProgramPipelineEXT::StaticId() {
-    static gapic::Id ID{ { 0xd7, 0x6f, 0x09, 0xd5, 0xd9, 0x4a, 0xa9, 0x19, 0xb1, 0x83, 0xed, 0x98, 0x0c, 0x74, 0x0f, 0x55, 0x02, 0xbc, 0x6d, 0x78,  } };
-    return ID;
-}
 const schema::Entity& GlBindProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBindProgramPipelineEXT::StaticId(),
         "gles",
         "",
         "GlBindProgramPipelineEXT",
@@ -2980,13 +2335,8 @@ const schema::Entity& GlBindProgramPipelineEXT::StaticSchema() {
 
 // GlBindRenderbuffer:
 // gles.GlBindRenderbuffer{$,Uint32,Uint32}
-const gapic::Id& GlBindRenderbuffer::StaticId() {
-    static gapic::Id ID{ { 0x8e, 0xb6, 0xc5, 0xd4, 0x48, 0xe7, 0x4e, 0x5e, 0x5d, 0x87, 0xc6, 0x48, 0xbc, 0xc6, 0x28, 0x5f, 0x88, 0x08, 0xfd, 0x22,  } };
-    return ID;
-}
 const schema::Entity& GlBindRenderbuffer::StaticSchema() {
     static schema::Entity entity {
-        GlBindRenderbuffer::StaticId(),
         "gles",
         "",
         "GlBindRenderbuffer",
@@ -3002,13 +2352,8 @@ const schema::Entity& GlBindRenderbuffer::StaticSchema() {
 
 // GlBindSampler:
 // gles.GlBindSampler{$,Uint32,Uint32}
-const gapic::Id& GlBindSampler::StaticId() {
-    static gapic::Id ID{ { 0xe8, 0x93, 0x9c, 0x3b, 0x63, 0x40, 0x99, 0xdc, 0x94, 0xe4, 0x57, 0x5d, 0x96, 0x39, 0xd4, 0xb8, 0xfc, 0x4a, 0x9f, 0x7f,  } };
-    return ID;
-}
 const schema::Entity& GlBindSampler::StaticSchema() {
     static schema::Entity entity {
-        GlBindSampler::StaticId(),
         "gles",
         "",
         "GlBindSampler",
@@ -3024,13 +2369,8 @@ const schema::Entity& GlBindSampler::StaticSchema() {
 
 // GlBindTexture:
 // gles.GlBindTexture{$,Uint32,Uint32}
-const gapic::Id& GlBindTexture::StaticId() {
-    static gapic::Id ID{ { 0x71, 0x3e, 0x50, 0x0c, 0x12, 0x0f, 0x76, 0x1a, 0x03, 0x97, 0x59, 0xf8, 0xa5, 0x59, 0x69, 0x3e, 0x95, 0xc3, 0xfe, 0xed,  } };
-    return ID;
-}
 const schema::Entity& GlBindTexture::StaticSchema() {
     static schema::Entity entity {
-        GlBindTexture::StaticId(),
         "gles",
         "",
         "GlBindTexture",
@@ -3046,13 +2386,8 @@ const schema::Entity& GlBindTexture::StaticSchema() {
 
 // GlBindTransformFeedback:
 // gles.GlBindTransformFeedback{$,Uint32,Uint32}
-const gapic::Id& GlBindTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0xc7, 0x4d, 0x37, 0x22, 0x9c, 0xee, 0x2a, 0x7e, 0xa0, 0xb1, 0xde, 0x09, 0xad, 0x81, 0x62, 0x73, 0xcd, 0x3c, 0xe7, 0x2b,  } };
-    return ID;
-}
 const schema::Entity& GlBindTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlBindTransformFeedback::StaticId(),
         "gles",
         "",
         "GlBindTransformFeedback",
@@ -3068,13 +2403,8 @@ const schema::Entity& GlBindTransformFeedback::StaticSchema() {
 
 // GlBindVertexArray:
 // gles.GlBindVertexArray{$,Uint32}
-const gapic::Id& GlBindVertexArray::StaticId() {
-    static gapic::Id ID{ { 0xc1, 0x06, 0xe4, 0x02, 0x13, 0xb5, 0x67, 0xa3, 0xd9, 0xa9, 0xce, 0x1b, 0x1b, 0x8a, 0x6c, 0xcc, 0x53, 0x0d, 0x22, 0x8f,  } };
-    return ID;
-}
 const schema::Entity& GlBindVertexArray::StaticSchema() {
     static schema::Entity entity {
-        GlBindVertexArray::StaticId(),
         "gles",
         "",
         "GlBindVertexArray",
@@ -3089,13 +2419,8 @@ const schema::Entity& GlBindVertexArray::StaticSchema() {
 
 // GlBindVertexArrayOES:
 // gles.GlBindVertexArrayOES{$,Uint32}
-const gapic::Id& GlBindVertexArrayOES::StaticId() {
-    static gapic::Id ID{ { 0xfb, 0xf2, 0x87, 0x4a, 0x57, 0xa1, 0xe1, 0x8e, 0x05, 0x96, 0x41, 0xd4, 0x0f, 0x15, 0x93, 0x2b, 0x18, 0x43, 0xeb, 0x15,  } };
-    return ID;
-}
 const schema::Entity& GlBindVertexArrayOES::StaticSchema() {
     static schema::Entity entity {
-        GlBindVertexArrayOES::StaticId(),
         "gles",
         "",
         "GlBindVertexArrayOES",
@@ -3110,10 +2435,6 @@ const schema::Entity& GlBindVertexArrayOES::StaticSchema() {
 
 // GlBindVertexBuffer:
 // gles.GlBindVertexBuffer{$,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlBindVertexBuffer::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0x31, 0x28, 0x0a, 0xb5, 0x50, 0x4d, 0xac, 0x92, 0xd6, 0x00, 0x92, 0xc3, 0x4a, 0xe7, 0x4a, 0x82, 0x8a, 0x30, 0xee,  } };
-    return ID;
-}
 void GlBindVertexBuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBindingIndex);
@@ -3123,7 +2444,6 @@ void GlBindVertexBuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBindVertexBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlBindVertexBuffer::StaticId(),
         "gles",
         "",
         "GlBindVertexBuffer",
@@ -3141,13 +2461,8 @@ const schema::Entity& GlBindVertexBuffer::StaticSchema() {
 
 // GlBlendBarrier:
 // gles.GlBlendBarrier{$}
-const gapic::Id& GlBlendBarrier::StaticId() {
-    static gapic::Id ID{ { 0x7b, 0x8d, 0xaf, 0xa7, 0x7e, 0x09, 0xb3, 0xf9, 0x21, 0xa7, 0x27, 0x89, 0x8c, 0xec, 0x35, 0xe8, 0x1a, 0x8d, 0xc3, 0x58,  } };
-    return ID;
-}
 const schema::Entity& GlBlendBarrier::StaticSchema() {
     static schema::Entity entity {
-        GlBlendBarrier::StaticId(),
         "gles",
         "",
         "GlBlendBarrier",
@@ -3161,13 +2476,8 @@ const schema::Entity& GlBlendBarrier::StaticSchema() {
 
 // GlBlendBarrierKHR:
 // gles.GlBlendBarrierKHR{$}
-const gapic::Id& GlBlendBarrierKHR::StaticId() {
-    static gapic::Id ID{ { 0x17, 0xd0, 0x57, 0x89, 0xf1, 0x45, 0x8b, 0x4a, 0xba, 0x1c, 0xab, 0xd3, 0xc2, 0xa2, 0x82, 0x24, 0xc0, 0x74, 0xae, 0x22,  } };
-    return ID;
-}
 const schema::Entity& GlBlendBarrierKHR::StaticSchema() {
     static schema::Entity entity {
-        GlBlendBarrierKHR::StaticId(),
         "gles",
         "",
         "GlBlendBarrierKHR",
@@ -3181,13 +2491,8 @@ const schema::Entity& GlBlendBarrierKHR::StaticSchema() {
 
 // GlBlendBarrierNV:
 // gles.GlBlendBarrierNV{$}
-const gapic::Id& GlBlendBarrierNV::StaticId() {
-    static gapic::Id ID{ { 0xde, 0x58, 0x6a, 0x1c, 0x4e, 0xf4, 0xfe, 0x3e, 0x17, 0x5d, 0x01, 0x65, 0xd9, 0x19, 0xec, 0xe0, 0x85, 0xb0, 0x84, 0xba,  } };
-    return ID;
-}
 const schema::Entity& GlBlendBarrierNV::StaticSchema() {
     static schema::Entity entity {
-        GlBlendBarrierNV::StaticId(),
         "gles",
         "",
         "GlBlendBarrierNV",
@@ -3201,10 +2506,6 @@ const schema::Entity& GlBlendBarrierNV::StaticSchema() {
 
 // GlBlendColor:
 // gles.GlBlendColor{$,Float32,Float32,Float32,Float32}
-const gapic::Id& GlBlendColor::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x19, 0xe7, 0x57, 0x16, 0x0c, 0x2e, 0x41, 0x7d, 0xc1, 0x9a, 0x4d, 0x38, 0x5b, 0xb4, 0xe0, 0x22, 0x78, 0xfa, 0x05,  } };
-    return ID;
-}
 void GlBlendColor::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Float32(this->mRed);
@@ -3214,7 +2515,6 @@ void GlBlendColor::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendColor::StaticSchema() {
     static schema::Entity entity {
-        GlBlendColor::StaticId(),
         "gles",
         "",
         "GlBlendColor",
@@ -3232,13 +2532,8 @@ const schema::Entity& GlBlendColor::StaticSchema() {
 
 // GlBlendEquation:
 // gles.GlBlendEquation{$,Uint32}
-const gapic::Id& GlBlendEquation::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0xbd, 0x2b, 0x8f, 0xe5, 0x37, 0x04, 0xe1, 0x61, 0x32, 0x5b, 0x6d, 0x38, 0x2b, 0x4a, 0x3c, 0xe6, 0x9c, 0xf7, 0x09,  } };
-    return ID;
-}
 const schema::Entity& GlBlendEquation::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquation::StaticId(),
         "gles",
         "",
         "GlBlendEquation",
@@ -3253,13 +2548,8 @@ const schema::Entity& GlBlendEquation::StaticSchema() {
 
 // GlBlendEquationSeparate:
 // gles.GlBlendEquationSeparate{$,Uint32,Uint32}
-const gapic::Id& GlBlendEquationSeparate::StaticId() {
-    static gapic::Id ID{ { 0x28, 0x3a, 0xb3, 0x8b, 0x54, 0xe1, 0x8c, 0x39, 0x77, 0x1d, 0x1c, 0x3a, 0x6b, 0xb0, 0xdc, 0xbe, 0x49, 0xf2, 0x80, 0x86,  } };
-    return ID;
-}
 const schema::Entity& GlBlendEquationSeparate::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationSeparate::StaticId(),
         "gles",
         "",
         "GlBlendEquationSeparate",
@@ -3275,10 +2565,6 @@ const schema::Entity& GlBlendEquationSeparate::StaticSchema() {
 
 // GlBlendEquationSeparatei:
 // gles.GlBlendEquationSeparatei{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendEquationSeparatei::StaticId() {
-    static gapic::Id ID{ { 0x02, 0xe4, 0x5a, 0xbc, 0x39, 0x46, 0xe1, 0x3e, 0xf2, 0x09, 0xd3, 0x8b, 0x70, 0x3d, 0x75, 0xd4, 0x6a, 0x54, 0xef, 0x93,  } };
-    return ID;
-}
 void GlBlendEquationSeparatei::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3287,7 +2573,6 @@ void GlBlendEquationSeparatei::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendEquationSeparatei::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationSeparatei::StaticId(),
         "gles",
         "",
         "GlBlendEquationSeparatei",
@@ -3304,10 +2589,6 @@ const schema::Entity& GlBlendEquationSeparatei::StaticSchema() {
 
 // GlBlendEquationSeparateiEXT:
 // gles.GlBlendEquationSeparateiEXT{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendEquationSeparateiEXT::StaticId() {
-    static gapic::Id ID{ { 0xab, 0x0e, 0xac, 0x5b, 0xad, 0xdc, 0x91, 0x29, 0x7c, 0x9e, 0x2e, 0xc3, 0x01, 0xcb, 0xf7, 0x8b, 0x43, 0x92, 0x1c, 0x23,  } };
-    return ID;
-}
 void GlBlendEquationSeparateiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3316,7 +2597,6 @@ void GlBlendEquationSeparateiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendEquationSeparateiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationSeparateiEXT::StaticId(),
         "gles",
         "",
         "GlBlendEquationSeparateiEXT",
@@ -3333,10 +2613,6 @@ const schema::Entity& GlBlendEquationSeparateiEXT::StaticSchema() {
 
 // GlBlendEquationSeparateiOES:
 // gles.GlBlendEquationSeparateiOES{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendEquationSeparateiOES::StaticId() {
-    static gapic::Id ID{ { 0x40, 0x2d, 0xb7, 0xc3, 0x14, 0x57, 0xcf, 0xd0, 0xfc, 0xd4, 0xe3, 0x64, 0x34, 0x5d, 0xfe, 0x42, 0xbb, 0x2e, 0xd5, 0xcf,  } };
-    return ID;
-}
 void GlBlendEquationSeparateiOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3345,7 +2621,6 @@ void GlBlendEquationSeparateiOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendEquationSeparateiOES::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationSeparateiOES::StaticId(),
         "gles",
         "",
         "GlBlendEquationSeparateiOES",
@@ -3362,13 +2637,8 @@ const schema::Entity& GlBlendEquationSeparateiOES::StaticSchema() {
 
 // GlBlendEquationi:
 // gles.GlBlendEquationi{$,Uint32,Uint32}
-const gapic::Id& GlBlendEquationi::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xd6, 0x32, 0xef, 0xc5, 0xcb, 0x27, 0x8a, 0xc2, 0x14, 0xdf, 0x19, 0xa4, 0xc9, 0x62, 0x0c, 0xd6, 0x23, 0x29, 0x3e,  } };
-    return ID;
-}
 const schema::Entity& GlBlendEquationi::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationi::StaticId(),
         "gles",
         "",
         "GlBlendEquationi",
@@ -3384,13 +2654,8 @@ const schema::Entity& GlBlendEquationi::StaticSchema() {
 
 // GlBlendEquationiEXT:
 // gles.GlBlendEquationiEXT{$,Uint32,Uint32}
-const gapic::Id& GlBlendEquationiEXT::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0x8d, 0x66, 0x8b, 0x03, 0x72, 0xed, 0x0f, 0x02, 0xf9, 0x08, 0x8f, 0xb8, 0x97, 0xbe, 0x4b, 0x66, 0x1b, 0x3e, 0xc5,  } };
-    return ID;
-}
 const schema::Entity& GlBlendEquationiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationiEXT::StaticId(),
         "gles",
         "",
         "GlBlendEquationiEXT",
@@ -3406,13 +2671,8 @@ const schema::Entity& GlBlendEquationiEXT::StaticSchema() {
 
 // GlBlendEquationiOES:
 // gles.GlBlendEquationiOES{$,Uint32,Uint32}
-const gapic::Id& GlBlendEquationiOES::StaticId() {
-    static gapic::Id ID{ { 0xdf, 0x76, 0x9a, 0x52, 0xa6, 0xec, 0xc1, 0xf7, 0x70, 0xe5, 0xb5, 0x0f, 0x74, 0x62, 0xde, 0x68, 0xef, 0x23, 0xcc, 0xf8,  } };
-    return ID;
-}
 const schema::Entity& GlBlendEquationiOES::StaticSchema() {
     static schema::Entity entity {
-        GlBlendEquationiOES::StaticId(),
         "gles",
         "",
         "GlBlendEquationiOES",
@@ -3428,13 +2688,8 @@ const schema::Entity& GlBlendEquationiOES::StaticSchema() {
 
 // GlBlendFunc:
 // gles.GlBlendFunc{$,Uint32,Uint32}
-const gapic::Id& GlBlendFunc::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x49, 0xc2, 0x06, 0xf8, 0x4a, 0x3e, 0x1c, 0x27, 0x53, 0x34, 0x57, 0x97, 0x0c, 0xb5, 0xd6, 0x2b, 0x3d, 0xb5, 0xf9,  } };
-    return ID;
-}
 const schema::Entity& GlBlendFunc::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFunc::StaticId(),
         "gles",
         "",
         "GlBlendFunc",
@@ -3450,10 +2705,6 @@ const schema::Entity& GlBlendFunc::StaticSchema() {
 
 // GlBlendFuncSeparate:
 // gles.GlBlendFuncSeparate{$,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFuncSeparate::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x57, 0x72, 0x29, 0xae, 0x36, 0x41, 0xdd, 0xac, 0x86, 0x81, 0xce, 0x6e, 0x4d, 0x2d, 0xb5, 0x55, 0x76, 0x5e, 0xb4,  } };
-    return ID;
-}
 void GlBlendFuncSeparate::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSrcFactorRgb);
@@ -3463,7 +2714,6 @@ void GlBlendFuncSeparate::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFuncSeparate::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFuncSeparate::StaticId(),
         "gles",
         "",
         "GlBlendFuncSeparate",
@@ -3481,10 +2731,6 @@ const schema::Entity& GlBlendFuncSeparate::StaticSchema() {
 
 // GlBlendFuncSeparatei:
 // gles.GlBlendFuncSeparatei{$,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFuncSeparatei::StaticId() {
-    static gapic::Id ID{ { 0x87, 0x89, 0x02, 0x80, 0xbd, 0x32, 0x4e, 0x30, 0x23, 0x7c, 0x7d, 0xa9, 0x84, 0xc4, 0x19, 0xee, 0xf1, 0x86, 0x60, 0x18,  } };
-    return ID;
-}
 void GlBlendFuncSeparatei::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3495,7 +2741,6 @@ void GlBlendFuncSeparatei::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFuncSeparatei::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFuncSeparatei::StaticId(),
         "gles",
         "",
         "GlBlendFuncSeparatei",
@@ -3514,10 +2759,6 @@ const schema::Entity& GlBlendFuncSeparatei::StaticSchema() {
 
 // GlBlendFuncSeparateiEXT:
 // gles.GlBlendFuncSeparateiEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFuncSeparateiEXT::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0x4e, 0x1f, 0xa7, 0x31, 0x52, 0x01, 0x31, 0xe0, 0x73, 0xca, 0xb5, 0x30, 0xea, 0x0e, 0xe9, 0xb7, 0xe3, 0xbf, 0xc2,  } };
-    return ID;
-}
 void GlBlendFuncSeparateiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3528,7 +2769,6 @@ void GlBlendFuncSeparateiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFuncSeparateiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFuncSeparateiEXT::StaticId(),
         "gles",
         "",
         "GlBlendFuncSeparateiEXT",
@@ -3547,10 +2787,6 @@ const schema::Entity& GlBlendFuncSeparateiEXT::StaticSchema() {
 
 // GlBlendFuncSeparateiOES:
 // gles.GlBlendFuncSeparateiOES{$,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFuncSeparateiOES::StaticId() {
-    static gapic::Id ID{ { 0x82, 0x9b, 0xdf, 0x9e, 0xf3, 0x5a, 0x48, 0x96, 0x51, 0x7b, 0xe7, 0x8d, 0x5b, 0x71, 0xa4, 0x64, 0x5e, 0x63, 0xc3, 0x92,  } };
-    return ID;
-}
 void GlBlendFuncSeparateiOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3561,7 +2797,6 @@ void GlBlendFuncSeparateiOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFuncSeparateiOES::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFuncSeparateiOES::StaticId(),
         "gles",
         "",
         "GlBlendFuncSeparateiOES",
@@ -3580,10 +2815,6 @@ const schema::Entity& GlBlendFuncSeparateiOES::StaticSchema() {
 
 // GlBlendFunci:
 // gles.GlBlendFunci{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFunci::StaticId() {
-    static gapic::Id ID{ { 0x72, 0xc0, 0xa4, 0xe6, 0x16, 0xfc, 0x28, 0x90, 0x21, 0x77, 0xea, 0x53, 0x0a, 0x41, 0x1f, 0x2d, 0x79, 0x40, 0x12, 0xa0,  } };
-    return ID;
-}
 void GlBlendFunci::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3592,7 +2823,6 @@ void GlBlendFunci::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFunci::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFunci::StaticId(),
         "gles",
         "",
         "GlBlendFunci",
@@ -3609,10 +2839,6 @@ const schema::Entity& GlBlendFunci::StaticSchema() {
 
 // GlBlendFunciEXT:
 // gles.GlBlendFunciEXT{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFunciEXT::StaticId() {
-    static gapic::Id ID{ { 0x54, 0x05, 0x60, 0x7a, 0x5e, 0xf8, 0xea, 0xb7, 0x0c, 0x9b, 0x90, 0x99, 0xf0, 0xe9, 0xc2, 0xdd, 0x58, 0xb6, 0xf8, 0xef,  } };
-    return ID;
-}
 void GlBlendFunciEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3621,7 +2847,6 @@ void GlBlendFunciEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFunciEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFunciEXT::StaticId(),
         "gles",
         "",
         "GlBlendFunciEXT",
@@ -3638,10 +2863,6 @@ const schema::Entity& GlBlendFunciEXT::StaticSchema() {
 
 // GlBlendFunciOES:
 // gles.GlBlendFunciOES{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlBlendFunciOES::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0xe2, 0x0e, 0x1a, 0x63, 0xf5, 0x8a, 0x26, 0x02, 0x14, 0x4f, 0xd4, 0x2c, 0x3d, 0xb3, 0xf0, 0x74, 0x95, 0xf3, 0xc6,  } };
-    return ID;
-}
 void GlBlendFunciOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuf);
@@ -3650,7 +2871,6 @@ void GlBlendFunciOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlendFunciOES::StaticSchema() {
     static schema::Entity entity {
-        GlBlendFunciOES::StaticId(),
         "gles",
         "",
         "GlBlendFunciOES",
@@ -3667,13 +2887,8 @@ const schema::Entity& GlBlendFunciOES::StaticSchema() {
 
 // GlBlendParameteriNV:
 // gles.GlBlendParameteriNV{$,Uint32,Int32}
-const gapic::Id& GlBlendParameteriNV::StaticId() {
-    static gapic::Id ID{ { 0xbc, 0x23, 0xad, 0x8e, 0x9b, 0xc4, 0xe1, 0x5b, 0x8a, 0xf2, 0x23, 0x5e, 0x5d, 0xd9, 0x10, 0x65, 0x91, 0x8c, 0x2e, 0xbc,  } };
-    return ID;
-}
 const schema::Entity& GlBlendParameteriNV::StaticSchema() {
     static schema::Entity entity {
-        GlBlendParameteriNV::StaticId(),
         "gles",
         "",
         "GlBlendParameteriNV",
@@ -3689,10 +2904,6 @@ const schema::Entity& GlBlendParameteriNV::StaticSchema() {
 
 // GlBlitFramebuffer:
 // gles.GlBlitFramebuffer{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
-const gapic::Id& GlBlitFramebuffer::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0x0e, 0x0c, 0xbc, 0x4e, 0x94, 0x2e, 0x1f, 0x99, 0xae, 0xe0, 0x5f, 0x0c, 0x87, 0x02, 0x44, 0x90, 0xb4, 0x1d, 0x5c,  } };
-    return ID;
-}
 void GlBlitFramebuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mSrcX0);
@@ -3708,7 +2919,6 @@ void GlBlitFramebuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlitFramebuffer::StaticSchema() {
     static schema::Entity entity {
-        GlBlitFramebuffer::StaticId(),
         "gles",
         "",
         "GlBlitFramebuffer",
@@ -3732,10 +2942,6 @@ const schema::Entity& GlBlitFramebuffer::StaticSchema() {
 
 // GlBlitFramebufferANGLE:
 // gles.GlBlitFramebufferANGLE{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
-const gapic::Id& GlBlitFramebufferANGLE::StaticId() {
-    static gapic::Id ID{ { 0x16, 0xfb, 0xb1, 0xb1, 0x42, 0xb5, 0x55, 0x25, 0xa6, 0x53, 0xf9, 0x01, 0x27, 0x19, 0x22, 0x4b, 0x46, 0x17, 0x61, 0x77,  } };
-    return ID;
-}
 void GlBlitFramebufferANGLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mSrcX0);
@@ -3751,7 +2957,6 @@ void GlBlitFramebufferANGLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlitFramebufferANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlBlitFramebufferANGLE::StaticId(),
         "gles",
         "",
         "GlBlitFramebufferANGLE",
@@ -3775,10 +2980,6 @@ const schema::Entity& GlBlitFramebufferANGLE::StaticSchema() {
 
 // GlBlitFramebufferNV:
 // gles.GlBlitFramebufferNV{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
-const gapic::Id& GlBlitFramebufferNV::StaticId() {
-    static gapic::Id ID{ { 0x91, 0x40, 0xa8, 0xcc, 0x65, 0xbf, 0x94, 0x14, 0x82, 0x68, 0x50, 0x43, 0x3c, 0x2e, 0x6c, 0x7b, 0x56, 0x7e, 0x47, 0x06,  } };
-    return ID;
-}
 void GlBlitFramebufferNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mSrcX0);
@@ -3794,7 +2995,6 @@ void GlBlitFramebufferNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBlitFramebufferNV::StaticSchema() {
     static schema::Entity entity {
-        GlBlitFramebufferNV::StaticId(),
         "gles",
         "",
         "GlBlitFramebufferNV",
@@ -3818,10 +3018,6 @@ const schema::Entity& GlBlitFramebufferNV::StaticSchema() {
 
 // GlBufferData:
 // gles.GlBufferData{$,Uint32,Int32,$,Uint32}
-const gapic::Id& GlBufferData::StaticId() {
-    static gapic::Id ID{ { 0xda, 0xdc, 0x9e, 0x5e, 0xc9, 0xe2, 0x00, 0xe9, 0x08, 0x9a, 0x39, 0x25, 0x98, 0x55, 0x53, 0xd3, 0x44, 0x10, 0x7d, 0xe1,  } };
-    return ID;
-}
 void GlBufferData::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -3831,7 +3027,6 @@ void GlBufferData::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBufferData::StaticSchema() {
     static schema::Entity entity {
-        GlBufferData::StaticId(),
         "gles",
         "",
         "GlBufferData",
@@ -3849,13 +3044,8 @@ const schema::Entity& GlBufferData::StaticSchema() {
 
 // Voidᶜᵖ:
 // gles.Voidᶜᵖ{$}
-const gapic::Id& Void__CP::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0xb6, 0x1f, 0x0a, 0x77, 0xca, 0x73, 0xdc, 0x79, 0xe1, 0x50, 0xcc, 0x4e, 0x20, 0x14, 0xef, 0x37, 0x3f, 0x3f, 0x48,  } };
-    return ID;
-}
 const schema::Entity& Void__CP::StaticSchema() {
     static schema::Entity entity {
-        Void__CP::StaticId(),
         "gles",
         "",
         "Voidᶜᵖ",
@@ -3869,10 +3059,6 @@ const schema::Entity& Void__CP::StaticSchema() {
 
 // GlBufferStorageEXT:
 // gles.GlBufferStorageEXT{$,Uint32,Int32,$,Uint32}
-const gapic::Id& GlBufferStorageEXT::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x67, 0x26, 0x65, 0x70, 0x46, 0xa6, 0x85, 0x9c, 0x15, 0xbf, 0xc8, 0x75, 0xa7, 0xe8, 0x7f, 0x22, 0x79, 0xef, 0x57,  } };
-    return ID;
-}
 void GlBufferStorageEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -3882,7 +3068,6 @@ void GlBufferStorageEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBufferStorageEXT::StaticSchema() {
     static schema::Entity entity {
-        GlBufferStorageEXT::StaticId(),
         "gles",
         "",
         "GlBufferStorageEXT",
@@ -3900,10 +3085,6 @@ const schema::Entity& GlBufferStorageEXT::StaticSchema() {
 
 // GlBufferSubData:
 // gles.GlBufferSubData{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlBufferSubData::StaticId() {
-    static gapic::Id ID{ { 0xbe, 0x90, 0xc6, 0x2a, 0xa0, 0x8d, 0x17, 0xf4, 0xac, 0x6e, 0xa6, 0xb1, 0x25, 0xee, 0x60, 0x0e, 0x19, 0xc0, 0x56, 0x6e,  } };
-    return ID;
-}
 void GlBufferSubData::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -3913,7 +3094,6 @@ void GlBufferSubData::Encode(Encoder* e) const {
 }
 const schema::Entity& GlBufferSubData::StaticSchema() {
     static schema::Entity entity {
-        GlBufferSubData::StaticId(),
         "gles",
         "",
         "GlBufferSubData",
@@ -3931,13 +3111,8 @@ const schema::Entity& GlBufferSubData::StaticSchema() {
 
 // GlCheckFramebufferStatus:
 // gles.GlCheckFramebufferStatus{$,Uint32,Uint32}
-const gapic::Id& GlCheckFramebufferStatus::StaticId() {
-    static gapic::Id ID{ { 0x55, 0x10, 0x3a, 0x5b, 0x87, 0xd9, 0x2e, 0xb6, 0x3b, 0x7c, 0x9a, 0x34, 0xc9, 0x05, 0x8b, 0x83, 0xd8, 0xcb, 0x8d, 0x60,  } };
-    return ID;
-}
 const schema::Entity& GlCheckFramebufferStatus::StaticSchema() {
     static schema::Entity entity {
-        GlCheckFramebufferStatus::StaticId(),
         "gles",
         "",
         "GlCheckFramebufferStatus",
@@ -3953,13 +3128,8 @@ const schema::Entity& GlCheckFramebufferStatus::StaticSchema() {
 
 // GlClear:
 // gles.GlClear{$,Uint32}
-const gapic::Id& GlClear::StaticId() {
-    static gapic::Id ID{ { 0x5d, 0xdb, 0x12, 0x06, 0xeb, 0x04, 0x07, 0x4d, 0x38, 0xf0, 0xfc, 0x5c, 0xc9, 0x6c, 0x83, 0x19, 0xfe, 0xd3, 0xcf, 0xe2,  } };
-    return ID;
-}
 const schema::Entity& GlClear::StaticSchema() {
     static schema::Entity entity {
-        GlClear::StaticId(),
         "gles",
         "",
         "GlClear",
@@ -3974,10 +3144,6 @@ const schema::Entity& GlClear::StaticSchema() {
 
 // GlClearBufferfi:
 // gles.GlClearBufferfi{$,Uint32,Int32,Float32,Int32}
-const gapic::Id& GlClearBufferfi::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0xa7, 0x2f, 0x9e, 0xac, 0xad, 0x62, 0x33, 0x1f, 0x4a, 0xbc, 0x7a, 0x72, 0xa8, 0xac, 0x8f, 0x1f, 0x22, 0x59, 0xe2,  } };
-    return ID;
-}
 void GlClearBufferfi::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuffer);
@@ -3987,7 +3153,6 @@ void GlClearBufferfi::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClearBufferfi::StaticSchema() {
     static schema::Entity entity {
-        GlClearBufferfi::StaticId(),
         "gles",
         "",
         "GlClearBufferfi",
@@ -4005,10 +3170,6 @@ const schema::Entity& GlClearBufferfi::StaticSchema() {
 
 // GlClearBufferfv:
 // gles.GlClearBufferfv{$,Uint32,Int32,$}
-const gapic::Id& GlClearBufferfv::StaticId() {
-    static gapic::Id ID{ { 0xa1, 0x1a, 0x48, 0x1f, 0x54, 0x4a, 0xb2, 0x30, 0xad, 0x0f, 0x1e, 0x76, 0x29, 0x5a, 0xf3, 0x71, 0xdb, 0x8b, 0x29, 0x8f,  } };
-    return ID;
-}
 void GlClearBufferfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuffer);
@@ -4017,7 +3178,6 @@ void GlClearBufferfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClearBufferfv::StaticSchema() {
     static schema::Entity entity {
-        GlClearBufferfv::StaticId(),
         "gles",
         "",
         "GlClearBufferfv",
@@ -4034,10 +3194,6 @@ const schema::Entity& GlClearBufferfv::StaticSchema() {
 
 // GlClearBufferiv:
 // gles.GlClearBufferiv{$,Uint32,Int32,$}
-const gapic::Id& GlClearBufferiv::StaticId() {
-    static gapic::Id ID{ { 0x0d, 0x93, 0x0a, 0x2a, 0x98, 0xdd, 0x42, 0x2b, 0x47, 0x1d, 0x88, 0x94, 0xd3, 0xfb, 0x46, 0x74, 0x03, 0x41, 0x52, 0xd0,  } };
-    return ID;
-}
 void GlClearBufferiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuffer);
@@ -4046,7 +3202,6 @@ void GlClearBufferiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClearBufferiv::StaticSchema() {
     static schema::Entity entity {
-        GlClearBufferiv::StaticId(),
         "gles",
         "",
         "GlClearBufferiv",
@@ -4063,10 +3218,6 @@ const schema::Entity& GlClearBufferiv::StaticSchema() {
 
 // GlClearBufferuiv:
 // gles.GlClearBufferuiv{$,Uint32,Int32,$}
-const gapic::Id& GlClearBufferuiv::StaticId() {
-    static gapic::Id ID{ { 0x11, 0x23, 0x34, 0xd7, 0xcd, 0x59, 0x66, 0xbe, 0x2f, 0xc9, 0x2a, 0x3e, 0x3a, 0xe2, 0xf6, 0x91, 0x1e, 0x21, 0x6d, 0xc6,  } };
-    return ID;
-}
 void GlClearBufferuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mBuffer);
@@ -4075,7 +3226,6 @@ void GlClearBufferuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClearBufferuiv::StaticSchema() {
     static schema::Entity entity {
-        GlClearBufferuiv::StaticId(),
         "gles",
         "",
         "GlClearBufferuiv",
@@ -4092,10 +3242,6 @@ const schema::Entity& GlClearBufferuiv::StaticSchema() {
 
 // GlClearColor:
 // gles.GlClearColor{$,Float32,Float32,Float32,Float32}
-const gapic::Id& GlClearColor::StaticId() {
-    static gapic::Id ID{ { 0x57, 0x52, 0x63, 0xec, 0x95, 0xeb, 0xce, 0x06, 0x9b, 0x6c, 0xf1, 0x23, 0x79, 0xd2, 0x83, 0x82, 0x35, 0xab, 0x08, 0x0f,  } };
-    return ID;
-}
 void GlClearColor::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Float32(this->mR);
@@ -4105,7 +3251,6 @@ void GlClearColor::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClearColor::StaticSchema() {
     static schema::Entity entity {
-        GlClearColor::StaticId(),
         "gles",
         "",
         "GlClearColor",
@@ -4123,13 +3268,8 @@ const schema::Entity& GlClearColor::StaticSchema() {
 
 // GlClearDepthf:
 // gles.GlClearDepthf{$,Float32}
-const gapic::Id& GlClearDepthf::StaticId() {
-    static gapic::Id ID{ { 0xec, 0x7d, 0x5f, 0x6c, 0x81, 0x6b, 0xd2, 0xb9, 0x80, 0xc0, 0x3c, 0x8c, 0x71, 0xb9, 0xb5, 0xb3, 0x83, 0x36, 0x08, 0xaa,  } };
-    return ID;
-}
 const schema::Entity& GlClearDepthf::StaticSchema() {
     static schema::Entity entity {
-        GlClearDepthf::StaticId(),
         "gles",
         "",
         "GlClearDepthf",
@@ -4144,13 +3284,8 @@ const schema::Entity& GlClearDepthf::StaticSchema() {
 
 // GlClearStencil:
 // gles.GlClearStencil{$,Int32}
-const gapic::Id& GlClearStencil::StaticId() {
-    static gapic::Id ID{ { 0x6f, 0x0a, 0x5b, 0xf7, 0x23, 0xdd, 0x6e, 0xdc, 0x06, 0x8f, 0x36, 0xd0, 0x9e, 0x03, 0xcb, 0xf3, 0xed, 0x2a, 0xb7, 0x4e,  } };
-    return ID;
-}
 const schema::Entity& GlClearStencil::StaticSchema() {
     static schema::Entity entity {
-        GlClearStencil::StaticId(),
         "gles",
         "",
         "GlClearStencil",
@@ -4165,10 +3300,6 @@ const schema::Entity& GlClearStencil::StaticSchema() {
 
 // GlClientWaitSync:
 // gles.GlClientWaitSync{$,Uint64,Uint32,Uint64,Uint32}
-const gapic::Id& GlClientWaitSync::StaticId() {
-    static gapic::Id ID{ { 0x99, 0x7b, 0x33, 0xde, 0x73, 0x5f, 0xdd, 0x11, 0x18, 0x0d, 0x1f, 0xa6, 0x10, 0xa1, 0x78, 0xc7, 0xe0, 0x9d, 0x3f, 0x6d,  } };
-    return ID;
-}
 void GlClientWaitSync::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -4178,7 +3309,6 @@ void GlClientWaitSync::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClientWaitSync::StaticSchema() {
     static schema::Entity entity {
-        GlClientWaitSync::StaticId(),
         "gles",
         "",
         "GlClientWaitSync",
@@ -4196,10 +3326,6 @@ const schema::Entity& GlClientWaitSync::StaticSchema() {
 
 // GlClientWaitSyncAPPLE:
 // gles.GlClientWaitSyncAPPLE{$,Uint64,Uint32,Uint64,Uint32}
-const gapic::Id& GlClientWaitSyncAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xe0, 0xe0, 0x02, 0xd4, 0xa0, 0x33, 0x92, 0x52, 0xbe, 0x31, 0xf8, 0xf0, 0x2d, 0x05, 0xdf, 0x46, 0xd2, 0x4f, 0x9f, 0x4e,  } };
-    return ID;
-}
 void GlClientWaitSyncAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -4209,7 +3335,6 @@ void GlClientWaitSyncAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlClientWaitSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlClientWaitSyncAPPLE::StaticId(),
         "gles",
         "",
         "GlClientWaitSyncAPPLE",
@@ -4227,10 +3352,6 @@ const schema::Entity& GlClientWaitSyncAPPLE::StaticSchema() {
 
 // GlColorMask:
 // gles.GlColorMask{$,Uint8,Uint8,Uint8,Uint8}
-const gapic::Id& GlColorMask::StaticId() {
-    static gapic::Id ID{ { 0x02, 0x4d, 0x4f, 0x9e, 0x74, 0xdf, 0xc4, 0x3d, 0x4c, 0x03, 0x53, 0x08, 0x30, 0xa2, 0x1a, 0x86, 0xe0, 0x3d, 0x90, 0x40,  } };
-    return ID;
-}
 void GlColorMask::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint8(this->mRed);
@@ -4240,7 +3361,6 @@ void GlColorMask::Encode(Encoder* e) const {
 }
 const schema::Entity& GlColorMask::StaticSchema() {
     static schema::Entity entity {
-        GlColorMask::StaticId(),
         "gles",
         "",
         "GlColorMask",
@@ -4258,10 +3378,6 @@ const schema::Entity& GlColorMask::StaticSchema() {
 
 // GlColorMaski:
 // gles.GlColorMaski{$,Uint32,Uint8,Uint8,Uint8,Uint8}
-const gapic::Id& GlColorMaski::StaticId() {
-    static gapic::Id ID{ { 0xce, 0x22, 0xbc, 0x1a, 0x06, 0x58, 0x03, 0xd4, 0xd1, 0xa8, 0x58, 0x67, 0xdd, 0x93, 0xa7, 0x0b, 0x71, 0x70, 0x1f, 0x29,  } };
-    return ID;
-}
 void GlColorMaski::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -4272,7 +3388,6 @@ void GlColorMaski::Encode(Encoder* e) const {
 }
 const schema::Entity& GlColorMaski::StaticSchema() {
     static schema::Entity entity {
-        GlColorMaski::StaticId(),
         "gles",
         "",
         "GlColorMaski",
@@ -4291,10 +3406,6 @@ const schema::Entity& GlColorMaski::StaticSchema() {
 
 // GlColorMaskiEXT:
 // gles.GlColorMaskiEXT{$,Uint32,Uint8,Uint8,Uint8,Uint8}
-const gapic::Id& GlColorMaskiEXT::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0xbe, 0x38, 0x51, 0x10, 0xf8, 0x97, 0x13, 0x82, 0x3d, 0x58, 0x95, 0xf0, 0xff, 0x5e, 0xbe, 0xe7, 0x85, 0xf4, 0x51,  } };
-    return ID;
-}
 void GlColorMaskiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -4305,7 +3416,6 @@ void GlColorMaskiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlColorMaskiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlColorMaskiEXT::StaticId(),
         "gles",
         "",
         "GlColorMaskiEXT",
@@ -4324,10 +3434,6 @@ const schema::Entity& GlColorMaskiEXT::StaticSchema() {
 
 // GlColorMaskiOES:
 // gles.GlColorMaskiOES{$,Uint32,Uint8,Uint8,Uint8,Uint8}
-const gapic::Id& GlColorMaskiOES::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x82, 0xf7, 0xf8, 0xa1, 0xf0, 0x24, 0xf5, 0xad, 0xa8, 0x3f, 0x26, 0xd7, 0x61, 0x2f, 0xa6, 0x87, 0x7a, 0x14, 0x61,  } };
-    return ID;
-}
 void GlColorMaskiOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -4338,7 +3444,6 @@ void GlColorMaskiOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlColorMaskiOES::StaticSchema() {
     static schema::Entity entity {
-        GlColorMaskiOES::StaticId(),
         "gles",
         "",
         "GlColorMaskiOES",
@@ -4357,13 +3462,8 @@ const schema::Entity& GlColorMaskiOES::StaticSchema() {
 
 // GlCompileShader:
 // gles.GlCompileShader{$,Uint32}
-const gapic::Id& GlCompileShader::StaticId() {
-    static gapic::Id ID{ { 0x75, 0x07, 0xda, 0x4d, 0x80, 0xc6, 0xc1, 0xc5, 0x18, 0x73, 0xec, 0xdd, 0x70, 0xaa, 0x9f, 0xf4, 0xfc, 0x24, 0x88, 0xfd,  } };
-    return ID;
-}
 const schema::Entity& GlCompileShader::StaticSchema() {
     static schema::Entity entity {
-        GlCompileShader::StaticId(),
         "gles",
         "",
         "GlCompileShader",
@@ -4378,13 +3478,8 @@ const schema::Entity& GlCompileShader::StaticSchema() {
 
 // TexturePointer:
 // gles.TexturePointer{$}
-const gapic::Id& TexturePointer::StaticId() {
-    static gapic::Id ID{ { 0x0f, 0x2d, 0xbc, 0xc4, 0x14, 0x33, 0x85, 0xcb, 0xfb, 0x33, 0x14, 0x2f, 0xcd, 0x48, 0xf0, 0xd5, 0x56, 0xcc, 0x9a, 0xb6,  } };
-    return ID;
-}
 const schema::Entity& TexturePointer::StaticSchema() {
     static schema::Entity entity {
-        TexturePointer::StaticId(),
         "gles",
         "",
         "TexturePointer",
@@ -4398,10 +3493,6 @@ const schema::Entity& TexturePointer::StaticSchema() {
 
 // GlCompressedTexImage2D:
 // gles.GlCompressedTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,$}
-const gapic::Id& GlCompressedTexImage2D::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xe7, 0x7a, 0x76, 0xb9, 0x36, 0xf7, 0x3d, 0xac, 0x0c, 0xf0, 0xc3, 0x89, 0xf5, 0x0a, 0x70, 0xb2, 0x1a, 0x92, 0x93,  } };
-    return ID;
-}
 void GlCompressedTexImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4415,7 +3506,6 @@ void GlCompressedTexImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexImage2D::StaticId(),
         "gles",
         "",
         "GlCompressedTexImage2D",
@@ -4437,10 +3527,6 @@ const schema::Entity& GlCompressedTexImage2D::StaticSchema() {
 
 // GlCompressedTexImage3D:
 // gles.GlCompressedTexImage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
-const gapic::Id& GlCompressedTexImage3D::StaticId() {
-    static gapic::Id ID{ { 0x45, 0xeb, 0x8d, 0x7f, 0xb3, 0xe1, 0x8c, 0x32, 0xcb, 0x7b, 0xb0, 0x8e, 0xee, 0x55, 0xd1, 0x42, 0x05, 0x6e, 0x26, 0xe1,  } };
-    return ID;
-}
 void GlCompressedTexImage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4455,7 +3541,6 @@ void GlCompressedTexImage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexImage3D::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexImage3D::StaticId(),
         "gles",
         "",
         "GlCompressedTexImage3D",
@@ -4478,10 +3563,6 @@ const schema::Entity& GlCompressedTexImage3D::StaticSchema() {
 
 // GlCompressedTexImage3DOES:
 // gles.GlCompressedTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
-const gapic::Id& GlCompressedTexImage3DOES::StaticId() {
-    static gapic::Id ID{ { 0x76, 0x92, 0xad, 0x95, 0x90, 0x20, 0x5f, 0x65, 0xc6, 0xe0, 0xd2, 0xf9, 0xcd, 0xbb, 0x83, 0x6a, 0xb6, 0x4f, 0x7c, 0x1d,  } };
-    return ID;
-}
 void GlCompressedTexImage3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4496,7 +3577,6 @@ void GlCompressedTexImage3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexImage3DOES::StaticId(),
         "gles",
         "",
         "GlCompressedTexImage3DOES",
@@ -4519,10 +3599,6 @@ const schema::Entity& GlCompressedTexImage3DOES::StaticSchema() {
 
 // GlCompressedTexSubImage2D:
 // gles.GlCompressedTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
-const gapic::Id& GlCompressedTexSubImage2D::StaticId() {
-    static gapic::Id ID{ { 0x78, 0x04, 0x53, 0x48, 0xb4, 0x06, 0xca, 0xb8, 0x35, 0x6b, 0xcf, 0x74, 0xe9, 0x1e, 0x01, 0x51, 0x82, 0x1b, 0xbd, 0xeb,  } };
-    return ID;
-}
 void GlCompressedTexSubImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4537,7 +3613,6 @@ void GlCompressedTexSubImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexSubImage2D::StaticId(),
         "gles",
         "",
         "GlCompressedTexSubImage2D",
@@ -4560,10 +3635,6 @@ const schema::Entity& GlCompressedTexSubImage2D::StaticSchema() {
 
 // GlCompressedTexSubImage3D:
 // gles.GlCompressedTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
-const gapic::Id& GlCompressedTexSubImage3D::StaticId() {
-    static gapic::Id ID{ { 0x6c, 0x85, 0x8b, 0x0c, 0xcc, 0x7a, 0x42, 0xf0, 0xe7, 0xde, 0x60, 0xee, 0x8a, 0xa4, 0xda, 0xc3, 0xf5, 0x51, 0xdd, 0xbe,  } };
-    return ID;
-}
 void GlCompressedTexSubImage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4580,7 +3651,6 @@ void GlCompressedTexSubImage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexSubImage3D::StaticId(),
         "gles",
         "",
         "GlCompressedTexSubImage3D",
@@ -4605,10 +3675,6 @@ const schema::Entity& GlCompressedTexSubImage3D::StaticSchema() {
 
 // GlCompressedTexSubImage3DOES:
 // gles.GlCompressedTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
-const gapic::Id& GlCompressedTexSubImage3DOES::StaticId() {
-    static gapic::Id ID{ { 0x62, 0x7f, 0x0d, 0x0e, 0xa9, 0x88, 0x80, 0x22, 0x11, 0x2e, 0x46, 0x61, 0xa0, 0x9e, 0x0c, 0xb2, 0x24, 0x0a, 0x1f, 0xea,  } };
-    return ID;
-}
 void GlCompressedTexSubImage3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4625,7 +3691,6 @@ void GlCompressedTexSubImage3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCompressedTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlCompressedTexSubImage3DOES::StaticId(),
         "gles",
         "",
         "GlCompressedTexSubImage3DOES",
@@ -4650,10 +3715,6 @@ const schema::Entity& GlCompressedTexSubImage3DOES::StaticSchema() {
 
 // GlCopyBufferSubData:
 // gles.GlCopyBufferSubData{$,Uint32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlCopyBufferSubData::StaticId() {
-    static gapic::Id ID{ { 0xde, 0xd8, 0xb2, 0xbe, 0x09, 0xc9, 0xe1, 0xf2, 0x9a, 0xf7, 0xfd, 0x18, 0xaf, 0x36, 0xad, 0xe6, 0xf2, 0xb7, 0x33, 0x0e,  } };
-    return ID;
-}
 void GlCopyBufferSubData::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mReadTarget);
@@ -4664,7 +3725,6 @@ void GlCopyBufferSubData::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyBufferSubData::StaticSchema() {
     static schema::Entity entity {
-        GlCopyBufferSubData::StaticId(),
         "gles",
         "",
         "GlCopyBufferSubData",
@@ -4683,10 +3743,6 @@ const schema::Entity& GlCopyBufferSubData::StaticSchema() {
 
 // GlCopyBufferSubDataNV:
 // gles.GlCopyBufferSubDataNV{$,Uint32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlCopyBufferSubDataNV::StaticId() {
-    static gapic::Id ID{ { 0x94, 0x13, 0xcb, 0x4e, 0xf0, 0x3d, 0xef, 0xe1, 0xe6, 0xd9, 0xb7, 0xa8, 0x5b, 0x1d, 0x28, 0xf7, 0xb4, 0xcb, 0x64, 0xaa,  } };
-    return ID;
-}
 void GlCopyBufferSubDataNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mReadTarget);
@@ -4697,7 +3753,6 @@ void GlCopyBufferSubDataNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyBufferSubDataNV::StaticSchema() {
     static schema::Entity entity {
-        GlCopyBufferSubDataNV::StaticId(),
         "gles",
         "",
         "GlCopyBufferSubDataNV",
@@ -4716,10 +3771,6 @@ const schema::Entity& GlCopyBufferSubDataNV::StaticSchema() {
 
 // GlCopyImageSubData:
 // gles.GlCopyImageSubData{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyImageSubData::StaticId() {
-    static gapic::Id ID{ { 0x50, 0xdd, 0x6c, 0x0a, 0x0d, 0x09, 0x97, 0x91, 0x22, 0xb6, 0xb1, 0xfb, 0xce, 0x27, 0x5d, 0xe3, 0x10, 0x2e, 0xa9, 0xe5,  } };
-    return ID;
-}
 void GlCopyImageSubData::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSrcName);
@@ -4740,7 +3791,6 @@ void GlCopyImageSubData::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyImageSubData::StaticSchema() {
     static schema::Entity entity {
-        GlCopyImageSubData::StaticId(),
         "gles",
         "",
         "GlCopyImageSubData",
@@ -4769,10 +3819,6 @@ const schema::Entity& GlCopyImageSubData::StaticSchema() {
 
 // GlCopyImageSubDataEXT:
 // gles.GlCopyImageSubDataEXT{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyImageSubDataEXT::StaticId() {
-    static gapic::Id ID{ { 0x31, 0xed, 0x6c, 0x4d, 0xb3, 0x4d, 0x78, 0xa7, 0x17, 0x50, 0xe0, 0xd9, 0xc4, 0x5d, 0xe4, 0x5d, 0xc2, 0xd1, 0x9e, 0xde,  } };
-    return ID;
-}
 void GlCopyImageSubDataEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSrcName);
@@ -4793,7 +3839,6 @@ void GlCopyImageSubDataEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyImageSubDataEXT::StaticSchema() {
     static schema::Entity entity {
-        GlCopyImageSubDataEXT::StaticId(),
         "gles",
         "",
         "GlCopyImageSubDataEXT",
@@ -4822,10 +3867,6 @@ const schema::Entity& GlCopyImageSubDataEXT::StaticSchema() {
 
 // GlCopyImageSubDataOES:
 // gles.GlCopyImageSubDataOES{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyImageSubDataOES::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0x7e, 0x68, 0x56, 0xd0, 0x20, 0x73, 0xdc, 0x61, 0xad, 0x85, 0x3b, 0x3b, 0x27, 0x99, 0x7c, 0x9d, 0x68, 0xee, 0x1d,  } };
-    return ID;
-}
 void GlCopyImageSubDataOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSrcName);
@@ -4846,7 +3887,6 @@ void GlCopyImageSubDataOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyImageSubDataOES::StaticSchema() {
     static schema::Entity entity {
-        GlCopyImageSubDataOES::StaticId(),
         "gles",
         "",
         "GlCopyImageSubDataOES",
@@ -4875,13 +3915,8 @@ const schema::Entity& GlCopyImageSubDataOES::StaticSchema() {
 
 // GlCopyPathNV:
 // gles.GlCopyPathNV{$,Uint32,Uint32}
-const gapic::Id& GlCopyPathNV::StaticId() {
-    static gapic::Id ID{ { 0x88, 0x4f, 0x96, 0x83, 0x3e, 0x2f, 0x95, 0x6f, 0xa3, 0xea, 0xa4, 0xfa, 0x45, 0xa2, 0xf7, 0x49, 0xc7, 0xc9, 0x39, 0xae,  } };
-    return ID;
-}
 const schema::Entity& GlCopyPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlCopyPathNV::StaticId(),
         "gles",
         "",
         "GlCopyPathNV",
@@ -4897,10 +3932,6 @@ const schema::Entity& GlCopyPathNV::StaticSchema() {
 
 // GlCopyTexImage2D:
 // gles.GlCopyTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyTexImage2D::StaticId() {
-    static gapic::Id ID{ { 0x06, 0x90, 0x80, 0xba, 0xfb, 0x4c, 0x90, 0xc6, 0x50, 0xf1, 0x2e, 0xb2, 0xea, 0xd3, 0xbb, 0xea, 0xc5, 0x3d, 0xb7, 0xe5,  } };
-    return ID;
-}
 void GlCopyTexImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4914,7 +3945,6 @@ void GlCopyTexImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyTexImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlCopyTexImage2D::StaticId(),
         "gles",
         "",
         "GlCopyTexImage2D",
@@ -4936,10 +3966,6 @@ const schema::Entity& GlCopyTexImage2D::StaticSchema() {
 
 // GlCopyTexSubImage2D:
 // gles.GlCopyTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyTexSubImage2D::StaticId() {
-    static gapic::Id ID{ { 0x99, 0x7c, 0xc1, 0x77, 0x66, 0x4e, 0x5f, 0x26, 0x99, 0x36, 0x72, 0xf5, 0x97, 0xf8, 0xff, 0x21, 0xc0, 0xf1, 0x05, 0x3d,  } };
-    return ID;
-}
 void GlCopyTexSubImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4953,7 +3979,6 @@ void GlCopyTexSubImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlCopyTexSubImage2D::StaticId(),
         "gles",
         "",
         "GlCopyTexSubImage2D",
@@ -4975,10 +4000,6 @@ const schema::Entity& GlCopyTexSubImage2D::StaticSchema() {
 
 // GlCopyTexSubImage3D:
 // gles.GlCopyTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyTexSubImage3D::StaticId() {
-    static gapic::Id ID{ { 0xd5, 0xa8, 0x77, 0xa2, 0x6b, 0x45, 0x1b, 0x89, 0xd2, 0x4e, 0x51, 0xe0, 0x14, 0x4c, 0xb2, 0xd9, 0x43, 0x1f, 0xa5, 0xea,  } };
-    return ID;
-}
 void GlCopyTexSubImage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -4993,7 +4014,6 @@ void GlCopyTexSubImage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
-        GlCopyTexSubImage3D::StaticId(),
         "gles",
         "",
         "GlCopyTexSubImage3D",
@@ -5016,10 +4036,6 @@ const schema::Entity& GlCopyTexSubImage3D::StaticSchema() {
 
 // GlCopyTexSubImage3DOES:
 // gles.GlCopyTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlCopyTexSubImage3DOES::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x24, 0xcb, 0xfe, 0xd6, 0xda, 0x6d, 0x17, 0x95, 0x1d, 0x4f, 0x4d, 0x27, 0xe2, 0x59, 0x89, 0x30, 0x24, 0x7d, 0xb7,  } };
-    return ID;
-}
 void GlCopyTexSubImage3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -5034,7 +4050,6 @@ void GlCopyTexSubImage3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlCopyTexSubImage3DOES::StaticId(),
         "gles",
         "",
         "GlCopyTexSubImage3DOES",
@@ -5057,10 +4072,6 @@ const schema::Entity& GlCopyTexSubImage3DOES::StaticSchema() {
 
 // GlCopyTextureLevelsAPPLE:
 // gles.GlCopyTextureLevelsAPPLE{$,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlCopyTextureLevelsAPPLE::StaticId() {
-    static gapic::Id ID{ { 0x16, 0xa7, 0x15, 0x08, 0xbc, 0x67, 0x1c, 0xc5, 0xb2, 0xb8, 0xc4, 0x69, 0x63, 0x44, 0x08, 0x86, 0x85, 0xda, 0x70, 0xa7,  } };
-    return ID;
-}
 void GlCopyTextureLevelsAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDestinationTexture);
@@ -5070,7 +4081,6 @@ void GlCopyTextureLevelsAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCopyTextureLevelsAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlCopyTextureLevelsAPPLE::StaticId(),
         "gles",
         "",
         "GlCopyTextureLevelsAPPLE",
@@ -5088,10 +4098,6 @@ const schema::Entity& GlCopyTextureLevelsAPPLE::StaticSchema() {
 
 // GlCoverFillPathInstancedNV:
 // gles.GlCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlCoverFillPathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0xaf, 0x24, 0x1a, 0xa6, 0xec, 0x36, 0x37, 0x25, 0x4c, 0x79, 0xf1, 0x71, 0x92, 0x79, 0xb6, 0xd0, 0x1a, 0x69, 0x01, 0xe5,  } };
-    return ID;
-}
 void GlCoverFillPathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -5104,7 +4110,6 @@ void GlCoverFillPathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverFillPathInstancedNV::StaticId(),
         "gles",
         "",
         "GlCoverFillPathInstancedNV",
@@ -5125,13 +4130,8 @@ const schema::Entity& GlCoverFillPathInstancedNV::StaticSchema() {
 
 // GlCoverFillPathNV:
 // gles.GlCoverFillPathNV{$,Uint32,Uint32}
-const gapic::Id& GlCoverFillPathNV::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0xe8, 0xea, 0xf9, 0x2b, 0x12, 0xa0, 0x47, 0x12, 0x41, 0x38, 0x72, 0x83, 0xbb, 0xaf, 0xf2, 0x44, 0x9e, 0x33, 0x6b,  } };
-    return ID;
-}
 const schema::Entity& GlCoverFillPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverFillPathNV::StaticId(),
         "gles",
         "",
         "GlCoverFillPathNV",
@@ -5147,10 +4147,6 @@ const schema::Entity& GlCoverFillPathNV::StaticSchema() {
 
 // GlCoverStrokePathInstancedNV:
 // gles.GlCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlCoverStrokePathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0x89, 0xd8, 0x7e, 0xc8, 0x94, 0x7a, 0xcf, 0x1a, 0x5a, 0x7d, 0x7c, 0xe0, 0x37, 0xd3, 0x25, 0xee, 0x04, 0xb0, 0x41, 0x75,  } };
-    return ID;
-}
 void GlCoverStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -5163,7 +4159,6 @@ void GlCoverStrokePathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverStrokePathInstancedNV::StaticId(),
         "gles",
         "",
         "GlCoverStrokePathInstancedNV",
@@ -5184,13 +4179,8 @@ const schema::Entity& GlCoverStrokePathInstancedNV::StaticSchema() {
 
 // GlCoverStrokePathNV:
 // gles.GlCoverStrokePathNV{$,Uint32,Uint32}
-const gapic::Id& GlCoverStrokePathNV::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0xb9, 0x71, 0x17, 0xaa, 0x96, 0x9b, 0xb8, 0xc9, 0x20, 0x1d, 0xe5, 0xbb, 0x1e, 0xbd, 0x75, 0x13, 0x8c, 0xc0, 0x5b,  } };
-    return ID;
-}
 const schema::Entity& GlCoverStrokePathNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverStrokePathNV::StaticId(),
         "gles",
         "",
         "GlCoverStrokePathNV",
@@ -5206,13 +4196,8 @@ const schema::Entity& GlCoverStrokePathNV::StaticSchema() {
 
 // GlCoverageMaskNV:
 // gles.GlCoverageMaskNV{$,Uint8}
-const gapic::Id& GlCoverageMaskNV::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0xee, 0xc7, 0xdb, 0x29, 0x71, 0xd0, 0x54, 0x76, 0x71, 0x2f, 0x3c, 0x25, 0xd1, 0x08, 0x57, 0x21, 0x4d, 0x39, 0x71,  } };
-    return ID;
-}
 const schema::Entity& GlCoverageMaskNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverageMaskNV::StaticId(),
         "gles",
         "",
         "GlCoverageMaskNV",
@@ -5227,13 +4212,8 @@ const schema::Entity& GlCoverageMaskNV::StaticSchema() {
 
 // GlCoverageModulationNV:
 // gles.GlCoverageModulationNV{$,Uint32}
-const gapic::Id& GlCoverageModulationNV::StaticId() {
-    static gapic::Id ID{ { 0xde, 0x6e, 0xdf, 0x44, 0xb2, 0x0c, 0xd7, 0x3a, 0x41, 0x88, 0x94, 0x61, 0x29, 0x31, 0x39, 0x90, 0x84, 0xd7, 0xbc, 0x7d,  } };
-    return ID;
-}
 const schema::Entity& GlCoverageModulationNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverageModulationNV::StaticId(),
         "gles",
         "",
         "GlCoverageModulationNV",
@@ -5248,13 +4228,8 @@ const schema::Entity& GlCoverageModulationNV::StaticSchema() {
 
 // GlCoverageModulationTableNV:
 // gles.GlCoverageModulationTableNV{$,Int32,$}
-const gapic::Id& GlCoverageModulationTableNV::StaticId() {
-    static gapic::Id ID{ { 0x28, 0x7a, 0xcc, 0xcd, 0x06, 0x77, 0x2d, 0x7e, 0xc9, 0xea, 0xa7, 0xdc, 0x09, 0xa8, 0x10, 0x61, 0xe1, 0x7f, 0xe3, 0x25,  } };
-    return ID;
-}
 const schema::Entity& GlCoverageModulationTableNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverageModulationTableNV::StaticId(),
         "gles",
         "",
         "GlCoverageModulationTableNV",
@@ -5270,13 +4245,8 @@ const schema::Entity& GlCoverageModulationTableNV::StaticSchema() {
 
 // GlCoverageOperationNV:
 // gles.GlCoverageOperationNV{$,Uint32}
-const gapic::Id& GlCoverageOperationNV::StaticId() {
-    static gapic::Id ID{ { 0x76, 0xea, 0xf0, 0x2e, 0xc7, 0xec, 0x3a, 0x87, 0xb1, 0x23, 0x19, 0x9c, 0x0c, 0xd8, 0xcc, 0xa5, 0xbf, 0xff, 0xd9, 0xc7,  } };
-    return ID;
-}
 const schema::Entity& GlCoverageOperationNV::StaticSchema() {
     static schema::Entity entity {
-        GlCoverageOperationNV::StaticId(),
         "gles",
         "",
         "GlCoverageOperationNV",
@@ -5291,13 +4261,8 @@ const schema::Entity& GlCoverageOperationNV::StaticSchema() {
 
 // GlCreatePerfQueryINTEL:
 // gles.GlCreatePerfQueryINTEL{$,Uint32,$}
-const gapic::Id& GlCreatePerfQueryINTEL::StaticId() {
-    static gapic::Id ID{ { 0x02, 0xea, 0xf9, 0xe8, 0xa8, 0x96, 0x68, 0xc4, 0x81, 0x1a, 0x11, 0x46, 0xf5, 0xd4, 0x68, 0x8c, 0xe1, 0xba, 0xbd, 0x66,  } };
-    return ID;
-}
 const schema::Entity& GlCreatePerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlCreatePerfQueryINTEL::StaticId(),
         "gles",
         "",
         "GlCreatePerfQueryINTEL",
@@ -5313,13 +4278,8 @@ const schema::Entity& GlCreatePerfQueryINTEL::StaticSchema() {
 
 // GlCreateProgram:
 // gles.GlCreateProgram{$,Uint32}
-const gapic::Id& GlCreateProgram::StaticId() {
-    static gapic::Id ID{ { 0xf1, 0xcd, 0xea, 0x8f, 0x66, 0xef, 0x28, 0xa5, 0xea, 0x0e, 0x80, 0xce, 0x29, 0x24, 0xff, 0x7f, 0x8f, 0x1a, 0x95, 0x7b,  } };
-    return ID;
-}
 const schema::Entity& GlCreateProgram::StaticSchema() {
     static schema::Entity entity {
-        GlCreateProgram::StaticId(),
         "gles",
         "",
         "GlCreateProgram",
@@ -5334,13 +4294,8 @@ const schema::Entity& GlCreateProgram::StaticSchema() {
 
 // GlCreateShader:
 // gles.GlCreateShader{$,Uint32,Uint32}
-const gapic::Id& GlCreateShader::StaticId() {
-    static gapic::Id ID{ { 0x51, 0xfb, 0x26, 0x16, 0xd7, 0x61, 0x93, 0xb7, 0xd5, 0x10, 0xd9, 0x8a, 0x5d, 0x8b, 0x56, 0x70, 0x7e, 0xdc, 0xcc, 0x91,  } };
-    return ID;
-}
 const schema::Entity& GlCreateShader::StaticSchema() {
     static schema::Entity entity {
-        GlCreateShader::StaticId(),
         "gles",
         "",
         "GlCreateShader",
@@ -5356,10 +4311,6 @@ const schema::Entity& GlCreateShader::StaticSchema() {
 
 // GlCreateShaderProgramv:
 // gles.GlCreateShaderProgramv{$,Uint32,Int32,$,Uint32}
-const gapic::Id& GlCreateShaderProgramv::StaticId() {
-    static gapic::Id ID{ { 0x81, 0xce, 0x5e, 0x81, 0x03, 0xe0, 0xe9, 0xed, 0x66, 0xe2, 0x1e, 0x9f, 0x5b, 0x71, 0x84, 0xb6, 0xe3, 0x8e, 0x5e, 0xc0,  } };
-    return ID;
-}
 void GlCreateShaderProgramv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mType);
@@ -5369,7 +4320,6 @@ void GlCreateShaderProgramv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCreateShaderProgramv::StaticSchema() {
     static schema::Entity entity {
-        GlCreateShaderProgramv::StaticId(),
         "gles",
         "",
         "GlCreateShaderProgramv",
@@ -5387,10 +4337,6 @@ const schema::Entity& GlCreateShaderProgramv::StaticSchema() {
 
 // GlCreateShaderProgramvEXT:
 // gles.GlCreateShaderProgramvEXT{$,Uint32,Int32,$,Uint32}
-const gapic::Id& GlCreateShaderProgramvEXT::StaticId() {
-    static gapic::Id ID{ { 0x37, 0xaa, 0xed, 0x83, 0x53, 0xa2, 0xf4, 0x71, 0x8b, 0x78, 0x13, 0x10, 0xd1, 0xbc, 0x8b, 0xf6, 0x2b, 0x1b, 0xd3, 0x95,  } };
-    return ID;
-}
 void GlCreateShaderProgramvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mType);
@@ -5400,7 +4346,6 @@ void GlCreateShaderProgramvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlCreateShaderProgramvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlCreateShaderProgramvEXT::StaticId(),
         "gles",
         "",
         "GlCreateShaderProgramvEXT",
@@ -5418,13 +4363,8 @@ const schema::Entity& GlCreateShaderProgramvEXT::StaticSchema() {
 
 // GlCullFace:
 // gles.GlCullFace{$,Uint32}
-const gapic::Id& GlCullFace::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x6b, 0xed, 0xbc, 0x50, 0xe1, 0x84, 0x3d, 0x43, 0xde, 0xa6, 0x89, 0x54, 0x98, 0x66, 0x03, 0x94, 0xd3, 0xf9, 0xc3,  } };
-    return ID;
-}
 const schema::Entity& GlCullFace::StaticSchema() {
     static schema::Entity entity {
-        GlCullFace::StaticId(),
         "gles",
         "",
         "GlCullFace",
@@ -5439,13 +4379,8 @@ const schema::Entity& GlCullFace::StaticSchema() {
 
 // GlDebugMessageCallback:
 // gles.GlDebugMessageCallback{$,$,$}
-const gapic::Id& GlDebugMessageCallback::StaticId() {
-    static gapic::Id ID{ { 0x8c, 0x3a, 0xe1, 0x6a, 0x2e, 0xc4, 0x82, 0xe0, 0x92, 0x18, 0x19, 0xe5, 0x93, 0x76, 0x5b, 0x3f, 0xe4, 0xd3, 0x88, 0x53,  } };
-    return ID;
-}
 const schema::Entity& GlDebugMessageCallback::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageCallback::StaticId(),
         "gles",
         "",
         "GlDebugMessageCallback",
@@ -5461,13 +4396,8 @@ const schema::Entity& GlDebugMessageCallback::StaticSchema() {
 
 // GlDebugMessageCallbackKHR:
 // gles.GlDebugMessageCallbackKHR{$,$,$}
-const gapic::Id& GlDebugMessageCallbackKHR::StaticId() {
-    static gapic::Id ID{ { 0xc3, 0x21, 0x66, 0xfe, 0x4c, 0x90, 0x40, 0xbf, 0x54, 0x31, 0x28, 0x2b, 0x4b, 0x11, 0x71, 0x67, 0x82, 0x85, 0x7f, 0x7e,  } };
-    return ID;
-}
 const schema::Entity& GlDebugMessageCallbackKHR::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageCallbackKHR::StaticId(),
         "gles",
         "",
         "GlDebugMessageCallbackKHR",
@@ -5483,10 +4413,6 @@ const schema::Entity& GlDebugMessageCallbackKHR::StaticSchema() {
 
 // GlDebugMessageControl:
 // gles.GlDebugMessageControl{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
-const gapic::Id& GlDebugMessageControl::StaticId() {
-    static gapic::Id ID{ { 0x76, 0xcf, 0xd3, 0xac, 0x3e, 0xed, 0x5c, 0x46, 0x3c, 0x9e, 0x2e, 0xf0, 0x03, 0x3e, 0x48, 0x82, 0xcd, 0xb7, 0x83, 0x06,  } };
-    return ID;
-}
 void GlDebugMessageControl::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -5498,7 +4424,6 @@ void GlDebugMessageControl::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDebugMessageControl::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageControl::StaticId(),
         "gles",
         "",
         "GlDebugMessageControl",
@@ -5518,10 +4443,6 @@ const schema::Entity& GlDebugMessageControl::StaticSchema() {
 
 // GlDebugMessageControlKHR:
 // gles.GlDebugMessageControlKHR{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
-const gapic::Id& GlDebugMessageControlKHR::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0x85, 0x68, 0x3f, 0x52, 0x57, 0x77, 0x36, 0x03, 0xdb, 0x59, 0x82, 0xc9, 0x40, 0xff, 0x95, 0x59, 0xd1, 0x20, 0xf1,  } };
-    return ID;
-}
 void GlDebugMessageControlKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -5533,7 +4454,6 @@ void GlDebugMessageControlKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDebugMessageControlKHR::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageControlKHR::StaticId(),
         "gles",
         "",
         "GlDebugMessageControlKHR",
@@ -5553,10 +4473,6 @@ const schema::Entity& GlDebugMessageControlKHR::StaticSchema() {
 
 // GlDebugMessageInsert:
 // gles.GlDebugMessageInsert{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlDebugMessageInsert::StaticId() {
-    static gapic::Id ID{ { 0xf6, 0xc8, 0x28, 0x99, 0x9f, 0x5b, 0x27, 0xbf, 0x61, 0xe6, 0x74, 0x72, 0xa9, 0x73, 0xd7, 0x20, 0x14, 0x86, 0xf9, 0x16,  } };
-    return ID;
-}
 void GlDebugMessageInsert::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -5568,7 +4484,6 @@ void GlDebugMessageInsert::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDebugMessageInsert::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageInsert::StaticId(),
         "gles",
         "",
         "GlDebugMessageInsert",
@@ -5588,10 +4503,6 @@ const schema::Entity& GlDebugMessageInsert::StaticSchema() {
 
 // GlDebugMessageInsertKHR:
 // gles.GlDebugMessageInsertKHR{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlDebugMessageInsertKHR::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0xaa, 0xe9, 0x49, 0x9a, 0x1e, 0xde, 0x45, 0x7a, 0x14, 0xe8, 0x04, 0x23, 0x4a, 0xae, 0x8c, 0x86, 0x38, 0x88, 0x94,  } };
-    return ID;
-}
 void GlDebugMessageInsertKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -5603,7 +4514,6 @@ void GlDebugMessageInsertKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDebugMessageInsertKHR::StaticSchema() {
     static schema::Entity entity {
-        GlDebugMessageInsertKHR::StaticId(),
         "gles",
         "",
         "GlDebugMessageInsertKHR",
@@ -5623,13 +4533,8 @@ const schema::Entity& GlDebugMessageInsertKHR::StaticSchema() {
 
 // GlDeleteBuffers:
 // gles.GlDeleteBuffers{$,Int32,$}
-const gapic::Id& GlDeleteBuffers::StaticId() {
-    static gapic::Id ID{ { 0x40, 0x11, 0x7d, 0x4a, 0xd6, 0x55, 0x04, 0xf6, 0x19, 0xa2, 0x59, 0x07, 0xd7, 0x02, 0x05, 0x29, 0x58, 0x54, 0xd1, 0xde,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteBuffers::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteBuffers::StaticId(),
         "gles",
         "",
         "GlDeleteBuffers",
@@ -5645,13 +4550,8 @@ const schema::Entity& GlDeleteBuffers::StaticSchema() {
 
 // GlDeleteFencesNV:
 // gles.GlDeleteFencesNV{$,Int32,$}
-const gapic::Id& GlDeleteFencesNV::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x89, 0x49, 0xda, 0x3e, 0xb6, 0xb8, 0x0d, 0x2e, 0xd8, 0xaf, 0x0e, 0xd0, 0x02, 0x7e, 0x8b, 0x08, 0x57, 0x7b, 0x53,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteFencesNV::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteFencesNV::StaticId(),
         "gles",
         "",
         "GlDeleteFencesNV",
@@ -5667,13 +4567,8 @@ const schema::Entity& GlDeleteFencesNV::StaticSchema() {
 
 // GlDeleteFramebuffers:
 // gles.GlDeleteFramebuffers{$,Int32,$}
-const gapic::Id& GlDeleteFramebuffers::StaticId() {
-    static gapic::Id ID{ { 0xc5, 0x22, 0x9d, 0x74, 0xd6, 0xf5, 0x2d, 0xff, 0xbb, 0x41, 0x6c, 0xfc, 0x4f, 0x87, 0x39, 0x52, 0x05, 0x5c, 0x8e, 0xd8,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteFramebuffers::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteFramebuffers::StaticId(),
         "gles",
         "",
         "GlDeleteFramebuffers",
@@ -5689,13 +4584,8 @@ const schema::Entity& GlDeleteFramebuffers::StaticSchema() {
 
 // GlDeletePathsNV:
 // gles.GlDeletePathsNV{$,Uint32,Int32}
-const gapic::Id& GlDeletePathsNV::StaticId() {
-    static gapic::Id ID{ { 0xe4, 0x75, 0xbd, 0x39, 0xd8, 0x17, 0x99, 0x99, 0x5b, 0xf0, 0x3e, 0xdc, 0x53, 0x25, 0xaa, 0x85, 0x1b, 0xe3, 0xb1, 0xf0,  } };
-    return ID;
-}
 const schema::Entity& GlDeletePathsNV::StaticSchema() {
     static schema::Entity entity {
-        GlDeletePathsNV::StaticId(),
         "gles",
         "",
         "GlDeletePathsNV",
@@ -5711,13 +4601,8 @@ const schema::Entity& GlDeletePathsNV::StaticSchema() {
 
 // GlDeletePerfMonitorsAMD:
 // gles.GlDeletePerfMonitorsAMD{$,Int32,$}
-const gapic::Id& GlDeletePerfMonitorsAMD::StaticId() {
-    static gapic::Id ID{ { 0xda, 0xcb, 0xc2, 0x2a, 0x82, 0x04, 0x76, 0xe5, 0x91, 0xb7, 0xbd, 0xdd, 0xfa, 0x13, 0x0d, 0x02, 0xf1, 0x97, 0x0d, 0xf5,  } };
-    return ID;
-}
 const schema::Entity& GlDeletePerfMonitorsAMD::StaticSchema() {
     static schema::Entity entity {
-        GlDeletePerfMonitorsAMD::StaticId(),
         "gles",
         "",
         "GlDeletePerfMonitorsAMD",
@@ -5733,13 +4618,8 @@ const schema::Entity& GlDeletePerfMonitorsAMD::StaticSchema() {
 
 // GlDeletePerfQueryINTEL:
 // gles.GlDeletePerfQueryINTEL{$,Uint32}
-const gapic::Id& GlDeletePerfQueryINTEL::StaticId() {
-    static gapic::Id ID{ { 0xd9, 0x8a, 0x22, 0x69, 0x35, 0xa9, 0x2e, 0x83, 0xf7, 0xe1, 0x85, 0x34, 0xb0, 0x89, 0x30, 0xea, 0x5d, 0x78, 0xad, 0x6a,  } };
-    return ID;
-}
 const schema::Entity& GlDeletePerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlDeletePerfQueryINTEL::StaticId(),
         "gles",
         "",
         "GlDeletePerfQueryINTEL",
@@ -5754,13 +4634,8 @@ const schema::Entity& GlDeletePerfQueryINTEL::StaticSchema() {
 
 // GlDeleteProgram:
 // gles.GlDeleteProgram{$,Uint32}
-const gapic::Id& GlDeleteProgram::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0x8e, 0x62, 0x73, 0xef, 0x20, 0xea, 0x9e, 0x07, 0x8f, 0x2b, 0xd9, 0xc4, 0xe3, 0x33, 0xd4, 0x92, 0x5c, 0x1f, 0xc0,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteProgram::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteProgram::StaticId(),
         "gles",
         "",
         "GlDeleteProgram",
@@ -5775,13 +4650,8 @@ const schema::Entity& GlDeleteProgram::StaticSchema() {
 
 // PipelineIdᶜᵖ:
 // gles.PipelineIdᶜᵖ{$}
-const gapic::Id& PipelineId__CP::StaticId() {
-    static gapic::Id ID{ { 0x54, 0x55, 0xc9, 0x7e, 0x0b, 0xd2, 0x60, 0xc5, 0xb2, 0x8e, 0xc6, 0x32, 0x9a, 0x20, 0xe5, 0xda, 0xf0, 0xc5, 0x7c, 0xe4,  } };
-    return ID;
-}
 const schema::Entity& PipelineId__CP::StaticSchema() {
     static schema::Entity entity {
-        PipelineId__CP::StaticId(),
         "gles",
         "",
         "PipelineIdᶜᵖ",
@@ -5795,13 +4665,8 @@ const schema::Entity& PipelineId__CP::StaticSchema() {
 
 // GlDeleteProgramPipelines:
 // gles.GlDeleteProgramPipelines{$,Int32,$}
-const gapic::Id& GlDeleteProgramPipelines::StaticId() {
-    static gapic::Id ID{ { 0x51, 0xf2, 0x86, 0xdf, 0xb0, 0x87, 0xdc, 0x12, 0xf6, 0x2c, 0xb8, 0x14, 0x7e, 0x59, 0xd0, 0x43, 0x82, 0x29, 0x45, 0xd5,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteProgramPipelines::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteProgramPipelines::StaticId(),
         "gles",
         "",
         "GlDeleteProgramPipelines",
@@ -5817,13 +4682,8 @@ const schema::Entity& GlDeleteProgramPipelines::StaticSchema() {
 
 // GlDeleteProgramPipelinesEXT:
 // gles.GlDeleteProgramPipelinesEXT{$,Int32,$}
-const gapic::Id& GlDeleteProgramPipelinesEXT::StaticId() {
-    static gapic::Id ID{ { 0xed, 0x41, 0x48, 0x7b, 0xcc, 0xcb, 0x9d, 0xb9, 0x1d, 0x77, 0x84, 0x5e, 0x49, 0xc8, 0xcd, 0x04, 0x9b, 0x86, 0x78, 0xee,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteProgramPipelinesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteProgramPipelinesEXT::StaticId(),
         "gles",
         "",
         "GlDeleteProgramPipelinesEXT",
@@ -5839,13 +4699,8 @@ const schema::Entity& GlDeleteProgramPipelinesEXT::StaticSchema() {
 
 // QueryIdᶜᵖ:
 // gles.QueryIdᶜᵖ{$}
-const gapic::Id& QueryId__CP::StaticId() {
-    static gapic::Id ID{ { 0x64, 0xc5, 0x7f, 0x4b, 0x2e, 0x65, 0x2b, 0xf2, 0x9f, 0x36, 0x9c, 0x22, 0x34, 0x60, 0x83, 0xc8, 0x2b, 0xdb, 0xa8, 0x7f,  } };
-    return ID;
-}
 const schema::Entity& QueryId__CP::StaticSchema() {
     static schema::Entity entity {
-        QueryId__CP::StaticId(),
         "gles",
         "",
         "QueryIdᶜᵖ",
@@ -5859,13 +4714,8 @@ const schema::Entity& QueryId__CP::StaticSchema() {
 
 // GlDeleteQueries:
 // gles.GlDeleteQueries{$,Int32,$}
-const gapic::Id& GlDeleteQueries::StaticId() {
-    static gapic::Id ID{ { 0xfb, 0x46, 0x72, 0x13, 0x8f, 0xaf, 0x6c, 0xb0, 0x31, 0x1e, 0x9f, 0xd4, 0xa3, 0xee, 0xe5, 0x00, 0x4d, 0x67, 0x93, 0x2b,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteQueries::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteQueries::StaticId(),
         "gles",
         "",
         "GlDeleteQueries",
@@ -5881,13 +4731,8 @@ const schema::Entity& GlDeleteQueries::StaticSchema() {
 
 // GlDeleteQueriesEXT:
 // gles.GlDeleteQueriesEXT{$,Int32,$}
-const gapic::Id& GlDeleteQueriesEXT::StaticId() {
-    static gapic::Id ID{ { 0xd3, 0xd1, 0xcd, 0x3e, 0x75, 0x09, 0xd4, 0x3d, 0xed, 0xe0, 0xb7, 0xf4, 0x99, 0xf3, 0x18, 0xaa, 0xb5, 0xad, 0x47, 0x16,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteQueriesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteQueriesEXT::StaticId(),
         "gles",
         "",
         "GlDeleteQueriesEXT",
@@ -5903,13 +4748,8 @@ const schema::Entity& GlDeleteQueriesEXT::StaticSchema() {
 
 // RenderbufferIdᶜᵖ:
 // gles.RenderbufferIdᶜᵖ{$}
-const gapic::Id& RenderbufferId__CP::StaticId() {
-    static gapic::Id ID{ { 0x5d, 0x12, 0x85, 0xc5, 0x49, 0xef, 0x94, 0x6f, 0x28, 0x71, 0xf9, 0x79, 0x39, 0xb3, 0x38, 0x1c, 0xf5, 0x6f, 0x77, 0x62,  } };
-    return ID;
-}
 const schema::Entity& RenderbufferId__CP::StaticSchema() {
     static schema::Entity entity {
-        RenderbufferId__CP::StaticId(),
         "gles",
         "",
         "RenderbufferIdᶜᵖ",
@@ -5923,13 +4763,8 @@ const schema::Entity& RenderbufferId__CP::StaticSchema() {
 
 // GlDeleteRenderbuffers:
 // gles.GlDeleteRenderbuffers{$,Int32,$}
-const gapic::Id& GlDeleteRenderbuffers::StaticId() {
-    static gapic::Id ID{ { 0xae, 0xe1, 0x45, 0x70, 0x5e, 0x08, 0x94, 0x76, 0x6b, 0x8e, 0xee, 0x22, 0x6e, 0x1d, 0xb2, 0xec, 0xec, 0x5d, 0x64, 0x92,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteRenderbuffers::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteRenderbuffers::StaticId(),
         "gles",
         "",
         "GlDeleteRenderbuffers",
@@ -5945,13 +4780,8 @@ const schema::Entity& GlDeleteRenderbuffers::StaticSchema() {
 
 // SamplerIdᶜᵖ:
 // gles.SamplerIdᶜᵖ{$}
-const gapic::Id& SamplerId__CP::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x39, 0xc1, 0x40, 0x2f, 0xd8, 0x11, 0x40, 0x8c, 0xcd, 0xd4, 0x11, 0xab, 0x3d, 0x40, 0x07, 0x7b, 0x70, 0x40, 0xaf,  } };
-    return ID;
-}
 const schema::Entity& SamplerId__CP::StaticSchema() {
     static schema::Entity entity {
-        SamplerId__CP::StaticId(),
         "gles",
         "",
         "SamplerIdᶜᵖ",
@@ -5965,13 +4795,8 @@ const schema::Entity& SamplerId__CP::StaticSchema() {
 
 // GlDeleteSamplers:
 // gles.GlDeleteSamplers{$,Int32,$}
-const gapic::Id& GlDeleteSamplers::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x12, 0x38, 0xbc, 0x75, 0x68, 0x41, 0x0f, 0xfd, 0x5c, 0x46, 0xc3, 0xe4, 0x94, 0xab, 0x0c, 0xf9, 0xb0, 0x6a, 0x40,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteSamplers::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteSamplers::StaticId(),
         "gles",
         "",
         "GlDeleteSamplers",
@@ -5987,13 +4812,8 @@ const schema::Entity& GlDeleteSamplers::StaticSchema() {
 
 // GlDeleteShader:
 // gles.GlDeleteShader{$,Uint32}
-const gapic::Id& GlDeleteShader::StaticId() {
-    static gapic::Id ID{ { 0x61, 0x5a, 0x51, 0x9d, 0x97, 0x4d, 0x55, 0x9a, 0x58, 0x83, 0x09, 0xdf, 0xd9, 0x4d, 0xd2, 0x08, 0xbb, 0xd7, 0x7c, 0x6f,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteShader::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteShader::StaticId(),
         "gles",
         "",
         "GlDeleteShader",
@@ -6008,13 +4828,8 @@ const schema::Entity& GlDeleteShader::StaticSchema() {
 
 // GlDeleteSync:
 // gles.GlDeleteSync{$,Uint64}
-const gapic::Id& GlDeleteSync::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0x0c, 0xde, 0xc5, 0xae, 0x34, 0x15, 0x5c, 0xdb, 0x29, 0xe0, 0x70, 0x31, 0x04, 0xac, 0x28, 0xaf, 0x98, 0x02, 0xc0,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteSync::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteSync::StaticId(),
         "gles",
         "",
         "GlDeleteSync",
@@ -6029,13 +4844,8 @@ const schema::Entity& GlDeleteSync::StaticSchema() {
 
 // GlDeleteSyncAPPLE:
 // gles.GlDeleteSyncAPPLE{$,Uint64}
-const gapic::Id& GlDeleteSyncAPPLE::StaticId() {
-    static gapic::Id ID{ { 0x29, 0xb1, 0x78, 0x23, 0xe0, 0x91, 0x01, 0xcc, 0xc7, 0x68, 0xbb, 0xd8, 0x87, 0xc5, 0xd9, 0xc5, 0x84, 0x7f, 0x21, 0x33,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteSyncAPPLE::StaticId(),
         "gles",
         "",
         "GlDeleteSyncAPPLE",
@@ -6050,13 +4860,8 @@ const schema::Entity& GlDeleteSyncAPPLE::StaticSchema() {
 
 // TextureIdᶜᵖ:
 // gles.TextureIdᶜᵖ{$}
-const gapic::Id& TextureId__CP::StaticId() {
-    static gapic::Id ID{ { 0x82, 0x81, 0xa9, 0xc4, 0x19, 0x46, 0x91, 0x59, 0x16, 0x9a, 0x15, 0xcb, 0xcc, 0xfa, 0x69, 0x9c, 0x75, 0x0d, 0x28, 0xc8,  } };
-    return ID;
-}
 const schema::Entity& TextureId__CP::StaticSchema() {
     static schema::Entity entity {
-        TextureId__CP::StaticId(),
         "gles",
         "",
         "TextureIdᶜᵖ",
@@ -6070,13 +4875,8 @@ const schema::Entity& TextureId__CP::StaticSchema() {
 
 // GlDeleteTextures:
 // gles.GlDeleteTextures{$,Int32,$}
-const gapic::Id& GlDeleteTextures::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0x92, 0x68, 0xb5, 0x16, 0xaf, 0xdb, 0x48, 0xfa, 0x31, 0x6a, 0x24, 0xd1, 0xee, 0xd9, 0x8e, 0x6b, 0xc3, 0x2a, 0xb2,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteTextures::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteTextures::StaticId(),
         "gles",
         "",
         "GlDeleteTextures",
@@ -6092,13 +4892,8 @@ const schema::Entity& GlDeleteTextures::StaticSchema() {
 
 // TransformFeedbackIdᶜᵖ:
 // gles.TransformFeedbackIdᶜᵖ{$}
-const gapic::Id& TransformFeedbackId__CP::StaticId() {
-    static gapic::Id ID{ { 0x55, 0x3d, 0x14, 0x43, 0x9e, 0xa0, 0x15, 0x26, 0xa5, 0xb8, 0x00, 0x2a, 0x96, 0xb3, 0xac, 0x2e, 0x01, 0xc1, 0xbc, 0xc0,  } };
-    return ID;
-}
 const schema::Entity& TransformFeedbackId__CP::StaticSchema() {
     static schema::Entity entity {
-        TransformFeedbackId__CP::StaticId(),
         "gles",
         "",
         "TransformFeedbackIdᶜᵖ",
@@ -6112,13 +4907,8 @@ const schema::Entity& TransformFeedbackId__CP::StaticSchema() {
 
 // GlDeleteTransformFeedbacks:
 // gles.GlDeleteTransformFeedbacks{$,Int32,$}
-const gapic::Id& GlDeleteTransformFeedbacks::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0xdc, 0x2d, 0xb9, 0xe5, 0x0f, 0xe0, 0xee, 0x21, 0x90, 0x68, 0x05, 0x82, 0xe4, 0xbe, 0xba, 0x2b, 0xe4, 0xf1, 0xbb,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteTransformFeedbacks::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteTransformFeedbacks::StaticId(),
         "gles",
         "",
         "GlDeleteTransformFeedbacks",
@@ -6134,13 +4924,8 @@ const schema::Entity& GlDeleteTransformFeedbacks::StaticSchema() {
 
 // VertexArrayIdᶜᵖ:
 // gles.VertexArrayIdᶜᵖ{$}
-const gapic::Id& VertexArrayId__CP::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0xde, 0xab, 0x81, 0x51, 0x77, 0x0e, 0xa9, 0x04, 0x17, 0x55, 0xcc, 0x26, 0xde, 0x4a, 0x4d, 0x31, 0x2d, 0x32, 0xf4,  } };
-    return ID;
-}
 const schema::Entity& VertexArrayId__CP::StaticSchema() {
     static schema::Entity entity {
-        VertexArrayId__CP::StaticId(),
         "gles",
         "",
         "VertexArrayIdᶜᵖ",
@@ -6154,13 +4939,8 @@ const schema::Entity& VertexArrayId__CP::StaticSchema() {
 
 // GlDeleteVertexArrays:
 // gles.GlDeleteVertexArrays{$,Int32,$}
-const gapic::Id& GlDeleteVertexArrays::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0xc2, 0xf3, 0xbf, 0xf2, 0x27, 0x07, 0x67, 0x1c, 0xa8, 0x73, 0x75, 0x7a, 0xcf, 0xa4, 0x24, 0x5a, 0x92, 0x12, 0x66,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteVertexArrays::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteVertexArrays::StaticId(),
         "gles",
         "",
         "GlDeleteVertexArrays",
@@ -6176,13 +4956,8 @@ const schema::Entity& GlDeleteVertexArrays::StaticSchema() {
 
 // GlDeleteVertexArraysOES:
 // gles.GlDeleteVertexArraysOES{$,Int32,$}
-const gapic::Id& GlDeleteVertexArraysOES::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0xc4, 0x2c, 0x5b, 0xfa, 0xb0, 0xfd, 0xa4, 0x7d, 0xca, 0x62, 0x89, 0xad, 0xb6, 0x3c, 0x1c, 0x8b, 0x86, 0xad, 0xbd,  } };
-    return ID;
-}
 const schema::Entity& GlDeleteVertexArraysOES::StaticSchema() {
     static schema::Entity entity {
-        GlDeleteVertexArraysOES::StaticId(),
         "gles",
         "",
         "GlDeleteVertexArraysOES",
@@ -6198,13 +4973,8 @@ const schema::Entity& GlDeleteVertexArraysOES::StaticSchema() {
 
 // GlDepthFunc:
 // gles.GlDepthFunc{$,Uint32}
-const gapic::Id& GlDepthFunc::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0xfa, 0x7c, 0xc5, 0xda, 0xc4, 0x06, 0x06, 0x19, 0xfb, 0x59, 0x37, 0x4a, 0x56, 0x9a, 0x1a, 0xb5, 0x4b, 0x8b, 0xe6,  } };
-    return ID;
-}
 const schema::Entity& GlDepthFunc::StaticSchema() {
     static schema::Entity entity {
-        GlDepthFunc::StaticId(),
         "gles",
         "",
         "GlDepthFunc",
@@ -6219,13 +4989,8 @@ const schema::Entity& GlDepthFunc::StaticSchema() {
 
 // GlDepthMask:
 // gles.GlDepthMask{$,Uint8}
-const gapic::Id& GlDepthMask::StaticId() {
-    static gapic::Id ID{ { 0x6c, 0x25, 0xf3, 0x82, 0x1d, 0x97, 0x57, 0x49, 0xd5, 0xc5, 0x24, 0x30, 0x10, 0x99, 0x51, 0xaf, 0xf6, 0x52, 0x62, 0x1d,  } };
-    return ID;
-}
 const schema::Entity& GlDepthMask::StaticSchema() {
     static schema::Entity entity {
-        GlDepthMask::StaticId(),
         "gles",
         "",
         "GlDepthMask",
@@ -6240,10 +5005,6 @@ const schema::Entity& GlDepthMask::StaticSchema() {
 
 // GlDepthRangeArrayfvNV:
 // gles.GlDepthRangeArrayfvNV{$,Uint32,Int32,$}
-const gapic::Id& GlDepthRangeArrayfvNV::StaticId() {
-    static gapic::Id ID{ { 0x05, 0x94, 0x24, 0xdd, 0x8f, 0x5e, 0xd2, 0xcf, 0x12, 0xa5, 0x98, 0x3f, 0x75, 0x2f, 0x76, 0x8e, 0x94, 0x22, 0x0a, 0x59,  } };
-    return ID;
-}
 void GlDepthRangeArrayfvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirst);
@@ -6252,7 +5013,6 @@ void GlDepthRangeArrayfvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDepthRangeArrayfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlDepthRangeArrayfvNV::StaticId(),
         "gles",
         "",
         "GlDepthRangeArrayfvNV",
@@ -6269,10 +5029,6 @@ const schema::Entity& GlDepthRangeArrayfvNV::StaticSchema() {
 
 // GlDepthRangeIndexedfNV:
 // gles.GlDepthRangeIndexedfNV{$,Uint32,Float32,Float32}
-const gapic::Id& GlDepthRangeIndexedfNV::StaticId() {
-    static gapic::Id ID{ { 0x68, 0xa7, 0x2c, 0x38, 0x20, 0x4f, 0x4e, 0x3c, 0x0f, 0xa8, 0x5c, 0x01, 0xdb, 0x58, 0xcf, 0x23, 0xe4, 0x88, 0x1e, 0x8e,  } };
-    return ID;
-}
 void GlDepthRangeIndexedfNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -6281,7 +5037,6 @@ void GlDepthRangeIndexedfNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDepthRangeIndexedfNV::StaticSchema() {
     static schema::Entity entity {
-        GlDepthRangeIndexedfNV::StaticId(),
         "gles",
         "",
         "GlDepthRangeIndexedfNV",
@@ -6298,13 +5053,8 @@ const schema::Entity& GlDepthRangeIndexedfNV::StaticSchema() {
 
 // GlDepthRangef:
 // gles.GlDepthRangef{$,Float32,Float32}
-const gapic::Id& GlDepthRangef::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0xf7, 0x71, 0x94, 0xe5, 0x1a, 0xbe, 0x4e, 0x70, 0x37, 0xe2, 0xcd, 0xf4, 0x4a, 0x45, 0x02, 0x60, 0xfa, 0x66, 0xd4,  } };
-    return ID;
-}
 const schema::Entity& GlDepthRangef::StaticSchema() {
     static schema::Entity entity {
-        GlDepthRangef::StaticId(),
         "gles",
         "",
         "GlDepthRangef",
@@ -6320,13 +5070,8 @@ const schema::Entity& GlDepthRangef::StaticSchema() {
 
 // GlDetachShader:
 // gles.GlDetachShader{$,Uint32,Uint32}
-const gapic::Id& GlDetachShader::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0xba, 0x72, 0x01, 0xc5, 0x8a, 0x2e, 0xc7, 0xd2, 0xe2, 0x98, 0xbb, 0x5c, 0x48, 0x02, 0x01, 0xe5, 0x36, 0xcd, 0xce,  } };
-    return ID;
-}
 const schema::Entity& GlDetachShader::StaticSchema() {
     static schema::Entity entity {
-        GlDetachShader::StaticId(),
         "gles",
         "",
         "GlDetachShader",
@@ -6342,13 +5087,8 @@ const schema::Entity& GlDetachShader::StaticSchema() {
 
 // GlDisable:
 // gles.GlDisable{$,Uint32}
-const gapic::Id& GlDisable::StaticId() {
-    static gapic::Id ID{ { 0x20, 0xcc, 0xcf, 0x33, 0x35, 0x62, 0x65, 0xac, 0xec, 0xb1, 0xe9, 0xb0, 0xaf, 0xe6, 0x75, 0x77, 0x7c, 0xb0, 0xfc, 0x97,  } };
-    return ID;
-}
 const schema::Entity& GlDisable::StaticSchema() {
     static schema::Entity entity {
-        GlDisable::StaticId(),
         "gles",
         "",
         "GlDisable",
@@ -6363,13 +5103,8 @@ const schema::Entity& GlDisable::StaticSchema() {
 
 // GlDisableDriverControlQCOM:
 // gles.GlDisableDriverControlQCOM{$,Uint32}
-const gapic::Id& GlDisableDriverControlQCOM::StaticId() {
-    static gapic::Id ID{ { 0xba, 0x11, 0xb0, 0xd2, 0xa0, 0xb6, 0xa4, 0x7a, 0x1d, 0xf4, 0xad, 0xdf, 0xee, 0xc9, 0x77, 0x4c, 0x61, 0xff, 0x57, 0xb1,  } };
-    return ID;
-}
 const schema::Entity& GlDisableDriverControlQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlDisableDriverControlQCOM::StaticId(),
         "gles",
         "",
         "GlDisableDriverControlQCOM",
@@ -6384,13 +5119,8 @@ const schema::Entity& GlDisableDriverControlQCOM::StaticSchema() {
 
 // GlDisableVertexAttribArray:
 // gles.GlDisableVertexAttribArray{$,Uint32}
-const gapic::Id& GlDisableVertexAttribArray::StaticId() {
-    static gapic::Id ID{ { 0xcd, 0x8d, 0xc2, 0xa7, 0x0e, 0xae, 0x6e, 0x2f, 0xcd, 0x54, 0x44, 0xb4, 0xaa, 0x51, 0xee, 0xfa, 0x52, 0xa9, 0xa2, 0xeb,  } };
-    return ID;
-}
 const schema::Entity& GlDisableVertexAttribArray::StaticSchema() {
     static schema::Entity entity {
-        GlDisableVertexAttribArray::StaticId(),
         "gles",
         "",
         "GlDisableVertexAttribArray",
@@ -6405,13 +5135,8 @@ const schema::Entity& GlDisableVertexAttribArray::StaticSchema() {
 
 // GlDisablei:
 // gles.GlDisablei{$,Uint32,Uint32}
-const gapic::Id& GlDisablei::StaticId() {
-    static gapic::Id ID{ { 0xfc, 0x40, 0xe4, 0xaf, 0xb9, 0x14, 0x21, 0x9a, 0x6b, 0x0a, 0xeb, 0x13, 0xd7, 0x2b, 0xf3, 0xb4, 0xad, 0x51, 0x70, 0xf6,  } };
-    return ID;
-}
 const schema::Entity& GlDisablei::StaticSchema() {
     static schema::Entity entity {
-        GlDisablei::StaticId(),
         "gles",
         "",
         "GlDisablei",
@@ -6427,13 +5152,8 @@ const schema::Entity& GlDisablei::StaticSchema() {
 
 // GlDisableiEXT:
 // gles.GlDisableiEXT{$,Uint32,Uint32}
-const gapic::Id& GlDisableiEXT::StaticId() {
-    static gapic::Id ID{ { 0xeb, 0xdb, 0x00, 0xe5, 0xed, 0x37, 0xc2, 0xf3, 0x2c, 0x91, 0x94, 0x2e, 0x0d, 0xaf, 0xfb, 0x61, 0xca, 0xff, 0x04, 0x55,  } };
-    return ID;
-}
 const schema::Entity& GlDisableiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDisableiEXT::StaticId(),
         "gles",
         "",
         "GlDisableiEXT",
@@ -6449,13 +5169,8 @@ const schema::Entity& GlDisableiEXT::StaticSchema() {
 
 // GlDisableiNV:
 // gles.GlDisableiNV{$,Uint32,Uint32}
-const gapic::Id& GlDisableiNV::StaticId() {
-    static gapic::Id ID{ { 0xe7, 0x27, 0xd8, 0xc1, 0x77, 0xf1, 0x30, 0x6a, 0x29, 0x0e, 0x7d, 0xc2, 0xff, 0x4b, 0x2e, 0x57, 0x11, 0x09, 0x63, 0x84,  } };
-    return ID;
-}
 const schema::Entity& GlDisableiNV::StaticSchema() {
     static schema::Entity entity {
-        GlDisableiNV::StaticId(),
         "gles",
         "",
         "GlDisableiNV",
@@ -6471,13 +5186,8 @@ const schema::Entity& GlDisableiNV::StaticSchema() {
 
 // GlDisableiOES:
 // gles.GlDisableiOES{$,Uint32,Uint32}
-const gapic::Id& GlDisableiOES::StaticId() {
-    static gapic::Id ID{ { 0x72, 0xb9, 0x37, 0xfa, 0x4d, 0x39, 0xa3, 0x99, 0x96, 0xec, 0x22, 0x24, 0x1a, 0xae, 0x9c, 0x22, 0x81, 0xd2, 0x4b, 0x26,  } };
-    return ID;
-}
 const schema::Entity& GlDisableiOES::StaticSchema() {
     static schema::Entity entity {
-        GlDisableiOES::StaticId(),
         "gles",
         "",
         "GlDisableiOES",
@@ -6493,10 +5203,6 @@ const schema::Entity& GlDisableiOES::StaticSchema() {
 
 // GlDiscardFramebufferEXT:
 // gles.GlDiscardFramebufferEXT{$,Uint32,Int32,$}
-const gapic::Id& GlDiscardFramebufferEXT::StaticId() {
-    static gapic::Id ID{ { 0xf7, 0xa5, 0x90, 0xe0, 0x18, 0x04, 0xf3, 0x98, 0x88, 0x17, 0xe2, 0x3f, 0x45, 0x14, 0x40, 0x88, 0xe6, 0xe1, 0x05, 0x36,  } };
-    return ID;
-}
 void GlDiscardFramebufferEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -6505,7 +5211,6 @@ void GlDiscardFramebufferEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDiscardFramebufferEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDiscardFramebufferEXT::StaticId(),
         "gles",
         "",
         "GlDiscardFramebufferEXT",
@@ -6522,10 +5227,6 @@ const schema::Entity& GlDiscardFramebufferEXT::StaticSchema() {
 
 // GlDispatchCompute:
 // gles.GlDispatchCompute{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlDispatchCompute::StaticId() {
-    static gapic::Id ID{ { 0xa9, 0x9f, 0xb5, 0xe5, 0xd4, 0x59, 0x59, 0x03, 0x18, 0x1a, 0x5a, 0x51, 0xcf, 0xa3, 0xa0, 0x5b, 0xf3, 0xb6, 0x25, 0xfa,  } };
-    return ID;
-}
 void GlDispatchCompute::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mNumGroupsX);
@@ -6534,7 +5235,6 @@ void GlDispatchCompute::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDispatchCompute::StaticSchema() {
     static schema::Entity entity {
-        GlDispatchCompute::StaticId(),
         "gles",
         "",
         "GlDispatchCompute",
@@ -6551,13 +5251,8 @@ const schema::Entity& GlDispatchCompute::StaticSchema() {
 
 // GlDispatchComputeIndirect:
 // gles.GlDispatchComputeIndirect{$,Int32}
-const gapic::Id& GlDispatchComputeIndirect::StaticId() {
-    static gapic::Id ID{ { 0xf8, 0xff, 0x03, 0x8f, 0x68, 0x9e, 0x53, 0x75, 0xa5, 0x70, 0x59, 0x64, 0xb3, 0xa2, 0x28, 0x11, 0x9e, 0x7f, 0x97, 0xac,  } };
-    return ID;
-}
 const schema::Entity& GlDispatchComputeIndirect::StaticSchema() {
     static schema::Entity entity {
-        GlDispatchComputeIndirect::StaticId(),
         "gles",
         "",
         "GlDispatchComputeIndirect",
@@ -6572,10 +5267,6 @@ const schema::Entity& GlDispatchComputeIndirect::StaticSchema() {
 
 // GlDrawArrays:
 // gles.GlDrawArrays{$,Uint32,Int32,Int32}
-const gapic::Id& GlDrawArrays::StaticId() {
-    static gapic::Id ID{ { 0x7c, 0xab, 0xb6, 0xa0, 0xf0, 0xd3, 0xe5, 0xe1, 0xa5, 0x1f, 0xcb, 0x99, 0xd1, 0x68, 0x0e, 0x61, 0x9d, 0x3f, 0xb3, 0x50,  } };
-    return ID;
-}
 void GlDrawArrays::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -6584,7 +5275,6 @@ void GlDrawArrays::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArrays::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArrays::StaticId(),
         "gles",
         "",
         "GlDrawArrays",
@@ -6601,13 +5291,8 @@ const schema::Entity& GlDrawArrays::StaticSchema() {
 
 // GlDrawArraysIndirect:
 // gles.GlDrawArraysIndirect{$,Uint32,$}
-const gapic::Id& GlDrawArraysIndirect::StaticId() {
-    static gapic::Id ID{ { 0xe7, 0x3a, 0x71, 0xda, 0x59, 0x0b, 0x08, 0x7a, 0x31, 0xaf, 0x3d, 0x5c, 0xa9, 0x38, 0x11, 0xab, 0x7a, 0x42, 0x69, 0x19,  } };
-    return ID;
-}
 const schema::Entity& GlDrawArraysIndirect::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysIndirect::StaticId(),
         "gles",
         "",
         "GlDrawArraysIndirect",
@@ -6623,10 +5308,6 @@ const schema::Entity& GlDrawArraysIndirect::StaticSchema() {
 
 // GlDrawArraysInstanced:
 // gles.GlDrawArraysInstanced{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlDrawArraysInstanced::StaticId() {
-    static gapic::Id ID{ { 0xe9, 0xc2, 0x01, 0xee, 0xe7, 0x62, 0x52, 0x9c, 0x08, 0x26, 0x7e, 0x29, 0x95, 0x32, 0xb7, 0x85, 0x31, 0x4e, 0xd6, 0x64,  } };
-    return ID;
-}
 void GlDrawArraysInstanced::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -6636,7 +5317,6 @@ void GlDrawArraysInstanced::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArraysInstanced::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysInstanced::StaticId(),
         "gles",
         "",
         "GlDrawArraysInstanced",
@@ -6654,10 +5334,6 @@ const schema::Entity& GlDrawArraysInstanced::StaticSchema() {
 
 // GlDrawArraysInstancedANGLE:
 // gles.GlDrawArraysInstancedANGLE{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlDrawArraysInstancedANGLE::StaticId() {
-    static gapic::Id ID{ { 0x79, 0x9f, 0x19, 0x73, 0x9e, 0xd8, 0x81, 0xdf, 0x67, 0xe6, 0x41, 0x8f, 0xcc, 0x34, 0x39, 0x57, 0xe8, 0x6f, 0x79, 0x3b,  } };
-    return ID;
-}
 void GlDrawArraysInstancedANGLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -6667,7 +5343,6 @@ void GlDrawArraysInstancedANGLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArraysInstancedANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysInstancedANGLE::StaticId(),
         "gles",
         "",
         "GlDrawArraysInstancedANGLE",
@@ -6685,10 +5360,6 @@ const schema::Entity& GlDrawArraysInstancedANGLE::StaticSchema() {
 
 // GlDrawArraysInstancedBaseInstanceEXT:
 // gles.GlDrawArraysInstancedBaseInstanceEXT{$,Uint32,Int32,Int32,Int32,Uint32}
-const gapic::Id& GlDrawArraysInstancedBaseInstanceEXT::StaticId() {
-    static gapic::Id ID{ { 0x8b, 0x0b, 0x92, 0xdb, 0x98, 0x05, 0x78, 0x12, 0x01, 0x6a, 0x36, 0x94, 0x19, 0x20, 0xcd, 0x6e, 0x0a, 0x62, 0x09, 0x43,  } };
-    return ID;
-}
 void GlDrawArraysInstancedBaseInstanceEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -6699,7 +5370,6 @@ void GlDrawArraysInstancedBaseInstanceEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysInstancedBaseInstanceEXT::StaticId(),
         "gles",
         "",
         "GlDrawArraysInstancedBaseInstanceEXT",
@@ -6718,10 +5388,6 @@ const schema::Entity& GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
 
 // GlDrawArraysInstancedEXT:
 // gles.GlDrawArraysInstancedEXT{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlDrawArraysInstancedEXT::StaticId() {
-    static gapic::Id ID{ { 0x85, 0xad, 0x90, 0xfc, 0x8f, 0x1f, 0x4b, 0xfe, 0x95, 0x07, 0x92, 0x4b, 0xa2, 0xbf, 0x42, 0x66, 0x01, 0xa4, 0xe3, 0x94,  } };
-    return ID;
-}
 void GlDrawArraysInstancedEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -6731,7 +5397,6 @@ void GlDrawArraysInstancedEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArraysInstancedEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysInstancedEXT::StaticId(),
         "gles",
         "",
         "GlDrawArraysInstancedEXT",
@@ -6749,10 +5414,6 @@ const schema::Entity& GlDrawArraysInstancedEXT::StaticSchema() {
 
 // GlDrawArraysInstancedNV:
 // gles.GlDrawArraysInstancedNV{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlDrawArraysInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0xb0, 0x08, 0xc7, 0x9c, 0xa0, 0xef, 0xf3, 0x0f, 0x57, 0xf0, 0x55, 0xc5, 0x19, 0xa1, 0xa4, 0x3f, 0xb9, 0x2a, 0xe6, 0xd9,  } };
-    return ID;
-}
 void GlDrawArraysInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -6762,7 +5423,6 @@ void GlDrawArraysInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawArraysInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlDrawArraysInstancedNV::StaticId(),
         "gles",
         "",
         "GlDrawArraysInstancedNV",
@@ -6780,13 +5440,8 @@ const schema::Entity& GlDrawArraysInstancedNV::StaticSchema() {
 
 // GlDrawBuffers:
 // gles.GlDrawBuffers{$,Int32,$}
-const gapic::Id& GlDrawBuffers::StaticId() {
-    static gapic::Id ID{ { 0xf4, 0x6d, 0x3e, 0xc0, 0xd7, 0x66, 0x7d, 0xdb, 0xbf, 0x32, 0x56, 0x48, 0x21, 0x89, 0x40, 0x07, 0x68, 0x00, 0x5b, 0x3d,  } };
-    return ID;
-}
 const schema::Entity& GlDrawBuffers::StaticSchema() {
     static schema::Entity entity {
-        GlDrawBuffers::StaticId(),
         "gles",
         "",
         "GlDrawBuffers",
@@ -6802,13 +5457,8 @@ const schema::Entity& GlDrawBuffers::StaticSchema() {
 
 // GlDrawBuffersEXT:
 // gles.GlDrawBuffersEXT{$,Int32,$}
-const gapic::Id& GlDrawBuffersEXT::StaticId() {
-    static gapic::Id ID{ { 0x48, 0xae, 0x56, 0x71, 0x53, 0x7c, 0x3f, 0xc2, 0x80, 0x7c, 0x04, 0x6c, 0x33, 0x0d, 0x37, 0xca, 0xd7, 0x41, 0xef, 0xfa,  } };
-    return ID;
-}
 const schema::Entity& GlDrawBuffersEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawBuffersEXT::StaticId(),
         "gles",
         "",
         "GlDrawBuffersEXT",
@@ -6824,10 +5474,6 @@ const schema::Entity& GlDrawBuffersEXT::StaticSchema() {
 
 // GlDrawBuffersIndexedEXT:
 // gles.GlDrawBuffersIndexedEXT{$,Int32,$,$}
-const gapic::Id& GlDrawBuffersIndexedEXT::StaticId() {
-    static gapic::Id ID{ { 0x01, 0x37, 0xe1, 0x79, 0x10, 0xff, 0x14, 0x22, 0x82, 0x2f, 0x7a, 0x07, 0xec, 0xaa, 0x39, 0x8a, 0xc7, 0xae, 0x6d, 0x6f,  } };
-    return ID;
-}
 void GlDrawBuffersIndexedEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mN);
@@ -6836,7 +5482,6 @@ void GlDrawBuffersIndexedEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawBuffersIndexedEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawBuffersIndexedEXT::StaticId(),
         "gles",
         "",
         "GlDrawBuffersIndexedEXT",
@@ -6853,13 +5498,8 @@ const schema::Entity& GlDrawBuffersIndexedEXT::StaticSchema() {
 
 // GlDrawBuffersNV:
 // gles.GlDrawBuffersNV{$,Int32,$}
-const gapic::Id& GlDrawBuffersNV::StaticId() {
-    static gapic::Id ID{ { 0x05, 0x12, 0x2d, 0x61, 0x1d, 0x67, 0xca, 0xc4, 0x15, 0xf3, 0xa9, 0x73, 0xb0, 0xd4, 0x0e, 0xfb, 0x70, 0xa9, 0x72, 0x66,  } };
-    return ID;
-}
 const schema::Entity& GlDrawBuffersNV::StaticSchema() {
     static schema::Entity entity {
-        GlDrawBuffersNV::StaticId(),
         "gles",
         "",
         "GlDrawBuffersNV",
@@ -6875,13 +5515,8 @@ const schema::Entity& GlDrawBuffersNV::StaticSchema() {
 
 // IndicesPointer:
 // gles.IndicesPointer{$}
-const gapic::Id& IndicesPointer::StaticId() {
-    static gapic::Id ID{ { 0x5e, 0xb8, 0x41, 0xd0, 0xb2, 0xe5, 0x14, 0x9b, 0xdc, 0x1b, 0xdf, 0x81, 0xd7, 0xb8, 0x88, 0xe8, 0x19, 0xf7, 0xb7, 0x13,  } };
-    return ID;
-}
 const schema::Entity& IndicesPointer::StaticSchema() {
     static schema::Entity entity {
-        IndicesPointer::StaticId(),
         "gles",
         "",
         "IndicesPointer",
@@ -6895,10 +5530,6 @@ const schema::Entity& IndicesPointer::StaticSchema() {
 
 // GlDrawElements:
 // gles.GlDrawElements{$,Uint32,Int32,Uint32,$}
-const gapic::Id& GlDrawElements::StaticId() {
-    static gapic::Id ID{ { 0x43, 0xef, 0x1e, 0x0e, 0x24, 0x99, 0x4f, 0x30, 0xb8, 0x30, 0x4d, 0x99, 0x26, 0x24, 0xca, 0xbf, 0x62, 0x23, 0x1c, 0xf1,  } };
-    return ID;
-}
 void GlDrawElements::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -6908,7 +5539,6 @@ void GlDrawElements::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElements::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElements::StaticId(),
         "gles",
         "",
         "GlDrawElements",
@@ -6926,10 +5556,6 @@ const schema::Entity& GlDrawElements::StaticSchema() {
 
 // GlDrawElementsBaseVertex:
 // gles.GlDrawElementsBaseVertex{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsBaseVertex::StaticId() {
-    static gapic::Id ID{ { 0x84, 0x90, 0x76, 0x31, 0xff, 0x72, 0xb5, 0x78, 0xd0, 0xce, 0xa2, 0xe0, 0xc9, 0x99, 0xcf, 0xfc, 0x95, 0xd0, 0x37, 0x0f,  } };
-    return ID;
-}
 void GlDrawElementsBaseVertex::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -6940,7 +5566,6 @@ void GlDrawElementsBaseVertex::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsBaseVertex::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsBaseVertex::StaticId(),
         "gles",
         "",
         "GlDrawElementsBaseVertex",
@@ -6959,10 +5584,6 @@ const schema::Entity& GlDrawElementsBaseVertex::StaticSchema() {
 
 // GlDrawElementsBaseVertexEXT:
 // gles.GlDrawElementsBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsBaseVertexEXT::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x14, 0xde, 0x9c, 0xc3, 0xd1, 0x58, 0x56, 0x32, 0x39, 0x5c, 0x70, 0xb8, 0x23, 0x1f, 0x13, 0x0a, 0xd0, 0x52, 0x0d,  } };
-    return ID;
-}
 void GlDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -6973,7 +5594,6 @@ void GlDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsBaseVertexEXT::StaticId(),
         "gles",
         "",
         "GlDrawElementsBaseVertexEXT",
@@ -6992,10 +5612,6 @@ const schema::Entity& GlDrawElementsBaseVertexEXT::StaticSchema() {
 
 // GlDrawElementsBaseVertexOES:
 // gles.GlDrawElementsBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsBaseVertexOES::StaticId() {
-    static gapic::Id ID{ { 0x8d, 0x21, 0xd0, 0x35, 0x4a, 0x9c, 0xb8, 0x1f, 0x7d, 0x83, 0x14, 0x78, 0x5b, 0xcf, 0xc7, 0x14, 0x7e, 0x2a, 0xbf, 0x5f,  } };
-    return ID;
-}
 void GlDrawElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7006,7 +5622,6 @@ void GlDrawElementsBaseVertexOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsBaseVertexOES::StaticId(),
         "gles",
         "",
         "GlDrawElementsBaseVertexOES",
@@ -7025,10 +5640,6 @@ const schema::Entity& GlDrawElementsBaseVertexOES::StaticSchema() {
 
 // GlDrawElementsIndirect:
 // gles.GlDrawElementsIndirect{$,Uint32,Uint32,$}
-const gapic::Id& GlDrawElementsIndirect::StaticId() {
-    static gapic::Id ID{ { 0xeb, 0xc2, 0x8a, 0x00, 0x91, 0xe8, 0x06, 0x7e, 0x3e, 0x79, 0x49, 0x0f, 0x43, 0x1e, 0x4c, 0xac, 0x06, 0xd9, 0xb9, 0x46,  } };
-    return ID;
-}
 void GlDrawElementsIndirect::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -7037,7 +5648,6 @@ void GlDrawElementsIndirect::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsIndirect::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsIndirect::StaticId(),
         "gles",
         "",
         "GlDrawElementsIndirect",
@@ -7054,10 +5664,6 @@ const schema::Entity& GlDrawElementsIndirect::StaticSchema() {
 
 // GlDrawElementsInstanced:
 // gles.GlDrawElementsInstanced{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsInstanced::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0xfc, 0xa5, 0x20, 0x56, 0x54, 0x39, 0xd0, 0x55, 0xcb, 0x29, 0xb6, 0xca, 0xa4, 0x35, 0x22, 0xbb, 0x96, 0x11, 0x16,  } };
-    return ID;
-}
 void GlDrawElementsInstanced::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -7068,7 +5674,6 @@ void GlDrawElementsInstanced::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstanced::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstanced::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstanced",
@@ -7087,10 +5692,6 @@ const schema::Entity& GlDrawElementsInstanced::StaticSchema() {
 
 // GlDrawElementsInstancedANGLE:
 // gles.GlDrawElementsInstancedANGLE{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsInstancedANGLE::StaticId() {
-    static gapic::Id ID{ { 0x94, 0x0a, 0xfe, 0xa2, 0xd9, 0xeb, 0x77, 0xe9, 0x51, 0x5a, 0x1d, 0x22, 0xf0, 0xd2, 0x03, 0xa9, 0xf1, 0x2e, 0xd3, 0x34,  } };
-    return ID;
-}
 void GlDrawElementsInstancedANGLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7101,7 +5702,6 @@ void GlDrawElementsInstancedANGLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedANGLE::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedANGLE",
@@ -7120,10 +5720,6 @@ const schema::Entity& GlDrawElementsInstancedANGLE::StaticSchema() {
 
 // GlDrawElementsInstancedBaseInstanceEXT:
 // gles.GlDrawElementsInstancedBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Uint32}
-const gapic::Id& GlDrawElementsInstancedBaseInstanceEXT::StaticId() {
-    static gapic::Id ID{ { 0xa6, 0x69, 0xbb, 0x39, 0x5d, 0x04, 0x9e, 0x22, 0x0a, 0xb5, 0x42, 0x11, 0x2a, 0xa7, 0xfa, 0x4c, 0xb8, 0x81, 0xf9, 0x47,  } };
-    return ID;
-}
 void GlDrawElementsInstancedBaseInstanceEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7135,7 +5731,6 @@ void GlDrawElementsInstancedBaseInstanceEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedBaseInstanceEXT::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedBaseInstanceEXT",
@@ -7155,10 +5750,6 @@ const schema::Entity& GlDrawElementsInstancedBaseInstanceEXT::StaticSchema() {
 
 // GlDrawElementsInstancedBaseVertex:
 // gles.GlDrawElementsInstancedBaseVertex{$,Uint32,Int32,Uint32,$,Int32,Int32}
-const gapic::Id& GlDrawElementsInstancedBaseVertex::StaticId() {
-    static gapic::Id ID{ { 0x7f, 0x5c, 0xd2, 0x88, 0x1e, 0xa2, 0xf7, 0x21, 0xa5, 0x08, 0x04, 0xf5, 0x37, 0x71, 0x4c, 0xe7, 0xee, 0xc3, 0xae, 0xa7,  } };
-    return ID;
-}
 void GlDrawElementsInstancedBaseVertex::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -7170,7 +5761,6 @@ void GlDrawElementsInstancedBaseVertex::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedBaseVertex::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedBaseVertex::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertex",
@@ -7190,10 +5780,6 @@ const schema::Entity& GlDrawElementsInstancedBaseVertex::StaticSchema() {
 
 // GlDrawElementsInstancedBaseVertexBaseInstanceEXT:
 // gles.GlDrawElementsInstancedBaseVertexBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Int32,Uint32}
-const gapic::Id& GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticId() {
-    static gapic::Id ID{ { 0x56, 0x58, 0x4c, 0xd2, 0x9f, 0xab, 0x30, 0xc2, 0xac, 0xe9, 0xd3, 0xc7, 0x78, 0xc8, 0x50, 0x13, 0x3d, 0x1f, 0x2d, 0x63,  } };
-    return ID;
-}
 void GlDrawElementsInstancedBaseVertexBaseInstanceEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7206,7 +5792,6 @@ void GlDrawElementsInstancedBaseVertexBaseInstanceEXT::Encode(Encoder* e) const 
 }
 const schema::Entity& GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexBaseInstanceEXT",
@@ -7227,10 +5812,6 @@ const schema::Entity& GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticSc
 
 // GlDrawElementsInstancedBaseVertexEXT:
 // gles.GlDrawElementsInstancedBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32,Int32}
-const gapic::Id& GlDrawElementsInstancedBaseVertexEXT::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x20, 0x8f, 0x1e, 0x37, 0x56, 0x5e, 0x18, 0xff, 0x81, 0xc6, 0x0c, 0xe0, 0xda, 0xad, 0xbb, 0xf4, 0x88, 0x9b, 0x1f,  } };
-    return ID;
-}
 void GlDrawElementsInstancedBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7242,7 +5823,6 @@ void GlDrawElementsInstancedBaseVertexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedBaseVertexEXT::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexEXT",
@@ -7262,10 +5842,6 @@ const schema::Entity& GlDrawElementsInstancedBaseVertexEXT::StaticSchema() {
 
 // GlDrawElementsInstancedBaseVertexOES:
 // gles.GlDrawElementsInstancedBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32,Int32}
-const gapic::Id& GlDrawElementsInstancedBaseVertexOES::StaticId() {
-    static gapic::Id ID{ { 0x4a, 0x5d, 0x46, 0xab, 0x8d, 0xca, 0xea, 0x49, 0xf7, 0x65, 0x0b, 0x84, 0x37, 0x07, 0x24, 0xd6, 0x87, 0xa0, 0xda, 0x06,  } };
-    return ID;
-}
 void GlDrawElementsInstancedBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7277,7 +5853,6 @@ void GlDrawElementsInstancedBaseVertexOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedBaseVertexOES::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedBaseVertexOES",
@@ -7297,10 +5872,6 @@ const schema::Entity& GlDrawElementsInstancedBaseVertexOES::StaticSchema() {
 
 // GlDrawElementsInstancedEXT:
 // gles.GlDrawElementsInstancedEXT{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsInstancedEXT::StaticId() {
-    static gapic::Id ID{ { 0xc5, 0xc7, 0x85, 0x97, 0x35, 0x73, 0x08, 0x84, 0x51, 0x01, 0x66, 0x0e, 0xba, 0x9c, 0x25, 0x55, 0xdc, 0x66, 0x7a, 0xfc,  } };
-    return ID;
-}
 void GlDrawElementsInstancedEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7311,7 +5882,6 @@ void GlDrawElementsInstancedEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedEXT::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedEXT",
@@ -7330,10 +5900,6 @@ const schema::Entity& GlDrawElementsInstancedEXT::StaticSchema() {
 
 // GlDrawElementsInstancedNV:
 // gles.GlDrawElementsInstancedNV{$,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawElementsInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0x33, 0xfd, 0x9f, 0x2b, 0x45, 0x10, 0x34, 0x4f, 0x37, 0x15, 0x64, 0x07, 0x2c, 0xec, 0x09, 0xcc, 0x88, 0x80, 0x1d, 0xaa,  } };
-    return ID;
-}
 void GlDrawElementsInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7344,7 +5910,6 @@ void GlDrawElementsInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawElementsInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlDrawElementsInstancedNV::StaticId(),
         "gles",
         "",
         "GlDrawElementsInstancedNV",
@@ -7363,10 +5928,6 @@ const schema::Entity& GlDrawElementsInstancedNV::StaticSchema() {
 
 // GlDrawRangeElements:
 // gles.GlDrawRangeElements{$,Uint32,Uint32,Uint32,Int32,Uint32,$}
-const gapic::Id& GlDrawRangeElements::StaticId() {
-    static gapic::Id ID{ { 0xe0, 0x0d, 0xe9, 0x04, 0xe2, 0xac, 0x89, 0x91, 0xc1, 0xda, 0xe4, 0x40, 0xff, 0xf4, 0x13, 0x59, 0xa9, 0x2e, 0x0e, 0xda,  } };
-    return ID;
-}
 void GlDrawRangeElements::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -7378,7 +5939,6 @@ void GlDrawRangeElements::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawRangeElements::StaticSchema() {
     static schema::Entity entity {
-        GlDrawRangeElements::StaticId(),
         "gles",
         "",
         "GlDrawRangeElements",
@@ -7398,10 +5958,6 @@ const schema::Entity& GlDrawRangeElements::StaticSchema() {
 
 // GlDrawRangeElementsBaseVertex:
 // gles.GlDrawRangeElementsBaseVertex{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawRangeElementsBaseVertex::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x06, 0x2f, 0x42, 0x40, 0x41, 0x84, 0x81, 0x89, 0xfb, 0xe8, 0x86, 0xb3, 0x5d, 0x25, 0x96, 0x5f, 0x6d, 0xe8, 0x7c,  } };
-    return ID;
-}
 void GlDrawRangeElementsBaseVertex::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDrawMode);
@@ -7414,7 +5970,6 @@ void GlDrawRangeElementsBaseVertex::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawRangeElementsBaseVertex::StaticSchema() {
     static schema::Entity entity {
-        GlDrawRangeElementsBaseVertex::StaticId(),
         "gles",
         "",
         "GlDrawRangeElementsBaseVertex",
@@ -7435,10 +5990,6 @@ const schema::Entity& GlDrawRangeElementsBaseVertex::StaticSchema() {
 
 // GlDrawRangeElementsBaseVertexEXT:
 // gles.GlDrawRangeElementsBaseVertexEXT{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawRangeElementsBaseVertexEXT::StaticId() {
-    static gapic::Id ID{ { 0x8f, 0xcd, 0x3b, 0x40, 0x4c, 0xc3, 0x0f, 0xab, 0xe5, 0x7e, 0x7b, 0xae, 0x63, 0xb4, 0xc7, 0xba, 0xb5, 0xfe, 0x7f, 0xce,  } };
-    return ID;
-}
 void GlDrawRangeElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7451,7 +6002,6 @@ void GlDrawRangeElementsBaseVertexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlDrawRangeElementsBaseVertexEXT::StaticId(),
         "gles",
         "",
         "GlDrawRangeElementsBaseVertexEXT",
@@ -7472,10 +6022,6 @@ const schema::Entity& GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
 
 // GlDrawRangeElementsBaseVertexOES:
 // gles.GlDrawRangeElementsBaseVertexOES{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
-const gapic::Id& GlDrawRangeElementsBaseVertexOES::StaticId() {
-    static gapic::Id ID{ { 0xae, 0x81, 0x42, 0x9f, 0x30, 0xee, 0x82, 0xf9, 0xac, 0xb0, 0x66, 0xa0, 0xf6, 0x24, 0xdf, 0x11, 0x1a, 0x90, 0x9d, 0x53,  } };
-    return ID;
-}
 void GlDrawRangeElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -7488,7 +6034,6 @@ void GlDrawRangeElementsBaseVertexOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlDrawRangeElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
-        GlDrawRangeElementsBaseVertexOES::StaticId(),
         "gles",
         "",
         "GlDrawRangeElementsBaseVertexOES",
@@ -7509,13 +6054,8 @@ const schema::Entity& GlDrawRangeElementsBaseVertexOES::StaticSchema() {
 
 // GlEGLImageTargetRenderbufferStorageOES:
 // gles.GlEGLImageTargetRenderbufferStorageOES{$,Uint32,$}
-const gapic::Id& GlEGLImageTargetRenderbufferStorageOES::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0xec, 0x36, 0xc2, 0xf1, 0x9d, 0x6d, 0xf4, 0xca, 0xe5, 0xa1, 0x95, 0x94, 0xba, 0xb2, 0xb8, 0xb9, 0xb6, 0xd9, 0x4c,  } };
-    return ID;
-}
 const schema::Entity& GlEGLImageTargetRenderbufferStorageOES::StaticSchema() {
     static schema::Entity entity {
-        GlEGLImageTargetRenderbufferStorageOES::StaticId(),
         "gles",
         "",
         "GlEGLImageTargetRenderbufferStorageOES",
@@ -7531,13 +6071,8 @@ const schema::Entity& GlEGLImageTargetRenderbufferStorageOES::StaticSchema() {
 
 // GlEGLImageTargetTexture2DOES:
 // gles.GlEGLImageTargetTexture2DOES{$,Uint32,$}
-const gapic::Id& GlEGLImageTargetTexture2DOES::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x37, 0x0b, 0x8c, 0xf9, 0xb4, 0x0c, 0x24, 0xca, 0x99, 0x99, 0xec, 0x54, 0x31, 0x96, 0xd4, 0x49, 0x20, 0x83, 0xb6,  } };
-    return ID;
-}
 const schema::Entity& GlEGLImageTargetTexture2DOES::StaticSchema() {
     static schema::Entity entity {
-        GlEGLImageTargetTexture2DOES::StaticId(),
         "gles",
         "",
         "GlEGLImageTargetTexture2DOES",
@@ -7553,13 +6088,8 @@ const schema::Entity& GlEGLImageTargetTexture2DOES::StaticSchema() {
 
 // GlEnable:
 // gles.GlEnable{$,Uint32}
-const gapic::Id& GlEnable::StaticId() {
-    static gapic::Id ID{ { 0x20, 0x26, 0x1c, 0xc0, 0x9e, 0x69, 0x6a, 0xd2, 0x3d, 0x79, 0xbc, 0x1a, 0x58, 0x3e, 0x13, 0xff, 0xd7, 0xbc, 0x06, 0x9d,  } };
-    return ID;
-}
 const schema::Entity& GlEnable::StaticSchema() {
     static schema::Entity entity {
-        GlEnable::StaticId(),
         "gles",
         "",
         "GlEnable",
@@ -7574,13 +6104,8 @@ const schema::Entity& GlEnable::StaticSchema() {
 
 // GlEnableDriverControlQCOM:
 // gles.GlEnableDriverControlQCOM{$,Uint32}
-const gapic::Id& GlEnableDriverControlQCOM::StaticId() {
-    static gapic::Id ID{ { 0xb4, 0x45, 0xb0, 0xfc, 0xc1, 0xf3, 0x31, 0xa8, 0x4a, 0x5a, 0xc3, 0xe5, 0x2b, 0xeb, 0x34, 0x78, 0xe7, 0x7e, 0x5b, 0x98,  } };
-    return ID;
-}
 const schema::Entity& GlEnableDriverControlQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlEnableDriverControlQCOM::StaticId(),
         "gles",
         "",
         "GlEnableDriverControlQCOM",
@@ -7595,13 +6120,8 @@ const schema::Entity& GlEnableDriverControlQCOM::StaticSchema() {
 
 // GlEnableVertexAttribArray:
 // gles.GlEnableVertexAttribArray{$,Uint32}
-const gapic::Id& GlEnableVertexAttribArray::StaticId() {
-    static gapic::Id ID{ { 0xf0, 0x26, 0x10, 0x54, 0xf8, 0xbc, 0x65, 0x3e, 0x75, 0x01, 0x11, 0xb2, 0x9c, 0xe6, 0x81, 0x90, 0x06, 0x8f, 0x5b, 0xff,  } };
-    return ID;
-}
 const schema::Entity& GlEnableVertexAttribArray::StaticSchema() {
     static schema::Entity entity {
-        GlEnableVertexAttribArray::StaticId(),
         "gles",
         "",
         "GlEnableVertexAttribArray",
@@ -7616,13 +6136,8 @@ const schema::Entity& GlEnableVertexAttribArray::StaticSchema() {
 
 // GlEnablei:
 // gles.GlEnablei{$,Uint32,Uint32}
-const gapic::Id& GlEnablei::StaticId() {
-    static gapic::Id ID{ { 0x61, 0x49, 0x11, 0x1f, 0x07, 0xa1, 0x9b, 0xb7, 0x4b, 0x21, 0x2e, 0x27, 0x68, 0x51, 0xa7, 0xcb, 0x70, 0xc1, 0x0f, 0xc3,  } };
-    return ID;
-}
 const schema::Entity& GlEnablei::StaticSchema() {
     static schema::Entity entity {
-        GlEnablei::StaticId(),
         "gles",
         "",
         "GlEnablei",
@@ -7638,13 +6153,8 @@ const schema::Entity& GlEnablei::StaticSchema() {
 
 // GlEnableiEXT:
 // gles.GlEnableiEXT{$,Uint32,Uint32}
-const gapic::Id& GlEnableiEXT::StaticId() {
-    static gapic::Id ID{ { 0xea, 0x46, 0xe9, 0x09, 0xef, 0xc8, 0xf3, 0x84, 0xa7, 0x1d, 0xc6, 0x5e, 0x3e, 0x05, 0x49, 0xa9, 0x90, 0x92, 0x39, 0x53,  } };
-    return ID;
-}
 const schema::Entity& GlEnableiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlEnableiEXT::StaticId(),
         "gles",
         "",
         "GlEnableiEXT",
@@ -7660,13 +6170,8 @@ const schema::Entity& GlEnableiEXT::StaticSchema() {
 
 // GlEnableiNV:
 // gles.GlEnableiNV{$,Uint32,Uint32}
-const gapic::Id& GlEnableiNV::StaticId() {
-    static gapic::Id ID{ { 0xad, 0x7c, 0x93, 0xce, 0x81, 0xf6, 0x4b, 0x32, 0xe0, 0xac, 0x11, 0xa8, 0xf5, 0x7c, 0xa3, 0xc2, 0xac, 0x44, 0x80, 0x82,  } };
-    return ID;
-}
 const schema::Entity& GlEnableiNV::StaticSchema() {
     static schema::Entity entity {
-        GlEnableiNV::StaticId(),
         "gles",
         "",
         "GlEnableiNV",
@@ -7682,13 +6187,8 @@ const schema::Entity& GlEnableiNV::StaticSchema() {
 
 // GlEnableiOES:
 // gles.GlEnableiOES{$,Uint32,Uint32}
-const gapic::Id& GlEnableiOES::StaticId() {
-    static gapic::Id ID{ { 0x62, 0xe2, 0xd2, 0x33, 0x05, 0xc8, 0x21, 0x83, 0x15, 0xa9, 0xb9, 0x5a, 0xf6, 0xd5, 0x1f, 0xbb, 0x83, 0x78, 0x00, 0x0e,  } };
-    return ID;
-}
 const schema::Entity& GlEnableiOES::StaticSchema() {
     static schema::Entity entity {
-        GlEnableiOES::StaticId(),
         "gles",
         "",
         "GlEnableiOES",
@@ -7704,13 +6204,8 @@ const schema::Entity& GlEnableiOES::StaticSchema() {
 
 // GlEndConditionalRenderNV:
 // gles.GlEndConditionalRenderNV{$}
-const gapic::Id& GlEndConditionalRenderNV::StaticId() {
-    static gapic::Id ID{ { 0x79, 0x9a, 0x10, 0x96, 0x20, 0x3c, 0x79, 0x54, 0xe2, 0x51, 0xec, 0x02, 0xed, 0x94, 0xbb, 0xd7, 0xc7, 0x62, 0x8d, 0xf4,  } };
-    return ID;
-}
 const schema::Entity& GlEndConditionalRenderNV::StaticSchema() {
     static schema::Entity entity {
-        GlEndConditionalRenderNV::StaticId(),
         "gles",
         "",
         "GlEndConditionalRenderNV",
@@ -7724,13 +6219,8 @@ const schema::Entity& GlEndConditionalRenderNV::StaticSchema() {
 
 // GlEndPerfMonitorAMD:
 // gles.GlEndPerfMonitorAMD{$,Uint32}
-const gapic::Id& GlEndPerfMonitorAMD::StaticId() {
-    static gapic::Id ID{ { 0x1d, 0x36, 0xbc, 0x13, 0x9d, 0x99, 0xc0, 0x2e, 0x45, 0x11, 0x6a, 0x36, 0x25, 0x1a, 0x72, 0x37, 0xee, 0xcd, 0xd8, 0x45,  } };
-    return ID;
-}
 const schema::Entity& GlEndPerfMonitorAMD::StaticSchema() {
     static schema::Entity entity {
-        GlEndPerfMonitorAMD::StaticId(),
         "gles",
         "",
         "GlEndPerfMonitorAMD",
@@ -7745,13 +6235,8 @@ const schema::Entity& GlEndPerfMonitorAMD::StaticSchema() {
 
 // GlEndPerfQueryINTEL:
 // gles.GlEndPerfQueryINTEL{$,Uint32}
-const gapic::Id& GlEndPerfQueryINTEL::StaticId() {
-    static gapic::Id ID{ { 0x88, 0x36, 0x1a, 0x9f, 0x16, 0x6c, 0xa9, 0x6a, 0x29, 0x6d, 0x3d, 0x4a, 0x98, 0x2d, 0xca, 0xd4, 0xa2, 0x9b, 0x26, 0xa4,  } };
-    return ID;
-}
 const schema::Entity& GlEndPerfQueryINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlEndPerfQueryINTEL::StaticId(),
         "gles",
         "",
         "GlEndPerfQueryINTEL",
@@ -7766,13 +6251,8 @@ const schema::Entity& GlEndPerfQueryINTEL::StaticSchema() {
 
 // GlEndQuery:
 // gles.GlEndQuery{$,Uint32}
-const gapic::Id& GlEndQuery::StaticId() {
-    static gapic::Id ID{ { 0x42, 0xa5, 0xd7, 0xd6, 0x64, 0xcf, 0xe9, 0x40, 0x21, 0x17, 0x87, 0x3a, 0x72, 0x64, 0xe9, 0x52, 0x1f, 0x67, 0x7e, 0xe5,  } };
-    return ID;
-}
 const schema::Entity& GlEndQuery::StaticSchema() {
     static schema::Entity entity {
-        GlEndQuery::StaticId(),
         "gles",
         "",
         "GlEndQuery",
@@ -7787,13 +6267,8 @@ const schema::Entity& GlEndQuery::StaticSchema() {
 
 // GlEndQueryEXT:
 // gles.GlEndQueryEXT{$,Uint32}
-const gapic::Id& GlEndQueryEXT::StaticId() {
-    static gapic::Id ID{ { 0x68, 0x12, 0x21, 0x7c, 0xe5, 0xc3, 0xaa, 0xc8, 0x0d, 0x6a, 0x5e, 0x54, 0x87, 0x62, 0xd3, 0xd2, 0x50, 0xeb, 0x0f, 0xb4,  } };
-    return ID;
-}
 const schema::Entity& GlEndQueryEXT::StaticSchema() {
     static schema::Entity entity {
-        GlEndQueryEXT::StaticId(),
         "gles",
         "",
         "GlEndQueryEXT",
@@ -7808,13 +6283,8 @@ const schema::Entity& GlEndQueryEXT::StaticSchema() {
 
 // GlEndTilingQCOM:
 // gles.GlEndTilingQCOM{$,Uint32}
-const gapic::Id& GlEndTilingQCOM::StaticId() {
-    static gapic::Id ID{ { 0x14, 0xbd, 0x3e, 0x73, 0x77, 0x1b, 0xf8, 0x58, 0x5f, 0x9d, 0x10, 0xd3, 0x9f, 0xa5, 0x08, 0xd6, 0x37, 0x20, 0x63, 0x8a,  } };
-    return ID;
-}
 const schema::Entity& GlEndTilingQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlEndTilingQCOM::StaticId(),
         "gles",
         "",
         "GlEndTilingQCOM",
@@ -7829,13 +6299,8 @@ const schema::Entity& GlEndTilingQCOM::StaticSchema() {
 
 // GlEndTransformFeedback:
 // gles.GlEndTransformFeedback{$}
-const gapic::Id& GlEndTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0xb5, 0x7f, 0x76, 0x03, 0xaf, 0x5e, 0xdd, 0x7e, 0xed, 0xd7, 0xef, 0x93, 0x23, 0x18, 0x00, 0xd7, 0xf6, 0x02, 0x8c, 0x05,  } };
-    return ID;
-}
 const schema::Entity& GlEndTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlEndTransformFeedback::StaticId(),
         "gles",
         "",
         "GlEndTransformFeedback",
@@ -7849,13 +6314,8 @@ const schema::Entity& GlEndTransformFeedback::StaticSchema() {
 
 // Voidᵖᵖ:
 // gles.Voidᵖᵖ{$}
-const gapic::Id& Void__P__P::StaticId() {
-    static gapic::Id ID{ { 0x35, 0x15, 0x54, 0x0c, 0x17, 0xba, 0x44, 0xa8, 0x14, 0x86, 0xcc, 0xf1, 0x62, 0xac, 0x2d, 0xbe, 0x0c, 0xb4, 0xc4, 0xd4,  } };
-    return ID;
-}
 const schema::Entity& Void__P__P::StaticSchema() {
     static schema::Entity entity {
-        Void__P__P::StaticId(),
         "gles",
         "",
         "Voidᵖᵖ",
@@ -7869,13 +6329,8 @@ const schema::Entity& Void__P__P::StaticSchema() {
 
 // GlExtGetBufferPointervQCOM:
 // gles.GlExtGetBufferPointervQCOM{$,Uint32,$}
-const gapic::Id& GlExtGetBufferPointervQCOM::StaticId() {
-    static gapic::Id ID{ { 0xb2, 0x00, 0xde, 0x21, 0xeb, 0x9f, 0x04, 0x63, 0x97, 0xc4, 0xff, 0xed, 0x2c, 0x8a, 0xb9, 0x3d, 0xae, 0x7b, 0x97, 0xbb,  } };
-    return ID;
-}
 const schema::Entity& GlExtGetBufferPointervQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetBufferPointervQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetBufferPointervQCOM",
@@ -7891,10 +6346,6 @@ const schema::Entity& GlExtGetBufferPointervQCOM::StaticSchema() {
 
 // GlExtGetBuffersQCOM:
 // gles.GlExtGetBuffersQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetBuffersQCOM::StaticId() {
-    static gapic::Id ID{ { 0x04, 0xca, 0x9a, 0x1d, 0x45, 0xcc, 0xf5, 0x4f, 0x4c, 0x42, 0x7d, 0xc9, 0x03, 0x11, 0x0d, 0x93, 0x1f, 0xfc, 0x77, 0x92,  } };
-    return ID;
-}
 void GlExtGetBuffersQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mBuffers);
@@ -7903,7 +6354,6 @@ void GlExtGetBuffersQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetBuffersQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetBuffersQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetBuffersQCOM",
@@ -7920,10 +6370,6 @@ const schema::Entity& GlExtGetBuffersQCOM::StaticSchema() {
 
 // GlExtGetFramebuffersQCOM:
 // gles.GlExtGetFramebuffersQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetFramebuffersQCOM::StaticId() {
-    static gapic::Id ID{ { 0xbb, 0x96, 0xef, 0xfe, 0xc4, 0x57, 0xda, 0x17, 0xf1, 0x87, 0x9e, 0x24, 0xdb, 0x0c, 0xc4, 0x7a, 0xc1, 0x7e, 0x1d, 0x5a,  } };
-    return ID;
-}
 void GlExtGetFramebuffersQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mFramebuffers);
@@ -7932,7 +6378,6 @@ void GlExtGetFramebuffersQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetFramebuffersQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetFramebuffersQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetFramebuffersQCOM",
@@ -7949,10 +6394,6 @@ const schema::Entity& GlExtGetFramebuffersQCOM::StaticSchema() {
 
 // GlExtGetProgramBinarySourceQCOM:
 // gles.GlExtGetProgramBinarySourceQCOM{$,Uint32,Uint32,$,$}
-const gapic::Id& GlExtGetProgramBinarySourceQCOM::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x86, 0xe2, 0x9a, 0x16, 0xf0, 0x75, 0x01, 0x65, 0xbe, 0x53, 0x03, 0x21, 0x79, 0xbe, 0x7c, 0x16, 0x77, 0xc0, 0xad,  } };
-    return ID;
-}
 void GlExtGetProgramBinarySourceQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -7962,7 +6403,6 @@ void GlExtGetProgramBinarySourceQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetProgramBinarySourceQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetProgramBinarySourceQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetProgramBinarySourceQCOM",
@@ -7980,13 +6420,8 @@ const schema::Entity& GlExtGetProgramBinarySourceQCOM::StaticSchema() {
 
 // ProgramIdᵖ:
 // gles.ProgramIdᵖ{$}
-const gapic::Id& ProgramId__P::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x31, 0xc4, 0x02, 0x06, 0x3b, 0x34, 0x69, 0x95, 0x3e, 0x1f, 0x79, 0x7d, 0x50, 0xc9, 0xe4, 0x20, 0xf1, 0x94, 0x5e,  } };
-    return ID;
-}
 const schema::Entity& ProgramId__P::StaticSchema() {
     static schema::Entity entity {
-        ProgramId__P::StaticId(),
         "gles",
         "",
         "ProgramIdᵖ",
@@ -8000,10 +6435,6 @@ const schema::Entity& ProgramId__P::StaticSchema() {
 
 // GlExtGetProgramsQCOM:
 // gles.GlExtGetProgramsQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetProgramsQCOM::StaticId() {
-    static gapic::Id ID{ { 0x43, 0xf1, 0x1c, 0x12, 0xac, 0x48, 0xe4, 0xf2, 0x11, 0xfc, 0x7a, 0x44, 0xa3, 0xb1, 0xa3, 0x89, 0xf2, 0x3e, 0x2e, 0x42,  } };
-    return ID;
-}
 void GlExtGetProgramsQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPrograms);
@@ -8012,7 +6443,6 @@ void GlExtGetProgramsQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetProgramsQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetProgramsQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetProgramsQCOM",
@@ -8029,13 +6459,8 @@ const schema::Entity& GlExtGetProgramsQCOM::StaticSchema() {
 
 // RenderbufferIdᵖ:
 // gles.RenderbufferIdᵖ{$}
-const gapic::Id& RenderbufferId__P::StaticId() {
-    static gapic::Id ID{ { 0x66, 0x72, 0x70, 0x37, 0xb7, 0xac, 0x40, 0x67, 0x1b, 0x86, 0x67, 0x58, 0x39, 0x5d, 0xbc, 0xb3, 0x62, 0x98, 0x29, 0x18,  } };
-    return ID;
-}
 const schema::Entity& RenderbufferId__P::StaticSchema() {
     static schema::Entity entity {
-        RenderbufferId__P::StaticId(),
         "gles",
         "",
         "RenderbufferIdᵖ",
@@ -8049,10 +6474,6 @@ const schema::Entity& RenderbufferId__P::StaticSchema() {
 
 // GlExtGetRenderbuffersQCOM:
 // gles.GlExtGetRenderbuffersQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetRenderbuffersQCOM::StaticId() {
-    static gapic::Id ID{ { 0x97, 0x63, 0x82, 0x31, 0x4d, 0xe1, 0xfc, 0x00, 0xe2, 0x9a, 0xd4, 0x04, 0xfa, 0x48, 0xd9, 0x41, 0x6e, 0x91, 0x1a, 0x10,  } };
-    return ID;
-}
 void GlExtGetRenderbuffersQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mRenderbuffers);
@@ -8061,7 +6482,6 @@ void GlExtGetRenderbuffersQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetRenderbuffersQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetRenderbuffersQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetRenderbuffersQCOM",
@@ -8078,13 +6498,8 @@ const schema::Entity& GlExtGetRenderbuffersQCOM::StaticSchema() {
 
 // ShaderIdᵖ:
 // gles.ShaderIdᵖ{$}
-const gapic::Id& ShaderId__P::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0x25, 0xfb, 0x69, 0x07, 0x16, 0x37, 0x80, 0x7c, 0x01, 0x82, 0xc1, 0xd7, 0xe2, 0xa1, 0x7f, 0x5c, 0x97, 0x23, 0xbf,  } };
-    return ID;
-}
 const schema::Entity& ShaderId__P::StaticSchema() {
     static schema::Entity entity {
-        ShaderId__P::StaticId(),
         "gles",
         "",
         "ShaderIdᵖ",
@@ -8098,10 +6513,6 @@ const schema::Entity& ShaderId__P::StaticSchema() {
 
 // GlExtGetShadersQCOM:
 // gles.GlExtGetShadersQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetShadersQCOM::StaticId() {
-    static gapic::Id ID{ { 0x0d, 0x08, 0x34, 0xd0, 0x89, 0x17, 0x33, 0x1a, 0xd8, 0x5f, 0x3b, 0x18, 0xea, 0x07, 0x88, 0xdb, 0x00, 0x54, 0x85, 0x64,  } };
-    return ID;
-}
 void GlExtGetShadersQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mShaders);
@@ -8110,7 +6521,6 @@ void GlExtGetShadersQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetShadersQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetShadersQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetShadersQCOM",
@@ -8127,10 +6537,6 @@ const schema::Entity& GlExtGetShadersQCOM::StaticSchema() {
 
 // GlExtGetTexLevelParameterivQCOM:
 // gles.GlExtGetTexLevelParameterivQCOM{$,Uint32,Uint32,Int32,Uint32,$}
-const gapic::Id& GlExtGetTexLevelParameterivQCOM::StaticId() {
-    static gapic::Id ID{ { 0x8b, 0xfc, 0x4e, 0xae, 0xb9, 0xb9, 0xfc, 0xb6, 0xf0, 0x94, 0x4c, 0x63, 0xe7, 0x96, 0xf4, 0x8f, 0x11, 0x2d, 0xf5, 0x09,  } };
-    return ID;
-}
 void GlExtGetTexLevelParameterivQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -8141,7 +6547,6 @@ void GlExtGetTexLevelParameterivQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetTexLevelParameterivQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetTexLevelParameterivQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetTexLevelParameterivQCOM",
@@ -8160,10 +6565,6 @@ const schema::Entity& GlExtGetTexLevelParameterivQCOM::StaticSchema() {
 
 // GlExtGetTexSubImageQCOM:
 // gles.GlExtGetTexSubImageQCOM{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlExtGetTexSubImageQCOM::StaticId() {
-    static gapic::Id ID{ { 0x2a, 0x49, 0xec, 0x02, 0x51, 0x7c, 0xcc, 0xca, 0xc6, 0x44, 0xfc, 0xf6, 0x8e, 0xda, 0x33, 0xe2, 0xed, 0x11, 0x12, 0x8b,  } };
-    return ID;
-}
 void GlExtGetTexSubImageQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8180,7 +6581,6 @@ void GlExtGetTexSubImageQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetTexSubImageQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetTexSubImageQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetTexSubImageQCOM",
@@ -8205,13 +6605,8 @@ const schema::Entity& GlExtGetTexSubImageQCOM::StaticSchema() {
 
 // TextureIdᵖ:
 // gles.TextureIdᵖ{$}
-const gapic::Id& TextureId__P::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0xb4, 0xc0, 0xb4, 0x5c, 0xc9, 0x56, 0x6c, 0x79, 0xfb, 0xe2, 0xe9, 0x24, 0xab, 0x86, 0x39, 0x8c, 0x6c, 0x60, 0xbf,  } };
-    return ID;
-}
 const schema::Entity& TextureId__P::StaticSchema() {
     static schema::Entity entity {
-        TextureId__P::StaticId(),
         "gles",
         "",
         "TextureIdᵖ",
@@ -8225,10 +6620,6 @@ const schema::Entity& TextureId__P::StaticSchema() {
 
 // GlExtGetTexturesQCOM:
 // gles.GlExtGetTexturesQCOM{$,$,Int32,$}
-const gapic::Id& GlExtGetTexturesQCOM::StaticId() {
-    static gapic::Id ID{ { 0x60, 0x97, 0x86, 0x0f, 0x38, 0x10, 0xb5, 0xdb, 0x21, 0x33, 0x1d, 0x1d, 0xee, 0x3d, 0xd4, 0xfb, 0xd8, 0x8b, 0xd7, 0x31,  } };
-    return ID;
-}
 void GlExtGetTexturesQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mTextures);
@@ -8237,7 +6628,6 @@ void GlExtGetTexturesQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtGetTexturesQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtGetTexturesQCOM::StaticId(),
         "gles",
         "",
         "GlExtGetTexturesQCOM",
@@ -8254,13 +6644,8 @@ const schema::Entity& GlExtGetTexturesQCOM::StaticSchema() {
 
 // GlExtIsProgramBinaryQCOM:
 // gles.GlExtIsProgramBinaryQCOM{$,Uint32,Uint8}
-const gapic::Id& GlExtIsProgramBinaryQCOM::StaticId() {
-    static gapic::Id ID{ { 0xb6, 0x8b, 0x25, 0xea, 0x48, 0x3c, 0x10, 0x46, 0x8d, 0x3f, 0x6a, 0x03, 0x71, 0xd9, 0x59, 0xe7, 0x9d, 0x9e, 0xf5, 0x9e,  } };
-    return ID;
-}
 const schema::Entity& GlExtIsProgramBinaryQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtIsProgramBinaryQCOM::StaticId(),
         "gles",
         "",
         "GlExtIsProgramBinaryQCOM",
@@ -8276,10 +6661,6 @@ const schema::Entity& GlExtIsProgramBinaryQCOM::StaticSchema() {
 
 // GlExtTexObjectStateOverrideiQCOM:
 // gles.GlExtTexObjectStateOverrideiQCOM{$,Uint32,Uint32,Int32}
-const gapic::Id& GlExtTexObjectStateOverrideiQCOM::StaticId() {
-    static gapic::Id ID{ { 0xd0, 0xf8, 0xa5, 0x4a, 0x17, 0xbc, 0x66, 0xa8, 0x32, 0x55, 0x68, 0x9b, 0xc9, 0x6d, 0xe5, 0x48, 0x32, 0x02, 0xd9, 0x9c,  } };
-    return ID;
-}
 void GlExtTexObjectStateOverrideiQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8288,7 +6669,6 @@ void GlExtTexObjectStateOverrideiQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlExtTexObjectStateOverrideiQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlExtTexObjectStateOverrideiQCOM::StaticId(),
         "gles",
         "",
         "GlExtTexObjectStateOverrideiQCOM",
@@ -8305,10 +6685,6 @@ const schema::Entity& GlExtTexObjectStateOverrideiQCOM::StaticSchema() {
 
 // GlFenceSync:
 // gles.GlFenceSync{$,Uint32,Uint32,Uint64}
-const gapic::Id& GlFenceSync::StaticId() {
-    static gapic::Id ID{ { 0x96, 0x46, 0xcb, 0x15, 0xd5, 0xf7, 0xaf, 0x8e, 0xbd, 0xbf, 0x17, 0x16, 0xc3, 0x61, 0x51, 0xa0, 0xb1, 0x58, 0x45, 0xd2,  } };
-    return ID;
-}
 void GlFenceSync::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mCondition);
@@ -8317,7 +6693,6 @@ void GlFenceSync::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFenceSync::StaticSchema() {
     static schema::Entity entity {
-        GlFenceSync::StaticId(),
         "gles",
         "",
         "GlFenceSync",
@@ -8334,10 +6709,6 @@ const schema::Entity& GlFenceSync::StaticSchema() {
 
 // GlFenceSyncAPPLE:
 // gles.GlFenceSyncAPPLE{$,Uint32,Uint32,Uint64}
-const gapic::Id& GlFenceSyncAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0x2f, 0xcb, 0xce, 0x6b, 0xdb, 0xc9, 0xfc, 0x65, 0x3b, 0x85, 0x93, 0x4e, 0x40, 0xa3, 0x2f, 0xc5, 0x09, 0xdb, 0xe7,  } };
-    return ID;
-}
 void GlFenceSyncAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mCondition);
@@ -8346,7 +6717,6 @@ void GlFenceSyncAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFenceSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlFenceSyncAPPLE::StaticId(),
         "gles",
         "",
         "GlFenceSyncAPPLE",
@@ -8363,13 +6733,8 @@ const schema::Entity& GlFenceSyncAPPLE::StaticSchema() {
 
 // GlFinish:
 // gles.GlFinish{$}
-const gapic::Id& GlFinish::StaticId() {
-    static gapic::Id ID{ { 0xa0, 0x65, 0x7d, 0x97, 0x3e, 0xf5, 0x59, 0xb9, 0x02, 0x40, 0xec, 0xc0, 0xf4, 0x17, 0xb2, 0xba, 0xfd, 0x04, 0xa3, 0x81,  } };
-    return ID;
-}
 const schema::Entity& GlFinish::StaticSchema() {
     static schema::Entity entity {
-        GlFinish::StaticId(),
         "gles",
         "",
         "GlFinish",
@@ -8383,13 +6748,8 @@ const schema::Entity& GlFinish::StaticSchema() {
 
 // GlFinishFenceNV:
 // gles.GlFinishFenceNV{$,Uint32}
-const gapic::Id& GlFinishFenceNV::StaticId() {
-    static gapic::Id ID{ { 0x42, 0xb8, 0x87, 0x53, 0x05, 0x6f, 0xcc, 0xc5, 0x3a, 0xbb, 0xd2, 0xe4, 0xd8, 0x7e, 0x81, 0x67, 0xd4, 0x96, 0xb5, 0x93,  } };
-    return ID;
-}
 const schema::Entity& GlFinishFenceNV::StaticSchema() {
     static schema::Entity entity {
-        GlFinishFenceNV::StaticId(),
         "gles",
         "",
         "GlFinishFenceNV",
@@ -8404,13 +6764,8 @@ const schema::Entity& GlFinishFenceNV::StaticSchema() {
 
 // GlFlush:
 // gles.GlFlush{$}
-const gapic::Id& GlFlush::StaticId() {
-    static gapic::Id ID{ { 0xb0, 0xde, 0x56, 0x9c, 0x00, 0x51, 0x7b, 0x2e, 0x05, 0x6c, 0xdb, 0x18, 0x55, 0x6b, 0x35, 0x00, 0xb3, 0x4c, 0x7d, 0x42,  } };
-    return ID;
-}
 const schema::Entity& GlFlush::StaticSchema() {
     static schema::Entity entity {
-        GlFlush::StaticId(),
         "gles",
         "",
         "GlFlush",
@@ -8424,10 +6779,6 @@ const schema::Entity& GlFlush::StaticSchema() {
 
 // GlFlushMappedBufferRange:
 // gles.GlFlushMappedBufferRange{$,Uint32,Int32,Int32}
-const gapic::Id& GlFlushMappedBufferRange::StaticId() {
-    static gapic::Id ID{ { 0xfb, 0x38, 0x93, 0x91, 0xea, 0xcd, 0x51, 0x6a, 0x45, 0x50, 0xaf, 0xff, 0x9e, 0x8a, 0x5c, 0x6e, 0x9c, 0xf2, 0x4c, 0x4d,  } };
-    return ID;
-}
 void GlFlushMappedBufferRange::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8436,7 +6787,6 @@ void GlFlushMappedBufferRange::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFlushMappedBufferRange::StaticSchema() {
     static schema::Entity entity {
-        GlFlushMappedBufferRange::StaticId(),
         "gles",
         "",
         "GlFlushMappedBufferRange",
@@ -8453,10 +6803,6 @@ const schema::Entity& GlFlushMappedBufferRange::StaticSchema() {
 
 // GlFlushMappedBufferRangeEXT:
 // gles.GlFlushMappedBufferRangeEXT{$,Uint32,Int32,Int32}
-const gapic::Id& GlFlushMappedBufferRangeEXT::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0xcb, 0xf1, 0x8e, 0xa9, 0x60, 0x97, 0xbe, 0x32, 0x73, 0x58, 0x2c, 0x92, 0xf8, 0x83, 0x90, 0x6a, 0xb4, 0x8a, 0xdb,  } };
-    return ID;
-}
 void GlFlushMappedBufferRangeEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8465,7 +6811,6 @@ void GlFlushMappedBufferRangeEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFlushMappedBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
-        GlFlushMappedBufferRangeEXT::StaticId(),
         "gles",
         "",
         "GlFlushMappedBufferRangeEXT",
@@ -8482,13 +6827,8 @@ const schema::Entity& GlFlushMappedBufferRangeEXT::StaticSchema() {
 
 // GlFragmentCoverageColorNV:
 // gles.GlFragmentCoverageColorNV{$,Uint32}
-const gapic::Id& GlFragmentCoverageColorNV::StaticId() {
-    static gapic::Id ID{ { 0x60, 0x31, 0xce, 0xa5, 0x9a, 0x36, 0x89, 0xe6, 0x62, 0xc0, 0x97, 0xd3, 0x78, 0xc3, 0x3a, 0x75, 0xd5, 0x5f, 0xe7, 0x49,  } };
-    return ID;
-}
 const schema::Entity& GlFragmentCoverageColorNV::StaticSchema() {
     static schema::Entity entity {
-        GlFragmentCoverageColorNV::StaticId(),
         "gles",
         "",
         "GlFragmentCoverageColorNV",
@@ -8503,10 +6843,6 @@ const schema::Entity& GlFragmentCoverageColorNV::StaticSchema() {
 
 // GlFramebufferParameteri:
 // gles.GlFramebufferParameteri{$,Uint32,Uint32,Int32}
-const gapic::Id& GlFramebufferParameteri::StaticId() {
-    static gapic::Id ID{ { 0x55, 0x69, 0x8f, 0x84, 0xcb, 0xbe, 0xd0, 0x47, 0x83, 0x42, 0xa1, 0x90, 0x17, 0xef, 0x47, 0x83, 0xfc, 0x84, 0xb2, 0x9e,  } };
-    return ID;
-}
 void GlFramebufferParameteri::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8515,7 +6851,6 @@ void GlFramebufferParameteri::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferParameteri::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferParameteri::StaticId(),
         "gles",
         "",
         "GlFramebufferParameteri",
@@ -8532,10 +6867,6 @@ const schema::Entity& GlFramebufferParameteri::StaticSchema() {
 
 // GlFramebufferRenderbuffer:
 // gles.GlFramebufferRenderbuffer{$,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlFramebufferRenderbuffer::StaticId() {
-    static gapic::Id ID{ { 0xc0, 0xf0, 0x48, 0x0f, 0x0b, 0x99, 0xa5, 0x70, 0xe6, 0x21, 0xd6, 0xb5, 0x41, 0xba, 0xa2, 0xc7, 0x8a, 0x32, 0x67, 0xd4,  } };
-    return ID;
-}
 void GlFramebufferRenderbuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
@@ -8545,7 +6876,6 @@ void GlFramebufferRenderbuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferRenderbuffer::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferRenderbuffer::StaticId(),
         "gles",
         "",
         "GlFramebufferRenderbuffer",
@@ -8563,10 +6893,6 @@ const schema::Entity& GlFramebufferRenderbuffer::StaticSchema() {
 
 // GlFramebufferSampleLocationsfvNV:
 // gles.GlFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlFramebufferSampleLocationsfvNV::StaticId() {
-    static gapic::Id ID{ { 0xb5, 0xee, 0xec, 0x62, 0x2e, 0xa6, 0xc8, 0xb1, 0x16, 0x6e, 0x57, 0x7f, 0x66, 0xb3, 0x33, 0x8b, 0x6f, 0x60, 0xe9, 0x72,  } };
-    return ID;
-}
 void GlFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8576,7 +6902,6 @@ void GlFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferSampleLocationsfvNV::StaticId(),
         "gles",
         "",
         "GlFramebufferSampleLocationsfvNV",
@@ -8594,10 +6919,6 @@ const schema::Entity& GlFramebufferSampleLocationsfvNV::StaticSchema() {
 
 // GlFramebufferTexture:
 // gles.GlFramebufferTexture{$,Uint32,Uint32,Uint32,Int32}
-const gapic::Id& GlFramebufferTexture::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0x00, 0x86, 0x40, 0xf1, 0x8d, 0x97, 0x02, 0x82, 0x59, 0x1b, 0x9b, 0x5f, 0xa5, 0x4b, 0x43, 0x6d, 0x7f, 0xf3, 0x13,  } };
-    return ID;
-}
 void GlFramebufferTexture::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8607,7 +6928,6 @@ void GlFramebufferTexture::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTexture::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTexture::StaticId(),
         "gles",
         "",
         "GlFramebufferTexture",
@@ -8625,10 +6945,6 @@ const schema::Entity& GlFramebufferTexture::StaticSchema() {
 
 // GlFramebufferTexture2D:
 // gles.GlFramebufferTexture2D{$,Uint32,Uint32,Uint32,Uint32,Int32}
-const gapic::Id& GlFramebufferTexture2D::StaticId() {
-    static gapic::Id ID{ { 0xe9, 0x6c, 0x42, 0xfc, 0xe5, 0x83, 0xfa, 0x94, 0x78, 0xe2, 0x87, 0x7e, 0xa2, 0x26, 0x00, 0x3c, 0x57, 0x2d, 0x7f, 0x1f,  } };
-    return ID;
-}
 void GlFramebufferTexture2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
@@ -8639,7 +6955,6 @@ void GlFramebufferTexture2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTexture2D::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTexture2D::StaticId(),
         "gles",
         "",
         "GlFramebufferTexture2D",
@@ -8658,10 +6973,6 @@ const schema::Entity& GlFramebufferTexture2D::StaticSchema() {
 
 // GlFramebufferTexture2DMultisampleEXT:
 // gles.GlFramebufferTexture2DMultisampleEXT{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlFramebufferTexture2DMultisampleEXT::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x2e, 0x50, 0x1b, 0xe9, 0x3b, 0xd5, 0x40, 0xc0, 0xa8, 0x87, 0x1c, 0x44, 0x4f, 0x83, 0xe7, 0x3b, 0x88, 0xb8, 0x00,  } };
-    return ID;
-}
 void GlFramebufferTexture2DMultisampleEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8673,7 +6984,6 @@ void GlFramebufferTexture2DMultisampleEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTexture2DMultisampleEXT::StaticId(),
         "gles",
         "",
         "GlFramebufferTexture2DMultisampleEXT",
@@ -8693,10 +7003,6 @@ const schema::Entity& GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
 
 // GlFramebufferTexture2DMultisampleIMG:
 // gles.GlFramebufferTexture2DMultisampleIMG{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlFramebufferTexture2DMultisampleIMG::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x6e, 0x20, 0xc9, 0x67, 0x20, 0x4a, 0xad, 0x62, 0x33, 0xa4, 0x9e, 0x6f, 0xcd, 0x48, 0xc8, 0xee, 0x59, 0xcd, 0x90,  } };
-    return ID;
-}
 void GlFramebufferTexture2DMultisampleIMG::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8708,7 +7014,6 @@ void GlFramebufferTexture2DMultisampleIMG::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTexture2DMultisampleIMG::StaticId(),
         "gles",
         "",
         "GlFramebufferTexture2DMultisampleIMG",
@@ -8728,10 +7033,6 @@ const schema::Entity& GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
 
 // GlFramebufferTexture3DOES:
 // gles.GlFramebufferTexture3DOES{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlFramebufferTexture3DOES::StaticId() {
-    static gapic::Id ID{ { 0x4f, 0xe2, 0x44, 0xa2, 0xc1, 0x92, 0x85, 0xfd, 0x5b, 0xad, 0x92, 0xa1, 0x1d, 0x09, 0xec, 0x5f, 0xa7, 0xd1, 0x31, 0x58,  } };
-    return ID;
-}
 void GlFramebufferTexture3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8743,7 +7044,6 @@ void GlFramebufferTexture3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTexture3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTexture3DOES::StaticId(),
         "gles",
         "",
         "GlFramebufferTexture3DOES",
@@ -8763,10 +7063,6 @@ const schema::Entity& GlFramebufferTexture3DOES::StaticSchema() {
 
 // GlFramebufferTextureEXT:
 // gles.GlFramebufferTextureEXT{$,Uint32,Uint32,Uint32,Int32}
-const gapic::Id& GlFramebufferTextureEXT::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0xde, 0x05, 0x88, 0x27, 0x4c, 0xa0, 0x15, 0xf5, 0xc1, 0x0e, 0x41, 0xf2, 0x4a, 0x26, 0xb1, 0x26, 0xae, 0x92, 0xf5,  } };
-    return ID;
-}
 void GlFramebufferTextureEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8776,7 +7072,6 @@ void GlFramebufferTextureEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTextureEXT::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTextureEXT::StaticId(),
         "gles",
         "",
         "GlFramebufferTextureEXT",
@@ -8794,10 +7089,6 @@ const schema::Entity& GlFramebufferTextureEXT::StaticSchema() {
 
 // GlFramebufferTextureLayer:
 // gles.GlFramebufferTextureLayer{$,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlFramebufferTextureLayer::StaticId() {
-    static gapic::Id ID{ { 0x80, 0x13, 0x55, 0x0d, 0x89, 0x44, 0x43, 0x17, 0x86, 0x9d, 0x11, 0x14, 0x83, 0xeb, 0x9e, 0x10, 0x2e, 0xbc, 0x20, 0x0f,  } };
-    return ID;
-}
 void GlFramebufferTextureLayer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8808,7 +7099,6 @@ void GlFramebufferTextureLayer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTextureLayer::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTextureLayer::StaticId(),
         "gles",
         "",
         "GlFramebufferTextureLayer",
@@ -8827,10 +7117,6 @@ const schema::Entity& GlFramebufferTextureLayer::StaticSchema() {
 
 // GlFramebufferTextureMultiviewOVR:
 // gles.GlFramebufferTextureMultiviewOVR{$,Uint32,Uint32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlFramebufferTextureMultiviewOVR::StaticId() {
-    static gapic::Id ID{ { 0x89, 0x88, 0x30, 0xd7, 0xfa, 0xe9, 0x0c, 0x06, 0xe3, 0x7e, 0xeb, 0x88, 0x18, 0x4d, 0xd2, 0x83, 0x57, 0x89, 0xf3, 0x83,  } };
-    return ID;
-}
 void GlFramebufferTextureMultiviewOVR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8842,7 +7128,6 @@ void GlFramebufferTextureMultiviewOVR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTextureMultiviewOVR::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTextureMultiviewOVR::StaticId(),
         "gles",
         "",
         "GlFramebufferTextureMultiviewOVR",
@@ -8862,10 +7147,6 @@ const schema::Entity& GlFramebufferTextureMultiviewOVR::StaticSchema() {
 
 // GlFramebufferTextureOES:
 // gles.GlFramebufferTextureOES{$,Uint32,Uint32,Uint32,Int32}
-const gapic::Id& GlFramebufferTextureOES::StaticId() {
-    static gapic::Id ID{ { 0xe2, 0xee, 0x5f, 0x7e, 0x0a, 0xbd, 0xb1, 0xf1, 0xd8, 0xdc, 0x35, 0x47, 0x60, 0x18, 0x72, 0x8e, 0xb7, 0x16, 0x08, 0xee,  } };
-    return ID;
-}
 void GlFramebufferTextureOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -8875,7 +7156,6 @@ void GlFramebufferTextureOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlFramebufferTextureOES::StaticSchema() {
     static schema::Entity entity {
-        GlFramebufferTextureOES::StaticId(),
         "gles",
         "",
         "GlFramebufferTextureOES",
@@ -8893,13 +7173,8 @@ const schema::Entity& GlFramebufferTextureOES::StaticSchema() {
 
 // GlFrontFace:
 // gles.GlFrontFace{$,Uint32}
-const gapic::Id& GlFrontFace::StaticId() {
-    static gapic::Id ID{ { 0x8e, 0xb6, 0x69, 0x3f, 0xaf, 0x51, 0x14, 0xdf, 0x57, 0x5a, 0xe6, 0x10, 0x2e, 0x68, 0x5e, 0x99, 0x6e, 0xd8, 0x96, 0x41,  } };
-    return ID;
-}
 const schema::Entity& GlFrontFace::StaticSchema() {
     static schema::Entity entity {
-        GlFrontFace::StaticId(),
         "gles",
         "",
         "GlFrontFace",
@@ -8914,13 +7189,8 @@ const schema::Entity& GlFrontFace::StaticSchema() {
 
 // GlGenBuffers:
 // gles.GlGenBuffers{$,Int32,$}
-const gapic::Id& GlGenBuffers::StaticId() {
-    static gapic::Id ID{ { 0x0c, 0xee, 0x90, 0xd5, 0xff, 0x34, 0x4c, 0x51, 0x26, 0xcd, 0xee, 0x86, 0xfb, 0x57, 0x14, 0x1d, 0xbc, 0xb5, 0x3c, 0x26,  } };
-    return ID;
-}
 const schema::Entity& GlGenBuffers::StaticSchema() {
     static schema::Entity entity {
-        GlGenBuffers::StaticId(),
         "gles",
         "",
         "GlGenBuffers",
@@ -8936,13 +7206,8 @@ const schema::Entity& GlGenBuffers::StaticSchema() {
 
 // GlGenFencesNV:
 // gles.GlGenFencesNV{$,Int32,$}
-const gapic::Id& GlGenFencesNV::StaticId() {
-    static gapic::Id ID{ { 0x9d, 0x72, 0x58, 0x08, 0xba, 0x85, 0x00, 0xfb, 0x53, 0x17, 0x48, 0xc9, 0x7c, 0xe1, 0x25, 0xb3, 0xf9, 0x35, 0x6e, 0x22,  } };
-    return ID;
-}
 const schema::Entity& GlGenFencesNV::StaticSchema() {
     static schema::Entity entity {
-        GlGenFencesNV::StaticId(),
         "gles",
         "",
         "GlGenFencesNV",
@@ -8958,13 +7223,8 @@ const schema::Entity& GlGenFencesNV::StaticSchema() {
 
 // GlGenFramebuffers:
 // gles.GlGenFramebuffers{$,Int32,$}
-const gapic::Id& GlGenFramebuffers::StaticId() {
-    static gapic::Id ID{ { 0xe0, 0x83, 0x2f, 0x39, 0x49, 0x46, 0xdc, 0x9a, 0x92, 0x6f, 0x9c, 0x71, 0xc9, 0xc6, 0x7c, 0xf5, 0x23, 0x95, 0x5e, 0x87,  } };
-    return ID;
-}
 const schema::Entity& GlGenFramebuffers::StaticSchema() {
     static schema::Entity entity {
-        GlGenFramebuffers::StaticId(),
         "gles",
         "",
         "GlGenFramebuffers",
@@ -8980,13 +7240,8 @@ const schema::Entity& GlGenFramebuffers::StaticSchema() {
 
 // GlGenPathsNV:
 // gles.GlGenPathsNV{$,Int32,Uint32}
-const gapic::Id& GlGenPathsNV::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x42, 0xea, 0x22, 0x03, 0x67, 0x4a, 0xce, 0xe5, 0xcd, 0xf0, 0xea, 0x88, 0x06, 0x7d, 0xc1, 0xfb, 0x54, 0x95, 0xb4,  } };
-    return ID;
-}
 const schema::Entity& GlGenPathsNV::StaticSchema() {
     static schema::Entity entity {
-        GlGenPathsNV::StaticId(),
         "gles",
         "",
         "GlGenPathsNV",
@@ -9002,13 +7257,8 @@ const schema::Entity& GlGenPathsNV::StaticSchema() {
 
 // GlGenPerfMonitorsAMD:
 // gles.GlGenPerfMonitorsAMD{$,Int32,$}
-const gapic::Id& GlGenPerfMonitorsAMD::StaticId() {
-    static gapic::Id ID{ { 0x51, 0xf3, 0xd9, 0x27, 0x58, 0xe7, 0x77, 0x7e, 0x44, 0x68, 0xd9, 0x69, 0x3d, 0x89, 0x39, 0xd4, 0x10, 0x17, 0x6d, 0x45,  } };
-    return ID;
-}
 const schema::Entity& GlGenPerfMonitorsAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGenPerfMonitorsAMD::StaticId(),
         "gles",
         "",
         "GlGenPerfMonitorsAMD",
@@ -9024,13 +7274,8 @@ const schema::Entity& GlGenPerfMonitorsAMD::StaticSchema() {
 
 // PipelineIdᵖ:
 // gles.PipelineIdᵖ{$}
-const gapic::Id& PipelineId__P::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0x29, 0x77, 0x84, 0xab, 0x31, 0x36, 0x33, 0x23, 0xbd, 0x4c, 0xbe, 0x8a, 0x10, 0x57, 0xa4, 0xd1, 0xc6, 0x8e, 0x3f,  } };
-    return ID;
-}
 const schema::Entity& PipelineId__P::StaticSchema() {
     static schema::Entity entity {
-        PipelineId__P::StaticId(),
         "gles",
         "",
         "PipelineIdᵖ",
@@ -9044,13 +7289,8 @@ const schema::Entity& PipelineId__P::StaticSchema() {
 
 // GlGenProgramPipelines:
 // gles.GlGenProgramPipelines{$,Int32,$}
-const gapic::Id& GlGenProgramPipelines::StaticId() {
-    static gapic::Id ID{ { 0x0b, 0x1a, 0x96, 0xc4, 0x72, 0xb2, 0x64, 0xf4, 0xa0, 0x4e, 0x89, 0x2e, 0x67, 0xc7, 0xc9, 0xd6, 0xfa, 0xab, 0x23, 0x59,  } };
-    return ID;
-}
 const schema::Entity& GlGenProgramPipelines::StaticSchema() {
     static schema::Entity entity {
-        GlGenProgramPipelines::StaticId(),
         "gles",
         "",
         "GlGenProgramPipelines",
@@ -9066,13 +7306,8 @@ const schema::Entity& GlGenProgramPipelines::StaticSchema() {
 
 // GlGenProgramPipelinesEXT:
 // gles.GlGenProgramPipelinesEXT{$,Int32,$}
-const gapic::Id& GlGenProgramPipelinesEXT::StaticId() {
-    static gapic::Id ID{ { 0xb2, 0x02, 0xee, 0xcd, 0xc7, 0x9c, 0x08, 0x67, 0x3d, 0xf3, 0xca, 0x3c, 0xf9, 0x47, 0x82, 0x23, 0xfe, 0x71, 0xd0, 0x38,  } };
-    return ID;
-}
 const schema::Entity& GlGenProgramPipelinesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGenProgramPipelinesEXT::StaticId(),
         "gles",
         "",
         "GlGenProgramPipelinesEXT",
@@ -9088,13 +7323,8 @@ const schema::Entity& GlGenProgramPipelinesEXT::StaticSchema() {
 
 // QueryIdᵖ:
 // gles.QueryIdᵖ{$}
-const gapic::Id& QueryId__P::StaticId() {
-    static gapic::Id ID{ { 0xdd, 0x17, 0x41, 0x87, 0x1b, 0xfe, 0x65, 0x66, 0x5a, 0x1d, 0x65, 0x6f, 0xc0, 0x91, 0x34, 0x60, 0xdc, 0x42, 0xc8, 0x64,  } };
-    return ID;
-}
 const schema::Entity& QueryId__P::StaticSchema() {
     static schema::Entity entity {
-        QueryId__P::StaticId(),
         "gles",
         "",
         "QueryIdᵖ",
@@ -9108,13 +7338,8 @@ const schema::Entity& QueryId__P::StaticSchema() {
 
 // GlGenQueries:
 // gles.GlGenQueries{$,Int32,$}
-const gapic::Id& GlGenQueries::StaticId() {
-    static gapic::Id ID{ { 0x91, 0x8e, 0x8e, 0xce, 0x49, 0x8a, 0x15, 0xdf, 0x5f, 0x2d, 0xdd, 0xbc, 0xb7, 0x71, 0x48, 0xaf, 0x34, 0x8c, 0x98, 0xc2,  } };
-    return ID;
-}
 const schema::Entity& GlGenQueries::StaticSchema() {
     static schema::Entity entity {
-        GlGenQueries::StaticId(),
         "gles",
         "",
         "GlGenQueries",
@@ -9130,13 +7355,8 @@ const schema::Entity& GlGenQueries::StaticSchema() {
 
 // GlGenQueriesEXT:
 // gles.GlGenQueriesEXT{$,Int32,$}
-const gapic::Id& GlGenQueriesEXT::StaticId() {
-    static gapic::Id ID{ { 0x28, 0x15, 0x43, 0x75, 0xbe, 0xed, 0x78, 0x08, 0x60, 0x11, 0xde, 0xaa, 0x84, 0xa5, 0x91, 0x20, 0xb9, 0x0a, 0x9e, 0x12,  } };
-    return ID;
-}
 const schema::Entity& GlGenQueriesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGenQueriesEXT::StaticId(),
         "gles",
         "",
         "GlGenQueriesEXT",
@@ -9152,13 +7372,8 @@ const schema::Entity& GlGenQueriesEXT::StaticSchema() {
 
 // GlGenRenderbuffers:
 // gles.GlGenRenderbuffers{$,Int32,$}
-const gapic::Id& GlGenRenderbuffers::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0x1e, 0x3a, 0x57, 0xf8, 0x76, 0xcb, 0xb2, 0x7e, 0xa4, 0xaf, 0xc6, 0xb7, 0x5e, 0x06, 0x0c, 0x78, 0xac, 0x0c, 0x36,  } };
-    return ID;
-}
 const schema::Entity& GlGenRenderbuffers::StaticSchema() {
     static schema::Entity entity {
-        GlGenRenderbuffers::StaticId(),
         "gles",
         "",
         "GlGenRenderbuffers",
@@ -9174,13 +7389,8 @@ const schema::Entity& GlGenRenderbuffers::StaticSchema() {
 
 // SamplerIdᵖ:
 // gles.SamplerIdᵖ{$}
-const gapic::Id& SamplerId__P::StaticId() {
-    static gapic::Id ID{ { 0x9d, 0x6d, 0xc9, 0xd4, 0x46, 0x97, 0x9e, 0xc7, 0x72, 0x36, 0xe8, 0x4b, 0xbc, 0x70, 0x30, 0x6a, 0x7f, 0xc0, 0x46, 0xb3,  } };
-    return ID;
-}
 const schema::Entity& SamplerId__P::StaticSchema() {
     static schema::Entity entity {
-        SamplerId__P::StaticId(),
         "gles",
         "",
         "SamplerIdᵖ",
@@ -9194,13 +7404,8 @@ const schema::Entity& SamplerId__P::StaticSchema() {
 
 // GlGenSamplers:
 // gles.GlGenSamplers{$,Int32,$}
-const gapic::Id& GlGenSamplers::StaticId() {
-    static gapic::Id ID{ { 0x12, 0xee, 0xf9, 0x57, 0xc9, 0x84, 0xf1, 0x6e, 0x52, 0x9a, 0x09, 0xed, 0x53, 0xa2, 0x1d, 0xae, 0xf0, 0xb1, 0x1f, 0xa1,  } };
-    return ID;
-}
 const schema::Entity& GlGenSamplers::StaticSchema() {
     static schema::Entity entity {
-        GlGenSamplers::StaticId(),
         "gles",
         "",
         "GlGenSamplers",
@@ -9216,13 +7421,8 @@ const schema::Entity& GlGenSamplers::StaticSchema() {
 
 // GlGenTextures:
 // gles.GlGenTextures{$,Int32,$}
-const gapic::Id& GlGenTextures::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x79, 0x3f, 0xa5, 0xda, 0x57, 0xd6, 0x0b, 0xe4, 0x3b, 0x55, 0x3b, 0xc5, 0x8c, 0xa5, 0x0c, 0x8b, 0x00, 0xe1, 0xee,  } };
-    return ID;
-}
 const schema::Entity& GlGenTextures::StaticSchema() {
     static schema::Entity entity {
-        GlGenTextures::StaticId(),
         "gles",
         "",
         "GlGenTextures",
@@ -9238,13 +7438,8 @@ const schema::Entity& GlGenTextures::StaticSchema() {
 
 // TransformFeedbackIdᵖ:
 // gles.TransformFeedbackIdᵖ{$}
-const gapic::Id& TransformFeedbackId__P::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0xf6, 0xaa, 0x65, 0x80, 0x16, 0xdf, 0xb4, 0xca, 0xec, 0x12, 0x70, 0xd1, 0x5d, 0x74, 0xdf, 0x30, 0xc1, 0x2a, 0x8c,  } };
-    return ID;
-}
 const schema::Entity& TransformFeedbackId__P::StaticSchema() {
     static schema::Entity entity {
-        TransformFeedbackId__P::StaticId(),
         "gles",
         "",
         "TransformFeedbackIdᵖ",
@@ -9258,13 +7453,8 @@ const schema::Entity& TransformFeedbackId__P::StaticSchema() {
 
 // GlGenTransformFeedbacks:
 // gles.GlGenTransformFeedbacks{$,Int32,$}
-const gapic::Id& GlGenTransformFeedbacks::StaticId() {
-    static gapic::Id ID{ { 0xe6, 0xa9, 0xc5, 0x34, 0x78, 0x0c, 0x56, 0x88, 0x97, 0xd3, 0xe3, 0x57, 0x6a, 0x73, 0x5f, 0x38, 0xe7, 0x98, 0xbe, 0x17,  } };
-    return ID;
-}
 const schema::Entity& GlGenTransformFeedbacks::StaticSchema() {
     static schema::Entity entity {
-        GlGenTransformFeedbacks::StaticId(),
         "gles",
         "",
         "GlGenTransformFeedbacks",
@@ -9280,13 +7470,8 @@ const schema::Entity& GlGenTransformFeedbacks::StaticSchema() {
 
 // VertexArrayIdᵖ:
 // gles.VertexArrayIdᵖ{$}
-const gapic::Id& VertexArrayId__P::StaticId() {
-    static gapic::Id ID{ { 0xf4, 0x63, 0x43, 0x34, 0xea, 0xd5, 0xfe, 0xc6, 0xd7, 0x55, 0xae, 0x9c, 0xf5, 0x09, 0xd0, 0x50, 0xb9, 0x50, 0x8b, 0xac,  } };
-    return ID;
-}
 const schema::Entity& VertexArrayId__P::StaticSchema() {
     static schema::Entity entity {
-        VertexArrayId__P::StaticId(),
         "gles",
         "",
         "VertexArrayIdᵖ",
@@ -9300,13 +7485,8 @@ const schema::Entity& VertexArrayId__P::StaticSchema() {
 
 // GlGenVertexArrays:
 // gles.GlGenVertexArrays{$,Int32,$}
-const gapic::Id& GlGenVertexArrays::StaticId() {
-    static gapic::Id ID{ { 0xb9, 0x18, 0xde, 0xdd, 0xb4, 0xc0, 0x67, 0xef, 0x5a, 0x3b, 0x95, 0xd1, 0x01, 0xcc, 0xc2, 0xcb, 0x1c, 0x3f, 0x98, 0x62,  } };
-    return ID;
-}
 const schema::Entity& GlGenVertexArrays::StaticSchema() {
     static schema::Entity entity {
-        GlGenVertexArrays::StaticId(),
         "gles",
         "",
         "GlGenVertexArrays",
@@ -9322,13 +7502,8 @@ const schema::Entity& GlGenVertexArrays::StaticSchema() {
 
 // GlGenVertexArraysOES:
 // gles.GlGenVertexArraysOES{$,Int32,$}
-const gapic::Id& GlGenVertexArraysOES::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xb2, 0x44, 0xc1, 0xad, 0x31, 0xc7, 0xba, 0xb4, 0xe7, 0x81, 0xac, 0xa8, 0x54, 0x78, 0xa0, 0xe9, 0x47, 0x1f, 0x4c,  } };
-    return ID;
-}
 const schema::Entity& GlGenVertexArraysOES::StaticSchema() {
     static schema::Entity entity {
-        GlGenVertexArraysOES::StaticId(),
         "gles",
         "",
         "GlGenVertexArraysOES",
@@ -9344,13 +7519,8 @@ const schema::Entity& GlGenVertexArraysOES::StaticSchema() {
 
 // GlGenerateMipmap:
 // gles.GlGenerateMipmap{$,Uint32}
-const gapic::Id& GlGenerateMipmap::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0x36, 0x05, 0x5c, 0x1a, 0x05, 0x2b, 0x67, 0xd7, 0xdc, 0xa5, 0xcc, 0xe6, 0x48, 0xd2, 0xd2, 0x5a, 0x01, 0xd5, 0xd5,  } };
-    return ID;
-}
 const schema::Entity& GlGenerateMipmap::StaticSchema() {
     static schema::Entity entity {
-        GlGenerateMipmap::StaticId(),
         "gles",
         "",
         "GlGenerateMipmap",
@@ -9365,10 +7535,6 @@ const schema::Entity& GlGenerateMipmap::StaticSchema() {
 
 // GlGetActiveAttrib:
 // gles.GlGetActiveAttrib{$,Uint32,Uint32,Int32,$,$,$,$}
-const gapic::Id& GlGetActiveAttrib::StaticId() {
-    static gapic::Id ID{ { 0x19, 0x7f, 0x7c, 0x94, 0x61, 0x12, 0x5f, 0xe3, 0xb5, 0xf1, 0xf3, 0x29, 0x57, 0x13, 0x0c, 0x1d, 0x83, 0x2c, 0x03, 0x5d,  } };
-    return ID;
-}
 void GlGetActiveAttrib::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9381,7 +7547,6 @@ void GlGetActiveAttrib::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetActiveAttrib::StaticSchema() {
     static schema::Entity entity {
-        GlGetActiveAttrib::StaticId(),
         "gles",
         "",
         "GlGetActiveAttrib",
@@ -9402,10 +7567,6 @@ const schema::Entity& GlGetActiveAttrib::StaticSchema() {
 
 // GlGetActiveUniform:
 // gles.GlGetActiveUniform{$,Uint32,Uint32,Int32,$,$,$,$}
-const gapic::Id& GlGetActiveUniform::StaticId() {
-    static gapic::Id ID{ { 0x84, 0x59, 0x75, 0x1a, 0xb2, 0xb6, 0xf2, 0x10, 0x9a, 0x90, 0x8c, 0xf2, 0xe1, 0x0d, 0xd4, 0x6f, 0x39, 0x52, 0xd3, 0x53,  } };
-    return ID;
-}
 void GlGetActiveUniform::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9418,7 +7579,6 @@ void GlGetActiveUniform::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetActiveUniform::StaticSchema() {
     static schema::Entity entity {
-        GlGetActiveUniform::StaticId(),
         "gles",
         "",
         "GlGetActiveUniform",
@@ -9439,10 +7599,6 @@ const schema::Entity& GlGetActiveUniform::StaticSchema() {
 
 // GlGetActiveUniformBlockName:
 // gles.GlGetActiveUniformBlockName{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetActiveUniformBlockName::StaticId() {
-    static gapic::Id ID{ { 0x22, 0xd6, 0x2d, 0x35, 0x31, 0x13, 0xa3, 0x4d, 0xa3, 0x6d, 0x65, 0xb8, 0x36, 0x43, 0x87, 0x3f, 0x1f, 0x5d, 0x87, 0x99,  } };
-    return ID;
-}
 void GlGetActiveUniformBlockName::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9453,7 +7609,6 @@ void GlGetActiveUniformBlockName::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetActiveUniformBlockName::StaticSchema() {
     static schema::Entity entity {
-        GlGetActiveUniformBlockName::StaticId(),
         "gles",
         "",
         "GlGetActiveUniformBlockName",
@@ -9472,10 +7627,6 @@ const schema::Entity& GlGetActiveUniformBlockName::StaticSchema() {
 
 // GlGetActiveUniformBlockiv:
 // gles.GlGetActiveUniformBlockiv{$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlGetActiveUniformBlockiv::StaticId() {
-    static gapic::Id ID{ { 0x18, 0x0d, 0x5e, 0xd6, 0xc5, 0x39, 0xe1, 0x7f, 0xa5, 0x7d, 0x71, 0x14, 0x14, 0x38, 0x8d, 0x9e, 0x00, 0x1c, 0x33, 0x5f,  } };
-    return ID;
-}
 void GlGetActiveUniformBlockiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9485,7 +7636,6 @@ void GlGetActiveUniformBlockiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetActiveUniformBlockiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetActiveUniformBlockiv::StaticId(),
         "gles",
         "",
         "GlGetActiveUniformBlockiv",
@@ -9503,13 +7653,8 @@ const schema::Entity& GlGetActiveUniformBlockiv::StaticSchema() {
 
 // UniformIndexᶜᵖ:
 // gles.UniformIndexᶜᵖ{$}
-const gapic::Id& UniformIndex__CP::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x2f, 0xff, 0x11, 0x54, 0x05, 0x62, 0x2b, 0xf2, 0x0f, 0x71, 0xfa, 0x8d, 0xd5, 0x8f, 0x0d, 0x4b, 0x4c, 0x41, 0xe8,  } };
-    return ID;
-}
 const schema::Entity& UniformIndex__CP::StaticSchema() {
     static schema::Entity entity {
-        UniformIndex__CP::StaticId(),
         "gles",
         "",
         "UniformIndexᶜᵖ",
@@ -9523,10 +7668,6 @@ const schema::Entity& UniformIndex__CP::StaticSchema() {
 
 // GlGetActiveUniformsiv:
 // gles.GlGetActiveUniformsiv{$,Uint32,Int32,$,Uint32,$}
-const gapic::Id& GlGetActiveUniformsiv::StaticId() {
-    static gapic::Id ID{ { 0x08, 0x66, 0x34, 0x15, 0x80, 0x60, 0x97, 0xb4, 0xab, 0x72, 0x36, 0x98, 0x6d, 0x11, 0x32, 0x7b, 0x82, 0x13, 0xde, 0x63,  } };
-    return ID;
-}
 void GlGetActiveUniformsiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9537,7 +7678,6 @@ void GlGetActiveUniformsiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetActiveUniformsiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetActiveUniformsiv::StaticId(),
         "gles",
         "",
         "GlGetActiveUniformsiv",
@@ -9556,10 +7696,6 @@ const schema::Entity& GlGetActiveUniformsiv::StaticSchema() {
 
 // GlGetAttachedShaders:
 // gles.GlGetAttachedShaders{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetAttachedShaders::StaticId() {
-    static gapic::Id ID{ { 0xd7, 0xbf, 0x81, 0xe9, 0x2f, 0x92, 0xeb, 0x8e, 0x2f, 0x94, 0x1a, 0x66, 0x10, 0xe1, 0x83, 0x8e, 0x6e, 0x19, 0x15, 0x16,  } };
-    return ID;
-}
 void GlGetAttachedShaders::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9569,7 +7705,6 @@ void GlGetAttachedShaders::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetAttachedShaders::StaticSchema() {
     static schema::Entity entity {
-        GlGetAttachedShaders::StaticId(),
         "gles",
         "",
         "GlGetAttachedShaders",
@@ -9587,10 +7722,6 @@ const schema::Entity& GlGetAttachedShaders::StaticSchema() {
 
 // GlGetAttribLocation:
 // gles.GlGetAttribLocation{$,Uint32,String,Int32}
-const gapic::Id& GlGetAttribLocation::StaticId() {
-    static gapic::Id ID{ { 0x3b, 0xf4, 0xd6, 0x05, 0xae, 0x6e, 0xf7, 0x37, 0x14, 0x5e, 0xef, 0xde, 0x97, 0x2c, 0x6d, 0x40, 0x19, 0xd7, 0xfa, 0x9a,  } };
-    return ID;
-}
 void GlGetAttribLocation::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -9599,7 +7730,6 @@ void GlGetAttribLocation::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetAttribLocation::StaticSchema() {
     static schema::Entity entity {
-        GlGetAttribLocation::StaticId(),
         "gles",
         "",
         "GlGetAttribLocation",
@@ -9616,10 +7746,6 @@ const schema::Entity& GlGetAttribLocation::StaticSchema() {
 
 // GlGetBooleani_v:
 // gles.GlGetBooleani_v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetBooleani_v::StaticId() {
-    static gapic::Id ID{ { 0x1f, 0x4f, 0x42, 0xbb, 0x02, 0x99, 0x20, 0xf9, 0xff, 0xc1, 0xde, 0xe0, 0xf8, 0xd2, 0xe4, 0x53, 0x6b, 0x8a, 0xde, 0xdf,  } };
-    return ID;
-}
 void GlGetBooleani_v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mParam);
@@ -9628,7 +7754,6 @@ void GlGetBooleani_v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetBooleani_v::StaticSchema() {
     static schema::Entity entity {
-        GlGetBooleani_v::StaticId(),
         "gles",
         "",
         "GlGetBooleani_v",
@@ -9645,13 +7770,8 @@ const schema::Entity& GlGetBooleani_v::StaticSchema() {
 
 // GlGetBooleanv:
 // gles.GlGetBooleanv{$,Uint32,$}
-const gapic::Id& GlGetBooleanv::StaticId() {
-    static gapic::Id ID{ { 0xb8, 0x56, 0xb0, 0xbc, 0x60, 0xf4, 0x2e, 0xe9, 0x6b, 0xfb, 0x01, 0x46, 0x9e, 0xb5, 0xe4, 0x27, 0x8b, 0xfb, 0xc4, 0x5a,  } };
-    return ID;
-}
 const schema::Entity& GlGetBooleanv::StaticSchema() {
     static schema::Entity entity {
-        GlGetBooleanv::StaticId(),
         "gles",
         "",
         "GlGetBooleanv",
@@ -9667,10 +7787,6 @@ const schema::Entity& GlGetBooleanv::StaticSchema() {
 
 // GlGetBufferParameteri64v:
 // gles.GlGetBufferParameteri64v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetBufferParameteri64v::StaticId() {
-    static gapic::Id ID{ { 0x72, 0x3b, 0x33, 0x23, 0xc5, 0x2a, 0x44, 0xd7, 0x08, 0x74, 0x5d, 0x2b, 0x65, 0x22, 0x4b, 0x15, 0x96, 0x07, 0x0a, 0xbd,  } };
-    return ID;
-}
 void GlGetBufferParameteri64v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -9679,7 +7795,6 @@ void GlGetBufferParameteri64v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetBufferParameteri64v::StaticSchema() {
     static schema::Entity entity {
-        GlGetBufferParameteri64v::StaticId(),
         "gles",
         "",
         "GlGetBufferParameteri64v",
@@ -9696,10 +7811,6 @@ const schema::Entity& GlGetBufferParameteri64v::StaticSchema() {
 
 // GlGetBufferParameteriv:
 // gles.GlGetBufferParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetBufferParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x40, 0x5f, 0x79, 0x4d, 0x15, 0x00, 0xe8, 0xd1, 0x17, 0xed, 0xb3, 0xad, 0x58, 0xea, 0xc0, 0xe9, 0x18, 0x6f, 0xf5,  } };
-    return ID;
-}
 void GlGetBufferParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -9708,7 +7819,6 @@ void GlGetBufferParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetBufferParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetBufferParameteriv::StaticId(),
         "gles",
         "",
         "GlGetBufferParameteriv",
@@ -9725,10 +7835,6 @@ const schema::Entity& GlGetBufferParameteriv::StaticSchema() {
 
 // GlGetBufferPointerv:
 // gles.GlGetBufferPointerv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetBufferPointerv::StaticId() {
-    static gapic::Id ID{ { 0x44, 0xf5, 0xc3, 0x9d, 0x73, 0xbc, 0x10, 0xf5, 0x67, 0x20, 0xa7, 0xd0, 0x71, 0x22, 0x44, 0x70, 0xbd, 0x13, 0xdd, 0x7c,  } };
-    return ID;
-}
 void GlGetBufferPointerv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -9737,7 +7843,6 @@ void GlGetBufferPointerv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetBufferPointerv::StaticSchema() {
     static schema::Entity entity {
-        GlGetBufferPointerv::StaticId(),
         "gles",
         "",
         "GlGetBufferPointerv",
@@ -9754,10 +7859,6 @@ const schema::Entity& GlGetBufferPointerv::StaticSchema() {
 
 // GlGetBufferPointervOES:
 // gles.GlGetBufferPointervOES{$,Uint32,Uint32,$}
-const gapic::Id& GlGetBufferPointervOES::StaticId() {
-    static gapic::Id ID{ { 0x63, 0x23, 0x8d, 0xcd, 0xc5, 0x35, 0x93, 0x39, 0xd9, 0x55, 0x61, 0x04, 0x30, 0x1b, 0xc5, 0xda, 0x95, 0xd4, 0xda, 0x07,  } };
-    return ID;
-}
 void GlGetBufferPointervOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -9766,7 +7867,6 @@ void GlGetBufferPointervOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetBufferPointervOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetBufferPointervOES::StaticId(),
         "gles",
         "",
         "GlGetBufferPointervOES",
@@ -9783,13 +7883,8 @@ const schema::Entity& GlGetBufferPointervOES::StaticSchema() {
 
 // GlGetCoverageModulationTableNV:
 // gles.GlGetCoverageModulationTableNV{$,Int32,$}
-const gapic::Id& GlGetCoverageModulationTableNV::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0x4e, 0xe0, 0x6b, 0x7e, 0x60, 0x21, 0xe6, 0x1d, 0x5f, 0x95, 0x02, 0xb7, 0x0b, 0x53, 0xe5, 0x64, 0x2f, 0x55, 0x63,  } };
-    return ID;
-}
 const schema::Entity& GlGetCoverageModulationTableNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetCoverageModulationTableNV::StaticId(),
         "gles",
         "",
         "GlGetCoverageModulationTableNV",
@@ -9805,10 +7900,6 @@ const schema::Entity& GlGetCoverageModulationTableNV::StaticSchema() {
 
 // GlGetDebugMessageLog:
 // gles.GlGetDebugMessageLog{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
-const gapic::Id& GlGetDebugMessageLog::StaticId() {
-    static gapic::Id ID{ { 0xae, 0xdd, 0xc0, 0x6e, 0xa8, 0xd2, 0xe5, 0x33, 0x63, 0x74, 0xfc, 0x0a, 0x9a, 0x0f, 0xa0, 0xfe, 0xe0, 0x33, 0x04, 0x8d,  } };
-    return ID;
-}
 void GlGetDebugMessageLog::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mCount);
@@ -9823,7 +7914,6 @@ void GlGetDebugMessageLog::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetDebugMessageLog::StaticSchema() {
     static schema::Entity entity {
-        GlGetDebugMessageLog::StaticId(),
         "gles",
         "",
         "GlGetDebugMessageLog",
@@ -9846,10 +7936,6 @@ const schema::Entity& GlGetDebugMessageLog::StaticSchema() {
 
 // GlGetDebugMessageLogKHR:
 // gles.GlGetDebugMessageLogKHR{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
-const gapic::Id& GlGetDebugMessageLogKHR::StaticId() {
-    static gapic::Id ID{ { 0x46, 0xd2, 0x97, 0xeb, 0xd7, 0x6e, 0xd5, 0x41, 0x95, 0x5e, 0xdc, 0x7d, 0x72, 0xf9, 0x64, 0xeb, 0x70, 0x30, 0xa9, 0x48,  } };
-    return ID;
-}
 void GlGetDebugMessageLogKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mCount);
@@ -9864,7 +7950,6 @@ void GlGetDebugMessageLogKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetDebugMessageLogKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetDebugMessageLogKHR::StaticId(),
         "gles",
         "",
         "GlGetDebugMessageLogKHR",
@@ -9887,10 +7972,6 @@ const schema::Entity& GlGetDebugMessageLogKHR::StaticSchema() {
 
 // GlGetDriverControlStringQCOM:
 // gles.GlGetDriverControlStringQCOM{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetDriverControlStringQCOM::StaticId() {
-    static gapic::Id ID{ { 0xef, 0xb7, 0xce, 0x10, 0x79, 0x45, 0x09, 0x69, 0xa8, 0x51, 0x36, 0x1a, 0x24, 0x0c, 0x60, 0x5f, 0x21, 0x6f, 0x46, 0x75,  } };
-    return ID;
-}
 void GlGetDriverControlStringQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mDriverControl);
@@ -9900,7 +7981,6 @@ void GlGetDriverControlStringQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetDriverControlStringQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlGetDriverControlStringQCOM::StaticId(),
         "gles",
         "",
         "GlGetDriverControlStringQCOM",
@@ -9918,10 +7998,6 @@ const schema::Entity& GlGetDriverControlStringQCOM::StaticSchema() {
 
 // GlGetDriverControlsQCOM:
 // gles.GlGetDriverControlsQCOM{$,$,Int32,$}
-const gapic::Id& GlGetDriverControlsQCOM::StaticId() {
-    static gapic::Id ID{ { 0x0f, 0x4d, 0xa2, 0xbf, 0x89, 0xe5, 0x1d, 0x11, 0xd3, 0x58, 0xb0, 0x0d, 0xc9, 0xd2, 0x7f, 0xcd, 0xde, 0xb2, 0xe9, 0x55,  } };
-    return ID;
-}
 void GlGetDriverControlsQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mNum);
@@ -9930,7 +8006,6 @@ void GlGetDriverControlsQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetDriverControlsQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlGetDriverControlsQCOM::StaticId(),
         "gles",
         "",
         "GlGetDriverControlsQCOM",
@@ -9947,13 +8022,8 @@ const schema::Entity& GlGetDriverControlsQCOM::StaticSchema() {
 
 // GlGetError:
 // gles.GlGetError{$,Uint32}
-const gapic::Id& GlGetError::StaticId() {
-    static gapic::Id ID{ { 0x4b, 0x2d, 0x93, 0x9e, 0xf1, 0xc2, 0x18, 0x24, 0x9a, 0x82, 0x80, 0xb1, 0x45, 0xf1, 0x77, 0xa9, 0xfa, 0x96, 0xd9, 0xae,  } };
-    return ID;
-}
 const schema::Entity& GlGetError::StaticSchema() {
     static schema::Entity entity {
-        GlGetError::StaticId(),
         "gles",
         "",
         "GlGetError",
@@ -9968,10 +8038,6 @@ const schema::Entity& GlGetError::StaticSchema() {
 
 // GlGetFenceivNV:
 // gles.GlGetFenceivNV{$,Uint32,Uint32,$}
-const gapic::Id& GlGetFenceivNV::StaticId() {
-    static gapic::Id ID{ { 0xdf, 0x37, 0xb3, 0x19, 0x70, 0xeb, 0x79, 0xce, 0x8b, 0xb0, 0xd6, 0x7a, 0x72, 0xc2, 0xc7, 0x6f, 0x10, 0x82, 0xc3, 0x73,  } };
-    return ID;
-}
 void GlGetFenceivNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFence);
@@ -9980,7 +8046,6 @@ void GlGetFenceivNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFenceivNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetFenceivNV::StaticId(),
         "gles",
         "",
         "GlGetFenceivNV",
@@ -9997,13 +8062,8 @@ const schema::Entity& GlGetFenceivNV::StaticSchema() {
 
 // GlGetFirstPerfQueryIdINTEL:
 // gles.GlGetFirstPerfQueryIdINTEL{$,$}
-const gapic::Id& GlGetFirstPerfQueryIdINTEL::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x9f, 0x7f, 0xa7, 0x07, 0xfd, 0x15, 0xcf, 0xf4, 0x38, 0x8d, 0x97, 0x76, 0x23, 0x74, 0x89, 0x01, 0xe6, 0xff, 0x8e,  } };
-    return ID;
-}
 const schema::Entity& GlGetFirstPerfQueryIdINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetFirstPerfQueryIdINTEL::StaticId(),
         "gles",
         "",
         "GlGetFirstPerfQueryIdINTEL",
@@ -10018,10 +8078,6 @@ const schema::Entity& GlGetFirstPerfQueryIdINTEL::StaticSchema() {
 
 // GlGetFloati_vNV:
 // gles.GlGetFloati_vNV{$,Uint32,Uint32,$}
-const gapic::Id& GlGetFloati_vNV::StaticId() {
-    static gapic::Id ID{ { 0x88, 0x23, 0x94, 0x28, 0xd3, 0x8d, 0xb0, 0xed, 0x50, 0x3f, 0xed, 0x15, 0x68, 0x02, 0xfb, 0xf1, 0x08, 0x96, 0x73, 0x6a,  } };
-    return ID;
-}
 void GlGetFloati_vNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -10030,7 +8086,6 @@ void GlGetFloati_vNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFloati_vNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetFloati_vNV::StaticId(),
         "gles",
         "",
         "GlGetFloati_vNV",
@@ -10047,13 +8102,8 @@ const schema::Entity& GlGetFloati_vNV::StaticSchema() {
 
 // GlGetFloatv:
 // gles.GlGetFloatv{$,Uint32,$}
-const gapic::Id& GlGetFloatv::StaticId() {
-    static gapic::Id ID{ { 0x7c, 0x95, 0x58, 0x98, 0xa7, 0xd8, 0xe3, 0x68, 0xfb, 0x9b, 0xf1, 0x62, 0xd6, 0x23, 0x69, 0x9f, 0xf8, 0x78, 0x83, 0xd2,  } };
-    return ID;
-}
 const schema::Entity& GlGetFloatv::StaticSchema() {
     static schema::Entity entity {
-        GlGetFloatv::StaticId(),
         "gles",
         "",
         "GlGetFloatv",
@@ -10069,10 +8119,6 @@ const schema::Entity& GlGetFloatv::StaticSchema() {
 
 // GlGetFragDataIndexEXT:
 // gles.GlGetFragDataIndexEXT{$,Uint32,String,Int32}
-const gapic::Id& GlGetFragDataIndexEXT::StaticId() {
-    static gapic::Id ID{ { 0x85, 0x40, 0x27, 0x62, 0xb1, 0x09, 0x15, 0x8f, 0x4f, 0xe0, 0x46, 0xf4, 0x4b, 0x42, 0x39, 0xbc, 0x76, 0xe9, 0xe0, 0x2d,  } };
-    return ID;
-}
 void GlGetFragDataIndexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -10081,7 +8127,6 @@ void GlGetFragDataIndexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFragDataIndexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetFragDataIndexEXT::StaticId(),
         "gles",
         "",
         "GlGetFragDataIndexEXT",
@@ -10098,10 +8143,6 @@ const schema::Entity& GlGetFragDataIndexEXT::StaticSchema() {
 
 // GlGetFragDataLocation:
 // gles.GlGetFragDataLocation{$,Uint32,String,Int32}
-const gapic::Id& GlGetFragDataLocation::StaticId() {
-    static gapic::Id ID{ { 0x87, 0x01, 0xde, 0x29, 0x12, 0x29, 0xa6, 0xd4, 0xd6, 0x7c, 0x75, 0x17, 0x3d, 0x6d, 0xdd, 0x31, 0xeb, 0x16, 0x8e, 0x9b,  } };
-    return ID;
-}
 void GlGetFragDataLocation::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -10110,7 +8151,6 @@ void GlGetFragDataLocation::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFragDataLocation::StaticSchema() {
     static schema::Entity entity {
-        GlGetFragDataLocation::StaticId(),
         "gles",
         "",
         "GlGetFragDataLocation",
@@ -10127,10 +8167,6 @@ const schema::Entity& GlGetFragDataLocation::StaticSchema() {
 
 // GlGetFramebufferAttachmentParameteriv:
 // gles.GlGetFramebufferAttachmentParameteriv{$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlGetFramebufferAttachmentParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x84, 0x06, 0x0b, 0xc5, 0xc2, 0x76, 0x30, 0x79, 0xd1, 0xa4, 0x0d, 0xf0, 0xd8, 0x02, 0xe5, 0x52, 0xa3, 0x7b, 0xdd, 0xe3,  } };
-    return ID;
-}
 void GlGetFramebufferAttachmentParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
@@ -10140,7 +8176,6 @@ void GlGetFramebufferAttachmentParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFramebufferAttachmentParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetFramebufferAttachmentParameteriv::StaticId(),
         "gles",
         "",
         "GlGetFramebufferAttachmentParameteriv",
@@ -10158,10 +8193,6 @@ const schema::Entity& GlGetFramebufferAttachmentParameteriv::StaticSchema() {
 
 // GlGetFramebufferParameteriv:
 // gles.GlGetFramebufferParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetFramebufferParameteriv::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0xb4, 0xfc, 0x01, 0x37, 0x7f, 0x82, 0x0c, 0x10, 0xb0, 0x9d, 0xb4, 0x77, 0x70, 0x26, 0x23, 0x50, 0xa7, 0x5f, 0xa3,  } };
-    return ID;
-}
 void GlGetFramebufferParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -10170,7 +8201,6 @@ void GlGetFramebufferParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetFramebufferParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetFramebufferParameteriv::StaticId(),
         "gles",
         "",
         "GlGetFramebufferParameteriv",
@@ -10187,13 +8217,8 @@ const schema::Entity& GlGetFramebufferParameteriv::StaticSchema() {
 
 // GlGetGraphicsResetStatus:
 // gles.GlGetGraphicsResetStatus{$,Uint32}
-const gapic::Id& GlGetGraphicsResetStatus::StaticId() {
-    static gapic::Id ID{ { 0x22, 0x49, 0x74, 0xb8, 0x0b, 0x3f, 0x74, 0x15, 0x83, 0x5d, 0x3b, 0xbd, 0xee, 0x1e, 0x0f, 0xf0, 0xf6, 0xbe, 0xb6, 0xb1,  } };
-    return ID;
-}
 const schema::Entity& GlGetGraphicsResetStatus::StaticSchema() {
     static schema::Entity entity {
-        GlGetGraphicsResetStatus::StaticId(),
         "gles",
         "",
         "GlGetGraphicsResetStatus",
@@ -10208,13 +8233,8 @@ const schema::Entity& GlGetGraphicsResetStatus::StaticSchema() {
 
 // GlGetGraphicsResetStatusEXT:
 // gles.GlGetGraphicsResetStatusEXT{$,Uint32}
-const gapic::Id& GlGetGraphicsResetStatusEXT::StaticId() {
-    static gapic::Id ID{ { 0x47, 0x1a, 0x3a, 0xe7, 0x9f, 0xf8, 0x0a, 0x99, 0x7e, 0x47, 0x39, 0x75, 0x19, 0x9a, 0x3e, 0xbc, 0xab, 0xb6, 0x13, 0x98,  } };
-    return ID;
-}
 const schema::Entity& GlGetGraphicsResetStatusEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetGraphicsResetStatusEXT::StaticId(),
         "gles",
         "",
         "GlGetGraphicsResetStatusEXT",
@@ -10229,13 +8249,8 @@ const schema::Entity& GlGetGraphicsResetStatusEXT::StaticSchema() {
 
 // GlGetGraphicsResetStatusKHR:
 // gles.GlGetGraphicsResetStatusKHR{$,Uint32}
-const gapic::Id& GlGetGraphicsResetStatusKHR::StaticId() {
-    static gapic::Id ID{ { 0xc0, 0x4d, 0x41, 0xa8, 0x60, 0xe0, 0x92, 0x27, 0xc6, 0x31, 0xc0, 0xc1, 0xc9, 0xc3, 0x1b, 0x46, 0x40, 0xc5, 0x79, 0x4e,  } };
-    return ID;
-}
 const schema::Entity& GlGetGraphicsResetStatusKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetGraphicsResetStatusKHR::StaticId(),
         "gles",
         "",
         "GlGetGraphicsResetStatusKHR",
@@ -10250,10 +8265,6 @@ const schema::Entity& GlGetGraphicsResetStatusKHR::StaticSchema() {
 
 // GlGetImageHandleNV:
 // gles.GlGetImageHandleNV{$,Uint32,Int32,Uint8,Int32,Uint32,Uint64}
-const gapic::Id& GlGetImageHandleNV::StaticId() {
-    static gapic::Id ID{ { 0xd3, 0xdf, 0xda, 0xfc, 0xdf, 0xf8, 0x79, 0xb9, 0x97, 0xd4, 0x65, 0x32, 0xe5, 0x4d, 0xe3, 0xa7, 0x3a, 0x46, 0x81, 0xf5,  } };
-    return ID;
-}
 void GlGetImageHandleNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -10265,7 +8276,6 @@ void GlGetImageHandleNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetImageHandleNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetImageHandleNV::StaticId(),
         "gles",
         "",
         "GlGetImageHandleNV",
@@ -10285,10 +8295,6 @@ const schema::Entity& GlGetImageHandleNV::StaticSchema() {
 
 // GlGetInteger64i_v:
 // gles.GlGetInteger64i_v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetInteger64i_v::StaticId() {
-    static gapic::Id ID{ { 0x4f, 0xdc, 0xa9, 0xe6, 0x08, 0xe3, 0x6e, 0x4b, 0x93, 0x6a, 0x9d, 0x99, 0x5c, 0x06, 0xb2, 0x4e, 0x15, 0xf9, 0xb9, 0xb2,  } };
-    return ID;
-}
 void GlGetInteger64i_v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mParam);
@@ -10297,7 +8303,6 @@ void GlGetInteger64i_v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetInteger64i_v::StaticSchema() {
     static schema::Entity entity {
-        GlGetInteger64i_v::StaticId(),
         "gles",
         "",
         "GlGetInteger64i_v",
@@ -10314,13 +8319,8 @@ const schema::Entity& GlGetInteger64i_v::StaticSchema() {
 
 // GlGetInteger64v:
 // gles.GlGetInteger64v{$,Uint32,$}
-const gapic::Id& GlGetInteger64v::StaticId() {
-    static gapic::Id ID{ { 0x9e, 0xa0, 0x4c, 0xff, 0x99, 0xa4, 0x5f, 0xc4, 0x7b, 0x69, 0x57, 0x35, 0x0e, 0x78, 0x90, 0x07, 0x88, 0x08, 0xc0, 0x99,  } };
-    return ID;
-}
 const schema::Entity& GlGetInteger64v::StaticSchema() {
     static schema::Entity entity {
-        GlGetInteger64v::StaticId(),
         "gles",
         "",
         "GlGetInteger64v",
@@ -10336,13 +8336,8 @@ const schema::Entity& GlGetInteger64v::StaticSchema() {
 
 // GlGetInteger64vAPPLE:
 // gles.GlGetInteger64vAPPLE{$,Uint32,$}
-const gapic::Id& GlGetInteger64vAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0x0c, 0x37, 0x60, 0x12, 0xa1, 0x87, 0x93, 0x88, 0x9b, 0x5f, 0x1b, 0xd1, 0x09, 0x2b, 0xec, 0x47, 0xbb, 0xa0, 0x91,  } };
-    return ID;
-}
 const schema::Entity& GlGetInteger64vAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlGetInteger64vAPPLE::StaticId(),
         "gles",
         "",
         "GlGetInteger64vAPPLE",
@@ -10358,10 +8353,6 @@ const schema::Entity& GlGetInteger64vAPPLE::StaticSchema() {
 
 // GlGetIntegeri_v:
 // gles.GlGetIntegeri_v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetIntegeri_v::StaticId() {
-    static gapic::Id ID{ { 0x49, 0xc8, 0x20, 0xac, 0x05, 0x1d, 0x30, 0xf6, 0xec, 0x0a, 0xf1, 0xc2, 0x28, 0xad, 0x4c, 0x81, 0x6f, 0x55, 0xc1, 0xcb,  } };
-    return ID;
-}
 void GlGetIntegeri_v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mParam);
@@ -10370,7 +8361,6 @@ void GlGetIntegeri_v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetIntegeri_v::StaticSchema() {
     static schema::Entity entity {
-        GlGetIntegeri_v::StaticId(),
         "gles",
         "",
         "GlGetIntegeri_v",
@@ -10387,10 +8377,6 @@ const schema::Entity& GlGetIntegeri_v::StaticSchema() {
 
 // GlGetIntegeri_vEXT:
 // gles.GlGetIntegeri_vEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetIntegeri_vEXT::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0x54, 0xbc, 0x02, 0x43, 0x46, 0xa2, 0x77, 0x32, 0x84, 0x9a, 0xe8, 0xfb, 0x5f, 0xce, 0xb7, 0xaa, 0x39, 0xea, 0x38,  } };
-    return ID;
-}
 void GlGetIntegeri_vEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -10399,7 +8385,6 @@ void GlGetIntegeri_vEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetIntegeri_vEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetIntegeri_vEXT::StaticId(),
         "gles",
         "",
         "GlGetIntegeri_vEXT",
@@ -10416,13 +8401,8 @@ const schema::Entity& GlGetIntegeri_vEXT::StaticSchema() {
 
 // GlGetIntegerv:
 // gles.GlGetIntegerv{$,Uint32,$}
-const gapic::Id& GlGetIntegerv::StaticId() {
-    static gapic::Id ID{ { 0x19, 0xa8, 0x82, 0x0e, 0x70, 0xf9, 0x86, 0x5a, 0x94, 0x5f, 0x3e, 0x7c, 0xd3, 0x88, 0x9a, 0x84, 0x81, 0x47, 0xb0, 0x3a,  } };
-    return ID;
-}
 const schema::Entity& GlGetIntegerv::StaticSchema() {
     static schema::Entity entity {
-        GlGetIntegerv::StaticId(),
         "gles",
         "",
         "GlGetIntegerv",
@@ -10438,10 +8418,6 @@ const schema::Entity& GlGetIntegerv::StaticSchema() {
 
 // GlGetInternalformatSampleivNV:
 // gles.GlGetInternalformatSampleivNV{$,Uint32,Uint32,Int32,Uint32,Int32,$}
-const gapic::Id& GlGetInternalformatSampleivNV::StaticId() {
-    static gapic::Id ID{ { 0x47, 0x0f, 0x4b, 0x97, 0x9a, 0x83, 0x4a, 0x60, 0x47, 0xb8, 0xd7, 0x2d, 0x49, 0x6d, 0x4f, 0x27, 0x1e, 0x38, 0x6f, 0x25,  } };
-    return ID;
-}
 void GlGetInternalformatSampleivNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -10453,7 +8429,6 @@ void GlGetInternalformatSampleivNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetInternalformatSampleivNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetInternalformatSampleivNV::StaticId(),
         "gles",
         "",
         "GlGetInternalformatSampleivNV",
@@ -10473,10 +8448,6 @@ const schema::Entity& GlGetInternalformatSampleivNV::StaticSchema() {
 
 // GlGetInternalformativ:
 // gles.GlGetInternalformativ{$,Uint32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlGetInternalformativ::StaticId() {
-    static gapic::Id ID{ { 0x1c, 0x57, 0xdb, 0xa2, 0xfe, 0x43, 0xab, 0x41, 0x41, 0x11, 0x63, 0xfb, 0xba, 0x44, 0x05, 0x83, 0x84, 0xfa, 0xbe, 0x2a,  } };
-    return ID;
-}
 void GlGetInternalformativ::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -10487,7 +8458,6 @@ void GlGetInternalformativ::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetInternalformativ::StaticSchema() {
     static schema::Entity entity {
-        GlGetInternalformativ::StaticId(),
         "gles",
         "",
         "GlGetInternalformativ",
@@ -10506,10 +8476,6 @@ const schema::Entity& GlGetInternalformativ::StaticSchema() {
 
 // GlGetMultisamplefv:
 // gles.GlGetMultisamplefv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetMultisamplefv::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xec, 0x3d, 0x57, 0x49, 0x2d, 0xf4, 0x6e, 0x25, 0x6d, 0x15, 0x21, 0xe3, 0x64, 0x7a, 0xca, 0x5b, 0xe5, 0x76, 0x16,  } };
-    return ID;
-}
 void GlGetMultisamplefv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPname);
@@ -10518,7 +8484,6 @@ void GlGetMultisamplefv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetMultisamplefv::StaticSchema() {
     static schema::Entity entity {
-        GlGetMultisamplefv::StaticId(),
         "gles",
         "",
         "GlGetMultisamplefv",
@@ -10535,13 +8500,8 @@ const schema::Entity& GlGetMultisamplefv::StaticSchema() {
 
 // GlGetNextPerfQueryIdINTEL:
 // gles.GlGetNextPerfQueryIdINTEL{$,Uint32,$}
-const gapic::Id& GlGetNextPerfQueryIdINTEL::StaticId() {
-    static gapic::Id ID{ { 0x3a, 0xf2, 0x45, 0x02, 0x57, 0x98, 0x6b, 0xe0, 0x0b, 0x03, 0x4b, 0x34, 0x34, 0xfa, 0x7a, 0x12, 0xf2, 0xa8, 0x08, 0x44,  } };
-    return ID;
-}
 const schema::Entity& GlGetNextPerfQueryIdINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetNextPerfQueryIdINTEL::StaticId(),
         "gles",
         "",
         "GlGetNextPerfQueryIdINTEL",
@@ -10557,10 +8517,6 @@ const schema::Entity& GlGetNextPerfQueryIdINTEL::StaticSchema() {
 
 // GlGetObjectLabel:
 // gles.GlGetObjectLabel{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetObjectLabel::StaticId() {
-    static gapic::Id ID{ { 0xf2, 0xa2, 0xdc, 0x5f, 0x33, 0xe1, 0x5a, 0xa0, 0x94, 0x36, 0x76, 0x16, 0x0b, 0xee, 0x1a, 0x94, 0xc7, 0x11, 0xe9, 0x12,  } };
-    return ID;
-}
 void GlGetObjectLabel::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIdentifier);
@@ -10571,7 +8527,6 @@ void GlGetObjectLabel::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetObjectLabel::StaticSchema() {
     static schema::Entity entity {
-        GlGetObjectLabel::StaticId(),
         "gles",
         "",
         "GlGetObjectLabel",
@@ -10590,10 +8545,6 @@ const schema::Entity& GlGetObjectLabel::StaticSchema() {
 
 // GlGetObjectLabelEXT:
 // gles.GlGetObjectLabelEXT{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetObjectLabelEXT::StaticId() {
-    static gapic::Id ID{ { 0x70, 0xa5, 0xc8, 0x65, 0xe5, 0x6e, 0x0e, 0xb1, 0x1e, 0x68, 0x4e, 0xf8, 0xde, 0x9a, 0x0d, 0x9e, 0xc0, 0x41, 0x4d, 0xbf,  } };
-    return ID;
-}
 void GlGetObjectLabelEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mType);
@@ -10604,7 +8555,6 @@ void GlGetObjectLabelEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetObjectLabelEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetObjectLabelEXT::StaticId(),
         "gles",
         "",
         "GlGetObjectLabelEXT",
@@ -10623,10 +8573,6 @@ const schema::Entity& GlGetObjectLabelEXT::StaticSchema() {
 
 // GlGetObjectLabelKHR:
 // gles.GlGetObjectLabelKHR{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetObjectLabelKHR::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0xf8, 0x12, 0x9f, 0x93, 0x60, 0xf2, 0xde, 0x52, 0x70, 0xba, 0x5b, 0xbb, 0x96, 0x4b, 0xbc, 0x87, 0x29, 0xef, 0xa1,  } };
-    return ID;
-}
 void GlGetObjectLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIdentifier);
@@ -10637,7 +8583,6 @@ void GlGetObjectLabelKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetObjectLabelKHR::StaticId(),
         "gles",
         "",
         "GlGetObjectLabelKHR",
@@ -10656,10 +8601,6 @@ const schema::Entity& GlGetObjectLabelKHR::StaticSchema() {
 
 // GlGetObjectPtrLabel:
 // gles.GlGetObjectPtrLabel{$,$,Int32,$,$}
-const gapic::Id& GlGetObjectPtrLabel::StaticId() {
-    static gapic::Id ID{ { 0x13, 0xf6, 0x24, 0x1f, 0x90, 0xbc, 0x1c, 0x6f, 0x6b, 0x0b, 0x0c, 0xdb, 0x34, 0x16, 0x3b, 0x7c, 0x2a, 0xbb, 0x18, 0xde,  } };
-    return ID;
-}
 void GlGetObjectPtrLabel::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPtr);
@@ -10669,7 +8610,6 @@ void GlGetObjectPtrLabel::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
-        GlGetObjectPtrLabel::StaticId(),
         "gles",
         "",
         "GlGetObjectPtrLabel",
@@ -10687,10 +8627,6 @@ const schema::Entity& GlGetObjectPtrLabel::StaticSchema() {
 
 // GlGetObjectPtrLabelKHR:
 // gles.GlGetObjectPtrLabelKHR{$,$,Int32,$,$}
-const gapic::Id& GlGetObjectPtrLabelKHR::StaticId() {
-    static gapic::Id ID{ { 0x90, 0x77, 0x5c, 0x4f, 0x52, 0x55, 0x42, 0x00, 0x1c, 0x1f, 0x69, 0xdb, 0x3f, 0xf4, 0xdc, 0x8e, 0x30, 0xd2, 0xe0, 0xcb,  } };
-    return ID;
-}
 void GlGetObjectPtrLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPtr);
@@ -10700,7 +8636,6 @@ void GlGetObjectPtrLabelKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetObjectPtrLabelKHR::StaticId(),
         "gles",
         "",
         "GlGetObjectPtrLabelKHR",
@@ -10718,13 +8653,8 @@ const schema::Entity& GlGetObjectPtrLabelKHR::StaticSchema() {
 
 // GlGetPathCommandsNV:
 // gles.GlGetPathCommandsNV{$,Uint32,$}
-const gapic::Id& GlGetPathCommandsNV::StaticId() {
-    static gapic::Id ID{ { 0x63, 0x05, 0x0c, 0x53, 0x16, 0x35, 0x25, 0xc0, 0x8f, 0x53, 0x71, 0xfe, 0x5e, 0x07, 0x25, 0x19, 0x61, 0x35, 0x4f, 0x15,  } };
-    return ID;
-}
 const schema::Entity& GlGetPathCommandsNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathCommandsNV::StaticId(),
         "gles",
         "",
         "GlGetPathCommandsNV",
@@ -10740,13 +8670,8 @@ const schema::Entity& GlGetPathCommandsNV::StaticSchema() {
 
 // GlGetPathCoordsNV:
 // gles.GlGetPathCoordsNV{$,Uint32,$}
-const gapic::Id& GlGetPathCoordsNV::StaticId() {
-    static gapic::Id ID{ { 0xab, 0x67, 0xfe, 0x3b, 0x72, 0xec, 0x0c, 0xf8, 0x89, 0x8e, 0x4a, 0x5e, 0x46, 0x90, 0x6a, 0xe5, 0x2e, 0xd5, 0xc3, 0x23,  } };
-    return ID;
-}
 const schema::Entity& GlGetPathCoordsNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathCoordsNV::StaticId(),
         "gles",
         "",
         "GlGetPathCoordsNV",
@@ -10762,13 +8687,8 @@ const schema::Entity& GlGetPathCoordsNV::StaticSchema() {
 
 // GlGetPathDashArrayNV:
 // gles.GlGetPathDashArrayNV{$,Uint32,$}
-const gapic::Id& GlGetPathDashArrayNV::StaticId() {
-    static gapic::Id ID{ { 0xb6, 0x4b, 0x60, 0xe9, 0xce, 0x02, 0x8a, 0x34, 0x4c, 0x97, 0x98, 0x2e, 0xa3, 0x96, 0xf4, 0x43, 0xcc, 0x2c, 0x2f, 0xc0,  } };
-    return ID;
-}
 const schema::Entity& GlGetPathDashArrayNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathDashArrayNV::StaticId(),
         "gles",
         "",
         "GlGetPathDashArrayNV",
@@ -10784,10 +8704,6 @@ const schema::Entity& GlGetPathDashArrayNV::StaticSchema() {
 
 // GlGetPathLengthNV:
 // gles.GlGetPathLengthNV{$,Uint32,Int32,Int32,Float32}
-const gapic::Id& GlGetPathLengthNV::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0xcf, 0x40, 0x52, 0xda, 0x52, 0x66, 0x17, 0x0e, 0xad, 0x65, 0x2b, 0x8d, 0x04, 0xc2, 0x7f, 0x19, 0xe0, 0x0a, 0xd9,  } };
-    return ID;
-}
 void GlGetPathLengthNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -10797,7 +8713,6 @@ void GlGetPathLengthNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathLengthNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathLengthNV::StaticId(),
         "gles",
         "",
         "GlGetPathLengthNV",
@@ -10815,10 +8730,6 @@ const schema::Entity& GlGetPathLengthNV::StaticSchema() {
 
 // GlGetPathMetricRangeNV:
 // gles.GlGetPathMetricRangeNV{$,Uint32,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetPathMetricRangeNV::StaticId() {
-    static gapic::Id ID{ { 0x06, 0x38, 0x50, 0x15, 0x7a, 0x87, 0x6c, 0x6a, 0x76, 0x0d, 0xda, 0x36, 0xeb, 0x1e, 0x3e, 0x14, 0xd3, 0x68, 0xdd, 0x87,  } };
-    return ID;
-}
 void GlGetPathMetricRangeNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMetricQueryMask);
@@ -10829,7 +8740,6 @@ void GlGetPathMetricRangeNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathMetricRangeNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathMetricRangeNV::StaticId(),
         "gles",
         "",
         "GlGetPathMetricRangeNV",
@@ -10848,10 +8758,6 @@ const schema::Entity& GlGetPathMetricRangeNV::StaticSchema() {
 
 // GlGetPathMetricsNV:
 // gles.GlGetPathMetricsNV{$,Uint32,Int32,Uint32,$,Uint32,Int32,$}
-const gapic::Id& GlGetPathMetricsNV::StaticId() {
-    static gapic::Id ID{ { 0x56, 0x03, 0x15, 0x61, 0x39, 0x9a, 0x19, 0x90, 0x69, 0xd6, 0x02, 0x1a, 0x97, 0x10, 0x4d, 0xf0, 0x01, 0x8c, 0x0e, 0x0e,  } };
-    return ID;
-}
 void GlGetPathMetricsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMetricQueryMask);
@@ -10864,7 +8770,6 @@ void GlGetPathMetricsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathMetricsNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathMetricsNV::StaticId(),
         "gles",
         "",
         "GlGetPathMetricsNV",
@@ -10885,10 +8790,6 @@ const schema::Entity& GlGetPathMetricsNV::StaticSchema() {
 
 // GlGetPathParameterfvNV:
 // gles.GlGetPathParameterfvNV{$,Uint32,Uint32,$}
-const gapic::Id& GlGetPathParameterfvNV::StaticId() {
-    static gapic::Id ID{ { 0xd6, 0x40, 0x19, 0x70, 0x3a, 0x21, 0x98, 0x91, 0x2d, 0xd6, 0xed, 0xcb, 0xfd, 0xb8, 0xad, 0xdd, 0x99, 0xf3, 0xd9, 0x64,  } };
-    return ID;
-}
 void GlGetPathParameterfvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -10897,7 +8798,6 @@ void GlGetPathParameterfvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathParameterfvNV::StaticId(),
         "gles",
         "",
         "GlGetPathParameterfvNV",
@@ -10914,10 +8814,6 @@ const schema::Entity& GlGetPathParameterfvNV::StaticSchema() {
 
 // GlGetPathParameterivNV:
 // gles.GlGetPathParameterivNV{$,Uint32,Uint32,$}
-const gapic::Id& GlGetPathParameterivNV::StaticId() {
-    static gapic::Id ID{ { 0x9f, 0x73, 0x16, 0xe4, 0xfc, 0x28, 0xad, 0xbb, 0x99, 0x08, 0x33, 0xfc, 0xfb, 0x38, 0x0f, 0x3e, 0x2a, 0x85, 0xb4, 0x53,  } };
-    return ID;
-}
 void GlGetPathParameterivNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -10926,7 +8822,6 @@ void GlGetPathParameterivNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathParameterivNV::StaticId(),
         "gles",
         "",
         "GlGetPathParameterivNV",
@@ -10943,10 +8838,6 @@ const schema::Entity& GlGetPathParameterivNV::StaticSchema() {
 
 // GlGetPathSpacingNV:
 // gles.GlGetPathSpacingNV{$,Uint32,Int32,Uint32,$,Uint32,Float32,Float32,Uint32,$}
-const gapic::Id& GlGetPathSpacingNV::StaticId() {
-    static gapic::Id ID{ { 0x60, 0x5d, 0xbc, 0x1c, 0xff, 0x97, 0x1a, 0x98, 0xab, 0x6a, 0xbd, 0x4e, 0xd8, 0x2a, 0x2a, 0x2f, 0xe6, 0x42, 0x9c, 0x8b,  } };
-    return ID;
-}
 void GlGetPathSpacingNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPathListMode);
@@ -10961,7 +8852,6 @@ void GlGetPathSpacingNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPathSpacingNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetPathSpacingNV::StaticId(),
         "gles",
         "",
         "GlGetPathSpacingNV",
@@ -10984,10 +8874,6 @@ const schema::Entity& GlGetPathSpacingNV::StaticSchema() {
 
 // GlGetPerfCounterInfoINTEL:
 // gles.GlGetPerfCounterInfoINTEL{$,Uint32,Uint32,Uint32,$,Uint32,$,$,$,$,$,$}
-const gapic::Id& GlGetPerfCounterInfoINTEL::StaticId() {
-    static gapic::Id ID{ { 0xb6, 0xd6, 0x1c, 0x6f, 0x42, 0x8a, 0xe5, 0x81, 0xfa, 0xd6, 0x06, 0x63, 0xfc, 0xc3, 0xf3, 0xe3, 0x65, 0xe8, 0x25, 0xee,  } };
-    return ID;
-}
 void GlGetPerfCounterInfoINTEL::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQueryId);
@@ -11004,7 +8890,6 @@ void GlGetPerfCounterInfoINTEL::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfCounterInfoINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfCounterInfoINTEL::StaticId(),
         "gles",
         "",
         "GlGetPerfCounterInfoINTEL",
@@ -11029,10 +8914,6 @@ const schema::Entity& GlGetPerfCounterInfoINTEL::StaticSchema() {
 
 // GlGetPerfMonitorCounterDataAMD:
 // gles.GlGetPerfMonitorCounterDataAMD{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetPerfMonitorCounterDataAMD::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0x69, 0xd6, 0xca, 0x86, 0x75, 0x8d, 0x8e, 0xf7, 0x6e, 0x37, 0x01, 0x0f, 0xe7, 0xb7, 0x77, 0xa3, 0x80, 0xe1, 0xea,  } };
-    return ID;
-}
 void GlGetPerfMonitorCounterDataAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMonitor);
@@ -11043,7 +8924,6 @@ void GlGetPerfMonitorCounterDataAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorCounterDataAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorCounterDataAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorCounterDataAMD",
@@ -11062,10 +8942,6 @@ const schema::Entity& GlGetPerfMonitorCounterDataAMD::StaticSchema() {
 
 // GlGetPerfMonitorCounterInfoAMD:
 // gles.GlGetPerfMonitorCounterInfoAMD{$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlGetPerfMonitorCounterInfoAMD::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xf9, 0x36, 0x61, 0xb2, 0xf6, 0x8c, 0x6b, 0x48, 0x85, 0x0c, 0xd5, 0xcb, 0x27, 0xc9, 0x55, 0x28, 0x9d, 0xba, 0xd9,  } };
-    return ID;
-}
 void GlGetPerfMonitorCounterInfoAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mGroup);
@@ -11075,7 +8951,6 @@ void GlGetPerfMonitorCounterInfoAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorCounterInfoAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorCounterInfoAMD",
@@ -11093,10 +8968,6 @@ const schema::Entity& GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
 
 // GlGetPerfMonitorCounterStringAMD:
 // gles.GlGetPerfMonitorCounterStringAMD{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetPerfMonitorCounterStringAMD::StaticId() {
-    static gapic::Id ID{ { 0xbe, 0xe7, 0x71, 0x90, 0xc5, 0x2c, 0xea, 0x96, 0xe0, 0x0e, 0x48, 0x14, 0x5e, 0xda, 0xa0, 0xb8, 0x22, 0x12, 0x4f, 0x08,  } };
-    return ID;
-}
 void GlGetPerfMonitorCounterStringAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mGroup);
@@ -11107,7 +8978,6 @@ void GlGetPerfMonitorCounterStringAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorCounterStringAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorCounterStringAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorCounterStringAMD",
@@ -11126,10 +8996,6 @@ const schema::Entity& GlGetPerfMonitorCounterStringAMD::StaticSchema() {
 
 // GlGetPerfMonitorCountersAMD:
 // gles.GlGetPerfMonitorCountersAMD{$,Uint32,$,$,Int32,$}
-const gapic::Id& GlGetPerfMonitorCountersAMD::StaticId() {
-    static gapic::Id ID{ { 0xda, 0x4d, 0xf1, 0xab, 0x41, 0x0f, 0x32, 0x8e, 0x08, 0xc8, 0x6c, 0xef, 0x53, 0x6e, 0x83, 0x64, 0x06, 0xcd, 0x84, 0xfc,  } };
-    return ID;
-}
 void GlGetPerfMonitorCountersAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mGroup);
@@ -11140,7 +9006,6 @@ void GlGetPerfMonitorCountersAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorCountersAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorCountersAMD",
@@ -11159,10 +9024,6 @@ const schema::Entity& GlGetPerfMonitorCountersAMD::StaticSchema() {
 
 // GlGetPerfMonitorGroupStringAMD:
 // gles.GlGetPerfMonitorGroupStringAMD{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetPerfMonitorGroupStringAMD::StaticId() {
-    static gapic::Id ID{ { 0x38, 0x80, 0x37, 0x72, 0x41, 0xaa, 0x5c, 0xa7, 0xed, 0x87, 0x2f, 0xfd, 0xbe, 0x1c, 0x6a, 0x35, 0xf7, 0x55, 0x17, 0x40,  } };
-    return ID;
-}
 void GlGetPerfMonitorGroupStringAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mGroup);
@@ -11172,7 +9033,6 @@ void GlGetPerfMonitorGroupStringAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorGroupStringAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorGroupStringAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorGroupStringAMD",
@@ -11190,10 +9050,6 @@ const schema::Entity& GlGetPerfMonitorGroupStringAMD::StaticSchema() {
 
 // GlGetPerfMonitorGroupsAMD:
 // gles.GlGetPerfMonitorGroupsAMD{$,$,Int32,$}
-const gapic::Id& GlGetPerfMonitorGroupsAMD::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0xd6, 0xa0, 0x8a, 0x69, 0xd7, 0x37, 0x7f, 0x80, 0x71, 0x5d, 0xab, 0x5c, 0x71, 0xd5, 0x8e, 0xa2, 0x1b, 0x24, 0xd7,  } };
-    return ID;
-}
 void GlGetPerfMonitorGroupsAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mNumGroups);
@@ -11202,7 +9058,6 @@ void GlGetPerfMonitorGroupsAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfMonitorGroupsAMD::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfMonitorGroupsAMD::StaticId(),
         "gles",
         "",
         "GlGetPerfMonitorGroupsAMD",
@@ -11219,10 +9074,6 @@ const schema::Entity& GlGetPerfMonitorGroupsAMD::StaticSchema() {
 
 // GlGetPerfQueryDataINTEL:
 // gles.GlGetPerfQueryDataINTEL{$,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetPerfQueryDataINTEL::StaticId() {
-    static gapic::Id ID{ { 0x23, 0x08, 0x5c, 0xc4, 0x6b, 0x4e, 0x40, 0x02, 0x00, 0x8b, 0x57, 0xda, 0xf4, 0x57, 0x41, 0x42, 0x3d, 0xc4, 0x8a, 0x68,  } };
-    return ID;
-}
 void GlGetPerfQueryDataINTEL::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQueryHandle);
@@ -11233,7 +9084,6 @@ void GlGetPerfQueryDataINTEL::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfQueryDataINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfQueryDataINTEL::StaticId(),
         "gles",
         "",
         "GlGetPerfQueryDataINTEL",
@@ -11252,13 +9102,8 @@ const schema::Entity& GlGetPerfQueryDataINTEL::StaticSchema() {
 
 // GlGetPerfQueryIdByNameINTEL:
 // gles.GlGetPerfQueryIdByNameINTEL{$,$,$}
-const gapic::Id& GlGetPerfQueryIdByNameINTEL::StaticId() {
-    static gapic::Id ID{ { 0x9d, 0x0b, 0x23, 0x09, 0x89, 0x5a, 0x43, 0x8f, 0xe5, 0x24, 0x9f, 0xf4, 0xe4, 0x8f, 0xe3, 0x96, 0x9d, 0xb1, 0x02, 0xf1,  } };
-    return ID;
-}
 const schema::Entity& GlGetPerfQueryIdByNameINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfQueryIdByNameINTEL::StaticId(),
         "gles",
         "",
         "GlGetPerfQueryIdByNameINTEL",
@@ -11274,10 +9119,6 @@ const schema::Entity& GlGetPerfQueryIdByNameINTEL::StaticSchema() {
 
 // GlGetPerfQueryInfoINTEL:
 // gles.GlGetPerfQueryInfoINTEL{$,Uint32,Uint32,$,$,$,$,$}
-const gapic::Id& GlGetPerfQueryInfoINTEL::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x2a, 0x21, 0xb8, 0x91, 0x75, 0x72, 0x97, 0x8b, 0x15, 0xf2, 0xd5, 0x91, 0x4b, 0x5a, 0x7d, 0xc9, 0x98, 0x2d, 0xe6,  } };
-    return ID;
-}
 void GlGetPerfQueryInfoINTEL::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQueryId);
@@ -11290,7 +9131,6 @@ void GlGetPerfQueryInfoINTEL::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetPerfQueryInfoINTEL::StaticSchema() {
     static schema::Entity entity {
-        GlGetPerfQueryInfoINTEL::StaticId(),
         "gles",
         "",
         "GlGetPerfQueryInfoINTEL",
@@ -11311,13 +9151,8 @@ const schema::Entity& GlGetPerfQueryInfoINTEL::StaticSchema() {
 
 // GlGetPointerv:
 // gles.GlGetPointerv{$,Uint32,$}
-const gapic::Id& GlGetPointerv::StaticId() {
-    static gapic::Id ID{ { 0xcc, 0xd9, 0x76, 0x1b, 0xec, 0x04, 0x7a, 0x88, 0xbc, 0xe4, 0x19, 0xd6, 0x7f, 0x82, 0xfb, 0x3f, 0xdf, 0xe4, 0x5e, 0xef,  } };
-    return ID;
-}
 const schema::Entity& GlGetPointerv::StaticSchema() {
     static schema::Entity entity {
-        GlGetPointerv::StaticId(),
         "gles",
         "",
         "GlGetPointerv",
@@ -11333,13 +9168,8 @@ const schema::Entity& GlGetPointerv::StaticSchema() {
 
 // GlGetPointervKHR:
 // gles.GlGetPointervKHR{$,Uint32,$}
-const gapic::Id& GlGetPointervKHR::StaticId() {
-    static gapic::Id ID{ { 0xf1, 0x40, 0x35, 0x47, 0x24, 0xf2, 0xb2, 0x8a, 0x37, 0x79, 0xe1, 0x07, 0xaa, 0xe6, 0x4f, 0x8d, 0x84, 0x4d, 0xd1, 0x3b,  } };
-    return ID;
-}
 const schema::Entity& GlGetPointervKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetPointervKHR::StaticId(),
         "gles",
         "",
         "GlGetPointervKHR",
@@ -11355,10 +9185,6 @@ const schema::Entity& GlGetPointervKHR::StaticSchema() {
 
 // GlGetProgramBinary:
 // gles.GlGetProgramBinary{$,Uint32,Int32,$,$,$}
-const gapic::Id& GlGetProgramBinary::StaticId() {
-    static gapic::Id ID{ { 0xde, 0x03, 0x1b, 0x40, 0xc5, 0xee, 0xdb, 0x4b, 0xd7, 0xc2, 0x04, 0x4a, 0x45, 0x64, 0x5e, 0x21, 0xb1, 0x03, 0xae, 0x66,  } };
-    return ID;
-}
 void GlGetProgramBinary::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11369,7 +9195,6 @@ void GlGetProgramBinary::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramBinary::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramBinary::StaticId(),
         "gles",
         "",
         "GlGetProgramBinary",
@@ -11388,10 +9213,6 @@ const schema::Entity& GlGetProgramBinary::StaticSchema() {
 
 // GlGetProgramBinaryOES:
 // gles.GlGetProgramBinaryOES{$,Uint32,Int32,$,$,$}
-const gapic::Id& GlGetProgramBinaryOES::StaticId() {
-    static gapic::Id ID{ { 0x73, 0x93, 0x0d, 0x17, 0xb8, 0xe5, 0x9e, 0xda, 0xa9, 0xe6, 0xe7, 0x85, 0xae, 0xd5, 0x5e, 0x64, 0x6f, 0x57, 0xce, 0x9d,  } };
-    return ID;
-}
 void GlGetProgramBinaryOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11402,7 +9223,6 @@ void GlGetProgramBinaryOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramBinaryOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramBinaryOES::StaticId(),
         "gles",
         "",
         "GlGetProgramBinaryOES",
@@ -11421,10 +9241,6 @@ const schema::Entity& GlGetProgramBinaryOES::StaticSchema() {
 
 // GlGetProgramInfoLog:
 // gles.GlGetProgramInfoLog{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetProgramInfoLog::StaticId() {
-    static gapic::Id ID{ { 0x37, 0xb8, 0x1f, 0x9c, 0x65, 0x83, 0xf7, 0x58, 0xfb, 0x38, 0x9e, 0x80, 0xdc, 0x9b, 0x4d, 0xa9, 0xc3, 0xeb, 0x03, 0xf8,  } };
-    return ID;
-}
 void GlGetProgramInfoLog::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11434,7 +9250,6 @@ void GlGetProgramInfoLog::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramInfoLog::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramInfoLog::StaticId(),
         "gles",
         "",
         "GlGetProgramInfoLog",
@@ -11452,10 +9267,6 @@ const schema::Entity& GlGetProgramInfoLog::StaticSchema() {
 
 // GlGetProgramInterfaceiv:
 // gles.GlGetProgramInterfaceiv{$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlGetProgramInterfaceiv::StaticId() {
-    static gapic::Id ID{ { 0xa9, 0x8e, 0x7f, 0x4b, 0x0b, 0xa1, 0x17, 0x9e, 0xca, 0x9b, 0x2c, 0x88, 0xad, 0xab, 0xdd, 0xdb, 0xc4, 0x5f, 0x8e, 0x38,  } };
-    return ID;
-}
 void GlGetProgramInterfaceiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11465,7 +9276,6 @@ void GlGetProgramInterfaceiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramInterfaceiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramInterfaceiv::StaticId(),
         "gles",
         "",
         "GlGetProgramInterfaceiv",
@@ -11483,10 +9293,6 @@ const schema::Entity& GlGetProgramInterfaceiv::StaticSchema() {
 
 // GlGetProgramPipelineInfoLog:
 // gles.GlGetProgramPipelineInfoLog{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetProgramPipelineInfoLog::StaticId() {
-    static gapic::Id ID{ { 0x80, 0x09, 0x71, 0x1e, 0xdd, 0xb3, 0x2e, 0x9a, 0xd1, 0x97, 0x13, 0xc6, 0x36, 0xd7, 0x55, 0xde, 0x69, 0x6a, 0x66, 0x0a,  } };
-    return ID;
-}
 void GlGetProgramPipelineInfoLog::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -11496,7 +9302,6 @@ void GlGetProgramPipelineInfoLog::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramPipelineInfoLog::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramPipelineInfoLog::StaticId(),
         "gles",
         "",
         "GlGetProgramPipelineInfoLog",
@@ -11514,10 +9319,6 @@ const schema::Entity& GlGetProgramPipelineInfoLog::StaticSchema() {
 
 // GlGetProgramPipelineInfoLogEXT:
 // gles.GlGetProgramPipelineInfoLogEXT{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetProgramPipelineInfoLogEXT::StaticId() {
-    static gapic::Id ID{ { 0xa3, 0x71, 0x0e, 0xa6, 0x2f, 0x7a, 0x5e, 0x59, 0xcb, 0xb5, 0xdb, 0x4e, 0x26, 0x9a, 0x48, 0x77, 0xdb, 0x7c, 0xc2, 0x13,  } };
-    return ID;
-}
 void GlGetProgramPipelineInfoLogEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -11527,7 +9328,6 @@ void GlGetProgramPipelineInfoLogEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramPipelineInfoLogEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramPipelineInfoLogEXT::StaticId(),
         "gles",
         "",
         "GlGetProgramPipelineInfoLogEXT",
@@ -11545,10 +9345,6 @@ const schema::Entity& GlGetProgramPipelineInfoLogEXT::StaticSchema() {
 
 // GlGetProgramPipelineiv:
 // gles.GlGetProgramPipelineiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetProgramPipelineiv::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0xdf, 0x47, 0xf1, 0xc2, 0x9e, 0xad, 0x8f, 0x76, 0xb8, 0x1c, 0x09, 0xcb, 0x43, 0x8d, 0x2b, 0x12, 0xc6, 0x2b, 0xf2,  } };
-    return ID;
-}
 void GlGetProgramPipelineiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -11557,7 +9353,6 @@ void GlGetProgramPipelineiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramPipelineiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramPipelineiv::StaticId(),
         "gles",
         "",
         "GlGetProgramPipelineiv",
@@ -11574,10 +9369,6 @@ const schema::Entity& GlGetProgramPipelineiv::StaticSchema() {
 
 // GlGetProgramPipelineivEXT:
 // gles.GlGetProgramPipelineivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetProgramPipelineivEXT::StaticId() {
-    static gapic::Id ID{ { 0xb2, 0x6c, 0xb7, 0xa8, 0xbc, 0xe1, 0xc3, 0x5b, 0xf2, 0x0b, 0x3f, 0x88, 0x5d, 0x1e, 0x9e, 0x83, 0xa6, 0x06, 0xba, 0x6f,  } };
-    return ID;
-}
 void GlGetProgramPipelineivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -11586,7 +9377,6 @@ void GlGetProgramPipelineivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramPipelineivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramPipelineivEXT::StaticId(),
         "gles",
         "",
         "GlGetProgramPipelineivEXT",
@@ -11603,10 +9393,6 @@ const schema::Entity& GlGetProgramPipelineivEXT::StaticSchema() {
 
 // GlGetProgramResourceIndex:
 // gles.GlGetProgramResourceIndex{$,Uint32,Uint32,String,Uint32}
-const gapic::Id& GlGetProgramResourceIndex::StaticId() {
-    static gapic::Id ID{ { 0xcc, 0xa6, 0x6e, 0xc3, 0xf1, 0xbe, 0xe3, 0x25, 0xfa, 0x3d, 0xf9, 0x7c, 0x0a, 0x2b, 0xc2, 0x18, 0xdf, 0xcc, 0x4e, 0xb8,  } };
-    return ID;
-}
 void GlGetProgramResourceIndex::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11616,7 +9402,6 @@ void GlGetProgramResourceIndex::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourceIndex::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourceIndex::StaticId(),
         "gles",
         "",
         "GlGetProgramResourceIndex",
@@ -11634,10 +9419,6 @@ const schema::Entity& GlGetProgramResourceIndex::StaticSchema() {
 
 // GlGetProgramResourceLocation:
 // gles.GlGetProgramResourceLocation{$,Uint32,Uint32,String,Int32}
-const gapic::Id& GlGetProgramResourceLocation::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x25, 0xc8, 0x77, 0x55, 0x62, 0xdf, 0x54, 0x20, 0xcd, 0x12, 0x53, 0xf7, 0x66, 0xac, 0xed, 0x53, 0x8b, 0x78, 0xea,  } };
-    return ID;
-}
 void GlGetProgramResourceLocation::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11647,7 +9428,6 @@ void GlGetProgramResourceLocation::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourceLocation::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourceLocation::StaticId(),
         "gles",
         "",
         "GlGetProgramResourceLocation",
@@ -11665,10 +9445,6 @@ const schema::Entity& GlGetProgramResourceLocation::StaticSchema() {
 
 // GlGetProgramResourceLocationIndexEXT:
 // gles.GlGetProgramResourceLocationIndexEXT{$,Uint32,Uint32,String,Int32}
-const gapic::Id& GlGetProgramResourceLocationIndexEXT::StaticId() {
-    static gapic::Id ID{ { 0xe1, 0x3e, 0x03, 0x56, 0xa9, 0x23, 0xf4, 0x20, 0x95, 0xf4, 0x39, 0xa5, 0x2c, 0xa9, 0xef, 0x49, 0xfd, 0x9e, 0xcb, 0x0f,  } };
-    return ID;
-}
 void GlGetProgramResourceLocationIndexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11678,7 +9454,6 @@ void GlGetProgramResourceLocationIndexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourceLocationIndexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourceLocationIndexEXT::StaticId(),
         "gles",
         "",
         "GlGetProgramResourceLocationIndexEXT",
@@ -11696,10 +9471,6 @@ const schema::Entity& GlGetProgramResourceLocationIndexEXT::StaticSchema() {
 
 // GlGetProgramResourceName:
 // gles.GlGetProgramResourceName{$,Uint32,Uint32,Uint32,Int32,$,$}
-const gapic::Id& GlGetProgramResourceName::StaticId() {
-    static gapic::Id ID{ { 0xc1, 0x9d, 0x04, 0xcf, 0xfa, 0xb7, 0xc7, 0xc2, 0xbd, 0x67, 0x7e, 0x20, 0x04, 0x67, 0xf9, 0x93, 0x4a, 0xff, 0xb6, 0x32,  } };
-    return ID;
-}
 void GlGetProgramResourceName::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11711,7 +9482,6 @@ void GlGetProgramResourceName::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourceName::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourceName::StaticId(),
         "gles",
         "",
         "GlGetProgramResourceName",
@@ -11731,10 +9501,6 @@ const schema::Entity& GlGetProgramResourceName::StaticSchema() {
 
 // GlGetProgramResourcefvNV:
 // gles.GlGetProgramResourcefvNV{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
-const gapic::Id& GlGetProgramResourcefvNV::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0x25, 0xe9, 0xd5, 0xb0, 0x99, 0xf4, 0x56, 0xcc, 0xb0, 0xad, 0x4a, 0xa3, 0x31, 0xa7, 0x76, 0xfb, 0x7c, 0x08, 0xbd,  } };
-    return ID;
-}
 void GlGetProgramResourcefvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11748,7 +9514,6 @@ void GlGetProgramResourcefvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourcefvNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourcefvNV::StaticId(),
         "gles",
         "",
         "GlGetProgramResourcefvNV",
@@ -11770,10 +9535,6 @@ const schema::Entity& GlGetProgramResourcefvNV::StaticSchema() {
 
 // GlGetProgramResourceiv:
 // gles.GlGetProgramResourceiv{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
-const gapic::Id& GlGetProgramResourceiv::StaticId() {
-    static gapic::Id ID{ { 0xd8, 0x66, 0x9d, 0xdc, 0xe2, 0xe8, 0x43, 0x9c, 0x00, 0xc2, 0x1a, 0x99, 0x14, 0x2e, 0xe1, 0x97, 0xcf, 0xca, 0x6f, 0xc2,  } };
-    return ID;
-}
 void GlGetProgramResourceiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11787,7 +9548,6 @@ void GlGetProgramResourceiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramResourceiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramResourceiv::StaticId(),
         "gles",
         "",
         "GlGetProgramResourceiv",
@@ -11809,10 +9569,6 @@ const schema::Entity& GlGetProgramResourceiv::StaticSchema() {
 
 // GlGetProgramiv:
 // gles.GlGetProgramiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetProgramiv::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x2d, 0xc2, 0xc7, 0xb3, 0x0d, 0x2a, 0x1d, 0x83, 0x12, 0x04, 0xcb, 0x4a, 0x41, 0x8e, 0xb5, 0xbd, 0xd7, 0x7c, 0x28,  } };
-    return ID;
-}
 void GlGetProgramiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -11821,7 +9577,6 @@ void GlGetProgramiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetProgramiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetProgramiv::StaticId(),
         "gles",
         "",
         "GlGetProgramiv",
@@ -11838,13 +9593,8 @@ const schema::Entity& GlGetProgramiv::StaticSchema() {
 
 // S64ᵖ:
 // gles.S64ᵖ{$}
-const gapic::Id& S64__P::StaticId() {
-    static gapic::Id ID{ { 0x73, 0x55, 0xaa, 0x38, 0xf2, 0x1e, 0xa2, 0x2f, 0x2c, 0x66, 0x8b, 0xf6, 0xa7, 0x64, 0xe5, 0x18, 0x05, 0xa8, 0xb8, 0xeb,  } };
-    return ID;
-}
 const schema::Entity& S64__P::StaticSchema() {
     static schema::Entity entity {
-        S64__P::StaticId(),
         "gles",
         "",
         "S64ᵖ",
@@ -11858,10 +9608,6 @@ const schema::Entity& S64__P::StaticSchema() {
 
 // GlGetQueryObjecti64v:
 // gles.GlGetQueryObjecti64v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjecti64v::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x8a, 0xb1, 0xcb, 0x21, 0x33, 0xab, 0x2d, 0xea, 0xbf, 0xa4, 0xbb, 0x4c, 0x37, 0xcc, 0xf3, 0xf8, 0xf8, 0x62, 0x62,  } };
-    return ID;
-}
 void GlGetQueryObjecti64v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -11870,7 +9616,6 @@ void GlGetQueryObjecti64v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjecti64v::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjecti64v::StaticId(),
         "gles",
         "",
         "GlGetQueryObjecti64v",
@@ -11887,10 +9632,6 @@ const schema::Entity& GlGetQueryObjecti64v::StaticSchema() {
 
 // GlGetQueryObjecti64vEXT:
 // gles.GlGetQueryObjecti64vEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjecti64vEXT::StaticId() {
-    static gapic::Id ID{ { 0x65, 0xe1, 0xf3, 0xcd, 0x79, 0x52, 0xf0, 0xc7, 0xa4, 0xc8, 0x1d, 0x99, 0xb3, 0x49, 0xdd, 0x86, 0xd1, 0xc0, 0x9a, 0x84,  } };
-    return ID;
-}
 void GlGetQueryObjecti64vEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -11899,7 +9640,6 @@ void GlGetQueryObjecti64vEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjecti64vEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjecti64vEXT::StaticId(),
         "gles",
         "",
         "GlGetQueryObjecti64vEXT",
@@ -11916,10 +9656,6 @@ const schema::Entity& GlGetQueryObjecti64vEXT::StaticSchema() {
 
 // GlGetQueryObjectivEXT:
 // gles.GlGetQueryObjectivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjectivEXT::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0x33, 0x42, 0x54, 0xe4, 0x07, 0xd2, 0xf0, 0x88, 0xef, 0x7e, 0x29, 0x32, 0x22, 0xd7, 0x19, 0x35, 0x9a, 0x2a, 0xf4,  } };
-    return ID;
-}
 void GlGetQueryObjectivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -11928,7 +9664,6 @@ void GlGetQueryObjectivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjectivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjectivEXT::StaticId(),
         "gles",
         "",
         "GlGetQueryObjectivEXT",
@@ -11945,13 +9680,8 @@ const schema::Entity& GlGetQueryObjectivEXT::StaticSchema() {
 
 // U64ᵖ:
 // gles.U64ᵖ{$}
-const gapic::Id& U64__P::StaticId() {
-    static gapic::Id ID{ { 0x0d, 0x63, 0xad, 0x74, 0x09, 0xba, 0x5b, 0xcb, 0x3e, 0xb7, 0x29, 0x77, 0x70, 0x7c, 0xda, 0xda, 0x32, 0x2a, 0x7e, 0x2c,  } };
-    return ID;
-}
 const schema::Entity& U64__P::StaticSchema() {
     static schema::Entity entity {
-        U64__P::StaticId(),
         "gles",
         "",
         "U64ᵖ",
@@ -11965,10 +9695,6 @@ const schema::Entity& U64__P::StaticSchema() {
 
 // GlGetQueryObjectui64v:
 // gles.GlGetQueryObjectui64v{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjectui64v::StaticId() {
-    static gapic::Id ID{ { 0xed, 0x3d, 0x24, 0x8b, 0x57, 0x89, 0x90, 0xde, 0x96, 0xf9, 0x09, 0x32, 0x1e, 0x0d, 0x46, 0x91, 0x16, 0xfb, 0x1a, 0xf2,  } };
-    return ID;
-}
 void GlGetQueryObjectui64v::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -11977,7 +9703,6 @@ void GlGetQueryObjectui64v::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjectui64v::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjectui64v::StaticId(),
         "gles",
         "",
         "GlGetQueryObjectui64v",
@@ -11994,10 +9719,6 @@ const schema::Entity& GlGetQueryObjectui64v::StaticSchema() {
 
 // GlGetQueryObjectui64vEXT:
 // gles.GlGetQueryObjectui64vEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjectui64vEXT::StaticId() {
-    static gapic::Id ID{ { 0x81, 0x31, 0x5a, 0x2a, 0x16, 0x16, 0xd1, 0xa7, 0xe3, 0x82, 0x4d, 0xb2, 0x01, 0x58, 0x11, 0xdd, 0x19, 0x4b, 0xad, 0xd7,  } };
-    return ID;
-}
 void GlGetQueryObjectui64vEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -12006,7 +9727,6 @@ void GlGetQueryObjectui64vEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjectui64vEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjectui64vEXT::StaticId(),
         "gles",
         "",
         "GlGetQueryObjectui64vEXT",
@@ -12023,10 +9743,6 @@ const schema::Entity& GlGetQueryObjectui64vEXT::StaticSchema() {
 
 // GlGetQueryObjectuiv:
 // gles.GlGetQueryObjectuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjectuiv::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x23, 0x16, 0x19, 0x64, 0x47, 0xff, 0x41, 0x66, 0xfe, 0xdc, 0xbf, 0x12, 0xee, 0x26, 0x28, 0x87, 0x10, 0xa0, 0x12,  } };
-    return ID;
-}
 void GlGetQueryObjectuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -12035,7 +9751,6 @@ void GlGetQueryObjectuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjectuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjectuiv::StaticId(),
         "gles",
         "",
         "GlGetQueryObjectuiv",
@@ -12052,10 +9767,6 @@ const schema::Entity& GlGetQueryObjectuiv::StaticSchema() {
 
 // GlGetQueryObjectuivEXT:
 // gles.GlGetQueryObjectuivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryObjectuivEXT::StaticId() {
-    static gapic::Id ID{ { 0x74, 0x3c, 0xe0, 0x07, 0x74, 0x85, 0x3b, 0x63, 0x88, 0x01, 0xa2, 0xb8, 0x6e, 0x97, 0x75, 0x2f, 0xe9, 0xba, 0x60, 0x32,  } };
-    return ID;
-}
 void GlGetQueryObjectuivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mQuery);
@@ -12064,7 +9775,6 @@ void GlGetQueryObjectuivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryObjectuivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryObjectuivEXT::StaticId(),
         "gles",
         "",
         "GlGetQueryObjectuivEXT",
@@ -12081,10 +9791,6 @@ const schema::Entity& GlGetQueryObjectuivEXT::StaticSchema() {
 
 // GlGetQueryiv:
 // gles.GlGetQueryiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryiv::StaticId() {
-    static gapic::Id ID{ { 0x78, 0xd6, 0x02, 0x38, 0x20, 0x0a, 0xd7, 0x31, 0x20, 0x02, 0x28, 0xe6, 0x54, 0xa9, 0x64, 0x10, 0x3c, 0x2d, 0x5b, 0x2a,  } };
-    return ID;
-}
 void GlGetQueryiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12093,7 +9799,6 @@ void GlGetQueryiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryiv::StaticId(),
         "gles",
         "",
         "GlGetQueryiv",
@@ -12110,10 +9815,6 @@ const schema::Entity& GlGetQueryiv::StaticSchema() {
 
 // GlGetQueryivEXT:
 // gles.GlGetQueryivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetQueryivEXT::StaticId() {
-    static gapic::Id ID{ { 0x8d, 0x9d, 0x22, 0xff, 0x9b, 0xa2, 0x99, 0x12, 0xa3, 0x9a, 0x6e, 0xf1, 0xce, 0x4b, 0x16, 0xe5, 0x3b, 0xbe, 0x6f, 0xfa,  } };
-    return ID;
-}
 void GlGetQueryivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12122,7 +9823,6 @@ void GlGetQueryivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetQueryivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetQueryivEXT::StaticId(),
         "gles",
         "",
         "GlGetQueryivEXT",
@@ -12139,10 +9839,6 @@ const schema::Entity& GlGetQueryivEXT::StaticSchema() {
 
 // GlGetRenderbufferParameteriv:
 // gles.GlGetRenderbufferParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetRenderbufferParameteriv::StaticId() {
-    static gapic::Id ID{ { 0xb0, 0xbf, 0xc2, 0x4f, 0x72, 0x80, 0xf1, 0xdc, 0x84, 0xf4, 0xff, 0xae, 0xf0, 0x8c, 0x57, 0xa9, 0x32, 0x49, 0xe0, 0xc4,  } };
-    return ID;
-}
 void GlGetRenderbufferParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12151,7 +9847,6 @@ void GlGetRenderbufferParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetRenderbufferParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetRenderbufferParameteriv::StaticId(),
         "gles",
         "",
         "GlGetRenderbufferParameteriv",
@@ -12168,10 +9863,6 @@ const schema::Entity& GlGetRenderbufferParameteriv::StaticSchema() {
 
 // GlGetSamplerParameterIiv:
 // gles.GlGetSamplerParameterIiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIiv::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0x00, 0xfc, 0x04, 0xc2, 0xf3, 0xfa, 0x9e, 0xd8, 0xd9, 0x11, 0x76, 0xf3, 0x1b, 0x2d, 0xe6, 0xfb, 0xbf, 0xd6, 0xfc,  } };
-    return ID;
-}
 void GlGetSamplerParameterIiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12180,7 +9871,6 @@ void GlGetSamplerParameterIiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIiv::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIiv",
@@ -12197,10 +9887,6 @@ const schema::Entity& GlGetSamplerParameterIiv::StaticSchema() {
 
 // GlGetSamplerParameterIivEXT:
 // gles.GlGetSamplerParameterIivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIivEXT::StaticId() {
-    static gapic::Id ID{ { 0x3e, 0xcb, 0xc6, 0x2b, 0xff, 0x27, 0x34, 0xe9, 0x37, 0x39, 0xa8, 0x50, 0x16, 0xe7, 0x37, 0x30, 0x26, 0xf0, 0x16, 0xcc,  } };
-    return ID;
-}
 void GlGetSamplerParameterIivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12209,7 +9895,6 @@ void GlGetSamplerParameterIivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIivEXT::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIivEXT",
@@ -12226,10 +9911,6 @@ const schema::Entity& GlGetSamplerParameterIivEXT::StaticSchema() {
 
 // GlGetSamplerParameterIivOES:
 // gles.GlGetSamplerParameterIivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIivOES::StaticId() {
-    static gapic::Id ID{ { 0x6e, 0x30, 0x42, 0x49, 0xe9, 0x67, 0x94, 0x2d, 0xe4, 0x88, 0x96, 0xb1, 0xa7, 0x87, 0x9b, 0xbf, 0x98, 0xe6, 0x81, 0x8a,  } };
-    return ID;
-}
 void GlGetSamplerParameterIivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12238,7 +9919,6 @@ void GlGetSamplerParameterIivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIivOES::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIivOES",
@@ -12255,10 +9935,6 @@ const schema::Entity& GlGetSamplerParameterIivOES::StaticSchema() {
 
 // GlGetSamplerParameterIuiv:
 // gles.GlGetSamplerParameterIuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIuiv::StaticId() {
-    static gapic::Id ID{ { 0xf0, 0xc2, 0x02, 0x48, 0xad, 0x91, 0x97, 0x96, 0x3a, 0xf8, 0xea, 0x71, 0xf1, 0x8f, 0x2d, 0x14, 0xcb, 0x67, 0xa6, 0xec,  } };
-    return ID;
-}
 void GlGetSamplerParameterIuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12267,7 +9943,6 @@ void GlGetSamplerParameterIuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIuiv::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIuiv",
@@ -12284,10 +9959,6 @@ const schema::Entity& GlGetSamplerParameterIuiv::StaticSchema() {
 
 // GlGetSamplerParameterIuivEXT:
 // gles.GlGetSamplerParameterIuivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIuivEXT::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0xba, 0xf7, 0x62, 0x02, 0xb6, 0x49, 0xa9, 0x24, 0xec, 0xfc, 0x5b, 0x7f, 0x47, 0x2b, 0x93, 0xd6, 0x26, 0xa6, 0xc0,  } };
-    return ID;
-}
 void GlGetSamplerParameterIuivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12296,7 +9967,6 @@ void GlGetSamplerParameterIuivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIuivEXT::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIuivEXT",
@@ -12313,10 +9983,6 @@ const schema::Entity& GlGetSamplerParameterIuivEXT::StaticSchema() {
 
 // GlGetSamplerParameterIuivOES:
 // gles.GlGetSamplerParameterIuivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterIuivOES::StaticId() {
-    static gapic::Id ID{ { 0x16, 0x9f, 0xc5, 0x9c, 0xa9, 0xe7, 0x8b, 0xa5, 0xd6, 0xcd, 0x88, 0xc3, 0x6b, 0xbe, 0x66, 0x88, 0x24, 0x31, 0xe1, 0xbc,  } };
-    return ID;
-}
 void GlGetSamplerParameterIuivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12325,7 +9991,6 @@ void GlGetSamplerParameterIuivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterIuivOES::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterIuivOES",
@@ -12342,10 +10007,6 @@ const schema::Entity& GlGetSamplerParameterIuivOES::StaticSchema() {
 
 // GlGetSamplerParameterfv:
 // gles.GlGetSamplerParameterfv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameterfv::StaticId() {
-    static gapic::Id ID{ { 0x29, 0x4c, 0x4b, 0xbb, 0xfe, 0x57, 0xa7, 0xfe, 0xec, 0x90, 0x31, 0x28, 0xc5, 0x9b, 0x8f, 0x2f, 0xd4, 0x11, 0x60, 0x2f,  } };
-    return ID;
-}
 void GlGetSamplerParameterfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12354,7 +10015,6 @@ void GlGetSamplerParameterfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameterfv::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameterfv",
@@ -12371,10 +10031,6 @@ const schema::Entity& GlGetSamplerParameterfv::StaticSchema() {
 
 // GlGetSamplerParameteriv:
 // gles.GlGetSamplerParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetSamplerParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x07, 0x74, 0x2f, 0xb3, 0x4b, 0xf3, 0xc7, 0x53, 0x4f, 0x54, 0xde, 0xc4, 0xab, 0xeb, 0x39, 0x1b, 0x20, 0x29, 0xa9, 0x9c,  } };
-    return ID;
-}
 void GlGetSamplerParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -12383,7 +10039,6 @@ void GlGetSamplerParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetSamplerParameteriv::StaticId(),
         "gles",
         "",
         "GlGetSamplerParameteriv",
@@ -12400,10 +10055,6 @@ const schema::Entity& GlGetSamplerParameteriv::StaticSchema() {
 
 // GlGetShaderInfoLog:
 // gles.GlGetShaderInfoLog{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetShaderInfoLog::StaticId() {
-    static gapic::Id ID{ { 0xa0, 0x51, 0x12, 0x2a, 0x01, 0x66, 0x17, 0xb5, 0xdf, 0x4f, 0x81, 0x99, 0xe4, 0x8e, 0xef, 0xff, 0x4b, 0xf8, 0xa8, 0x3f,  } };
-    return ID;
-}
 void GlGetShaderInfoLog::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShader);
@@ -12413,7 +10064,6 @@ void GlGetShaderInfoLog::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetShaderInfoLog::StaticSchema() {
     static schema::Entity entity {
-        GlGetShaderInfoLog::StaticId(),
         "gles",
         "",
         "GlGetShaderInfoLog",
@@ -12431,10 +10081,6 @@ const schema::Entity& GlGetShaderInfoLog::StaticSchema() {
 
 // GlGetShaderPrecisionFormat:
 // gles.GlGetShaderPrecisionFormat{$,Uint32,Uint32,$,$}
-const gapic::Id& GlGetShaderPrecisionFormat::StaticId() {
-    static gapic::Id ID{ { 0x95, 0xd2, 0xa7, 0xa3, 0x23, 0xf1, 0xe2, 0x23, 0x3f, 0x64, 0xd5, 0xa9, 0x03, 0xa1, 0x4b, 0x38, 0x88, 0x2f, 0x49, 0x9a,  } };
-    return ID;
-}
 void GlGetShaderPrecisionFormat::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShaderType);
@@ -12444,7 +10090,6 @@ void GlGetShaderPrecisionFormat::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetShaderPrecisionFormat::StaticSchema() {
     static schema::Entity entity {
-        GlGetShaderPrecisionFormat::StaticId(),
         "gles",
         "",
         "GlGetShaderPrecisionFormat",
@@ -12462,10 +10107,6 @@ const schema::Entity& GlGetShaderPrecisionFormat::StaticSchema() {
 
 // GlGetShaderSource:
 // gles.GlGetShaderSource{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetShaderSource::StaticId() {
-    static gapic::Id ID{ { 0xde, 0xb6, 0xdb, 0x06, 0x3e, 0xe2, 0xa8, 0x08, 0x0c, 0x47, 0x72, 0x89, 0xd3, 0xf9, 0x0a, 0xe7, 0x1b, 0x10, 0x74, 0xd6,  } };
-    return ID;
-}
 void GlGetShaderSource::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShader);
@@ -12475,7 +10116,6 @@ void GlGetShaderSource::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetShaderSource::StaticSchema() {
     static schema::Entity entity {
-        GlGetShaderSource::StaticId(),
         "gles",
         "",
         "GlGetShaderSource",
@@ -12493,10 +10133,6 @@ const schema::Entity& GlGetShaderSource::StaticSchema() {
 
 // GlGetShaderiv:
 // gles.GlGetShaderiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetShaderiv::StaticId() {
-    static gapic::Id ID{ { 0x3a, 0x72, 0xfd, 0xe2, 0xfe, 0x06, 0x2f, 0x58, 0x0a, 0xbb, 0x78, 0x32, 0x86, 0x7f, 0x4e, 0x46, 0x27, 0x8f, 0x2a, 0xda,  } };
-    return ID;
-}
 void GlGetShaderiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShader);
@@ -12505,7 +10141,6 @@ void GlGetShaderiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetShaderiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetShaderiv::StaticId(),
         "gles",
         "",
         "GlGetShaderiv",
@@ -12522,13 +10157,8 @@ const schema::Entity& GlGetShaderiv::StaticSchema() {
 
 // GlGetString:
 // gles.GlGetString{$,Uint32,$}
-const gapic::Id& GlGetString::StaticId() {
-    static gapic::Id ID{ { 0x97, 0xe5, 0xcc, 0xcd, 0x3b, 0xeb, 0x18, 0xec, 0xff, 0x72, 0x16, 0x83, 0x70, 0x03, 0xc1, 0x51, 0x65, 0xf8, 0x52, 0x68,  } };
-    return ID;
-}
 const schema::Entity& GlGetString::StaticSchema() {
     static schema::Entity entity {
-        GlGetString::StaticId(),
         "gles",
         "",
         "GlGetString",
@@ -12544,10 +10174,6 @@ const schema::Entity& GlGetString::StaticSchema() {
 
 // GlGetStringi:
 // gles.GlGetStringi{$,Uint32,Uint32,$}
-const gapic::Id& GlGetStringi::StaticId() {
-    static gapic::Id ID{ { 0xef, 0x3b, 0xb9, 0x57, 0xdd, 0x0b, 0xad, 0xa4, 0x62, 0xd8, 0xa1, 0x41, 0x65, 0x1d, 0x86, 0xfc, 0xe2, 0x67, 0x3a, 0x3e,  } };
-    return ID;
-}
 void GlGetStringi::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mName);
@@ -12556,7 +10182,6 @@ void GlGetStringi::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetStringi::StaticSchema() {
     static schema::Entity entity {
-        GlGetStringi::StaticId(),
         "gles",
         "",
         "GlGetStringi",
@@ -12573,10 +10198,6 @@ const schema::Entity& GlGetStringi::StaticSchema() {
 
 // GlGetSynciv:
 // gles.GlGetSynciv{$,Uint64,Uint32,Int32,$,$}
-const gapic::Id& GlGetSynciv::StaticId() {
-    static gapic::Id ID{ { 0x6b, 0x61, 0x72, 0x4a, 0x74, 0xb5, 0xfb, 0x38, 0x59, 0x9d, 0x7b, 0x6e, 0x26, 0x03, 0xb2, 0xfd, 0x86, 0xe2, 0x74, 0xe6,  } };
-    return ID;
-}
 void GlGetSynciv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -12587,7 +10208,6 @@ void GlGetSynciv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSynciv::StaticSchema() {
     static schema::Entity entity {
-        GlGetSynciv::StaticId(),
         "gles",
         "",
         "GlGetSynciv",
@@ -12606,10 +10226,6 @@ const schema::Entity& GlGetSynciv::StaticSchema() {
 
 // GlGetSyncivAPPLE:
 // gles.GlGetSyncivAPPLE{$,Uint64,Uint32,Int32,$,$}
-const gapic::Id& GlGetSyncivAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xef, 0x11, 0xf6, 0x87, 0xe2, 0x50, 0xcf, 0x50, 0xf6, 0x99, 0xbf, 0xb5, 0x4c, 0x0b, 0xc9, 0x8a, 0x68, 0x33, 0xcd, 0xc9,  } };
-    return ID;
-}
 void GlGetSyncivAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -12620,7 +10236,6 @@ void GlGetSyncivAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetSyncivAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlGetSyncivAPPLE::StaticId(),
         "gles",
         "",
         "GlGetSyncivAPPLE",
@@ -12639,10 +10254,6 @@ const schema::Entity& GlGetSyncivAPPLE::StaticSchema() {
 
 // GlGetTexLevelParameterfv:
 // gles.GlGetTexLevelParameterfv{$,Uint32,Int32,Uint32,$}
-const gapic::Id& GlGetTexLevelParameterfv::StaticId() {
-    static gapic::Id ID{ { 0x1f, 0x25, 0xc3, 0x54, 0x8d, 0x9d, 0x08, 0xc2, 0x9a, 0xa2, 0xc5, 0x21, 0x36, 0x3d, 0xf4, 0xf8, 0x23, 0x1f, 0xec, 0xd2,  } };
-    return ID;
-}
 void GlGetTexLevelParameterfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12652,7 +10263,6 @@ void GlGetTexLevelParameterfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexLevelParameterfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexLevelParameterfv::StaticId(),
         "gles",
         "",
         "GlGetTexLevelParameterfv",
@@ -12670,10 +10280,6 @@ const schema::Entity& GlGetTexLevelParameterfv::StaticSchema() {
 
 // GlGetTexLevelParameteriv:
 // gles.GlGetTexLevelParameteriv{$,Uint32,Int32,Uint32,$}
-const gapic::Id& GlGetTexLevelParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x73, 0x56, 0x83, 0x2f, 0xbb, 0x61, 0x54, 0xb3, 0x5c, 0x41, 0xeb, 0x53, 0xbd, 0x4f, 0xb3, 0xf2, 0xfd, 0x12, 0x2c, 0xe0,  } };
-    return ID;
-}
 void GlGetTexLevelParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12683,7 +10289,6 @@ void GlGetTexLevelParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexLevelParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexLevelParameteriv::StaticId(),
         "gles",
         "",
         "GlGetTexLevelParameteriv",
@@ -12701,10 +10306,6 @@ const schema::Entity& GlGetTexLevelParameteriv::StaticSchema() {
 
 // GlGetTexParameterIiv:
 // gles.GlGetTexParameterIiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIiv::StaticId() {
-    static gapic::Id ID{ { 0x71, 0x6c, 0xb3, 0x25, 0x32, 0x93, 0x33, 0x71, 0xe5, 0xe9, 0xca, 0xf9, 0x60, 0x2a, 0xc7, 0x1b, 0x2d, 0x25, 0x34, 0x87,  } };
-    return ID;
-}
 void GlGetTexParameterIiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12713,7 +10314,6 @@ void GlGetTexParameterIiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIiv::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIiv",
@@ -12730,10 +10330,6 @@ const schema::Entity& GlGetTexParameterIiv::StaticSchema() {
 
 // GlGetTexParameterIivEXT:
 // gles.GlGetTexParameterIivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIivEXT::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x8f, 0x50, 0xf9, 0x3f, 0x37, 0xd0, 0x1a, 0x99, 0x5b, 0x53, 0x98, 0x9a, 0xd0, 0x6a, 0xc5, 0x09, 0x6e, 0x70, 0xf2,  } };
-    return ID;
-}
 void GlGetTexParameterIivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12742,7 +10338,6 @@ void GlGetTexParameterIivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIivEXT::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIivEXT",
@@ -12759,10 +10354,6 @@ const schema::Entity& GlGetTexParameterIivEXT::StaticSchema() {
 
 // GlGetTexParameterIivOES:
 // gles.GlGetTexParameterIivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIivOES::StaticId() {
-    static gapic::Id ID{ { 0x84, 0x10, 0x43, 0x02, 0x34, 0x6e, 0xe7, 0x47, 0x88, 0x97, 0xec, 0x70, 0xcc, 0x0a, 0xff, 0xad, 0xc0, 0x01, 0xa2, 0x01,  } };
-    return ID;
-}
 void GlGetTexParameterIivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12771,7 +10362,6 @@ void GlGetTexParameterIivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIivOES::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIivOES",
@@ -12788,10 +10378,6 @@ const schema::Entity& GlGetTexParameterIivOES::StaticSchema() {
 
 // GlGetTexParameterIuiv:
 // gles.GlGetTexParameterIuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIuiv::StaticId() {
-    static gapic::Id ID{ { 0x7a, 0xd4, 0x64, 0xa6, 0x04, 0x7e, 0xe3, 0x38, 0x77, 0x57, 0x31, 0x5c, 0x70, 0x71, 0x9a, 0xe5, 0x4d, 0x5e, 0xa6, 0xcf,  } };
-    return ID;
-}
 void GlGetTexParameterIuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12800,7 +10386,6 @@ void GlGetTexParameterIuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIuiv::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIuiv",
@@ -12817,10 +10402,6 @@ const schema::Entity& GlGetTexParameterIuiv::StaticSchema() {
 
 // GlGetTexParameterIuivEXT:
 // gles.GlGetTexParameterIuivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIuivEXT::StaticId() {
-    static gapic::Id ID{ { 0x5d, 0x1f, 0x99, 0x0d, 0x11, 0x9b, 0x1d, 0xe4, 0xc8, 0xbb, 0xc1, 0x6d, 0x0d, 0x52, 0x20, 0x30, 0xee, 0x9e, 0x4f, 0xf8,  } };
-    return ID;
-}
 void GlGetTexParameterIuivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12829,7 +10410,6 @@ void GlGetTexParameterIuivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIuivEXT::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIuivEXT",
@@ -12846,10 +10426,6 @@ const schema::Entity& GlGetTexParameterIuivEXT::StaticSchema() {
 
 // GlGetTexParameterIuivOES:
 // gles.GlGetTexParameterIuivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterIuivOES::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x85, 0x7a, 0xa3, 0x42, 0x61, 0x61, 0xf7, 0x51, 0x1a, 0x07, 0x63, 0x8e, 0x1e, 0x07, 0xc7, 0xe8, 0xaa, 0x73, 0x82,  } };
-    return ID;
-}
 void GlGetTexParameterIuivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12858,7 +10434,6 @@ void GlGetTexParameterIuivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterIuivOES::StaticId(),
         "gles",
         "",
         "GlGetTexParameterIuivOES",
@@ -12875,10 +10450,6 @@ const schema::Entity& GlGetTexParameterIuivOES::StaticSchema() {
 
 // GlGetTexParameterfv:
 // gles.GlGetTexParameterfv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameterfv::StaticId() {
-    static gapic::Id ID{ { 0xdd, 0xed, 0x22, 0x61, 0x9d, 0xbd, 0xb3, 0x2e, 0xbc, 0x8c, 0x87, 0x49, 0x02, 0xfd, 0x30, 0x59, 0xba, 0xca, 0xde, 0x82,  } };
-    return ID;
-}
 void GlGetTexParameterfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12887,7 +10458,6 @@ void GlGetTexParameterfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameterfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameterfv::StaticId(),
         "gles",
         "",
         "GlGetTexParameterfv",
@@ -12904,10 +10474,6 @@ const schema::Entity& GlGetTexParameterfv::StaticSchema() {
 
 // GlGetTexParameteriv:
 // gles.GlGetTexParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetTexParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x31, 0xac, 0xb2, 0x54, 0x77, 0x54, 0x82, 0xaa, 0x65, 0x5c, 0x95, 0x99, 0x82, 0x2b, 0xbc, 0x83, 0xac, 0x67, 0x04, 0xe4,  } };
-    return ID;
-}
 void GlGetTexParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -12916,7 +10482,6 @@ void GlGetTexParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTexParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlGetTexParameteriv::StaticId(),
         "gles",
         "",
         "GlGetTexParameteriv",
@@ -12933,13 +10498,8 @@ const schema::Entity& GlGetTexParameteriv::StaticSchema() {
 
 // GlGetTextureHandleNV:
 // gles.GlGetTextureHandleNV{$,Uint32,Uint64}
-const gapic::Id& GlGetTextureHandleNV::StaticId() {
-    static gapic::Id ID{ { 0x92, 0xff, 0x58, 0x21, 0x37, 0xc4, 0xb1, 0x34, 0x6d, 0x25, 0x5c, 0xc4, 0x9d, 0x73, 0x30, 0xc3, 0x11, 0x58, 0x45, 0x1f,  } };
-    return ID;
-}
 const schema::Entity& GlGetTextureHandleNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetTextureHandleNV::StaticId(),
         "gles",
         "",
         "GlGetTextureHandleNV",
@@ -12955,10 +10515,6 @@ const schema::Entity& GlGetTextureHandleNV::StaticSchema() {
 
 // GlGetTextureSamplerHandleNV:
 // gles.GlGetTextureSamplerHandleNV{$,Uint32,Uint32,Uint64}
-const gapic::Id& GlGetTextureSamplerHandleNV::StaticId() {
-    static gapic::Id ID{ { 0xfc, 0xcb, 0xa5, 0xc1, 0x6a, 0xe9, 0xf9, 0xda, 0x96, 0x36, 0x55, 0x19, 0xa4, 0x3f, 0x4f, 0x8e, 0x8f, 0x1b, 0xe1, 0xc4,  } };
-    return ID;
-}
 void GlGetTextureSamplerHandleNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -12967,7 +10523,6 @@ void GlGetTextureSamplerHandleNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTextureSamplerHandleNV::StaticSchema() {
     static schema::Entity entity {
-        GlGetTextureSamplerHandleNV::StaticId(),
         "gles",
         "",
         "GlGetTextureSamplerHandleNV",
@@ -12984,10 +10539,6 @@ const schema::Entity& GlGetTextureSamplerHandleNV::StaticSchema() {
 
 // GlGetTransformFeedbackVarying:
 // gles.GlGetTransformFeedbackVarying{$,Uint32,Uint32,Int32,$,$,$,$}
-const gapic::Id& GlGetTransformFeedbackVarying::StaticId() {
-    static gapic::Id ID{ { 0x8b, 0x83, 0x01, 0xf4, 0xd7, 0xff, 0x3f, 0x8d, 0x68, 0x88, 0x8c, 0xcb, 0x84, 0xd2, 0x63, 0x4a, 0x95, 0x11, 0x3d, 0xe3,  } };
-    return ID;
-}
 void GlGetTransformFeedbackVarying::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13000,7 +10551,6 @@ void GlGetTransformFeedbackVarying::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTransformFeedbackVarying::StaticSchema() {
     static schema::Entity entity {
-        GlGetTransformFeedbackVarying::StaticId(),
         "gles",
         "",
         "GlGetTransformFeedbackVarying",
@@ -13021,10 +10571,6 @@ const schema::Entity& GlGetTransformFeedbackVarying::StaticSchema() {
 
 // GlGetTranslatedShaderSourceANGLE:
 // gles.GlGetTranslatedShaderSourceANGLE{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetTranslatedShaderSourceANGLE::StaticId() {
-    static gapic::Id ID{ { 0x6b, 0x2a, 0x32, 0x8f, 0xf2, 0x68, 0x17, 0x2c, 0x55, 0x93, 0xca, 0xe1, 0xdd, 0xd5, 0xfc, 0x07, 0x53, 0x1f, 0xd0, 0x0a,  } };
-    return ID;
-}
 void GlGetTranslatedShaderSourceANGLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShader);
@@ -13034,7 +10580,6 @@ void GlGetTranslatedShaderSourceANGLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetTranslatedShaderSourceANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlGetTranslatedShaderSourceANGLE::StaticId(),
         "gles",
         "",
         "GlGetTranslatedShaderSourceANGLE",
@@ -13052,10 +10597,6 @@ const schema::Entity& GlGetTranslatedShaderSourceANGLE::StaticSchema() {
 
 // GlGetUniformBlockIndex:
 // gles.GlGetUniformBlockIndex{$,Uint32,String,Uint32}
-const gapic::Id& GlGetUniformBlockIndex::StaticId() {
-    static gapic::Id ID{ { 0xa9, 0x57, 0x63, 0xad, 0xbf, 0x8e, 0x0b, 0xcb, 0xb7, 0xbd, 0xc0, 0x0b, 0xcd, 0x28, 0x34, 0xf6, 0x72, 0x11, 0x2e, 0xc8,  } };
-    return ID;
-}
 void GlGetUniformBlockIndex::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13064,7 +10605,6 @@ void GlGetUniformBlockIndex::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformBlockIndex::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformBlockIndex::StaticId(),
         "gles",
         "",
         "GlGetUniformBlockIndex",
@@ -13081,13 +10621,8 @@ const schema::Entity& GlGetUniformBlockIndex::StaticSchema() {
 
 // UniformIndexᵖ:
 // gles.UniformIndexᵖ{$}
-const gapic::Id& UniformIndex__P::StaticId() {
-    static gapic::Id ID{ { 0x56, 0x9f, 0xee, 0x8f, 0x4b, 0x44, 0x31, 0xbd, 0x1d, 0x7a, 0x76, 0x3a, 0xd0, 0x08, 0xfa, 0x4f, 0xb0, 0xa0, 0x5a, 0x6a,  } };
-    return ID;
-}
 const schema::Entity& UniformIndex__P::StaticSchema() {
     static schema::Entity entity {
-        UniformIndex__P::StaticId(),
         "gles",
         "",
         "UniformIndexᵖ",
@@ -13101,10 +10636,6 @@ const schema::Entity& UniformIndex__P::StaticSchema() {
 
 // GlGetUniformIndices:
 // gles.GlGetUniformIndices{$,Uint32,Int32,$,$}
-const gapic::Id& GlGetUniformIndices::StaticId() {
-    static gapic::Id ID{ { 0x49, 0x09, 0x95, 0x2f, 0xd2, 0xaa, 0xf0, 0xc6, 0xcc, 0xfb, 0x90, 0xc7, 0xc6, 0x16, 0x2f, 0xca, 0x29, 0x39, 0x5b, 0x0d,  } };
-    return ID;
-}
 void GlGetUniformIndices::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13114,7 +10645,6 @@ void GlGetUniformIndices::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformIndices::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformIndices::StaticId(),
         "gles",
         "",
         "GlGetUniformIndices",
@@ -13132,10 +10662,6 @@ const schema::Entity& GlGetUniformIndices::StaticSchema() {
 
 // GlGetUniformLocation:
 // gles.GlGetUniformLocation{$,Uint32,String,Int32}
-const gapic::Id& GlGetUniformLocation::StaticId() {
-    static gapic::Id ID{ { 0x83, 0xb1, 0x90, 0x06, 0x78, 0xec, 0xfa, 0x23, 0xd7, 0x55, 0x37, 0xe0, 0x6b, 0x67, 0x5d, 0xd7, 0x4d, 0xb9, 0xa9, 0x4a,  } };
-    return ID;
-}
 void GlGetUniformLocation::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13144,7 +10670,6 @@ void GlGetUniformLocation::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformLocation::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformLocation::StaticId(),
         "gles",
         "",
         "GlGetUniformLocation",
@@ -13161,10 +10686,6 @@ const schema::Entity& GlGetUniformLocation::StaticSchema() {
 
 // GlGetUniformfv:
 // gles.GlGetUniformfv{$,Uint32,Int32,$}
-const gapic::Id& GlGetUniformfv::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x8b, 0x39, 0x00, 0xe7, 0x17, 0x90, 0xdd, 0x53, 0x8d, 0x27, 0x82, 0x37, 0x64, 0x0a, 0xaa, 0xd5, 0x4e, 0x91, 0x92,  } };
-    return ID;
-}
 void GlGetUniformfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13173,7 +10694,6 @@ void GlGetUniformfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformfv::StaticId(),
         "gles",
         "",
         "GlGetUniformfv",
@@ -13190,10 +10710,6 @@ const schema::Entity& GlGetUniformfv::StaticSchema() {
 
 // GlGetUniformiv:
 // gles.GlGetUniformiv{$,Uint32,Int32,$}
-const gapic::Id& GlGetUniformiv::StaticId() {
-    static gapic::Id ID{ { 0xf2, 0x82, 0xf6, 0x4e, 0x5d, 0x38, 0x83, 0x59, 0x00, 0x4e, 0x0d, 0x0b, 0x2f, 0x17, 0x11, 0x6b, 0x24, 0xac, 0xf4, 0x3f,  } };
-    return ID;
-}
 void GlGetUniformiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13202,7 +10718,6 @@ void GlGetUniformiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformiv::StaticId(),
         "gles",
         "",
         "GlGetUniformiv",
@@ -13219,10 +10734,6 @@ const schema::Entity& GlGetUniformiv::StaticSchema() {
 
 // GlGetUniformuiv:
 // gles.GlGetUniformuiv{$,Uint32,Int32,$}
-const gapic::Id& GlGetUniformuiv::StaticId() {
-    static gapic::Id ID{ { 0x2e, 0x4c, 0xa5, 0xcb, 0x8d, 0xfe, 0x8f, 0x8c, 0x54, 0x77, 0x07, 0x97, 0x4a, 0x0f, 0x32, 0x2c, 0x11, 0x4b, 0xd7, 0x9e,  } };
-    return ID;
-}
 void GlGetUniformuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13231,7 +10742,6 @@ void GlGetUniformuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetUniformuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetUniformuiv::StaticId(),
         "gles",
         "",
         "GlGetUniformuiv",
@@ -13248,10 +10758,6 @@ const schema::Entity& GlGetUniformuiv::StaticSchema() {
 
 // GlGetVertexAttribIiv:
 // gles.GlGetVertexAttribIiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetVertexAttribIiv::StaticId() {
-    static gapic::Id ID{ { 0x63, 0xe3, 0xcc, 0x38, 0xa2, 0x3e, 0x90, 0x29, 0x58, 0xd5, 0x95, 0x61, 0xe4, 0xaf, 0xcd, 0xbc, 0x6c, 0x27, 0x0a, 0x2c,  } };
-    return ID;
-}
 void GlGetVertexAttribIiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -13260,7 +10766,6 @@ void GlGetVertexAttribIiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetVertexAttribIiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetVertexAttribIiv::StaticId(),
         "gles",
         "",
         "GlGetVertexAttribIiv",
@@ -13277,10 +10782,6 @@ const schema::Entity& GlGetVertexAttribIiv::StaticSchema() {
 
 // GlGetVertexAttribIuiv:
 // gles.GlGetVertexAttribIuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetVertexAttribIuiv::StaticId() {
-    static gapic::Id ID{ { 0xa9, 0x85, 0x7d, 0xe8, 0xe3, 0xed, 0x4c, 0xf0, 0xba, 0xf3, 0x27, 0x11, 0xc0, 0x21, 0xec, 0x93, 0x40, 0xb2, 0x85, 0xee,  } };
-    return ID;
-}
 void GlGetVertexAttribIuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -13289,7 +10790,6 @@ void GlGetVertexAttribIuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetVertexAttribIuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetVertexAttribIuiv::StaticId(),
         "gles",
         "",
         "GlGetVertexAttribIuiv",
@@ -13306,10 +10806,6 @@ const schema::Entity& GlGetVertexAttribIuiv::StaticSchema() {
 
 // GlGetVertexAttribPointerv:
 // gles.GlGetVertexAttribPointerv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetVertexAttribPointerv::StaticId() {
-    static gapic::Id ID{ { 0x10, 0x7d, 0x50, 0x06, 0x66, 0x04, 0x0a, 0x94, 0xcc, 0xa1, 0xd5, 0x37, 0xf5, 0xea, 0x0b, 0x66, 0x3b, 0x53, 0xc2, 0xb5,  } };
-    return ID;
-}
 void GlGetVertexAttribPointerv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -13318,7 +10814,6 @@ void GlGetVertexAttribPointerv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetVertexAttribPointerv::StaticSchema() {
     static schema::Entity entity {
-        GlGetVertexAttribPointerv::StaticId(),
         "gles",
         "",
         "GlGetVertexAttribPointerv",
@@ -13335,10 +10830,6 @@ const schema::Entity& GlGetVertexAttribPointerv::StaticSchema() {
 
 // GlGetVertexAttribfv:
 // gles.GlGetVertexAttribfv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetVertexAttribfv::StaticId() {
-    static gapic::Id ID{ { 0x03, 0xbb, 0x78, 0xb3, 0x91, 0xb5, 0xee, 0xaa, 0xc2, 0x5b, 0x1b, 0xa7, 0x7b, 0x6c, 0xd7, 0x03, 0x76, 0xf7, 0xcc, 0x5f,  } };
-    return ID;
-}
 void GlGetVertexAttribfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -13347,7 +10838,6 @@ void GlGetVertexAttribfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetVertexAttribfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetVertexAttribfv::StaticId(),
         "gles",
         "",
         "GlGetVertexAttribfv",
@@ -13364,10 +10854,6 @@ const schema::Entity& GlGetVertexAttribfv::StaticSchema() {
 
 // GlGetVertexAttribiv:
 // gles.GlGetVertexAttribiv{$,Uint32,Uint32,$}
-const gapic::Id& GlGetVertexAttribiv::StaticId() {
-    static gapic::Id ID{ { 0x59, 0xcc, 0x2a, 0x9d, 0xec, 0x4c, 0x1f, 0x18, 0xb0, 0x2b, 0x79, 0x3a, 0x9f, 0x21, 0x7f, 0xab, 0xa4, 0x5e, 0x43, 0x25,  } };
-    return ID;
-}
 void GlGetVertexAttribiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -13376,7 +10862,6 @@ void GlGetVertexAttribiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetVertexAttribiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetVertexAttribiv::StaticId(),
         "gles",
         "",
         "GlGetVertexAttribiv",
@@ -13393,10 +10878,6 @@ const schema::Entity& GlGetVertexAttribiv::StaticSchema() {
 
 // GlGetnUniformfv:
 // gles.GlGetnUniformfv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformfv::StaticId() {
-    static gapic::Id ID{ { 0xe2, 0x72, 0x7d, 0xc1, 0x7c, 0xef, 0x36, 0x04, 0x5d, 0xa4, 0x34, 0x61, 0x17, 0xad, 0x93, 0x14, 0x9a, 0xa1, 0x2f, 0x69,  } };
-    return ID;
-}
 void GlGetnUniformfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13406,7 +10887,6 @@ void GlGetnUniformfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformfv::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformfv::StaticId(),
         "gles",
         "",
         "GlGetnUniformfv",
@@ -13424,10 +10904,6 @@ const schema::Entity& GlGetnUniformfv::StaticSchema() {
 
 // GlGetnUniformfvEXT:
 // gles.GlGetnUniformfvEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformfvEXT::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0xee, 0xbc, 0x17, 0x71, 0x34, 0x64, 0x21, 0xcc, 0x84, 0xe7, 0xa8, 0xbc, 0x94, 0x66, 0x76, 0xb6, 0x58, 0x64, 0xd9,  } };
-    return ID;
-}
 void GlGetnUniformfvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13437,7 +10913,6 @@ void GlGetnUniformfvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformfvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformfvEXT::StaticId(),
         "gles",
         "",
         "GlGetnUniformfvEXT",
@@ -13455,10 +10930,6 @@ const schema::Entity& GlGetnUniformfvEXT::StaticSchema() {
 
 // GlGetnUniformfvKHR:
 // gles.GlGetnUniformfvKHR{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformfvKHR::StaticId() {
-    static gapic::Id ID{ { 0x58, 0x57, 0xb8, 0x3f, 0x3f, 0x46, 0xa9, 0x70, 0xfd, 0x41, 0x67, 0x96, 0x48, 0x18, 0xae, 0x27, 0xa5, 0xb4, 0xbc, 0x7f,  } };
-    return ID;
-}
 void GlGetnUniformfvKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13468,7 +10939,6 @@ void GlGetnUniformfvKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformfvKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformfvKHR::StaticId(),
         "gles",
         "",
         "GlGetnUniformfvKHR",
@@ -13486,10 +10956,6 @@ const schema::Entity& GlGetnUniformfvKHR::StaticSchema() {
 
 // GlGetnUniformiv:
 // gles.GlGetnUniformiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformiv::StaticId() {
-    static gapic::Id ID{ { 0x80, 0x4b, 0xa8, 0x98, 0x39, 0xd7, 0xaf, 0x75, 0x72, 0x9d, 0xe4, 0x61, 0xea, 0xfe, 0x7f, 0xdd, 0xc9, 0xb1, 0x33, 0x1b,  } };
-    return ID;
-}
 void GlGetnUniformiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13499,7 +10965,6 @@ void GlGetnUniformiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformiv::StaticId(),
         "gles",
         "",
         "GlGetnUniformiv",
@@ -13517,10 +10982,6 @@ const schema::Entity& GlGetnUniformiv::StaticSchema() {
 
 // GlGetnUniformivEXT:
 // gles.GlGetnUniformivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformivEXT::StaticId() {
-    static gapic::Id ID{ { 0xf3, 0x5e, 0x52, 0xb8, 0x13, 0x47, 0xfc, 0x50, 0x1b, 0xdc, 0x1f, 0xc8, 0xa9, 0xdc, 0xa5, 0x0a, 0x8b, 0xd1, 0x76, 0x2d,  } };
-    return ID;
-}
 void GlGetnUniformivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13530,7 +10991,6 @@ void GlGetnUniformivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformivEXT::StaticId(),
         "gles",
         "",
         "GlGetnUniformivEXT",
@@ -13548,10 +11008,6 @@ const schema::Entity& GlGetnUniformivEXT::StaticSchema() {
 
 // GlGetnUniformivKHR:
 // gles.GlGetnUniformivKHR{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformivKHR::StaticId() {
-    static gapic::Id ID{ { 0x72, 0x42, 0x83, 0xad, 0xfa, 0xb2, 0x22, 0x56, 0x13, 0x87, 0x5d, 0xa9, 0x2f, 0x16, 0x72, 0x4d, 0x46, 0x1a, 0x85, 0x1c,  } };
-    return ID;
-}
 void GlGetnUniformivKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13561,7 +11017,6 @@ void GlGetnUniformivKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformivKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformivKHR::StaticId(),
         "gles",
         "",
         "GlGetnUniformivKHR",
@@ -13579,10 +11034,6 @@ const schema::Entity& GlGetnUniformivKHR::StaticSchema() {
 
 // GlGetnUniformuiv:
 // gles.GlGetnUniformuiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformuiv::StaticId() {
-    static gapic::Id ID{ { 0x56, 0x19, 0xe2, 0x4c, 0x76, 0x88, 0xbd, 0xce, 0xe1, 0x66, 0xe5, 0x68, 0x51, 0x8e, 0x32, 0x3a, 0x1d, 0x90, 0x6a, 0xe1,  } };
-    return ID;
-}
 void GlGetnUniformuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13592,7 +11043,6 @@ void GlGetnUniformuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformuiv::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformuiv::StaticId(),
         "gles",
         "",
         "GlGetnUniformuiv",
@@ -13610,10 +11060,6 @@ const schema::Entity& GlGetnUniformuiv::StaticSchema() {
 
 // GlGetnUniformuivKHR:
 // gles.GlGetnUniformuivKHR{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlGetnUniformuivKHR::StaticId() {
-    static gapic::Id ID{ { 0x63, 0xf2, 0xd8, 0x69, 0x3a, 0x76, 0x21, 0x60, 0x87, 0x18, 0x82, 0xdd, 0x8d, 0x4a, 0x12, 0x96, 0x75, 0xe6, 0xb9, 0x72,  } };
-    return ID;
-}
 void GlGetnUniformuivKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -13623,7 +11069,6 @@ void GlGetnUniformuivKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlGetnUniformuivKHR::StaticSchema() {
     static schema::Entity entity {
-        GlGetnUniformuivKHR::StaticId(),
         "gles",
         "",
         "GlGetnUniformuivKHR",
@@ -13641,13 +11086,8 @@ const schema::Entity& GlGetnUniformuivKHR::StaticSchema() {
 
 // GlHint:
 // gles.GlHint{$,Uint32,Uint32}
-const gapic::Id& GlHint::StaticId() {
-    static gapic::Id ID{ { 0x22, 0x0e, 0x1e, 0xdc, 0xf7, 0x04, 0x2b, 0xde, 0x6e, 0x0e, 0x37, 0x41, 0x6a, 0x1b, 0xf4, 0x10, 0x29, 0x27, 0x10, 0x29,  } };
-    return ID;
-}
 const schema::Entity& GlHint::StaticSchema() {
     static schema::Entity entity {
-        GlHint::StaticId(),
         "gles",
         "",
         "GlHint",
@@ -13663,13 +11103,8 @@ const schema::Entity& GlHint::StaticSchema() {
 
 // GlInsertEventMarkerEXT:
 // gles.GlInsertEventMarkerEXT{$,Int32,$}
-const gapic::Id& GlInsertEventMarkerEXT::StaticId() {
-    static gapic::Id ID{ { 0x97, 0x25, 0x0e, 0xc3, 0xfb, 0x92, 0x4f, 0x40, 0x36, 0x67, 0x94, 0xf4, 0x9b, 0x0a, 0xe7, 0xcf, 0x27, 0x19, 0xcc, 0x96,  } };
-    return ID;
-}
 const schema::Entity& GlInsertEventMarkerEXT::StaticSchema() {
     static schema::Entity entity {
-        GlInsertEventMarkerEXT::StaticId(),
         "gles",
         "",
         "GlInsertEventMarkerEXT",
@@ -13685,10 +11120,6 @@ const schema::Entity& GlInsertEventMarkerEXT::StaticSchema() {
 
 // GlInterpolatePathsNV:
 // gles.GlInterpolatePathsNV{$,Uint32,Uint32,Uint32,Float32}
-const gapic::Id& GlInterpolatePathsNV::StaticId() {
-    static gapic::Id ID{ { 0x92, 0xb6, 0xa1, 0x6e, 0x13, 0xe1, 0xbb, 0x21, 0x01, 0x90, 0xe0, 0x02, 0x8b, 0xe1, 0x36, 0x1b, 0xfc, 0x62, 0x70, 0xe4,  } };
-    return ID;
-}
 void GlInterpolatePathsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mResultPath);
@@ -13698,7 +11129,6 @@ void GlInterpolatePathsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlInterpolatePathsNV::StaticSchema() {
     static schema::Entity entity {
-        GlInterpolatePathsNV::StaticId(),
         "gles",
         "",
         "GlInterpolatePathsNV",
@@ -13716,10 +11146,6 @@ const schema::Entity& GlInterpolatePathsNV::StaticSchema() {
 
 // GlInvalidateFramebuffer:
 // gles.GlInvalidateFramebuffer{$,Uint32,Int32,$}
-const gapic::Id& GlInvalidateFramebuffer::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0x79, 0xe5, 0xe5, 0xe3, 0xa9, 0x07, 0x5d, 0x26, 0x54, 0x21, 0x97, 0x07, 0xa9, 0xd3, 0x8d, 0xb3, 0xbf, 0x23, 0x1c,  } };
-    return ID;
-}
 void GlInvalidateFramebuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13728,7 +11154,6 @@ void GlInvalidateFramebuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlInvalidateFramebuffer::StaticSchema() {
     static schema::Entity entity {
-        GlInvalidateFramebuffer::StaticId(),
         "gles",
         "",
         "GlInvalidateFramebuffer",
@@ -13745,10 +11170,6 @@ const schema::Entity& GlInvalidateFramebuffer::StaticSchema() {
 
 // GlInvalidateSubFramebuffer:
 // gles.GlInvalidateSubFramebuffer{$,Uint32,Int32,$,Int32,Int32,Int32,Int32}
-const gapic::Id& GlInvalidateSubFramebuffer::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0x64, 0x13, 0x5d, 0x1e, 0xf5, 0x73, 0x8d, 0x77, 0x8e, 0x85, 0xfe, 0x0e, 0x14, 0x2d, 0xbc, 0x5b, 0x9c, 0xd1, 0x8d,  } };
-    return ID;
-}
 void GlInvalidateSubFramebuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13761,7 +11182,6 @@ void GlInvalidateSubFramebuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlInvalidateSubFramebuffer::StaticSchema() {
     static schema::Entity entity {
-        GlInvalidateSubFramebuffer::StaticId(),
         "gles",
         "",
         "GlInvalidateSubFramebuffer",
@@ -13782,13 +11202,8 @@ const schema::Entity& GlInvalidateSubFramebuffer::StaticSchema() {
 
 // GlIsBuffer:
 // gles.GlIsBuffer{$,Uint32,Uint8}
-const gapic::Id& GlIsBuffer::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x8a, 0x68, 0x83, 0xba, 0xa9, 0xdf, 0x66, 0x11, 0x6c, 0x32, 0x71, 0x37, 0xed, 0x8e, 0xee, 0xfc, 0xef, 0x4d, 0xdd,  } };
-    return ID;
-}
 const schema::Entity& GlIsBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlIsBuffer::StaticId(),
         "gles",
         "",
         "GlIsBuffer",
@@ -13804,13 +11219,8 @@ const schema::Entity& GlIsBuffer::StaticSchema() {
 
 // GlIsEnabled:
 // gles.GlIsEnabled{$,Uint32,Uint8}
-const gapic::Id& GlIsEnabled::StaticId() {
-    static gapic::Id ID{ { 0x44, 0x32, 0x44, 0x67, 0xc5, 0x17, 0x32, 0xa5, 0xf0, 0xcd, 0xff, 0xa4, 0x0a, 0xf2, 0x98, 0x17, 0x89, 0x69, 0x26, 0x05,  } };
-    return ID;
-}
 const schema::Entity& GlIsEnabled::StaticSchema() {
     static schema::Entity entity {
-        GlIsEnabled::StaticId(),
         "gles",
         "",
         "GlIsEnabled",
@@ -13826,10 +11236,6 @@ const schema::Entity& GlIsEnabled::StaticSchema() {
 
 // GlIsEnabledi:
 // gles.GlIsEnabledi{$,Uint32,Uint32,Uint8}
-const gapic::Id& GlIsEnabledi::StaticId() {
-    static gapic::Id ID{ { 0xeb, 0x62, 0xf6, 0x4f, 0xb9, 0x8c, 0xc7, 0x74, 0x6b, 0x69, 0x44, 0xea, 0xfd, 0x81, 0x6a, 0x75, 0xac, 0xb3, 0xbe, 0x52,  } };
-    return ID;
-}
 void GlIsEnabledi::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13838,7 +11244,6 @@ void GlIsEnabledi::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsEnabledi::StaticSchema() {
     static schema::Entity entity {
-        GlIsEnabledi::StaticId(),
         "gles",
         "",
         "GlIsEnabledi",
@@ -13855,10 +11260,6 @@ const schema::Entity& GlIsEnabledi::StaticSchema() {
 
 // GlIsEnablediEXT:
 // gles.GlIsEnablediEXT{$,Uint32,Uint32,Uint8}
-const gapic::Id& GlIsEnablediEXT::StaticId() {
-    static gapic::Id ID{ { 0x9a, 0xef, 0x2d, 0xcd, 0xaf, 0xc9, 0x78, 0xec, 0x8c, 0x92, 0xb8, 0x3c, 0x4b, 0xa6, 0x24, 0x2d, 0x28, 0x2a, 0x3c, 0x0d,  } };
-    return ID;
-}
 void GlIsEnablediEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13867,7 +11268,6 @@ void GlIsEnablediEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsEnablediEXT::StaticSchema() {
     static schema::Entity entity {
-        GlIsEnablediEXT::StaticId(),
         "gles",
         "",
         "GlIsEnablediEXT",
@@ -13884,10 +11284,6 @@ const schema::Entity& GlIsEnablediEXT::StaticSchema() {
 
 // GlIsEnablediNV:
 // gles.GlIsEnablediNV{$,Uint32,Uint32,Uint8}
-const gapic::Id& GlIsEnablediNV::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0x61, 0xf6, 0xa4, 0x3f, 0x70, 0x76, 0x8c, 0x0a, 0x71, 0x86, 0x24, 0x76, 0x6e, 0xc0, 0xfd, 0xa4, 0x7f, 0x99, 0x3f,  } };
-    return ID;
-}
 void GlIsEnablediNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13896,7 +11292,6 @@ void GlIsEnablediNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsEnablediNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsEnablediNV::StaticId(),
         "gles",
         "",
         "GlIsEnablediNV",
@@ -13913,10 +11308,6 @@ const schema::Entity& GlIsEnablediNV::StaticSchema() {
 
 // GlIsEnablediOES:
 // gles.GlIsEnablediOES{$,Uint32,Uint32,Uint8}
-const gapic::Id& GlIsEnablediOES::StaticId() {
-    static gapic::Id ID{ { 0xd7, 0x41, 0xbf, 0xc8, 0xf9, 0x45, 0x5e, 0x50, 0xed, 0xce, 0x66, 0x05, 0x0d, 0xf3, 0xeb, 0xf4, 0x97, 0x1d, 0x7d, 0x53,  } };
-    return ID;
-}
 void GlIsEnablediOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -13925,7 +11316,6 @@ void GlIsEnablediOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsEnablediOES::StaticSchema() {
     static schema::Entity entity {
-        GlIsEnablediOES::StaticId(),
         "gles",
         "",
         "GlIsEnablediOES",
@@ -13942,13 +11332,8 @@ const schema::Entity& GlIsEnablediOES::StaticSchema() {
 
 // GlIsFenceNV:
 // gles.GlIsFenceNV{$,Uint32,Uint8}
-const gapic::Id& GlIsFenceNV::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x6a, 0x8b, 0x21, 0x25, 0x63, 0xc2, 0xdb, 0x7b, 0x61, 0x96, 0x07, 0xd7, 0x37, 0xcb, 0xf2, 0x17, 0x3d, 0xfe, 0x97,  } };
-    return ID;
-}
 const schema::Entity& GlIsFenceNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsFenceNV::StaticId(),
         "gles",
         "",
         "GlIsFenceNV",
@@ -13964,13 +11349,8 @@ const schema::Entity& GlIsFenceNV::StaticSchema() {
 
 // GlIsFramebuffer:
 // gles.GlIsFramebuffer{$,Uint32,Uint8}
-const gapic::Id& GlIsFramebuffer::StaticId() {
-    static gapic::Id ID{ { 0x78, 0x88, 0x99, 0x37, 0x6a, 0x5e, 0x50, 0xde, 0x7d, 0x23, 0x28, 0x82, 0xfd, 0x6c, 0xb0, 0x49, 0x71, 0xe5, 0x81, 0x49,  } };
-    return ID;
-}
 const schema::Entity& GlIsFramebuffer::StaticSchema() {
     static schema::Entity entity {
-        GlIsFramebuffer::StaticId(),
         "gles",
         "",
         "GlIsFramebuffer",
@@ -13986,13 +11366,8 @@ const schema::Entity& GlIsFramebuffer::StaticSchema() {
 
 // GlIsImageHandleResidentNV:
 // gles.GlIsImageHandleResidentNV{$,Uint64,Uint8}
-const gapic::Id& GlIsImageHandleResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x32, 0xe5, 0x46, 0xd6, 0x39, 0x93, 0xc4, 0x46, 0x70, 0xf0, 0x07, 0x3f, 0x53, 0x93, 0xa2, 0x9a, 0x05, 0x71, 0x83, 0x67,  } };
-    return ID;
-}
 const schema::Entity& GlIsImageHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsImageHandleResidentNV::StaticId(),
         "gles",
         "",
         "GlIsImageHandleResidentNV",
@@ -14008,13 +11383,8 @@ const schema::Entity& GlIsImageHandleResidentNV::StaticSchema() {
 
 // GlIsPathNV:
 // gles.GlIsPathNV{$,Uint32,Uint8}
-const gapic::Id& GlIsPathNV::StaticId() {
-    static gapic::Id ID{ { 0x8b, 0x03, 0x12, 0xca, 0x72, 0xc6, 0x32, 0xa2, 0xa1, 0xd6, 0xab, 0x7c, 0xd7, 0xbd, 0x27, 0xa0, 0x96, 0x82, 0x29, 0xec,  } };
-    return ID;
-}
 const schema::Entity& GlIsPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsPathNV::StaticId(),
         "gles",
         "",
         "GlIsPathNV",
@@ -14030,10 +11400,6 @@ const schema::Entity& GlIsPathNV::StaticSchema() {
 
 // GlIsPointInFillPathNV:
 // gles.GlIsPointInFillPathNV{$,Uint32,Uint32,Float32,Float32,Uint8}
-const gapic::Id& GlIsPointInFillPathNV::StaticId() {
-    static gapic::Id ID{ { 0xb4, 0x01, 0x89, 0xf7, 0xb8, 0x63, 0x9c, 0xe1, 0x98, 0x3f, 0x24, 0x27, 0x6a, 0x7c, 0x2c, 0x92, 0x46, 0xaa, 0x84, 0x12,  } };
-    return ID;
-}
 void GlIsPointInFillPathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -14044,7 +11410,6 @@ void GlIsPointInFillPathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsPointInFillPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsPointInFillPathNV::StaticId(),
         "gles",
         "",
         "GlIsPointInFillPathNV",
@@ -14063,10 +11428,6 @@ const schema::Entity& GlIsPointInFillPathNV::StaticSchema() {
 
 // GlIsPointInStrokePathNV:
 // gles.GlIsPointInStrokePathNV{$,Uint32,Float32,Float32,Uint8}
-const gapic::Id& GlIsPointInStrokePathNV::StaticId() {
-    static gapic::Id ID{ { 0x67, 0xb4, 0xe4, 0x3c, 0x88, 0x0c, 0x9d, 0x5a, 0x15, 0x78, 0x56, 0xe6, 0x93, 0x8c, 0x1f, 0x00, 0x17, 0x59, 0x52, 0xe2,  } };
-    return ID;
-}
 void GlIsPointInStrokePathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -14076,7 +11437,6 @@ void GlIsPointInStrokePathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlIsPointInStrokePathNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsPointInStrokePathNV::StaticId(),
         "gles",
         "",
         "GlIsPointInStrokePathNV",
@@ -14094,13 +11454,8 @@ const schema::Entity& GlIsPointInStrokePathNV::StaticSchema() {
 
 // GlIsProgram:
 // gles.GlIsProgram{$,Uint32,Uint8}
-const gapic::Id& GlIsProgram::StaticId() {
-    static gapic::Id ID{ { 0x62, 0x93, 0x7d, 0x9c, 0x24, 0x90, 0xac, 0xe8, 0x2a, 0x62, 0xc7, 0xb1, 0xb5, 0xb7, 0x00, 0xa7, 0xf2, 0x1c, 0xf4, 0xd2,  } };
-    return ID;
-}
 const schema::Entity& GlIsProgram::StaticSchema() {
     static schema::Entity entity {
-        GlIsProgram::StaticId(),
         "gles",
         "",
         "GlIsProgram",
@@ -14116,13 +11471,8 @@ const schema::Entity& GlIsProgram::StaticSchema() {
 
 // GlIsProgramPipeline:
 // gles.GlIsProgramPipeline{$,Uint32,Uint8}
-const gapic::Id& GlIsProgramPipeline::StaticId() {
-    static gapic::Id ID{ { 0x4f, 0x06, 0xdb, 0x58, 0x0c, 0x97, 0x4f, 0x75, 0x7b, 0x6c, 0xf9, 0xf2, 0x88, 0xcd, 0x1c, 0x22, 0xf6, 0xf0, 0xd2, 0x39,  } };
-    return ID;
-}
 const schema::Entity& GlIsProgramPipeline::StaticSchema() {
     static schema::Entity entity {
-        GlIsProgramPipeline::StaticId(),
         "gles",
         "",
         "GlIsProgramPipeline",
@@ -14138,13 +11488,8 @@ const schema::Entity& GlIsProgramPipeline::StaticSchema() {
 
 // GlIsProgramPipelineEXT:
 // gles.GlIsProgramPipelineEXT{$,Uint32,Uint8}
-const gapic::Id& GlIsProgramPipelineEXT::StaticId() {
-    static gapic::Id ID{ { 0x4b, 0x4b, 0xb8, 0x62, 0x50, 0x9c, 0x6d, 0xd9, 0x9b, 0xd9, 0x15, 0xed, 0x3b, 0x35, 0xde, 0x54, 0x41, 0x83, 0xa1, 0x5f,  } };
-    return ID;
-}
 const schema::Entity& GlIsProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
-        GlIsProgramPipelineEXT::StaticId(),
         "gles",
         "",
         "GlIsProgramPipelineEXT",
@@ -14160,13 +11505,8 @@ const schema::Entity& GlIsProgramPipelineEXT::StaticSchema() {
 
 // GlIsQuery:
 // gles.GlIsQuery{$,Uint32,Uint8}
-const gapic::Id& GlIsQuery::StaticId() {
-    static gapic::Id ID{ { 0xe1, 0x69, 0xc6, 0x91, 0xbf, 0x60, 0xaf, 0x94, 0x74, 0xd5, 0xef, 0x67, 0x79, 0x01, 0xc4, 0xc2, 0x23, 0x63, 0xe9, 0x9e,  } };
-    return ID;
-}
 const schema::Entity& GlIsQuery::StaticSchema() {
     static schema::Entity entity {
-        GlIsQuery::StaticId(),
         "gles",
         "",
         "GlIsQuery",
@@ -14182,13 +11522,8 @@ const schema::Entity& GlIsQuery::StaticSchema() {
 
 // GlIsQueryEXT:
 // gles.GlIsQueryEXT{$,Uint32,Uint8}
-const gapic::Id& GlIsQueryEXT::StaticId() {
-    static gapic::Id ID{ { 0x94, 0x99, 0xc1, 0x25, 0x8e, 0xfa, 0x72, 0xae, 0xa2, 0xbb, 0x45, 0x27, 0x9a, 0x06, 0x51, 0xd7, 0xc7, 0x27, 0xa2, 0xf7,  } };
-    return ID;
-}
 const schema::Entity& GlIsQueryEXT::StaticSchema() {
     static schema::Entity entity {
-        GlIsQueryEXT::StaticId(),
         "gles",
         "",
         "GlIsQueryEXT",
@@ -14204,13 +11539,8 @@ const schema::Entity& GlIsQueryEXT::StaticSchema() {
 
 // GlIsRenderbuffer:
 // gles.GlIsRenderbuffer{$,Uint32,Uint8}
-const gapic::Id& GlIsRenderbuffer::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x8e, 0xbc, 0x77, 0xec, 0xd6, 0x37, 0xf9, 0x1b, 0xd2, 0xfb, 0x78, 0x0f, 0xd8, 0xe3, 0xc3, 0xcd, 0x47, 0x31, 0xd6,  } };
-    return ID;
-}
 const schema::Entity& GlIsRenderbuffer::StaticSchema() {
     static schema::Entity entity {
-        GlIsRenderbuffer::StaticId(),
         "gles",
         "",
         "GlIsRenderbuffer",
@@ -14226,13 +11556,8 @@ const schema::Entity& GlIsRenderbuffer::StaticSchema() {
 
 // GlIsSampler:
 // gles.GlIsSampler{$,Uint32,Uint8}
-const gapic::Id& GlIsSampler::StaticId() {
-    static gapic::Id ID{ { 0x9b, 0xa6, 0x6d, 0x27, 0x5e, 0x60, 0x83, 0x9a, 0xd4, 0x56, 0x3e, 0xb4, 0xc9, 0x79, 0xdb, 0x75, 0x53, 0xcd, 0x84, 0x35,  } };
-    return ID;
-}
 const schema::Entity& GlIsSampler::StaticSchema() {
     static schema::Entity entity {
-        GlIsSampler::StaticId(),
         "gles",
         "",
         "GlIsSampler",
@@ -14248,13 +11573,8 @@ const schema::Entity& GlIsSampler::StaticSchema() {
 
 // GlIsShader:
 // gles.GlIsShader{$,Uint32,Uint8}
-const gapic::Id& GlIsShader::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0xc5, 0x41, 0x5d, 0xbd, 0xb1, 0x89, 0xc9, 0x61, 0x80, 0xb2, 0xc2, 0x56, 0x28, 0xe3, 0xf7, 0xe8, 0x2a, 0xbf, 0x69,  } };
-    return ID;
-}
 const schema::Entity& GlIsShader::StaticSchema() {
     static schema::Entity entity {
-        GlIsShader::StaticId(),
         "gles",
         "",
         "GlIsShader",
@@ -14270,13 +11590,8 @@ const schema::Entity& GlIsShader::StaticSchema() {
 
 // GlIsSync:
 // gles.GlIsSync{$,Uint64,Uint8}
-const gapic::Id& GlIsSync::StaticId() {
-    static gapic::Id ID{ { 0xc7, 0xb6, 0x5c, 0x6d, 0xb1, 0xe0, 0x52, 0x6c, 0x34, 0xd4, 0x82, 0x6f, 0x4f, 0x08, 0xeb, 0x30, 0x30, 0x75, 0xb0, 0x67,  } };
-    return ID;
-}
 const schema::Entity& GlIsSync::StaticSchema() {
     static schema::Entity entity {
-        GlIsSync::StaticId(),
         "gles",
         "",
         "GlIsSync",
@@ -14292,13 +11607,8 @@ const schema::Entity& GlIsSync::StaticSchema() {
 
 // GlIsSyncAPPLE:
 // gles.GlIsSyncAPPLE{$,Uint64,Uint8}
-const gapic::Id& GlIsSyncAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xad, 0x22, 0xd8, 0x3a, 0x9e, 0x41, 0x41, 0x8f, 0xcb, 0x90, 0x33, 0x01, 0x46, 0x4e, 0x5a, 0xac, 0x98, 0x59, 0x3f, 0x23,  } };
-    return ID;
-}
 const schema::Entity& GlIsSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlIsSyncAPPLE::StaticId(),
         "gles",
         "",
         "GlIsSyncAPPLE",
@@ -14314,13 +11624,8 @@ const schema::Entity& GlIsSyncAPPLE::StaticSchema() {
 
 // GlIsTexture:
 // gles.GlIsTexture{$,Uint32,Uint8}
-const gapic::Id& GlIsTexture::StaticId() {
-    static gapic::Id ID{ { 0x87, 0x4f, 0x86, 0x76, 0x1b, 0x2f, 0xc0, 0xc9, 0x9c, 0x1d, 0xf6, 0x12, 0x87, 0x36, 0xc0, 0xaa, 0xdf, 0x9e, 0x11, 0x2d,  } };
-    return ID;
-}
 const schema::Entity& GlIsTexture::StaticSchema() {
     static schema::Entity entity {
-        GlIsTexture::StaticId(),
         "gles",
         "",
         "GlIsTexture",
@@ -14336,13 +11641,8 @@ const schema::Entity& GlIsTexture::StaticSchema() {
 
 // GlIsTextureHandleResidentNV:
 // gles.GlIsTextureHandleResidentNV{$,Uint64,Uint8}
-const gapic::Id& GlIsTextureHandleResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x9d, 0x34, 0x15, 0x67, 0xdb, 0x60, 0x21, 0xe1, 0x73, 0x11, 0x84, 0xca, 0xfa, 0xbd, 0x1d, 0x5d, 0xfd, 0xcd, 0xda, 0xd5,  } };
-    return ID;
-}
 const schema::Entity& GlIsTextureHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlIsTextureHandleResidentNV::StaticId(),
         "gles",
         "",
         "GlIsTextureHandleResidentNV",
@@ -14358,13 +11658,8 @@ const schema::Entity& GlIsTextureHandleResidentNV::StaticSchema() {
 
 // GlIsTransformFeedback:
 // gles.GlIsTransformFeedback{$,Uint32,Uint8}
-const gapic::Id& GlIsTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0x37, 0xbe, 0xce, 0xbb, 0x2a, 0xc8, 0x65, 0xf6, 0x1f, 0x92, 0xf9, 0xdb, 0xa7, 0x57, 0xd3, 0xc0, 0xc6, 0x86, 0x83,  } };
-    return ID;
-}
 const schema::Entity& GlIsTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlIsTransformFeedback::StaticId(),
         "gles",
         "",
         "GlIsTransformFeedback",
@@ -14380,13 +11675,8 @@ const schema::Entity& GlIsTransformFeedback::StaticSchema() {
 
 // GlIsVertexArray:
 // gles.GlIsVertexArray{$,Uint32,Uint8}
-const gapic::Id& GlIsVertexArray::StaticId() {
-    static gapic::Id ID{ { 0x41, 0xf2, 0x5c, 0x42, 0x9f, 0xa0, 0x4f, 0x28, 0xc8, 0x01, 0x10, 0x56, 0x7a, 0xed, 0xaf, 0xaf, 0xf0, 0x70, 0xd9, 0x80,  } };
-    return ID;
-}
 const schema::Entity& GlIsVertexArray::StaticSchema() {
     static schema::Entity entity {
-        GlIsVertexArray::StaticId(),
         "gles",
         "",
         "GlIsVertexArray",
@@ -14402,13 +11692,8 @@ const schema::Entity& GlIsVertexArray::StaticSchema() {
 
 // GlIsVertexArrayOES:
 // gles.GlIsVertexArrayOES{$,Uint32,Uint8}
-const gapic::Id& GlIsVertexArrayOES::StaticId() {
-    static gapic::Id ID{ { 0xd7, 0x68, 0xf3, 0xae, 0x3a, 0xb2, 0xdb, 0xe6, 0xe4, 0x81, 0x65, 0x57, 0x87, 0xf4, 0xf7, 0xff, 0x3a, 0x2d, 0xea, 0x60,  } };
-    return ID;
-}
 const schema::Entity& GlIsVertexArrayOES::StaticSchema() {
     static schema::Entity entity {
-        GlIsVertexArrayOES::StaticId(),
         "gles",
         "",
         "GlIsVertexArrayOES",
@@ -14424,10 +11709,6 @@ const schema::Entity& GlIsVertexArrayOES::StaticSchema() {
 
 // GlLabelObjectEXT:
 // gles.GlLabelObjectEXT{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlLabelObjectEXT::StaticId() {
-    static gapic::Id ID{ { 0xe8, 0xbb, 0x16, 0x5b, 0x3e, 0x74, 0x6b, 0xf7, 0x88, 0x9f, 0x0c, 0x9f, 0x3e, 0xf9, 0xe3, 0xc2, 0x13, 0x57, 0x07, 0xc7,  } };
-    return ID;
-}
 void GlLabelObjectEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mType);
@@ -14437,7 +11718,6 @@ void GlLabelObjectEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlLabelObjectEXT::StaticSchema() {
     static schema::Entity entity {
-        GlLabelObjectEXT::StaticId(),
         "gles",
         "",
         "GlLabelObjectEXT",
@@ -14455,13 +11735,8 @@ const schema::Entity& GlLabelObjectEXT::StaticSchema() {
 
 // GlLineWidth:
 // gles.GlLineWidth{$,Float32}
-const gapic::Id& GlLineWidth::StaticId() {
-    static gapic::Id ID{ { 0xaa, 0xb7, 0xa4, 0xc7, 0xef, 0x3a, 0x3a, 0xc9, 0x9c, 0x99, 0xa2, 0x4b, 0x9d, 0x15, 0xdc, 0x21, 0x40, 0xba, 0xc9, 0x09,  } };
-    return ID;
-}
 const schema::Entity& GlLineWidth::StaticSchema() {
     static schema::Entity entity {
-        GlLineWidth::StaticId(),
         "gles",
         "",
         "GlLineWidth",
@@ -14476,13 +11751,8 @@ const schema::Entity& GlLineWidth::StaticSchema() {
 
 // GlLinkProgram:
 // gles.GlLinkProgram{$,Uint32}
-const gapic::Id& GlLinkProgram::StaticId() {
-    static gapic::Id ID{ { 0x0b, 0x93, 0xaa, 0x61, 0xc7, 0x1a, 0x11, 0x9f, 0xd1, 0xd3, 0x38, 0x58, 0x89, 0x32, 0x9b, 0xec, 0xea, 0x88, 0x38, 0xa1,  } };
-    return ID;
-}
 const schema::Entity& GlLinkProgram::StaticSchema() {
     static schema::Entity entity {
-        GlLinkProgram::StaticId(),
         "gles",
         "",
         "GlLinkProgram",
@@ -14497,13 +11767,8 @@ const schema::Entity& GlLinkProgram::StaticSchema() {
 
 // GlMakeImageHandleNonResidentNV:
 // gles.GlMakeImageHandleNonResidentNV{$,Uint64}
-const gapic::Id& GlMakeImageHandleNonResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x3a, 0x01, 0x75, 0xbb, 0xdd, 0xf7, 0x47, 0xba, 0x07, 0xd8, 0x3a, 0xaa, 0xaa, 0xd9, 0x9d, 0x66, 0x6a, 0x2f, 0x61, 0xb4,  } };
-    return ID;
-}
 const schema::Entity& GlMakeImageHandleNonResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlMakeImageHandleNonResidentNV::StaticId(),
         "gles",
         "",
         "GlMakeImageHandleNonResidentNV",
@@ -14518,13 +11783,8 @@ const schema::Entity& GlMakeImageHandleNonResidentNV::StaticSchema() {
 
 // GlMakeImageHandleResidentNV:
 // gles.GlMakeImageHandleResidentNV{$,Uint64,Uint32}
-const gapic::Id& GlMakeImageHandleResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x26, 0x20, 0x1d, 0xa9, 0x82, 0x1a, 0xa6, 0x43, 0x4c, 0x75, 0x18, 0x46, 0x76, 0xce, 0xd4, 0xe1, 0xfe, 0xc4, 0x68, 0xce,  } };
-    return ID;
-}
 const schema::Entity& GlMakeImageHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlMakeImageHandleResidentNV::StaticId(),
         "gles",
         "",
         "GlMakeImageHandleResidentNV",
@@ -14540,13 +11800,8 @@ const schema::Entity& GlMakeImageHandleResidentNV::StaticSchema() {
 
 // GlMakeTextureHandleNonResidentNV:
 // gles.GlMakeTextureHandleNonResidentNV{$,Uint64}
-const gapic::Id& GlMakeTextureHandleNonResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0xc3, 0x40, 0xf9, 0xca, 0x02, 0x15, 0x26, 0x09, 0xd2, 0x11, 0xd6, 0xac, 0x0b, 0x30, 0x50, 0x0c, 0x0a, 0x18, 0xc5,  } };
-    return ID;
-}
 const schema::Entity& GlMakeTextureHandleNonResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlMakeTextureHandleNonResidentNV::StaticId(),
         "gles",
         "",
         "GlMakeTextureHandleNonResidentNV",
@@ -14561,13 +11816,8 @@ const schema::Entity& GlMakeTextureHandleNonResidentNV::StaticSchema() {
 
 // GlMakeTextureHandleResidentNV:
 // gles.GlMakeTextureHandleResidentNV{$,Uint64}
-const gapic::Id& GlMakeTextureHandleResidentNV::StaticId() {
-    static gapic::Id ID{ { 0x90, 0xdd, 0x00, 0xc7, 0x8d, 0xa6, 0xad, 0x7d, 0x78, 0x3b, 0xc7, 0x4b, 0x11, 0xd8, 0x58, 0xee, 0xd0, 0x3d, 0x70, 0xb0,  } };
-    return ID;
-}
 const schema::Entity& GlMakeTextureHandleResidentNV::StaticSchema() {
     static schema::Entity entity {
-        GlMakeTextureHandleResidentNV::StaticId(),
         "gles",
         "",
         "GlMakeTextureHandleResidentNV",
@@ -14582,10 +11832,6 @@ const schema::Entity& GlMakeTextureHandleResidentNV::StaticSchema() {
 
 // GlMapBufferOES:
 // gles.GlMapBufferOES{$,Uint32,Uint32,$}
-const gapic::Id& GlMapBufferOES::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0x61, 0x42, 0xb0, 0x5a, 0xc4, 0xcf, 0x7b, 0x5f, 0x29, 0x5a, 0xd2, 0x9b, 0xe4, 0x2c, 0x95, 0xf3, 0x8d, 0x4e, 0xeb,  } };
-    return ID;
-}
 void GlMapBufferOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -14594,7 +11840,6 @@ void GlMapBufferOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMapBufferOES::StaticSchema() {
     static schema::Entity entity {
-        GlMapBufferOES::StaticId(),
         "gles",
         "",
         "GlMapBufferOES",
@@ -14611,10 +11856,6 @@ const schema::Entity& GlMapBufferOES::StaticSchema() {
 
 // GlMapBufferRange:
 // gles.GlMapBufferRange{$,Uint32,Int32,Int32,Uint32,$}
-const gapic::Id& GlMapBufferRange::StaticId() {
-    static gapic::Id ID{ { 0x4a, 0x70, 0xb6, 0x4d, 0x00, 0xf1, 0xbe, 0xef, 0x1e, 0x68, 0xd2, 0xc4, 0xab, 0x94, 0xcd, 0xdb, 0xc5, 0x34, 0x71, 0xd0,  } };
-    return ID;
-}
 void GlMapBufferRange::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -14625,7 +11866,6 @@ void GlMapBufferRange::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMapBufferRange::StaticSchema() {
     static schema::Entity entity {
-        GlMapBufferRange::StaticId(),
         "gles",
         "",
         "GlMapBufferRange",
@@ -14644,10 +11884,6 @@ const schema::Entity& GlMapBufferRange::StaticSchema() {
 
 // GlMapBufferRangeEXT:
 // gles.GlMapBufferRangeEXT{$,Uint32,Int32,Int32,Uint32,$}
-const gapic::Id& GlMapBufferRangeEXT::StaticId() {
-    static gapic::Id ID{ { 0x46, 0xe5, 0xf0, 0xdc, 0x82, 0xfb, 0x77, 0xee, 0xce, 0x0d, 0xea, 0x6b, 0x50, 0x87, 0x78, 0x50, 0x64, 0xfd, 0x73, 0x52,  } };
-    return ID;
-}
 void GlMapBufferRangeEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -14658,7 +11894,6 @@ void GlMapBufferRangeEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMapBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMapBufferRangeEXT::StaticId(),
         "gles",
         "",
         "GlMapBufferRangeEXT",
@@ -14677,13 +11912,8 @@ const schema::Entity& GlMapBufferRangeEXT::StaticSchema() {
 
 // GlMatrixLoad3x2fNV:
 // gles.GlMatrixLoad3x2fNV{$,Uint32,$}
-const gapic::Id& GlMatrixLoad3x2fNV::StaticId() {
-    static gapic::Id ID{ { 0xa1, 0x69, 0x16, 0x04, 0x62, 0xe9, 0x59, 0x1b, 0x17, 0x8d, 0xce, 0xa9, 0x98, 0x2e, 0x80, 0x2e, 0x9a, 0xa1, 0x39, 0x0d,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixLoad3x2fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixLoad3x2fNV::StaticId(),
         "gles",
         "",
         "GlMatrixLoad3x2fNV",
@@ -14699,13 +11929,8 @@ const schema::Entity& GlMatrixLoad3x2fNV::StaticSchema() {
 
 // GlMatrixLoad3x3fNV:
 // gles.GlMatrixLoad3x3fNV{$,Uint32,$}
-const gapic::Id& GlMatrixLoad3x3fNV::StaticId() {
-    static gapic::Id ID{ { 0xf2, 0x11, 0x73, 0xc4, 0xff, 0x0f, 0x6d, 0x41, 0x7e, 0x11, 0x4d, 0x90, 0xde, 0x83, 0xec, 0x59, 0xa9, 0x37, 0x86, 0xff,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixLoad3x3fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixLoad3x3fNV::StaticId(),
         "gles",
         "",
         "GlMatrixLoad3x3fNV",
@@ -14721,13 +11946,8 @@ const schema::Entity& GlMatrixLoad3x3fNV::StaticSchema() {
 
 // GlMatrixLoadTranspose3x3fNV:
 // gles.GlMatrixLoadTranspose3x3fNV{$,Uint32,$}
-const gapic::Id& GlMatrixLoadTranspose3x3fNV::StaticId() {
-    static gapic::Id ID{ { 0xa3, 0xc8, 0x5c, 0x13, 0x11, 0x39, 0x4c, 0x07, 0xbf, 0xd0, 0xfd, 0xc5, 0x00, 0x61, 0x19, 0x4b, 0x84, 0x51, 0xf6, 0x83,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixLoadTranspose3x3fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixLoadTranspose3x3fNV::StaticId(),
         "gles",
         "",
         "GlMatrixLoadTranspose3x3fNV",
@@ -14743,13 +11963,8 @@ const schema::Entity& GlMatrixLoadTranspose3x3fNV::StaticSchema() {
 
 // GlMatrixMult3x2fNV:
 // gles.GlMatrixMult3x2fNV{$,Uint32,$}
-const gapic::Id& GlMatrixMult3x2fNV::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x47, 0x49, 0x72, 0x08, 0xd6, 0xc6, 0xcb, 0x4f, 0x00, 0xd6, 0xc5, 0xbc, 0x6c, 0x1e, 0x2d, 0xc0, 0x7d, 0x01, 0xf0,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixMult3x2fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixMult3x2fNV::StaticId(),
         "gles",
         "",
         "GlMatrixMult3x2fNV",
@@ -14765,13 +11980,8 @@ const schema::Entity& GlMatrixMult3x2fNV::StaticSchema() {
 
 // GlMatrixMult3x3fNV:
 // gles.GlMatrixMult3x3fNV{$,Uint32,$}
-const gapic::Id& GlMatrixMult3x3fNV::StaticId() {
-    static gapic::Id ID{ { 0xcc, 0xca, 0x9e, 0xe5, 0xbc, 0xb4, 0xe0, 0xcb, 0x2b, 0x00, 0x4d, 0x27, 0x3c, 0xde, 0x4d, 0x6b, 0x2c, 0x99, 0x8d, 0x4b,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixMult3x3fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixMult3x3fNV::StaticId(),
         "gles",
         "",
         "GlMatrixMult3x3fNV",
@@ -14787,13 +11997,8 @@ const schema::Entity& GlMatrixMult3x3fNV::StaticSchema() {
 
 // GlMatrixMultTranspose3x3fNV:
 // gles.GlMatrixMultTranspose3x3fNV{$,Uint32,$}
-const gapic::Id& GlMatrixMultTranspose3x3fNV::StaticId() {
-    static gapic::Id ID{ { 0xb8, 0x6b, 0xaf, 0x24, 0x07, 0x50, 0xff, 0xbd, 0x03, 0x31, 0x42, 0x49, 0xde, 0xb1, 0x1c, 0x14, 0x01, 0xc9, 0x9e, 0x8a,  } };
-    return ID;
-}
 const schema::Entity& GlMatrixMultTranspose3x3fNV::StaticSchema() {
     static schema::Entity entity {
-        GlMatrixMultTranspose3x3fNV::StaticId(),
         "gles",
         "",
         "GlMatrixMultTranspose3x3fNV",
@@ -14809,13 +12014,8 @@ const schema::Entity& GlMatrixMultTranspose3x3fNV::StaticSchema() {
 
 // GlMemoryBarrier:
 // gles.GlMemoryBarrier{$,Uint32}
-const gapic::Id& GlMemoryBarrier::StaticId() {
-    static gapic::Id ID{ { 0x64, 0xb9, 0x9c, 0x28, 0xfa, 0x0a, 0x77, 0x4f, 0xde, 0x62, 0xaf, 0x04, 0x86, 0xff, 0x7e, 0x14, 0x3c, 0xf1, 0x4b, 0xb4,  } };
-    return ID;
-}
 const schema::Entity& GlMemoryBarrier::StaticSchema() {
     static schema::Entity entity {
-        GlMemoryBarrier::StaticId(),
         "gles",
         "",
         "GlMemoryBarrier",
@@ -14830,13 +12030,8 @@ const schema::Entity& GlMemoryBarrier::StaticSchema() {
 
 // GlMemoryBarrierByRegion:
 // gles.GlMemoryBarrierByRegion{$,Uint32}
-const gapic::Id& GlMemoryBarrierByRegion::StaticId() {
-    static gapic::Id ID{ { 0xb1, 0x16, 0xb6, 0xb2, 0x4a, 0xd9, 0x2d, 0x5a, 0x11, 0xb6, 0xb0, 0x03, 0x89, 0x2a, 0x8e, 0x0f, 0x59, 0xf4, 0x7f, 0x48,  } };
-    return ID;
-}
 const schema::Entity& GlMemoryBarrierByRegion::StaticSchema() {
     static schema::Entity entity {
-        GlMemoryBarrierByRegion::StaticId(),
         "gles",
         "",
         "GlMemoryBarrierByRegion",
@@ -14851,13 +12046,8 @@ const schema::Entity& GlMemoryBarrierByRegion::StaticSchema() {
 
 // GlMinSampleShading:
 // gles.GlMinSampleShading{$,Float32}
-const gapic::Id& GlMinSampleShading::StaticId() {
-    static gapic::Id ID{ { 0x20, 0xbb, 0x94, 0xb8, 0x7b, 0xbd, 0xae, 0x7d, 0x56, 0xc1, 0xca, 0x08, 0x0f, 0x70, 0x32, 0xf7, 0xd0, 0xae, 0x35, 0x92,  } };
-    return ID;
-}
 const schema::Entity& GlMinSampleShading::StaticSchema() {
     static schema::Entity entity {
-        GlMinSampleShading::StaticId(),
         "gles",
         "",
         "GlMinSampleShading",
@@ -14872,13 +12062,8 @@ const schema::Entity& GlMinSampleShading::StaticSchema() {
 
 // GlMinSampleShadingOES:
 // gles.GlMinSampleShadingOES{$,Float32}
-const gapic::Id& GlMinSampleShadingOES::StaticId() {
-    static gapic::Id ID{ { 0xbe, 0xa7, 0xc0, 0xa8, 0xbf, 0xfc, 0x51, 0x46, 0xdb, 0xde, 0x66, 0xb9, 0xd6, 0xdb, 0x54, 0x8b, 0xc9, 0xf9, 0xbb, 0x75,  } };
-    return ID;
-}
 const schema::Entity& GlMinSampleShadingOES::StaticSchema() {
     static schema::Entity entity {
-        GlMinSampleShadingOES::StaticId(),
         "gles",
         "",
         "GlMinSampleShadingOES",
@@ -14893,10 +12078,6 @@ const schema::Entity& GlMinSampleShadingOES::StaticSchema() {
 
 // GlMultiDrawArraysEXT:
 // gles.GlMultiDrawArraysEXT{$,Uint32,$,$,Int32}
-const gapic::Id& GlMultiDrawArraysEXT::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0x0d, 0xbd, 0x0d, 0x67, 0x79, 0x05, 0x8d, 0x86, 0xa8, 0xe9, 0x22, 0x07, 0x82, 0xe3, 0x0f, 0x6d, 0x78, 0x22, 0x3a,  } };
-    return ID;
-}
 void GlMultiDrawArraysEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -14906,7 +12087,6 @@ void GlMultiDrawArraysEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawArraysEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawArraysEXT::StaticId(),
         "gles",
         "",
         "GlMultiDrawArraysEXT",
@@ -14924,10 +12104,6 @@ const schema::Entity& GlMultiDrawArraysEXT::StaticSchema() {
 
 // GlMultiDrawArraysIndirectEXT:
 // gles.GlMultiDrawArraysIndirectEXT{$,Uint32,$,Int32,Int32}
-const gapic::Id& GlMultiDrawArraysIndirectEXT::StaticId() {
-    static gapic::Id ID{ { 0x7c, 0x67, 0x76, 0xee, 0x84, 0xed, 0x62, 0xe8, 0xef, 0xa7, 0xf3, 0x15, 0x51, 0x33, 0x11, 0xa5, 0x9c, 0xd8, 0x20, 0x42,  } };
-    return ID;
-}
 void GlMultiDrawArraysIndirectEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -14937,7 +12113,6 @@ void GlMultiDrawArraysIndirectEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawArraysIndirectEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawArraysIndirectEXT::StaticId(),
         "gles",
         "",
         "GlMultiDrawArraysIndirectEXT",
@@ -14955,13 +12130,8 @@ const schema::Entity& GlMultiDrawArraysIndirectEXT::StaticSchema() {
 
 // Voidᶜᵖᶜᵖ:
 // gles.Voidᶜᵖᶜᵖ{$}
-const gapic::Id& Void__CP__CP::StaticId() {
-    static gapic::Id ID{ { 0xce, 0x3e, 0x26, 0x1a, 0xd3, 0xd0, 0xe4, 0x4f, 0x87, 0xd8, 0x78, 0x79, 0x0f, 0xda, 0x4c, 0xea, 0xb4, 0x83, 0x3d, 0xed,  } };
-    return ID;
-}
 const schema::Entity& Void__CP__CP::StaticSchema() {
     static schema::Entity entity {
-        Void__CP__CP::StaticId(),
         "gles",
         "",
         "Voidᶜᵖᶜᵖ",
@@ -14975,10 +12145,6 @@ const schema::Entity& Void__CP__CP::StaticSchema() {
 
 // GlMultiDrawElementsBaseVertexEXT:
 // gles.GlMultiDrawElementsBaseVertexEXT{$,Uint32,$,Uint32,$,Int32,$}
-const gapic::Id& GlMultiDrawElementsBaseVertexEXT::StaticId() {
-    static gapic::Id ID{ { 0x5a, 0x80, 0xa0, 0x12, 0xd4, 0xdc, 0x6b, 0x43, 0x16, 0xbf, 0x66, 0x67, 0x56, 0x06, 0x67, 0xc6, 0x63, 0xb3, 0x81, 0xf8,  } };
-    return ID;
-}
 void GlMultiDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -14990,7 +12156,6 @@ void GlMultiDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawElementsBaseVertexEXT::StaticId(),
         "gles",
         "",
         "GlMultiDrawElementsBaseVertexEXT",
@@ -15010,10 +12175,6 @@ const schema::Entity& GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
 
 // GlMultiDrawElementsBaseVertexOES:
 // gles.GlMultiDrawElementsBaseVertexOES{$,Uint32,$,Uint32,$,Int32,$}
-const gapic::Id& GlMultiDrawElementsBaseVertexOES::StaticId() {
-    static gapic::Id ID{ { 0x75, 0xf3, 0xc1, 0x23, 0x9c, 0x32, 0xc9, 0x5d, 0xd0, 0x24, 0xe1, 0x15, 0x8b, 0xa6, 0xa6, 0x1c, 0xae, 0x65, 0xde, 0xca,  } };
-    return ID;
-}
 void GlMultiDrawElementsBaseVertexOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -15025,7 +12186,6 @@ void GlMultiDrawElementsBaseVertexOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawElementsBaseVertexOES::StaticId(),
         "gles",
         "",
         "GlMultiDrawElementsBaseVertexOES",
@@ -15045,10 +12205,6 @@ const schema::Entity& GlMultiDrawElementsBaseVertexOES::StaticSchema() {
 
 // GlMultiDrawElementsEXT:
 // gles.GlMultiDrawElementsEXT{$,Uint32,$,Uint32,$,Int32}
-const gapic::Id& GlMultiDrawElementsEXT::StaticId() {
-    static gapic::Id ID{ { 0xe2, 0x31, 0xdc, 0xdb, 0x98, 0x5a, 0x05, 0x96, 0x66, 0xfc, 0x4c, 0x46, 0x73, 0xa7, 0xec, 0x16, 0xa8, 0x02, 0x13, 0x33,  } };
-    return ID;
-}
 void GlMultiDrawElementsEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -15059,7 +12215,6 @@ void GlMultiDrawElementsEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawElementsEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawElementsEXT::StaticId(),
         "gles",
         "",
         "GlMultiDrawElementsEXT",
@@ -15078,10 +12233,6 @@ const schema::Entity& GlMultiDrawElementsEXT::StaticSchema() {
 
 // GlMultiDrawElementsIndirectEXT:
 // gles.GlMultiDrawElementsIndirectEXT{$,Uint32,Uint32,$,Int32,Int32}
-const gapic::Id& GlMultiDrawElementsIndirectEXT::StaticId() {
-    static gapic::Id ID{ { 0x39, 0xae, 0xbb, 0x42, 0xf0, 0xba, 0x67, 0xd7, 0xfa, 0x4c, 0xa2, 0x1b, 0xfb, 0xb8, 0x3f, 0xf1, 0x87, 0x34, 0x7f, 0xaa,  } };
-    return ID;
-}
 void GlMultiDrawElementsIndirectEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMode);
@@ -15092,7 +12243,6 @@ void GlMultiDrawElementsIndirectEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlMultiDrawElementsIndirectEXT::StaticSchema() {
     static schema::Entity entity {
-        GlMultiDrawElementsIndirectEXT::StaticId(),
         "gles",
         "",
         "GlMultiDrawElementsIndirectEXT",
@@ -15111,10 +12261,6 @@ const schema::Entity& GlMultiDrawElementsIndirectEXT::StaticSchema() {
 
 // GlNamedFramebufferSampleLocationsfvNV:
 // gles.GlNamedFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlNamedFramebufferSampleLocationsfvNV::StaticId() {
-    static gapic::Id ID{ { 0x19, 0x26, 0x7e, 0x4f, 0x24, 0xef, 0xfe, 0xd4, 0x2a, 0x6f, 0x51, 0xa6, 0xf6, 0x8e, 0x46, 0x53, 0x5b, 0xfd, 0x40, 0x89,  } };
-    return ID;
-}
 void GlNamedFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFramebuffer);
@@ -15124,7 +12270,6 @@ void GlNamedFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlNamedFramebufferSampleLocationsfvNV::StaticId(),
         "gles",
         "",
         "GlNamedFramebufferSampleLocationsfvNV",
@@ -15142,10 +12287,6 @@ const schema::Entity& GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
 
 // GlObjectLabel:
 // gles.GlObjectLabel{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlObjectLabel::StaticId() {
-    static gapic::Id ID{ { 0xfc, 0x70, 0x59, 0xa0, 0x4c, 0xac, 0x97, 0xc8, 0x4b, 0x2f, 0x5a, 0x5a, 0x27, 0x58, 0x88, 0xb7, 0xbd, 0x9e, 0xa5, 0xc9,  } };
-    return ID;
-}
 void GlObjectLabel::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIdentifier);
@@ -15155,7 +12296,6 @@ void GlObjectLabel::Encode(Encoder* e) const {
 }
 const schema::Entity& GlObjectLabel::StaticSchema() {
     static schema::Entity entity {
-        GlObjectLabel::StaticId(),
         "gles",
         "",
         "GlObjectLabel",
@@ -15173,10 +12313,6 @@ const schema::Entity& GlObjectLabel::StaticSchema() {
 
 // GlObjectLabelKHR:
 // gles.GlObjectLabelKHR{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlObjectLabelKHR::StaticId() {
-    static gapic::Id ID{ { 0x48, 0xb4, 0xb5, 0x40, 0x24, 0x5d, 0x17, 0x71, 0x9c, 0xf9, 0xa7, 0x05, 0x31, 0xa4, 0x28, 0x4e, 0x15, 0xdc, 0x57, 0x73,  } };
-    return ID;
-}
 void GlObjectLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIdentifier);
@@ -15186,7 +12322,6 @@ void GlObjectLabelKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
-        GlObjectLabelKHR::StaticId(),
         "gles",
         "",
         "GlObjectLabelKHR",
@@ -15204,10 +12339,6 @@ const schema::Entity& GlObjectLabelKHR::StaticSchema() {
 
 // GlObjectPtrLabel:
 // gles.GlObjectPtrLabel{$,$,Int32,$}
-const gapic::Id& GlObjectPtrLabel::StaticId() {
-    static gapic::Id ID{ { 0x86, 0x0a, 0xfa, 0x07, 0x10, 0x8e, 0x73, 0x4f, 0x73, 0x23, 0x51, 0xa4, 0xe6, 0x6a, 0xa5, 0xff, 0x51, 0x9d, 0x36, 0xb0,  } };
-    return ID;
-}
 void GlObjectPtrLabel::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPtr);
@@ -15216,7 +12347,6 @@ void GlObjectPtrLabel::Encode(Encoder* e) const {
 }
 const schema::Entity& GlObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
-        GlObjectPtrLabel::StaticId(),
         "gles",
         "",
         "GlObjectPtrLabel",
@@ -15233,10 +12363,6 @@ const schema::Entity& GlObjectPtrLabel::StaticSchema() {
 
 // GlObjectPtrLabelKHR:
 // gles.GlObjectPtrLabelKHR{$,$,Int32,$}
-const gapic::Id& GlObjectPtrLabelKHR::StaticId() {
-    static gapic::Id ID{ { 0x37, 0xa1, 0x1d, 0x2e, 0x77, 0xc8, 0x74, 0x51, 0x7b, 0xdb, 0x50, 0x1b, 0x8f, 0xbf, 0xfc, 0xef, 0xfd, 0x4b, 0xc0, 0x26,  } };
-    return ID;
-}
 void GlObjectPtrLabelKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mPtr);
@@ -15245,7 +12371,6 @@ void GlObjectPtrLabelKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
-        GlObjectPtrLabelKHR::StaticId(),
         "gles",
         "",
         "GlObjectPtrLabelKHR",
@@ -15262,13 +12387,8 @@ const schema::Entity& GlObjectPtrLabelKHR::StaticSchema() {
 
 // GlPatchParameteri:
 // gles.GlPatchParameteri{$,Uint32,Int32}
-const gapic::Id& GlPatchParameteri::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x2e, 0x96, 0xfc, 0x30, 0x64, 0xc7, 0xe0, 0x6f, 0xfb, 0x23, 0x5f, 0xb9, 0x56, 0x26, 0x44, 0xc1, 0x14, 0x3b, 0xfc,  } };
-    return ID;
-}
 const schema::Entity& GlPatchParameteri::StaticSchema() {
     static schema::Entity entity {
-        GlPatchParameteri::StaticId(),
         "gles",
         "",
         "GlPatchParameteri",
@@ -15284,13 +12404,8 @@ const schema::Entity& GlPatchParameteri::StaticSchema() {
 
 // GlPatchParameteriEXT:
 // gles.GlPatchParameteriEXT{$,Uint32,Int32}
-const gapic::Id& GlPatchParameteriEXT::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x0b, 0xaf, 0xcb, 0x66, 0xf1, 0x8f, 0x5f, 0xc7, 0x9c, 0xcb, 0xf2, 0xc5, 0xa8, 0x28, 0x42, 0x81, 0x45, 0x06, 0x0c,  } };
-    return ID;
-}
 const schema::Entity& GlPatchParameteriEXT::StaticSchema() {
     static schema::Entity entity {
-        GlPatchParameteriEXT::StaticId(),
         "gles",
         "",
         "GlPatchParameteriEXT",
@@ -15306,13 +12421,8 @@ const schema::Entity& GlPatchParameteriEXT::StaticSchema() {
 
 // GlPatchParameteriOES:
 // gles.GlPatchParameteriOES{$,Uint32,Int32}
-const gapic::Id& GlPatchParameteriOES::StaticId() {
-    static gapic::Id ID{ { 0x89, 0x10, 0xf5, 0xa3, 0x19, 0x5a, 0x5c, 0xa3, 0xc1, 0xd7, 0xd4, 0xb0, 0x85, 0x44, 0x4b, 0xcf, 0x17, 0x09, 0xf3, 0x0b,  } };
-    return ID;
-}
 const schema::Entity& GlPatchParameteriOES::StaticSchema() {
     static schema::Entity entity {
-        GlPatchParameteriOES::StaticId(),
         "gles",
         "",
         "GlPatchParameteriOES",
@@ -15328,10 +12438,6 @@ const schema::Entity& GlPatchParameteriOES::StaticSchema() {
 
 // GlPathCommandsNV:
 // gles.GlPathCommandsNV{$,Uint32,Int32,$,Int32,Uint32,$}
-const gapic::Id& GlPathCommandsNV::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x2c, 0x32, 0xdb, 0x5e, 0xab, 0xc1, 0x96, 0x84, 0xe4, 0xcc, 0x98, 0xb0, 0x34, 0xf4, 0xed, 0x6c, 0xd8, 0x12, 0xf7,  } };
-    return ID;
-}
 void GlPathCommandsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15343,7 +12449,6 @@ void GlPathCommandsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathCommandsNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathCommandsNV::StaticId(),
         "gles",
         "",
         "GlPathCommandsNV",
@@ -15363,10 +12468,6 @@ const schema::Entity& GlPathCommandsNV::StaticSchema() {
 
 // GlPathCoordsNV:
 // gles.GlPathCoordsNV{$,Uint32,Int32,Uint32,$}
-const gapic::Id& GlPathCoordsNV::StaticId() {
-    static gapic::Id ID{ { 0x78, 0xde, 0xad, 0x18, 0x88, 0x5b, 0xad, 0xdb, 0x34, 0x87, 0x75, 0x43, 0xa7, 0x32, 0x95, 0xd4, 0xaf, 0x56, 0xf2, 0xe1,  } };
-    return ID;
-}
 void GlPathCoordsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15376,7 +12477,6 @@ void GlPathCoordsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathCoordsNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathCoordsNV::StaticId(),
         "gles",
         "",
         "GlPathCoordsNV",
@@ -15394,13 +12494,8 @@ const schema::Entity& GlPathCoordsNV::StaticSchema() {
 
 // GlPathCoverDepthFuncNV:
 // gles.GlPathCoverDepthFuncNV{$,Uint32}
-const gapic::Id& GlPathCoverDepthFuncNV::StaticId() {
-    static gapic::Id ID{ { 0xa0, 0x9f, 0x72, 0x79, 0x46, 0x44, 0x6a, 0xf9, 0xeb, 0x4d, 0x11, 0x69, 0xa2, 0x9e, 0xd7, 0xf6, 0x27, 0xaa, 0x91, 0x56,  } };
-    return ID;
-}
 const schema::Entity& GlPathCoverDepthFuncNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathCoverDepthFuncNV::StaticId(),
         "gles",
         "",
         "GlPathCoverDepthFuncNV",
@@ -15415,10 +12510,6 @@ const schema::Entity& GlPathCoverDepthFuncNV::StaticSchema() {
 
 // GlPathDashArrayNV:
 // gles.GlPathDashArrayNV{$,Uint32,Int32,$}
-const gapic::Id& GlPathDashArrayNV::StaticId() {
-    static gapic::Id ID{ { 0x74, 0x1a, 0xdb, 0x18, 0x62, 0xc5, 0xb3, 0xf2, 0x81, 0xb1, 0xe2, 0xa2, 0x8b, 0x39, 0x6f, 0x9d, 0x37, 0x3c, 0xde, 0x61,  } };
-    return ID;
-}
 void GlPathDashArrayNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15427,7 +12518,6 @@ void GlPathDashArrayNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathDashArrayNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathDashArrayNV::StaticId(),
         "gles",
         "",
         "GlPathDashArrayNV",
@@ -15444,10 +12534,6 @@ const schema::Entity& GlPathDashArrayNV::StaticSchema() {
 
 // GlPathGlyphIndexArrayNV:
 // gles.GlPathGlyphIndexArrayNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Float32,Uint32}
-const gapic::Id& GlPathGlyphIndexArrayNV::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0xb5, 0x88, 0x28, 0xdf, 0xfd, 0x82, 0x2a, 0x1c, 0x2b, 0x52, 0xfd, 0x10, 0x52, 0x3e, 0x4d, 0xef, 0xf1, 0x41, 0x4e,  } };
-    return ID;
-}
 void GlPathGlyphIndexArrayNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirstPathName);
@@ -15462,7 +12548,6 @@ void GlPathGlyphIndexArrayNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathGlyphIndexArrayNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathGlyphIndexArrayNV::StaticId(),
         "gles",
         "",
         "GlPathGlyphIndexArrayNV",
@@ -15485,10 +12570,6 @@ const schema::Entity& GlPathGlyphIndexArrayNV::StaticSchema() {
 
 // GlPathGlyphIndexRangeNV:
 // gles.GlPathGlyphIndexRangeNV{$,Uint32,$,Uint32,Uint32,Float32,Uint32,Uint32}
-const gapic::Id& GlPathGlyphIndexRangeNV::StaticId() {
-    static gapic::Id ID{ { 0x40, 0x33, 0x03, 0xb7, 0x87, 0x0d, 0x9d, 0xf7, 0x53, 0xf4, 0x09, 0xdf, 0x84, 0x2c, 0x1f, 0xd3, 0xb2, 0x4a, 0xc7, 0x1e,  } };
-    return ID;
-}
 void GlPathGlyphIndexRangeNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFontTarget);
@@ -15501,7 +12582,6 @@ void GlPathGlyphIndexRangeNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathGlyphIndexRangeNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathGlyphIndexRangeNV::StaticId(),
         "gles",
         "",
         "GlPathGlyphIndexRangeNV",
@@ -15522,10 +12602,6 @@ const schema::Entity& GlPathGlyphIndexRangeNV::StaticSchema() {
 
 // GlPathGlyphRangeNV:
 // gles.GlPathGlyphRangeNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Uint32,Float32}
-const gapic::Id& GlPathGlyphRangeNV::StaticId() {
-    static gapic::Id ID{ { 0xa3, 0xda, 0x98, 0x3a, 0xf5, 0x3f, 0x72, 0x2a, 0x77, 0xf0, 0xe9, 0xb6, 0x39, 0x41, 0x23, 0xf9, 0xa5, 0x67, 0x29, 0xf7,  } };
-    return ID;
-}
 void GlPathGlyphRangeNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirstPathName);
@@ -15540,7 +12616,6 @@ void GlPathGlyphRangeNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathGlyphRangeNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathGlyphRangeNV::StaticId(),
         "gles",
         "",
         "GlPathGlyphRangeNV",
@@ -15563,10 +12638,6 @@ const schema::Entity& GlPathGlyphRangeNV::StaticSchema() {
 
 // GlPathGlyphsNV:
 // gles.GlPathGlyphsNV{$,Uint32,Uint32,$,Uint32,Int32,Uint32,$,Uint32,Uint32,Float32}
-const gapic::Id& GlPathGlyphsNV::StaticId() {
-    static gapic::Id ID{ { 0xcb, 0x0f, 0x31, 0x9a, 0x16, 0xad, 0xee, 0x63, 0x5e, 0x8c, 0x21, 0x70, 0x86, 0xff, 0x05, 0x97, 0x4c, 0xd8, 0x23, 0x27,  } };
-    return ID;
-}
 void GlPathGlyphsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirstPathName);
@@ -15582,7 +12653,6 @@ void GlPathGlyphsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathGlyphsNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathGlyphsNV::StaticId(),
         "gles",
         "",
         "GlPathGlyphsNV",
@@ -15606,10 +12676,6 @@ const schema::Entity& GlPathGlyphsNV::StaticSchema() {
 
 // GlPathMemoryGlyphIndexArrayNV:
 // gles.GlPathMemoryGlyphIndexArrayNV{$,Uint32,Uint32,Int32,$,Int32,Uint32,Int32,Uint32,Float32,Uint32}
-const gapic::Id& GlPathMemoryGlyphIndexArrayNV::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0xde, 0xbd, 0x4e, 0x1b, 0x60, 0xf6, 0x27, 0xc0, 0x0a, 0xd1, 0x30, 0x6e, 0xa8, 0x39, 0x97, 0x87, 0xf5, 0xe1, 0x18,  } };
-    return ID;
-}
 void GlPathMemoryGlyphIndexArrayNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirstPathName);
@@ -15625,7 +12691,6 @@ void GlPathMemoryGlyphIndexArrayNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathMemoryGlyphIndexArrayNV::StaticId(),
         "gles",
         "",
         "GlPathMemoryGlyphIndexArrayNV",
@@ -15649,10 +12714,6 @@ const schema::Entity& GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
 
 // GlPathParameterfNV:
 // gles.GlPathParameterfNV{$,Uint32,Uint32,Float32}
-const gapic::Id& GlPathParameterfNV::StaticId() {
-    static gapic::Id ID{ { 0x70, 0xe3, 0xd2, 0x24, 0x66, 0xb3, 0xc3, 0x87, 0x3e, 0x56, 0x16, 0x0f, 0x29, 0x83, 0x05, 0x05, 0xd8, 0xb3, 0x61, 0x3c,  } };
-    return ID;
-}
 void GlPathParameterfNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15661,7 +12722,6 @@ void GlPathParameterfNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathParameterfNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathParameterfNV::StaticId(),
         "gles",
         "",
         "GlPathParameterfNV",
@@ -15678,10 +12738,6 @@ const schema::Entity& GlPathParameterfNV::StaticSchema() {
 
 // GlPathParameterfvNV:
 // gles.GlPathParameterfvNV{$,Uint32,Uint32,$}
-const gapic::Id& GlPathParameterfvNV::StaticId() {
-    static gapic::Id ID{ { 0x01, 0xce, 0x4f, 0xa2, 0xf8, 0xda, 0xdd, 0x3e, 0x34, 0xeb, 0xb5, 0xd1, 0xe9, 0x56, 0x77, 0xc1, 0x99, 0x4d, 0xa3, 0xde,  } };
-    return ID;
-}
 void GlPathParameterfvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15690,7 +12746,6 @@ void GlPathParameterfvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathParameterfvNV::StaticId(),
         "gles",
         "",
         "GlPathParameterfvNV",
@@ -15707,10 +12762,6 @@ const schema::Entity& GlPathParameterfvNV::StaticSchema() {
 
 // GlPathParameteriNV:
 // gles.GlPathParameteriNV{$,Uint32,Uint32,Int32}
-const gapic::Id& GlPathParameteriNV::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0x36, 0xe6, 0xc6, 0x20, 0x0e, 0xfc, 0xc4, 0xd6, 0xb2, 0xf8, 0xf6, 0xcb, 0x1c, 0xd8, 0xba, 0x0d, 0x28, 0xc4, 0xca,  } };
-    return ID;
-}
 void GlPathParameteriNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15719,7 +12770,6 @@ void GlPathParameteriNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathParameteriNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathParameteriNV::StaticId(),
         "gles",
         "",
         "GlPathParameteriNV",
@@ -15736,10 +12786,6 @@ const schema::Entity& GlPathParameteriNV::StaticSchema() {
 
 // GlPathParameterivNV:
 // gles.GlPathParameterivNV{$,Uint32,Uint32,$}
-const gapic::Id& GlPathParameterivNV::StaticId() {
-    static gapic::Id ID{ { 0xee, 0xb7, 0x62, 0xaf, 0xfa, 0xd8, 0x80, 0x57, 0xe8, 0xa1, 0x07, 0xaf, 0x66, 0x37, 0x69, 0x67, 0xb6, 0x8a, 0x0f, 0x64,  } };
-    return ID;
-}
 void GlPathParameterivNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15748,7 +12794,6 @@ void GlPathParameterivNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathParameterivNV::StaticId(),
         "gles",
         "",
         "GlPathParameterivNV",
@@ -15765,13 +12810,8 @@ const schema::Entity& GlPathParameterivNV::StaticSchema() {
 
 // GlPathStencilDepthOffsetNV:
 // gles.GlPathStencilDepthOffsetNV{$,Float32,Float32}
-const gapic::Id& GlPathStencilDepthOffsetNV::StaticId() {
-    static gapic::Id ID{ { 0x10, 0xac, 0x54, 0xfc, 0x9d, 0x9d, 0x7e, 0x39, 0x29, 0x9e, 0x3b, 0xa2, 0xb0, 0xe8, 0x30, 0x35, 0xbb, 0x36, 0x28, 0x22,  } };
-    return ID;
-}
 const schema::Entity& GlPathStencilDepthOffsetNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathStencilDepthOffsetNV::StaticId(),
         "gles",
         "",
         "GlPathStencilDepthOffsetNV",
@@ -15787,10 +12827,6 @@ const schema::Entity& GlPathStencilDepthOffsetNV::StaticSchema() {
 
 // GlPathStencilFuncNV:
 // gles.GlPathStencilFuncNV{$,Uint32,Int32,Uint32}
-const gapic::Id& GlPathStencilFuncNV::StaticId() {
-    static gapic::Id ID{ { 0x37, 0x6e, 0xfb, 0xfa, 0x5a, 0xb1, 0x10, 0x5b, 0x06, 0x58, 0xa3, 0x47, 0x4e, 0xd4, 0xc5, 0x03, 0x8d, 0x3c, 0x11, 0x86,  } };
-    return ID;
-}
 void GlPathStencilFuncNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFunc);
@@ -15799,7 +12835,6 @@ void GlPathStencilFuncNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathStencilFuncNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathStencilFuncNV::StaticId(),
         "gles",
         "",
         "GlPathStencilFuncNV",
@@ -15816,10 +12851,6 @@ const schema::Entity& GlPathStencilFuncNV::StaticSchema() {
 
 // GlPathStringNV:
 // gles.GlPathStringNV{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlPathStringNV::StaticId() {
-    static gapic::Id ID{ { 0xcb, 0x03, 0xba, 0x61, 0x96, 0x28, 0x20, 0xf4, 0x64, 0x4b, 0xef, 0x96, 0x5a, 0x5c, 0x2b, 0xb5, 0xaf, 0x01, 0xc3, 0x83,  } };
-    return ID;
-}
 void GlPathStringNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15829,7 +12860,6 @@ void GlPathStringNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathStringNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathStringNV::StaticId(),
         "gles",
         "",
         "GlPathStringNV",
@@ -15847,10 +12877,6 @@ const schema::Entity& GlPathStringNV::StaticSchema() {
 
 // GlPathSubCommandsNV:
 // gles.GlPathSubCommandsNV{$,Uint32,Int32,Int32,Int32,$,Int32,Uint32,$}
-const gapic::Id& GlPathSubCommandsNV::StaticId() {
-    static gapic::Id ID{ { 0x14, 0x05, 0x9d, 0x10, 0x8e, 0x93, 0xf2, 0x54, 0x14, 0x94, 0x23, 0x2b, 0x8a, 0xfa, 0xfb, 0x56, 0xe7, 0x0e, 0xa1, 0xe1,  } };
-    return ID;
-}
 void GlPathSubCommandsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15864,7 +12890,6 @@ void GlPathSubCommandsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathSubCommandsNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathSubCommandsNV::StaticId(),
         "gles",
         "",
         "GlPathSubCommandsNV",
@@ -15886,10 +12911,6 @@ const schema::Entity& GlPathSubCommandsNV::StaticSchema() {
 
 // GlPathSubCoordsNV:
 // gles.GlPathSubCoordsNV{$,Uint32,Int32,Int32,Uint32,$}
-const gapic::Id& GlPathSubCoordsNV::StaticId() {
-    static gapic::Id ID{ { 0x9b, 0x0d, 0x01, 0x7d, 0xed, 0xfb, 0xce, 0xbf, 0xfb, 0x73, 0x7b, 0x5f, 0x5c, 0xf6, 0x06, 0x18, 0x58, 0x54, 0xc3, 0x15,  } };
-    return ID;
-}
 void GlPathSubCoordsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15900,7 +12921,6 @@ void GlPathSubCoordsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPathSubCoordsNV::StaticSchema() {
     static schema::Entity entity {
-        GlPathSubCoordsNV::StaticId(),
         "gles",
         "",
         "GlPathSubCoordsNV",
@@ -15919,13 +12939,8 @@ const schema::Entity& GlPathSubCoordsNV::StaticSchema() {
 
 // GlPauseTransformFeedback:
 // gles.GlPauseTransformFeedback{$}
-const gapic::Id& GlPauseTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0xb9, 0x18, 0x07, 0x86, 0x8e, 0x04, 0xae, 0xcd, 0xd1, 0x7e, 0x7e, 0xe9, 0x33, 0x7a, 0x23, 0xf5, 0x2b, 0x60, 0xd3, 0xe6,  } };
-    return ID;
-}
 const schema::Entity& GlPauseTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlPauseTransformFeedback::StaticId(),
         "gles",
         "",
         "GlPauseTransformFeedback",
@@ -15939,13 +12954,8 @@ const schema::Entity& GlPauseTransformFeedback::StaticSchema() {
 
 // GlPixelStorei:
 // gles.GlPixelStorei{$,Uint32,Int32}
-const gapic::Id& GlPixelStorei::StaticId() {
-    static gapic::Id ID{ { 0xdd, 0x15, 0x7a, 0x88, 0x20, 0x83, 0x12, 0x16, 0x16, 0xfc, 0xf1, 0x32, 0x0e, 0x77, 0xa2, 0x13, 0x4b, 0x7e, 0x90, 0x66,  } };
-    return ID;
-}
 const schema::Entity& GlPixelStorei::StaticSchema() {
     static schema::Entity entity {
-        GlPixelStorei::StaticId(),
         "gles",
         "",
         "GlPixelStorei",
@@ -15961,10 +12971,6 @@ const schema::Entity& GlPixelStorei::StaticSchema() {
 
 // GlPointAlongPathNV:
 // gles.GlPointAlongPathNV{$,Uint32,Int32,Int32,Float32,$,$,$,$,Uint8}
-const gapic::Id& GlPointAlongPathNV::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x96, 0xc1, 0x3e, 0x96, 0xbe, 0x77, 0x86, 0x5a, 0x4b, 0x98, 0x46, 0x65, 0xb9, 0x21, 0x8e, 0x50, 0x8b, 0xe3, 0x7f,  } };
-    return ID;
-}
 void GlPointAlongPathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -15979,7 +12985,6 @@ void GlPointAlongPathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPointAlongPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlPointAlongPathNV::StaticId(),
         "gles",
         "",
         "GlPointAlongPathNV",
@@ -16002,13 +13007,8 @@ const schema::Entity& GlPointAlongPathNV::StaticSchema() {
 
 // GlPolygonModeNV:
 // gles.GlPolygonModeNV{$,Uint32,Uint32}
-const gapic::Id& GlPolygonModeNV::StaticId() {
-    static gapic::Id ID{ { 0x9e, 0xc7, 0xa8, 0x49, 0xd6, 0xc8, 0x16, 0x02, 0xfd, 0x1f, 0xeb, 0x84, 0x9d, 0x66, 0x7a, 0x9a, 0xb5, 0x52, 0x5d, 0xb9,  } };
-    return ID;
-}
 const schema::Entity& GlPolygonModeNV::StaticSchema() {
     static schema::Entity entity {
-        GlPolygonModeNV::StaticId(),
         "gles",
         "",
         "GlPolygonModeNV",
@@ -16024,13 +13024,8 @@ const schema::Entity& GlPolygonModeNV::StaticSchema() {
 
 // GlPolygonOffset:
 // gles.GlPolygonOffset{$,Float32,Float32}
-const gapic::Id& GlPolygonOffset::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0xb7, 0xd7, 0x84, 0x37, 0x1f, 0xf6, 0xbb, 0x8d, 0x90, 0x5c, 0xd7, 0x08, 0x6c, 0xac, 0x83, 0xbe, 0x7d, 0x3c, 0x66,  } };
-    return ID;
-}
 const schema::Entity& GlPolygonOffset::StaticSchema() {
     static schema::Entity entity {
-        GlPolygonOffset::StaticId(),
         "gles",
         "",
         "GlPolygonOffset",
@@ -16046,13 +13041,8 @@ const schema::Entity& GlPolygonOffset::StaticSchema() {
 
 // GlPopDebugGroup:
 // gles.GlPopDebugGroup{$}
-const gapic::Id& GlPopDebugGroup::StaticId() {
-    static gapic::Id ID{ { 0x5e, 0x3c, 0x9a, 0x6e, 0x42, 0x43, 0x6f, 0xca, 0x8f, 0xb0, 0x1d, 0xc6, 0x7c, 0xcd, 0xa0, 0x88, 0xd1, 0xaa, 0x78, 0x79,  } };
-    return ID;
-}
 const schema::Entity& GlPopDebugGroup::StaticSchema() {
     static schema::Entity entity {
-        GlPopDebugGroup::StaticId(),
         "gles",
         "",
         "GlPopDebugGroup",
@@ -16066,13 +13056,8 @@ const schema::Entity& GlPopDebugGroup::StaticSchema() {
 
 // GlPopDebugGroupKHR:
 // gles.GlPopDebugGroupKHR{$}
-const gapic::Id& GlPopDebugGroupKHR::StaticId() {
-    static gapic::Id ID{ { 0x55, 0xad, 0x18, 0x6b, 0x42, 0x96, 0x53, 0xf7, 0x08, 0x27, 0xed, 0x70, 0x09, 0xba, 0x5b, 0xe2, 0xdb, 0xd5, 0xec, 0x82,  } };
-    return ID;
-}
 const schema::Entity& GlPopDebugGroupKHR::StaticSchema() {
     static schema::Entity entity {
-        GlPopDebugGroupKHR::StaticId(),
         "gles",
         "",
         "GlPopDebugGroupKHR",
@@ -16086,13 +13071,8 @@ const schema::Entity& GlPopDebugGroupKHR::StaticSchema() {
 
 // GlPopGroupMarkerEXT:
 // gles.GlPopGroupMarkerEXT{$}
-const gapic::Id& GlPopGroupMarkerEXT::StaticId() {
-    static gapic::Id ID{ { 0xdb, 0x66, 0x34, 0xe1, 0x1e, 0xfb, 0xaf, 0x6e, 0xc3, 0x55, 0x3a, 0xf8, 0xf0, 0x55, 0x50, 0xaa, 0x85, 0xe3, 0x6c, 0x52,  } };
-    return ID;
-}
 const schema::Entity& GlPopGroupMarkerEXT::StaticSchema() {
     static schema::Entity entity {
-        GlPopGroupMarkerEXT::StaticId(),
         "gles",
         "",
         "GlPopGroupMarkerEXT",
@@ -16106,10 +13086,6 @@ const schema::Entity& GlPopGroupMarkerEXT::StaticSchema() {
 
 // GlPrimitiveBoundingBox:
 // gles.GlPrimitiveBoundingBox{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlPrimitiveBoundingBox::StaticId() {
-    static gapic::Id ID{ { 0x49, 0x39, 0xf3, 0x8e, 0x7a, 0x79, 0x36, 0x15, 0x93, 0x74, 0xc9, 0xca, 0x5c, 0x6a, 0x3f, 0x80, 0xdc, 0xac, 0xdd, 0x1b,  } };
-    return ID;
-}
 void GlPrimitiveBoundingBox::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Float32(this->mMinX);
@@ -16123,7 +13099,6 @@ void GlPrimitiveBoundingBox::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPrimitiveBoundingBox::StaticSchema() {
     static schema::Entity entity {
-        GlPrimitiveBoundingBox::StaticId(),
         "gles",
         "",
         "GlPrimitiveBoundingBox",
@@ -16145,10 +13120,6 @@ const schema::Entity& GlPrimitiveBoundingBox::StaticSchema() {
 
 // GlPrimitiveBoundingBoxEXT:
 // gles.GlPrimitiveBoundingBoxEXT{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlPrimitiveBoundingBoxEXT::StaticId() {
-    static gapic::Id ID{ { 0xf6, 0xe2, 0x7c, 0xc2, 0x47, 0x30, 0x13, 0x0a, 0xa2, 0x56, 0xf3, 0x4b, 0xf6, 0x87, 0xfc, 0x88, 0xda, 0x9a, 0xaf, 0xa1,  } };
-    return ID;
-}
 void GlPrimitiveBoundingBoxEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Float32(this->mMinX);
@@ -16162,7 +13133,6 @@ void GlPrimitiveBoundingBoxEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPrimitiveBoundingBoxEXT::StaticSchema() {
     static schema::Entity entity {
-        GlPrimitiveBoundingBoxEXT::StaticId(),
         "gles",
         "",
         "GlPrimitiveBoundingBoxEXT",
@@ -16184,10 +13154,6 @@ const schema::Entity& GlPrimitiveBoundingBoxEXT::StaticSchema() {
 
 // GlPrimitiveBoundingBoxOES:
 // gles.GlPrimitiveBoundingBoxOES{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlPrimitiveBoundingBoxOES::StaticId() {
-    static gapic::Id ID{ { 0x06, 0xa7, 0xe4, 0x23, 0xd5, 0xe5, 0x9b, 0xd8, 0x0b, 0x91, 0x00, 0x04, 0x96, 0x1b, 0x6f, 0xba, 0xe5, 0xb6, 0xe8, 0x84,  } };
-    return ID;
-}
 void GlPrimitiveBoundingBoxOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Float32(this->mMinX);
@@ -16201,7 +13167,6 @@ void GlPrimitiveBoundingBoxOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPrimitiveBoundingBoxOES::StaticSchema() {
     static schema::Entity entity {
-        GlPrimitiveBoundingBoxOES::StaticId(),
         "gles",
         "",
         "GlPrimitiveBoundingBoxOES",
@@ -16223,10 +13188,6 @@ const schema::Entity& GlPrimitiveBoundingBoxOES::StaticSchema() {
 
 // GlProgramBinary:
 // gles.GlProgramBinary{$,Uint32,Uint32,$,Int32}
-const gapic::Id& GlProgramBinary::StaticId() {
-    static gapic::Id ID{ { 0x05, 0x0f, 0x76, 0x47, 0xaf, 0x32, 0x02, 0xb8, 0x84, 0x36, 0xe6, 0x75, 0xfd, 0x12, 0x1b, 0x25, 0xb5, 0xf6, 0x4b, 0x7d,  } };
-    return ID;
-}
 void GlProgramBinary::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16236,7 +13197,6 @@ void GlProgramBinary::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramBinary::StaticSchema() {
     static schema::Entity entity {
-        GlProgramBinary::StaticId(),
         "gles",
         "",
         "GlProgramBinary",
@@ -16254,10 +13214,6 @@ const schema::Entity& GlProgramBinary::StaticSchema() {
 
 // GlProgramBinaryOES:
 // gles.GlProgramBinaryOES{$,Uint32,Uint32,$,Int32}
-const gapic::Id& GlProgramBinaryOES::StaticId() {
-    static gapic::Id ID{ { 0xc7, 0xd8, 0x79, 0xa1, 0xfa, 0xcf, 0x26, 0x05, 0x28, 0xd8, 0xc6, 0x5a, 0xe2, 0xe7, 0x27, 0x01, 0x52, 0xad, 0xf3, 0x4e,  } };
-    return ID;
-}
 void GlProgramBinaryOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16267,7 +13223,6 @@ void GlProgramBinaryOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramBinaryOES::StaticSchema() {
     static schema::Entity entity {
-        GlProgramBinaryOES::StaticId(),
         "gles",
         "",
         "GlProgramBinaryOES",
@@ -16285,10 +13240,6 @@ const schema::Entity& GlProgramBinaryOES::StaticSchema() {
 
 // GlProgramParameteri:
 // gles.GlProgramParameteri{$,Uint32,Uint32,Int32}
-const gapic::Id& GlProgramParameteri::StaticId() {
-    static gapic::Id ID{ { 0xd3, 0x43, 0x88, 0x9b, 0xef, 0x8c, 0xd9, 0xfa, 0xe3, 0x0f, 0xc0, 0x26, 0x11, 0x45, 0x0d, 0x50, 0x7a, 0xf0, 0x02, 0x31,  } };
-    return ID;
-}
 void GlProgramParameteri::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16297,7 +13248,6 @@ void GlProgramParameteri::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramParameteri::StaticSchema() {
     static schema::Entity entity {
-        GlProgramParameteri::StaticId(),
         "gles",
         "",
         "GlProgramParameteri",
@@ -16314,10 +13264,6 @@ const schema::Entity& GlProgramParameteri::StaticSchema() {
 
 // GlProgramParameteriEXT:
 // gles.GlProgramParameteriEXT{$,Uint32,Uint32,Int32}
-const gapic::Id& GlProgramParameteriEXT::StaticId() {
-    static gapic::Id ID{ { 0xe7, 0x22, 0xae, 0x46, 0x67, 0x88, 0x71, 0xba, 0xe1, 0x7f, 0x89, 0x7f, 0x32, 0x19, 0xd5, 0x26, 0x82, 0x9c, 0x55, 0x50,  } };
-    return ID;
-}
 void GlProgramParameteriEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16326,7 +13272,6 @@ void GlProgramParameteriEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramParameteriEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramParameteriEXT::StaticId(),
         "gles",
         "",
         "GlProgramParameteriEXT",
@@ -16343,10 +13288,6 @@ const schema::Entity& GlProgramParameteriEXT::StaticSchema() {
 
 // GlProgramPathFragmentInputGenNV:
 // gles.GlProgramPathFragmentInputGenNV{$,Uint32,Int32,Uint32,Int32,$}
-const gapic::Id& GlProgramPathFragmentInputGenNV::StaticId() {
-    static gapic::Id ID{ { 0x75, 0x53, 0x59, 0x85, 0xd1, 0x90, 0x72, 0x61, 0x7c, 0xe3, 0x5b, 0xc8, 0x95, 0x08, 0xec, 0x1b, 0x5f, 0xc0, 0x44, 0x4e,  } };
-    return ID;
-}
 void GlProgramPathFragmentInputGenNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16357,7 +13298,6 @@ void GlProgramPathFragmentInputGenNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramPathFragmentInputGenNV::StaticSchema() {
     static schema::Entity entity {
-        GlProgramPathFragmentInputGenNV::StaticId(),
         "gles",
         "",
         "GlProgramPathFragmentInputGenNV",
@@ -16376,10 +13316,6 @@ const schema::Entity& GlProgramPathFragmentInputGenNV::StaticSchema() {
 
 // GlProgramUniform1f:
 // gles.GlProgramUniform1f{$,Uint32,Int32,Float32}
-const gapic::Id& GlProgramUniform1f::StaticId() {
-    static gapic::Id ID{ { 0x90, 0x98, 0x34, 0xa7, 0x69, 0xb8, 0x9b, 0x67, 0x7e, 0x9c, 0xfe, 0x5d, 0xc7, 0xef, 0x50, 0x4d, 0xd0, 0xd6, 0x65, 0x95,  } };
-    return ID;
-}
 void GlProgramUniform1f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16388,7 +13324,6 @@ void GlProgramUniform1f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1f::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1f::StaticId(),
         "gles",
         "",
         "GlProgramUniform1f",
@@ -16405,10 +13340,6 @@ const schema::Entity& GlProgramUniform1f::StaticSchema() {
 
 // GlProgramUniform1fEXT:
 // gles.GlProgramUniform1fEXT{$,Uint32,Int32,Float32}
-const gapic::Id& GlProgramUniform1fEXT::StaticId() {
-    static gapic::Id ID{ { 0xa1, 0xf3, 0x48, 0x76, 0x74, 0x7e, 0xe1, 0x68, 0xb0, 0x3f, 0xda, 0x22, 0xbf, 0xa8, 0xa3, 0x21, 0x75, 0xf9, 0xf5, 0x39,  } };
-    return ID;
-}
 void GlProgramUniform1fEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16417,7 +13348,6 @@ void GlProgramUniform1fEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1fEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1fEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1fEXT",
@@ -16434,10 +13364,6 @@ const schema::Entity& GlProgramUniform1fEXT::StaticSchema() {
 
 // GlProgramUniform1fv:
 // gles.GlProgramUniform1fv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1fv::StaticId() {
-    static gapic::Id ID{ { 0x6c, 0x37, 0x20, 0xa0, 0x14, 0xc6, 0xc9, 0x96, 0xba, 0x6e, 0x96, 0xfe, 0x14, 0x01, 0xa0, 0x6f, 0x0d, 0xe7, 0x8f, 0x34,  } };
-    return ID;
-}
 void GlProgramUniform1fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16447,7 +13373,6 @@ void GlProgramUniform1fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1fv::StaticId(),
         "gles",
         "",
         "GlProgramUniform1fv",
@@ -16465,10 +13390,6 @@ const schema::Entity& GlProgramUniform1fv::StaticSchema() {
 
 // GlProgramUniform1fvEXT:
 // gles.GlProgramUniform1fvEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x14, 0xa0, 0x86, 0xcf, 0xc0, 0x38, 0x8a, 0x46, 0x22, 0x2d, 0xb7, 0x8b, 0x02, 0xac, 0x5f, 0x64, 0x35, 0xef, 0x0a, 0x6e,  } };
-    return ID;
-}
 void GlProgramUniform1fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16478,7 +13399,6 @@ void GlProgramUniform1fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1fvEXT",
@@ -16496,10 +13416,6 @@ const schema::Entity& GlProgramUniform1fvEXT::StaticSchema() {
 
 // GlProgramUniform1i:
 // gles.GlProgramUniform1i{$,Uint32,Int32,Int32}
-const gapic::Id& GlProgramUniform1i::StaticId() {
-    static gapic::Id ID{ { 0xae, 0x78, 0x41, 0xea, 0x59, 0x54, 0x55, 0x40, 0x10, 0x11, 0x27, 0xe6, 0x43, 0x77, 0x26, 0xe5, 0x9e, 0xa2, 0x45, 0x06,  } };
-    return ID;
-}
 void GlProgramUniform1i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16508,7 +13424,6 @@ void GlProgramUniform1i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1i::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1i::StaticId(),
         "gles",
         "",
         "GlProgramUniform1i",
@@ -16525,10 +13440,6 @@ const schema::Entity& GlProgramUniform1i::StaticSchema() {
 
 // GlProgramUniform1iEXT:
 // gles.GlProgramUniform1iEXT{$,Uint32,Int32,Int32}
-const gapic::Id& GlProgramUniform1iEXT::StaticId() {
-    static gapic::Id ID{ { 0x80, 0x3a, 0x0f, 0x95, 0x00, 0xe9, 0x66, 0xdd, 0x28, 0x52, 0x26, 0x95, 0x70, 0x10, 0x2b, 0x5c, 0x16, 0xb7, 0x46, 0xaf,  } };
-    return ID;
-}
 void GlProgramUniform1iEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16537,7 +13448,6 @@ void GlProgramUniform1iEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1iEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1iEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1iEXT",
@@ -16554,10 +13464,6 @@ const schema::Entity& GlProgramUniform1iEXT::StaticSchema() {
 
 // GlProgramUniform1iv:
 // gles.GlProgramUniform1iv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1iv::StaticId() {
-    static gapic::Id ID{ { 0x99, 0x6c, 0x16, 0xa9, 0x3f, 0xbb, 0x94, 0x44, 0xd2, 0x52, 0xda, 0xbf, 0xa6, 0x0c, 0x9f, 0x45, 0x39, 0x0e, 0x48, 0x95,  } };
-    return ID;
-}
 void GlProgramUniform1iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16567,7 +13473,6 @@ void GlProgramUniform1iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1iv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1iv::StaticId(),
         "gles",
         "",
         "GlProgramUniform1iv",
@@ -16585,10 +13490,6 @@ const schema::Entity& GlProgramUniform1iv::StaticSchema() {
 
 // GlProgramUniform1ivEXT:
 // gles.GlProgramUniform1ivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1ivEXT::StaticId() {
-    static gapic::Id ID{ { 0x76, 0xe4, 0x74, 0xae, 0xc2, 0x5d, 0x4b, 0x03, 0x20, 0x1a, 0xbd, 0x96, 0x33, 0x9d, 0xf4, 0x1b, 0x16, 0xeb, 0x49, 0x5e,  } };
-    return ID;
-}
 void GlProgramUniform1ivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16598,7 +13499,6 @@ void GlProgramUniform1ivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1ivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1ivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1ivEXT",
@@ -16616,10 +13516,6 @@ const schema::Entity& GlProgramUniform1ivEXT::StaticSchema() {
 
 // GlProgramUniform1ui:
 // gles.GlProgramUniform1ui{$,Uint32,Int32,Uint32}
-const gapic::Id& GlProgramUniform1ui::StaticId() {
-    static gapic::Id ID{ { 0xe9, 0xac, 0xc4, 0x3e, 0x5a, 0x94, 0x34, 0xba, 0x53, 0xb5, 0xa9, 0x02, 0x95, 0x0a, 0x44, 0xd4, 0x4a, 0xf5, 0xb3, 0x80,  } };
-    return ID;
-}
 void GlProgramUniform1ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16628,7 +13524,6 @@ void GlProgramUniform1ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1ui::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1ui::StaticId(),
         "gles",
         "",
         "GlProgramUniform1ui",
@@ -16645,10 +13540,6 @@ const schema::Entity& GlProgramUniform1ui::StaticSchema() {
 
 // GlProgramUniform1uiEXT:
 // gles.GlProgramUniform1uiEXT{$,Uint32,Int32,Uint32}
-const gapic::Id& GlProgramUniform1uiEXT::StaticId() {
-    static gapic::Id ID{ { 0xbe, 0x53, 0xcd, 0xe8, 0xce, 0x81, 0x0a, 0x19, 0xf7, 0x34, 0x3c, 0x47, 0x0a, 0x61, 0xa3, 0x86, 0xf7, 0xbf, 0xfd, 0x75,  } };
-    return ID;
-}
 void GlProgramUniform1uiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16657,7 +13548,6 @@ void GlProgramUniform1uiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1uiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1uiEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1uiEXT",
@@ -16674,10 +13564,6 @@ const schema::Entity& GlProgramUniform1uiEXT::StaticSchema() {
 
 // GlProgramUniform1uiv:
 // gles.GlProgramUniform1uiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1uiv::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x44, 0xe6, 0xf8, 0x68, 0x9f, 0x79, 0x1d, 0xfe, 0xb9, 0x06, 0xd8, 0x0a, 0x62, 0x7d, 0xe7, 0xbd, 0x43, 0x6f, 0x4f,  } };
-    return ID;
-}
 void GlProgramUniform1uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16687,7 +13573,6 @@ void GlProgramUniform1uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1uiv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1uiv::StaticId(),
         "gles",
         "",
         "GlProgramUniform1uiv",
@@ -16705,10 +13590,6 @@ const schema::Entity& GlProgramUniform1uiv::StaticSchema() {
 
 // GlProgramUniform1uivEXT:
 // gles.GlProgramUniform1uivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform1uivEXT::StaticId() {
-    static gapic::Id ID{ { 0x1f, 0x9e, 0x20, 0x2d, 0x6e, 0x34, 0x24, 0xa9, 0xe7, 0x27, 0x72, 0x3e, 0x8f, 0x0f, 0x5e, 0x98, 0xe4, 0x13, 0x23, 0x6a,  } };
-    return ID;
-}
 void GlProgramUniform1uivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16718,7 +13599,6 @@ void GlProgramUniform1uivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform1uivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform1uivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform1uivEXT",
@@ -16736,10 +13616,6 @@ const schema::Entity& GlProgramUniform1uivEXT::StaticSchema() {
 
 // GlProgramUniform2f:
 // gles.GlProgramUniform2f{$,Uint32,Int32,Float32,Float32}
-const gapic::Id& GlProgramUniform2f::StaticId() {
-    static gapic::Id ID{ { 0x2e, 0xb9, 0x69, 0x86, 0x51, 0x27, 0x8d, 0xd7, 0xb8, 0x54, 0x63, 0xa5, 0x34, 0x9e, 0x12, 0xbf, 0x0c, 0xb5, 0xc1, 0xe1,  } };
-    return ID;
-}
 void GlProgramUniform2f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16749,7 +13625,6 @@ void GlProgramUniform2f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2f::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2f::StaticId(),
         "gles",
         "",
         "GlProgramUniform2f",
@@ -16767,10 +13642,6 @@ const schema::Entity& GlProgramUniform2f::StaticSchema() {
 
 // GlProgramUniform2fEXT:
 // gles.GlProgramUniform2fEXT{$,Uint32,Int32,Float32,Float32}
-const gapic::Id& GlProgramUniform2fEXT::StaticId() {
-    static gapic::Id ID{ { 0x6e, 0xf4, 0x3a, 0x36, 0x5d, 0x69, 0x85, 0x00, 0x19, 0xe3, 0x01, 0x5b, 0xb2, 0x35, 0xf5, 0x70, 0x2b, 0x86, 0xc1, 0x95,  } };
-    return ID;
-}
 void GlProgramUniform2fEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16780,7 +13651,6 @@ void GlProgramUniform2fEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2fEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2fEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2fEXT",
@@ -16798,10 +13668,6 @@ const schema::Entity& GlProgramUniform2fEXT::StaticSchema() {
 
 // GlProgramUniform2fv:
 // gles.GlProgramUniform2fv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2fv::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0x26, 0x68, 0x1d, 0xc9, 0x1c, 0x96, 0x94, 0xbf, 0x4a, 0x32, 0xf1, 0x00, 0x2b, 0xe1, 0x54, 0x24, 0x32, 0x32, 0x16,  } };
-    return ID;
-}
 void GlProgramUniform2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16811,7 +13677,6 @@ void GlProgramUniform2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2fv::StaticId(),
         "gles",
         "",
         "GlProgramUniform2fv",
@@ -16829,10 +13694,6 @@ const schema::Entity& GlProgramUniform2fv::StaticSchema() {
 
 // GlProgramUniform2fvEXT:
 // gles.GlProgramUniform2fvEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x77, 0x28, 0x4c, 0x93, 0xac, 0x0b, 0x82, 0x94, 0xc0, 0x0b, 0x82, 0x98, 0xca, 0x98, 0x8f, 0xbd, 0xc1, 0x8d, 0x8f,  } };
-    return ID;
-}
 void GlProgramUniform2fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16842,7 +13703,6 @@ void GlProgramUniform2fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2fvEXT",
@@ -16860,10 +13720,6 @@ const schema::Entity& GlProgramUniform2fvEXT::StaticSchema() {
 
 // GlProgramUniform2i:
 // gles.GlProgramUniform2i{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform2i::StaticId() {
-    static gapic::Id ID{ { 0x91, 0xb1, 0x1d, 0x4e, 0xe8, 0x87, 0x30, 0x94, 0x2b, 0x0d, 0x0f, 0x22, 0x78, 0x2a, 0x67, 0x4b, 0x0f, 0x55, 0xf8, 0xfc,  } };
-    return ID;
-}
 void GlProgramUniform2i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16873,7 +13729,6 @@ void GlProgramUniform2i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2i::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2i::StaticId(),
         "gles",
         "",
         "GlProgramUniform2i",
@@ -16891,10 +13746,6 @@ const schema::Entity& GlProgramUniform2i::StaticSchema() {
 
 // GlProgramUniform2iEXT:
 // gles.GlProgramUniform2iEXT{$,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform2iEXT::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0xa8, 0x53, 0xef, 0x06, 0xa9, 0xeb, 0x1e, 0x1a, 0xda, 0xde, 0xe9, 0xaa, 0x30, 0x4d, 0xc6, 0x3d, 0x62, 0x96, 0x77,  } };
-    return ID;
-}
 void GlProgramUniform2iEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16904,7 +13755,6 @@ void GlProgramUniform2iEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2iEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2iEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2iEXT",
@@ -16922,10 +13772,6 @@ const schema::Entity& GlProgramUniform2iEXT::StaticSchema() {
 
 // GlProgramUniform2iv:
 // gles.GlProgramUniform2iv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2iv::StaticId() {
-    static gapic::Id ID{ { 0xed, 0xc7, 0x69, 0x22, 0x93, 0xc5, 0xff, 0x56, 0x06, 0xb7, 0x59, 0xe6, 0xb0, 0x68, 0x8a, 0x9e, 0xc2, 0x5e, 0xd2, 0xbe,  } };
-    return ID;
-}
 void GlProgramUniform2iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16935,7 +13781,6 @@ void GlProgramUniform2iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2iv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2iv::StaticId(),
         "gles",
         "",
         "GlProgramUniform2iv",
@@ -16953,10 +13798,6 @@ const schema::Entity& GlProgramUniform2iv::StaticSchema() {
 
 // GlProgramUniform2ivEXT:
 // gles.GlProgramUniform2ivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2ivEXT::StaticId() {
-    static gapic::Id ID{ { 0x8b, 0xcc, 0xa5, 0x0b, 0xe2, 0x79, 0x26, 0x50, 0x20, 0xba, 0x9d, 0x0b, 0x58, 0x34, 0x79, 0xe9, 0x85, 0x35, 0x2a, 0xee,  } };
-    return ID;
-}
 void GlProgramUniform2ivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16966,7 +13807,6 @@ void GlProgramUniform2ivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2ivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2ivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2ivEXT",
@@ -16984,10 +13824,6 @@ const schema::Entity& GlProgramUniform2ivEXT::StaticSchema() {
 
 // GlProgramUniform2ui:
 // gles.GlProgramUniform2ui{$,Uint32,Int32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform2ui::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0x03, 0xbc, 0x81, 0x3d, 0xf5, 0xe2, 0xe8, 0xba, 0x05, 0xa1, 0x9a, 0x7a, 0x40, 0x7f, 0x60, 0x6a, 0xc8, 0xaa, 0xc9,  } };
-    return ID;
-}
 void GlProgramUniform2ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -16997,7 +13833,6 @@ void GlProgramUniform2ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2ui::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2ui::StaticId(),
         "gles",
         "",
         "GlProgramUniform2ui",
@@ -17015,10 +13850,6 @@ const schema::Entity& GlProgramUniform2ui::StaticSchema() {
 
 // GlProgramUniform2uiEXT:
 // gles.GlProgramUniform2uiEXT{$,Uint32,Int32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform2uiEXT::StaticId() {
-    static gapic::Id ID{ { 0x9e, 0x7e, 0x61, 0x98, 0xdf, 0x72, 0xb5, 0x75, 0xe4, 0x17, 0xaa, 0xc1, 0xa5, 0x29, 0x59, 0x5f, 0x72, 0x2f, 0x8c, 0xbf,  } };
-    return ID;
-}
 void GlProgramUniform2uiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17028,7 +13859,6 @@ void GlProgramUniform2uiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2uiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2uiEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2uiEXT",
@@ -17046,10 +13876,6 @@ const schema::Entity& GlProgramUniform2uiEXT::StaticSchema() {
 
 // GlProgramUniform2uiv:
 // gles.GlProgramUniform2uiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2uiv::StaticId() {
-    static gapic::Id ID{ { 0x25, 0xf2, 0x76, 0x18, 0x71, 0x9c, 0x57, 0x0f, 0x3e, 0x8a, 0x54, 0xb1, 0x91, 0xb0, 0xb4, 0x3f, 0xf3, 0x3f, 0xd6, 0x0f,  } };
-    return ID;
-}
 void GlProgramUniform2uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17059,7 +13885,6 @@ void GlProgramUniform2uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2uiv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2uiv::StaticId(),
         "gles",
         "",
         "GlProgramUniform2uiv",
@@ -17077,10 +13902,6 @@ const schema::Entity& GlProgramUniform2uiv::StaticSchema() {
 
 // GlProgramUniform2uivEXT:
 // gles.GlProgramUniform2uivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform2uivEXT::StaticId() {
-    static gapic::Id ID{ { 0x7d, 0xf8, 0xa7, 0x6b, 0x70, 0xdb, 0x6e, 0xe0, 0xf4, 0x9b, 0x91, 0x1e, 0x47, 0xba, 0x17, 0xf7, 0x2e, 0xf4, 0xd9, 0x78,  } };
-    return ID;
-}
 void GlProgramUniform2uivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17090,7 +13911,6 @@ void GlProgramUniform2uivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform2uivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform2uivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform2uivEXT",
@@ -17108,10 +13928,6 @@ const schema::Entity& GlProgramUniform2uivEXT::StaticSchema() {
 
 // GlProgramUniform3f:
 // gles.GlProgramUniform3f{$,Uint32,Int32,Float32,Float32,Float32}
-const gapic::Id& GlProgramUniform3f::StaticId() {
-    static gapic::Id ID{ { 0x9b, 0xda, 0x7d, 0xa1, 0xda, 0x3f, 0x33, 0x89, 0xd0, 0xbe, 0x31, 0x92, 0x73, 0x77, 0xa7, 0x86, 0xa2, 0x9c, 0x01, 0x7f,  } };
-    return ID;
-}
 void GlProgramUniform3f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17122,7 +13938,6 @@ void GlProgramUniform3f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3f::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3f::StaticId(),
         "gles",
         "",
         "GlProgramUniform3f",
@@ -17141,10 +13956,6 @@ const schema::Entity& GlProgramUniform3f::StaticSchema() {
 
 // GlProgramUniform3fEXT:
 // gles.GlProgramUniform3fEXT{$,Uint32,Int32,Float32,Float32,Float32}
-const gapic::Id& GlProgramUniform3fEXT::StaticId() {
-    static gapic::Id ID{ { 0xd8, 0x6b, 0x6e, 0xe6, 0x61, 0x5a, 0xf7, 0x5e, 0xfc, 0x2d, 0xe8, 0x65, 0xe2, 0x63, 0x16, 0x14, 0xcd, 0x6f, 0x62, 0x91,  } };
-    return ID;
-}
 void GlProgramUniform3fEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17155,7 +13966,6 @@ void GlProgramUniform3fEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3fEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3fEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3fEXT",
@@ -17174,10 +13984,6 @@ const schema::Entity& GlProgramUniform3fEXT::StaticSchema() {
 
 // GlProgramUniform3fv:
 // gles.GlProgramUniform3fv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3fv::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0x80, 0x51, 0x80, 0x3d, 0xe0, 0x11, 0xba, 0xa7, 0x39, 0x29, 0x52, 0xd8, 0xc9, 0x73, 0xaf, 0x78, 0xff, 0xb7, 0xff,  } };
-    return ID;
-}
 void GlProgramUniform3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17187,7 +13993,6 @@ void GlProgramUniform3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3fv::StaticId(),
         "gles",
         "",
         "GlProgramUniform3fv",
@@ -17205,10 +14010,6 @@ const schema::Entity& GlProgramUniform3fv::StaticSchema() {
 
 // GlProgramUniform3fvEXT:
 // gles.GlProgramUniform3fvEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xaa, 0xd1, 0x7f, 0x39, 0x8c, 0x50, 0x1b, 0x5d, 0x8d, 0x66, 0x74, 0x54, 0x09, 0x3f, 0x09, 0x5b, 0xee, 0x47, 0x43, 0x46,  } };
-    return ID;
-}
 void GlProgramUniform3fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17218,7 +14019,6 @@ void GlProgramUniform3fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3fvEXT",
@@ -17236,10 +14036,6 @@ const schema::Entity& GlProgramUniform3fvEXT::StaticSchema() {
 
 // GlProgramUniform3i:
 // gles.GlProgramUniform3i{$,Uint32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform3i::StaticId() {
-    static gapic::Id ID{ { 0x59, 0x9a, 0x1b, 0x40, 0xd2, 0x50, 0x5e, 0xbf, 0xc6, 0x7f, 0x43, 0xdf, 0x2e, 0x77, 0x41, 0x85, 0x45, 0x28, 0x24, 0xb5,  } };
-    return ID;
-}
 void GlProgramUniform3i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17250,7 +14046,6 @@ void GlProgramUniform3i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3i::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3i::StaticId(),
         "gles",
         "",
         "GlProgramUniform3i",
@@ -17269,10 +14064,6 @@ const schema::Entity& GlProgramUniform3i::StaticSchema() {
 
 // GlProgramUniform3iEXT:
 // gles.GlProgramUniform3iEXT{$,Uint32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform3iEXT::StaticId() {
-    static gapic::Id ID{ { 0x42, 0x16, 0xec, 0x4c, 0x9f, 0x87, 0x18, 0xbc, 0xd0, 0x36, 0xfa, 0xfb, 0x5e, 0xe1, 0xe8, 0x97, 0x16, 0x1c, 0x2f, 0xf0,  } };
-    return ID;
-}
 void GlProgramUniform3iEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17283,7 +14074,6 @@ void GlProgramUniform3iEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3iEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3iEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3iEXT",
@@ -17302,10 +14092,6 @@ const schema::Entity& GlProgramUniform3iEXT::StaticSchema() {
 
 // GlProgramUniform3iv:
 // gles.GlProgramUniform3iv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3iv::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xd3, 0x65, 0xe3, 0x57, 0x84, 0xff, 0x3b, 0xce, 0xec, 0x05, 0x75, 0xac, 0x0a, 0xcb, 0xe5, 0x9a, 0x33, 0xc4, 0xf1,  } };
-    return ID;
-}
 void GlProgramUniform3iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17315,7 +14101,6 @@ void GlProgramUniform3iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3iv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3iv::StaticId(),
         "gles",
         "",
         "GlProgramUniform3iv",
@@ -17333,10 +14118,6 @@ const schema::Entity& GlProgramUniform3iv::StaticSchema() {
 
 // GlProgramUniform3ivEXT:
 // gles.GlProgramUniform3ivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3ivEXT::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0x63, 0xee, 0x2b, 0x6c, 0xf0, 0x9f, 0x2f, 0x0e, 0x64, 0x1c, 0xe3, 0xe3, 0x67, 0x54, 0xf2, 0x20, 0xe0, 0x0d, 0x22,  } };
-    return ID;
-}
 void GlProgramUniform3ivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17346,7 +14127,6 @@ void GlProgramUniform3ivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3ivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3ivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3ivEXT",
@@ -17364,10 +14144,6 @@ const schema::Entity& GlProgramUniform3ivEXT::StaticSchema() {
 
 // GlProgramUniform3ui:
 // gles.GlProgramUniform3ui{$,Uint32,Int32,Uint32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform3ui::StaticId() {
-    static gapic::Id ID{ { 0x79, 0xf5, 0x36, 0x9c, 0xb9, 0xce, 0xef, 0x60, 0x4c, 0x74, 0xc5, 0x87, 0x04, 0x10, 0x22, 0xe2, 0x6a, 0xfb, 0x4d, 0xa2,  } };
-    return ID;
-}
 void GlProgramUniform3ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17378,7 +14154,6 @@ void GlProgramUniform3ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3ui::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3ui::StaticId(),
         "gles",
         "",
         "GlProgramUniform3ui",
@@ -17397,10 +14172,6 @@ const schema::Entity& GlProgramUniform3ui::StaticSchema() {
 
 // GlProgramUniform3uiEXT:
 // gles.GlProgramUniform3uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform3uiEXT::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0xe9, 0x08, 0xa6, 0xa6, 0xfc, 0x48, 0x63, 0x6b, 0xa5, 0xda, 0xc0, 0x16, 0x49, 0x70, 0x28, 0x36, 0x8c, 0x22, 0x59,  } };
-    return ID;
-}
 void GlProgramUniform3uiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17411,7 +14182,6 @@ void GlProgramUniform3uiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3uiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3uiEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3uiEXT",
@@ -17430,10 +14200,6 @@ const schema::Entity& GlProgramUniform3uiEXT::StaticSchema() {
 
 // GlProgramUniform3uiv:
 // gles.GlProgramUniform3uiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3uiv::StaticId() {
-    static gapic::Id ID{ { 0xe6, 0xcd, 0x6b, 0xc1, 0x0b, 0xa0, 0x3c, 0xca, 0xec, 0x46, 0xdf, 0x88, 0x23, 0xb7, 0xb7, 0xb1, 0x83, 0xdc, 0x3d, 0x89,  } };
-    return ID;
-}
 void GlProgramUniform3uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17443,7 +14209,6 @@ void GlProgramUniform3uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3uiv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3uiv::StaticId(),
         "gles",
         "",
         "GlProgramUniform3uiv",
@@ -17461,10 +14226,6 @@ const schema::Entity& GlProgramUniform3uiv::StaticSchema() {
 
 // GlProgramUniform3uivEXT:
 // gles.GlProgramUniform3uivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform3uivEXT::StaticId() {
-    static gapic::Id ID{ { 0x2a, 0xdf, 0xa6, 0x2d, 0x69, 0xd5, 0x39, 0x79, 0xc3, 0xf9, 0xe5, 0xe3, 0x59, 0x6d, 0x6c, 0xbc, 0x99, 0xb4, 0x33, 0x54,  } };
-    return ID;
-}
 void GlProgramUniform3uivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17474,7 +14235,6 @@ void GlProgramUniform3uivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform3uivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform3uivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform3uivEXT",
@@ -17492,10 +14252,6 @@ const schema::Entity& GlProgramUniform3uivEXT::StaticSchema() {
 
 // GlProgramUniform4f:
 // gles.GlProgramUniform4f{$,Uint32,Int32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlProgramUniform4f::StaticId() {
-    static gapic::Id ID{ { 0x77, 0xd0, 0xd0, 0x76, 0xb6, 0x90, 0x3e, 0xab, 0xaf, 0xdf, 0x70, 0x27, 0xec, 0xe2, 0xf0, 0xbf, 0x01, 0x3c, 0x62, 0xc7,  } };
-    return ID;
-}
 void GlProgramUniform4f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17507,7 +14263,6 @@ void GlProgramUniform4f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4f::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4f::StaticId(),
         "gles",
         "",
         "GlProgramUniform4f",
@@ -17527,10 +14282,6 @@ const schema::Entity& GlProgramUniform4f::StaticSchema() {
 
 // GlProgramUniform4fEXT:
 // gles.GlProgramUniform4fEXT{$,Uint32,Int32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlProgramUniform4fEXT::StaticId() {
-    static gapic::Id ID{ { 0x11, 0x9a, 0x88, 0xbb, 0xd7, 0x1a, 0x99, 0x2d, 0xa6, 0x37, 0xeb, 0xdd, 0xbe, 0xa6, 0x24, 0x19, 0x4c, 0x34, 0x2d, 0x5d,  } };
-    return ID;
-}
 void GlProgramUniform4fEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17542,7 +14293,6 @@ void GlProgramUniform4fEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4fEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4fEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4fEXT",
@@ -17562,10 +14312,6 @@ const schema::Entity& GlProgramUniform4fEXT::StaticSchema() {
 
 // GlProgramUniform4fv:
 // gles.GlProgramUniform4fv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4fv::StaticId() {
-    static gapic::Id ID{ { 0x81, 0xa0, 0x9d, 0xe5, 0x74, 0xb5, 0xd2, 0xc4, 0xa4, 0xe7, 0x4b, 0xcc, 0xc4, 0x54, 0x86, 0x6e, 0x4a, 0x7d, 0xed, 0x10,  } };
-    return ID;
-}
 void GlProgramUniform4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17575,7 +14321,6 @@ void GlProgramUniform4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4fv::StaticId(),
         "gles",
         "",
         "GlProgramUniform4fv",
@@ -17593,10 +14338,6 @@ const schema::Entity& GlProgramUniform4fv::StaticSchema() {
 
 // GlProgramUniform4fvEXT:
 // gles.GlProgramUniform4fvEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x7d, 0xf3, 0xd8, 0xb6, 0xc4, 0x8f, 0x16, 0x8a, 0xaa, 0xe9, 0x9e, 0x9d, 0xbe, 0x87, 0x68, 0xc4, 0x92, 0xcd, 0x9e, 0x2c,  } };
-    return ID;
-}
 void GlProgramUniform4fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17606,7 +14347,6 @@ void GlProgramUniform4fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4fvEXT",
@@ -17624,10 +14364,6 @@ const schema::Entity& GlProgramUniform4fvEXT::StaticSchema() {
 
 // GlProgramUniform4i:
 // gles.GlProgramUniform4i{$,Uint32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform4i::StaticId() {
-    static gapic::Id ID{ { 0x11, 0x21, 0xb7, 0xf2, 0xfe, 0xb2, 0x9f, 0x8a, 0x5e, 0xc1, 0x71, 0x4d, 0xa1, 0x29, 0xb1, 0xed, 0xf1, 0x62, 0x0d, 0x92,  } };
-    return ID;
-}
 void GlProgramUniform4i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17639,7 +14375,6 @@ void GlProgramUniform4i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4i::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4i::StaticId(),
         "gles",
         "",
         "GlProgramUniform4i",
@@ -17659,10 +14394,6 @@ const schema::Entity& GlProgramUniform4i::StaticSchema() {
 
 // GlProgramUniform4iEXT:
 // gles.GlProgramUniform4iEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlProgramUniform4iEXT::StaticId() {
-    static gapic::Id ID{ { 0x55, 0x79, 0xb5, 0xf1, 0xb0, 0xb6, 0xda, 0x36, 0x6a, 0x1f, 0xbc, 0x04, 0xcf, 0xd5, 0xbe, 0x31, 0x7a, 0xfa, 0x02, 0xba,  } };
-    return ID;
-}
 void GlProgramUniform4iEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17674,7 +14405,6 @@ void GlProgramUniform4iEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4iEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4iEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4iEXT",
@@ -17694,10 +14424,6 @@ const schema::Entity& GlProgramUniform4iEXT::StaticSchema() {
 
 // GlProgramUniform4iv:
 // gles.GlProgramUniform4iv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4iv::StaticId() {
-    static gapic::Id ID{ { 0xee, 0x06, 0x71, 0xa3, 0xe7, 0x60, 0xbb, 0x52, 0x79, 0x96, 0x3a, 0xd8, 0x43, 0x09, 0x64, 0xad, 0x0c, 0x38, 0x1c, 0x7a,  } };
-    return ID;
-}
 void GlProgramUniform4iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17707,7 +14433,6 @@ void GlProgramUniform4iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4iv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4iv::StaticId(),
         "gles",
         "",
         "GlProgramUniform4iv",
@@ -17725,10 +14450,6 @@ const schema::Entity& GlProgramUniform4iv::StaticSchema() {
 
 // GlProgramUniform4ivEXT:
 // gles.GlProgramUniform4ivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4ivEXT::StaticId() {
-    static gapic::Id ID{ { 0xbc, 0xe0, 0x57, 0x42, 0x9b, 0x94, 0xbe, 0x68, 0x77, 0xe1, 0x6e, 0xff, 0xd2, 0x76, 0xdb, 0xb5, 0x79, 0x91, 0x8e, 0xa6,  } };
-    return ID;
-}
 void GlProgramUniform4ivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17738,7 +14459,6 @@ void GlProgramUniform4ivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4ivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4ivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4ivEXT",
@@ -17756,10 +14476,6 @@ const schema::Entity& GlProgramUniform4ivEXT::StaticSchema() {
 
 // GlProgramUniform4ui:
 // gles.GlProgramUniform4ui{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform4ui::StaticId() {
-    static gapic::Id ID{ { 0xa9, 0x65, 0xf4, 0x2f, 0xc6, 0x0f, 0xdf, 0xfa, 0x58, 0xde, 0x80, 0xf1, 0x8c, 0x42, 0x9a, 0xb4, 0xc8, 0x7d, 0x81, 0xf9,  } };
-    return ID;
-}
 void GlProgramUniform4ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17771,7 +14487,6 @@ void GlProgramUniform4ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4ui::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4ui::StaticId(),
         "gles",
         "",
         "GlProgramUniform4ui",
@@ -17791,10 +14506,6 @@ const schema::Entity& GlProgramUniform4ui::StaticSchema() {
 
 // GlProgramUniform4uiEXT:
 // gles.GlProgramUniform4uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlProgramUniform4uiEXT::StaticId() {
-    static gapic::Id ID{ { 0xb0, 0xa0, 0xe5, 0x53, 0x0c, 0x21, 0xef, 0xd2, 0x76, 0x7f, 0x1d, 0x3b, 0x5e, 0x25, 0x5a, 0x32, 0x2a, 0x48, 0x0e, 0x0e,  } };
-    return ID;
-}
 void GlProgramUniform4uiEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17806,7 +14517,6 @@ void GlProgramUniform4uiEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4uiEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4uiEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4uiEXT",
@@ -17826,10 +14536,6 @@ const schema::Entity& GlProgramUniform4uiEXT::StaticSchema() {
 
 // GlProgramUniform4uiv:
 // gles.GlProgramUniform4uiv{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4uiv::StaticId() {
-    static gapic::Id ID{ { 0x37, 0x81, 0xf9, 0x48, 0xa5, 0x70, 0x07, 0x7f, 0x00, 0xe0, 0x44, 0x6b, 0x40, 0xce, 0x25, 0x3a, 0xd1, 0x64, 0x4e, 0x9b,  } };
-    return ID;
-}
 void GlProgramUniform4uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17839,7 +14545,6 @@ void GlProgramUniform4uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4uiv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4uiv::StaticId(),
         "gles",
         "",
         "GlProgramUniform4uiv",
@@ -17857,10 +14562,6 @@ const schema::Entity& GlProgramUniform4uiv::StaticSchema() {
 
 // GlProgramUniform4uivEXT:
 // gles.GlProgramUniform4uivEXT{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniform4uivEXT::StaticId() {
-    static gapic::Id ID{ { 0xc7, 0x14, 0x6e, 0xfb, 0x0a, 0x72, 0xa0, 0x97, 0x8d, 0x4d, 0xd1, 0x56, 0x42, 0x2b, 0x2a, 0x9a, 0xd4, 0x42, 0x63, 0xb1,  } };
-    return ID;
-}
 void GlProgramUniform4uivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17870,7 +14571,6 @@ void GlProgramUniform4uivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniform4uivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniform4uivEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniform4uivEXT",
@@ -17888,10 +14588,6 @@ const schema::Entity& GlProgramUniform4uivEXT::StaticSchema() {
 
 // GlProgramUniformHandleui64NV:
 // gles.GlProgramUniformHandleui64NV{$,Uint32,Int32,Uint64}
-const gapic::Id& GlProgramUniformHandleui64NV::StaticId() {
-    static gapic::Id ID{ { 0x31, 0xd0, 0xe8, 0xfc, 0x99, 0xc2, 0x52, 0x0f, 0x2c, 0x44, 0xba, 0x11, 0xfd, 0x71, 0xbb, 0x4e, 0x7e, 0x79, 0x20, 0x6f,  } };
-    return ID;
-}
 void GlProgramUniformHandleui64NV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17900,7 +14596,6 @@ void GlProgramUniformHandleui64NV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformHandleui64NV::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformHandleui64NV::StaticId(),
         "gles",
         "",
         "GlProgramUniformHandleui64NV",
@@ -17917,10 +14612,6 @@ const schema::Entity& GlProgramUniformHandleui64NV::StaticSchema() {
 
 // GlProgramUniformHandleui64vNV:
 // gles.GlProgramUniformHandleui64vNV{$,Uint32,Int32,Int32,$}
-const gapic::Id& GlProgramUniformHandleui64vNV::StaticId() {
-    static gapic::Id ID{ { 0x30, 0xc2, 0x9d, 0xb4, 0x7b, 0x67, 0x07, 0x3b, 0xca, 0xa1, 0x36, 0x91, 0x14, 0x40, 0xb0, 0xed, 0xeb, 0xce, 0x42, 0x21,  } };
-    return ID;
-}
 void GlProgramUniformHandleui64vNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17930,7 +14621,6 @@ void GlProgramUniformHandleui64vNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformHandleui64vNV::StaticId(),
         "gles",
         "",
         "GlProgramUniformHandleui64vNV",
@@ -17948,10 +14638,6 @@ const schema::Entity& GlProgramUniformHandleui64vNV::StaticSchema() {
 
 // GlProgramUniformMatrix2fv:
 // gles.GlProgramUniformMatrix2fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2fv::StaticId() {
-    static gapic::Id ID{ { 0x67, 0x32, 0xe4, 0x1d, 0xda, 0x74, 0x75, 0x7c, 0x74, 0x2a, 0x0b, 0xa1, 0x4e, 0x89, 0xaf, 0x94, 0xbf, 0x1c, 0xbc, 0xdd,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17962,7 +14648,6 @@ void GlProgramUniformMatrix2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2fv",
@@ -17981,10 +14666,6 @@ const schema::Entity& GlProgramUniformMatrix2fv::StaticSchema() {
 
 // GlProgramUniformMatrix2fvEXT:
 // gles.GlProgramUniformMatrix2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x73, 0x6f, 0x65, 0xfc, 0xd2, 0xfb, 0xb3, 0xb1, 0xa1, 0x74, 0x70, 0x35, 0x86, 0xbd, 0x07, 0xc0, 0xfd, 0xc7, 0x20, 0x99,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -17995,7 +14676,6 @@ void GlProgramUniformMatrix2fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2fvEXT",
@@ -18014,10 +14694,6 @@ const schema::Entity& GlProgramUniformMatrix2fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix2x3fv:
 // gles.GlProgramUniformMatrix2x3fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2x3fv::StaticId() {
-    static gapic::Id ID{ { 0xd1, 0xd8, 0xdd, 0xab, 0x48, 0x31, 0x95, 0x35, 0xb1, 0xd4, 0xac, 0x63, 0xe1, 0x2e, 0xb4, 0xe8, 0x1b, 0x2f, 0xb8, 0xcf,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2x3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18028,7 +14704,6 @@ void GlProgramUniformMatrix2x3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2x3fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2x3fv",
@@ -18047,10 +14722,6 @@ const schema::Entity& GlProgramUniformMatrix2x3fv::StaticSchema() {
 
 // GlProgramUniformMatrix2x3fvEXT:
 // gles.GlProgramUniformMatrix2x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2x3fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x15, 0x50, 0xc7, 0xe0, 0x1c, 0xe4, 0x2a, 0x33, 0xe8, 0xa1, 0x6c, 0x97, 0xba, 0x06, 0x4d, 0xfa, 0xb2, 0x66, 0x95,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2x3fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18061,7 +14732,6 @@ void GlProgramUniformMatrix2x3fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2x3fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2x3fvEXT",
@@ -18080,10 +14750,6 @@ const schema::Entity& GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix2x4fv:
 // gles.GlProgramUniformMatrix2x4fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2x4fv::StaticId() {
-    static gapic::Id ID{ { 0xcb, 0x38, 0xa9, 0x87, 0xf9, 0xcf, 0xda, 0x82, 0x24, 0x1d, 0xd3, 0xfd, 0x2f, 0x7f, 0xb2, 0x5a, 0xd9, 0xec, 0xf4, 0x24,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2x4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18094,7 +14760,6 @@ void GlProgramUniformMatrix2x4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2x4fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2x4fv",
@@ -18113,10 +14778,6 @@ const schema::Entity& GlProgramUniformMatrix2x4fv::StaticSchema() {
 
 // GlProgramUniformMatrix2x4fvEXT:
 // gles.GlProgramUniformMatrix2x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix2x4fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xe4, 0x8a, 0x30, 0x48, 0xd4, 0x65, 0x1e, 0xff, 0xc3, 0x7c, 0x56, 0xf2, 0xfd, 0xec, 0xe4, 0xd0, 0x90, 0x60, 0xb4, 0x0a,  } };
-    return ID;
-}
 void GlProgramUniformMatrix2x4fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18127,7 +14788,6 @@ void GlProgramUniformMatrix2x4fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix2x4fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix2x4fvEXT",
@@ -18146,10 +14806,6 @@ const schema::Entity& GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix3fv:
 // gles.GlProgramUniformMatrix3fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3fv::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0x74, 0x25, 0x44, 0xd7, 0x63, 0x1e, 0x6f, 0x15, 0xc3, 0xe1, 0x87, 0x61, 0x60, 0xfe, 0xfa, 0x9f, 0xba, 0x7a, 0x6a,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18160,7 +14816,6 @@ void GlProgramUniformMatrix3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3fv",
@@ -18179,10 +14834,6 @@ const schema::Entity& GlProgramUniformMatrix3fv::StaticSchema() {
 
 // GlProgramUniformMatrix3fvEXT:
 // gles.GlProgramUniformMatrix3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x0c, 0x9b, 0x48, 0x6e, 0x47, 0xb4, 0x3d, 0x73, 0xb3, 0x05, 0x3b, 0x8d, 0x1d, 0x75, 0x3c, 0x10, 0x07, 0xb1, 0xbc, 0x1c,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18193,7 +14844,6 @@ void GlProgramUniformMatrix3fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3fvEXT",
@@ -18212,10 +14862,6 @@ const schema::Entity& GlProgramUniformMatrix3fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix3x2fv:
 // gles.GlProgramUniformMatrix3x2fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3x2fv::StaticId() {
-    static gapic::Id ID{ { 0xf1, 0x5e, 0x0d, 0xae, 0xaf, 0xc7, 0xe8, 0x79, 0x89, 0xd2, 0xac, 0x45, 0xa4, 0x87, 0xe9, 0xa2, 0x47, 0xf1, 0xd6, 0xb7,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3x2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18226,7 +14872,6 @@ void GlProgramUniformMatrix3x2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3x2fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3x2fv",
@@ -18245,10 +14890,6 @@ const schema::Entity& GlProgramUniformMatrix3x2fv::StaticSchema() {
 
 // GlProgramUniformMatrix3x2fvEXT:
 // gles.GlProgramUniformMatrix3x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3x2fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xf8, 0x88, 0x08, 0xdf, 0xb1, 0xc5, 0x83, 0x66, 0x79, 0x76, 0xa9, 0x4c, 0x4b, 0xbd, 0x70, 0x86, 0x8b, 0xf7, 0xe1, 0x8b,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3x2fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18259,7 +14900,6 @@ void GlProgramUniformMatrix3x2fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3x2fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3x2fvEXT",
@@ -18278,10 +14918,6 @@ const schema::Entity& GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix3x4fv:
 // gles.GlProgramUniformMatrix3x4fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3x4fv::StaticId() {
-    static gapic::Id ID{ { 0x36, 0x67, 0x2e, 0x01, 0x16, 0xb7, 0x70, 0x54, 0x8d, 0xc4, 0x06, 0xbc, 0x70, 0xc1, 0x2c, 0xc7, 0xf1, 0x0f, 0x17, 0x63,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3x4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18292,7 +14928,6 @@ void GlProgramUniformMatrix3x4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3x4fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3x4fv",
@@ -18311,10 +14946,6 @@ const schema::Entity& GlProgramUniformMatrix3x4fv::StaticSchema() {
 
 // GlProgramUniformMatrix3x4fvEXT:
 // gles.GlProgramUniformMatrix3x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix3x4fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x78, 0x5d, 0x86, 0xee, 0x01, 0x44, 0xf7, 0x2a, 0xcb, 0x4b, 0xd0, 0xc7, 0xa3, 0xc2, 0xca, 0x16, 0x96, 0x4b, 0x5c,  } };
-    return ID;
-}
 void GlProgramUniformMatrix3x4fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18325,7 +14956,6 @@ void GlProgramUniformMatrix3x4fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix3x4fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix3x4fvEXT",
@@ -18344,10 +14974,6 @@ const schema::Entity& GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix4fv:
 // gles.GlProgramUniformMatrix4fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4fv::StaticId() {
-    static gapic::Id ID{ { 0x6c, 0x3c, 0x1c, 0xf5, 0xfa, 0x35, 0xb5, 0x5e, 0xd0, 0x34, 0x1e, 0x73, 0xee, 0xea, 0xa0, 0xa9, 0x8d, 0xe7, 0x2d, 0xce,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18358,7 +14984,6 @@ void GlProgramUniformMatrix4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4fv",
@@ -18377,10 +15002,6 @@ const schema::Entity& GlProgramUniformMatrix4fv::StaticSchema() {
 
 // GlProgramUniformMatrix4fvEXT:
 // gles.GlProgramUniformMatrix4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4fvEXT::StaticId() {
-    static gapic::Id ID{ { 0x1f, 0x33, 0x48, 0xd7, 0x96, 0x2d, 0xb4, 0x41, 0x35, 0x74, 0x3b, 0xcf, 0x81, 0x47, 0xa1, 0x21, 0xb4, 0xf5, 0xa7, 0x71,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18391,7 +15012,6 @@ void GlProgramUniformMatrix4fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4fvEXT",
@@ -18410,10 +15030,6 @@ const schema::Entity& GlProgramUniformMatrix4fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix4x2fv:
 // gles.GlProgramUniformMatrix4x2fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4x2fv::StaticId() {
-    static gapic::Id ID{ { 0x3b, 0xeb, 0x23, 0x22, 0x64, 0x52, 0xda, 0x3d, 0x1f, 0xcf, 0xf3, 0xfe, 0x68, 0x75, 0xec, 0x06, 0xfe, 0xee, 0x0d, 0xf6,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4x2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18424,7 +15040,6 @@ void GlProgramUniformMatrix4x2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4x2fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4x2fv",
@@ -18443,10 +15058,6 @@ const schema::Entity& GlProgramUniformMatrix4x2fv::StaticSchema() {
 
 // GlProgramUniformMatrix4x2fvEXT:
 // gles.GlProgramUniformMatrix4x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4x2fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xf6, 0xba, 0xf4, 0x3c, 0xe4, 0x20, 0x98, 0x16, 0x97, 0xdf, 0x7c, 0x7f, 0xc6, 0x4b, 0x05, 0x77, 0xcc, 0xa5, 0xa4, 0x8d,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4x2fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18457,7 +15068,6 @@ void GlProgramUniformMatrix4x2fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4x2fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4x2fvEXT",
@@ -18476,10 +15086,6 @@ const schema::Entity& GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
 
 // GlProgramUniformMatrix4x3fv:
 // gles.GlProgramUniformMatrix4x3fv{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4x3fv::StaticId() {
-    static gapic::Id ID{ { 0xbf, 0x58, 0x20, 0x40, 0x59, 0x5e, 0x63, 0xa6, 0x70, 0x06, 0x67, 0x18, 0xe1, 0xb7, 0xf0, 0x8f, 0x41, 0x64, 0x1a, 0x45,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4x3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18490,7 +15096,6 @@ void GlProgramUniformMatrix4x3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4x3fv::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4x3fv",
@@ -18509,10 +15114,6 @@ const schema::Entity& GlProgramUniformMatrix4x3fv::StaticSchema() {
 
 // GlProgramUniformMatrix4x3fvEXT:
 // gles.GlProgramUniformMatrix4x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
-const gapic::Id& GlProgramUniformMatrix4x3fvEXT::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0x09, 0x5f, 0xcc, 0x92, 0x65, 0x16, 0x06, 0x58, 0x28, 0xc3, 0xc9, 0x51, 0x84, 0x2c, 0x5c, 0x97, 0x1a, 0xed, 0xf7,  } };
-    return ID;
-}
 void GlProgramUniformMatrix4x3fvEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -18523,7 +15124,6 @@ void GlProgramUniformMatrix4x3fvEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
     static schema::Entity entity {
-        GlProgramUniformMatrix4x3fvEXT::StaticId(),
         "gles",
         "",
         "GlProgramUniformMatrix4x3fvEXT",
@@ -18542,10 +15142,6 @@ const schema::Entity& GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
 
 // GlPushDebugGroup:
 // gles.GlPushDebugGroup{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlPushDebugGroup::StaticId() {
-    static gapic::Id ID{ { 0xbb, 0xcf, 0x9b, 0x8d, 0x61, 0x37, 0xc4, 0x4f, 0xab, 0xd2, 0x91, 0xe8, 0x1d, 0xb3, 0xb3, 0x56, 0xa0, 0x65, 0x0a, 0x48,  } };
-    return ID;
-}
 void GlPushDebugGroup::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -18555,7 +15151,6 @@ void GlPushDebugGroup::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPushDebugGroup::StaticSchema() {
     static schema::Entity entity {
-        GlPushDebugGroup::StaticId(),
         "gles",
         "",
         "GlPushDebugGroup",
@@ -18573,10 +15168,6 @@ const schema::Entity& GlPushDebugGroup::StaticSchema() {
 
 // GlPushDebugGroupKHR:
 // gles.GlPushDebugGroupKHR{$,Uint32,Uint32,Int32,$}
-const gapic::Id& GlPushDebugGroupKHR::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0xb6, 0x9e, 0x06, 0x61, 0x7f, 0x67, 0x1b, 0x86, 0xec, 0xea, 0x74, 0x33, 0x1a, 0xf1, 0x16, 0xba, 0x36, 0xa3, 0x87,  } };
-    return ID;
-}
 void GlPushDebugGroupKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSource);
@@ -18586,7 +15177,6 @@ void GlPushDebugGroupKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlPushDebugGroupKHR::StaticSchema() {
     static schema::Entity entity {
-        GlPushDebugGroupKHR::StaticId(),
         "gles",
         "",
         "GlPushDebugGroupKHR",
@@ -18604,13 +15194,8 @@ const schema::Entity& GlPushDebugGroupKHR::StaticSchema() {
 
 // GlPushGroupMarkerEXT:
 // gles.GlPushGroupMarkerEXT{$,Int32,$}
-const gapic::Id& GlPushGroupMarkerEXT::StaticId() {
-    static gapic::Id ID{ { 0x32, 0x26, 0x30, 0x60, 0x42, 0xc7, 0xe0, 0xca, 0x70, 0xd4, 0x12, 0x88, 0x93, 0x22, 0x1a, 0xf0, 0x7d, 0xb1, 0x1d, 0x23,  } };
-    return ID;
-}
 const schema::Entity& GlPushGroupMarkerEXT::StaticSchema() {
     static schema::Entity entity {
-        GlPushGroupMarkerEXT::StaticId(),
         "gles",
         "",
         "GlPushGroupMarkerEXT",
@@ -18626,13 +15211,8 @@ const schema::Entity& GlPushGroupMarkerEXT::StaticSchema() {
 
 // GlQueryCounterEXT:
 // gles.GlQueryCounterEXT{$,Uint32,Uint32}
-const gapic::Id& GlQueryCounterEXT::StaticId() {
-    static gapic::Id ID{ { 0x2a, 0x2f, 0x72, 0x6a, 0x61, 0x9b, 0x5f, 0xdd, 0x17, 0xbc, 0x98, 0x3d, 0x61, 0x80, 0x87, 0x89, 0xb6, 0xf3, 0x99, 0xb6,  } };
-    return ID;
-}
 const schema::Entity& GlQueryCounterEXT::StaticSchema() {
     static schema::Entity entity {
-        GlQueryCounterEXT::StaticId(),
         "gles",
         "",
         "GlQueryCounterEXT",
@@ -18648,13 +15228,8 @@ const schema::Entity& GlQueryCounterEXT::StaticSchema() {
 
 // GlRasterSamplesEXT:
 // gles.GlRasterSamplesEXT{$,Uint32,Uint8}
-const gapic::Id& GlRasterSamplesEXT::StaticId() {
-    static gapic::Id ID{ { 0xac, 0x02, 0x06, 0x86, 0x0f, 0xde, 0x7b, 0x36, 0xee, 0x0d, 0x3f, 0x7b, 0x0d, 0x50, 0xf3, 0x94, 0x43, 0x01, 0x39, 0x10,  } };
-    return ID;
-}
 const schema::Entity& GlRasterSamplesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlRasterSamplesEXT::StaticId(),
         "gles",
         "",
         "GlRasterSamplesEXT",
@@ -18670,13 +15245,8 @@ const schema::Entity& GlRasterSamplesEXT::StaticSchema() {
 
 // GlReadBuffer:
 // gles.GlReadBuffer{$,Uint32}
-const gapic::Id& GlReadBuffer::StaticId() {
-    static gapic::Id ID{ { 0x28, 0x06, 0x22, 0x5a, 0xa6, 0x6e, 0xd9, 0x15, 0x75, 0x8b, 0x09, 0xb3, 0x37, 0xe1, 0x06, 0xc1, 0x32, 0x3b, 0x3d, 0xd0,  } };
-    return ID;
-}
 const schema::Entity& GlReadBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlReadBuffer::StaticId(),
         "gles",
         "",
         "GlReadBuffer",
@@ -18691,13 +15261,8 @@ const schema::Entity& GlReadBuffer::StaticSchema() {
 
 // GlReadBufferIndexedEXT:
 // gles.GlReadBufferIndexedEXT{$,Uint32,Int32}
-const gapic::Id& GlReadBufferIndexedEXT::StaticId() {
-    static gapic::Id ID{ { 0x74, 0x6e, 0x49, 0xd5, 0x45, 0x9f, 0x42, 0x27, 0x9c, 0xdd, 0x15, 0x1c, 0x22, 0x2f, 0x81, 0xd8, 0x95, 0x56, 0xe1, 0x0c,  } };
-    return ID;
-}
 const schema::Entity& GlReadBufferIndexedEXT::StaticSchema() {
     static schema::Entity entity {
-        GlReadBufferIndexedEXT::StaticId(),
         "gles",
         "",
         "GlReadBufferIndexedEXT",
@@ -18713,13 +15278,8 @@ const schema::Entity& GlReadBufferIndexedEXT::StaticSchema() {
 
 // GlReadBufferNV:
 // gles.GlReadBufferNV{$,Uint32}
-const gapic::Id& GlReadBufferNV::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0x33, 0xc7, 0xcc, 0xba, 0xd4, 0x82, 0x4c, 0xba, 0x94, 0xb4, 0xad, 0xe4, 0x08, 0x7b, 0x44, 0xee, 0x6c, 0xc2, 0xe0,  } };
-    return ID;
-}
 const schema::Entity& GlReadBufferNV::StaticSchema() {
     static schema::Entity entity {
-        GlReadBufferNV::StaticId(),
         "gles",
         "",
         "GlReadBufferNV",
@@ -18734,10 +15294,6 @@ const schema::Entity& GlReadBufferNV::StaticSchema() {
 
 // GlReadPixels:
 // gles.GlReadPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlReadPixels::StaticId() {
-    static gapic::Id ID{ { 0xab, 0xbd, 0x21, 0xc6, 0x62, 0xc7, 0xe5, 0x93, 0x6a, 0x86, 0xde, 0xe7, 0xb9, 0x1b, 0x1a, 0xbd, 0xc5, 0xe6, 0x07, 0xdc,  } };
-    return ID;
-}
 void GlReadPixels::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -18750,7 +15306,6 @@ void GlReadPixels::Encode(Encoder* e) const {
 }
 const schema::Entity& GlReadPixels::StaticSchema() {
     static schema::Entity entity {
-        GlReadPixels::StaticId(),
         "gles",
         "",
         "GlReadPixels",
@@ -18771,10 +15326,6 @@ const schema::Entity& GlReadPixels::StaticSchema() {
 
 // GlReadnPixels:
 // gles.GlReadnPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlReadnPixels::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0x43, 0x91, 0x46, 0x33, 0xf8, 0x10, 0x90, 0x09, 0xc1, 0x28, 0xcf, 0xe5, 0x89, 0x55, 0xff, 0xda, 0xc6, 0x02, 0x82,  } };
-    return ID;
-}
 void GlReadnPixels::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -18788,7 +15339,6 @@ void GlReadnPixels::Encode(Encoder* e) const {
 }
 const schema::Entity& GlReadnPixels::StaticSchema() {
     static schema::Entity entity {
-        GlReadnPixels::StaticId(),
         "gles",
         "",
         "GlReadnPixels",
@@ -18810,10 +15360,6 @@ const schema::Entity& GlReadnPixels::StaticSchema() {
 
 // GlReadnPixelsEXT:
 // gles.GlReadnPixelsEXT{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlReadnPixelsEXT::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0xff, 0x55, 0xe4, 0xb4, 0xfc, 0x0f, 0x81, 0x6a, 0x2b, 0xc7, 0xf1, 0x9d, 0xd1, 0x81, 0xe5, 0x08, 0x59, 0xc0, 0x4d,  } };
-    return ID;
-}
 void GlReadnPixelsEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -18827,7 +15373,6 @@ void GlReadnPixelsEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlReadnPixelsEXT::StaticSchema() {
     static schema::Entity entity {
-        GlReadnPixelsEXT::StaticId(),
         "gles",
         "",
         "GlReadnPixelsEXT",
@@ -18849,10 +15394,6 @@ const schema::Entity& GlReadnPixelsEXT::StaticSchema() {
 
 // GlReadnPixelsKHR:
 // gles.GlReadnPixelsKHR{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
-const gapic::Id& GlReadnPixelsKHR::StaticId() {
-    static gapic::Id ID{ { 0xa2, 0xb1, 0x44, 0xcd, 0x5e, 0xa1, 0xe4, 0x03, 0x75, 0x49, 0x7a, 0x13, 0xeb, 0x85, 0xaf, 0x35, 0x30, 0xe4, 0xba, 0x01,  } };
-    return ID;
-}
 void GlReadnPixelsKHR::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -18866,7 +15407,6 @@ void GlReadnPixelsKHR::Encode(Encoder* e) const {
 }
 const schema::Entity& GlReadnPixelsKHR::StaticSchema() {
     static schema::Entity entity {
-        GlReadnPixelsKHR::StaticId(),
         "gles",
         "",
         "GlReadnPixelsKHR",
@@ -18888,13 +15428,8 @@ const schema::Entity& GlReadnPixelsKHR::StaticSchema() {
 
 // GlReleaseShaderCompiler:
 // gles.GlReleaseShaderCompiler{$}
-const gapic::Id& GlReleaseShaderCompiler::StaticId() {
-    static gapic::Id ID{ { 0xa1, 0x4c, 0xa7, 0x0f, 0x98, 0x39, 0x91, 0x00, 0x7f, 0xb5, 0xcc, 0x57, 0x98, 0x96, 0x40, 0xf7, 0x46, 0x90, 0x91, 0x04,  } };
-    return ID;
-}
 const schema::Entity& GlReleaseShaderCompiler::StaticSchema() {
     static schema::Entity entity {
-        GlReleaseShaderCompiler::StaticId(),
         "gles",
         "",
         "GlReleaseShaderCompiler",
@@ -18908,10 +15443,6 @@ const schema::Entity& GlReleaseShaderCompiler::StaticSchema() {
 
 // GlRenderbufferStorage:
 // gles.GlRenderbufferStorage{$,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorage::StaticId() {
-    static gapic::Id ID{ { 0x30, 0x18, 0xcb, 0x64, 0x7f, 0xb0, 0xa5, 0xf6, 0xd6, 0xfa, 0x61, 0xcb, 0x47, 0x08, 0x3f, 0xf6, 0x4e, 0xa3, 0x29, 0x7b,  } };
-    return ID;
-}
 void GlRenderbufferStorage::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -18921,7 +15452,6 @@ void GlRenderbufferStorage::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorage::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorage::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorage",
@@ -18939,10 +15469,6 @@ const schema::Entity& GlRenderbufferStorage::StaticSchema() {
 
 // GlRenderbufferStorageMultisample:
 // gles.GlRenderbufferStorageMultisample{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisample::StaticId() {
-    static gapic::Id ID{ { 0x35, 0xed, 0xb3, 0x1d, 0xd8, 0x64, 0xea, 0x95, 0xef, 0xe8, 0xc9, 0x6e, 0x28, 0x2e, 0x55, 0x1b, 0xe8, 0x48, 0x81, 0x6e,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisample::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -18953,7 +15479,6 @@ void GlRenderbufferStorageMultisample::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisample::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisample::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisample",
@@ -18972,10 +15497,6 @@ const schema::Entity& GlRenderbufferStorageMultisample::StaticSchema() {
 
 // GlRenderbufferStorageMultisampleANGLE:
 // gles.GlRenderbufferStorageMultisampleANGLE{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisampleANGLE::StaticId() {
-    static gapic::Id ID{ { 0xdf, 0x22, 0x9f, 0xd5, 0xc2, 0x5e, 0xce, 0x8f, 0xcc, 0x65, 0x2b, 0x95, 0x78, 0x42, 0xd2, 0x77, 0xe9, 0x98, 0xf6, 0x69,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisampleANGLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -18986,7 +15507,6 @@ void GlRenderbufferStorageMultisampleANGLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisampleANGLE::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisampleANGLE",
@@ -19005,10 +15525,6 @@ const schema::Entity& GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
 
 // GlRenderbufferStorageMultisampleAPPLE:
 // gles.GlRenderbufferStorageMultisampleAPPLE{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisampleAPPLE::StaticId() {
-    static gapic::Id ID{ { 0xc3, 0xd3, 0x04, 0xf4, 0x5d, 0xc2, 0xeb, 0x56, 0xc8, 0x9d, 0xff, 0x4f, 0xa7, 0xde, 0x48, 0xb3, 0x04, 0x3a, 0xa4, 0x6e,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisampleAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -19019,7 +15535,6 @@ void GlRenderbufferStorageMultisampleAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisampleAPPLE::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisampleAPPLE",
@@ -19038,10 +15553,6 @@ const schema::Entity& GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
 
 // GlRenderbufferStorageMultisampleEXT:
 // gles.GlRenderbufferStorageMultisampleEXT{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisampleEXT::StaticId() {
-    static gapic::Id ID{ { 0x45, 0x40, 0x2c, 0xea, 0xd5, 0xa7, 0xb5, 0x1e, 0xc2, 0x08, 0x39, 0xa0, 0xe4, 0xb0, 0x96, 0xbb, 0x14, 0x9a, 0xb5, 0xd1,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisampleEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -19052,7 +15563,6 @@ void GlRenderbufferStorageMultisampleEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisampleEXT::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisampleEXT::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisampleEXT",
@@ -19071,10 +15581,6 @@ const schema::Entity& GlRenderbufferStorageMultisampleEXT::StaticSchema() {
 
 // GlRenderbufferStorageMultisampleIMG:
 // gles.GlRenderbufferStorageMultisampleIMG{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisampleIMG::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x11, 0x42, 0x98, 0xcc, 0x88, 0x4e, 0x17, 0x57, 0x79, 0x7f, 0x9a, 0xc0, 0x3f, 0xea, 0xde, 0xbb, 0x4c, 0xcb, 0x1a,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisampleIMG::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -19085,7 +15591,6 @@ void GlRenderbufferStorageMultisampleIMG::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisampleIMG::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisampleIMG::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisampleIMG",
@@ -19104,10 +15609,6 @@ const schema::Entity& GlRenderbufferStorageMultisampleIMG::StaticSchema() {
 
 // GlRenderbufferStorageMultisampleNV:
 // gles.GlRenderbufferStorageMultisampleNV{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlRenderbufferStorageMultisampleNV::StaticId() {
-    static gapic::Id ID{ { 0x9e, 0xf5, 0x9f, 0x1e, 0x01, 0x48, 0xc2, 0x3c, 0xd5, 0xca, 0xa5, 0x76, 0x77, 0xd1, 0xae, 0x25, 0xa1, 0x8f, 0xaa, 0x4c,  } };
-    return ID;
-}
 void GlRenderbufferStorageMultisampleNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -19118,7 +15619,6 @@ void GlRenderbufferStorageMultisampleNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlRenderbufferStorageMultisampleNV::StaticSchema() {
     static schema::Entity entity {
-        GlRenderbufferStorageMultisampleNV::StaticId(),
         "gles",
         "",
         "GlRenderbufferStorageMultisampleNV",
@@ -19137,13 +15637,8 @@ const schema::Entity& GlRenderbufferStorageMultisampleNV::StaticSchema() {
 
 // GlResolveDepthValuesNV:
 // gles.GlResolveDepthValuesNV{$}
-const gapic::Id& GlResolveDepthValuesNV::StaticId() {
-    static gapic::Id ID{ { 0x97, 0x58, 0x90, 0x26, 0x1d, 0x57, 0x70, 0x78, 0xdf, 0x0c, 0x3c, 0x83, 0x2d, 0xc4, 0x7d, 0x32, 0xde, 0x5f, 0xaa, 0x6f,  } };
-    return ID;
-}
 const schema::Entity& GlResolveDepthValuesNV::StaticSchema() {
     static schema::Entity entity {
-        GlResolveDepthValuesNV::StaticId(),
         "gles",
         "",
         "GlResolveDepthValuesNV",
@@ -19157,13 +15652,8 @@ const schema::Entity& GlResolveDepthValuesNV::StaticSchema() {
 
 // GlResolveMultisampleFramebufferAPPLE:
 // gles.GlResolveMultisampleFramebufferAPPLE{$}
-const gapic::Id& GlResolveMultisampleFramebufferAPPLE::StaticId() {
-    static gapic::Id ID{ { 0x81, 0x71, 0x35, 0x75, 0x0c, 0x23, 0x71, 0xaa, 0x30, 0x93, 0x54, 0x16, 0xf8, 0xee, 0x12, 0x7b, 0xa4, 0xd3, 0x81, 0x08,  } };
-    return ID;
-}
 const schema::Entity& GlResolveMultisampleFramebufferAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlResolveMultisampleFramebufferAPPLE::StaticId(),
         "gles",
         "",
         "GlResolveMultisampleFramebufferAPPLE",
@@ -19177,13 +15667,8 @@ const schema::Entity& GlResolveMultisampleFramebufferAPPLE::StaticSchema() {
 
 // GlResumeTransformFeedback:
 // gles.GlResumeTransformFeedback{$}
-const gapic::Id& GlResumeTransformFeedback::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0xd3, 0xeb, 0x7a, 0x0f, 0xe5, 0x20, 0xf0, 0xe7, 0x3e, 0xe7, 0xc4, 0x72, 0x96, 0x15, 0x70, 0x3d, 0xd4, 0x8d, 0xe3,  } };
-    return ID;
-}
 const schema::Entity& GlResumeTransformFeedback::StaticSchema() {
     static schema::Entity entity {
-        GlResumeTransformFeedback::StaticId(),
         "gles",
         "",
         "GlResumeTransformFeedback",
@@ -19197,13 +15682,8 @@ const schema::Entity& GlResumeTransformFeedback::StaticSchema() {
 
 // GlSampleCoverage:
 // gles.GlSampleCoverage{$,Float32,Uint8}
-const gapic::Id& GlSampleCoverage::StaticId() {
-    static gapic::Id ID{ { 0xc5, 0x0d, 0x8e, 0x12, 0x05, 0x9e, 0xd8, 0xc4, 0x1d, 0x12, 0xe3, 0x34, 0x71, 0x78, 0x44, 0xd6, 0xc2, 0x97, 0xc8, 0x9d,  } };
-    return ID;
-}
 const schema::Entity& GlSampleCoverage::StaticSchema() {
     static schema::Entity entity {
-        GlSampleCoverage::StaticId(),
         "gles",
         "",
         "GlSampleCoverage",
@@ -19219,13 +15699,8 @@ const schema::Entity& GlSampleCoverage::StaticSchema() {
 
 // GlSampleMaski:
 // gles.GlSampleMaski{$,Uint32,Uint32}
-const gapic::Id& GlSampleMaski::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x23, 0x5c, 0xca, 0x47, 0x87, 0x60, 0x35, 0x36, 0x13, 0xaf, 0x59, 0x19, 0x15, 0xba, 0x38, 0x71, 0xc0, 0x3f, 0x23,  } };
-    return ID;
-}
 const schema::Entity& GlSampleMaski::StaticSchema() {
     static schema::Entity entity {
-        GlSampleMaski::StaticId(),
         "gles",
         "",
         "GlSampleMaski",
@@ -19241,10 +15716,6 @@ const schema::Entity& GlSampleMaski::StaticSchema() {
 
 // GlSamplerParameterIiv:
 // gles.GlSamplerParameterIiv{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIiv::StaticId() {
-    static gapic::Id ID{ { 0x48, 0xcd, 0x7e, 0xb5, 0xeb, 0x0a, 0xa1, 0xf5, 0xb8, 0x1a, 0x66, 0x84, 0xd3, 0xc2, 0xd8, 0xe4, 0x78, 0x56, 0xdf, 0x7d,  } };
-    return ID;
-}
 void GlSamplerParameterIiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19253,7 +15724,6 @@ void GlSamplerParameterIiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIiv::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIiv",
@@ -19270,10 +15740,6 @@ const schema::Entity& GlSamplerParameterIiv::StaticSchema() {
 
 // GlSamplerParameterIivEXT:
 // gles.GlSamplerParameterIivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIivEXT::StaticId() {
-    static gapic::Id ID{ { 0xaf, 0x7d, 0xf1, 0x1e, 0x71, 0x60, 0xf5, 0xa1, 0x24, 0x5e, 0xe7, 0x38, 0xdd, 0xb5, 0x98, 0xbb, 0x77, 0xb0, 0x73, 0x4d,  } };
-    return ID;
-}
 void GlSamplerParameterIivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19282,7 +15748,6 @@ void GlSamplerParameterIivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIivEXT::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIivEXT",
@@ -19299,10 +15764,6 @@ const schema::Entity& GlSamplerParameterIivEXT::StaticSchema() {
 
 // GlSamplerParameterIivOES:
 // gles.GlSamplerParameterIivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIivOES::StaticId() {
-    static gapic::Id ID{ { 0x90, 0x50, 0x75, 0x46, 0xe1, 0xed, 0x64, 0x57, 0x3d, 0xf1, 0x76, 0x6a, 0x75, 0x70, 0xa3, 0x0a, 0x09, 0x0d, 0x30, 0xd3,  } };
-    return ID;
-}
 void GlSamplerParameterIivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19311,7 +15772,6 @@ void GlSamplerParameterIivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIivOES::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIivOES",
@@ -19328,10 +15788,6 @@ const schema::Entity& GlSamplerParameterIivOES::StaticSchema() {
 
 // GlSamplerParameterIuiv:
 // gles.GlSamplerParameterIuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIuiv::StaticId() {
-    static gapic::Id ID{ { 0xfb, 0x6a, 0x9b, 0x6c, 0x65, 0x59, 0x50, 0x90, 0xa4, 0x9c, 0xc2, 0xf7, 0x8b, 0x79, 0xd0, 0x00, 0xc0, 0xea, 0xfe, 0x5b,  } };
-    return ID;
-}
 void GlSamplerParameterIuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19340,7 +15796,6 @@ void GlSamplerParameterIuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIuiv::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIuiv",
@@ -19357,10 +15812,6 @@ const schema::Entity& GlSamplerParameterIuiv::StaticSchema() {
 
 // GlSamplerParameterIuivEXT:
 // gles.GlSamplerParameterIuivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIuivEXT::StaticId() {
-    static gapic::Id ID{ { 0x01, 0xa8, 0x96, 0xa1, 0x2a, 0x98, 0xba, 0xf5, 0x60, 0xaf, 0x38, 0x37, 0x01, 0x19, 0x2c, 0x39, 0xf5, 0xf3, 0x25, 0x9c,  } };
-    return ID;
-}
 void GlSamplerParameterIuivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19369,7 +15820,6 @@ void GlSamplerParameterIuivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIuivEXT::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIuivEXT",
@@ -19386,10 +15836,6 @@ const schema::Entity& GlSamplerParameterIuivEXT::StaticSchema() {
 
 // GlSamplerParameterIuivOES:
 // gles.GlSamplerParameterIuivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterIuivOES::StaticId() {
-    static gapic::Id ID{ { 0x4e, 0x24, 0x18, 0xcc, 0x8d, 0x0e, 0x39, 0x5b, 0x7a, 0xc2, 0x41, 0x72, 0x55, 0xc2, 0xf5, 0x00, 0x67, 0xa1, 0x11, 0x1b,  } };
-    return ID;
-}
 void GlSamplerParameterIuivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19398,7 +15844,6 @@ void GlSamplerParameterIuivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterIuivOES::StaticId(),
         "gles",
         "",
         "GlSamplerParameterIuivOES",
@@ -19415,10 +15860,6 @@ const schema::Entity& GlSamplerParameterIuivOES::StaticSchema() {
 
 // GlSamplerParameterf:
 // gles.GlSamplerParameterf{$,Uint32,Uint32,Float32}
-const gapic::Id& GlSamplerParameterf::StaticId() {
-    static gapic::Id ID{ { 0xa6, 0x9c, 0x3b, 0xd9, 0x2d, 0xfc, 0x68, 0xf5, 0xa7, 0xe4, 0xd3, 0xb5, 0xdf, 0x1d, 0x44, 0xe6, 0xa4, 0xde, 0x65, 0x53,  } };
-    return ID;
-}
 void GlSamplerParameterf::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19427,7 +15868,6 @@ void GlSamplerParameterf::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterf::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterf::StaticId(),
         "gles",
         "",
         "GlSamplerParameterf",
@@ -19444,10 +15884,6 @@ const schema::Entity& GlSamplerParameterf::StaticSchema() {
 
 // GlSamplerParameterfv:
 // gles.GlSamplerParameterfv{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameterfv::StaticId() {
-    static gapic::Id ID{ { 0x73, 0x2f, 0x05, 0xe0, 0x45, 0x91, 0xf3, 0x71, 0xfd, 0x2b, 0x09, 0xaf, 0x8c, 0x3f, 0x7d, 0xe0, 0xa5, 0xb0, 0x26, 0xef,  } };
-    return ID;
-}
 void GlSamplerParameterfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19456,7 +15892,6 @@ void GlSamplerParameterfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameterfv::StaticId(),
         "gles",
         "",
         "GlSamplerParameterfv",
@@ -19473,10 +15908,6 @@ const schema::Entity& GlSamplerParameterfv::StaticSchema() {
 
 // GlSamplerParameteri:
 // gles.GlSamplerParameteri{$,Uint32,Uint32,Int32}
-const gapic::Id& GlSamplerParameteri::StaticId() {
-    static gapic::Id ID{ { 0xf9, 0xb6, 0x4b, 0x05, 0x22, 0x6f, 0x4c, 0x26, 0x32, 0x69, 0xda, 0xe9, 0x6d, 0x3f, 0x10, 0x5c, 0xd5, 0x70, 0xe4, 0x73,  } };
-    return ID;
-}
 void GlSamplerParameteri::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19485,7 +15916,6 @@ void GlSamplerParameteri::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameteri::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameteri::StaticId(),
         "gles",
         "",
         "GlSamplerParameteri",
@@ -19502,10 +15932,6 @@ const schema::Entity& GlSamplerParameteri::StaticSchema() {
 
 // GlSamplerParameteriv:
 // gles.GlSamplerParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlSamplerParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x36, 0x95, 0xf2, 0x89, 0x8e, 0xd3, 0x92, 0x1b, 0xe9, 0xb2, 0x0c, 0xb5, 0xc3, 0xfa, 0x77, 0xfa, 0x24, 0xdd, 0xe2, 0x40,  } };
-    return ID;
-}
 void GlSamplerParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mSampler);
@@ -19514,7 +15940,6 @@ void GlSamplerParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlSamplerParameteriv::StaticId(),
         "gles",
         "",
         "GlSamplerParameteriv",
@@ -19531,10 +15956,6 @@ const schema::Entity& GlSamplerParameteriv::StaticSchema() {
 
 // GlScissor:
 // gles.GlScissor{$,Int32,Int32,Int32,Int32}
-const gapic::Id& GlScissor::StaticId() {
-    static gapic::Id ID{ { 0x27, 0x92, 0x43, 0x35, 0x4d, 0xaf, 0xf5, 0x34, 0xf0, 0xde, 0xe5, 0x6d, 0xd0, 0xe7, 0x47, 0x2c, 0xbd, 0x72, 0x40, 0x15,  } };
-    return ID;
-}
 void GlScissor::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -19544,7 +15965,6 @@ void GlScissor::Encode(Encoder* e) const {
 }
 const schema::Entity& GlScissor::StaticSchema() {
     static schema::Entity entity {
-        GlScissor::StaticId(),
         "gles",
         "",
         "GlScissor",
@@ -19562,10 +15982,6 @@ const schema::Entity& GlScissor::StaticSchema() {
 
 // GlScissorArrayvNV:
 // gles.GlScissorArrayvNV{$,Uint32,Int32,$}
-const gapic::Id& GlScissorArrayvNV::StaticId() {
-    static gapic::Id ID{ { 0x8e, 0x3f, 0x3c, 0xdd, 0xe7, 0x39, 0xa9, 0xdc, 0xdc, 0x32, 0x54, 0xa7, 0x21, 0x2e, 0xc8, 0xc0, 0xc8, 0x54, 0xb5, 0x2d,  } };
-    return ID;
-}
 void GlScissorArrayvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirst);
@@ -19574,7 +15990,6 @@ void GlScissorArrayvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlScissorArrayvNV::StaticSchema() {
     static schema::Entity entity {
-        GlScissorArrayvNV::StaticId(),
         "gles",
         "",
         "GlScissorArrayvNV",
@@ -19591,10 +16006,6 @@ const schema::Entity& GlScissorArrayvNV::StaticSchema() {
 
 // GlScissorIndexedNV:
 // gles.GlScissorIndexedNV{$,Uint32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlScissorIndexedNV::StaticId() {
-    static gapic::Id ID{ { 0x6d, 0x0f, 0xef, 0x23, 0x31, 0x52, 0xc8, 0xc8, 0x04, 0xe2, 0xa7, 0xc7, 0xb6, 0xc4, 0x0c, 0xee, 0x00, 0x39, 0x8d, 0x1b,  } };
-    return ID;
-}
 void GlScissorIndexedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -19605,7 +16016,6 @@ void GlScissorIndexedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlScissorIndexedNV::StaticSchema() {
     static schema::Entity entity {
-        GlScissorIndexedNV::StaticId(),
         "gles",
         "",
         "GlScissorIndexedNV",
@@ -19624,13 +16034,8 @@ const schema::Entity& GlScissorIndexedNV::StaticSchema() {
 
 // GlScissorIndexedvNV:
 // gles.GlScissorIndexedvNV{$,Uint32,$}
-const gapic::Id& GlScissorIndexedvNV::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0x0c, 0x03, 0xd6, 0x3a, 0x5c, 0x2f, 0x54, 0x32, 0x0d, 0x5d, 0x75, 0x71, 0x42, 0x54, 0x48, 0xe9, 0x83, 0x4c, 0x88,  } };
-    return ID;
-}
 const schema::Entity& GlScissorIndexedvNV::StaticSchema() {
     static schema::Entity entity {
-        GlScissorIndexedvNV::StaticId(),
         "gles",
         "",
         "GlScissorIndexedvNV",
@@ -19646,10 +16051,6 @@ const schema::Entity& GlScissorIndexedvNV::StaticSchema() {
 
 // GlSelectPerfMonitorCountersAMD:
 // gles.GlSelectPerfMonitorCountersAMD{$,Uint32,Uint8,Uint32,Int32,$}
-const gapic::Id& GlSelectPerfMonitorCountersAMD::StaticId() {
-    static gapic::Id ID{ { 0xbd, 0x68, 0x10, 0xab, 0xbe, 0x19, 0x48, 0x2a, 0x59, 0xa7, 0xb1, 0x54, 0xf9, 0x2e, 0xe6, 0x76, 0x0e, 0xde, 0x53, 0x0b,  } };
-    return ID;
-}
 void GlSelectPerfMonitorCountersAMD::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mMonitor);
@@ -19660,7 +16061,6 @@ void GlSelectPerfMonitorCountersAMD::Encode(Encoder* e) const {
 }
 const schema::Entity& GlSelectPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
-        GlSelectPerfMonitorCountersAMD::StaticId(),
         "gles",
         "",
         "GlSelectPerfMonitorCountersAMD",
@@ -19679,13 +16079,8 @@ const schema::Entity& GlSelectPerfMonitorCountersAMD::StaticSchema() {
 
 // GlSetFenceNV:
 // gles.GlSetFenceNV{$,Uint32,Uint32}
-const gapic::Id& GlSetFenceNV::StaticId() {
-    static gapic::Id ID{ { 0xd2, 0xcc, 0xa3, 0x60, 0xff, 0x89, 0xa3, 0xe4, 0x7a, 0xfc, 0x27, 0xa7, 0x36, 0x78, 0xf7, 0x0f, 0xba, 0x01, 0xa7, 0xb3,  } };
-    return ID;
-}
 const schema::Entity& GlSetFenceNV::StaticSchema() {
     static schema::Entity entity {
-        GlSetFenceNV::StaticId(),
         "gles",
         "",
         "GlSetFenceNV",
@@ -19701,13 +16096,8 @@ const schema::Entity& GlSetFenceNV::StaticSchema() {
 
 // ShaderIdᶜᵖ:
 // gles.ShaderIdᶜᵖ{$}
-const gapic::Id& ShaderId__CP::StaticId() {
-    static gapic::Id ID{ { 0x11, 0xc4, 0xab, 0x91, 0xb8, 0x50, 0x1a, 0xca, 0xd9, 0xc7, 0xe0, 0xe4, 0xfa, 0x2d, 0x11, 0xef, 0xb4, 0x07, 0x8d, 0x5e,  } };
-    return ID;
-}
 const schema::Entity& ShaderId__CP::StaticSchema() {
     static schema::Entity entity {
-        ShaderId__CP::StaticId(),
         "gles",
         "",
         "ShaderIdᶜᵖ",
@@ -19721,10 +16111,6 @@ const schema::Entity& ShaderId__CP::StaticSchema() {
 
 // GlShaderBinary:
 // gles.GlShaderBinary{$,Int32,$,Uint32,$,Int32}
-const gapic::Id& GlShaderBinary::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x01, 0x4c, 0x02, 0x1d, 0xa1, 0xa7, 0x55, 0xea, 0xc6, 0xb3, 0x09, 0x14, 0x25, 0x54, 0xee, 0x10, 0x3e, 0x7e, 0x39,  } };
-    return ID;
-}
 void GlShaderBinary::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mCount);
@@ -19735,7 +16121,6 @@ void GlShaderBinary::Encode(Encoder* e) const {
 }
 const schema::Entity& GlShaderBinary::StaticSchema() {
     static schema::Entity entity {
-        GlShaderBinary::StaticId(),
         "gles",
         "",
         "GlShaderBinary",
@@ -19754,10 +16139,6 @@ const schema::Entity& GlShaderBinary::StaticSchema() {
 
 // GlShaderSource:
 // gles.GlShaderSource{$,Uint32,Int32,$,$}
-const gapic::Id& GlShaderSource::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x69, 0x4d, 0xe0, 0xcf, 0x34, 0x15, 0xf5, 0xac, 0xa6, 0x30, 0xb2, 0x3b, 0x7a, 0x05, 0xe4, 0xff, 0x44, 0xf9, 0x16,  } };
-    return ID;
-}
 void GlShaderSource::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mShader);
@@ -19767,7 +16148,6 @@ void GlShaderSource::Encode(Encoder* e) const {
 }
 const schema::Entity& GlShaderSource::StaticSchema() {
     static schema::Entity entity {
-        GlShaderSource::StaticId(),
         "gles",
         "",
         "GlShaderSource",
@@ -19785,10 +16165,6 @@ const schema::Entity& GlShaderSource::StaticSchema() {
 
 // GlStartTilingQCOM:
 // gles.GlStartTilingQCOM{$,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlStartTilingQCOM::StaticId() {
-    static gapic::Id ID{ { 0x87, 0x8e, 0xde, 0xfb, 0xdf, 0x20, 0x54, 0xd2, 0x08, 0x3d, 0x07, 0xa6, 0x4e, 0x0d, 0xa6, 0x40, 0x4a, 0x15, 0x72, 0x28,  } };
-    return ID;
-}
 void GlStartTilingQCOM::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mX);
@@ -19799,7 +16175,6 @@ void GlStartTilingQCOM::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStartTilingQCOM::StaticSchema() {
     static schema::Entity entity {
-        GlStartTilingQCOM::StaticId(),
         "gles",
         "",
         "GlStartTilingQCOM",
@@ -19818,10 +16193,6 @@ const schema::Entity& GlStartTilingQCOM::StaticSchema() {
 
 // GlStencilFillPathInstancedNV:
 // gles.GlStencilFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlStencilFillPathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0x27, 0x01, 0x76, 0x6c, 0xde, 0xdf, 0x00, 0x03, 0x27, 0xf3, 0xc4, 0x6f, 0xe8, 0x49, 0xa0, 0xb3, 0x20, 0xf0, 0x73, 0xb8,  } };
-    return ID;
-}
 void GlStencilFillPathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -19835,7 +16206,6 @@ void GlStencilFillPathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilFillPathInstancedNV::StaticId(),
         "gles",
         "",
         "GlStencilFillPathInstancedNV",
@@ -19857,10 +16227,6 @@ const schema::Entity& GlStencilFillPathInstancedNV::StaticSchema() {
 
 // GlStencilFillPathNV:
 // gles.GlStencilFillPathNV{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlStencilFillPathNV::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x79, 0x65, 0x6c, 0x39, 0xb0, 0xda, 0x82, 0x9c, 0xf0, 0xc4, 0xdd, 0x98, 0x66, 0xaf, 0x4a, 0x4b, 0x09, 0xc7, 0xca,  } };
-    return ID;
-}
 void GlStencilFillPathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -19869,7 +16235,6 @@ void GlStencilFillPathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilFillPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilFillPathNV::StaticId(),
         "gles",
         "",
         "GlStencilFillPathNV",
@@ -19886,10 +16251,6 @@ const schema::Entity& GlStencilFillPathNV::StaticSchema() {
 
 // GlStencilFunc:
 // gles.GlStencilFunc{$,Uint32,Int32,Uint32}
-const gapic::Id& GlStencilFunc::StaticId() {
-    static gapic::Id ID{ { 0x81, 0x75, 0x4b, 0x4a, 0xbf, 0x9f, 0xb7, 0xbe, 0x31, 0xae, 0x0d, 0x13, 0x05, 0x07, 0xb3, 0x30, 0x91, 0x09, 0x59, 0x31,  } };
-    return ID;
-}
 void GlStencilFunc::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFunc);
@@ -19898,7 +16259,6 @@ void GlStencilFunc::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilFunc::StaticSchema() {
     static schema::Entity entity {
-        GlStencilFunc::StaticId(),
         "gles",
         "",
         "GlStencilFunc",
@@ -19915,10 +16275,6 @@ const schema::Entity& GlStencilFunc::StaticSchema() {
 
 // GlStencilFuncSeparate:
 // gles.GlStencilFuncSeparate{$,Uint32,Uint32,Int32,Uint32}
-const gapic::Id& GlStencilFuncSeparate::StaticId() {
-    static gapic::Id ID{ { 0xb5, 0xc1, 0x1a, 0x32, 0x4e, 0xe5, 0x7e, 0x95, 0xe6, 0x37, 0x9e, 0xb8, 0x8f, 0xa0, 0x69, 0xf3, 0xfe, 0x31, 0x5a, 0x3e,  } };
-    return ID;
-}
 void GlStencilFuncSeparate::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFace);
@@ -19928,7 +16284,6 @@ void GlStencilFuncSeparate::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilFuncSeparate::StaticSchema() {
     static schema::Entity entity {
-        GlStencilFuncSeparate::StaticId(),
         "gles",
         "",
         "GlStencilFuncSeparate",
@@ -19946,13 +16301,8 @@ const schema::Entity& GlStencilFuncSeparate::StaticSchema() {
 
 // GlStencilMask:
 // gles.GlStencilMask{$,Uint32}
-const gapic::Id& GlStencilMask::StaticId() {
-    static gapic::Id ID{ { 0x79, 0x36, 0x6a, 0x6a, 0x8c, 0x6a, 0x14, 0x6f, 0x5d, 0x5a, 0xee, 0xf9, 0xa0, 0x21, 0x34, 0x95, 0x96, 0x50, 0xe8, 0x01,  } };
-    return ID;
-}
 const schema::Entity& GlStencilMask::StaticSchema() {
     static schema::Entity entity {
-        GlStencilMask::StaticId(),
         "gles",
         "",
         "GlStencilMask",
@@ -19967,13 +16317,8 @@ const schema::Entity& GlStencilMask::StaticSchema() {
 
 // GlStencilMaskSeparate:
 // gles.GlStencilMaskSeparate{$,Uint32,Uint32}
-const gapic::Id& GlStencilMaskSeparate::StaticId() {
-    static gapic::Id ID{ { 0x4b, 0xd2, 0x23, 0x31, 0x00, 0x2f, 0x7b, 0xf7, 0x09, 0x77, 0xa2, 0x7b, 0x9a, 0xe0, 0x97, 0x66, 0xb3, 0x01, 0x70, 0xb1,  } };
-    return ID;
-}
 const schema::Entity& GlStencilMaskSeparate::StaticSchema() {
     static schema::Entity entity {
-        GlStencilMaskSeparate::StaticId(),
         "gles",
         "",
         "GlStencilMaskSeparate",
@@ -19989,10 +16334,6 @@ const schema::Entity& GlStencilMaskSeparate::StaticSchema() {
 
 // GlStencilOp:
 // gles.GlStencilOp{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlStencilOp::StaticId() {
-    static gapic::Id ID{ { 0x59, 0x29, 0xac, 0xaa, 0x9b, 0x9e, 0xae, 0x85, 0xe4, 0x17, 0x68, 0x7b, 0x5f, 0x9a, 0x95, 0xac, 0xb7, 0x49, 0x8f, 0x91,  } };
-    return ID;
-}
 void GlStencilOp::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFail);
@@ -20001,7 +16342,6 @@ void GlStencilOp::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilOp::StaticSchema() {
     static schema::Entity entity {
-        GlStencilOp::StaticId(),
         "gles",
         "",
         "GlStencilOp",
@@ -20018,10 +16358,6 @@ const schema::Entity& GlStencilOp::StaticSchema() {
 
 // GlStencilOpSeparate:
 // gles.GlStencilOpSeparate{$,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlStencilOpSeparate::StaticId() {
-    static gapic::Id ID{ { 0xe8, 0xcf, 0x94, 0xae, 0x24, 0x4b, 0x9a, 0xc5, 0x40, 0x8a, 0xe2, 0x56, 0x9f, 0xc7, 0x5b, 0x98, 0x60, 0x47, 0xb7, 0xbc,  } };
-    return ID;
-}
 void GlStencilOpSeparate::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFace);
@@ -20031,7 +16367,6 @@ void GlStencilOpSeparate::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilOpSeparate::StaticSchema() {
     static schema::Entity entity {
-        GlStencilOpSeparate::StaticId(),
         "gles",
         "",
         "GlStencilOpSeparate",
@@ -20049,10 +16384,6 @@ const schema::Entity& GlStencilOpSeparate::StaticSchema() {
 
 // GlStencilStrokePathInstancedNV:
 // gles.GlStencilStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlStencilStrokePathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0xc3, 0x05, 0xdc, 0x61, 0x72, 0x05, 0xc6, 0x2c, 0x98, 0xc3, 0x97, 0x6b, 0x3e, 0xaf, 0xd9, 0x61, 0xec, 0xc4, 0xe4,  } };
-    return ID;
-}
 void GlStencilStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -20066,7 +16397,6 @@ void GlStencilStrokePathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilStrokePathInstancedNV::StaticId(),
         "gles",
         "",
         "GlStencilStrokePathInstancedNV",
@@ -20088,10 +16418,6 @@ const schema::Entity& GlStencilStrokePathInstancedNV::StaticSchema() {
 
 // GlStencilStrokePathNV:
 // gles.GlStencilStrokePathNV{$,Uint32,Int32,Uint32}
-const gapic::Id& GlStencilStrokePathNV::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0xc9, 0xe5, 0x9b, 0xec, 0x55, 0x2c, 0x20, 0x2b, 0x17, 0x27, 0x1b, 0x92, 0x6c, 0x57, 0x96, 0xdf, 0xc8, 0xcb, 0x2f,  } };
-    return ID;
-}
 void GlStencilStrokePathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -20100,7 +16426,6 @@ void GlStencilStrokePathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilStrokePathNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilStrokePathNV::StaticId(),
         "gles",
         "",
         "GlStencilStrokePathNV",
@@ -20117,10 +16442,6 @@ const schema::Entity& GlStencilStrokePathNV::StaticSchema() {
 
 // GlStencilThenCoverFillPathInstancedNV:
 // gles.GlStencilThenCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlStencilThenCoverFillPathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0x49, 0x85, 0xb9, 0xfb, 0xeb, 0xc9, 0xea, 0x0f, 0x7c, 0x0e, 0x0a, 0x09, 0x77, 0x22, 0xec, 0xa4, 0x92, 0xf9, 0xeb, 0x0a,  } };
-    return ID;
-}
 void GlStencilThenCoverFillPathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -20135,7 +16456,6 @@ void GlStencilThenCoverFillPathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilThenCoverFillPathInstancedNV::StaticId(),
         "gles",
         "",
         "GlStencilThenCoverFillPathInstancedNV",
@@ -20158,10 +16478,6 @@ const schema::Entity& GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
 
 // GlStencilThenCoverFillPathNV:
 // gles.GlStencilThenCoverFillPathNV{$,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlStencilThenCoverFillPathNV::StaticId() {
-    static gapic::Id ID{ { 0x5d, 0x70, 0xd5, 0x23, 0x0a, 0x1b, 0xee, 0x66, 0x12, 0x41, 0xd7, 0xaf, 0x9e, 0x1d, 0xdd, 0x97, 0x71, 0xd4, 0x78, 0x8e,  } };
-    return ID;
-}
 void GlStencilThenCoverFillPathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -20171,7 +16487,6 @@ void GlStencilThenCoverFillPathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilThenCoverFillPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilThenCoverFillPathNV::StaticId(),
         "gles",
         "",
         "GlStencilThenCoverFillPathNV",
@@ -20189,10 +16504,6 @@ const schema::Entity& GlStencilThenCoverFillPathNV::StaticSchema() {
 
 // GlStencilThenCoverStrokePathInstancedNV:
 // gles.GlStencilThenCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlStencilThenCoverStrokePathInstancedNV::StaticId() {
-    static gapic::Id ID{ { 0x89, 0x79, 0x5b, 0x8d, 0xe9, 0x64, 0xf3, 0xd2, 0x77, 0xdf, 0xfb, 0xd2, 0xe9, 0x3a, 0x73, 0xd9, 0x75, 0xe5, 0xfa, 0x91,  } };
-    return ID;
-}
 void GlStencilThenCoverStrokePathInstancedNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mNumPaths);
@@ -20207,7 +16518,6 @@ void GlStencilThenCoverStrokePathInstancedNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilThenCoverStrokePathInstancedNV::StaticId(),
         "gles",
         "",
         "GlStencilThenCoverStrokePathInstancedNV",
@@ -20230,10 +16540,6 @@ const schema::Entity& GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
 
 // GlStencilThenCoverStrokePathNV:
 // gles.GlStencilThenCoverStrokePathNV{$,Uint32,Int32,Uint32,Uint32}
-const gapic::Id& GlStencilThenCoverStrokePathNV::StaticId() {
-    static gapic::Id ID{ { 0xbd, 0x15, 0xc3, 0x91, 0x91, 0xa1, 0x0d, 0x6c, 0xe7, 0xfe, 0x19, 0x2c, 0xae, 0x14, 0xf4, 0x45, 0xb5, 0xed, 0x72, 0xc6,  } };
-    return ID;
-}
 void GlStencilThenCoverStrokePathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPath);
@@ -20243,7 +16549,6 @@ void GlStencilThenCoverStrokePathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlStencilThenCoverStrokePathNV::StaticSchema() {
     static schema::Entity entity {
-        GlStencilThenCoverStrokePathNV::StaticId(),
         "gles",
         "",
         "GlStencilThenCoverStrokePathNV",
@@ -20261,13 +16566,8 @@ const schema::Entity& GlStencilThenCoverStrokePathNV::StaticSchema() {
 
 // GlSubpixelPrecisionBiasNV:
 // gles.GlSubpixelPrecisionBiasNV{$,Uint32,Uint32}
-const gapic::Id& GlSubpixelPrecisionBiasNV::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0xec, 0x38, 0x1d, 0x60, 0xff, 0xb9, 0x70, 0x82, 0x80, 0x6d, 0x42, 0x84, 0x6e, 0xf9, 0xcf, 0x17, 0xc1, 0x58, 0xb9,  } };
-    return ID;
-}
 const schema::Entity& GlSubpixelPrecisionBiasNV::StaticSchema() {
     static schema::Entity entity {
-        GlSubpixelPrecisionBiasNV::StaticId(),
         "gles",
         "",
         "GlSubpixelPrecisionBiasNV",
@@ -20283,13 +16583,8 @@ const schema::Entity& GlSubpixelPrecisionBiasNV::StaticSchema() {
 
 // GlTestFenceNV:
 // gles.GlTestFenceNV{$,Uint32,Uint8}
-const gapic::Id& GlTestFenceNV::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0x66, 0xbe, 0x38, 0x87, 0xe4, 0x2c, 0xd7, 0x49, 0xcf, 0x89, 0x85, 0xca, 0xef, 0x8d, 0xba, 0x0d, 0x49, 0xd9, 0xb0,  } };
-    return ID;
-}
 const schema::Entity& GlTestFenceNV::StaticSchema() {
     static schema::Entity entity {
-        GlTestFenceNV::StaticId(),
         "gles",
         "",
         "GlTestFenceNV",
@@ -20305,10 +16600,6 @@ const schema::Entity& GlTestFenceNV::StaticSchema() {
 
 // GlTexBuffer:
 // gles.GlTexBuffer{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlTexBuffer::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0x2b, 0xd9, 0x22, 0xe2, 0x0f, 0xb8, 0xc7, 0xcb, 0x83, 0xd2, 0x86, 0x55, 0xce, 0xfa, 0xc8, 0xbe, 0x67, 0x9a, 0x7c,  } };
-    return ID;
-}
 void GlTexBuffer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20317,7 +16608,6 @@ void GlTexBuffer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlTexBuffer::StaticId(),
         "gles",
         "",
         "GlTexBuffer",
@@ -20334,10 +16624,6 @@ const schema::Entity& GlTexBuffer::StaticSchema() {
 
 // GlTexBufferEXT:
 // gles.GlTexBufferEXT{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlTexBufferEXT::StaticId() {
-    static gapic::Id ID{ { 0x76, 0x04, 0x1e, 0x34, 0xdc, 0xbb, 0xdd, 0x5f, 0x7f, 0xf6, 0xd5, 0x8e, 0x37, 0x14, 0xd7, 0xd0, 0x77, 0x08, 0x24, 0x92,  } };
-    return ID;
-}
 void GlTexBufferEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20346,7 +16632,6 @@ void GlTexBufferEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBufferEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexBufferEXT::StaticId(),
         "gles",
         "",
         "GlTexBufferEXT",
@@ -20363,10 +16648,6 @@ const schema::Entity& GlTexBufferEXT::StaticSchema() {
 
 // GlTexBufferOES:
 // gles.GlTexBufferOES{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlTexBufferOES::StaticId() {
-    static gapic::Id ID{ { 0x57, 0xe3, 0xb6, 0x6c, 0x63, 0x31, 0x76, 0x0e, 0x31, 0xe1, 0x76, 0xb7, 0x90, 0x67, 0xc7, 0xde, 0x12, 0x63, 0x58, 0x81,  } };
-    return ID;
-}
 void GlTexBufferOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20375,7 +16656,6 @@ void GlTexBufferOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBufferOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexBufferOES::StaticId(),
         "gles",
         "",
         "GlTexBufferOES",
@@ -20392,10 +16672,6 @@ const schema::Entity& GlTexBufferOES::StaticSchema() {
 
 // GlTexBufferRange:
 // gles.GlTexBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlTexBufferRange::StaticId() {
-    static gapic::Id ID{ { 0x58, 0xce, 0xf5, 0x61, 0xbc, 0x7c, 0xc7, 0xd6, 0x88, 0x88, 0x33, 0x1a, 0x42, 0xc6, 0x67, 0x06, 0x9f, 0x4d, 0xed, 0x78,  } };
-    return ID;
-}
 void GlTexBufferRange::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20406,7 +16682,6 @@ void GlTexBufferRange::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBufferRange::StaticSchema() {
     static schema::Entity entity {
-        GlTexBufferRange::StaticId(),
         "gles",
         "",
         "GlTexBufferRange",
@@ -20425,10 +16700,6 @@ const schema::Entity& GlTexBufferRange::StaticSchema() {
 
 // GlTexBufferRangeEXT:
 // gles.GlTexBufferRangeEXT{$,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlTexBufferRangeEXT::StaticId() {
-    static gapic::Id ID{ { 0x26, 0x5d, 0x9f, 0xbb, 0xf5, 0x1b, 0x71, 0x09, 0xc5, 0xa0, 0x20, 0x2e, 0x29, 0x9b, 0x62, 0x4f, 0x97, 0x38, 0x42, 0x89,  } };
-    return ID;
-}
 void GlTexBufferRangeEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20439,7 +16710,6 @@ void GlTexBufferRangeEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexBufferRangeEXT::StaticId(),
         "gles",
         "",
         "GlTexBufferRangeEXT",
@@ -20458,10 +16728,6 @@ const schema::Entity& GlTexBufferRangeEXT::StaticSchema() {
 
 // GlTexBufferRangeOES:
 // gles.GlTexBufferRangeOES{$,Uint32,Uint32,Uint32,Int32,Int32}
-const gapic::Id& GlTexBufferRangeOES::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0xc3, 0x10, 0x94, 0x18, 0x5c, 0x02, 0x35, 0xf8, 0xa7, 0x0f, 0xf4, 0x6f, 0xba, 0xf6, 0x1e, 0x58, 0x25, 0x99, 0xda,  } };
-    return ID;
-}
 void GlTexBufferRangeOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20472,7 +16738,6 @@ void GlTexBufferRangeOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexBufferRangeOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexBufferRangeOES::StaticId(),
         "gles",
         "",
         "GlTexBufferRangeOES",
@@ -20491,10 +16756,6 @@ const schema::Entity& GlTexBufferRangeOES::StaticSchema() {
 
 // GlTexImage2D:
 // gles.GlTexImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexImage2D::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0x22, 0x56, 0xb0, 0xba, 0xff, 0x32, 0x7b, 0xb2, 0xd1, 0xf0, 0x03, 0x05, 0xfc, 0x4c, 0x8b, 0x22, 0x61, 0x9f, 0x28,  } };
-    return ID;
-}
 void GlTexImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20509,7 +16770,6 @@ void GlTexImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlTexImage2D::StaticId(),
         "gles",
         "",
         "GlTexImage2D",
@@ -20532,10 +16792,6 @@ const schema::Entity& GlTexImage2D::StaticSchema() {
 
 // GlTexImage3D:
 // gles.GlTexImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexImage3D::StaticId() {
-    static gapic::Id ID{ { 0xd5, 0x9f, 0x11, 0x69, 0xab, 0x6e, 0xc0, 0x4c, 0x1d, 0x8a, 0x19, 0xcb, 0x70, 0xaa, 0x89, 0x6d, 0x49, 0x05, 0xe6, 0xa4,  } };
-    return ID;
-}
 void GlTexImage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20551,7 +16807,6 @@ void GlTexImage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexImage3D::StaticSchema() {
     static schema::Entity entity {
-        GlTexImage3D::StaticId(),
         "gles",
         "",
         "GlTexImage3D",
@@ -20575,10 +16830,6 @@ const schema::Entity& GlTexImage3D::StaticSchema() {
 
 // GlTexImage3DOES:
 // gles.GlTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexImage3DOES::StaticId() {
-    static gapic::Id ID{ { 0xad, 0x54, 0x8d, 0x1f, 0x2f, 0x67, 0xd2, 0xb0, 0xc0, 0xce, 0xa5, 0x46, 0x96, 0x77, 0x97, 0x7f, 0x0b, 0xc9, 0x25, 0xa6,  } };
-    return ID;
-}
 void GlTexImage3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20594,7 +16845,6 @@ void GlTexImage3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexImage3DOES::StaticId(),
         "gles",
         "",
         "GlTexImage3DOES",
@@ -20618,10 +16868,6 @@ const schema::Entity& GlTexImage3DOES::StaticSchema() {
 
 // GlTexPageCommitmentEXT:
 // gles.GlTexPageCommitmentEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint8}
-const gapic::Id& GlTexPageCommitmentEXT::StaticId() {
-    static gapic::Id ID{ { 0x9e, 0x6b, 0x36, 0x1a, 0xe1, 0xaa, 0xe2, 0xb1, 0x65, 0xa3, 0xfb, 0x1d, 0x96, 0xf2, 0x1a, 0x6c, 0xdc, 0x7e, 0xd9, 0xb1,  } };
-    return ID;
-}
 void GlTexPageCommitmentEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20636,7 +16882,6 @@ void GlTexPageCommitmentEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexPageCommitmentEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexPageCommitmentEXT::StaticId(),
         "gles",
         "",
         "GlTexPageCommitmentEXT",
@@ -20659,10 +16904,6 @@ const schema::Entity& GlTexPageCommitmentEXT::StaticSchema() {
 
 // GlTexParameterIiv:
 // gles.GlTexParameterIiv{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIiv::StaticId() {
-    static gapic::Id ID{ { 0x80, 0x42, 0x07, 0x59, 0xbe, 0xf8, 0x04, 0x3e, 0xdb, 0x37, 0x92, 0x79, 0x08, 0x41, 0xa9, 0x3c, 0x92, 0x4b, 0xac, 0x83,  } };
-    return ID;
-}
 void GlTexParameterIiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20671,7 +16912,6 @@ void GlTexParameterIiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIiv::StaticId(),
         "gles",
         "",
         "GlTexParameterIiv",
@@ -20688,10 +16928,6 @@ const schema::Entity& GlTexParameterIiv::StaticSchema() {
 
 // GlTexParameterIivEXT:
 // gles.GlTexParameterIivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIivEXT::StaticId() {
-    static gapic::Id ID{ { 0x27, 0x9a, 0x78, 0x85, 0xe4, 0xcd, 0xfc, 0x3d, 0xae, 0x12, 0xd1, 0x13, 0x81, 0x3c, 0xe0, 0x36, 0xdd, 0xa4, 0xfc, 0xa0,  } };
-    return ID;
-}
 void GlTexParameterIivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20700,7 +16936,6 @@ void GlTexParameterIivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIivEXT::StaticId(),
         "gles",
         "",
         "GlTexParameterIivEXT",
@@ -20717,10 +16952,6 @@ const schema::Entity& GlTexParameterIivEXT::StaticSchema() {
 
 // GlTexParameterIivOES:
 // gles.GlTexParameterIivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIivOES::StaticId() {
-    static gapic::Id ID{ { 0xa7, 0x95, 0x86, 0x58, 0xad, 0x65, 0xde, 0xbd, 0x5a, 0x11, 0x79, 0x11, 0xd2, 0xd8, 0xef, 0x03, 0x87, 0xcc, 0x3e, 0x4c,  } };
-    return ID;
-}
 void GlTexParameterIivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20729,7 +16960,6 @@ void GlTexParameterIivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIivOES::StaticId(),
         "gles",
         "",
         "GlTexParameterIivOES",
@@ -20746,10 +16976,6 @@ const schema::Entity& GlTexParameterIivOES::StaticSchema() {
 
 // GlTexParameterIuiv:
 // gles.GlTexParameterIuiv{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIuiv::StaticId() {
-    static gapic::Id ID{ { 0x47, 0x64, 0xbe, 0xee, 0x50, 0x47, 0x7a, 0x20, 0x78, 0xbd, 0xad, 0x4a, 0x93, 0x28, 0xad, 0x37, 0xa3, 0xc3, 0x9b, 0xaa,  } };
-    return ID;
-}
 void GlTexParameterIuiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20758,7 +16984,6 @@ void GlTexParameterIuiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIuiv::StaticId(),
         "gles",
         "",
         "GlTexParameterIuiv",
@@ -20775,10 +17000,6 @@ const schema::Entity& GlTexParameterIuiv::StaticSchema() {
 
 // GlTexParameterIuivEXT:
 // gles.GlTexParameterIuivEXT{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIuivEXT::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x91, 0xf4, 0x9e, 0x6c, 0x93, 0xe2, 0xe3, 0x72, 0xc1, 0x03, 0xc1, 0xf1, 0xdd, 0x84, 0xd6, 0xc2, 0x2d, 0xe2, 0x59,  } };
-    return ID;
-}
 void GlTexParameterIuivEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20787,7 +17008,6 @@ void GlTexParameterIuivEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIuivEXT::StaticId(),
         "gles",
         "",
         "GlTexParameterIuivEXT",
@@ -20804,10 +17024,6 @@ const schema::Entity& GlTexParameterIuivEXT::StaticSchema() {
 
 // GlTexParameterIuivOES:
 // gles.GlTexParameterIuivOES{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterIuivOES::StaticId() {
-    static gapic::Id ID{ { 0x1b, 0x5a, 0xfb, 0x63, 0xcb, 0x58, 0x2e, 0x92, 0xba, 0x58, 0x38, 0x95, 0xdb, 0x99, 0x9a, 0x00, 0x3f, 0xe9, 0x51, 0xce,  } };
-    return ID;
-}
 void GlTexParameterIuivOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20816,7 +17032,6 @@ void GlTexParameterIuivOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterIuivOES::StaticId(),
         "gles",
         "",
         "GlTexParameterIuivOES",
@@ -20833,10 +17048,6 @@ const schema::Entity& GlTexParameterIuivOES::StaticSchema() {
 
 // GlTexParameterf:
 // gles.GlTexParameterf{$,Uint32,Uint32,Float32}
-const gapic::Id& GlTexParameterf::StaticId() {
-    static gapic::Id ID{ { 0x27, 0xc9, 0xc2, 0x52, 0xdf, 0xa6, 0x6c, 0x80, 0x41, 0x68, 0xfe, 0x30, 0x3f, 0x33, 0xb7, 0x63, 0x3b, 0x03, 0xe8, 0x0e,  } };
-    return ID;
-}
 void GlTexParameterf::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20845,7 +17056,6 @@ void GlTexParameterf::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterf::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterf::StaticId(),
         "gles",
         "",
         "GlTexParameterf",
@@ -20862,10 +17072,6 @@ const schema::Entity& GlTexParameterf::StaticSchema() {
 
 // GlTexParameterfv:
 // gles.GlTexParameterfv{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameterfv::StaticId() {
-    static gapic::Id ID{ { 0xe9, 0x7e, 0x8e, 0x96, 0x2e, 0xe7, 0x92, 0xd6, 0xdd, 0x65, 0xd7, 0x3a, 0x61, 0x5d, 0x65, 0x21, 0xfc, 0xf6, 0x57, 0x6b,  } };
-    return ID;
-}
 void GlTexParameterfv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20874,7 +17080,6 @@ void GlTexParameterfv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameterfv::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameterfv::StaticId(),
         "gles",
         "",
         "GlTexParameterfv",
@@ -20891,10 +17096,6 @@ const schema::Entity& GlTexParameterfv::StaticSchema() {
 
 // GlTexParameteri:
 // gles.GlTexParameteri{$,Uint32,Uint32,Int32}
-const gapic::Id& GlTexParameteri::StaticId() {
-    static gapic::Id ID{ { 0xac, 0xf2, 0x2b, 0x5a, 0xe1, 0x31, 0xc9, 0xf2, 0x23, 0x68, 0x1c, 0x84, 0xf5, 0x5f, 0x35, 0x63, 0xa9, 0xab, 0x41, 0xe5,  } };
-    return ID;
-}
 void GlTexParameteri::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20903,7 +17104,6 @@ void GlTexParameteri::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameteri::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameteri::StaticId(),
         "gles",
         "",
         "GlTexParameteri",
@@ -20920,10 +17120,6 @@ const schema::Entity& GlTexParameteri::StaticSchema() {
 
 // GlTexParameteriv:
 // gles.GlTexParameteriv{$,Uint32,Uint32,$}
-const gapic::Id& GlTexParameteriv::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x97, 0x88, 0x1a, 0xaa, 0xff, 0x6d, 0xe0, 0x4d, 0x05, 0x3b, 0xb8, 0x15, 0x63, 0xdf, 0xb4, 0x64, 0x51, 0x40, 0x63,  } };
-    return ID;
-}
 void GlTexParameteriv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20932,7 +17128,6 @@ void GlTexParameteriv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexParameteriv::StaticSchema() {
     static schema::Entity entity {
-        GlTexParameteriv::StaticId(),
         "gles",
         "",
         "GlTexParameteriv",
@@ -20949,10 +17144,6 @@ const schema::Entity& GlTexParameteriv::StaticSchema() {
 
 // GlTexStorage1DEXT:
 // gles.GlTexStorage1DEXT{$,Uint32,Int32,Uint32,Int32}
-const gapic::Id& GlTexStorage1DEXT::StaticId() {
-    static gapic::Id ID{ { 0xb2, 0x45, 0xcd, 0xf2, 0xe4, 0xce, 0xbe, 0xf8, 0xd7, 0x4b, 0x42, 0x1d, 0x96, 0x74, 0xb6, 0x1e, 0x96, 0xec, 0x2a, 0xd4,  } };
-    return ID;
-}
 void GlTexStorage1DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20962,7 +17153,6 @@ void GlTexStorage1DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage1DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage1DEXT::StaticId(),
         "gles",
         "",
         "GlTexStorage1DEXT",
@@ -20980,10 +17170,6 @@ const schema::Entity& GlTexStorage1DEXT::StaticSchema() {
 
 // GlTexStorage2D:
 // gles.GlTexStorage2D{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlTexStorage2D::StaticId() {
-    static gapic::Id ID{ { 0xd4, 0x13, 0x8a, 0x40, 0x6c, 0x10, 0xab, 0x02, 0xbd, 0xf6, 0xdc, 0x4c, 0x1d, 0x6d, 0x05, 0x67, 0xdf, 0xc2, 0x23, 0xf9,  } };
-    return ID;
-}
 void GlTexStorage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -20994,7 +17180,6 @@ void GlTexStorage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage2D::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage2D::StaticId(),
         "gles",
         "",
         "GlTexStorage2D",
@@ -21013,10 +17198,6 @@ const schema::Entity& GlTexStorage2D::StaticSchema() {
 
 // GlTexStorage2DEXT:
 // gles.GlTexStorage2DEXT{$,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlTexStorage2DEXT::StaticId() {
-    static gapic::Id ID{ { 0x46, 0x76, 0x1f, 0xdc, 0xbf, 0x03, 0xcb, 0x7f, 0x71, 0x95, 0xee, 0x33, 0x7f, 0xf9, 0xc5, 0x07, 0x29, 0xf0, 0xd9, 0x2a,  } };
-    return ID;
-}
 void GlTexStorage2DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21027,7 +17208,6 @@ void GlTexStorage2DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage2DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage2DEXT::StaticId(),
         "gles",
         "",
         "GlTexStorage2DEXT",
@@ -21046,10 +17226,6 @@ const schema::Entity& GlTexStorage2DEXT::StaticSchema() {
 
 // GlTexStorage2DMultisample:
 // gles.GlTexStorage2DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Uint8}
-const gapic::Id& GlTexStorage2DMultisample::StaticId() {
-    static gapic::Id ID{ { 0xd1, 0xc3, 0x01, 0xc2, 0x1b, 0x9d, 0x60, 0x39, 0x6b, 0xb1, 0x93, 0x42, 0xf0, 0xdc, 0x90, 0x3d, 0xe3, 0x88, 0xaa, 0xdf,  } };
-    return ID;
-}
 void GlTexStorage2DMultisample::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21061,7 +17237,6 @@ void GlTexStorage2DMultisample::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage2DMultisample::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage2DMultisample::StaticId(),
         "gles",
         "",
         "GlTexStorage2DMultisample",
@@ -21081,10 +17256,6 @@ const schema::Entity& GlTexStorage2DMultisample::StaticSchema() {
 
 // GlTexStorage3D:
 // gles.GlTexStorage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlTexStorage3D::StaticId() {
-    static gapic::Id ID{ { 0xf1, 0x28, 0xff, 0xab, 0x32, 0xb0, 0x49, 0x47, 0xb6, 0xdf, 0xa8, 0x8b, 0xb2, 0x89, 0x00, 0x12, 0x8f, 0x8c, 0xd8, 0xb2,  } };
-    return ID;
-}
 void GlTexStorage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21096,7 +17267,6 @@ void GlTexStorage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage3D::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage3D::StaticId(),
         "gles",
         "",
         "GlTexStorage3D",
@@ -21116,10 +17286,6 @@ const schema::Entity& GlTexStorage3D::StaticSchema() {
 
 // GlTexStorage3DEXT:
 // gles.GlTexStorage3DEXT{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlTexStorage3DEXT::StaticId() {
-    static gapic::Id ID{ { 0x1b, 0x46, 0x6b, 0x32, 0x80, 0xc1, 0x46, 0xf7, 0xab, 0x32, 0x86, 0x48, 0xfe, 0xaf, 0x00, 0x87, 0x30, 0x62, 0xca, 0xcf,  } };
-    return ID;
-}
 void GlTexStorage3DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21131,7 +17297,6 @@ void GlTexStorage3DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage3DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage3DEXT::StaticId(),
         "gles",
         "",
         "GlTexStorage3DEXT",
@@ -21151,10 +17316,6 @@ const schema::Entity& GlTexStorage3DEXT::StaticSchema() {
 
 // GlTexStorage3DMultisample:
 // gles.GlTexStorage3DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
-const gapic::Id& GlTexStorage3DMultisample::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0xda, 0x40, 0x74, 0x2c, 0x38, 0x52, 0xf1, 0x98, 0xcf, 0xdd, 0x63, 0xbc, 0x19, 0xa9, 0x8d, 0xa3, 0x10, 0x0b, 0x59,  } };
-    return ID;
-}
 void GlTexStorage3DMultisample::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21167,7 +17328,6 @@ void GlTexStorage3DMultisample::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage3DMultisample::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage3DMultisample::StaticId(),
         "gles",
         "",
         "GlTexStorage3DMultisample",
@@ -21188,10 +17348,6 @@ const schema::Entity& GlTexStorage3DMultisample::StaticSchema() {
 
 // GlTexStorage3DMultisampleOES:
 // gles.GlTexStorage3DMultisampleOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
-const gapic::Id& GlTexStorage3DMultisampleOES::StaticId() {
-    static gapic::Id ID{ { 0x77, 0xab, 0x5a, 0x84, 0xaa, 0x70, 0x07, 0x3c, 0xf8, 0x05, 0x56, 0xca, 0xfa, 0xd4, 0xd1, 0x26, 0xb6, 0x3b, 0x61, 0x27,  } };
-    return ID;
-}
 void GlTexStorage3DMultisampleOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21204,7 +17360,6 @@ void GlTexStorage3DMultisampleOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexStorage3DMultisampleOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexStorage3DMultisampleOES::StaticId(),
         "gles",
         "",
         "GlTexStorage3DMultisampleOES",
@@ -21225,10 +17380,6 @@ const schema::Entity& GlTexStorage3DMultisampleOES::StaticSchema() {
 
 // GlTexSubImage2D:
 // gles.GlTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexSubImage2D::StaticId() {
-    static gapic::Id ID{ { 0x0d, 0x3b, 0xe2, 0xcd, 0xad, 0x00, 0xf2, 0xb4, 0xb3, 0xed, 0x49, 0x7f, 0xc2, 0xdc, 0x38, 0x25, 0x9e, 0xf3, 0x4d, 0x76,  } };
-    return ID;
-}
 void GlTexSubImage2D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21243,7 +17394,6 @@ void GlTexSubImage2D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
-        GlTexSubImage2D::StaticId(),
         "gles",
         "",
         "GlTexSubImage2D",
@@ -21266,10 +17416,6 @@ const schema::Entity& GlTexSubImage2D::StaticSchema() {
 
 // GlTexSubImage3D:
 // gles.GlTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexSubImage3D::StaticId() {
-    static gapic::Id ID{ { 0xe7, 0x46, 0xfc, 0x8c, 0x67, 0xf7, 0xca, 0x5c, 0x59, 0xa3, 0x64, 0x78, 0x9a, 0x91, 0xaf, 0x37, 0xa7, 0x84, 0xb2, 0x34,  } };
-    return ID;
-}
 void GlTexSubImage3D::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21286,7 +17432,6 @@ void GlTexSubImage3D::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
-        GlTexSubImage3D::StaticId(),
         "gles",
         "",
         "GlTexSubImage3D",
@@ -21311,10 +17456,6 @@ const schema::Entity& GlTexSubImage3D::StaticSchema() {
 
 // GlTexSubImage3DOES:
 // gles.GlTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
-const gapic::Id& GlTexSubImage3DOES::StaticId() {
-    static gapic::Id ID{ { 0x47, 0x35, 0x07, 0x69, 0xcd, 0x22, 0xab, 0x20, 0xaf, 0xab, 0xf7, 0x52, 0xd1, 0x4b, 0x7d, 0xd6, 0xa9, 0x8a, 0xee, 0xdf,  } };
-    return ID;
-}
 void GlTexSubImage3DOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTarget);
@@ -21331,7 +17472,6 @@ void GlTexSubImage3DOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
-        GlTexSubImage3DOES::StaticId(),
         "gles",
         "",
         "GlTexSubImage3DOES",
@@ -21356,10 +17496,6 @@ const schema::Entity& GlTexSubImage3DOES::StaticSchema() {
 
 // GlTextureStorage1DEXT:
 // gles.GlTextureStorage1DEXT{$,Uint32,Uint32,Int32,Uint32,Int32}
-const gapic::Id& GlTextureStorage1DEXT::StaticId() {
-    static gapic::Id ID{ { 0x8a, 0x47, 0x48, 0x2c, 0xce, 0x22, 0x69, 0xc8, 0xf3, 0x39, 0x6b, 0x38, 0xf7, 0x3c, 0xd3, 0x5d, 0x2d, 0xe7, 0xfd, 0xa7,  } };
-    return ID;
-}
 void GlTextureStorage1DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -21370,7 +17506,6 @@ void GlTextureStorage1DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTextureStorage1DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTextureStorage1DEXT::StaticId(),
         "gles",
         "",
         "GlTextureStorage1DEXT",
@@ -21389,10 +17524,6 @@ const schema::Entity& GlTextureStorage1DEXT::StaticSchema() {
 
 // GlTextureStorage2DEXT:
 // gles.GlTextureStorage2DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32}
-const gapic::Id& GlTextureStorage2DEXT::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x85, 0xae, 0x76, 0x92, 0x62, 0xf7, 0x86, 0xf0, 0x17, 0xf1, 0xd3, 0x1d, 0x04, 0xda, 0xec, 0x45, 0x42, 0x6f, 0xbe,  } };
-    return ID;
-}
 void GlTextureStorage2DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -21404,7 +17535,6 @@ void GlTextureStorage2DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTextureStorage2DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTextureStorage2DEXT::StaticId(),
         "gles",
         "",
         "GlTextureStorage2DEXT",
@@ -21424,10 +17554,6 @@ const schema::Entity& GlTextureStorage2DEXT::StaticSchema() {
 
 // GlTextureStorage3DEXT:
 // gles.GlTextureStorage3DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32,Int32}
-const gapic::Id& GlTextureStorage3DEXT::StaticId() {
-    static gapic::Id ID{ { 0x8e, 0xb6, 0x72, 0x2b, 0xd7, 0x7c, 0xa1, 0x16, 0xa6, 0x92, 0xe9, 0xa9, 0xd3, 0x9d, 0x8a, 0x13, 0x90, 0xaa, 0x20, 0x62,  } };
-    return ID;
-}
 void GlTextureStorage3DEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -21440,7 +17566,6 @@ void GlTextureStorage3DEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTextureStorage3DEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTextureStorage3DEXT::StaticId(),
         "gles",
         "",
         "GlTextureStorage3DEXT",
@@ -21461,10 +17586,6 @@ const schema::Entity& GlTextureStorage3DEXT::StaticSchema() {
 
 // GlTextureViewEXT:
 // gles.GlTextureViewEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlTextureViewEXT::StaticId() {
-    static gapic::Id ID{ { 0x39, 0x9f, 0xb6, 0xb5, 0x42, 0xbb, 0x5d, 0x1c, 0x2c, 0xc8, 0xab, 0x56, 0xbc, 0x7c, 0x6a, 0x50, 0xd5, 0x6d, 0xd7, 0xa8,  } };
-    return ID;
-}
 void GlTextureViewEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -21478,7 +17599,6 @@ void GlTextureViewEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTextureViewEXT::StaticSchema() {
     static schema::Entity entity {
-        GlTextureViewEXT::StaticId(),
         "gles",
         "",
         "GlTextureViewEXT",
@@ -21500,10 +17620,6 @@ const schema::Entity& GlTextureViewEXT::StaticSchema() {
 
 // GlTextureViewOES:
 // gles.GlTextureViewOES{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlTextureViewOES::StaticId() {
-    static gapic::Id ID{ { 0xab, 0x47, 0xba, 0x04, 0x7f, 0xdf, 0x69, 0xfe, 0xec, 0x7d, 0x4f, 0xa4, 0xd9, 0x11, 0x8d, 0x12, 0xd2, 0xb3, 0xb5, 0x8b,  } };
-    return ID;
-}
 void GlTextureViewOES::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mTexture);
@@ -21517,7 +17633,6 @@ void GlTextureViewOES::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTextureViewOES::StaticSchema() {
     static schema::Entity entity {
-        GlTextureViewOES::StaticId(),
         "gles",
         "",
         "GlTextureViewOES",
@@ -21539,10 +17654,6 @@ const schema::Entity& GlTextureViewOES::StaticSchema() {
 
 // GlTransformFeedbackVaryings:
 // gles.GlTransformFeedbackVaryings{$,Uint32,Int32,$,Uint32}
-const gapic::Id& GlTransformFeedbackVaryings::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x74, 0xd4, 0x55, 0x53, 0x1a, 0x58, 0x92, 0x76, 0x0b, 0x45, 0xe2, 0xa0, 0x26, 0xba, 0xd5, 0xaf, 0xb2, 0xb1, 0x19,  } };
-    return ID;
-}
 void GlTransformFeedbackVaryings::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -21552,7 +17663,6 @@ void GlTransformFeedbackVaryings::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTransformFeedbackVaryings::StaticSchema() {
     static schema::Entity entity {
-        GlTransformFeedbackVaryings::StaticId(),
         "gles",
         "",
         "GlTransformFeedbackVaryings",
@@ -21570,10 +17680,6 @@ const schema::Entity& GlTransformFeedbackVaryings::StaticSchema() {
 
 // GlTransformPathNV:
 // gles.GlTransformPathNV{$,Uint32,Uint32,Uint32,$}
-const gapic::Id& GlTransformPathNV::StaticId() {
-    static gapic::Id ID{ { 0x2a, 0x7a, 0xf3, 0x68, 0x37, 0xe4, 0xeb, 0x91, 0x1b, 0x34, 0x85, 0x59, 0xc6, 0x13, 0xc3, 0x0c, 0xb9, 0x56, 0xcf, 0x50,  } };
-    return ID;
-}
 void GlTransformPathNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mResultPath);
@@ -21583,7 +17689,6 @@ void GlTransformPathNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlTransformPathNV::StaticSchema() {
     static schema::Entity entity {
-        GlTransformPathNV::StaticId(),
         "gles",
         "",
         "GlTransformPathNV",
@@ -21601,13 +17706,8 @@ const schema::Entity& GlTransformPathNV::StaticSchema() {
 
 // GlUniform1f:
 // gles.GlUniform1f{$,Int32,Float32}
-const gapic::Id& GlUniform1f::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xbc, 0x4a, 0x06, 0xe3, 0x02, 0x84, 0x49, 0x59, 0x18, 0x2e, 0xfe, 0x87, 0x57, 0xf2, 0x5b, 0xfb, 0x57, 0x8e, 0x8a,  } };
-    return ID;
-}
 const schema::Entity& GlUniform1f::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1f::StaticId(),
         "gles",
         "",
         "GlUniform1f",
@@ -21623,10 +17723,6 @@ const schema::Entity& GlUniform1f::StaticSchema() {
 
 // GlUniform1fv:
 // gles.GlUniform1fv{$,Int32,Int32,$}
-const gapic::Id& GlUniform1fv::StaticId() {
-    static gapic::Id ID{ { 0x57, 0xae, 0xb5, 0x6d, 0x08, 0xa3, 0x46, 0x3a, 0xa4, 0xfd, 0xef, 0xf3, 0x31, 0xfc, 0xa6, 0x23, 0x23, 0xa4, 0x15, 0x8f,  } };
-    return ID;
-}
 void GlUniform1fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21635,7 +17731,6 @@ void GlUniform1fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform1fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1fv::StaticId(),
         "gles",
         "",
         "GlUniform1fv",
@@ -21652,13 +17747,8 @@ const schema::Entity& GlUniform1fv::StaticSchema() {
 
 // GlUniform1i:
 // gles.GlUniform1i{$,Int32,Int32}
-const gapic::Id& GlUniform1i::StaticId() {
-    static gapic::Id ID{ { 0xd8, 0xd6, 0x41, 0x13, 0x75, 0x25, 0x5f, 0xf2, 0x04, 0xd3, 0x9c, 0xa7, 0x6c, 0x4f, 0xd1, 0xa8, 0x58, 0x55, 0xeb, 0x3e,  } };
-    return ID;
-}
 const schema::Entity& GlUniform1i::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1i::StaticId(),
         "gles",
         "",
         "GlUniform1i",
@@ -21674,10 +17764,6 @@ const schema::Entity& GlUniform1i::StaticSchema() {
 
 // GlUniform1iv:
 // gles.GlUniform1iv{$,Int32,Int32,$}
-const gapic::Id& GlUniform1iv::StaticId() {
-    static gapic::Id ID{ { 0x66, 0x6d, 0x7b, 0xf3, 0xc0, 0xf3, 0x33, 0x65, 0xbf, 0x50, 0x90, 0x3b, 0x31, 0xa7, 0x2f, 0x1a, 0x01, 0xc8, 0x01, 0xdb,  } };
-    return ID;
-}
 void GlUniform1iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21686,7 +17772,6 @@ void GlUniform1iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform1iv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1iv::StaticId(),
         "gles",
         "",
         "GlUniform1iv",
@@ -21703,13 +17788,8 @@ const schema::Entity& GlUniform1iv::StaticSchema() {
 
 // GlUniform1ui:
 // gles.GlUniform1ui{$,Int32,Uint32}
-const gapic::Id& GlUniform1ui::StaticId() {
-    static gapic::Id ID{ { 0xe4, 0x7e, 0x64, 0x38, 0xc9, 0xb1, 0xde, 0xb6, 0x74, 0x44, 0xaa, 0xce, 0xe3, 0x59, 0x32, 0xa4, 0x6e, 0xb0, 0x04, 0xd1,  } };
-    return ID;
-}
 const schema::Entity& GlUniform1ui::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1ui::StaticId(),
         "gles",
         "",
         "GlUniform1ui",
@@ -21725,10 +17805,6 @@ const schema::Entity& GlUniform1ui::StaticSchema() {
 
 // GlUniform1uiv:
 // gles.GlUniform1uiv{$,Int32,Int32,$}
-const gapic::Id& GlUniform1uiv::StaticId() {
-    static gapic::Id ID{ { 0xc6, 0xb3, 0x0a, 0xa5, 0xe7, 0x51, 0x1e, 0x57, 0xaf, 0xac, 0x04, 0x08, 0x9f, 0x55, 0x3c, 0x02, 0xd0, 0xc7, 0x53, 0x19,  } };
-    return ID;
-}
 void GlUniform1uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21737,7 +17813,6 @@ void GlUniform1uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform1uiv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform1uiv::StaticId(),
         "gles",
         "",
         "GlUniform1uiv",
@@ -21754,10 +17829,6 @@ const schema::Entity& GlUniform1uiv::StaticSchema() {
 
 // GlUniform2f:
 // gles.GlUniform2f{$,Int32,Float32,Float32}
-const gapic::Id& GlUniform2f::StaticId() {
-    static gapic::Id ID{ { 0x06, 0x12, 0x3a, 0x96, 0x20, 0xf8, 0xb5, 0x3f, 0xa6, 0xf9, 0x18, 0x51, 0x41, 0x9b, 0x48, 0x9f, 0xc8, 0xd2, 0x7f, 0xbf,  } };
-    return ID;
-}
 void GlUniform2f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21766,7 +17837,6 @@ void GlUniform2f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2f::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2f::StaticId(),
         "gles",
         "",
         "GlUniform2f",
@@ -21783,10 +17853,6 @@ const schema::Entity& GlUniform2f::StaticSchema() {
 
 // GlUniform2fv:
 // gles.GlUniform2fv{$,Int32,Int32,$}
-const gapic::Id& GlUniform2fv::StaticId() {
-    static gapic::Id ID{ { 0x68, 0x7e, 0x55, 0x29, 0x33, 0xe2, 0xbf, 0x10, 0x68, 0x92, 0xd5, 0xfb, 0x81, 0x16, 0x4b, 0xbd, 0x78, 0x89, 0xe6, 0x54,  } };
-    return ID;
-}
 void GlUniform2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21795,7 +17861,6 @@ void GlUniform2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2fv::StaticId(),
         "gles",
         "",
         "GlUniform2fv",
@@ -21812,10 +17877,6 @@ const schema::Entity& GlUniform2fv::StaticSchema() {
 
 // GlUniform2i:
 // gles.GlUniform2i{$,Int32,Int32,Int32}
-const gapic::Id& GlUniform2i::StaticId() {
-    static gapic::Id ID{ { 0xce, 0xf5, 0x87, 0xb5, 0xc3, 0x6d, 0xb3, 0xd4, 0xbe, 0xc6, 0xf0, 0xc0, 0x4e, 0xcb, 0xea, 0x31, 0x26, 0x7e, 0x40, 0xd2,  } };
-    return ID;
-}
 void GlUniform2i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21824,7 +17885,6 @@ void GlUniform2i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2i::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2i::StaticId(),
         "gles",
         "",
         "GlUniform2i",
@@ -21841,10 +17901,6 @@ const schema::Entity& GlUniform2i::StaticSchema() {
 
 // GlUniform2iv:
 // gles.GlUniform2iv{$,Int32,Int32,$}
-const gapic::Id& GlUniform2iv::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xfd, 0x41, 0x35, 0x68, 0x1b, 0x89, 0xe1, 0x79, 0x9f, 0xd7, 0x62, 0x76, 0xad, 0x41, 0x87, 0x89, 0xd0, 0x0e, 0xfc,  } };
-    return ID;
-}
 void GlUniform2iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21853,7 +17909,6 @@ void GlUniform2iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2iv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2iv::StaticId(),
         "gles",
         "",
         "GlUniform2iv",
@@ -21870,10 +17925,6 @@ const schema::Entity& GlUniform2iv::StaticSchema() {
 
 // GlUniform2ui:
 // gles.GlUniform2ui{$,Int32,Uint32,Uint32}
-const gapic::Id& GlUniform2ui::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0xd6, 0xb0, 0xc7, 0xce, 0x9d, 0x93, 0x17, 0x82, 0xdf, 0xc9, 0xd3, 0xbc, 0xdf, 0xc9, 0x32, 0xa8, 0xb1, 0x09, 0x77,  } };
-    return ID;
-}
 void GlUniform2ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21882,7 +17933,6 @@ void GlUniform2ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2ui::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2ui::StaticId(),
         "gles",
         "",
         "GlUniform2ui",
@@ -21899,10 +17949,6 @@ const schema::Entity& GlUniform2ui::StaticSchema() {
 
 // GlUniform2uiv:
 // gles.GlUniform2uiv{$,Int32,Int32,$}
-const gapic::Id& GlUniform2uiv::StaticId() {
-    static gapic::Id ID{ { 0x02, 0xd1, 0xe7, 0xf7, 0x1e, 0xf0, 0x18, 0x22, 0x90, 0xfd, 0xa1, 0x9a, 0x6f, 0x92, 0x2a, 0xa3, 0x65, 0x12, 0xb0, 0x99,  } };
-    return ID;
-}
 void GlUniform2uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21911,7 +17957,6 @@ void GlUniform2uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform2uiv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform2uiv::StaticId(),
         "gles",
         "",
         "GlUniform2uiv",
@@ -21928,10 +17973,6 @@ const schema::Entity& GlUniform2uiv::StaticSchema() {
 
 // GlUniform3f:
 // gles.GlUniform3f{$,Int32,Float32,Float32,Float32}
-const gapic::Id& GlUniform3f::StaticId() {
-    static gapic::Id ID{ { 0x80, 0xdf, 0x77, 0xe8, 0x16, 0x16, 0x07, 0xe9, 0xd6, 0x38, 0x17, 0x31, 0x01, 0xe2, 0x1d, 0xc5, 0xcf, 0x59, 0x9b, 0x77,  } };
-    return ID;
-}
 void GlUniform3f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21941,7 +17982,6 @@ void GlUniform3f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3f::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3f::StaticId(),
         "gles",
         "",
         "GlUniform3f",
@@ -21959,10 +17999,6 @@ const schema::Entity& GlUniform3f::StaticSchema() {
 
 // GlUniform3fv:
 // gles.GlUniform3fv{$,Int32,Int32,$}
-const gapic::Id& GlUniform3fv::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x08, 0x18, 0xbf, 0x84, 0x3e, 0xef, 0xce, 0x4f, 0xe4, 0xb6, 0xce, 0x27, 0xd3, 0x80, 0x10, 0x45, 0xa9, 0x13, 0x52,  } };
-    return ID;
-}
 void GlUniform3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -21971,7 +18007,6 @@ void GlUniform3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3fv::StaticId(),
         "gles",
         "",
         "GlUniform3fv",
@@ -21988,10 +18023,6 @@ const schema::Entity& GlUniform3fv::StaticSchema() {
 
 // GlUniform3i:
 // gles.GlUniform3i{$,Int32,Int32,Int32,Int32}
-const gapic::Id& GlUniform3i::StaticId() {
-    static gapic::Id ID{ { 0xeb, 0xe1, 0x28, 0x72, 0x1a, 0xb7, 0xb2, 0xc3, 0xcc, 0xfa, 0x82, 0xad, 0x21, 0xe9, 0x6e, 0x5c, 0x39, 0x5b, 0x0c, 0x41,  } };
-    return ID;
-}
 void GlUniform3i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22001,7 +18032,6 @@ void GlUniform3i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3i::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3i::StaticId(),
         "gles",
         "",
         "GlUniform3i",
@@ -22019,10 +18049,6 @@ const schema::Entity& GlUniform3i::StaticSchema() {
 
 // GlUniform3iv:
 // gles.GlUniform3iv{$,Int32,Int32,$}
-const gapic::Id& GlUniform3iv::StaticId() {
-    static gapic::Id ID{ { 0x09, 0x5a, 0x3d, 0x67, 0x44, 0xf1, 0x70, 0x53, 0x92, 0xad, 0xf8, 0xf5, 0xb6, 0x5f, 0xb9, 0x9d, 0x73, 0xd0, 0x56, 0x16,  } };
-    return ID;
-}
 void GlUniform3iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22031,7 +18057,6 @@ void GlUniform3iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3iv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3iv::StaticId(),
         "gles",
         "",
         "GlUniform3iv",
@@ -22048,10 +18073,6 @@ const schema::Entity& GlUniform3iv::StaticSchema() {
 
 // GlUniform3ui:
 // gles.GlUniform3ui{$,Int32,Uint32,Uint32,Uint32}
-const gapic::Id& GlUniform3ui::StaticId() {
-    static gapic::Id ID{ { 0xa8, 0x3e, 0xbc, 0x74, 0x33, 0x8a, 0xd2, 0x7b, 0x95, 0x42, 0xcc, 0x8c, 0x2a, 0x32, 0x69, 0x5c, 0xd3, 0xeb, 0xfc, 0xb8,  } };
-    return ID;
-}
 void GlUniform3ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22061,7 +18082,6 @@ void GlUniform3ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3ui::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3ui::StaticId(),
         "gles",
         "",
         "GlUniform3ui",
@@ -22079,10 +18099,6 @@ const schema::Entity& GlUniform3ui::StaticSchema() {
 
 // GlUniform3uiv:
 // gles.GlUniform3uiv{$,Int32,Int32,$}
-const gapic::Id& GlUniform3uiv::StaticId() {
-    static gapic::Id ID{ { 0x43, 0xdc, 0x9d, 0x19, 0x68, 0x27, 0x87, 0x03, 0x95, 0xf7, 0x9a, 0x66, 0x82, 0x0e, 0x87, 0x4e, 0x32, 0xbc, 0xfb, 0x83,  } };
-    return ID;
-}
 void GlUniform3uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22091,7 +18107,6 @@ void GlUniform3uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform3uiv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform3uiv::StaticId(),
         "gles",
         "",
         "GlUniform3uiv",
@@ -22108,10 +18123,6 @@ const schema::Entity& GlUniform3uiv::StaticSchema() {
 
 // GlUniform4f:
 // gles.GlUniform4f{$,Int32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlUniform4f::StaticId() {
-    static gapic::Id ID{ { 0x85, 0xac, 0x92, 0x80, 0x75, 0x60, 0xb5, 0x6d, 0x93, 0x9e, 0x97, 0x07, 0x8c, 0x1d, 0x66, 0x37, 0x17, 0x3e, 0xaf, 0xf4,  } };
-    return ID;
-}
 void GlUniform4f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22122,7 +18133,6 @@ void GlUniform4f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4f::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4f::StaticId(),
         "gles",
         "",
         "GlUniform4f",
@@ -22141,10 +18151,6 @@ const schema::Entity& GlUniform4f::StaticSchema() {
 
 // GlUniform4fv:
 // gles.GlUniform4fv{$,Int32,Int32,$}
-const gapic::Id& GlUniform4fv::StaticId() {
-    static gapic::Id ID{ { 0x84, 0x9a, 0x9c, 0x97, 0x30, 0x5f, 0x2c, 0xfc, 0xe7, 0xcd, 0xf7, 0x3e, 0xb2, 0xa8, 0x82, 0x29, 0x22, 0xcb, 0x33, 0x68,  } };
-    return ID;
-}
 void GlUniform4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22153,7 +18159,6 @@ void GlUniform4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4fv::StaticId(),
         "gles",
         "",
         "GlUniform4fv",
@@ -22170,10 +18175,6 @@ const schema::Entity& GlUniform4fv::StaticSchema() {
 
 // GlUniform4i:
 // gles.GlUniform4i{$,Int32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlUniform4i::StaticId() {
-    static gapic::Id ID{ { 0xaf, 0x49, 0x74, 0x44, 0x07, 0xf6, 0xee, 0x54, 0xa8, 0x39, 0x51, 0x93, 0xe7, 0xf1, 0x5f, 0x76, 0x43, 0x0f, 0x60, 0xda,  } };
-    return ID;
-}
 void GlUniform4i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22184,7 +18185,6 @@ void GlUniform4i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4i::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4i::StaticId(),
         "gles",
         "",
         "GlUniform4i",
@@ -22203,10 +18203,6 @@ const schema::Entity& GlUniform4i::StaticSchema() {
 
 // GlUniform4iv:
 // gles.GlUniform4iv{$,Int32,Int32,$}
-const gapic::Id& GlUniform4iv::StaticId() {
-    static gapic::Id ID{ { 0x4d, 0x4b, 0x8f, 0x10, 0xcf, 0x25, 0x40, 0x28, 0x14, 0xfc, 0xe4, 0xcb, 0x6c, 0x76, 0xf0, 0xc2, 0xc1, 0xb4, 0x6d, 0xe7,  } };
-    return ID;
-}
 void GlUniform4iv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22215,7 +18211,6 @@ void GlUniform4iv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4iv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4iv::StaticId(),
         "gles",
         "",
         "GlUniform4iv",
@@ -22232,10 +18227,6 @@ const schema::Entity& GlUniform4iv::StaticSchema() {
 
 // GlUniform4ui:
 // gles.GlUniform4ui{$,Int32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlUniform4ui::StaticId() {
-    static gapic::Id ID{ { 0x8d, 0x6c, 0x36, 0xf5, 0x85, 0x23, 0xe3, 0x6a, 0x39, 0xd0, 0x1e, 0xa9, 0x0a, 0x4d, 0x21, 0x4f, 0x7e, 0x2a, 0xef, 0xb6,  } };
-    return ID;
-}
 void GlUniform4ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22246,7 +18237,6 @@ void GlUniform4ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4ui::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4ui::StaticId(),
         "gles",
         "",
         "GlUniform4ui",
@@ -22265,10 +18255,6 @@ const schema::Entity& GlUniform4ui::StaticSchema() {
 
 // GlUniform4uiv:
 // gles.GlUniform4uiv{$,Int32,Int32,$}
-const gapic::Id& GlUniform4uiv::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0x34, 0x43, 0xa8, 0xd0, 0x68, 0xea, 0x75, 0x30, 0x20, 0x37, 0x7f, 0x66, 0x9f, 0x83, 0x6d, 0xae, 0xb5, 0xde, 0x19,  } };
-    return ID;
-}
 void GlUniform4uiv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22277,7 +18263,6 @@ void GlUniform4uiv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniform4uiv::StaticSchema() {
     static schema::Entity entity {
-        GlUniform4uiv::StaticId(),
         "gles",
         "",
         "GlUniform4uiv",
@@ -22294,10 +18279,6 @@ const schema::Entity& GlUniform4uiv::StaticSchema() {
 
 // GlUniformBlockBinding:
 // gles.GlUniformBlockBinding{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlUniformBlockBinding::StaticId() {
-    static gapic::Id ID{ { 0x00, 0x8d, 0x2a, 0x1c, 0x08, 0x09, 0x8b, 0x5b, 0x13, 0xb0, 0xd1, 0xa4, 0x6e, 0xea, 0x2f, 0xa3, 0xc8, 0xa0, 0xa4, 0x67,  } };
-    return ID;
-}
 void GlUniformBlockBinding::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mProgram);
@@ -22306,7 +18287,6 @@ void GlUniformBlockBinding::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformBlockBinding::StaticSchema() {
     static schema::Entity entity {
-        GlUniformBlockBinding::StaticId(),
         "gles",
         "",
         "GlUniformBlockBinding",
@@ -22323,13 +18303,8 @@ const schema::Entity& GlUniformBlockBinding::StaticSchema() {
 
 // GlUniformHandleui64NV:
 // gles.GlUniformHandleui64NV{$,Int32,Uint64}
-const gapic::Id& GlUniformHandleui64NV::StaticId() {
-    static gapic::Id ID{ { 0x3c, 0x56, 0x1d, 0xf8, 0x9f, 0x2e, 0x6b, 0x49, 0x5f, 0xb2, 0x4a, 0x61, 0x1f, 0x40, 0xb6, 0xfd, 0xe1, 0x41, 0x75, 0xef,  } };
-    return ID;
-}
 const schema::Entity& GlUniformHandleui64NV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformHandleui64NV::StaticId(),
         "gles",
         "",
         "GlUniformHandleui64NV",
@@ -22345,10 +18320,6 @@ const schema::Entity& GlUniformHandleui64NV::StaticSchema() {
 
 // GlUniformHandleui64vNV:
 // gles.GlUniformHandleui64vNV{$,Int32,Int32,$}
-const gapic::Id& GlUniformHandleui64vNV::StaticId() {
-    static gapic::Id ID{ { 0x2e, 0xa3, 0x2a, 0xff, 0x1a, 0x37, 0xaf, 0xd2, 0xc8, 0x89, 0xf4, 0x6d, 0x79, 0xa8, 0xe0, 0x3c, 0x95, 0x67, 0xc8, 0x0e,  } };
-    return ID;
-}
 void GlUniformHandleui64vNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22357,7 +18328,6 @@ void GlUniformHandleui64vNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformHandleui64vNV::StaticId(),
         "gles",
         "",
         "GlUniformHandleui64vNV",
@@ -22374,10 +18344,6 @@ const schema::Entity& GlUniformHandleui64vNV::StaticSchema() {
 
 // GlUniformMatrix2fv:
 // gles.GlUniformMatrix2fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix2fv::StaticId() {
-    static gapic::Id ID{ { 0x95, 0x85, 0x0c, 0x9b, 0xd1, 0x18, 0x80, 0xcb, 0x89, 0xd4, 0x94, 0xb9, 0x54, 0xd3, 0xbc, 0x46, 0xc6, 0x37, 0x84, 0x26,  } };
-    return ID;
-}
 void GlUniformMatrix2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22387,7 +18353,6 @@ void GlUniformMatrix2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix2fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix2fv",
@@ -22405,10 +18370,6 @@ const schema::Entity& GlUniformMatrix2fv::StaticSchema() {
 
 // GlUniformMatrix2x3fv:
 // gles.GlUniformMatrix2x3fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix2x3fv::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0xab, 0x88, 0x4f, 0xd3, 0x52, 0x63, 0x2f, 0xcf, 0xc2, 0xab, 0x2b, 0x7d, 0x5a, 0x0b, 0x2c, 0xb1, 0x39, 0xce, 0xfc,  } };
-    return ID;
-}
 void GlUniformMatrix2x3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22418,7 +18379,6 @@ void GlUniformMatrix2x3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix2x3fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix2x3fv",
@@ -22436,10 +18396,6 @@ const schema::Entity& GlUniformMatrix2x3fv::StaticSchema() {
 
 // GlUniformMatrix2x3fvNV:
 // gles.GlUniformMatrix2x3fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix2x3fvNV::StaticId() {
-    static gapic::Id ID{ { 0x94, 0xd9, 0xaa, 0x85, 0x5f, 0x63, 0x9b, 0xb3, 0xbb, 0x1c, 0x96, 0x57, 0x2e, 0xc3, 0x77, 0x79, 0x3a, 0x12, 0x85, 0xd6,  } };
-    return ID;
-}
 void GlUniformMatrix2x3fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22449,7 +18405,6 @@ void GlUniformMatrix2x3fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix2x3fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix2x3fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix2x3fvNV",
@@ -22467,10 +18422,6 @@ const schema::Entity& GlUniformMatrix2x3fvNV::StaticSchema() {
 
 // GlUniformMatrix2x4fv:
 // gles.GlUniformMatrix2x4fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix2x4fv::StaticId() {
-    static gapic::Id ID{ { 0x9b, 0x53, 0x58, 0x0c, 0xba, 0x65, 0x5e, 0x5f, 0xd1, 0xf2, 0xfc, 0x49, 0xbb, 0x94, 0xcb, 0xf9, 0x22, 0x5d, 0x91, 0x57,  } };
-    return ID;
-}
 void GlUniformMatrix2x4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22480,7 +18431,6 @@ void GlUniformMatrix2x4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix2x4fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix2x4fv",
@@ -22498,10 +18448,6 @@ const schema::Entity& GlUniformMatrix2x4fv::StaticSchema() {
 
 // GlUniformMatrix2x4fvNV:
 // gles.GlUniformMatrix2x4fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix2x4fvNV::StaticId() {
-    static gapic::Id ID{ { 0xd2, 0xff, 0xfe, 0x3f, 0x1b, 0xa0, 0x58, 0xfa, 0xdb, 0x6e, 0x8e, 0x09, 0x9f, 0x5e, 0x69, 0x7b, 0x86, 0x75, 0xb8, 0x42,  } };
-    return ID;
-}
 void GlUniformMatrix2x4fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22511,7 +18457,6 @@ void GlUniformMatrix2x4fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix2x4fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix2x4fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix2x4fvNV",
@@ -22529,10 +18474,6 @@ const schema::Entity& GlUniformMatrix2x4fvNV::StaticSchema() {
 
 // GlUniformMatrix3fv:
 // gles.GlUniformMatrix3fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix3fv::StaticId() {
-    static gapic::Id ID{ { 0xbc, 0xb2, 0xf9, 0x37, 0x2f, 0xee, 0xea, 0xb1, 0x92, 0xc6, 0x1c, 0x5c, 0xe4, 0x1d, 0x68, 0x92, 0x7f, 0x27, 0xb9, 0x67,  } };
-    return ID;
-}
 void GlUniformMatrix3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22542,7 +18483,6 @@ void GlUniformMatrix3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix3fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix3fv",
@@ -22560,10 +18500,6 @@ const schema::Entity& GlUniformMatrix3fv::StaticSchema() {
 
 // GlUniformMatrix3x2fv:
 // gles.GlUniformMatrix3x2fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix3x2fv::StaticId() {
-    static gapic::Id ID{ { 0x16, 0x5f, 0xb0, 0x4c, 0xb9, 0x88, 0xea, 0xd1, 0x0a, 0x69, 0xea, 0x96, 0x40, 0xda, 0x0b, 0xaa, 0x70, 0x00, 0xef, 0xfc,  } };
-    return ID;
-}
 void GlUniformMatrix3x2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22573,7 +18509,6 @@ void GlUniformMatrix3x2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix3x2fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix3x2fv",
@@ -22591,10 +18526,6 @@ const schema::Entity& GlUniformMatrix3x2fv::StaticSchema() {
 
 // GlUniformMatrix3x2fvNV:
 // gles.GlUniformMatrix3x2fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix3x2fvNV::StaticId() {
-    static gapic::Id ID{ { 0x7f, 0xe9, 0xbd, 0xb2, 0x76, 0x1c, 0x11, 0x14, 0x77, 0x28, 0xd2, 0x3f, 0x2e, 0x47, 0xa3, 0x6d, 0x3e, 0x3f, 0x08, 0x91,  } };
-    return ID;
-}
 void GlUniformMatrix3x2fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22604,7 +18535,6 @@ void GlUniformMatrix3x2fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix3x2fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix3x2fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix3x2fvNV",
@@ -22622,10 +18552,6 @@ const schema::Entity& GlUniformMatrix3x2fvNV::StaticSchema() {
 
 // GlUniformMatrix3x4fv:
 // gles.GlUniformMatrix3x4fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix3x4fv::StaticId() {
-    static gapic::Id ID{ { 0xdb, 0x1d, 0x8c, 0x1a, 0x13, 0xd9, 0xa6, 0x3a, 0x3d, 0xb0, 0xd5, 0x67, 0x55, 0x57, 0x4c, 0x37, 0x86, 0x78, 0x2b, 0x9a,  } };
-    return ID;
-}
 void GlUniformMatrix3x4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22635,7 +18561,6 @@ void GlUniformMatrix3x4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix3x4fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix3x4fv",
@@ -22653,10 +18578,6 @@ const schema::Entity& GlUniformMatrix3x4fv::StaticSchema() {
 
 // GlUniformMatrix3x4fvNV:
 // gles.GlUniformMatrix3x4fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix3x4fvNV::StaticId() {
-    static gapic::Id ID{ { 0x75, 0x97, 0x8a, 0x5a, 0x2e, 0xd8, 0x5d, 0xd1, 0x5e, 0x17, 0x95, 0xe3, 0x17, 0x12, 0x50, 0xb1, 0x12, 0xd3, 0x70, 0x9e,  } };
-    return ID;
-}
 void GlUniformMatrix3x4fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22666,7 +18587,6 @@ void GlUniformMatrix3x4fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix3x4fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix3x4fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix3x4fvNV",
@@ -22684,10 +18604,6 @@ const schema::Entity& GlUniformMatrix3x4fvNV::StaticSchema() {
 
 // GlUniformMatrix4fv:
 // gles.GlUniformMatrix4fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix4fv::StaticId() {
-    static gapic::Id ID{ { 0x0a, 0xc4, 0x6b, 0x6c, 0xe8, 0x23, 0xed, 0x76, 0x66, 0x4f, 0xc6, 0x6a, 0x06, 0xd3, 0xbb, 0x20, 0x0a, 0x12, 0xfd, 0x3f,  } };
-    return ID;
-}
 void GlUniformMatrix4fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22697,7 +18613,6 @@ void GlUniformMatrix4fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix4fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix4fv",
@@ -22715,10 +18630,6 @@ const schema::Entity& GlUniformMatrix4fv::StaticSchema() {
 
 // GlUniformMatrix4x2fv:
 // gles.GlUniformMatrix4x2fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix4x2fv::StaticId() {
-    static gapic::Id ID{ { 0x6a, 0x20, 0x15, 0xeb, 0x06, 0x62, 0xf0, 0x00, 0x68, 0x85, 0xe7, 0x13, 0xf6, 0x32, 0x98, 0x91, 0xe6, 0x92, 0x5b, 0x21,  } };
-    return ID;
-}
 void GlUniformMatrix4x2fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22728,7 +18639,6 @@ void GlUniformMatrix4x2fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix4x2fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix4x2fv",
@@ -22746,10 +18656,6 @@ const schema::Entity& GlUniformMatrix4x2fv::StaticSchema() {
 
 // GlUniformMatrix4x2fvNV:
 // gles.GlUniformMatrix4x2fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix4x2fvNV::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x0a, 0x20, 0x6e, 0x6e, 0xb5, 0x3a, 0xce, 0x02, 0x72, 0x53, 0x7e, 0xe8, 0x60, 0xf4, 0xb9, 0x66, 0x71, 0x66, 0xe1,  } };
-    return ID;
-}
 void GlUniformMatrix4x2fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22759,7 +18665,6 @@ void GlUniformMatrix4x2fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix4x2fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix4x2fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix4x2fvNV",
@@ -22777,10 +18682,6 @@ const schema::Entity& GlUniformMatrix4x2fvNV::StaticSchema() {
 
 // GlUniformMatrix4x3fv:
 // gles.GlUniformMatrix4x3fv{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix4x3fv::StaticId() {
-    static gapic::Id ID{ { 0xaf, 0x52, 0xba, 0x74, 0xce, 0x07, 0xe6, 0x3c, 0x89, 0xda, 0x4d, 0xe8, 0xed, 0xe4, 0x27, 0x82, 0xe4, 0x09, 0xdd, 0x10,  } };
-    return ID;
-}
 void GlUniformMatrix4x3fv::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22790,7 +18691,6 @@ void GlUniformMatrix4x3fv::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix4x3fv::StaticId(),
         "gles",
         "",
         "GlUniformMatrix4x3fv",
@@ -22808,10 +18708,6 @@ const schema::Entity& GlUniformMatrix4x3fv::StaticSchema() {
 
 // GlUniformMatrix4x3fvNV:
 // gles.GlUniformMatrix4x3fvNV{$,Int32,Int32,Uint8,$}
-const gapic::Id& GlUniformMatrix4x3fvNV::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x21, 0xff, 0x52, 0xb4, 0x76, 0x99, 0x96, 0x03, 0x8b, 0xcd, 0xa6, 0x5e, 0x45, 0xb4, 0x59, 0x2c, 0x6d, 0x1c, 0x00,  } };
-    return ID;
-}
 void GlUniformMatrix4x3fvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mLocation);
@@ -22821,7 +18717,6 @@ void GlUniformMatrix4x3fvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUniformMatrix4x3fvNV::StaticSchema() {
     static schema::Entity entity {
-        GlUniformMatrix4x3fvNV::StaticId(),
         "gles",
         "",
         "GlUniformMatrix4x3fvNV",
@@ -22839,13 +18734,8 @@ const schema::Entity& GlUniformMatrix4x3fvNV::StaticSchema() {
 
 // GlUnmapBuffer:
 // gles.GlUnmapBuffer{$,Uint32,Uint8}
-const gapic::Id& GlUnmapBuffer::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x33, 0x88, 0xaa, 0x0b, 0xe0, 0x6a, 0x60, 0x22, 0x53, 0x2a, 0xd2, 0x47, 0x0d, 0xf4, 0x1d, 0x3b, 0x3f, 0x14, 0xc4,  } };
-    return ID;
-}
 const schema::Entity& GlUnmapBuffer::StaticSchema() {
     static schema::Entity entity {
-        GlUnmapBuffer::StaticId(),
         "gles",
         "",
         "GlUnmapBuffer",
@@ -22861,13 +18751,8 @@ const schema::Entity& GlUnmapBuffer::StaticSchema() {
 
 // GlUnmapBufferOES:
 // gles.GlUnmapBufferOES{$,Uint32,Uint8}
-const gapic::Id& GlUnmapBufferOES::StaticId() {
-    static gapic::Id ID{ { 0x10, 0xf6, 0x46, 0xe5, 0x61, 0x79, 0x9c, 0x71, 0x53, 0xdf, 0x9c, 0xa4, 0xd9, 0xa3, 0x3d, 0x35, 0x1c, 0x20, 0x73, 0x9d,  } };
-    return ID;
-}
 const schema::Entity& GlUnmapBufferOES::StaticSchema() {
     static schema::Entity entity {
-        GlUnmapBufferOES::StaticId(),
         "gles",
         "",
         "GlUnmapBufferOES",
@@ -22883,13 +18768,8 @@ const schema::Entity& GlUnmapBufferOES::StaticSchema() {
 
 // GlUseProgram:
 // gles.GlUseProgram{$,Uint32}
-const gapic::Id& GlUseProgram::StaticId() {
-    static gapic::Id ID{ { 0xc1, 0xaa, 0x36, 0x75, 0x50, 0xd1, 0x66, 0x35, 0x0f, 0xfc, 0x48, 0x01, 0x9a, 0x4c, 0xf4, 0x72, 0x7e, 0xe6, 0xa2, 0x12,  } };
-    return ID;
-}
 const schema::Entity& GlUseProgram::StaticSchema() {
     static schema::Entity entity {
-        GlUseProgram::StaticId(),
         "gles",
         "",
         "GlUseProgram",
@@ -22904,10 +18784,6 @@ const schema::Entity& GlUseProgram::StaticSchema() {
 
 // GlUseProgramStages:
 // gles.GlUseProgramStages{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlUseProgramStages::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0xf7, 0x36, 0x1d, 0x68, 0xd4, 0x3a, 0xb9, 0x2f, 0xd0, 0x25, 0x6c, 0x94, 0x2f, 0x84, 0xff, 0x27, 0x27, 0xde, 0xd1,  } };
-    return ID;
-}
 void GlUseProgramStages::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -22916,7 +18792,6 @@ void GlUseProgramStages::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUseProgramStages::StaticSchema() {
     static schema::Entity entity {
-        GlUseProgramStages::StaticId(),
         "gles",
         "",
         "GlUseProgramStages",
@@ -22933,10 +18808,6 @@ const schema::Entity& GlUseProgramStages::StaticSchema() {
 
 // GlUseProgramStagesEXT:
 // gles.GlUseProgramStagesEXT{$,Uint32,Uint32,Uint32}
-const gapic::Id& GlUseProgramStagesEXT::StaticId() {
-    static gapic::Id ID{ { 0xd2, 0x83, 0x73, 0xbe, 0x28, 0xee, 0x11, 0x05, 0x99, 0xb6, 0xcf, 0x5c, 0xc6, 0x7a, 0xb5, 0xe9, 0x08, 0x9c, 0xd7, 0xa2,  } };
-    return ID;
-}
 void GlUseProgramStagesEXT::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mPipeline);
@@ -22945,7 +18816,6 @@ void GlUseProgramStagesEXT::Encode(Encoder* e) const {
 }
 const schema::Entity& GlUseProgramStagesEXT::StaticSchema() {
     static schema::Entity entity {
-        GlUseProgramStagesEXT::StaticId(),
         "gles",
         "",
         "GlUseProgramStagesEXT",
@@ -22962,13 +18832,8 @@ const schema::Entity& GlUseProgramStagesEXT::StaticSchema() {
 
 // GlValidateProgram:
 // gles.GlValidateProgram{$,Uint32}
-const gapic::Id& GlValidateProgram::StaticId() {
-    static gapic::Id ID{ { 0x28, 0xfb, 0x49, 0x4a, 0x33, 0xdc, 0xbd, 0xc5, 0x5c, 0x13, 0x10, 0x6e, 0xab, 0x0a, 0xe3, 0x5a, 0x79, 0xae, 0xce, 0x29,  } };
-    return ID;
-}
 const schema::Entity& GlValidateProgram::StaticSchema() {
     static schema::Entity entity {
-        GlValidateProgram::StaticId(),
         "gles",
         "",
         "GlValidateProgram",
@@ -22983,13 +18848,8 @@ const schema::Entity& GlValidateProgram::StaticSchema() {
 
 // GlValidateProgramPipeline:
 // gles.GlValidateProgramPipeline{$,Uint32}
-const gapic::Id& GlValidateProgramPipeline::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x35, 0x48, 0x25, 0x01, 0x3a, 0x65, 0xa0, 0xf2, 0x22, 0xf7, 0x5e, 0x45, 0x2c, 0xeb, 0x59, 0xf1, 0x00, 0x45, 0x60,  } };
-    return ID;
-}
 const schema::Entity& GlValidateProgramPipeline::StaticSchema() {
     static schema::Entity entity {
-        GlValidateProgramPipeline::StaticId(),
         "gles",
         "",
         "GlValidateProgramPipeline",
@@ -23004,13 +18864,8 @@ const schema::Entity& GlValidateProgramPipeline::StaticSchema() {
 
 // GlValidateProgramPipelineEXT:
 // gles.GlValidateProgramPipelineEXT{$,Uint32}
-const gapic::Id& GlValidateProgramPipelineEXT::StaticId() {
-    static gapic::Id ID{ { 0x43, 0x97, 0x9d, 0xb1, 0xa7, 0x64, 0x90, 0x1b, 0x83, 0x3c, 0x77, 0xba, 0xcd, 0x33, 0xd6, 0x32, 0x48, 0x64, 0xa2, 0xe4,  } };
-    return ID;
-}
 const schema::Entity& GlValidateProgramPipelineEXT::StaticSchema() {
     static schema::Entity entity {
-        GlValidateProgramPipelineEXT::StaticId(),
         "gles",
         "",
         "GlValidateProgramPipelineEXT",
@@ -23025,13 +18880,8 @@ const schema::Entity& GlValidateProgramPipelineEXT::StaticSchema() {
 
 // GlVertexAttrib1f:
 // gles.GlVertexAttrib1f{$,Uint32,Float32}
-const gapic::Id& GlVertexAttrib1f::StaticId() {
-    static gapic::Id ID{ { 0x98, 0x80, 0x6f, 0xb6, 0xf6, 0x1d, 0xeb, 0x79, 0x09, 0xcc, 0xee, 0xa3, 0x0a, 0x9a, 0xe1, 0xd0, 0x6c, 0xcf, 0xc0, 0x07,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttrib1f::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib1f::StaticId(),
         "gles",
         "",
         "GlVertexAttrib1f",
@@ -23047,13 +18897,8 @@ const schema::Entity& GlVertexAttrib1f::StaticSchema() {
 
 // GlVertexAttrib1fv:
 // gles.GlVertexAttrib1fv{$,Uint32,$}
-const gapic::Id& GlVertexAttrib1fv::StaticId() {
-    static gapic::Id ID{ { 0xde, 0x0a, 0x44, 0xc1, 0x66, 0xf9, 0xd0, 0x54, 0xea, 0x4f, 0xcb, 0x10, 0x06, 0xec, 0xfa, 0x91, 0x46, 0x99, 0x29, 0xe4,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttrib1fv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib1fv::StaticId(),
         "gles",
         "",
         "GlVertexAttrib1fv",
@@ -23069,10 +18914,6 @@ const schema::Entity& GlVertexAttrib1fv::StaticSchema() {
 
 // GlVertexAttrib2f:
 // gles.GlVertexAttrib2f{$,Uint32,Float32,Float32}
-const gapic::Id& GlVertexAttrib2f::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0xc5, 0x0c, 0xac, 0x7a, 0x46, 0x8b, 0x05, 0x9a, 0xcf, 0x48, 0x29, 0xbe, 0x93, 0x4b, 0x41, 0xe4, 0x00, 0x71, 0xa8,  } };
-    return ID;
-}
 void GlVertexAttrib2f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mLocation);
@@ -23081,7 +18922,6 @@ void GlVertexAttrib2f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttrib2f::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib2f::StaticId(),
         "gles",
         "",
         "GlVertexAttrib2f",
@@ -23098,13 +18938,8 @@ const schema::Entity& GlVertexAttrib2f::StaticSchema() {
 
 // GlVertexAttrib2fv:
 // gles.GlVertexAttrib2fv{$,Uint32,$}
-const gapic::Id& GlVertexAttrib2fv::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0x24, 0xb3, 0x6e, 0x13, 0xf6, 0x67, 0x32, 0x3f, 0xa2, 0x17, 0x33, 0x72, 0x29, 0xca, 0xaa, 0x14, 0x06, 0xc4, 0x43,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttrib2fv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib2fv::StaticId(),
         "gles",
         "",
         "GlVertexAttrib2fv",
@@ -23120,10 +18955,6 @@ const schema::Entity& GlVertexAttrib2fv::StaticSchema() {
 
 // GlVertexAttrib3f:
 // gles.GlVertexAttrib3f{$,Uint32,Float32,Float32,Float32}
-const gapic::Id& GlVertexAttrib3f::StaticId() {
-    static gapic::Id ID{ { 0xc4, 0x57, 0xe9, 0x35, 0x4b, 0xeb, 0x9e, 0x2f, 0x5c, 0x9b, 0xfc, 0xfe, 0xf9, 0x93, 0x6b, 0xed, 0x55, 0xbb, 0xeb, 0x53,  } };
-    return ID;
-}
 void GlVertexAttrib3f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mLocation);
@@ -23133,7 +18964,6 @@ void GlVertexAttrib3f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttrib3f::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib3f::StaticId(),
         "gles",
         "",
         "GlVertexAttrib3f",
@@ -23151,13 +18981,8 @@ const schema::Entity& GlVertexAttrib3f::StaticSchema() {
 
 // GlVertexAttrib3fv:
 // gles.GlVertexAttrib3fv{$,Uint32,$}
-const gapic::Id& GlVertexAttrib3fv::StaticId() {
-    static gapic::Id ID{ { 0x8f, 0x8d, 0x72, 0x60, 0x76, 0xf1, 0xd4, 0x4b, 0x0a, 0x3d, 0xbe, 0x7e, 0x50, 0xc7, 0xd4, 0xae, 0x43, 0x2f, 0x03, 0x8b,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttrib3fv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib3fv::StaticId(),
         "gles",
         "",
         "GlVertexAttrib3fv",
@@ -23173,10 +18998,6 @@ const schema::Entity& GlVertexAttrib3fv::StaticSchema() {
 
 // GlVertexAttrib4f:
 // gles.GlVertexAttrib4f{$,Uint32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlVertexAttrib4f::StaticId() {
-    static gapic::Id ID{ { 0x54, 0xaa, 0x90, 0xe4, 0x25, 0xe6, 0x7c, 0xfb, 0x5e, 0x8f, 0x53, 0x0f, 0x14, 0xe5, 0xd4, 0x22, 0x45, 0x79, 0x1f, 0x54,  } };
-    return ID;
-}
 void GlVertexAttrib4f::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mLocation);
@@ -23187,7 +19008,6 @@ void GlVertexAttrib4f::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttrib4f::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib4f::StaticId(),
         "gles",
         "",
         "GlVertexAttrib4f",
@@ -23206,13 +19026,8 @@ const schema::Entity& GlVertexAttrib4f::StaticSchema() {
 
 // GlVertexAttrib4fv:
 // gles.GlVertexAttrib4fv{$,Uint32,$}
-const gapic::Id& GlVertexAttrib4fv::StaticId() {
-    static gapic::Id ID{ { 0x97, 0x65, 0x15, 0x7f, 0x21, 0x8d, 0x31, 0xf9, 0x25, 0x67, 0x22, 0x0f, 0xca, 0x4a, 0x74, 0x8c, 0x11, 0x6a, 0x86, 0x44,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttrib4fv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttrib4fv::StaticId(),
         "gles",
         "",
         "GlVertexAttrib4fv",
@@ -23228,13 +19043,8 @@ const schema::Entity& GlVertexAttrib4fv::StaticSchema() {
 
 // GlVertexAttribBinding:
 // gles.GlVertexAttribBinding{$,Uint32,Uint32}
-const gapic::Id& GlVertexAttribBinding::StaticId() {
-    static gapic::Id ID{ { 0x58, 0x6b, 0x9c, 0x6c, 0xdc, 0x47, 0xc5, 0xe9, 0xf4, 0x18, 0x0a, 0x6e, 0x20, 0xfc, 0xe5, 0xc3, 0xdc, 0x1c, 0xf1, 0x19,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribBinding::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribBinding::StaticId(),
         "gles",
         "",
         "GlVertexAttribBinding",
@@ -23250,13 +19060,8 @@ const schema::Entity& GlVertexAttribBinding::StaticSchema() {
 
 // GlVertexAttribDivisor:
 // gles.GlVertexAttribDivisor{$,Uint32,Uint32}
-const gapic::Id& GlVertexAttribDivisor::StaticId() {
-    static gapic::Id ID{ { 0xf5, 0x10, 0x11, 0x75, 0x2e, 0x46, 0xcd, 0x23, 0xf0, 0x3d, 0xfb, 0x62, 0xdf, 0x3f, 0x43, 0x3d, 0xab, 0x7b, 0x46, 0x19,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribDivisor::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribDivisor::StaticId(),
         "gles",
         "",
         "GlVertexAttribDivisor",
@@ -23272,13 +19077,8 @@ const schema::Entity& GlVertexAttribDivisor::StaticSchema() {
 
 // GlVertexAttribDivisorANGLE:
 // gles.GlVertexAttribDivisorANGLE{$,Uint32,Uint32}
-const gapic::Id& GlVertexAttribDivisorANGLE::StaticId() {
-    static gapic::Id ID{ { 0xea, 0x32, 0xed, 0x69, 0x92, 0x52, 0x57, 0x62, 0x02, 0xc1, 0x67, 0x43, 0x53, 0xc9, 0x27, 0xac, 0x74, 0xab, 0xa1, 0x9b,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribDivisorANGLE::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribDivisorANGLE::StaticId(),
         "gles",
         "",
         "GlVertexAttribDivisorANGLE",
@@ -23294,13 +19094,8 @@ const schema::Entity& GlVertexAttribDivisorANGLE::StaticSchema() {
 
 // GlVertexAttribDivisorEXT:
 // gles.GlVertexAttribDivisorEXT{$,Uint32,Uint32}
-const gapic::Id& GlVertexAttribDivisorEXT::StaticId() {
-    static gapic::Id ID{ { 0x61, 0xa3, 0x06, 0x0a, 0x14, 0x4d, 0xc9, 0xc4, 0xd2, 0x4b, 0x85, 0x98, 0xa5, 0x86, 0x62, 0x81, 0xa1, 0xc7, 0xf3, 0x1b,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribDivisorEXT::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribDivisorEXT::StaticId(),
         "gles",
         "",
         "GlVertexAttribDivisorEXT",
@@ -23316,13 +19111,8 @@ const schema::Entity& GlVertexAttribDivisorEXT::StaticSchema() {
 
 // GlVertexAttribDivisorNV:
 // gles.GlVertexAttribDivisorNV{$,Uint32,Uint32}
-const gapic::Id& GlVertexAttribDivisorNV::StaticId() {
-    static gapic::Id ID{ { 0x44, 0x89, 0xf4, 0xaf, 0x1e, 0x70, 0x26, 0xe3, 0x0c, 0x2c, 0xf7, 0x15, 0x6b, 0x56, 0x25, 0x19, 0x79, 0x59, 0xfa, 0x68,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribDivisorNV::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribDivisorNV::StaticId(),
         "gles",
         "",
         "GlVertexAttribDivisorNV",
@@ -23338,10 +19128,6 @@ const schema::Entity& GlVertexAttribDivisorNV::StaticSchema() {
 
 // GlVertexAttribFormat:
 // gles.GlVertexAttribFormat{$,Uint32,Int32,Uint32,Uint8,Uint32}
-const gapic::Id& GlVertexAttribFormat::StaticId() {
-    static gapic::Id ID{ { 0xd7, 0x0e, 0x83, 0xd4, 0x8d, 0x37, 0x0a, 0xdf, 0x3a, 0x3f, 0xf3, 0x8c, 0x0e, 0x6f, 0x89, 0xe8, 0xe1, 0xd5, 0x07, 0xab,  } };
-    return ID;
-}
 void GlVertexAttribFormat::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -23352,7 +19138,6 @@ void GlVertexAttribFormat::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribFormat::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribFormat::StaticId(),
         "gles",
         "",
         "GlVertexAttribFormat",
@@ -23371,10 +19156,6 @@ const schema::Entity& GlVertexAttribFormat::StaticSchema() {
 
 // GlVertexAttribI4i:
 // gles.GlVertexAttribI4i{$,Uint32,Int32,Int32,Int32,Int32}
-const gapic::Id& GlVertexAttribI4i::StaticId() {
-    static gapic::Id ID{ { 0x3e, 0xb1, 0x1d, 0x2a, 0x4f, 0x11, 0x5a, 0x6b, 0x2b, 0xba, 0xaa, 0x69, 0xc0, 0x07, 0x66, 0x59, 0x0f, 0x15, 0xcc, 0xa9,  } };
-    return ID;
-}
 void GlVertexAttribI4i::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -23385,7 +19166,6 @@ void GlVertexAttribI4i::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribI4i::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribI4i::StaticId(),
         "gles",
         "",
         "GlVertexAttribI4i",
@@ -23404,13 +19184,8 @@ const schema::Entity& GlVertexAttribI4i::StaticSchema() {
 
 // GlVertexAttribI4iv:
 // gles.GlVertexAttribI4iv{$,Uint32,$}
-const gapic::Id& GlVertexAttribI4iv::StaticId() {
-    static gapic::Id ID{ { 0x0e, 0x50, 0x02, 0x70, 0xb7, 0x62, 0xd2, 0x50, 0xb6, 0xba, 0x8b, 0xe9, 0x37, 0xca, 0x56, 0xaf, 0x9a, 0xdf, 0xa7, 0x68,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribI4iv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribI4iv::StaticId(),
         "gles",
         "",
         "GlVertexAttribI4iv",
@@ -23426,10 +19201,6 @@ const schema::Entity& GlVertexAttribI4iv::StaticSchema() {
 
 // GlVertexAttribI4ui:
 // gles.GlVertexAttribI4ui{$,Uint32,Uint32,Uint32,Uint32,Uint32}
-const gapic::Id& GlVertexAttribI4ui::StaticId() {
-    static gapic::Id ID{ { 0x82, 0xf3, 0x89, 0x2b, 0x45, 0xe7, 0x06, 0x65, 0x7d, 0x58, 0x54, 0x9f, 0x24, 0x5b, 0xde, 0x81, 0x90, 0x39, 0x66, 0xdb,  } };
-    return ID;
-}
 void GlVertexAttribI4ui::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -23440,7 +19211,6 @@ void GlVertexAttribI4ui::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribI4ui::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribI4ui::StaticId(),
         "gles",
         "",
         "GlVertexAttribI4ui",
@@ -23459,13 +19229,8 @@ const schema::Entity& GlVertexAttribI4ui::StaticSchema() {
 
 // GlVertexAttribI4uiv:
 // gles.GlVertexAttribI4uiv{$,Uint32,$}
-const gapic::Id& GlVertexAttribI4uiv::StaticId() {
-    static gapic::Id ID{ { 0xdc, 0x61, 0x75, 0x53, 0x47, 0xba, 0x6f, 0xf2, 0x0d, 0xde, 0x3e, 0x86, 0x2c, 0x5a, 0xce, 0xbd, 0xd7, 0xd5, 0xeb, 0xf8,  } };
-    return ID;
-}
 const schema::Entity& GlVertexAttribI4uiv::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribI4uiv::StaticId(),
         "gles",
         "",
         "GlVertexAttribI4uiv",
@@ -23481,10 +19246,6 @@ const schema::Entity& GlVertexAttribI4uiv::StaticSchema() {
 
 // GlVertexAttribIFormat:
 // gles.GlVertexAttribIFormat{$,Uint32,Int32,Uint32,Uint32}
-const gapic::Id& GlVertexAttribIFormat::StaticId() {
-    static gapic::Id ID{ { 0x8f, 0x88, 0x3d, 0xcd, 0xf2, 0xa1, 0xf0, 0x48, 0x7c, 0x31, 0xfc, 0x29, 0xe0, 0x82, 0x8c, 0x48, 0x5b, 0x8a, 0x69, 0x5c,  } };
-    return ID;
-}
 void GlVertexAttribIFormat::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -23494,7 +19255,6 @@ void GlVertexAttribIFormat::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribIFormat::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribIFormat::StaticId(),
         "gles",
         "",
         "GlVertexAttribIFormat",
@@ -23512,10 +19272,6 @@ const schema::Entity& GlVertexAttribIFormat::StaticSchema() {
 
 // GlVertexAttribIPointer:
 // gles.GlVertexAttribIPointer{$,Uint32,Int32,Uint32,Int32,$}
-const gapic::Id& GlVertexAttribIPointer::StaticId() {
-    static gapic::Id ID{ { 0x20, 0xcb, 0x2f, 0xd7, 0x37, 0xf2, 0xc8, 0xd0, 0xa7, 0x7e, 0x15, 0x9b, 0xdb, 0x07, 0x1f, 0x1c, 0x34, 0xc6, 0x4a, 0x27,  } };
-    return ID;
-}
 void GlVertexAttribIPointer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mLocation);
@@ -23526,7 +19282,6 @@ void GlVertexAttribIPointer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribIPointer::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribIPointer::StaticId(),
         "gles",
         "",
         "GlVertexAttribIPointer",
@@ -23545,10 +19300,6 @@ const schema::Entity& GlVertexAttribIPointer::StaticSchema() {
 
 // GlVertexAttribPointer:
 // gles.GlVertexAttribPointer{$,Uint32,Int32,Uint32,Uint8,Int32,$}
-const gapic::Id& GlVertexAttribPointer::StaticId() {
-    static gapic::Id ID{ { 0xab, 0xb8, 0xee, 0x9d, 0xeb, 0xde, 0x9b, 0xf9, 0x83, 0xe6, 0xc4, 0xa2, 0x36, 0x88, 0x43, 0xda, 0xf4, 0xc4, 0xd3, 0x6a,  } };
-    return ID;
-}
 void GlVertexAttribPointer::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mLocation);
@@ -23560,7 +19311,6 @@ void GlVertexAttribPointer::Encode(Encoder* e) const {
 }
 const schema::Entity& GlVertexAttribPointer::StaticSchema() {
     static schema::Entity entity {
-        GlVertexAttribPointer::StaticId(),
         "gles",
         "",
         "GlVertexAttribPointer",
@@ -23580,13 +19330,8 @@ const schema::Entity& GlVertexAttribPointer::StaticSchema() {
 
 // GlVertexBindingDivisor:
 // gles.GlVertexBindingDivisor{$,Uint32,Uint32}
-const gapic::Id& GlVertexBindingDivisor::StaticId() {
-    static gapic::Id ID{ { 0x2c, 0x63, 0x70, 0x3c, 0x4c, 0x4d, 0xf7, 0x05, 0x82, 0x38, 0xbb, 0xf0, 0x82, 0x50, 0x11, 0x94, 0x45, 0x87, 0xfc, 0x47,  } };
-    return ID;
-}
 const schema::Entity& GlVertexBindingDivisor::StaticSchema() {
     static schema::Entity entity {
-        GlVertexBindingDivisor::StaticId(),
         "gles",
         "",
         "GlVertexBindingDivisor",
@@ -23602,10 +19347,6 @@ const schema::Entity& GlVertexBindingDivisor::StaticSchema() {
 
 // GlViewport:
 // gles.GlViewport{$,Int32,Int32,Int32,Int32}
-const gapic::Id& GlViewport::StaticId() {
-    static gapic::Id ID{ { 0x48, 0x6a, 0x6c, 0x39, 0x99, 0x75, 0xbf, 0x21, 0xb7, 0x29, 0x34, 0x38, 0x0d, 0x11, 0x7b, 0xa6, 0x8f, 0x35, 0x2e, 0x8f,  } };
-    return ID;
-}
 void GlViewport::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Int32(this->mX);
@@ -23615,7 +19356,6 @@ void GlViewport::Encode(Encoder* e) const {
 }
 const schema::Entity& GlViewport::StaticSchema() {
     static schema::Entity entity {
-        GlViewport::StaticId(),
         "gles",
         "",
         "GlViewport",
@@ -23633,10 +19373,6 @@ const schema::Entity& GlViewport::StaticSchema() {
 
 // GlViewportArrayvNV:
 // gles.GlViewportArrayvNV{$,Uint32,Int32,$}
-const gapic::Id& GlViewportArrayvNV::StaticId() {
-    static gapic::Id ID{ { 0x03, 0xb0, 0x44, 0x3a, 0x88, 0x29, 0x47, 0x4a, 0x8c, 0x9c, 0xb5, 0x2c, 0x18, 0x54, 0xfb, 0xf0, 0x89, 0x25, 0x3c, 0x04,  } };
-    return ID;
-}
 void GlViewportArrayvNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mFirst);
@@ -23645,7 +19381,6 @@ void GlViewportArrayvNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlViewportArrayvNV::StaticSchema() {
     static schema::Entity entity {
-        GlViewportArrayvNV::StaticId(),
         "gles",
         "",
         "GlViewportArrayvNV",
@@ -23662,10 +19397,6 @@ const schema::Entity& GlViewportArrayvNV::StaticSchema() {
 
 // GlViewportIndexedfNV:
 // gles.GlViewportIndexedfNV{$,Uint32,Float32,Float32,Float32,Float32}
-const gapic::Id& GlViewportIndexedfNV::StaticId() {
-    static gapic::Id ID{ { 0xb3, 0x3c, 0x75, 0x4b, 0x21, 0x40, 0xde, 0xad, 0x50, 0xb9, 0xd2, 0xee, 0xeb, 0x1e, 0x8b, 0x6c, 0x4c, 0x1f, 0x61, 0xb6,  } };
-    return ID;
-}
 void GlViewportIndexedfNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mIndex);
@@ -23676,7 +19407,6 @@ void GlViewportIndexedfNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlViewportIndexedfNV::StaticSchema() {
     static schema::Entity entity {
-        GlViewportIndexedfNV::StaticId(),
         "gles",
         "",
         "GlViewportIndexedfNV",
@@ -23695,13 +19425,8 @@ const schema::Entity& GlViewportIndexedfNV::StaticSchema() {
 
 // GlViewportIndexedfvNV:
 // gles.GlViewportIndexedfvNV{$,Uint32,$}
-const gapic::Id& GlViewportIndexedfvNV::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xc5, 0x99, 0xfc, 0xf4, 0x8d, 0x95, 0xd0, 0x44, 0x00, 0xf2, 0xd5, 0x88, 0xaf, 0x9f, 0xdd, 0x4c, 0x0a, 0x0b, 0x48,  } };
-    return ID;
-}
 const schema::Entity& GlViewportIndexedfvNV::StaticSchema() {
     static schema::Entity entity {
-        GlViewportIndexedfvNV::StaticId(),
         "gles",
         "",
         "GlViewportIndexedfvNV",
@@ -23717,10 +19442,6 @@ const schema::Entity& GlViewportIndexedfvNV::StaticSchema() {
 
 // GlWaitSync:
 // gles.GlWaitSync{$,Uint64,Uint32,Uint64}
-const gapic::Id& GlWaitSync::StaticId() {
-    static gapic::Id ID{ { 0x2a, 0x27, 0xfa, 0x8b, 0xed, 0x64, 0xc6, 0x25, 0xa6, 0xc9, 0xde, 0xc5, 0x18, 0x62, 0x9d, 0x34, 0x09, 0x72, 0x66, 0xa5,  } };
-    return ID;
-}
 void GlWaitSync::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -23729,7 +19450,6 @@ void GlWaitSync::Encode(Encoder* e) const {
 }
 const schema::Entity& GlWaitSync::StaticSchema() {
     static schema::Entity entity {
-        GlWaitSync::StaticId(),
         "gles",
         "",
         "GlWaitSync",
@@ -23746,10 +19466,6 @@ const schema::Entity& GlWaitSync::StaticSchema() {
 
 // GlWaitSyncAPPLE:
 // gles.GlWaitSyncAPPLE{$,Uint64,Uint32,Uint64}
-const gapic::Id& GlWaitSyncAPPLE::StaticId() {
-    static gapic::Id ID{ { 0x30, 0xc0, 0x30, 0xe9, 0x83, 0x59, 0x7a, 0xa9, 0x1e, 0x7c, 0x1c, 0x1c, 0xd1, 0x15, 0xb6, 0x5a, 0x59, 0xd4, 0x23, 0xc8,  } };
-    return ID;
-}
 void GlWaitSyncAPPLE::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint64(this->mSync);
@@ -23758,7 +19474,6 @@ void GlWaitSyncAPPLE::Encode(Encoder* e) const {
 }
 const schema::Entity& GlWaitSyncAPPLE::StaticSchema() {
     static schema::Entity entity {
-        GlWaitSyncAPPLE::StaticId(),
         "gles",
         "",
         "GlWaitSyncAPPLE",
@@ -23775,10 +19490,6 @@ const schema::Entity& GlWaitSyncAPPLE::StaticSchema() {
 
 // GlWeightPathsNV:
 // gles.GlWeightPathsNV{$,Uint32,Int32,$,$}
-const gapic::Id& GlWeightPathsNV::StaticId() {
-    static gapic::Id ID{ { 0x1a, 0x20, 0xf2, 0x0b, 0x72, 0xba, 0xbe, 0x18, 0x15, 0xd6, 0x5c, 0x63, 0x29, 0x80, 0xe8, 0x9d, 0xcb, 0x17, 0x80, 0x43,  } };
-    return ID;
-}
 void GlWeightPathsNV::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Uint32(this->mResultPath);
@@ -23788,7 +19499,6 @@ void GlWeightPathsNV::Encode(Encoder* e) const {
 }
 const schema::Entity& GlWeightPathsNV::StaticSchema() {
     static schema::Entity entity {
-        GlWeightPathsNV::StaticId(),
         "gles",
         "",
         "GlWeightPathsNV",
@@ -23806,10 +19516,6 @@ const schema::Entity& GlWeightPathsNV::StaticSchema() {
 
 // GlXCreateContext:
 // gles.GlXCreateContext{$,$,$,$,Bool,$}
-const gapic::Id& GlXCreateContext::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0xb6, 0x17, 0xc6, 0x5f, 0x7e, 0x0f, 0xf1, 0x7b, 0xd0, 0x1f, 0x07, 0x21, 0x76, 0xfd, 0x72, 0x5d, 0xeb, 0x93, 0x6e,  } };
-    return ID;
-}
 void GlXCreateContext::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDpy);
@@ -23820,7 +19526,6 @@ void GlXCreateContext::Encode(Encoder* e) const {
 }
 const schema::Entity& GlXCreateContext::StaticSchema() {
     static schema::Entity entity {
-        GlXCreateContext::StaticId(),
         "gles",
         "",
         "GlXCreateContext",
@@ -23839,10 +19544,6 @@ const schema::Entity& GlXCreateContext::StaticSchema() {
 
 // GlXCreateNewContext:
 // gles.GlXCreateNewContext{$,$,$,Uint32,$,Bool,$}
-const gapic::Id& GlXCreateNewContext::StaticId() {
-    static gapic::Id ID{ { 0x79, 0x98, 0x6b, 0x73, 0x1c, 0x50, 0x92, 0xca, 0x81, 0xdb, 0x41, 0xfb, 0x41, 0x3f, 0x9a, 0x8c, 0xb5, 0xce, 0x34, 0x5d,  } };
-    return ID;
-}
 void GlXCreateNewContext::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -23854,7 +19555,6 @@ void GlXCreateNewContext::Encode(Encoder* e) const {
 }
 const schema::Entity& GlXCreateNewContext::StaticSchema() {
     static schema::Entity entity {
-        GlXCreateNewContext::StaticId(),
         "gles",
         "",
         "GlXCreateNewContext",
@@ -23874,10 +19574,6 @@ const schema::Entity& GlXCreateNewContext::StaticSchema() {
 
 // GlXMakeContextCurrent:
 // gles.GlXMakeContextCurrent{$,$,$,$,$,Int64}
-const gapic::Id& GlXMakeContextCurrent::StaticId() {
-    static gapic::Id ID{ { 0x53, 0x4f, 0x8c, 0x8a, 0xab, 0xc7, 0xf8, 0xe1, 0xfa, 0xf3, 0x1c, 0x99, 0xb4, 0xaa, 0x7e, 0xde, 0xd3, 0xb5, 0x99, 0xa5,  } };
-    return ID;
-}
 void GlXMakeContextCurrent::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -23888,7 +19584,6 @@ void GlXMakeContextCurrent::Encode(Encoder* e) const {
 }
 const schema::Entity& GlXMakeContextCurrent::StaticSchema() {
     static schema::Entity entity {
-        GlXMakeContextCurrent::StaticId(),
         "gles",
         "",
         "GlXMakeContextCurrent",
@@ -23907,10 +19602,6 @@ const schema::Entity& GlXMakeContextCurrent::StaticSchema() {
 
 // GlXMakeCurrent:
 // gles.GlXMakeCurrent{$,$,$,$,Int64}
-const gapic::Id& GlXMakeCurrent::StaticId() {
-    static gapic::Id ID{ { 0xbe, 0x63, 0x66, 0x59, 0xc4, 0x45, 0xa5, 0xe7, 0xa6, 0x41, 0x88, 0xa5, 0x6e, 0xa3, 0x3e, 0x78, 0xf6, 0x27, 0x4e, 0xfa,  } };
-    return ID;
-}
 void GlXMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -23920,7 +19611,6 @@ void GlXMakeCurrent::Encode(Encoder* e) const {
 }
 const schema::Entity& GlXMakeCurrent::StaticSchema() {
     static schema::Entity entity {
-        GlXMakeCurrent::StaticId(),
         "gles",
         "",
         "GlXMakeCurrent",
@@ -23938,13 +19628,8 @@ const schema::Entity& GlXMakeCurrent::StaticSchema() {
 
 // Intᵖ:
 // gles.Intᵖ{$}
-const gapic::Id& Int__P::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x7b, 0xc3, 0xcc, 0x81, 0xef, 0x06, 0xa0, 0x5a, 0xfc, 0x88, 0x00, 0xdc, 0x73, 0xab, 0xbc, 0x7c, 0x46, 0x29, 0x5e,  } };
-    return ID;
-}
 const schema::Entity& Int__P::StaticSchema() {
     static schema::Entity entity {
-        Int__P::StaticId(),
         "gles",
         "",
         "Intᵖ",
@@ -23958,10 +19643,6 @@ const schema::Entity& Int__P::StaticSchema() {
 
 // GlXQueryDrawable:
 // gles.GlXQueryDrawable{$,$,$,Int64,$,Int64}
-const gapic::Id& GlXQueryDrawable::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x78, 0x75, 0xae, 0xb4, 0xc4, 0xee, 0x20, 0xba, 0x96, 0xbd, 0x4e, 0x7b, 0xa0, 0x02, 0x75, 0x02, 0x87, 0x71, 0xf6,  } };
-    return ID;
-}
 void GlXQueryDrawable::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mDisplay);
@@ -23972,7 +19653,6 @@ void GlXQueryDrawable::Encode(Encoder* e) const {
 }
 const schema::Entity& GlXQueryDrawable::StaticSchema() {
     static schema::Entity entity {
-        GlXQueryDrawable::StaticId(),
         "gles",
         "",
         "GlXQueryDrawable",
@@ -23991,13 +19671,8 @@ const schema::Entity& GlXQueryDrawable::StaticSchema() {
 
 // GlXSwapBuffers:
 // gles.GlXSwapBuffers{$,$,$}
-const gapic::Id& GlXSwapBuffers::StaticId() {
-    static gapic::Id ID{ { 0x8c, 0x04, 0xbc, 0x9a, 0xe4, 0x1c, 0xa0, 0x50, 0x2b, 0x27, 0x6e, 0xa6, 0xb6, 0xce, 0x45, 0x43, 0xec, 0x2e, 0x6e, 0xba,  } };
-    return ID;
-}
 const schema::Entity& GlXSwapBuffers::StaticSchema() {
     static schema::Entity entity {
-        GlXSwapBuffers::StaticId(),
         "gles",
         "",
         "GlXSwapBuffers",
@@ -24013,13 +19688,8 @@ const schema::Entity& GlXSwapBuffers::StaticSchema() {
 
 // HDC:
 // gles.HDC{$}
-const gapic::Id& HDC::StaticId() {
-    static gapic::Id ID{ { 0x21, 0x4b, 0x01, 0x3a, 0xd3, 0x94, 0xdd, 0xd2, 0xf8, 0x24, 0x8c, 0x39, 0x29, 0x45, 0x7c, 0x11, 0xfd, 0x9a, 0x8a, 0x00,  } };
-    return ID;
-}
 const schema::Entity& HDC::StaticSchema() {
     static schema::Entity entity {
-        HDC::StaticId(),
         "gles",
         "",
         "HDC",
@@ -24033,13 +19703,8 @@ const schema::Entity& HDC::StaticSchema() {
 
 // HGLRC:
 // gles.HGLRC{$}
-const gapic::Id& HGLRC::StaticId() {
-    static gapic::Id ID{ { 0x5c, 0x08, 0x0b, 0xfb, 0x21, 0x8a, 0xf4, 0x20, 0x6e, 0x40, 0x9e, 0x13, 0xc9, 0xc6, 0x36, 0x2e, 0xeb, 0x60, 0x97, 0x4d,  } };
-    return ID;
-}
 const schema::Entity& HGLRC::StaticSchema() {
     static schema::Entity entity {
-        HGLRC::StaticId(),
         "gles",
         "",
         "HGLRC",
@@ -24053,13 +19718,8 @@ const schema::Entity& HGLRC::StaticSchema() {
 
 // Intˢ:
 // gles.Intˢ{$}
-const gapic::Id& Int__S::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0xdc, 0xe6, 0xf8, 0xf3, 0x6f, 0xd9, 0x30, 0x16, 0xf3, 0x91, 0x0b, 0x9e, 0x76, 0x07, 0x3d, 0x09, 0x2d, 0x78, 0xc9,  } };
-    return ID;
-}
 const schema::Entity& Int__S::StaticSchema() {
     static schema::Entity entity {
-        Int__S::StaticId(),
         "gles",
         "",
         "Intˢ",
@@ -24073,13 +19733,8 @@ const schema::Entity& Int__S::StaticSchema() {
 
 // Vec2f:
 // gles.Vec2f{[2]Float32}
-const gapic::Id& Vec2f::StaticId() {
-    static gapic::Id ID{ { 0x5c, 0x9a, 0xbc, 0x46, 0x16, 0x4a, 0x53, 0xae, 0x5b, 0x0e, 0xe3, 0x8c, 0x3b, 0x8e, 0xdc, 0x65, 0xad, 0xe9, 0x85, 0xeb,  } };
-    return ID;
-}
 const schema::Entity& Vec2f::StaticSchema() {
     static schema::Entity entity {
-        Vec2f::StaticId(),
         "gles",
         "",
         "Vec2f",
@@ -24093,13 +19748,8 @@ const schema::Entity& Vec2f::StaticSchema() {
 
 // Mat2f:
 // gles.Mat2f{[2]$}
-const gapic::Id& Mat2f::StaticId() {
-    static gapic::Id ID{ { 0x34, 0x8c, 0xad, 0xc5, 0x1e, 0x85, 0x59, 0x1c, 0xde, 0x6b, 0x35, 0x4f, 0x24, 0xc6, 0xb1, 0xf1, 0x37, 0xe6, 0x0b, 0xbc,  } };
-    return ID;
-}
 const schema::Entity& Mat2f::StaticSchema() {
     static schema::Entity entity {
-        Mat2f::StaticId(),
         "gles",
         "",
         "Mat2f",
@@ -24113,13 +19763,8 @@ const schema::Entity& Mat2f::StaticSchema() {
 
 // Mat2fˢ:
 // gles.Mat2fˢ{$}
-const gapic::Id& Mat2f__S::StaticId() {
-    static gapic::Id ID{ { 0x96, 0x07, 0xb8, 0x9c, 0xc5, 0x68, 0x11, 0x2f, 0xab, 0x9c, 0x1d, 0x07, 0xa4, 0x49, 0x70, 0x5b, 0x84, 0x38, 0x30, 0xb3,  } };
-    return ID;
-}
 const schema::Entity& Mat2f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat2f__S::StaticId(),
         "gles",
         "",
         "Mat2fˢ",
@@ -24133,13 +19778,8 @@ const schema::Entity& Mat2f__S::StaticSchema() {
 
 // Mat2fᵖ:
 // gles.Mat2fᵖ{$}
-const gapic::Id& Mat2f__P::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0xd0, 0x65, 0xe7, 0x22, 0x37, 0x0d, 0x72, 0x9d, 0x62, 0x98, 0xa2, 0xb8, 0x76, 0x59, 0x8a, 0xee, 0x26, 0x98, 0x44,  } };
-    return ID;
-}
 const schema::Entity& Mat2f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat2f__P::StaticId(),
         "gles",
         "",
         "Mat2fᵖ",
@@ -24153,13 +19793,8 @@ const schema::Entity& Mat2f__P::StaticSchema() {
 
 // Vec3f:
 // gles.Vec3f{[3]Float32}
-const gapic::Id& Vec3f::StaticId() {
-    static gapic::Id ID{ { 0xee, 0x1f, 0xd7, 0x1e, 0x56, 0x62, 0x61, 0x4e, 0xbb, 0x1c, 0xfa, 0xc1, 0xf2, 0x87, 0xa3, 0x65, 0x44, 0x6e, 0x9d, 0x36,  } };
-    return ID;
-}
 const schema::Entity& Vec3f::StaticSchema() {
     static schema::Entity entity {
-        Vec3f::StaticId(),
         "gles",
         "",
         "Vec3f",
@@ -24173,13 +19808,8 @@ const schema::Entity& Vec3f::StaticSchema() {
 
 // Mat2x3f:
 // gles.Mat2x3f{[2]$}
-const gapic::Id& Mat2x3f::StaticId() {
-    static gapic::Id ID{ { 0xdf, 0x2b, 0x7f, 0x88, 0xe0, 0xcd, 0x29, 0xf9, 0xf6, 0x18, 0x9f, 0x9d, 0x1e, 0x15, 0x47, 0xb8, 0x34, 0x06, 0x61, 0x3d,  } };
-    return ID;
-}
 const schema::Entity& Mat2x3f::StaticSchema() {
     static schema::Entity entity {
-        Mat2x3f::StaticId(),
         "gles",
         "",
         "Mat2x3f",
@@ -24193,13 +19823,8 @@ const schema::Entity& Mat2x3f::StaticSchema() {
 
 // Mat2x3fˢ:
 // gles.Mat2x3fˢ{$}
-const gapic::Id& Mat2x3f__S::StaticId() {
-    static gapic::Id ID{ { 0xd3, 0x2d, 0x90, 0xbe, 0xe5, 0x9a, 0x79, 0xc1, 0x22, 0xfb, 0x67, 0x09, 0xfe, 0xcf, 0xe5, 0xd7, 0xff, 0x5e, 0x74, 0x69,  } };
-    return ID;
-}
 const schema::Entity& Mat2x3f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat2x3f__S::StaticId(),
         "gles",
         "",
         "Mat2x3fˢ",
@@ -24213,13 +19838,8 @@ const schema::Entity& Mat2x3f__S::StaticSchema() {
 
 // Mat2x3fᵖ:
 // gles.Mat2x3fᵖ{$}
-const gapic::Id& Mat2x3f__P::StaticId() {
-    static gapic::Id ID{ { 0xec, 0xec, 0x33, 0x6c, 0x65, 0x06, 0x50, 0xf7, 0x1f, 0xb0, 0x85, 0xfb, 0x61, 0xd0, 0x7a, 0xd1, 0x10, 0xb2, 0x31, 0x85,  } };
-    return ID;
-}
 const schema::Entity& Mat2x3f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat2x3f__P::StaticId(),
         "gles",
         "",
         "Mat2x3fᵖ",
@@ -24233,13 +19853,8 @@ const schema::Entity& Mat2x3f__P::StaticSchema() {
 
 // Vec4f:
 // gles.Vec4f{[4]Float32}
-const gapic::Id& Vec4f::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x3f, 0x5e, 0x5b, 0x67, 0xc6, 0x0d, 0x6d, 0xb6, 0x26, 0xad, 0x38, 0xae, 0xf0, 0x97, 0xc1, 0xc1, 0x0e, 0x04, 0x56,  } };
-    return ID;
-}
 const schema::Entity& Vec4f::StaticSchema() {
     static schema::Entity entity {
-        Vec4f::StaticId(),
         "gles",
         "",
         "Vec4f",
@@ -24253,13 +19868,8 @@ const schema::Entity& Vec4f::StaticSchema() {
 
 // Mat2x4f:
 // gles.Mat2x4f{[2]$}
-const gapic::Id& Mat2x4f::StaticId() {
-    static gapic::Id ID{ { 0x9d, 0x3a, 0xdd, 0x11, 0x06, 0xd4, 0x45, 0x29, 0x6a, 0xd1, 0x46, 0xbf, 0x6a, 0x5c, 0xbc, 0x86, 0xf9, 0x53, 0x7a, 0xe7,  } };
-    return ID;
-}
 const schema::Entity& Mat2x4f::StaticSchema() {
     static schema::Entity entity {
-        Mat2x4f::StaticId(),
         "gles",
         "",
         "Mat2x4f",
@@ -24273,13 +19883,8 @@ const schema::Entity& Mat2x4f::StaticSchema() {
 
 // Mat2x4fˢ:
 // gles.Mat2x4fˢ{$}
-const gapic::Id& Mat2x4f__S::StaticId() {
-    static gapic::Id ID{ { 0xc5, 0x26, 0x18, 0xc5, 0xeb, 0xb6, 0xf1, 0xf5, 0x15, 0x47, 0xc9, 0x5a, 0x53, 0xa9, 0x38, 0xfb, 0x15, 0x19, 0xe6, 0xa7,  } };
-    return ID;
-}
 const schema::Entity& Mat2x4f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat2x4f__S::StaticId(),
         "gles",
         "",
         "Mat2x4fˢ",
@@ -24293,13 +19898,8 @@ const schema::Entity& Mat2x4f__S::StaticSchema() {
 
 // Mat2x4fᵖ:
 // gles.Mat2x4fᵖ{$}
-const gapic::Id& Mat2x4f__P::StaticId() {
-    static gapic::Id ID{ { 0x06, 0xc9, 0x05, 0x9b, 0x92, 0x07, 0xd1, 0xce, 0xc7, 0x53, 0x0f, 0x36, 0xad, 0xc1, 0xd0, 0x65, 0x83, 0x03, 0x92, 0xb9,  } };
-    return ID;
-}
 const schema::Entity& Mat2x4f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat2x4f__P::StaticId(),
         "gles",
         "",
         "Mat2x4fᵖ",
@@ -24313,13 +19913,8 @@ const schema::Entity& Mat2x4f__P::StaticSchema() {
 
 // Mat3f:
 // gles.Mat3f{[3]$}
-const gapic::Id& Mat3f::StaticId() {
-    static gapic::Id ID{ { 0x5f, 0x2d, 0x73, 0x00, 0x92, 0x22, 0x87, 0xf1, 0xfd, 0x13, 0x08, 0xa3, 0xf3, 0xea, 0x18, 0xb9, 0x0f, 0x4b, 0x1a, 0xd2,  } };
-    return ID;
-}
 const schema::Entity& Mat3f::StaticSchema() {
     static schema::Entity entity {
-        Mat3f::StaticId(),
         "gles",
         "",
         "Mat3f",
@@ -24333,13 +19928,8 @@ const schema::Entity& Mat3f::StaticSchema() {
 
 // Mat3fˢ:
 // gles.Mat3fˢ{$}
-const gapic::Id& Mat3f__S::StaticId() {
-    static gapic::Id ID{ { 0x8f, 0xe1, 0x74, 0x5f, 0xe4, 0xba, 0x30, 0x2d, 0x52, 0x81, 0xe4, 0x0d, 0x6e, 0x03, 0xfb, 0xfe, 0xcd, 0x28, 0x37, 0x0f,  } };
-    return ID;
-}
 const schema::Entity& Mat3f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat3f__S::StaticId(),
         "gles",
         "",
         "Mat3fˢ",
@@ -24353,13 +19943,8 @@ const schema::Entity& Mat3f__S::StaticSchema() {
 
 // Mat3fᵖ:
 // gles.Mat3fᵖ{$}
-const gapic::Id& Mat3f__P::StaticId() {
-    static gapic::Id ID{ { 0x8f, 0x20, 0x75, 0xb7, 0x0a, 0x2e, 0xc0, 0xb7, 0x93, 0xf1, 0x40, 0x6c, 0x89, 0x5f, 0x0f, 0x39, 0xc0, 0xe7, 0xa3, 0x11,  } };
-    return ID;
-}
 const schema::Entity& Mat3f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat3f__P::StaticId(),
         "gles",
         "",
         "Mat3fᵖ",
@@ -24373,13 +19958,8 @@ const schema::Entity& Mat3f__P::StaticSchema() {
 
 // Mat3x2f:
 // gles.Mat3x2f{[3]$}
-const gapic::Id& Mat3x2f::StaticId() {
-    static gapic::Id ID{ { 0x0f, 0xde, 0x29, 0xdd, 0x1b, 0x7f, 0xd6, 0xa4, 0xc9, 0x00, 0x52, 0x8b, 0x3b, 0xd1, 0x1b, 0x75, 0x4b, 0xd7, 0xd6, 0x17,  } };
-    return ID;
-}
 const schema::Entity& Mat3x2f::StaticSchema() {
     static schema::Entity entity {
-        Mat3x2f::StaticId(),
         "gles",
         "",
         "Mat3x2f",
@@ -24393,13 +19973,8 @@ const schema::Entity& Mat3x2f::StaticSchema() {
 
 // Mat3x2fˢ:
 // gles.Mat3x2fˢ{$}
-const gapic::Id& Mat3x2f__S::StaticId() {
-    static gapic::Id ID{ { 0x71, 0xb9, 0x44, 0xc3, 0x7e, 0x34, 0x0f, 0x20, 0x75, 0x9c, 0x8d, 0x98, 0xf4, 0x18, 0x27, 0x76, 0xdc, 0x6c, 0x1b, 0x76,  } };
-    return ID;
-}
 const schema::Entity& Mat3x2f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat3x2f__S::StaticId(),
         "gles",
         "",
         "Mat3x2fˢ",
@@ -24413,13 +19988,8 @@ const schema::Entity& Mat3x2f__S::StaticSchema() {
 
 // Mat3x2fᵖ:
 // gles.Mat3x2fᵖ{$}
-const gapic::Id& Mat3x2f__P::StaticId() {
-    static gapic::Id ID{ { 0x5b, 0x06, 0x5c, 0x7a, 0x2b, 0x32, 0xe6, 0xd6, 0x6f, 0x5a, 0x52, 0x14, 0x9f, 0x6b, 0x96, 0x94, 0xcb, 0x51, 0x80, 0x24,  } };
-    return ID;
-}
 const schema::Entity& Mat3x2f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat3x2f__P::StaticId(),
         "gles",
         "",
         "Mat3x2fᵖ",
@@ -24433,13 +20003,8 @@ const schema::Entity& Mat3x2f__P::StaticSchema() {
 
 // Mat3x4f:
 // gles.Mat3x4f{[3]$}
-const gapic::Id& Mat3x4f::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x64, 0x4d, 0xdb, 0x97, 0x0f, 0x9e, 0x07, 0xe4, 0xb5, 0x0a, 0x2e, 0x4a, 0xae, 0x7b, 0x5f, 0xc6, 0x5d, 0x28, 0xd2,  } };
-    return ID;
-}
 const schema::Entity& Mat3x4f::StaticSchema() {
     static schema::Entity entity {
-        Mat3x4f::StaticId(),
         "gles",
         "",
         "Mat3x4f",
@@ -24453,13 +20018,8 @@ const schema::Entity& Mat3x4f::StaticSchema() {
 
 // Mat3x4fˢ:
 // gles.Mat3x4fˢ{$}
-const gapic::Id& Mat3x4f__S::StaticId() {
-    static gapic::Id ID{ { 0x3f, 0x0f, 0x3a, 0x3d, 0xa2, 0xd5, 0xac, 0x40, 0xc5, 0x3f, 0x5b, 0x87, 0xb0, 0xc1, 0x16, 0x36, 0xb3, 0x66, 0xff, 0xdb,  } };
-    return ID;
-}
 const schema::Entity& Mat3x4f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat3x4f__S::StaticId(),
         "gles",
         "",
         "Mat3x4fˢ",
@@ -24473,13 +20033,8 @@ const schema::Entity& Mat3x4f__S::StaticSchema() {
 
 // Mat3x4fᵖ:
 // gles.Mat3x4fᵖ{$}
-const gapic::Id& Mat3x4f__P::StaticId() {
-    static gapic::Id ID{ { 0x2b, 0x74, 0xb9, 0x73, 0x74, 0x8d, 0xe6, 0x5c, 0x99, 0x3c, 0x3c, 0xb1, 0x15, 0xb5, 0xc3, 0x8b, 0x31, 0x69, 0x70, 0xef,  } };
-    return ID;
-}
 const schema::Entity& Mat3x4f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat3x4f__P::StaticId(),
         "gles",
         "",
         "Mat3x4fᵖ",
@@ -24493,13 +20048,8 @@ const schema::Entity& Mat3x4f__P::StaticSchema() {
 
 // Mat4f:
 // gles.Mat4f{[4]$}
-const gapic::Id& Mat4f::StaticId() {
-    static gapic::Id ID{ { 0x36, 0x81, 0x12, 0x48, 0xca, 0x65, 0x3b, 0x13, 0x77, 0xc4, 0x1a, 0x6e, 0x2b, 0x39, 0x6d, 0xaf, 0x96, 0x97, 0x9f, 0xf8,  } };
-    return ID;
-}
 const schema::Entity& Mat4f::StaticSchema() {
     static schema::Entity entity {
-        Mat4f::StaticId(),
         "gles",
         "",
         "Mat4f",
@@ -24513,13 +20063,8 @@ const schema::Entity& Mat4f::StaticSchema() {
 
 // Mat4fˢ:
 // gles.Mat4fˢ{$}
-const gapic::Id& Mat4f__S::StaticId() {
-    static gapic::Id ID{ { 0xcf, 0xa8, 0xa3, 0x0b, 0x19, 0xbd, 0x72, 0x04, 0xe5, 0x8b, 0xe2, 0xca, 0x54, 0x62, 0x2b, 0x69, 0x14, 0x77, 0xa1, 0x33,  } };
-    return ID;
-}
 const schema::Entity& Mat4f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat4f__S::StaticId(),
         "gles",
         "",
         "Mat4fˢ",
@@ -24533,13 +20078,8 @@ const schema::Entity& Mat4f__S::StaticSchema() {
 
 // Mat4fᵖ:
 // gles.Mat4fᵖ{$}
-const gapic::Id& Mat4f__P::StaticId() {
-    static gapic::Id ID{ { 0x8c, 0x2a, 0x93, 0x68, 0xa7, 0xf1, 0x1e, 0xbd, 0x2c, 0x4a, 0xd3, 0xe9, 0xa1, 0xec, 0x6b, 0x8e, 0xa0, 0xa1, 0x4b, 0xe2,  } };
-    return ID;
-}
 const schema::Entity& Mat4f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat4f__P::StaticId(),
         "gles",
         "",
         "Mat4fᵖ",
@@ -24553,13 +20093,8 @@ const schema::Entity& Mat4f__P::StaticSchema() {
 
 // Mat4x2f:
 // gles.Mat4x2f{[4]$}
-const gapic::Id& Mat4x2f::StaticId() {
-    static gapic::Id ID{ { 0xdd, 0xac, 0x06, 0x20, 0x3e, 0x70, 0xb1, 0x79, 0x2a, 0x85, 0x98, 0x1e, 0xed, 0xd3, 0x62, 0x8f, 0xaa, 0xe2, 0x61, 0x71,  } };
-    return ID;
-}
 const schema::Entity& Mat4x2f::StaticSchema() {
     static schema::Entity entity {
-        Mat4x2f::StaticId(),
         "gles",
         "",
         "Mat4x2f",
@@ -24573,13 +20108,8 @@ const schema::Entity& Mat4x2f::StaticSchema() {
 
 // Mat4x2fˢ:
 // gles.Mat4x2fˢ{$}
-const gapic::Id& Mat4x2f__S::StaticId() {
-    static gapic::Id ID{ { 0x26, 0x10, 0xb5, 0x07, 0xbf, 0x0f, 0x19, 0x89, 0xb3, 0x54, 0xa5, 0xd4, 0xfd, 0x47, 0x77, 0xe0, 0xb4, 0x23, 0x51, 0x2d,  } };
-    return ID;
-}
 const schema::Entity& Mat4x2f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat4x2f__S::StaticId(),
         "gles",
         "",
         "Mat4x2fˢ",
@@ -24593,13 +20123,8 @@ const schema::Entity& Mat4x2f__S::StaticSchema() {
 
 // Mat4x2fᵖ:
 // gles.Mat4x2fᵖ{$}
-const gapic::Id& Mat4x2f__P::StaticId() {
-    static gapic::Id ID{ { 0x2d, 0x42, 0x69, 0x78, 0xe4, 0xd0, 0x21, 0xa6, 0x79, 0xf5, 0x65, 0x05, 0xcb, 0x38, 0x3d, 0xd1, 0x68, 0x02, 0x63, 0x69,  } };
-    return ID;
-}
 const schema::Entity& Mat4x2f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat4x2f__P::StaticId(),
         "gles",
         "",
         "Mat4x2fᵖ",
@@ -24613,13 +20138,8 @@ const schema::Entity& Mat4x2f__P::StaticSchema() {
 
 // Mat4x3f:
 // gles.Mat4x3f{[4]$}
-const gapic::Id& Mat4x3f::StaticId() {
-    static gapic::Id ID{ { 0x25, 0x48, 0xfb, 0x5a, 0x3c, 0xaf, 0xb5, 0x8b, 0x21, 0xf5, 0x1a, 0xd4, 0x8e, 0xbc, 0x6f, 0x63, 0x0a, 0xc4, 0x71, 0xe1,  } };
-    return ID;
-}
 const schema::Entity& Mat4x3f::StaticSchema() {
     static schema::Entity entity {
-        Mat4x3f::StaticId(),
         "gles",
         "",
         "Mat4x3f",
@@ -24633,13 +20153,8 @@ const schema::Entity& Mat4x3f::StaticSchema() {
 
 // Mat4x3fˢ:
 // gles.Mat4x3fˢ{$}
-const gapic::Id& Mat4x3f__S::StaticId() {
-    static gapic::Id ID{ { 0xa3, 0x6f, 0x79, 0x2c, 0x0d, 0x10, 0x88, 0x84, 0xa0, 0x08, 0xcd, 0x68, 0x53, 0xc7, 0x26, 0x0e, 0x6e, 0xf1, 0xfd, 0xb7,  } };
-    return ID;
-}
 const schema::Entity& Mat4x3f__S::StaticSchema() {
     static schema::Entity entity {
-        Mat4x3f__S::StaticId(),
         "gles",
         "",
         "Mat4x3fˢ",
@@ -24653,13 +20168,8 @@ const schema::Entity& Mat4x3f__S::StaticSchema() {
 
 // Mat4x3fᵖ:
 // gles.Mat4x3fᵖ{$}
-const gapic::Id& Mat4x3f__P::StaticId() {
-    static gapic::Id ID{ { 0x13, 0xcf, 0x82, 0xc7, 0xe6, 0x8c, 0x3c, 0x34, 0xa8, 0x7f, 0x9a, 0x89, 0xaa, 0x2e, 0xc8, 0xab, 0x93, 0xcd, 0x72, 0x0b,  } };
-    return ID;
-}
 const schema::Entity& Mat4x3f__P::StaticSchema() {
     static schema::Entity entity {
-        Mat4x3f__P::StaticId(),
         "gles",
         "",
         "Mat4x3fᵖ",
@@ -24673,13 +20183,8 @@ const schema::Entity& Mat4x3f__P::StaticSchema() {
 
 // PipelineIdˢ:
 // gles.PipelineIdˢ{$}
-const gapic::Id& PipelineId__S::StaticId() {
-    static gapic::Id ID{ { 0x3e, 0xc8, 0x53, 0x72, 0x4f, 0x77, 0x11, 0x5b, 0xc1, 0xd3, 0xe3, 0x56, 0xce, 0x3c, 0xdf, 0x97, 0xcc, 0x04, 0x17, 0xac,  } };
-    return ID;
-}
 const schema::Entity& PipelineId__S::StaticSchema() {
     static schema::Entity entity {
-        PipelineId__S::StaticId(),
         "gles",
         "",
         "PipelineIdˢ",
@@ -24693,13 +20198,8 @@ const schema::Entity& PipelineId__S::StaticSchema() {
 
 // ProgramIdˢ:
 // gles.ProgramIdˢ{$}
-const gapic::Id& ProgramId__S::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0x94, 0x65, 0xb8, 0xc8, 0x3c, 0x92, 0x48, 0x1a, 0xb4, 0x65, 0x1b, 0x94, 0x59, 0x35, 0x13, 0x9e, 0xd4, 0x29, 0x82,  } };
-    return ID;
-}
 const schema::Entity& ProgramId__S::StaticSchema() {
     static schema::Entity entity {
-        ProgramId__S::StaticId(),
         "gles",
         "",
         "ProgramIdˢ",
@@ -24713,13 +20213,8 @@ const schema::Entity& ProgramId__S::StaticSchema() {
 
 // QueryIdˢ:
 // gles.QueryIdˢ{$}
-const gapic::Id& QueryId__S::StaticId() {
-    static gapic::Id ID{ { 0x4c, 0x3a, 0x03, 0xb4, 0x0c, 0xe0, 0x05, 0x0f, 0x28, 0x73, 0x8f, 0xe8, 0xd5, 0x53, 0x40, 0x4b, 0x03, 0x20, 0x2a, 0x8c,  } };
-    return ID;
-}
 const schema::Entity& QueryId__S::StaticSchema() {
     static schema::Entity entity {
-        QueryId__S::StaticId(),
         "gles",
         "",
         "QueryIdˢ",
@@ -24733,13 +20228,8 @@ const schema::Entity& QueryId__S::StaticSchema() {
 
 // RenderbufferIdˢ:
 // gles.RenderbufferIdˢ{$}
-const gapic::Id& RenderbufferId__S::StaticId() {
-    static gapic::Id ID{ { 0x22, 0x37, 0x16, 0x8d, 0xf2, 0x86, 0x52, 0xa6, 0xe4, 0xe0, 0x2e, 0xff, 0x63, 0x84, 0x6b, 0x06, 0x4f, 0xd0, 0x75, 0x0b,  } };
-    return ID;
-}
 const schema::Entity& RenderbufferId__S::StaticSchema() {
     static schema::Entity entity {
-        RenderbufferId__S::StaticId(),
         "gles",
         "",
         "RenderbufferIdˢ",
@@ -24753,13 +20243,8 @@ const schema::Entity& RenderbufferId__S::StaticSchema() {
 
 // ReplayBindRenderer:
 // gles.ReplayBindRenderer{$,Uint32}
-const gapic::Id& ReplayBindRenderer::StaticId() {
-    static gapic::Id ID{ { 0x58, 0xd7, 0xa9, 0xb1, 0x56, 0x51, 0x1b, 0xb2, 0xe1, 0x4d, 0x04, 0x31, 0x4e, 0xe8, 0x0f, 0x85, 0x4f, 0x4f, 0x96, 0xb3,  } };
-    return ID;
-}
 const schema::Entity& ReplayBindRenderer::StaticSchema() {
     static schema::Entity entity {
-        ReplayBindRenderer::StaticId(),
         "gles",
         "",
         "ReplayBindRenderer",
@@ -24774,13 +20259,8 @@ const schema::Entity& ReplayBindRenderer::StaticSchema() {
 
 // ReplayCreateRenderer:
 // gles.ReplayCreateRenderer{$,Uint32}
-const gapic::Id& ReplayCreateRenderer::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0xe7, 0xc6, 0x73, 0x83, 0x89, 0xcb, 0x87, 0x05, 0x5e, 0x2b, 0xfd, 0x18, 0x79, 0x4f, 0x35, 0xd2, 0x15, 0xbd, 0x45,  } };
-    return ID;
-}
 const schema::Entity& ReplayCreateRenderer::StaticSchema() {
     static schema::Entity entity {
-        ReplayCreateRenderer::StaticId(),
         "gles",
         "",
         "ReplayCreateRenderer",
@@ -24795,13 +20275,8 @@ const schema::Entity& ReplayCreateRenderer::StaticSchema() {
 
 // S64ˢ:
 // gles.S64ˢ{$}
-const gapic::Id& S64__S::StaticId() {
-    static gapic::Id ID{ { 0xe4, 0xea, 0xe4, 0xf3, 0x6a, 0x3c, 0x2e, 0x08, 0x4f, 0xdd, 0x53, 0x47, 0xe2, 0xf6, 0x2e, 0xeb, 0xd0, 0x92, 0xca, 0x58,  } };
-    return ID;
-}
 const schema::Entity& S64__S::StaticSchema() {
     static schema::Entity entity {
-        S64__S::StaticId(),
         "gles",
         "",
         "S64ˢ",
@@ -24815,13 +20290,8 @@ const schema::Entity& S64__S::StaticSchema() {
 
 // SamplerIdˢ:
 // gles.SamplerIdˢ{$}
-const gapic::Id& SamplerId__S::StaticId() {
-    static gapic::Id ID{ { 0x8a, 0x78, 0xad, 0xf1, 0xd0, 0xcd, 0x4a, 0x3f, 0x87, 0x09, 0x24, 0x65, 0x67, 0xf2, 0xf4, 0x92, 0xc6, 0x4b, 0x2a, 0x1c,  } };
-    return ID;
-}
 const schema::Entity& SamplerId__S::StaticSchema() {
     static schema::Entity entity {
-        SamplerId__S::StaticId(),
         "gles",
         "",
         "SamplerIdˢ",
@@ -24835,13 +20305,8 @@ const schema::Entity& SamplerId__S::StaticSchema() {
 
 // ShaderIdˢ:
 // gles.ShaderIdˢ{$}
-const gapic::Id& ShaderId__S::StaticId() {
-    static gapic::Id ID{ { 0x87, 0x6d, 0xe1, 0x58, 0x80, 0x7e, 0xe9, 0xb5, 0xdc, 0x3d, 0x50, 0xe6, 0xff, 0x9b, 0x14, 0x54, 0x2b, 0xd7, 0x18, 0x1c,  } };
-    return ID;
-}
 const schema::Entity& ShaderId__S::StaticSchema() {
     static schema::Entity entity {
-        ShaderId__S::StaticId(),
         "gles",
         "",
         "ShaderIdˢ",
@@ -24855,13 +20320,8 @@ const schema::Entity& ShaderId__S::StaticSchema() {
 
 // StartTimer:
 // gles.StartTimer{$,Uint8}
-const gapic::Id& StartTimer::StaticId() {
-    static gapic::Id ID{ { 0xe3, 0x1c, 0xda, 0x8d, 0xbf, 0x1a, 0x54, 0xdc, 0xa2, 0xcb, 0xfc, 0xeb, 0xf8, 0x48, 0x30, 0x12, 0x2e, 0xe1, 0x35, 0x0a,  } };
-    return ID;
-}
 const schema::Entity& StartTimer::StaticSchema() {
     static schema::Entity entity {
-        StartTimer::StaticId(),
         "gles",
         "",
         "StartTimer",
@@ -24878,13 +20338,8 @@ const schema::Entity& StartTimer::StaticSchema() {
 
 // StopTimer:
 // gles.StopTimer{$,Uint8,Uint64}
-const gapic::Id& StopTimer::StaticId() {
-    static gapic::Id ID{ { 0x3e, 0xf7, 0x35, 0xb1, 0x7a, 0xc8, 0x1d, 0x31, 0x50, 0xa9, 0x2b, 0xd6, 0x39, 0xd9, 0x07, 0x60, 0xde, 0x6d, 0x8f, 0xdb,  } };
-    return ID;
-}
 const schema::Entity& StopTimer::StaticSchema() {
     static schema::Entity entity {
-        StopTimer::StaticId(),
         "gles",
         "",
         "StopTimer",
@@ -24900,13 +20355,8 @@ const schema::Entity& StopTimer::StaticSchema() {
 
 // SwitchThread:
 // gles.SwitchThread{$,Uint64}
-const gapic::Id& SwitchThread::StaticId() {
-    static gapic::Id ID{ { 0x0d, 0x94, 0xef, 0x2d, 0x96, 0x3b, 0x65, 0x08, 0x51, 0x06, 0x09, 0x91, 0xf9, 0x52, 0x19, 0xb0, 0xcc, 0x6d, 0x2c, 0x8b,  } };
-    return ID;
-}
 const schema::Entity& SwitchThread::StaticSchema() {
     static schema::Entity entity {
-        SwitchThread::StaticId(),
         "gles",
         "",
         "SwitchThread",
@@ -24921,13 +20371,8 @@ const schema::Entity& SwitchThread::StaticSchema() {
 
 // TextureIdˢ:
 // gles.TextureIdˢ{$}
-const gapic::Id& TextureId__S::StaticId() {
-    static gapic::Id ID{ { 0x71, 0xa3, 0xf8, 0xfa, 0x2c, 0xb3, 0xff, 0xcf, 0x9b, 0x72, 0x26, 0x9b, 0xe6, 0x3a, 0xf9, 0xa8, 0xd9, 0x5f, 0xce, 0x34,  } };
-    return ID;
-}
 const schema::Entity& TextureId__S::StaticSchema() {
     static schema::Entity entity {
-        TextureId__S::StaticId(),
         "gles",
         "",
         "TextureIdˢ",
@@ -24941,13 +20386,8 @@ const schema::Entity& TextureId__S::StaticSchema() {
 
 // TransformFeedbackIdˢ:
 // gles.TransformFeedbackIdˢ{$}
-const gapic::Id& TransformFeedbackId__S::StaticId() {
-    static gapic::Id ID{ { 0x16, 0x92, 0xbf, 0x5b, 0x19, 0x54, 0x35, 0x86, 0xc5, 0x21, 0xce, 0xa9, 0x4a, 0xd9, 0xcc, 0x6f, 0x0b, 0x5c, 0xca, 0x7c,  } };
-    return ID;
-}
 const schema::Entity& TransformFeedbackId__S::StaticSchema() {
     static schema::Entity entity {
-        TransformFeedbackId__S::StaticId(),
         "gles",
         "",
         "TransformFeedbackIdˢ",
@@ -24961,13 +20401,8 @@ const schema::Entity& TransformFeedbackId__S::StaticSchema() {
 
 // U16ˢ:
 // gles.U16ˢ{$}
-const gapic::Id& U16__S::StaticId() {
-    static gapic::Id ID{ { 0x02, 0x9c, 0xa8, 0xd3, 0x9e, 0x79, 0x0f, 0xbf, 0x78, 0x7a, 0x39, 0xb4, 0x29, 0xbe, 0x72, 0x01, 0x78, 0x4b, 0x88, 0x72,  } };
-    return ID;
-}
 const schema::Entity& U16__S::StaticSchema() {
     static schema::Entity entity {
-        U16__S::StaticId(),
         "gles",
         "",
         "U16ˢ",
@@ -24981,13 +20416,8 @@ const schema::Entity& U16__S::StaticSchema() {
 
 // U16ᵖ:
 // gles.U16ᵖ{$}
-const gapic::Id& U16__P::StaticId() {
-    static gapic::Id ID{ { 0x7b, 0xc4, 0xf0, 0x62, 0x51, 0xdc, 0xf0, 0x89, 0xe2, 0xb3, 0xfe, 0xf0, 0x29, 0x2a, 0x5b, 0x5c, 0x90, 0xce, 0x26, 0x61,  } };
-    return ID;
-}
 const schema::Entity& U16__P::StaticSchema() {
     static schema::Entity entity {
-        U16__P::StaticId(),
         "gles",
         "",
         "U16ᵖ",
@@ -25001,13 +20431,8 @@ const schema::Entity& U16__P::StaticSchema() {
 
 // U32ˢ:
 // gles.U32ˢ{$}
-const gapic::Id& U32__S::StaticId() {
-    static gapic::Id ID{ { 0xea, 0x72, 0xe8, 0xa6, 0x20, 0x55, 0x3f, 0xc7, 0xa1, 0x89, 0x32, 0x9b, 0x5c, 0x55, 0xab, 0xf9, 0xbc, 0x9d, 0x85, 0x75,  } };
-    return ID;
-}
 const schema::Entity& U32__S::StaticSchema() {
     static schema::Entity entity {
-        U32__S::StaticId(),
         "gles",
         "",
         "U32ˢ",
@@ -25021,13 +20446,8 @@ const schema::Entity& U32__S::StaticSchema() {
 
 // U32ᵖ:
 // gles.U32ᵖ{$}
-const gapic::Id& U32__P::StaticId() {
-    static gapic::Id ID{ { 0xe6, 0xdf, 0xa8, 0x72, 0x7f, 0x9f, 0x6d, 0xcf, 0x15, 0x7d, 0x22, 0xa4, 0xcb, 0xff, 0x1a, 0x14, 0x13, 0x4f, 0x56, 0x71,  } };
-    return ID;
-}
 const schema::Entity& U32__P::StaticSchema() {
     static schema::Entity entity {
-        U32__P::StaticId(),
         "gles",
         "",
         "U32ᵖ",
@@ -25041,13 +20461,8 @@ const schema::Entity& U32__P::StaticSchema() {
 
 // U64ˢ:
 // gles.U64ˢ{$}
-const gapic::Id& U64__S::StaticId() {
-    static gapic::Id ID{ { 0x2e, 0x7c, 0x5c, 0xf0, 0xc2, 0x5c, 0xcd, 0xaf, 0x98, 0xb2, 0x08, 0xef, 0x74, 0x36, 0x83, 0x51, 0x60, 0x6c, 0x83, 0xd7,  } };
-    return ID;
-}
 const schema::Entity& U64__S::StaticSchema() {
     static schema::Entity entity {
-        U64__S::StaticId(),
         "gles",
         "",
         "U64ˢ",
@@ -25061,13 +20476,8 @@ const schema::Entity& U64__S::StaticSchema() {
 
 // U8ᵖ:
 // gles.U8ᵖ{$}
-const gapic::Id& U8__P::StaticId() {
-    static gapic::Id ID{ { 0x5c, 0x44, 0x4e, 0x39, 0x78, 0xf6, 0x1c, 0x46, 0x07, 0xc1, 0x9d, 0xfd, 0x08, 0x0b, 0x32, 0x8c, 0xb3, 0x7a, 0x15, 0x71,  } };
-    return ID;
-}
 const schema::Entity& U8__P::StaticSchema() {
     static schema::Entity entity {
-        U8__P::StaticId(),
         "gles",
         "",
         "U8ᵖ",
@@ -25081,13 +20491,8 @@ const schema::Entity& U8__P::StaticSchema() {
 
 // UniformIndexˢ:
 // gles.UniformIndexˢ{$}
-const gapic::Id& UniformIndex__S::StaticId() {
-    static gapic::Id ID{ { 0x0c, 0x5f, 0x44, 0x12, 0x0a, 0x92, 0x67, 0x47, 0x21, 0xc3, 0xc3, 0x42, 0x3b, 0x72, 0x24, 0x40, 0x9c, 0x68, 0x99, 0x7b,  } };
-    return ID;
-}
 const schema::Entity& UniformIndex__S::StaticSchema() {
     static schema::Entity entity {
-        UniformIndex__S::StaticId(),
         "gles",
         "",
         "UniformIndexˢ",
@@ -25101,13 +20506,8 @@ const schema::Entity& UniformIndex__S::StaticSchema() {
 
 // Vec2fː2ᵃ:
 // gles.Vec2fː2ᵃ{[2]$}
-const gapic::Id& Vec2f__2__A::StaticId() {
-    static gapic::Id ID{ { 0x7c, 0x9f, 0x9f, 0x85, 0xd7, 0x74, 0x93, 0x90, 0x23, 0xac, 0x36, 0xf0, 0x9d, 0x00, 0x0f, 0x79, 0xda, 0x0d, 0x9b, 0x29,  } };
-    return ID;
-}
 const schema::Entity& Vec2f__2__A::StaticSchema() {
     static schema::Entity entity {
-        Vec2f__2__A::StaticId(),
         "gles",
         "",
         "Vec2fː2ᵃ",
@@ -25121,13 +20521,8 @@ const schema::Entity& Vec2f__2__A::StaticSchema() {
 
 // Vec2fː3ᵃ:
 // gles.Vec2fː3ᵃ{[3]$}
-const gapic::Id& Vec2f__3__A::StaticId() {
-    static gapic::Id ID{ { 0xfc, 0xc0, 0xcb, 0x5d, 0x17, 0x48, 0x7b, 0x0e, 0xad, 0x82, 0x35, 0x1d, 0xcf, 0x29, 0xd2, 0xec, 0x95, 0xd7, 0xa0, 0x5e,  } };
-    return ID;
-}
 const schema::Entity& Vec2f__3__A::StaticSchema() {
     static schema::Entity entity {
-        Vec2f__3__A::StaticId(),
         "gles",
         "",
         "Vec2fː3ᵃ",
@@ -25141,13 +20536,8 @@ const schema::Entity& Vec2f__3__A::StaticSchema() {
 
 // Vec2fː4ᵃ:
 // gles.Vec2fː4ᵃ{[4]$}
-const gapic::Id& Vec2f__4__A::StaticId() {
-    static gapic::Id ID{ { 0x43, 0x0a, 0x1b, 0x73, 0xd8, 0x7f, 0x0e, 0x06, 0xc2, 0x60, 0xb7, 0x7f, 0xcb, 0x7b, 0x9a, 0x4c, 0xcb, 0xab, 0x9e, 0xff,  } };
-    return ID;
-}
 const schema::Entity& Vec2f__4__A::StaticSchema() {
     static schema::Entity entity {
-        Vec2f__4__A::StaticId(),
         "gles",
         "",
         "Vec2fː4ᵃ",
@@ -25161,13 +20551,8 @@ const schema::Entity& Vec2f__4__A::StaticSchema() {
 
 // Vec2fˢ:
 // gles.Vec2fˢ{$}
-const gapic::Id& Vec2f__S::StaticId() {
-    static gapic::Id ID{ { 0x0f, 0xe5, 0x7c, 0x39, 0x6b, 0x5b, 0xeb, 0x65, 0x50, 0x44, 0xfe, 0xe5, 0x0d, 0x8b, 0x19, 0x4f, 0x83, 0xab, 0xea, 0x05,  } };
-    return ID;
-}
 const schema::Entity& Vec2f__S::StaticSchema() {
     static schema::Entity entity {
-        Vec2f__S::StaticId(),
         "gles",
         "",
         "Vec2fˢ",
@@ -25181,13 +20566,8 @@ const schema::Entity& Vec2f__S::StaticSchema() {
 
 // Vec2fᵖ:
 // gles.Vec2fᵖ{$}
-const gapic::Id& Vec2f__P::StaticId() {
-    static gapic::Id ID{ { 0xc8, 0x05, 0x66, 0x69, 0x0f, 0x9f, 0x08, 0x7d, 0xe3, 0x84, 0x58, 0xf5, 0x91, 0x11, 0x96, 0xff, 0xb9, 0x05, 0x15, 0xc6,  } };
-    return ID;
-}
 const schema::Entity& Vec2f__P::StaticSchema() {
     static schema::Entity entity {
-        Vec2f__P::StaticId(),
         "gles",
         "",
         "Vec2fᵖ",
@@ -25201,13 +20581,8 @@ const schema::Entity& Vec2f__P::StaticSchema() {
 
 // Vec2i:
 // gles.Vec2i{[2]Int32}
-const gapic::Id& Vec2i::StaticId() {
-    static gapic::Id ID{ { 0x73, 0xfb, 0x17, 0xa4, 0x32, 0x92, 0x85, 0x0c, 0xa1, 0x07, 0x62, 0xc5, 0x5c, 0xc8, 0xb6, 0x89, 0x77, 0xf4, 0x1c, 0xf2,  } };
-    return ID;
-}
 const schema::Entity& Vec2i::StaticSchema() {
     static schema::Entity entity {
-        Vec2i::StaticId(),
         "gles",
         "",
         "Vec2i",
@@ -25221,13 +20596,8 @@ const schema::Entity& Vec2i::StaticSchema() {
 
 // Vec2iˢ:
 // gles.Vec2iˢ{$}
-const gapic::Id& Vec2i__S::StaticId() {
-    static gapic::Id ID{ { 0xcc, 0xa4, 0x1b, 0xcd, 0x5b, 0x14, 0xc6, 0x15, 0x85, 0xfa, 0x4a, 0x8b, 0xb7, 0xde, 0xd8, 0x0a, 0x8c, 0x13, 0x2e, 0xda,  } };
-    return ID;
-}
 const schema::Entity& Vec2i__S::StaticSchema() {
     static schema::Entity entity {
-        Vec2i__S::StaticId(),
         "gles",
         "",
         "Vec2iˢ",
@@ -25241,13 +20611,8 @@ const schema::Entity& Vec2i__S::StaticSchema() {
 
 // Vec2iᵖ:
 // gles.Vec2iᵖ{$}
-const gapic::Id& Vec2i__P::StaticId() {
-    static gapic::Id ID{ { 0x60, 0xe8, 0x35, 0xd1, 0xdf, 0x76, 0x16, 0xec, 0x45, 0x17, 0x58, 0x6e, 0xa7, 0xf9, 0xbb, 0x26, 0x8a, 0xce, 0xa0, 0x7e,  } };
-    return ID;
-}
 const schema::Entity& Vec2i__P::StaticSchema() {
     static schema::Entity entity {
-        Vec2i__P::StaticId(),
         "gles",
         "",
         "Vec2iᵖ",
@@ -25261,13 +20626,8 @@ const schema::Entity& Vec2i__P::StaticSchema() {
 
 // Vec2u:
 // gles.Vec2u{[2]Uint32}
-const gapic::Id& Vec2u::StaticId() {
-    static gapic::Id ID{ { 0xb7, 0x8b, 0x9d, 0x23, 0x51, 0xdd, 0xc8, 0x36, 0x32, 0x74, 0x32, 0xb2, 0xff, 0xb3, 0xcd, 0xc1, 0xe0, 0x5e, 0xa1, 0x0b,  } };
-    return ID;
-}
 const schema::Entity& Vec2u::StaticSchema() {
     static schema::Entity entity {
-        Vec2u::StaticId(),
         "gles",
         "",
         "Vec2u",
@@ -25281,13 +20641,8 @@ const schema::Entity& Vec2u::StaticSchema() {
 
 // Vec2uˢ:
 // gles.Vec2uˢ{$}
-const gapic::Id& Vec2u__S::StaticId() {
-    static gapic::Id ID{ { 0x00, 0xf5, 0xc0, 0xab, 0xd2, 0x7d, 0xcc, 0xa6, 0xb6, 0x02, 0x9f, 0xc7, 0x95, 0x2e, 0x42, 0x6b, 0xf1, 0x1b, 0x6c, 0xd6,  } };
-    return ID;
-}
 const schema::Entity& Vec2u__S::StaticSchema() {
     static schema::Entity entity {
-        Vec2u__S::StaticId(),
         "gles",
         "",
         "Vec2uˢ",
@@ -25301,13 +20656,8 @@ const schema::Entity& Vec2u__S::StaticSchema() {
 
 // Vec2uᵖ:
 // gles.Vec2uᵖ{$}
-const gapic::Id& Vec2u__P::StaticId() {
-    static gapic::Id ID{ { 0xf7, 0xd9, 0x1d, 0xe5, 0x5f, 0x5c, 0x32, 0x77, 0x29, 0x4e, 0xe9, 0x81, 0x7d, 0xcb, 0x86, 0x31, 0x41, 0x21, 0x52, 0x74,  } };
-    return ID;
-}
 const schema::Entity& Vec2u__P::StaticSchema() {
     static schema::Entity entity {
-        Vec2u__P::StaticId(),
         "gles",
         "",
         "Vec2uᵖ",
@@ -25321,13 +20671,8 @@ const schema::Entity& Vec2u__P::StaticSchema() {
 
 // Vec3fː2ᵃ:
 // gles.Vec3fː2ᵃ{[2]$}
-const gapic::Id& Vec3f__2__A::StaticId() {
-    static gapic::Id ID{ { 0xd5, 0xd5, 0x1e, 0xbd, 0xa2, 0xe2, 0x5d, 0x99, 0xda, 0x2f, 0x09, 0x0d, 0x10, 0x3a, 0x75, 0x4e, 0x8d, 0x9e, 0xb0, 0x0d,  } };
-    return ID;
-}
 const schema::Entity& Vec3f__2__A::StaticSchema() {
     static schema::Entity entity {
-        Vec3f__2__A::StaticId(),
         "gles",
         "",
         "Vec3fː2ᵃ",
@@ -25341,13 +20686,8 @@ const schema::Entity& Vec3f__2__A::StaticSchema() {
 
 // Vec3fː3ᵃ:
 // gles.Vec3fː3ᵃ{[3]$}
-const gapic::Id& Vec3f__3__A::StaticId() {
-    static gapic::Id ID{ { 0xc3, 0x8e, 0xec, 0x6a, 0x46, 0x26, 0x0b, 0x79, 0x3b, 0xec, 0xff, 0x01, 0x03, 0x5a, 0x98, 0xab, 0xf4, 0xb6, 0xc7, 0x6e,  } };
-    return ID;
-}
 const schema::Entity& Vec3f__3__A::StaticSchema() {
     static schema::Entity entity {
-        Vec3f__3__A::StaticId(),
         "gles",
         "",
         "Vec3fː3ᵃ",
@@ -25361,13 +20701,8 @@ const schema::Entity& Vec3f__3__A::StaticSchema() {
 
 // Vec3fː4ᵃ:
 // gles.Vec3fː4ᵃ{[4]$}
-const gapic::Id& Vec3f__4__A::StaticId() {
-    static gapic::Id ID{ { 0x1e, 0x85, 0xf7, 0x1e, 0x19, 0xb4, 0x22, 0x79, 0x06, 0xad, 0xdf, 0xfa, 0x74, 0xa4, 0x72, 0x9a, 0xe4, 0x37, 0xc6, 0x77,  } };
-    return ID;
-}
 const schema::Entity& Vec3f__4__A::StaticSchema() {
     static schema::Entity entity {
-        Vec3f__4__A::StaticId(),
         "gles",
         "",
         "Vec3fː4ᵃ",
@@ -25381,13 +20716,8 @@ const schema::Entity& Vec3f__4__A::StaticSchema() {
 
 // Vec3fˢ:
 // gles.Vec3fˢ{$}
-const gapic::Id& Vec3f__S::StaticId() {
-    static gapic::Id ID{ { 0xef, 0x7c, 0x28, 0xde, 0x83, 0xd7, 0xc5, 0x05, 0x00, 0x01, 0xd9, 0xc8, 0x0f, 0xf4, 0x8f, 0x80, 0xbc, 0x1c, 0x7b, 0x3b,  } };
-    return ID;
-}
 const schema::Entity& Vec3f__S::StaticSchema() {
     static schema::Entity entity {
-        Vec3f__S::StaticId(),
         "gles",
         "",
         "Vec3fˢ",
@@ -25401,13 +20731,8 @@ const schema::Entity& Vec3f__S::StaticSchema() {
 
 // Vec3fᵖ:
 // gles.Vec3fᵖ{$}
-const gapic::Id& Vec3f__P::StaticId() {
-    static gapic::Id ID{ { 0x5e, 0x1d, 0x70, 0xce, 0x79, 0xa4, 0x89, 0x0c, 0x2c, 0x67, 0x09, 0x74, 0x0d, 0x17, 0xdd, 0x64, 0xa1, 0x98, 0x76, 0xc1,  } };
-    return ID;
-}
 const schema::Entity& Vec3f__P::StaticSchema() {
     static schema::Entity entity {
-        Vec3f__P::StaticId(),
         "gles",
         "",
         "Vec3fᵖ",
@@ -25421,13 +20746,8 @@ const schema::Entity& Vec3f__P::StaticSchema() {
 
 // Vec3i:
 // gles.Vec3i{[3]Int32}
-const gapic::Id& Vec3i::StaticId() {
-    static gapic::Id ID{ { 0x45, 0xbd, 0x56, 0x29, 0x5f, 0xde, 0x71, 0x1b, 0x2e, 0xae, 0x5f, 0x4f, 0xe3, 0xba, 0x3d, 0x29, 0x31, 0xf3, 0x05, 0xcd,  } };
-    return ID;
-}
 const schema::Entity& Vec3i::StaticSchema() {
     static schema::Entity entity {
-        Vec3i::StaticId(),
         "gles",
         "",
         "Vec3i",
@@ -25441,13 +20761,8 @@ const schema::Entity& Vec3i::StaticSchema() {
 
 // Vec3iˢ:
 // gles.Vec3iˢ{$}
-const gapic::Id& Vec3i__S::StaticId() {
-    static gapic::Id ID{ { 0x68, 0x63, 0xa2, 0x95, 0x89, 0x7b, 0x14, 0x91, 0x1a, 0x75, 0xdc, 0x82, 0x9b, 0xbf, 0x0d, 0xbd, 0xda, 0x95, 0x46, 0x99,  } };
-    return ID;
-}
 const schema::Entity& Vec3i__S::StaticSchema() {
     static schema::Entity entity {
-        Vec3i__S::StaticId(),
         "gles",
         "",
         "Vec3iˢ",
@@ -25461,13 +20776,8 @@ const schema::Entity& Vec3i__S::StaticSchema() {
 
 // Vec3iᵖ:
 // gles.Vec3iᵖ{$}
-const gapic::Id& Vec3i__P::StaticId() {
-    static gapic::Id ID{ { 0xa4, 0x88, 0xe6, 0x32, 0x3e, 0x7e, 0x21, 0x6c, 0x05, 0xde, 0x95, 0x68, 0x37, 0xec, 0x61, 0xa5, 0x13, 0x27, 0x4c, 0x00,  } };
-    return ID;
-}
 const schema::Entity& Vec3i__P::StaticSchema() {
     static schema::Entity entity {
-        Vec3i__P::StaticId(),
         "gles",
         "",
         "Vec3iᵖ",
@@ -25481,13 +20791,8 @@ const schema::Entity& Vec3i__P::StaticSchema() {
 
 // Vec3u:
 // gles.Vec3u{[3]Uint32}
-const gapic::Id& Vec3u::StaticId() {
-    static gapic::Id ID{ { 0x53, 0x0e, 0xb2, 0x0d, 0xc4, 0x92, 0xa6, 0x66, 0xc5, 0xce, 0x3a, 0x64, 0x88, 0xf6, 0x66, 0x0f, 0xa9, 0x55, 0x54, 0x87,  } };
-    return ID;
-}
 const schema::Entity& Vec3u::StaticSchema() {
     static schema::Entity entity {
-        Vec3u::StaticId(),
         "gles",
         "",
         "Vec3u",
@@ -25501,13 +20806,8 @@ const schema::Entity& Vec3u::StaticSchema() {
 
 // Vec3uˢ:
 // gles.Vec3uˢ{$}
-const gapic::Id& Vec3u__S::StaticId() {
-    static gapic::Id ID{ { 0x83, 0x24, 0x23, 0xab, 0xcb, 0xfe, 0x5b, 0xef, 0x91, 0xfc, 0x56, 0xaf, 0x88, 0x5b, 0xc4, 0xd0, 0x61, 0x22, 0x89, 0xe4,  } };
-    return ID;
-}
 const schema::Entity& Vec3u__S::StaticSchema() {
     static schema::Entity entity {
-        Vec3u__S::StaticId(),
         "gles",
         "",
         "Vec3uˢ",
@@ -25521,13 +20821,8 @@ const schema::Entity& Vec3u__S::StaticSchema() {
 
 // Vec3uᵖ:
 // gles.Vec3uᵖ{$}
-const gapic::Id& Vec3u__P::StaticId() {
-    static gapic::Id ID{ { 0x59, 0xff, 0xdb, 0x1d, 0x32, 0xdc, 0x74, 0x97, 0x89, 0x0f, 0x6a, 0x45, 0xcb, 0x4d, 0x47, 0x85, 0xd3, 0x91, 0x03, 0x95,  } };
-    return ID;
-}
 const schema::Entity& Vec3u__P::StaticSchema() {
     static schema::Entity entity {
-        Vec3u__P::StaticId(),
         "gles",
         "",
         "Vec3uᵖ",
@@ -25541,13 +20836,8 @@ const schema::Entity& Vec3u__P::StaticSchema() {
 
 // Vec4fː2ᵃ:
 // gles.Vec4fː2ᵃ{[2]$}
-const gapic::Id& Vec4f__2__A::StaticId() {
-    static gapic::Id ID{ { 0xde, 0xa6, 0xa8, 0xfe, 0x66, 0xb4, 0xd9, 0x44, 0x63, 0xd0, 0x58, 0x4e, 0x6f, 0x10, 0x2a, 0xb3, 0xd4, 0x39, 0xf1, 0xb0,  } };
-    return ID;
-}
 const schema::Entity& Vec4f__2__A::StaticSchema() {
     static schema::Entity entity {
-        Vec4f__2__A::StaticId(),
         "gles",
         "",
         "Vec4fː2ᵃ",
@@ -25561,13 +20851,8 @@ const schema::Entity& Vec4f__2__A::StaticSchema() {
 
 // Vec4fː3ᵃ:
 // gles.Vec4fː3ᵃ{[3]$}
-const gapic::Id& Vec4f__3__A::StaticId() {
-    static gapic::Id ID{ { 0x3f, 0xc2, 0xcf, 0x3b, 0x98, 0xdb, 0x80, 0x76, 0x2a, 0x54, 0x73, 0x75, 0x8b, 0x7f, 0x37, 0x7d, 0xe2, 0x35, 0x3b, 0x60,  } };
-    return ID;
-}
 const schema::Entity& Vec4f__3__A::StaticSchema() {
     static schema::Entity entity {
-        Vec4f__3__A::StaticId(),
         "gles",
         "",
         "Vec4fː3ᵃ",
@@ -25581,13 +20866,8 @@ const schema::Entity& Vec4f__3__A::StaticSchema() {
 
 // Vec4fː4ᵃ:
 // gles.Vec4fː4ᵃ{[4]$}
-const gapic::Id& Vec4f__4__A::StaticId() {
-    static gapic::Id ID{ { 0xb2, 0xd9, 0x95, 0xf9, 0x2c, 0xd8, 0xae, 0x4a, 0xa9, 0x61, 0xe5, 0xe1, 0xef, 0x1a, 0x07, 0xbf, 0xbf, 0xfd, 0xe7, 0x43,  } };
-    return ID;
-}
 const schema::Entity& Vec4f__4__A::StaticSchema() {
     static schema::Entity entity {
-        Vec4f__4__A::StaticId(),
         "gles",
         "",
         "Vec4fː4ᵃ",
@@ -25601,13 +20881,8 @@ const schema::Entity& Vec4f__4__A::StaticSchema() {
 
 // Vec4fˢ:
 // gles.Vec4fˢ{$}
-const gapic::Id& Vec4f__S::StaticId() {
-    static gapic::Id ID{ { 0x2f, 0xfb, 0xdb, 0xef, 0x13, 0xe1, 0x0b, 0xba, 0x8d, 0x0e, 0x42, 0x71, 0xe3, 0xbd, 0xbb, 0xd6, 0xde, 0x79, 0x3b, 0x6b,  } };
-    return ID;
-}
 const schema::Entity& Vec4f__S::StaticSchema() {
     static schema::Entity entity {
-        Vec4f__S::StaticId(),
         "gles",
         "",
         "Vec4fˢ",
@@ -25621,13 +20896,8 @@ const schema::Entity& Vec4f__S::StaticSchema() {
 
 // Vec4fᵖ:
 // gles.Vec4fᵖ{$}
-const gapic::Id& Vec4f__P::StaticId() {
-    static gapic::Id ID{ { 0x7b, 0x5d, 0xaf, 0x5d, 0x82, 0x44, 0xa5, 0x96, 0xf6, 0xe6, 0x7b, 0x9f, 0x6b, 0x5a, 0x78, 0x0b, 0x85, 0xfe, 0x20, 0x49,  } };
-    return ID;
-}
 const schema::Entity& Vec4f__P::StaticSchema() {
     static schema::Entity entity {
-        Vec4f__P::StaticId(),
         "gles",
         "",
         "Vec4fᵖ",
@@ -25641,13 +20911,8 @@ const schema::Entity& Vec4f__P::StaticSchema() {
 
 // Vec4i:
 // gles.Vec4i{[4]Int32}
-const gapic::Id& Vec4i::StaticId() {
-    static gapic::Id ID{ { 0x20, 0x09, 0x1f, 0xb1, 0xbd, 0xd6, 0x14, 0x15, 0x55, 0x70, 0x91, 0xdc, 0x3a, 0x35, 0x45, 0x3d, 0x04, 0xaa, 0x29, 0xbb,  } };
-    return ID;
-}
 const schema::Entity& Vec4i::StaticSchema() {
     static schema::Entity entity {
-        Vec4i::StaticId(),
         "gles",
         "",
         "Vec4i",
@@ -25661,13 +20926,8 @@ const schema::Entity& Vec4i::StaticSchema() {
 
 // Vec4iˢ:
 // gles.Vec4iˢ{$}
-const gapic::Id& Vec4i__S::StaticId() {
-    static gapic::Id ID{ { 0xe5, 0xce, 0x39, 0x67, 0x29, 0x4a, 0x17, 0xab, 0xfa, 0x2d, 0x22, 0x40, 0x57, 0x2a, 0x8a, 0x6e, 0xed, 0xef, 0xba, 0xfa,  } };
-    return ID;
-}
 const schema::Entity& Vec4i__S::StaticSchema() {
     static schema::Entity entity {
-        Vec4i__S::StaticId(),
         "gles",
         "",
         "Vec4iˢ",
@@ -25681,13 +20941,8 @@ const schema::Entity& Vec4i__S::StaticSchema() {
 
 // Vec4iᵖ:
 // gles.Vec4iᵖ{$}
-const gapic::Id& Vec4i__P::StaticId() {
-    static gapic::Id ID{ { 0xef, 0x44, 0x39, 0xa4, 0x31, 0xe8, 0x63, 0xb5, 0x71, 0x0b, 0x4f, 0x8a, 0xd0, 0x1c, 0x9f, 0xaa, 0xf3, 0xc2, 0x92, 0x42,  } };
-    return ID;
-}
 const schema::Entity& Vec4i__P::StaticSchema() {
     static schema::Entity entity {
-        Vec4i__P::StaticId(),
         "gles",
         "",
         "Vec4iᵖ",
@@ -25701,13 +20956,8 @@ const schema::Entity& Vec4i__P::StaticSchema() {
 
 // Vec4u:
 // gles.Vec4u{[4]Uint32}
-const gapic::Id& Vec4u::StaticId() {
-    static gapic::Id ID{ { 0x31, 0xb8, 0x8e, 0x0e, 0xbc, 0xec, 0xa0, 0x59, 0x1f, 0x03, 0xf4, 0x51, 0xbb, 0x89, 0x78, 0xa2, 0xd3, 0x24, 0x08, 0x84,  } };
-    return ID;
-}
 const schema::Entity& Vec4u::StaticSchema() {
     static schema::Entity entity {
-        Vec4u::StaticId(),
         "gles",
         "",
         "Vec4u",
@@ -25721,13 +20971,8 @@ const schema::Entity& Vec4u::StaticSchema() {
 
 // Vec4uˢ:
 // gles.Vec4uˢ{$}
-const gapic::Id& Vec4u__S::StaticId() {
-    static gapic::Id ID{ { 0x63, 0x7e, 0xc6, 0xfb, 0x42, 0x27, 0xd0, 0x00, 0x46, 0xa3, 0x98, 0xf8, 0x1e, 0x56, 0xe9, 0x78, 0xaa, 0x9e, 0xea, 0xad,  } };
-    return ID;
-}
 const schema::Entity& Vec4u__S::StaticSchema() {
     static schema::Entity entity {
-        Vec4u__S::StaticId(),
         "gles",
         "",
         "Vec4uˢ",
@@ -25741,13 +20986,8 @@ const schema::Entity& Vec4u__S::StaticSchema() {
 
 // Vec4uᵖ:
 // gles.Vec4uᵖ{$}
-const gapic::Id& Vec4u__P::StaticId() {
-    static gapic::Id ID{ { 0x89, 0xd1, 0xb3, 0xb7, 0xd9, 0xcb, 0x08, 0x70, 0xea, 0x9d, 0xc5, 0x89, 0x77, 0xad, 0x2e, 0x46, 0x40, 0xfa, 0x0e, 0x4e,  } };
-    return ID;
-}
 const schema::Entity& Vec4u__P::StaticSchema() {
     static schema::Entity entity {
-        Vec4u__P::StaticId(),
         "gles",
         "",
         "Vec4uᵖ",
@@ -25761,13 +21001,8 @@ const schema::Entity& Vec4u__P::StaticSchema() {
 
 // VertexArrayIdˢ:
 // gles.VertexArrayIdˢ{$}
-const gapic::Id& VertexArrayId__S::StaticId() {
-    static gapic::Id ID{ { 0xce, 0x0d, 0x6b, 0x94, 0x01, 0xe1, 0xb7, 0xc8, 0xcd, 0x66, 0xd2, 0xa6, 0xb7, 0x11, 0x01, 0xb5, 0x5d, 0x7d, 0x3a, 0xbf,  } };
-    return ID;
-}
 const schema::Entity& VertexArrayId__S::StaticSchema() {
     static schema::Entity entity {
-        VertexArrayId__S::StaticId(),
         "gles",
         "",
         "VertexArrayIdˢ",
@@ -25781,13 +21016,8 @@ const schema::Entity& VertexArrayId__S::StaticSchema() {
 
 // Voidˢ:
 // gles.Voidˢ{$}
-const gapic::Id& Void__S::StaticId() {
-    static gapic::Id ID{ { 0x9c, 0x3e, 0x53, 0xca, 0x8c, 0x01, 0x9c, 0xd9, 0x1f, 0x99, 0x6e, 0x54, 0x1c, 0x28, 0x9d, 0xea, 0xca, 0x46, 0xf1, 0x4c,  } };
-    return ID;
-}
 const schema::Entity& Void__S::StaticSchema() {
     static schema::Entity entity {
-        Void__S::StaticId(),
         "gles",
         "",
         "Voidˢ",
@@ -25801,13 +21031,8 @@ const schema::Entity& Void__S::StaticSchema() {
 
 // Voidᵖˢ:
 // gles.Voidᵖˢ{$}
-const gapic::Id& Void__P__S::StaticId() {
-    static gapic::Id ID{ { 0xfa, 0x9c, 0xaa, 0xd6, 0x23, 0x3c, 0x42, 0x20, 0xd8, 0xfb, 0x3e, 0xaa, 0xda, 0x60, 0xbe, 0x75, 0x7e, 0x37, 0x66, 0xb8,  } };
-    return ID;
-}
 const schema::Entity& Void__P__S::StaticSchema() {
     static schema::Entity entity {
-        Void__P__S::StaticId(),
         "gles",
         "",
         "Voidᵖˢ",
@@ -25821,13 +21046,8 @@ const schema::Entity& Void__P__S::StaticSchema() {
 
 // Voidᶜᵖˢ:
 // gles.Voidᶜᵖˢ{$}
-const gapic::Id& Void__CP__S::StaticId() {
-    static gapic::Id ID{ { 0xd6, 0xbb, 0xf1, 0x91, 0xaa, 0x86, 0xd9, 0x10, 0xbe, 0xe6, 0xf9, 0x2c, 0x2b, 0x30, 0x5e, 0xe1, 0x64, 0x07, 0xec, 0xda,  } };
-    return ID;
-}
 const schema::Entity& Void__CP__S::StaticSchema() {
     static schema::Entity entity {
-        Void__CP__S::StaticId(),
         "gles",
         "",
         "Voidᶜᵖˢ",
@@ -25841,13 +21061,8 @@ const schema::Entity& Void__CP__S::StaticSchema() {
 
 // Voidᶜᵖᵖ:
 // gles.Voidᶜᵖᵖ{$}
-const gapic::Id& Void__CP__P::StaticId() {
-    static gapic::Id ID{ { 0xc2, 0x5c, 0x2a, 0xee, 0x62, 0x4f, 0xc0, 0x9c, 0x80, 0x90, 0x8a, 0x47, 0xc2, 0x57, 0xef, 0x11, 0x02, 0x25, 0x3c, 0x7a,  } };
-    return ID;
-}
 const schema::Entity& Void__CP__P::StaticSchema() {
     static schema::Entity entity {
-        Void__CP__P::StaticId(),
         "gles",
         "",
         "Voidᶜᵖᵖ",
@@ -25861,13 +21076,8 @@ const schema::Entity& Void__CP__P::StaticSchema() {
 
 // WglCreateContext:
 // gles.WglCreateContext{$,$,$}
-const gapic::Id& WglCreateContext::StaticId() {
-    static gapic::Id ID{ { 0x11, 0x23, 0x71, 0x08, 0xb5, 0xde, 0x9e, 0x8a, 0x32, 0xdb, 0x10, 0x9a, 0x28, 0x0b, 0x09, 0x7e, 0xc3, 0x14, 0x80, 0xaf,  } };
-    return ID;
-}
 const schema::Entity& WglCreateContext::StaticSchema() {
     static schema::Entity entity {
-        WglCreateContext::StaticId(),
         "gles",
         "",
         "WglCreateContext",
@@ -25883,10 +21093,6 @@ const schema::Entity& WglCreateContext::StaticSchema() {
 
 // WglCreateContextAttribsARB:
 // gles.WglCreateContextAttribsARB{$,$,$,$,$}
-const gapic::Id& WglCreateContextAttribsARB::StaticId() {
-    static gapic::Id ID{ { 0x0b, 0x43, 0xad, 0x1f, 0xd9, 0x65, 0x1b, 0xe1, 0xa6, 0x21, 0x58, 0xe5, 0x58, 0x64, 0x80, 0x11, 0xa5, 0xff, 0x04, 0xa9,  } };
-    return ID;
-}
 void WglCreateContextAttribsARB::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mHdc);
@@ -25896,7 +21102,6 @@ void WglCreateContextAttribsARB::Encode(Encoder* e) const {
 }
 const schema::Entity& WglCreateContextAttribsARB::StaticSchema() {
     static schema::Entity entity {
-        WglCreateContextAttribsARB::StaticId(),
         "gles",
         "",
         "WglCreateContextAttribsARB",
@@ -25914,10 +21119,6 @@ const schema::Entity& WglCreateContextAttribsARB::StaticSchema() {
 
 // WglMakeCurrent:
 // gles.WglMakeCurrent{$,$,$,Int64}
-const gapic::Id& WglMakeCurrent::StaticId() {
-    static gapic::Id ID{ { 0x00, 0xb3, 0x59, 0x53, 0xe6, 0x6c, 0x41, 0x19, 0x3e, 0x80, 0x3c, 0xe0, 0x8f, 0xf8, 0xf0, 0x9f, 0xd5, 0x82, 0x67, 0xe8,  } };
-    return ID;
-}
 void WglMakeCurrent::Encode(Encoder* e) const {
     e->Value(this->mobservations);
     e->Value(this->mHdc);
@@ -25926,7 +21127,6 @@ void WglMakeCurrent::Encode(Encoder* e) const {
 }
 const schema::Entity& WglMakeCurrent::StaticSchema() {
     static schema::Entity entity {
-        WglMakeCurrent::StaticId(),
         "gles",
         "",
         "WglMakeCurrent",
@@ -25943,13 +21143,8 @@ const schema::Entity& WglMakeCurrent::StaticSchema() {
 
 // WglSwapBuffers:
 // gles.WglSwapBuffers{$,$}
-const gapic::Id& WglSwapBuffers::StaticId() {
-    static gapic::Id ID{ { 0x3d, 0xdb, 0x3c, 0x71, 0x6f, 0xfa, 0x17, 0xb1, 0x1e, 0xf9, 0x99, 0xe1, 0x58, 0xd5, 0x4f, 0xea, 0x9a, 0xca, 0xcb, 0x59,  } };
-    return ID;
-}
 const schema::Entity& WglSwapBuffers::StaticSchema() {
     static schema::Entity entity {
-        WglSwapBuffers::StaticId(),
         "gles",
         "",
         "WglSwapBuffers",
@@ -25964,13 +21159,8 @@ const schema::Entity& WglSwapBuffers::StaticSchema() {
 
 // generate_types:
 // gles.generate_types{$,$}
-const gapic::Id& generate_types::StaticId() {
-    static gapic::Id ID{ { 0xd1, 0x87, 0x46, 0x6b, 0xc9, 0x4a, 0x8f, 0x94, 0x60, 0x7b, 0xc7, 0xb0, 0x5b, 0xb0, 0xad, 0x9e, 0x52, 0xbd, 0xd9, 0xe7,  } };
-    return ID;
-}
 const schema::Entity& generate_types::StaticSchema() {
     static schema::Entity entity {
-        generate_types::StaticId(),
         "gles",
         "",
         "generate_types",
