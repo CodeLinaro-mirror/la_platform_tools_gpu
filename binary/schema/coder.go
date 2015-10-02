@@ -46,6 +46,9 @@ func EncodeType(e binary.Encoder, t binary.Type, compact bool) {
 	case *Struct:
 		e.Uint8(uint8(StructTag))
 		e.Entity(t.Entity, compact)
+		if !compact {
+			e.String(t.Relative)
+		}
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
 		EncodeType(e, t.Type, compact)
@@ -99,6 +102,9 @@ func DecodeType(d binary.Decoder, compact bool) binary.Type {
 	case StructTag:
 		t := &Struct{}
 		t.Entity = d.Entity(compact)
+		if !compact {
+			t.Relative = d.String()
+		}
 		return t
 	case PointerTag:
 		t := &Pointer{}

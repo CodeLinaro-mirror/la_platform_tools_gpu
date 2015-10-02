@@ -22,7 +22,7 @@ import (
 
 // Struct is the Type descriptor for an binary.Object typed value.
 type Struct struct {
-	Relative string         // The relative name of the type.
+	Relative string         // The relative go import name of the type, only useful to codergen.
 	Entity   *binary.Entity // The schema entity this is a field of.
 }
 
