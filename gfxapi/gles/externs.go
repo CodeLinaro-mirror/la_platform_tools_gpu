@@ -204,6 +204,10 @@ func (e externs) stateVariableSize(v GLenum) int32 {
 		return 1
 	case GLenum_GL_SAMPLES:
 		return 1
+	case GLenum_GL_MAX_SAMPLES:
+		return 1
+	case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
+		return 1
 	case GLenum_GL_SCISSOR_BOX:
 		return 4
 	case GLenum_GL_SCISSOR_TEST:
