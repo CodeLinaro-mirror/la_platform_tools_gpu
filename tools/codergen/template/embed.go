@@ -171,7 +171,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "Cpp.Schema.Primitive"}}new schema::Primitive{"{{.Name}}", schema::Primitive::{{.Method}}}{{end}}
-{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.String | File.TypeName}}::Schema()}{{end}}
+{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.String | File.TypeName}}::StaticSchema()}{{end}}
 {{define "Cpp.Schema.Pointer"}}new schema::Pointer{ {{Call "Cpp.Schema" .Type}} }{{end}}
 {{define "Cpp.Schema.Interface"}}new schema::Interface{"{{.Name}}"}{{end}}
 {{define "Cpp.Schema.Variant"}}new schema::Variant{"{{.Name}}"}{{end}}

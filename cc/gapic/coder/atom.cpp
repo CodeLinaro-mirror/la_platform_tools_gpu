@@ -72,8 +72,8 @@ const schema::Entity& Group::StaticSchema() {
         "",
         {
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Range", new schema::Struct{"", Range::Schema()}},
-            schema::Field{"SubGroups", new schema::Slice{"GroupList", new schema::Struct{"", Group::Schema()}}},
+            schema::Field{"Range", new schema::Struct{"", Range::StaticSchema()}},
+            schema::Field{"SubGroups", new schema::Slice{"GroupList", new schema::Struct{"", Group::StaticSchema()}}},
         },
     };
     return entity;
@@ -144,7 +144,7 @@ const schema::Entity& Observation::StaticSchema() {
         "Observation",
         "",
         {
-            schema::Field{"Range", new schema::Struct{"", memory::Range::Schema()}},
+            schema::Field{"Range", new schema::Struct{"", memory::Range::StaticSchema()}},
             schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
         },
     };
@@ -165,8 +165,8 @@ const schema::Entity& Observations::StaticSchema() {
         "Observations",
         "",
         {
-            schema::Field{"Reads", new schema::Slice{"", new schema::Struct{"", Observation::Schema()}}},
-            schema::Field{"Writes", new schema::Slice{"", new schema::Struct{"", Observation::Schema()}}},
+            schema::Field{"Reads", new schema::Slice{"", new schema::Struct{"", Observation::StaticSchema()}}},
+            schema::Field{"Writes", new schema::Slice{"", new schema::Struct{"", Observation::StaticSchema()}}},
         },
     };
     return entity;
