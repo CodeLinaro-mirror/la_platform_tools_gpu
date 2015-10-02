@@ -27,6 +27,10 @@
 
 namespace gapic {
 
+namespace schema {
+class Entity;
+}
+
 class StreamWriter;
 class Encodable;
 class Encoder;
@@ -71,8 +75,12 @@ public:
     void Int64(int64_t);
     void Pointer(const void*);
     void String(const char*);
+    void String(const std::string& str) {
+      String(str.c_str());
+    }
     void Data(const void* ptr, int32_t size);
     void Id(const gapic::Id&);
+    void Entity(const schema::Entity&);
 
     void Value(const Encodable& obj);
     void Variant(const Encodable* obj);
@@ -80,6 +88,7 @@ public:
 
 private:
     std::unordered_map<gapic::Id, uint32_t> mIds;
+    std::unordered_map<gapic::Id, uint32_t> mTypeIds;
     std::shared_ptr<StreamWriter> mOutput;
     uint32_t mLastObjectId;
 };

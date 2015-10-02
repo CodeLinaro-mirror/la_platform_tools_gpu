@@ -7,6 +7,7 @@
 #ifndef GAPIC_CODER_ATOM_H
 #define GAPIC_CODER_ATOM_H
 
+#include "gapic/schema.h"
 namespace gapic {
 
 class Encodable;
@@ -21,15 +22,33 @@ namespace atom {
             mWidth(Width),
             mHeight(Height),
             mData(Data) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0x00, 0x8f, 0x27, 0x0c, 0x45, 0x41, 0xb2, 0xe9, 0xb9, 0xa2, 0xd1, 0x56, 0xbf, 0xcc, 0xb0, 0x3d, 0xc7, 0xa8, 0xd7, 0x49,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mWidth);
             e->Uint32(this->mHeight);
             e->Uint32(this->mData.size());
             e->Data(this->mData.data(), this->mData.size());
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                FramebufferObservation::StaticId(),
+                "atom",
+                "FramebufferObservation",
+                "",
+                "",
+                {
+                    schema::Field{"Width", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
+                    schema::Field{"Height", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
+                    schema::Field{"Data", new schema::Slice{"", new schema::Primitive{"byte", schema::Primitive::Uint8}}},
+                },
+            };
+            return entity;
         }
 
         uint32_t mWidth;
@@ -43,13 +62,30 @@ namespace atom {
         Range(uint64_t Start, uint64_t End) :
             mStart(Start),
             mEnd(End) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xbf, 0x66, 0xc9, 0x90, 0x1c, 0x26, 0xf0, 0x77, 0x79, 0x1f, 0x74, 0x69, 0x45, 0x35, 0x19, 0xc0, 0x14, 0xca, 0xd3, 0xb4,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint64(this->mStart);
             e->Uint64(this->mEnd);
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Range::StaticId(),
+                "atom",
+                "Range",
+                "",
+                "",
+                {
+                    schema::Field{"Start", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+                    schema::Field{"End", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+                },
+            };
+            return entity;
         }
 
         uint64_t mStart;
@@ -63,9 +99,12 @@ namespace atom {
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0x05, 0x6a, 0x33, 0xef, 0x32, 0xd6, 0xb5, 0x7d, 0x29, 0x5c, 0xb3, 0xa0, 0x64, 0xde, 0x29, 0x08, 0xa1, 0x86, 0x56, 0xe7,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->String(this->mName);
@@ -74,6 +113,21 @@ namespace atom {
             for (int i = 0; i < this->mSubGroups.size(); i++) {
                 e->Value(this->mSubGroups[i]);
             }
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Group::StaticId(),
+                "atom",
+                "Group",
+                "",
+                "",
+                {
+                    schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
+                    schema::Field{"Range", new schema::Struct{"", Range::Schema()}},
+                    schema::Field{"SubGroups", new schema::Slice{"GroupList", new schema::Struct{"", Group::Schema()}}},
+                },
+            };
+            return entity;
         }
 
         char* mName;
@@ -86,15 +140,31 @@ namespace atom {
         List() = default;
         List(Array<gapic::Encodable*> Atoms) :
             mAtoms(Atoms) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xbf, 0x5f, 0x4f, 0x6c, 0x52, 0x70, 0x8d, 0x45, 0x3f, 0x26, 0xf0, 0xd1, 0xb7, 0xda, 0xc0, 0x21, 0x5d, 0xad, 0x34, 0x2e,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mAtoms.size());
             for (int i = 0; i < this->mAtoms.size(); i++) {
                 e->Variant(this->mAtoms[i]);
             }
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                List::StaticId(),
+                "atom",
+                "List",
+                "",
+                "",
+                {
+                    schema::Field{"Atoms", new schema::Slice{"", new schema::Variant{"Atom"}}},
+                },
+            };
+            return entity;
         }
 
         Array<gapic::Encodable*> mAtoms;
@@ -109,9 +179,12 @@ namespace atom {
             mEndOfFrame(EndOfFrame),
             mDrawCall(DrawCall),
             mDocumentationUrl(DocumentationUrl) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0x13, 0x7d, 0x41, 0xcf, 0xf5, 0x61, 0x0f, 0x25, 0x91, 0xdc, 0xe2, 0x4f, 0xf3, 0x23, 0xd2, 0xe5, 0xc6, 0xfd, 0xa7, 0xa5,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Id(this->mAPI);
@@ -119,6 +192,23 @@ namespace atom {
             e->Bool(this->mEndOfFrame);
             e->Bool(this->mDrawCall);
             e->String(this->mDocumentationUrl);
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Metadata::StaticId(),
+                "atom",
+                "Metadata",
+                "",
+                "",
+                {
+                    schema::Field{"API", new schema::Primitive{"gfxapi.ID", schema::Primitive::ID}},
+                    schema::Field{"DisplayName", new schema::Primitive{"string", schema::Primitive::String}},
+                    schema::Field{"EndOfFrame", new schema::Primitive{"bool", schema::Primitive::Bool}},
+                    schema::Field{"DrawCall", new schema::Primitive{"bool", schema::Primitive::Bool}},
+                    schema::Field{"DocumentationUrl", new schema::Primitive{"string", schema::Primitive::String}},
+                },
+            };
+            return entity;
         }
 
         gapic::Id mAPI;
@@ -134,13 +224,30 @@ namespace atom {
         Observation(memory::Range Range, gapic::Id ID) :
             mRange(Range),
             mID(ID) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xf7, 0xbd, 0x56, 0xf9, 0x88, 0x54, 0x3a, 0xc2, 0x93, 0x5d, 0x67, 0x99, 0x1e, 0xed, 0xaa, 0x19, 0x9a, 0xde, 0xca, 0x04,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Value(this->mRange);
             e->Id(this->mID);
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Observation::StaticId(),
+                "atom",
+                "Observation",
+                "",
+                "",
+                {
+                    schema::Field{"Range", new schema::Struct{"", memory::Range::Schema()}},
+                    schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
+                },
+            };
+            return entity;
         }
 
         memory::Range mRange;
@@ -153,9 +260,12 @@ namespace atom {
         Observations(Array<Observation> Reads, Array<Observation> Writes) :
             mReads(Reads),
             mWrites(Writes) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0xe6, 0xfc, 0xbb, 0x47, 0xfe, 0xac, 0x86, 0xab, 0x0e, 0x02, 0x8a, 0xcb, 0x08, 0xcf, 0x86, 0x30, 0xf0, 0x1e, 0x3a, 0xa0,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Uint32(this->mReads.size());
@@ -166,6 +276,20 @@ namespace atom {
             for (int i = 0; i < this->mWrites.size(); i++) {
                 e->Value(this->mWrites[i]);
             }
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Observations::StaticId(),
+                "atom",
+                "Observations",
+                "",
+                "",
+                {
+                    schema::Field{"Reads", new schema::Slice{"", new schema::Struct{"", Observation::Schema()}}},
+                    schema::Field{"Writes", new schema::Slice{"", new schema::Struct{"", Observation::Schema()}}},
+                },
+            };
+            return entity;
         }
 
         Array<Observation> mReads;
@@ -178,14 +302,31 @@ namespace atom {
         Resource(gapic::Id ID, Array<uint8_t> Data) :
             mID(ID),
             mData(Data) {}
-        virtual const gapic::Id& Id() const {
+        static const gapic::Id& StaticId() {
             static gapic::Id ID{ { 0x3d, 0xa8, 0x7a, 0xce, 0xbd, 0x8d, 0xec, 0x19, 0xf9, 0x33, 0x0c, 0x8c, 0x80, 0x64, 0xf0, 0xe9, 0x9b, 0x3a, 0x8c, 0xd4,  } };
             return ID;
+        }
+        virtual const gapic::Id& Id() const {
+            return StaticId();
         }
         virtual void Encode(Encoder* e) const {
             e->Id(this->mID);
             e->Uint32(this->mData.size());
             e->Data(this->mData.data(), this->mData.size());
+        }
+        static const schema::Entity& Schema() {
+            static schema::Entity entity {
+                Resource::StaticId(),
+                "atom",
+                "Resource",
+                "",
+                "",
+                {
+                    schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
+                    schema::Field{"Data", new schema::Slice{"", new schema::Primitive{"byte", schema::Primitive::Uint8}}},
+                },
+            };
+            return entity;
         }
 
         gapic::Id mID;
