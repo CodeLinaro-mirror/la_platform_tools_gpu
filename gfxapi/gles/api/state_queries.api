@@ -303,6 +303,12 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
       v[0] = ?
     case GL_NUM_PROGRAM_BINARY_FORMATS:
       v[0] = ?
+    case GL_MAX_COLOR_ATTACHMENTS:
+      v[0] = ?
+    case GL_MAX_UNIFORM_BLOCK_SIZE:
+      v[0] = ?
+    case GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+      v[0] = ?
     /*
       case GL_SHADER_BINARY_FORMATS:
         values = ?  // list of length GL_NUM_SHADER_BINARY_FORMATS
@@ -328,20 +334,34 @@ cmd void glGetIntegerv(GLenum param, GLint* values) {
       v[0] = ctx.Info.VersionMajor
     case GL_MINOR_VERSION:
       v[0] = ctx.Info.VersionMinor
-  // TODO: implement the following which depend on:
-  //   glStencilOp, glStencilOpSeparate, glStencilFuncSeparate.
-  // GL_STENCIL_BACK_FAIL
-  // GL_STENCIL_BACK_FUNC
-  // GL_STENCIL_BACK_PASS_DEPTH_FAIL
-  // GL_STENCIL_BACK_PASS_DEPTH_PASS
-  // GL_STENCIL_BACK_REF
-  // GL_STENCIL_BACK_VALUE_MASK
-  // GL_STENCIL_FAIL
-  // GL_STENCIL_FUNC
-  // GL_STENCIL_PASS_DEPTH_FAIL
-  // GL_STENCIL_PASS_DEPTH_PASS
-  // GL_STENCIL_REF
-  // GL_STENCIL_VALUE_MASK
+    // TODO: implement the following which depend on:
+    //   glStencilOp, glStencilOpSeparate, glStencilFuncSeparate.
+    case GL_STENCIL_BACK_FAIL:
+      v[0] = ?
+    case GL_STENCIL_BACK_FUNC:
+      v[0] = ?
+    case GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+      v[0] = ?
+    case GL_STENCIL_BACK_PASS_DEPTH_PASS:
+      v[0] = ?
+    case GL_STENCIL_BACK_REF:
+      v[0] = ?
+    case GL_STENCIL_BACK_VALUE_MASK:
+      v[0] = ?
+    case GL_STENCIL_FAIL:
+      v[0] = ?
+    case GL_STENCIL_FUNC:
+      v[0] = ?
+    case GL_STENCIL_PASS_DEPTH_FAIL:
+      v[0] = ?
+    case GL_STENCIL_PASS_DEPTH_PASS:
+      v[0] = ?
+    case GL_STENCIL_REF:
+      v[0] = ?
+    case GL_STENCIL_TEST:
+      v[0] = ?
+    case GL_STENCIL_VALUE_MASK:
+      v[0] = ?
 
   // TODO: all the values returned by glGetFloatv and glGetBooleanv can
   // be returned here with a type conversion: "_most_ floating-point values

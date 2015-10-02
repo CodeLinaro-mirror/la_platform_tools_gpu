@@ -1392,6 +1392,8 @@ cmd void glTexParameteri(GLenum target, GLenum parameter, GLint value) {
     case GL_TEXTURE_WRAP_S:             t.WrapS = as!GLenum(value)
     case GL_TEXTURE_WRAP_T:             t.WrapT = as!GLenum(value)
     case GL_TEXTURE_MAX_ANISOTROPY_EXT: t.MaxAnisotropy = as!f32(value)
+    case GL_TEXTURE_BASE_LEVEL:         {  }
+    case GL_TEXTURE_MAX_LEVEL:          {  }
     case GL_TEXTURE_SWIZZLE_R:          t.SwizzleR = as!GLenum(value)
     case GL_TEXTURE_SWIZZLE_G:          t.SwizzleG = as!GLenum(value)
     case GL_TEXTURE_SWIZZLE_B:          t.SwizzleB = as!GLenum(value)

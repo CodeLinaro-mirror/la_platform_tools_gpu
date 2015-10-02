@@ -42619,6 +42619,21 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
+            case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
             case GLenum::GL_STENCIL_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
@@ -42656,6 +42671,71 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             }
             case GLenum::GL_MINOR_VERSION: {
                 write(l_v, 0, l_ctx->mInfo.mVersionMinor);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FAIL: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_FUNC: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_FAIL: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_PASS_DEPTH_PASS: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_REF: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_BACK_VALUE_MASK: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_FAIL: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_FUNC: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_FAIL: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_PASS_DEPTH_PASS: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_REF: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_TEST: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_STENCIL_VALUE_MASK: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
         }
@@ -47909,6 +47989,12 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
             }
             case GLenum::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
                 l_t->mMaxAnisotropy = (float)(value);
+                break;
+            }
+            case GLenum::GL_TEXTURE_BASE_LEVEL: {
+                break;
+            }
+            case GLenum::GL_TEXTURE_MAX_LEVEL: {
                 break;
             }
             case GLenum::GL_TEXTURE_SWIZZLE_R: {

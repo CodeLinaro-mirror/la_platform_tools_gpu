@@ -188,6 +188,12 @@ inline int stateVariableSize(uint32_t v) {
         return 1;
     case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS:
         return 1;
+    case GLenum::GL_MAX_COLOR_ATTACHMENTS:
+        return 1;
+    case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE:
+        return 1;
+    case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS:
+        return 1;
     case GLenum::GL_SCISSOR_BOX:
         return 4;
     case GLenum::GL_SCISSOR_TEST:
