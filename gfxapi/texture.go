@@ -19,6 +19,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/service/path"
 )
 
 // Texture2D represents a two-dimensional texture resource.
@@ -52,6 +53,17 @@ type CubemapLevel struct {
 	PositiveZ image.Info
 }
 
+func (l *CubemapLevel) faces() [6]*image.Info {
+	return [6]*image.Info{
+		&l.NegativeX,
+		&l.PositiveX,
+		&l.NegativeY,
+		&l.PositiveY,
+		&l.NegativeZ,
+		&l.PositiveZ,
+	}
+}
+
 type imageMatcher struct {
 	best          *image.Info
 	score         uint32
@@ -80,6 +92,21 @@ func (t *Texture2D) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*
 	return m.best, nil
 }
 
+// Convert returns this Texture2D with each mip-level converted to the requested format.
+func (t *Texture2D) Convert(p *path.As, d database.Database, l log.Logger) (interface{}, error) {
+	out := &Texture2D{
+		Levels: make([]image.Info, len(t.Levels)),
+	}
+	for i, m := range t.Levels {
+		if obj, err := m.Convert(p, d, l); err == nil {
+			out.Levels[i] = *obj.(*image.Info)
+		} else {
+			return nil, err
+		}
+	}
+	return out, nil
+}
+
 // Thumbnail returns the image that most closely matches the desired size.
 func (t *Cubemap) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*image.Info, error) {
 	m := imageMatcher{width: w, height: h}
@@ -94,4 +121,22 @@ func (t *Cubemap) Thumbnail(w, h uint32, d database.Database, l log.Logger) (*im
 	}
 
 	return m.best, nil
+}
+
+// Convert returns this Cubemap with each mip-level face converted to the requested format.
+func (t *Cubemap) Convert(p *path.As, d database.Database, l log.Logger) (interface{}, error) {
+	out := &Cubemap{
+		Levels: make([]CubemapLevel, len(t.Levels)),
+	}
+	for i, m := range t.Levels {
+		dst, src := out.Levels[i].faces(), m.faces()
+		for j := range src {
+			if obj, err := src[j].Convert(p, d, l); err == nil {
+				*dst[j] = *obj.(*image.Info)
+			} else {
+				return nil, err
+			}
+		}
+	}
+	return out, nil
 }

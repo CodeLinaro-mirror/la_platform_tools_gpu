@@ -29,7 +29,7 @@ import (
 
 // State represents the graphics state across all contexts.
 type State struct {
-	binary.Object
+	binary.Object `java:"disable"`
 
 	// Architecture holds information about the device architecture that was used
 	// to create the capture.
