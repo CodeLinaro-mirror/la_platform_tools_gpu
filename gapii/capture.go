@@ -24,7 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-const CaptureTag = "GapiiTraceFile_V1.0"
+const CaptureTag = "GapiiTraceFile_V1.1"
 
 type Options struct {
 	// If true, then a framebuffer-observation will be made after every end-of-frame.
