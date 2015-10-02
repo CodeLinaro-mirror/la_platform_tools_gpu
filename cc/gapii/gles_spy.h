@@ -42609,6 +42609,16 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
+            case GLenum::GL_MAX_SAMPLES: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
+            case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
+                write(l_v, 0,
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
+                break;
+            }
             case GLenum::GL_STENCIL_BITS: {
                 write(l_v, 0,
                       slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
