@@ -111,6 +111,7 @@ func (d *decoder) Entity(compact bool) *binary.Entity {
 	sid := v >> 1
 	if (v & 1) != 0 {
 		s := &binary.Entity{}
+		d.entities[sid] = s
 		schema.DecodeEntity(d, s, compact)
 		return s
 	}
