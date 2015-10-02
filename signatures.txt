@@ -4973,7 +4973,8 @@ test.resultUseResource{}
 
 Schema stats:
 Count: 1243
-All: 129060
 Total: 37454
+Compact: 39945
+Full: 154521
 Average: 30
 Largest: 67

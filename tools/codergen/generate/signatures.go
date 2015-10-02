@@ -24,6 +24,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 
 	"sort"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type byID []*Struct
@@ -32,26 +34,69 @@ func (a byID) Len() int           { return len(a) }
 func (a byID) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a byID) Less(i, j int) bool { return a[i].Signature() < a[j].Signature() }
 
+type stream struct {
+	name    string
+	b       bytes.Buffer
+	e       binary.Encoder
+	d       binary.Decoder
+	compact bool
+	size    int
+}
+
+func newStream(compact bool) *stream {
+	s := &stream{compact: compact}
+	if compact {
+		s.name = "compact"
+	} else {
+		s.name = "full"
+	}
+	s.e = cyclic.Encoder(vle.Writer(&s.b))
+	s.d = cyclic.Decoder(vle.Reader(&s.b))
+	return s
+}
+
+func (s *stream) test(e *binary.Entity) {
+	s.e.Entity(e, s.compact)
+	s.size += s.b.Len()
+	if s.e.Error() != nil {
+		panic(fmt.Errorf("Failed encoding %s entity for %q, %v", s.name, e.Signature(), s.e.Error()))
+	}
+	got := s.d.Entity(s.compact)
+	if got == nil || s.d.Error() != nil {
+		panic(fmt.Errorf("Failed reading %s entity for %q, %v", s.name, e.Signature(), s.d.Error()))
+	}
+	if e.Signature() != got.Signature() {
+		panic(fmt.Errorf("Signature of %s entity did not match, expected %q got %q", s.name, e.Signature(), got.Signature()))
+	}
+	if !s.compact {
+		es := fmt.Sprint(e)
+		gots := fmt.Sprint(got)
+		if es != gots {
+			panic(fmt.Errorf("Full encoding did not match, expected %#v got %#v", es, gots))
+		}
+	}
+}
+
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}
 	for _, m := range modules {
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))
-	buf := &bytes.Buffer{}
-	e := cyclic.Encoder(vle.Writer(buf))
+	full := newStream(false)
+	compact := newStream(true)
 	total := 0
 	largest := 0
-	// pre write the entire schema so the lookup table is full
+	// pre write the entire schema so the lookup table is full, and verify the encode/decode behaviour while doing it
 	for _, s := range structs {
-		e.Entity(&s.Entity, false)
+		full.test(&s.Entity)
+		compact.test(&s.Entity)
 	}
-	all := buf.Len()
 	for _, s := range structs {
-		start := buf.Len()
+		start := compact.b.Len()
 		// now encode the entity directly to bypass the table
-		schema.EncodeEntity(e, &s.Entity, true)
-		size := buf.Len() - start
+		schema.EncodeEntity(compact.e, &s.Entity, true)
+		size := compact.b.Len() - start
 		total += size
 		if largest < size {
 			largest = size
@@ -64,8 +109,9 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, "Schema stats:")
 	fmt.Fprintln(w, "Count:", len(structs))
-	fmt.Fprintln(w, "All:", all)
 	fmt.Fprintln(w, "Total:", total)
+	fmt.Fprintln(w, "Compact:", compact.size)
+	fmt.Fprintln(w, "Full:", full.size)
 	fmt.Fprintln(w, "Average:", total/len(structs))
 	fmt.Fprintln(w, "Largest:", largest)
 }
