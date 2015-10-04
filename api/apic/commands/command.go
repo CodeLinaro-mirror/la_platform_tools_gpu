@@ -15,73 +15,15 @@
 package commands
 
 import (
-	"flag"
 	"fmt"
 	"os"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// Command holds information about a runnable api command.
-type Command struct {
-	Name      string                         // The name of the command
-	Run       func(flags flag.FlagSet) error // the action for the command
-	ShortHelp string                         // Help for how to use the command
-	Flags     flag.FlagSet                   // The command line flags it accepts
-}
-
 const (
 	maxErrors = 10
 )
-
-var (
-	commands = []*Command{}
-	verbose  = flag.Bool("v", false, "Verbosity")
-)
-
-// Register adds a new command to the supported set, it will panic if a
-// duplicate name is encountered.
-func Register(c *Command) {
-	if len(Filter(c.Name)) != 0 {
-		panic(fmt.Errorf("Duplicate command name %s", c.Name))
-	}
-	commands = append(commands, c)
-}
-
-// Filter returns the filtered list of commands who's names match the specified
-// prefix.
-func Filter(prefix string) (result []*Command) {
-	for _, c := range commands {
-		if strings.HasPrefix(c.Name, prefix) {
-			result = append(result, c)
-		}
-	}
-	return result
-}
-
-// Usage prints message with the formatting args (if not empty) to stderr,
-// prints the command usage information to stderr and then terminates the program.
-func Usage(message string, args ...interface{}) error {
-	err := ""
-	if len(message) > 0 {
-		err = fmt.Sprintf(message, args...)
-		fmt.Fprint(os.Stderr, err)
-	}
-	fmt.Fprintf(os.Stderr, "\nApic is a tool for managing api source files\n\n")
-	fmt.Fprintf(os.Stderr, "Available commands\n")
-	for _, c := range commands {
-		fmt.Fprintf(os.Stderr, "  %s : %s\n", c.Name, c.ShortHelp)
-	}
-	return fmt.Errorf(err)
-}
-
-// Log prints message with the formatting args to stdout.
-func Logf(message string, args ...interface{}) {
-	if *verbose {
-		fmt.Fprintf(os.Stdout, message, args...)
-	}
-}
 
 // CheckErrors will, if len(errs) > 0, print each of the error messages for the
 // specified api and then terminate the program. If errs is zero length,

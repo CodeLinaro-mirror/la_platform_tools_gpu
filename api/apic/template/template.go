@@ -30,22 +30,23 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
 
 var (
-	command = &commands.Command{
+	verb = &verbs.Verb{
 		Name:      "template",
 		ShortHelp: "Passes the ast to a template for code generation",
 	}
-	dir    = command.Flags.String("dir", cwd(), "The output directory")
-	tracer = command.Flags.String("t", "", "The template function trace expression")
-	deps   = command.Flags.String("deps", "", "The dependancies file to generate")
+	dir    = verb.Flags.String("dir", cwd(), "The output directory")
+	tracer = verb.Flags.String("t", "", "The template function trace expression")
+	deps   = verb.Flags.String("deps", "", "The dependancies file to generate")
 )
 
 func init() {
-	command.Flags.Var(&globalList, "G", "A global value setting for the template")
-	command.Run = doTemplate
-	commands.Register(command)
+	verb.Flags.Var(&globalList, "G", "A global value setting for the template")
+	verb.Run = doTemplate
+	verbs.Register(verb)
 }
 
 func cwd() string {
@@ -72,7 +73,7 @@ func writeDeps() error {
 	if len(*deps) == 0 {
 		return nil
 	}
-	commands.Logf("Write deps to %v\n", *deps)
+	verbs.Logf("Write deps to %v\n", *deps)
 	file, err := os.Create(*deps)
 	if err != nil {
 		return err
@@ -207,7 +208,7 @@ func (f *Functions) Include(templates ...string) error {
 			t = filepath.Join(dir, t)
 		}
 		if f.templates.Lookup(t) == nil {
-			commands.Logf("Reading template %q\n", t)
+			verbs.Logf("Reading template %q\n", t)
 			inputDep(t)
 			tmplData, err := f.loader(t)
 			if err != nil {
@@ -217,7 +218,7 @@ func (f *Functions) Include(templates ...string) error {
 			if err != nil {
 				return fmt.Errorf("%s: %s\n", t, err)
 			}
-			commands.Logf("Executing template %q\n", tmpl.Name())
+			verbs.Logf("Executing template %q\n", tmpl.Name())
 			var buf bytes.Buffer
 			if err = f.execute(tmpl, &buf, f.api); err != nil {
 				return fmt.Errorf("%s: %s\n", tmpl.Name(), err)
@@ -231,7 +232,7 @@ func (f *Functions) Include(templates ...string) error {
 // The filename is relative to the output directory.
 func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
-	commands.Logf("Writing output to %q\n", outputPath)
+	verbs.Logf("Writing output to %q\n", outputPath)
 	outputDep(outputPath)
 
 	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
@@ -245,17 +246,17 @@ func (f *Functions) Copyright(name string, tool string) (string, error) {
 func doTemplate(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		return commands.Usage("Missing api file\n")
+		return verbs.Usage("Missing api file\n")
 	}
 	apiName := args[0]
 	if len(args) < 2 {
-		return commands.Usage("Missing template file\n")
+		return verbs.Usage("Missing template file\n")
 	}
 	mainTemplate := args[1]
-	commands.Logf("Reading api file %q\n", apiName)
+	verbs.Logf("Reading api file %q\n", apiName)
 	inputDep(apiName)
 
-	commands.Logf("Compiling api file %q\n", apiName)
+	verbs.Logf("Compiling api file %q\n", apiName)
 	mappings := resolver.ASTToSemantic{}
 	compiled, errs := api.Resolve(apiName, mappings)
 	if err := commands.CheckErrors(apiName, errs); err != nil {

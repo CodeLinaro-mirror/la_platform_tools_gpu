@@ -27,16 +27,16 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/parse"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
 
 const debug = false
 
 var (
-	command = &commands.Command{
+	verb = &verbs.Verb{
 		Name:      "format",
 		ShortHelp: "Formats an api file",
 		Run:       doFormat,
@@ -44,13 +44,13 @@ var (
 )
 
 func init() {
-	commands.Register(command)
+	verbs.Register(verb)
 }
 
 func doFormat(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		return commands.Usage("Missing api file\n")
+		return verbs.Usage("Missing api file\n")
 	}
 	for _, path := range args {
 		f, err := ioutil.ReadFile(path)

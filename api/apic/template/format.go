@@ -22,7 +22,7 @@ import (
 
 	"golang.org/x/tools/imports"
 
-	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
 
 const (
@@ -37,7 +37,7 @@ const (
 
 // Reflow does the primitive reflow, but no language specific handling.
 func (f *Functions) Reflow(indentSize int, value string) (string, error) {
-	commands.Logf("Reflowing string\n")
+	verbs.Logf("Reflowing string\n")
 	result, err := reflow(value, indentSize)
 	if err != nil {
 		return "", fmt.Errorf("%s : %s", f.active.Name(), err)
@@ -49,7 +49,7 @@ const goIndent = 2 // Required by go style guide
 
 // GoFmt reflows the string as if it were go code using the standard go fmt library.
 func (f *Functions) GoFmt(value string) (string, error) {
-	commands.Logf("Reflowing go code\n")
+	verbs.Logf("Reflowing go code\n")
 	result, err := reflow(value, goIndent)
 	if err != nil {
 		return "", fmt.Errorf("%s : %s", f.active.Name(), err)
@@ -62,7 +62,7 @@ func (f *Functions) GoFmt(value string) (string, error) {
 	}
 	formatted, err := imports.Process(f.active.Name(), result, opt)
 	if err != nil {
-		commands.Logf("GoFmt failed with %s\n", err)
+		verbs.Logf("GoFmt failed with %s\n", err)
 		return string(result), nil
 	}
 	return string(formatted), nil
@@ -74,7 +74,7 @@ func (f *Functions) Format(command stringList, value string) (string, error) {
 		return "", fmt.Errorf("%s : Invalid Format command", f.active.Name())
 	}
 	binary := command[0]
-	commands.Logf("Reflowing code with %s\n", binary)
+	verbs.Logf("Reflowing code with %s\n", binary)
 	// indent level is arbitrary, because we expect the external formatter to redo it anyway
 	result, err := reflow(value, 4)
 	if err != nil {
@@ -83,43 +83,43 @@ func (f *Functions) Format(command stringList, value string) (string, error) {
 
 	_, err = exec.LookPath(binary)
 	if err != nil {
-		commands.Logf("Could not find external formatter %s\n", binary)
+		verbs.Logf("Could not find external formatter %s\n", binary)
 		return string(result), nil
 	}
 	cmd := exec.Command(binary, command[1:]...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		commands.Logf("Reformat out pipe failed: %s\n", err)
+		verbs.Logf("Reformat out pipe failed: %s\n", err)
 		return string(result), nil
 	}
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
-		commands.Logf("Reformat in pipe failed: %s\n", err)
+		verbs.Logf("Reformat in pipe failed: %s\n", err)
 		return string(result), nil
 	}
 	err = cmd.Start()
 	if err != nil {
-		commands.Logf("Reformat start failed: %s\n", err)
+		verbs.Logf("Reformat start failed: %s\n", err)
 		return string(result), nil
 	}
 	_, err = stdin.Write(result)
 	if err != nil {
-		commands.Logf("Reformat write failed: %s\n", err)
+		verbs.Logf("Reformat write failed: %s\n", err)
 		return string(result), nil
 	}
 	err = stdin.Close()
 	if err != nil {
-		commands.Logf("Reformat close failed: %s\n", err)
+		verbs.Logf("Reformat close failed: %s\n", err)
 		return string(result), nil
 	}
 	formatted, err := ioutil.ReadAll(stdout)
 	if err != nil {
-		commands.Logf("Reformat read: %s\n", err)
+		verbs.Logf("Reformat read: %s\n", err)
 		return string(result), nil
 	}
 	err = cmd.Wait()
 	if err != nil {
-		commands.Logf("Reformat wait failed: %s\n", err)
+		verbs.Logf("Reformat wait failed: %s\n", err)
 		return string(result), nil
 	}
 	return string(formatted), nil
