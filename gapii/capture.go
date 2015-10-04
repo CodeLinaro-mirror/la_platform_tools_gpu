@@ -21,6 +21,9 @@ import (
 	"net"
 	"time"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -138,4 +141,36 @@ func Capture(logger log.Logger, port int, w io.Writer, options Options, stop cha
 			log.Infof(logger, "Retry...")
 		}
 	}
+}
+
+// ReadCapture converts the contents of a capture stream to an atom list.
+func ReadCapture(name string, in io.Reader, l log.Logger) (*atom.List, error) {
+	list := atom.NewList()
+	d := cyclic.Decoder(vle.Reader(in))
+	tag := d.String()
+	if d.Error() != nil {
+		return list, d.Error()
+	}
+	if tag != CaptureTag {
+		return list, fmt.Errorf("Invalid capture tag '%s'", tag)
+	}
+	for {
+		if obj := d.Variant(); d.Error() != nil {
+			if d.Error() != io.EOF {
+				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), d.Error())
+				if len(list.Atoms) > 0 {
+					a := list.Atoms[len(list.Atoms)-1]
+					log.Warningf(l, "Last atom succesfully decoded: %T %v", a, a)
+				}
+			}
+			break
+		} else {
+			atom, ok := obj.(atom.Atom)
+			if !ok {
+				return list, fmt.Errorf("Expected atom, got '%T' after decoding %d atoms", obj, len(list.Atoms))
+			}
+			list.Atoms = append(list.Atoms, atom)
+		}
+	}
+	return list, nil
 }
