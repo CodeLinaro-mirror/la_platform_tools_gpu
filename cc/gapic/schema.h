@@ -46,18 +46,17 @@ class Type {
 
 class Field {
  public:
-  // Move
-  Field(Field&& field) : mDeclared(field.mDeclared), mType(std::move(field.mType)) {}
-
   Field(const std::string& declared, Type* type)
       : mDeclared(declared), mType(type) {}
 
   void encode(Encoder& e) const {
     mType->encode(e);
   }
- private:
+
+  const char* name() const { return mDeclared.c_str(); }
+
   std::string mDeclared;
-  std::unique_ptr<Type> mType;
+  Type* mType;
 };
 
 class Entity {
@@ -74,8 +73,7 @@ class Entity {
       mName(name),
       mIdentity(identity),
       mVersion(version),
-      mExported(true),
-      mFields(std::move(fields)) {}
+      mFields(fields) {}
 
   void encode(Encoder& e) const {
     e.String(mPackage);
@@ -86,14 +84,12 @@ class Entity {
       f.encode(e);
     }
   }
- private:
+
   std::string mPackage;
   std::string mName;
   std::string mIdentity;
   std::string mVersion;
-  bool mExported;
-  std::initializer_list<Field> mFields;
-  std::initializer_list<std::unique_ptr<Encodable>> mMetadata;
+  std::vector<Field> mFields;
 };
 
 class Primitive : public Type {
@@ -148,7 +144,7 @@ class Pointer : public Type {
     mType->encode(e);
   }
  private:
-  std::unique_ptr<Type> mType;
+  Type* mType;
 };
 
 class Interface : public Type {
@@ -192,7 +188,7 @@ class Slice : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mValueType;
+  Type* mValueType;
 };
 
 class Array : public Type {
@@ -206,7 +202,7 @@ class Array : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mValueType;
+  Type* mValueType;
   uint32_t mSize;
 };
 
@@ -223,52 +219,10 @@ class Map : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mKeyType;
-  std::unique_ptr<Type> mValueType;
-};
-
-class Constant {
- public:
-  // Move
-  Constant(Constant&& c) : mName(c.mName), mValue(c.mValue) {}
-
-  // Only uint32_t is supported in C++ at the moment, but it would
-  // be fairly easy to support all the primitive types.
-  Constant(const std::string& name, uint32_t value) :
-      mName(name), mValue(value) {}
-
-  void encode(Encoder& e) const {
-    e.String(mName);
-    e.Uint32(mValue);
-  }
- private:
-  std::string mName;
-  uint32_t mValue;
-};
-
-class ConstantSet {
- public:
-  ConstantSet() = default;
-  ConstantSet(Primitive* type, std::initializer_list<Constant> entries) :
-      mType(type), mEntries(std::move(entries)) {
-    if (mType->method() != Primitive::Uint32) {
-      GAPID_FATAL("Constant and ConstantSet only support uint32");
-    }
-  }
-
-  void encode(Encoder& e) const {
-    mType->encode(e);
-    e.Uint32(uint32_t(mEntries.size()));
-    for (const auto& entry : mEntries) {
-      entry.encode(e);
-    }
-  }
- private:
-  std::unique_ptr<Primitive> mType;
-  std::initializer_list<Constant> mEntries;
+  Type* mKeyType;
+  Type* mValueType;
 };
 
 }  // namespace schema
 }  // namespace gapic
-
 #endif

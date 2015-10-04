@@ -154,7 +154,7 @@ void Encoder::Id(const gapic::Id& id) {
 }
 
 void Encoder::Entity(const schema::Entity* entity) {
-    if (entity != nullptr) {
+    if (entity == nullptr) {
         Uint32(0);
         return;
     }
