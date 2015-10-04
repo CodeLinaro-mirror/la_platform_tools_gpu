@@ -136,6 +136,9 @@ func (e *encoder) Variant(obj binary.Object) {
 
 func (d *decoder) Variant() binary.Object {
 	entity := d.Entity(true)
+	if entity == nil {
+		return nil
+	}
 	if class := d.Lookup(entity); class == nil {
 		d.SetError(fmt.Errorf("Unknown type %v", entity))
 		return nil

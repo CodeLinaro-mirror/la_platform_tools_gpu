@@ -154,6 +154,10 @@ void Encoder::Id(const gapic::Id& id) {
 }
 
 void Encoder::Entity(const schema::Entity* entity) {
+    if (entity != nullptr) {
+        Uint32(0);
+        return;
+    }
     auto ret = mEntities.insert(
         std::make_pair(entity, mEntities.size() + 1));
     uint32_t sid = ret.first->second;
