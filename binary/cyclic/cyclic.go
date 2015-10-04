@@ -140,7 +140,7 @@ func (d *decoder) Variant() binary.Object {
 		return nil
 	}
 	if class := d.Lookup(entity); class == nil {
-		d.SetError(fmt.Errorf("Unknown type %v", entity))
+		d.SetError(fmt.Errorf("Unknown type %q", entity.Signature()))
 		return nil
 	} else {
 		return class.Decode(d)
