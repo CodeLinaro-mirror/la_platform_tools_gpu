@@ -54,7 +54,7 @@ class Field {
   }
 
   const char* name() const { return mDeclared.c_str(); }
-
+private:
   std::string mDeclared;
   Type* mType;
 };
@@ -84,7 +84,7 @@ class Entity {
       f.encode(e);
     }
   }
-
+private:
   std::string mPackage;
   std::string mName;
   std::string mIdentity;
