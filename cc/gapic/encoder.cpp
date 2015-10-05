@@ -22,7 +22,9 @@
 
 namespace gapic {
 
-Encoder::Encoder(std::shared_ptr<StreamWriter> output) : mOutput(output), mLastObjectId(0) {}
+Encoder::Encoder(std::shared_ptr<StreamWriter> output) : mOutput(output), mLastObjectId(0) {
+    mEntities.insert(std::make_pair(nullptr, 0));
+}
 
 void Encoder::Bool(bool v) {
     uint8_t b = v ? 1 : 0;
@@ -154,12 +156,8 @@ void Encoder::Id(const gapic::Id& id) {
 }
 
 void Encoder::Entity(const schema::Entity* entity) {
-    if (entity == nullptr) {
-        Uint32(0);
-        return;
-    }
     auto ret = mEntities.insert(
-        std::make_pair(entity, mEntities.size() + 1));
+        std::make_pair(entity, mEntities.size()));
     uint32_t sid = ret.first->second;
     if (!ret.second) {
         Uint32(sid << 1);
@@ -175,7 +173,7 @@ void Encoder::Value(const Encodable& obj) {
 
 void Encoder::Variant(const Encodable* obj) {
     if (obj == nullptr) {
-        Uint32(0);
+        Entity(nullptr);
         return;
     }
     Entity(obj->Schema());
