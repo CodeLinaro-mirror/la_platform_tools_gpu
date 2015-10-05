@@ -16,6 +16,7 @@ package main
 
 import (
 	_ "android.googlesource.com/platform/tools/gpu/tools/gapit/info"
+	_ "android.googlesource.com/platform/tools/gpu/tools/gapit/report"
 	_ "android.googlesource.com/platform/tools/gpu/tools/gapit/trace"
 	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )

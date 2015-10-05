@@ -21,9 +21,9 @@ import (
 	"os"
 
 	"android.googlesource.com/platform/tools/gpu/gapii"
+	_ "android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/tools/verbs"
-	_ "android.googlesource.com/platform/tools/gpu/gfxapi/all"
 )
 
 var (
@@ -51,7 +51,7 @@ func (c *countingReader) Read(buf []byte) (int, error) {
 
 func doInfo(flags flag.FlagSet) error {
 	if flags.NArg() != 1 {
-		return verbs.Usage("Exactly one gfx trace file expected, got %d", flag.NArg())
+		return verbs.Usage("Exactly one gfx trace file expected, got %d", flags.NArg())
 	}
 	filename := flags.Arg(0)
 	fmt.Println("reading file ", filename)
