@@ -50,6 +50,7 @@ var (
 		javabase.Child("base/rpclib/src/test/java/com/android/tools/rpclib"),
 		javabase.Child("adt/idea/android/src/com/android/tools/idea/editors/gfxtrace"),
 	}
+	pkginfobase = gpusrc.Child("tools/pkginfo")
 
 	Tools struct {
 		Embed    graph.Entity
@@ -121,6 +122,8 @@ func init() {
 		do.GoRun(gpusrc.File("tools/clean_generated/main.go"), gpusrc).Creates(graph.Virtual("clean_gpu"))
 		do.GoRun(gpusrc.File("tools/clean_generated/main.go"), javapaths...).Creates(graph.Virtual("clean_java"))
 		do.GoRun(gpusrc.File("tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(graph.Virtual("copyright")).DependsOn(embedCopyright)
+		// pkginfo helper APK
+		PkgInfo()
 		// The default rules
 		graph.List(graph.Default).DependsOn("apps", "test")
 	})
@@ -154,6 +157,16 @@ func Apic(dst *graph.Path, api *graph.Path, template *graph.Path) {
 
 func Codergen(name string, args ...string) {
 	do.Exec(Tools.Codergen, args...).Creates(graph.Virtual(name)).DependsOn("apic").Access(do.GoPkgResources)
+}
+
+func PkgInfo() {
+	gradleAPK := pkginfobase.File("app/build/outputs/apk/app-debug.apk")
+	binAPK := config.Paths.Bin.File("pkginfo.apk")
+	graph.NewStep(func(step *graph.Step) error {
+		return do.ExecAt(pkginfobase.Name(), config.Verbose, pkginfobase.File("gradlew").Name(), "build")
+	}).Creates(gradleAPK)
+	do.CopyFile(binAPK, gradleAPK)
+	graph.List("pkginfo").DependsOn(binAPK)
 }
 
 func ShutdownReplayd() graph.Entity {
