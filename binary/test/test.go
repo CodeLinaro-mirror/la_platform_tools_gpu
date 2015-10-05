@@ -49,7 +49,7 @@ var (
 		0x05, 'T', 'y', 'p', 'e', 'A', // Identity
 		0x00, // Version
 		0x01, // field count
-		0xc0, // primitive string
+		0xb0, // primitive string
 	}
 	ObjectB = &TypeB{Data: "ObjectB"}
 	EntityB = []byte{
@@ -57,7 +57,7 @@ var (
 		0x05, 'T', 'y', 'p', 'e', 'B', // Identity
 		0x00, // Version
 		0x01, // field count
-		0xc0, // primitive string
+		0xb0, // primitive string
 	}
 	BadObject = &BadType{Data: "BadObject"}
 )

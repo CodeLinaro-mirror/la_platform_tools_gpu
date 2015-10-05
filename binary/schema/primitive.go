@@ -25,8 +25,7 @@ import (
 type Method uint8
 
 const (
-	ID Method = iota
-	Bool
+	Bool Method = iota
 	Int8
 	Uint8
 	Int16
@@ -42,7 +41,6 @@ const (
 
 var (
 	methodToString = map[Method]string{
-		ID:      "ID",
 		Bool:    "Bool",
 		Int8:    "Int8",
 		Uint8:   "Uint8",
@@ -58,7 +56,6 @@ var (
 	}
 	stringToMethod = map[string]Method{}
 	methodToBase   = map[Method]string{
-		ID:      "binary.ID",
 		Bool:    "bool",
 		Int8:    "int8",
 		Uint8:   "uint8",
@@ -89,12 +86,7 @@ type Primitive struct {
 
 // Native returns the go native type name for this primitive.
 func (p *Primitive) Native() string {
-	switch p.Method {
-	case ID:
-		return "binary.ID"
-	default:
-		return strings.ToLower(p.Method.String())
-	}
+	return strings.ToLower(p.Method.String())
 }
 
 func (p *Primitive) Representation() string {
@@ -119,8 +111,6 @@ func (p *Primitive) Format(f fmt.State, c rune) {
 
 func (p *Primitive) EncodeValue(e binary.Encoder, value interface{}) {
 	switch p.Method {
-	case ID:
-		e.ID(value.(binary.ID))
 	case Bool:
 		e.Bool(value.(bool))
 	case Int8:
@@ -152,8 +142,6 @@ func (p *Primitive) EncodeValue(e binary.Encoder, value interface{}) {
 
 func (p *Primitive) DecodeValue(d binary.Decoder) interface{} {
 	switch p.Method {
-	case ID:
-		return d.ID()
 	case Bool:
 		return d.Bool()
 	case Int8:

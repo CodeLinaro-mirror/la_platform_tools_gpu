@@ -95,7 +95,6 @@ private:
 class Primitive : public Type {
  public:
   enum Method {
-    ID,
     Bool,
     Int8,
     Uint8,

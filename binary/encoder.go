@@ -17,8 +17,6 @@ package binary
 // Encoder extends Writer with additional methods for encoding objects.
 type Encoder interface {
 	Writer
-	// ID writes a binary.ID to the stream.
-	ID(ID)
 	// Entity writes a binary.Entity to the stream.
 	// See Entity for details of what is included in the compact form.
 	Entity(e *Entity, compact bool)

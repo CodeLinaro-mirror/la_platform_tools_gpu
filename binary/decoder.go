@@ -17,8 +17,6 @@ package binary
 // Decoder extends Reader with additional methods for decoding objects.
 type Decoder interface {
 	Reader
-	// ID decodes a binary.ID from the stream.
-	ID() ID
 	// Entity supports reading a binary.Entity from the stream.
 	// See Entity for details of what is included in the compact form.
 	Entity(compact bool) *Entity

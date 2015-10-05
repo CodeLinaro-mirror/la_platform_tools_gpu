@@ -38,16 +38,6 @@ type decoder struct {
 	binary.Reader
 }
 
-func (e *encoder) ID(id binary.ID) {
-	e.Data(id[:])
-}
-
-func (d *decoder) ID() binary.ID {
-	id := binary.ID{}
-	d.Data(id[:])
-	return id
-}
-
 func (e *encoder) Entity(*binary.Entity, bool) {
 	panic(fmt.Errorf("Flat encoders do not support Schema objects"))
 }

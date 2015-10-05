@@ -144,17 +144,6 @@ void Encoder::Data(const void* ptr, int32_t size) {
     mOutput->write(ptr, size);
 }
 
-void Encoder::Id(const gapic::Id& id) {
-    auto ret = mIds.insert(std::make_pair(id, mIds.size() + 1));
-    uint32_t sid = ret.first->second;
-    if (!ret.second) {
-        Uint32(sid << 1);
-    } else {
-        Uint32((sid << 1) | 1);
-        mOutput->write(&id.data, 20);
-    }
-}
-
 void Encoder::Entity(const schema::Entity* entity) {
     auto ret = mEntities.insert(
         std::make_pair(entity, mEntities.size()));

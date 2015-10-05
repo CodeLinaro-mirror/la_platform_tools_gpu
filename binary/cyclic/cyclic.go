@@ -31,7 +31,6 @@ func Encoder(writer binary.Writer) binary.Encoder {
 		Writer:   writer,
 		entities: map[*binary.Entity]uint32{},
 		objects:  map[binary.Object]uint32{},
-		ids:      map[binary.ID]uint32{},
 	}
 }
 
@@ -42,7 +41,6 @@ func Decoder(reader binary.Reader) *decoder {
 		Namespace: registry.Global,
 		entities:  map[uint32]*binary.Entity{},
 		objects:   map[uint32]binary.Object{},
-		ids:       map[uint32]binary.ID{},
 	}
 }
 
@@ -50,7 +48,6 @@ type encoder struct {
 	binary.Writer
 	entities map[*binary.Entity]uint32
 	objects  map[binary.Object]uint32
-	ids      map[binary.ID]uint32
 }
 
 type decoder struct {
@@ -58,34 +55,6 @@ type decoder struct {
 	Namespace *registry.Namespace
 	entities  map[uint32]*binary.Entity
 	objects   map[uint32]binary.Object
-	ids       map[uint32]binary.ID
-}
-
-func (e *encoder) ID(id binary.ID) {
-	if sid, found := e.ids[id]; found {
-		e.Uint32(sid << 1)
-	} else {
-		sid = uint32(len(e.ids)) + 1
-		e.ids[id] = sid
-		e.Uint32((sid << 1) | 1)
-		e.Data(id[:])
-	}
-}
-
-func (d *decoder) ID() binary.ID {
-	id := binary.ID{}
-	v := d.Uint32()
-	sid := v >> 1
-	if (v & 1) != 0 {
-		d.Data(id[:])
-		d.ids[sid] = id
-		return id
-	}
-	id, found := d.ids[sid]
-	if !found {
-		d.SetError(fmt.Errorf("Unknown id sid %v", sid))
-	}
-	return id
 }
 
 func (e *encoder) Entity(s *binary.Entity, compact bool) {
