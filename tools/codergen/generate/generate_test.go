@@ -154,60 +154,60 @@ func TestInterfaceVsAny(t *testing.T) {
 		}
 	}
 }
-func TestStableID(t *testing.T) {
+func TestStableSignature(t *testing.T) {
 	source := "type MyStruct struct {binary.Generate}"
 	a := parseStruct(t, "MyStruct", source)
 	b := parseStruct(t, "MyStruct", source)
-	if a.TypeID != b.TypeID {
-		t.Errorf("ID was not stable")
+	if a.Signature() != b.Signature() {
+		t.Errorf("Signature was not stable")
 	}
 }
 
-func TestNameAffectsID(t *testing.T) {
+func TestNameAffectsSignature(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	b := parseStruct(t, "YourStruct", "type YourStruct struct {binary.Generate}")
-	if a.TypeID == b.TypeID {
-		t.Errorf("Name change did not change ID")
+	if a.Signature() == b.Signature() {
+		t.Errorf("Name change did not change Signature")
 	}
 }
 
 func TestNameOveride(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	b := parseStruct(t, "YourStruct", "type YourStruct struct {binary.Generate `identity:\"MyStruct\"`}")
-	if a.TypeID != b.TypeID {
-		t.Errorf("Identity change changed ID")
+	if a.Signature() != b.Signature() {
+		t.Errorf("Identity change changed Signature")
 	}
 }
 
 func TestVersionOveride(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate `version:\"1\"`}")
-	if a.TypeID == b.TypeID {
-		t.Errorf("Version change did not change ID")
+	if a.Signature() == b.Signature() {
+		t.Errorf("Version change did not change Signature")
 	}
 }
 
-func TestFieldCountAffectsID(t *testing.T) {
+func TestFieldCountAffectsSignature(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
-	if a.TypeID == b.TypeID {
-		t.Errorf("Field count did not change ID")
+	if a.Signature() == b.Signature() {
+		t.Errorf("Field count did not change Signature")
 	}
 }
 
-func TestFieldNameAffectsID(t *testing.T) {
+func TestFieldNameAffectsSignature(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; b int}")
-	if a.TypeID != b.TypeID {
-		t.Errorf("Field name changed ID")
+	if a.Signature() != b.Signature() {
+		t.Errorf("Field name changed Signature")
 	}
 }
 
-func TestFieldTypeAffectsID(t *testing.T) {
+func TestFieldTypeAffectsSignature(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a byte}")
-	if a.TypeID == b.TypeID {
-		t.Errorf("Field type did not change ID")
+	if a.Signature() == b.Signature() {
+		t.Errorf("Field type did not change Signature")
 	}
 }
 
