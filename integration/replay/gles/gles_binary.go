@@ -18,10 +18,6 @@ func init() {
 	Namespace.Add((*directCall)(nil).Class())
 }
 
-var (
-	binaryIDdirectCall = binary.ID{0x05, 0x80, 0x17, 0x2d, 0x33, 0x0d, 0x15, 0x65, 0xbd, 0x78, 0xff, 0x65, 0x14, 0xb1, 0xb5, 0x23, 0x8d, 0x64, 0x05, 0xad}
-)
-
 type binaryClassdirectCall struct{}
 
 func (*directCall) Class() binary.Class {
@@ -37,7 +33,6 @@ func doDecodedirectCall(d binary.Decoder, o *directCall) {
 		o.atom = nil
 	}
 }
-func (*binaryClassdirectCall) ID() binary.ID      { return binaryIDdirectCall }
 func (*binaryClassdirectCall) New() binary.Object { return &directCall{} }
 func (*binaryClassdirectCall) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedirectCall(e, obj.(*directCall))
@@ -53,7 +48,6 @@ func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassdirectCall) Schema() *binary.Entity { return schemadirectCall }
 
 var schemadirectCall = &binary.Entity{
-	TypeID:   binaryIDdirectCall,
 	Package:  "gles",
 	Identity: "directCall",
 	Fields: []binary.Field{

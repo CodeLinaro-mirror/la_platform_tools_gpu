@@ -16,12 +16,6 @@ func init() {
 	Namespace.Add((*response)(nil).Class())
 }
 
-var (
-	binaryIDdelay    = binary.ID{0x8f, 0x4f, 0x3b, 0x20, 0xa2, 0xed, 0xd8, 0x26, 0xab, 0xea, 0x8a, 0xfb, 0xf4, 0xc9, 0x2a, 0x2e, 0xa5, 0xb8, 0x7d, 0xb9}
-	binaryIDrequest  = binary.ID{0xf8, 0x62, 0xad, 0xad, 0x5f, 0xee, 0xfc, 0xa3, 0xfe, 0x46, 0x5d, 0x59, 0x23, 0x2a, 0xfd, 0x6a, 0x18, 0xfd, 0xb3, 0x22}
-	binaryIDresponse = binary.ID{0xcc, 0xf7, 0x23, 0x18, 0xb1, 0x5c, 0x98, 0xbf, 0xb6, 0xec, 0x38, 0x3c, 0x94, 0xdf, 0x2d, 0x52, 0x37, 0x6e, 0x8b, 0x02}
-)
-
 type binaryClassdelay struct{}
 
 func (*delay) Class() binary.Class {
@@ -33,7 +27,6 @@ func doEncodedelay(e binary.Encoder, o *delay) {
 func doDecodedelay(d binary.Decoder, o *delay) {
 	o.data = string(d.String())
 }
-func (*binaryClassdelay) ID() binary.ID      { return binaryIDdelay }
 func (*binaryClassdelay) New() binary.Object { return &delay{} }
 func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedelay(e, obj.(*delay))
@@ -49,7 +42,6 @@ func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassdelay) Schema() *binary.Entity { return schemadelay }
 
 var schemadelay = &binary.Entity{
-	TypeID:   binaryIDdelay,
 	Package:  "rpc",
 	Identity: "delay",
 	Fields: []binary.Field{
@@ -68,7 +60,6 @@ func doEncoderequest(e binary.Encoder, o *request) {
 func doDecoderequest(d binary.Decoder, o *request) {
 	o.data = string(d.String())
 }
-func (*binaryClassrequest) ID() binary.ID      { return binaryIDrequest }
 func (*binaryClassrequest) New() binary.Object { return &request{} }
 func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderequest(e, obj.(*request))
@@ -84,7 +75,6 @@ func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassrequest) Schema() *binary.Entity { return schemarequest }
 
 var schemarequest = &binary.Entity{
-	TypeID:   binaryIDrequest,
 	Package:  "rpc",
 	Identity: "request",
 	Fields: []binary.Field{
@@ -103,7 +93,6 @@ func doEncoderesponse(e binary.Encoder, o *response) {
 func doDecoderesponse(d binary.Decoder, o *response) {
 	o.data = string(d.String())
 }
-func (*binaryClassresponse) ID() binary.ID      { return binaryIDresponse }
 func (*binaryClassresponse) New() binary.Object { return &response{} }
 func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesponse(e, obj.(*response))
@@ -119,7 +108,6 @@ func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassresponse) Schema() *binary.Entity { return schemaresponse }
 
 var schemaresponse = &binary.Entity{
-	TypeID:   binaryIDresponse,
 	Package:  "rpc",
 	Identity: "response",
 	Fields: []binary.Field{

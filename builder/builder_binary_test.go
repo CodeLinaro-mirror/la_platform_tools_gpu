@@ -16,11 +16,6 @@ func init() {
 	Namespace.Add((*testAtom)(nil).Class())
 }
 
-var (
-	binaryIDtestStruct = binary.ID{0x54, 0x50, 0x33, 0x85, 0x41, 0x3b, 0x53, 0x85, 0x9f, 0xed, 0xe8, 0x19, 0x98, 0xdc, 0x79, 0xd8, 0x35, 0x7a, 0x99, 0xc2}
-	binaryIDtestAtom   = binary.ID{0xb3, 0x55, 0xfa, 0x4f, 0x97, 0xf0, 0x3f, 0xb5, 0x6e, 0xaa, 0x3d, 0x63, 0xba, 0xcf, 0xb2, 0xb7, 0xda, 0x5b, 0x2e, 0x5b}
-)
-
 type binaryClasstestStruct struct{}
 
 func (*testStruct) Class() binary.Class {
@@ -42,7 +37,6 @@ func doDecodetestStruct(d binary.Decoder, o *testStruct) {
 		o.Ptr = nil
 	}
 }
-func (*binaryClasstestStruct) ID() binary.ID      { return binaryIDtestStruct }
 func (*binaryClasstestStruct) New() binary.Object { return &testStruct{} }
 func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestStruct(e, obj.(*testStruct))
@@ -58,7 +52,6 @@ func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasstestStruct) Schema() *binary.Entity { return schematestStruct }
 
 var schematestStruct = &binary.Entity{
-	TypeID:   binaryIDtestStruct,
 	Package:  "builder",
 	Identity: "testStruct",
 	Fields: []binary.Field{
@@ -118,7 +111,6 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 		}
 	}
 }
-func (*binaryClasstestAtom) ID() binary.ID      { return binaryIDtestAtom }
 func (*binaryClasstestAtom) New() binary.Object { return &testAtom{} }
 func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestAtom(e, obj.(*testAtom))
@@ -134,7 +126,6 @@ func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClasstestAtom) Schema() *binary.Entity { return schematestAtom }
 
 var schematestAtom = &binary.Entity{
-	TypeID:   binaryIDtestAtom,
 	Package:  "builder",
 	Identity: "testAtom",
 	Fields: []binary.Field{

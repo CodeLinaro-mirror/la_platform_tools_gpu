@@ -21,11 +21,6 @@ func init() {
 	Namespace.Add((*Payload)(nil).Class())
 }
 
-var (
-	binaryIDResourceInfo = binary.ID{0x49, 0xd6, 0x79, 0x4f, 0x2f, 0x27, 0x15, 0x78, 0x19, 0xd7, 0xfb, 0xce, 0xab, 0x4f, 0x43, 0x66, 0x80, 0x15, 0x1f, 0x1b}
-	binaryIDPayload      = binary.ID{0xf4, 0x07, 0x49, 0xe4, 0x5e, 0xc1, 0x5d, 0xab, 0xa6, 0xc4, 0x25, 0x93, 0x3b, 0x3b, 0xd3, 0x92, 0x26, 0x4f, 0x17, 0xd4}
-)
-
 type binaryClassResourceInfo struct{}
 
 func (*ResourceInfo) Class() binary.Class {
@@ -39,7 +34,6 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 	o.ID = string(d.String())
 	o.Size = uint32(d.Uint32())
 }
-func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
 func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResourceInfo(e, obj.(*ResourceInfo))
@@ -55,7 +49,6 @@ func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResourceInfo) Schema() *binary.Entity { return schemaResourceInfo }
 
 var schemaResourceInfo = &binary.Entity{
-	TypeID:   binaryIDResourceInfo,
 	Package:  "protocol",
 	Identity: "ResourceInfo",
 	Fields: []binary.Field{
@@ -99,7 +92,6 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 		d.Data(o.Opcodes)
 	}
 }
-func (*binaryClassPayload) ID() binary.ID      { return binaryIDPayload }
 func (*binaryClassPayload) New() binary.Object { return &Payload{} }
 func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePayload(e, obj.(*Payload))
@@ -115,7 +107,6 @@ func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassPayload) Schema() *binary.Entity { return schemaPayload }
 
 var schemaPayload = &binary.Entity{
-	TypeID:   binaryIDPayload,
 	Package:  "protocol",
 	Identity: "Payload",
 	Fields: []binary.Field{

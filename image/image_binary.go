@@ -34,25 +34,6 @@ func init() {
 	Namespace.Add((*fmtRGBAF32)(nil).Class())
 }
 
-var (
-	binaryIDImage                          = binary.ID{0xc3, 0xf8, 0x24, 0xb1, 0x94, 0x6a, 0xeb, 0xa7, 0x5f, 0x52, 0x59, 0x70, 0x5a, 0xcb, 0x58, 0x41, 0xfc, 0xb4, 0x52, 0x66}
-	binaryIDInfo                           = binary.ID{0x18, 0xea, 0x86, 0x05, 0x9d, 0xce, 0x55, 0x97, 0x1b, 0x94, 0x16, 0x86, 0x8a, 0x4a, 0xd8, 0x5e, 0x7d, 0x67, 0x2e, 0x09}
-	binaryIDLazyConverter                  = binary.ID{0xd9, 0x0d, 0x74, 0x8b, 0xab, 0x34, 0x66, 0x3f, 0x28, 0x3b, 0x4c, 0xa1, 0x37, 0x6b, 0x36, 0x8f, 0x59, 0xb8, 0xb7, 0xb2}
-	binaryIDLazyResizer                    = binary.ID{0x77, 0xb9, 0x12, 0x9f, 0xa4, 0x23, 0xa0, 0x6b, 0x38, 0x9c, 0xf6, 0x9d, 0x56, 0xa6, 0xf5, 0xb7, 0xfd, 0x5d, 0x4b, 0x29}
-	binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD = binary.ID{0x13, 0x31, 0x7f, 0x4d, 0xe1, 0x8e, 0x07, 0xc4, 0x5e, 0xea, 0x75, 0x34, 0xc1, 0xc4, 0x97, 0xb8, 0x94, 0x1b, 0x19, 0x84}
-	binaryIDfmtATC_RGB_AMD                 = binary.ID{0x99, 0x8f, 0x20, 0x9f, 0xb9, 0xa8, 0x32, 0x7e, 0xf7, 0xce, 0x01, 0x4e, 0x3a, 0xd9, 0x07, 0x79, 0x3d, 0x44, 0xcf, 0xf3}
-	binaryIDfmtAlpha                       = binary.ID{0x2a, 0xf1, 0xe7, 0xdd, 0xac, 0xf3, 0xcb, 0x06, 0xf4, 0x16, 0x82, 0x64, 0x81, 0x21, 0x9f, 0x51, 0xa3, 0x76, 0x4f, 0x64}
-	binaryIDfmtETC1_RGB8_OES               = binary.ID{0x74, 0x56, 0x4d, 0xd7, 0x3b, 0x36, 0x7f, 0xbf, 0x59, 0xb5, 0x34, 0xbb, 0x98, 0x08, 0x20, 0x7c, 0x61, 0x19, 0x4c, 0x00}
-	binaryIDfmtFloat32                     = binary.ID{0x3d, 0xc3, 0xd4, 0x77, 0x41, 0xc8, 0xa0, 0xb5, 0x8f, 0x59, 0x4c, 0x04, 0x91, 0x1d, 0xd7, 0xea, 0x46, 0xa8, 0x3a, 0xed}
-	binaryIDfmtLuminance                   = binary.ID{0xcb, 0xda, 0xb3, 0x73, 0xc4, 0x78, 0x75, 0xd7, 0x02, 0x4e, 0x18, 0xaf, 0xba, 0x03, 0x8c, 0x4b, 0x8e, 0x43, 0xc6, 0x18}
-	binaryIDfmtLuminanceAlpha              = binary.ID{0x86, 0x8a, 0x2f, 0xf0, 0x80, 0xb2, 0x61, 0x1f, 0x57, 0xd0, 0x6e, 0x44, 0x5f, 0x02, 0x11, 0x60, 0x2b, 0x80, 0xe9, 0x18}
-	binaryIDfmtPNG                         = binary.ID{0xda, 0x58, 0x38, 0xf1, 0xa4, 0x9f, 0xa7, 0xd7, 0x64, 0x7e, 0x58, 0xb8, 0xd1, 0x74, 0x5c, 0x0f, 0xd9, 0x4e, 0x43, 0x06}
-	binaryIDfmtRGB                         = binary.ID{0x7b, 0x07, 0xb7, 0xcc, 0xb3, 0x24, 0xc1, 0x31, 0xf4, 0xfc, 0xbf, 0x4b, 0x3b, 0x28, 0x5c, 0xf7, 0xff, 0xd5, 0xa1, 0xc6}
-	binaryIDfmtRGB565                      = binary.ID{0xf1, 0x4e, 0x01, 0x87, 0x66, 0xdb, 0x56, 0x55, 0x5b, 0x8e, 0x1b, 0xb2, 0xb3, 0xa3, 0x97, 0x79, 0x5e, 0x6a, 0x0c, 0x89}
-	binaryIDfmtRGBA                        = binary.ID{0x02, 0x1e, 0x56, 0x1c, 0xb1, 0x1d, 0xa6, 0x8e, 0xdf, 0xae, 0x99, 0x0f, 0x91, 0xb3, 0x1e, 0x31, 0x9d, 0x36, 0x2e, 0x45}
-	binaryIDfmtRGBAF32                     = binary.ID{0xce, 0xaf, 0x41, 0x43, 0x98, 0x8d, 0xdb, 0x96, 0x2b, 0xd3, 0xee, 0xb0, 0x01, 0xdf, 0x47, 0x4b, 0x98, 0x75, 0x63, 0x4e}
-)
-
 type binaryClassImage struct{}
 
 func (*Image) Class() binary.Class {
@@ -78,7 +59,6 @@ func doDecodeImage(d binary.Decoder, o *Image) {
 		d.Data(o.Data)
 	}
 }
-func (*binaryClassImage) ID() binary.ID      { return binaryIDImage }
 func (*binaryClassImage) New() binary.Object { return &Image{} }
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImage(e, obj.(*Image))
@@ -94,7 +74,6 @@ func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassImage) Schema() *binary.Entity { return schemaImage }
 
 var schemaImage = &binary.Entity{
-	TypeID:   binaryIDImage,
 	Package:  "image",
 	Identity: "Image",
 	Fields: []binary.Field{
@@ -134,7 +113,6 @@ func doDecodeInfo(d binary.Decoder, o *Info) {
 		o.Data = nil
 	}
 }
-func (*binaryClassInfo) ID() binary.ID      { return binaryIDInfo }
 func (*binaryClassInfo) New() binary.Object { return &Info{} }
 func (*binaryClassInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeInfo(e, obj.(*Info))
@@ -150,7 +128,6 @@ func (*binaryClassInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassInfo) Schema() *binary.Entity { return schemaInfo }
 
 var schemaInfo = &binary.Entity{
-	TypeID:   binaryIDInfo,
 	Package:  "image",
 	Identity: "Info",
 	Fields: []binary.Field{
@@ -190,7 +167,6 @@ func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) {
 	}
 	o.StrideFrom = int(d.Int32())
 }
-func (*binaryClassLazyConverter) ID() binary.ID      { return binaryIDLazyConverter }
 func (*binaryClassLazyConverter) New() binary.Object { return &LazyConverter{} }
 func (*binaryClassLazyConverter) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeLazyConverter(e, obj.(*LazyConverter))
@@ -206,7 +182,6 @@ func (*binaryClassLazyConverter) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassLazyConverter) Schema() *binary.Entity { return schemaLazyConverter }
 
 var schemaLazyConverter = &binary.Entity{
-	TypeID:   binaryIDLazyConverter,
 	Package:  "image",
 	Identity: "LazyConverter",
 	Fields: []binary.Field{
@@ -244,7 +219,6 @@ func doDecodeLazyResizer(d binary.Decoder, o *LazyResizer) {
 	o.DstWidth = uint32(d.Uint32())
 	o.DstHeight = uint32(d.Uint32())
 }
-func (*binaryClassLazyResizer) ID() binary.ID      { return binaryIDLazyResizer }
 func (*binaryClassLazyResizer) New() binary.Object { return &LazyResizer{} }
 func (*binaryClassLazyResizer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeLazyResizer(e, obj.(*LazyResizer))
@@ -260,7 +234,6 @@ func (*binaryClassLazyResizer) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassLazyResizer) Schema() *binary.Entity { return schemaLazyResizer }
 
 var schemaLazyResizer = &binary.Entity{
-	TypeID:   binaryIDLazyResizer,
 	Package:  "image",
 	Identity: "LazyResizer",
 	Fields: []binary.Field{
@@ -282,9 +255,6 @@ func doEncodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(e binary.Encoder, o *fmtATC_RGBA_EXP
 }
 func doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d binary.Decoder, o *fmtATC_RGBA_EXPLICIT_ALPHA_AMD) {
 }
-func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) ID() binary.ID {
-	return binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD
-}
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) New() binary.Object {
 	return &fmtATC_RGBA_EXPLICIT_ALPHA_AMD{}
 }
@@ -304,7 +274,6 @@ func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Schema() *binary.Entity {
 }
 
 var schemafmtATC_RGBA_EXPLICIT_ALPHA_AMD = &binary.Entity{
-	TypeID:   binaryIDfmtATC_RGBA_EXPLICIT_ALPHA_AMD,
 	Package:  "image",
 	Identity: "fmtATC_RGBA_EXPLICIT_ALPHA_AMD",
 	Fields:   []binary.Field{},
@@ -319,7 +288,6 @@ func doEncodefmtATC_RGB_AMD(e binary.Encoder, o *fmtATC_RGB_AMD) {
 }
 func doDecodefmtATC_RGB_AMD(d binary.Decoder, o *fmtATC_RGB_AMD) {
 }
-func (*binaryClassfmtATC_RGB_AMD) ID() binary.ID      { return binaryIDfmtATC_RGB_AMD }
 func (*binaryClassfmtATC_RGB_AMD) New() binary.Object { return &fmtATC_RGB_AMD{} }
 func (*binaryClassfmtATC_RGB_AMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtATC_RGB_AMD(e, obj.(*fmtATC_RGB_AMD))
@@ -335,7 +303,6 @@ func (*binaryClassfmtATC_RGB_AMD) DecodeTo(d binary.Decoder, obj binary.Object) 
 func (*binaryClassfmtATC_RGB_AMD) Schema() *binary.Entity { return schemafmtATC_RGB_AMD }
 
 var schemafmtATC_RGB_AMD = &binary.Entity{
-	TypeID:   binaryIDfmtATC_RGB_AMD,
 	Package:  "image",
 	Identity: "fmtATC_RGB_AMD",
 	Fields:   []binary.Field{},
@@ -350,7 +317,6 @@ func doEncodefmtAlpha(e binary.Encoder, o *fmtAlpha) {
 }
 func doDecodefmtAlpha(d binary.Decoder, o *fmtAlpha) {
 }
-func (*binaryClassfmtAlpha) ID() binary.ID      { return binaryIDfmtAlpha }
 func (*binaryClassfmtAlpha) New() binary.Object { return &fmtAlpha{} }
 func (*binaryClassfmtAlpha) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtAlpha(e, obj.(*fmtAlpha))
@@ -366,7 +332,6 @@ func (*binaryClassfmtAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtAlpha) Schema() *binary.Entity { return schemafmtAlpha }
 
 var schemafmtAlpha = &binary.Entity{
-	TypeID:   binaryIDfmtAlpha,
 	Package:  "image",
 	Identity: "fmtAlpha",
 	Fields:   []binary.Field{},
@@ -381,7 +346,6 @@ func doEncodefmtETC1_RGB8_OES(e binary.Encoder, o *fmtETC1_RGB8_OES) {
 }
 func doDecodefmtETC1_RGB8_OES(d binary.Decoder, o *fmtETC1_RGB8_OES) {
 }
-func (*binaryClassfmtETC1_RGB8_OES) ID() binary.ID      { return binaryIDfmtETC1_RGB8_OES }
 func (*binaryClassfmtETC1_RGB8_OES) New() binary.Object { return &fmtETC1_RGB8_OES{} }
 func (*binaryClassfmtETC1_RGB8_OES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtETC1_RGB8_OES(e, obj.(*fmtETC1_RGB8_OES))
@@ -397,7 +361,6 @@ func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object
 func (*binaryClassfmtETC1_RGB8_OES) Schema() *binary.Entity { return schemafmtETC1_RGB8_OES }
 
 var schemafmtETC1_RGB8_OES = &binary.Entity{
-	TypeID:   binaryIDfmtETC1_RGB8_OES,
 	Package:  "image",
 	Identity: "fmtETC1_RGB8_OES",
 	Fields:   []binary.Field{},
@@ -412,7 +375,6 @@ func doEncodefmtFloat32(e binary.Encoder, o *fmtFloat32) {
 }
 func doDecodefmtFloat32(d binary.Decoder, o *fmtFloat32) {
 }
-func (*binaryClassfmtFloat32) ID() binary.ID      { return binaryIDfmtFloat32 }
 func (*binaryClassfmtFloat32) New() binary.Object { return &fmtFloat32{} }
 func (*binaryClassfmtFloat32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtFloat32(e, obj.(*fmtFloat32))
@@ -428,7 +390,6 @@ func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtFloat32) Schema() *binary.Entity { return schemafmtFloat32 }
 
 var schemafmtFloat32 = &binary.Entity{
-	TypeID:   binaryIDfmtFloat32,
 	Package:  "image",
 	Identity: "fmtFloat32",
 	Fields:   []binary.Field{},
@@ -443,7 +404,6 @@ func doEncodefmtLuminance(e binary.Encoder, o *fmtLuminance) {
 }
 func doDecodefmtLuminance(d binary.Decoder, o *fmtLuminance) {
 }
-func (*binaryClassfmtLuminance) ID() binary.ID      { return binaryIDfmtLuminance }
 func (*binaryClassfmtLuminance) New() binary.Object { return &fmtLuminance{} }
 func (*binaryClassfmtLuminance) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtLuminance(e, obj.(*fmtLuminance))
@@ -459,7 +419,6 @@ func (*binaryClassfmtLuminance) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtLuminance) Schema() *binary.Entity { return schemafmtLuminance }
 
 var schemafmtLuminance = &binary.Entity{
-	TypeID:   binaryIDfmtLuminance,
 	Package:  "image",
 	Identity: "fmtLuminance",
 	Fields:   []binary.Field{},
@@ -474,7 +433,6 @@ func doEncodefmtLuminanceAlpha(e binary.Encoder, o *fmtLuminanceAlpha) {
 }
 func doDecodefmtLuminanceAlpha(d binary.Decoder, o *fmtLuminanceAlpha) {
 }
-func (*binaryClassfmtLuminanceAlpha) ID() binary.ID      { return binaryIDfmtLuminanceAlpha }
 func (*binaryClassfmtLuminanceAlpha) New() binary.Object { return &fmtLuminanceAlpha{} }
 func (*binaryClassfmtLuminanceAlpha) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtLuminanceAlpha(e, obj.(*fmtLuminanceAlpha))
@@ -490,7 +448,6 @@ func (*binaryClassfmtLuminanceAlpha) DecodeTo(d binary.Decoder, obj binary.Objec
 func (*binaryClassfmtLuminanceAlpha) Schema() *binary.Entity { return schemafmtLuminanceAlpha }
 
 var schemafmtLuminanceAlpha = &binary.Entity{
-	TypeID:   binaryIDfmtLuminanceAlpha,
 	Package:  "image",
 	Identity: "fmtLuminanceAlpha",
 	Fields:   []binary.Field{},
@@ -505,7 +462,6 @@ func doEncodefmtPNG(e binary.Encoder, o *fmtPNG) {
 }
 func doDecodefmtPNG(d binary.Decoder, o *fmtPNG) {
 }
-func (*binaryClassfmtPNG) ID() binary.ID      { return binaryIDfmtPNG }
 func (*binaryClassfmtPNG) New() binary.Object { return &fmtPNG{} }
 func (*binaryClassfmtPNG) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtPNG(e, obj.(*fmtPNG))
@@ -521,7 +477,6 @@ func (*binaryClassfmtPNG) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtPNG) Schema() *binary.Entity { return schemafmtPNG }
 
 var schemafmtPNG = &binary.Entity{
-	TypeID:   binaryIDfmtPNG,
 	Package:  "image",
 	Identity: "fmtPNG",
 	Fields:   []binary.Field{},
@@ -536,7 +491,6 @@ func doEncodefmtRGB(e binary.Encoder, o *fmtRGB) {
 }
 func doDecodefmtRGB(d binary.Decoder, o *fmtRGB) {
 }
-func (*binaryClassfmtRGB) ID() binary.ID      { return binaryIDfmtRGB }
 func (*binaryClassfmtRGB) New() binary.Object { return &fmtRGB{} }
 func (*binaryClassfmtRGB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGB(e, obj.(*fmtRGB))
@@ -552,7 +506,6 @@ func (*binaryClassfmtRGB) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtRGB) Schema() *binary.Entity { return schemafmtRGB }
 
 var schemafmtRGB = &binary.Entity{
-	TypeID:   binaryIDfmtRGB,
 	Package:  "image",
 	Identity: "fmtRGB",
 	Fields:   []binary.Field{},
@@ -567,7 +520,6 @@ func doEncodefmtRGB565(e binary.Encoder, o *fmtRGB565) {
 }
 func doDecodefmtRGB565(d binary.Decoder, o *fmtRGB565) {
 }
-func (*binaryClassfmtRGB565) ID() binary.ID      { return binaryIDfmtRGB565 }
 func (*binaryClassfmtRGB565) New() binary.Object { return &fmtRGB565{} }
 func (*binaryClassfmtRGB565) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGB565(e, obj.(*fmtRGB565))
@@ -583,7 +535,6 @@ func (*binaryClassfmtRGB565) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtRGB565) Schema() *binary.Entity { return schemafmtRGB565 }
 
 var schemafmtRGB565 = &binary.Entity{
-	TypeID:   binaryIDfmtRGB565,
 	Package:  "image",
 	Identity: "fmtRGB565",
 	Fields:   []binary.Field{},
@@ -598,7 +549,6 @@ func doEncodefmtRGBA(e binary.Encoder, o *fmtRGBA) {
 }
 func doDecodefmtRGBA(d binary.Decoder, o *fmtRGBA) {
 }
-func (*binaryClassfmtRGBA) ID() binary.ID      { return binaryIDfmtRGBA }
 func (*binaryClassfmtRGBA) New() binary.Object { return &fmtRGBA{} }
 func (*binaryClassfmtRGBA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGBA(e, obj.(*fmtRGBA))
@@ -614,7 +564,6 @@ func (*binaryClassfmtRGBA) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtRGBA) Schema() *binary.Entity { return schemafmtRGBA }
 
 var schemafmtRGBA = &binary.Entity{
-	TypeID:   binaryIDfmtRGBA,
 	Package:  "image",
 	Identity: "fmtRGBA",
 	Fields:   []binary.Field{},
@@ -629,7 +578,6 @@ func doEncodefmtRGBAF32(e binary.Encoder, o *fmtRGBAF32) {
 }
 func doDecodefmtRGBAF32(d binary.Decoder, o *fmtRGBAF32) {
 }
-func (*binaryClassfmtRGBAF32) ID() binary.ID      { return binaryIDfmtRGBAF32 }
 func (*binaryClassfmtRGBAF32) New() binary.Object { return &fmtRGBAF32{} }
 func (*binaryClassfmtRGBAF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGBAF32(e, obj.(*fmtRGBAF32))
@@ -645,7 +593,6 @@ func (*binaryClassfmtRGBAF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassfmtRGBAF32) Schema() *binary.Entity { return schemafmtRGBAF32 }
 
 var schemafmtRGBAF32 = &binary.Entity{
-	TypeID:   binaryIDfmtRGBAF32,
 	Package:  "image",
 	Identity: "fmtRGBAF32",
 	Fields:   []binary.Field{},

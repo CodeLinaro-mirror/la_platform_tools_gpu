@@ -21,11 +21,6 @@ func init() {
 	Namespace.Add((*Range)(nil).Class())
 }
 
-var (
-	binaryIDPointer = binary.ID{0xaa, 0x47, 0x2f, 0xe5, 0xc7, 0x15, 0xbe, 0xf8, 0xf3, 0x63, 0x5a, 0x5c, 0x56, 0xc7, 0x23, 0x66, 0xb7, 0x85, 0x84, 0x59}
-	binaryIDRange   = binary.ID{0xfb, 0x3f, 0xff, 0x8c, 0x2d, 0xc4, 0x7b, 0xe0, 0xef, 0xe2, 0x95, 0x57, 0xae, 0x48, 0x62, 0x84, 0xb2, 0x98, 0xf6, 0xd6}
-)
-
 type binaryClassPointer struct{}
 
 func (*Pointer) Class() binary.Class {
@@ -39,7 +34,6 @@ func doDecodePointer(d binary.Decoder, o *Pointer) {
 	o.Address = uint64(d.Uint64())
 	o.Pool = PoolID(d.Uint32())
 }
-func (*binaryClassPointer) ID() binary.ID      { return binaryIDPointer }
 func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
 func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePointer(e, obj.(*Pointer))
@@ -55,7 +49,6 @@ func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassPointer) Schema() *binary.Entity { return schemaPointer }
 
 var schemaPointer = &binary.Entity{
-	TypeID:   binaryIDPointer,
 	Package:  "memory",
 	Identity: "Pointer",
 	Fields: []binary.Field{
@@ -77,7 +70,6 @@ func doDecodeRange(d binary.Decoder, o *Range) {
 	o.Base = uint64(d.Uint64())
 	o.Size = uint64(d.Uint64())
 }
-func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRange(e, obj.(*Range))
@@ -93,7 +85,6 @@ func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassRange) Schema() *binary.Entity { return schemaRange }
 
 var schemaRange = &binary.Entity{
-	TypeID:   binaryIDRange,
 	Package:  "memory",
 	Identity: "Range",
 	Fields: []binary.Field{

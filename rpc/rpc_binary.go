@@ -18,10 +18,6 @@ func init() {
 	Namespace.Add((*Error)(nil).Class())
 }
 
-var (
-	binaryIDError = binary.ID{0xc6, 0x3c, 0x31, 0x46, 0xf5, 0xf2, 0x6d, 0x78, 0x06, 0x06, 0x89, 0x03, 0x5b, 0xe6, 0x3f, 0x6c, 0x6f, 0x7a, 0x11, 0x1a}
-)
-
 type binaryClassError struct{}
 
 func (*Error) Class() binary.Class {
@@ -33,7 +29,6 @@ func doEncodeError(e binary.Encoder, o *Error) {
 func doDecodeError(d binary.Decoder, o *Error) {
 	o.message = string(d.String())
 }
-func (*binaryClassError) ID() binary.ID      { return binaryIDError }
 func (*binaryClassError) New() binary.Object { return &Error{} }
 func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeError(e, obj.(*Error))
@@ -49,7 +44,6 @@ func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassError) Schema() *binary.Entity { return schemaError }
 
 var schemaError = &binary.Entity{
-	TypeID:   binaryIDError,
 	Package:  "rpc",
 	Identity: "Error",
 	Fields: []binary.Field{

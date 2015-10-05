@@ -20,12 +20,6 @@ func init() {
 	Namespace.Add((*msgOpenChannel)(nil).Class())
 }
 
-var (
-	binaryIDmsgCloseChannel = binary.ID{0x2a, 0x93, 0xa2, 0x98, 0x22, 0xa8, 0x28, 0xe9, 0x7d, 0x12, 0x4a, 0x60, 0xe0, 0x11, 0x7f, 0x63, 0xa4, 0x7e, 0xc9, 0x82}
-	binaryIDmsgData         = binary.ID{0x6a, 0x4e, 0xf7, 0x25, 0x1b, 0x7d, 0x26, 0x8f, 0x8f, 0xfa, 0xda, 0xe4, 0x45, 0xaf, 0x68, 0x0c, 0x4b, 0xe1, 0xab, 0xcb}
-	binaryIDmsgOpenChannel  = binary.ID{0x9f, 0x0d, 0xe7, 0x40, 0x7a, 0xa6, 0x29, 0xd7, 0x4e, 0x66, 0x3a, 0xae, 0x1e, 0x75, 0x1f, 0x11, 0xb2, 0xfa, 0x15, 0x37}
-)
-
 type binaryClassmsgCloseChannel struct{}
 
 func (*msgCloseChannel) Class() binary.Class {
@@ -37,7 +31,6 @@ func doEncodemsgCloseChannel(e binary.Encoder, o *msgCloseChannel) {
 func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) {
 	o.channelId = channelId(d.Uint32())
 }
-func (*binaryClassmsgCloseChannel) ID() binary.ID      { return binaryIDmsgCloseChannel }
 func (*binaryClassmsgCloseChannel) New() binary.Object { return &msgCloseChannel{} }
 func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
@@ -53,7 +46,6 @@ func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClassmsgCloseChannel) Schema() *binary.Entity { return schemamsgCloseChannel }
 
 var schemamsgCloseChannel = &binary.Entity{
-	TypeID:   binaryIDmsgCloseChannel,
 	Package:  "multiplexer",
 	Identity: "msgCloseChannel",
 	Fields: []binary.Field{
@@ -78,7 +70,6 @@ func doDecodemsgData(d binary.Decoder, o *msgData) {
 		d.Data(o.d)
 	}
 }
-func (*binaryClassmsgData) ID() binary.ID      { return binaryIDmsgData }
 func (*binaryClassmsgData) New() binary.Object { return &msgData{} }
 func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgData(e, obj.(*msgData))
@@ -94,7 +85,6 @@ func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassmsgData) Schema() *binary.Entity { return schemamsgData }
 
 var schemamsgData = &binary.Entity{
-	TypeID:   binaryIDmsgData,
 	Package:  "multiplexer",
 	Identity: "msgData",
 	Fields: []binary.Field{
@@ -114,7 +104,6 @@ func doEncodemsgOpenChannel(e binary.Encoder, o *msgOpenChannel) {
 func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) {
 	o.channelId = channelId(d.Uint32())
 }
-func (*binaryClassmsgOpenChannel) ID() binary.ID      { return binaryIDmsgOpenChannel }
 func (*binaryClassmsgOpenChannel) New() binary.Object { return &msgOpenChannel{} }
 func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
@@ -130,7 +119,6 @@ func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) 
 func (*binaryClassmsgOpenChannel) Schema() *binary.Entity { return schemamsgOpenChannel }
 
 var schemamsgOpenChannel = &binary.Entity{
-	TypeID:   binaryIDmsgOpenChannel,
 	Package:  "multiplexer",
 	Identity: "msgOpenChannel",
 	Fields: []binary.Field{

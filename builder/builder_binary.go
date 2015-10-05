@@ -38,27 +38,6 @@ func init() {
 	Namespace.Add((*getCaptureFramebufferDimensions)(nil).Class())
 }
 
-var (
-	binaryIDBuildReport                     = binary.ID{0x07, 0x7c, 0x5c, 0x62, 0xb7, 0x7e, 0xff, 0x16, 0xf0, 0x02, 0xdb, 0x40, 0x07, 0xda, 0x94, 0xd5, 0x77, 0x7e, 0x83, 0xb5}
-	binaryIDFollow                          = binary.ID{0xcf, 0x6d, 0xac, 0x3d, 0x1f, 0xf6, 0xb2, 0x5f, 0x0d, 0xbf, 0x13, 0x34, 0x46, 0xec, 0x18, 0x25, 0xee, 0x0d, 0x7f, 0xde}
-	binaryIDGet                             = binary.ID{0x4a, 0x94, 0xec, 0xb6, 0x83, 0x6d, 0x8a, 0x2d, 0x01, 0xc8, 0xff, 0x18, 0xa7, 0x69, 0xba, 0xfe, 0xfe, 0x5a, 0x14, 0x39}
-	binaryIDGetFramebufferColor             = binary.ID{0xbd, 0x45, 0x32, 0xb5, 0xa2, 0x74, 0x76, 0x76, 0x68, 0xac, 0x38, 0x2d, 0xbd, 0x0f, 0x50, 0xf0, 0xb0, 0x5a, 0x78, 0xd9}
-	binaryIDGetFramebufferDepth             = binary.ID{0xad, 0x44, 0xcf, 0x9f, 0x2e, 0xd9, 0x7d, 0xad, 0xc9, 0x91, 0x8b, 0x35, 0x45, 0x75, 0x79, 0xb1, 0x46, 0x8b, 0x33, 0xba}
-	binaryIDGetHierarchy                    = binary.ID{0x1e, 0x02, 0x20, 0x28, 0xb2, 0x1f, 0xb5, 0x5b, 0x45, 0xff, 0x8a, 0x08, 0x8e, 0xc5, 0x42, 0x40, 0x93, 0xe0, 0xf7, 0x3d}
-	binaryIDGetResourceData                 = binary.ID{0xea, 0xbe, 0xda, 0x9a, 0x65, 0x32, 0x81, 0xe3, 0x2d, 0xa6, 0x16, 0x67, 0xdd, 0x39, 0x58, 0x91, 0xdd, 0x29, 0x84, 0x50}
-	binaryIDGetResources                    = binary.ID{0x84, 0x30, 0x3c, 0xc6, 0x99, 0x41, 0x69, 0xe0, 0xf0, 0x0e, 0x2f, 0x4c, 0xf4, 0x70, 0x7a, 0x63, 0x20, 0x1b, 0x09, 0x3d}
-	binaryIDGetState                        = binary.ID{0x85, 0xab, 0x19, 0x7f, 0xa8, 0x18, 0xd3, 0x07, 0x5b, 0x66, 0x56, 0xea, 0x20, 0x90, 0xb1, 0xe6, 0xc0, 0x49, 0x30, 0xdc}
-	binaryIDGetTimingInfo                   = binary.ID{0xf8, 0x27, 0x8e, 0x51, 0x2d, 0xf9, 0x2e, 0x04, 0x3a, 0x97, 0xa7, 0xf7, 0x31, 0xb0, 0x70, 0xc8, 0x49, 0xbe, 0xd6, 0xd3}
-	binaryIDIndexLimits                     = binary.ID{0xc4, 0x1a, 0xde, 0x65, 0x19, 0x02, 0xb4, 0x0a, 0xf6, 0x3f, 0x1a, 0x97, 0x39, 0xb5, 0x77, 0xd4, 0xfc, 0xa5, 0x85, 0x45}
-	binaryIDRenderFramebufferColor          = binary.ID{0x40, 0xcd, 0xd8, 0x7b, 0x76, 0x32, 0x7b, 0x6f, 0x03, 0x90, 0xe7, 0x88, 0x28, 0x80, 0x87, 0x7c, 0x21, 0x8f, 0xa8, 0xa0}
-	binaryIDRenderFramebufferDepth          = binary.ID{0x1f, 0x13, 0xb2, 0x47, 0x53, 0x42, 0x4c, 0x2d, 0x18, 0x35, 0x29, 0x97, 0x37, 0x9f, 0x7d, 0x86, 0xb2, 0xe6, 0xe4, 0xbc}
-	binaryIDSet                             = binary.ID{0xae, 0x9e, 0x97, 0x7e, 0x41, 0x9c, 0x10, 0xe0, 0x72, 0x49, 0x90, 0x19, 0xc3, 0x21, 0xd4, 0xfd, 0x1d, 0xb0, 0xe3, 0xc8}
-	binaryIDatomFramebufferDimensions       = binary.ID{0xa6, 0xc3, 0xab, 0x5d, 0x01, 0xd4, 0xc9, 0x95, 0x0f, 0x01, 0x85, 0xa6, 0xf8, 0x00, 0x0e, 0x3d, 0xf4, 0xdd, 0xdb, 0x39}
-	binaryIDcalcIndexLimits                 = binary.ID{0xef, 0xd6, 0x99, 0xcb, 0x40, 0x28, 0xe3, 0xbb, 0x44, 0x14, 0xe1, 0xb4, 0xdd, 0xbe, 0xb6, 0x27, 0xd7, 0x34, 0x38, 0xd5}
-	binaryIDcaptureFramebufferDimensions    = binary.ID{0x5d, 0xc8, 0x7d, 0xac, 0x54, 0xfc, 0x34, 0xb5, 0xa2, 0xbd, 0xa3, 0xe3, 0x5d, 0x90, 0x4a, 0x58, 0x66, 0x61, 0x9e, 0xdb}
-	binaryIDgetCaptureFramebufferDimensions = binary.ID{0xc6, 0x3e, 0x40, 0x7f, 0xe2, 0xa1, 0xe7, 0xe4, 0x34, 0xc6, 0xe8, 0xc9, 0x21, 0xcc, 0x2b, 0x6b, 0x2d, 0xcd, 0x52, 0x54}
-)
-
 type binaryClassBuildReport struct{}
 
 func (*BuildReport) Class() binary.Class {
@@ -88,7 +67,6 @@ func doDecodeBuildReport(d binary.Decoder, o *BuildReport) {
 		o.Device = nil
 	}
 }
-func (*binaryClassBuildReport) ID() binary.ID      { return binaryIDBuildReport }
 func (*binaryClassBuildReport) New() binary.Object { return &BuildReport{} }
 func (*binaryClassBuildReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBuildReport(e, obj.(*BuildReport))
@@ -104,7 +82,6 @@ func (*binaryClassBuildReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassBuildReport) Schema() *binary.Entity { return schemaBuildReport }
 
 var schemaBuildReport = &binary.Entity{
-	TypeID:   binaryIDBuildReport,
 	Package:  "builder",
 	Identity: "BuildReport",
 	Fields: []binary.Field{
@@ -128,7 +105,6 @@ func doDecodeFollow(d binary.Decoder, o *Follow) {
 		o.Path = nil
 	}
 }
-func (*binaryClassFollow) ID() binary.ID      { return binaryIDFollow }
 func (*binaryClassFollow) New() binary.Object { return &Follow{} }
 func (*binaryClassFollow) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFollow(e, obj.(*Follow))
@@ -144,7 +120,6 @@ func (*binaryClassFollow) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassFollow) Schema() *binary.Entity { return schemaFollow }
 
 var schemaFollow = &binary.Entity{
-	TypeID:   binaryIDFollow,
 	Package:  "builder",
 	Identity: "Follow",
 	Fields: []binary.Field{
@@ -167,7 +142,6 @@ func doDecodeGet(d binary.Decoder, o *Get) {
 		o.Path = nil
 	}
 }
-func (*binaryClassGet) ID() binary.ID      { return binaryIDGet }
 func (*binaryClassGet) New() binary.Object { return &Get{} }
 func (*binaryClassGet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGet(e, obj.(*Get))
@@ -183,7 +157,6 @@ func (*binaryClassGet) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGet) Schema() *binary.Entity { return schemaGet }
 
 var schemaGet = &binary.Entity{
-	TypeID:   binaryIDGet,
 	Package:  "builder",
 	Identity: "Get",
 	Fields: []binary.Field{
@@ -222,7 +195,6 @@ func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) {
 	}
 	d.Value(&o.Settings)
 }
-func (*binaryClassGetFramebufferColor) ID() binary.ID      { return binaryIDGetFramebufferColor }
 func (*binaryClassGetFramebufferColor) New() binary.Object { return &GetFramebufferColor{} }
 func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferColor(e, obj.(*GetFramebufferColor))
@@ -238,7 +210,6 @@ func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferColor) Schema() *binary.Entity { return schemaGetFramebufferColor }
 
 var schemaGetFramebufferColor = &binary.Entity{
-	TypeID:   binaryIDGetFramebufferColor,
 	Package:  "builder",
 	Identity: "GetFramebufferColor",
 	Fields: []binary.Field{
@@ -277,7 +248,6 @@ func doDecodeGetFramebufferDepth(d binary.Decoder, o *GetFramebufferDepth) {
 		o.After = nil
 	}
 }
-func (*binaryClassGetFramebufferDepth) ID() binary.ID      { return binaryIDGetFramebufferDepth }
 func (*binaryClassGetFramebufferDepth) New() binary.Object { return &GetFramebufferDepth{} }
 func (*binaryClassGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferDepth(e, obj.(*GetFramebufferDepth))
@@ -293,7 +263,6 @@ func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferDepth) Schema() *binary.Entity { return schemaGetFramebufferDepth }
 
 var schemaGetFramebufferDepth = &binary.Entity{
-	TypeID:   binaryIDGetFramebufferDepth,
 	Package:  "builder",
 	Identity: "GetFramebufferDepth",
 	Fields: []binary.Field{
@@ -321,7 +290,6 @@ func doDecodeGetHierarchy(d binary.Decoder, o *GetHierarchy) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassGetHierarchy) ID() binary.ID      { return binaryIDGetHierarchy }
 func (*binaryClassGetHierarchy) New() binary.Object { return &GetHierarchy{} }
 func (*binaryClassGetHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetHierarchy(e, obj.(*GetHierarchy))
@@ -337,7 +305,6 @@ func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetHierarchy) Schema() *binary.Entity { return schemaGetHierarchy }
 
 var schemaGetHierarchy = &binary.Entity{
-	TypeID:   binaryIDGetHierarchy,
 	Package:  "builder",
 	Identity: "GetHierarchy",
 	Fields: []binary.Field{
@@ -364,7 +331,6 @@ func doDecodeGetResourceData(d binary.Decoder, o *GetResourceData) {
 		o.Path = nil
 	}
 }
-func (*binaryClassGetResourceData) ID() binary.ID      { return binaryIDGetResourceData }
 func (*binaryClassGetResourceData) New() binary.Object { return &GetResourceData{} }
 func (*binaryClassGetResourceData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResourceData(e, obj.(*GetResourceData))
@@ -380,7 +346,6 @@ func (*binaryClassGetResourceData) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClassGetResourceData) Schema() *binary.Entity { return schemaGetResourceData }
 
 var schemaGetResourceData = &binary.Entity{
-	TypeID:   binaryIDGetResourceData,
 	Package:  "builder",
 	Identity: "GetResourceData",
 	Fields: []binary.Field{
@@ -407,7 +372,6 @@ func doDecodeGetResources(d binary.Decoder, o *GetResources) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassGetResources) ID() binary.ID      { return binaryIDGetResources }
 func (*binaryClassGetResources) New() binary.Object { return &GetResources{} }
 func (*binaryClassGetResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResources(e, obj.(*GetResources))
@@ -423,7 +387,6 @@ func (*binaryClassGetResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetResources) Schema() *binary.Entity { return schemaGetResources }
 
 var schemaGetResources = &binary.Entity{
-	TypeID:   binaryIDGetResources,
 	Package:  "builder",
 	Identity: "GetResources",
 	Fields: []binary.Field{
@@ -450,7 +413,6 @@ func doDecodeGetState(d binary.Decoder, o *GetState) {
 		o.After = nil
 	}
 }
-func (*binaryClassGetState) ID() binary.ID      { return binaryIDGetState }
 func (*binaryClassGetState) New() binary.Object { return &GetState{} }
 func (*binaryClassGetState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetState(e, obj.(*GetState))
@@ -466,7 +428,6 @@ func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetState) Schema() *binary.Entity { return schemaGetState }
 
 var schemaGetState = &binary.Entity{
-	TypeID:   binaryIDGetState,
 	Package:  "builder",
 	Identity: "GetState",
 	Fields: []binary.Field{
@@ -505,7 +466,6 @@ func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) {
 	}
 	o.Flags = service.TimingFlags(d.Int32())
 }
-func (*binaryClassGetTimingInfo) ID() binary.ID      { return binaryIDGetTimingInfo }
 func (*binaryClassGetTimingInfo) New() binary.Object { return &GetTimingInfo{} }
 func (*binaryClassGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetTimingInfo(e, obj.(*GetTimingInfo))
@@ -521,7 +481,6 @@ func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGetTimingInfo) Schema() *binary.Entity { return schemaGetTimingInfo }
 
 var schemaGetTimingInfo = &binary.Entity{
-	TypeID:   binaryIDGetTimingInfo,
 	Package:  "builder",
 	Identity: "GetTimingInfo",
 	Fields: []binary.Field{
@@ -544,7 +503,6 @@ func doDecodeIndexLimits(d binary.Decoder, o *IndexLimits) {
 	o.Min = uint32(d.Uint32())
 	o.Max = uint32(d.Uint32())
 }
-func (*binaryClassIndexLimits) ID() binary.ID      { return binaryIDIndexLimits }
 func (*binaryClassIndexLimits) New() binary.Object { return &IndexLimits{} }
 func (*binaryClassIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIndexLimits(e, obj.(*IndexLimits))
@@ -560,7 +518,6 @@ func (*binaryClassIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassIndexLimits) Schema() *binary.Entity { return schemaIndexLimits }
 
 var schemaIndexLimits = &binary.Entity{
-	TypeID:   binaryIDIndexLimits,
 	Package:  "builder",
 	Identity: "IndexLimits",
 	Fields: []binary.Field{
@@ -604,7 +561,6 @@ func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor)
 	o.Height = uint32(d.Uint32())
 	o.WireframeMode = service.WireframeMode(d.Int32())
 }
-func (*binaryClassRenderFramebufferColor) ID() binary.ID      { return binaryIDRenderFramebufferColor }
 func (*binaryClassRenderFramebufferColor) New() binary.Object { return &RenderFramebufferColor{} }
 func (*binaryClassRenderFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferColor(e, obj.(*RenderFramebufferColor))
@@ -620,7 +576,6 @@ func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferColor) Schema() *binary.Entity { return schemaRenderFramebufferColor }
 
 var schemaRenderFramebufferColor = &binary.Entity{
-	TypeID:   binaryIDRenderFramebufferColor,
 	Package:  "builder",
 	Identity: "RenderFramebufferColor",
 	Fields: []binary.Field{
@@ -665,7 +620,6 @@ func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth)
 	o.FramebufferWidth = uint32(d.Uint32())
 	o.FramebufferHeight = uint32(d.Uint32())
 }
-func (*binaryClassRenderFramebufferDepth) ID() binary.ID      { return binaryIDRenderFramebufferDepth }
 func (*binaryClassRenderFramebufferDepth) New() binary.Object { return &RenderFramebufferDepth{} }
 func (*binaryClassRenderFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferDepth(e, obj.(*RenderFramebufferDepth))
@@ -681,7 +635,6 @@ func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferDepth) Schema() *binary.Entity { return schemaRenderFramebufferDepth }
 
 var schemaRenderFramebufferDepth = &binary.Entity{
-	TypeID:   binaryIDRenderFramebufferDepth,
 	Package:  "builder",
 	Identity: "RenderFramebufferDepth",
 	Fields: []binary.Field{
@@ -709,7 +662,6 @@ func doDecodeSet(d binary.Decoder, o *Set) {
 	}
 	o.Value = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassSet) ID() binary.ID      { return binaryIDSet }
 func (*binaryClassSet) New() binary.Object { return &Set{} }
 func (*binaryClassSet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSet(e, obj.(*Set))
@@ -725,7 +677,6 @@ func (*binaryClassSet) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassSet) Schema() *binary.Entity { return schemaSet }
 
 var schemaSet = &binary.Entity{
-	TypeID:   binaryIDSet,
 	Package:  "builder",
 	Identity: "Set",
 	Fields: []binary.Field{
@@ -749,7 +700,6 @@ func doDecodeatomFramebufferDimensions(d binary.Decoder, o *atomFramebufferDimen
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
 }
-func (*binaryClassatomFramebufferDimensions) ID() binary.ID      { return binaryIDatomFramebufferDimensions }
 func (*binaryClassatomFramebufferDimensions) New() binary.Object { return &atomFramebufferDimensions{} }
 func (*binaryClassatomFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeatomFramebufferDimensions(e, obj.(*atomFramebufferDimensions))
@@ -767,7 +717,6 @@ func (*binaryClassatomFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemaatomFramebufferDimensions = &binary.Entity{
-	TypeID:   binaryIDatomFramebufferDimensions,
 	Package:  "builder",
 	Identity: "atomFramebufferDimensions",
 	Fields: []binary.Field{
@@ -794,7 +743,6 @@ func doDecodecalcIndexLimits(d binary.Decoder, o *calcIndexLimits) {
 	o.littleEndian = bool(d.Bool())
 	o.data = binary.ID(d.ID())
 }
-func (*binaryClasscalcIndexLimits) ID() binary.ID      { return binaryIDcalcIndexLimits }
 func (*binaryClasscalcIndexLimits) New() binary.Object { return &calcIndexLimits{} }
 func (*binaryClasscalcIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecalcIndexLimits(e, obj.(*calcIndexLimits))
@@ -810,7 +758,6 @@ func (*binaryClasscalcIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object)
 func (*binaryClasscalcIndexLimits) Schema() *binary.Entity { return schemacalcIndexLimits }
 
 var schemacalcIndexLimits = &binary.Entity{
-	TypeID:   binaryIDcalcIndexLimits,
 	Package:  "builder",
 	Identity: "calcIndexLimits",
 	Fields: []binary.Field{
@@ -840,9 +787,6 @@ func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebuffe
 		}
 	}
 }
-func (*binaryClasscaptureFramebufferDimensions) ID() binary.ID {
-	return binaryIDcaptureFramebufferDimensions
-}
 func (*binaryClasscaptureFramebufferDimensions) New() binary.Object {
 	return &captureFramebufferDimensions{}
 }
@@ -862,7 +806,6 @@ func (*binaryClasscaptureFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemacaptureFramebufferDimensions = &binary.Entity{
-	TypeID:   binaryIDcaptureFramebufferDimensions,
 	Package:  "builder",
 	Identity: "captureFramebufferDimensions",
 	Fields: []binary.Field{
@@ -889,9 +832,6 @@ func doDecodegetCaptureFramebufferDimensions(d binary.Decoder, o *getCaptureFram
 		o.Capture = nil
 	}
 }
-func (*binaryClassgetCaptureFramebufferDimensions) ID() binary.ID {
-	return binaryIDgetCaptureFramebufferDimensions
-}
 func (*binaryClassgetCaptureFramebufferDimensions) New() binary.Object {
 	return &getCaptureFramebufferDimensions{}
 }
@@ -911,7 +851,6 @@ func (*binaryClassgetCaptureFramebufferDimensions) Schema() *binary.Entity {
 }
 
 var schemagetCaptureFramebufferDimensions = &binary.Entity{
-	TypeID:   binaryIDgetCaptureFramebufferDimensions,
 	Package:  "builder",
 	Identity: "getCaptureFramebufferDimensions",
 	Fields: []binary.Field{

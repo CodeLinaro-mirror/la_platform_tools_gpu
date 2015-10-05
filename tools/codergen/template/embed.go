@@ -316,14 +316,6 @@ const go_binary_tmpl = `{{/*
  * limitations under the License.
  */}}
 
-{{define "Go.ID"}}
-  {{.IDName}}║= binary.ID{
-    {{range $i,$v := .ID}}
-      {{if $i}}, {{end}}{{printf "0x%2.2x" $v}}
-    {{end}}
-  }¶
-{{end}}
-
 {{define "Go.Init"}}
   Namespace.Add((*{{.Name}})(nil).Class())¶
 {{end}}
@@ -345,10 +337,6 @@ const go_binary_tmpl = `{{/*
     {{end}}
   «}¶
   {{$base := 18}}
-  {{$wrap := gt (len .Name) (add $base 7)}}
-  func (*binaryClass{{.Name}}) ID() binary.ID{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
-    return {{.IDName}}{{if $wrap}}¶{{else}}•{{end}}
-  «}¶
   {{$wrap := gt (len .Name) (add $base 7)}}
   func (*binaryClass{{.Name}}) New() binary.Object{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
     return &{{.Name}}{}{{if $wrap}}¶{{else}}•{{end}}
@@ -372,7 +360,6 @@ const go_binary_tmpl = `{{/*
     «}¶
     ¶
     var schema{{.Name}} = &binary.Entity{»¶
-      TypeID:║{{.IDName}},¶
       Package:║"{{.Package}}",¶
       {{if .Display}}Display:║"{{.Display}}",¶{{end}}
       Identity:║"{{.Identity}}",¶
@@ -614,9 +601,6 @@ const go_binary_tmpl = `{{/*
       {{range .Structs}}{{template "Go.Init" .}}{{end}}
     «}¶
     ¶
-    var (»¶
-      {{range .Structs}}{{template "Go.ID" .}}{{end}}
-    «)¶
   {{end}}
   {{range .Structs}}
     ¶

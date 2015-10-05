@@ -23,12 +23,6 @@ func init() {
 	Namespace.Add((*Texture2D)(nil).Class())
 }
 
-var (
-	binaryIDCubemapLevel = binary.ID{0xbe, 0x00, 0x3e, 0x54, 0xde, 0x25, 0xc2, 0x58, 0x96, 0xd5, 0xed, 0x65, 0x31, 0xf8, 0x5e, 0x7e, 0x72, 0x2c, 0x05, 0x7f}
-	binaryIDCubemap      = binary.ID{0xb6, 0x6b, 0x6c, 0x08, 0x27, 0xe5, 0x20, 0x64, 0x47, 0x7e, 0xe9, 0x1b, 0x6c, 0x94, 0x2b, 0x99, 0x5b, 0x75, 0x44, 0x45}
-	binaryIDTexture2D    = binary.ID{0xac, 0x33, 0xed, 0x51, 0x16, 0x61, 0x4b, 0xef, 0x3e, 0xed, 0x36, 0x35, 0x81, 0x66, 0x8f, 0xed, 0xc3, 0x40, 0x88, 0x3a}
-)
-
 type binaryClassCubemapLevel struct{}
 
 func (*CubemapLevel) Class() binary.Class {
@@ -50,7 +44,6 @@ func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) {
 	d.Value(&o.NegativeZ)
 	d.Value(&o.PositiveZ)
 }
-func (*binaryClassCubemapLevel) ID() binary.ID      { return binaryIDCubemapLevel }
 func (*binaryClassCubemapLevel) New() binary.Object { return &CubemapLevel{} }
 func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemapLevel(e, obj.(*CubemapLevel))
@@ -66,7 +59,6 @@ func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassCubemapLevel) Schema() *binary.Entity { return schemaCubemapLevel }
 
 var schemaCubemapLevel = &binary.Entity{
-	TypeID:   binaryIDCubemapLevel,
 	Package:  "gfxapi",
 	Identity: "CubemapLevel",
 	Fields: []binary.Field{
@@ -98,7 +90,6 @@ func doDecodeCubemap(d binary.Decoder, o *Cubemap) {
 		}
 	}
 }
-func (*binaryClassCubemap) ID() binary.ID      { return binaryIDCubemap }
 func (*binaryClassCubemap) New() binary.Object { return &Cubemap{} }
 func (*binaryClassCubemap) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemap(e, obj.(*Cubemap))
@@ -114,7 +105,6 @@ func (*binaryClassCubemap) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassCubemap) Schema() *binary.Entity { return schemaCubemap }
 
 var schemaCubemap = &binary.Entity{
-	TypeID:   binaryIDCubemap,
 	Package:  "gfxapi",
 	Identity: "Cubemap",
 	Fields: []binary.Field{
@@ -141,7 +131,6 @@ func doDecodeTexture2D(d binary.Decoder, o *Texture2D) {
 		}
 	}
 }
-func (*binaryClassTexture2D) ID() binary.ID      { return binaryIDTexture2D }
 func (*binaryClassTexture2D) New() binary.Object { return &Texture2D{} }
 func (*binaryClassTexture2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTexture2D(e, obj.(*Texture2D))
@@ -157,7 +146,6 @@ func (*binaryClassTexture2D) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTexture2D) Schema() *binary.Entity { return schemaTexture2D }
 
 var schemaTexture2D = &binary.Entity{
-	TypeID:   binaryIDTexture2D,
 	Package:  "gfxapi",
 	Identity: "Texture2D",
 	Fields: []binary.Field{

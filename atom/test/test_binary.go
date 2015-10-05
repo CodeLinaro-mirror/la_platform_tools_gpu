@@ -21,12 +21,6 @@ func init() {
 	Namespace.Add((*AtomC)(nil).Class())
 }
 
-var (
-	AtomAID = binary.ID{0x16, 0x54, 0x07, 0x2b, 0x4f, 0x20, 0x4e, 0xd2, 0xc3, 0xd4, 0xad, 0x12, 0x43, 0xbd, 0x72, 0x29, 0x45, 0xa3, 0x23, 0xb9}
-	AtomBID = binary.ID{0x5b, 0x79, 0xf2, 0x11, 0xcc, 0x81, 0xa7, 0x4c, 0xd3, 0x76, 0xf1, 0xf8, 0xb7, 0x5d, 0x5f, 0xfb, 0x8a, 0xd0, 0x2f, 0x83}
-	AtomCID = binary.ID{0x9d, 0xee, 0x3e, 0xee, 0x34, 0x6c, 0x2f, 0xaa, 0x2f, 0x8a, 0x46, 0x07, 0x47, 0x2d, 0x78, 0x09, 0x5e, 0x16, 0x88, 0x4b}
-)
-
 type binaryClassAtomA struct{}
 
 func (*AtomA) Class() binary.Class {
@@ -40,7 +34,6 @@ func doDecodeAtomA(d binary.Decoder, o *AtomA) {
 	o.ID = atom.ID(d.Uint64())
 	o.AtomFlags = atom.Flags(d.Uint32())
 }
-func (*binaryClassAtomA) ID() binary.ID      { return AtomAID }
 func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomA(e, obj.(*AtomA))
@@ -56,7 +49,6 @@ func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAtomA) Schema() *binary.Entity { return schemaAtomA }
 
 var schemaAtomA = &binary.Entity{
-	TypeID:   AtomAID,
 	Package:  "test",
 	Identity: "AtomA",
 	Fields: []binary.Field{
@@ -78,7 +70,6 @@ func doDecodeAtomB(d binary.Decoder, o *AtomB) {
 	o.ID = atom.ID(d.Uint64())
 	o.Bool = bool(d.Bool())
 }
-func (*binaryClassAtomB) ID() binary.ID      { return AtomBID }
 func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomB(e, obj.(*AtomB))
@@ -94,7 +85,6 @@ func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAtomB) Schema() *binary.Entity { return schemaAtomB }
 
 var schemaAtomB = &binary.Entity{
-	TypeID:   AtomBID,
 	Package:  "test",
 	Identity: "AtomB",
 	Fields: []binary.Field{
@@ -114,7 +104,6 @@ func doEncodeAtomC(e binary.Encoder, o *AtomC) {
 func doDecodeAtomC(d binary.Decoder, o *AtomC) {
 	o.String = string(d.String())
 }
-func (*binaryClassAtomC) ID() binary.ID      { return AtomCID }
 func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomC(e, obj.(*AtomC))
@@ -130,7 +119,6 @@ func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAtomC) Schema() *binary.Entity { return schemaAtomC }
 
 var schemaAtomC = &binary.Entity{
-	TypeID:   AtomCID,
 	Package:  "test",
 	Identity: "AtomC",
 	Fields: []binary.Field{

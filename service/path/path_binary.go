@@ -36,28 +36,6 @@ func init() {
 	Namespace.Add((*TimingInfo)(nil).Class())
 }
 
-var (
-	binaryIDArrayIndex  = binary.ID{0xf8, 0x8e, 0x95, 0xda, 0x94, 0x41, 0x4d, 0x8f, 0x56, 0xae, 0xa8, 0xdc, 0xae, 0xfd, 0x97, 0x23, 0xfe, 0x19, 0x04, 0x8b}
-	binaryIDAs          = binary.ID{0x35, 0x53, 0xd7, 0x13, 0xb9, 0xb4, 0x22, 0x14, 0xf0, 0x4d, 0xeb, 0x4d, 0xfb, 0x37, 0x66, 0x90, 0x90, 0x8e, 0xe5, 0x20}
-	binaryIDCapture     = binary.ID{0x39, 0xeb, 0xe7, 0x3d, 0x98, 0x30, 0x51, 0xe3, 0x8f, 0xda, 0xbb, 0x06, 0xc8, 0xf1, 0x58, 0x6e, 0x34, 0x31, 0x53, 0x50}
-	binaryIDAtoms       = binary.ID{0x8d, 0x0e, 0xe5, 0x46, 0x49, 0xf2, 0x19, 0x22, 0xcb, 0xd0, 0x26, 0x39, 0x91, 0x4f, 0xa7, 0x38, 0xd4, 0x6a, 0xc4, 0x06}
-	binaryIDAtom        = binary.ID{0xfc, 0x5f, 0x50, 0xbe, 0x51, 0x98, 0x34, 0x42, 0xc7, 0x7f, 0xe1, 0x44, 0xc0, 0x2d, 0x9a, 0xcf, 0x2b, 0x07, 0x0a, 0x75}
-	binaryIDBlob        = binary.ID{0x90, 0xc1, 0xb7, 0xc0, 0xa7, 0x1e, 0x63, 0x4a, 0x17, 0x4a, 0xb5, 0x0d, 0xc3, 0x80, 0x88, 0x37, 0x46, 0xc9, 0xd2, 0xdf}
-	binaryIDDevice      = binary.ID{0x03, 0xfc, 0x20, 0xfe, 0xa5, 0x78, 0x20, 0xdb, 0x7d, 0xad, 0x26, 0x89, 0x77, 0xa4, 0x12, 0x3c, 0xfb, 0xa1, 0x64, 0x3d}
-	binaryIDField       = binary.ID{0x77, 0xe8, 0x53, 0xf3, 0xd8, 0xa7, 0x86, 0xa1, 0xd8, 0x7f, 0xd8, 0x36, 0x50, 0x46, 0xf5, 0x4b, 0x10, 0xc4, 0x42, 0x37}
-	binaryIDHierarchy   = binary.ID{0x9a, 0x6b, 0x68, 0x38, 0xa9, 0x5b, 0xf9, 0x02, 0x02, 0x65, 0xd6, 0xc3, 0x5c, 0x9f, 0xaa, 0x5c, 0xc3, 0xa5, 0x52, 0x12}
-	binaryIDImageInfo   = binary.ID{0xca, 0x2a, 0xed, 0x2f, 0x8c, 0x2b, 0x90, 0x71, 0xf6, 0x6b, 0x84, 0x47, 0xaa, 0xca, 0x7d, 0x48, 0xb4, 0x13, 0x07, 0x5e}
-	binaryIDMapIndex    = binary.ID{0x3d, 0xcf, 0x16, 0xce, 0xaa, 0xc4, 0x7f, 0x56, 0x66, 0x2b, 0xca, 0x9c, 0xc4, 0x02, 0x5a, 0xd8, 0x08, 0x55, 0x69, 0x8c}
-	binaryIDMemoryRange = binary.ID{0x35, 0x60, 0x1c, 0x67, 0xdb, 0x2f, 0xf5, 0x97, 0x4c, 0xbd, 0x74, 0x17, 0xd7, 0xec, 0xfd, 0x0d, 0x7b, 0xca, 0x0f, 0x59}
-	binaryIDReport      = binary.ID{0xfe, 0x10, 0x85, 0x43, 0xe2, 0x81, 0xdd, 0x10, 0x44, 0xb8, 0x7d, 0x1e, 0xc8, 0xfd, 0x35, 0xef, 0x14, 0x89, 0x7a, 0x24}
-	binaryIDResource    = binary.ID{0xea, 0x1b, 0x8b, 0x7e, 0xb1, 0x46, 0xa4, 0x31, 0xbe, 0x0e, 0x4a, 0xb0, 0xc1, 0x97, 0xf5, 0x9e, 0x41, 0x94, 0xac, 0x23}
-	binaryIDResources   = binary.ID{0x8f, 0x3f, 0x51, 0x6c, 0x3c, 0x7b, 0x9a, 0xf7, 0x1d, 0x0b, 0xf6, 0x5c, 0x98, 0x62, 0x05, 0xfe, 0x7b, 0x8f, 0xfc, 0x64}
-	binaryIDSlice       = binary.ID{0x06, 0x2e, 0xa9, 0x0c, 0xc3, 0xa4, 0x7d, 0xb9, 0xc1, 0x61, 0xd1, 0x1e, 0x22, 0xaa, 0x37, 0x53, 0x7f, 0xbc, 0xeb, 0xe9}
-	binaryIDState       = binary.ID{0xc8, 0xee, 0x5d, 0x01, 0xe8, 0x84, 0xb9, 0x68, 0x58, 0x24, 0xb5, 0x43, 0x8f, 0xb2, 0x78, 0xbf, 0xb0, 0x1d, 0x3e, 0xc2}
-	binaryIDThumbnail   = binary.ID{0x4f, 0x0b, 0x0e, 0x67, 0xa8, 0x6e, 0x9a, 0x08, 0x4a, 0x4e, 0x36, 0x77, 0x91, 0xc8, 0x6c, 0xf3, 0x76, 0x2a, 0x83, 0xd4}
-	binaryIDTimingInfo  = binary.ID{0x15, 0xe8, 0x5b, 0x9f, 0x7f, 0xd5, 0xa9, 0x21, 0x54, 0x98, 0x7f, 0xb9, 0x5c, 0x3d, 0x7c, 0xc2, 0x47, 0xd1, 0x26, 0x5a}
-)
-
 type binaryClassArrayIndex struct{}
 
 func (*ArrayIndex) Class() binary.Class {
@@ -75,7 +53,6 @@ func doDecodeArrayIndex(d binary.Decoder, o *ArrayIndex) {
 	}
 	o.Index = uint64(d.Uint64())
 }
-func (*binaryClassArrayIndex) ID() binary.ID      { return binaryIDArrayIndex }
 func (*binaryClassArrayIndex) New() binary.Object { return &ArrayIndex{} }
 func (*binaryClassArrayIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeArrayIndex(e, obj.(*ArrayIndex))
@@ -91,7 +68,6 @@ func (*binaryClassArrayIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassArrayIndex) Schema() *binary.Entity { return schemaArrayIndex }
 
 var schemaArrayIndex = &binary.Entity{
-	TypeID:   binaryIDArrayIndex,
 	Package:  "path",
 	Identity: "ArrayIndex",
 	Fields: []binary.Field{
@@ -117,7 +93,6 @@ func doDecodeAs(d binary.Decoder, o *As) {
 	}
 	o.Type = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassAs) ID() binary.ID      { return binaryIDAs }
 func (*binaryClassAs) New() binary.Object { return &As{} }
 func (*binaryClassAs) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAs(e, obj.(*As))
@@ -133,7 +108,6 @@ func (*binaryClassAs) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAs) Schema() *binary.Entity { return schemaAs }
 
 var schemaAs = &binary.Entity{
-	TypeID:   binaryIDAs,
 	Package:  "path",
 	Identity: "As",
 	Fields: []binary.Field{
@@ -153,7 +127,6 @@ func doEncodeCapture(e binary.Encoder, o *Capture) {
 func doDecodeCapture(d binary.Decoder, o *Capture) {
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassCapture) ID() binary.ID      { return binaryIDCapture }
 func (*binaryClassCapture) New() binary.Object { return &Capture{} }
 func (*binaryClassCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCapture(e, obj.(*Capture))
@@ -169,7 +142,6 @@ func (*binaryClassCapture) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassCapture) Schema() *binary.Entity { return schemaCapture }
 
 var schemaCapture = &binary.Entity{
-	TypeID:   binaryIDCapture,
 	Package:  "path",
 	Identity: "Capture",
 	Fields: []binary.Field{
@@ -196,7 +168,6 @@ func doDecodeAtoms(d binary.Decoder, o *Atoms) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassAtoms) ID() binary.ID      { return binaryIDAtoms }
 func (*binaryClassAtoms) New() binary.Object { return &Atoms{} }
 func (*binaryClassAtoms) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtoms(e, obj.(*Atoms))
@@ -212,7 +183,6 @@ func (*binaryClassAtoms) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAtoms) Schema() *binary.Entity { return schemaAtoms }
 
 var schemaAtoms = &binary.Entity{
-	TypeID:   binaryIDAtoms,
 	Package:  "path",
 	Identity: "Atoms",
 	Fields: []binary.Field{
@@ -241,7 +211,6 @@ func doDecodeAtom(d binary.Decoder, o *Atom) {
 	}
 	o.Index = uint64(d.Uint64())
 }
-func (*binaryClassAtom) ID() binary.ID      { return binaryIDAtom }
 func (*binaryClassAtom) New() binary.Object { return &Atom{} }
 func (*binaryClassAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtom(e, obj.(*Atom))
@@ -257,7 +226,6 @@ func (*binaryClassAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassAtom) Schema() *binary.Entity { return schemaAtom }
 
 var schemaAtom = &binary.Entity{
-	TypeID:   binaryIDAtom,
 	Package:  "path",
 	Identity: "Atom",
 	Fields: []binary.Field{
@@ -277,7 +245,6 @@ func doEncodeBlob(e binary.Encoder, o *Blob) {
 func doDecodeBlob(d binary.Decoder, o *Blob) {
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassBlob) ID() binary.ID      { return binaryIDBlob }
 func (*binaryClassBlob) New() binary.Object { return &Blob{} }
 func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBlob(e, obj.(*Blob))
@@ -293,7 +260,6 @@ func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassBlob) Schema() *binary.Entity { return schemaBlob }
 
 var schemaBlob = &binary.Entity{
-	TypeID:   binaryIDBlob,
 	Package:  "path",
 	Identity: "Blob",
 	Fields: []binary.Field{
@@ -312,7 +278,6 @@ func doEncodeDevice(e binary.Encoder, o *Device) {
 func doDecodeDevice(d binary.Decoder, o *Device) {
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassDevice) ID() binary.ID      { return binaryIDDevice }
 func (*binaryClassDevice) New() binary.Object { return &Device{} }
 func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeDevice(e, obj.(*Device))
@@ -328,7 +293,6 @@ func (*binaryClassDevice) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassDevice) Schema() *binary.Entity { return schemaDevice }
 
 var schemaDevice = &binary.Entity{
-	TypeID:   binaryIDDevice,
 	Package:  "path",
 	Identity: "Device",
 	Fields: []binary.Field{
@@ -353,7 +317,6 @@ func doDecodeField(d binary.Decoder, o *Field) {
 	}
 	o.Name = string(d.String())
 }
-func (*binaryClassField) ID() binary.ID      { return binaryIDField }
 func (*binaryClassField) New() binary.Object { return &Field{} }
 func (*binaryClassField) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeField(e, obj.(*Field))
@@ -369,7 +332,6 @@ func (*binaryClassField) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassField) Schema() *binary.Entity { return schemaField }
 
 var schemaField = &binary.Entity{
-	TypeID:   binaryIDField,
 	Package:  "path",
 	Identity: "Field",
 	Fields: []binary.Field{
@@ -397,7 +359,6 @@ func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassHierarchy) ID() binary.ID      { return binaryIDHierarchy }
 func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
 func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHierarchy(e, obj.(*Hierarchy))
@@ -413,7 +374,6 @@ func (*binaryClassHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassHierarchy) Schema() *binary.Entity { return schemaHierarchy }
 
 var schemaHierarchy = &binary.Entity{
-	TypeID:   binaryIDHierarchy,
 	Package:  "path",
 	Identity: "Hierarchy",
 	Fields: []binary.Field{
@@ -432,7 +392,6 @@ func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) {
 func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) {
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassImageInfo) ID() binary.ID      { return binaryIDImageInfo }
 func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
 func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImageInfo(e, obj.(*ImageInfo))
@@ -448,7 +407,6 @@ func (*binaryClassImageInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassImageInfo) Schema() *binary.Entity { return schemaImageInfo }
 
 var schemaImageInfo = &binary.Entity{
-	TypeID:   binaryIDImageInfo,
 	Package:  "path",
 	Identity: "ImageInfo",
 	Fields: []binary.Field{
@@ -473,7 +431,6 @@ func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	}
 	o.Key = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassMapIndex) ID() binary.ID      { return binaryIDMapIndex }
 func (*binaryClassMapIndex) New() binary.Object { return &MapIndex{} }
 func (*binaryClassMapIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMapIndex(e, obj.(*MapIndex))
@@ -489,7 +446,6 @@ func (*binaryClassMapIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassMapIndex) Schema() *binary.Entity { return schemaMapIndex }
 
 var schemaMapIndex = &binary.Entity{
-	TypeID:   binaryIDMapIndex,
 	Package:  "path",
 	Identity: "MapIndex",
 	Fields: []binary.Field{
@@ -523,7 +479,6 @@ func doDecodeMemoryRange(d binary.Decoder, o *MemoryRange) {
 	o.Address = uint64(d.Uint64())
 	o.Size = uint64(d.Uint64())
 }
-func (*binaryClassMemoryRange) ID() binary.ID      { return binaryIDMemoryRange }
 func (*binaryClassMemoryRange) New() binary.Object { return &MemoryRange{} }
 func (*binaryClassMemoryRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMemoryRange(e, obj.(*MemoryRange))
@@ -539,7 +494,6 @@ func (*binaryClassMemoryRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassMemoryRange) Schema() *binary.Entity { return schemaMemoryRange }
 
 var schemaMemoryRange = &binary.Entity{
-	TypeID:   binaryIDMemoryRange,
 	Package:  "path",
 	Identity: "MemoryRange",
 	Fields: []binary.Field{
@@ -579,7 +533,6 @@ func doDecodeReport(d binary.Decoder, o *Report) {
 		o.Device = nil
 	}
 }
-func (*binaryClassReport) ID() binary.ID      { return binaryIDReport }
 func (*binaryClassReport) New() binary.Object { return &Report{} }
 func (*binaryClassReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReport(e, obj.(*Report))
@@ -595,7 +548,6 @@ func (*binaryClassReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassReport) Schema() *binary.Entity { return schemaReport }
 
 var schemaReport = &binary.Entity{
-	TypeID:   binaryIDReport,
 	Package:  "path",
 	Identity: "Report",
 	Fields: []binary.Field{
@@ -625,7 +577,6 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 		o.After = nil
 	}
 }
-func (*binaryClassResource) ID() binary.ID      { return binaryIDResource }
 func (*binaryClassResource) New() binary.Object { return &Resource{} }
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
@@ -641,7 +592,6 @@ func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
 var schemaResource = &binary.Entity{
-	TypeID:   binaryIDResource,
 	Package:  "path",
 	Identity: "Resource",
 	Fields: []binary.Field{
@@ -669,7 +619,6 @@ func doDecodeResources(d binary.Decoder, o *Resources) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassResources) ID() binary.ID      { return binaryIDResources }
 func (*binaryClassResources) New() binary.Object { return &Resources{} }
 func (*binaryClassResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResources(e, obj.(*Resources))
@@ -685,7 +634,6 @@ func (*binaryClassResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResources) Schema() *binary.Entity { return schemaResources }
 
 var schemaResources = &binary.Entity{
-	TypeID:   binaryIDResources,
 	Package:  "path",
 	Identity: "Resources",
 	Fields: []binary.Field{
@@ -712,7 +660,6 @@ func doDecodeSlice(d binary.Decoder, o *Slice) {
 	o.Start = uint64(d.Uint64())
 	o.End = uint64(d.Uint64())
 }
-func (*binaryClassSlice) ID() binary.ID      { return binaryIDSlice }
 func (*binaryClassSlice) New() binary.Object { return &Slice{} }
 func (*binaryClassSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSlice(e, obj.(*Slice))
@@ -728,7 +675,6 @@ func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassSlice) Schema() *binary.Entity { return schemaSlice }
 
 var schemaSlice = &binary.Entity{
-	TypeID:   binaryIDSlice,
 	Package:  "path",
 	Identity: "Slice",
 	Fields: []binary.Field{
@@ -757,7 +703,6 @@ func doDecodeState(d binary.Decoder, o *State) {
 		o.After = nil
 	}
 }
-func (*binaryClassState) ID() binary.ID      { return binaryIDState }
 func (*binaryClassState) New() binary.Object { return &State{} }
 func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeState(e, obj.(*State))
@@ -773,7 +718,6 @@ func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassState) Schema() *binary.Entity { return schemaState }
 
 var schemaState = &binary.Entity{
-	TypeID:   binaryIDState,
 	Package:  "path",
 	Identity: "State",
 	Fields: []binary.Field{
@@ -802,7 +746,6 @@ func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 	o.DesiredMaxHeight = uint32(d.Uint32())
 	o.DesiredFormat = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassThumbnail) ID() binary.ID      { return binaryIDThumbnail }
 func (*binaryClassThumbnail) New() binary.Object { return &Thumbnail{} }
 func (*binaryClassThumbnail) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeThumbnail(e, obj.(*Thumbnail))
@@ -818,7 +761,6 @@ func (*binaryClassThumbnail) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassThumbnail) Schema() *binary.Entity { return schemaThumbnail }
 
 var schemaThumbnail = &binary.Entity{
-	TypeID:   binaryIDThumbnail,
 	Package:  "path",
 	Identity: "Thumbnail",
 	Fields: []binary.Field{
@@ -840,7 +782,6 @@ func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) {
 func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassTimingInfo) ID() binary.ID      { return binaryIDTimingInfo }
 func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }
 func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTimingInfo(e, obj.(*TimingInfo))
@@ -856,7 +797,6 @@ func (*binaryClassTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassTimingInfo) Schema() *binary.Entity { return schemaTimingInfo }
 
 var schemaTimingInfo = &binary.Entity{
-	TypeID:   binaryIDTimingInfo,
 	Package:  "path",
 	Identity: "TimingInfo",
 	Fields: []binary.Field{

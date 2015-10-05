@@ -29,17 +29,6 @@ func init() {
 	Namespace.Add((*Resource)(nil).Class())
 }
 
-var (
-	binaryIDFramebufferObservation = binary.ID{0x00, 0x8f, 0x27, 0x0c, 0x45, 0x41, 0xb2, 0xe9, 0xb9, 0xa2, 0xd1, 0x56, 0xbf, 0xcc, 0xb0, 0x3d, 0xc7, 0xa8, 0xd7, 0x49}
-	binaryIDRange                  = binary.ID{0xbf, 0x66, 0xc9, 0x90, 0x1c, 0x26, 0xf0, 0x77, 0x79, 0x1f, 0x74, 0x69, 0x45, 0x35, 0x19, 0xc0, 0x14, 0xca, 0xd3, 0xb4}
-	binaryIDGroup                  = binary.ID{0x05, 0x6a, 0x33, 0xef, 0x32, 0xd6, 0xb5, 0x7d, 0x29, 0x5c, 0xb3, 0xa0, 0x64, 0xde, 0x29, 0x08, 0xa1, 0x86, 0x56, 0xe7}
-	binaryIDList                   = binary.ID{0x17, 0x12, 0x61, 0xf8, 0xbe, 0x6c, 0x49, 0xa1, 0x20, 0xc0, 0xf4, 0x7b, 0x18, 0xa4, 0x1d, 0x36, 0x71, 0x8b, 0x5b, 0xce}
-	binaryIDMetadata               = binary.ID{0x13, 0x7d, 0x41, 0xcf, 0xf5, 0x61, 0x0f, 0x25, 0x91, 0xdc, 0xe2, 0x4f, 0xf3, 0x23, 0xd2, 0xe5, 0xc6, 0xfd, 0xa7, 0xa5}
-	binaryIDObservation            = binary.ID{0xf7, 0xbd, 0x56, 0xf9, 0x88, 0x54, 0x3a, 0xc2, 0x93, 0x5d, 0x67, 0x99, 0x1e, 0xed, 0xaa, 0x19, 0x9a, 0xde, 0xca, 0x04}
-	binaryIDObservations           = binary.ID{0xe6, 0xfc, 0xbb, 0x47, 0xfe, 0xac, 0x86, 0xab, 0x0e, 0x02, 0x8a, 0xcb, 0x08, 0xcf, 0x86, 0x30, 0xf0, 0x1e, 0x3a, 0xa0}
-	binaryIDResource               = binary.ID{0x3d, 0xa8, 0x7a, 0xce, 0xbd, 0x8d, 0xec, 0x19, 0xf9, 0x33, 0x0c, 0x8c, 0x80, 0x64, 0xf0, 0xe9, 0x9b, 0x3a, 0x8c, 0xd4}
-)
-
 type binaryClassFramebufferObservation struct{}
 
 func (*FramebufferObservation) Class() binary.Class {
@@ -59,7 +48,6 @@ func doDecodeFramebufferObservation(d binary.Decoder, o *FramebufferObservation)
 		d.Data(o.Data)
 	}
 }
-func (*binaryClassFramebufferObservation) ID() binary.ID      { return binaryIDFramebufferObservation }
 func (*binaryClassFramebufferObservation) New() binary.Object { return &FramebufferObservation{} }
 func (*binaryClassFramebufferObservation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferObservation(e, obj.(*FramebufferObservation))
@@ -75,7 +63,6 @@ func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassFramebufferObservation) Schema() *binary.Entity { return schemaFramebufferObservation }
 
 var schemaFramebufferObservation = &binary.Entity{
-	TypeID:   binaryIDFramebufferObservation,
 	Package:  "atom",
 	Identity: "FramebufferObservation",
 	Fields: []binary.Field{
@@ -98,7 +85,6 @@ func doDecodeRange(d binary.Decoder, o *Range) {
 	o.Start = uint64(d.Uint64())
 	o.End = uint64(d.Uint64())
 }
-func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
 func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRange(e, obj.(*Range))
@@ -114,7 +100,6 @@ func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassRange) Schema() *binary.Entity { return schemaRange }
 
 var schemaRange = &binary.Entity{
-	TypeID:   binaryIDRange,
 	Package:  "atom",
 	Identity: "Range",
 	Fields: []binary.Field{
@@ -146,7 +131,6 @@ func doDecodeGroup(d binary.Decoder, o *Group) {
 		}
 	}
 }
-func (*binaryClassGroup) ID() binary.ID      { return binaryIDGroup }
 func (*binaryClassGroup) New() binary.Object { return &Group{} }
 func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGroup(e, obj.(*Group))
@@ -162,7 +146,6 @@ func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassGroup) Schema() *binary.Entity { return schemaGroup }
 
 var schemaGroup = &binary.Entity{
-	TypeID:   binaryIDGroup,
 	Package:  "atom",
 	Identity: "Group",
 	Fields: []binary.Field{
@@ -195,7 +178,6 @@ func doDecodeList(d binary.Decoder, o *List) {
 		}
 	}
 }
-func (*binaryClassList) ID() binary.ID      { return binaryIDList }
 func (*binaryClassList) New() binary.Object { return &List{} }
 func (*binaryClassList) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeList(e, obj.(*List))
@@ -211,7 +193,6 @@ func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassList) Schema() *binary.Entity { return schemaList }
 
 var schemaList = &binary.Entity{
-	TypeID:   binaryIDList,
 	Package:  "atom",
 	Identity: "List",
 	Fields: []binary.Field{
@@ -238,7 +219,6 @@ func doDecodeMetadata(d binary.Decoder, o *Metadata) {
 	o.DrawCall = bool(d.Bool())
 	o.DocumentationUrl = string(d.String())
 }
-func (*binaryClassMetadata) ID() binary.ID      { return binaryIDMetadata }
 func (*binaryClassMetadata) New() binary.Object { return &Metadata{} }
 func (*binaryClassMetadata) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMetadata(e, obj.(*Metadata))
@@ -254,7 +234,6 @@ func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassMetadata) Schema() *binary.Entity { return schemaMetadata }
 
 var schemaMetadata = &binary.Entity{
-	TypeID:   binaryIDMetadata,
 	Package:  "atom",
 	Identity: "Metadata",
 	Fields: []binary.Field{
@@ -279,7 +258,6 @@ func doDecodeObservation(d binary.Decoder, o *Observation) {
 	d.Value(&o.Range)
 	o.ID = binary.ID(d.ID())
 }
-func (*binaryClassObservation) ID() binary.ID      { return binaryIDObservation }
 func (*binaryClassObservation) New() binary.Object { return &Observation{} }
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeObservation(e, obj.(*Observation))
@@ -295,7 +273,6 @@ func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassObservation) Schema() *binary.Entity { return schemaObservation }
 
 var schemaObservation = &binary.Entity{
-	TypeID:   binaryIDObservation,
 	Package:  "atom",
 	Identity: "Observation",
 	Fields: []binary.Field{
@@ -333,7 +310,6 @@ func doDecodeObservations(d binary.Decoder, o *Observations) {
 		}
 	}
 }
-func (*binaryClassObservations) ID() binary.ID      { return binaryIDObservations }
 func (*binaryClassObservations) New() binary.Object { return &Observations{} }
 func (*binaryClassObservations) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeObservations(e, obj.(*Observations))
@@ -349,7 +325,6 @@ func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassObservations) Schema() *binary.Entity { return schemaObservations }
 
 var schemaObservations = &binary.Entity{
-	TypeID:   binaryIDObservations,
 	Package:  "atom",
 	Identity: "Observations",
 	Fields: []binary.Field{
@@ -375,7 +350,6 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 		d.Data(o.Data)
 	}
 }
-func (*binaryClassResource) ID() binary.ID      { return binaryIDResource }
 func (*binaryClassResource) New() binary.Object { return &Resource{} }
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
@@ -391,7 +365,6 @@ func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 func (*binaryClassResource) Schema() *binary.Entity { return schemaResource }
 
 var schemaResource = &binary.Entity{
-	TypeID:   binaryIDResource,
 	Package:  "atom",
 	Identity: "Resource",
 	Fields: []binary.Field{
