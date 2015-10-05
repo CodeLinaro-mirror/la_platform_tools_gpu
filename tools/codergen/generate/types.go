@@ -115,16 +115,10 @@ func (m *Module) fromType(from types.Type, s *Struct, tags Tags) binary.Type {
 		}
 		return &schema.Slice{Alias: alias, ValueType: vt}
 	case *types.Array:
-		length := uint32(from.Len())
-		if elem, ok := from.Elem().(*types.Basic); ok {
-			if elem.Kind() == types.Byte && length == binary.IDSize {
-				return &schema.Primitive{Name: name, Method: schema.ID}
-			}
-		}
 		return &schema.Array{
 			Alias:     alias,
 			ValueType: m.fromType(from.Elem(), s, ""),
-			Size:      length,
+			Size:      uint32(from.Len()),
 		}
 	case *types.Map:
 		return &schema.Map{

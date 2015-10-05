@@ -138,18 +138,37 @@ func (t *Templates) Generate(g generate.Generate) (bool, error) {
 	return true, ioutil.WriteFile(g.Output, data, 0666)
 }
 
+func appendTypeMatches(try []string, prefix string, node binary.Type) []string {
+	try = append(try, fmt.Sprint(prefix, "#", node.String()))
+	if node.String() != node.Representation() {
+		try = append(try, fmt.Sprint(prefix, "#", node.Representation()))
+	}
+	return try
+}
+
 func (t *Templates) getTemplate(prefix string, node interface{}) (*template.Template, error) {
 	try := []string{}
 
 	switch node := node.(type) {
-	case binary.Type:
-		try = append(try, fmt.Sprint(prefix, "#", node.String()))
-		if node.String() != node.Representation() {
-			try = append(try, fmt.Sprint(prefix, "#", node.Representation()))
-			if _, ok := node.(*schema.Primitive); ok {
-				try = append(try, fmt.Sprint(prefix, ".Alias"))
-			}
+	case *schema.Slice:
+		try = appendTypeMatches(try, prefix, node)
+		if node.Alias != "" {
+			try = append(try, fmt.Sprint(prefix, ".Slice.Alias"))
 		}
+		try = append(try, fmt.Sprint(prefix, ".Slice#", node.ValueType.Representation()))
+	case *schema.Array:
+		try = appendTypeMatches(try, prefix, node)
+		if node.Alias != "" {
+			try = append(try, fmt.Sprint(prefix, ".Array.Alias"))
+		}
+		try = append(try, fmt.Sprint(prefix, ".Array#", node.ValueType.Representation()))
+	case *schema.Primitive:
+		try = appendTypeMatches(try, prefix, node)
+		if node.String() != node.Representation() {
+			try = append(try, fmt.Sprint(prefix, ".Alias"))
+		}
+	case binary.Type:
+		try = appendTypeMatches(try, prefix, node)
 	case *variable:
 		return t.getTemplate(prefix, node.Type)
 	case string:

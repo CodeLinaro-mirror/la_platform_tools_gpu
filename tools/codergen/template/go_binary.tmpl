@@ -111,7 +111,7 @@
   e.Uint32(uint32(len({{.Name}})))¶
 {{end}}
 
-{{define "Go.Encode#[]uint8"}}
+{{define "Go.Encode.Slice#uint8"}}
   {{template "Go.Encode_Length" $}}
   e.Data({{.Name}})¶
 {{end}}
@@ -121,6 +121,10 @@
   for i := range {{.Name}} {»¶
     {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
   «}¶
+{{end}}
+
+{{define "Go.Encode.Array#uint8"}}
+  e.Data({{.Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Encode.Array"}}
@@ -178,7 +182,7 @@
     {{.Name}} = make({{.Type}}, count)¶
 {{end}}
 
-{{define "Go.Decode#[]uint8"}}
+{{define "Go.Decode.Slice#uint8"}}
   {{template "Go.Decode_Length" $}}
     d.Data({{.Name}})¶
   «}¶
@@ -190,6 +194,10 @@
       {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
     «}¶
   «}¶
+{{end}}
+
+{{define "Go.Decode.Array#uint8"}}
+  d.Data({{.Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Decode.Array"}}
@@ -298,7 +306,6 @@
       {{end}}
       {{range .Structs}}{{template "Go.Init" .}}{{end}}
     «}¶
-    ¶
   {{end}}
   {{range .Structs}}
     ¶

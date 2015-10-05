@@ -56,3 +56,11 @@ func (*Templates) Contains(test, s interface{}) bool {
 func (*Templates) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
 }
+
+func (*Templates) TrimPackage(n string) string {
+	i := strings.LastIndex(n, ".")
+	if i < 0 {
+		return n
+	}
+	return n[i+1:]
+}

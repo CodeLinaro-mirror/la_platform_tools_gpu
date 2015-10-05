@@ -44,6 +44,8 @@
 
 {{define "Cpp.Include"}}{{end}}
 
+{{define "Cpp.Type#gfxapi.ID"}}gapic::Id{{end}}
+{{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type#bool"}}bool{{end}}
 {{define "Cpp.Type#int8"}}int8_t{{end}}
 {{define "Cpp.Type#uint8"}}uint8_t{{end}}
@@ -56,11 +58,11 @@
 {{define "Cpp.Type#float32"}}float{{end}}
 {{define "Cpp.Type#float64"}}double{{end}}
 {{define "Cpp.Type#string"}}char*{{end}}
-{{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type.Struct"}}{{.String | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
+{{define "Cpp.Type.Array.Alias"}}{{TrimPackage .Alias}}{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
@@ -110,7 +112,7 @@
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
 
-{{define "Cpp.Encode#[]uint8"}}
+{{define "Cpp.Encode.Slice#uint8"}}
   e->Uint32({{.Name}}.size());¶
   e->Data({{.Name}}.data(), {{.Name}}.size());
 {{end}}
@@ -120,6 +122,10 @@
   for (int i = 0; i < {{.Name}}.size(); i++) {»¶
     {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
+{{end}}
+
+{{define "Cpp.Encode.Array#uint8"}}
+  e->Data({{.Name}}, {{.Type.Size}});
 {{end}}
 
 {{define "Cpp.Encode.Array"}}

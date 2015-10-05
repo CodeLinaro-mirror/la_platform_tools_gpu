@@ -53,7 +53,6 @@ var (
 		{Declared: "array", Type: &schema.Array{ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}, Size: 10}},
 		{Declared: "dict", Type: &schema.Map{KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: structType}},
 		{Declared: "data", Type: &schema.Slice{ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
-		{Declared: "id", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		{Declared: "", Type: structType},
 	}
 )

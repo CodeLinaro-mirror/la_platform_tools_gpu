@@ -27,6 +27,7 @@
 {{define "Java.PrimitiveType#float64"}}double{{end}}
 {{define "Java.PrimitiveType#string"}}String{{end}}
 
+{{define "Java.Type#gfxapi.ID"}}ApiID{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
 {{define "Java.Type#log.Severity"}}Severity{{end}}
@@ -37,9 +38,15 @@
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Variant"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
+{{define "Java.Type.Array.Alias"}}{{TrimPackage .Alias}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.nil"}}void{{end}}
+
+{{define "Java.ElementType.Array.Alias"}}{{Call "Java.Type" .}}{{end}}
+{{define "Java.ElementType.Array"}}{{Call "Java.ElementType" .ValueType}}[{{.Size}}]{{end}}
+{{define "Java.ElementType.Slice"}}{{Call "Java.ElementType" .ValueType}}[]{{end}}
+{{define "Java.ElementType"}}{{Call "Java.Type" .}}{{end}}
 
 {{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}

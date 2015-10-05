@@ -25,7 +25,6 @@
   «}¶
 {{end}}
 
-{{define "Java.Encode#binary.ID"}}e.id({{.Name}});{{end}}
 {{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Primitive"}}e.{{Call "Java.Method" .Type}}({{.Name}});{{end}}
 {{define "Java.Encode.Alias"}}{{.Name}}.encode(e);{{end}}
@@ -35,7 +34,7 @@
 {{define "Java.Encode.Variant"}}e.variant({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.variant(Box.wrap({{.Name}}));{{end}}
 
-{{define "Java.Encode#[]uint8"}}
+{{define "Java.Encode.Slice#uint8"}}
   e.uint32({{.Name}}.length);¶
   e.write({{.Name}}, {{.Name}}.length);¶
 {{end}}
@@ -45,6 +44,14 @@
   for (int i = 0; i < {{.Name}}.length; i++) {»¶
     {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
+{{end}}
+
+{{define "Java.Encode.Array#uint8"}}
+  e.write({{.Name}}, {{.Type.Size}});¶
+{{end}}
+
+{{define "Java.Encode.Array.Alias"}}
+  {{.Name}}.write(e);¶
 {{end}}
 
 {{define "Java.Encode.Array"}}
@@ -65,7 +72,6 @@
   «}¶
 {{end}}
 
-{{define "Java.Decode#binary.ID"}}{{.Name}} = d.id();{{end}}
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
 {{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
@@ -75,20 +81,28 @@
 {{define "Java.Decode.Variant"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.variant());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = ((Box)d.variant()).unwrap();{{end}}
 
-{{define "Java.Decode#[]uint8"}}
+{{define "Java.Decode.Slice#uint8"}}
   {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
   d.read({{.Name}}, {{.Name}}.length);¶
 {{end}}
 
 {{define "Java.Decode.Slice"}}
-  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
+  {{.Name}} = new {{Call "Java.ElementType" .Type.ValueType}}[d.uint32()];¶
   for (int i = 0; i <{{.Name}}.length; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
 {{end}}
 
+{{define "Java.Decode.Array#uint8"}}
+  d.read({{.Name}}, {{.Name}}.length);¶
+{{end}}
+
+{{define "Java.Decode.Array.Alias"}}
+  {{.Name}} = new {{Call "Java.Type" .Type}}(d);¶
+{{end}}
+
 {{define "Java.Decode.Array"}}
-  {{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];¶
+  {{.Name}} = new {{Call "Java.ElementType" .Type}}[{{.Type.Size}}];¶
   for (int i = 0; i < {{.Type.Size}}; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}

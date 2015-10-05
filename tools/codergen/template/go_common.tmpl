@@ -38,7 +38,9 @@
 {{define "Go.Type"}}{{.Name}}{{end}}
 {{define "Go.Type.Any"}}interface{}{{end}}
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
+{{define "Go.Type.Array.Alias"}}{{.Alias}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
+{{define "Go.Type.Slice.Alias"}}{{.Alias}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Struct"}}{{.}}{{end}}
 

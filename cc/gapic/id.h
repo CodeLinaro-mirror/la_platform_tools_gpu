@@ -29,6 +29,9 @@ struct Id {
 
     bool operator == (const Id& rhs) const;
 
+    operator uint8_t*() { return data; }
+    operator const uint8_t*() const { return data; }
+
     uint8_t data[20];
 };
 
