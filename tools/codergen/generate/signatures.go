@@ -103,7 +103,6 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		}
 		fmt.Fprintln(w)
 		fmt.Fprintln(w, s.Name(), ": size", size)
-		fmt.Fprintln(w, s.TypeID)
 		fmt.Fprintln(w, s.Entity.Signature())
 	}
 	fmt.Fprintln(w)

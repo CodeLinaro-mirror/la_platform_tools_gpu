@@ -99,11 +99,6 @@ func (s *Struct) IDName() string {
 	return s.Tag("id", "binaryID"+s.Name())
 }
 
-// ID returns the type id for the entity.
-func (s *Struct) ID() binary.ID {
-	return s.TypeID
-}
-
 // HasStructTag returns true if any struct in the module has the named tag.
 func (m *Module) HasStructTag(name string) bool {
 	for _, s := range m.Structs {
