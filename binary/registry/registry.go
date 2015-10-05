@@ -23,7 +23,7 @@ import (
 // Namespace represents a mapping of type identifiers to their Class.
 type Namespace struct {
 	fallbacks []*Namespace
-	classes   map[string]binary.Class
+	classes   map[binary.Signature]binary.Class
 }
 
 var (
@@ -35,7 +35,7 @@ var (
 func NewNamespace(fallbacks ...*Namespace) *Namespace {
 	return &Namespace{
 		fallbacks: fallbacks,
-		classes:   map[string]binary.Class{},
+		classes:   map[binary.Signature]binary.Class{},
 	}
 }
 
@@ -62,7 +62,7 @@ func (n *Namespace) AddFallbacks(fallbacks ...*Namespace) {
 
 // Lookup looks up a Class by the given type id in the Namespace.
 // If there is no match, it will return nil.
-func (n *Namespace) Lookup(signature string) binary.Class {
+func (n *Namespace) Lookup(signature binary.Signature) binary.Class {
 	if class, found := n.classes[signature]; found {
 		return class
 	}
