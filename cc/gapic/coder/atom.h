@@ -127,7 +127,7 @@ namespace atom {
             mID(ID) {}
         virtual void Encode(Encoder* e) const{
             e->Value(this->mRange);
-            e->Id(this->mID);
+            e->Data(this->mID, 20);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -168,7 +168,7 @@ namespace atom {
             mID(ID),
             mData(Data) {}
         virtual void Encode(Encoder* e) const{
-            e->Id(this->mID);
+            e->Data(this->mID, 20);
             e->Uint32(this->mData.size());
             e->Data(this->mData.data(), this->mData.size());
         }

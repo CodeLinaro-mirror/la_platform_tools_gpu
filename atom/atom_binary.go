@@ -11,7 +11,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -206,14 +205,14 @@ func (*Metadata) Class() binary.Class {
 	return (*binaryClassMetadata)(nil)
 }
 func doEncodeMetadata(e binary.Encoder, o *Metadata) {
-	e.ID(binary.ID(o.API))
+	e.Data(o.API[:20])
 	e.String(o.DisplayName)
 	e.Bool(o.EndOfFrame)
 	e.Bool(o.DrawCall)
 	e.String(o.DocumentationUrl)
 }
 func doDecodeMetadata(d binary.Decoder, o *Metadata) {
-	o.API = gfxapi.ID(d.ID())
+	d.Data(o.API[:20])
 	o.DisplayName = string(d.String())
 	o.EndOfFrame = bool(d.Bool())
 	o.DrawCall = bool(d.Bool())
@@ -237,7 +236,7 @@ var schemaMetadata = &binary.Entity{
 	Package:  "atom",
 	Identity: "Metadata",
 	Fields: []binary.Field{
-		{Declared: "API", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
+		{Declared: "API", Type: &schema.Array{Alias: "gfxapi.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "DisplayName", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "EndOfFrame", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "DrawCall", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
@@ -252,11 +251,11 @@ func (*Observation) Class() binary.Class {
 }
 func doEncodeObservation(e binary.Encoder, o *Observation) {
 	e.Value(&o.Range)
-	e.ID(o.ID)
+	e.Data(o.ID[:20])
 }
 func doDecodeObservation(d binary.Decoder, o *Observation) {
 	d.Value(&o.Range)
-	o.ID = binary.ID(d.ID())
+	d.Data(o.ID[:20])
 }
 func (*binaryClassObservation) New() binary.Object { return &Observation{} }
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
@@ -277,7 +276,7 @@ var schemaObservation = &binary.Entity{
 	Identity: "Observation",
 	Fields: []binary.Field{
 		{Declared: "Range", Type: &schema.Struct{Entity: (*memory.Range)(nil).Class().Schema()}},
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Array{Alias: "binary.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 	},
 }
 
@@ -339,12 +338,12 @@ func (*Resource) Class() binary.Class {
 	return (*binaryClassResource)(nil)
 }
 func doEncodeResource(e binary.Encoder, o *Resource) {
-	e.ID(o.ID)
+	e.Data(o.ID[:20])
 	e.Uint32(uint32(len(o.Data)))
 	e.Data(o.Data)
 }
 func doDecodeResource(d binary.Decoder, o *Resource) {
-	o.ID = binary.ID(d.ID())
+	d.Data(o.ID[:20])
 	if count := d.Uint32(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
@@ -368,7 +367,7 @@ var schemaResource = &binary.Entity{
 	Package:  "atom",
 	Identity: "Resource",
 	Fields: []binary.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Array{Alias: "binary.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }

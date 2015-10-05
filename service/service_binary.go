@@ -137,19 +137,19 @@ func (*Capture) Class() binary.Class {
 }
 func doEncodeCapture(e binary.Encoder, o *Capture) {
 	e.String(o.Name)
-	e.ID(binary.ID(o.Atoms))
+	e.Data(o.Atoms[:20])
 	e.Uint32(uint32(len(o.Apis)))
 	for i := range o.Apis {
-		e.ID(binary.ID(o.Apis[i]))
+		e.Data(o.Apis[i][:20])
 	}
 }
 func doDecodeCapture(d binary.Decoder, o *Capture) {
 	o.Name = string(d.String())
-	o.Atoms = AtomsID(d.ID())
+	d.Data(o.Atoms[:20])
 	if count := d.Uint32(); count > 0 {
 		o.Apis = make([]ApiID, count)
 		for i := range o.Apis {
-			o.Apis[i] = ApiID(d.ID())
+			d.Data(o.Apis[i][:20])
 		}
 	}
 }
@@ -172,8 +172,8 @@ var schemaCapture = &binary.Entity{
 	Identity: "Capture",
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Atoms", Type: &schema.Primitive{Name: "AtomsID", Method: schema.ID}},
-		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "ApiID", Method: schema.ID}}},
+		{Declared: "Atoms", Type: &schema.Array{Alias: "AtomsID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
+		{Declared: "Apis", Type: &schema.Slice{Alias: "", ValueType: &schema.Array{Alias: "ApiID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}}},
 	},
 }
 
@@ -432,7 +432,7 @@ func (*ResourceInfo) Class() binary.Class {
 	return (*binaryClassResourceInfo)(nil)
 }
 func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) {
-	e.ID(binary.ID(o.ID))
+	e.Data(o.ID[:20])
 	e.String(o.Name)
 	e.Uint32(uint32(len(o.Accesses)))
 	for i := range o.Accesses {
@@ -440,7 +440,7 @@ func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) {
 	}
 }
 func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
-	o.ID = path.ResourceID(d.ID())
+	d.Data(o.ID[:20])
 	o.Name = string(d.String())
 	if count := d.Uint32(); count > 0 {
 		o.Accesses = make([]uint64, count)
@@ -467,7 +467,7 @@ var schemaResourceInfo = &binary.Entity{
 	Package:  "service",
 	Identity: "ResourceInfo",
 	Fields: []binary.Field{
-		{Declared: "ID", Type: &schema.Primitive{Name: "path.ResourceID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Array{Alias: "path.ResourceID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Accesses", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
 	},

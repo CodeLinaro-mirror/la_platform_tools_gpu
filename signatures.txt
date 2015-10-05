@@ -92,20 +92,20 @@ atom.Group{String,$,[]$}
 List : size 14
 atom.List{[]&}
 
-Metadata : size 21
-atom.Metadata{ID,String,Bool,Bool,String}
+Metadata : size 23
+atom.Metadata{[20]Uint8,String,Bool,Bool,String}
 
 Observations : size 26
 atom.Observations{[]$,[]$}
 
-Observation : size 22
-atom.Observation{$,ID}
+Observation : size 24
+atom.Observation{$,[20]Uint8}
 
 Range : size 15
 atom.Range{Uint64,Uint64}
 
-Resource : size 19
-atom.Resource{ID,[]Uint8}
+Resource : size 21
+atom.Resource{[20]Uint8,[]Uint8}
 
 BuildReport : size 28
 builder.BuildReport{*$,*$}
@@ -152,8 +152,8 @@ builder.Set{?,~}
 atomFramebufferDimensions : size 39
 builder.atomFramebufferDimensions{Uint64,Uint32,Uint32}
 
-calcIndexLimits : size 30
-builder.calcIndexLimits{Int32,Int32,Bool,ID}
+calcIndexLimits : size 32
+builder.calcIndexLimits{Int32,Int32,Bool,[20]Uint8}
 
 captureFramebufferDimensions : size 42
 builder.captureFramebufferDimensions{[]$}
@@ -161,8 +161,8 @@ builder.captureFramebufferDimensions{[]$}
 getCaptureFramebufferDimensions : size 45
 builder.getCaptureFramebufferDimensions{*$}
 
-testAtom : size 30
-builder.testAtom{ID,String,[]Bool,~,*$,map[String]String}
+testAtom : size 32
+builder.testAtom{[20]Uint8,String,[]Bool,~,*$,map[String]String}
 
 testStruct : size 25
 builder.testStruct{String,*$}
@@ -3101,11 +3101,11 @@ image.Image{?,Uint32,Uint32,[]Uint8}
 Info : size 20
 image.Info{?,Uint32,Uint32,*$}
 
-LazyConverter : size 28
-image.LazyConverter{ID,Uint32,Uint32,?,?,Int32}
+LazyConverter : size 30
+image.LazyConverter{[20]Uint8,Uint32,Uint32,?,?,Int32}
 
-LazyResizer : size 26
-image.LazyResizer{ID,?,Uint32,Uint32,Uint32,Uint32}
+LazyResizer : size 28
+image.LazyResizer{[20]Uint8,?,Uint32,Uint32,Uint32,Uint32}
 
 fmtATC_RGBA_EXPLICIT_ALPHA_AMD : size 39
 image.fmtATC_RGBA_EXPLICIT_ALPHA_AMD{}
@@ -3170,14 +3170,14 @@ path.Atoms{*$}
 Atom : size 16
 path.Atom{*$,Uint64}
 
-Blob : size 13
-path.Blob{ID}
+Blob : size 15
+path.Blob{[20]Uint8}
 
-Capture : size 16
-path.Capture{ID}
+Capture : size 18
+path.Capture{[20]Uint8}
 
-Device : size 15
-path.Device{ID}
+Device : size 17
+path.Device{[20]Uint8}
 
 Field : size 15
 path.Field{?,String}
@@ -3185,8 +3185,8 @@ path.Field{?,String}
 Hierarchy : size 20
 path.Hierarchy{*$}
 
-ImageInfo : size 18
-path.ImageInfo{ID}
+ImageInfo : size 20
+path.ImageInfo{[20]Uint8}
 
 MapIndex : size 18
 path.MapIndex{?,~}
@@ -3200,8 +3200,8 @@ path.Report{*$,*$}
 Resources : size 20
 path.Resources{*$}
 
-Resource : size 20
-path.Resource{ID,*$}
+Resource : size 22
+path.Resource{[20]Uint8,*$}
 
 Slice : size 16
 path.Slice{?,Uint64,Uint64}
@@ -3212,8 +3212,8 @@ path.State{*$}
 Thumbnail : size 21
 path.Thumbnail{?,Uint32,Uint32,~}
 
-TimingInfo : size 19
-path.TimingInfo{ID}
+TimingInfo : size 21
+path.TimingInfo{[20]Uint8}
 
 Payload : size 29
 protocol.Payload{Uint32,Uint32,[]Uint8,[]$,[]Uint8}
@@ -3239,8 +3239,8 @@ service.AtomRangeTimer{Uint64,Uint64,Uint64}
 AtomTimer : size 22
 service.AtomTimer{Uint64,Uint64}
 
-Capture : size 22
-service.Capture{String,ID,[]ID}
+Capture : size 26
+service.Capture{String,[20]Uint8,[][20]Uint8}
 
 Device : size 27
 service.Device{String,String,String,Uint8,Uint8,Uint64,String,String,String,String}
@@ -3257,8 +3257,8 @@ service.ReportItem{Int32,String,Uint64}
 Report : size 21
 service.Report{[]$}
 
-ResourceInfo : size 27
-service.ResourceInfo{ID,String,[]Uint64}
+ResourceInfo : size 29
+service.ResourceInfo{[20]Uint8,String,[]Uint64}
 
 Resources : size 36
 service.Resources{[]$,[]$,[]$,[]$}
@@ -3689,14 +3689,14 @@ test.callGetSingleListNode{}
 callGetStruct : size 21
 test.callGetStruct{}
 
-callResolveResource : size 28
-test.callResolveResource{ID}
+callResolveResource : size 30
+test.callResolveResource{[20]Uint8}
 
 callSetStruct : size 24
 test.callSetStruct{$}
 
-callUseResource : size 24
-test.callUseResource{ID}
+callUseResource : size 26
+test.callUseResource{[20]Uint8}
 
 resultAdd : size 18
 test.resultAdd{Uint32}
@@ -3710,8 +3710,8 @@ test.resultGetListNodeChainArray{[]*$}
 resultGetListNodeChain : size 34
 test.resultGetListNodeChain{*$}
 
-resultGetResource : size 26
-test.resultGetResource{ID}
+resultGetResource : size 28
+test.resultGetResource{[20]Uint8}
 
 resultGetSingleListNode : size 35
 test.resultGetSingleListNode{*$}
@@ -3730,8 +3730,8 @@ test.resultUseResource{}
 
 Schema stats:
 Count: 1243
-Total: 37454
-Compact: 39945
-Full: 127216
+Total: 37492
+Compact: 39983
+Full: 127349
 Average: 30
 Largest: 67

@@ -8,7 +8,6 @@ package builder
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
 func init() {
@@ -66,7 +65,7 @@ func (*testAtom) Class() binary.Class {
 	return (*binaryClasstestAtom)(nil)
 }
 func doEncodetestAtom(e binary.Encoder, o *testAtom) {
-	e.ID(binary.ID(o.api))
+	e.Data(o.api[:20])
 	e.String(o.Str)
 	e.Uint32(uint32(len(o.Sli)))
 	for i := range o.Sli {
@@ -85,7 +84,7 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 	}
 }
 func doDecodetestAtom(d binary.Decoder, o *testAtom) {
-	o.api = gfxapi.ID(d.ID())
+	d.Data(o.api[:20])
 	o.Str = string(d.String())
 	if count := d.Uint32(); count > 0 {
 		o.Sli = make([]bool, count)
@@ -129,7 +128,7 @@ var schematestAtom = &binary.Entity{
 	Package:  "builder",
 	Identity: "testAtom",
 	Fields: []binary.Field{
-		{Declared: "api", Type: &schema.Primitive{Name: "gfxapi.ID", Method: schema.ID}},
+		{Declared: "api", Type: &schema.Array{Alias: "gfxapi.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Sli", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
 		{Declared: "Any", Type: &schema.Any{}},

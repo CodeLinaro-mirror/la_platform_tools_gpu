@@ -144,7 +144,7 @@ func (*LazyConverter) Class() binary.Class {
 	return (*binaryClassLazyConverter)(nil)
 }
 func doEncodeLazyConverter(e binary.Encoder, o *LazyConverter) {
-	e.ID(o.Data)
+	e.Data(o.Data[:20])
 	e.Uint32(o.Width)
 	e.Uint32(o.Height)
 	e.Object(o.FormatFrom)
@@ -152,7 +152,7 @@ func doEncodeLazyConverter(e binary.Encoder, o *LazyConverter) {
 	e.Int32(int32(o.StrideFrom))
 }
 func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) {
-	o.Data = binary.ID(d.ID())
+	d.Data(o.Data[:20])
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
 	if obj := d.Object(); obj != nil {
@@ -185,7 +185,7 @@ var schemaLazyConverter = &binary.Entity{
 	Package:  "image",
 	Identity: "LazyConverter",
 	Fields: []binary.Field{
-		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Data", Type: &schema.Array{Alias: "binary.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "FormatFrom", Type: &schema.Interface{Name: "Format"}},
@@ -200,7 +200,7 @@ func (*LazyResizer) Class() binary.Class {
 	return (*binaryClassLazyResizer)(nil)
 }
 func doEncodeLazyResizer(e binary.Encoder, o *LazyResizer) {
-	e.ID(o.Data)
+	e.Data(o.Data[:20])
 	e.Object(o.Format)
 	e.Uint32(o.SrcWidth)
 	e.Uint32(o.SrcHeight)
@@ -208,7 +208,7 @@ func doEncodeLazyResizer(e binary.Encoder, o *LazyResizer) {
 	e.Uint32(o.DstHeight)
 }
 func doDecodeLazyResizer(d binary.Decoder, o *LazyResizer) {
-	o.Data = binary.ID(d.ID())
+	d.Data(o.Data[:20])
 	if obj := d.Object(); obj != nil {
 		o.Format = obj.(Format)
 	} else {
@@ -237,7 +237,7 @@ var schemaLazyResizer = &binary.Entity{
 	Package:  "image",
 	Identity: "LazyResizer",
 	Fields: []binary.Field{
-		{Declared: "Data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Data", Type: &schema.Array{Alias: "binary.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 		{Declared: "Format", Type: &schema.Interface{Name: "Format"}},
 		{Declared: "SrcWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "SrcHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},

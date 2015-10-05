@@ -386,10 +386,10 @@ func (*callResolveResource) Class() binary.Class {
 	return (*binaryClasscallResolveResource)(nil)
 }
 func doEncodecallResolveResource(e binary.Encoder, o *callResolveResource) {
-	e.ID(binary.ID(o.r))
+	e.Data(o.r[:20])
 }
 func doDecodecallResolveResource(d binary.Decoder, o *callResolveResource) {
-	o.r = ResourceID(d.ID())
+	d.Data(o.r[:20])
 }
 func (*binaryClasscallResolveResource) New() binary.Object { return &callResolveResource{} }
 func (*binaryClasscallResolveResource) Encode(e binary.Encoder, obj binary.Object) {
@@ -409,7 +409,7 @@ var schemacallResolveResource = &binary.Entity{
 	Package:  "test",
 	Identity: "callResolveResource",
 	Fields: []binary.Field{
-		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
+		{Declared: "r", Type: &schema.Array{Alias: "ResourceID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 	},
 }
 
@@ -452,10 +452,10 @@ func (*callUseResource) Class() binary.Class {
 	return (*binaryClasscallUseResource)(nil)
 }
 func doEncodecallUseResource(e binary.Encoder, o *callUseResource) {
-	e.ID(binary.ID(o.r))
+	e.Data(o.r[:20])
 }
 func doDecodecallUseResource(d binary.Decoder, o *callUseResource) {
-	o.r = ResourceID(d.ID())
+	d.Data(o.r[:20])
 }
 func (*binaryClasscallUseResource) New() binary.Object { return &callUseResource{} }
 func (*binaryClasscallUseResource) Encode(e binary.Encoder, obj binary.Object) {
@@ -475,7 +475,7 @@ var schemacallUseResource = &binary.Entity{
 	Package:  "test",
 	Identity: "callUseResource",
 	Fields: []binary.Field{
-		{Declared: "r", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
+		{Declared: "r", Type: &schema.Array{Alias: "ResourceID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 	},
 }
 
@@ -645,10 +645,10 @@ func (*resultGetResource) Class() binary.Class {
 	return (*binaryClassresultGetResource)(nil)
 }
 func doEncoderesultGetResource(e binary.Encoder, o *resultGetResource) {
-	e.ID(binary.ID(o.value))
+	e.Data(o.value[:20])
 }
 func doDecoderesultGetResource(d binary.Decoder, o *resultGetResource) {
-	o.value = ResourceID(d.ID())
+	d.Data(o.value[:20])
 }
 func (*binaryClassresultGetResource) New() binary.Object { return &resultGetResource{} }
 func (*binaryClassresultGetResource) Encode(e binary.Encoder, obj binary.Object) {
@@ -668,7 +668,7 @@ var schemaresultGetResource = &binary.Entity{
 	Package:  "test",
 	Identity: "resultGetResource",
 	Fields: []binary.Field{
-		{Declared: "value", Type: &schema.Primitive{Name: "ResourceID", Method: schema.ID}},
+		{Declared: "value", Type: &schema.Array{Alias: "ResourceID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 	},
 }
 

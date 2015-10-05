@@ -80,9 +80,9 @@ const schema::Entity* List::StaticSchema() {
 }
 
 // Metadata:
-// atom.Metadata{ID,String,Bool,Bool,String}
+// atom.Metadata{[20]Uint8,String,Bool,Bool,String}
 void Metadata::Encode(Encoder* e) const {
-    e->Id(this->mAPI);
+    e->Data(this->mAPI, 20);
     e->String(this->mDisplayName);
     e->Bool(this->mEndOfFrame);
     e->Bool(this->mDrawCall);
@@ -95,7 +95,7 @@ const schema::Entity* Metadata::StaticSchema() {
         "Metadata",
         "",
         {
-            schema::Field{"API", new schema::Primitive{"gfxapi.ID", schema::Primitive::ID}},
+            schema::Field{"API", new schema::Array{"gfxapi.ID", new schema::Primitive{"byte", schema::Primitive::Uint8}, 20}},
             schema::Field{"DisplayName", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"EndOfFrame", new schema::Primitive{"bool", schema::Primitive::Bool}},
             schema::Field{"DrawCall", new schema::Primitive{"bool", schema::Primitive::Bool}},
@@ -106,7 +106,7 @@ const schema::Entity* Metadata::StaticSchema() {
 }
 
 // Observation:
-// atom.Observation{$,ID}
+// atom.Observation{$,[20]Uint8}
 const schema::Entity* Observation::StaticSchema() {
     static schema::Entity entity {
         "atom",
@@ -115,7 +115,7 @@ const schema::Entity* Observation::StaticSchema() {
         "",
         {
             schema::Field{"Range", new schema::Struct{ memory::Range::StaticSchema()}},
-            schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
+            schema::Field{"ID", new schema::Array{"binary.ID", new schema::Primitive{"byte", schema::Primitive::Uint8}, 20}},
         },
     };
     return &entity;
@@ -138,7 +138,7 @@ const schema::Entity* Observations::StaticSchema() {
 }
 
 // Resource:
-// atom.Resource{ID,[]Uint8}
+// atom.Resource{[20]Uint8,[]Uint8}
 const schema::Entity* Resource::StaticSchema() {
     static schema::Entity entity {
         "atom",
@@ -146,7 +146,7 @@ const schema::Entity* Resource::StaticSchema() {
         "Resource",
         "",
         {
-            schema::Field{"ID", new schema::Primitive{"binary.ID", schema::Primitive::ID}},
+            schema::Field{"ID", new schema::Array{"binary.ID", new schema::Primitive{"byte", schema::Primitive::Uint8}, 20}},
             schema::Field{"Data", new schema::Slice{"", new schema::Primitive{"byte", schema::Primitive::Uint8}}},
         },
     };

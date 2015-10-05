@@ -66,6 +66,8 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.Include"}}{{end}}
 
+{{define "Cpp.Type#gfxapi.ID"}}gapic::Id{{end}}
+{{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type#bool"}}bool{{end}}
 {{define "Cpp.Type#int8"}}int8_t{{end}}
 {{define "Cpp.Type#uint8"}}uint8_t{{end}}
@@ -78,11 +80,11 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type#float32"}}float{{end}}
 {{define "Cpp.Type#float64"}}double{{end}}
 {{define "Cpp.Type#string"}}char*{{end}}
-{{define "Cpp.Type#binary.ID"}}gapic::Id{{end}}
 {{define "Cpp.Type.Struct"}}{{.String | File.TypeName}}{{end}}
 {{define "Cpp.Type.Interface"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Variant"}}gapic::Encodable*{{end}}
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
+{{define "Cpp.Type.Array.Alias"}}{{TrimPackage .Alias}}{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
 {{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
@@ -132,7 +134,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
 
-{{define "Cpp.Encode#[]uint8"}}
+{{define "Cpp.Encode.Slice#uint8"}}
   e->Uint32({{.Name}}.size());¶
   e->Data({{.Name}}.data(), {{.Name}}.size());
 {{end}}
@@ -142,6 +144,10 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   for (int i = 0; i < {{.Name}}.size(); i++) {»¶
     {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
+{{end}}
+
+{{define "Cpp.Encode.Array#uint8"}}
+  e->Data({{.Name}}, {{.Type.Size}});
 {{end}}
 
 {{define "Cpp.Encode.Array"}}
@@ -413,7 +419,7 @@ const go_binary_tmpl = `{{/*
   e.Uint32(uint32(len({{.Name}})))¶
 {{end}}
 
-{{define "Go.Encode#[]uint8"}}
+{{define "Go.Encode.Slice#uint8"}}
   {{template "Go.Encode_Length" $}}
   e.Data({{.Name}})¶
 {{end}}
@@ -423,6 +429,10 @@ const go_binary_tmpl = `{{/*
   for i := range {{.Name}} {»¶
     {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
   «}¶
+{{end}}
+
+{{define "Go.Encode.Array#uint8"}}
+  e.Data({{.Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Encode.Array"}}
@@ -480,7 +490,7 @@ const go_binary_tmpl = `{{/*
     {{.Name}} = make({{.Type}}, count)¶
 {{end}}
 
-{{define "Go.Decode#[]uint8"}}
+{{define "Go.Decode.Slice#uint8"}}
   {{template "Go.Decode_Length" $}}
     d.Data({{.Name}})¶
   «}¶
@@ -492,6 +502,10 @@ const go_binary_tmpl = `{{/*
       {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
     «}¶
   «}¶
+{{end}}
+
+{{define "Go.Decode.Array#uint8"}}
+  d.Data({{.Name}}[:{{.Type.Size}}])¶
 {{end}}
 
 {{define "Go.Decode.Array"}}
@@ -600,7 +614,6 @@ const go_binary_tmpl = `{{/*
       {{end}}
       {{range .Structs}}{{template "Go.Init" .}}{{end}}
     «}¶
-    ¶
   {{end}}
   {{range .Structs}}
     ¶
@@ -734,7 +747,9 @@ const go_common_tmpl = `{{/*
 {{define "Go.Type"}}{{.Name}}{{end}}
 {{define "Go.Type.Any"}}interface{}{{end}}
 {{define "Go.Type.Pointer"}}*{{Call "Go.Type" .Type}}{{end}}
+{{define "Go.Type.Array.Alias"}}{{.Alias}}{{end}}
 {{define "Go.Type.Array"}}[{{.Size}}]{{Call "Go.Type" .ValueType}}{{end}}
+{{define "Go.Type.Slice.Alias"}}{{.Alias}}{{end}}
 {{define "Go.Type.Slice"}}[]{{Call "Go.Type" .ValueType}}{{end}}
 {{define "Go.Type.Struct"}}{{.}}{{end}}
 
@@ -939,7 +954,6 @@ const java_binary_tmpl = `{{/*
   «}¶
 {{end}}
 
-{{define "Java.Encode#binary.ID"}}e.id({{.Name}});{{end}}
 {{define "Java.Encode#binary.Object"}}e.object({{.Name}});{{end}}
 {{define "Java.Encode.Primitive"}}e.{{Call "Java.Method" .Type}}({{.Name}});{{end}}
 {{define "Java.Encode.Alias"}}{{.Name}}.encode(e);{{end}}
@@ -949,7 +963,7 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Encode.Variant"}}e.variant({{.Name}}.unwrap());{{end}}
 {{define "Java.Encode.Any"}}e.variant(Box.wrap({{.Name}}));{{end}}
 
-{{define "Java.Encode#[]uint8"}}
+{{define "Java.Encode.Slice#uint8"}}
   e.uint32({{.Name}}.length);¶
   e.write({{.Name}}, {{.Name}}.length);¶
 {{end}}
@@ -959,6 +973,14 @@ const java_binary_tmpl = `{{/*
   for (int i = 0; i < {{.Name}}.length; i++) {»¶
     {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
+{{end}}
+
+{{define "Java.Encode.Array#uint8"}}
+  e.write({{.Name}}, {{.Type.Size}});¶
+{{end}}
+
+{{define "Java.Encode.Array.Alias"}}
+  {{.Name}}.write(e);¶
 {{end}}
 
 {{define "Java.Encode.Array"}}
@@ -979,7 +1001,6 @@ const java_binary_tmpl = `{{/*
   «}¶
 {{end}}
 
-{{define "Java.Decode#binary.ID"}}{{.Name}} = d.id();{{end}}
 {{define "Java.Decode#binary.Object"}}{{.Name}} = d.object();{{end}}
 {{define "Java.Decode.Primitive"}}{{.Name}} = d.{{Call "Java.Method" .Type}}();{{end}}
 {{define "Java.Decode.Alias"}}{{.Name}} = {{Call "Java.Type" .Type}}.decode(d);{{end}}
@@ -989,20 +1010,28 @@ const java_binary_tmpl = `{{/*
 {{define "Java.Decode.Variant"}}{{.Name}} = {{Call "Java.Type" .Type}}.wrap(d.variant());{{end}}
 {{define "Java.Decode.Any"}}{{.Name}} = ((Box)d.variant()).unwrap();{{end}}
 
-{{define "Java.Decode#[]uint8"}}
+{{define "Java.Decode.Slice#uint8"}}
   {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
   d.read({{.Name}}, {{.Name}}.length);¶
 {{end}}
 
 {{define "Java.Decode.Slice"}}
-  {{.Name}} = new {{Call "Java.Type" .Type.ValueType}}[d.uint32()];¶
+  {{.Name}} = new {{Call "Java.ElementType" .Type.ValueType}}[d.uint32()];¶
   for (int i = 0; i <{{.Name}}.length; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
 {{end}}
 
+{{define "Java.Decode.Array#uint8"}}
+  d.read({{.Name}}, {{.Name}}.length);¶
+{{end}}
+
+{{define "Java.Decode.Array.Alias"}}
+  {{.Name}} = new {{Call "Java.Type" .Type}}(d);¶
+{{end}}
+
 {{define "Java.Decode.Array"}}
-  {{.Name}} = new {{Call "Java.Type" .Type}}[{{.Type.Size}}];¶
+  {{.Name}} = new {{Call "Java.ElementType" .Type}}[{{.Type.Size}}];¶
   for (int i = 0; i < {{.Type.Size}}; i++) {»¶
     {{Call "Java.Decode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
@@ -1296,6 +1325,7 @@ const java_common_tmpl = `{{/*
 {{define "Java.PrimitiveType#float64"}}double{{end}}
 {{define "Java.PrimitiveType#string"}}String{{end}}
 
+{{define "Java.Type#gfxapi.ID"}}ApiID{{end}}
 {{define "Java.Type#binary.ID"}}BinaryID{{end}}
 {{define "Java.Type#binary.Object"}}BinaryObject{{end}}
 {{define "Java.Type#log.Severity"}}Severity{{end}}
@@ -1306,9 +1336,15 @@ const java_common_tmpl = `{{/*
 {{define "Java.Type.Interface"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Variant"}}{{File.InterfaceName .}}{{end}}
 {{define "Java.Type.Pointer"}}{{Call "Java.Type" .Type}}{{end}}
+{{define "Java.Type.Array.Alias"}}{{TrimPackage .Alias}}{{end}}
 {{define "Java.Type.Array"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.Slice"}}{{Call "Java.Type" .ValueType}}[]{{end}}
 {{define "Java.Type.nil"}}void{{end}}
+
+{{define "Java.ElementType.Array.Alias"}}{{Call "Java.Type" .}}{{end}}
+{{define "Java.ElementType.Array"}}{{Call "Java.ElementType" .ValueType}}[{{.Size}}]{{end}}
+{{define "Java.ElementType.Slice"}}{{Call "Java.ElementType" .ValueType}}[]{{end}}
+{{define "Java.ElementType"}}{{Call "Java.Type" .}}{{end}}
 
 {{define "Java.Import.Struct"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}
 {{define "Java.Import.Interface"}}{{if $p := File.Import .}}import {{$p}};¶{{end}}{{end}}

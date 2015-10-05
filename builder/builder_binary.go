@@ -735,13 +735,13 @@ func doEncodecalcIndexLimits(e binary.Encoder, o *calcIndexLimits) {
 	e.Int32(int32(o.indexSize))
 	e.Int32(int32(o.count))
 	e.Bool(o.littleEndian)
-	e.ID(o.data)
+	e.Data(o.data[:20])
 }
 func doDecodecalcIndexLimits(d binary.Decoder, o *calcIndexLimits) {
 	o.indexSize = int(d.Int32())
 	o.count = int(d.Int32())
 	o.littleEndian = bool(d.Bool())
-	o.data = binary.ID(d.ID())
+	d.Data(o.data[:20])
 }
 func (*binaryClasscalcIndexLimits) New() binary.Object { return &calcIndexLimits{} }
 func (*binaryClasscalcIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
@@ -764,7 +764,7 @@ var schemacalcIndexLimits = &binary.Entity{
 		{Declared: "indexSize", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 		{Declared: "count", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 		{Declared: "littleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		{Declared: "data", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "data", Type: &schema.Array{Alias: "binary.ID", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}, Size: 20}},
 	},
 }
 
