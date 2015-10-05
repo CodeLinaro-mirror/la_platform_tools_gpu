@@ -55,13 +55,13 @@ var (
 		Embed    graph.Entity
 		Apic     graph.Entity
 		Codergen graph.Entity
-		Gapit    graph.Entity
 	}
 
 	Apps struct {
 		Gapis graph.Entity
 		Gapir graph.Entity
 		Gapid graph.Entity
+		Gapit graph.Entity
 	}
 )
 
@@ -71,8 +71,6 @@ func init() {
 		Tools.Embed = do.GoInstall(GPURoot, "tools/embed")
 		Tools.Apic = do.GoInstall(GPURoot, "api/apic")
 		Tools.Codergen = do.GoInstall(GPURoot, "tools/codergen")
-		Tools.Gapit = do.GoInstall(GPURoot, "tools/gapit")
-		graph.List("gapit").DependsOn(Tools.Gapit)
 		graph.List("tools").DependsStruct(Tools)
 		// All the embed rules
 		embedCopyright := Embed(gpusrc.Child("tools/copyright"))
@@ -100,7 +98,6 @@ func init() {
 		// The testing rules
 		gotest := do.GoTest(GPURoot + "/...")
 		// Runtime dependencies
-		graph.Creator(Tools.Gapit).DependsOn("cc:spy")
 		graph.List("runtime").DependsOn(Apps.Gapir, "cc:spy", "cc:gapii")
 		graph.Creator(gotest).DependsOn("code", "runtime")
 		if config.TargetOS == config.HostOS {
@@ -113,6 +110,8 @@ func init() {
 		graph.Creator(Apps.Gapis).DependsOn("code")
 		Apps.Gapid = do.GoInstall(GPURoot, "_experimental/client/gapid")
 		graph.Creator(Apps.Gapid).DependsOn("code")
+		Apps.Gapit = do.GoInstall(GPURoot, "tools/gapit")
+		graph.Creator(Apps.Gapit).DependsOn("code")
 		graph.List("apps").DependsStruct(Apps)
 		// Application launchers
 		do.Exec(Apps.Gapis).Creates(graph.Virtual("gapis")).DependsOn(Apps.Gapir)
