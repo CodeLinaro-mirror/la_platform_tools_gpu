@@ -45,14 +45,16 @@ func (e *Entity) Name() string {
 	return e.Identity
 }
 
+type Signature string
+
 // Signature returns a canonical string representations of an entities signature.
 // If two entities have the same Signature, the are assumed to represent the same type
-func (e *Entity) Signature() string {
+func (e *Entity) Signature() Signature {
 	if e.signature == "" {
 		// Internally signature is implemented by the fmt.Formatter interface with the format specifier 'z'
 		e.signature = fmt.Sprintf("%z", e)
 	}
-	return e.signature
+	return Signature(e.signature)
 }
 
 // Format implements the fmt.Formatter interface
