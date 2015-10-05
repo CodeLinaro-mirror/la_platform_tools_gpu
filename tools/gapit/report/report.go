@@ -13,43 +13,40 @@
 // limitations under the License.
 
 // The report generates and displays a report for the given capture file.
-package main
+package report
 
 import (
 	"flag"
 	"fmt"
-	"os"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/gapis"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"android.googlesource.com/platform/tools/gpu/service/path"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
-
-const usage = `report: A tool to check a capture replays without issues.
-Usage: report <capture>
-  -help: show this help message
-`
 
 var (
-	gapisAddr = flag.String("gapis", "localhost:6700", "gapis tcp host:port to connect to")
-	dataPath  = flag.String("data", "data", "Path to the server's data folder")
+	verb = &verbs.Verb{
+		Name:      "report",
+		ShortHelp: "Check a capture replays without issues",
+	}
+	gapisAddr = verb.Flags.String("gapis", "localhost:6700", "gapis tcp host:port to connect to")
+	dataPath  = verb.Flags.String("data", "data", "Path to the server's data folder")
 )
 
-func run() error {
-	flag.Usage = func() {
-		fmt.Printf(usage)
-		flag.PrintDefaults()
-	}
-	flag.Parse()
+func init() {
+	verb.Run = doReport
+	verbs.Register(verb)
+}
 
-	if flag.NArg() != 1 {
-		flag.Usage()
-		return fmt.Errorf("Invalid number of arguments. Expected 1, got %d", flag.NArg())
+func doReport(flags flag.FlagSet) error {
+	if flags.NArg() != 1 {
+		return verbs.Usage("Exactly one gfx trace file expected, got %d", flags.NArg())
 	}
 
-	capture := flag.Arg(0)
+	capture := flags.Arg(0)
 
 	logger := log.Std()
 	defer log.Close(logger)
@@ -103,11 +100,4 @@ func run() error {
 	}
 
 	return nil
-}
-
-func main() {
-	if err := run(); err != nil {
-		fmt.Fprintf(os.Stderr, "report failed: %v\n", err)
-		os.Exit(1)
-	}
 }
