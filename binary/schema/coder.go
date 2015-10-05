@@ -158,7 +158,6 @@ func EncodeEntity(e binary.Encoder, c *binary.Entity, compact bool) {
 	e.String(c.Version)
 	if !compact {
 		e.String(c.Display)
-		e.ID(c.TypeID)
 		e.Bool(c.Exported)
 	}
 	e.Uint32(uint32(len(c.Fields)))
@@ -182,7 +181,6 @@ func DecodeEntity(d binary.Decoder, c *binary.Entity, compact bool) {
 	c.Version = d.String()
 	if !compact {
 		c.Display = d.String()
-		c.TypeID = d.ID()
 		c.Exported = d.Bool()
 	}
 	c.Fields = make(binary.FieldList, d.Uint32())

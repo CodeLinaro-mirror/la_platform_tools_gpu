@@ -4975,6 +4975,6 @@ Schema stats:
 Count: 1243
 Total: 37454
 Compact: 39945
-Full: 154521
+Full: 127216
 Average: 30
 Largest: 67

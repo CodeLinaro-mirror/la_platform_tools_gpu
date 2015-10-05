@@ -103,23 +103,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   •{}¶
 {{end}}
 
-{{define "Cpp.HeaderID"}}
-  static const gapic::Id& StaticId();¶
-
-  virtual const gapic::Id& Id() const {»¶
-    return StaticId();¶
-  «}¶
-{{end}}
-
-{{define "Cpp.ID"}}
-   const gapic::Id& {{.Name | File.TypeName}}::StaticId() {»¶
-      static gapic::Id ID{ {•
-        {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
-      ,  } };¶
-      return ID;¶
-  «}¶
-{{end}}
-
 {{define "Cpp.HeaderEncoder"}}
   virtual void Encode(Encoder* e) const
   {{if gt (len .Fields) 3}}
@@ -171,7 +154,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "Cpp.Schema.Primitive"}}new schema::Primitive{"{{.Name}}", schema::Primitive::{{.Method}}}{{end}}
-{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.String | File.TypeName}}::StaticSchema()}{{end}}
+{{define "Cpp.Schema.Struct"}}new schema::Struct{ {{.String | File.TypeName}}::StaticSchema()}{{end}}
 {{define "Cpp.Schema.Pointer"}}new schema::Pointer{ {{Call "Cpp.Schema" .Type}} }{{end}}
 {{define "Cpp.Schema.Interface"}}new schema::Interface{"{{.Name}}"}{{end}}
 {{define "Cpp.Schema.Variant"}}new schema::Variant{"{{.Name}}"}{{end}}
@@ -182,18 +165,17 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "Cpp.HeaderSchema"}}
     {{if File.Directive "Schema" true}}
-    virtual const schema::Entity& Schema() const {»¶
+    virtual const schema::Entity* Schema() const {»¶
         return StaticSchema();¶
     «}¶
-    static const schema::Entity& StaticSchema();
+    static const schema::Entity* StaticSchema();
     {{end}}
 {{end}}
 
 {{define "Cpp.SchemaMethod"}}
     {{if File.Directive "Schema" true}}
-    const schema::Entity& {{.Name | File.TypeName}}::StaticSchema() {»¶
+    const schema::Entity* {{.Name | File.TypeName}}::StaticSchema() {»¶
         static schema::Entity entity {»¶
- 	   {{.Name | File.TypeName}}::StaticId(),¶
 	  "{{.Package}}",¶
 	  "{{.Display}}",¶
           "{{.Identity}}",¶
@@ -204,7 +186,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 	   {{end}}
 	   «},¶
         «};¶
-         return entity;¶
+         return &entity;¶
     «}¶
     {{end}}
 {{end}}
@@ -260,7 +242,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
       class {{.Name | File.TypeName}}: public Encodable {¶
       public:»¶
 	{{template "Cpp.Constructor" .}}
-	{{template "Cpp.HeaderID" .}}
 	{{template "Cpp.HeaderEncoder" .}}
 	{{template "Cpp.HeaderSchema" .}}
 	¶
@@ -305,7 +286,6 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
     {{else}}
         // {{.Entity.Name}}:¶
 	// {{.Entity.Signature}}¶
-	{{template "Cpp.ID" .}}
 	{{template "Cpp.Encoder" .}}
 	{{template "Cpp.SchemaMethod" .}}
 	¶
@@ -1062,6 +1042,16 @@ const java_binary_tmpl = `{{/*
   «}¶
 {{end}}
 
+{{define "Java.Schema.Primitive"}}new Primitive("{{.Name}}", Method.{{.Method}}){{end}}
+{{define "Java.Schema.Struct"}}new Struct({{File.ClassName .}}.Klass.INSTANCE.entity()){{end}}
+{{define "Java.Schema.Pointer"}}new Pointer({{Call "Java.Schema" .Type}}){{end}}
+{{define "Java.Schema.Interface"}}new Interface("{{.Name}}"){{end}}
+{{define "Java.Schema.Variant"}}new Variant("{{.Name}}"){{end}}
+{{define "Java.Schema.Any"}}new AnyType(){{end}}
+{{define "Java.Schema.Slice"}}new Slice("{{.Alias}}", {{Call "Java.Schema" .ValueType}}){{end}}
+{{define "Java.Schema.Array"}}new Array("{{.Alias}}", {{Call "Java.Schema" .ValueType}}, {{.Size}}){{end}}
+{{define "Java.Schema.Map"}}new Map("{{.Alias}}", {{Call "Java.Schema" .KeyType}}, {{Call "Java.Schema" .ValueType}}){{end}}
+
 {{define "Java.ClassBody"}}
   ¶{{/*Newline after section marker*/}}
   {{range .Struct.Fields}}{{template "Java.Field" .}}{{end}}
@@ -1074,13 +1064,20 @@ const java_binary_tmpl = `{{/*
   @Override @NotNull¶
   public BinaryClass klass() { return Klass.INSTANCE; }¶
   ¶
-  private static final byte[] IDBytes = {
-    {{range .Struct.ID}}{{ToS8 .}}, {{end}}
-  •};¶
-  public static final BinaryID ID = new BinaryID(IDBytes);¶
+  ¶
+  private static final Entity ENTITY = new Entity(
+    "{{.Struct.Package}}",
+    "{{.Struct.Identity}}",
+    "{{.Struct.Version}}",
+    "{{.Struct.Display}}");¶
   ¶
   static {»¶
-    Namespace.register(ID, Klass.INSTANCE);¶
+    Namespace.register(Klass.INSTANCE);¶
+    ENTITY.setFields(new Field[]{»¶
+      {{range .Struct.Fields}}
+        new Field("{{.Declared}}", {{Call "Java.Schema" .Type}}),¶
+      {{end}}
+    «});¶
   «}¶
   public static void register() {}¶
   //{{/*Comment the following section marker*/}}
@@ -1091,7 +1088,7 @@ const java_binary_tmpl = `{{/*
   INSTANCE;¶
   ¶
   @Override @NotNull¶
-  public BinaryID id() { return ID; }¶
+  public Entity entity() { return ENTITY; }¶
   ¶
   @Override @NotNull¶
   public BinaryObject create() { return new {{File.ClassName .Struct}}(); }¶

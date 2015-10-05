@@ -23,12 +23,9 @@ import (
 	"path/filepath"
 	"sync"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gapii"
@@ -135,32 +132,9 @@ func (s rpcServer) GetSchema(l log.Logger) (schema.Message, error) {
 }
 
 func (s rpcServer) readCapture(name string, in io.Reader, l log.Logger) (*path.Capture, error) {
-	list := atom.NewList()
-	d := cyclic.Decoder(vle.Reader(in))
-	tag := d.String()
-	if d.Error() != nil {
-		return nil, d.Error()
-	}
-	if tag != gapii.CaptureTag {
-		return nil, fmt.Errorf("Invalid capture tag '%s'", tag)
-	}
-	for {
-		if obj := d.Variant(); d.Error() != nil {
-			if d.Error() != io.EOF {
-				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), d.Error())
-				if len(list.Atoms) > 0 {
-					a := list.Atoms[len(list.Atoms)-1]
-					log.Warningf(l, "Last atom succesfully decoded: %T %v", a, a)
-				}
-			}
-			break
-		} else {
-			atom, ok := obj.(atom.Atom)
-			if !ok {
-				return nil, fmt.Errorf("Expected atom, got '%T' after decoding %d atoms", obj, len(list.Atoms))
-			}
-			list.Atoms = append(list.Atoms, atom)
-		}
+	list, err := gapii.ReadCapture(name, in, l)
+	if err != nil {
+		return nil, err
 	}
 	if len(list.Atoms) == 0 {
 		return nil, nil

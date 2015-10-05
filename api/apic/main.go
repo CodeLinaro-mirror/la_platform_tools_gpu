@@ -15,42 +15,13 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"os"
-
-	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/format"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/template"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/validate"
-	"android.googlesource.com/platform/tools/gpu/tools/profile"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
 
-func run() error {
-	flag.Parse()
-	defer profile.CPU()()
-	args := flag.Args()
-	if len(args) < 1 {
-		return commands.Usage("Must supply a verb\n")
-	}
-	verb := args[0]
-	matches := commands.Filter(verb)
-	switch len(matches) {
-	case 1:
-		c := matches[0]
-		commands.Logf("Running %q\n", c.Name)
-		c.Flags.Parse(args[1:])
-		return c.Run(c.Flags)
-	case 0:
-		return commands.Usage("Verb '%s' is unknown\n", verb)
-	default:
-		return commands.Usage("Verb '%s' is ambiguous\n", verb)
-	}
-}
-
 func main() {
-	if err := run(); err != nil {
-		fmt.Fprintf(os.Stderr, "apic failed: %v\n", err)
-		os.Exit(1)
-	}
+	verbs.ShortHelp = "Apic is a tool for managing api source files."
+	verbs.Run()
 }

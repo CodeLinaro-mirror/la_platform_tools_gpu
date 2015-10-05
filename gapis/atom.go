@@ -119,14 +119,14 @@ type atomClass struct {
 	result       int   // index on fields, or -1
 }
 
-var observationsId = (*atom.Observations)(nil).Class().ID()
+var observationsSig = (*atom.Observations)(nil).Class().Schema().Signature()
 
 func newAtomClass(base *schema.ObjectClass, meta *atom.Metadata) *atomClass {
 	class := &atomClass{base: base, meta: meta, observations: -1}
 	// Find the observations, if present
 	for i, f := range base.Fields {
 		if s, ok := f.Type.(*schema.Struct); ok {
-			if s.Entity.TypeID == observationsId {
+			if s.Entity.Signature() == observationsSig {
 				class.observations = i
 				continue
 			}
@@ -142,10 +142,6 @@ func newAtomClass(base *schema.ObjectClass, meta *atom.Metadata) *atomClass {
 
 func (c *atomClass) Schema() *binary.Entity {
 	return (*binary.Entity)(c.base)
-}
-
-func (c *atomClass) ID() binary.ID {
-	return c.base.TypeID
 }
 
 func (c *atomClass) New() binary.Object {

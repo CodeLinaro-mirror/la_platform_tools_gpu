@@ -77,7 +77,7 @@ Spy::Spy()
     GAPID_INFO("Observe framebuffers on draw call: %s", mObserveFramebufferOnDrawCall ? "yes" : "no");
 
     mEncoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(conn));
-    mEncoder->String("GapiiTraceFile_V1.0");
+    mEncoder->String("GapiiTraceFile_V1.1");
     GlesSpy::init(mEncoder);
     GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
 }

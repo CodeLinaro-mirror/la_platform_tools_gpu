@@ -81,23 +81,6 @@
   •{}¶
 {{end}}
 
-{{define "Cpp.HeaderID"}}
-  static const gapic::Id& StaticId();¶
-
-  virtual const gapic::Id& Id() const {»¶
-    return StaticId();¶
-  «}¶
-{{end}}
-
-{{define "Cpp.ID"}}
-   const gapic::Id& {{.Name | File.TypeName}}::StaticId() {»¶
-      static gapic::Id ID{ {•
-        {{range $i,$v := .ID}}{{if $i}}, {{end}}{{printf "0x%2.2x" $v}}{{end}}
-      ,  } };¶
-      return ID;¶
-  «}¶
-{{end}}
-
 {{define "Cpp.HeaderEncoder"}}
   virtual void Encode(Encoder* e) const
   {{if gt (len .Fields) 3}}
@@ -149,7 +132,7 @@
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
 
 {{define "Cpp.Schema.Primitive"}}new schema::Primitive{"{{.Name}}", schema::Primitive::{{.Method}}}{{end}}
-{{define "Cpp.Schema.Struct"}}new schema::Struct{"", {{.String | File.TypeName}}::StaticSchema()}{{end}}
+{{define "Cpp.Schema.Struct"}}new schema::Struct{ {{.String | File.TypeName}}::StaticSchema()}{{end}}
 {{define "Cpp.Schema.Pointer"}}new schema::Pointer{ {{Call "Cpp.Schema" .Type}} }{{end}}
 {{define "Cpp.Schema.Interface"}}new schema::Interface{"{{.Name}}"}{{end}}
 {{define "Cpp.Schema.Variant"}}new schema::Variant{"{{.Name}}"}{{end}}
@@ -160,18 +143,17 @@
 
 {{define "Cpp.HeaderSchema"}}
     {{if File.Directive "Schema" true}}
-    virtual const schema::Entity& Schema() const {»¶
+    virtual const schema::Entity* Schema() const {»¶
         return StaticSchema();¶
     «}¶
-    static const schema::Entity& StaticSchema();
+    static const schema::Entity* StaticSchema();
     {{end}}
 {{end}}
 
 {{define "Cpp.SchemaMethod"}}
     {{if File.Directive "Schema" true}}
-    const schema::Entity& {{.Name | File.TypeName}}::StaticSchema() {»¶
+    const schema::Entity* {{.Name | File.TypeName}}::StaticSchema() {»¶
         static schema::Entity entity {»¶
- 	   {{.Name | File.TypeName}}::StaticId(),¶
 	  "{{.Package}}",¶
 	  "{{.Display}}",¶
           "{{.Identity}}",¶
@@ -182,7 +164,7 @@
 	   {{end}}
 	   «},¶
         «};¶
-         return entity;¶
+         return &entity;¶
     «}¶
     {{end}}
 {{end}}
@@ -238,7 +220,6 @@
       class {{.Name | File.TypeName}}: public Encodable {¶
       public:»¶
 	{{template "Cpp.Constructor" .}}
-	{{template "Cpp.HeaderID" .}}
 	{{template "Cpp.HeaderEncoder" .}}
 	{{template "Cpp.HeaderSchema" .}}
 	¶
@@ -283,7 +264,6 @@
     {{else}}
         // {{.Entity.Name}}:¶
 	// {{.Entity.Signature}}¶
-	{{template "Cpp.ID" .}}
 	{{template "Cpp.Encoder" .}}
 	{{template "Cpp.SchemaMethod" .}}
 	¶

@@ -18,7 +18,6 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 // Encoder creates a binary.Encoder that writes to the supplied binary.Writer.
@@ -28,10 +27,7 @@ func Encoder(writer binary.Writer) binary.Encoder {
 
 // Decoder creates a binary.Decoder that reads from the provided binary.Reader.
 func Decoder(reader binary.Reader) binary.Decoder {
-	return &decoder{
-		Reader:    reader,
-		Namespace: registry.Global,
-	}
+	return &decoder{Reader: reader}
 }
 
 type encoder struct {
@@ -40,7 +36,6 @@ type encoder struct {
 
 type decoder struct {
 	binary.Reader
-	Namespace *registry.Namespace
 }
 
 func (e *encoder) ID(id binary.ID) {
@@ -64,25 +59,13 @@ func (d *decoder) Entity(bool) *binary.Entity {
 func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
 func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) {
-	if obj == nil {
-		e.ID(binary.ID{})
-		return
-	}
-	class := obj.Class()
-	e.ID(class.ID())
-	class.Encode(e, obj)
+	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
 }
 
 func (d *decoder) Variant() binary.Object {
-	id := d.ID()
-	if class := d.Namespace.Lookup(id); class == nil {
-		d.SetError(fmt.Errorf("Unknown type id %v", id))
-		return nil
-	} else {
-		return class.Decode(d)
-	}
+	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
 }
 
-func (e *encoder) Object(obj binary.Object)         { e.Variant(obj) }
-func (d *decoder) Object() binary.Object            { return d.Variant() }
-func (d *decoder) Lookup(id binary.ID) binary.Class { return d.Namespace.Lookup(id) }
+func (e *encoder) Object(obj binary.Object)           { e.Variant(obj) }
+func (d *decoder) Object() binary.Object              { return d.Variant() }
+func (d *decoder) Lookup(*binary.Entity) binary.Class { return nil }

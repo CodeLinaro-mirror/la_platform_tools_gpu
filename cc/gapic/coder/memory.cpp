@@ -16,13 +16,8 @@ namespace coder {
 namespace memory {
 // Pointer:
 // memory.Pointer{Uint64,Uint32}
-const gapic::Id& Pointer::StaticId() {
-    static gapic::Id ID{ { 0xaa, 0x47, 0x2f, 0xe5, 0xc7, 0x15, 0xbe, 0xf8, 0xf3, 0x63, 0x5a, 0x5c, 0x56, 0xc7, 0x23, 0x66, 0xb7, 0x85, 0x84, 0x59,  } };
-    return ID;
-}
-const schema::Entity& Pointer::StaticSchema() {
+const schema::Entity* Pointer::StaticSchema() {
     static schema::Entity entity {
-        Pointer::StaticId(),
         "memory",
         "",
         "Pointer",
@@ -32,18 +27,13 @@ const schema::Entity& Pointer::StaticSchema() {
             schema::Field{"Pool", new schema::Primitive{"PoolID", schema::Primitive::Uint32}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 // Range:
 // memory.Range{Uint64,Uint64}
-const gapic::Id& Range::StaticId() {
-    static gapic::Id ID{ { 0xfb, 0x3f, 0xff, 0x8c, 0x2d, 0xc4, 0x7b, 0xe0, 0xef, 0xe2, 0x95, 0x57, 0xae, 0x48, 0x62, 0x84, 0xb2, 0x98, 0xf6, 0xd6,  } };
-    return ID;
-}
-const schema::Entity& Range::StaticSchema() {
+const schema::Entity* Range::StaticSchema() {
     static schema::Entity entity {
-        Range::StaticId(),
         "memory",
         "",
         "Range",
@@ -53,7 +43,7 @@ const schema::Entity& Range::StaticSchema() {
             schema::Field{"Size", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
-    return entity;
+    return &entity;
 }
 
 

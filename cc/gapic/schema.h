@@ -46,80 +46,50 @@ class Type {
 
 class Field {
  public:
-  // Move
-  Field(Field&& field) : mDeclared(field.mDeclared), mType(std::move(field.mType)) {}
-
   Field(const std::string& declared, Type* type)
       : mDeclared(declared), mType(type) {}
 
   void encode(Encoder& e) const {
     mType->encode(e);
   }
- private:
+
+  const char* name() const { return mDeclared.c_str(); }
+
   std::string mDeclared;
-  std::unique_ptr<Type> mType;
+  Type* mType;
 };
 
-class Entity : public Encodable {
+class Entity {
  public:
   Entity() = default;
 
-  Entity(const gapic::Id& id,
-         const std::string& package,
+  Entity(const std::string& package,
          const std::string& name,
          const std::string& identity,
          const std::string& version,
          std::initializer_list<Field> fields)
       :
-      mTypeId(id),
       mPackage(package),
       mName(name),
       mIdentity(identity),
       mVersion(version),
-      mExported(true),
-      mFields(std::move(fields)) {}
+      mFields(fields) {}
 
-  Entity(const gapic::Id& id,
-         const std::string& package,
-         const std::string& name,
-         const std::string& identity,
-         const std::string& version,
-         std::initializer_list<Field> fields,
-         std::initializer_list<std::unique_ptr<Encodable>> metadata)
-      :
-      mTypeId(id),
-      mPackage(package),
-      mName(name),
-      mIdentity(identity),
-      mVersion(version),
-      mExported(true),
-      mFields(std::move(fields)),
-      mMetadata(std::move(metadata)) {}
-
-  virtual const gapic::Id& Id() const {
-    static gapic::Id ID{ { 0xf1, 0xab, 0xae, 0xcf, 0xc3, 0x23, 0xf8, 0x65, 0xa1, 0xeb, 0xe0, 0x3a, 0xa1, 0xae, 0xb3, 0xab, 0x77, 0xb0, 0x57, 0xef, } };
-    return ID;
-  }
-
-  virtual void Encode(Encoder* e) const {
-    e->String(mPackage);
-    e->String(mIdentity);
-    e->String(mVersion);
-    e->Uint32(uint32_t(mFields.size()));
+  void encode(Encoder& e) const {
+    e.String(mPackage);
+    e.String(mIdentity);
+    e.String(mVersion);
+    e.Uint32(uint32_t(mFields.size()));
     for (const auto& f : mFields) {
-      f.encode(*e);
+      f.encode(e);
     }
   }
 
- private:
-  gapic::Id mTypeId;
   std::string mPackage;
   std::string mName;
   std::string mIdentity;
   std::string mVersion;
-  bool mExported;
-  std::initializer_list<Field> mFields;
-  std::initializer_list<std::unique_ptr<Encodable>> mMetadata;
+  std::vector<Field> mFields;
 };
 
 class Primitive : public Type {
@@ -154,16 +124,15 @@ class Primitive : public Type {
 
 class Struct : public Type {
  public:
-  Struct(const std::string& relative, const Entity& entity)
-      : mRelative(relative), mEntity(entity) {}
+  Struct(const Entity* entity)
+      : mEntity(entity) {}
 
   void encode(Encoder& e) const {
     e.Uint8(uint8_t(StructTag));
     e.Entity(mEntity);
   }
  private:
-  std::string mRelative;
-  const Entity& mEntity;
+  const Entity* mEntity;
 };
 
 class Pointer : public Type {
@@ -175,7 +144,7 @@ class Pointer : public Type {
     mType->encode(e);
   }
  private:
-  std::unique_ptr<Type> mType;
+  Type* mType;
 };
 
 class Interface : public Type {
@@ -219,7 +188,7 @@ class Slice : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mValueType;
+  Type* mValueType;
 };
 
 class Array : public Type {
@@ -233,7 +202,7 @@ class Array : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mValueType;
+  Type* mValueType;
   uint32_t mSize;
 };
 
@@ -250,57 +219,10 @@ class Map : public Type {
   }
  private:
   std::string mAlias;
-  std::unique_ptr<Type> mKeyType;
-  std::unique_ptr<Type> mValueType;
-};
-
-class Constant {
- public:
-  // Move
-  Constant(Constant&& c) : mName(c.mName), mValue(c.mValue) {}
-
-  // Only uint32_t is supported in C++ at the moment, but it would
-  // be fairly easy to support all the primitive types.
-  Constant(const std::string& name, uint32_t value) :
-      mName(name), mValue(value) {}
-
-  void encode(Encoder& e) const {
-    e.String(mName);
-    e.Uint32(mValue);
-  }
- private:
-  std::string mName;
-  uint32_t mValue;
-};
-
-class ConstantSet : public Encodable {
- public:
-  ConstantSet() = default;
-  ConstantSet(Primitive* type, std::initializer_list<Constant> entries) :
-      mType(type), mEntries(std::move(entries)) {
-    if (mType->method() != Primitive::Uint32) {
-      GAPID_FATAL("Constant and ConstantSet only support uint32");
-    }
-  }
-
-  virtual const gapic::Id& Id() const {
-    static gapic::Id ID{ { 0x28, 0x8f, 0x6c, 0x88, 0x31, 0xd1, 0x04, 0x52, 0xb7, 0x5a, 0x25, 0x83, 0x01, 0x4e, 0x9a, 0x7c, 0x53, 0x03, 0x32, 0x9e, } };
-    return ID;
-  }
-
-  virtual void Encode(Encoder* e) const {
-    mType->encode(*e);
-    e->Uint32(uint32_t(mEntries.size()));
-    for (const auto& entry : mEntries) {
-      entry.encode(*e);
-    }
-  }
- private:
-  std::unique_ptr<Primitive> mType;
-  std::initializer_list<Constant> mEntries;
+  Type* mKeyType;
+  Type* mValueType;
 };
 
 }  // namespace schema
 }  // namespace gapic
-
 #endif

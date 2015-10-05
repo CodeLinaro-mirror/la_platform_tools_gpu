@@ -28,10 +28,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	"android.googlesource.com/platform/tools/gpu/parse"
+	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
 
 var (
-	command = &commands.Command{
+	verb = &verbs.Verb{
 		Name:      "validate",
 		ShortHelp: "Validates an api file for correctness",
 		Run:       doValidate,
@@ -39,13 +40,13 @@ var (
 )
 
 func init() {
-	commands.Register(command)
+	verbs.Register(verb)
 }
 
 func doValidate(flags flag.FlagSet) error {
 	args := flags.Args()
 	if len(args) < 1 {
-		return commands.Usage("Missing api file\n")
+		return verbs.Usage("Missing api file\n")
 	}
 	mappings := resolver.ASTToSemantic{}
 	for _, apiName := range args {
@@ -53,7 +54,7 @@ func doValidate(flags flag.FlagSet) error {
 		if err := commands.CheckErrors(apiName, errs); err != nil {
 			return err
 		}
-		commands.Logf("Validating api file %q\n", apiName)
+		verbs.Logf("Validating api file %q\n", apiName)
 		errors := Validate(apiName, compiled)
 		for _, err := range errors {
 			fmt.Fprintf(os.Stderr, "%s\n", err.Error())

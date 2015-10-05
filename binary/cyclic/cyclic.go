@@ -126,18 +126,21 @@ func (e *encoder) Value(obj binary.Object) { obj.Class().Encode(e, obj) }
 func (d *decoder) Value(obj binary.Object) { obj.Class().DecodeTo(d, obj) }
 func (e *encoder) Variant(obj binary.Object) {
 	if obj == nil {
-		e.ID(binary.ID{})
+		e.Entity(nil, true)
 		return
 	}
 	class := obj.Class()
-	e.ID(class.ID())
+	e.Entity(class.Schema(), true)
 	class.Encode(e, obj)
 }
 
 func (d *decoder) Variant() binary.Object {
-	id := d.ID()
-	if class := d.Namespace.Lookup(id); class == nil {
-		d.SetError(fmt.Errorf("Unknown type id %v", id))
+	entity := d.Entity(true)
+	if entity == nil {
+		return nil
+	}
+	if class := d.Lookup(entity); class == nil {
+		d.SetError(fmt.Errorf("Unknown type %q", entity.Signature()))
 		return nil
 	} else {
 		return class.Decode(d)
@@ -182,6 +185,6 @@ func (d *decoder) Object() binary.Object {
 	return o
 }
 
-func (d *decoder) Lookup(id binary.ID) binary.Class {
-	return d.Namespace.Lookup(id)
+func (d *decoder) Lookup(entity *binary.Entity) binary.Class {
+	return d.Namespace.Lookup(entity.Signature())
 }

@@ -18,10 +18,6 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type ObjectClass binary.Entity
 
-func (c *ObjectClass) ID() binary.ID {
-	return c.TypeID
-}
-
 func (c *ObjectClass) Name() string { return (*binary.Entity)(c).Name() }
 
 func (c *ObjectClass) New() binary.Object { return &Object{Type: c} }

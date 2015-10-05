@@ -25,11 +25,6 @@ type Object interface {
 
 // Class represents a struct type in the binary registry.
 type Class interface {
-	// ID should be a sha1 has of the types signature, such that
-	// no two classes generate the same ID, and any change to the types name or
-	// fields causes it's id to change.
-	ID() ID
-
 	// New can be used to build a new default initialized instance of the type.
 	New() Object
 
