@@ -220,9 +220,7 @@ func fakeStruct(structs map[*types.Struct]*Struct, pkg *types.Package, module st
 	if _, found := structs[t]; found {
 		return
 	}
-	s := &Struct{Entity: binary.Entity{Package: module, Identity: typename, Exported: true}}
-	s.UpdateID()
-	structs[t] = s
+	structs[t] = &Struct{Entity: binary.Entity{Package: module, Identity: typename, Exported: true}}
 }
 
 // From processes scanned source code to produce the module set it represents.

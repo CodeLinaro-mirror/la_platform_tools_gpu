@@ -34,9 +34,9 @@ import (
 // application's call to a graphics API function or provide meta-data describing
 // observed memory or state at the time of capture.
 //
-// Each implementation of Atom should have a unique and stable TypeID to ensure
+// Each implementation of Atom should have a unique and stable Signature to ensure
 // binary compatibility with old capture formats. Any change to the Atom's
-// binary format should also result in a new TypeID.
+// binary format should also result in a new Signature.
 type Atom interface {
 	binary.Object
 

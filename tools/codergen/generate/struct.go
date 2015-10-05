@@ -110,11 +110,6 @@ func (m *Module) HasStructTag(name string) bool {
 	return false
 }
 
-// UpdateID recalculates the struct ID from the current signature.
-func (s *Struct) UpdateID() {
-	s.TypeID = binary.NewID([]byte(s.Entity.Signature()))
-}
-
 type sortEntry struct {
 	s       *Struct
 	visited bool
@@ -159,7 +154,6 @@ func (m *Module) finaliseStructs() {
 	names := make(sort.StringSlice, len(m.Structs))
 	byname := make(map[string]*sortEntry, len(m.Structs))
 	for i, s := range m.Structs {
-		s.UpdateID()
 		name := s.Name()
 		names[i] = name
 		byname[name] = &sortEntry{s, false}

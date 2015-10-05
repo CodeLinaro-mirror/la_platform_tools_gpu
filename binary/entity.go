@@ -23,7 +23,6 @@ import (
 // In it's compact form, the entity contains only the information strictly required to generate it's signature, and not
 // any of metadata or display names.
 type Entity struct {
-	TypeID   ID        // The unique type identifier for the class, obsolete
 	Package  string    // The package that declared the struct.
 	Display  string    // The display name of the class, not set in compact form.
 	Identity string    // The true name of the class.

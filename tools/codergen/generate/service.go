@@ -120,8 +120,6 @@ func (m *Module) addService(n *types.TypeName) error {
 			// for methods with an unnamed first return value, default the name to "value" to match legacy behaviour.
 			method.Result.Struct.Entity.Fields[0].Declared = "value"
 		}
-		method.Call.UpdateID()
-		method.Result.UpdateID()
 		s.Methods = append(s.Methods, method)
 	}
 	m.Services = append(m.Services, s)
