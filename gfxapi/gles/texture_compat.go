@@ -16,7 +16,6 @@ package gles
 
 import (
 	"fmt"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
@@ -194,7 +193,7 @@ func convertTexSubImage2D(i atom.ID, a *GlTexSubImage2D, s *gfxapi.State, d data
 
 // getSupportedUncompressedTextureFormats returns the set of supported
 // uncompressed texture formats for a given version and extension list.
-func getSupportedUncompressedTextureFormats(version Version, extensions string) (map[GLenum]struct{}, error) {
+func getSupportedUncompressedTextureFormats(version Version, extensions extensions) (map[GLenum]struct{}, error) {
 	s := struct{}{}
 	if version.IsES {
 		switch { // OpenGL ES
@@ -283,9 +282,9 @@ func getSupportedUncompressedTextureFormats(version Version, extensions string) 
 
 // getSupportedCompressedTextureFormats returns the set of supported compressed
 // texture formats for a given extension list.
-func getSupportedCompressedTextureFormats(extensions string) map[GLenum]struct{} {
+func getSupportedCompressedTextureFormats(extensions extensions) map[GLenum]struct{} {
 	supported := map[GLenum]struct{}{}
-	for _, extension := range strings.Split(extensions, " ") {
+	for extension := range extensions {
 		for _, format := range getExtensionTextureFormats(extension) {
 			supported[format] = struct{}{}
 		}
