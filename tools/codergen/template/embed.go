@@ -1085,12 +1085,12 @@ const java_binary_tmpl = `{{/*
     "{{.Struct.Display}}");¶
   ¶
   static {»¶
-    Namespace.register(Klass.INSTANCE);¶
     ENTITY.setFields(new Field[]{»¶
       {{range .Struct.Fields}}
         new Field("{{.Declared}}", {{Call "Java.Schema" .Type}}),¶
       {{end}}
     «});¶
+    Namespace.register(Klass.INSTANCE);¶
   «}¶
   public static void register() {}¶
   //{{/*Comment the following section marker*/}}
