@@ -33,7 +33,6 @@ func doDecodedirectCall(d binary.Decoder, o *directCall) {
 		o.atom = nil
 	}
 }
-func (*binaryClassdirectCall) New() binary.Object { return &directCall{} }
 func (*binaryClassdirectCall) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedirectCall(e, obj.(*directCall))
 }

@@ -33,7 +33,6 @@ func doEncodeTypeA(e binary.Encoder, o *TypeA) {
 func doDecodeTypeA(d binary.Decoder, o *TypeA) {
 	o.Data = string(d.String())
 }
-func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeA(e, obj.(*TypeA))
 }
@@ -66,7 +65,6 @@ func doEncodeTypeB(e binary.Encoder, o *TypeB) {
 func doDecodeTypeB(d binary.Decoder, o *TypeB) {
 	o.Data = string(d.String())
 }
-func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeB(e, obj.(*TypeB))
 }
@@ -103,7 +101,6 @@ func doDecodeX(d binary.Decoder, o *X) {
 	o.b = int32(d.Int32())
 	o.c = string(d.String())
 }
-func (*binaryClassX) New() binary.Object { return &X{} }
 func (*binaryClassX) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeX(e, obj.(*X))
 }
@@ -149,7 +146,6 @@ func doDecodeY(d binary.Decoder, o *Y) {
 	d.Struct(ent_05812f806fd444a2f25ef8af1732c40dd2f23b10, &o.x)
 	o.end = string(d.String())
 }
-func (*binaryClassY) New() binary.Object { return &Y{} }
 func (*binaryClassY) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeY(e, obj.(*Y))
 }
@@ -174,7 +170,6 @@ var schemaY = &binary.Entity{
 }
 
 type binaryClassX_V1 struct{ binary.FrozenClassBase }
-
 func (*X_V1) Class() binary.Class {
 	return &binaryClassX_V1{}
 }
@@ -189,7 +184,7 @@ func doUpgradeDecodeǀX_V1ǁX(d binary.Decoder, o *X) {
 	if d.Error() != nil {
 		return
 	}
-	old.upgrade(o) // This upgrade() method is not code generated.
+	old.upgrade(o)  // This upgrade() method is not code generated.
 }
 func (*binaryClassX_V1) Decode(d binary.Decoder) binary.Object {
 	obj := &X{}

@@ -64,7 +64,6 @@ func doDecodeboolSlice(d binary.Decoder, o *boolSlice) {
 		}
 	}
 }
-func (*binaryClassboolSlice) New() binary.Object { return &boolSlice{} }
 func (*binaryClassboolSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeboolSlice(e, obj.(*boolSlice))
 }
@@ -97,7 +96,6 @@ func doEncodebool_(e binary.Encoder, o *bool_) {
 func doDecodebool_(d binary.Decoder, o *bool_) {
 	o.value = bool(d.Bool())
 }
-func (*binaryClassbool_) New() binary.Object { return &bool_{} }
 func (*binaryClassbool_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodebool_(e, obj.(*bool_))
 }
@@ -138,7 +136,6 @@ func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) {
 		}
 	}
 }
-func (*binaryClassfloat32Slice) New() binary.Object { return &float32Slice{} }
 func (*binaryClassfloat32Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefloat32Slice(e, obj.(*float32Slice))
 }
@@ -171,7 +168,6 @@ func doEncodefloat32_(e binary.Encoder, o *float32_) {
 func doDecodefloat32_(d binary.Decoder, o *float32_) {
 	o.value = float32(d.Float32())
 }
-func (*binaryClassfloat32_) New() binary.Object { return &float32_{} }
 func (*binaryClassfloat32_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefloat32_(e, obj.(*float32_))
 }
@@ -212,7 +208,6 @@ func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) {
 		}
 	}
 }
-func (*binaryClassfloat64Slice) New() binary.Object { return &float64Slice{} }
 func (*binaryClassfloat64Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefloat64Slice(e, obj.(*float64Slice))
 }
@@ -245,7 +240,6 @@ func doEncodefloat64_(e binary.Encoder, o *float64_) {
 func doDecodefloat64_(d binary.Decoder, o *float64_) {
 	o.value = float64(d.Float64())
 }
-func (*binaryClassfloat64_) New() binary.Object { return &float64_{} }
 func (*binaryClassfloat64_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefloat64_(e, obj.(*float64_))
 }
@@ -286,7 +280,6 @@ func doDecodeint16Slice(d binary.Decoder, o *int16Slice) {
 		}
 	}
 }
-func (*binaryClassint16Slice) New() binary.Object { return &int16Slice{} }
 func (*binaryClassint16Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint16Slice(e, obj.(*int16Slice))
 }
@@ -319,7 +312,6 @@ func doEncodeint16_(e binary.Encoder, o *int16_) {
 func doDecodeint16_(d binary.Decoder, o *int16_) {
 	o.value = int16(d.Int16())
 }
-func (*binaryClassint16_) New() binary.Object { return &int16_{} }
 func (*binaryClassint16_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint16_(e, obj.(*int16_))
 }
@@ -360,7 +352,6 @@ func doDecodeint32Slice(d binary.Decoder, o *int32Slice) {
 		}
 	}
 }
-func (*binaryClassint32Slice) New() binary.Object { return &int32Slice{} }
 func (*binaryClassint32Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint32Slice(e, obj.(*int32Slice))
 }
@@ -393,7 +384,6 @@ func doEncodeint32_(e binary.Encoder, o *int32_) {
 func doDecodeint32_(d binary.Decoder, o *int32_) {
 	o.value = int32(d.Int32())
 }
-func (*binaryClassint32_) New() binary.Object { return &int32_{} }
 func (*binaryClassint32_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint32_(e, obj.(*int32_))
 }
@@ -434,7 +424,6 @@ func doDecodeint64Slice(d binary.Decoder, o *int64Slice) {
 		}
 	}
 }
-func (*binaryClassint64Slice) New() binary.Object { return &int64Slice{} }
 func (*binaryClassint64Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint64Slice(e, obj.(*int64Slice))
 }
@@ -467,7 +456,6 @@ func doEncodeint64_(e binary.Encoder, o *int64_) {
 func doDecodeint64_(d binary.Decoder, o *int64_) {
 	o.value = int64(d.Int64())
 }
-func (*binaryClassint64_) New() binary.Object { return &int64_{} }
 func (*binaryClassint64_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint64_(e, obj.(*int64_))
 }
@@ -508,7 +496,6 @@ func doDecodeint8Slice(d binary.Decoder, o *int8Slice) {
 		}
 	}
 }
-func (*binaryClassint8Slice) New() binary.Object { return &int8Slice{} }
 func (*binaryClassint8Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint8Slice(e, obj.(*int8Slice))
 }
@@ -541,7 +528,6 @@ func doEncodeint8_(e binary.Encoder, o *int8_) {
 func doDecodeint8_(d binary.Decoder, o *int8_) {
 	o.value = int8(d.Int8())
 }
-func (*binaryClassint8_) New() binary.Object { return &int8_{} }
 func (*binaryClassint8_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint8_(e, obj.(*int8_))
 }
@@ -582,7 +568,6 @@ func doDecodeintSlice(d binary.Decoder, o *intSlice) {
 		}
 	}
 }
-func (*binaryClassintSlice) New() binary.Object { return &intSlice{} }
 func (*binaryClassintSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeintSlice(e, obj.(*intSlice))
 }
@@ -615,7 +600,6 @@ func doEncodeint_(e binary.Encoder, o *int_) {
 func doDecodeint_(d binary.Decoder, o *int_) {
 	o.value = int(d.Int32())
 }
-func (*binaryClassint_) New() binary.Object { return &int_{} }
 func (*binaryClassint_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeint_(e, obj.(*int_))
 }
@@ -660,7 +644,6 @@ func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) {
 		}
 	}
 }
-func (*binaryClassobjectSlice) New() binary.Object { return &objectSlice{} }
 func (*binaryClassobjectSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeobjectSlice(e, obj.(*objectSlice))
 }
@@ -697,7 +680,6 @@ func doDecodeobject_(d binary.Decoder, o *object_) {
 		o.value = nil
 	}
 }
-func (*binaryClassobject_) New() binary.Object { return &object_{} }
 func (*binaryClassobject_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeobject_(e, obj.(*object_))
 }
@@ -738,7 +720,6 @@ func doDecodestringSlice(d binary.Decoder, o *stringSlice) {
 		}
 	}
 }
-func (*binaryClassstringSlice) New() binary.Object { return &stringSlice{} }
 func (*binaryClassstringSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodestringSlice(e, obj.(*stringSlice))
 }
@@ -771,7 +752,6 @@ func doEncodestring_(e binary.Encoder, o *string_) {
 func doDecodestring_(d binary.Decoder, o *string_) {
 	o.value = string(d.String())
 }
-func (*binaryClassstring_) New() binary.Object { return &string_{} }
 func (*binaryClassstring_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodestring_(e, obj.(*string_))
 }
@@ -812,7 +792,6 @@ func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) {
 		}
 	}
 }
-func (*binaryClassuint16Slice) New() binary.Object { return &uint16Slice{} }
 func (*binaryClassuint16Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint16Slice(e, obj.(*uint16Slice))
 }
@@ -845,7 +824,6 @@ func doEncodeuint16_(e binary.Encoder, o *uint16_) {
 func doDecodeuint16_(d binary.Decoder, o *uint16_) {
 	o.value = uint16(d.Uint16())
 }
-func (*binaryClassuint16_) New() binary.Object { return &uint16_{} }
 func (*binaryClassuint16_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint16_(e, obj.(*uint16_))
 }
@@ -886,7 +864,6 @@ func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) {
 		}
 	}
 }
-func (*binaryClassuint32Slice) New() binary.Object { return &uint32Slice{} }
 func (*binaryClassuint32Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint32Slice(e, obj.(*uint32Slice))
 }
@@ -919,7 +896,6 @@ func doEncodeuint32_(e binary.Encoder, o *uint32_) {
 func doDecodeuint32_(d binary.Decoder, o *uint32_) {
 	o.value = uint32(d.Uint32())
 }
-func (*binaryClassuint32_) New() binary.Object { return &uint32_{} }
 func (*binaryClassuint32_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint32_(e, obj.(*uint32_))
 }
@@ -960,7 +936,6 @@ func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) {
 		}
 	}
 }
-func (*binaryClassuint64Slice) New() binary.Object { return &uint64Slice{} }
 func (*binaryClassuint64Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint64Slice(e, obj.(*uint64Slice))
 }
@@ -993,7 +968,6 @@ func doEncodeuint64_(e binary.Encoder, o *uint64_) {
 func doDecodeuint64_(d binary.Decoder, o *uint64_) {
 	o.value = uint64(d.Uint64())
 }
-func (*binaryClassuint64_) New() binary.Object { return &uint64_{} }
 func (*binaryClassuint64_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint64_(e, obj.(*uint64_))
 }
@@ -1030,7 +1004,6 @@ func doDecodeuint8Slice(d binary.Decoder, o *uint8Slice) {
 		d.Data(o.value)
 	}
 }
-func (*binaryClassuint8Slice) New() binary.Object { return &uint8Slice{} }
 func (*binaryClassuint8Slice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint8Slice(e, obj.(*uint8Slice))
 }
@@ -1063,7 +1036,6 @@ func doEncodeuint8_(e binary.Encoder, o *uint8_) {
 func doDecodeuint8_(d binary.Decoder, o *uint8_) {
 	o.value = uint8(d.Uint8())
 }
-func (*binaryClassuint8_) New() binary.Object { return &uint8_{} }
 func (*binaryClassuint8_) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeuint8_(e, obj.(*uint8_))
 }

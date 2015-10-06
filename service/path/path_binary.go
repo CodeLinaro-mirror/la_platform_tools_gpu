@@ -53,7 +53,6 @@ func doDecodeArrayIndex(d binary.Decoder, o *ArrayIndex) {
 	}
 	o.Index = uint64(d.Uint64())
 }
-func (*binaryClassArrayIndex) New() binary.Object { return &ArrayIndex{} }
 func (*binaryClassArrayIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeArrayIndex(e, obj.(*ArrayIndex))
 }
@@ -93,7 +92,6 @@ func doDecodeAs(d binary.Decoder, o *As) {
 	}
 	o.Type = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassAs) New() binary.Object { return &As{} }
 func (*binaryClassAs) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAs(e, obj.(*As))
 }
@@ -127,7 +125,6 @@ func doEncodeCapture(e binary.Encoder, o *Capture) {
 func doDecodeCapture(d binary.Decoder, o *Capture) {
 	d.Data(o.ID[:20])
 }
-func (*binaryClassCapture) New() binary.Object { return &Capture{} }
 func (*binaryClassCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCapture(e, obj.(*Capture))
 }
@@ -168,7 +165,6 @@ func doDecodeAtoms(d binary.Decoder, o *Atoms) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassAtoms) New() binary.Object { return &Atoms{} }
 func (*binaryClassAtoms) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtoms(e, obj.(*Atoms))
 }
@@ -211,7 +207,6 @@ func doDecodeAtom(d binary.Decoder, o *Atom) {
 	}
 	o.Index = uint64(d.Uint64())
 }
-func (*binaryClassAtom) New() binary.Object { return &Atom{} }
 func (*binaryClassAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtom(e, obj.(*Atom))
 }
@@ -245,7 +240,6 @@ func doEncodeBlob(e binary.Encoder, o *Blob) {
 func doDecodeBlob(d binary.Decoder, o *Blob) {
 	d.Data(o.ID[:20])
 }
-func (*binaryClassBlob) New() binary.Object { return &Blob{} }
 func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBlob(e, obj.(*Blob))
 }
@@ -278,7 +272,6 @@ func doEncodeDevice(e binary.Encoder, o *Device) {
 func doDecodeDevice(d binary.Decoder, o *Device) {
 	d.Data(o.ID[:20])
 }
-func (*binaryClassDevice) New() binary.Object { return &Device{} }
 func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeDevice(e, obj.(*Device))
 }
@@ -317,7 +310,6 @@ func doDecodeField(d binary.Decoder, o *Field) {
 	}
 	o.Name = string(d.String())
 }
-func (*binaryClassField) New() binary.Object { return &Field{} }
 func (*binaryClassField) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeField(e, obj.(*Field))
 }
@@ -359,7 +351,6 @@ func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
 func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHierarchy(e, obj.(*Hierarchy))
 }
@@ -392,7 +383,6 @@ func doEncodeImageInfo(e binary.Encoder, o *ImageInfo) {
 func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) {
 	d.Data(o.ID[:20])
 }
-func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
 func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImageInfo(e, obj.(*ImageInfo))
 }
@@ -431,7 +421,6 @@ func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	}
 	o.Key = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassMapIndex) New() binary.Object { return &MapIndex{} }
 func (*binaryClassMapIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMapIndex(e, obj.(*MapIndex))
 }
@@ -479,7 +468,6 @@ func doDecodeMemoryRange(d binary.Decoder, o *MemoryRange) {
 	o.Address = uint64(d.Uint64())
 	o.Size = uint64(d.Uint64())
 }
-func (*binaryClassMemoryRange) New() binary.Object { return &MemoryRange{} }
 func (*binaryClassMemoryRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMemoryRange(e, obj.(*MemoryRange))
 }
@@ -533,7 +521,6 @@ func doDecodeReport(d binary.Decoder, o *Report) {
 		o.Device = nil
 	}
 }
-func (*binaryClassReport) New() binary.Object { return &Report{} }
 func (*binaryClassReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReport(e, obj.(*Report))
 }
@@ -577,7 +564,6 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 		o.After = nil
 	}
 }
-func (*binaryClassResource) New() binary.Object { return &Resource{} }
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
 }
@@ -619,7 +605,6 @@ func doDecodeResources(d binary.Decoder, o *Resources) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassResources) New() binary.Object { return &Resources{} }
 func (*binaryClassResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResources(e, obj.(*Resources))
 }
@@ -660,7 +645,6 @@ func doDecodeSlice(d binary.Decoder, o *Slice) {
 	o.Start = uint64(d.Uint64())
 	o.End = uint64(d.Uint64())
 }
-func (*binaryClassSlice) New() binary.Object { return &Slice{} }
 func (*binaryClassSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSlice(e, obj.(*Slice))
 }
@@ -703,7 +687,6 @@ func doDecodeState(d binary.Decoder, o *State) {
 		o.After = nil
 	}
 }
-func (*binaryClassState) New() binary.Object { return &State{} }
 func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeState(e, obj.(*State))
 }
@@ -746,7 +729,6 @@ func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 	o.DesiredMaxHeight = uint32(d.Uint32())
 	o.DesiredFormat = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassThumbnail) New() binary.Object { return &Thumbnail{} }
 func (*binaryClassThumbnail) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeThumbnail(e, obj.(*Thumbnail))
 }
@@ -782,7 +764,6 @@ func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) {
 func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 	d.Data(o.ID[:20])
 }
-func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }
 func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTimingInfo(e, obj.(*TimingInfo))
 }

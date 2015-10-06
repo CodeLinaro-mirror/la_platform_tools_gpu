@@ -34,7 +34,6 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 	o.ID = string(d.String())
 	o.Size = uint32(d.Uint32())
 }
-func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResourceInfo(e, obj.(*ResourceInfo))
 }
@@ -99,7 +98,6 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 		d.Data(o.Opcodes)
 	}
 }
-func (*binaryClassPayload) New() binary.Object { return &Payload{} }
 func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePayload(e, obj.(*Payload))
 }

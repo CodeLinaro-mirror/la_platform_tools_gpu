@@ -41,7 +41,7 @@ func Decoder(reader binary.Reader) *decoder {
 		Namespace: registry.Global,
 		entities:  map[uint32]*binary.Entity{},
 		objects:   map[uint32]binary.Object{},
-		substack:  binary.Substack{},
+		substack:  substack{},
 	}
 }
 
@@ -56,7 +56,7 @@ type decoder struct {
 	Namespace *registry.Namespace
 	entities  map[uint32]*binary.Entity
 	objects   map[uint32]binary.Object
-	substack  binary.Substack
+	substack  substack
 }
 
 func (e *encoder) Entity(s *binary.Entity, compact bool) {
@@ -110,8 +110,14 @@ func (d *decoder) Struct(ent *binary.Entity, obj binary.Object) error {
 	if u := d.Namespace.LookupUpgrader(ent.Signature()); u == nil {
 		return d.SetError(fmt.Errorf("Unknown type id %v", ent))
 	} else {
+		l := len(d.substack.stack)
 		d.substack.PushSubspace(ent)
 		u.DecodeTo(d, obj)
+		if l != len(d.substack.stack) {
+			d.SetError(fmt.Errorf(
+				"Decoding type %q altered the substack. Before %d now %d",
+				ent.Signature(), l, len(d.substack.stack)))
+		}
 		return d.Error()
 	}
 }
@@ -147,8 +153,15 @@ func (d *decoder) Variant() binary.Object {
 		d.SetError(fmt.Errorf("Unknown type %q", entity.Signature()))
 		return nil
 	} else {
+		l := len(d.substack.stack)
 		d.substack.PushSubspace(entity)
-		return u.Decode(d)
+		o := u.Decode(d)
+		if l != len(d.substack.stack) {
+			d.SetError(fmt.Errorf(
+				"Decoding type %q altered the substack. Before %d now %d",
+				entity.Signature(), l, len(d.substack.stack)))
+		}
+		return o
 	}
 }
 

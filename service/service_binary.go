@@ -70,7 +70,6 @@ func doDecodeAtomRangeTimer(d binary.Decoder, o *AtomRangeTimer) {
 	o.ToAtomIndex = uint64(d.Uint64())
 	o.Nanoseconds = uint64(d.Uint64())
 }
-func (*binaryClassAtomRangeTimer) New() binary.Object { return &AtomRangeTimer{} }
 func (*binaryClassAtomRangeTimer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomRangeTimer(e, obj.(*AtomRangeTimer))
 }
@@ -107,7 +106,6 @@ func doDecodeAtomTimer(d binary.Decoder, o *AtomTimer) {
 	o.AtomIndex = uint64(d.Uint64())
 	o.Nanoseconds = uint64(d.Uint64())
 }
-func (*binaryClassAtomTimer) New() binary.Object { return &AtomTimer{} }
 func (*binaryClassAtomTimer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomTimer(e, obj.(*AtomTimer))
 }
@@ -153,7 +151,6 @@ func doDecodeCapture(d binary.Decoder, o *Capture) {
 		}
 	}
 }
-func (*binaryClassCapture) New() binary.Object { return &Capture{} }
 func (*binaryClassCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCapture(e, obj.(*Capture))
 }
@@ -206,7 +203,6 @@ func doDecodeDevice(d binary.Decoder, o *Device) {
 	o.Vendor = string(d.String())
 	o.Version = string(d.String())
 }
-func (*binaryClassDevice) New() binary.Object { return &Device{} }
 func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeDevice(e, obj.(*Device))
 }
@@ -303,7 +299,6 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
 		}
 	}
 }
-func (*binaryClassMemoryInfo) New() binary.Object { return &MemoryInfo{} }
 func (*binaryClassMemoryInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMemoryInfo(e, obj.(*MemoryInfo))
 }
@@ -343,7 +338,6 @@ func doDecodeRenderSettings(d binary.Decoder, o *RenderSettings) {
 	o.MaxHeight = uint32(d.Uint32())
 	o.WireframeMode = WireframeMode(d.Int32())
 }
-func (*binaryClassRenderSettings) New() binary.Object { return &RenderSettings{} }
 func (*binaryClassRenderSettings) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderSettings(e, obj.(*RenderSettings))
 }
@@ -382,7 +376,6 @@ func doDecodeReportItem(d binary.Decoder, o *ReportItem) {
 	o.Message = string(d.String())
 	o.Atom = uint64(d.Uint64())
 }
-func (*binaryClassReportItem) New() binary.Object { return &ReportItem{} }
 func (*binaryClassReportItem) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReportItem(e, obj.(*ReportItem))
 }
@@ -432,7 +425,6 @@ func doDecodeReport(d binary.Decoder, o *Report) {
 		}
 	}
 }
-func (*binaryClassReport) New() binary.Object { return &Report{} }
 func (*binaryClassReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReport(e, obj.(*Report))
 }
@@ -477,7 +469,6 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 		}
 	}
 }
-func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResourceInfo(e, obj.(*ResourceInfo))
 }
@@ -578,7 +569,6 @@ func doDecodeResources(d binary.Decoder, o *Resources) {
 		}
 	}
 }
-func (*binaryClassResources) New() binary.Object { return &Resources{} }
 func (*binaryClassResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResources(e, obj.(*Resources))
 }
@@ -663,7 +653,6 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 		}
 	}
 }
-func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }
 func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTimingInfo(e, obj.(*TimingInfo))
 }
@@ -702,7 +691,6 @@ func doDecodecallFollow(d binary.Decoder, o *callFollow) {
 		o.p = nil
 	}
 }
-func (*binaryClasscallFollow) New() binary.Object { return &callFollow{} }
 func (*binaryClasscallFollow) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallFollow(e, obj.(*callFollow))
 }
@@ -739,7 +727,6 @@ func doDecodecallGet(d binary.Decoder, o *callGet) {
 		o.p = nil
 	}
 }
-func (*binaryClasscallGet) New() binary.Object { return &callGet{} }
 func (*binaryClasscallGet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGet(e, obj.(*callGet))
 }
@@ -770,7 +757,6 @@ func doEncodecallGetCaptures(e binary.Encoder, o *callGetCaptures) {
 }
 func doDecodecallGetCaptures(d binary.Decoder, o *callGetCaptures) {
 }
-func (*binaryClasscallGetCaptures) New() binary.Object { return &callGetCaptures{} }
 func (*binaryClasscallGetCaptures) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetCaptures(e, obj.(*callGetCaptures))
 }
@@ -799,7 +785,6 @@ func doEncodecallGetDevices(e binary.Encoder, o *callGetDevices) {
 }
 func doDecodecallGetDevices(d binary.Decoder, o *callGetDevices) {
 }
-func (*binaryClasscallGetDevices) New() binary.Object { return &callGetDevices{} }
 func (*binaryClasscallGetDevices) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetDevices(e, obj.(*callGetDevices))
 }
@@ -857,7 +842,6 @@ func doDecodecallGetFramebufferColor(d binary.Decoder, o *callGetFramebufferColo
 	}
 	d.Struct(ent_fce65e0023777b929bde1f3d7da272183be446bd, &o.settings)
 }
-func (*binaryClasscallGetFramebufferColor) New() binary.Object { return &callGetFramebufferColor{} }
 func (*binaryClasscallGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetFramebufferColor(e, obj.(*callGetFramebufferColor))
 }
@@ -912,7 +896,6 @@ func doDecodecallGetFramebufferDepth(d binary.Decoder, o *callGetFramebufferDept
 		o.after = nil
 	}
 }
-func (*binaryClasscallGetFramebufferDepth) New() binary.Object { return &callGetFramebufferDepth{} }
 func (*binaryClasscallGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetFramebufferDepth(e, obj.(*callGetFramebufferDepth))
 }
@@ -946,7 +929,6 @@ func doEncodecallGetSchema(e binary.Encoder, o *callGetSchema) {
 }
 func doDecodecallGetSchema(d binary.Decoder, o *callGetSchema) {
 }
-func (*binaryClasscallGetSchema) New() binary.Object { return &callGetSchema{} }
 func (*binaryClasscallGetSchema) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetSchema(e, obj.(*callGetSchema))
 }
@@ -997,7 +979,6 @@ func doDecodecallGetTimingInfo(d binary.Decoder, o *callGetTimingInfo) {
 	}
 	o.flags = TimingFlags(d.Int32())
 }
-func (*binaryClasscallGetTimingInfo) New() binary.Object { return &callGetTimingInfo{} }
 func (*binaryClasscallGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetTimingInfo(e, obj.(*callGetTimingInfo))
 }
@@ -1038,7 +1019,6 @@ func doDecodecallImportCapture(d binary.Decoder, o *callImportCapture) {
 		d.Data(o.Data)
 	}
 }
-func (*binaryClasscallImportCapture) New() binary.Object { return &callImportCapture{} }
 func (*binaryClasscallImportCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallImportCapture(e, obj.(*callImportCapture))
 }
@@ -1072,7 +1052,6 @@ func doEncodecallLoadCapture(e binary.Encoder, o *callLoadCapture) {
 func doDecodecallLoadCapture(d binary.Decoder, o *callLoadCapture) {
 	o.path = string(d.String())
 }
-func (*binaryClasscallLoadCapture) New() binary.Object { return &callLoadCapture{} }
 func (*binaryClasscallLoadCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallLoadCapture(e, obj.(*callLoadCapture))
 }
@@ -1111,7 +1090,6 @@ func doDecodecallSet(d binary.Decoder, o *callSet) {
 	}
 	o.v = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClasscallSet) New() binary.Object { return &callSet{} }
 func (*binaryClasscallSet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallSet(e, obj.(*callSet))
 }
@@ -1149,7 +1127,6 @@ func doDecoderesultFollow(d binary.Decoder, o *resultFollow) {
 		o.value = nil
 	}
 }
-func (*binaryClassresultFollow) New() binary.Object { return &resultFollow{} }
 func (*binaryClassresultFollow) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultFollow(e, obj.(*resultFollow))
 }
@@ -1182,7 +1159,6 @@ func doEncoderesultGet(e binary.Encoder, o *resultGet) {
 func doDecoderesultGet(d binary.Decoder, o *resultGet) {
 	o.value = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassresultGet) New() binary.Object { return &resultGet{} }
 func (*binaryClassresultGet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGet(e, obj.(*resultGet))
 }
@@ -1231,7 +1207,6 @@ func doDecoderesultGetCaptures(d binary.Decoder, o *resultGetCaptures) {
 		}
 	}
 }
-func (*binaryClassresultGetCaptures) New() binary.Object { return &resultGetCaptures{} }
 func (*binaryClassresultGetCaptures) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetCaptures(e, obj.(*resultGetCaptures))
 }
@@ -1280,7 +1255,6 @@ func doDecoderesultGetDevices(d binary.Decoder, o *resultGetDevices) {
 		}
 	}
 }
-func (*binaryClassresultGetDevices) New() binary.Object { return &resultGetDevices{} }
 func (*binaryClassresultGetDevices) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetDevices(e, obj.(*resultGetDevices))
 }
@@ -1321,7 +1295,6 @@ func doDecoderesultGetFramebufferColor(d binary.Decoder, o *resultGetFramebuffer
 		o.value = nil
 	}
 }
-func (*binaryClassresultGetFramebufferColor) New() binary.Object { return &resultGetFramebufferColor{} }
 func (*binaryClassresultGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetFramebufferColor(e, obj.(*resultGetFramebufferColor))
 }
@@ -1364,7 +1337,6 @@ func doDecoderesultGetFramebufferDepth(d binary.Decoder, o *resultGetFramebuffer
 		o.value = nil
 	}
 }
-func (*binaryClassresultGetFramebufferDepth) New() binary.Object { return &resultGetFramebufferDepth{} }
 func (*binaryClassresultGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetFramebufferDepth(e, obj.(*resultGetFramebufferDepth))
 }
@@ -1406,7 +1378,6 @@ func doDecoderesultGetSchema(d binary.Decoder, o *resultGetSchema) {
 	}
 	d.Struct(ent_e4eb441698e1087e227cf358c8557e8a3ea6a162, &o.value)
 }
-func (*binaryClassresultGetSchema) New() binary.Object { return &resultGetSchema{} }
 func (*binaryClassresultGetSchema) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetSchema(e, obj.(*resultGetSchema))
 }
@@ -1447,7 +1418,6 @@ func doDecoderesultGetTimingInfo(d binary.Decoder, o *resultGetTimingInfo) {
 		o.value = nil
 	}
 }
-func (*binaryClassresultGetTimingInfo) New() binary.Object { return &resultGetTimingInfo{} }
 func (*binaryClassresultGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetTimingInfo(e, obj.(*resultGetTimingInfo))
 }
@@ -1488,7 +1458,6 @@ func doDecoderesultImportCapture(d binary.Decoder, o *resultImportCapture) {
 		o.value = nil
 	}
 }
-func (*binaryClassresultImportCapture) New() binary.Object { return &resultImportCapture{} }
 func (*binaryClassresultImportCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultImportCapture(e, obj.(*resultImportCapture))
 }
@@ -1529,7 +1498,6 @@ func doDecoderesultLoadCapture(d binary.Decoder, o *resultLoadCapture) {
 		o.value = nil
 	}
 }
-func (*binaryClassresultLoadCapture) New() binary.Object { return &resultLoadCapture{} }
 func (*binaryClassresultLoadCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultLoadCapture(e, obj.(*resultLoadCapture))
 }
@@ -1566,7 +1534,6 @@ func doDecoderesultSet(d binary.Decoder, o *resultSet) {
 		o.value = nil
 	}
 }
-func (*binaryClassresultSet) New() binary.Object { return &resultSet{} }
 func (*binaryClassresultSet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultSet(e, obj.(*resultSet))
 }

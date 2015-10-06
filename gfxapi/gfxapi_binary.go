@@ -86,7 +86,6 @@ func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) {
 	}
 	d.Struct(ent_312c235aa3fbec54cc72a76a1eb710091c78298d, &o.PositiveZ)
 }
-func (*binaryClassCubemapLevel) New() binary.Object { return &CubemapLevel{} }
 func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemapLevel(e, obj.(*CubemapLevel))
 }
@@ -139,7 +138,6 @@ func doDecodeCubemap(d binary.Decoder, o *Cubemap) {
 		}
 	}
 }
-func (*binaryClassCubemap) New() binary.Object { return &Cubemap{} }
 func (*binaryClassCubemap) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemap(e, obj.(*Cubemap))
 }
@@ -187,7 +185,6 @@ func doDecodeTexture2D(d binary.Decoder, o *Texture2D) {
 		}
 	}
 }
-func (*binaryClassTexture2D) New() binary.Object { return &Texture2D{} }
 func (*binaryClassTexture2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTexture2D(e, obj.(*Texture2D))
 }

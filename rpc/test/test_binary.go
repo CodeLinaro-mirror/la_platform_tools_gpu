@@ -63,7 +63,6 @@ func doDecodeListNode(d binary.Decoder, o *ListNode) {
 		o.Next = nil
 	}
 }
-func (*binaryClassListNode) New() binary.Object { return &ListNode{} }
 func (*binaryClassListNode) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeListNode(e, obj.(*ListNode))
 }
@@ -101,7 +100,6 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 	o.Float = float32(d.Float32())
 	o.String = string(d.String())
 }
-func (*binaryClassResource) New() binary.Object { return &Resource{} }
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
 }
@@ -140,7 +138,6 @@ func doDecodeStruct(d binary.Decoder, o *Struct) {
 	o.U32 = uint32(d.Uint32())
 	o.Enum = Enum(d.Int32())
 }
-func (*binaryClassStruct) New() binary.Object { return &Struct{} }
 func (*binaryClassStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeStruct(e, obj.(*Struct))
 }
@@ -177,7 +174,6 @@ func doDecodecallAdd(d binary.Decoder, o *callAdd) {
 	o.a = uint32(d.Uint32())
 	o.b = uint32(d.Uint32())
 }
-func (*binaryClasscallAdd) New() binary.Object { return &callAdd{} }
 func (*binaryClasscallAdd) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallAdd(e, obj.(*callAdd))
 }
@@ -211,7 +207,6 @@ func doEncodecallEnumToString(e binary.Encoder, o *callEnumToString) {
 func doDecodecallEnumToString(d binary.Decoder, o *callEnumToString) {
 	o.e = Enum(d.Int32())
 }
-func (*binaryClasscallEnumToString) New() binary.Object { return &callEnumToString{} }
 func (*binaryClasscallEnumToString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallEnumToString(e, obj.(*callEnumToString))
 }
@@ -242,7 +237,6 @@ func doEncodecallGetListNodeChain(e binary.Encoder, o *callGetListNodeChain) {
 }
 func doDecodecallGetListNodeChain(d binary.Decoder, o *callGetListNodeChain) {
 }
-func (*binaryClasscallGetListNodeChain) New() binary.Object { return &callGetListNodeChain{} }
 func (*binaryClasscallGetListNodeChain) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetListNodeChain(e, obj.(*callGetListNodeChain))
 }
@@ -271,7 +265,6 @@ func doEncodecallGetListNodeChainArray(e binary.Encoder, o *callGetListNodeChain
 }
 func doDecodecallGetListNodeChainArray(d binary.Decoder, o *callGetListNodeChainArray) {
 }
-func (*binaryClasscallGetListNodeChainArray) New() binary.Object { return &callGetListNodeChainArray{} }
 func (*binaryClasscallGetListNodeChainArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetListNodeChainArray(e, obj.(*callGetListNodeChainArray))
 }
@@ -302,7 +295,6 @@ func doEncodecallGetResource(e binary.Encoder, o *callGetResource) {
 }
 func doDecodecallGetResource(d binary.Decoder, o *callGetResource) {
 }
-func (*binaryClasscallGetResource) New() binary.Object { return &callGetResource{} }
 func (*binaryClasscallGetResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetResource(e, obj.(*callGetResource))
 }
@@ -331,7 +323,6 @@ func doEncodecallGetSingleListNode(e binary.Encoder, o *callGetSingleListNode) {
 }
 func doDecodecallGetSingleListNode(d binary.Decoder, o *callGetSingleListNode) {
 }
-func (*binaryClasscallGetSingleListNode) New() binary.Object { return &callGetSingleListNode{} }
 func (*binaryClasscallGetSingleListNode) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetSingleListNode(e, obj.(*callGetSingleListNode))
 }
@@ -360,7 +351,6 @@ func doEncodecallGetStruct(e binary.Encoder, o *callGetStruct) {
 }
 func doDecodecallGetStruct(d binary.Decoder, o *callGetStruct) {
 }
-func (*binaryClasscallGetStruct) New() binary.Object { return &callGetStruct{} }
 func (*binaryClasscallGetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetStruct(e, obj.(*callGetStruct))
 }
@@ -391,7 +381,6 @@ func doEncodecallResolveResource(e binary.Encoder, o *callResolveResource) {
 func doDecodecallResolveResource(d binary.Decoder, o *callResolveResource) {
 	d.Data(o.r[:20])
 }
-func (*binaryClasscallResolveResource) New() binary.Object { return &callResolveResource{} }
 func (*binaryClasscallResolveResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallResolveResource(e, obj.(*callResolveResource))
 }
@@ -431,7 +420,6 @@ func doDecodecallSetStruct(d binary.Decoder, o *callSetStruct) {
 	}
 	d.Struct(ent_5c7b027bf1450e20e81eddae2dd90e0879199561, &o.s)
 }
-func (*binaryClasscallSetStruct) New() binary.Object { return &callSetStruct{} }
 func (*binaryClasscallSetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallSetStruct(e, obj.(*callSetStruct))
 }
@@ -464,7 +452,6 @@ func doEncodecallUseResource(e binary.Encoder, o *callUseResource) {
 func doDecodecallUseResource(d binary.Decoder, o *callUseResource) {
 	d.Data(o.r[:20])
 }
-func (*binaryClasscallUseResource) New() binary.Object { return &callUseResource{} }
 func (*binaryClasscallUseResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallUseResource(e, obj.(*callUseResource))
 }
@@ -497,7 +484,6 @@ func doEncoderesultAdd(e binary.Encoder, o *resultAdd) {
 func doDecoderesultAdd(d binary.Decoder, o *resultAdd) {
 	o.value = uint32(d.Uint32())
 }
-func (*binaryClassresultAdd) New() binary.Object { return &resultAdd{} }
 func (*binaryClassresultAdd) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultAdd(e, obj.(*resultAdd))
 }
@@ -530,7 +516,6 @@ func doEncoderesultEnumToString(e binary.Encoder, o *resultEnumToString) {
 func doDecoderesultEnumToString(d binary.Decoder, o *resultEnumToString) {
 	o.value = string(d.String())
 }
-func (*binaryClassresultEnumToString) New() binary.Object { return &resultEnumToString{} }
 func (*binaryClassresultEnumToString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultEnumToString(e, obj.(*resultEnumToString))
 }
@@ -571,7 +556,6 @@ func doDecoderesultGetListNodeChain(d binary.Decoder, o *resultGetListNodeChain)
 		o.value = nil
 	}
 }
-func (*binaryClassresultGetListNodeChain) New() binary.Object { return &resultGetListNodeChain{} }
 func (*binaryClassresultGetListNodeChain) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetListNodeChain(e, obj.(*resultGetListNodeChain))
 }
@@ -620,9 +604,6 @@ func doDecoderesultGetListNodeChainArray(d binary.Decoder, o *resultGetListNodeC
 		}
 	}
 }
-func (*binaryClassresultGetListNodeChainArray) New() binary.Object {
-	return &resultGetListNodeChainArray{}
-}
 func (*binaryClassresultGetListNodeChainArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetListNodeChainArray(e, obj.(*resultGetListNodeChainArray))
 }
@@ -657,7 +638,6 @@ func doEncoderesultGetResource(e binary.Encoder, o *resultGetResource) {
 func doDecoderesultGetResource(d binary.Decoder, o *resultGetResource) {
 	d.Data(o.value[:20])
 }
-func (*binaryClassresultGetResource) New() binary.Object { return &resultGetResource{} }
 func (*binaryClassresultGetResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetResource(e, obj.(*resultGetResource))
 }
@@ -698,7 +678,6 @@ func doDecoderesultGetSingleListNode(d binary.Decoder, o *resultGetSingleListNod
 		o.value = nil
 	}
 }
-func (*binaryClassresultGetSingleListNode) New() binary.Object { return &resultGetSingleListNode{} }
 func (*binaryClassresultGetSingleListNode) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetSingleListNode(e, obj.(*resultGetSingleListNode))
 }
@@ -740,7 +719,6 @@ func doDecoderesultGetStruct(d binary.Decoder, o *resultGetStruct) {
 	}
 	d.Struct(ent_fb61cd7b6964528ad3848da40de0a8e742abec39, &o.value)
 }
-func (*binaryClassresultGetStruct) New() binary.Object { return &resultGetStruct{} }
 func (*binaryClassresultGetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetStruct(e, obj.(*resultGetStruct))
 }
@@ -780,7 +758,6 @@ func doDecoderesultResolveResource(d binary.Decoder, o *resultResolveResource) {
 	}
 	d.Struct(ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f, &o.value)
 }
-func (*binaryClassresultResolveResource) New() binary.Object { return &resultResolveResource{} }
 func (*binaryClassresultResolveResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultResolveResource(e, obj.(*resultResolveResource))
 }
@@ -811,7 +788,6 @@ func doEncoderesultSetStruct(e binary.Encoder, o *resultSetStruct) {
 }
 func doDecoderesultSetStruct(d binary.Decoder, o *resultSetStruct) {
 }
-func (*binaryClassresultSetStruct) New() binary.Object { return &resultSetStruct{} }
 func (*binaryClassresultSetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultSetStruct(e, obj.(*resultSetStruct))
 }
@@ -840,7 +816,6 @@ func doEncoderesultUseResource(e binary.Encoder, o *resultUseResource) {
 }
 func doDecoderesultUseResource(d binary.Decoder, o *resultUseResource) {
 }
-func (*binaryClassresultUseResource) New() binary.Object { return &resultUseResource{} }
 func (*binaryClassresultUseResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultUseResource(e, obj.(*resultUseResource))
 }

@@ -27,7 +27,6 @@ func doEncodedelay(e binary.Encoder, o *delay) {
 func doDecodedelay(d binary.Decoder, o *delay) {
 	o.data = string(d.String())
 }
-func (*binaryClassdelay) New() binary.Object { return &delay{} }
 func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedelay(e, obj.(*delay))
 }
@@ -60,7 +59,6 @@ func doEncoderequest(e binary.Encoder, o *request) {
 func doDecoderequest(d binary.Decoder, o *request) {
 	o.data = string(d.String())
 }
-func (*binaryClassrequest) New() binary.Object { return &request{} }
 func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderequest(e, obj.(*request))
 }
@@ -93,7 +91,6 @@ func doEncoderesponse(e binary.Encoder, o *response) {
 func doDecoderesponse(d binary.Decoder, o *response) {
 	o.data = string(d.String())
 }
-func (*binaryClassresponse) New() binary.Object { return &response{} }
 func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesponse(e, obj.(*response))
 }

@@ -29,7 +29,6 @@ func doEncodeError(e binary.Encoder, o *Error) {
 func doDecodeError(d binary.Decoder, o *Error) {
 	o.message = string(d.String())
 }
-func (*binaryClassError) New() binary.Object { return &Error{} }
 func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeError(e, obj.(*Error))
 }

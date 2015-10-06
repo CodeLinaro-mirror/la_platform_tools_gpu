@@ -12,19 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package cyclic
 
-import "fmt"
+import (
+	"fmt"
 
-type Substack struct {
-	stack []*Entity
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
+
+type substack struct {
+	stack []*binary.Entity
 }
 
-func (s *Substack) Push(ent *Entity) {
+func (s *substack) Push(ent *binary.Entity) {
 	s.stack = append(s.stack, ent)
 }
 
-func (s *Substack) PushSubspace(ent *Entity) {
+func (s *substack) PushSubspace(ent *binary.Entity) {
 	ents := ent.Subspace()
 	for i := len(ents) - 1; i >= 0; i-- {
 		subEntity := ents[i]
@@ -32,7 +36,7 @@ func (s *Substack) PushSubspace(ent *Entity) {
 	}
 }
 
-func (s *Substack) Pop() (*Entity, error) {
+func (s *substack) Pop() (*binary.Entity, error) {
 	if len(s.stack) == 0 {
 		return nil, fmt.Errorf("Pop on empty subtype Entity stack")
 	}
@@ -41,7 +45,7 @@ func (s *Substack) Pop() (*Entity, error) {
 	return head, nil
 }
 
-func (s *Substack) Dup(count uint32) error {
+func (s *substack) Dup(count uint32) error {
 	top, err := s.Pop()
 	if err != nil {
 		return err

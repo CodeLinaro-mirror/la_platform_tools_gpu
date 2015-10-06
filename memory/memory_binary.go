@@ -34,7 +34,6 @@ func doDecodePointer(d binary.Decoder, o *Pointer) {
 	o.Address = uint64(d.Uint64())
 	o.Pool = PoolID(d.Uint32())
 }
-func (*binaryClassPointer) New() binary.Object { return &Pointer{} }
 func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePointer(e, obj.(*Pointer))
 }
@@ -70,7 +69,6 @@ func doDecodeRange(d binary.Decoder, o *Range) {
 	o.Base = uint64(d.Uint64())
 	o.Size = uint64(d.Uint64())
 }
-func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRange(e, obj.(*Range))
 }

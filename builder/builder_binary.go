@@ -67,7 +67,6 @@ func doDecodeBuildReport(d binary.Decoder, o *BuildReport) {
 		o.Device = nil
 	}
 }
-func (*binaryClassBuildReport) New() binary.Object { return &BuildReport{} }
 func (*binaryClassBuildReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBuildReport(e, obj.(*BuildReport))
 }
@@ -105,7 +104,6 @@ func doDecodeFollow(d binary.Decoder, o *Follow) {
 		o.Path = nil
 	}
 }
-func (*binaryClassFollow) New() binary.Object { return &Follow{} }
 func (*binaryClassFollow) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFollow(e, obj.(*Follow))
 }
@@ -142,7 +140,6 @@ func doDecodeGet(d binary.Decoder, o *Get) {
 		o.Path = nil
 	}
 }
-func (*binaryClassGet) New() binary.Object { return &Get{} }
 func (*binaryClassGet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGet(e, obj.(*Get))
 }
@@ -202,7 +199,6 @@ func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) {
 	}
 	d.Struct(ent_f6ac466dd492ca02e3ee3bbaf8f8990814b98e0e, &o.Settings)
 }
-func (*binaryClassGetFramebufferColor) New() binary.Object { return &GetFramebufferColor{} }
 func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferColor(e, obj.(*GetFramebufferColor))
 }
@@ -255,7 +251,6 @@ func doDecodeGetFramebufferDepth(d binary.Decoder, o *GetFramebufferDepth) {
 		o.After = nil
 	}
 }
-func (*binaryClassGetFramebufferDepth) New() binary.Object { return &GetFramebufferDepth{} }
 func (*binaryClassGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferDepth(e, obj.(*GetFramebufferDepth))
 }
@@ -297,7 +292,6 @@ func doDecodeGetHierarchy(d binary.Decoder, o *GetHierarchy) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassGetHierarchy) New() binary.Object { return &GetHierarchy{} }
 func (*binaryClassGetHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetHierarchy(e, obj.(*GetHierarchy))
 }
@@ -338,7 +332,6 @@ func doDecodeGetResourceData(d binary.Decoder, o *GetResourceData) {
 		o.Path = nil
 	}
 }
-func (*binaryClassGetResourceData) New() binary.Object { return &GetResourceData{} }
 func (*binaryClassGetResourceData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResourceData(e, obj.(*GetResourceData))
 }
@@ -379,7 +372,6 @@ func doDecodeGetResources(d binary.Decoder, o *GetResources) {
 		o.Capture = nil
 	}
 }
-func (*binaryClassGetResources) New() binary.Object { return &GetResources{} }
 func (*binaryClassGetResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResources(e, obj.(*GetResources))
 }
@@ -420,7 +412,6 @@ func doDecodeGetState(d binary.Decoder, o *GetState) {
 		o.After = nil
 	}
 }
-func (*binaryClassGetState) New() binary.Object { return &GetState{} }
 func (*binaryClassGetState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetState(e, obj.(*GetState))
 }
@@ -473,7 +464,6 @@ func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) {
 	}
 	o.Flags = service.TimingFlags(d.Int32())
 }
-func (*binaryClassGetTimingInfo) New() binary.Object { return &GetTimingInfo{} }
 func (*binaryClassGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetTimingInfo(e, obj.(*GetTimingInfo))
 }
@@ -510,7 +500,6 @@ func doDecodeIndexLimits(d binary.Decoder, o *IndexLimits) {
 	o.Min = uint32(d.Uint32())
 	o.Max = uint32(d.Uint32())
 }
-func (*binaryClassIndexLimits) New() binary.Object { return &IndexLimits{} }
 func (*binaryClassIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIndexLimits(e, obj.(*IndexLimits))
 }
@@ -568,7 +557,6 @@ func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor)
 	o.Height = uint32(d.Uint32())
 	o.WireframeMode = service.WireframeMode(d.Int32())
 }
-func (*binaryClassRenderFramebufferColor) New() binary.Object { return &RenderFramebufferColor{} }
 func (*binaryClassRenderFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferColor(e, obj.(*RenderFramebufferColor))
 }
@@ -627,7 +615,6 @@ func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth)
 	o.FramebufferWidth = uint32(d.Uint32())
 	o.FramebufferHeight = uint32(d.Uint32())
 }
-func (*binaryClassRenderFramebufferDepth) New() binary.Object { return &RenderFramebufferDepth{} }
 func (*binaryClassRenderFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferDepth(e, obj.(*RenderFramebufferDepth))
 }
@@ -669,7 +656,6 @@ func doDecodeSet(d binary.Decoder, o *Set) {
 	}
 	o.Value = schema.Any{}.DecodeValue(d)
 }
-func (*binaryClassSet) New() binary.Object { return &Set{} }
 func (*binaryClassSet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSet(e, obj.(*Set))
 }
@@ -707,7 +693,6 @@ func doDecodeatomFramebufferDimensions(d binary.Decoder, o *atomFramebufferDimen
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
 }
-func (*binaryClassatomFramebufferDimensions) New() binary.Object { return &atomFramebufferDimensions{} }
 func (*binaryClassatomFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeatomFramebufferDimensions(e, obj.(*atomFramebufferDimensions))
 }
@@ -750,7 +735,6 @@ func doDecodecalcIndexLimits(d binary.Decoder, o *calcIndexLimits) {
 	o.littleEndian = bool(d.Bool())
 	d.Data(o.data[:20])
 }
-func (*binaryClasscalcIndexLimits) New() binary.Object { return &calcIndexLimits{} }
 func (*binaryClasscalcIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecalcIndexLimits(e, obj.(*calcIndexLimits))
 }
@@ -801,9 +785,6 @@ func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebuffe
 		}
 	}
 }
-func (*binaryClasscaptureFramebufferDimensions) New() binary.Object {
-	return &captureFramebufferDimensions{}
-}
 func (*binaryClasscaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecaptureFramebufferDimensions(e, obj.(*captureFramebufferDimensions))
 }
@@ -845,9 +826,6 @@ func doDecodegetCaptureFramebufferDimensions(d binary.Decoder, o *getCaptureFram
 	} else {
 		o.Capture = nil
 	}
-}
-func (*binaryClassgetCaptureFramebufferDimensions) New() binary.Object {
-	return &getCaptureFramebufferDimensions{}
 }
 func (*binaryClassgetCaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodegetCaptureFramebufferDimensions(e, obj.(*getCaptureFramebufferDimensions))

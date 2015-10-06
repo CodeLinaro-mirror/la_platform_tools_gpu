@@ -36,7 +36,6 @@ func doDecodetestStruct(d binary.Decoder, o *testStruct) {
 		o.Ptr = nil
 	}
 }
-func (*binaryClasstestStruct) New() binary.Object { return &testStruct{} }
 func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestStruct(e, obj.(*testStruct))
 }
@@ -110,7 +109,6 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 		}
 	}
 }
-func (*binaryClasstestAtom) New() binary.Object { return &testAtom{} }
 func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestAtom(e, obj.(*testAtom))
 }

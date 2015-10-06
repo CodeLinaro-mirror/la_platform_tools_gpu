@@ -36,9 +36,6 @@
   «}¶
   {{$base := 18}}
   {{$wrap := gt (len .Name) (add $base 7)}}
-  func (*binaryClass{{.Name}}) New() binary.Object{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
-    return &{{.Name}}{}{{if $wrap}}¶{{else}}•{{end}}
-  «}¶
   func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) {»¶
     doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
   «}¶

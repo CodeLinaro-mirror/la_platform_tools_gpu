@@ -1019,7 +1019,6 @@ func doDecodeArchitecture(d binary.Decoder, o *Architecture) {
 	o.IntegerSize = uint32(d.Uint32())
 	o.LittleEndian = bool(d.Bool())
 }
-func (*binaryClassArchitecture) New() binary.Object { return &Architecture{} }
 func (*binaryClassArchitecture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeArchitecture(e, obj.(*Architecture))
 }
@@ -1062,7 +1061,6 @@ func doDecodeColor(d binary.Decoder, o *Color) {
 	o.Blue = GLfloat(d.Float32())
 	o.Alpha = GLfloat(d.Float32())
 }
-func (*binaryClassColor) New() binary.Object { return &Color{} }
 func (*binaryClassColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeColor(e, obj.(*Color))
 }
@@ -1117,7 +1115,6 @@ func doDecodeBlendState(d binary.Decoder, o *BlendState) {
 	}
 	d.Struct(ent_bf572d3ef943f48bec679058e49ec0a11cb794b3, &o.BlendColor)
 }
-func (*binaryClassBlendState) New() binary.Object { return &BlendState{} }
 func (*binaryClassBlendState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBlendState(e, obj.(*BlendState))
 }
@@ -1167,7 +1164,6 @@ func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) {
 	o.Base = uint64(d.Uint64())
 	o.Count = uint64(d.Uint64())
 }
-func (*binaryClassSliceInfo) New() binary.Object { return &SliceInfo{} }
 func (*binaryClassSliceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSliceInfo(e, obj.(*SliceInfo))
 }
@@ -1209,7 +1205,6 @@ func doDecodeU8ˢ(d binary.Decoder, o *U8ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassU8ˢ) New() binary.Object { return &U8ˢ{} }
 func (*binaryClassU8ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU8ˢ(e, obj.(*U8ˢ))
 }
@@ -1266,7 +1261,6 @@ func doDecodeBuffer(d binary.Decoder, o *Buffer) {
 	}
 	d.Struct(ent_0cff1b21727b8c5cfc8edb2e3a0fa944df5f057b, &o.MappingData)
 }
-func (*binaryClassBuffer) New() binary.Object { return &Buffer{} }
 func (*binaryClassBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBuffer(e, obj.(*Buffer))
 }
@@ -1311,7 +1305,6 @@ func doDecodeBufferDataPointer(d binary.Decoder, o *BufferDataPointer) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassBufferDataPointer) New() binary.Object { return &BufferDataPointer{} }
 func (*binaryClassBufferDataPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferDataPointer(e, obj.(*BufferDataPointer))
 }
@@ -1351,7 +1344,6 @@ func doDecodeBufferIdˢ(d binary.Decoder, o *BufferIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassBufferIdˢ) New() binary.Object { return &BufferIdˢ{} }
 func (*binaryClassBufferIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferIdˢ(e, obj.(*BufferIdˢ))
 }
@@ -1391,7 +1383,6 @@ func doDecodeBufferIdᵖ(d binary.Decoder, o *BufferIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassBufferIdᵖ) New() binary.Object { return &BufferIdᵖ{} }
 func (*binaryClassBufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferIdᵖ(e, obj.(*BufferIdᵖ))
 }
@@ -1431,7 +1422,6 @@ func doDecodeBufferIdᶜᵖ(d binary.Decoder, o *BufferIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassBufferIdᶜᵖ) New() binary.Object { return &BufferIdᶜᵖ{} }
 func (*binaryClassBufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferIdᶜᵖ(e, obj.(*BufferIdᶜᵖ))
 }
@@ -1471,7 +1461,6 @@ func doDecodeCGLContextObj(d binary.Decoder, o *CGLContextObj) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGLContextObj) New() binary.Object { return &CGLContextObj{} }
 func (*binaryClassCGLContextObj) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLContextObj(e, obj.(*CGLContextObj))
 }
@@ -1511,7 +1500,6 @@ func doDecodeCGLContextObjˢ(d binary.Decoder, o *CGLContextObjˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassCGLContextObjˢ) New() binary.Object { return &CGLContextObjˢ{} }
 func (*binaryClassCGLContextObjˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLContextObjˢ(e, obj.(*CGLContextObjˢ))
 }
@@ -1551,7 +1539,6 @@ func doDecodeCGLContextObjᵖ(d binary.Decoder, o *CGLContextObjᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGLContextObjᵖ) New() binary.Object { return &CGLContextObjᵖ{} }
 func (*binaryClassCGLContextObjᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLContextObjᵖ(e, obj.(*CGLContextObjᵖ))
 }
@@ -1591,7 +1578,6 @@ func doDecodeCGLPixelFormatObj(d binary.Decoder, o *CGLPixelFormatObj) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGLPixelFormatObj) New() binary.Object { return &CGLPixelFormatObj{} }
 func (*binaryClassCGLPixelFormatObj) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLPixelFormatObj(e, obj.(*CGLPixelFormatObj))
 }
@@ -1660,7 +1646,6 @@ func doDecodeCGLCreateContext(d binary.Decoder, o *CGLCreateContext) {
 	d.Struct(ent_5e43824ea751dd1206dfd2b081c3da1995cdc6af, &o.Ctx)
 	o.Result = CGLError(d.Int64())
 }
-func (*binaryClassCGLCreateContext) New() binary.Object { return &CGLCreateContext{} }
 func (*binaryClassCGLCreateContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLCreateContext(e, obj.(*CGLCreateContext))
 }
@@ -1715,7 +1700,6 @@ func doDecodeCGLFlushDrawable(d binary.Decoder, o *CGLFlushDrawable) {
 	d.Struct(ent_c7b5f50b945fcca96a3c868a3503f28c54817380, &o.Ctx)
 	o.Result = CGLError(d.Int64())
 }
-func (*binaryClassCGLFlushDrawable) New() binary.Object { return &CGLFlushDrawable{} }
 func (*binaryClassCGLFlushDrawable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLFlushDrawable(e, obj.(*CGLFlushDrawable))
 }
@@ -1757,7 +1741,6 @@ func doDecodeCGSConnectionIDᵖ(d binary.Decoder, o *CGSConnectionIDᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGSConnectionIDᵖ) New() binary.Object { return &CGSConnectionIDᵖ{} }
 func (*binaryClassCGSConnectionIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSConnectionIDᵖ(e, obj.(*CGSConnectionIDᵖ))
 }
@@ -1797,7 +1780,6 @@ func doDecodeCGSWindowIDᵖ(d binary.Decoder, o *CGSWindowIDᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGSWindowIDᵖ) New() binary.Object { return &CGSWindowIDᵖ{} }
 func (*binaryClassCGSWindowIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSWindowIDᵖ(e, obj.(*CGSWindowIDᵖ))
 }
@@ -1837,7 +1819,6 @@ func doDecodeCGSSurfaceIDᵖ(d binary.Decoder, o *CGSSurfaceIDᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGSSurfaceIDᵖ) New() binary.Object { return &CGSSurfaceIDᵖ{} }
 func (*binaryClassCGSSurfaceIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSSurfaceIDᵖ(e, obj.(*CGSSurfaceIDᵖ))
 }
@@ -1915,7 +1896,6 @@ func doDecodeCGLGetSurface(d binary.Decoder, o *CGLGetSurface) {
 	d.Struct(ent_0af3df66e2456246536e9c3c97d508319613c665, &o.Sid)
 	o.Result = int64(d.Int64())
 }
-func (*binaryClassCGLGetSurface) New() binary.Object { return &CGLGetSurface{} }
 func (*binaryClassCGLGetSurface) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLGetSurface(e, obj.(*CGLGetSurface))
 }
@@ -1971,7 +1951,6 @@ func doDecodeCGLSetCurrentContext(d binary.Decoder, o *CGLSetCurrentContext) {
 	d.Struct(ent_c7b5f50b945fcca96a3c868a3503f28c54817380, &o.Ctx)
 	o.Result = CGLError(d.Int64())
 }
-func (*binaryClassCGLSetCurrentContext) New() binary.Object { return &CGLSetCurrentContext{} }
 func (*binaryClassCGLSetCurrentContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLSetCurrentContext(e, obj.(*CGLSetCurrentContext))
 }
@@ -2013,7 +1992,6 @@ func doDecodeCGSConnectionID(d binary.Decoder, o *CGSConnectionID) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCGSConnectionID) New() binary.Object { return &CGSConnectionID{} }
 func (*binaryClassCGSConnectionID) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSConnectionID(e, obj.(*CGSConnectionID))
 }
@@ -2053,7 +2031,6 @@ func doDecodeCGSConnectionIDˢ(d binary.Decoder, o *CGSConnectionIDˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassCGSConnectionIDˢ) New() binary.Object { return &CGSConnectionIDˢ{} }
 func (*binaryClassCGSConnectionIDˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSConnectionIDˢ(e, obj.(*CGSConnectionIDˢ))
 }
@@ -2093,7 +2070,6 @@ func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassF64ᵖ) New() binary.Object { return &F64ᵖ{} }
 func (*binaryClassF64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF64ᵖ(e, obj.(*F64ᵖ))
 }
@@ -2157,7 +2133,6 @@ func doDecodeCGSGetSurfaceBounds(d binary.Decoder, o *CGSGetSurfaceBounds) {
 	d.Struct(ent_463b88d0c3e2dbc9f98ee9e9306271fe1e5325e4, &o.Bounds)
 	o.Result = int64(d.Int64())
 }
-func (*binaryClassCGSGetSurfaceBounds) New() binary.Object { return &CGSGetSurfaceBounds{} }
 func (*binaryClassCGSGetSurfaceBounds) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSGetSurfaceBounds(e, obj.(*CGSGetSurfaceBounds))
 }
@@ -2202,7 +2177,6 @@ func doDecodeCGSSurfaceIDˢ(d binary.Decoder, o *CGSSurfaceIDˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassCGSSurfaceIDˢ) New() binary.Object { return &CGSSurfaceIDˢ{} }
 func (*binaryClassCGSSurfaceIDˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSSurfaceIDˢ(e, obj.(*CGSSurfaceIDˢ))
 }
@@ -2242,7 +2216,6 @@ func doDecodeCGSWindowIDˢ(d binary.Decoder, o *CGSWindowIDˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassCGSWindowIDˢ) New() binary.Object { return &CGSWindowIDˢ{} }
 func (*binaryClassCGSWindowIDˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSWindowIDˢ(e, obj.(*CGSWindowIDˢ))
 }
@@ -2282,7 +2255,6 @@ func doDecodeCharˢ(d binary.Decoder, o *Charˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassCharˢ) New() binary.Object { return &Charˢ{} }
 func (*binaryClassCharˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharˢ(e, obj.(*Charˢ))
 }
@@ -2322,7 +2294,6 @@ func doDecodeCharᵖ(d binary.Decoder, o *Charᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassCharᵖ) New() binary.Object { return &Charᵖ{} }
 func (*binaryClassCharᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharᵖ(e, obj.(*Charᵖ))
 }
@@ -2366,7 +2337,6 @@ func doDecodeClearState(d binary.Decoder, o *ClearState) {
 	o.ClearDepth = GLfloat(d.Float32())
 	o.ClearStencil = GLint(d.Int32())
 }
-func (*binaryClassClearState) New() binary.Object { return &ClearState{} }
 func (*binaryClassClearState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeClearState(e, obj.(*ClearState))
 }
@@ -2413,7 +2383,6 @@ func doDecodeContextCreationInfo(d binary.Decoder, o *ContextCreationInfo) {
 	o.VersionMinor = GLint(d.Int32())
 	o.PreserveBuffersOnSwap = bool(d.Bool())
 }
-func (*binaryClassContextCreationInfo) New() binary.Object { return &ContextCreationInfo{} }
 func (*binaryClassContextCreationInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeContextCreationInfo(e, obj.(*ContextCreationInfo))
 }
@@ -2458,7 +2427,6 @@ func doDecodeRect(d binary.Decoder, o *Rect) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassRect) New() binary.Object { return &Rect{} }
 func (*binaryClassRect) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRect(e, obj.(*Rect))
 }
@@ -2556,7 +2524,6 @@ func doDecodeRasterizerState(d binary.Decoder, o *RasterizerState) {
 	o.SampleCoverageValue = GLfloat(d.Float32())
 	o.SampleCoverageInvert = GLboolean(d.Uint8())
 }
-func (*binaryClassRasterizerState) New() binary.Object { return &RasterizerState{} }
 func (*binaryClassRasterizerState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRasterizerState(e, obj.(*RasterizerState))
 }
@@ -2613,7 +2580,6 @@ func doDecodeVertexAttributeValue(d binary.Decoder, o *VertexAttributeValue) {
 	}
 	d.Struct(ent_418db461bdb51bf835c8e6dd3c40ecdca07cc9b9, &o.Value)
 }
-func (*binaryClassVertexAttributeValue) New() binary.Object { return &VertexAttributeValue{} }
 func (*binaryClassVertexAttributeValue) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexAttributeValue(e, obj.(*VertexAttributeValue))
 }
@@ -2660,7 +2626,6 @@ func doDecodeTextureUnit(d binary.Decoder, o *TextureUnit) {
 		}
 	}
 }
-func (*binaryClassTextureUnit) New() binary.Object { return &TextureUnit{} }
 func (*binaryClassTextureUnit) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureUnit(e, obj.(*TextureUnit))
 }
@@ -2706,7 +2671,6 @@ func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) {
 	d.Struct(ent_471187cc309325f2fce174ed60a2bf9d5f34eec1, &o.Data)
 	o.Format = GLenum(d.Uint32())
 }
-func (*binaryClassRenderbuffer) New() binary.Object { return &Renderbuffer{} }
 func (*binaryClassRenderbuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbuffer(e, obj.(*Renderbuffer))
 }
@@ -2757,7 +2721,6 @@ func doDecodeImage(d binary.Decoder, o *Image) {
 	o.Size = uint32(d.Uint32())
 	o.Format = GLenum(d.Uint32())
 }
-func (*binaryClassImage) New() binary.Object { return &Image{} }
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImage(e, obj.(*Image))
 }
@@ -2815,7 +2778,6 @@ func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) {
 		}
 	}
 }
-func (*binaryClassCubemapLevel) New() binary.Object { return &CubemapLevel{} }
 func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemapLevel(e, obj.(*CubemapLevel))
 }
@@ -2916,7 +2878,6 @@ func doDecodeTexture(d binary.Decoder, o *Texture) {
 	o.SwizzleA = GLenum(d.Uint32())
 	o.MaxAnisotropy = float32(d.Float32())
 }
-func (*binaryClassTexture) New() binary.Object { return &Texture{} }
 func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTexture(e, obj.(*Texture))
 }
@@ -2968,7 +2929,6 @@ func doDecodeFramebufferAttachmentInfo(d binary.Decoder, o *FramebufferAttachmen
 	o.TextureLevel = GLint(d.Int32())
 	o.CubeMapFace = GLenum(d.Uint32())
 }
-func (*binaryClassFramebufferAttachmentInfo) New() binary.Object { return &FramebufferAttachmentInfo{} }
 func (*binaryClassFramebufferAttachmentInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferAttachmentInfo(e, obj.(*FramebufferAttachmentInfo))
 }
@@ -3027,7 +2987,6 @@ func doDecodeFramebuffer(d binary.Decoder, o *Framebuffer) {
 		}
 	}
 }
-func (*binaryClassFramebuffer) New() binary.Object { return &Framebuffer{} }
 func (*binaryClassFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebuffer(e, obj.(*Framebuffer))
 }
@@ -3067,7 +3026,6 @@ func doDecodeGLcharˢ(d binary.Decoder, o *GLcharˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLcharˢ) New() binary.Object { return &GLcharˢ{} }
 func (*binaryClassGLcharˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharˢ(e, obj.(*GLcharˢ))
 }
@@ -3124,7 +3082,6 @@ func doDecodeShader(d binary.Decoder, o *Shader) {
 	o.Source = string(d.String())
 	o.Type = GLenum(d.Uint32())
 }
-func (*binaryClassShader) New() binary.Object { return &Shader{} }
 func (*binaryClassShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShader(e, obj.(*Shader))
 }
@@ -3173,7 +3130,6 @@ func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) {
 	o.VectorCount = int32(d.Int32())
 	o.Type = GLenum(d.Uint32())
 }
-func (*binaryClassVertexAttribute) New() binary.Object { return &VertexAttribute{} }
 func (*binaryClassVertexAttribute) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexAttribute(e, obj.(*VertexAttribute))
 }
@@ -3219,7 +3175,6 @@ func doDecodeUniform(d binary.Decoder, o *Uniform) {
 	}
 	d.Struct(ent_418db461bdb51bf835c8e6dd3c40ecdca07cc9b9, &o.Value)
 }
-func (*binaryClassUniform) New() binary.Object { return &Uniform{} }
 func (*binaryClassUniform) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniform(e, obj.(*Uniform))
 }
@@ -3350,7 +3305,6 @@ func doDecodeProgram(d binary.Decoder, o *Program) {
 	}
 	d.Struct(ent_fa15982a7e6123e8392296b2f5ae5fa498124bb9, &o.InfoLog)
 }
-func (*binaryClassProgram) New() binary.Object { return &Program{} }
 func (*binaryClassProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeProgram(e, obj.(*Program))
 }
@@ -3395,7 +3349,6 @@ func doDecodeVertexBufferBinding(d binary.Decoder, o *VertexBufferBinding) {
 	o.Stride = GLsizei(d.Int32())
 	o.Divisor = GLuint(d.Uint32())
 }
-func (*binaryClassVertexBufferBinding) New() binary.Object { return &VertexBufferBinding{} }
 func (*binaryClassVertexBufferBinding) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexBufferBinding(e, obj.(*VertexBufferBinding))
 }
@@ -3438,7 +3391,6 @@ func doDecodeVertexPointer(d binary.Decoder, o *VertexPointer) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVertexPointer) New() binary.Object { return &VertexPointer{} }
 func (*binaryClassVertexPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexPointer(e, obj.(*VertexPointer))
 }
@@ -3494,7 +3446,6 @@ func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) {
 	o.Integer = bool(d.Bool())
 	o.Binding = VertexBufferBindingIndex(d.Uint32())
 }
-func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
 func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
 }
@@ -3581,7 +3532,6 @@ func doDecodeVertexArray(d binary.Decoder, o *VertexArray) {
 		}
 	}
 }
-func (*binaryClassVertexArray) New() binary.Object { return &VertexArray{} }
 func (*binaryClassVertexArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArray(e, obj.(*VertexArray))
 }
@@ -3613,7 +3563,6 @@ func doEncodeQuery(e binary.Encoder, o *Query) {
 }
 func doDecodeQuery(d binary.Decoder, o *Query) {
 }
-func (*binaryClassQuery) New() binary.Object { return &Query{} }
 func (*binaryClassQuery) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQuery(e, obj.(*Query))
 }
@@ -3834,7 +3783,6 @@ func doDecodeObjects(d binary.Decoder, o *Objects) {
 		}
 	}
 }
-func (*binaryClassObjects) New() binary.Object { return &Objects{} }
 func (*binaryClassObjects) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeObjects(e, obj.(*Objects))
 }
@@ -4054,7 +4002,6 @@ func doDecodeContext(d binary.Decoder, o *Context) {
 	}
 	d.Struct(ent_3bcc9527b12b019aafcd7b6b5a8b15a52ae688db, &o.Instances)
 }
-func (*binaryClassContext) New() binary.Object { return &Context{} }
 func (*binaryClassContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeContext(e, obj.(*Context))
 }
@@ -4132,7 +4079,6 @@ func doDecodeContextInfo(d binary.Decoder, o *ContextInfo) {
 	o.ResetViewportScissor = bool(d.Bool())
 	o.PreserveBuffersOnSwap = bool(d.Bool())
 }
-func (*binaryClassContextInfo) New() binary.Object { return &ContextInfo{} }
 func (*binaryClassContextInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeContextInfo(e, obj.(*ContextInfo))
 }
@@ -4183,7 +4129,6 @@ func doDecodeEGLConfig(d binary.Decoder, o *EGLConfig) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassEGLConfig) New() binary.Object { return &EGLConfig{} }
 func (*binaryClassEGLConfig) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLConfig(e, obj.(*EGLConfig))
 }
@@ -4223,7 +4168,6 @@ func doDecodeEGLContext(d binary.Decoder, o *EGLContext) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassEGLContext) New() binary.Object { return &EGLContext{} }
 func (*binaryClassEGLContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLContext(e, obj.(*EGLContext))
 }
@@ -4263,7 +4207,6 @@ func doDecodeEGLDisplay(d binary.Decoder, o *EGLDisplay) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassEGLDisplay) New() binary.Object { return &EGLDisplay{} }
 func (*binaryClassEGLDisplay) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLDisplay(e, obj.(*EGLDisplay))
 }
@@ -4303,7 +4246,6 @@ func doDecodeEGLSurface(d binary.Decoder, o *EGLSurface) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassEGLSurface) New() binary.Object { return &EGLSurface{} }
 func (*binaryClassEGLSurface) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLSurface(e, obj.(*EGLSurface))
 }
@@ -4343,7 +4285,6 @@ func doDecodeEGLintˢ(d binary.Decoder, o *EGLintˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassEGLintˢ) New() binary.Object { return &EGLintˢ{} }
 func (*binaryClassEGLintˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLintˢ(e, obj.(*EGLintˢ))
 }
@@ -4383,7 +4324,6 @@ func doDecodeEGLintᵖ(d binary.Decoder, o *EGLintᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassEGLintᵖ) New() binary.Object { return &EGLintᵖ{} }
 func (*binaryClassEGLintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLintᵖ(e, obj.(*EGLintᵖ))
 }
@@ -4468,7 +4408,6 @@ func doDecodeEglCreateContext(d binary.Decoder, o *EglCreateContext) {
 	}
 	d.Struct(ent_76ca758b77b9e6ff03ebcc18a6a7145145a3360b, &o.Result)
 }
-func (*binaryClassEglCreateContext) New() binary.Object { return &EglCreateContext{} }
 func (*binaryClassEglCreateContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEglCreateContext(e, obj.(*EglCreateContext))
 }
@@ -4542,7 +4481,6 @@ func doDecodeEglInitialize(d binary.Decoder, o *EglInitialize) {
 	d.Struct(ent_e5debb7c35dd3a3b655053dfbd76aeff1e884525, &o.Minor)
 	o.Result = EGLBoolean(d.Int64())
 }
-func (*binaryClassEglInitialize) New() binary.Object { return &EglInitialize{} }
 func (*binaryClassEglInitialize) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEglInitialize(e, obj.(*EglInitialize))
 }
@@ -4624,7 +4562,6 @@ func doDecodeEglMakeCurrent(d binary.Decoder, o *EglMakeCurrent) {
 	d.Struct(ent_e190fd060c11f4fb0afccc5655281abedd0d55ad, &o.Context)
 	o.Result = EGLBoolean(d.Int64())
 }
-func (*binaryClassEglMakeCurrent) New() binary.Object { return &EglMakeCurrent{} }
 func (*binaryClassEglMakeCurrent) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEglMakeCurrent(e, obj.(*EglMakeCurrent))
 }
@@ -4700,7 +4637,6 @@ func doDecodeEglQuerySurface(d binary.Decoder, o *EglQuerySurface) {
 	d.Struct(ent_48dca76dd4762333370f9f16d88e9427cecf491d, &o.Value)
 	o.Result = EGLBoolean(d.Int64())
 }
-func (*binaryClassEglQuerySurface) New() binary.Object { return &EglQuerySurface{} }
 func (*binaryClassEglQuerySurface) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEglQuerySurface(e, obj.(*EglQuerySurface))
 }
@@ -4745,7 +4681,6 @@ func doDecodeVoidᵖ(d binary.Decoder, o *Voidᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVoidᵖ) New() binary.Object { return &Voidᵖ{} }
 func (*binaryClassVoidᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖ(e, obj.(*Voidᵖ))
 }
@@ -4805,7 +4740,6 @@ func doDecodeEglSwapBuffers(d binary.Decoder, o *EglSwapBuffers) {
 	d.Struct(ent_f31291cbf0e82f1f3f2e158048555a41afd990f9, &o.Surface)
 	o.Result = EGLBoolean(d.Int64())
 }
-func (*binaryClassEglSwapBuffers) New() binary.Object { return &EglSwapBuffers{} }
 func (*binaryClassEglSwapBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEglSwapBuffers(e, obj.(*EglSwapBuffers))
 }
@@ -4848,7 +4782,6 @@ func doDecodeF64ˢ(d binary.Decoder, o *F64ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassF64ˢ) New() binary.Object { return &F64ˢ{} }
 func (*binaryClassF64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF64ˢ(e, obj.(*F64ˢ))
 }
@@ -4888,7 +4821,6 @@ func doDecodeFlushPostBuffer(d binary.Decoder, o *FlushPostBuffer) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassFlushPostBuffer) New() binary.Object { return &FlushPostBuffer{} }
 func (*binaryClassFlushPostBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFlushPostBuffer(e, obj.(*FlushPostBuffer))
 }
@@ -4928,7 +4860,6 @@ func doDecodeFramebufferIdˢ(d binary.Decoder, o *FramebufferIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassFramebufferIdˢ) New() binary.Object { return &FramebufferIdˢ{} }
 func (*binaryClassFramebufferIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferIdˢ(e, obj.(*FramebufferIdˢ))
 }
@@ -4968,7 +4899,6 @@ func doDecodeFramebufferIdᵖ(d binary.Decoder, o *FramebufferIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassFramebufferIdᵖ) New() binary.Object { return &FramebufferIdᵖ{} }
 func (*binaryClassFramebufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferIdᵖ(e, obj.(*FramebufferIdᵖ))
 }
@@ -5008,7 +4938,6 @@ func doDecodeFramebufferIdᶜᵖ(d binary.Decoder, o *FramebufferIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassFramebufferIdᶜᵖ) New() binary.Object { return &FramebufferIdᶜᵖ{} }
 func (*binaryClassFramebufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferIdᶜᵖ(e, obj.(*FramebufferIdᶜᵖ))
 }
@@ -5048,7 +4977,6 @@ func doDecodeGLDEBUGPROC(d binary.Decoder, o *GLDEBUGPROC) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLDEBUGPROC) New() binary.Object { return &GLDEBUGPROC{} }
 func (*binaryClassGLDEBUGPROC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLDEBUGPROC(e, obj.(*GLDEBUGPROC))
 }
@@ -5088,7 +5016,6 @@ func doDecodeGLXContext(d binary.Decoder, o *GLXContext) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLXContext) New() binary.Object { return &GLXContext{} }
 func (*binaryClassGLXContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLXContext(e, obj.(*GLXContext))
 }
@@ -5128,7 +5055,6 @@ func doDecodeGLXDrawable(d binary.Decoder, o *GLXDrawable) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLXDrawable) New() binary.Object { return &GLXDrawable{} }
 func (*binaryClassGLXDrawable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLXDrawable(e, obj.(*GLXDrawable))
 }
@@ -5168,7 +5094,6 @@ func doDecodeGLbooleanˢ(d binary.Decoder, o *GLbooleanˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLbooleanˢ) New() binary.Object { return &GLbooleanˢ{} }
 func (*binaryClassGLbooleanˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLbooleanˢ(e, obj.(*GLbooleanˢ))
 }
@@ -5208,7 +5133,6 @@ func doDecodeGLbooleanᵖ(d binary.Decoder, o *GLbooleanᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLbooleanᵖ) New() binary.Object { return &GLbooleanᵖ{} }
 func (*binaryClassGLbooleanᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLbooleanᵖ(e, obj.(*GLbooleanᵖ))
 }
@@ -5248,7 +5172,6 @@ func doDecodeGLcharᵖ(d binary.Decoder, o *GLcharᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLcharᵖ) New() binary.Object { return &GLcharᵖ{} }
 func (*binaryClassGLcharᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᵖ(e, obj.(*GLcharᵖ))
 }
@@ -5288,7 +5211,6 @@ func doDecodeGLcharᶜᵖ(d binary.Decoder, o *GLcharᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLcharᶜᵖ) New() binary.Object { return &GLcharᶜᵖ{} }
 func (*binaryClassGLcharᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖ(e, obj.(*GLcharᶜᵖ))
 }
@@ -5328,7 +5250,6 @@ func doDecodeGLcharᶜᵖˢ(d binary.Decoder, o *GLcharᶜᵖˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLcharᶜᵖˢ) New() binary.Object { return &GLcharᶜᵖˢ{} }
 func (*binaryClassGLcharᶜᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖˢ(e, obj.(*GLcharᶜᵖˢ))
 }
@@ -5368,7 +5289,6 @@ func doDecodeGLcharᶜᵖᵖ(d binary.Decoder, o *GLcharᶜᵖᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLcharᶜᵖᵖ) New() binary.Object { return &GLcharᶜᵖᵖ{} }
 func (*binaryClassGLcharᶜᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖᵖ(e, obj.(*GLcharᶜᵖᵖ))
 }
@@ -5408,7 +5328,6 @@ func doDecodeGLcharᶜᵖᶜᵖ(d binary.Decoder, o *GLcharᶜᵖᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLcharᶜᵖᶜᵖ) New() binary.Object { return &GLcharᶜᵖᶜᵖ{} }
 func (*binaryClassGLcharᶜᵖᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖᶜᵖ(e, obj.(*GLcharᶜᵖᶜᵖ))
 }
@@ -5448,7 +5367,6 @@ func doDecodeGLeglImageOES(d binary.Decoder, o *GLeglImageOES) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLeglImageOES) New() binary.Object { return &GLeglImageOES{} }
 func (*binaryClassGLeglImageOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLeglImageOES(e, obj.(*GLeglImageOES))
 }
@@ -5488,7 +5406,6 @@ func doDecodeGLenumˢ(d binary.Decoder, o *GLenumˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLenumˢ) New() binary.Object { return &GLenumˢ{} }
 func (*binaryClassGLenumˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLenumˢ(e, obj.(*GLenumˢ))
 }
@@ -5528,7 +5445,6 @@ func doDecodeGLenumᵖ(d binary.Decoder, o *GLenumᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLenumᵖ) New() binary.Object { return &GLenumᵖ{} }
 func (*binaryClassGLenumᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLenumᵖ(e, obj.(*GLenumᵖ))
 }
@@ -5568,7 +5484,6 @@ func doDecodeGLenumᶜᵖ(d binary.Decoder, o *GLenumᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLenumᶜᵖ) New() binary.Object { return &GLenumᶜᵖ{} }
 func (*binaryClassGLenumᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLenumᶜᵖ(e, obj.(*GLenumᶜᵖ))
 }
@@ -5605,7 +5520,6 @@ func doDecodeGLfloatː2ᵃ(d binary.Decoder, o *GLfloatː2ᵃ) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassGLfloatː2ᵃ) New() binary.Object { return &GLfloatː2ᵃ{} }
 func (*binaryClassGLfloatː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatː2ᵃ(e, obj.(*GLfloatː2ᵃ))
 }
@@ -5642,7 +5556,6 @@ func doDecodeGLfloatː3ᵃ(d binary.Decoder, o *GLfloatː3ᵃ) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassGLfloatː3ᵃ) New() binary.Object { return &GLfloatː3ᵃ{} }
 func (*binaryClassGLfloatː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatː3ᵃ(e, obj.(*GLfloatː3ᵃ))
 }
@@ -5679,7 +5592,6 @@ func doDecodeGLfloatː4ᵃ(d binary.Decoder, o *GLfloatː4ᵃ) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassGLfloatː4ᵃ) New() binary.Object { return &GLfloatː4ᵃ{} }
 func (*binaryClassGLfloatː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatː4ᵃ(e, obj.(*GLfloatː4ᵃ))
 }
@@ -5719,7 +5631,6 @@ func doDecodeGLfloatˢ(d binary.Decoder, o *GLfloatˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLfloatˢ) New() binary.Object { return &GLfloatˢ{} }
 func (*binaryClassGLfloatˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatˢ(e, obj.(*GLfloatˢ))
 }
@@ -5759,7 +5670,6 @@ func doDecodeGLfloatᵖ(d binary.Decoder, o *GLfloatᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLfloatᵖ) New() binary.Object { return &GLfloatᵖ{} }
 func (*binaryClassGLfloatᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatᵖ(e, obj.(*GLfloatᵖ))
 }
@@ -5799,7 +5709,6 @@ func doDecodeGLfloatᶜᵖ(d binary.Decoder, o *GLfloatᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLfloatᶜᵖ) New() binary.Object { return &GLfloatᶜᵖ{} }
 func (*binaryClassGLfloatᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatᶜᵖ(e, obj.(*GLfloatᶜᵖ))
 }
@@ -5839,7 +5748,6 @@ func doDecodeGLint64ˢ(d binary.Decoder, o *GLint64ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLint64ˢ) New() binary.Object { return &GLint64ˢ{} }
 func (*binaryClassGLint64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLint64ˢ(e, obj.(*GLint64ˢ))
 }
@@ -5879,7 +5787,6 @@ func doDecodeGLint64ᵖ(d binary.Decoder, o *GLint64ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLint64ᵖ) New() binary.Object { return &GLint64ᵖ{} }
 func (*binaryClassGLint64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLint64ᵖ(e, obj.(*GLint64ᵖ))
 }
@@ -5916,7 +5823,6 @@ func doDecodeGLintː2ᵃ(d binary.Decoder, o *GLintː2ᵃ) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassGLintː2ᵃ) New() binary.Object { return &GLintː2ᵃ{} }
 func (*binaryClassGLintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintː2ᵃ(e, obj.(*GLintː2ᵃ))
 }
@@ -5953,7 +5859,6 @@ func doDecodeGLintː3ᵃ(d binary.Decoder, o *GLintː3ᵃ) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassGLintː3ᵃ) New() binary.Object { return &GLintː3ᵃ{} }
 func (*binaryClassGLintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintː3ᵃ(e, obj.(*GLintː3ᵃ))
 }
@@ -5990,7 +5895,6 @@ func doDecodeGLintː4ᵃ(d binary.Decoder, o *GLintː4ᵃ) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassGLintː4ᵃ) New() binary.Object { return &GLintː4ᵃ{} }
 func (*binaryClassGLintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintː4ᵃ(e, obj.(*GLintː4ᵃ))
 }
@@ -6030,7 +5934,6 @@ func doDecodeGLintˢ(d binary.Decoder, o *GLintˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLintˢ) New() binary.Object { return &GLintˢ{} }
 func (*binaryClassGLintˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintˢ(e, obj.(*GLintˢ))
 }
@@ -6070,7 +5973,6 @@ func doDecodeGLintᵖ(d binary.Decoder, o *GLintᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLintᵖ) New() binary.Object { return &GLintᵖ{} }
 func (*binaryClassGLintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintᵖ(e, obj.(*GLintᵖ))
 }
@@ -6110,7 +6012,6 @@ func doDecodeGLintᶜᵖ(d binary.Decoder, o *GLintᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLintᶜᵖ) New() binary.Object { return &GLintᶜᵖ{} }
 func (*binaryClassGLintᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintᶜᵖ(e, obj.(*GLintᶜᵖ))
 }
@@ -6150,7 +6051,6 @@ func doDecodeGLsizeiˢ(d binary.Decoder, o *GLsizeiˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLsizeiˢ) New() binary.Object { return &GLsizeiˢ{} }
 func (*binaryClassGLsizeiˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLsizeiˢ(e, obj.(*GLsizeiˢ))
 }
@@ -6190,7 +6090,6 @@ func doDecodeGLsizeiᵖ(d binary.Decoder, o *GLsizeiᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLsizeiᵖ) New() binary.Object { return &GLsizeiᵖ{} }
 func (*binaryClassGLsizeiᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLsizeiᵖ(e, obj.(*GLsizeiᵖ))
 }
@@ -6230,7 +6129,6 @@ func doDecodeGLsizeiᶜᵖ(d binary.Decoder, o *GLsizeiᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLsizeiᶜᵖ) New() binary.Object { return &GLsizeiᶜᵖ{} }
 func (*binaryClassGLsizeiᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLsizeiᶜᵖ(e, obj.(*GLsizeiᶜᵖ))
 }
@@ -6270,7 +6168,6 @@ func doDecodeGLubyteˢ(d binary.Decoder, o *GLubyteˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLubyteˢ) New() binary.Object { return &GLubyteˢ{} }
 func (*binaryClassGLubyteˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLubyteˢ(e, obj.(*GLubyteˢ))
 }
@@ -6310,7 +6207,6 @@ func doDecodeGLubyteᵖ(d binary.Decoder, o *GLubyteᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLubyteᵖ) New() binary.Object { return &GLubyteᵖ{} }
 func (*binaryClassGLubyteᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLubyteᵖ(e, obj.(*GLubyteᵖ))
 }
@@ -6350,7 +6246,6 @@ func doDecodeGLubyteᶜᵖ(d binary.Decoder, o *GLubyteᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLubyteᶜᵖ) New() binary.Object { return &GLubyteᶜᵖ{} }
 func (*binaryClassGLubyteᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLubyteᶜᵖ(e, obj.(*GLubyteᶜᵖ))
 }
@@ -6390,7 +6285,6 @@ func doDecodeGLuint64ˢ(d binary.Decoder, o *GLuint64ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLuint64ˢ) New() binary.Object { return &GLuint64ˢ{} }
 func (*binaryClassGLuint64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuint64ˢ(e, obj.(*GLuint64ˢ))
 }
@@ -6430,7 +6324,6 @@ func doDecodeGLuint64ᵖ(d binary.Decoder, o *GLuint64ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLuint64ᵖ) New() binary.Object { return &GLuint64ᵖ{} }
 func (*binaryClassGLuint64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuint64ᵖ(e, obj.(*GLuint64ᵖ))
 }
@@ -6470,7 +6363,6 @@ func doDecodeGLuint64ᶜᵖ(d binary.Decoder, o *GLuint64ᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLuint64ᶜᵖ) New() binary.Object { return &GLuint64ᶜᵖ{} }
 func (*binaryClassGLuint64ᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuint64ᶜᵖ(e, obj.(*GLuint64ᶜᵖ))
 }
@@ -6507,7 +6399,6 @@ func doDecodeGLuintː2ᵃ(d binary.Decoder, o *GLuintː2ᵃ) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassGLuintː2ᵃ) New() binary.Object { return &GLuintː2ᵃ{} }
 func (*binaryClassGLuintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintː2ᵃ(e, obj.(*GLuintː2ᵃ))
 }
@@ -6544,7 +6435,6 @@ func doDecodeGLuintː3ᵃ(d binary.Decoder, o *GLuintː3ᵃ) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassGLuintː3ᵃ) New() binary.Object { return &GLuintː3ᵃ{} }
 func (*binaryClassGLuintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintː3ᵃ(e, obj.(*GLuintː3ᵃ))
 }
@@ -6581,7 +6471,6 @@ func doDecodeGLuintː4ᵃ(d binary.Decoder, o *GLuintː4ᵃ) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassGLuintː4ᵃ) New() binary.Object { return &GLuintː4ᵃ{} }
 func (*binaryClassGLuintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintː4ᵃ(e, obj.(*GLuintː4ᵃ))
 }
@@ -6621,7 +6510,6 @@ func doDecodeGLuintˢ(d binary.Decoder, o *GLuintˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLuintˢ) New() binary.Object { return &GLuintˢ{} }
 func (*binaryClassGLuintˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintˢ(e, obj.(*GLuintˢ))
 }
@@ -6661,7 +6549,6 @@ func doDecodeGLuintᵖ(d binary.Decoder, o *GLuintᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLuintᵖ) New() binary.Object { return &GLuintᵖ{} }
 func (*binaryClassGLuintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintᵖ(e, obj.(*GLuintᵖ))
 }
@@ -6701,7 +6588,6 @@ func doDecodeGLuintᶜᵖ(d binary.Decoder, o *GLuintᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLuintᶜᵖ) New() binary.Object { return &GLuintᶜᵖ{} }
 func (*binaryClassGLuintᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintᶜᵖ(e, obj.(*GLuintᶜᵖ))
 }
@@ -6741,7 +6627,6 @@ func doDecodeGLvoidˢ(d binary.Decoder, o *GLvoidˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassGLvoidˢ) New() binary.Object { return &GLvoidˢ{} }
 func (*binaryClassGLvoidˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLvoidˢ(e, obj.(*GLvoidˢ))
 }
@@ -6781,7 +6666,6 @@ func doDecodeGLvoidᵖ(d binary.Decoder, o *GLvoidᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassGLvoidᵖ) New() binary.Object { return &GLvoidᵖ{} }
 func (*binaryClassGLvoidᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLvoidᵖ(e, obj.(*GLvoidᵖ))
 }
@@ -6825,7 +6709,6 @@ func doDecodeGlActiveShaderProgram(d binary.Decoder, o *GlActiveShaderProgram) {
 	o.Pipeline = PipelineId(d.Uint32())
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlActiveShaderProgram) New() binary.Object { return &GlActiveShaderProgram{} }
 func (*binaryClassGlActiveShaderProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlActiveShaderProgram(e, obj.(*GlActiveShaderProgram))
 }
@@ -6871,7 +6754,6 @@ func doDecodeGlActiveShaderProgramEXT(d binary.Decoder, o *GlActiveShaderProgram
 	o.Pipeline = PipelineId(d.Uint32())
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlActiveShaderProgramEXT) New() binary.Object { return &GlActiveShaderProgramEXT{} }
 func (*binaryClassGlActiveShaderProgramEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlActiveShaderProgramEXT(e, obj.(*GlActiveShaderProgramEXT))
 }
@@ -6917,7 +6799,6 @@ func doDecodeGlActiveTexture(d binary.Decoder, o *GlActiveTexture) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Unit = GLenum(d.Uint32())
 }
-func (*binaryClassGlActiveTexture) New() binary.Object { return &GlActiveTexture{} }
 func (*binaryClassGlActiveTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlActiveTexture(e, obj.(*GlActiveTexture))
 }
@@ -6962,7 +6843,6 @@ func doDecodeGlAlphaFuncQCOM(d binary.Decoder, o *GlAlphaFuncQCOM) {
 	o.Func = GLenum(d.Uint32())
 	o.Ref = GLclampf(d.Float32())
 }
-func (*binaryClassGlAlphaFuncQCOM) New() binary.Object { return &GlAlphaFuncQCOM{} }
 func (*binaryClassGlAlphaFuncQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlAlphaFuncQCOM(e, obj.(*GlAlphaFuncQCOM))
 }
@@ -7003,9 +6883,6 @@ func doDecodeGlApplyFramebufferAttachmentCMAAINTEL(d binary.Decoder, o *GlApplyF
 		ent_ff910d22367a209e1a92357e3aac7f549243486c = ent
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
-}
-func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) New() binary.Object {
-	return &GlApplyFramebufferAttachmentCMAAINTEL{}
 }
 func (*binaryClassGlApplyFramebufferAttachmentCMAAINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlApplyFramebufferAttachmentCMAAINTEL(e, obj.(*GlApplyFramebufferAttachmentCMAAINTEL))
@@ -7052,7 +6929,6 @@ func doDecodeGlAttachShader(d binary.Decoder, o *GlAttachShader) {
 	o.Program = ProgramId(d.Uint32())
 	o.Shader = ShaderId(d.Uint32())
 }
-func (*binaryClassGlAttachShader) New() binary.Object { return &GlAttachShader{} }
 func (*binaryClassGlAttachShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlAttachShader(e, obj.(*GlAttachShader))
 }
@@ -7097,9 +6973,6 @@ func doDecodeGlBeginConditionalRenderNV(d binary.Decoder, o *GlBeginConditionalR
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Id = GLuint(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
-}
-func (*binaryClassGlBeginConditionalRenderNV) New() binary.Object {
-	return &GlBeginConditionalRenderNV{}
 }
 func (*binaryClassGlBeginConditionalRenderNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginConditionalRenderNV(e, obj.(*GlBeginConditionalRenderNV))
@@ -7146,7 +7019,6 @@ func doDecodeGlBeginPerfMonitorAMD(d binary.Decoder, o *GlBeginPerfMonitorAMD) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Monitor = GLuint(d.Uint32())
 }
-func (*binaryClassGlBeginPerfMonitorAMD) New() binary.Object { return &GlBeginPerfMonitorAMD{} }
 func (*binaryClassGlBeginPerfMonitorAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginPerfMonitorAMD(e, obj.(*GlBeginPerfMonitorAMD))
 }
@@ -7189,7 +7061,6 @@ func doDecodeGlBeginPerfQueryINTEL(d binary.Decoder, o *GlBeginPerfQueryINTEL) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.QueryHandle = GLuint(d.Uint32())
 }
-func (*binaryClassGlBeginPerfQueryINTEL) New() binary.Object { return &GlBeginPerfQueryINTEL{} }
 func (*binaryClassGlBeginPerfQueryINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginPerfQueryINTEL(e, obj.(*GlBeginPerfQueryINTEL))
 }
@@ -7234,7 +7105,6 @@ func doDecodeGlBeginQuery(d binary.Decoder, o *GlBeginQuery) {
 	o.Target = GLenum(d.Uint32())
 	o.Query = QueryId(d.Uint32())
 }
-func (*binaryClassGlBeginQuery) New() binary.Object { return &GlBeginQuery{} }
 func (*binaryClassGlBeginQuery) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginQuery(e, obj.(*GlBeginQuery))
 }
@@ -7280,7 +7150,6 @@ func doDecodeGlBeginQueryEXT(d binary.Decoder, o *GlBeginQueryEXT) {
 	o.Target = GLenum(d.Uint32())
 	o.Query = QueryId(d.Uint32())
 }
-func (*binaryClassGlBeginQueryEXT) New() binary.Object { return &GlBeginQueryEXT{} }
 func (*binaryClassGlBeginQueryEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginQueryEXT(e, obj.(*GlBeginQueryEXT))
 }
@@ -7324,7 +7193,6 @@ func doDecodeGlBeginTransformFeedback(d binary.Decoder, o *GlBeginTransformFeedb
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.PrimitiveMode = GLenum(d.Uint32())
 }
-func (*binaryClassGlBeginTransformFeedback) New() binary.Object { return &GlBeginTransformFeedback{} }
 func (*binaryClassGlBeginTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBeginTransformFeedback(e, obj.(*GlBeginTransformFeedback))
 }
@@ -7373,7 +7241,6 @@ func doDecodeGlBindAttribLocation(d binary.Decoder, o *GlBindAttribLocation) {
 	o.Location = AttributeLocation(d.Uint32())
 	o.Name = string(d.String())
 }
-func (*binaryClassGlBindAttribLocation) New() binary.Object { return &GlBindAttribLocation{} }
 func (*binaryClassGlBindAttribLocation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindAttribLocation(e, obj.(*GlBindAttribLocation))
 }
@@ -7420,7 +7287,6 @@ func doDecodeGlBindBuffer(d binary.Decoder, o *GlBindBuffer) {
 	o.Target = GLenum(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
-func (*binaryClassGlBindBuffer) New() binary.Object { return &GlBindBuffer{} }
 func (*binaryClassGlBindBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindBuffer(e, obj.(*GlBindBuffer))
 }
@@ -7468,7 +7334,6 @@ func doDecodeGlBindBufferBase(d binary.Decoder, o *GlBindBufferBase) {
 	o.Index = BufferBindingIndex(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
-func (*binaryClassGlBindBufferBase) New() binary.Object { return &GlBindBufferBase{} }
 func (*binaryClassGlBindBufferBase) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindBufferBase(e, obj.(*GlBindBufferBase))
 }
@@ -7521,7 +7386,6 @@ func doDecodeGlBindBufferRange(d binary.Decoder, o *GlBindBufferRange) {
 	o.Offset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlBindBufferRange) New() binary.Object { return &GlBindBufferRange{} }
 func (*binaryClassGlBindBufferRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindBufferRange(e, obj.(*GlBindBufferRange))
 }
@@ -7572,7 +7436,6 @@ func doDecodeGlBindFragDataLocationEXT(d binary.Decoder, o *GlBindFragDataLocati
 	o.Color = GLuint(d.Uint32())
 	o.Name = string(d.String())
 }
-func (*binaryClassGlBindFragDataLocationEXT) New() binary.Object { return &GlBindFragDataLocationEXT{} }
 func (*binaryClassGlBindFragDataLocationEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindFragDataLocationEXT(e, obj.(*GlBindFragDataLocationEXT))
 }
@@ -7625,9 +7488,6 @@ func doDecodeGlBindFragDataLocationIndexedEXT(d binary.Decoder, o *GlBindFragDat
 	o.Index = GLuint(d.Uint32())
 	o.Name = string(d.String())
 }
-func (*binaryClassGlBindFragDataLocationIndexedEXT) New() binary.Object {
-	return &GlBindFragDataLocationIndexedEXT{}
-}
 func (*binaryClassGlBindFragDataLocationIndexedEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindFragDataLocationIndexedEXT(e, obj.(*GlBindFragDataLocationIndexedEXT))
 }
@@ -7677,7 +7537,6 @@ func doDecodeGlBindFramebuffer(d binary.Decoder, o *GlBindFramebuffer) {
 	o.Target = GLenum(d.Uint32())
 	o.Framebuffer = FramebufferId(d.Uint32())
 }
-func (*binaryClassGlBindFramebuffer) New() binary.Object { return &GlBindFramebuffer{} }
 func (*binaryClassGlBindFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindFramebuffer(e, obj.(*GlBindFramebuffer))
 }
@@ -7733,7 +7592,6 @@ func doDecodeGlBindImageTexture(d binary.Decoder, o *GlBindImageTexture) {
 	o.Access = GLenum(d.Uint32())
 	o.Format = GLenum(d.Uint32())
 }
-func (*binaryClassGlBindImageTexture) New() binary.Object { return &GlBindImageTexture{} }
 func (*binaryClassGlBindImageTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindImageTexture(e, obj.(*GlBindImageTexture))
 }
@@ -7782,7 +7640,6 @@ func doDecodeGlBindProgramPipeline(d binary.Decoder, o *GlBindProgramPipeline) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Pipeline = PipelineId(d.Uint32())
 }
-func (*binaryClassGlBindProgramPipeline) New() binary.Object { return &GlBindProgramPipeline{} }
 func (*binaryClassGlBindProgramPipeline) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindProgramPipeline(e, obj.(*GlBindProgramPipeline))
 }
@@ -7825,7 +7682,6 @@ func doDecodeGlBindProgramPipelineEXT(d binary.Decoder, o *GlBindProgramPipeline
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Pipeline = PipelineId(d.Uint32())
 }
-func (*binaryClassGlBindProgramPipelineEXT) New() binary.Object { return &GlBindProgramPipelineEXT{} }
 func (*binaryClassGlBindProgramPipelineEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindProgramPipelineEXT(e, obj.(*GlBindProgramPipelineEXT))
 }
@@ -7872,7 +7728,6 @@ func doDecodeGlBindRenderbuffer(d binary.Decoder, o *GlBindRenderbuffer) {
 	o.Target = GLenum(d.Uint32())
 	o.Renderbuffer = RenderbufferId(d.Uint32())
 }
-func (*binaryClassGlBindRenderbuffer) New() binary.Object { return &GlBindRenderbuffer{} }
 func (*binaryClassGlBindRenderbuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindRenderbuffer(e, obj.(*GlBindRenderbuffer))
 }
@@ -7918,7 +7773,6 @@ func doDecodeGlBindSampler(d binary.Decoder, o *GlBindSampler) {
 	o.Unit = GLuint(d.Uint32())
 	o.Sampler = SamplerId(d.Uint32())
 }
-func (*binaryClassGlBindSampler) New() binary.Object { return &GlBindSampler{} }
 func (*binaryClassGlBindSampler) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindSampler(e, obj.(*GlBindSampler))
 }
@@ -7964,7 +7818,6 @@ func doDecodeGlBindTexture(d binary.Decoder, o *GlBindTexture) {
 	o.Target = GLenum(d.Uint32())
 	o.Texture = TextureId(d.Uint32())
 }
-func (*binaryClassGlBindTexture) New() binary.Object { return &GlBindTexture{} }
 func (*binaryClassGlBindTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindTexture(e, obj.(*GlBindTexture))
 }
@@ -8010,7 +7863,6 @@ func doDecodeGlBindTransformFeedback(d binary.Decoder, o *GlBindTransformFeedbac
 	o.Target = GLenum(d.Uint32())
 	o.Id = TransformFeedbackId(d.Uint32())
 }
-func (*binaryClassGlBindTransformFeedback) New() binary.Object { return &GlBindTransformFeedback{} }
 func (*binaryClassGlBindTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindTransformFeedback(e, obj.(*GlBindTransformFeedback))
 }
@@ -8056,7 +7908,6 @@ func doDecodeGlBindVertexArray(d binary.Decoder, o *GlBindVertexArray) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Array = VertexArrayId(d.Uint32())
 }
-func (*binaryClassGlBindVertexArray) New() binary.Object { return &GlBindVertexArray{} }
 func (*binaryClassGlBindVertexArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindVertexArray(e, obj.(*GlBindVertexArray))
 }
@@ -8099,7 +7950,6 @@ func doDecodeGlBindVertexArrayOES(d binary.Decoder, o *GlBindVertexArrayOES) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Array = VertexArrayId(d.Uint32())
 }
-func (*binaryClassGlBindVertexArrayOES) New() binary.Object { return &GlBindVertexArrayOES{} }
 func (*binaryClassGlBindVertexArrayOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindVertexArrayOES(e, obj.(*GlBindVertexArrayOES))
 }
@@ -8148,7 +7998,6 @@ func doDecodeGlBindVertexBuffer(d binary.Decoder, o *GlBindVertexBuffer) {
 	o.Offset = GLintptr(d.Int32())
 	o.Stride = GLsizei(d.Int32())
 }
-func (*binaryClassGlBindVertexBuffer) New() binary.Object { return &GlBindVertexBuffer{} }
 func (*binaryClassGlBindVertexBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBindVertexBuffer(e, obj.(*GlBindVertexBuffer))
 }
@@ -8192,7 +8041,6 @@ func doDecodeGlBlendBarrier(d binary.Decoder, o *GlBlendBarrier) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlBlendBarrier) New() binary.Object { return &GlBlendBarrier{} }
 func (*binaryClassGlBlendBarrier) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendBarrier(e, obj.(*GlBlendBarrier))
 }
@@ -8232,7 +8080,6 @@ func doDecodeGlBlendBarrierKHR(d binary.Decoder, o *GlBlendBarrierKHR) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlBlendBarrierKHR) New() binary.Object { return &GlBlendBarrierKHR{} }
 func (*binaryClassGlBlendBarrierKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendBarrierKHR(e, obj.(*GlBlendBarrierKHR))
 }
@@ -8272,7 +8119,6 @@ func doDecodeGlBlendBarrierNV(d binary.Decoder, o *GlBlendBarrierNV) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlBlendBarrierNV) New() binary.Object { return &GlBlendBarrierNV{} }
 func (*binaryClassGlBlendBarrierNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendBarrierNV(e, obj.(*GlBlendBarrierNV))
 }
@@ -8320,7 +8166,6 @@ func doDecodeGlBlendColor(d binary.Decoder, o *GlBlendColor) {
 	o.Blue = GLfloat(d.Float32())
 	o.Alpha = GLfloat(d.Float32())
 }
-func (*binaryClassGlBlendColor) New() binary.Object { return &GlBlendColor{} }
 func (*binaryClassGlBlendColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendColor(e, obj.(*GlBlendColor))
 }
@@ -8366,7 +8211,6 @@ func doDecodeGlBlendEquation(d binary.Decoder, o *GlBlendEquation) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Equation = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquation) New() binary.Object { return &GlBlendEquation{} }
 func (*binaryClassGlBlendEquation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquation(e, obj.(*GlBlendEquation))
 }
@@ -8411,7 +8255,6 @@ func doDecodeGlBlendEquationSeparate(d binary.Decoder, o *GlBlendEquationSeparat
 	o.Rgb = GLenum(d.Uint32())
 	o.Alpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationSeparate) New() binary.Object { return &GlBlendEquationSeparate{} }
 func (*binaryClassGlBlendEquationSeparate) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationSeparate(e, obj.(*GlBlendEquationSeparate))
 }
@@ -8461,7 +8304,6 @@ func doDecodeGlBlendEquationSeparatei(d binary.Decoder, o *GlBlendEquationSepara
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationSeparatei) New() binary.Object { return &GlBlendEquationSeparatei{} }
 func (*binaryClassGlBlendEquationSeparatei) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationSeparatei(e, obj.(*GlBlendEquationSeparatei))
 }
@@ -8511,9 +8353,6 @@ func doDecodeGlBlendEquationSeparateiEXT(d binary.Decoder, o *GlBlendEquationSep
 	o.Buf = DrawBufferIndex(d.Uint32())
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
-}
-func (*binaryClassGlBlendEquationSeparateiEXT) New() binary.Object {
-	return &GlBlendEquationSeparateiEXT{}
 }
 func (*binaryClassGlBlendEquationSeparateiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationSeparateiEXT(e, obj.(*GlBlendEquationSeparateiEXT))
@@ -8565,9 +8404,6 @@ func doDecodeGlBlendEquationSeparateiOES(d binary.Decoder, o *GlBlendEquationSep
 	o.ModeRGB = GLenum(d.Uint32())
 	o.ModeAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationSeparateiOES) New() binary.Object {
-	return &GlBlendEquationSeparateiOES{}
-}
 func (*binaryClassGlBlendEquationSeparateiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationSeparateiOES(e, obj.(*GlBlendEquationSeparateiOES))
 }
@@ -8616,7 +8452,6 @@ func doDecodeGlBlendEquationi(d binary.Decoder, o *GlBlendEquationi) {
 	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationi) New() binary.Object { return &GlBlendEquationi{} }
 func (*binaryClassGlBlendEquationi) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationi(e, obj.(*GlBlendEquationi))
 }
@@ -8662,7 +8497,6 @@ func doDecodeGlBlendEquationiEXT(d binary.Decoder, o *GlBlendEquationiEXT) {
 	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationiEXT) New() binary.Object { return &GlBlendEquationiEXT{} }
 func (*binaryClassGlBlendEquationiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationiEXT(e, obj.(*GlBlendEquationiEXT))
 }
@@ -8708,7 +8542,6 @@ func doDecodeGlBlendEquationiOES(d binary.Decoder, o *GlBlendEquationiOES) {
 	o.Buf = DrawBufferIndex(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendEquationiOES) New() binary.Object { return &GlBlendEquationiOES{} }
 func (*binaryClassGlBlendEquationiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendEquationiOES(e, obj.(*GlBlendEquationiOES))
 }
@@ -8754,7 +8587,6 @@ func doDecodeGlBlendFunc(d binary.Decoder, o *GlBlendFunc) {
 	o.SrcFactor = GLenum(d.Uint32())
 	o.DstFactor = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFunc) New() binary.Object { return &GlBlendFunc{} }
 func (*binaryClassGlBlendFunc) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFunc(e, obj.(*GlBlendFunc))
 }
@@ -8804,7 +8636,6 @@ func doDecodeGlBlendFuncSeparate(d binary.Decoder, o *GlBlendFuncSeparate) {
 	o.SrcFactorAlpha = GLenum(d.Uint32())
 	o.DstFactorAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFuncSeparate) New() binary.Object { return &GlBlendFuncSeparate{} }
 func (*binaryClassGlBlendFuncSeparate) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFuncSeparate(e, obj.(*GlBlendFuncSeparate))
 }
@@ -8858,7 +8689,6 @@ func doDecodeGlBlendFuncSeparatei(d binary.Decoder, o *GlBlendFuncSeparatei) {
 	o.SrcAlpha = GLenum(d.Uint32())
 	o.DstAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFuncSeparatei) New() binary.Object { return &GlBlendFuncSeparatei{} }
 func (*binaryClassGlBlendFuncSeparatei) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFuncSeparatei(e, obj.(*GlBlendFuncSeparatei))
 }
@@ -8913,7 +8743,6 @@ func doDecodeGlBlendFuncSeparateiEXT(d binary.Decoder, o *GlBlendFuncSeparateiEX
 	o.SrcAlpha = GLenum(d.Uint32())
 	o.DstAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFuncSeparateiEXT) New() binary.Object { return &GlBlendFuncSeparateiEXT{} }
 func (*binaryClassGlBlendFuncSeparateiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFuncSeparateiEXT(e, obj.(*GlBlendFuncSeparateiEXT))
 }
@@ -8970,7 +8799,6 @@ func doDecodeGlBlendFuncSeparateiOES(d binary.Decoder, o *GlBlendFuncSeparateiOE
 	o.SrcAlpha = GLenum(d.Uint32())
 	o.DstAlpha = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFuncSeparateiOES) New() binary.Object { return &GlBlendFuncSeparateiOES{} }
 func (*binaryClassGlBlendFuncSeparateiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFuncSeparateiOES(e, obj.(*GlBlendFuncSeparateiOES))
 }
@@ -9023,7 +8851,6 @@ func doDecodeGlBlendFunci(d binary.Decoder, o *GlBlendFunci) {
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFunci) New() binary.Object { return &GlBlendFunci{} }
 func (*binaryClassGlBlendFunci) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFunci(e, obj.(*GlBlendFunci))
 }
@@ -9072,7 +8899,6 @@ func doDecodeGlBlendFunciEXT(d binary.Decoder, o *GlBlendFunciEXT) {
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFunciEXT) New() binary.Object { return &GlBlendFunciEXT{} }
 func (*binaryClassGlBlendFunciEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFunciEXT(e, obj.(*GlBlendFunciEXT))
 }
@@ -9121,7 +8947,6 @@ func doDecodeGlBlendFunciOES(d binary.Decoder, o *GlBlendFunciOES) {
 	o.Src = GLenum(d.Uint32())
 	o.Dst = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlendFunciOES) New() binary.Object { return &GlBlendFunciOES{} }
 func (*binaryClassGlBlendFunciOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendFunciOES(e, obj.(*GlBlendFunciOES))
 }
@@ -9168,7 +8993,6 @@ func doDecodeGlBlendParameteriNV(d binary.Decoder, o *GlBlendParameteriNV) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlBlendParameteriNV) New() binary.Object { return &GlBlendParameteriNV{} }
 func (*binaryClassGlBlendParameteriNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlendParameteriNV(e, obj.(*GlBlendParameteriNV))
 }
@@ -9230,7 +9054,6 @@ func doDecodeGlBlitFramebuffer(d binary.Decoder, o *GlBlitFramebuffer) {
 	o.Mask = GLbitfield(d.Uint32())
 	o.Filter = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlitFramebuffer) New() binary.Object { return &GlBlitFramebuffer{} }
 func (*binaryClassGlBlitFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlitFramebuffer(e, obj.(*GlBlitFramebuffer))
 }
@@ -9300,7 +9123,6 @@ func doDecodeGlBlitFramebufferANGLE(d binary.Decoder, o *GlBlitFramebufferANGLE)
 	o.Mask = GLbitfield(d.Uint32())
 	o.Filter = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlitFramebufferANGLE) New() binary.Object { return &GlBlitFramebufferANGLE{} }
 func (*binaryClassGlBlitFramebufferANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlitFramebufferANGLE(e, obj.(*GlBlitFramebufferANGLE))
 }
@@ -9370,7 +9192,6 @@ func doDecodeGlBlitFramebufferNV(d binary.Decoder, o *GlBlitFramebufferNV) {
 	o.Mask = GLbitfield(d.Uint32())
 	o.Filter = GLenum(d.Uint32())
 }
-func (*binaryClassGlBlitFramebufferNV) New() binary.Object { return &GlBlitFramebufferNV{} }
 func (*binaryClassGlBlitFramebufferNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBlitFramebufferNV(e, obj.(*GlBlitFramebufferNV))
 }
@@ -9435,7 +9256,6 @@ func doDecodeGlBufferData(d binary.Decoder, o *GlBufferData) {
 	d.Struct(ent_5a925ca40bac5fa887211849b83b6ba6f0cac295, &o.Data)
 	o.Usage = GLenum(d.Uint32())
 }
-func (*binaryClassGlBufferData) New() binary.Object { return &GlBufferData{} }
 func (*binaryClassGlBufferData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBufferData(e, obj.(*GlBufferData))
 }
@@ -9479,7 +9299,6 @@ func doDecodeVoidᶜᵖ(d binary.Decoder, o *Voidᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVoidᶜᵖ) New() binary.Object { return &Voidᶜᵖ{} }
 func (*binaryClassVoidᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖ(e, obj.(*Voidᶜᵖ))
 }
@@ -9534,7 +9353,6 @@ func doDecodeGlBufferStorageEXT(d binary.Decoder, o *GlBufferStorageEXT) {
 	d.Struct(ent_5fb7a961fd8adddc478805afa502cb04447d26ba, &o.Data)
 	o.Flag = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlBufferStorageEXT) New() binary.Object { return &GlBufferStorageEXT{} }
 func (*binaryClassGlBufferStorageEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBufferStorageEXT(e, obj.(*GlBufferStorageEXT))
 }
@@ -9593,7 +9411,6 @@ func doDecodeGlBufferSubData(d binary.Decoder, o *GlBufferSubData) {
 	}
 	d.Struct(ent_5a925ca40bac5fa887211849b83b6ba6f0cac295, &o.Data)
 }
-func (*binaryClassGlBufferSubData) New() binary.Object { return &GlBufferSubData{} }
 func (*binaryClassGlBufferSubData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlBufferSubData(e, obj.(*GlBufferSubData))
 }
@@ -9641,7 +9458,6 @@ func doDecodeGlCheckFramebufferStatus(d binary.Decoder, o *GlCheckFramebufferSta
 	o.Target = GLenum(d.Uint32())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlCheckFramebufferStatus) New() binary.Object { return &GlCheckFramebufferStatus{} }
 func (*binaryClassGlCheckFramebufferStatus) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCheckFramebufferStatus(e, obj.(*GlCheckFramebufferStatus))
 }
@@ -9687,7 +9503,6 @@ func doDecodeGlClear(d binary.Decoder, o *GlClear) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Mask = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlClear) New() binary.Object { return &GlClear{} }
 func (*binaryClassGlClear) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClear(e, obj.(*GlClear))
 }
@@ -9736,7 +9551,6 @@ func doDecodeGlClearBufferfi(d binary.Decoder, o *GlClearBufferfi) {
 	o.Depth = GLfloat(d.Float32())
 	o.Stencil = GLint(d.Int32())
 }
-func (*binaryClassGlClearBufferfi) New() binary.Object { return &GlClearBufferfi{} }
 func (*binaryClassGlClearBufferfi) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearBufferfi(e, obj.(*GlClearBufferfi))
 }
@@ -9793,7 +9607,6 @@ func doDecodeGlClearBufferfv(d binary.Decoder, o *GlClearBufferfv) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlClearBufferfv) New() binary.Object { return &GlClearBufferfv{} }
 func (*binaryClassGlClearBufferfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearBufferfv(e, obj.(*GlClearBufferfv))
 }
@@ -9849,7 +9662,6 @@ func doDecodeGlClearBufferiv(d binary.Decoder, o *GlClearBufferiv) {
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlClearBufferiv) New() binary.Object { return &GlClearBufferiv{} }
 func (*binaryClassGlClearBufferiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearBufferiv(e, obj.(*GlClearBufferiv))
 }
@@ -9905,7 +9717,6 @@ func doDecodeGlClearBufferuiv(d binary.Decoder, o *GlClearBufferuiv) {
 	}
 	d.Struct(ent_3e94ff06e0adbde5f26f8bb833180b0da1e5d828, &o.Value)
 }
-func (*binaryClassGlClearBufferuiv) New() binary.Object { return &GlClearBufferuiv{} }
 func (*binaryClassGlClearBufferuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearBufferuiv(e, obj.(*GlClearBufferuiv))
 }
@@ -9956,7 +9767,6 @@ func doDecodeGlClearColor(d binary.Decoder, o *GlClearColor) {
 	o.B = GLfloat(d.Float32())
 	o.A = GLfloat(d.Float32())
 }
-func (*binaryClassGlClearColor) New() binary.Object { return &GlClearColor{} }
 func (*binaryClassGlClearColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearColor(e, obj.(*GlClearColor))
 }
@@ -10002,7 +9812,6 @@ func doDecodeGlClearDepthf(d binary.Decoder, o *GlClearDepthf) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Depth = GLfloat(d.Float32())
 }
-func (*binaryClassGlClearDepthf) New() binary.Object { return &GlClearDepthf{} }
 func (*binaryClassGlClearDepthf) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearDepthf(e, obj.(*GlClearDepthf))
 }
@@ -10045,7 +9854,6 @@ func doDecodeGlClearStencil(d binary.Decoder, o *GlClearStencil) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Stencil = GLint(d.Int32())
 }
-func (*binaryClassGlClearStencil) New() binary.Object { return &GlClearStencil{} }
 func (*binaryClassGlClearStencil) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClearStencil(e, obj.(*GlClearStencil))
 }
@@ -10094,7 +9902,6 @@ func doDecodeGlClientWaitSync(d binary.Decoder, o *GlClientWaitSync) {
 	o.Timeout = GLuint64(d.Uint64())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlClientWaitSync) New() binary.Object { return &GlClientWaitSync{} }
 func (*binaryClassGlClientWaitSync) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClientWaitSync(e, obj.(*GlClientWaitSync))
 }
@@ -10146,7 +9953,6 @@ func doDecodeGlClientWaitSyncAPPLE(d binary.Decoder, o *GlClientWaitSyncAPPLE) {
 	o.Timeout = GLuint64(d.Uint64())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlClientWaitSyncAPPLE) New() binary.Object { return &GlClientWaitSyncAPPLE{} }
 func (*binaryClassGlClientWaitSyncAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlClientWaitSyncAPPLE(e, obj.(*GlClientWaitSyncAPPLE))
 }
@@ -10198,7 +10004,6 @@ func doDecodeGlColorMask(d binary.Decoder, o *GlColorMask) {
 	o.Blue = GLboolean(d.Uint8())
 	o.Alpha = GLboolean(d.Uint8())
 }
-func (*binaryClassGlColorMask) New() binary.Object { return &GlColorMask{} }
 func (*binaryClassGlColorMask) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlColorMask(e, obj.(*GlColorMask))
 }
@@ -10252,7 +10057,6 @@ func doDecodeGlColorMaski(d binary.Decoder, o *GlColorMaski) {
 	o.B = GLboolean(d.Uint8())
 	o.A = GLboolean(d.Uint8())
 }
-func (*binaryClassGlColorMaski) New() binary.Object { return &GlColorMaski{} }
 func (*binaryClassGlColorMaski) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlColorMaski(e, obj.(*GlColorMaski))
 }
@@ -10307,7 +10111,6 @@ func doDecodeGlColorMaskiEXT(d binary.Decoder, o *GlColorMaskiEXT) {
 	o.B = GLboolean(d.Uint8())
 	o.A = GLboolean(d.Uint8())
 }
-func (*binaryClassGlColorMaskiEXT) New() binary.Object { return &GlColorMaskiEXT{} }
 func (*binaryClassGlColorMaskiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlColorMaskiEXT(e, obj.(*GlColorMaskiEXT))
 }
@@ -10362,7 +10165,6 @@ func doDecodeGlColorMaskiOES(d binary.Decoder, o *GlColorMaskiOES) {
 	o.B = GLboolean(d.Uint8())
 	o.A = GLboolean(d.Uint8())
 }
-func (*binaryClassGlColorMaskiOES) New() binary.Object { return &GlColorMaskiOES{} }
 func (*binaryClassGlColorMaskiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlColorMaskiOES(e, obj.(*GlColorMaskiOES))
 }
@@ -10409,7 +10211,6 @@ func doDecodeGlCompileShader(d binary.Decoder, o *GlCompileShader) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Shader = ShaderId(d.Uint32())
 }
-func (*binaryClassGlCompileShader) New() binary.Object { return &GlCompileShader{} }
 func (*binaryClassGlCompileShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompileShader(e, obj.(*GlCompileShader))
 }
@@ -10450,7 +10251,6 @@ func doDecodeTexturePointer(d binary.Decoder, o *TexturePointer) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassTexturePointer) New() binary.Object { return &TexturePointer{} }
 func (*binaryClassTexturePointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTexturePointer(e, obj.(*TexturePointer))
 }
@@ -10513,7 +10313,6 @@ func doDecodeGlCompressedTexImage2D(d binary.Decoder, o *GlCompressedTexImage2D)
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexImage2D) New() binary.Object { return &GlCompressedTexImage2D{} }
 func (*binaryClassGlCompressedTexImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexImage2D(e, obj.(*GlCompressedTexImage2D))
 }
@@ -10586,7 +10385,6 @@ func doDecodeGlCompressedTexImage3D(d binary.Decoder, o *GlCompressedTexImage3D)
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexImage3D) New() binary.Object { return &GlCompressedTexImage3D{} }
 func (*binaryClassGlCompressedTexImage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexImage3D(e, obj.(*GlCompressedTexImage3D))
 }
@@ -10660,7 +10458,6 @@ func doDecodeGlCompressedTexImage3DOES(d binary.Decoder, o *GlCompressedTexImage
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexImage3DOES) New() binary.Object { return &GlCompressedTexImage3DOES{} }
 func (*binaryClassGlCompressedTexImage3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexImage3DOES(e, obj.(*GlCompressedTexImage3DOES))
 }
@@ -10736,7 +10533,6 @@ func doDecodeGlCompressedTexSubImage2D(d binary.Decoder, o *GlCompressedTexSubIm
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexSubImage2D) New() binary.Object { return &GlCompressedTexSubImage2D{} }
 func (*binaryClassGlCompressedTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexSubImage2D(e, obj.(*GlCompressedTexSubImage2D))
 }
@@ -10816,7 +10612,6 @@ func doDecodeGlCompressedTexSubImage3D(d binary.Decoder, o *GlCompressedTexSubIm
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexSubImage3D) New() binary.Object { return &GlCompressedTexSubImage3D{} }
 func (*binaryClassGlCompressedTexSubImage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexSubImage3D(e, obj.(*GlCompressedTexSubImage3D))
 }
@@ -10898,9 +10693,6 @@ func doDecodeGlCompressedTexSubImage3DOES(d binary.Decoder, o *GlCompressedTexSu
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlCompressedTexSubImage3DOES) New() binary.Object {
-	return &GlCompressedTexSubImage3DOES{}
-}
 func (*binaryClassGlCompressedTexSubImage3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCompressedTexSubImage3DOES(e, obj.(*GlCompressedTexSubImage3DOES))
 }
@@ -10963,7 +10755,6 @@ func doDecodeGlCopyBufferSubData(d binary.Decoder, o *GlCopyBufferSubData) {
 	o.WriteOffset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlCopyBufferSubData) New() binary.Object { return &GlCopyBufferSubData{} }
 func (*binaryClassGlCopyBufferSubData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyBufferSubData(e, obj.(*GlCopyBufferSubData))
 }
@@ -11018,7 +10809,6 @@ func doDecodeGlCopyBufferSubDataNV(d binary.Decoder, o *GlCopyBufferSubDataNV) {
 	o.WriteOffset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlCopyBufferSubDataNV) New() binary.Object { return &GlCopyBufferSubDataNV{} }
 func (*binaryClassGlCopyBufferSubDataNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyBufferSubDataNV(e, obj.(*GlCopyBufferSubDataNV))
 }
@@ -11093,7 +10883,6 @@ func doDecodeGlCopyImageSubData(d binary.Decoder, o *GlCopyImageSubData) {
 	o.SrcHeight = GLsizei(d.Int32())
 	o.SrcDepth = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyImageSubData) New() binary.Object { return &GlCopyImageSubData{} }
 func (*binaryClassGlCopyImageSubData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyImageSubData(e, obj.(*GlCopyImageSubData))
 }
@@ -11178,7 +10967,6 @@ func doDecodeGlCopyImageSubDataEXT(d binary.Decoder, o *GlCopyImageSubDataEXT) {
 	o.SrcHeight = GLsizei(d.Int32())
 	o.SrcDepth = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyImageSubDataEXT) New() binary.Object { return &GlCopyImageSubDataEXT{} }
 func (*binaryClassGlCopyImageSubDataEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyImageSubDataEXT(e, obj.(*GlCopyImageSubDataEXT))
 }
@@ -11263,7 +11051,6 @@ func doDecodeGlCopyImageSubDataOES(d binary.Decoder, o *GlCopyImageSubDataOES) {
 	o.SrcHeight = GLsizei(d.Int32())
 	o.SrcDepth = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyImageSubDataOES) New() binary.Object { return &GlCopyImageSubDataOES{} }
 func (*binaryClassGlCopyImageSubDataOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyImageSubDataOES(e, obj.(*GlCopyImageSubDataOES))
 }
@@ -11322,7 +11109,6 @@ func doDecodeGlCopyPathNV(d binary.Decoder, o *GlCopyPathNV) {
 	o.ResultPath = GLuint(d.Uint32())
 	o.SrcPath = GLuint(d.Uint32())
 }
-func (*binaryClassGlCopyPathNV) New() binary.Object { return &GlCopyPathNV{} }
 func (*binaryClassGlCopyPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyPathNV(e, obj.(*GlCopyPathNV))
 }
@@ -11380,7 +11166,6 @@ func doDecodeGlCopyTexImage2D(d binary.Decoder, o *GlCopyTexImage2D) {
 	o.Height = GLsizei(d.Int32())
 	o.Border = GLint(d.Int32())
 }
-func (*binaryClassGlCopyTexImage2D) New() binary.Object { return &GlCopyTexImage2D{} }
 func (*binaryClassGlCopyTexImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyTexImage2D(e, obj.(*GlCopyTexImage2D))
 }
@@ -11444,7 +11229,6 @@ func doDecodeGlCopyTexSubImage2D(d binary.Decoder, o *GlCopyTexSubImage2D) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyTexSubImage2D) New() binary.Object { return &GlCopyTexSubImage2D{} }
 func (*binaryClassGlCopyTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyTexSubImage2D(e, obj.(*GlCopyTexSubImage2D))
 }
@@ -11510,7 +11294,6 @@ func doDecodeGlCopyTexSubImage3D(d binary.Decoder, o *GlCopyTexSubImage3D) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyTexSubImage3D) New() binary.Object { return &GlCopyTexSubImage3D{} }
 func (*binaryClassGlCopyTexSubImage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyTexSubImage3D(e, obj.(*GlCopyTexSubImage3D))
 }
@@ -11577,7 +11360,6 @@ func doDecodeGlCopyTexSubImage3DOES(d binary.Decoder, o *GlCopyTexSubImage3DOES)
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyTexSubImage3DOES) New() binary.Object { return &GlCopyTexSubImage3DOES{} }
 func (*binaryClassGlCopyTexSubImage3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyTexSubImage3DOES(e, obj.(*GlCopyTexSubImage3DOES))
 }
@@ -11634,7 +11416,6 @@ func doDecodeGlCopyTextureLevelsAPPLE(d binary.Decoder, o *GlCopyTextureLevelsAP
 	o.SourceBaseLevel = GLint(d.Int32())
 	o.SourceLevelCount = GLsizei(d.Int32())
 }
-func (*binaryClassGlCopyTextureLevelsAPPLE) New() binary.Object { return &GlCopyTextureLevelsAPPLE{} }
 func (*binaryClassGlCopyTextureLevelsAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCopyTextureLevelsAPPLE(e, obj.(*GlCopyTextureLevelsAPPLE))
 }
@@ -11708,9 +11489,6 @@ func doDecodeGlCoverFillPathInstancedNV(d binary.Decoder, o *GlCoverFillPathInst
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlCoverFillPathInstancedNV) New() binary.Object {
-	return &GlCoverFillPathInstancedNV{}
-}
 func (*binaryClassGlCoverFillPathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverFillPathInstancedNV(e, obj.(*GlCoverFillPathInstancedNV))
 }
@@ -11763,7 +11541,6 @@ func doDecodeGlCoverFillPathNV(d binary.Decoder, o *GlCoverFillPathNV) {
 	o.Path = GLuint(d.Uint32())
 	o.CoverMode = GLenum(d.Uint32())
 }
-func (*binaryClassGlCoverFillPathNV) New() binary.Object { return &GlCoverFillPathNV{} }
 func (*binaryClassGlCoverFillPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverFillPathNV(e, obj.(*GlCoverFillPathNV))
 }
@@ -11833,9 +11610,6 @@ func doDecodeGlCoverStrokePathInstancedNV(d binary.Decoder, o *GlCoverStrokePath
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlCoverStrokePathInstancedNV) New() binary.Object {
-	return &GlCoverStrokePathInstancedNV{}
-}
 func (*binaryClassGlCoverStrokePathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverStrokePathInstancedNV(e, obj.(*GlCoverStrokePathInstancedNV))
 }
@@ -11888,7 +11662,6 @@ func doDecodeGlCoverStrokePathNV(d binary.Decoder, o *GlCoverStrokePathNV) {
 	o.Path = GLuint(d.Uint32())
 	o.CoverMode = GLenum(d.Uint32())
 }
-func (*binaryClassGlCoverStrokePathNV) New() binary.Object { return &GlCoverStrokePathNV{} }
 func (*binaryClassGlCoverStrokePathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverStrokePathNV(e, obj.(*GlCoverStrokePathNV))
 }
@@ -11932,7 +11705,6 @@ func doDecodeGlCoverageMaskNV(d binary.Decoder, o *GlCoverageMaskNV) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Mask = GLboolean(d.Uint8())
 }
-func (*binaryClassGlCoverageMaskNV) New() binary.Object { return &GlCoverageMaskNV{} }
 func (*binaryClassGlCoverageMaskNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverageMaskNV(e, obj.(*GlCoverageMaskNV))
 }
@@ -11975,7 +11747,6 @@ func doDecodeGlCoverageModulationNV(d binary.Decoder, o *GlCoverageModulationNV)
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Components = GLenum(d.Uint32())
 }
-func (*binaryClassGlCoverageModulationNV) New() binary.Object { return &GlCoverageModulationNV{} }
 func (*binaryClassGlCoverageModulationNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverageModulationNV(e, obj.(*GlCoverageModulationNV))
 }
@@ -12027,9 +11798,6 @@ func doDecodeGlCoverageModulationTableNV(d binary.Decoder, o *GlCoverageModulati
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlCoverageModulationTableNV) New() binary.Object {
-	return &GlCoverageModulationTableNV{}
-}
 func (*binaryClassGlCoverageModulationTableNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverageModulationTableNV(e, obj.(*GlCoverageModulationTableNV))
 }
@@ -12075,7 +11843,6 @@ func doDecodeGlCoverageOperationNV(d binary.Decoder, o *GlCoverageOperationNV) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Operation = GLenum(d.Uint32())
 }
-func (*binaryClassGlCoverageOperationNV) New() binary.Object { return &GlCoverageOperationNV{} }
 func (*binaryClassGlCoverageOperationNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCoverageOperationNV(e, obj.(*GlCoverageOperationNV))
 }
@@ -12127,7 +11894,6 @@ func doDecodeGlCreatePerfQueryINTEL(d binary.Decoder, o *GlCreatePerfQueryINTEL)
 	}
 	d.Struct(ent_64ab191c15a5d46dd45e1da254831148fd1f1c8f, &o.QueryHandle)
 }
-func (*binaryClassGlCreatePerfQueryINTEL) New() binary.Object { return &GlCreatePerfQueryINTEL{} }
 func (*binaryClassGlCreatePerfQueryINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCreatePerfQueryINTEL(e, obj.(*GlCreatePerfQueryINTEL))
 }
@@ -12171,7 +11937,6 @@ func doDecodeGlCreateProgram(d binary.Decoder, o *GlCreateProgram) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Result = ProgramId(d.Uint32())
 }
-func (*binaryClassGlCreateProgram) New() binary.Object { return &GlCreateProgram{} }
 func (*binaryClassGlCreateProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCreateProgram(e, obj.(*GlCreateProgram))
 }
@@ -12216,7 +11981,6 @@ func doDecodeGlCreateShader(d binary.Decoder, o *GlCreateShader) {
 	o.Type = GLenum(d.Uint32())
 	o.Result = ShaderId(d.Uint32())
 }
-func (*binaryClassGlCreateShader) New() binary.Object { return &GlCreateShader{} }
 func (*binaryClassGlCreateShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCreateShader(e, obj.(*GlCreateShader))
 }
@@ -12273,7 +12037,6 @@ func doDecodeGlCreateShaderProgramv(d binary.Decoder, o *GlCreateShaderProgramv)
 	d.Struct(ent_bb424a7fac9055908cf61d92a0100a74271861d0, &o.Strings)
 	o.Result = ProgramId(d.Uint32())
 }
-func (*binaryClassGlCreateShaderProgramv) New() binary.Object { return &GlCreateShaderProgramv{} }
 func (*binaryClassGlCreateShaderProgramv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCreateShaderProgramv(e, obj.(*GlCreateShaderProgramv))
 }
@@ -12332,7 +12095,6 @@ func doDecodeGlCreateShaderProgramvEXT(d binary.Decoder, o *GlCreateShaderProgra
 	d.Struct(ent_206b43819fc6f139e0c9cd60b1727c7be8ccbccb, &o.Strings)
 	o.Result = GLuint(d.Uint32())
 }
-func (*binaryClassGlCreateShaderProgramvEXT) New() binary.Object { return &GlCreateShaderProgramvEXT{} }
 func (*binaryClassGlCreateShaderProgramvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCreateShaderProgramvEXT(e, obj.(*GlCreateShaderProgramvEXT))
 }
@@ -12380,7 +12142,6 @@ func doDecodeGlCullFace(d binary.Decoder, o *GlCullFace) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlCullFace) New() binary.Object { return &GlCullFace{} }
 func (*binaryClassGlCullFace) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlCullFace(e, obj.(*GlCullFace))
 }
@@ -12439,7 +12200,6 @@ func doDecodeGlDebugMessageCallback(d binary.Decoder, o *GlDebugMessageCallback)
 	}
 	d.Struct(ent_407ad795674e66bd0ca8b1241beda37bd65be97e, &o.UserParam)
 }
-func (*binaryClassGlDebugMessageCallback) New() binary.Object { return &GlDebugMessageCallback{} }
 func (*binaryClassGlDebugMessageCallback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageCallback(e, obj.(*GlDebugMessageCallback))
 }
@@ -12499,7 +12259,6 @@ func doDecodeGlDebugMessageCallbackKHR(d binary.Decoder, o *GlDebugMessageCallba
 	}
 	d.Struct(ent_407ad795674e66bd0ca8b1241beda37bd65be97e, &o.UserParam)
 }
-func (*binaryClassGlDebugMessageCallbackKHR) New() binary.Object { return &GlDebugMessageCallbackKHR{} }
 func (*binaryClassGlDebugMessageCallbackKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageCallbackKHR(e, obj.(*GlDebugMessageCallbackKHR))
 }
@@ -12562,7 +12321,6 @@ func doDecodeGlDebugMessageControl(d binary.Decoder, o *GlDebugMessageControl) {
 	d.Struct(ent_34d035beb841c223caad6a22a712ed4861f6fc11, &o.Ids)
 	o.Enabled = GLboolean(d.Uint8())
 }
-func (*binaryClassGlDebugMessageControl) New() binary.Object { return &GlDebugMessageControl{} }
 func (*binaryClassGlDebugMessageControl) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageControl(e, obj.(*GlDebugMessageControl))
 }
@@ -12627,7 +12385,6 @@ func doDecodeGlDebugMessageControlKHR(d binary.Decoder, o *GlDebugMessageControl
 	d.Struct(ent_34d035beb841c223caad6a22a712ed4861f6fc11, &o.Ids)
 	o.Enabled = GLboolean(d.Uint8())
 }
-func (*binaryClassGlDebugMessageControlKHR) New() binary.Object { return &GlDebugMessageControlKHR{} }
 func (*binaryClassGlDebugMessageControlKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageControlKHR(e, obj.(*GlDebugMessageControlKHR))
 }
@@ -12694,7 +12451,6 @@ func doDecodeGlDebugMessageInsert(d binary.Decoder, o *GlDebugMessageInsert) {
 	}
 	d.Struct(ent_161b3edbe1f8db830a4536c83bd0d8275391dac1, &o.Message)
 }
-func (*binaryClassGlDebugMessageInsert) New() binary.Object { return &GlDebugMessageInsert{} }
 func (*binaryClassGlDebugMessageInsert) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageInsert(e, obj.(*GlDebugMessageInsert))
 }
@@ -12759,7 +12515,6 @@ func doDecodeGlDebugMessageInsertKHR(d binary.Decoder, o *GlDebugMessageInsertKH
 	}
 	d.Struct(ent_161b3edbe1f8db830a4536c83bd0d8275391dac1, &o.Message)
 }
-func (*binaryClassGlDebugMessageInsertKHR) New() binary.Object { return &GlDebugMessageInsertKHR{} }
 func (*binaryClassGlDebugMessageInsertKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDebugMessageInsertKHR(e, obj.(*GlDebugMessageInsertKHR))
 }
@@ -12818,7 +12573,6 @@ func doDecodeGlDeleteBuffers(d binary.Decoder, o *GlDeleteBuffers) {
 	}
 	d.Struct(ent_7692358d0133c51ca3340721c49fc02ac95271ec, &o.Buffers)
 }
-func (*binaryClassGlDeleteBuffers) New() binary.Object { return &GlDeleteBuffers{} }
 func (*binaryClassGlDeleteBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteBuffers(e, obj.(*GlDeleteBuffers))
 }
@@ -12871,7 +12625,6 @@ func doDecodeGlDeleteFencesNV(d binary.Decoder, o *GlDeleteFencesNV) {
 	}
 	d.Struct(ent_b8c230bc500a628c6a9c83092b4b0112deb07d1f, &o.Fences)
 }
-func (*binaryClassGlDeleteFencesNV) New() binary.Object { return &GlDeleteFencesNV{} }
 func (*binaryClassGlDeleteFencesNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteFencesNV(e, obj.(*GlDeleteFencesNV))
 }
@@ -12924,7 +12677,6 @@ func doDecodeGlDeleteFramebuffers(d binary.Decoder, o *GlDeleteFramebuffers) {
 	}
 	d.Struct(ent_d0d04c777b76bb06dfa70945b3687e20ec78c0b3, &o.Framebuffers)
 }
-func (*binaryClassGlDeleteFramebuffers) New() binary.Object { return &GlDeleteFramebuffers{} }
 func (*binaryClassGlDeleteFramebuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteFramebuffers(e, obj.(*GlDeleteFramebuffers))
 }
@@ -12970,7 +12722,6 @@ func doDecodeGlDeletePathsNV(d binary.Decoder, o *GlDeletePathsNV) {
 	o.Path = GLuint(d.Uint32())
 	o.Range = GLsizei(d.Int32())
 }
-func (*binaryClassGlDeletePathsNV) New() binary.Object { return &GlDeletePathsNV{} }
 func (*binaryClassGlDeletePathsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeletePathsNV(e, obj.(*GlDeletePathsNV))
 }
@@ -13023,7 +12774,6 @@ func doDecodeGlDeletePerfMonitorsAMD(d binary.Decoder, o *GlDeletePerfMonitorsAM
 	}
 	d.Struct(ent_d54305026631d6439d994a2cc9758c5a8c03267c, &o.Monitors)
 }
-func (*binaryClassGlDeletePerfMonitorsAMD) New() binary.Object { return &GlDeletePerfMonitorsAMD{} }
 func (*binaryClassGlDeletePerfMonitorsAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeletePerfMonitorsAMD(e, obj.(*GlDeletePerfMonitorsAMD))
 }
@@ -13069,7 +12819,6 @@ func doDecodeGlDeletePerfQueryINTEL(d binary.Decoder, o *GlDeletePerfQueryINTEL)
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.QueryHandle = GLuint(d.Uint32())
 }
-func (*binaryClassGlDeletePerfQueryINTEL) New() binary.Object { return &GlDeletePerfQueryINTEL{} }
 func (*binaryClassGlDeletePerfQueryINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeletePerfQueryINTEL(e, obj.(*GlDeletePerfQueryINTEL))
 }
@@ -13112,7 +12861,6 @@ func doDecodeGlDeleteProgram(d binary.Decoder, o *GlDeleteProgram) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlDeleteProgram) New() binary.Object { return &GlDeleteProgram{} }
 func (*binaryClassGlDeleteProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteProgram(e, obj.(*GlDeleteProgram))
 }
@@ -13153,7 +12901,6 @@ func doDecodePipelineIdᶜᵖ(d binary.Decoder, o *PipelineIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassPipelineIdᶜᵖ) New() binary.Object { return &PipelineIdᶜᵖ{} }
 func (*binaryClassPipelineIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePipelineIdᶜᵖ(e, obj.(*PipelineIdᶜᵖ))
 }
@@ -13204,7 +12951,6 @@ func doDecodeGlDeleteProgramPipelines(d binary.Decoder, o *GlDeleteProgramPipeli
 	}
 	d.Struct(ent_90ff993f2f8f078b5b6d19c7fc258d730b1e5316, &o.Pipelines)
 }
-func (*binaryClassGlDeleteProgramPipelines) New() binary.Object { return &GlDeleteProgramPipelines{} }
 func (*binaryClassGlDeleteProgramPipelines) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteProgramPipelines(e, obj.(*GlDeleteProgramPipelines))
 }
@@ -13259,9 +13005,6 @@ func doDecodeGlDeleteProgramPipelinesEXT(d binary.Decoder, o *GlDeleteProgramPip
 	}
 	d.Struct(ent_90ff993f2f8f078b5b6d19c7fc258d730b1e5316, &o.Pipelines)
 }
-func (*binaryClassGlDeleteProgramPipelinesEXT) New() binary.Object {
-	return &GlDeleteProgramPipelinesEXT{}
-}
 func (*binaryClassGlDeleteProgramPipelinesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteProgramPipelinesEXT(e, obj.(*GlDeleteProgramPipelinesEXT))
 }
@@ -13305,7 +13048,6 @@ func doDecodeQueryIdᶜᵖ(d binary.Decoder, o *QueryIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassQueryIdᶜᵖ) New() binary.Object { return &QueryIdᶜᵖ{} }
 func (*binaryClassQueryIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQueryIdᶜᵖ(e, obj.(*QueryIdᶜᵖ))
 }
@@ -13356,7 +13098,6 @@ func doDecodeGlDeleteQueries(d binary.Decoder, o *GlDeleteQueries) {
 	}
 	d.Struct(ent_a70f5fca5ed5cec97b2011e682ed295fc0b0d585, &o.Queries)
 }
-func (*binaryClassGlDeleteQueries) New() binary.Object { return &GlDeleteQueries{} }
 func (*binaryClassGlDeleteQueries) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteQueries(e, obj.(*GlDeleteQueries))
 }
@@ -13409,7 +13150,6 @@ func doDecodeGlDeleteQueriesEXT(d binary.Decoder, o *GlDeleteQueriesEXT) {
 	}
 	d.Struct(ent_a70f5fca5ed5cec97b2011e682ed295fc0b0d585, &o.Queries)
 }
-func (*binaryClassGlDeleteQueriesEXT) New() binary.Object { return &GlDeleteQueriesEXT{} }
 func (*binaryClassGlDeleteQueriesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteQueriesEXT(e, obj.(*GlDeleteQueriesEXT))
 }
@@ -13451,7 +13191,6 @@ func doDecodeRenderbufferIdᶜᵖ(d binary.Decoder, o *RenderbufferIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassRenderbufferIdᶜᵖ) New() binary.Object { return &RenderbufferIdᶜᵖ{} }
 func (*binaryClassRenderbufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbufferIdᶜᵖ(e, obj.(*RenderbufferIdᶜᵖ))
 }
@@ -13502,7 +13241,6 @@ func doDecodeGlDeleteRenderbuffers(d binary.Decoder, o *GlDeleteRenderbuffers) {
 	}
 	d.Struct(ent_15531c3490c5c2ba2fb9d12c9ddcb4489dfa9b01, &o.Renderbuffers)
 }
-func (*binaryClassGlDeleteRenderbuffers) New() binary.Object { return &GlDeleteRenderbuffers{} }
 func (*binaryClassGlDeleteRenderbuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteRenderbuffers(e, obj.(*GlDeleteRenderbuffers))
 }
@@ -13544,7 +13282,6 @@ func doDecodeSamplerIdᶜᵖ(d binary.Decoder, o *SamplerIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassSamplerIdᶜᵖ) New() binary.Object { return &SamplerIdᶜᵖ{} }
 func (*binaryClassSamplerIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSamplerIdᶜᵖ(e, obj.(*SamplerIdᶜᵖ))
 }
@@ -13595,7 +13332,6 @@ func doDecodeGlDeleteSamplers(d binary.Decoder, o *GlDeleteSamplers) {
 	}
 	d.Struct(ent_91d677410cd9bc57df99d6dc7be7fb8d411d4d92, &o.Samplers)
 }
-func (*binaryClassGlDeleteSamplers) New() binary.Object { return &GlDeleteSamplers{} }
 func (*binaryClassGlDeleteSamplers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteSamplers(e, obj.(*GlDeleteSamplers))
 }
@@ -13639,7 +13375,6 @@ func doDecodeGlDeleteShader(d binary.Decoder, o *GlDeleteShader) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Shader = ShaderId(d.Uint32())
 }
-func (*binaryClassGlDeleteShader) New() binary.Object { return &GlDeleteShader{} }
 func (*binaryClassGlDeleteShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteShader(e, obj.(*GlDeleteShader))
 }
@@ -13682,7 +13417,6 @@ func doDecodeGlDeleteSync(d binary.Decoder, o *GlDeleteSync) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Sync = GLsync(d.Uint64())
 }
-func (*binaryClassGlDeleteSync) New() binary.Object { return &GlDeleteSync{} }
 func (*binaryClassGlDeleteSync) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteSync(e, obj.(*GlDeleteSync))
 }
@@ -13725,7 +13459,6 @@ func doDecodeGlDeleteSyncAPPLE(d binary.Decoder, o *GlDeleteSyncAPPLE) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Sync = GLsync(d.Uint64())
 }
-func (*binaryClassGlDeleteSyncAPPLE) New() binary.Object { return &GlDeleteSyncAPPLE{} }
 func (*binaryClassGlDeleteSyncAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteSyncAPPLE(e, obj.(*GlDeleteSyncAPPLE))
 }
@@ -13766,7 +13499,6 @@ func doDecodeTextureIdᶜᵖ(d binary.Decoder, o *TextureIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassTextureIdᶜᵖ) New() binary.Object { return &TextureIdᶜᵖ{} }
 func (*binaryClassTextureIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureIdᶜᵖ(e, obj.(*TextureIdᶜᵖ))
 }
@@ -13817,7 +13549,6 @@ func doDecodeGlDeleteTextures(d binary.Decoder, o *GlDeleteTextures) {
 	}
 	d.Struct(ent_2129d10003ff8d018ac11e934bc07d0ab17e2918, &o.Textures)
 }
-func (*binaryClassGlDeleteTextures) New() binary.Object { return &GlDeleteTextures{} }
 func (*binaryClassGlDeleteTextures) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteTextures(e, obj.(*GlDeleteTextures))
 }
@@ -13859,7 +13590,6 @@ func doDecodeTransformFeedbackIdᶜᵖ(d binary.Decoder, o *TransformFeedbackId�
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassTransformFeedbackIdᶜᵖ) New() binary.Object { return &TransformFeedbackIdᶜᵖ{} }
 func (*binaryClassTransformFeedbackIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTransformFeedbackIdᶜᵖ(e, obj.(*TransformFeedbackIdᶜᵖ))
 }
@@ -13912,9 +13642,6 @@ func doDecodeGlDeleteTransformFeedbacks(d binary.Decoder, o *GlDeleteTransformFe
 	}
 	d.Struct(ent_9f940f97be7506bc6dd16785e2ae2a993c9f9a22, &o.Ids)
 }
-func (*binaryClassGlDeleteTransformFeedbacks) New() binary.Object {
-	return &GlDeleteTransformFeedbacks{}
-}
 func (*binaryClassGlDeleteTransformFeedbacks) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteTransformFeedbacks(e, obj.(*GlDeleteTransformFeedbacks))
 }
@@ -13958,7 +13685,6 @@ func doDecodeVertexArrayIdᶜᵖ(d binary.Decoder, o *VertexArrayIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVertexArrayIdᶜᵖ) New() binary.Object { return &VertexArrayIdᶜᵖ{} }
 func (*binaryClassVertexArrayIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArrayIdᶜᵖ(e, obj.(*VertexArrayIdᶜᵖ))
 }
@@ -14009,7 +13735,6 @@ func doDecodeGlDeleteVertexArrays(d binary.Decoder, o *GlDeleteVertexArrays) {
 	}
 	d.Struct(ent_df75e034d4e9d7686d4421455563418e8539c5eb, &o.Arrays)
 }
-func (*binaryClassGlDeleteVertexArrays) New() binary.Object { return &GlDeleteVertexArrays{} }
 func (*binaryClassGlDeleteVertexArrays) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteVertexArrays(e, obj.(*GlDeleteVertexArrays))
 }
@@ -14062,7 +13787,6 @@ func doDecodeGlDeleteVertexArraysOES(d binary.Decoder, o *GlDeleteVertexArraysOE
 	}
 	d.Struct(ent_df75e034d4e9d7686d4421455563418e8539c5eb, &o.Arrays)
 }
-func (*binaryClassGlDeleteVertexArraysOES) New() binary.Object { return &GlDeleteVertexArraysOES{} }
 func (*binaryClassGlDeleteVertexArraysOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDeleteVertexArraysOES(e, obj.(*GlDeleteVertexArraysOES))
 }
@@ -14108,7 +13832,6 @@ func doDecodeGlDepthFunc(d binary.Decoder, o *GlDepthFunc) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Function = GLenum(d.Uint32())
 }
-func (*binaryClassGlDepthFunc) New() binary.Object { return &GlDepthFunc{} }
 func (*binaryClassGlDepthFunc) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDepthFunc(e, obj.(*GlDepthFunc))
 }
@@ -14151,7 +13874,6 @@ func doDecodeGlDepthMask(d binary.Decoder, o *GlDepthMask) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Enabled = GLboolean(d.Uint8())
 }
-func (*binaryClassGlDepthMask) New() binary.Object { return &GlDepthMask{} }
 func (*binaryClassGlDepthMask) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDepthMask(e, obj.(*GlDepthMask))
 }
@@ -14205,7 +13927,6 @@ func doDecodeGlDepthRangeArrayfvNV(d binary.Decoder, o *GlDepthRangeArrayfvNV) {
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlDepthRangeArrayfvNV) New() binary.Object { return &GlDepthRangeArrayfvNV{} }
 func (*binaryClassGlDepthRangeArrayfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDepthRangeArrayfvNV(e, obj.(*GlDepthRangeArrayfvNV))
 }
@@ -14254,7 +13975,6 @@ func doDecodeGlDepthRangeIndexedfNV(d binary.Decoder, o *GlDepthRangeIndexedfNV)
 	o.N = GLfloat(d.Float32())
 	o.F = GLfloat(d.Float32())
 }
-func (*binaryClassGlDepthRangeIndexedfNV) New() binary.Object { return &GlDepthRangeIndexedfNV{} }
 func (*binaryClassGlDepthRangeIndexedfNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDepthRangeIndexedfNV(e, obj.(*GlDepthRangeIndexedfNV))
 }
@@ -14301,7 +14021,6 @@ func doDecodeGlDepthRangef(d binary.Decoder, o *GlDepthRangef) {
 	o.Near = GLfloat(d.Float32())
 	o.Far = GLfloat(d.Float32())
 }
-func (*binaryClassGlDepthRangef) New() binary.Object { return &GlDepthRangef{} }
 func (*binaryClassGlDepthRangef) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDepthRangef(e, obj.(*GlDepthRangef))
 }
@@ -14347,7 +14066,6 @@ func doDecodeGlDetachShader(d binary.Decoder, o *GlDetachShader) {
 	o.Program = ProgramId(d.Uint32())
 	o.Shader = ShaderId(d.Uint32())
 }
-func (*binaryClassGlDetachShader) New() binary.Object { return &GlDetachShader{} }
 func (*binaryClassGlDetachShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDetachShader(e, obj.(*GlDetachShader))
 }
@@ -14391,7 +14109,6 @@ func doDecodeGlDisable(d binary.Decoder, o *GlDisable) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Capability = GLenum(d.Uint32())
 }
-func (*binaryClassGlDisable) New() binary.Object { return &GlDisable{} }
 func (*binaryClassGlDisable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisable(e, obj.(*GlDisable))
 }
@@ -14433,9 +14150,6 @@ func doDecodeGlDisableDriverControlQCOM(d binary.Decoder, o *GlDisableDriverCont
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.DriverControl = GLuint(d.Uint32())
-}
-func (*binaryClassGlDisableDriverControlQCOM) New() binary.Object {
-	return &GlDisableDriverControlQCOM{}
 }
 func (*binaryClassGlDisableDriverControlQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisableDriverControlQCOM(e, obj.(*GlDisableDriverControlQCOM))
@@ -14480,9 +14194,6 @@ func doDecodeGlDisableVertexAttribArray(d binary.Decoder, o *GlDisableVertexAttr
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Location = AttributeLocation(d.Uint32())
-}
-func (*binaryClassGlDisableVertexAttribArray) New() binary.Object {
-	return &GlDisableVertexAttribArray{}
 }
 func (*binaryClassGlDisableVertexAttribArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisableVertexAttribArray(e, obj.(*GlDisableVertexAttribArray))
@@ -14530,7 +14241,6 @@ func doDecodeGlDisablei(d binary.Decoder, o *GlDisablei) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlDisablei) New() binary.Object { return &GlDisablei{} }
 func (*binaryClassGlDisablei) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisablei(e, obj.(*GlDisablei))
 }
@@ -14576,7 +14286,6 @@ func doDecodeGlDisableiEXT(d binary.Decoder, o *GlDisableiEXT) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlDisableiEXT) New() binary.Object { return &GlDisableiEXT{} }
 func (*binaryClassGlDisableiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisableiEXT(e, obj.(*GlDisableiEXT))
 }
@@ -14622,7 +14331,6 @@ func doDecodeGlDisableiNV(d binary.Decoder, o *GlDisableiNV) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlDisableiNV) New() binary.Object { return &GlDisableiNV{} }
 func (*binaryClassGlDisableiNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisableiNV(e, obj.(*GlDisableiNV))
 }
@@ -14668,7 +14376,6 @@ func doDecodeGlDisableiOES(d binary.Decoder, o *GlDisableiOES) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlDisableiOES) New() binary.Object { return &GlDisableiOES{} }
 func (*binaryClassGlDisableiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDisableiOES(e, obj.(*GlDisableiOES))
 }
@@ -14723,7 +14430,6 @@ func doDecodeGlDiscardFramebufferEXT(d binary.Decoder, o *GlDiscardFramebufferEX
 	}
 	d.Struct(ent_bee94d47fd93d2948f1c6cdc86d03289e6b39017, &o.Attachments)
 }
-func (*binaryClassGlDiscardFramebufferEXT) New() binary.Object { return &GlDiscardFramebufferEXT{} }
 func (*binaryClassGlDiscardFramebufferEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDiscardFramebufferEXT(e, obj.(*GlDiscardFramebufferEXT))
 }
@@ -14774,7 +14480,6 @@ func doDecodeGlDispatchCompute(d binary.Decoder, o *GlDispatchCompute) {
 	o.NumGroupsY = GLuint(d.Uint32())
 	o.NumGroupsZ = GLuint(d.Uint32())
 }
-func (*binaryClassGlDispatchCompute) New() binary.Object { return &GlDispatchCompute{} }
 func (*binaryClassGlDispatchCompute) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDispatchCompute(e, obj.(*GlDispatchCompute))
 }
@@ -14819,7 +14524,6 @@ func doDecodeGlDispatchComputeIndirect(d binary.Decoder, o *GlDispatchComputeInd
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Indirect = GLintptr(d.Int32())
 }
-func (*binaryClassGlDispatchComputeIndirect) New() binary.Object { return &GlDispatchComputeIndirect{} }
 func (*binaryClassGlDispatchComputeIndirect) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDispatchComputeIndirect(e, obj.(*GlDispatchComputeIndirect))
 }
@@ -14868,7 +14572,6 @@ func doDecodeGlDrawArrays(d binary.Decoder, o *GlDrawArrays) {
 	o.FirstIndex = GLint(d.Int32())
 	o.IndicesCount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawArrays) New() binary.Object { return &GlDrawArrays{} }
 func (*binaryClassGlDrawArrays) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArrays(e, obj.(*GlDrawArrays))
 }
@@ -14922,7 +14625,6 @@ func doDecodeGlDrawArraysIndirect(d binary.Decoder, o *GlDrawArraysIndirect) {
 	}
 	d.Struct(ent_d7a0de01ba2ea395786078a387d94a13d0c76009, &o.Indirect)
 }
-func (*binaryClassGlDrawArraysIndirect) New() binary.Object { return &GlDrawArraysIndirect{} }
 func (*binaryClassGlDrawArraysIndirect) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysIndirect(e, obj.(*GlDrawArraysIndirect))
 }
@@ -14972,7 +14674,6 @@ func doDecodeGlDrawArraysInstanced(d binary.Decoder, o *GlDrawArraysInstanced) {
 	o.IndicesCount = GLsizei(d.Int32())
 	o.InstanceCount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawArraysInstanced) New() binary.Object { return &GlDrawArraysInstanced{} }
 func (*binaryClassGlDrawArraysInstanced) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysInstanced(e, obj.(*GlDrawArraysInstanced))
 }
@@ -15023,9 +14724,6 @@ func doDecodeGlDrawArraysInstancedANGLE(d binary.Decoder, o *GlDrawArraysInstanc
 	o.First = GLint(d.Int32())
 	o.Count = GLsizei(d.Int32())
 	o.Primcount = GLsizei(d.Int32())
-}
-func (*binaryClassGlDrawArraysInstancedANGLE) New() binary.Object {
-	return &GlDrawArraysInstancedANGLE{}
 }
 func (*binaryClassGlDrawArraysInstancedANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysInstancedANGLE(e, obj.(*GlDrawArraysInstancedANGLE))
@@ -15082,9 +14780,6 @@ func doDecodeGlDrawArraysInstancedBaseInstanceEXT(d binary.Decoder, o *GlDrawArr
 	o.Instancecount = GLsizei(d.Int32())
 	o.Baseinstance = GLuint(d.Uint32())
 }
-func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) New() binary.Object {
-	return &GlDrawArraysInstancedBaseInstanceEXT{}
-}
 func (*binaryClassGlDrawArraysInstancedBaseInstanceEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysInstancedBaseInstanceEXT(e, obj.(*GlDrawArraysInstancedBaseInstanceEXT))
 }
@@ -15139,7 +14834,6 @@ func doDecodeGlDrawArraysInstancedEXT(d binary.Decoder, o *GlDrawArraysInstanced
 	o.Count = GLsizei(d.Int32())
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawArraysInstancedEXT) New() binary.Object { return &GlDrawArraysInstancedEXT{} }
 func (*binaryClassGlDrawArraysInstancedEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysInstancedEXT(e, obj.(*GlDrawArraysInstancedEXT))
 }
@@ -15193,7 +14887,6 @@ func doDecodeGlDrawArraysInstancedNV(d binary.Decoder, o *GlDrawArraysInstancedN
 	o.Count = GLsizei(d.Int32())
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawArraysInstancedNV) New() binary.Object { return &GlDrawArraysInstancedNV{} }
 func (*binaryClassGlDrawArraysInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawArraysInstancedNV(e, obj.(*GlDrawArraysInstancedNV))
 }
@@ -15250,7 +14943,6 @@ func doDecodeGlDrawBuffers(d binary.Decoder, o *GlDrawBuffers) {
 	}
 	d.Struct(ent_18ea364b60b38fdac04802c386dc8a13eeb3adaf, &o.Bufs)
 }
-func (*binaryClassGlDrawBuffers) New() binary.Object { return &GlDrawBuffers{} }
 func (*binaryClassGlDrawBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawBuffers(e, obj.(*GlDrawBuffers))
 }
@@ -15303,7 +14995,6 @@ func doDecodeGlDrawBuffersEXT(d binary.Decoder, o *GlDrawBuffersEXT) {
 	}
 	d.Struct(ent_18ea364b60b38fdac04802c386dc8a13eeb3adaf, &o.Bufs)
 }
-func (*binaryClassGlDrawBuffersEXT) New() binary.Object { return &GlDrawBuffersEXT{} }
 func (*binaryClassGlDrawBuffersEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawBuffersEXT(e, obj.(*GlDrawBuffersEXT))
 }
@@ -15365,7 +15056,6 @@ func doDecodeGlDrawBuffersIndexedEXT(d binary.Decoder, o *GlDrawBuffersIndexedEX
 	}
 	d.Struct(ent_abf2dccf75ffd5abb87578587fc21ed8ff338856, &o.Indices)
 }
-func (*binaryClassGlDrawBuffersIndexedEXT) New() binary.Object { return &GlDrawBuffersIndexedEXT{} }
 func (*binaryClassGlDrawBuffersIndexedEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawBuffersIndexedEXT(e, obj.(*GlDrawBuffersIndexedEXT))
 }
@@ -15421,7 +15111,6 @@ func doDecodeGlDrawBuffersNV(d binary.Decoder, o *GlDrawBuffersNV) {
 	}
 	d.Struct(ent_18ea364b60b38fdac04802c386dc8a13eeb3adaf, &o.Bufs)
 }
-func (*binaryClassGlDrawBuffersNV) New() binary.Object { return &GlDrawBuffersNV{} }
 func (*binaryClassGlDrawBuffersNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawBuffersNV(e, obj.(*GlDrawBuffersNV))
 }
@@ -15463,7 +15152,6 @@ func doDecodeIndicesPointer(d binary.Decoder, o *IndicesPointer) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassIndicesPointer) New() binary.Object { return &IndicesPointer{} }
 func (*binaryClassIndicesPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIndicesPointer(e, obj.(*IndicesPointer))
 }
@@ -15518,7 +15206,6 @@ func doDecodeGlDrawElements(d binary.Decoder, o *GlDrawElements) {
 	}
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 }
-func (*binaryClassGlDrawElements) New() binary.Object { return &GlDrawElements{} }
 func (*binaryClassGlDrawElements) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElements(e, obj.(*GlDrawElements))
 }
@@ -15579,7 +15266,6 @@ func doDecodeGlDrawElementsBaseVertex(d binary.Decoder, o *GlDrawElementsBaseVer
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.BaseVertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawElementsBaseVertex) New() binary.Object { return &GlDrawElementsBaseVertex{} }
 func (*binaryClassGlDrawElementsBaseVertex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsBaseVertex(e, obj.(*GlDrawElementsBaseVertex))
 }
@@ -15642,9 +15328,6 @@ func doDecodeGlDrawElementsBaseVertexEXT(d binary.Decoder, o *GlDrawElementsBase
 	}
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Basevertex = GLint(d.Int32())
-}
-func (*binaryClassGlDrawElementsBaseVertexEXT) New() binary.Object {
-	return &GlDrawElementsBaseVertexEXT{}
 }
 func (*binaryClassGlDrawElementsBaseVertexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsBaseVertexEXT(e, obj.(*GlDrawElementsBaseVertexEXT))
@@ -15709,9 +15392,6 @@ func doDecodeGlDrawElementsBaseVertexOES(d binary.Decoder, o *GlDrawElementsBase
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Basevertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawElementsBaseVertexOES) New() binary.Object {
-	return &GlDrawElementsBaseVertexOES{}
-}
 func (*binaryClassGlDrawElementsBaseVertexOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsBaseVertexOES(e, obj.(*GlDrawElementsBaseVertexOES))
 }
@@ -15771,7 +15451,6 @@ func doDecodeGlDrawElementsIndirect(d binary.Decoder, o *GlDrawElementsIndirect)
 	}
 	d.Struct(ent_d7a0de01ba2ea395786078a387d94a13d0c76009, &o.Indirect)
 }
-func (*binaryClassGlDrawElementsIndirect) New() binary.Object { return &GlDrawElementsIndirect{} }
 func (*binaryClassGlDrawElementsIndirect) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsIndirect(e, obj.(*GlDrawElementsIndirect))
 }
@@ -15831,7 +15510,6 @@ func doDecodeGlDrawElementsInstanced(d binary.Decoder, o *GlDrawElementsInstance
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.InstanceCount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawElementsInstanced) New() binary.Object { return &GlDrawElementsInstanced{} }
 func (*binaryClassGlDrawElementsInstanced) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstanced(e, obj.(*GlDrawElementsInstanced))
 }
@@ -15894,9 +15572,6 @@ func doDecodeGlDrawElementsInstancedANGLE(d binary.Decoder, o *GlDrawElementsIns
 	}
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Primcount = GLsizei(d.Int32())
-}
-func (*binaryClassGlDrawElementsInstancedANGLE) New() binary.Object {
-	return &GlDrawElementsInstancedANGLE{}
 }
 func (*binaryClassGlDrawElementsInstancedANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedANGLE(e, obj.(*GlDrawElementsInstancedANGLE))
@@ -15963,9 +15638,6 @@ func doDecodeGlDrawElementsInstancedBaseInstanceEXT(d binary.Decoder, o *GlDrawE
 	o.Instancecount = GLsizei(d.Int32())
 	o.Baseinstance = GLuint(d.Uint32())
 }
-func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) New() binary.Object {
-	return &GlDrawElementsInstancedBaseInstanceEXT{}
-}
 func (*binaryClassGlDrawElementsInstancedBaseInstanceEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedBaseInstanceEXT(e, obj.(*GlDrawElementsInstancedBaseInstanceEXT))
 }
@@ -16031,9 +15703,6 @@ func doDecodeGlDrawElementsInstancedBaseVertex(d binary.Decoder, o *GlDrawElemen
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.InstanceCount = GLsizei(d.Int32())
 	o.BaseVertex = GLint(d.Int32())
-}
-func (*binaryClassGlDrawElementsInstancedBaseVertex) New() binary.Object {
-	return &GlDrawElementsInstancedBaseVertex{}
 }
 func (*binaryClassGlDrawElementsInstancedBaseVertex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedBaseVertex(e, obj.(*GlDrawElementsInstancedBaseVertex))
@@ -16103,9 +15772,6 @@ func doDecodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(d binary.Decoder, 
 	o.Basevertex = GLint(d.Int32())
 	o.Baseinstance = GLuint(d.Uint32())
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) New() binary.Object {
-	return &GlDrawElementsInstancedBaseVertexBaseInstanceEXT{}
-}
 func (*binaryClassGlDrawElementsInstancedBaseVertexBaseInstanceEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedBaseVertexBaseInstanceEXT(e, obj.(*GlDrawElementsInstancedBaseVertexBaseInstanceEXT))
 }
@@ -16173,9 +15839,6 @@ func doDecodeGlDrawElementsInstancedBaseVertexEXT(d binary.Decoder, o *GlDrawEle
 	o.Instancecount = GLsizei(d.Int32())
 	o.Basevertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) New() binary.Object {
-	return &GlDrawElementsInstancedBaseVertexEXT{}
-}
 func (*binaryClassGlDrawElementsInstancedBaseVertexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedBaseVertexEXT(e, obj.(*GlDrawElementsInstancedBaseVertexEXT))
 }
@@ -16242,9 +15905,6 @@ func doDecodeGlDrawElementsInstancedBaseVertexOES(d binary.Decoder, o *GlDrawEle
 	o.Instancecount = GLsizei(d.Int32())
 	o.Basevertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawElementsInstancedBaseVertexOES) New() binary.Object {
-	return &GlDrawElementsInstancedBaseVertexOES{}
-}
 func (*binaryClassGlDrawElementsInstancedBaseVertexOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedBaseVertexOES(e, obj.(*GlDrawElementsInstancedBaseVertexOES))
 }
@@ -16309,9 +15969,6 @@ func doDecodeGlDrawElementsInstancedEXT(d binary.Decoder, o *GlDrawElementsInsta
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawElementsInstancedEXT) New() binary.Object {
-	return &GlDrawElementsInstancedEXT{}
-}
 func (*binaryClassGlDrawElementsInstancedEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedEXT(e, obj.(*GlDrawElementsInstancedEXT))
 }
@@ -16375,7 +16032,6 @@ func doDecodeGlDrawElementsInstancedNV(d binary.Decoder, o *GlDrawElementsInstan
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlDrawElementsInstancedNV) New() binary.Object { return &GlDrawElementsInstancedNV{} }
 func (*binaryClassGlDrawElementsInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawElementsInstancedNV(e, obj.(*GlDrawElementsInstancedNV))
 }
@@ -16441,7 +16097,6 @@ func doDecodeGlDrawRangeElements(d binary.Decoder, o *GlDrawRangeElements) {
 	}
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 }
-func (*binaryClassGlDrawRangeElements) New() binary.Object { return &GlDrawRangeElements{} }
 func (*binaryClassGlDrawRangeElements) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawRangeElements(e, obj.(*GlDrawRangeElements))
 }
@@ -16507,9 +16162,6 @@ func doDecodeGlDrawRangeElementsBaseVertex(d binary.Decoder, o *GlDrawRangeEleme
 	}
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.BaseVertex = GLint(d.Int32())
-}
-func (*binaryClassGlDrawRangeElementsBaseVertex) New() binary.Object {
-	return &GlDrawRangeElementsBaseVertex{}
 }
 func (*binaryClassGlDrawRangeElementsBaseVertex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawRangeElementsBaseVertex(e, obj.(*GlDrawRangeElementsBaseVertex))
@@ -16580,9 +16232,6 @@ func doDecodeGlDrawRangeElementsBaseVertexEXT(d binary.Decoder, o *GlDrawRangeEl
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Basevertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexEXT) New() binary.Object {
-	return &GlDrawRangeElementsBaseVertexEXT{}
-}
 func (*binaryClassGlDrawRangeElementsBaseVertexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawRangeElementsBaseVertexEXT(e, obj.(*GlDrawRangeElementsBaseVertexEXT))
 }
@@ -16652,9 +16301,6 @@ func doDecodeGlDrawRangeElementsBaseVertexOES(d binary.Decoder, o *GlDrawRangeEl
 	d.Struct(ent_3d4a293e3e1b37455890e3d1063bcd3bc7a2beb8, &o.Indices)
 	o.Basevertex = GLint(d.Int32())
 }
-func (*binaryClassGlDrawRangeElementsBaseVertexOES) New() binary.Object {
-	return &GlDrawRangeElementsBaseVertexOES{}
-}
 func (*binaryClassGlDrawRangeElementsBaseVertexOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlDrawRangeElementsBaseVertexOES(e, obj.(*GlDrawRangeElementsBaseVertexOES))
 }
@@ -16714,9 +16360,6 @@ func doDecodeGlEGLImageTargetRenderbufferStorageOES(d binary.Decoder, o *GlEGLIm
 	}
 	d.Struct(ent_b27678c88c8cdf39c7d896b7111e1ac5c6471517, &o.Image)
 }
-func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) New() binary.Object {
-	return &GlEGLImageTargetRenderbufferStorageOES{}
-}
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEGLImageTargetRenderbufferStorageOES(e, obj.(*GlEGLImageTargetRenderbufferStorageOES))
 }
@@ -16771,9 +16414,6 @@ func doDecodeGlEGLImageTargetTexture2DOES(d binary.Decoder, o *GlEGLImageTargetT
 	}
 	d.Struct(ent_b27678c88c8cdf39c7d896b7111e1ac5c6471517, &o.Image)
 }
-func (*binaryClassGlEGLImageTargetTexture2DOES) New() binary.Object {
-	return &GlEGLImageTargetTexture2DOES{}
-}
 func (*binaryClassGlEGLImageTargetTexture2DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEGLImageTargetTexture2DOES(e, obj.(*GlEGLImageTargetTexture2DOES))
 }
@@ -16819,7 +16459,6 @@ func doDecodeGlEnable(d binary.Decoder, o *GlEnable) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Capability = GLenum(d.Uint32())
 }
-func (*binaryClassGlEnable) New() binary.Object { return &GlEnable{} }
 func (*binaryClassGlEnable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnable(e, obj.(*GlEnable))
 }
@@ -16862,7 +16501,6 @@ func doDecodeGlEnableDriverControlQCOM(d binary.Decoder, o *GlEnableDriverContro
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.DriverControl = GLuint(d.Uint32())
 }
-func (*binaryClassGlEnableDriverControlQCOM) New() binary.Object { return &GlEnableDriverControlQCOM{} }
 func (*binaryClassGlEnableDriverControlQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnableDriverControlQCOM(e, obj.(*GlEnableDriverControlQCOM))
 }
@@ -16907,7 +16545,6 @@ func doDecodeGlEnableVertexAttribArray(d binary.Decoder, o *GlEnableVertexAttrib
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Location = AttributeLocation(d.Uint32())
 }
-func (*binaryClassGlEnableVertexAttribArray) New() binary.Object { return &GlEnableVertexAttribArray{} }
 func (*binaryClassGlEnableVertexAttribArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnableVertexAttribArray(e, obj.(*GlEnableVertexAttribArray))
 }
@@ -16954,7 +16591,6 @@ func doDecodeGlEnablei(d binary.Decoder, o *GlEnablei) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlEnablei) New() binary.Object { return &GlEnablei{} }
 func (*binaryClassGlEnablei) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnablei(e, obj.(*GlEnablei))
 }
@@ -17000,7 +16636,6 @@ func doDecodeGlEnableiEXT(d binary.Decoder, o *GlEnableiEXT) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlEnableiEXT) New() binary.Object { return &GlEnableiEXT{} }
 func (*binaryClassGlEnableiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnableiEXT(e, obj.(*GlEnableiEXT))
 }
@@ -17046,7 +16681,6 @@ func doDecodeGlEnableiNV(d binary.Decoder, o *GlEnableiNV) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlEnableiNV) New() binary.Object { return &GlEnableiNV{} }
 func (*binaryClassGlEnableiNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnableiNV(e, obj.(*GlEnableiNV))
 }
@@ -17092,7 +16726,6 @@ func doDecodeGlEnableiOES(d binary.Decoder, o *GlEnableiOES) {
 	o.Target = GLenum(d.Uint32())
 	o.Index = GLuint(d.Uint32())
 }
-func (*binaryClassGlEnableiOES) New() binary.Object { return &GlEnableiOES{} }
 func (*binaryClassGlEnableiOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEnableiOES(e, obj.(*GlEnableiOES))
 }
@@ -17134,7 +16767,6 @@ func doDecodeGlEndConditionalRenderNV(d binary.Decoder, o *GlEndConditionalRende
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlEndConditionalRenderNV) New() binary.Object { return &GlEndConditionalRenderNV{} }
 func (*binaryClassGlEndConditionalRenderNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndConditionalRenderNV(e, obj.(*GlEndConditionalRenderNV))
 }
@@ -17178,7 +16810,6 @@ func doDecodeGlEndPerfMonitorAMD(d binary.Decoder, o *GlEndPerfMonitorAMD) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Monitor = GLuint(d.Uint32())
 }
-func (*binaryClassGlEndPerfMonitorAMD) New() binary.Object { return &GlEndPerfMonitorAMD{} }
 func (*binaryClassGlEndPerfMonitorAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndPerfMonitorAMD(e, obj.(*GlEndPerfMonitorAMD))
 }
@@ -17221,7 +16852,6 @@ func doDecodeGlEndPerfQueryINTEL(d binary.Decoder, o *GlEndPerfQueryINTEL) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.QueryHandle = GLuint(d.Uint32())
 }
-func (*binaryClassGlEndPerfQueryINTEL) New() binary.Object { return &GlEndPerfQueryINTEL{} }
 func (*binaryClassGlEndPerfQueryINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndPerfQueryINTEL(e, obj.(*GlEndPerfQueryINTEL))
 }
@@ -17264,7 +16894,6 @@ func doDecodeGlEndQuery(d binary.Decoder, o *GlEndQuery) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Target = GLenum(d.Uint32())
 }
-func (*binaryClassGlEndQuery) New() binary.Object { return &GlEndQuery{} }
 func (*binaryClassGlEndQuery) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndQuery(e, obj.(*GlEndQuery))
 }
@@ -17307,7 +16936,6 @@ func doDecodeGlEndQueryEXT(d binary.Decoder, o *GlEndQueryEXT) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Target = GLenum(d.Uint32())
 }
-func (*binaryClassGlEndQueryEXT) New() binary.Object { return &GlEndQueryEXT{} }
 func (*binaryClassGlEndQueryEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndQueryEXT(e, obj.(*GlEndQueryEXT))
 }
@@ -17350,7 +16978,6 @@ func doDecodeGlEndTilingQCOM(d binary.Decoder, o *GlEndTilingQCOM) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.PreserveMask = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlEndTilingQCOM) New() binary.Object { return &GlEndTilingQCOM{} }
 func (*binaryClassGlEndTilingQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndTilingQCOM(e, obj.(*GlEndTilingQCOM))
 }
@@ -17391,7 +17018,6 @@ func doDecodeGlEndTransformFeedback(d binary.Decoder, o *GlEndTransformFeedback)
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlEndTransformFeedback) New() binary.Object { return &GlEndTransformFeedback{} }
 func (*binaryClassGlEndTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlEndTransformFeedback(e, obj.(*GlEndTransformFeedback))
 }
@@ -17431,7 +17057,6 @@ func doDecodeVoidᵖᵖ(d binary.Decoder, o *Voidᵖᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVoidᵖᵖ) New() binary.Object { return &Voidᵖᵖ{} }
 func (*binaryClassVoidᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖᵖ(e, obj.(*Voidᵖᵖ))
 }
@@ -17481,9 +17106,6 @@ func doDecodeGlExtGetBufferPointervQCOM(d binary.Decoder, o *GlExtGetBufferPoint
 		ent_ba394937b8be61a154aff030b169fda3f96cda68 = ent
 	}
 	d.Struct(ent_ba394937b8be61a154aff030b169fda3f96cda68, &o.Params)
-}
-func (*binaryClassGlExtGetBufferPointervQCOM) New() binary.Object {
-	return &GlExtGetBufferPointervQCOM{}
 }
 func (*binaryClassGlExtGetBufferPointervQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetBufferPointervQCOM(e, obj.(*GlExtGetBufferPointervQCOM))
@@ -17548,7 +17170,6 @@ func doDecodeGlExtGetBuffersQCOM(d binary.Decoder, o *GlExtGetBuffersQCOM) {
 	}
 	d.Struct(ent_703d820ebd585f278011816cc4b35f67280fb13f, &o.NumBuffers)
 }
-func (*binaryClassGlExtGetBuffersQCOM) New() binary.Object { return &GlExtGetBuffersQCOM{} }
 func (*binaryClassGlExtGetBuffersQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetBuffersQCOM(e, obj.(*GlExtGetBuffersQCOM))
 }
@@ -17611,7 +17232,6 @@ func doDecodeGlExtGetFramebuffersQCOM(d binary.Decoder, o *GlExtGetFramebuffersQ
 	}
 	d.Struct(ent_fc11bcdc3a2eea67fd4b4d944219a0ca3813ca0b, &o.NumFramebuffers)
 }
-func (*binaryClassGlExtGetFramebuffersQCOM) New() binary.Object { return &GlExtGetFramebuffersQCOM{} }
 func (*binaryClassGlExtGetFramebuffersQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetFramebuffersQCOM(e, obj.(*GlExtGetFramebuffersQCOM))
 }
@@ -17678,9 +17298,6 @@ func doDecodeGlExtGetProgramBinarySourceQCOM(d binary.Decoder, o *GlExtGetProgra
 	}
 	d.Struct(ent_ced4ed2dc22408e5a40bcdd0ec0b5e4d9772260e, &o.Length)
 }
-func (*binaryClassGlExtGetProgramBinarySourceQCOM) New() binary.Object {
-	return &GlExtGetProgramBinarySourceQCOM{}
-}
 func (*binaryClassGlExtGetProgramBinarySourceQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetProgramBinarySourceQCOM(e, obj.(*GlExtGetProgramBinarySourceQCOM))
 }
@@ -17726,7 +17343,6 @@ func doDecodeProgramIdᵖ(d binary.Decoder, o *ProgramIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassProgramIdᵖ) New() binary.Object { return &ProgramIdᵖ{} }
 func (*binaryClassProgramIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeProgramIdᵖ(e, obj.(*ProgramIdᵖ))
 }
@@ -17786,7 +17402,6 @@ func doDecodeGlExtGetProgramsQCOM(d binary.Decoder, o *GlExtGetProgramsQCOM) {
 	}
 	d.Struct(ent_ae0093ac4b3c43d151ff603a3b34d9a1074e5068, &o.NumPrograms)
 }
-func (*binaryClassGlExtGetProgramsQCOM) New() binary.Object { return &GlExtGetProgramsQCOM{} }
 func (*binaryClassGlExtGetProgramsQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetProgramsQCOM(e, obj.(*GlExtGetProgramsQCOM))
 }
@@ -17829,7 +17444,6 @@ func doDecodeRenderbufferIdᵖ(d binary.Decoder, o *RenderbufferIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassRenderbufferIdᵖ) New() binary.Object { return &RenderbufferIdᵖ{} }
 func (*binaryClassRenderbufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbufferIdᵖ(e, obj.(*RenderbufferIdᵖ))
 }
@@ -17889,7 +17503,6 @@ func doDecodeGlExtGetRenderbuffersQCOM(d binary.Decoder, o *GlExtGetRenderbuffer
 	}
 	d.Struct(ent_74192700221028ec71028359b1e4fbea6b295ae9, &o.NumRenderbuffers)
 }
-func (*binaryClassGlExtGetRenderbuffersQCOM) New() binary.Object { return &GlExtGetRenderbuffersQCOM{} }
 func (*binaryClassGlExtGetRenderbuffersQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetRenderbuffersQCOM(e, obj.(*GlExtGetRenderbuffersQCOM))
 }
@@ -17934,7 +17547,6 @@ func doDecodeShaderIdᵖ(d binary.Decoder, o *ShaderIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassShaderIdᵖ) New() binary.Object { return &ShaderIdᵖ{} }
 func (*binaryClassShaderIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShaderIdᵖ(e, obj.(*ShaderIdᵖ))
 }
@@ -17994,7 +17606,6 @@ func doDecodeGlExtGetShadersQCOM(d binary.Decoder, o *GlExtGetShadersQCOM) {
 	}
 	d.Struct(ent_24110683dc0ba782b7219bde1064e856b167d549, &o.NumShaders)
 }
-func (*binaryClassGlExtGetShadersQCOM) New() binary.Object { return &GlExtGetShadersQCOM{} }
 func (*binaryClassGlExtGetShadersQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetShadersQCOM(e, obj.(*GlExtGetShadersQCOM))
 }
@@ -18053,9 +17664,6 @@ func doDecodeGlExtGetTexLevelParameterivQCOM(d binary.Decoder, o *GlExtGetTexLev
 		ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd = ent
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
-}
-func (*binaryClassGlExtGetTexLevelParameterivQCOM) New() binary.Object {
-	return &GlExtGetTexLevelParameterivQCOM{}
 }
 func (*binaryClassGlExtGetTexLevelParameterivQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetTexLevelParameterivQCOM(e, obj.(*GlExtGetTexLevelParameterivQCOM))
@@ -18132,7 +17740,6 @@ func doDecodeGlExtGetTexSubImageQCOM(d binary.Decoder, o *GlExtGetTexSubImageQCO
 	}
 	d.Struct(ent_4e4fe27856617349934b35d7b5bf17fddd318282, &o.Texels)
 }
-func (*binaryClassGlExtGetTexSubImageQCOM) New() binary.Object { return &GlExtGetTexSubImageQCOM{} }
 func (*binaryClassGlExtGetTexSubImageQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetTexSubImageQCOM(e, obj.(*GlExtGetTexSubImageQCOM))
 }
@@ -18185,7 +17792,6 @@ func doDecodeTextureIdᵖ(d binary.Decoder, o *TextureIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassTextureIdᵖ) New() binary.Object { return &TextureIdᵖ{} }
 func (*binaryClassTextureIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureIdᵖ(e, obj.(*TextureIdᵖ))
 }
@@ -18245,7 +17851,6 @@ func doDecodeGlExtGetTexturesQCOM(d binary.Decoder, o *GlExtGetTexturesQCOM) {
 	}
 	d.Struct(ent_ab25e685aa3636330436cd5498ad3102eeb3129a, &o.NumTextures)
 }
-func (*binaryClassGlExtGetTexturesQCOM) New() binary.Object { return &GlExtGetTexturesQCOM{} }
 func (*binaryClassGlExtGetTexturesQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtGetTexturesQCOM(e, obj.(*GlExtGetTexturesQCOM))
 }
@@ -18292,7 +17897,6 @@ func doDecodeGlExtIsProgramBinaryQCOM(d binary.Decoder, o *GlExtIsProgramBinaryQ
 	o.Program = ProgramId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlExtIsProgramBinaryQCOM) New() binary.Object { return &GlExtIsProgramBinaryQCOM{} }
 func (*binaryClassGlExtIsProgramBinaryQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtIsProgramBinaryQCOM(e, obj.(*GlExtIsProgramBinaryQCOM))
 }
@@ -18341,9 +17945,6 @@ func doDecodeGlExtTexObjectStateOverrideiQCOM(d binary.Decoder, o *GlExtTexObjec
 	o.Target = GLenum(d.Uint32())
 	o.Pname = GLenum(d.Uint32())
 	o.Param = GLint(d.Int32())
-}
-func (*binaryClassGlExtTexObjectStateOverrideiQCOM) New() binary.Object {
-	return &GlExtTexObjectStateOverrideiQCOM{}
 }
 func (*binaryClassGlExtTexObjectStateOverrideiQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlExtTexObjectStateOverrideiQCOM(e, obj.(*GlExtTexObjectStateOverrideiQCOM))
@@ -18395,7 +17996,6 @@ func doDecodeGlFenceSync(d binary.Decoder, o *GlFenceSync) {
 	o.SyncFlags = GLbitfield(d.Uint32())
 	o.Result = GLsync(d.Uint64())
 }
-func (*binaryClassGlFenceSync) New() binary.Object { return &GlFenceSync{} }
 func (*binaryClassGlFenceSync) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFenceSync(e, obj.(*GlFenceSync))
 }
@@ -18444,7 +18044,6 @@ func doDecodeGlFenceSyncAPPLE(d binary.Decoder, o *GlFenceSyncAPPLE) {
 	o.Flag = GLbitfield(d.Uint32())
 	o.Result = GLsync(d.Uint64())
 }
-func (*binaryClassGlFenceSyncAPPLE) New() binary.Object { return &GlFenceSyncAPPLE{} }
 func (*binaryClassGlFenceSyncAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFenceSyncAPPLE(e, obj.(*GlFenceSyncAPPLE))
 }
@@ -18487,7 +18086,6 @@ func doDecodeGlFinish(d binary.Decoder, o *GlFinish) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlFinish) New() binary.Object { return &GlFinish{} }
 func (*binaryClassGlFinish) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFinish(e, obj.(*GlFinish))
 }
@@ -18529,7 +18127,6 @@ func doDecodeGlFinishFenceNV(d binary.Decoder, o *GlFinishFenceNV) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Fence = GLuint(d.Uint32())
 }
-func (*binaryClassGlFinishFenceNV) New() binary.Object { return &GlFinishFenceNV{} }
 func (*binaryClassGlFinishFenceNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFinishFenceNV(e, obj.(*GlFinishFenceNV))
 }
@@ -18570,7 +18167,6 @@ func doDecodeGlFlush(d binary.Decoder, o *GlFlush) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlFlush) New() binary.Object { return &GlFlush{} }
 func (*binaryClassGlFlush) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFlush(e, obj.(*GlFlush))
 }
@@ -18616,7 +18212,6 @@ func doDecodeGlFlushMappedBufferRange(d binary.Decoder, o *GlFlushMappedBufferRa
 	o.Offset = GLintptr(d.Int32())
 	o.Length = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlFlushMappedBufferRange) New() binary.Object { return &GlFlushMappedBufferRange{} }
 func (*binaryClassGlFlushMappedBufferRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFlushMappedBufferRange(e, obj.(*GlFlushMappedBufferRange))
 }
@@ -18667,9 +18262,6 @@ func doDecodeGlFlushMappedBufferRangeEXT(d binary.Decoder, o *GlFlushMappedBuffe
 	o.Offset = GLintptr(d.Int32())
 	o.Length = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlFlushMappedBufferRangeEXT) New() binary.Object {
-	return &GlFlushMappedBufferRangeEXT{}
-}
 func (*binaryClassGlFlushMappedBufferRangeEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFlushMappedBufferRangeEXT(e, obj.(*GlFlushMappedBufferRangeEXT))
 }
@@ -18716,7 +18308,6 @@ func doDecodeGlFragmentCoverageColorNV(d binary.Decoder, o *GlFragmentCoverageCo
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Color = GLuint(d.Uint32())
 }
-func (*binaryClassGlFragmentCoverageColorNV) New() binary.Object { return &GlFragmentCoverageColorNV{} }
 func (*binaryClassGlFragmentCoverageColorNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFragmentCoverageColorNV(e, obj.(*GlFragmentCoverageColorNV))
 }
@@ -18765,7 +18356,6 @@ func doDecodeGlFramebufferParameteri(d binary.Decoder, o *GlFramebufferParameter
 	o.Pname = GLenum(d.Uint32())
 	o.Param = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferParameteri) New() binary.Object { return &GlFramebufferParameteri{} }
 func (*binaryClassGlFramebufferParameteri) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferParameteri(e, obj.(*GlFramebufferParameteri))
 }
@@ -18818,7 +18408,6 @@ func doDecodeGlFramebufferRenderbuffer(d binary.Decoder, o *GlFramebufferRenderb
 	o.RenderbufferTarget = GLenum(d.Uint32())
 	o.Renderbuffer = RenderbufferId(d.Uint32())
 }
-func (*binaryClassGlFramebufferRenderbuffer) New() binary.Object { return &GlFramebufferRenderbuffer{} }
 func (*binaryClassGlFramebufferRenderbuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferRenderbuffer(e, obj.(*GlFramebufferRenderbuffer))
 }
@@ -18879,9 +18468,6 @@ func doDecodeGlFramebufferSampleLocationsfvNV(d binary.Decoder, o *GlFramebuffer
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlFramebufferSampleLocationsfvNV) New() binary.Object {
-	return &GlFramebufferSampleLocationsfvNV{}
-}
 func (*binaryClassGlFramebufferSampleLocationsfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferSampleLocationsfvNV(e, obj.(*GlFramebufferSampleLocationsfvNV))
 }
@@ -18935,7 +18521,6 @@ func doDecodeGlFramebufferTexture(d binary.Decoder, o *GlFramebufferTexture) {
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTexture) New() binary.Object { return &GlFramebufferTexture{} }
 func (*binaryClassGlFramebufferTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTexture(e, obj.(*GlFramebufferTexture))
 }
@@ -18989,7 +18574,6 @@ func doDecodeGlFramebufferTexture2D(d binary.Decoder, o *GlFramebufferTexture2D)
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTexture2D) New() binary.Object { return &GlFramebufferTexture2D{} }
 func (*binaryClassGlFramebufferTexture2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTexture2D(e, obj.(*GlFramebufferTexture2D))
 }
@@ -19045,9 +18629,6 @@ func doDecodeGlFramebufferTexture2DMultisampleEXT(d binary.Decoder, o *GlFramebu
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 	o.Samples = GLsizei(d.Int32())
-}
-func (*binaryClassGlFramebufferTexture2DMultisampleEXT) New() binary.Object {
-	return &GlFramebufferTexture2DMultisampleEXT{}
 }
 func (*binaryClassGlFramebufferTexture2DMultisampleEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTexture2DMultisampleEXT(e, obj.(*GlFramebufferTexture2DMultisampleEXT))
@@ -19108,9 +18689,6 @@ func doDecodeGlFramebufferTexture2DMultisampleIMG(d binary.Decoder, o *GlFramebu
 	o.Level = GLint(d.Int32())
 	o.Samples = GLsizei(d.Int32())
 }
-func (*binaryClassGlFramebufferTexture2DMultisampleIMG) New() binary.Object {
-	return &GlFramebufferTexture2DMultisampleIMG{}
-}
 func (*binaryClassGlFramebufferTexture2DMultisampleIMG) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTexture2DMultisampleIMG(e, obj.(*GlFramebufferTexture2DMultisampleIMG))
 }
@@ -19170,7 +18748,6 @@ func doDecodeGlFramebufferTexture3DOES(d binary.Decoder, o *GlFramebufferTexture
 	o.Level = GLint(d.Int32())
 	o.Zoffset = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTexture3DOES) New() binary.Object { return &GlFramebufferTexture3DOES{} }
 func (*binaryClassGlFramebufferTexture3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTexture3DOES(e, obj.(*GlFramebufferTexture3DOES))
 }
@@ -19226,7 +18803,6 @@ func doDecodeGlFramebufferTextureEXT(d binary.Decoder, o *GlFramebufferTextureEX
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTextureEXT) New() binary.Object { return &GlFramebufferTextureEXT{} }
 func (*binaryClassGlFramebufferTextureEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTextureEXT(e, obj.(*GlFramebufferTextureEXT))
 }
@@ -19282,7 +18858,6 @@ func doDecodeGlFramebufferTextureLayer(d binary.Decoder, o *GlFramebufferTexture
 	o.Level = GLint(d.Int32())
 	o.Layer = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTextureLayer) New() binary.Object { return &GlFramebufferTextureLayer{} }
 func (*binaryClassGlFramebufferTextureLayer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTextureLayer(e, obj.(*GlFramebufferTextureLayer))
 }
@@ -19341,9 +18916,6 @@ func doDecodeGlFramebufferTextureMultiviewOVR(d binary.Decoder, o *GlFramebuffer
 	o.BaseViewIndex = GLint(d.Int32())
 	o.NumViews = GLsizei(d.Int32())
 }
-func (*binaryClassGlFramebufferTextureMultiviewOVR) New() binary.Object {
-	return &GlFramebufferTextureMultiviewOVR{}
-}
 func (*binaryClassGlFramebufferTextureMultiviewOVR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTextureMultiviewOVR(e, obj.(*GlFramebufferTextureMultiviewOVR))
 }
@@ -19399,7 +18971,6 @@ func doDecodeGlFramebufferTextureOES(d binary.Decoder, o *GlFramebufferTextureOE
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 }
-func (*binaryClassGlFramebufferTextureOES) New() binary.Object { return &GlFramebufferTextureOES{} }
 func (*binaryClassGlFramebufferTextureOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFramebufferTextureOES(e, obj.(*GlFramebufferTextureOES))
 }
@@ -19447,7 +19018,6 @@ func doDecodeGlFrontFace(d binary.Decoder, o *GlFrontFace) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Orientation = GLenum(d.Uint32())
 }
-func (*binaryClassGlFrontFace) New() binary.Object { return &GlFrontFace{} }
 func (*binaryClassGlFrontFace) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlFrontFace(e, obj.(*GlFrontFace))
 }
@@ -19499,7 +19069,6 @@ func doDecodeGlGenBuffers(d binary.Decoder, o *GlGenBuffers) {
 	}
 	d.Struct(ent_b420b6a98785d683a6f0360bb3f3d318855e8135, &o.Buffers)
 }
-func (*binaryClassGlGenBuffers) New() binary.Object { return &GlGenBuffers{} }
 func (*binaryClassGlGenBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenBuffers(e, obj.(*GlGenBuffers))
 }
@@ -19552,7 +19121,6 @@ func doDecodeGlGenFencesNV(d binary.Decoder, o *GlGenFencesNV) {
 	}
 	d.Struct(ent_f252b01ea19ce7bc884e4e99c962311d6f98cabf, &o.Fences)
 }
-func (*binaryClassGlGenFencesNV) New() binary.Object { return &GlGenFencesNV{} }
 func (*binaryClassGlGenFencesNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenFencesNV(e, obj.(*GlGenFencesNV))
 }
@@ -19605,7 +19173,6 @@ func doDecodeGlGenFramebuffers(d binary.Decoder, o *GlGenFramebuffers) {
 	}
 	d.Struct(ent_f0119fbf7bd36efd4566380c38b745d1afef4984, &o.Framebuffers)
 }
-func (*binaryClassGlGenFramebuffers) New() binary.Object { return &GlGenFramebuffers{} }
 func (*binaryClassGlGenFramebuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenFramebuffers(e, obj.(*GlGenFramebuffers))
 }
@@ -19651,7 +19218,6 @@ func doDecodeGlGenPathsNV(d binary.Decoder, o *GlGenPathsNV) {
 	o.Range = GLsizei(d.Int32())
 	o.Result = GLuint(d.Uint32())
 }
-func (*binaryClassGlGenPathsNV) New() binary.Object { return &GlGenPathsNV{} }
 func (*binaryClassGlGenPathsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenPathsNV(e, obj.(*GlGenPathsNV))
 }
@@ -19704,7 +19270,6 @@ func doDecodeGlGenPerfMonitorsAMD(d binary.Decoder, o *GlGenPerfMonitorsAMD) {
 	}
 	d.Struct(ent_d54305026631d6439d994a2cc9758c5a8c03267c, &o.Monitors)
 }
-func (*binaryClassGlGenPerfMonitorsAMD) New() binary.Object { return &GlGenPerfMonitorsAMD{} }
 func (*binaryClassGlGenPerfMonitorsAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenPerfMonitorsAMD(e, obj.(*GlGenPerfMonitorsAMD))
 }
@@ -19746,7 +19311,6 @@ func doDecodePipelineIdᵖ(d binary.Decoder, o *PipelineIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassPipelineIdᵖ) New() binary.Object { return &PipelineIdᵖ{} }
 func (*binaryClassPipelineIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePipelineIdᵖ(e, obj.(*PipelineIdᵖ))
 }
@@ -19797,7 +19361,6 @@ func doDecodeGlGenProgramPipelines(d binary.Decoder, o *GlGenProgramPipelines) {
 	}
 	d.Struct(ent_782745f7071f8f3687503b155b038b88f443c665, &o.Pipelines)
 }
-func (*binaryClassGlGenProgramPipelines) New() binary.Object { return &GlGenProgramPipelines{} }
 func (*binaryClassGlGenProgramPipelines) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenProgramPipelines(e, obj.(*GlGenProgramPipelines))
 }
@@ -19850,7 +19413,6 @@ func doDecodeGlGenProgramPipelinesEXT(d binary.Decoder, o *GlGenProgramPipelines
 	}
 	d.Struct(ent_782745f7071f8f3687503b155b038b88f443c665, &o.Pipelines)
 }
-func (*binaryClassGlGenProgramPipelinesEXT) New() binary.Object { return &GlGenProgramPipelinesEXT{} }
 func (*binaryClassGlGenProgramPipelinesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenProgramPipelinesEXT(e, obj.(*GlGenProgramPipelinesEXT))
 }
@@ -19894,7 +19456,6 @@ func doDecodeQueryIdᵖ(d binary.Decoder, o *QueryIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassQueryIdᵖ) New() binary.Object { return &QueryIdᵖ{} }
 func (*binaryClassQueryIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQueryIdᵖ(e, obj.(*QueryIdᵖ))
 }
@@ -19945,7 +19506,6 @@ func doDecodeGlGenQueries(d binary.Decoder, o *GlGenQueries) {
 	}
 	d.Struct(ent_27779e72eaafe3469c792bbb6be026dbae65572a, &o.Queries)
 }
-func (*binaryClassGlGenQueries) New() binary.Object { return &GlGenQueries{} }
 func (*binaryClassGlGenQueries) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenQueries(e, obj.(*GlGenQueries))
 }
@@ -19998,7 +19558,6 @@ func doDecodeGlGenQueriesEXT(d binary.Decoder, o *GlGenQueriesEXT) {
 	}
 	d.Struct(ent_27779e72eaafe3469c792bbb6be026dbae65572a, &o.Queries)
 }
-func (*binaryClassGlGenQueriesEXT) New() binary.Object { return &GlGenQueriesEXT{} }
 func (*binaryClassGlGenQueriesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenQueriesEXT(e, obj.(*GlGenQueriesEXT))
 }
@@ -20051,7 +19610,6 @@ func doDecodeGlGenRenderbuffers(d binary.Decoder, o *GlGenRenderbuffers) {
 	}
 	d.Struct(ent_26f91efabb5d0f3910ec2666c0f5b1e3c0aa9483, &o.Renderbuffers)
 }
-func (*binaryClassGlGenRenderbuffers) New() binary.Object { return &GlGenRenderbuffers{} }
 func (*binaryClassGlGenRenderbuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenRenderbuffers(e, obj.(*GlGenRenderbuffers))
 }
@@ -20093,7 +19651,6 @@ func doDecodeSamplerIdᵖ(d binary.Decoder, o *SamplerIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassSamplerIdᵖ) New() binary.Object { return &SamplerIdᵖ{} }
 func (*binaryClassSamplerIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSamplerIdᵖ(e, obj.(*SamplerIdᵖ))
 }
@@ -20144,7 +19701,6 @@ func doDecodeGlGenSamplers(d binary.Decoder, o *GlGenSamplers) {
 	}
 	d.Struct(ent_4e6083603ef85341dbabb86e3085964c5240e254, &o.Samplers)
 }
-func (*binaryClassGlGenSamplers) New() binary.Object { return &GlGenSamplers{} }
 func (*binaryClassGlGenSamplers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenSamplers(e, obj.(*GlGenSamplers))
 }
@@ -20197,7 +19753,6 @@ func doDecodeGlGenTextures(d binary.Decoder, o *GlGenTextures) {
 	}
 	d.Struct(ent_5e9581462204bade0a016fee93a88fb67cf78b04, &o.Textures)
 }
-func (*binaryClassGlGenTextures) New() binary.Object { return &GlGenTextures{} }
 func (*binaryClassGlGenTextures) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenTextures(e, obj.(*GlGenTextures))
 }
@@ -20239,7 +19794,6 @@ func doDecodeTransformFeedbackIdᵖ(d binary.Decoder, o *TransformFeedbackIdᵖ)
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassTransformFeedbackIdᵖ) New() binary.Object { return &TransformFeedbackIdᵖ{} }
 func (*binaryClassTransformFeedbackIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTransformFeedbackIdᵖ(e, obj.(*TransformFeedbackIdᵖ))
 }
@@ -20290,7 +19844,6 @@ func doDecodeGlGenTransformFeedbacks(d binary.Decoder, o *GlGenTransformFeedback
 	}
 	d.Struct(ent_fd8459714ed61f5d2c6bd0f46e2169cb816dbbf2, &o.Ids)
 }
-func (*binaryClassGlGenTransformFeedbacks) New() binary.Object { return &GlGenTransformFeedbacks{} }
 func (*binaryClassGlGenTransformFeedbacks) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenTransformFeedbacks(e, obj.(*GlGenTransformFeedbacks))
 }
@@ -20334,7 +19887,6 @@ func doDecodeVertexArrayIdᵖ(d binary.Decoder, o *VertexArrayIdᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVertexArrayIdᵖ) New() binary.Object { return &VertexArrayIdᵖ{} }
 func (*binaryClassVertexArrayIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArrayIdᵖ(e, obj.(*VertexArrayIdᵖ))
 }
@@ -20385,7 +19937,6 @@ func doDecodeGlGenVertexArrays(d binary.Decoder, o *GlGenVertexArrays) {
 	}
 	d.Struct(ent_4c18a9dc8df51bd3914587c082ada6d24784240f, &o.Arrays)
 }
-func (*binaryClassGlGenVertexArrays) New() binary.Object { return &GlGenVertexArrays{} }
 func (*binaryClassGlGenVertexArrays) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenVertexArrays(e, obj.(*GlGenVertexArrays))
 }
@@ -20438,7 +19989,6 @@ func doDecodeGlGenVertexArraysOES(d binary.Decoder, o *GlGenVertexArraysOES) {
 	}
 	d.Struct(ent_4c18a9dc8df51bd3914587c082ada6d24784240f, &o.Arrays)
 }
-func (*binaryClassGlGenVertexArraysOES) New() binary.Object { return &GlGenVertexArraysOES{} }
 func (*binaryClassGlGenVertexArraysOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenVertexArraysOES(e, obj.(*GlGenVertexArraysOES))
 }
@@ -20482,7 +20032,6 @@ func doDecodeGlGenerateMipmap(d binary.Decoder, o *GlGenerateMipmap) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Target = GLenum(d.Uint32())
 }
-func (*binaryClassGlGenerateMipmap) New() binary.Object { return &GlGenerateMipmap{} }
 func (*binaryClassGlGenerateMipmap) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGenerateMipmap(e, obj.(*GlGenerateMipmap))
 }
@@ -20565,7 +20114,6 @@ func doDecodeGlGetActiveAttrib(d binary.Decoder, o *GlGetActiveAttrib) {
 	}
 	d.Struct(ent_e275d8377d0f79c790949c8ac0dbb925f9cddaae, &o.Name)
 }
-func (*binaryClassGlGetActiveAttrib) New() binary.Object { return &GlGetActiveAttrib{} }
 func (*binaryClassGlGetActiveAttrib) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetActiveAttrib(e, obj.(*GlGetActiveAttrib))
 }
@@ -20654,7 +20202,6 @@ func doDecodeGlGetActiveUniform(d binary.Decoder, o *GlGetActiveUniform) {
 	}
 	d.Struct(ent_e275d8377d0f79c790949c8ac0dbb925f9cddaae, &o.Name)
 }
-func (*binaryClassGlGetActiveUniform) New() binary.Object { return &GlGetActiveUniform{} }
 func (*binaryClassGlGetActiveUniform) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetActiveUniform(e, obj.(*GlGetActiveUniform))
 }
@@ -20725,9 +20272,6 @@ func doDecodeGlGetActiveUniformBlockName(d binary.Decoder, o *GlGetActiveUniform
 	}
 	d.Struct(ent_e275d8377d0f79c790949c8ac0dbb925f9cddaae, &o.Name)
 }
-func (*binaryClassGlGetActiveUniformBlockName) New() binary.Object {
-	return &GlGetActiveUniformBlockName{}
-}
 func (*binaryClassGlGetActiveUniformBlockName) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetActiveUniformBlockName(e, obj.(*GlGetActiveUniformBlockName))
 }
@@ -20789,7 +20333,6 @@ func doDecodeGlGetActiveUniformBlockiv(d binary.Decoder, o *GlGetActiveUniformBl
 	}
 	d.Struct(ent_4a5d71b67304318667d618908bb875203e6d34e1, &o.Parameters)
 }
-func (*binaryClassGlGetActiveUniformBlockiv) New() binary.Object { return &GlGetActiveUniformBlockiv{} }
 func (*binaryClassGlGetActiveUniformBlockiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetActiveUniformBlockiv(e, obj.(*GlGetActiveUniformBlockiv))
 }
@@ -20835,7 +20378,6 @@ func doDecodeUniformIndexᶜᵖ(d binary.Decoder, o *UniformIndexᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassUniformIndexᶜᵖ) New() binary.Object { return &UniformIndexᶜᵖ{} }
 func (*binaryClassUniformIndexᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniformIndexᶜᵖ(e, obj.(*UniformIndexᶜᵖ))
 }
@@ -20899,7 +20441,6 @@ func doDecodeGlGetActiveUniformsiv(d binary.Decoder, o *GlGetActiveUniformsiv) {
 	}
 	d.Struct(ent_4a5d71b67304318667d618908bb875203e6d34e1, &o.Parameters)
 }
-func (*binaryClassGlGetActiveUniformsiv) New() binary.Object { return &GlGetActiveUniformsiv{} }
 func (*binaryClassGlGetActiveUniformsiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetActiveUniformsiv(e, obj.(*GlGetActiveUniformsiv))
 }
@@ -20966,7 +20507,6 @@ func doDecodeGlGetAttachedShaders(d binary.Decoder, o *GlGetAttachedShaders) {
 	}
 	d.Struct(ent_b15dee8ccd84232cf728af474b917872aea3a462, &o.Shaders)
 }
-func (*binaryClassGlGetAttachedShaders) New() binary.Object { return &GlGetAttachedShaders{} }
 func (*binaryClassGlGetAttachedShaders) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetAttachedShaders(e, obj.(*GlGetAttachedShaders))
 }
@@ -21016,7 +20556,6 @@ func doDecodeGlGetAttribLocation(d binary.Decoder, o *GlGetAttribLocation) {
 	o.Name = string(d.String())
 	o.Result = GLint(d.Int32())
 }
-func (*binaryClassGlGetAttribLocation) New() binary.Object { return &GlGetAttribLocation{} }
 func (*binaryClassGlGetAttribLocation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetAttribLocation(e, obj.(*GlGetAttribLocation))
 }
@@ -21072,7 +20611,6 @@ func doDecodeGlGetBooleani_v(d binary.Decoder, o *GlGetBooleani_v) {
 	}
 	d.Struct(ent_0fb6dacb7cfe5328401ea05607731620980002c8, &o.Values)
 }
-func (*binaryClassGlGetBooleani_v) New() binary.Object { return &GlGetBooleani_v{} }
 func (*binaryClassGlGetBooleani_v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBooleani_v(e, obj.(*GlGetBooleani_v))
 }
@@ -21126,7 +20664,6 @@ func doDecodeGlGetBooleanv(d binary.Decoder, o *GlGetBooleanv) {
 	}
 	d.Struct(ent_0fb6dacb7cfe5328401ea05607731620980002c8, &o.Values)
 }
-func (*binaryClassGlGetBooleanv) New() binary.Object { return &GlGetBooleanv{} }
 func (*binaryClassGlGetBooleanv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBooleanv(e, obj.(*GlGetBooleanv))
 }
@@ -21181,7 +20718,6 @@ func doDecodeGlGetBufferParameteri64v(d binary.Decoder, o *GlGetBufferParameteri
 	}
 	d.Struct(ent_bbf0f4046b37b097cdf890d0eeea5e8f1c0ad624, &o.Params)
 }
-func (*binaryClassGlGetBufferParameteri64v) New() binary.Object { return &GlGetBufferParameteri64v{} }
 func (*binaryClassGlGetBufferParameteri64v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBufferParameteri64v(e, obj.(*GlGetBufferParameteri64v))
 }
@@ -21239,7 +20775,6 @@ func doDecodeGlGetBufferParameteriv(d binary.Decoder, o *GlGetBufferParameteriv)
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetBufferParameteriv) New() binary.Object { return &GlGetBufferParameteriv{} }
 func (*binaryClassGlGetBufferParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBufferParameteriv(e, obj.(*GlGetBufferParameteriv))
 }
@@ -21295,7 +20830,6 @@ func doDecodeGlGetBufferPointerv(d binary.Decoder, o *GlGetBufferPointerv) {
 	}
 	d.Struct(ent_ba394937b8be61a154aff030b169fda3f96cda68, &o.Params)
 }
-func (*binaryClassGlGetBufferPointerv) New() binary.Object { return &GlGetBufferPointerv{} }
 func (*binaryClassGlGetBufferPointerv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBufferPointerv(e, obj.(*GlGetBufferPointerv))
 }
@@ -21351,7 +20885,6 @@ func doDecodeGlGetBufferPointervOES(d binary.Decoder, o *GlGetBufferPointervOES)
 	}
 	d.Struct(ent_ba394937b8be61a154aff030b169fda3f96cda68, &o.Params)
 }
-func (*binaryClassGlGetBufferPointervOES) New() binary.Object { return &GlGetBufferPointervOES{} }
 func (*binaryClassGlGetBufferPointervOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetBufferPointervOES(e, obj.(*GlGetBufferPointervOES))
 }
@@ -21404,9 +20937,6 @@ func doDecodeGlGetCoverageModulationTableNV(d binary.Decoder, o *GlGetCoverageMo
 		ent_59e7cd1534d20dc1ab40413f2da1d2974a0f43ed = ent
 	}
 	d.Struct(ent_59e7cd1534d20dc1ab40413f2da1d2974a0f43ed, &o.V)
-}
-func (*binaryClassGlGetCoverageModulationTableNV) New() binary.Object {
-	return &GlGetCoverageModulationTableNV{}
 }
 func (*binaryClassGlGetCoverageModulationTableNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetCoverageModulationTableNV(e, obj.(*GlGetCoverageModulationTableNV))
@@ -21511,7 +21041,6 @@ func doDecodeGlGetDebugMessageLog(d binary.Decoder, o *GlGetDebugMessageLog) {
 	d.Struct(ent_ee90ee2ade298b7fd5db7f6fa1cde6a9595a7866, &o.MessageLog)
 	o.Result = GLuint(d.Uint32())
 }
-func (*binaryClassGlGetDebugMessageLog) New() binary.Object { return &GlGetDebugMessageLog{} }
 func (*binaryClassGlGetDebugMessageLog) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetDebugMessageLog(e, obj.(*GlGetDebugMessageLog))
 }
@@ -21620,7 +21149,6 @@ func doDecodeGlGetDebugMessageLogKHR(d binary.Decoder, o *GlGetDebugMessageLogKH
 	d.Struct(ent_ee90ee2ade298b7fd5db7f6fa1cde6a9595a7866, &o.MessageLog)
 	o.Result = GLuint(d.Uint32())
 }
-func (*binaryClassGlGetDebugMessageLogKHR) New() binary.Object { return &GlGetDebugMessageLogKHR{} }
 func (*binaryClassGlGetDebugMessageLogKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetDebugMessageLogKHR(e, obj.(*GlGetDebugMessageLogKHR))
 }
@@ -21693,9 +21221,6 @@ func doDecodeGlGetDriverControlStringQCOM(d binary.Decoder, o *GlGetDriverContro
 	}
 	d.Struct(ent_895aebe118987a65ba8365251112aeac0285cfd0, &o.DriverControlString)
 }
-func (*binaryClassGlGetDriverControlStringQCOM) New() binary.Object {
-	return &GlGetDriverControlStringQCOM{}
-}
 func (*binaryClassGlGetDriverControlStringQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetDriverControlStringQCOM(e, obj.(*GlGetDriverControlStringQCOM))
 }
@@ -21761,7 +21286,6 @@ func doDecodeGlGetDriverControlsQCOM(d binary.Decoder, o *GlGetDriverControlsQCO
 	}
 	d.Struct(ent_d5ef3e25b0eda9c2d6542fefde56bea6ab1c2e2f, &o.DriverControls)
 }
-func (*binaryClassGlGetDriverControlsQCOM) New() binary.Object { return &GlGetDriverControlsQCOM{} }
 func (*binaryClassGlGetDriverControlsQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetDriverControlsQCOM(e, obj.(*GlGetDriverControlsQCOM))
 }
@@ -21808,7 +21332,6 @@ func doDecodeGlGetError(d binary.Decoder, o *GlGetError) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlGetError) New() binary.Object { return &GlGetError{} }
 func (*binaryClassGlGetError) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetError(e, obj.(*GlGetError))
 }
@@ -21862,7 +21385,6 @@ func doDecodeGlGetFenceivNV(d binary.Decoder, o *GlGetFenceivNV) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetFenceivNV) New() binary.Object { return &GlGetFenceivNV{} }
 func (*binaryClassGlGetFenceivNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFenceivNV(e, obj.(*GlGetFenceivNV))
 }
@@ -21913,9 +21435,6 @@ func doDecodeGlGetFirstPerfQueryIdINTEL(d binary.Decoder, o *GlGetFirstPerfQuery
 		ent_f46480e8d86bf8efb023373b40ebaafee10cee63 = ent
 	}
 	d.Struct(ent_f46480e8d86bf8efb023373b40ebaafee10cee63, &o.QueryId)
-}
-func (*binaryClassGlGetFirstPerfQueryIdINTEL) New() binary.Object {
-	return &GlGetFirstPerfQueryIdINTEL{}
 }
 func (*binaryClassGlGetFirstPerfQueryIdINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFirstPerfQueryIdINTEL(e, obj.(*GlGetFirstPerfQueryIdINTEL))
@@ -21972,7 +21491,6 @@ func doDecodeGlGetFloati_vNV(d binary.Decoder, o *GlGetFloati_vNV) {
 	}
 	d.Struct(ent_84325ab1f124c72d1304dc34175ffff1a1fb76b3, &o.Data)
 }
-func (*binaryClassGlGetFloati_vNV) New() binary.Object { return &GlGetFloati_vNV{} }
 func (*binaryClassGlGetFloati_vNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFloati_vNV(e, obj.(*GlGetFloati_vNV))
 }
@@ -22026,7 +21544,6 @@ func doDecodeGlGetFloatv(d binary.Decoder, o *GlGetFloatv) {
 	}
 	d.Struct(ent_e2af5af92234fe15627d88c7b467cc369d80c680, &o.Values)
 }
-func (*binaryClassGlGetFloatv) New() binary.Object { return &GlGetFloatv{} }
 func (*binaryClassGlGetFloatv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFloatv(e, obj.(*GlGetFloatv))
 }
@@ -22074,7 +21591,6 @@ func doDecodeGlGetFragDataIndexEXT(d binary.Decoder, o *GlGetFragDataIndexEXT) {
 	o.Name = string(d.String())
 	o.Result = GLint(d.Int32())
 }
-func (*binaryClassGlGetFragDataIndexEXT) New() binary.Object { return &GlGetFragDataIndexEXT{} }
 func (*binaryClassGlGetFragDataIndexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFragDataIndexEXT(e, obj.(*GlGetFragDataIndexEXT))
 }
@@ -22123,7 +21639,6 @@ func doDecodeGlGetFragDataLocation(d binary.Decoder, o *GlGetFragDataLocation) {
 	o.Name = string(d.String())
 	o.Result = GLint(d.Int32())
 }
-func (*binaryClassGlGetFragDataLocation) New() binary.Object { return &GlGetFragDataLocation{} }
 func (*binaryClassGlGetFragDataLocation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFragDataLocation(e, obj.(*GlGetFragDataLocation))
 }
@@ -22180,9 +21695,6 @@ func doDecodeGlGetFramebufferAttachmentParameteriv(d binary.Decoder, o *GlGetFra
 		ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8 = ent
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
-}
-func (*binaryClassGlGetFramebufferAttachmentParameteriv) New() binary.Object {
-	return &GlGetFramebufferAttachmentParameteriv{}
 }
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFramebufferAttachmentParameteriv(e, obj.(*GlGetFramebufferAttachmentParameteriv))
@@ -22242,9 +21754,6 @@ func doDecodeGlGetFramebufferParameteriv(d binary.Decoder, o *GlGetFramebufferPa
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetFramebufferParameteriv) New() binary.Object {
-	return &GlGetFramebufferParameteriv{}
-}
 func (*binaryClassGlGetFramebufferParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetFramebufferParameteriv(e, obj.(*GlGetFramebufferParameteriv))
 }
@@ -22291,7 +21800,6 @@ func doDecodeGlGetGraphicsResetStatus(d binary.Decoder, o *GlGetGraphicsResetSta
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlGetGraphicsResetStatus) New() binary.Object { return &GlGetGraphicsResetStatus{} }
 func (*binaryClassGlGetGraphicsResetStatus) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetGraphicsResetStatus(e, obj.(*GlGetGraphicsResetStatus))
 }
@@ -22336,9 +21844,6 @@ func doDecodeGlGetGraphicsResetStatusEXT(d binary.Decoder, o *GlGetGraphicsReset
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlGetGraphicsResetStatusEXT) New() binary.Object {
-	return &GlGetGraphicsResetStatusEXT{}
-}
 func (*binaryClassGlGetGraphicsResetStatusEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetGraphicsResetStatusEXT(e, obj.(*GlGetGraphicsResetStatusEXT))
 }
@@ -22382,9 +21887,6 @@ func doDecodeGlGetGraphicsResetStatusKHR(d binary.Decoder, o *GlGetGraphicsReset
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Result = GLenum(d.Uint32())
-}
-func (*binaryClassGlGetGraphicsResetStatusKHR) New() binary.Object {
-	return &GlGetGraphicsResetStatusKHR{}
 }
 func (*binaryClassGlGetGraphicsResetStatusKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetGraphicsResetStatusKHR(e, obj.(*GlGetGraphicsResetStatusKHR))
@@ -22440,7 +21942,6 @@ func doDecodeGlGetImageHandleNV(d binary.Decoder, o *GlGetImageHandleNV) {
 	o.Format = GLenum(d.Uint32())
 	o.Result = GLuint64(d.Uint64())
 }
-func (*binaryClassGlGetImageHandleNV) New() binary.Object { return &GlGetImageHandleNV{} }
 func (*binaryClassGlGetImageHandleNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetImageHandleNV(e, obj.(*GlGetImageHandleNV))
 }
@@ -22499,7 +22000,6 @@ func doDecodeGlGetInteger64i_v(d binary.Decoder, o *GlGetInteger64i_v) {
 	}
 	d.Struct(ent_521d1a37f247d7260c0bd6f6a7df9be352232b24, &o.Values)
 }
-func (*binaryClassGlGetInteger64i_v) New() binary.Object { return &GlGetInteger64i_v{} }
 func (*binaryClassGlGetInteger64i_v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetInteger64i_v(e, obj.(*GlGetInteger64i_v))
 }
@@ -22553,7 +22053,6 @@ func doDecodeGlGetInteger64v(d binary.Decoder, o *GlGetInteger64v) {
 	}
 	d.Struct(ent_521d1a37f247d7260c0bd6f6a7df9be352232b24, &o.Values)
 }
-func (*binaryClassGlGetInteger64v) New() binary.Object { return &GlGetInteger64v{} }
 func (*binaryClassGlGetInteger64v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetInteger64v(e, obj.(*GlGetInteger64v))
 }
@@ -22606,7 +22105,6 @@ func doDecodeGlGetInteger64vAPPLE(d binary.Decoder, o *GlGetInteger64vAPPLE) {
 	}
 	d.Struct(ent_bbf0f4046b37b097cdf890d0eeea5e8f1c0ad624, &o.Params)
 }
-func (*binaryClassGlGetInteger64vAPPLE) New() binary.Object { return &GlGetInteger64vAPPLE{} }
 func (*binaryClassGlGetInteger64vAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetInteger64vAPPLE(e, obj.(*GlGetInteger64vAPPLE))
 }
@@ -22661,7 +22159,6 @@ func doDecodeGlGetIntegeri_v(d binary.Decoder, o *GlGetIntegeri_v) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetIntegeri_v) New() binary.Object { return &GlGetIntegeri_v{} }
 func (*binaryClassGlGetIntegeri_v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetIntegeri_v(e, obj.(*GlGetIntegeri_v))
 }
@@ -22717,7 +22214,6 @@ func doDecodeGlGetIntegeri_vEXT(d binary.Decoder, o *GlGetIntegeri_vEXT) {
 	}
 	d.Struct(ent_f5e5b6019245222a8f97175dd3a6f49578a4b8f3, &o.Data)
 }
-func (*binaryClassGlGetIntegeri_vEXT) New() binary.Object { return &GlGetIntegeri_vEXT{} }
 func (*binaryClassGlGetIntegeri_vEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetIntegeri_vEXT(e, obj.(*GlGetIntegeri_vEXT))
 }
@@ -22771,7 +22267,6 @@ func doDecodeGlGetIntegerv(d binary.Decoder, o *GlGetIntegerv) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetIntegerv) New() binary.Object { return &GlGetIntegerv{} }
 func (*binaryClassGlGetIntegerv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetIntegerv(e, obj.(*GlGetIntegerv))
 }
@@ -22831,9 +22326,6 @@ func doDecodeGlGetInternalformatSampleivNV(d binary.Decoder, o *GlGetInternalfor
 		ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd = ent
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
-}
-func (*binaryClassGlGetInternalformatSampleivNV) New() binary.Object {
-	return &GlGetInternalformatSampleivNV{}
 }
 func (*binaryClassGlGetInternalformatSampleivNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetInternalformatSampleivNV(e, obj.(*GlGetInternalformatSampleivNV))
@@ -22899,7 +22391,6 @@ func doDecodeGlGetInternalformativ(d binary.Decoder, o *GlGetInternalformativ) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetInternalformativ) New() binary.Object { return &GlGetInternalformativ{} }
 func (*binaryClassGlGetInternalformativ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetInternalformativ(e, obj.(*GlGetInternalformativ))
 }
@@ -22957,7 +22448,6 @@ func doDecodeGlGetMultisamplefv(d binary.Decoder, o *GlGetMultisamplefv) {
 	}
 	d.Struct(ent_538c329a4dd99665dae3d63903567f40afe5d100, &o.Val)
 }
-func (*binaryClassGlGetMultisamplefv) New() binary.Object { return &GlGetMultisamplefv{} }
 func (*binaryClassGlGetMultisamplefv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetMultisamplefv(e, obj.(*GlGetMultisamplefv))
 }
@@ -23011,7 +22501,6 @@ func doDecodeGlGetNextPerfQueryIdINTEL(d binary.Decoder, o *GlGetNextPerfQueryId
 	}
 	d.Struct(ent_0371f2c0f985e7deba88936fe61c48adcb4a9cd4, &o.NextQueryId)
 }
-func (*binaryClassGlGetNextPerfQueryIdINTEL) New() binary.Object { return &GlGetNextPerfQueryIdINTEL{} }
 func (*binaryClassGlGetNextPerfQueryIdINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetNextPerfQueryIdINTEL(e, obj.(*GlGetNextPerfQueryIdINTEL))
 }
@@ -23079,7 +22568,6 @@ func doDecodeGlGetObjectLabel(d binary.Decoder, o *GlGetObjectLabel) {
 	}
 	d.Struct(ent_a866af6ea6a64de3b0cebaf46a928ebe2dd2ebcc, &o.Label)
 }
-func (*binaryClassGlGetObjectLabel) New() binary.Object { return &GlGetObjectLabel{} }
 func (*binaryClassGlGetObjectLabel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetObjectLabel(e, obj.(*GlGetObjectLabel))
 }
@@ -23148,7 +22636,6 @@ func doDecodeGlGetObjectLabelEXT(d binary.Decoder, o *GlGetObjectLabelEXT) {
 	}
 	d.Struct(ent_a866af6ea6a64de3b0cebaf46a928ebe2dd2ebcc, &o.Label)
 }
-func (*binaryClassGlGetObjectLabelEXT) New() binary.Object { return &GlGetObjectLabelEXT{} }
 func (*binaryClassGlGetObjectLabelEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetObjectLabelEXT(e, obj.(*GlGetObjectLabelEXT))
 }
@@ -23217,7 +22704,6 @@ func doDecodeGlGetObjectLabelKHR(d binary.Decoder, o *GlGetObjectLabelKHR) {
 	}
 	d.Struct(ent_a866af6ea6a64de3b0cebaf46a928ebe2dd2ebcc, &o.Label)
 }
-func (*binaryClassGlGetObjectLabelKHR) New() binary.Object { return &GlGetObjectLabelKHR{} }
 func (*binaryClassGlGetObjectLabelKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetObjectLabelKHR(e, obj.(*GlGetObjectLabelKHR))
 }
@@ -23291,7 +22777,6 @@ func doDecodeGlGetObjectPtrLabel(d binary.Decoder, o *GlGetObjectPtrLabel) {
 	}
 	d.Struct(ent_a866af6ea6a64de3b0cebaf46a928ebe2dd2ebcc, &o.Label)
 }
-func (*binaryClassGlGetObjectPtrLabel) New() binary.Object { return &GlGetObjectPtrLabel{} }
 func (*binaryClassGlGetObjectPtrLabel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetObjectPtrLabel(e, obj.(*GlGetObjectPtrLabel))
 }
@@ -23364,7 +22849,6 @@ func doDecodeGlGetObjectPtrLabelKHR(d binary.Decoder, o *GlGetObjectPtrLabelKHR)
 	}
 	d.Struct(ent_a866af6ea6a64de3b0cebaf46a928ebe2dd2ebcc, &o.Label)
 }
-func (*binaryClassGlGetObjectPtrLabelKHR) New() binary.Object { return &GlGetObjectPtrLabelKHR{} }
 func (*binaryClassGlGetObjectPtrLabelKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetObjectPtrLabelKHR(e, obj.(*GlGetObjectPtrLabelKHR))
 }
@@ -23419,7 +22903,6 @@ func doDecodeGlGetPathCommandsNV(d binary.Decoder, o *GlGetPathCommandsNV) {
 	}
 	d.Struct(ent_aa9c0bf8735a7909ae6223b150a3f9b5f030e252, &o.Commands)
 }
-func (*binaryClassGlGetPathCommandsNV) New() binary.Object { return &GlGetPathCommandsNV{} }
 func (*binaryClassGlGetPathCommandsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathCommandsNV(e, obj.(*GlGetPathCommandsNV))
 }
@@ -23472,7 +22955,6 @@ func doDecodeGlGetPathCoordsNV(d binary.Decoder, o *GlGetPathCoordsNV) {
 	}
 	d.Struct(ent_67a82e5fee0be545d5281d9a964ed6c517457148, &o.Coords)
 }
-func (*binaryClassGlGetPathCoordsNV) New() binary.Object { return &GlGetPathCoordsNV{} }
 func (*binaryClassGlGetPathCoordsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathCoordsNV(e, obj.(*GlGetPathCoordsNV))
 }
@@ -23525,7 +23007,6 @@ func doDecodeGlGetPathDashArrayNV(d binary.Decoder, o *GlGetPathDashArrayNV) {
 	}
 	d.Struct(ent_33b314a5318dbf1325704514076b33aa4a815c4d, &o.DashArray)
 }
-func (*binaryClassGlGetPathDashArrayNV) New() binary.Object { return &GlGetPathDashArrayNV{} }
 func (*binaryClassGlGetPathDashArrayNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathDashArrayNV(e, obj.(*GlGetPathDashArrayNV))
 }
@@ -23575,7 +23056,6 @@ func doDecodeGlGetPathLengthNV(d binary.Decoder, o *GlGetPathLengthNV) {
 	o.NumSegments = GLsizei(d.Int32())
 	o.Result = GLfloat(d.Float32())
 }
-func (*binaryClassGlGetPathLengthNV) New() binary.Object { return &GlGetPathLengthNV{} }
 func (*binaryClassGlGetPathLengthNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathLengthNV(e, obj.(*GlGetPathLengthNV))
 }
@@ -23636,7 +23116,6 @@ func doDecodeGlGetPathMetricRangeNV(d binary.Decoder, o *GlGetPathMetricRangeNV)
 	}
 	d.Struct(ent_ac3c32bbd3772fe0be53ce6ad8349f388b18df9a, &o.Metrics)
 }
-func (*binaryClassGlGetPathMetricRangeNV) New() binary.Object { return &GlGetPathMetricRangeNV{} }
 func (*binaryClassGlGetPathMetricRangeNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathMetricRangeNV(e, obj.(*GlGetPathMetricRangeNV))
 }
@@ -23709,7 +23188,6 @@ func doDecodeGlGetPathMetricsNV(d binary.Decoder, o *GlGetPathMetricsNV) {
 	}
 	d.Struct(ent_ac3c32bbd3772fe0be53ce6ad8349f388b18df9a, &o.Metrics)
 }
-func (*binaryClassGlGetPathMetricsNV) New() binary.Object { return &GlGetPathMetricsNV{} }
 func (*binaryClassGlGetPathMetricsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathMetricsNV(e, obj.(*GlGetPathMetricsNV))
 }
@@ -23769,7 +23247,6 @@ func doDecodeGlGetPathParameterfvNV(d binary.Decoder, o *GlGetPathParameterfvNV)
 	}
 	d.Struct(ent_18a7b8d241a5a57842d752349bd7ea7a6f389219, &o.Value)
 }
-func (*binaryClassGlGetPathParameterfvNV) New() binary.Object { return &GlGetPathParameterfvNV{} }
 func (*binaryClassGlGetPathParameterfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathParameterfvNV(e, obj.(*GlGetPathParameterfvNV))
 }
@@ -23825,7 +23302,6 @@ func doDecodeGlGetPathParameterivNV(d binary.Decoder, o *GlGetPathParameterivNV)
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetPathParameterivNV) New() binary.Object { return &GlGetPathParameterivNV{} }
 func (*binaryClassGlGetPathParameterivNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathParameterivNV(e, obj.(*GlGetPathParameterivNV))
 }
@@ -23900,7 +23376,6 @@ func doDecodeGlGetPathSpacingNV(d binary.Decoder, o *GlGetPathSpacingNV) {
 	}
 	d.Struct(ent_8806cac21e84116325da2c4e01c058de7f20391a, &o.ReturnedSpacing)
 }
-func (*binaryClassGlGetPathSpacingNV) New() binary.Object { return &GlGetPathSpacingNV{} }
 func (*binaryClassGlGetPathSpacingNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPathSpacingNV(e, obj.(*GlGetPathSpacingNV))
 }
@@ -24020,7 +23495,6 @@ func doDecodeGlGetPerfCounterInfoINTEL(d binary.Decoder, o *GlGetPerfCounterInfo
 	}
 	d.Struct(ent_b9b35581106e4d4ecbef41b8abc9f6f91b8bcb4c, &o.RawCounterMaxValue)
 }
-func (*binaryClassGlGetPerfCounterInfoINTEL) New() binary.Object { return &GlGetPerfCounterInfoINTEL{} }
 func (*binaryClassGlGetPerfCounterInfoINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfCounterInfoINTEL(e, obj.(*GlGetPerfCounterInfoINTEL))
 }
@@ -24097,9 +23571,6 @@ func doDecodeGlGetPerfMonitorCounterDataAMD(d binary.Decoder, o *GlGetPerfMonito
 	}
 	d.Struct(ent_b696b0f45923ca512ead7a9c2727575c1cfaa3be, &o.BytesWritten)
 }
-func (*binaryClassGlGetPerfMonitorCounterDataAMD) New() binary.Object {
-	return &GlGetPerfMonitorCounterDataAMD{}
-}
 func (*binaryClassGlGetPerfMonitorCounterDataAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorCounterDataAMD(e, obj.(*GlGetPerfMonitorCounterDataAMD))
 }
@@ -24160,9 +23631,6 @@ func doDecodeGlGetPerfMonitorCounterInfoAMD(d binary.Decoder, o *GlGetPerfMonito
 		ent_20db425fae2cdb07e005cd8127ed7460dc16af21 = ent
 	}
 	d.Struct(ent_20db425fae2cdb07e005cd8127ed7460dc16af21, &o.Data)
-}
-func (*binaryClassGlGetPerfMonitorCounterInfoAMD) New() binary.Object {
-	return &GlGetPerfMonitorCounterInfoAMD{}
 }
 func (*binaryClassGlGetPerfMonitorCounterInfoAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorCounterInfoAMD(e, obj.(*GlGetPerfMonitorCounterInfoAMD))
@@ -24232,9 +23700,6 @@ func doDecodeGlGetPerfMonitorCounterStringAMD(d binary.Decoder, o *GlGetPerfMoni
 		ent_c81c66332cd9ee9d7d15ee23330f8e8278b67762 = ent
 	}
 	d.Struct(ent_c81c66332cd9ee9d7d15ee23330f8e8278b67762, &o.CounterString)
-}
-func (*binaryClassGlGetPerfMonitorCounterStringAMD) New() binary.Object {
-	return &GlGetPerfMonitorCounterStringAMD{}
 }
 func (*binaryClassGlGetPerfMonitorCounterStringAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorCounterStringAMD(e, obj.(*GlGetPerfMonitorCounterStringAMD))
@@ -24313,9 +23778,6 @@ func doDecodeGlGetPerfMonitorCountersAMD(d binary.Decoder, o *GlGetPerfMonitorCo
 	}
 	d.Struct(ent_9d09b1cf503b7c93c60f37fcda6b56e4956f8fea, &o.Counters)
 }
-func (*binaryClassGlGetPerfMonitorCountersAMD) New() binary.Object {
-	return &GlGetPerfMonitorCountersAMD{}
-}
 func (*binaryClassGlGetPerfMonitorCountersAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorCountersAMD(e, obj.(*GlGetPerfMonitorCountersAMD))
 }
@@ -24384,9 +23846,6 @@ func doDecodeGlGetPerfMonitorGroupStringAMD(d binary.Decoder, o *GlGetPerfMonito
 	}
 	d.Struct(ent_cfba84dfd3c564bc2772d9bb57fb63a2cfbd0248, &o.GroupString)
 }
-func (*binaryClassGlGetPerfMonitorGroupStringAMD) New() binary.Object {
-	return &GlGetPerfMonitorGroupStringAMD{}
-}
 func (*binaryClassGlGetPerfMonitorGroupStringAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorGroupStringAMD(e, obj.(*GlGetPerfMonitorGroupStringAMD))
 }
@@ -24452,7 +23911,6 @@ func doDecodeGlGetPerfMonitorGroupsAMD(d binary.Decoder, o *GlGetPerfMonitorGrou
 	}
 	d.Struct(ent_a95aa55825acf6aab5a7cf18cff16ae6d6d35ce6, &o.Groups)
 }
-func (*binaryClassGlGetPerfMonitorGroupsAMD) New() binary.Object { return &GlGetPerfMonitorGroupsAMD{} }
 func (*binaryClassGlGetPerfMonitorGroupsAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfMonitorGroupsAMD(e, obj.(*GlGetPerfMonitorGroupsAMD))
 }
@@ -24521,7 +23979,6 @@ func doDecodeGlGetPerfQueryDataINTEL(d binary.Decoder, o *GlGetPerfQueryDataINTE
 	}
 	d.Struct(ent_5489f9d532f743a49213b9dfcc54e41359a49e0d, &o.BytesWritten)
 }
-func (*binaryClassGlGetPerfQueryDataINTEL) New() binary.Object { return &GlGetPerfQueryDataINTEL{} }
 func (*binaryClassGlGetPerfQueryDataINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfQueryDataINTEL(e, obj.(*GlGetPerfQueryDataINTEL))
 }
@@ -24585,9 +24042,6 @@ func doDecodeGlGetPerfQueryIdByNameINTEL(d binary.Decoder, o *GlGetPerfQueryIdBy
 		ent_f46480e8d86bf8efb023373b40ebaafee10cee63 = ent
 	}
 	d.Struct(ent_f46480e8d86bf8efb023373b40ebaafee10cee63, &o.QueryId)
-}
-func (*binaryClassGlGetPerfQueryIdByNameINTEL) New() binary.Object {
-	return &GlGetPerfQueryIdByNameINTEL{}
 }
 func (*binaryClassGlGetPerfQueryIdByNameINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfQueryIdByNameINTEL(e, obj.(*GlGetPerfQueryIdByNameINTEL))
@@ -24681,7 +24135,6 @@ func doDecodeGlGetPerfQueryInfoINTEL(d binary.Decoder, o *GlGetPerfQueryInfoINTE
 	}
 	d.Struct(ent_c41c816551aada03e8b2a21a667999511c461fc6, &o.CapsMask)
 }
-func (*binaryClassGlGetPerfQueryInfoINTEL) New() binary.Object { return &GlGetPerfQueryInfoINTEL{} }
 func (*binaryClassGlGetPerfQueryInfoINTEL) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPerfQueryInfoINTEL(e, obj.(*GlGetPerfQueryInfoINTEL))
 }
@@ -24741,7 +24194,6 @@ func doDecodeGlGetPointerv(d binary.Decoder, o *GlGetPointerv) {
 	}
 	d.Struct(ent_ba394937b8be61a154aff030b169fda3f96cda68, &o.Params)
 }
-func (*binaryClassGlGetPointerv) New() binary.Object { return &GlGetPointerv{} }
 func (*binaryClassGlGetPointerv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPointerv(e, obj.(*GlGetPointerv))
 }
@@ -24794,7 +24246,6 @@ func doDecodeGlGetPointervKHR(d binary.Decoder, o *GlGetPointervKHR) {
 	}
 	d.Struct(ent_ba394937b8be61a154aff030b169fda3f96cda68, &o.Params)
 }
-func (*binaryClassGlGetPointervKHR) New() binary.Object { return &GlGetPointervKHR{} }
 func (*binaryClassGlGetPointervKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetPointervKHR(e, obj.(*GlGetPointervKHR))
 }
@@ -24867,7 +24318,6 @@ func doDecodeGlGetProgramBinary(d binary.Decoder, o *GlGetProgramBinary) {
 	}
 	d.Struct(ent_711aadcd39ba3fa17c2a2f581ecb968fd2327220, &o.Binary)
 }
-func (*binaryClassGlGetProgramBinary) New() binary.Object { return &GlGetProgramBinary{} }
 func (*binaryClassGlGetProgramBinary) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramBinary(e, obj.(*GlGetProgramBinary))
 }
@@ -24943,7 +24393,6 @@ func doDecodeGlGetProgramBinaryOES(d binary.Decoder, o *GlGetProgramBinaryOES) {
 	}
 	d.Struct(ent_711aadcd39ba3fa17c2a2f581ecb968fd2327220, &o.Binary)
 }
-func (*binaryClassGlGetProgramBinaryOES) New() binary.Object { return &GlGetProgramBinaryOES{} }
 func (*binaryClassGlGetProgramBinaryOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramBinaryOES(e, obj.(*GlGetProgramBinaryOES))
 }
@@ -25010,7 +24459,6 @@ func doDecodeGlGetProgramInfoLog(d binary.Decoder, o *GlGetProgramInfoLog) {
 	}
 	d.Struct(ent_5253e8a177e01996f7b6b492654585787407a177, &o.Info)
 }
-func (*binaryClassGlGetProgramInfoLog) New() binary.Object { return &GlGetProgramInfoLog{} }
 func (*binaryClassGlGetProgramInfoLog) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramInfoLog(e, obj.(*GlGetProgramInfoLog))
 }
@@ -25069,7 +24517,6 @@ func doDecodeGlGetProgramInterfaceiv(d binary.Decoder, o *GlGetProgramInterfacei
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetProgramInterfaceiv) New() binary.Object { return &GlGetProgramInterfaceiv{} }
 func (*binaryClassGlGetProgramInterfaceiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramInterfaceiv(e, obj.(*GlGetProgramInterfaceiv))
 }
@@ -25136,9 +24583,6 @@ func doDecodeGlGetProgramPipelineInfoLog(d binary.Decoder, o *GlGetProgramPipeli
 		ent_8393248a5716df96e59a593ffac7bec306a64e40 = ent
 	}
 	d.Struct(ent_8393248a5716df96e59a593ffac7bec306a64e40, &o.InfoLog)
-}
-func (*binaryClassGlGetProgramPipelineInfoLog) New() binary.Object {
-	return &GlGetProgramPipelineInfoLog{}
 }
 func (*binaryClassGlGetProgramPipelineInfoLog) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramPipelineInfoLog(e, obj.(*GlGetProgramPipelineInfoLog))
@@ -25207,9 +24651,6 @@ func doDecodeGlGetProgramPipelineInfoLogEXT(d binary.Decoder, o *GlGetProgramPip
 	}
 	d.Struct(ent_8393248a5716df96e59a593ffac7bec306a64e40, &o.InfoLog)
 }
-func (*binaryClassGlGetProgramPipelineInfoLogEXT) New() binary.Object {
-	return &GlGetProgramPipelineInfoLogEXT{}
-}
 func (*binaryClassGlGetProgramPipelineInfoLogEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramPipelineInfoLogEXT(e, obj.(*GlGetProgramPipelineInfoLogEXT))
 }
@@ -25268,7 +24709,6 @@ func doDecodeGlGetProgramPipelineiv(d binary.Decoder, o *GlGetProgramPipelineiv)
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetProgramPipelineiv) New() binary.Object { return &GlGetProgramPipelineiv{} }
 func (*binaryClassGlGetProgramPipelineiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramPipelineiv(e, obj.(*GlGetProgramPipelineiv))
 }
@@ -25324,7 +24764,6 @@ func doDecodeGlGetProgramPipelineivEXT(d binary.Decoder, o *GlGetProgramPipeline
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetProgramPipelineivEXT) New() binary.Object { return &GlGetProgramPipelineivEXT{} }
 func (*binaryClassGlGetProgramPipelineivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramPipelineivEXT(e, obj.(*GlGetProgramPipelineivEXT))
 }
@@ -25377,7 +24816,6 @@ func doDecodeGlGetProgramResourceIndex(d binary.Decoder, o *GlGetProgramResource
 	o.Name = string(d.String())
 	o.Result = GLuint(d.Uint32())
 }
-func (*binaryClassGlGetProgramResourceIndex) New() binary.Object { return &GlGetProgramResourceIndex{} }
 func (*binaryClassGlGetProgramResourceIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourceIndex(e, obj.(*GlGetProgramResourceIndex))
 }
@@ -25431,9 +24869,6 @@ func doDecodeGlGetProgramResourceLocation(d binary.Decoder, o *GlGetProgramResou
 	o.Name = string(d.String())
 	o.Result = GLint(d.Int32())
 }
-func (*binaryClassGlGetProgramResourceLocation) New() binary.Object {
-	return &GlGetProgramResourceLocation{}
-}
 func (*binaryClassGlGetProgramResourceLocation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourceLocation(e, obj.(*GlGetProgramResourceLocation))
 }
@@ -25486,9 +24921,6 @@ func doDecodeGlGetProgramResourceLocationIndexEXT(d binary.Decoder, o *GlGetProg
 	o.ProgramInterface = GLenum(d.Uint32())
 	o.Name = string(d.String())
 	o.Result = GLint(d.Int32())
-}
-func (*binaryClassGlGetProgramResourceLocationIndexEXT) New() binary.Object {
-	return &GlGetProgramResourceLocationIndexEXT{}
 }
 func (*binaryClassGlGetProgramResourceLocationIndexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourceLocationIndexEXT(e, obj.(*GlGetProgramResourceLocationIndexEXT))
@@ -25561,7 +24993,6 @@ func doDecodeGlGetProgramResourceName(d binary.Decoder, o *GlGetProgramResourceN
 	}
 	d.Struct(ent_e275d8377d0f79c790949c8ac0dbb925f9cddaae, &o.Name)
 }
-func (*binaryClassGlGetProgramResourceName) New() binary.Object { return &GlGetProgramResourceName{} }
 func (*binaryClassGlGetProgramResourceName) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourceName(e, obj.(*GlGetProgramResourceName))
 }
@@ -25646,7 +25077,6 @@ func doDecodeGlGetProgramResourcefvNV(d binary.Decoder, o *GlGetProgramResourcef
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetProgramResourcefvNV) New() binary.Object { return &GlGetProgramResourcefvNV{} }
 func (*binaryClassGlGetProgramResourcefvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourcefvNV(e, obj.(*GlGetProgramResourcefvNV))
 }
@@ -25733,7 +25163,6 @@ func doDecodeGlGetProgramResourceiv(d binary.Decoder, o *GlGetProgramResourceiv)
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetProgramResourceiv) New() binary.Object { return &GlGetProgramResourceiv{} }
 func (*binaryClassGlGetProgramResourceiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramResourceiv(e, obj.(*GlGetProgramResourceiv))
 }
@@ -25794,7 +25223,6 @@ func doDecodeGlGetProgramiv(d binary.Decoder, o *GlGetProgramiv) {
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetProgramiv) New() binary.Object { return &GlGetProgramiv{} }
 func (*binaryClassGlGetProgramiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetProgramiv(e, obj.(*GlGetProgramiv))
 }
@@ -25837,7 +25265,6 @@ func doDecodeS64ᵖ(d binary.Decoder, o *S64ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassS64ᵖ) New() binary.Object { return &S64ᵖ{} }
 func (*binaryClassS64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS64ᵖ(e, obj.(*S64ᵖ))
 }
@@ -25890,7 +25317,6 @@ func doDecodeGlGetQueryObjecti64v(d binary.Decoder, o *GlGetQueryObjecti64v) {
 	}
 	d.Struct(ent_4086adfa367cfad904b9895ede9659101cf24806, &o.Value)
 }
-func (*binaryClassGlGetQueryObjecti64v) New() binary.Object { return &GlGetQueryObjecti64v{} }
 func (*binaryClassGlGetQueryObjecti64v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjecti64v(e, obj.(*GlGetQueryObjecti64v))
 }
@@ -25946,7 +25372,6 @@ func doDecodeGlGetQueryObjecti64vEXT(d binary.Decoder, o *GlGetQueryObjecti64vEX
 	}
 	d.Struct(ent_42d05cf6876580aae5d2d8742b7cd3cc3ce495f4, &o.Value)
 }
-func (*binaryClassGlGetQueryObjecti64vEXT) New() binary.Object { return &GlGetQueryObjecti64vEXT{} }
 func (*binaryClassGlGetQueryObjecti64vEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjecti64vEXT(e, obj.(*GlGetQueryObjecti64vEXT))
 }
@@ -26004,7 +25429,6 @@ func doDecodeGlGetQueryObjectivEXT(d binary.Decoder, o *GlGetQueryObjectivEXT) {
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetQueryObjectivEXT) New() binary.Object { return &GlGetQueryObjectivEXT{} }
 func (*binaryClassGlGetQueryObjectivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjectivEXT(e, obj.(*GlGetQueryObjectivEXT))
 }
@@ -26047,7 +25471,6 @@ func doDecodeU64ᵖ(d binary.Decoder, o *U64ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassU64ᵖ) New() binary.Object { return &U64ᵖ{} }
 func (*binaryClassU64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU64ᵖ(e, obj.(*U64ᵖ))
 }
@@ -26100,7 +25523,6 @@ func doDecodeGlGetQueryObjectui64v(d binary.Decoder, o *GlGetQueryObjectui64v) {
 	}
 	d.Struct(ent_43014451a3309956f911ae92c5e70f24ffd2dc3f, &o.Value)
 }
-func (*binaryClassGlGetQueryObjectui64v) New() binary.Object { return &GlGetQueryObjectui64v{} }
 func (*binaryClassGlGetQueryObjectui64v) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjectui64v(e, obj.(*GlGetQueryObjectui64v))
 }
@@ -26156,7 +25578,6 @@ func doDecodeGlGetQueryObjectui64vEXT(d binary.Decoder, o *GlGetQueryObjectui64v
 	}
 	d.Struct(ent_f0a8985fe4b9454d7b1759eb077897664afc568a, &o.Value)
 }
-func (*binaryClassGlGetQueryObjectui64vEXT) New() binary.Object { return &GlGetQueryObjectui64vEXT{} }
 func (*binaryClassGlGetQueryObjectui64vEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjectui64vEXT(e, obj.(*GlGetQueryObjectui64vEXT))
 }
@@ -26214,7 +25635,6 @@ func doDecodeGlGetQueryObjectuiv(d binary.Decoder, o *GlGetQueryObjectuiv) {
 	}
 	d.Struct(ent_f982c0928b8074fd2b7365307cb37d8f875af289, &o.Value)
 }
-func (*binaryClassGlGetQueryObjectuiv) New() binary.Object { return &GlGetQueryObjectuiv{} }
 func (*binaryClassGlGetQueryObjectuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjectuiv(e, obj.(*GlGetQueryObjectuiv))
 }
@@ -26270,7 +25690,6 @@ func doDecodeGlGetQueryObjectuivEXT(d binary.Decoder, o *GlGetQueryObjectuivEXT)
 	}
 	d.Struct(ent_f982c0928b8074fd2b7365307cb37d8f875af289, &o.Value)
 }
-func (*binaryClassGlGetQueryObjectuivEXT) New() binary.Object { return &GlGetQueryObjectuivEXT{} }
 func (*binaryClassGlGetQueryObjectuivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryObjectuivEXT(e, obj.(*GlGetQueryObjectuivEXT))
 }
@@ -26326,7 +25745,6 @@ func doDecodeGlGetQueryiv(d binary.Decoder, o *GlGetQueryiv) {
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetQueryiv) New() binary.Object { return &GlGetQueryiv{} }
 func (*binaryClassGlGetQueryiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryiv(e, obj.(*GlGetQueryiv))
 }
@@ -26382,7 +25800,6 @@ func doDecodeGlGetQueryivEXT(d binary.Decoder, o *GlGetQueryivEXT) {
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetQueryivEXT) New() binary.Object { return &GlGetQueryivEXT{} }
 func (*binaryClassGlGetQueryivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetQueryivEXT(e, obj.(*GlGetQueryivEXT))
 }
@@ -26437,9 +25854,6 @@ func doDecodeGlGetRenderbufferParameteriv(d binary.Decoder, o *GlGetRenderbuffer
 		ent_a547728fe2833f8c19c56740cad814e8290b9477 = ent
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
-}
-func (*binaryClassGlGetRenderbufferParameteriv) New() binary.Object {
-	return &GlGetRenderbufferParameteriv{}
 }
 func (*binaryClassGlGetRenderbufferParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetRenderbufferParameteriv(e, obj.(*GlGetRenderbufferParameteriv))
@@ -26498,7 +25912,6 @@ func doDecodeGlGetSamplerParameterIiv(d binary.Decoder, o *GlGetSamplerParameter
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameterIiv) New() binary.Object { return &GlGetSamplerParameterIiv{} }
 func (*binaryClassGlGetSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIiv(e, obj.(*GlGetSamplerParameterIiv))
 }
@@ -26555,9 +25968,6 @@ func doDecodeGlGetSamplerParameterIivEXT(d binary.Decoder, o *GlGetSamplerParame
 		ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd = ent
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
-}
-func (*binaryClassGlGetSamplerParameterIivEXT) New() binary.Object {
-	return &GlGetSamplerParameterIivEXT{}
 }
 func (*binaryClassGlGetSamplerParameterIivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIivEXT(e, obj.(*GlGetSamplerParameterIivEXT))
@@ -26616,9 +26026,6 @@ func doDecodeGlGetSamplerParameterIivOES(d binary.Decoder, o *GlGetSamplerParame
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameterIivOES) New() binary.Object {
-	return &GlGetSamplerParameterIivOES{}
-}
 func (*binaryClassGlGetSamplerParameterIivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIivOES(e, obj.(*GlGetSamplerParameterIivOES))
 }
@@ -26676,7 +26083,6 @@ func doDecodeGlGetSamplerParameterIuiv(d binary.Decoder, o *GlGetSamplerParamete
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameterIuiv) New() binary.Object { return &GlGetSamplerParameterIuiv{} }
 func (*binaryClassGlGetSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIuiv(e, obj.(*GlGetSamplerParameterIuiv))
 }
@@ -26733,9 +26139,6 @@ func doDecodeGlGetSamplerParameterIuivEXT(d binary.Decoder, o *GlGetSamplerParam
 		ent_3600567ba28868dd85db2e6f72cbcf5632f6b271 = ent
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
-}
-func (*binaryClassGlGetSamplerParameterIuivEXT) New() binary.Object {
-	return &GlGetSamplerParameterIuivEXT{}
 }
 func (*binaryClassGlGetSamplerParameterIuivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIuivEXT(e, obj.(*GlGetSamplerParameterIuivEXT))
@@ -26794,9 +26197,6 @@ func doDecodeGlGetSamplerParameterIuivOES(d binary.Decoder, o *GlGetSamplerParam
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameterIuivOES) New() binary.Object {
-	return &GlGetSamplerParameterIuivOES{}
-}
 func (*binaryClassGlGetSamplerParameterIuivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterIuivOES(e, obj.(*GlGetSamplerParameterIuivOES))
 }
@@ -26854,7 +26254,6 @@ func doDecodeGlGetSamplerParameterfv(d binary.Decoder, o *GlGetSamplerParameterf
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameterfv) New() binary.Object { return &GlGetSamplerParameterfv{} }
 func (*binaryClassGlGetSamplerParameterfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameterfv(e, obj.(*GlGetSamplerParameterfv))
 }
@@ -26912,7 +26311,6 @@ func doDecodeGlGetSamplerParameteriv(d binary.Decoder, o *GlGetSamplerParameteri
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetSamplerParameteriv) New() binary.Object { return &GlGetSamplerParameteriv{} }
 func (*binaryClassGlGetSamplerParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSamplerParameteriv(e, obj.(*GlGetSamplerParameteriv))
 }
@@ -26979,7 +26377,6 @@ func doDecodeGlGetShaderInfoLog(d binary.Decoder, o *GlGetShaderInfoLog) {
 	}
 	d.Struct(ent_5253e8a177e01996f7b6b492654585787407a177, &o.Info)
 }
-func (*binaryClassGlGetShaderInfoLog) New() binary.Object { return &GlGetShaderInfoLog{} }
 func (*binaryClassGlGetShaderInfoLog) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetShaderInfoLog(e, obj.(*GlGetShaderInfoLog))
 }
@@ -27044,9 +26441,6 @@ func doDecodeGlGetShaderPrecisionFormat(d binary.Decoder, o *GlGetShaderPrecisio
 		ent_ef33733e9e5430059333181f832798233f7d402b = ent
 	}
 	d.Struct(ent_ef33733e9e5430059333181f832798233f7d402b, &o.Precision)
-}
-func (*binaryClassGlGetShaderPrecisionFormat) New() binary.Object {
-	return &GlGetShaderPrecisionFormat{}
 }
 func (*binaryClassGlGetShaderPrecisionFormat) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetShaderPrecisionFormat(e, obj.(*GlGetShaderPrecisionFormat))
@@ -27115,7 +26509,6 @@ func doDecodeGlGetShaderSource(d binary.Decoder, o *GlGetShaderSource) {
 	}
 	d.Struct(ent_4952d2dc366833b4b190269567404c261c3fed25, &o.Source)
 }
-func (*binaryClassGlGetShaderSource) New() binary.Object { return &GlGetShaderSource{} }
 func (*binaryClassGlGetShaderSource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetShaderSource(e, obj.(*GlGetShaderSource))
 }
@@ -27172,7 +26565,6 @@ func doDecodeGlGetShaderiv(d binary.Decoder, o *GlGetShaderiv) {
 	}
 	d.Struct(ent_67a36c8fac839b10c9d15b86bc82ac9150f794c8, &o.Value)
 }
-func (*binaryClassGlGetShaderiv) New() binary.Object { return &GlGetShaderiv{} }
 func (*binaryClassGlGetShaderiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetShaderiv(e, obj.(*GlGetShaderiv))
 }
@@ -27226,7 +26618,6 @@ func doDecodeGlGetString(d binary.Decoder, o *GlGetString) {
 	}
 	d.Struct(ent_7da7fdf5afaa2295bba3adcc0a3394552b114a38, &o.Result)
 }
-func (*binaryClassGlGetString) New() binary.Object { return &GlGetString{} }
 func (*binaryClassGlGetString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetString(e, obj.(*GlGetString))
 }
@@ -27281,7 +26672,6 @@ func doDecodeGlGetStringi(d binary.Decoder, o *GlGetStringi) {
 	}
 	d.Struct(ent_7da7fdf5afaa2295bba3adcc0a3394552b114a38, &o.Result)
 }
-func (*binaryClassGlGetStringi) New() binary.Object { return &GlGetStringi{} }
 func (*binaryClassGlGetStringi) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetStringi(e, obj.(*GlGetStringi))
 }
@@ -27348,7 +26738,6 @@ func doDecodeGlGetSynciv(d binary.Decoder, o *GlGetSynciv) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetSynciv) New() binary.Object { return &GlGetSynciv{} }
 func (*binaryClassGlGetSynciv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSynciv(e, obj.(*GlGetSynciv))
 }
@@ -27417,7 +26806,6 @@ func doDecodeGlGetSyncivAPPLE(d binary.Decoder, o *GlGetSyncivAPPLE) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetSyncivAPPLE) New() binary.Object { return &GlGetSyncivAPPLE{} }
 func (*binaryClassGlGetSyncivAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetSyncivAPPLE(e, obj.(*GlGetSyncivAPPLE))
 }
@@ -27477,7 +26865,6 @@ func doDecodeGlGetTexLevelParameterfv(d binary.Decoder, o *GlGetTexLevelParamete
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetTexLevelParameterfv) New() binary.Object { return &GlGetTexLevelParameterfv{} }
 func (*binaryClassGlGetTexLevelParameterfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexLevelParameterfv(e, obj.(*GlGetTexLevelParameterfv))
 }
@@ -27538,7 +26925,6 @@ func doDecodeGlGetTexLevelParameteriv(d binary.Decoder, o *GlGetTexLevelParamete
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetTexLevelParameteriv) New() binary.Object { return &GlGetTexLevelParameteriv{} }
 func (*binaryClassGlGetTexLevelParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexLevelParameteriv(e, obj.(*GlGetTexLevelParameteriv))
 }
@@ -27597,7 +26983,6 @@ func doDecodeGlGetTexParameterIiv(d binary.Decoder, o *GlGetTexParameterIiv) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIiv) New() binary.Object { return &GlGetTexParameterIiv{} }
 func (*binaryClassGlGetTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIiv(e, obj.(*GlGetTexParameterIiv))
 }
@@ -27653,7 +27038,6 @@ func doDecodeGlGetTexParameterIivEXT(d binary.Decoder, o *GlGetTexParameterIivEX
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIivEXT) New() binary.Object { return &GlGetTexParameterIivEXT{} }
 func (*binaryClassGlGetTexParameterIivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIivEXT(e, obj.(*GlGetTexParameterIivEXT))
 }
@@ -27711,7 +27095,6 @@ func doDecodeGlGetTexParameterIivOES(d binary.Decoder, o *GlGetTexParameterIivOE
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIivOES) New() binary.Object { return &GlGetTexParameterIivOES{} }
 func (*binaryClassGlGetTexParameterIivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIivOES(e, obj.(*GlGetTexParameterIivOES))
 }
@@ -27769,7 +27152,6 @@ func doDecodeGlGetTexParameterIuiv(d binary.Decoder, o *GlGetTexParameterIuiv) {
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIuiv) New() binary.Object { return &GlGetTexParameterIuiv{} }
 func (*binaryClassGlGetTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIuiv(e, obj.(*GlGetTexParameterIuiv))
 }
@@ -27825,7 +27207,6 @@ func doDecodeGlGetTexParameterIuivEXT(d binary.Decoder, o *GlGetTexParameterIuiv
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIuivEXT) New() binary.Object { return &GlGetTexParameterIuivEXT{} }
 func (*binaryClassGlGetTexParameterIuivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIuivEXT(e, obj.(*GlGetTexParameterIuivEXT))
 }
@@ -27883,7 +27264,6 @@ func doDecodeGlGetTexParameterIuivOES(d binary.Decoder, o *GlGetTexParameterIuiv
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetTexParameterIuivOES) New() binary.Object { return &GlGetTexParameterIuivOES{} }
 func (*binaryClassGlGetTexParameterIuivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterIuivOES(e, obj.(*GlGetTexParameterIuivOES))
 }
@@ -27941,7 +27321,6 @@ func doDecodeGlGetTexParameterfv(d binary.Decoder, o *GlGetTexParameterfv) {
 	}
 	d.Struct(ent_e2af5af92234fe15627d88c7b467cc369d80c680, &o.Values)
 }
-func (*binaryClassGlGetTexParameterfv) New() binary.Object { return &GlGetTexParameterfv{} }
 func (*binaryClassGlGetTexParameterfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameterfv(e, obj.(*GlGetTexParameterfv))
 }
@@ -27997,7 +27376,6 @@ func doDecodeGlGetTexParameteriv(d binary.Decoder, o *GlGetTexParameteriv) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetTexParameteriv) New() binary.Object { return &GlGetTexParameteriv{} }
 func (*binaryClassGlGetTexParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTexParameteriv(e, obj.(*GlGetTexParameteriv))
 }
@@ -28044,7 +27422,6 @@ func doDecodeGlGetTextureHandleNV(d binary.Decoder, o *GlGetTextureHandleNV) {
 	o.Texture = TextureId(d.Uint32())
 	o.Result = GLuint64(d.Uint64())
 }
-func (*binaryClassGlGetTextureHandleNV) New() binary.Object { return &GlGetTextureHandleNV{} }
 func (*binaryClassGlGetTextureHandleNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTextureHandleNV(e, obj.(*GlGetTextureHandleNV))
 }
@@ -28091,9 +27468,6 @@ func doDecodeGlGetTextureSamplerHandleNV(d binary.Decoder, o *GlGetTextureSample
 	o.Texture = TextureId(d.Uint32())
 	o.Sampler = SamplerId(d.Uint32())
 	o.Result = GLuint64(d.Uint64())
-}
-func (*binaryClassGlGetTextureSamplerHandleNV) New() binary.Object {
-	return &GlGetTextureSamplerHandleNV{}
 }
 func (*binaryClassGlGetTextureSamplerHandleNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTextureSamplerHandleNV(e, obj.(*GlGetTextureSamplerHandleNV))
@@ -28181,9 +27555,6 @@ func doDecodeGlGetTransformFeedbackVarying(d binary.Decoder, o *GlGetTransformFe
 	}
 	d.Struct(ent_e275d8377d0f79c790949c8ac0dbb925f9cddaae, &o.Name)
 }
-func (*binaryClassGlGetTransformFeedbackVarying) New() binary.Object {
-	return &GlGetTransformFeedbackVarying{}
-}
 func (*binaryClassGlGetTransformFeedbackVarying) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTransformFeedbackVarying(e, obj.(*GlGetTransformFeedbackVarying))
 }
@@ -28254,9 +27625,6 @@ func doDecodeGlGetTranslatedShaderSourceANGLE(d binary.Decoder, o *GlGetTranslat
 	}
 	d.Struct(ent_4952d2dc366833b4b190269567404c261c3fed25, &o.Source)
 }
-func (*binaryClassGlGetTranslatedShaderSourceANGLE) New() binary.Object {
-	return &GlGetTranslatedShaderSourceANGLE{}
-}
 func (*binaryClassGlGetTranslatedShaderSourceANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetTranslatedShaderSourceANGLE(e, obj.(*GlGetTranslatedShaderSourceANGLE))
 }
@@ -28308,7 +27676,6 @@ func doDecodeGlGetUniformBlockIndex(d binary.Decoder, o *GlGetUniformBlockIndex)
 	o.UniformBlockName = string(d.String())
 	o.Result = UniformBlockId(d.Uint32())
 }
-func (*binaryClassGlGetUniformBlockIndex) New() binary.Object { return &GlGetUniformBlockIndex{} }
 func (*binaryClassGlGetUniformBlockIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformBlockIndex(e, obj.(*GlGetUniformBlockIndex))
 }
@@ -28351,7 +27718,6 @@ func doDecodeUniformIndexᵖ(d binary.Decoder, o *UniformIndexᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassUniformIndexᵖ) New() binary.Object { return &UniformIndexᵖ{} }
 func (*binaryClassUniformIndexᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniformIndexᵖ(e, obj.(*UniformIndexᵖ))
 }
@@ -28413,7 +27779,6 @@ func doDecodeGlGetUniformIndices(d binary.Decoder, o *GlGetUniformIndices) {
 	}
 	d.Struct(ent_d76a6e14e32b1bd12b2774a352abd72129aaa79b, &o.UniformIndices)
 }
-func (*binaryClassGlGetUniformIndices) New() binary.Object { return &GlGetUniformIndices{} }
 func (*binaryClassGlGetUniformIndices) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformIndices(e, obj.(*GlGetUniformIndices))
 }
@@ -28463,7 +27828,6 @@ func doDecodeGlGetUniformLocation(d binary.Decoder, o *GlGetUniformLocation) {
 	o.Name = string(d.String())
 	o.Result = UniformLocation(d.Int32())
 }
-func (*binaryClassGlGetUniformLocation) New() binary.Object { return &GlGetUniformLocation{} }
 func (*binaryClassGlGetUniformLocation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformLocation(e, obj.(*GlGetUniformLocation))
 }
@@ -28519,7 +27883,6 @@ func doDecodeGlGetUniformfv(d binary.Decoder, o *GlGetUniformfv) {
 	}
 	d.Struct(ent_e2af5af92234fe15627d88c7b467cc369d80c680, &o.Values)
 }
-func (*binaryClassGlGetUniformfv) New() binary.Object { return &GlGetUniformfv{} }
 func (*binaryClassGlGetUniformfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformfv(e, obj.(*GlGetUniformfv))
 }
@@ -28575,7 +27938,6 @@ func doDecodeGlGetUniformiv(d binary.Decoder, o *GlGetUniformiv) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetUniformiv) New() binary.Object { return &GlGetUniformiv{} }
 func (*binaryClassGlGetUniformiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformiv(e, obj.(*GlGetUniformiv))
 }
@@ -28631,7 +27993,6 @@ func doDecodeGlGetUniformuiv(d binary.Decoder, o *GlGetUniformuiv) {
 	}
 	d.Struct(ent_3a2faf9279cb27faa5f078df8217831638c07534, &o.Values)
 }
-func (*binaryClassGlGetUniformuiv) New() binary.Object { return &GlGetUniformuiv{} }
 func (*binaryClassGlGetUniformuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetUniformuiv(e, obj.(*GlGetUniformuiv))
 }
@@ -28687,7 +28048,6 @@ func doDecodeGlGetVertexAttribIiv(d binary.Decoder, o *GlGetVertexAttribIiv) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetVertexAttribIiv) New() binary.Object { return &GlGetVertexAttribIiv{} }
 func (*binaryClassGlGetVertexAttribIiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetVertexAttribIiv(e, obj.(*GlGetVertexAttribIiv))
 }
@@ -28743,7 +28103,6 @@ func doDecodeGlGetVertexAttribIuiv(d binary.Decoder, o *GlGetVertexAttribIuiv) {
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetVertexAttribIuiv) New() binary.Object { return &GlGetVertexAttribIuiv{} }
 func (*binaryClassGlGetVertexAttribIuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetVertexAttribIuiv(e, obj.(*GlGetVertexAttribIuiv))
 }
@@ -28799,7 +28158,6 @@ func doDecodeGlGetVertexAttribPointerv(d binary.Decoder, o *GlGetVertexAttribPoi
 	}
 	d.Struct(ent_031a32d8fb498bfbb4396fcaef5b5d612ed589dc, &o.Pointer)
 }
-func (*binaryClassGlGetVertexAttribPointerv) New() binary.Object { return &GlGetVertexAttribPointerv{} }
 func (*binaryClassGlGetVertexAttribPointerv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetVertexAttribPointerv(e, obj.(*GlGetVertexAttribPointerv))
 }
@@ -28857,7 +28215,6 @@ func doDecodeGlGetVertexAttribfv(d binary.Decoder, o *GlGetVertexAttribfv) {
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetVertexAttribfv) New() binary.Object { return &GlGetVertexAttribfv{} }
 func (*binaryClassGlGetVertexAttribfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetVertexAttribfv(e, obj.(*GlGetVertexAttribfv))
 }
@@ -28913,7 +28270,6 @@ func doDecodeGlGetVertexAttribiv(d binary.Decoder, o *GlGetVertexAttribiv) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetVertexAttribiv) New() binary.Object { return &GlGetVertexAttribiv{} }
 func (*binaryClassGlGetVertexAttribiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetVertexAttribiv(e, obj.(*GlGetVertexAttribiv))
 }
@@ -28971,7 +28327,6 @@ func doDecodeGlGetnUniformfv(d binary.Decoder, o *GlGetnUniformfv) {
 	}
 	d.Struct(ent_e2af5af92234fe15627d88c7b467cc369d80c680, &o.Values)
 }
-func (*binaryClassGlGetnUniformfv) New() binary.Object { return &GlGetnUniformfv{} }
 func (*binaryClassGlGetnUniformfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformfv(e, obj.(*GlGetnUniformfv))
 }
@@ -29030,7 +28385,6 @@ func doDecodeGlGetnUniformfvEXT(d binary.Decoder, o *GlGetnUniformfvEXT) {
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetnUniformfvEXT) New() binary.Object { return &GlGetnUniformfvEXT{} }
 func (*binaryClassGlGetnUniformfvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformfvEXT(e, obj.(*GlGetnUniformfvEXT))
 }
@@ -29089,7 +28443,6 @@ func doDecodeGlGetnUniformfvKHR(d binary.Decoder, o *GlGetnUniformfvKHR) {
 	}
 	d.Struct(ent_e7fc333368ed2750b6ea9827a5a83e976c5b4ff4, &o.Params)
 }
-func (*binaryClassGlGetnUniformfvKHR) New() binary.Object { return &GlGetnUniformfvKHR{} }
 func (*binaryClassGlGetnUniformfvKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformfvKHR(e, obj.(*GlGetnUniformfvKHR))
 }
@@ -29148,7 +28501,6 @@ func doDecodeGlGetnUniformiv(d binary.Decoder, o *GlGetnUniformiv) {
 	}
 	d.Struct(ent_a547728fe2833f8c19c56740cad814e8290b9477, &o.Values)
 }
-func (*binaryClassGlGetnUniformiv) New() binary.Object { return &GlGetnUniformiv{} }
 func (*binaryClassGlGetnUniformiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformiv(e, obj.(*GlGetnUniformiv))
 }
@@ -29207,7 +28559,6 @@ func doDecodeGlGetnUniformivEXT(d binary.Decoder, o *GlGetnUniformivEXT) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetnUniformivEXT) New() binary.Object { return &GlGetnUniformivEXT{} }
 func (*binaryClassGlGetnUniformivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformivEXT(e, obj.(*GlGetnUniformivEXT))
 }
@@ -29266,7 +28617,6 @@ func doDecodeGlGetnUniformivKHR(d binary.Decoder, o *GlGetnUniformivKHR) {
 	}
 	d.Struct(ent_0797e4fdcc9c9148394916e1b2de91fc1b0079fd, &o.Params)
 }
-func (*binaryClassGlGetnUniformivKHR) New() binary.Object { return &GlGetnUniformivKHR{} }
 func (*binaryClassGlGetnUniformivKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformivKHR(e, obj.(*GlGetnUniformivKHR))
 }
@@ -29325,7 +28675,6 @@ func doDecodeGlGetnUniformuiv(d binary.Decoder, o *GlGetnUniformuiv) {
 	}
 	d.Struct(ent_3a2faf9279cb27faa5f078df8217831638c07534, &o.Values)
 }
-func (*binaryClassGlGetnUniformuiv) New() binary.Object { return &GlGetnUniformuiv{} }
 func (*binaryClassGlGetnUniformuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformuiv(e, obj.(*GlGetnUniformuiv))
 }
@@ -29384,7 +28733,6 @@ func doDecodeGlGetnUniformuivKHR(d binary.Decoder, o *GlGetnUniformuivKHR) {
 	}
 	d.Struct(ent_3600567ba28868dd85db2e6f72cbcf5632f6b271, &o.Params)
 }
-func (*binaryClassGlGetnUniformuivKHR) New() binary.Object { return &GlGetnUniformuivKHR{} }
 func (*binaryClassGlGetnUniformuivKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlGetnUniformuivKHR(e, obj.(*GlGetnUniformuivKHR))
 }
@@ -29432,7 +28780,6 @@ func doDecodeGlHint(d binary.Decoder, o *GlHint) {
 	o.Target = GLenum(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlHint) New() binary.Object { return &GlHint{} }
 func (*binaryClassGlHint) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlHint(e, obj.(*GlHint))
 }
@@ -29485,7 +28832,6 @@ func doDecodeGlInsertEventMarkerEXT(d binary.Decoder, o *GlInsertEventMarkerEXT)
 	}
 	d.Struct(ent_2c801d98b4edb7bbf15f3538f1e3da96cb8e6aa0, &o.Marker)
 }
-func (*binaryClassGlInsertEventMarkerEXT) New() binary.Object { return &GlInsertEventMarkerEXT{} }
 func (*binaryClassGlInsertEventMarkerEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlInsertEventMarkerEXT(e, obj.(*GlInsertEventMarkerEXT))
 }
@@ -29535,7 +28881,6 @@ func doDecodeGlInterpolatePathsNV(d binary.Decoder, o *GlInterpolatePathsNV) {
 	o.PathB = GLuint(d.Uint32())
 	o.Weight = GLfloat(d.Float32())
 }
-func (*binaryClassGlInterpolatePathsNV) New() binary.Object { return &GlInterpolatePathsNV{} }
 func (*binaryClassGlInterpolatePathsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlInterpolatePathsNV(e, obj.(*GlInterpolatePathsNV))
 }
@@ -29592,7 +28937,6 @@ func doDecodeGlInvalidateFramebuffer(d binary.Decoder, o *GlInvalidateFramebuffe
 	}
 	d.Struct(ent_bee94d47fd93d2948f1c6cdc86d03289e6b39017, &o.Attachments)
 }
-func (*binaryClassGlInvalidateFramebuffer) New() binary.Object { return &GlInvalidateFramebuffer{} }
 func (*binaryClassGlInvalidateFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlInvalidateFramebuffer(e, obj.(*GlInvalidateFramebuffer))
 }
@@ -29658,9 +29002,6 @@ func doDecodeGlInvalidateSubFramebuffer(d binary.Decoder, o *GlInvalidateSubFram
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlInvalidateSubFramebuffer) New() binary.Object {
-	return &GlInvalidateSubFramebuffer{}
-}
 func (*binaryClassGlInvalidateSubFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlInvalidateSubFramebuffer(e, obj.(*GlInvalidateSubFramebuffer))
 }
@@ -29713,7 +29054,6 @@ func doDecodeGlIsBuffer(d binary.Decoder, o *GlIsBuffer) {
 	o.Buffer = BufferId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsBuffer) New() binary.Object { return &GlIsBuffer{} }
 func (*binaryClassGlIsBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsBuffer(e, obj.(*GlIsBuffer))
 }
@@ -29759,7 +29099,6 @@ func doDecodeGlIsEnabled(d binary.Decoder, o *GlIsEnabled) {
 	o.Capability = GLenum(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsEnabled) New() binary.Object { return &GlIsEnabled{} }
 func (*binaryClassGlIsEnabled) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsEnabled(e, obj.(*GlIsEnabled))
 }
@@ -29807,7 +29146,6 @@ func doDecodeGlIsEnabledi(d binary.Decoder, o *GlIsEnabledi) {
 	o.Index = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsEnabledi) New() binary.Object { return &GlIsEnabledi{} }
 func (*binaryClassGlIsEnabledi) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsEnabledi(e, obj.(*GlIsEnabledi))
 }
@@ -29856,7 +29194,6 @@ func doDecodeGlIsEnablediEXT(d binary.Decoder, o *GlIsEnablediEXT) {
 	o.Index = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsEnablediEXT) New() binary.Object { return &GlIsEnablediEXT{} }
 func (*binaryClassGlIsEnablediEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsEnablediEXT(e, obj.(*GlIsEnablediEXT))
 }
@@ -29905,7 +29242,6 @@ func doDecodeGlIsEnablediNV(d binary.Decoder, o *GlIsEnablediNV) {
 	o.Index = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsEnablediNV) New() binary.Object { return &GlIsEnablediNV{} }
 func (*binaryClassGlIsEnablediNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsEnablediNV(e, obj.(*GlIsEnablediNV))
 }
@@ -29954,7 +29290,6 @@ func doDecodeGlIsEnablediOES(d binary.Decoder, o *GlIsEnablediOES) {
 	o.Index = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsEnablediOES) New() binary.Object { return &GlIsEnablediOES{} }
 func (*binaryClassGlIsEnablediOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsEnablediOES(e, obj.(*GlIsEnablediOES))
 }
@@ -30001,7 +29336,6 @@ func doDecodeGlIsFenceNV(d binary.Decoder, o *GlIsFenceNV) {
 	o.Fence = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsFenceNV) New() binary.Object { return &GlIsFenceNV{} }
 func (*binaryClassGlIsFenceNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsFenceNV(e, obj.(*GlIsFenceNV))
 }
@@ -30047,7 +29381,6 @@ func doDecodeGlIsFramebuffer(d binary.Decoder, o *GlIsFramebuffer) {
 	o.Framebuffer = FramebufferId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsFramebuffer) New() binary.Object { return &GlIsFramebuffer{} }
 func (*binaryClassGlIsFramebuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsFramebuffer(e, obj.(*GlIsFramebuffer))
 }
@@ -30093,7 +29426,6 @@ func doDecodeGlIsImageHandleResidentNV(d binary.Decoder, o *GlIsImageHandleResid
 	o.Handle = GLuint64(d.Uint64())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsImageHandleResidentNV) New() binary.Object { return &GlIsImageHandleResidentNV{} }
 func (*binaryClassGlIsImageHandleResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsImageHandleResidentNV(e, obj.(*GlIsImageHandleResidentNV))
 }
@@ -30141,7 +29473,6 @@ func doDecodeGlIsPathNV(d binary.Decoder, o *GlIsPathNV) {
 	o.Path = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsPathNV) New() binary.Object { return &GlIsPathNV{} }
 func (*binaryClassGlIsPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsPathNV(e, obj.(*GlIsPathNV))
 }
@@ -30193,7 +29524,6 @@ func doDecodeGlIsPointInFillPathNV(d binary.Decoder, o *GlIsPointInFillPathNV) {
 	o.Y = GLfloat(d.Float32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsPointInFillPathNV) New() binary.Object { return &GlIsPointInFillPathNV{} }
 func (*binaryClassGlIsPointInFillPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsPointInFillPathNV(e, obj.(*GlIsPointInFillPathNV))
 }
@@ -30246,7 +29576,6 @@ func doDecodeGlIsPointInStrokePathNV(d binary.Decoder, o *GlIsPointInStrokePathN
 	o.Y = GLfloat(d.Float32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsPointInStrokePathNV) New() binary.Object { return &GlIsPointInStrokePathNV{} }
 func (*binaryClassGlIsPointInStrokePathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsPointInStrokePathNV(e, obj.(*GlIsPointInStrokePathNV))
 }
@@ -30296,7 +29625,6 @@ func doDecodeGlIsProgram(d binary.Decoder, o *GlIsProgram) {
 	o.Program = ProgramId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsProgram) New() binary.Object { return &GlIsProgram{} }
 func (*binaryClassGlIsProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsProgram(e, obj.(*GlIsProgram))
 }
@@ -30342,7 +29670,6 @@ func doDecodeGlIsProgramPipeline(d binary.Decoder, o *GlIsProgramPipeline) {
 	o.Pipeline = PipelineId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsProgramPipeline) New() binary.Object { return &GlIsProgramPipeline{} }
 func (*binaryClassGlIsProgramPipeline) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsProgramPipeline(e, obj.(*GlIsProgramPipeline))
 }
@@ -30388,7 +29715,6 @@ func doDecodeGlIsProgramPipelineEXT(d binary.Decoder, o *GlIsProgramPipelineEXT)
 	o.Pipeline = PipelineId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsProgramPipelineEXT) New() binary.Object { return &GlIsProgramPipelineEXT{} }
 func (*binaryClassGlIsProgramPipelineEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsProgramPipelineEXT(e, obj.(*GlIsProgramPipelineEXT))
 }
@@ -30434,7 +29760,6 @@ func doDecodeGlIsQuery(d binary.Decoder, o *GlIsQuery) {
 	o.Query = QueryId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsQuery) New() binary.Object { return &GlIsQuery{} }
 func (*binaryClassGlIsQuery) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsQuery(e, obj.(*GlIsQuery))
 }
@@ -30480,7 +29805,6 @@ func doDecodeGlIsQueryEXT(d binary.Decoder, o *GlIsQueryEXT) {
 	o.Query = QueryId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsQueryEXT) New() binary.Object { return &GlIsQueryEXT{} }
 func (*binaryClassGlIsQueryEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsQueryEXT(e, obj.(*GlIsQueryEXT))
 }
@@ -30526,7 +29850,6 @@ func doDecodeGlIsRenderbuffer(d binary.Decoder, o *GlIsRenderbuffer) {
 	o.Renderbuffer = RenderbufferId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsRenderbuffer) New() binary.Object { return &GlIsRenderbuffer{} }
 func (*binaryClassGlIsRenderbuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsRenderbuffer(e, obj.(*GlIsRenderbuffer))
 }
@@ -30572,7 +29895,6 @@ func doDecodeGlIsSampler(d binary.Decoder, o *GlIsSampler) {
 	o.Sampler = SamplerId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsSampler) New() binary.Object { return &GlIsSampler{} }
 func (*binaryClassGlIsSampler) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsSampler(e, obj.(*GlIsSampler))
 }
@@ -30618,7 +29940,6 @@ func doDecodeGlIsShader(d binary.Decoder, o *GlIsShader) {
 	o.Shader = ShaderId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsShader) New() binary.Object { return &GlIsShader{} }
 func (*binaryClassGlIsShader) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsShader(e, obj.(*GlIsShader))
 }
@@ -30664,7 +29985,6 @@ func doDecodeGlIsSync(d binary.Decoder, o *GlIsSync) {
 	o.Sync = GLsync(d.Uint64())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsSync) New() binary.Object { return &GlIsSync{} }
 func (*binaryClassGlIsSync) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsSync(e, obj.(*GlIsSync))
 }
@@ -30710,7 +30030,6 @@ func doDecodeGlIsSyncAPPLE(d binary.Decoder, o *GlIsSyncAPPLE) {
 	o.Sync = GLsync(d.Uint64())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsSyncAPPLE) New() binary.Object { return &GlIsSyncAPPLE{} }
 func (*binaryClassGlIsSyncAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsSyncAPPLE(e, obj.(*GlIsSyncAPPLE))
 }
@@ -30756,7 +30075,6 @@ func doDecodeGlIsTexture(d binary.Decoder, o *GlIsTexture) {
 	o.Texture = TextureId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsTexture) New() binary.Object { return &GlIsTexture{} }
 func (*binaryClassGlIsTexture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsTexture(e, obj.(*GlIsTexture))
 }
@@ -30801,9 +30119,6 @@ func doDecodeGlIsTextureHandleResidentNV(d binary.Decoder, o *GlIsTextureHandleR
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Handle = GLuint64(d.Uint64())
 	o.Result = GLboolean(d.Uint8())
-}
-func (*binaryClassGlIsTextureHandleResidentNV) New() binary.Object {
-	return &GlIsTextureHandleResidentNV{}
 }
 func (*binaryClassGlIsTextureHandleResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsTextureHandleResidentNV(e, obj.(*GlIsTextureHandleResidentNV))
@@ -30852,7 +30167,6 @@ func doDecodeGlIsTransformFeedback(d binary.Decoder, o *GlIsTransformFeedback) {
 	o.Id = TransformFeedbackId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsTransformFeedback) New() binary.Object { return &GlIsTransformFeedback{} }
 func (*binaryClassGlIsTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsTransformFeedback(e, obj.(*GlIsTransformFeedback))
 }
@@ -30898,7 +30212,6 @@ func doDecodeGlIsVertexArray(d binary.Decoder, o *GlIsVertexArray) {
 	o.Array = VertexArrayId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsVertexArray) New() binary.Object { return &GlIsVertexArray{} }
 func (*binaryClassGlIsVertexArray) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsVertexArray(e, obj.(*GlIsVertexArray))
 }
@@ -30944,7 +30257,6 @@ func doDecodeGlIsVertexArrayOES(d binary.Decoder, o *GlIsVertexArrayOES) {
 	o.Array = VertexArrayId(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlIsVertexArrayOES) New() binary.Object { return &GlIsVertexArrayOES{} }
 func (*binaryClassGlIsVertexArrayOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlIsVertexArrayOES(e, obj.(*GlIsVertexArrayOES))
 }
@@ -31001,7 +30313,6 @@ func doDecodeGlLabelObjectEXT(d binary.Decoder, o *GlLabelObjectEXT) {
 	}
 	d.Struct(ent_ada91fcd45b9595e1fc465ed78ef8acf2a359bcd, &o.Label)
 }
-func (*binaryClassGlLabelObjectEXT) New() binary.Object { return &GlLabelObjectEXT{} }
 func (*binaryClassGlLabelObjectEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlLabelObjectEXT(e, obj.(*GlLabelObjectEXT))
 }
@@ -31047,7 +30358,6 @@ func doDecodeGlLineWidth(d binary.Decoder, o *GlLineWidth) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Width = GLfloat(d.Float32())
 }
-func (*binaryClassGlLineWidth) New() binary.Object { return &GlLineWidth{} }
 func (*binaryClassGlLineWidth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlLineWidth(e, obj.(*GlLineWidth))
 }
@@ -31090,7 +30400,6 @@ func doDecodeGlLinkProgram(d binary.Decoder, o *GlLinkProgram) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlLinkProgram) New() binary.Object { return &GlLinkProgram{} }
 func (*binaryClassGlLinkProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlLinkProgram(e, obj.(*GlLinkProgram))
 }
@@ -31132,9 +30441,6 @@ func doDecodeGlMakeImageHandleNonResidentNV(d binary.Decoder, o *GlMakeImageHand
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Handle = GLuint64(d.Uint64())
-}
-func (*binaryClassGlMakeImageHandleNonResidentNV) New() binary.Object {
-	return &GlMakeImageHandleNonResidentNV{}
 }
 func (*binaryClassGlMakeImageHandleNonResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMakeImageHandleNonResidentNV(e, obj.(*GlMakeImageHandleNonResidentNV))
@@ -31182,9 +30488,6 @@ func doDecodeGlMakeImageHandleResidentNV(d binary.Decoder, o *GlMakeImageHandleR
 	o.Handle = GLuint64(d.Uint64())
 	o.Access = GLenum(d.Uint32())
 }
-func (*binaryClassGlMakeImageHandleResidentNV) New() binary.Object {
-	return &GlMakeImageHandleResidentNV{}
-}
 func (*binaryClassGlMakeImageHandleResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMakeImageHandleResidentNV(e, obj.(*GlMakeImageHandleResidentNV))
 }
@@ -31230,9 +30533,6 @@ func doDecodeGlMakeTextureHandleNonResidentNV(d binary.Decoder, o *GlMakeTexture
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Handle = GLuint64(d.Uint64())
 }
-func (*binaryClassGlMakeTextureHandleNonResidentNV) New() binary.Object {
-	return &GlMakeTextureHandleNonResidentNV{}
-}
 func (*binaryClassGlMakeTextureHandleNonResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMakeTextureHandleNonResidentNV(e, obj.(*GlMakeTextureHandleNonResidentNV))
 }
@@ -31276,9 +30576,6 @@ func doDecodeGlMakeTextureHandleResidentNV(d binary.Decoder, o *GlMakeTextureHan
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Handle = GLuint64(d.Uint64())
-}
-func (*binaryClassGlMakeTextureHandleResidentNV) New() binary.Object {
-	return &GlMakeTextureHandleResidentNV{}
 }
 func (*binaryClassGlMakeTextureHandleResidentNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMakeTextureHandleResidentNV(e, obj.(*GlMakeTextureHandleResidentNV))
@@ -31335,7 +30632,6 @@ func doDecodeGlMapBufferOES(d binary.Decoder, o *GlMapBufferOES) {
 	}
 	d.Struct(ent_62619bfc836097efb0c3f9d7c6f08c2406460506, &o.Result)
 }
-func (*binaryClassGlMapBufferOES) New() binary.Object { return &GlMapBufferOES{} }
 func (*binaryClassGlMapBufferOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMapBufferOES(e, obj.(*GlMapBufferOES))
 }
@@ -31395,7 +30691,6 @@ func doDecodeGlMapBufferRange(d binary.Decoder, o *GlMapBufferRange) {
 	}
 	d.Struct(ent_62619bfc836097efb0c3f9d7c6f08c2406460506, &o.Result)
 }
-func (*binaryClassGlMapBufferRange) New() binary.Object { return &GlMapBufferRange{} }
 func (*binaryClassGlMapBufferRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMapBufferRange(e, obj.(*GlMapBufferRange))
 }
@@ -31457,7 +30752,6 @@ func doDecodeGlMapBufferRangeEXT(d binary.Decoder, o *GlMapBufferRangeEXT) {
 	}
 	d.Struct(ent_62619bfc836097efb0c3f9d7c6f08c2406460506, &o.Result)
 }
-func (*binaryClassGlMapBufferRangeEXT) New() binary.Object { return &GlMapBufferRangeEXT{} }
 func (*binaryClassGlMapBufferRangeEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMapBufferRangeEXT(e, obj.(*GlMapBufferRangeEXT))
 }
@@ -31513,7 +30807,6 @@ func doDecodeGlMatrixLoad3x2fNV(d binary.Decoder, o *GlMatrixLoad3x2fNV) {
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
 }
-func (*binaryClassGlMatrixLoad3x2fNV) New() binary.Object { return &GlMatrixLoad3x2fNV{} }
 func (*binaryClassGlMatrixLoad3x2fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixLoad3x2fNV(e, obj.(*GlMatrixLoad3x2fNV))
 }
@@ -31566,7 +30859,6 @@ func doDecodeGlMatrixLoad3x3fNV(d binary.Decoder, o *GlMatrixLoad3x3fNV) {
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
 }
-func (*binaryClassGlMatrixLoad3x3fNV) New() binary.Object { return &GlMatrixLoad3x3fNV{} }
 func (*binaryClassGlMatrixLoad3x3fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixLoad3x3fNV(e, obj.(*GlMatrixLoad3x3fNV))
 }
@@ -31618,9 +30910,6 @@ func doDecodeGlMatrixLoadTranspose3x3fNV(d binary.Decoder, o *GlMatrixLoadTransp
 		ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c = ent
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
-}
-func (*binaryClassGlMatrixLoadTranspose3x3fNV) New() binary.Object {
-	return &GlMatrixLoadTranspose3x3fNV{}
 }
 func (*binaryClassGlMatrixLoadTranspose3x3fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixLoadTranspose3x3fNV(e, obj.(*GlMatrixLoadTranspose3x3fNV))
@@ -31676,7 +30965,6 @@ func doDecodeGlMatrixMult3x2fNV(d binary.Decoder, o *GlMatrixMult3x2fNV) {
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
 }
-func (*binaryClassGlMatrixMult3x2fNV) New() binary.Object { return &GlMatrixMult3x2fNV{} }
 func (*binaryClassGlMatrixMult3x2fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixMult3x2fNV(e, obj.(*GlMatrixMult3x2fNV))
 }
@@ -31729,7 +31017,6 @@ func doDecodeGlMatrixMult3x3fNV(d binary.Decoder, o *GlMatrixMult3x3fNV) {
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
 }
-func (*binaryClassGlMatrixMult3x3fNV) New() binary.Object { return &GlMatrixMult3x3fNV{} }
 func (*binaryClassGlMatrixMult3x3fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixMult3x3fNV(e, obj.(*GlMatrixMult3x3fNV))
 }
@@ -31782,9 +31069,6 @@ func doDecodeGlMatrixMultTranspose3x3fNV(d binary.Decoder, o *GlMatrixMultTransp
 	}
 	d.Struct(ent_96dfe3c30f8bc9945a1e3fdeb3a76ba82422f89c, &o.M)
 }
-func (*binaryClassGlMatrixMultTranspose3x3fNV) New() binary.Object {
-	return &GlMatrixMultTranspose3x3fNV{}
-}
 func (*binaryClassGlMatrixMultTranspose3x3fNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMatrixMultTranspose3x3fNV(e, obj.(*GlMatrixMultTranspose3x3fNV))
 }
@@ -31830,7 +31114,6 @@ func doDecodeGlMemoryBarrier(d binary.Decoder, o *GlMemoryBarrier) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Barriers = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlMemoryBarrier) New() binary.Object { return &GlMemoryBarrier{} }
 func (*binaryClassGlMemoryBarrier) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMemoryBarrier(e, obj.(*GlMemoryBarrier))
 }
@@ -31873,7 +31156,6 @@ func doDecodeGlMemoryBarrierByRegion(d binary.Decoder, o *GlMemoryBarrierByRegio
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Barriers = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlMemoryBarrierByRegion) New() binary.Object { return &GlMemoryBarrierByRegion{} }
 func (*binaryClassGlMemoryBarrierByRegion) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMemoryBarrierByRegion(e, obj.(*GlMemoryBarrierByRegion))
 }
@@ -31918,7 +31200,6 @@ func doDecodeGlMinSampleShading(d binary.Decoder, o *GlMinSampleShading) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Value = GLfloat(d.Float32())
 }
-func (*binaryClassGlMinSampleShading) New() binary.Object { return &GlMinSampleShading{} }
 func (*binaryClassGlMinSampleShading) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMinSampleShading(e, obj.(*GlMinSampleShading))
 }
@@ -31961,7 +31242,6 @@ func doDecodeGlMinSampleShadingOES(d binary.Decoder, o *GlMinSampleShadingOES) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Value = GLfloat(d.Float32())
 }
-func (*binaryClassGlMinSampleShadingOES) New() binary.Object { return &GlMinSampleShadingOES{} }
 func (*binaryClassGlMinSampleShadingOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMinSampleShadingOES(e, obj.(*GlMinSampleShadingOES))
 }
@@ -32024,7 +31304,6 @@ func doDecodeGlMultiDrawArraysEXT(d binary.Decoder, o *GlMultiDrawArraysEXT) {
 	d.Struct(ent_a7f6a5014d7eba92416b2d98c658128618bf8979, &o.Count)
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlMultiDrawArraysEXT) New() binary.Object { return &GlMultiDrawArraysEXT{} }
 func (*binaryClassGlMultiDrawArraysEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawArraysEXT(e, obj.(*GlMultiDrawArraysEXT))
 }
@@ -32083,9 +31362,6 @@ func doDecodeGlMultiDrawArraysIndirectEXT(d binary.Decoder, o *GlMultiDrawArrays
 	o.Drawcount = GLsizei(d.Int32())
 	o.Stride = GLsizei(d.Int32())
 }
-func (*binaryClassGlMultiDrawArraysIndirectEXT) New() binary.Object {
-	return &GlMultiDrawArraysIndirectEXT{}
-}
 func (*binaryClassGlMultiDrawArraysIndirectEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawArraysIndirectEXT(e, obj.(*GlMultiDrawArraysIndirectEXT))
 }
@@ -32131,7 +31407,6 @@ func doDecodeVoidᶜᵖᶜᵖ(d binary.Decoder, o *Voidᶜᵖᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVoidᶜᵖᶜᵖ) New() binary.Object { return &Voidᶜᵖᶜᵖ{} }
 func (*binaryClassVoidᶜᵖᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖᶜᵖ(e, obj.(*Voidᶜᵖᶜᵖ))
 }
@@ -32203,9 +31478,6 @@ func doDecodeGlMultiDrawElementsBaseVertexEXT(d binary.Decoder, o *GlMultiDrawEl
 		ent_68d50f4fd8311b303eaa964cc7d718bb1c475941 = ent
 	}
 	d.Struct(ent_68d50f4fd8311b303eaa964cc7d718bb1c475941, &o.Basevertex)
-}
-func (*binaryClassGlMultiDrawElementsBaseVertexEXT) New() binary.Object {
-	return &GlMultiDrawElementsBaseVertexEXT{}
 }
 func (*binaryClassGlMultiDrawElementsBaseVertexEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawElementsBaseVertexEXT(e, obj.(*GlMultiDrawElementsBaseVertexEXT))
@@ -32287,9 +31559,6 @@ func doDecodeGlMultiDrawElementsBaseVertexOES(d binary.Decoder, o *GlMultiDrawEl
 	}
 	d.Struct(ent_68d50f4fd8311b303eaa964cc7d718bb1c475941, &o.Basevertex)
 }
-func (*binaryClassGlMultiDrawElementsBaseVertexOES) New() binary.Object {
-	return &GlMultiDrawElementsBaseVertexOES{}
-}
 func (*binaryClassGlMultiDrawElementsBaseVertexOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawElementsBaseVertexOES(e, obj.(*GlMultiDrawElementsBaseVertexOES))
 }
@@ -32361,7 +31630,6 @@ func doDecodeGlMultiDrawElementsEXT(d binary.Decoder, o *GlMultiDrawElementsEXT)
 	d.Struct(ent_62e6185053d0f182c85179be30fb086f2dc2e56e, &o.Indices)
 	o.Primcount = GLsizei(d.Int32())
 }
-func (*binaryClassGlMultiDrawElementsEXT) New() binary.Object { return &GlMultiDrawElementsEXT{} }
 func (*binaryClassGlMultiDrawElementsEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawElementsEXT(e, obj.(*GlMultiDrawElementsEXT))
 }
@@ -32422,9 +31690,6 @@ func doDecodeGlMultiDrawElementsIndirectEXT(d binary.Decoder, o *GlMultiDrawElem
 	d.Struct(ent_d7a0de01ba2ea395786078a387d94a13d0c76009, &o.Indirect)
 	o.Drawcount = GLsizei(d.Int32())
 	o.Stride = GLsizei(d.Int32())
-}
-func (*binaryClassGlMultiDrawElementsIndirectEXT) New() binary.Object {
-	return &GlMultiDrawElementsIndirectEXT{}
 }
 func (*binaryClassGlMultiDrawElementsIndirectEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlMultiDrawElementsIndirectEXT(e, obj.(*GlMultiDrawElementsIndirectEXT))
@@ -32487,9 +31752,6 @@ func doDecodeGlNamedFramebufferSampleLocationsfvNV(d binary.Decoder, o *GlNamedF
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) New() binary.Object {
-	return &GlNamedFramebufferSampleLocationsfvNV{}
-}
 func (*binaryClassGlNamedFramebufferSampleLocationsfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlNamedFramebufferSampleLocationsfvNV(e, obj.(*GlNamedFramebufferSampleLocationsfvNV))
 }
@@ -32550,7 +31812,6 @@ func doDecodeGlObjectLabel(d binary.Decoder, o *GlObjectLabel) {
 	}
 	d.Struct(ent_ada91fcd45b9595e1fc465ed78ef8acf2a359bcd, &o.Label)
 }
-func (*binaryClassGlObjectLabel) New() binary.Object { return &GlObjectLabel{} }
 func (*binaryClassGlObjectLabel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlObjectLabel(e, obj.(*GlObjectLabel))
 }
@@ -32609,7 +31870,6 @@ func doDecodeGlObjectLabelKHR(d binary.Decoder, o *GlObjectLabelKHR) {
 	}
 	d.Struct(ent_ada91fcd45b9595e1fc465ed78ef8acf2a359bcd, &o.Label)
 }
-func (*binaryClassGlObjectLabelKHR) New() binary.Object { return &GlObjectLabelKHR{} }
 func (*binaryClassGlObjectLabelKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlObjectLabelKHR(e, obj.(*GlObjectLabelKHR))
 }
@@ -32673,7 +31933,6 @@ func doDecodeGlObjectPtrLabel(d binary.Decoder, o *GlObjectPtrLabel) {
 	}
 	d.Struct(ent_ada91fcd45b9595e1fc465ed78ef8acf2a359bcd, &o.Label)
 }
-func (*binaryClassGlObjectPtrLabel) New() binary.Object { return &GlObjectPtrLabel{} }
 func (*binaryClassGlObjectPtrLabel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlObjectPtrLabel(e, obj.(*GlObjectPtrLabel))
 }
@@ -32736,7 +31995,6 @@ func doDecodeGlObjectPtrLabelKHR(d binary.Decoder, o *GlObjectPtrLabelKHR) {
 	}
 	d.Struct(ent_ada91fcd45b9595e1fc465ed78ef8acf2a359bcd, &o.Label)
 }
-func (*binaryClassGlObjectPtrLabelKHR) New() binary.Object { return &GlObjectPtrLabelKHR{} }
 func (*binaryClassGlObjectPtrLabelKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlObjectPtrLabelKHR(e, obj.(*GlObjectPtrLabelKHR))
 }
@@ -32783,7 +32041,6 @@ func doDecodeGlPatchParameteri(d binary.Decoder, o *GlPatchParameteri) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlPatchParameteri) New() binary.Object { return &GlPatchParameteri{} }
 func (*binaryClassGlPatchParameteri) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPatchParameteri(e, obj.(*GlPatchParameteri))
 }
@@ -32829,7 +32086,6 @@ func doDecodeGlPatchParameteriEXT(d binary.Decoder, o *GlPatchParameteriEXT) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlPatchParameteriEXT) New() binary.Object { return &GlPatchParameteriEXT{} }
 func (*binaryClassGlPatchParameteriEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPatchParameteriEXT(e, obj.(*GlPatchParameteriEXT))
 }
@@ -32875,7 +32131,6 @@ func doDecodeGlPatchParameteriOES(d binary.Decoder, o *GlPatchParameteriOES) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlPatchParameteriOES) New() binary.Object { return &GlPatchParameteriOES{} }
 func (*binaryClassGlPatchParameteriOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPatchParameteriOES(e, obj.(*GlPatchParameteriOES))
 }
@@ -32943,7 +32198,6 @@ func doDecodeGlPathCommandsNV(d binary.Decoder, o *GlPathCommandsNV) {
 	}
 	d.Struct(ent_2e41427312f13338d455273fd2c6601b9c86a719, &o.Coords)
 }
-func (*binaryClassGlPathCommandsNV) New() binary.Object { return &GlPathCommandsNV{} }
 func (*binaryClassGlPathCommandsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathCommandsNV(e, obj.(*GlPathCommandsNV))
 }
@@ -33004,7 +32258,6 @@ func doDecodeGlPathCoordsNV(d binary.Decoder, o *GlPathCoordsNV) {
 	}
 	d.Struct(ent_2e41427312f13338d455273fd2c6601b9c86a719, &o.Coords)
 }
-func (*binaryClassGlPathCoordsNV) New() binary.Object { return &GlPathCoordsNV{} }
 func (*binaryClassGlPathCoordsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathCoordsNV(e, obj.(*GlPathCoordsNV))
 }
@@ -33050,7 +32303,6 @@ func doDecodeGlPathCoverDepthFuncNV(d binary.Decoder, o *GlPathCoverDepthFuncNV)
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Func = GLenum(d.Uint32())
 }
-func (*binaryClassGlPathCoverDepthFuncNV) New() binary.Object { return &GlPathCoverDepthFuncNV{} }
 func (*binaryClassGlPathCoverDepthFuncNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathCoverDepthFuncNV(e, obj.(*GlPathCoverDepthFuncNV))
 }
@@ -33104,7 +32356,6 @@ func doDecodeGlPathDashArrayNV(d binary.Decoder, o *GlPathDashArrayNV) {
 	}
 	d.Struct(ent_9f23a3228b56f85763b45e01cc4a15d2536e5266, &o.DashArray)
 }
-func (*binaryClassGlPathDashArrayNV) New() binary.Object { return &GlPathDashArrayNV{} }
 func (*binaryClassGlPathDashArrayNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathDashArrayNV(e, obj.(*GlPathDashArrayNV))
 }
@@ -33172,7 +32423,6 @@ func doDecodeGlPathGlyphIndexArrayNV(d binary.Decoder, o *GlPathGlyphIndexArrayN
 	o.EmScale = GLfloat(d.Float32())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlPathGlyphIndexArrayNV) New() binary.Object { return &GlPathGlyphIndexArrayNV{} }
 func (*binaryClassGlPathGlyphIndexArrayNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathGlyphIndexArrayNV(e, obj.(*GlPathGlyphIndexArrayNV))
 }
@@ -33244,7 +32494,6 @@ func doDecodeGlPathGlyphIndexRangeNV(d binary.Decoder, o *GlPathGlyphIndexRangeN
 	o.BaseAndCount = GLuint(d.Uint32())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlPathGlyphIndexRangeNV) New() binary.Object { return &GlPathGlyphIndexRangeNV{} }
 func (*binaryClassGlPathGlyphIndexRangeNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathGlyphIndexRangeNV(e, obj.(*GlPathGlyphIndexRangeNV))
 }
@@ -33318,7 +32567,6 @@ func doDecodeGlPathGlyphRangeNV(d binary.Decoder, o *GlPathGlyphRangeNV) {
 	o.PathParameterTemplate = GLuint(d.Uint32())
 	o.EmScale = GLfloat(d.Float32())
 }
-func (*binaryClassGlPathGlyphRangeNV) New() binary.Object { return &GlPathGlyphRangeNV{} }
 func (*binaryClassGlPathGlyphRangeNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathGlyphRangeNV(e, obj.(*GlPathGlyphRangeNV))
 }
@@ -33401,7 +32649,6 @@ func doDecodeGlPathGlyphsNV(d binary.Decoder, o *GlPathGlyphsNV) {
 	o.PathParameterTemplate = GLuint(d.Uint32())
 	o.EmScale = GLfloat(d.Float32())
 }
-func (*binaryClassGlPathGlyphsNV) New() binary.Object { return &GlPathGlyphsNV{} }
 func (*binaryClassGlPathGlyphsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathGlyphsNV(e, obj.(*GlPathGlyphsNV))
 }
@@ -33478,9 +32725,6 @@ func doDecodeGlPathMemoryGlyphIndexArrayNV(d binary.Decoder, o *GlPathMemoryGlyp
 	o.EmScale = GLfloat(d.Float32())
 	o.Result = GLenum(d.Uint32())
 }
-func (*binaryClassGlPathMemoryGlyphIndexArrayNV) New() binary.Object {
-	return &GlPathMemoryGlyphIndexArrayNV{}
-}
 func (*binaryClassGlPathMemoryGlyphIndexArrayNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathMemoryGlyphIndexArrayNV(e, obj.(*GlPathMemoryGlyphIndexArrayNV))
 }
@@ -33538,7 +32782,6 @@ func doDecodeGlPathParameterfNV(d binary.Decoder, o *GlPathParameterfNV) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLfloat(d.Float32())
 }
-func (*binaryClassGlPathParameterfNV) New() binary.Object { return &GlPathParameterfNV{} }
 func (*binaryClassGlPathParameterfNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathParameterfNV(e, obj.(*GlPathParameterfNV))
 }
@@ -33594,7 +32837,6 @@ func doDecodeGlPathParameterfvNV(d binary.Decoder, o *GlPathParameterfvNV) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlPathParameterfvNV) New() binary.Object { return &GlPathParameterfvNV{} }
 func (*binaryClassGlPathParameterfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathParameterfvNV(e, obj.(*GlPathParameterfvNV))
 }
@@ -33643,7 +32885,6 @@ func doDecodeGlPathParameteriNV(d binary.Decoder, o *GlPathParameteriNV) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlPathParameteriNV) New() binary.Object { return &GlPathParameteriNV{} }
 func (*binaryClassGlPathParameteriNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathParameteriNV(e, obj.(*GlPathParameteriNV))
 }
@@ -33699,7 +32940,6 @@ func doDecodeGlPathParameterivNV(d binary.Decoder, o *GlPathParameterivNV) {
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlPathParameterivNV) New() binary.Object { return &GlPathParameterivNV{} }
 func (*binaryClassGlPathParameterivNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathParameterivNV(e, obj.(*GlPathParameterivNV))
 }
@@ -33745,9 +32985,6 @@ func doDecodeGlPathStencilDepthOffsetNV(d binary.Decoder, o *GlPathStencilDepthO
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Factor = GLfloat(d.Float32())
 	o.Units = GLfloat(d.Float32())
-}
-func (*binaryClassGlPathStencilDepthOffsetNV) New() binary.Object {
-	return &GlPathStencilDepthOffsetNV{}
 }
 func (*binaryClassGlPathStencilDepthOffsetNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathStencilDepthOffsetNV(e, obj.(*GlPathStencilDepthOffsetNV))
@@ -33798,7 +33035,6 @@ func doDecodeGlPathStencilFuncNV(d binary.Decoder, o *GlPathStencilFuncNV) {
 	o.Ref = GLint(d.Int32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlPathStencilFuncNV) New() binary.Object { return &GlPathStencilFuncNV{} }
 func (*binaryClassGlPathStencilFuncNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathStencilFuncNV(e, obj.(*GlPathStencilFuncNV))
 }
@@ -33856,7 +33092,6 @@ func doDecodeGlPathStringNV(d binary.Decoder, o *GlPathStringNV) {
 	}
 	d.Struct(ent_fa79a64ef50c4249d0171d0f8463773a859c96a2, &o.PathString)
 }
-func (*binaryClassGlPathStringNV) New() binary.Object { return &GlPathStringNV{} }
 func (*binaryClassGlPathStringNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathStringNV(e, obj.(*GlPathStringNV))
 }
@@ -33930,7 +33165,6 @@ func doDecodeGlPathSubCommandsNV(d binary.Decoder, o *GlPathSubCommandsNV) {
 	}
 	d.Struct(ent_2e41427312f13338d455273fd2c6601b9c86a719, &o.Coords)
 }
-func (*binaryClassGlPathSubCommandsNV) New() binary.Object { return &GlPathSubCommandsNV{} }
 func (*binaryClassGlPathSubCommandsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathSubCommandsNV(e, obj.(*GlPathSubCommandsNV))
 }
@@ -33995,7 +33229,6 @@ func doDecodeGlPathSubCoordsNV(d binary.Decoder, o *GlPathSubCoordsNV) {
 	}
 	d.Struct(ent_2e41427312f13338d455273fd2c6601b9c86a719, &o.Coords)
 }
-func (*binaryClassGlPathSubCoordsNV) New() binary.Object { return &GlPathSubCoordsNV{} }
 func (*binaryClassGlPathSubCoordsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPathSubCoordsNV(e, obj.(*GlPathSubCoordsNV))
 }
@@ -34040,7 +33273,6 @@ func doDecodeGlPauseTransformFeedback(d binary.Decoder, o *GlPauseTransformFeedb
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlPauseTransformFeedback) New() binary.Object { return &GlPauseTransformFeedback{} }
 func (*binaryClassGlPauseTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPauseTransformFeedback(e, obj.(*GlPauseTransformFeedback))
 }
@@ -34086,7 +33318,6 @@ func doDecodeGlPixelStorei(d binary.Decoder, o *GlPixelStorei) {
 	o.Parameter = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlPixelStorei) New() binary.Object { return &GlPixelStorei{} }
 func (*binaryClassGlPixelStorei) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPixelStorei(e, obj.(*GlPixelStorei))
 }
@@ -34174,7 +33405,6 @@ func doDecodeGlPointAlongPathNV(d binary.Decoder, o *GlPointAlongPathNV) {
 	d.Struct(ent_3252d641a3aa2cf67530b39ffbebe2644ea4c722, &o.TangentY)
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlPointAlongPathNV) New() binary.Object { return &GlPointAlongPathNV{} }
 func (*binaryClassGlPointAlongPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPointAlongPathNV(e, obj.(*GlPointAlongPathNV))
 }
@@ -34227,7 +33457,6 @@ func doDecodeGlPolygonModeNV(d binary.Decoder, o *GlPolygonModeNV) {
 	o.Face = GLenum(d.Uint32())
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlPolygonModeNV) New() binary.Object { return &GlPolygonModeNV{} }
 func (*binaryClassGlPolygonModeNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPolygonModeNV(e, obj.(*GlPolygonModeNV))
 }
@@ -34273,7 +33502,6 @@ func doDecodeGlPolygonOffset(d binary.Decoder, o *GlPolygonOffset) {
 	o.ScaleFactor = GLfloat(d.Float32())
 	o.Units = GLfloat(d.Float32())
 }
-func (*binaryClassGlPolygonOffset) New() binary.Object { return &GlPolygonOffset{} }
 func (*binaryClassGlPolygonOffset) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPolygonOffset(e, obj.(*GlPolygonOffset))
 }
@@ -34315,7 +33543,6 @@ func doDecodeGlPopDebugGroup(d binary.Decoder, o *GlPopDebugGroup) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlPopDebugGroup) New() binary.Object { return &GlPopDebugGroup{} }
 func (*binaryClassGlPopDebugGroup) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPopDebugGroup(e, obj.(*GlPopDebugGroup))
 }
@@ -34355,7 +33582,6 @@ func doDecodeGlPopDebugGroupKHR(d binary.Decoder, o *GlPopDebugGroupKHR) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlPopDebugGroupKHR) New() binary.Object { return &GlPopDebugGroupKHR{} }
 func (*binaryClassGlPopDebugGroupKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPopDebugGroupKHR(e, obj.(*GlPopDebugGroupKHR))
 }
@@ -34395,7 +33621,6 @@ func doDecodeGlPopGroupMarkerEXT(d binary.Decoder, o *GlPopGroupMarkerEXT) {
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlPopGroupMarkerEXT) New() binary.Object { return &GlPopGroupMarkerEXT{} }
 func (*binaryClassGlPopGroupMarkerEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPopGroupMarkerEXT(e, obj.(*GlPopGroupMarkerEXT))
 }
@@ -34451,7 +33676,6 @@ func doDecodeGlPrimitiveBoundingBox(d binary.Decoder, o *GlPrimitiveBoundingBox)
 	o.MaxZ = GLfloat(d.Float32())
 	o.MaxW = GLfloat(d.Float32())
 }
-func (*binaryClassGlPrimitiveBoundingBox) New() binary.Object { return &GlPrimitiveBoundingBox{} }
 func (*binaryClassGlPrimitiveBoundingBox) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPrimitiveBoundingBox(e, obj.(*GlPrimitiveBoundingBox))
 }
@@ -34515,7 +33739,6 @@ func doDecodeGlPrimitiveBoundingBoxEXT(d binary.Decoder, o *GlPrimitiveBoundingB
 	o.MaxZ = GLfloat(d.Float32())
 	o.MaxW = GLfloat(d.Float32())
 }
-func (*binaryClassGlPrimitiveBoundingBoxEXT) New() binary.Object { return &GlPrimitiveBoundingBoxEXT{} }
 func (*binaryClassGlPrimitiveBoundingBoxEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPrimitiveBoundingBoxEXT(e, obj.(*GlPrimitiveBoundingBoxEXT))
 }
@@ -34581,7 +33804,6 @@ func doDecodeGlPrimitiveBoundingBoxOES(d binary.Decoder, o *GlPrimitiveBoundingB
 	o.MaxZ = GLfloat(d.Float32())
 	o.MaxW = GLfloat(d.Float32())
 }
-func (*binaryClassGlPrimitiveBoundingBoxOES) New() binary.Object { return &GlPrimitiveBoundingBoxOES{} }
 func (*binaryClassGlPrimitiveBoundingBoxOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPrimitiveBoundingBoxOES(e, obj.(*GlPrimitiveBoundingBoxOES))
 }
@@ -34646,7 +33868,6 @@ func doDecodeGlProgramBinary(d binary.Decoder, o *GlProgramBinary) {
 	d.Struct(ent_384581d03a0ec5830a27534b167cef2ee9f72ffa, &o.Binary)
 	o.Length = GLsizei(d.Int32())
 }
-func (*binaryClassGlProgramBinary) New() binary.Object { return &GlProgramBinary{} }
 func (*binaryClassGlProgramBinary) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramBinary(e, obj.(*GlProgramBinary))
 }
@@ -34705,7 +33926,6 @@ func doDecodeGlProgramBinaryOES(d binary.Decoder, o *GlProgramBinaryOES) {
 	d.Struct(ent_384581d03a0ec5830a27534b167cef2ee9f72ffa, &o.Binary)
 	o.BinarySize = GLint(d.Int32())
 }
-func (*binaryClassGlProgramBinaryOES) New() binary.Object { return &GlProgramBinaryOES{} }
 func (*binaryClassGlProgramBinaryOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramBinaryOES(e, obj.(*GlProgramBinaryOES))
 }
@@ -34755,7 +33975,6 @@ func doDecodeGlProgramParameteri(d binary.Decoder, o *GlProgramParameteri) {
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlProgramParameteri) New() binary.Object { return &GlProgramParameteri{} }
 func (*binaryClassGlProgramParameteri) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramParameteri(e, obj.(*GlProgramParameteri))
 }
@@ -34804,7 +34023,6 @@ func doDecodeGlProgramParameteriEXT(d binary.Decoder, o *GlProgramParameteriEXT)
 	o.Pname = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlProgramParameteriEXT) New() binary.Object { return &GlProgramParameteriEXT{} }
 func (*binaryClassGlProgramParameteriEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramParameteriEXT(e, obj.(*GlProgramParameteriEXT))
 }
@@ -34864,9 +34082,6 @@ func doDecodeGlProgramPathFragmentInputGenNV(d binary.Decoder, o *GlProgramPathF
 	}
 	d.Struct(ent_00795171808994976fa20cb16b07d8dfd711aee4, &o.Coeffs)
 }
-func (*binaryClassGlProgramPathFragmentInputGenNV) New() binary.Object {
-	return &GlProgramPathFragmentInputGenNV{}
-}
 func (*binaryClassGlProgramPathFragmentInputGenNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramPathFragmentInputGenNV(e, obj.(*GlProgramPathFragmentInputGenNV))
 }
@@ -34919,7 +34134,6 @@ func doDecodeGlProgramUniform1f(d binary.Decoder, o *GlProgramUniform1f) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value0 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform1f) New() binary.Object { return &GlProgramUniform1f{} }
 func (*binaryClassGlProgramUniform1f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1f(e, obj.(*GlProgramUniform1f))
 }
@@ -34968,7 +34182,6 @@ func doDecodeGlProgramUniform1fEXT(d binary.Decoder, o *GlProgramUniform1fEXT) {
 	o.Location = UniformLocation(d.Int32())
 	o.V0 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform1fEXT) New() binary.Object { return &GlProgramUniform1fEXT{} }
 func (*binaryClassGlProgramUniform1fEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1fEXT(e, obj.(*GlProgramUniform1fEXT))
 }
@@ -35026,7 +34239,6 @@ func doDecodeGlProgramUniform1fv(d binary.Decoder, o *GlProgramUniform1fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniform1fv) New() binary.Object { return &GlProgramUniform1fv{} }
 func (*binaryClassGlProgramUniform1fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1fv(e, obj.(*GlProgramUniform1fv))
 }
@@ -35085,7 +34297,6 @@ func doDecodeGlProgramUniform1fvEXT(d binary.Decoder, o *GlProgramUniform1fvEXT)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlProgramUniform1fvEXT) New() binary.Object { return &GlProgramUniform1fvEXT{} }
 func (*binaryClassGlProgramUniform1fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1fvEXT(e, obj.(*GlProgramUniform1fvEXT))
 }
@@ -35135,7 +34346,6 @@ func doDecodeGlProgramUniform1i(d binary.Decoder, o *GlProgramUniform1i) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value0 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform1i) New() binary.Object { return &GlProgramUniform1i{} }
 func (*binaryClassGlProgramUniform1i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1i(e, obj.(*GlProgramUniform1i))
 }
@@ -35184,7 +34394,6 @@ func doDecodeGlProgramUniform1iEXT(d binary.Decoder, o *GlProgramUniform1iEXT) {
 	o.Location = UniformLocation(d.Int32())
 	o.V0 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform1iEXT) New() binary.Object { return &GlProgramUniform1iEXT{} }
 func (*binaryClassGlProgramUniform1iEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1iEXT(e, obj.(*GlProgramUniform1iEXT))
 }
@@ -35242,7 +34451,6 @@ func doDecodeGlProgramUniform1iv(d binary.Decoder, o *GlProgramUniform1iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlProgramUniform1iv) New() binary.Object { return &GlProgramUniform1iv{} }
 func (*binaryClassGlProgramUniform1iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1iv(e, obj.(*GlProgramUniform1iv))
 }
@@ -35301,7 +34509,6 @@ func doDecodeGlProgramUniform1ivEXT(d binary.Decoder, o *GlProgramUniform1ivEXT)
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlProgramUniform1ivEXT) New() binary.Object { return &GlProgramUniform1ivEXT{} }
 func (*binaryClassGlProgramUniform1ivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1ivEXT(e, obj.(*GlProgramUniform1ivEXT))
 }
@@ -35351,7 +34558,6 @@ func doDecodeGlProgramUniform1ui(d binary.Decoder, o *GlProgramUniform1ui) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value0 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform1ui) New() binary.Object { return &GlProgramUniform1ui{} }
 func (*binaryClassGlProgramUniform1ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1ui(e, obj.(*GlProgramUniform1ui))
 }
@@ -35400,7 +34606,6 @@ func doDecodeGlProgramUniform1uiEXT(d binary.Decoder, o *GlProgramUniform1uiEXT)
 	o.Location = UniformLocation(d.Int32())
 	o.V0 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform1uiEXT) New() binary.Object { return &GlProgramUniform1uiEXT{} }
 func (*binaryClassGlProgramUniform1uiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1uiEXT(e, obj.(*GlProgramUniform1uiEXT))
 }
@@ -35458,7 +34663,6 @@ func doDecodeGlProgramUniform1uiv(d binary.Decoder, o *GlProgramUniform1uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlProgramUniform1uiv) New() binary.Object { return &GlProgramUniform1uiv{} }
 func (*binaryClassGlProgramUniform1uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1uiv(e, obj.(*GlProgramUniform1uiv))
 }
@@ -35517,7 +34721,6 @@ func doDecodeGlProgramUniform1uivEXT(d binary.Decoder, o *GlProgramUniform1uivEX
 	}
 	d.Struct(ent_3e94ff06e0adbde5f26f8bb833180b0da1e5d828, &o.Value)
 }
-func (*binaryClassGlProgramUniform1uivEXT) New() binary.Object { return &GlProgramUniform1uivEXT{} }
 func (*binaryClassGlProgramUniform1uivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform1uivEXT(e, obj.(*GlProgramUniform1uivEXT))
 }
@@ -35571,7 +34774,6 @@ func doDecodeGlProgramUniform2f(d binary.Decoder, o *GlProgramUniform2f) {
 	o.Value0 = GLfloat(d.Float32())
 	o.Value1 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform2f) New() binary.Object { return &GlProgramUniform2f{} }
 func (*binaryClassGlProgramUniform2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2f(e, obj.(*GlProgramUniform2f))
 }
@@ -35623,7 +34825,6 @@ func doDecodeGlProgramUniform2fEXT(d binary.Decoder, o *GlProgramUniform2fEXT) {
 	o.V0 = GLfloat(d.Float32())
 	o.V1 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform2fEXT) New() binary.Object { return &GlProgramUniform2fEXT{} }
 func (*binaryClassGlProgramUniform2fEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2fEXT(e, obj.(*GlProgramUniform2fEXT))
 }
@@ -35682,7 +34883,6 @@ func doDecodeGlProgramUniform2fv(d binary.Decoder, o *GlProgramUniform2fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniform2fv) New() binary.Object { return &GlProgramUniform2fv{} }
 func (*binaryClassGlProgramUniform2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2fv(e, obj.(*GlProgramUniform2fv))
 }
@@ -35741,7 +34941,6 @@ func doDecodeGlProgramUniform2fvEXT(d binary.Decoder, o *GlProgramUniform2fvEXT)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlProgramUniform2fvEXT) New() binary.Object { return &GlProgramUniform2fvEXT{} }
 func (*binaryClassGlProgramUniform2fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2fvEXT(e, obj.(*GlProgramUniform2fvEXT))
 }
@@ -35793,7 +34992,6 @@ func doDecodeGlProgramUniform2i(d binary.Decoder, o *GlProgramUniform2i) {
 	o.Value0 = GLint(d.Int32())
 	o.Value1 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform2i) New() binary.Object { return &GlProgramUniform2i{} }
 func (*binaryClassGlProgramUniform2i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2i(e, obj.(*GlProgramUniform2i))
 }
@@ -35845,7 +35043,6 @@ func doDecodeGlProgramUniform2iEXT(d binary.Decoder, o *GlProgramUniform2iEXT) {
 	o.V0 = GLint(d.Int32())
 	o.V1 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform2iEXT) New() binary.Object { return &GlProgramUniform2iEXT{} }
 func (*binaryClassGlProgramUniform2iEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2iEXT(e, obj.(*GlProgramUniform2iEXT))
 }
@@ -35904,7 +35101,6 @@ func doDecodeGlProgramUniform2iv(d binary.Decoder, o *GlProgramUniform2iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlProgramUniform2iv) New() binary.Object { return &GlProgramUniform2iv{} }
 func (*binaryClassGlProgramUniform2iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2iv(e, obj.(*GlProgramUniform2iv))
 }
@@ -35963,7 +35159,6 @@ func doDecodeGlProgramUniform2ivEXT(d binary.Decoder, o *GlProgramUniform2ivEXT)
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlProgramUniform2ivEXT) New() binary.Object { return &GlProgramUniform2ivEXT{} }
 func (*binaryClassGlProgramUniform2ivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2ivEXT(e, obj.(*GlProgramUniform2ivEXT))
 }
@@ -36015,7 +35210,6 @@ func doDecodeGlProgramUniform2ui(d binary.Decoder, o *GlProgramUniform2ui) {
 	o.Value0 = GLuint(d.Uint32())
 	o.Value1 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform2ui) New() binary.Object { return &GlProgramUniform2ui{} }
 func (*binaryClassGlProgramUniform2ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2ui(e, obj.(*GlProgramUniform2ui))
 }
@@ -36067,7 +35261,6 @@ func doDecodeGlProgramUniform2uiEXT(d binary.Decoder, o *GlProgramUniform2uiEXT)
 	o.V0 = GLuint(d.Uint32())
 	o.V1 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform2uiEXT) New() binary.Object { return &GlProgramUniform2uiEXT{} }
 func (*binaryClassGlProgramUniform2uiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2uiEXT(e, obj.(*GlProgramUniform2uiEXT))
 }
@@ -36126,7 +35319,6 @@ func doDecodeGlProgramUniform2uiv(d binary.Decoder, o *GlProgramUniform2uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlProgramUniform2uiv) New() binary.Object { return &GlProgramUniform2uiv{} }
 func (*binaryClassGlProgramUniform2uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2uiv(e, obj.(*GlProgramUniform2uiv))
 }
@@ -36185,7 +35377,6 @@ func doDecodeGlProgramUniform2uivEXT(d binary.Decoder, o *GlProgramUniform2uivEX
 	}
 	d.Struct(ent_3e94ff06e0adbde5f26f8bb833180b0da1e5d828, &o.Value)
 }
-func (*binaryClassGlProgramUniform2uivEXT) New() binary.Object { return &GlProgramUniform2uivEXT{} }
 func (*binaryClassGlProgramUniform2uivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform2uivEXT(e, obj.(*GlProgramUniform2uivEXT))
 }
@@ -36241,7 +35432,6 @@ func doDecodeGlProgramUniform3f(d binary.Decoder, o *GlProgramUniform3f) {
 	o.Value1 = GLfloat(d.Float32())
 	o.Value2 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform3f) New() binary.Object { return &GlProgramUniform3f{} }
 func (*binaryClassGlProgramUniform3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3f(e, obj.(*GlProgramUniform3f))
 }
@@ -36296,7 +35486,6 @@ func doDecodeGlProgramUniform3fEXT(d binary.Decoder, o *GlProgramUniform3fEXT) {
 	o.V1 = GLfloat(d.Float32())
 	o.V2 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform3fEXT) New() binary.Object { return &GlProgramUniform3fEXT{} }
 func (*binaryClassGlProgramUniform3fEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3fEXT(e, obj.(*GlProgramUniform3fEXT))
 }
@@ -36356,7 +35545,6 @@ func doDecodeGlProgramUniform3fv(d binary.Decoder, o *GlProgramUniform3fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniform3fv) New() binary.Object { return &GlProgramUniform3fv{} }
 func (*binaryClassGlProgramUniform3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3fv(e, obj.(*GlProgramUniform3fv))
 }
@@ -36415,7 +35603,6 @@ func doDecodeGlProgramUniform3fvEXT(d binary.Decoder, o *GlProgramUniform3fvEXT)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlProgramUniform3fvEXT) New() binary.Object { return &GlProgramUniform3fvEXT{} }
 func (*binaryClassGlProgramUniform3fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3fvEXT(e, obj.(*GlProgramUniform3fvEXT))
 }
@@ -36469,7 +35656,6 @@ func doDecodeGlProgramUniform3i(d binary.Decoder, o *GlProgramUniform3i) {
 	o.Value1 = GLint(d.Int32())
 	o.Value2 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform3i) New() binary.Object { return &GlProgramUniform3i{} }
 func (*binaryClassGlProgramUniform3i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3i(e, obj.(*GlProgramUniform3i))
 }
@@ -36524,7 +35710,6 @@ func doDecodeGlProgramUniform3iEXT(d binary.Decoder, o *GlProgramUniform3iEXT) {
 	o.V1 = GLint(d.Int32())
 	o.V2 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform3iEXT) New() binary.Object { return &GlProgramUniform3iEXT{} }
 func (*binaryClassGlProgramUniform3iEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3iEXT(e, obj.(*GlProgramUniform3iEXT))
 }
@@ -36584,7 +35769,6 @@ func doDecodeGlProgramUniform3iv(d binary.Decoder, o *GlProgramUniform3iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlProgramUniform3iv) New() binary.Object { return &GlProgramUniform3iv{} }
 func (*binaryClassGlProgramUniform3iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3iv(e, obj.(*GlProgramUniform3iv))
 }
@@ -36643,7 +35827,6 @@ func doDecodeGlProgramUniform3ivEXT(d binary.Decoder, o *GlProgramUniform3ivEXT)
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlProgramUniform3ivEXT) New() binary.Object { return &GlProgramUniform3ivEXT{} }
 func (*binaryClassGlProgramUniform3ivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3ivEXT(e, obj.(*GlProgramUniform3ivEXT))
 }
@@ -36697,7 +35880,6 @@ func doDecodeGlProgramUniform3ui(d binary.Decoder, o *GlProgramUniform3ui) {
 	o.Value1 = GLuint(d.Uint32())
 	o.Value2 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform3ui) New() binary.Object { return &GlProgramUniform3ui{} }
 func (*binaryClassGlProgramUniform3ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3ui(e, obj.(*GlProgramUniform3ui))
 }
@@ -36752,7 +35934,6 @@ func doDecodeGlProgramUniform3uiEXT(d binary.Decoder, o *GlProgramUniform3uiEXT)
 	o.V1 = GLuint(d.Uint32())
 	o.V2 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform3uiEXT) New() binary.Object { return &GlProgramUniform3uiEXT{} }
 func (*binaryClassGlProgramUniform3uiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3uiEXT(e, obj.(*GlProgramUniform3uiEXT))
 }
@@ -36812,7 +35993,6 @@ func doDecodeGlProgramUniform3uiv(d binary.Decoder, o *GlProgramUniform3uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlProgramUniform3uiv) New() binary.Object { return &GlProgramUniform3uiv{} }
 func (*binaryClassGlProgramUniform3uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3uiv(e, obj.(*GlProgramUniform3uiv))
 }
@@ -36871,7 +36051,6 @@ func doDecodeGlProgramUniform3uivEXT(d binary.Decoder, o *GlProgramUniform3uivEX
 	}
 	d.Struct(ent_3e94ff06e0adbde5f26f8bb833180b0da1e5d828, &o.Value)
 }
-func (*binaryClassGlProgramUniform3uivEXT) New() binary.Object { return &GlProgramUniform3uivEXT{} }
 func (*binaryClassGlProgramUniform3uivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform3uivEXT(e, obj.(*GlProgramUniform3uivEXT))
 }
@@ -36929,7 +36108,6 @@ func doDecodeGlProgramUniform4f(d binary.Decoder, o *GlProgramUniform4f) {
 	o.Value2 = GLfloat(d.Float32())
 	o.Value3 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform4f) New() binary.Object { return &GlProgramUniform4f{} }
 func (*binaryClassGlProgramUniform4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4f(e, obj.(*GlProgramUniform4f))
 }
@@ -36987,7 +36165,6 @@ func doDecodeGlProgramUniform4fEXT(d binary.Decoder, o *GlProgramUniform4fEXT) {
 	o.V2 = GLfloat(d.Float32())
 	o.V3 = GLfloat(d.Float32())
 }
-func (*binaryClassGlProgramUniform4fEXT) New() binary.Object { return &GlProgramUniform4fEXT{} }
 func (*binaryClassGlProgramUniform4fEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4fEXT(e, obj.(*GlProgramUniform4fEXT))
 }
@@ -37048,7 +36225,6 @@ func doDecodeGlProgramUniform4fv(d binary.Decoder, o *GlProgramUniform4fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniform4fv) New() binary.Object { return &GlProgramUniform4fv{} }
 func (*binaryClassGlProgramUniform4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4fv(e, obj.(*GlProgramUniform4fv))
 }
@@ -37107,7 +36283,6 @@ func doDecodeGlProgramUniform4fvEXT(d binary.Decoder, o *GlProgramUniform4fvEXT)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlProgramUniform4fvEXT) New() binary.Object { return &GlProgramUniform4fvEXT{} }
 func (*binaryClassGlProgramUniform4fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4fvEXT(e, obj.(*GlProgramUniform4fvEXT))
 }
@@ -37163,7 +36338,6 @@ func doDecodeGlProgramUniform4i(d binary.Decoder, o *GlProgramUniform4i) {
 	o.Value2 = GLint(d.Int32())
 	o.Value3 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform4i) New() binary.Object { return &GlProgramUniform4i{} }
 func (*binaryClassGlProgramUniform4i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4i(e, obj.(*GlProgramUniform4i))
 }
@@ -37221,7 +36395,6 @@ func doDecodeGlProgramUniform4iEXT(d binary.Decoder, o *GlProgramUniform4iEXT) {
 	o.V2 = GLint(d.Int32())
 	o.V3 = GLint(d.Int32())
 }
-func (*binaryClassGlProgramUniform4iEXT) New() binary.Object { return &GlProgramUniform4iEXT{} }
 func (*binaryClassGlProgramUniform4iEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4iEXT(e, obj.(*GlProgramUniform4iEXT))
 }
@@ -37282,7 +36455,6 @@ func doDecodeGlProgramUniform4iv(d binary.Decoder, o *GlProgramUniform4iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlProgramUniform4iv) New() binary.Object { return &GlProgramUniform4iv{} }
 func (*binaryClassGlProgramUniform4iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4iv(e, obj.(*GlProgramUniform4iv))
 }
@@ -37341,7 +36513,6 @@ func doDecodeGlProgramUniform4ivEXT(d binary.Decoder, o *GlProgramUniform4ivEXT)
 	}
 	d.Struct(ent_7e58b06fbf62adbcb7874d7cef629e3e47a186b1, &o.Value)
 }
-func (*binaryClassGlProgramUniform4ivEXT) New() binary.Object { return &GlProgramUniform4ivEXT{} }
 func (*binaryClassGlProgramUniform4ivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4ivEXT(e, obj.(*GlProgramUniform4ivEXT))
 }
@@ -37397,7 +36568,6 @@ func doDecodeGlProgramUniform4ui(d binary.Decoder, o *GlProgramUniform4ui) {
 	o.Value2 = GLuint(d.Uint32())
 	o.Value3 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform4ui) New() binary.Object { return &GlProgramUniform4ui{} }
 func (*binaryClassGlProgramUniform4ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4ui(e, obj.(*GlProgramUniform4ui))
 }
@@ -37455,7 +36625,6 @@ func doDecodeGlProgramUniform4uiEXT(d binary.Decoder, o *GlProgramUniform4uiEXT)
 	o.V2 = GLuint(d.Uint32())
 	o.V3 = GLuint(d.Uint32())
 }
-func (*binaryClassGlProgramUniform4uiEXT) New() binary.Object { return &GlProgramUniform4uiEXT{} }
 func (*binaryClassGlProgramUniform4uiEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4uiEXT(e, obj.(*GlProgramUniform4uiEXT))
 }
@@ -37516,7 +36685,6 @@ func doDecodeGlProgramUniform4uiv(d binary.Decoder, o *GlProgramUniform4uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlProgramUniform4uiv) New() binary.Object { return &GlProgramUniform4uiv{} }
 func (*binaryClassGlProgramUniform4uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4uiv(e, obj.(*GlProgramUniform4uiv))
 }
@@ -37575,7 +36743,6 @@ func doDecodeGlProgramUniform4uivEXT(d binary.Decoder, o *GlProgramUniform4uivEX
 	}
 	d.Struct(ent_3e94ff06e0adbde5f26f8bb833180b0da1e5d828, &o.Value)
 }
-func (*binaryClassGlProgramUniform4uivEXT) New() binary.Object { return &GlProgramUniform4uivEXT{} }
 func (*binaryClassGlProgramUniform4uivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniform4uivEXT(e, obj.(*GlProgramUniform4uivEXT))
 }
@@ -37626,9 +36793,6 @@ func doDecodeGlProgramUniformHandleui64NV(d binary.Decoder, o *GlProgramUniformH
 	o.Program = ProgramId(d.Uint32())
 	o.Location = UniformLocation(d.Int32())
 	o.Value = GLuint64(d.Uint64())
-}
-func (*binaryClassGlProgramUniformHandleui64NV) New() binary.Object {
-	return &GlProgramUniformHandleui64NV{}
 }
 func (*binaryClassGlProgramUniformHandleui64NV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformHandleui64NV(e, obj.(*GlProgramUniformHandleui64NV))
@@ -37688,9 +36852,6 @@ func doDecodeGlProgramUniformHandleui64vNV(d binary.Decoder, o *GlProgramUniform
 		ent_378c28c1928446330548c848e995d3ba64342b3e = ent
 	}
 	d.Struct(ent_378c28c1928446330548c848e995d3ba64342b3e, &o.Values)
-}
-func (*binaryClassGlProgramUniformHandleui64vNV) New() binary.Object {
-	return &GlProgramUniformHandleui64vNV{}
 }
 func (*binaryClassGlProgramUniformHandleui64vNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformHandleui64vNV(e, obj.(*GlProgramUniformHandleui64vNV))
@@ -37754,7 +36915,6 @@ func doDecodeGlProgramUniformMatrix2fv(d binary.Decoder, o *GlProgramUniformMatr
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix2fv) New() binary.Object { return &GlProgramUniformMatrix2fv{} }
 func (*binaryClassGlProgramUniformMatrix2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2fv(e, obj.(*GlProgramUniformMatrix2fv))
 }
@@ -37817,9 +36977,6 @@ func doDecodeGlProgramUniformMatrix2fvEXT(d binary.Decoder, o *GlProgramUniformM
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix2fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix2fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix2fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2fvEXT(e, obj.(*GlProgramUniformMatrix2fvEXT))
@@ -37884,9 +37041,6 @@ func doDecodeGlProgramUniformMatrix2x3fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix2x3fv) New() binary.Object {
-	return &GlProgramUniformMatrix2x3fv{}
-}
 func (*binaryClassGlProgramUniformMatrix2x3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2x3fv(e, obj.(*GlProgramUniformMatrix2x3fv))
 }
@@ -37949,9 +37103,6 @@ func doDecodeGlProgramUniformMatrix2x3fvEXT(d binary.Decoder, o *GlProgramUnifor
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix2x3fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix2x3fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix2x3fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2x3fvEXT(e, obj.(*GlProgramUniformMatrix2x3fvEXT))
@@ -38016,9 +37167,6 @@ func doDecodeGlProgramUniformMatrix2x4fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix2x4fv) New() binary.Object {
-	return &GlProgramUniformMatrix2x4fv{}
-}
 func (*binaryClassGlProgramUniformMatrix2x4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2x4fv(e, obj.(*GlProgramUniformMatrix2x4fv))
 }
@@ -38081,9 +37229,6 @@ func doDecodeGlProgramUniformMatrix2x4fvEXT(d binary.Decoder, o *GlProgramUnifor
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix2x4fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix2x4fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix2x4fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix2x4fvEXT(e, obj.(*GlProgramUniformMatrix2x4fvEXT))
@@ -38148,7 +37293,6 @@ func doDecodeGlProgramUniformMatrix3fv(d binary.Decoder, o *GlProgramUniformMatr
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix3fv) New() binary.Object { return &GlProgramUniformMatrix3fv{} }
 func (*binaryClassGlProgramUniformMatrix3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3fv(e, obj.(*GlProgramUniformMatrix3fv))
 }
@@ -38211,9 +37355,6 @@ func doDecodeGlProgramUniformMatrix3fvEXT(d binary.Decoder, o *GlProgramUniformM
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix3fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix3fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix3fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3fvEXT(e, obj.(*GlProgramUniformMatrix3fvEXT))
@@ -38278,9 +37419,6 @@ func doDecodeGlProgramUniformMatrix3x2fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix3x2fv) New() binary.Object {
-	return &GlProgramUniformMatrix3x2fv{}
-}
 func (*binaryClassGlProgramUniformMatrix3x2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3x2fv(e, obj.(*GlProgramUniformMatrix3x2fv))
 }
@@ -38343,9 +37481,6 @@ func doDecodeGlProgramUniformMatrix3x2fvEXT(d binary.Decoder, o *GlProgramUnifor
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix3x2fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix3x2fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix3x2fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3x2fvEXT(e, obj.(*GlProgramUniformMatrix3x2fvEXT))
@@ -38410,9 +37545,6 @@ func doDecodeGlProgramUniformMatrix3x4fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix3x4fv) New() binary.Object {
-	return &GlProgramUniformMatrix3x4fv{}
-}
 func (*binaryClassGlProgramUniformMatrix3x4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3x4fv(e, obj.(*GlProgramUniformMatrix3x4fv))
 }
@@ -38475,9 +37607,6 @@ func doDecodeGlProgramUniformMatrix3x4fvEXT(d binary.Decoder, o *GlProgramUnifor
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix3x4fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix3x4fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix3x4fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix3x4fvEXT(e, obj.(*GlProgramUniformMatrix3x4fvEXT))
@@ -38542,7 +37671,6 @@ func doDecodeGlProgramUniformMatrix4fv(d binary.Decoder, o *GlProgramUniformMatr
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix4fv) New() binary.Object { return &GlProgramUniformMatrix4fv{} }
 func (*binaryClassGlProgramUniformMatrix4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4fv(e, obj.(*GlProgramUniformMatrix4fv))
 }
@@ -38605,9 +37733,6 @@ func doDecodeGlProgramUniformMatrix4fvEXT(d binary.Decoder, o *GlProgramUniformM
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix4fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix4fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix4fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4fvEXT(e, obj.(*GlProgramUniformMatrix4fvEXT))
@@ -38672,9 +37797,6 @@ func doDecodeGlProgramUniformMatrix4x2fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix4x2fv) New() binary.Object {
-	return &GlProgramUniformMatrix4x2fv{}
-}
 func (*binaryClassGlProgramUniformMatrix4x2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4x2fv(e, obj.(*GlProgramUniformMatrix4x2fv))
 }
@@ -38737,9 +37859,6 @@ func doDecodeGlProgramUniformMatrix4x2fvEXT(d binary.Decoder, o *GlProgramUnifor
 		ent_cd66daec9a1313d949ab4a92dfb0936403615360 = ent
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
-}
-func (*binaryClassGlProgramUniformMatrix4x2fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix4x2fvEXT{}
 }
 func (*binaryClassGlProgramUniformMatrix4x2fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4x2fvEXT(e, obj.(*GlProgramUniformMatrix4x2fvEXT))
@@ -38804,9 +37923,6 @@ func doDecodeGlProgramUniformMatrix4x3fv(d binary.Decoder, o *GlProgramUniformMa
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlProgramUniformMatrix4x3fv) New() binary.Object {
-	return &GlProgramUniformMatrix4x3fv{}
-}
 func (*binaryClassGlProgramUniformMatrix4x3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4x3fv(e, obj.(*GlProgramUniformMatrix4x3fv))
 }
@@ -38870,9 +37986,6 @@ func doDecodeGlProgramUniformMatrix4x3fvEXT(d binary.Decoder, o *GlProgramUnifor
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlProgramUniformMatrix4x3fvEXT) New() binary.Object {
-	return &GlProgramUniformMatrix4x3fvEXT{}
-}
 func (*binaryClassGlProgramUniformMatrix4x3fvEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlProgramUniformMatrix4x3fvEXT(e, obj.(*GlProgramUniformMatrix4x3fvEXT))
 }
@@ -38934,7 +38047,6 @@ func doDecodeGlPushDebugGroup(d binary.Decoder, o *GlPushDebugGroup) {
 	}
 	d.Struct(ent_161b3edbe1f8db830a4536c83bd0d8275391dac1, &o.Message)
 }
-func (*binaryClassGlPushDebugGroup) New() binary.Object { return &GlPushDebugGroup{} }
 func (*binaryClassGlPushDebugGroup) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPushDebugGroup(e, obj.(*GlPushDebugGroup))
 }
@@ -38993,7 +38105,6 @@ func doDecodeGlPushDebugGroupKHR(d binary.Decoder, o *GlPushDebugGroupKHR) {
 	}
 	d.Struct(ent_161b3edbe1f8db830a4536c83bd0d8275391dac1, &o.Message)
 }
-func (*binaryClassGlPushDebugGroupKHR) New() binary.Object { return &GlPushDebugGroupKHR{} }
 func (*binaryClassGlPushDebugGroupKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPushDebugGroupKHR(e, obj.(*GlPushDebugGroupKHR))
 }
@@ -39048,7 +38159,6 @@ func doDecodeGlPushGroupMarkerEXT(d binary.Decoder, o *GlPushGroupMarkerEXT) {
 	}
 	d.Struct(ent_2c801d98b4edb7bbf15f3538f1e3da96cb8e6aa0, &o.Marker)
 }
-func (*binaryClassGlPushGroupMarkerEXT) New() binary.Object { return &GlPushGroupMarkerEXT{} }
 func (*binaryClassGlPushGroupMarkerEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlPushGroupMarkerEXT(e, obj.(*GlPushGroupMarkerEXT))
 }
@@ -39094,7 +38204,6 @@ func doDecodeGlQueryCounterEXT(d binary.Decoder, o *GlQueryCounterEXT) {
 	o.Query = QueryId(d.Uint32())
 	o.Target = GLenum(d.Uint32())
 }
-func (*binaryClassGlQueryCounterEXT) New() binary.Object { return &GlQueryCounterEXT{} }
 func (*binaryClassGlQueryCounterEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlQueryCounterEXT(e, obj.(*GlQueryCounterEXT))
 }
@@ -39140,7 +38249,6 @@ func doDecodeGlRasterSamplesEXT(d binary.Decoder, o *GlRasterSamplesEXT) {
 	o.Samples = GLuint(d.Uint32())
 	o.Fixedsamplelocations = GLboolean(d.Uint8())
 }
-func (*binaryClassGlRasterSamplesEXT) New() binary.Object { return &GlRasterSamplesEXT{} }
 func (*binaryClassGlRasterSamplesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRasterSamplesEXT(e, obj.(*GlRasterSamplesEXT))
 }
@@ -39184,7 +38292,6 @@ func doDecodeGlReadBuffer(d binary.Decoder, o *GlReadBuffer) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Src = GLenum(d.Uint32())
 }
-func (*binaryClassGlReadBuffer) New() binary.Object { return &GlReadBuffer{} }
 func (*binaryClassGlReadBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadBuffer(e, obj.(*GlReadBuffer))
 }
@@ -39229,7 +38336,6 @@ func doDecodeGlReadBufferIndexedEXT(d binary.Decoder, o *GlReadBufferIndexedEXT)
 	o.Src = GLenum(d.Uint32())
 	o.Index = GLint(d.Int32())
 }
-func (*binaryClassGlReadBufferIndexedEXT) New() binary.Object { return &GlReadBufferIndexedEXT{} }
 func (*binaryClassGlReadBufferIndexedEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadBufferIndexedEXT(e, obj.(*GlReadBufferIndexedEXT))
 }
@@ -39273,7 +38379,6 @@ func doDecodeGlReadBufferNV(d binary.Decoder, o *GlReadBufferNV) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Mode = GLenum(d.Uint32())
 }
-func (*binaryClassGlReadBufferNV) New() binary.Object { return &GlReadBufferNV{} }
 func (*binaryClassGlReadBufferNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadBufferNV(e, obj.(*GlReadBufferNV))
 }
@@ -39335,7 +38440,6 @@ func doDecodeGlReadPixels(d binary.Decoder, o *GlReadPixels) {
 	}
 	d.Struct(ent_20db425fae2cdb07e005cd8127ed7460dc16af21, &o.Data)
 }
-func (*binaryClassGlReadPixels) New() binary.Object { return &GlReadPixels{} }
 func (*binaryClassGlReadPixels) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadPixels(e, obj.(*GlReadPixels))
 }
@@ -39405,7 +38509,6 @@ func doDecodeGlReadnPixels(d binary.Decoder, o *GlReadnPixels) {
 	}
 	d.Struct(ent_20db425fae2cdb07e005cd8127ed7460dc16af21, &o.Data)
 }
-func (*binaryClassGlReadnPixels) New() binary.Object { return &GlReadnPixels{} }
 func (*binaryClassGlReadnPixels) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadnPixels(e, obj.(*GlReadnPixels))
 }
@@ -39476,7 +38579,6 @@ func doDecodeGlReadnPixelsEXT(d binary.Decoder, o *GlReadnPixelsEXT) {
 	}
 	d.Struct(ent_20db425fae2cdb07e005cd8127ed7460dc16af21, &o.Data)
 }
-func (*binaryClassGlReadnPixelsEXT) New() binary.Object { return &GlReadnPixelsEXT{} }
 func (*binaryClassGlReadnPixelsEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadnPixelsEXT(e, obj.(*GlReadnPixelsEXT))
 }
@@ -39547,7 +38649,6 @@ func doDecodeGlReadnPixelsKHR(d binary.Decoder, o *GlReadnPixelsKHR) {
 	}
 	d.Struct(ent_20db425fae2cdb07e005cd8127ed7460dc16af21, &o.Data)
 }
-func (*binaryClassGlReadnPixelsKHR) New() binary.Object { return &GlReadnPixelsKHR{} }
 func (*binaryClassGlReadnPixelsKHR) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReadnPixelsKHR(e, obj.(*GlReadnPixelsKHR))
 }
@@ -39595,7 +38696,6 @@ func doDecodeGlReleaseShaderCompiler(d binary.Decoder, o *GlReleaseShaderCompile
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlReleaseShaderCompiler) New() binary.Object { return &GlReleaseShaderCompiler{} }
 func (*binaryClassGlReleaseShaderCompiler) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlReleaseShaderCompiler(e, obj.(*GlReleaseShaderCompiler))
 }
@@ -39645,7 +38745,6 @@ func doDecodeGlRenderbufferStorage(d binary.Decoder, o *GlRenderbufferStorage) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlRenderbufferStorage) New() binary.Object { return &GlRenderbufferStorage{} }
 func (*binaryClassGlRenderbufferStorage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorage(e, obj.(*GlRenderbufferStorage))
 }
@@ -39698,9 +38797,6 @@ func doDecodeGlRenderbufferStorageMultisample(d binary.Decoder, o *GlRenderbuffe
 	o.Format = GLenum(d.Uint32())
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
-}
-func (*binaryClassGlRenderbufferStorageMultisample) New() binary.Object {
-	return &GlRenderbufferStorageMultisample{}
 }
 func (*binaryClassGlRenderbufferStorageMultisample) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisample(e, obj.(*GlRenderbufferStorageMultisample))
@@ -39758,9 +38854,6 @@ func doDecodeGlRenderbufferStorageMultisampleANGLE(d binary.Decoder, o *GlRender
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlRenderbufferStorageMultisampleANGLE) New() binary.Object {
-	return &GlRenderbufferStorageMultisampleANGLE{}
-}
 func (*binaryClassGlRenderbufferStorageMultisampleANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisampleANGLE(e, obj.(*GlRenderbufferStorageMultisampleANGLE))
 }
@@ -39816,9 +38909,6 @@ func doDecodeGlRenderbufferStorageMultisampleAPPLE(d binary.Decoder, o *GlRender
 	o.Internalformat = GLenum(d.Uint32())
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
-}
-func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) New() binary.Object {
-	return &GlRenderbufferStorageMultisampleAPPLE{}
 }
 func (*binaryClassGlRenderbufferStorageMultisampleAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisampleAPPLE(e, obj.(*GlRenderbufferStorageMultisampleAPPLE))
@@ -39876,9 +38966,6 @@ func doDecodeGlRenderbufferStorageMultisampleEXT(d binary.Decoder, o *GlRenderbu
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlRenderbufferStorageMultisampleEXT) New() binary.Object {
-	return &GlRenderbufferStorageMultisampleEXT{}
-}
 func (*binaryClassGlRenderbufferStorageMultisampleEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisampleEXT(e, obj.(*GlRenderbufferStorageMultisampleEXT))
 }
@@ -39934,9 +39021,6 @@ func doDecodeGlRenderbufferStorageMultisampleIMG(d binary.Decoder, o *GlRenderbu
 	o.Internalformat = GLenum(d.Uint32())
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
-}
-func (*binaryClassGlRenderbufferStorageMultisampleIMG) New() binary.Object {
-	return &GlRenderbufferStorageMultisampleIMG{}
 }
 func (*binaryClassGlRenderbufferStorageMultisampleIMG) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisampleIMG(e, obj.(*GlRenderbufferStorageMultisampleIMG))
@@ -39994,9 +39078,6 @@ func doDecodeGlRenderbufferStorageMultisampleNV(d binary.Decoder, o *GlRenderbuf
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlRenderbufferStorageMultisampleNV) New() binary.Object {
-	return &GlRenderbufferStorageMultisampleNV{}
-}
 func (*binaryClassGlRenderbufferStorageMultisampleNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlRenderbufferStorageMultisampleNV(e, obj.(*GlRenderbufferStorageMultisampleNV))
 }
@@ -40043,7 +39124,6 @@ func doDecodeGlResolveDepthValuesNV(d binary.Decoder, o *GlResolveDepthValuesNV)
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlResolveDepthValuesNV) New() binary.Object { return &GlResolveDepthValuesNV{} }
 func (*binaryClassGlResolveDepthValuesNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlResolveDepthValuesNV(e, obj.(*GlResolveDepthValuesNV))
 }
@@ -40082,9 +39162,6 @@ func doDecodeGlResolveMultisampleFramebufferAPPLE(d binary.Decoder, o *GlResolve
 		ent_ff910d22367a209e1a92357e3aac7f549243486c = ent
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
-}
-func (*binaryClassGlResolveMultisampleFramebufferAPPLE) New() binary.Object {
-	return &GlResolveMultisampleFramebufferAPPLE{}
 }
 func (*binaryClassGlResolveMultisampleFramebufferAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlResolveMultisampleFramebufferAPPLE(e, obj.(*GlResolveMultisampleFramebufferAPPLE))
@@ -40127,7 +39204,6 @@ func doDecodeGlResumeTransformFeedback(d binary.Decoder, o *GlResumeTransformFee
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 }
-func (*binaryClassGlResumeTransformFeedback) New() binary.Object { return &GlResumeTransformFeedback{} }
 func (*binaryClassGlResumeTransformFeedback) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlResumeTransformFeedback(e, obj.(*GlResumeTransformFeedback))
 }
@@ -40173,7 +39249,6 @@ func doDecodeGlSampleCoverage(d binary.Decoder, o *GlSampleCoverage) {
 	o.Value = GLfloat(d.Float32())
 	o.Invert = GLboolean(d.Uint8())
 }
-func (*binaryClassGlSampleCoverage) New() binary.Object { return &GlSampleCoverage{} }
 func (*binaryClassGlSampleCoverage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSampleCoverage(e, obj.(*GlSampleCoverage))
 }
@@ -40219,7 +39294,6 @@ func doDecodeGlSampleMaski(d binary.Decoder, o *GlSampleMaski) {
 	o.MaskNumber = GLuint(d.Uint32())
 	o.Mask = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlSampleMaski) New() binary.Object { return &GlSampleMaski{} }
 func (*binaryClassGlSampleMaski) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSampleMaski(e, obj.(*GlSampleMaski))
 }
@@ -40274,7 +39348,6 @@ func doDecodeGlSamplerParameterIiv(d binary.Decoder, o *GlSamplerParameterIiv) {
 	}
 	d.Struct(ent_750783e85ca52c868a7a0a219d3cd91f0e3c54cd, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIiv) New() binary.Object { return &GlSamplerParameterIiv{} }
 func (*binaryClassGlSamplerParameterIiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIiv(e, obj.(*GlSamplerParameterIiv))
 }
@@ -40330,7 +39403,6 @@ func doDecodeGlSamplerParameterIivEXT(d binary.Decoder, o *GlSamplerParameterIiv
 	}
 	d.Struct(ent_750783e85ca52c868a7a0a219d3cd91f0e3c54cd, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIivEXT) New() binary.Object { return &GlSamplerParameterIivEXT{} }
 func (*binaryClassGlSamplerParameterIivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIivEXT(e, obj.(*GlSamplerParameterIivEXT))
 }
@@ -40388,7 +39460,6 @@ func doDecodeGlSamplerParameterIivOES(d binary.Decoder, o *GlSamplerParameterIiv
 	}
 	d.Struct(ent_750783e85ca52c868a7a0a219d3cd91f0e3c54cd, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIivOES) New() binary.Object { return &GlSamplerParameterIivOES{} }
 func (*binaryClassGlSamplerParameterIivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIivOES(e, obj.(*GlSamplerParameterIivOES))
 }
@@ -40446,7 +39517,6 @@ func doDecodeGlSamplerParameterIuiv(d binary.Decoder, o *GlSamplerParameterIuiv)
 	}
 	d.Struct(ent_d05ae966e1054063afd7fd2cc7fd61ae9e0777e8, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIuiv) New() binary.Object { return &GlSamplerParameterIuiv{} }
 func (*binaryClassGlSamplerParameterIuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIuiv(e, obj.(*GlSamplerParameterIuiv))
 }
@@ -40502,7 +39572,6 @@ func doDecodeGlSamplerParameterIuivEXT(d binary.Decoder, o *GlSamplerParameterIu
 	}
 	d.Struct(ent_d05ae966e1054063afd7fd2cc7fd61ae9e0777e8, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIuivEXT) New() binary.Object { return &GlSamplerParameterIuivEXT{} }
 func (*binaryClassGlSamplerParameterIuivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIuivEXT(e, obj.(*GlSamplerParameterIuivEXT))
 }
@@ -40560,7 +39629,6 @@ func doDecodeGlSamplerParameterIuivOES(d binary.Decoder, o *GlSamplerParameterIu
 	}
 	d.Struct(ent_d05ae966e1054063afd7fd2cc7fd61ae9e0777e8, &o.Param)
 }
-func (*binaryClassGlSamplerParameterIuivOES) New() binary.Object { return &GlSamplerParameterIuivOES{} }
 func (*binaryClassGlSamplerParameterIuivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterIuivOES(e, obj.(*GlSamplerParameterIuivOES))
 }
@@ -40611,7 +39679,6 @@ func doDecodeGlSamplerParameterf(d binary.Decoder, o *GlSamplerParameterf) {
 	o.Pname = GLenum(d.Uint32())
 	o.Param = GLfloat(d.Float32())
 }
-func (*binaryClassGlSamplerParameterf) New() binary.Object { return &GlSamplerParameterf{} }
 func (*binaryClassGlSamplerParameterf) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterf(e, obj.(*GlSamplerParameterf))
 }
@@ -40667,7 +39734,6 @@ func doDecodeGlSamplerParameterfv(d binary.Decoder, o *GlSamplerParameterfv) {
 	}
 	d.Struct(ent_0f5a55a3b119671ee26ab9887bf67027b44bec67, &o.Param)
 }
-func (*binaryClassGlSamplerParameterfv) New() binary.Object { return &GlSamplerParameterfv{} }
 func (*binaryClassGlSamplerParameterfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameterfv(e, obj.(*GlSamplerParameterfv))
 }
@@ -40716,7 +39782,6 @@ func doDecodeGlSamplerParameteri(d binary.Decoder, o *GlSamplerParameteri) {
 	o.Pname = GLenum(d.Uint32())
 	o.Param = GLint(d.Int32())
 }
-func (*binaryClassGlSamplerParameteri) New() binary.Object { return &GlSamplerParameteri{} }
 func (*binaryClassGlSamplerParameteri) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameteri(e, obj.(*GlSamplerParameteri))
 }
@@ -40772,7 +39837,6 @@ func doDecodeGlSamplerParameteriv(d binary.Decoder, o *GlSamplerParameteriv) {
 	}
 	d.Struct(ent_750783e85ca52c868a7a0a219d3cd91f0e3c54cd, &o.Param)
 }
-func (*binaryClassGlSamplerParameteriv) New() binary.Object { return &GlSamplerParameteriv{} }
 func (*binaryClassGlSamplerParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSamplerParameteriv(e, obj.(*GlSamplerParameteriv))
 }
@@ -40823,7 +39887,6 @@ func doDecodeGlScissor(d binary.Decoder, o *GlScissor) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlScissor) New() binary.Object { return &GlScissor{} }
 func (*binaryClassGlScissor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlScissor(e, obj.(*GlScissor))
 }
@@ -40880,7 +39943,6 @@ func doDecodeGlScissorArrayvNV(d binary.Decoder, o *GlScissorArrayvNV) {
 	}
 	d.Struct(ent_7ebdb9103961f2dab36e37c625c856c3acd69b76, &o.V)
 }
-func (*binaryClassGlScissorArrayvNV) New() binary.Object { return &GlScissorArrayvNV{} }
 func (*binaryClassGlScissorArrayvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlScissorArrayvNV(e, obj.(*GlScissorArrayvNV))
 }
@@ -40933,7 +39995,6 @@ func doDecodeGlScissorIndexedNV(d binary.Decoder, o *GlScissorIndexedNV) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlScissorIndexedNV) New() binary.Object { return &GlScissorIndexedNV{} }
 func (*binaryClassGlScissorIndexedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlScissorIndexedNV(e, obj.(*GlScissorIndexedNV))
 }
@@ -40989,7 +40050,6 @@ func doDecodeGlScissorIndexedvNV(d binary.Decoder, o *GlScissorIndexedvNV) {
 	}
 	d.Struct(ent_7ebdb9103961f2dab36e37c625c856c3acd69b76, &o.V)
 }
-func (*binaryClassGlScissorIndexedvNV) New() binary.Object { return &GlScissorIndexedvNV{} }
 func (*binaryClassGlScissorIndexedvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlScissorIndexedvNV(e, obj.(*GlScissorIndexedvNV))
 }
@@ -41048,9 +40108,6 @@ func doDecodeGlSelectPerfMonitorCountersAMD(d binary.Decoder, o *GlSelectPerfMon
 	}
 	d.Struct(ent_a1d61d0caedee588e52fd9435facd2566fb4d876, &o.CounterList)
 }
-func (*binaryClassGlSelectPerfMonitorCountersAMD) New() binary.Object {
-	return &GlSelectPerfMonitorCountersAMD{}
-}
 func (*binaryClassGlSelectPerfMonitorCountersAMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSelectPerfMonitorCountersAMD(e, obj.(*GlSelectPerfMonitorCountersAMD))
 }
@@ -41101,7 +40158,6 @@ func doDecodeGlSetFenceNV(d binary.Decoder, o *GlSetFenceNV) {
 	o.Fence = GLuint(d.Uint32())
 	o.Condition = GLenum(d.Uint32())
 }
-func (*binaryClassGlSetFenceNV) New() binary.Object { return &GlSetFenceNV{} }
 func (*binaryClassGlSetFenceNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSetFenceNV(e, obj.(*GlSetFenceNV))
 }
@@ -41143,7 +40199,6 @@ func doDecodeShaderIdᶜᵖ(d binary.Decoder, o *ShaderIdᶜᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassShaderIdᶜᵖ) New() binary.Object { return &ShaderIdᶜᵖ{} }
 func (*binaryClassShaderIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShaderIdᶜᵖ(e, obj.(*ShaderIdᶜᵖ))
 }
@@ -41207,7 +40262,6 @@ func doDecodeGlShaderBinary(d binary.Decoder, o *GlShaderBinary) {
 	d.Struct(ent_384581d03a0ec5830a27534b167cef2ee9f72ffa, &o.Binary)
 	o.BinarySize = GLsizei(d.Int32())
 }
-func (*binaryClassGlShaderBinary) New() binary.Object { return &GlShaderBinary{} }
 func (*binaryClassGlShaderBinary) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlShaderBinary(e, obj.(*GlShaderBinary))
 }
@@ -41274,7 +40328,6 @@ func doDecodeGlShaderSource(d binary.Decoder, o *GlShaderSource) {
 	}
 	d.Struct(ent_ab7a7065906e3bd178d08bf805d3276dcf6964ec, &o.Length)
 }
-func (*binaryClassGlShaderSource) New() binary.Object { return &GlShaderSource{} }
 func (*binaryClassGlShaderSource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlShaderSource(e, obj.(*GlShaderSource))
 }
@@ -41328,7 +40381,6 @@ func doDecodeGlStartTilingQCOM(d binary.Decoder, o *GlStartTilingQCOM) {
 	o.Height = GLuint(d.Uint32())
 	o.PreserveMask = GLbitfield(d.Uint32())
 }
-func (*binaryClassGlStartTilingQCOM) New() binary.Object { return &GlStartTilingQCOM{} }
 func (*binaryClassGlStartTilingQCOM) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStartTilingQCOM(e, obj.(*GlStartTilingQCOM))
 }
@@ -41403,9 +40455,6 @@ func doDecodeGlStencilFillPathInstancedNV(d binary.Decoder, o *GlStencilFillPath
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlStencilFillPathInstancedNV) New() binary.Object {
-	return &GlStencilFillPathInstancedNV{}
-}
 func (*binaryClassGlStencilFillPathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilFillPathInstancedNV(e, obj.(*GlStencilFillPathInstancedNV))
 }
@@ -41461,7 +40510,6 @@ func doDecodeGlStencilFillPathNV(d binary.Decoder, o *GlStencilFillPathNV) {
 	o.FillMode = GLenum(d.Uint32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilFillPathNV) New() binary.Object { return &GlStencilFillPathNV{} }
 func (*binaryClassGlStencilFillPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilFillPathNV(e, obj.(*GlStencilFillPathNV))
 }
@@ -41510,7 +40558,6 @@ func doDecodeGlStencilFunc(d binary.Decoder, o *GlStencilFunc) {
 	o.Ref = GLint(d.Int32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilFunc) New() binary.Object { return &GlStencilFunc{} }
 func (*binaryClassGlStencilFunc) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilFunc(e, obj.(*GlStencilFunc))
 }
@@ -41561,7 +40608,6 @@ func doDecodeGlStencilFuncSeparate(d binary.Decoder, o *GlStencilFuncSeparate) {
 	o.ReferenceValue = GLint(d.Int32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilFuncSeparate) New() binary.Object { return &GlStencilFuncSeparate{} }
 func (*binaryClassGlStencilFuncSeparate) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilFuncSeparate(e, obj.(*GlStencilFuncSeparate))
 }
@@ -41607,7 +40653,6 @@ func doDecodeGlStencilMask(d binary.Decoder, o *GlStencilMask) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilMask) New() binary.Object { return &GlStencilMask{} }
 func (*binaryClassGlStencilMask) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilMask(e, obj.(*GlStencilMask))
 }
@@ -41652,7 +40697,6 @@ func doDecodeGlStencilMaskSeparate(d binary.Decoder, o *GlStencilMaskSeparate) {
 	o.Face = GLenum(d.Uint32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilMaskSeparate) New() binary.Object { return &GlStencilMaskSeparate{} }
 func (*binaryClassGlStencilMaskSeparate) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilMaskSeparate(e, obj.(*GlStencilMaskSeparate))
 }
@@ -41700,7 +40744,6 @@ func doDecodeGlStencilOp(d binary.Decoder, o *GlStencilOp) {
 	o.Zfail = GLenum(d.Uint32())
 	o.Zpass = GLenum(d.Uint32())
 }
-func (*binaryClassGlStencilOp) New() binary.Object { return &GlStencilOp{} }
 func (*binaryClassGlStencilOp) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilOp(e, obj.(*GlStencilOp))
 }
@@ -41751,7 +40794,6 @@ func doDecodeGlStencilOpSeparate(d binary.Decoder, o *GlStencilOpSeparate) {
 	o.StencilPassDepthFail = GLenum(d.Uint32())
 	o.StencilPassDepthPass = GLenum(d.Uint32())
 }
-func (*binaryClassGlStencilOpSeparate) New() binary.Object { return &GlStencilOpSeparate{} }
 func (*binaryClassGlStencilOpSeparate) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilOpSeparate(e, obj.(*GlStencilOpSeparate))
 }
@@ -41825,9 +40867,6 @@ func doDecodeGlStencilStrokePathInstancedNV(d binary.Decoder, o *GlStencilStroke
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlStencilStrokePathInstancedNV) New() binary.Object {
-	return &GlStencilStrokePathInstancedNV{}
-}
 func (*binaryClassGlStencilStrokePathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilStrokePathInstancedNV(e, obj.(*GlStencilStrokePathInstancedNV))
 }
@@ -41883,7 +40922,6 @@ func doDecodeGlStencilStrokePathNV(d binary.Decoder, o *GlStencilStrokePathNV) {
 	o.Reference = GLint(d.Int32())
 	o.Mask = GLuint(d.Uint32())
 }
-func (*binaryClassGlStencilStrokePathNV) New() binary.Object { return &GlStencilStrokePathNV{} }
 func (*binaryClassGlStencilStrokePathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilStrokePathNV(e, obj.(*GlStencilStrokePathNV))
 }
@@ -41958,9 +40996,6 @@ func doDecodeGlStencilThenCoverFillPathInstancedNV(d binary.Decoder, o *GlStenci
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlStencilThenCoverFillPathInstancedNV) New() binary.Object {
-	return &GlStencilThenCoverFillPathInstancedNV{}
-}
 func (*binaryClassGlStencilThenCoverFillPathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilThenCoverFillPathInstancedNV(e, obj.(*GlStencilThenCoverFillPathInstancedNV))
 }
@@ -42018,9 +41053,6 @@ func doDecodeGlStencilThenCoverFillPathNV(d binary.Decoder, o *GlStencilThenCove
 	o.FillMode = GLenum(d.Uint32())
 	o.Mask = GLuint(d.Uint32())
 	o.CoverMode = GLenum(d.Uint32())
-}
-func (*binaryClassGlStencilThenCoverFillPathNV) New() binary.Object {
-	return &GlStencilThenCoverFillPathNV{}
 }
 func (*binaryClassGlStencilThenCoverFillPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilThenCoverFillPathNV(e, obj.(*GlStencilThenCoverFillPathNV))
@@ -42099,9 +41131,6 @@ func doDecodeGlStencilThenCoverStrokePathInstancedNV(d binary.Decoder, o *GlSten
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) New() binary.Object {
-	return &GlStencilThenCoverStrokePathInstancedNV{}
-}
 func (*binaryClassGlStencilThenCoverStrokePathInstancedNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilThenCoverStrokePathInstancedNV(e, obj.(*GlStencilThenCoverStrokePathInstancedNV))
 }
@@ -42160,9 +41189,6 @@ func doDecodeGlStencilThenCoverStrokePathNV(d binary.Decoder, o *GlStencilThenCo
 	o.Mask = GLuint(d.Uint32())
 	o.CoverMode = GLenum(d.Uint32())
 }
-func (*binaryClassGlStencilThenCoverStrokePathNV) New() binary.Object {
-	return &GlStencilThenCoverStrokePathNV{}
-}
 func (*binaryClassGlStencilThenCoverStrokePathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlStencilThenCoverStrokePathNV(e, obj.(*GlStencilThenCoverStrokePathNV))
 }
@@ -42212,7 +41238,6 @@ func doDecodeGlSubpixelPrecisionBiasNV(d binary.Decoder, o *GlSubpixelPrecisionB
 	o.Xbits = GLuint(d.Uint32())
 	o.Ybits = GLuint(d.Uint32())
 }
-func (*binaryClassGlSubpixelPrecisionBiasNV) New() binary.Object { return &GlSubpixelPrecisionBiasNV{} }
 func (*binaryClassGlSubpixelPrecisionBiasNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlSubpixelPrecisionBiasNV(e, obj.(*GlSubpixelPrecisionBiasNV))
 }
@@ -42260,7 +41285,6 @@ func doDecodeGlTestFenceNV(d binary.Decoder, o *GlTestFenceNV) {
 	o.Fence = GLuint(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlTestFenceNV) New() binary.Object { return &GlTestFenceNV{} }
 func (*binaryClassGlTestFenceNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTestFenceNV(e, obj.(*GlTestFenceNV))
 }
@@ -42308,7 +41332,6 @@ func doDecodeGlTexBuffer(d binary.Decoder, o *GlTexBuffer) {
 	o.Internalformat = GLenum(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
-func (*binaryClassGlTexBuffer) New() binary.Object { return &GlTexBuffer{} }
 func (*binaryClassGlTexBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBuffer(e, obj.(*GlTexBuffer))
 }
@@ -42357,7 +41380,6 @@ func doDecodeGlTexBufferEXT(d binary.Decoder, o *GlTexBufferEXT) {
 	o.Internalformat = GLenum(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
-func (*binaryClassGlTexBufferEXT) New() binary.Object { return &GlTexBufferEXT{} }
 func (*binaryClassGlTexBufferEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBufferEXT(e, obj.(*GlTexBufferEXT))
 }
@@ -42406,7 +41428,6 @@ func doDecodeGlTexBufferOES(d binary.Decoder, o *GlTexBufferOES) {
 	o.Internalformat = GLenum(d.Uint32())
 	o.Buffer = BufferId(d.Uint32())
 }
-func (*binaryClassGlTexBufferOES) New() binary.Object { return &GlTexBufferOES{} }
 func (*binaryClassGlTexBufferOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBufferOES(e, obj.(*GlTexBufferOES))
 }
@@ -42459,7 +41480,6 @@ func doDecodeGlTexBufferRange(d binary.Decoder, o *GlTexBufferRange) {
 	o.Offset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlTexBufferRange) New() binary.Object { return &GlTexBufferRange{} }
 func (*binaryClassGlTexBufferRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBufferRange(e, obj.(*GlTexBufferRange))
 }
@@ -42514,7 +41534,6 @@ func doDecodeGlTexBufferRangeEXT(d binary.Decoder, o *GlTexBufferRangeEXT) {
 	o.Offset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlTexBufferRangeEXT) New() binary.Object { return &GlTexBufferRangeEXT{} }
 func (*binaryClassGlTexBufferRangeEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBufferRangeEXT(e, obj.(*GlTexBufferRangeEXT))
 }
@@ -42569,7 +41588,6 @@ func doDecodeGlTexBufferRangeOES(d binary.Decoder, o *GlTexBufferRangeOES) {
 	o.Offset = GLintptr(d.Int32())
 	o.Size = GLsizeiptr(d.Int32())
 }
-func (*binaryClassGlTexBufferRangeOES) New() binary.Object { return &GlTexBufferRangeOES{} }
 func (*binaryClassGlTexBufferRangeOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexBufferRangeOES(e, obj.(*GlTexBufferRangeOES))
 }
@@ -42639,7 +41657,6 @@ func doDecodeGlTexImage2D(d binary.Decoder, o *GlTexImage2D) {
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlTexImage2D) New() binary.Object { return &GlTexImage2D{} }
 func (*binaryClassGlTexImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexImage2D(e, obj.(*GlTexImage2D))
 }
@@ -42715,7 +41732,6 @@ func doDecodeGlTexImage3D(d binary.Decoder, o *GlTexImage3D) {
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlTexImage3D) New() binary.Object { return &GlTexImage3D{} }
 func (*binaryClassGlTexImage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexImage3D(e, obj.(*GlTexImage3D))
 }
@@ -42792,7 +41808,6 @@ func doDecodeGlTexImage3DOES(d binary.Decoder, o *GlTexImage3DOES) {
 	}
 	d.Struct(ent_c4544b5b3d1c2ed23340876267d30266bc31f169, &o.Pixels)
 }
-func (*binaryClassGlTexImage3DOES) New() binary.Object { return &GlTexImage3DOES{} }
 func (*binaryClassGlTexImage3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexImage3DOES(e, obj.(*GlTexImage3DOES))
 }
@@ -42860,7 +41875,6 @@ func doDecodeGlTexPageCommitmentEXT(d binary.Decoder, o *GlTexPageCommitmentEXT)
 	o.Depth = GLsizei(d.Int32())
 	o.Commit = GLboolean(d.Uint8())
 }
-func (*binaryClassGlTexPageCommitmentEXT) New() binary.Object { return &GlTexPageCommitmentEXT{} }
 func (*binaryClassGlTexPageCommitmentEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexPageCommitmentEXT(e, obj.(*GlTexPageCommitmentEXT))
 }
@@ -42922,7 +41936,6 @@ func doDecodeGlTexParameterIiv(d binary.Decoder, o *GlTexParameterIiv) {
 	}
 	d.Struct(ent_c482917cbc2266de7ef29ffd013a3fa8cbe69077, &o.Params)
 }
-func (*binaryClassGlTexParameterIiv) New() binary.Object { return &GlTexParameterIiv{} }
 func (*binaryClassGlTexParameterIiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIiv(e, obj.(*GlTexParameterIiv))
 }
@@ -42978,7 +41991,6 @@ func doDecodeGlTexParameterIivEXT(d binary.Decoder, o *GlTexParameterIivEXT) {
 	}
 	d.Struct(ent_c482917cbc2266de7ef29ffd013a3fa8cbe69077, &o.Params)
 }
-func (*binaryClassGlTexParameterIivEXT) New() binary.Object { return &GlTexParameterIivEXT{} }
 func (*binaryClassGlTexParameterIivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIivEXT(e, obj.(*GlTexParameterIivEXT))
 }
@@ -43034,7 +42046,6 @@ func doDecodeGlTexParameterIivOES(d binary.Decoder, o *GlTexParameterIivOES) {
 	}
 	d.Struct(ent_c482917cbc2266de7ef29ffd013a3fa8cbe69077, &o.Params)
 }
-func (*binaryClassGlTexParameterIivOES) New() binary.Object { return &GlTexParameterIivOES{} }
 func (*binaryClassGlTexParameterIivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIivOES(e, obj.(*GlTexParameterIivOES))
 }
@@ -43090,7 +42101,6 @@ func doDecodeGlTexParameterIuiv(d binary.Decoder, o *GlTexParameterIuiv) {
 	}
 	d.Struct(ent_9abeedc3fd56bd449693548239ad79fbf5561c59, &o.Params)
 }
-func (*binaryClassGlTexParameterIuiv) New() binary.Object { return &GlTexParameterIuiv{} }
 func (*binaryClassGlTexParameterIuiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIuiv(e, obj.(*GlTexParameterIuiv))
 }
@@ -43146,7 +42156,6 @@ func doDecodeGlTexParameterIuivEXT(d binary.Decoder, o *GlTexParameterIuivEXT) {
 	}
 	d.Struct(ent_9abeedc3fd56bd449693548239ad79fbf5561c59, &o.Params)
 }
-func (*binaryClassGlTexParameterIuivEXT) New() binary.Object { return &GlTexParameterIuivEXT{} }
 func (*binaryClassGlTexParameterIuivEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIuivEXT(e, obj.(*GlTexParameterIuivEXT))
 }
@@ -43202,7 +42211,6 @@ func doDecodeGlTexParameterIuivOES(d binary.Decoder, o *GlTexParameterIuivOES) {
 	}
 	d.Struct(ent_9abeedc3fd56bd449693548239ad79fbf5561c59, &o.Params)
 }
-func (*binaryClassGlTexParameterIuivOES) New() binary.Object { return &GlTexParameterIuivOES{} }
 func (*binaryClassGlTexParameterIuivOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterIuivOES(e, obj.(*GlTexParameterIuivOES))
 }
@@ -43251,7 +42259,6 @@ func doDecodeGlTexParameterf(d binary.Decoder, o *GlTexParameterf) {
 	o.Parameter = GLenum(d.Uint32())
 	o.Value = GLfloat(d.Float32())
 }
-func (*binaryClassGlTexParameterf) New() binary.Object { return &GlTexParameterf{} }
 func (*binaryClassGlTexParameterf) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterf(e, obj.(*GlTexParameterf))
 }
@@ -43307,7 +42314,6 @@ func doDecodeGlTexParameterfv(d binary.Decoder, o *GlTexParameterfv) {
 	}
 	d.Struct(ent_b445ea29509a18812acc85d00a54823c633e5edc, &o.Params)
 }
-func (*binaryClassGlTexParameterfv) New() binary.Object { return &GlTexParameterfv{} }
 func (*binaryClassGlTexParameterfv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameterfv(e, obj.(*GlTexParameterfv))
 }
@@ -43356,7 +42362,6 @@ func doDecodeGlTexParameteri(d binary.Decoder, o *GlTexParameteri) {
 	o.Parameter = GLenum(d.Uint32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlTexParameteri) New() binary.Object { return &GlTexParameteri{} }
 func (*binaryClassGlTexParameteri) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameteri(e, obj.(*GlTexParameteri))
 }
@@ -43412,7 +42417,6 @@ func doDecodeGlTexParameteriv(d binary.Decoder, o *GlTexParameteriv) {
 	}
 	d.Struct(ent_c482917cbc2266de7ef29ffd013a3fa8cbe69077, &o.Params)
 }
-func (*binaryClassGlTexParameteriv) New() binary.Object { return &GlTexParameteriv{} }
 func (*binaryClassGlTexParameteriv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexParameteriv(e, obj.(*GlTexParameteriv))
 }
@@ -43463,7 +42467,6 @@ func doDecodeGlTexStorage1DEXT(d binary.Decoder, o *GlTexStorage1DEXT) {
 	o.Format = GLenum(d.Uint32())
 	o.Width = GLsizei(d.Int32())
 }
-func (*binaryClassGlTexStorage1DEXT) New() binary.Object { return &GlTexStorage1DEXT{} }
 func (*binaryClassGlTexStorage1DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage1DEXT(e, obj.(*GlTexStorage1DEXT))
 }
@@ -43517,7 +42520,6 @@ func doDecodeGlTexStorage2D(d binary.Decoder, o *GlTexStorage2D) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlTexStorage2D) New() binary.Object { return &GlTexStorage2D{} }
 func (*binaryClassGlTexStorage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage2D(e, obj.(*GlTexStorage2D))
 }
@@ -43572,7 +42574,6 @@ func doDecodeGlTexStorage2DEXT(d binary.Decoder, o *GlTexStorage2DEXT) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlTexStorage2DEXT) New() binary.Object { return &GlTexStorage2DEXT{} }
 func (*binaryClassGlTexStorage2DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage2DEXT(e, obj.(*GlTexStorage2DEXT))
 }
@@ -43629,7 +42630,6 @@ func doDecodeGlTexStorage2DMultisample(d binary.Decoder, o *GlTexStorage2DMultis
 	o.Height = GLsizei(d.Int32())
 	o.Fixedsamplelocations = GLboolean(d.Uint8())
 }
-func (*binaryClassGlTexStorage2DMultisample) New() binary.Object { return &GlTexStorage2DMultisample{} }
 func (*binaryClassGlTexStorage2DMultisample) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage2DMultisample(e, obj.(*GlTexStorage2DMultisample))
 }
@@ -43689,7 +42689,6 @@ func doDecodeGlTexStorage3D(d binary.Decoder, o *GlTexStorage3D) {
 	o.Height = GLsizei(d.Int32())
 	o.Depth = GLsizei(d.Int32())
 }
-func (*binaryClassGlTexStorage3D) New() binary.Object { return &GlTexStorage3D{} }
 func (*binaryClassGlTexStorage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage3D(e, obj.(*GlTexStorage3D))
 }
@@ -43747,7 +42746,6 @@ func doDecodeGlTexStorage3DEXT(d binary.Decoder, o *GlTexStorage3DEXT) {
 	o.Height = GLsizei(d.Int32())
 	o.Depth = GLsizei(d.Int32())
 }
-func (*binaryClassGlTexStorage3DEXT) New() binary.Object { return &GlTexStorage3DEXT{} }
 func (*binaryClassGlTexStorage3DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage3DEXT(e, obj.(*GlTexStorage3DEXT))
 }
@@ -43807,7 +42805,6 @@ func doDecodeGlTexStorage3DMultisample(d binary.Decoder, o *GlTexStorage3DMultis
 	o.Depth = GLsizei(d.Int32())
 	o.Fixedsamplelocations = GLboolean(d.Uint8())
 }
-func (*binaryClassGlTexStorage3DMultisample) New() binary.Object { return &GlTexStorage3DMultisample{} }
 func (*binaryClassGlTexStorage3DMultisample) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage3DMultisample(e, obj.(*GlTexStorage3DMultisample))
 }
@@ -43869,9 +42866,6 @@ func doDecodeGlTexStorage3DMultisampleOES(d binary.Decoder, o *GlTexStorage3DMul
 	o.Height = GLsizei(d.Int32())
 	o.Depth = GLsizei(d.Int32())
 	o.Fixedsamplelocations = GLboolean(d.Uint8())
-}
-func (*binaryClassGlTexStorage3DMultisampleOES) New() binary.Object {
-	return &GlTexStorage3DMultisampleOES{}
 }
 func (*binaryClassGlTexStorage3DMultisampleOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexStorage3DMultisampleOES(e, obj.(*GlTexStorage3DMultisampleOES))
@@ -43946,7 +42940,6 @@ func doDecodeGlTexSubImage2D(d binary.Decoder, o *GlTexSubImage2D) {
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlTexSubImage2D) New() binary.Object { return &GlTexSubImage2D{} }
 func (*binaryClassGlTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexSubImage2D(e, obj.(*GlTexSubImage2D))
 }
@@ -44024,7 +43017,6 @@ func doDecodeGlTexSubImage3D(d binary.Decoder, o *GlTexSubImage3D) {
 	}
 	d.Struct(ent_246568420e7a0864c97c5aab4ed2493bb33b7986, &o.Data)
 }
-func (*binaryClassGlTexSubImage3D) New() binary.Object { return &GlTexSubImage3D{} }
 func (*binaryClassGlTexSubImage3D) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexSubImage3D(e, obj.(*GlTexSubImage3D))
 }
@@ -44104,7 +43096,6 @@ func doDecodeGlTexSubImage3DOES(d binary.Decoder, o *GlTexSubImage3DOES) {
 	}
 	d.Struct(ent_c4544b5b3d1c2ed23340876267d30266bc31f169, &o.Pixels)
 }
-func (*binaryClassGlTexSubImage3DOES) New() binary.Object { return &GlTexSubImage3DOES{} }
 func (*binaryClassGlTexSubImage3DOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTexSubImage3DOES(e, obj.(*GlTexSubImage3DOES))
 }
@@ -44165,7 +43156,6 @@ func doDecodeGlTextureStorage1DEXT(d binary.Decoder, o *GlTextureStorage1DEXT) {
 	o.Format = GLenum(d.Uint32())
 	o.Width = GLsizei(d.Int32())
 }
-func (*binaryClassGlTextureStorage1DEXT) New() binary.Object { return &GlTextureStorage1DEXT{} }
 func (*binaryClassGlTextureStorage1DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTextureStorage1DEXT(e, obj.(*GlTextureStorage1DEXT))
 }
@@ -44222,7 +43212,6 @@ func doDecodeGlTextureStorage2DEXT(d binary.Decoder, o *GlTextureStorage2DEXT) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlTextureStorage2DEXT) New() binary.Object { return &GlTextureStorage2DEXT{} }
 func (*binaryClassGlTextureStorage2DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTextureStorage2DEXT(e, obj.(*GlTextureStorage2DEXT))
 }
@@ -44282,7 +43271,6 @@ func doDecodeGlTextureStorage3DEXT(d binary.Decoder, o *GlTextureStorage3DEXT) {
 	o.Height = GLsizei(d.Int32())
 	o.Depth = GLsizei(d.Int32())
 }
-func (*binaryClassGlTextureStorage3DEXT) New() binary.Object { return &GlTextureStorage3DEXT{} }
 func (*binaryClassGlTextureStorage3DEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTextureStorage3DEXT(e, obj.(*GlTextureStorage3DEXT))
 }
@@ -44345,7 +43333,6 @@ func doDecodeGlTextureViewEXT(d binary.Decoder, o *GlTextureViewEXT) {
 	o.Minlayer = GLuint(d.Uint32())
 	o.Numlayers = GLuint(d.Uint32())
 }
-func (*binaryClassGlTextureViewEXT) New() binary.Object { return &GlTextureViewEXT{} }
 func (*binaryClassGlTextureViewEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTextureViewEXT(e, obj.(*GlTextureViewEXT))
 }
@@ -44409,7 +43396,6 @@ func doDecodeGlTextureViewOES(d binary.Decoder, o *GlTextureViewOES) {
 	o.Minlayer = GLuint(d.Uint32())
 	o.Numlayers = GLuint(d.Uint32())
 }
-func (*binaryClassGlTextureViewOES) New() binary.Object { return &GlTextureViewOES{} }
 func (*binaryClassGlTextureViewOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTextureViewOES(e, obj.(*GlTextureViewOES))
 }
@@ -44472,9 +43458,6 @@ func doDecodeGlTransformFeedbackVaryings(d binary.Decoder, o *GlTransformFeedbac
 	d.Struct(ent_369975a723a23c19afa00151674378c13bfca7ef, &o.Varyings)
 	o.BufferMode = GLenum(d.Uint32())
 }
-func (*binaryClassGlTransformFeedbackVaryings) New() binary.Object {
-	return &GlTransformFeedbackVaryings{}
-}
 func (*binaryClassGlTransformFeedbackVaryings) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTransformFeedbackVaryings(e, obj.(*GlTransformFeedbackVaryings))
 }
@@ -44535,7 +43518,6 @@ func doDecodeGlTransformPathNV(d binary.Decoder, o *GlTransformPathNV) {
 	}
 	d.Struct(ent_4ee959960e103d7f094e15b1cdf224b3c2c00f3e, &o.TransformValues)
 }
-func (*binaryClassGlTransformPathNV) New() binary.Object { return &GlTransformPathNV{} }
 func (*binaryClassGlTransformPathNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlTransformPathNV(e, obj.(*GlTransformPathNV))
 }
@@ -44583,7 +43565,6 @@ func doDecodeGlUniform1f(d binary.Decoder, o *GlUniform1f) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value = GLfloat(d.Float32())
 }
-func (*binaryClassGlUniform1f) New() binary.Object { return &GlUniform1f{} }
 func (*binaryClassGlUniform1f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1f(e, obj.(*GlUniform1f))
 }
@@ -44638,7 +43619,6 @@ func doDecodeGlUniform1fv(d binary.Decoder, o *GlUniform1fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniform1fv) New() binary.Object { return &GlUniform1fv{} }
 func (*binaryClassGlUniform1fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1fv(e, obj.(*GlUniform1fv))
 }
@@ -44685,7 +43665,6 @@ func doDecodeGlUniform1i(d binary.Decoder, o *GlUniform1i) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value = GLint(d.Int32())
 }
-func (*binaryClassGlUniform1i) New() binary.Object { return &GlUniform1i{} }
 func (*binaryClassGlUniform1i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1i(e, obj.(*GlUniform1i))
 }
@@ -44740,7 +43719,6 @@ func doDecodeGlUniform1iv(d binary.Decoder, o *GlUniform1iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlUniform1iv) New() binary.Object { return &GlUniform1iv{} }
 func (*binaryClassGlUniform1iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1iv(e, obj.(*GlUniform1iv))
 }
@@ -44787,7 +43765,6 @@ func doDecodeGlUniform1ui(d binary.Decoder, o *GlUniform1ui) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value0 = GLuint(d.Uint32())
 }
-func (*binaryClassGlUniform1ui) New() binary.Object { return &GlUniform1ui{} }
 func (*binaryClassGlUniform1ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1ui(e, obj.(*GlUniform1ui))
 }
@@ -44842,7 +43819,6 @@ func doDecodeGlUniform1uiv(d binary.Decoder, o *GlUniform1uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlUniform1uiv) New() binary.Object { return &GlUniform1uiv{} }
 func (*binaryClassGlUniform1uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform1uiv(e, obj.(*GlUniform1uiv))
 }
@@ -44891,7 +43867,6 @@ func doDecodeGlUniform2f(d binary.Decoder, o *GlUniform2f) {
 	o.Value0 = GLfloat(d.Float32())
 	o.Value1 = GLfloat(d.Float32())
 }
-func (*binaryClassGlUniform2f) New() binary.Object { return &GlUniform2f{} }
 func (*binaryClassGlUniform2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2f(e, obj.(*GlUniform2f))
 }
@@ -44947,7 +43922,6 @@ func doDecodeGlUniform2fv(d binary.Decoder, o *GlUniform2fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniform2fv) New() binary.Object { return &GlUniform2fv{} }
 func (*binaryClassGlUniform2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2fv(e, obj.(*GlUniform2fv))
 }
@@ -44996,7 +43970,6 @@ func doDecodeGlUniform2i(d binary.Decoder, o *GlUniform2i) {
 	o.Value0 = GLint(d.Int32())
 	o.Value1 = GLint(d.Int32())
 }
-func (*binaryClassGlUniform2i) New() binary.Object { return &GlUniform2i{} }
 func (*binaryClassGlUniform2i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2i(e, obj.(*GlUniform2i))
 }
@@ -45052,7 +44025,6 @@ func doDecodeGlUniform2iv(d binary.Decoder, o *GlUniform2iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlUniform2iv) New() binary.Object { return &GlUniform2iv{} }
 func (*binaryClassGlUniform2iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2iv(e, obj.(*GlUniform2iv))
 }
@@ -45101,7 +44073,6 @@ func doDecodeGlUniform2ui(d binary.Decoder, o *GlUniform2ui) {
 	o.Value0 = GLuint(d.Uint32())
 	o.Value1 = GLuint(d.Uint32())
 }
-func (*binaryClassGlUniform2ui) New() binary.Object { return &GlUniform2ui{} }
 func (*binaryClassGlUniform2ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2ui(e, obj.(*GlUniform2ui))
 }
@@ -45157,7 +44128,6 @@ func doDecodeGlUniform2uiv(d binary.Decoder, o *GlUniform2uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlUniform2uiv) New() binary.Object { return &GlUniform2uiv{} }
 func (*binaryClassGlUniform2uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform2uiv(e, obj.(*GlUniform2uiv))
 }
@@ -45208,7 +44178,6 @@ func doDecodeGlUniform3f(d binary.Decoder, o *GlUniform3f) {
 	o.Value1 = GLfloat(d.Float32())
 	o.Value2 = GLfloat(d.Float32())
 }
-func (*binaryClassGlUniform3f) New() binary.Object { return &GlUniform3f{} }
 func (*binaryClassGlUniform3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3f(e, obj.(*GlUniform3f))
 }
@@ -45265,7 +44234,6 @@ func doDecodeGlUniform3fv(d binary.Decoder, o *GlUniform3fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniform3fv) New() binary.Object { return &GlUniform3fv{} }
 func (*binaryClassGlUniform3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3fv(e, obj.(*GlUniform3fv))
 }
@@ -45316,7 +44284,6 @@ func doDecodeGlUniform3i(d binary.Decoder, o *GlUniform3i) {
 	o.Value1 = GLint(d.Int32())
 	o.Value2 = GLint(d.Int32())
 }
-func (*binaryClassGlUniform3i) New() binary.Object { return &GlUniform3i{} }
 func (*binaryClassGlUniform3i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3i(e, obj.(*GlUniform3i))
 }
@@ -45373,7 +44340,6 @@ func doDecodeGlUniform3iv(d binary.Decoder, o *GlUniform3iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlUniform3iv) New() binary.Object { return &GlUniform3iv{} }
 func (*binaryClassGlUniform3iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3iv(e, obj.(*GlUniform3iv))
 }
@@ -45424,7 +44390,6 @@ func doDecodeGlUniform3ui(d binary.Decoder, o *GlUniform3ui) {
 	o.Value1 = GLuint(d.Uint32())
 	o.Value2 = GLuint(d.Uint32())
 }
-func (*binaryClassGlUniform3ui) New() binary.Object { return &GlUniform3ui{} }
 func (*binaryClassGlUniform3ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3ui(e, obj.(*GlUniform3ui))
 }
@@ -45481,7 +44446,6 @@ func doDecodeGlUniform3uiv(d binary.Decoder, o *GlUniform3uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlUniform3uiv) New() binary.Object { return &GlUniform3uiv{} }
 func (*binaryClassGlUniform3uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform3uiv(e, obj.(*GlUniform3uiv))
 }
@@ -45534,7 +44498,6 @@ func doDecodeGlUniform4f(d binary.Decoder, o *GlUniform4f) {
 	o.Value2 = GLfloat(d.Float32())
 	o.Value3 = GLfloat(d.Float32())
 }
-func (*binaryClassGlUniform4f) New() binary.Object { return &GlUniform4f{} }
 func (*binaryClassGlUniform4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4f(e, obj.(*GlUniform4f))
 }
@@ -45592,7 +44555,6 @@ func doDecodeGlUniform4fv(d binary.Decoder, o *GlUniform4fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniform4fv) New() binary.Object { return &GlUniform4fv{} }
 func (*binaryClassGlUniform4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4fv(e, obj.(*GlUniform4fv))
 }
@@ -45645,7 +44607,6 @@ func doDecodeGlUniform4i(d binary.Decoder, o *GlUniform4i) {
 	o.Value2 = GLint(d.Int32())
 	o.Value3 = GLint(d.Int32())
 }
-func (*binaryClassGlUniform4i) New() binary.Object { return &GlUniform4i{} }
 func (*binaryClassGlUniform4i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4i(e, obj.(*GlUniform4i))
 }
@@ -45703,7 +44664,6 @@ func doDecodeGlUniform4iv(d binary.Decoder, o *GlUniform4iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlUniform4iv) New() binary.Object { return &GlUniform4iv{} }
 func (*binaryClassGlUniform4iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4iv(e, obj.(*GlUniform4iv))
 }
@@ -45756,7 +44716,6 @@ func doDecodeGlUniform4ui(d binary.Decoder, o *GlUniform4ui) {
 	o.Value2 = GLuint(d.Uint32())
 	o.Value3 = GLuint(d.Uint32())
 }
-func (*binaryClassGlUniform4ui) New() binary.Object { return &GlUniform4ui{} }
 func (*binaryClassGlUniform4ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4ui(e, obj.(*GlUniform4ui))
 }
@@ -45814,7 +44773,6 @@ func doDecodeGlUniform4uiv(d binary.Decoder, o *GlUniform4uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlUniform4uiv) New() binary.Object { return &GlUniform4uiv{} }
 func (*binaryClassGlUniform4uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniform4uiv(e, obj.(*GlUniform4uiv))
 }
@@ -45863,7 +44821,6 @@ func doDecodeGlUniformBlockBinding(d binary.Decoder, o *GlUniformBlockBinding) {
 	o.UniformBlockIndex = UniformBlockId(d.Uint32())
 	o.UniformBlockBinding = GLuint(d.Uint32())
 }
-func (*binaryClassGlUniformBlockBinding) New() binary.Object { return &GlUniformBlockBinding{} }
 func (*binaryClassGlUniformBlockBinding) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformBlockBinding(e, obj.(*GlUniformBlockBinding))
 }
@@ -45910,7 +44867,6 @@ func doDecodeGlUniformHandleui64NV(d binary.Decoder, o *GlUniformHandleui64NV) {
 	o.Location = UniformLocation(d.Int32())
 	o.Value = GLuint64(d.Uint64())
 }
-func (*binaryClassGlUniformHandleui64NV) New() binary.Object { return &GlUniformHandleui64NV{} }
 func (*binaryClassGlUniformHandleui64NV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformHandleui64NV(e, obj.(*GlUniformHandleui64NV))
 }
@@ -45965,7 +44921,6 @@ func doDecodeGlUniformHandleui64vNV(d binary.Decoder, o *GlUniformHandleui64vNV)
 	}
 	d.Struct(ent_35289143f7df91b10c67d0464b22c24b7532aed9, &o.Value)
 }
-func (*binaryClassGlUniformHandleui64vNV) New() binary.Object { return &GlUniformHandleui64vNV{} }
 func (*binaryClassGlUniformHandleui64vNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformHandleui64vNV(e, obj.(*GlUniformHandleui64vNV))
 }
@@ -46023,7 +44978,6 @@ func doDecodeGlUniformMatrix2fv(d binary.Decoder, o *GlUniformMatrix2fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix2fv) New() binary.Object { return &GlUniformMatrix2fv{} }
 func (*binaryClassGlUniformMatrix2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix2fv(e, obj.(*GlUniformMatrix2fv))
 }
@@ -46082,7 +45036,6 @@ func doDecodeGlUniformMatrix2x3fv(d binary.Decoder, o *GlUniformMatrix2x3fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix2x3fv) New() binary.Object { return &GlUniformMatrix2x3fv{} }
 func (*binaryClassGlUniformMatrix2x3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix2x3fv(e, obj.(*GlUniformMatrix2x3fv))
 }
@@ -46141,7 +45094,6 @@ func doDecodeGlUniformMatrix2x3fvNV(d binary.Decoder, o *GlUniformMatrix2x3fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix2x3fvNV) New() binary.Object { return &GlUniformMatrix2x3fvNV{} }
 func (*binaryClassGlUniformMatrix2x3fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix2x3fvNV(e, obj.(*GlUniformMatrix2x3fvNV))
 }
@@ -46200,7 +45152,6 @@ func doDecodeGlUniformMatrix2x4fv(d binary.Decoder, o *GlUniformMatrix2x4fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix2x4fv) New() binary.Object { return &GlUniformMatrix2x4fv{} }
 func (*binaryClassGlUniformMatrix2x4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix2x4fv(e, obj.(*GlUniformMatrix2x4fv))
 }
@@ -46259,7 +45210,6 @@ func doDecodeGlUniformMatrix2x4fvNV(d binary.Decoder, o *GlUniformMatrix2x4fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix2x4fvNV) New() binary.Object { return &GlUniformMatrix2x4fvNV{} }
 func (*binaryClassGlUniformMatrix2x4fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix2x4fvNV(e, obj.(*GlUniformMatrix2x4fvNV))
 }
@@ -46318,7 +45268,6 @@ func doDecodeGlUniformMatrix3fv(d binary.Decoder, o *GlUniformMatrix3fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix3fv) New() binary.Object { return &GlUniformMatrix3fv{} }
 func (*binaryClassGlUniformMatrix3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix3fv(e, obj.(*GlUniformMatrix3fv))
 }
@@ -46377,7 +45326,6 @@ func doDecodeGlUniformMatrix3x2fv(d binary.Decoder, o *GlUniformMatrix3x2fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix3x2fv) New() binary.Object { return &GlUniformMatrix3x2fv{} }
 func (*binaryClassGlUniformMatrix3x2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix3x2fv(e, obj.(*GlUniformMatrix3x2fv))
 }
@@ -46436,7 +45384,6 @@ func doDecodeGlUniformMatrix3x2fvNV(d binary.Decoder, o *GlUniformMatrix3x2fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix3x2fvNV) New() binary.Object { return &GlUniformMatrix3x2fvNV{} }
 func (*binaryClassGlUniformMatrix3x2fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix3x2fvNV(e, obj.(*GlUniformMatrix3x2fvNV))
 }
@@ -46495,7 +45442,6 @@ func doDecodeGlUniformMatrix3x4fv(d binary.Decoder, o *GlUniformMatrix3x4fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix3x4fv) New() binary.Object { return &GlUniformMatrix3x4fv{} }
 func (*binaryClassGlUniformMatrix3x4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix3x4fv(e, obj.(*GlUniformMatrix3x4fv))
 }
@@ -46554,7 +45500,6 @@ func doDecodeGlUniformMatrix3x4fvNV(d binary.Decoder, o *GlUniformMatrix3x4fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix3x4fvNV) New() binary.Object { return &GlUniformMatrix3x4fvNV{} }
 func (*binaryClassGlUniformMatrix3x4fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix3x4fvNV(e, obj.(*GlUniformMatrix3x4fvNV))
 }
@@ -46613,7 +45558,6 @@ func doDecodeGlUniformMatrix4fv(d binary.Decoder, o *GlUniformMatrix4fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix4fv) New() binary.Object { return &GlUniformMatrix4fv{} }
 func (*binaryClassGlUniformMatrix4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix4fv(e, obj.(*GlUniformMatrix4fv))
 }
@@ -46672,7 +45616,6 @@ func doDecodeGlUniformMatrix4x2fv(d binary.Decoder, o *GlUniformMatrix4x2fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix4x2fv) New() binary.Object { return &GlUniformMatrix4x2fv{} }
 func (*binaryClassGlUniformMatrix4x2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix4x2fv(e, obj.(*GlUniformMatrix4x2fv))
 }
@@ -46731,7 +45674,6 @@ func doDecodeGlUniformMatrix4x2fvNV(d binary.Decoder, o *GlUniformMatrix4x2fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix4x2fvNV) New() binary.Object { return &GlUniformMatrix4x2fvNV{} }
 func (*binaryClassGlUniformMatrix4x2fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix4x2fvNV(e, obj.(*GlUniformMatrix4x2fvNV))
 }
@@ -46790,7 +45732,6 @@ func doDecodeGlUniformMatrix4x3fv(d binary.Decoder, o *GlUniformMatrix4x3fv) {
 	}
 	d.Struct(ent_7284bf36b7c7aa5d83ea56a58a56290e0578e427, &o.Values)
 }
-func (*binaryClassGlUniformMatrix4x3fv) New() binary.Object { return &GlUniformMatrix4x3fv{} }
 func (*binaryClassGlUniformMatrix4x3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix4x3fv(e, obj.(*GlUniformMatrix4x3fv))
 }
@@ -46849,7 +45790,6 @@ func doDecodeGlUniformMatrix4x3fvNV(d binary.Decoder, o *GlUniformMatrix4x3fvNV)
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlUniformMatrix4x3fvNV) New() binary.Object { return &GlUniformMatrix4x3fvNV{} }
 func (*binaryClassGlUniformMatrix4x3fvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUniformMatrix4x3fvNV(e, obj.(*GlUniformMatrix4x3fvNV))
 }
@@ -46897,7 +45837,6 @@ func doDecodeGlUnmapBuffer(d binary.Decoder, o *GlUnmapBuffer) {
 	o.Target = GLenum(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlUnmapBuffer) New() binary.Object { return &GlUnmapBuffer{} }
 func (*binaryClassGlUnmapBuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUnmapBuffer(e, obj.(*GlUnmapBuffer))
 }
@@ -46943,7 +45882,6 @@ func doDecodeGlUnmapBufferOES(d binary.Decoder, o *GlUnmapBufferOES) {
 	o.Target = GLenum(d.Uint32())
 	o.Result = GLboolean(d.Uint8())
 }
-func (*binaryClassGlUnmapBufferOES) New() binary.Object { return &GlUnmapBufferOES{} }
 func (*binaryClassGlUnmapBufferOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUnmapBufferOES(e, obj.(*GlUnmapBufferOES))
 }
@@ -46987,7 +45925,6 @@ func doDecodeGlUseProgram(d binary.Decoder, o *GlUseProgram) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlUseProgram) New() binary.Object { return &GlUseProgram{} }
 func (*binaryClassGlUseProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUseProgram(e, obj.(*GlUseProgram))
 }
@@ -47034,7 +45971,6 @@ func doDecodeGlUseProgramStages(d binary.Decoder, o *GlUseProgramStages) {
 	o.Stages = GLbitfield(d.Uint32())
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlUseProgramStages) New() binary.Object { return &GlUseProgramStages{} }
 func (*binaryClassGlUseProgramStages) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUseProgramStages(e, obj.(*GlUseProgramStages))
 }
@@ -47083,7 +46019,6 @@ func doDecodeGlUseProgramStagesEXT(d binary.Decoder, o *GlUseProgramStagesEXT) {
 	o.Stages = GLbitfield(d.Uint32())
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlUseProgramStagesEXT) New() binary.Object { return &GlUseProgramStagesEXT{} }
 func (*binaryClassGlUseProgramStagesEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlUseProgramStagesEXT(e, obj.(*GlUseProgramStagesEXT))
 }
@@ -47128,7 +46063,6 @@ func doDecodeGlValidateProgram(d binary.Decoder, o *GlValidateProgram) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Program = ProgramId(d.Uint32())
 }
-func (*binaryClassGlValidateProgram) New() binary.Object { return &GlValidateProgram{} }
 func (*binaryClassGlValidateProgram) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlValidateProgram(e, obj.(*GlValidateProgram))
 }
@@ -47171,7 +46105,6 @@ func doDecodeGlValidateProgramPipeline(d binary.Decoder, o *GlValidateProgramPip
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Pipeline = PipelineId(d.Uint32())
 }
-func (*binaryClassGlValidateProgramPipeline) New() binary.Object { return &GlValidateProgramPipeline{} }
 func (*binaryClassGlValidateProgramPipeline) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlValidateProgramPipeline(e, obj.(*GlValidateProgramPipeline))
 }
@@ -47215,9 +46148,6 @@ func doDecodeGlValidateProgramPipelineEXT(d binary.Decoder, o *GlValidateProgram
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Pipeline = PipelineId(d.Uint32())
-}
-func (*binaryClassGlValidateProgramPipelineEXT) New() binary.Object {
-	return &GlValidateProgramPipelineEXT{}
 }
 func (*binaryClassGlValidateProgramPipelineEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlValidateProgramPipelineEXT(e, obj.(*GlValidateProgramPipelineEXT))
@@ -47265,7 +46195,6 @@ func doDecodeGlVertexAttrib1f(d binary.Decoder, o *GlVertexAttrib1f) {
 	o.Location = AttributeLocation(d.Uint32())
 	o.Value0 = GLfloat(d.Float32())
 }
-func (*binaryClassGlVertexAttrib1f) New() binary.Object { return &GlVertexAttrib1f{} }
 func (*binaryClassGlVertexAttrib1f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib1f(e, obj.(*GlVertexAttrib1f))
 }
@@ -47318,7 +46247,6 @@ func doDecodeGlVertexAttrib1fv(d binary.Decoder, o *GlVertexAttrib1fv) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlVertexAttrib1fv) New() binary.Object { return &GlVertexAttrib1fv{} }
 func (*binaryClassGlVertexAttrib1fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib1fv(e, obj.(*GlVertexAttrib1fv))
 }
@@ -47366,7 +46294,6 @@ func doDecodeGlVertexAttrib2f(d binary.Decoder, o *GlVertexAttrib2f) {
 	o.Value0 = GLfloat(d.Float32())
 	o.Value1 = GLfloat(d.Float32())
 }
-func (*binaryClassGlVertexAttrib2f) New() binary.Object { return &GlVertexAttrib2f{} }
 func (*binaryClassGlVertexAttrib2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib2f(e, obj.(*GlVertexAttrib2f))
 }
@@ -47420,7 +46347,6 @@ func doDecodeGlVertexAttrib2fv(d binary.Decoder, o *GlVertexAttrib2fv) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlVertexAttrib2fv) New() binary.Object { return &GlVertexAttrib2fv{} }
 func (*binaryClassGlVertexAttrib2fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib2fv(e, obj.(*GlVertexAttrib2fv))
 }
@@ -47470,7 +46396,6 @@ func doDecodeGlVertexAttrib3f(d binary.Decoder, o *GlVertexAttrib3f) {
 	o.Value1 = GLfloat(d.Float32())
 	o.Value2 = GLfloat(d.Float32())
 }
-func (*binaryClassGlVertexAttrib3f) New() binary.Object { return &GlVertexAttrib3f{} }
 func (*binaryClassGlVertexAttrib3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib3f(e, obj.(*GlVertexAttrib3f))
 }
@@ -47525,7 +46450,6 @@ func doDecodeGlVertexAttrib3fv(d binary.Decoder, o *GlVertexAttrib3fv) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlVertexAttrib3fv) New() binary.Object { return &GlVertexAttrib3fv{} }
 func (*binaryClassGlVertexAttrib3fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib3fv(e, obj.(*GlVertexAttrib3fv))
 }
@@ -47577,7 +46501,6 @@ func doDecodeGlVertexAttrib4f(d binary.Decoder, o *GlVertexAttrib4f) {
 	o.Value2 = GLfloat(d.Float32())
 	o.Value3 = GLfloat(d.Float32())
 }
-func (*binaryClassGlVertexAttrib4f) New() binary.Object { return &GlVertexAttrib4f{} }
 func (*binaryClassGlVertexAttrib4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib4f(e, obj.(*GlVertexAttrib4f))
 }
@@ -47633,7 +46556,6 @@ func doDecodeGlVertexAttrib4fv(d binary.Decoder, o *GlVertexAttrib4fv) {
 	}
 	d.Struct(ent_cd66daec9a1313d949ab4a92dfb0936403615360, &o.Value)
 }
-func (*binaryClassGlVertexAttrib4fv) New() binary.Object { return &GlVertexAttrib4fv{} }
 func (*binaryClassGlVertexAttrib4fv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttrib4fv(e, obj.(*GlVertexAttrib4fv))
 }
@@ -47679,7 +46601,6 @@ func doDecodeGlVertexAttribBinding(d binary.Decoder, o *GlVertexAttribBinding) {
 	o.Index = AttributeLocation(d.Uint32())
 	o.BindingIndex = VertexBufferBindingIndex(d.Uint32())
 }
-func (*binaryClassGlVertexAttribBinding) New() binary.Object { return &GlVertexAttribBinding{} }
 func (*binaryClassGlVertexAttribBinding) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribBinding(e, obj.(*GlVertexAttribBinding))
 }
@@ -47725,7 +46646,6 @@ func doDecodeGlVertexAttribDivisor(d binary.Decoder, o *GlVertexAttribDivisor) {
 	o.Index = AttributeLocation(d.Uint32())
 	o.Divisor = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribDivisor) New() binary.Object { return &GlVertexAttribDivisor{} }
 func (*binaryClassGlVertexAttribDivisor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribDivisor(e, obj.(*GlVertexAttribDivisor))
 }
@@ -47770,9 +46690,6 @@ func doDecodeGlVertexAttribDivisorANGLE(d binary.Decoder, o *GlVertexAttribDivis
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Index = AttributeLocation(d.Uint32())
 	o.Divisor = GLuint(d.Uint32())
-}
-func (*binaryClassGlVertexAttribDivisorANGLE) New() binary.Object {
-	return &GlVertexAttribDivisorANGLE{}
 }
 func (*binaryClassGlVertexAttribDivisorANGLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribDivisorANGLE(e, obj.(*GlVertexAttribDivisorANGLE))
@@ -47821,7 +46738,6 @@ func doDecodeGlVertexAttribDivisorEXT(d binary.Decoder, o *GlVertexAttribDivisor
 	o.Index = AttributeLocation(d.Uint32())
 	o.Divisor = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribDivisorEXT) New() binary.Object { return &GlVertexAttribDivisorEXT{} }
 func (*binaryClassGlVertexAttribDivisorEXT) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribDivisorEXT(e, obj.(*GlVertexAttribDivisorEXT))
 }
@@ -47869,7 +46785,6 @@ func doDecodeGlVertexAttribDivisorNV(d binary.Decoder, o *GlVertexAttribDivisorN
 	o.Index = AttributeLocation(d.Uint32())
 	o.Divisor = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribDivisorNV) New() binary.Object { return &GlVertexAttribDivisorNV{} }
 func (*binaryClassGlVertexAttribDivisorNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribDivisorNV(e, obj.(*GlVertexAttribDivisorNV))
 }
@@ -47923,7 +46838,6 @@ func doDecodeGlVertexAttribFormat(d binary.Decoder, o *GlVertexAttribFormat) {
 	o.Normalized = GLboolean(d.Uint8())
 	o.Relativeoffset = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribFormat) New() binary.Object { return &GlVertexAttribFormat{} }
 func (*binaryClassGlVertexAttribFormat) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribFormat(e, obj.(*GlVertexAttribFormat))
 }
@@ -47978,7 +46892,6 @@ func doDecodeGlVertexAttribI4i(d binary.Decoder, o *GlVertexAttribI4i) {
 	o.Z = GLint(d.Int32())
 	o.W = GLint(d.Int32())
 }
-func (*binaryClassGlVertexAttribI4i) New() binary.Object { return &GlVertexAttribI4i{} }
 func (*binaryClassGlVertexAttribI4i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribI4i(e, obj.(*GlVertexAttribI4i))
 }
@@ -48034,7 +46947,6 @@ func doDecodeGlVertexAttribI4iv(d binary.Decoder, o *GlVertexAttribI4iv) {
 	}
 	d.Struct(ent_8499650f3258641f7a9db1ead733ad2414c3940b, &o.Values)
 }
-func (*binaryClassGlVertexAttribI4iv) New() binary.Object { return &GlVertexAttribI4iv{} }
 func (*binaryClassGlVertexAttribI4iv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribI4iv(e, obj.(*GlVertexAttribI4iv))
 }
@@ -48086,7 +46998,6 @@ func doDecodeGlVertexAttribI4ui(d binary.Decoder, o *GlVertexAttribI4ui) {
 	o.Z = GLuint(d.Uint32())
 	o.W = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribI4ui) New() binary.Object { return &GlVertexAttribI4ui{} }
 func (*binaryClassGlVertexAttribI4ui) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribI4ui(e, obj.(*GlVertexAttribI4ui))
 }
@@ -48142,7 +47053,6 @@ func doDecodeGlVertexAttribI4uiv(d binary.Decoder, o *GlVertexAttribI4uiv) {
 	}
 	d.Struct(ent_00010ced4e88be3bd65d4bee14086907567f11f5, &o.Values)
 }
-func (*binaryClassGlVertexAttribI4uiv) New() binary.Object { return &GlVertexAttribI4uiv{} }
 func (*binaryClassGlVertexAttribI4uiv) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribI4uiv(e, obj.(*GlVertexAttribI4uiv))
 }
@@ -48192,7 +47102,6 @@ func doDecodeGlVertexAttribIFormat(d binary.Decoder, o *GlVertexAttribIFormat) {
 	o.Type = GLenum(d.Uint32())
 	o.Relativeoffset = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexAttribIFormat) New() binary.Object { return &GlVertexAttribIFormat{} }
 func (*binaryClassGlVertexAttribIFormat) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribIFormat(e, obj.(*GlVertexAttribIFormat))
 }
@@ -48253,7 +47162,6 @@ func doDecodeGlVertexAttribIPointer(d binary.Decoder, o *GlVertexAttribIPointer)
 	}
 	d.Struct(ent_9727bc416d3432c48bd72aa6502803ddbfb6fb04, &o.Data)
 }
-func (*binaryClassGlVertexAttribIPointer) New() binary.Object { return &GlVertexAttribIPointer{} }
 func (*binaryClassGlVertexAttribIPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribIPointer(e, obj.(*GlVertexAttribIPointer))
 }
@@ -48317,7 +47225,6 @@ func doDecodeGlVertexAttribPointer(d binary.Decoder, o *GlVertexAttribPointer) {
 	}
 	d.Struct(ent_9727bc416d3432c48bd72aa6502803ddbfb6fb04, &o.Data)
 }
-func (*binaryClassGlVertexAttribPointer) New() binary.Object { return &GlVertexAttribPointer{} }
 func (*binaryClassGlVertexAttribPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexAttribPointer(e, obj.(*GlVertexAttribPointer))
 }
@@ -48367,7 +47274,6 @@ func doDecodeGlVertexBindingDivisor(d binary.Decoder, o *GlVertexBindingDivisor)
 	o.BindingIndex = VertexBufferBindingIndex(d.Uint32())
 	o.Divisor = GLuint(d.Uint32())
 }
-func (*binaryClassGlVertexBindingDivisor) New() binary.Object { return &GlVertexBindingDivisor{} }
 func (*binaryClassGlVertexBindingDivisor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlVertexBindingDivisor(e, obj.(*GlVertexBindingDivisor))
 }
@@ -48417,7 +47323,6 @@ func doDecodeGlViewport(d binary.Decoder, o *GlViewport) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 }
-func (*binaryClassGlViewport) New() binary.Object { return &GlViewport{} }
 func (*binaryClassGlViewport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlViewport(e, obj.(*GlViewport))
 }
@@ -48474,7 +47379,6 @@ func doDecodeGlViewportArrayvNV(d binary.Decoder, o *GlViewportArrayvNV) {
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlViewportArrayvNV) New() binary.Object { return &GlViewportArrayvNV{} }
 func (*binaryClassGlViewportArrayvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlViewportArrayvNV(e, obj.(*GlViewportArrayvNV))
 }
@@ -48527,7 +47431,6 @@ func doDecodeGlViewportIndexedfNV(d binary.Decoder, o *GlViewportIndexedfNV) {
 	o.W = GLfloat(d.Float32())
 	o.H = GLfloat(d.Float32())
 }
-func (*binaryClassGlViewportIndexedfNV) New() binary.Object { return &GlViewportIndexedfNV{} }
 func (*binaryClassGlViewportIndexedfNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlViewportIndexedfNV(e, obj.(*GlViewportIndexedfNV))
 }
@@ -48583,7 +47486,6 @@ func doDecodeGlViewportIndexedfvNV(d binary.Decoder, o *GlViewportIndexedfvNV) {
 	}
 	d.Struct(ent_78a2dfa90d454f57c6519e0a816c2a8947ed0405, &o.V)
 }
-func (*binaryClassGlViewportIndexedfvNV) New() binary.Object { return &GlViewportIndexedfvNV{} }
 func (*binaryClassGlViewportIndexedfvNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlViewportIndexedfvNV(e, obj.(*GlViewportIndexedfvNV))
 }
@@ -48631,7 +47533,6 @@ func doDecodeGlWaitSync(d binary.Decoder, o *GlWaitSync) {
 	o.SyncFlags = GLbitfield(d.Uint32())
 	o.Timeout = GLuint64(d.Uint64())
 }
-func (*binaryClassGlWaitSync) New() binary.Object { return &GlWaitSync{} }
 func (*binaryClassGlWaitSync) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlWaitSync(e, obj.(*GlWaitSync))
 }
@@ -48680,7 +47581,6 @@ func doDecodeGlWaitSyncAPPLE(d binary.Decoder, o *GlWaitSyncAPPLE) {
 	o.Flag = GLbitfield(d.Uint32())
 	o.Timeout = GLuint64(d.Uint64())
 }
-func (*binaryClassGlWaitSyncAPPLE) New() binary.Object { return &GlWaitSyncAPPLE{} }
 func (*binaryClassGlWaitSyncAPPLE) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlWaitSyncAPPLE(e, obj.(*GlWaitSyncAPPLE))
 }
@@ -48745,7 +47645,6 @@ func doDecodeGlWeightPathsNV(d binary.Decoder, o *GlWeightPathsNV) {
 	}
 	d.Struct(ent_3ddd3559df955cbb1a784178ce2dda7c19da1862, &o.Weights)
 }
-func (*binaryClassGlWeightPathsNV) New() binary.Object { return &GlWeightPathsNV{} }
 func (*binaryClassGlWeightPathsNV) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlWeightPathsNV(e, obj.(*GlWeightPathsNV))
 }
@@ -48827,7 +47726,6 @@ func doDecodeGlXCreateContext(d binary.Decoder, o *GlXCreateContext) {
 	}
 	d.Struct(ent_83af86e83203135a6e97495d337b32cbfac62715, &o.Result)
 }
-func (*binaryClassGlXCreateContext) New() binary.Object { return &GlXCreateContext{} }
 func (*binaryClassGlXCreateContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXCreateContext(e, obj.(*GlXCreateContext))
 }
@@ -48912,7 +47810,6 @@ func doDecodeGlXCreateNewContext(d binary.Decoder, o *GlXCreateNewContext) {
 	}
 	d.Struct(ent_83af86e83203135a6e97495d337b32cbfac62715, &o.Result)
 }
-func (*binaryClassGlXCreateNewContext) New() binary.Object { return &GlXCreateNewContext{} }
 func (*binaryClassGlXCreateNewContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXCreateNewContext(e, obj.(*GlXCreateNewContext))
 }
@@ -48996,7 +47893,6 @@ func doDecodeGlXMakeContextCurrent(d binary.Decoder, o *GlXMakeContextCurrent) {
 	d.Struct(ent_6e4b55e6ca72dca332cb8d9f73653033957d644b, &o.Ctx)
 	o.Result = Bool(d.Int64())
 }
-func (*binaryClassGlXMakeContextCurrent) New() binary.Object { return &GlXMakeContextCurrent{} }
 func (*binaryClassGlXMakeContextCurrent) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXMakeContextCurrent(e, obj.(*GlXMakeContextCurrent))
 }
@@ -49070,7 +47966,6 @@ func doDecodeGlXMakeCurrent(d binary.Decoder, o *GlXMakeCurrent) {
 	d.Struct(ent_6e4b55e6ca72dca332cb8d9f73653033957d644b, &o.Ctx)
 	o.Result = Bool(d.Int64())
 }
-func (*binaryClassGlXMakeCurrent) New() binary.Object { return &GlXMakeCurrent{} }
 func (*binaryClassGlXMakeCurrent) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXMakeCurrent(e, obj.(*GlXMakeCurrent))
 }
@@ -49114,7 +48009,6 @@ func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassIntᵖ) New() binary.Object { return &Intᵖ{} }
 func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIntᵖ(e, obj.(*Intᵖ))
 }
@@ -49185,7 +48079,6 @@ func doDecodeGlXQueryDrawable(d binary.Decoder, o *GlXQueryDrawable) {
 	d.Struct(ent_a35fb063db20e38608c51606a23e2e57973e55d8, &o.Value)
 	o.Result = int64(d.Int64())
 }
-func (*binaryClassGlXQueryDrawable) New() binary.Object { return &GlXQueryDrawable{} }
 func (*binaryClassGlXQueryDrawable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXQueryDrawable(e, obj.(*GlXQueryDrawable))
 }
@@ -49248,7 +48141,6 @@ func doDecodeGlXSwapBuffers(d binary.Decoder, o *GlXSwapBuffers) {
 	}
 	d.Struct(ent_b11c23cc66ebc14e9ea6f576135df17f94bc93a2, &o.Drawable)
 }
-func (*binaryClassGlXSwapBuffers) New() binary.Object { return &GlXSwapBuffers{} }
 func (*binaryClassGlXSwapBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGlXSwapBuffers(e, obj.(*GlXSwapBuffers))
 }
@@ -49290,7 +48182,6 @@ func doDecodeHDC(d binary.Decoder, o *HDC) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassHDC) New() binary.Object { return &HDC{} }
 func (*binaryClassHDC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHDC(e, obj.(*HDC))
 }
@@ -49330,7 +48221,6 @@ func doDecodeHGLRC(d binary.Decoder, o *HGLRC) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassHGLRC) New() binary.Object { return &HGLRC{} }
 func (*binaryClassHGLRC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHGLRC(e, obj.(*HGLRC))
 }
@@ -49370,7 +48260,6 @@ func doDecodeIntˢ(d binary.Decoder, o *Intˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassIntˢ) New() binary.Object { return &Intˢ{} }
 func (*binaryClassIntˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIntˢ(e, obj.(*Intˢ))
 }
@@ -49407,7 +48296,6 @@ func doDecodeVec2f(d binary.Decoder, o *Vec2f) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
 func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2f(e, obj.(*Vec2f))
 }
@@ -49451,7 +48339,6 @@ func doDecodeMat2f(d binary.Decoder, o *Mat2f) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
 func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2f(e, obj.(*Mat2f))
 }
@@ -49491,7 +48378,6 @@ func doDecodeMat2fˢ(d binary.Decoder, o *Mat2fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat2fˢ) New() binary.Object { return &Mat2fˢ{} }
 func (*binaryClassMat2fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2fˢ(e, obj.(*Mat2fˢ))
 }
@@ -49531,7 +48417,6 @@ func doDecodeMat2fᵖ(d binary.Decoder, o *Mat2fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat2fᵖ) New() binary.Object { return &Mat2fᵖ{} }
 func (*binaryClassMat2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2fᵖ(e, obj.(*Mat2fᵖ))
 }
@@ -49568,7 +48453,6 @@ func doDecodeVec3f(d binary.Decoder, o *Vec3f) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
 func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3f(e, obj.(*Vec3f))
 }
@@ -49612,7 +48496,6 @@ func doDecodeMat2x3f(d binary.Decoder, o *Mat2x3f) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassMat2x3f) New() binary.Object { return &Mat2x3f{} }
 func (*binaryClassMat2x3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x3f(e, obj.(*Mat2x3f))
 }
@@ -49652,7 +48535,6 @@ func doDecodeMat2x3fˢ(d binary.Decoder, o *Mat2x3fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat2x3fˢ) New() binary.Object { return &Mat2x3fˢ{} }
 func (*binaryClassMat2x3fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x3fˢ(e, obj.(*Mat2x3fˢ))
 }
@@ -49692,7 +48574,6 @@ func doDecodeMat2x3fᵖ(d binary.Decoder, o *Mat2x3fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat2x3fᵖ) New() binary.Object { return &Mat2x3fᵖ{} }
 func (*binaryClassMat2x3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x3fᵖ(e, obj.(*Mat2x3fᵖ))
 }
@@ -49729,7 +48610,6 @@ func doDecodeVec4f(d binary.Decoder, o *Vec4f) {
 		o.Elements[i] = GLfloat(d.Float32())
 	}
 }
-func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
 func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4f(e, obj.(*Vec4f))
 }
@@ -49773,7 +48653,6 @@ func doDecodeMat2x4f(d binary.Decoder, o *Mat2x4f) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassMat2x4f) New() binary.Object { return &Mat2x4f{} }
 func (*binaryClassMat2x4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x4f(e, obj.(*Mat2x4f))
 }
@@ -49813,7 +48692,6 @@ func doDecodeMat2x4fˢ(d binary.Decoder, o *Mat2x4fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat2x4fˢ) New() binary.Object { return &Mat2x4fˢ{} }
 func (*binaryClassMat2x4fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x4fˢ(e, obj.(*Mat2x4fˢ))
 }
@@ -49853,7 +48731,6 @@ func doDecodeMat2x4fᵖ(d binary.Decoder, o *Mat2x4fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat2x4fᵖ) New() binary.Object { return &Mat2x4fᵖ{} }
 func (*binaryClassMat2x4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x4fᵖ(e, obj.(*Mat2x4fᵖ))
 }
@@ -49897,7 +48774,6 @@ func doDecodeMat3f(d binary.Decoder, o *Mat3f) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
 func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3f(e, obj.(*Mat3f))
 }
@@ -49937,7 +48813,6 @@ func doDecodeMat3fˢ(d binary.Decoder, o *Mat3fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat3fˢ) New() binary.Object { return &Mat3fˢ{} }
 func (*binaryClassMat3fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3fˢ(e, obj.(*Mat3fˢ))
 }
@@ -49977,7 +48852,6 @@ func doDecodeMat3fᵖ(d binary.Decoder, o *Mat3fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat3fᵖ) New() binary.Object { return &Mat3fᵖ{} }
 func (*binaryClassMat3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3fᵖ(e, obj.(*Mat3fᵖ))
 }
@@ -50021,7 +48895,6 @@ func doDecodeMat3x2f(d binary.Decoder, o *Mat3x2f) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassMat3x2f) New() binary.Object { return &Mat3x2f{} }
 func (*binaryClassMat3x2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x2f(e, obj.(*Mat3x2f))
 }
@@ -50061,7 +48934,6 @@ func doDecodeMat3x2fˢ(d binary.Decoder, o *Mat3x2fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat3x2fˢ) New() binary.Object { return &Mat3x2fˢ{} }
 func (*binaryClassMat3x2fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x2fˢ(e, obj.(*Mat3x2fˢ))
 }
@@ -50101,7 +48973,6 @@ func doDecodeMat3x2fᵖ(d binary.Decoder, o *Mat3x2fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat3x2fᵖ) New() binary.Object { return &Mat3x2fᵖ{} }
 func (*binaryClassMat3x2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x2fᵖ(e, obj.(*Mat3x2fᵖ))
 }
@@ -50145,7 +49016,6 @@ func doDecodeMat3x4f(d binary.Decoder, o *Mat3x4f) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassMat3x4f) New() binary.Object { return &Mat3x4f{} }
 func (*binaryClassMat3x4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x4f(e, obj.(*Mat3x4f))
 }
@@ -50185,7 +49055,6 @@ func doDecodeMat3x4fˢ(d binary.Decoder, o *Mat3x4fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat3x4fˢ) New() binary.Object { return &Mat3x4fˢ{} }
 func (*binaryClassMat3x4fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x4fˢ(e, obj.(*Mat3x4fˢ))
 }
@@ -50225,7 +49094,6 @@ func doDecodeMat3x4fᵖ(d binary.Decoder, o *Mat3x4fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat3x4fᵖ) New() binary.Object { return &Mat3x4fᵖ{} }
 func (*binaryClassMat3x4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x4fᵖ(e, obj.(*Mat3x4fᵖ))
 }
@@ -50269,7 +49137,6 @@ func doDecodeMat4f(d binary.Decoder, o *Mat4f) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
 func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4f(e, obj.(*Mat4f))
 }
@@ -50309,7 +49176,6 @@ func doDecodeMat4fˢ(d binary.Decoder, o *Mat4fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat4fˢ) New() binary.Object { return &Mat4fˢ{} }
 func (*binaryClassMat4fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4fˢ(e, obj.(*Mat4fˢ))
 }
@@ -50349,7 +49215,6 @@ func doDecodeMat4fᵖ(d binary.Decoder, o *Mat4fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat4fᵖ) New() binary.Object { return &Mat4fᵖ{} }
 func (*binaryClassMat4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4fᵖ(e, obj.(*Mat4fᵖ))
 }
@@ -50393,7 +49258,6 @@ func doDecodeMat4x2f(d binary.Decoder, o *Mat4x2f) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassMat4x2f) New() binary.Object { return &Mat4x2f{} }
 func (*binaryClassMat4x2f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x2f(e, obj.(*Mat4x2f))
 }
@@ -50433,7 +49297,6 @@ func doDecodeMat4x2fˢ(d binary.Decoder, o *Mat4x2fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat4x2fˢ) New() binary.Object { return &Mat4x2fˢ{} }
 func (*binaryClassMat4x2fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x2fˢ(e, obj.(*Mat4x2fˢ))
 }
@@ -50473,7 +49336,6 @@ func doDecodeMat4x2fᵖ(d binary.Decoder, o *Mat4x2fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat4x2fᵖ) New() binary.Object { return &Mat4x2fᵖ{} }
 func (*binaryClassMat4x2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x2fᵖ(e, obj.(*Mat4x2fᵖ))
 }
@@ -50517,7 +49379,6 @@ func doDecodeMat4x3f(d binary.Decoder, o *Mat4x3f) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassMat4x3f) New() binary.Object { return &Mat4x3f{} }
 func (*binaryClassMat4x3f) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x3f(e, obj.(*Mat4x3f))
 }
@@ -50557,7 +49418,6 @@ func doDecodeMat4x3fˢ(d binary.Decoder, o *Mat4x3fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassMat4x3fˢ) New() binary.Object { return &Mat4x3fˢ{} }
 func (*binaryClassMat4x3fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x3fˢ(e, obj.(*Mat4x3fˢ))
 }
@@ -50597,7 +49457,6 @@ func doDecodeMat4x3fᵖ(d binary.Decoder, o *Mat4x3fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassMat4x3fᵖ) New() binary.Object { return &Mat4x3fᵖ{} }
 func (*binaryClassMat4x3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x3fᵖ(e, obj.(*Mat4x3fᵖ))
 }
@@ -50637,7 +49496,6 @@ func doDecodePipelineIdˢ(d binary.Decoder, o *PipelineIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassPipelineIdˢ) New() binary.Object { return &PipelineIdˢ{} }
 func (*binaryClassPipelineIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePipelineIdˢ(e, obj.(*PipelineIdˢ))
 }
@@ -50677,7 +49535,6 @@ func doDecodeProgramIdˢ(d binary.Decoder, o *ProgramIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassProgramIdˢ) New() binary.Object { return &ProgramIdˢ{} }
 func (*binaryClassProgramIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeProgramIdˢ(e, obj.(*ProgramIdˢ))
 }
@@ -50717,7 +49574,6 @@ func doDecodeQueryIdˢ(d binary.Decoder, o *QueryIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassQueryIdˢ) New() binary.Object { return &QueryIdˢ{} }
 func (*binaryClassQueryIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQueryIdˢ(e, obj.(*QueryIdˢ))
 }
@@ -50757,7 +49613,6 @@ func doDecodeRenderbufferIdˢ(d binary.Decoder, o *RenderbufferIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassRenderbufferIdˢ) New() binary.Object { return &RenderbufferIdˢ{} }
 func (*binaryClassRenderbufferIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbufferIdˢ(e, obj.(*RenderbufferIdˢ))
 }
@@ -50799,7 +49654,6 @@ func doDecodeReplayBindRenderer(d binary.Decoder, o *ReplayBindRenderer) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Id = uint32(d.Uint32())
 }
-func (*binaryClassReplayBindRenderer) New() binary.Object { return &ReplayBindRenderer{} }
 func (*binaryClassReplayBindRenderer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReplayBindRenderer(e, obj.(*ReplayBindRenderer))
 }
@@ -50842,7 +49696,6 @@ func doDecodeReplayCreateRenderer(d binary.Decoder, o *ReplayCreateRenderer) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Id = uint32(d.Uint32())
 }
-func (*binaryClassReplayCreateRenderer) New() binary.Object { return &ReplayCreateRenderer{} }
 func (*binaryClassReplayCreateRenderer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReplayCreateRenderer(e, obj.(*ReplayCreateRenderer))
 }
@@ -50883,7 +49736,6 @@ func doDecodeS64ˢ(d binary.Decoder, o *S64ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassS64ˢ) New() binary.Object { return &S64ˢ{} }
 func (*binaryClassS64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS64ˢ(e, obj.(*S64ˢ))
 }
@@ -50923,7 +49775,6 @@ func doDecodeSamplerIdˢ(d binary.Decoder, o *SamplerIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassSamplerIdˢ) New() binary.Object { return &SamplerIdˢ{} }
 func (*binaryClassSamplerIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSamplerIdˢ(e, obj.(*SamplerIdˢ))
 }
@@ -50963,7 +49814,6 @@ func doDecodeShaderIdˢ(d binary.Decoder, o *ShaderIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassShaderIdˢ) New() binary.Object { return &ShaderIdˢ{} }
 func (*binaryClassShaderIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShaderIdˢ(e, obj.(*ShaderIdˢ))
 }
@@ -51005,7 +49855,6 @@ func doDecodeStartTimer(d binary.Decoder, o *StartTimer) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.Index = uint8(d.Uint8())
 }
-func (*binaryClassStartTimer) New() binary.Object { return &StartTimer{} }
 func (*binaryClassStartTimer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeStartTimer(e, obj.(*StartTimer))
 }
@@ -51189,7 +50038,6 @@ func doDecodeState(d binary.Decoder, o *State) {
 		}
 	}
 }
-func (*binaryClassState) New() binary.Object { return &State{} }
 func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeState(e, obj.(*State))
 }
@@ -51239,7 +50087,6 @@ func doDecodeStopTimer(d binary.Decoder, o *StopTimer) {
 	o.Index = uint8(d.Uint8())
 	o.Result = uint64(d.Uint64())
 }
-func (*binaryClassStopTimer) New() binary.Object { return &StopTimer{} }
 func (*binaryClassStopTimer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeStopTimer(e, obj.(*StopTimer))
 }
@@ -51283,7 +50130,6 @@ func doDecodeSwitchThread(d binary.Decoder, o *SwitchThread) {
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
 	o.ThreadID = ThreadID(d.Uint64())
 }
-func (*binaryClassSwitchThread) New() binary.Object { return &SwitchThread{} }
 func (*binaryClassSwitchThread) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSwitchThread(e, obj.(*SwitchThread))
 }
@@ -51324,7 +50170,6 @@ func doDecodeTextureIdˢ(d binary.Decoder, o *TextureIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassTextureIdˢ) New() binary.Object { return &TextureIdˢ{} }
 func (*binaryClassTextureIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureIdˢ(e, obj.(*TextureIdˢ))
 }
@@ -51364,7 +50209,6 @@ func doDecodeTransformFeedbackIdˢ(d binary.Decoder, o *TransformFeedbackIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassTransformFeedbackIdˢ) New() binary.Object { return &TransformFeedbackIdˢ{} }
 func (*binaryClassTransformFeedbackIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTransformFeedbackIdˢ(e, obj.(*TransformFeedbackIdˢ))
 }
@@ -51404,7 +50248,6 @@ func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassU16ˢ) New() binary.Object { return &U16ˢ{} }
 func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU16ˢ(e, obj.(*U16ˢ))
 }
@@ -51444,7 +50287,6 @@ func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassU16ᵖ) New() binary.Object { return &U16ᵖ{} }
 func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU16ᵖ(e, obj.(*U16ᵖ))
 }
@@ -51484,7 +50326,6 @@ func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassU32ˢ) New() binary.Object { return &U32ˢ{} }
 func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU32ˢ(e, obj.(*U32ˢ))
 }
@@ -51524,7 +50365,6 @@ func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
 func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU32ᵖ(e, obj.(*U32ᵖ))
 }
@@ -51564,7 +50404,6 @@ func doDecodeU64ˢ(d binary.Decoder, o *U64ˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassU64ˢ) New() binary.Object { return &U64ˢ{} }
 func (*binaryClassU64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU64ˢ(e, obj.(*U64ˢ))
 }
@@ -51604,7 +50443,6 @@ func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassU8ᵖ) New() binary.Object { return &U8ᵖ{} }
 func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU8ᵖ(e, obj.(*U8ᵖ))
 }
@@ -51644,7 +50482,6 @@ func doDecodeUniformIndexˢ(d binary.Decoder, o *UniformIndexˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassUniformIndexˢ) New() binary.Object { return &UniformIndexˢ{} }
 func (*binaryClassUniformIndexˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniformIndexˢ(e, obj.(*UniformIndexˢ))
 }
@@ -51688,7 +50525,6 @@ func doDecodeVec2fː2ᵃ(d binary.Decoder, o *Vec2fː2ᵃ) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassVec2fː2ᵃ) New() binary.Object { return &Vec2fː2ᵃ{} }
 func (*binaryClassVec2fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fː2ᵃ(e, obj.(*Vec2fː2ᵃ))
 }
@@ -51732,7 +50568,6 @@ func doDecodeVec2fː3ᵃ(d binary.Decoder, o *Vec2fː3ᵃ) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassVec2fː3ᵃ) New() binary.Object { return &Vec2fː3ᵃ{} }
 func (*binaryClassVec2fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fː3ᵃ(e, obj.(*Vec2fː3ᵃ))
 }
@@ -51776,7 +50611,6 @@ func doDecodeVec2fː4ᵃ(d binary.Decoder, o *Vec2fː4ᵃ) {
 		d.Struct(ent_e569c2dba9a938353345b68d1219afde52683bc1, &o.Elements[i])
 	}
 }
-func (*binaryClassVec2fː4ᵃ) New() binary.Object { return &Vec2fː4ᵃ{} }
 func (*binaryClassVec2fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fː4ᵃ(e, obj.(*Vec2fː4ᵃ))
 }
@@ -51816,7 +50650,6 @@ func doDecodeVec2fˢ(d binary.Decoder, o *Vec2fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec2fˢ) New() binary.Object { return &Vec2fˢ{} }
 func (*binaryClassVec2fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fˢ(e, obj.(*Vec2fˢ))
 }
@@ -51856,7 +50689,6 @@ func doDecodeVec2fᵖ(d binary.Decoder, o *Vec2fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec2fᵖ) New() binary.Object { return &Vec2fᵖ{} }
 func (*binaryClassVec2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fᵖ(e, obj.(*Vec2fᵖ))
 }
@@ -51893,7 +50725,6 @@ func doDecodeVec2i(d binary.Decoder, o *Vec2i) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
 func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2i(e, obj.(*Vec2i))
 }
@@ -51933,7 +50764,6 @@ func doDecodeVec2iˢ(d binary.Decoder, o *Vec2iˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec2iˢ) New() binary.Object { return &Vec2iˢ{} }
 func (*binaryClassVec2iˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2iˢ(e, obj.(*Vec2iˢ))
 }
@@ -51973,7 +50803,6 @@ func doDecodeVec2iᵖ(d binary.Decoder, o *Vec2iᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec2iᵖ) New() binary.Object { return &Vec2iᵖ{} }
 func (*binaryClassVec2iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2iᵖ(e, obj.(*Vec2iᵖ))
 }
@@ -52010,7 +50839,6 @@ func doDecodeVec2u(d binary.Decoder, o *Vec2u) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassVec2u) New() binary.Object { return &Vec2u{} }
 func (*binaryClassVec2u) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2u(e, obj.(*Vec2u))
 }
@@ -52050,7 +50878,6 @@ func doDecodeVec2uˢ(d binary.Decoder, o *Vec2uˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec2uˢ) New() binary.Object { return &Vec2uˢ{} }
 func (*binaryClassVec2uˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2uˢ(e, obj.(*Vec2uˢ))
 }
@@ -52090,7 +50917,6 @@ func doDecodeVec2uᵖ(d binary.Decoder, o *Vec2uᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec2uᵖ) New() binary.Object { return &Vec2uᵖ{} }
 func (*binaryClassVec2uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2uᵖ(e, obj.(*Vec2uᵖ))
 }
@@ -52134,7 +50960,6 @@ func doDecodeVec3fː2ᵃ(d binary.Decoder, o *Vec3fː2ᵃ) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassVec3fː2ᵃ) New() binary.Object { return &Vec3fː2ᵃ{} }
 func (*binaryClassVec3fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fː2ᵃ(e, obj.(*Vec3fː2ᵃ))
 }
@@ -52178,7 +51003,6 @@ func doDecodeVec3fː3ᵃ(d binary.Decoder, o *Vec3fː3ᵃ) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassVec3fː3ᵃ) New() binary.Object { return &Vec3fː3ᵃ{} }
 func (*binaryClassVec3fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fː3ᵃ(e, obj.(*Vec3fː3ᵃ))
 }
@@ -52222,7 +51046,6 @@ func doDecodeVec3fː4ᵃ(d binary.Decoder, o *Vec3fː4ᵃ) {
 		d.Struct(ent_be9f28d84e720bd72951eb9c7075e5d23f85cf32, &o.Elements[i])
 	}
 }
-func (*binaryClassVec3fː4ᵃ) New() binary.Object { return &Vec3fː4ᵃ{} }
 func (*binaryClassVec3fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fː4ᵃ(e, obj.(*Vec3fː4ᵃ))
 }
@@ -52262,7 +51085,6 @@ func doDecodeVec3fˢ(d binary.Decoder, o *Vec3fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec3fˢ) New() binary.Object { return &Vec3fˢ{} }
 func (*binaryClassVec3fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fˢ(e, obj.(*Vec3fˢ))
 }
@@ -52302,7 +51124,6 @@ func doDecodeVec3fᵖ(d binary.Decoder, o *Vec3fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec3fᵖ) New() binary.Object { return &Vec3fᵖ{} }
 func (*binaryClassVec3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fᵖ(e, obj.(*Vec3fᵖ))
 }
@@ -52339,7 +51160,6 @@ func doDecodeVec3i(d binary.Decoder, o *Vec3i) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
 func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3i(e, obj.(*Vec3i))
 }
@@ -52379,7 +51199,6 @@ func doDecodeVec3iˢ(d binary.Decoder, o *Vec3iˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec3iˢ) New() binary.Object { return &Vec3iˢ{} }
 func (*binaryClassVec3iˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3iˢ(e, obj.(*Vec3iˢ))
 }
@@ -52419,7 +51238,6 @@ func doDecodeVec3iᵖ(d binary.Decoder, o *Vec3iᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec3iᵖ) New() binary.Object { return &Vec3iᵖ{} }
 func (*binaryClassVec3iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3iᵖ(e, obj.(*Vec3iᵖ))
 }
@@ -52456,7 +51274,6 @@ func doDecodeVec3u(d binary.Decoder, o *Vec3u) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassVec3u) New() binary.Object { return &Vec3u{} }
 func (*binaryClassVec3u) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3u(e, obj.(*Vec3u))
 }
@@ -52496,7 +51313,6 @@ func doDecodeVec3uˢ(d binary.Decoder, o *Vec3uˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec3uˢ) New() binary.Object { return &Vec3uˢ{} }
 func (*binaryClassVec3uˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3uˢ(e, obj.(*Vec3uˢ))
 }
@@ -52536,7 +51352,6 @@ func doDecodeVec3uᵖ(d binary.Decoder, o *Vec3uᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec3uᵖ) New() binary.Object { return &Vec3uᵖ{} }
 func (*binaryClassVec3uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3uᵖ(e, obj.(*Vec3uᵖ))
 }
@@ -52580,7 +51395,6 @@ func doDecodeVec4fː2ᵃ(d binary.Decoder, o *Vec4fː2ᵃ) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassVec4fː2ᵃ) New() binary.Object { return &Vec4fː2ᵃ{} }
 func (*binaryClassVec4fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fː2ᵃ(e, obj.(*Vec4fː2ᵃ))
 }
@@ -52624,7 +51438,6 @@ func doDecodeVec4fː3ᵃ(d binary.Decoder, o *Vec4fː3ᵃ) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassVec4fː3ᵃ) New() binary.Object { return &Vec4fː3ᵃ{} }
 func (*binaryClassVec4fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fː3ᵃ(e, obj.(*Vec4fː3ᵃ))
 }
@@ -52668,7 +51481,6 @@ func doDecodeVec4fː4ᵃ(d binary.Decoder, o *Vec4fː4ᵃ) {
 		d.Struct(ent_7212d92e65bd9b7a87d833c5c5f74d2246cebd43, &o.Elements[i])
 	}
 }
-func (*binaryClassVec4fː4ᵃ) New() binary.Object { return &Vec4fː4ᵃ{} }
 func (*binaryClassVec4fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fː4ᵃ(e, obj.(*Vec4fː4ᵃ))
 }
@@ -52708,7 +51520,6 @@ func doDecodeVec4fˢ(d binary.Decoder, o *Vec4fˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec4fˢ) New() binary.Object { return &Vec4fˢ{} }
 func (*binaryClassVec4fˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fˢ(e, obj.(*Vec4fˢ))
 }
@@ -52748,7 +51559,6 @@ func doDecodeVec4fᵖ(d binary.Decoder, o *Vec4fᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec4fᵖ) New() binary.Object { return &Vec4fᵖ{} }
 func (*binaryClassVec4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fᵖ(e, obj.(*Vec4fᵖ))
 }
@@ -52785,7 +51595,6 @@ func doDecodeVec4i(d binary.Decoder, o *Vec4i) {
 		o.Elements[i] = GLint(d.Int32())
 	}
 }
-func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
 func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4i(e, obj.(*Vec4i))
 }
@@ -52825,7 +51634,6 @@ func doDecodeVec4iˢ(d binary.Decoder, o *Vec4iˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec4iˢ) New() binary.Object { return &Vec4iˢ{} }
 func (*binaryClassVec4iˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4iˢ(e, obj.(*Vec4iˢ))
 }
@@ -52865,7 +51673,6 @@ func doDecodeVec4iᵖ(d binary.Decoder, o *Vec4iᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec4iᵖ) New() binary.Object { return &Vec4iᵖ{} }
 func (*binaryClassVec4iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4iᵖ(e, obj.(*Vec4iᵖ))
 }
@@ -52902,7 +51709,6 @@ func doDecodeVec4u(d binary.Decoder, o *Vec4u) {
 		o.Elements[i] = GLuint(d.Uint32())
 	}
 }
-func (*binaryClassVec4u) New() binary.Object { return &Vec4u{} }
 func (*binaryClassVec4u) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4u(e, obj.(*Vec4u))
 }
@@ -52942,7 +51748,6 @@ func doDecodeVec4uˢ(d binary.Decoder, o *Vec4uˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVec4uˢ) New() binary.Object { return &Vec4uˢ{} }
 func (*binaryClassVec4uˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4uˢ(e, obj.(*Vec4uˢ))
 }
@@ -52982,7 +51787,6 @@ func doDecodeVec4uᵖ(d binary.Decoder, o *Vec4uᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVec4uᵖ) New() binary.Object { return &Vec4uᵖ{} }
 func (*binaryClassVec4uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4uᵖ(e, obj.(*Vec4uᵖ))
 }
@@ -53022,7 +51826,6 @@ func doDecodeVertexArrayIdˢ(d binary.Decoder, o *VertexArrayIdˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVertexArrayIdˢ) New() binary.Object { return &VertexArrayIdˢ{} }
 func (*binaryClassVertexArrayIdˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArrayIdˢ(e, obj.(*VertexArrayIdˢ))
 }
@@ -53062,7 +51865,6 @@ func doDecodeVoidˢ(d binary.Decoder, o *Voidˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVoidˢ) New() binary.Object { return &Voidˢ{} }
 func (*binaryClassVoidˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidˢ(e, obj.(*Voidˢ))
 }
@@ -53102,7 +51904,6 @@ func doDecodeVoidᵖˢ(d binary.Decoder, o *Voidᵖˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVoidᵖˢ) New() binary.Object { return &Voidᵖˢ{} }
 func (*binaryClassVoidᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖˢ(e, obj.(*Voidᵖˢ))
 }
@@ -53142,7 +51943,6 @@ func doDecodeVoidᶜᵖˢ(d binary.Decoder, o *Voidᶜᵖˢ) {
 	}
 	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
 }
-func (*binaryClassVoidᶜᵖˢ) New() binary.Object { return &Voidᶜᵖˢ{} }
 func (*binaryClassVoidᶜᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖˢ(e, obj.(*Voidᶜᵖˢ))
 }
@@ -53182,7 +51982,6 @@ func doDecodeVoidᶜᵖᵖ(d binary.Decoder, o *Voidᶜᵖᵖ) {
 	}
 	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
 }
-func (*binaryClassVoidᶜᵖᵖ) New() binary.Object { return &Voidᶜᵖᵖ{} }
 func (*binaryClassVoidᶜᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖᵖ(e, obj.(*Voidᶜᵖᵖ))
 }
@@ -53240,7 +52039,6 @@ func doDecodeWglCreateContext(d binary.Decoder, o *WglCreateContext) {
 	}
 	d.Struct(ent_a907b810a11a57190cf1fb1380c30372828cd5f1, &o.Result)
 }
-func (*binaryClassWglCreateContext) New() binary.Object { return &WglCreateContext{} }
 func (*binaryClassWglCreateContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeWglCreateContext(e, obj.(*WglCreateContext))
 }
@@ -53318,9 +52116,6 @@ func doDecodeWglCreateContextAttribsARB(d binary.Decoder, o *WglCreateContextAtt
 	}
 	d.Struct(ent_a907b810a11a57190cf1fb1380c30372828cd5f1, &o.Result)
 }
-func (*binaryClassWglCreateContextAttribsARB) New() binary.Object {
-	return &WglCreateContextAttribsARB{}
-}
 func (*binaryClassWglCreateContextAttribsARB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeWglCreateContextAttribsARB(e, obj.(*WglCreateContextAttribsARB))
 }
@@ -53386,7 +52181,6 @@ func doDecodeWglMakeCurrent(d binary.Decoder, o *WglMakeCurrent) {
 	d.Struct(ent_2fd0eec3271075c8578311cb53f20aa4d3ade76a, &o.Hglrc)
 	o.Result = BOOL(d.Int64())
 }
-func (*binaryClassWglMakeCurrent) New() binary.Object { return &WglMakeCurrent{} }
 func (*binaryClassWglMakeCurrent) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeWglMakeCurrent(e, obj.(*WglMakeCurrent))
 }
@@ -53438,7 +52232,6 @@ func doDecodeWglSwapBuffers(d binary.Decoder, o *WglSwapBuffers) {
 	}
 	d.Struct(ent_79c8fb4e4f4e841a1bc748b09d91f770b692ec8f, &o.Hdc)
 }
-func (*binaryClassWglSwapBuffers) New() binary.Object { return &WglSwapBuffers{} }
 func (*binaryClassWglSwapBuffers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeWglSwapBuffers(e, obj.(*WglSwapBuffers))
 }
@@ -53488,7 +52281,6 @@ func doDecodegenerate_types(d binary.Decoder, o *generate_types) {
 	}
 	d.Struct(ent_b1a2c8e2ad91cf61f901c6bdbc9dfefb1c130a85, &o.U32_slice)
 }
-func (*binaryClassgenerate_types) New() binary.Object { return &generate_types{} }
 func (*binaryClassgenerate_types) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodegenerate_types(e, obj.(*generate_types))
 }

@@ -36,6 +36,10 @@ type Entity struct {
 	signature string
 }
 
+// EntityList used to represent the entities of any composed subtypes which
+// need decoding.
+type EntityList []*Entity
+
 // Name returns the name of the Entity.
 func (e *Entity) Name() string {
 	if e.Display != "" {

@@ -34,7 +34,6 @@ func doDecodeAtomA(d binary.Decoder, o *AtomA) {
 	o.ID = atom.ID(d.Uint64())
 	o.AtomFlags = atom.Flags(d.Uint32())
 }
-func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomA(e, obj.(*AtomA))
 }
@@ -70,7 +69,6 @@ func doDecodeAtomB(d binary.Decoder, o *AtomB) {
 	o.ID = atom.ID(d.Uint64())
 	o.Bool = bool(d.Bool())
 }
-func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomB(e, obj.(*AtomB))
 }
@@ -104,7 +102,6 @@ func doEncodeAtomC(e binary.Encoder, o *AtomC) {
 func doDecodeAtomC(d binary.Decoder, o *AtomC) {
 	o.String = string(d.String())
 }
-func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomC(e, obj.(*AtomC))
 }
