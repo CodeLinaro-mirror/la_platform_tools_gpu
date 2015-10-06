@@ -23,9 +23,9 @@ type Decoder interface {
 	// Value decodes an Object from the stream.
 	Value(Object)
 	// Struct decodes an Object from the stream. The type identifier is specified.
-	Struct(ent *Entity, obj Object) error
+	Struct(t Type, obj Object) error
 	// Pop and subtype ID from the decoder stack.
-	PopEntity() (*Entity, error)
+	PopType() (Type, error)
 	// Variant decodes and returns an Object from the stream. The Class in the
 	// stream must have been previously registered with binary.registry.Add.
 	Variant() Object
@@ -36,4 +36,6 @@ type Decoder interface {
 	Object() Object
 	// Lookup the upgrade decoder for decoding this type of entity.
 	Lookup(*Entity) UpgradeDecoder
+	// Decode a collection count from the stream.
+	Count() uint32
 }

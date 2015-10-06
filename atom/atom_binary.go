@@ -42,7 +42,7 @@ func doEncodeFramebufferObservation(e binary.Encoder, o *FramebufferObservation)
 func doDecodeFramebufferObservation(d binary.Decoder, o *FramebufferObservation) {
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
 	}
@@ -120,25 +120,25 @@ func doEncodeGroup(e binary.Encoder, o *Group) {
 }
 func doDecodeGroup(d binary.Decoder, o *Group) {
 	o.Name = string(d.String())
-	var ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c = ent
+		t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c = t
 	}
-	d.Struct(ent_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c, &o.Range)
-	var ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 = ent
-	}
-	if count := d.Uint32(); count > 0 {
+	d.Struct(t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c, &o.Range)
+	if count := d.Count(); count > 0 {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
-			d.Struct(ent_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579, &o.SubGroups[i])
+			var t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 binary.Type
+			if t, err := d.PopType(); err != nil {
+				d.SetError(err)
+				return
+			} else {
+				t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 = t
+			}
+			d.Struct(t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579, &o.SubGroups[i])
 		}
 	}
 }
@@ -177,7 +177,7 @@ func doEncodeList(e binary.Encoder, o *List) {
 	}
 }
 func doDecodeList(d binary.Decoder, o *List) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Atoms = make([]Atom, count)
 		for i := range o.Atoms {
 			if obj := d.Variant(); obj != nil {
@@ -263,14 +263,14 @@ func doEncodeObservation(e binary.Encoder, o *Observation) {
 	e.Data(o.ID[:20])
 }
 func doDecodeObservation(d binary.Decoder, o *Observation) {
-	var ent_a07589894b4560331859dd95294109982b0f1446 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_a07589894b4560331859dd95294109982b0f1446 binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_a07589894b4560331859dd95294109982b0f1446 = ent
+		t_a07589894b4560331859dd95294109982b0f1446 = t
 	}
-	d.Struct(ent_a07589894b4560331859dd95294109982b0f1446, &o.Range)
+	d.Struct(t_a07589894b4560331859dd95294109982b0f1446, &o.Range)
 	d.Data(o.ID[:20])
 }
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
@@ -311,30 +311,30 @@ func doEncodeObservations(e binary.Encoder, o *Observations) {
 	}
 }
 func doDecodeObservations(d binary.Decoder, o *Observations) {
-	var ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146 = ent
-	}
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Reads = make([]Observation, count)
 		for i := range o.Reads {
-			d.Struct(ent_c7c3cc379a0da3de249d0eafe436ad676ba8c146, &o.Reads[i])
+			var t_c7c3cc379a0da3de249d0eafe436ad676ba8c146 binary.Type
+			if t, err := d.PopType(); err != nil {
+				d.SetError(err)
+				return
+			} else {
+				t_c7c3cc379a0da3de249d0eafe436ad676ba8c146 = t
+			}
+			d.Struct(t_c7c3cc379a0da3de249d0eafe436ad676ba8c146, &o.Reads[i])
 		}
 	}
-	var ent_e330f623e42ac06d54144296a88d22f3aea3292a *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_e330f623e42ac06d54144296a88d22f3aea3292a = ent
-	}
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Writes = make([]Observation, count)
 		for i := range o.Writes {
-			d.Struct(ent_e330f623e42ac06d54144296a88d22f3aea3292a, &o.Writes[i])
+			var t_e330f623e42ac06d54144296a88d22f3aea3292a binary.Type
+			if t, err := d.PopType(); err != nil {
+				d.SetError(err)
+				return
+			} else {
+				t_e330f623e42ac06d54144296a88d22f3aea3292a = t
+			}
+			d.Struct(t_e330f623e42ac06d54144296a88d22f3aea3292a, &o.Writes[i])
 		}
 	}
 }
@@ -372,7 +372,7 @@ func doEncodeResource(e binary.Encoder, o *Resource) {
 }
 func doDecodeResource(d binary.Decoder, o *Resource) {
 	d.Data(o.ID[:20])
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
 	}

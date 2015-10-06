@@ -76,24 +76,24 @@ func doEncodePayload(e binary.Encoder, o *Payload) {
 func doDecodePayload(d binary.Decoder, o *Payload) {
 	o.StackSize = uint32(d.Uint32())
 	o.VolatileMemorySize = uint32(d.Uint32())
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Constants = make([]byte, count)
 		d.Data(o.Constants)
 	}
-	var ent_6233a674930897af785febe2f53bca85fac74752 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_6233a674930897af785febe2f53bca85fac74752 = ent
-	}
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			d.Struct(ent_6233a674930897af785febe2f53bca85fac74752, &o.Resources[i])
+			var t_6233a674930897af785febe2f53bca85fac74752 binary.Type
+			if t, err := d.PopType(); err != nil {
+				d.SetError(err)
+				return
+			} else {
+				t_6233a674930897af785febe2f53bca85fac74752 = t
+			}
+			d.Struct(t_6233a674930897af785febe2f53bca85fac74752, &o.Resources[i])
 		}
 	}
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Opcodes = make([]byte, count)
 		d.Data(o.Opcodes)
 	}

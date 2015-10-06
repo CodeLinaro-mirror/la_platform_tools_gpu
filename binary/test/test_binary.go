@@ -136,14 +136,14 @@ func doEncodeY(e binary.Encoder, o *Y) {
 }
 func doDecodeY(d binary.Decoder, o *Y) {
 	o.begin = string(d.String())
-	var ent_05812f806fd444a2f25ef8af1732c40dd2f23b10 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_05812f806fd444a2f25ef8af1732c40dd2f23b10 binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_05812f806fd444a2f25ef8af1732c40dd2f23b10 = ent
+		t_05812f806fd444a2f25ef8af1732c40dd2f23b10 = t
 	}
-	d.Struct(ent_05812f806fd444a2f25ef8af1732c40dd2f23b10, &o.x)
+	d.Struct(t_05812f806fd444a2f25ef8af1732c40dd2f23b10, &o.x)
 	o.end = string(d.String())
 }
 func (*binaryClassY) Encode(e binary.Encoder, obj binary.Object) {
@@ -170,7 +170,6 @@ var schemaY = &binary.Entity{
 }
 
 type binaryClassX_V1 struct{ binary.FrozenClassBase }
-
 func (*X_V1) Class() binary.Class {
 	return &binaryClassX_V1{}
 }
@@ -185,7 +184,7 @@ func doUpgradeDecodeǀX_V1ǁX(d binary.Decoder, o *X) {
 	if d.Error() != nil {
 		return
 	}
-	old.upgrade(o) // This upgrade() method is not code generated.
+	old.upgrade(o)  // This upgrade() method is not code generated.
 }
 func (*binaryClassX_V1) Decode(d binary.Decoder) binary.Object {
 	obj := &X{}

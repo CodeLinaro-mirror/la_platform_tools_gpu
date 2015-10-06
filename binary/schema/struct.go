@@ -63,6 +63,6 @@ func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
 	return u.Decode(d)
 }
 
-func (s *Struct) Subspace() binary.EntityList {
-	return binary.EntityList{s.Entity}
+func (s *Struct) Subspace() *binary.Subspace {
+	return s.Entity.Subspace()
 }

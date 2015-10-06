@@ -54,7 +54,7 @@ func doDecodeImage(d binary.Decoder, o *Image) {
 	}
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Data = make([]byte, count)
 		d.Data(o.Data)
 	}

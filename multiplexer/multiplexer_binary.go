@@ -64,7 +64,7 @@ func doEncodemsgData(e binary.Encoder, o *msgData) {
 }
 func doDecodemsgData(d binary.Decoder, o *msgData) {
 	o.c = channelId(d.Uint32())
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.d = make([]byte, count)
 		d.Data(o.d)
 	}

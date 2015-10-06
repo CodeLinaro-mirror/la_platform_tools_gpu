@@ -36,10 +36,6 @@ type Entity struct {
 	signature string
 }
 
-// EntityList used to represent the entities of any composed subtypes which
-// need decoding.
-type EntityList []*Entity
-
 // Name returns the name of the Entity.
 func (e *Entity) Name() string {
 	if e.Display != "" {
@@ -84,12 +80,14 @@ func (e *Entity) Format(f fmt.State, c rune) {
 	fmt.Fprint(f, "}")
 }
 
-func (c *Entity) Subspace() EntityList {
-	var s EntityList
-	for _, f := range c.Fields {
-		s = append(s, f.Type.Subspace()...)
+func (e *Entity) Subspace() *Subspace {
+	var sub TypeList
+	for _, f := range e.Fields {
+		if f.Type.Subspace() != nil {
+			sub = append(sub, f.Type)
+		}
 	}
-	return s
+	return &Subspace{SubTypes: sub}
 }
 
 // FieldList is a slice of fields.
@@ -101,6 +99,12 @@ type Field struct {
 	Type     Type   // The type stored in the field.
 }
 
+// Represents the sub-types which need decoder support for nested types.
+type Subspace struct {
+	Counted  bool     // true if the schema type is a counted (slice, map)
+	SubTypes TypeList // the complete list of subtypes
+}
+
 // Type represents the common interface to all type objects in the schema.
 type Type interface {
 	String() string         // The true name of the type.
@@ -108,8 +112,14 @@ type Type interface {
 	EncodeValue(e Encoder, value interface{})
 	DecodeValue(d Decoder) interface{}
 	Format(f fmt.State, c rune)
-	Subspace() EntityList
+	// The subspace object. Nil means that this kind of schema object never has
+	// subtypes.
+	Subspace() *Subspace
 }
+
+// TypeList used to represent the entities of any composed subtypes which
+// need decoding.
+type TypeList []Type
 
 func trimPackage(n string) string {
 	i := strings.LastIndex(n, ".")

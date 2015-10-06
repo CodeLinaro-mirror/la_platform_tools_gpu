@@ -57,7 +57,7 @@ func doEncodeboolSlice(e binary.Encoder, o *boolSlice) {
 	}
 }
 func doDecodeboolSlice(d binary.Decoder, o *boolSlice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]bool, count)
 		for i := range o.value {
 			o.value[i] = bool(d.Bool())
@@ -129,7 +129,7 @@ func doEncodefloat32Slice(e binary.Encoder, o *float32Slice) {
 	}
 }
 func doDecodefloat32Slice(d binary.Decoder, o *float32Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]float32, count)
 		for i := range o.value {
 			o.value[i] = float32(d.Float32())
@@ -201,7 +201,7 @@ func doEncodefloat64Slice(e binary.Encoder, o *float64Slice) {
 	}
 }
 func doDecodefloat64Slice(d binary.Decoder, o *float64Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]float64, count)
 		for i := range o.value {
 			o.value[i] = float64(d.Float64())
@@ -273,7 +273,7 @@ func doEncodeint16Slice(e binary.Encoder, o *int16Slice) {
 	}
 }
 func doDecodeint16Slice(d binary.Decoder, o *int16Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]int16, count)
 		for i := range o.value {
 			o.value[i] = int16(d.Int16())
@@ -345,7 +345,7 @@ func doEncodeint32Slice(e binary.Encoder, o *int32Slice) {
 	}
 }
 func doDecodeint32Slice(d binary.Decoder, o *int32Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]int32, count)
 		for i := range o.value {
 			o.value[i] = int32(d.Int32())
@@ -417,7 +417,7 @@ func doEncodeint64Slice(e binary.Encoder, o *int64Slice) {
 	}
 }
 func doDecodeint64Slice(d binary.Decoder, o *int64Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]int64, count)
 		for i := range o.value {
 			o.value[i] = int64(d.Int64())
@@ -489,7 +489,7 @@ func doEncodeint8Slice(e binary.Encoder, o *int8Slice) {
 	}
 }
 func doDecodeint8Slice(d binary.Decoder, o *int8Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]int8, count)
 		for i := range o.value {
 			o.value[i] = int8(d.Int8())
@@ -561,7 +561,7 @@ func doEncodeintSlice(e binary.Encoder, o *intSlice) {
 	}
 }
 func doDecodeintSlice(d binary.Decoder, o *intSlice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]int, count)
 		for i := range o.value {
 			o.value[i] = int(d.Int32())
@@ -633,7 +633,7 @@ func doEncodeobjectSlice(e binary.Encoder, o *objectSlice) {
 	}
 }
 func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]binary.Object, count)
 		for i := range o.value {
 			if obj := d.Object(); obj != nil {
@@ -713,7 +713,7 @@ func doEncodestringSlice(e binary.Encoder, o *stringSlice) {
 	}
 }
 func doDecodestringSlice(d binary.Decoder, o *stringSlice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]string, count)
 		for i := range o.value {
 			o.value[i] = string(d.String())
@@ -785,7 +785,7 @@ func doEncodeuint16Slice(e binary.Encoder, o *uint16Slice) {
 	}
 }
 func doDecodeuint16Slice(d binary.Decoder, o *uint16Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]uint16, count)
 		for i := range o.value {
 			o.value[i] = uint16(d.Uint16())
@@ -857,7 +857,7 @@ func doEncodeuint32Slice(e binary.Encoder, o *uint32Slice) {
 	}
 }
 func doDecodeuint32Slice(d binary.Decoder, o *uint32Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]uint32, count)
 		for i := range o.value {
 			o.value[i] = uint32(d.Uint32())
@@ -929,7 +929,7 @@ func doEncodeuint64Slice(e binary.Encoder, o *uint64Slice) {
 	}
 }
 func doDecodeuint64Slice(d binary.Decoder, o *uint64Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]uint64, count)
 		for i := range o.value {
 			o.value[i] = uint64(d.Uint64())
@@ -999,7 +999,7 @@ func doEncodeuint8Slice(e binary.Encoder, o *uint8Slice) {
 	e.Data(o.value)
 }
 func doDecodeuint8Slice(d binary.Decoder, o *uint8Slice) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]uint8, count)
 		d.Data(o.value)
 	}

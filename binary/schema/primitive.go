@@ -172,7 +172,7 @@ func (p *Primitive) DecodeValue(d binary.Decoder) interface{} {
 	}
 }
 
-func (p *Primitive) Subspace() binary.EntityList {
+func (p *Primitive) Subspace() *binary.Subspace {
 	return nil
 }
 

@@ -52,14 +52,14 @@ func (d *decoder) Value(obj binary.Object) {
 	obj.Class().DecodeTo(d, obj)
 }
 
-func (d *decoder) Struct(_ *binary.Entity, obj binary.Object) error {
+func (d *decoder) Struct(_ binary.Type, obj binary.Object) error {
 	// Permitted until the code generation is smarter.
 	obj.Class().DecodeTo(d, obj)
 	return d.Error()
 }
 
-func (d *decoder) PopEntity() (*binary.Entity, error) {
-	panic("d.PopEntity() called on flat decoder")
+func (d *decoder) PopType() (binary.Type, error) {
+	panic("d.PopType() called on flat decoder")
 }
 
 func (e *encoder) Entity(*binary.Entity, bool) {
@@ -87,4 +87,8 @@ func (d *decoder) Object() binary.Object {
 
 func (d *decoder) Lookup(ent *binary.Entity) binary.UpgradeDecoder {
 	panic("d.Lookup() called on flat decoder")
+}
+
+func (d *decoder) Count() uint32 {
+	return d.Uint32()
 }

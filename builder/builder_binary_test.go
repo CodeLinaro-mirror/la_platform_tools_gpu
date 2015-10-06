@@ -85,7 +85,7 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 	d.Data(o.api[:20])
 	o.Str = string(d.String())
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Sli = make([]bool, count)
 		for i := range o.Sli {
 			o.Sli[i] = bool(d.Bool())
@@ -97,7 +97,7 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 	} else {
 		o.Ptr = nil
 	}
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.Map = make(map[string]string, count)
 		m := o.Map
 		for i := uint32(0); i < count; i++ {

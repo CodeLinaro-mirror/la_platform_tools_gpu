@@ -411,14 +411,14 @@ func doEncodecallSetStruct(e binary.Encoder, o *callSetStruct) {
 	e.Struct(&o.s)
 }
 func doDecodecallSetStruct(d binary.Decoder, o *callSetStruct) {
-	var ent_5c7b027bf1450e20e81eddae2dd90e0879199561 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_5c7b027bf1450e20e81eddae2dd90e0879199561 binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_5c7b027bf1450e20e81eddae2dd90e0879199561 = ent
+		t_5c7b027bf1450e20e81eddae2dd90e0879199561 = t
 	}
-	d.Struct(ent_5c7b027bf1450e20e81eddae2dd90e0879199561, &o.s)
+	d.Struct(t_5c7b027bf1450e20e81eddae2dd90e0879199561, &o.s)
 }
 func (*binaryClasscallSetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallSetStruct(e, obj.(*callSetStruct))
@@ -593,7 +593,7 @@ func doEncoderesultGetListNodeChainArray(e binary.Encoder, o *resultGetListNodeC
 	}
 }
 func doDecoderesultGetListNodeChainArray(d binary.Decoder, o *resultGetListNodeChainArray) {
-	if count := d.Uint32(); count > 0 {
+	if count := d.Count(); count > 0 {
 		o.value = make([]*ListNode, count)
 		for i := range o.value {
 			if obj := d.Object(); obj != nil {
@@ -710,14 +710,14 @@ func doEncoderesultGetStruct(e binary.Encoder, o *resultGetStruct) {
 	e.Struct(&o.value)
 }
 func doDecoderesultGetStruct(d binary.Decoder, o *resultGetStruct) {
-	var ent_fb61cd7b6964528ad3848da40de0a8e742abec39 *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_fb61cd7b6964528ad3848da40de0a8e742abec39 binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_fb61cd7b6964528ad3848da40de0a8e742abec39 = ent
+		t_fb61cd7b6964528ad3848da40de0a8e742abec39 = t
 	}
-	d.Struct(ent_fb61cd7b6964528ad3848da40de0a8e742abec39, &o.value)
+	d.Struct(t_fb61cd7b6964528ad3848da40de0a8e742abec39, &o.value)
 }
 func (*binaryClassresultGetStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetStruct(e, obj.(*resultGetStruct))
@@ -749,14 +749,14 @@ func doEncoderesultResolveResource(e binary.Encoder, o *resultResolveResource) {
 	e.Struct(&o.value)
 }
 func doDecoderesultResolveResource(d binary.Decoder, o *resultResolveResource) {
-	var ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
+	var t_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f binary.Type
+	if t, err := d.PopType(); err != nil {
 		d.SetError(err)
 		return
 	} else {
-		ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f = ent
+		t_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f = t
 	}
-	d.Struct(ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f, &o.value)
+	d.Struct(t_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f, &o.value)
 }
 func (*binaryClassresultResolveResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultResolveResource(e, obj.(*resultResolveResource))

@@ -106,32 +106,38 @@ func (d *decoder) Value(obj binary.Object) {
 	panic("Call to Value on cyclic decoder")
 }
 
-func (d *decoder) Struct(ent *binary.Entity, obj binary.Object) error {
-	if u := d.Namespace.LookupUpgrader(ent.Signature()); u == nil {
-		return d.SetError(fmt.Errorf("Unknown type id %v", ent))
+func (d *decoder) Struct(t binary.Type, obj binary.Object) error {
+	l := len(d.substack.stack)
+	ent := d.substack.pushExpectStruct(t)
+	if ent == nil {
+		return d.SetError(
+			fmt.Errorf("Struct() decoder expected %T got %s", obj, t))
 	} else {
-		l := len(d.substack.stack)
-		d.substack.PushSubspace(ent)
-		u.DecodeTo(d, obj)
-		if l != len(d.substack.stack) {
-			d.SetError(fmt.Errorf(
-				"Decoding type %q altered the substack. Before %d now %d",
-				ent.Signature(), l, len(d.substack.stack)))
+		sign := ent.Signature()
+		if u := d.Namespace.LookupUpgrader(sign); u == nil {
+			return d.SetError(fmt.Errorf("Unknown type %v sign %v", t, sign))
+		} else {
+			u.DecodeTo(d, obj)
+			if l != len(d.substack.stack) {
+				d.SetError(fmt.Errorf(
+					"Decoding type %q altered the substack. Subtypes: %v. Before %d now %d",
+					sign, t.Subspace(), l, len(d.substack.stack)))
+			}
+			return d.Error()
 		}
-		return d.Error()
 	}
 }
 
 func (d *decoder) StructPop(obj binary.Object) error {
-	if ent, err := d.PopEntity(); err != nil {
+	if t, err := d.PopType(); err != nil {
 		return err
 	} else {
-		return d.Struct(ent, obj)
+		return d.Struct(t, obj)
 	}
 }
 
-func (d *decoder) PopEntity() (*binary.Entity, error) {
-	return d.substack.Pop()
+func (d *decoder) PopType() (binary.Type, error) {
+	return d.substack.popType()
 }
 
 func (e *encoder) Variant(obj binary.Object) {
@@ -154,12 +160,12 @@ func (d *decoder) Variant() binary.Object {
 		return nil
 	} else {
 		l := len(d.substack.stack)
-		d.substack.PushSubspace(entity)
+		d.substack.pushStruct(entity)
 		o := u.Decode(d)
 		if l != len(d.substack.stack) {
 			d.SetError(fmt.Errorf(
-				"Decoding type %q altered the substack. Before %d now %d",
-				entity.Signature(), l, len(d.substack.stack)))
+				"Decoding type %q altered the substack. Subtypes: %v. Before %d now %d",
+				entity.Signature(), entity.Subspace(), l, len(d.substack.stack)))
 		}
 		return o
 	}
@@ -205,4 +211,12 @@ func (d *decoder) Object() binary.Object {
 
 func (d *decoder) Lookup(entity *binary.Entity) binary.UpgradeDecoder {
 	return d.Namespace.LookupUpgrader(entity.Signature())
+}
+
+func (d *decoder) Count() uint32 {
+	count := d.Uint32()
+	if err := d.substack.pushCount(count); err != nil {
+		d.SetError(err)
+	}
+	return count
 }
