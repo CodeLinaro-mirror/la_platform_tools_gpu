@@ -23,14 +23,14 @@ type Object interface {
 	Class() Class
 }
 
-// Provides a decoder interface which maybe used to decode a stream
-// from an old version into a newer version.
+// UpgradeDecoder provides a decoder interface which maybe used to
+// decode a stream from an old version into a newer version.
 type UpgradeDecoder interface {
 	// Decode reads a single object from the supplied Decoder.
 	Decode(Decoder) Object
 	// DecodeTo reads into the supplied object from the supplied Decoder.
-	// The object must be a type the Class understands, the implementation is
-	// allowed to panic if it is not.
+	// The object must be a type the UpgradeDecoder understands, the
+	// implementation is allowed to panic if it is not.
 	DecodeTo(Decoder, Object)
 }
 

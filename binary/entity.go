@@ -99,7 +99,7 @@ type Field struct {
 	Type     Type   // The type stored in the field.
 }
 
-// Represents the sub-types which need decoder support for nested types.
+// Subspace represents the sub-types which need decoder support for nested types.
 type Subspace struct {
 	Counted  bool     // true if the schema type is a counted (slice, map)
 	SubTypes TypeList // the complete list of subtypes
@@ -112,8 +112,9 @@ type Type interface {
 	EncodeValue(e Encoder, value interface{})
 	DecodeValue(d Decoder) interface{}
 	Format(f fmt.State, c rune)
-	// The subspace object. Nil means that this kind of schema object never has
-	// subtypes.
+	// Subspace returns the subspace for this type. The subspace represents
+	// the sub-types which need decoder support for nested types.
+	// Nil means that this kind of schema object never has subtypes.
 	Subspace() *Subspace
 }
 

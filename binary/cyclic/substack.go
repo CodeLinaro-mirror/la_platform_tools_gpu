@@ -21,14 +21,21 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
+// substack is a stack of type objects. Only types which need decoder
+// support for nested sub-structures are added to the stack. The
+// substack is an implementation detail of the cyclic decoder.
 type substack struct {
 	stack []binary.Type
 }
 
+// pushStruct pushes the sub-types needed to decode a struct described
+// the the schema object 'ent'.
 func (s *substack) pushStruct(ent *binary.Entity) {
 	s.pushSubTypes(ent.Subspace().SubTypes)
 }
 
+// entityForStruct if 't' is a schema object for a struct type return
+// the schema entity for that struct.
 func entityForStruct(t binary.Type) *binary.Entity {
 	if s, ok := t.(*schema.Struct); ok {
 		return s.Entity
@@ -36,6 +43,9 @@ func entityForStruct(t binary.Type) *binary.Entity {
 	return nil
 }
 
+// pushExpectStruct pushes the sub-types needed to decode a struct
+// described by the type 't'. If 't' is not a struct type push nothing
+// and return nil, otherwise return the schema entity for that struct.
 func (s *substack) pushExpectStruct(t binary.Type) *binary.Entity {
 	entity := entityForStruct(t)
 	if entity == nil {
@@ -45,12 +55,17 @@ func (s *substack) pushExpectStruct(t binary.Type) *binary.Entity {
 	return entity
 }
 
+// pushSubTypes pushes the sub-types needed to decode a value of type 't'.
 func (s *substack) pushSubTypes(t binary.TypeList) {
 	for i := len(t) - 1; i >= 0; i-- {
 		s.stack = append(s.stack, t[i])
 	}
 }
 
+// pushCount, pops the top type from the stack and pushes any sub-types
+// of that type count times. This is used to decode a collection of size
+// count. If the top item on the stack is not a collection (slice, array, map)
+// then an error is returned.
 func (s *substack) pushCount(count uint32) error {
 	t, err := s.popType()
 	if err != nil {
@@ -70,6 +85,8 @@ func (s *substack) pushCount(count uint32) error {
 	return nil
 }
 
+// popType pops the type which is on the top of the stack. An error
+// is returned if the stack is empty.
 func (s *substack) popType() (binary.Type, error) {
 	if len(s.stack) == 0 {
 		return nil, fmt.Errorf("Pop on empty subtype Entity stack")

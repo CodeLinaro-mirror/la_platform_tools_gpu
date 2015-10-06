@@ -74,8 +74,9 @@ func (n *Namespace) Lookup(signature binary.Signature) binary.Class {
 	return nil
 }
 
-// Looks up a decoder which can decode a stream for signature. If the signature
-// is not current, the decoder will read an old stream into a new object.
+// LookupUpgrader looks up a decoder which can decode a stream for signature.
+// If the signature is not current, the decoder will read an old stream into
+// a new object.
 func (n *Namespace) LookupUpgrader(signature binary.Signature) binary.UpgradeDecoder {
 	class := n.Lookup(signature)
 	if upgrader, ok := class.(binary.UpgradeDecoder); ok {
