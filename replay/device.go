@@ -35,11 +35,15 @@ var localReplayBinary = Replayd
 // Port number of the "gapir" running on the local device
 var localDevicePort = 9284
 
+// The path to the "gapir" log file for the local device.
+var localLogPath = ""
+
 // ConfigureLocalReplayDevice adjusts the settings for gapir.
-func ConfigureLocalReplayDevice(disableCache bool, binary string, port int) {
+func ConfigureLocalReplayDevice(disableCache bool, binary string, port int, logPath string) {
 	disableLocalDeviceCache = disableCache
 	localReplayBinary = binary
 	localDevicePort = port
+	localLogPath = logPath
 }
 
 // deviceOS is an enumerator of operating systems that the replay target may be
@@ -116,8 +120,11 @@ func (localDevice) Connect() (io.ReadWriteCloser, error) {
 	if disableLocalDeviceCache {
 		args = append(args, "--nocache")
 	}
-	args = append(args, "--port")
-	args = append(args, fmt.Sprintf("%d", localDevicePort))
+	args = append(args, "--port", fmt.Sprintf("%d", localDevicePort))
+
+	if len(localLogPath) > 0 {
+		args = append(args, "--log", localLogPath)
+	}
 
 	return process.ConnectStartIfNeeded(endpoint, localReplayBinary, args...)
 }

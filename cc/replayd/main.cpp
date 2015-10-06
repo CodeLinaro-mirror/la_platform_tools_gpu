@@ -109,8 +109,8 @@ void android_main(struct android_app*) {
 
 #else  // TARGET_OS == GAPID_OS_ANDROID
 // Main function for PC
-int main(int argc, char* argv[]) {
-    GAPID_LOGGER_INIT("logs/gapir.log");
+int main(int argc, const char* argv[]) {
+    const char* logPath = "logs/gapir.log";
 
     bool useCache = true;
     const char* portStr = "9284";
@@ -126,7 +126,17 @@ int main(int argc, char* argv[]) {
             }
             portStr = argv[i + 1];
         }
+        if (strcmp(argv[i], "--log") == 0) {
+            if (i + 1 >= argc) {
+                fprintf(stderr, "Usage: --log <log-file-path>");
+                exit(1);
+            }
+            logPath = argv[i + 1];
+        }
     }
+
+    GAPID_LOGGER_INIT(logPath);
+
     const char* cachePath = useCache ? ("data" PATH_DELIMITER_STR "ccache") : nullptr;
     MemoryManager memoryManager(memorySizes);
     GAPID_INFO("gapir listening on port %s", portStr);
