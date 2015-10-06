@@ -339,7 +339,7 @@ const go_binary_tmpl = `{{/*
   «}¶
   func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) {»¶
     {{range .Fields}}
-      {{Call "Go.PopDecode" (Var .Type "o." .Name)}}
+      {{Call "Go.Decode" (Var .Type "o." .Name)}}
     {{end}}
   «}¶
   {{$base := 18}}
@@ -383,7 +383,7 @@ const go_binary_tmpl = `{{/*
 {{define "Go.doDecode"}}
 func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
   {{range .Fields}}
-    {{Call "Go.PopDecode" (Var .Type "o." .Name)}}
+    {{Call "Go.Decode" (Var .Type "o." .Name)}}
   {{end}}
   return d.Error()¶
 «}¶
@@ -518,10 +518,9 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Struct"}}
   {{if (File.Directive "Schema" false)}}
   // Schema is off¶
-  _ = {{Call "Go.UniqueID" .}}¶
   d.Value(&{{.Name}})¶
   {{else}}
-  d.Struct({{Call "Go.UniqueID" .}}, &{{.Name}})¶
+  d.Struct(&{{.Name}})¶
   {{end}}
 {{end}}
 
@@ -567,7 +566,6 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Slice"}}
   {{template "Go.Decode_Length" $}}
     for i := range {{.Name}} {»¶
-      {{Call "Go.PopType" (Var .Type.ValueType .Name "[i]")}}
       {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
     «}¶
   «}¶
@@ -579,31 +577,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Decode.Array"}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.PopType" (Var .Type.ValueType .Name "[i]")}}
     {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
   «}¶
-{{end}}
-
-{{define "Go.PopType"}}
-{{end}}
-
-{{define "Go.UniqueID"}}
-{{(print "t_" .Unique)}}
-{{end}}
-
-{{define "Go.PopType.Struct"}}
-var•{{Call "Go.UniqueID" .}}•binary.Type¶
-if t, err := d.PopType(); err != nil {»¶
-  d.SetError(err)¶
-  return¶
-«} else {»¶
-  {{Call "Go.UniqueID" .}}•= t¶
-«}¶
-{{end}}
-
-{{define "Go.PopDecode"}}
-{{Call "Go.PopType" .}}
-{{Call "Go.Decode" .}}
 {{end}}
 
 {{define "Go.Decode.Map"}}
@@ -611,8 +586,6 @@ if t, err := d.PopType(); err != nil {»¶
     {{.Name}} = make({{.Type}}, count)¶
     m := {{.Name}}¶
     for i := uint32(0); i < count; i++ {»¶
-      {{Call "Go.PopType" (Var .Type.KeyType "k")}}
-      {{Call "Go.PopType" (Var .Type.ValueType "v")}}
       var k {{.Type.KeyType}}¶
       var v {{.Type.ValueType}}¶
       {{Call "Go.Decode" (Var .Type.KeyType "k")}}

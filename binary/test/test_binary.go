@@ -136,14 +136,7 @@ func doEncodeY(e binary.Encoder, o *Y) {
 }
 func doDecodeY(d binary.Decoder, o *Y) {
 	o.begin = string(d.String())
-	var t_05812f806fd444a2f25ef8af1732c40dd2f23b10 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_05812f806fd444a2f25ef8af1732c40dd2f23b10 = t
-	}
-	d.Struct(t_05812f806fd444a2f25ef8af1732c40dd2f23b10, &o.x)
+	d.Struct(&o.x)
 	o.end = string(d.String())
 }
 func (*binaryClassY) Encode(e binary.Encoder, obj binary.Object) {

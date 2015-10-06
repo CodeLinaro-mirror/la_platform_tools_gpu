@@ -120,25 +120,11 @@ func doEncodeGroup(e binary.Encoder, o *Group) {
 }
 func doDecodeGroup(d binary.Decoder, o *Group) {
 	o.Name = string(d.String())
-	var t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c = t
-	}
-	d.Struct(t_7fdf170b3f79b735ca1fc9910f8716acf8fa1b3c, &o.Range)
+	d.Struct(&o.Range)
 	if count := d.Count(); count > 0 {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
-			var t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579 = t
-			}
-			d.Struct(t_34ae9abedc0bc2b7bb9388e8c13e05019ff8f579, &o.SubGroups[i])
+			d.Struct(&o.SubGroups[i])
 		}
 	}
 }
@@ -263,14 +249,7 @@ func doEncodeObservation(e binary.Encoder, o *Observation) {
 	e.Data(o.ID[:20])
 }
 func doDecodeObservation(d binary.Decoder, o *Observation) {
-	var t_a07589894b4560331859dd95294109982b0f1446 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_a07589894b4560331859dd95294109982b0f1446 = t
-	}
-	d.Struct(t_a07589894b4560331859dd95294109982b0f1446, &o.Range)
+	d.Struct(&o.Range)
 	d.Data(o.ID[:20])
 }
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
@@ -314,27 +293,13 @@ func doDecodeObservations(d binary.Decoder, o *Observations) {
 	if count := d.Count(); count > 0 {
 		o.Reads = make([]Observation, count)
 		for i := range o.Reads {
-			var t_c7c3cc379a0da3de249d0eafe436ad676ba8c146 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_c7c3cc379a0da3de249d0eafe436ad676ba8c146 = t
-			}
-			d.Struct(t_c7c3cc379a0da3de249d0eafe436ad676ba8c146, &o.Reads[i])
+			d.Struct(&o.Reads[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Writes = make([]Observation, count)
 		for i := range o.Writes {
-			var t_e330f623e42ac06d54144296a88d22f3aea3292a binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_e330f623e42ac06d54144296a88d22f3aea3292a = t
-			}
-			d.Struct(t_e330f623e42ac06d54144296a88d22f3aea3292a, &o.Writes[i])
+			d.Struct(&o.Writes[i])
 		}
 	}
 }

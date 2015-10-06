@@ -97,25 +97,24 @@ func (e *encoder) Value(obj binary.Object) {
 	panic("Call to Value on cyclic encoder")
 }
 
-func (e *encoder) Struct(obj binary.Object) error {
+func (e *encoder) Struct(obj binary.Object) {
 	obj.Class().Encode(e, obj)
-	return e.Error()
 }
 
 func (d *decoder) Value(obj binary.Object) {
 	panic("Call to Value on cyclic decoder")
 }
 
-func (d *decoder) Struct(t binary.Type, obj binary.Object) error {
+func (d *decoder) doStruct(t binary.Type, obj binary.Object) {
 	l := len(d.substack.stack)
 	ent := d.substack.pushExpectStruct(t)
 	if ent == nil {
-		return d.SetError(
+		d.SetError(
 			fmt.Errorf("Struct() decoder expected %T got %s", obj, t))
 	} else {
 		sign := ent.Signature()
 		if u := d.Namespace.LookupUpgrader(sign); u == nil {
-			return d.SetError(fmt.Errorf("Unknown type %v sign %v", t, sign))
+			d.SetError(fmt.Errorf("Unknown type %v sign %v", t, sign))
 		} else {
 			u.DecodeTo(d, obj)
 			if l != len(d.substack.stack) {
@@ -123,21 +122,16 @@ func (d *decoder) Struct(t binary.Type, obj binary.Object) error {
 					"Decoding type %q altered the substack. Subtypes: %v. Before %d now %d",
 					sign, t.Subspace(), l, len(d.substack.stack)))
 			}
-			return d.Error()
 		}
 	}
 }
 
-func (d *decoder) StructPop(obj binary.Object) error {
-	if t, err := d.PopType(); err != nil {
-		return err
+func (d *decoder) Struct(obj binary.Object) {
+	if t, err := d.substack.popType(); err != nil {
+		d.SetError(err)
 	} else {
-		return d.Struct(t, obj)
+		d.doStruct(t, obj)
 	}
-}
-
-func (d *decoder) PopType() (binary.Type, error) {
-	return d.substack.popType()
 }
 
 func (e *encoder) Variant(obj binary.Object) {

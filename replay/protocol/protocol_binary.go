@@ -83,14 +83,7 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 	if count := d.Count(); count > 0 {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			var t_6233a674930897af785febe2f53bca85fac74752 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_6233a674930897af785febe2f53bca85fac74752 = t
-			}
-			d.Struct(t_6233a674930897af785febe2f53bca85fac74752, &o.Resources[i])
+			d.Struct(&o.Resources[i])
 		}
 	}
 	if count := d.Count(); count > 0 {

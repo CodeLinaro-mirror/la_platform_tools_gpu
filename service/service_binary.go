@@ -262,40 +262,19 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
 	if count := d.Count(); count > 0 {
 		o.Reads = make(memory.RangeList, count)
 		for i := range o.Reads {
-			var t_46843000c5853355719e7521b21f8838f3acc1fb binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_46843000c5853355719e7521b21f8838f3acc1fb = t
-			}
-			d.Struct(t_46843000c5853355719e7521b21f8838f3acc1fb, &o.Reads[i])
+			d.Struct(&o.Reads[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Writes = make(memory.RangeList, count)
 		for i := range o.Writes {
-			var t_5be69fd9e7979b70ee26b3a527ab6ff776008113 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_5be69fd9e7979b70ee26b3a527ab6ff776008113 = t
-			}
-			d.Struct(t_5be69fd9e7979b70ee26b3a527ab6ff776008113, &o.Writes[i])
+			d.Struct(&o.Writes[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Observed = make(memory.RangeList, count)
 		for i := range o.Observed {
-			var t_0724f441e79bf9de1963fc961ba43ff03f832fa8 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_0724f441e79bf9de1963fc961ba43ff03f832fa8 = t
-			}
-			d.Struct(t_0724f441e79bf9de1963fc961ba43ff03f832fa8, &o.Observed[i])
+			d.Struct(&o.Observed[i])
 		}
 	}
 }
@@ -414,14 +393,7 @@ func doDecodeReport(d binary.Decoder, o *Report) {
 	if count := d.Count(); count > 0 {
 		o.Items = make([]ReportItem, count)
 		for i := range o.Items {
-			var t_24e824fbfe817f6e820610a8a02af6ed729ee2fa binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_24e824fbfe817f6e820610a8a02af6ed729ee2fa = t
-			}
-			d.Struct(t_24e824fbfe817f6e820610a8a02af6ed729ee2fa, &o.Items[i])
+			d.Struct(&o.Items[i])
 		}
 	}
 }
@@ -519,53 +491,25 @@ func doDecodeResources(d binary.Decoder, o *Resources) {
 	if count := d.Count(); count > 0 {
 		o.Textures1D = make([]ResourceInfo, count)
 		for i := range o.Textures1D {
-			var t_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f = t
-			}
-			d.Struct(t_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f, &o.Textures1D[i])
+			d.Struct(&o.Textures1D[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Textures2D = make([]ResourceInfo, count)
 		for i := range o.Textures2D {
-			var t_c3226edef71d45d22b0a9c9071f78090390ec6d0 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_c3226edef71d45d22b0a9c9071f78090390ec6d0 = t
-			}
-			d.Struct(t_c3226edef71d45d22b0a9c9071f78090390ec6d0, &o.Textures2D[i])
+			d.Struct(&o.Textures2D[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Textures3D = make([]ResourceInfo, count)
 		for i := range o.Textures3D {
-			var t_8d9816329f90d0d89f9c7bb22f2714f500ccdbda binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_8d9816329f90d0d89f9c7bb22f2714f500ccdbda = t
-			}
-			d.Struct(t_8d9816329f90d0d89f9c7bb22f2714f500ccdbda, &o.Textures3D[i])
+			d.Struct(&o.Textures3D[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Cubemaps = make([]ResourceInfo, count)
 		for i := range o.Cubemaps {
-			var t_7d7a6015257b08fb00305bdb7e9eb9187af74829 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_7d7a6015257b08fb00305bdb7e9eb9187af74829 = t
-			}
-			d.Struct(t_7d7a6015257b08fb00305bdb7e9eb9187af74829, &o.Cubemaps[i])
+			d.Struct(&o.Cubemaps[i])
 		}
 	}
 }
@@ -616,40 +560,19 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 	if count := d.Count(); count > 0 {
 		o.PerCommand = make([]AtomTimer, count)
 		for i := range o.PerCommand {
-			var t_bc79380b317a6061b732fb0a24814feacef47c1c binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_bc79380b317a6061b732fb0a24814feacef47c1c = t
-			}
-			d.Struct(t_bc79380b317a6061b732fb0a24814feacef47c1c, &o.PerCommand[i])
+			d.Struct(&o.PerCommand[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.PerDrawCall = make([]AtomRangeTimer, count)
 		for i := range o.PerDrawCall {
-			var t_0b1178f5fe291c723fe274eb7315b537beb1a9c8 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_0b1178f5fe291c723fe274eb7315b537beb1a9c8 = t
-			}
-			d.Struct(t_0b1178f5fe291c723fe274eb7315b537beb1a9c8, &o.PerDrawCall[i])
+			d.Struct(&o.PerDrawCall[i])
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.PerFrame = make([]AtomRangeTimer, count)
 		for i := range o.PerFrame {
-			var t_4007a3aff86abab686f7fe8563d561d4d96c5cc6 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_4007a3aff86abab686f7fe8563d561d4d96c5cc6 = t
-			}
-			d.Struct(t_4007a3aff86abab686f7fe8563d561d4d96c5cc6, &o.PerFrame[i])
+			d.Struct(&o.PerFrame[i])
 		}
 	}
 }
@@ -833,14 +756,7 @@ func doDecodecallGetFramebufferColor(d binary.Decoder, o *callGetFramebufferColo
 	} else {
 		o.after = nil
 	}
-	var t_fce65e0023777b929bde1f3d7da272183be446bd binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_fce65e0023777b929bde1f3d7da272183be446bd = t
-	}
-	d.Struct(t_fce65e0023777b929bde1f3d7da272183be446bd, &o.settings)
+	d.Struct(&o.settings)
 }
 func (*binaryClasscallGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecallGetFramebufferColor(e, obj.(*callGetFramebufferColor))
@@ -1369,14 +1285,7 @@ func doEncoderesultGetSchema(e binary.Encoder, o *resultGetSchema) {
 	e.Struct(&o.value)
 }
 func doDecoderesultGetSchema(d binary.Decoder, o *resultGetSchema) {
-	var t_e4eb441698e1087e227cf358c8557e8a3ea6a162 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_e4eb441698e1087e227cf358c8557e8a3ea6a162 = t
-	}
-	d.Struct(t_e4eb441698e1087e227cf358c8557e8a3ea6a162, &o.value)
+	d.Struct(&o.value)
 }
 func (*binaryClassresultGetSchema) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesultGetSchema(e, obj.(*resultGetSchema))

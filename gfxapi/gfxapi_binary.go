@@ -37,54 +37,12 @@ func doEncodeCubemapLevel(e binary.Encoder, o *CubemapLevel) {
 	e.Struct(&o.PositiveZ)
 }
 func doDecodeCubemapLevel(d binary.Decoder, o *CubemapLevel) {
-	var t_ed7a039c2285395683d90eab03640b94578ff844 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_ed7a039c2285395683d90eab03640b94578ff844 = t
-	}
-	d.Struct(t_ed7a039c2285395683d90eab03640b94578ff844, &o.NegativeX)
-	var t_e53cc187fb428496be7fd3ab104d7f8e3ba29cbd binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_e53cc187fb428496be7fd3ab104d7f8e3ba29cbd = t
-	}
-	d.Struct(t_e53cc187fb428496be7fd3ab104d7f8e3ba29cbd, &o.PositiveX)
-	var t_42fbbb59ec7290fe9ff10537bf032fc0fe832e28 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_42fbbb59ec7290fe9ff10537bf032fc0fe832e28 = t
-	}
-	d.Struct(t_42fbbb59ec7290fe9ff10537bf032fc0fe832e28, &o.NegativeY)
-	var t_834e58944dfcf32937b9c838cecb8496a7241304 binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_834e58944dfcf32937b9c838cecb8496a7241304 = t
-	}
-	d.Struct(t_834e58944dfcf32937b9c838cecb8496a7241304, &o.PositiveY)
-	var t_26f4dc01073e0b37a69674d04a984ce26c991f1d binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_26f4dc01073e0b37a69674d04a984ce26c991f1d = t
-	}
-	d.Struct(t_26f4dc01073e0b37a69674d04a984ce26c991f1d, &o.NegativeZ)
-	var t_312c235aa3fbec54cc72a76a1eb710091c78298d binary.Type
-	if t, err := d.PopType(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		t_312c235aa3fbec54cc72a76a1eb710091c78298d = t
-	}
-	d.Struct(t_312c235aa3fbec54cc72a76a1eb710091c78298d, &o.PositiveZ)
+	d.Struct(&o.NegativeX)
+	d.Struct(&o.PositiveX)
+	d.Struct(&o.NegativeY)
+	d.Struct(&o.PositiveY)
+	d.Struct(&o.NegativeZ)
+	d.Struct(&o.PositiveZ)
 }
 func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCubemapLevel(e, obj.(*CubemapLevel))
@@ -127,14 +85,7 @@ func doDecodeCubemap(d binary.Decoder, o *Cubemap) {
 	if count := d.Count(); count > 0 {
 		o.Levels = make([]CubemapLevel, count)
 		for i := range o.Levels {
-			var t_94a4a97d77a867018a890e92ed41b727b3cbd920 binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_94a4a97d77a867018a890e92ed41b727b3cbd920 = t
-			}
-			d.Struct(t_94a4a97d77a867018a890e92ed41b727b3cbd920, &o.Levels[i])
+			d.Struct(&o.Levels[i])
 		}
 	}
 }
@@ -174,14 +125,7 @@ func doDecodeTexture2D(d binary.Decoder, o *Texture2D) {
 	if count := d.Count(); count > 0 {
 		o.Levels = make([]image.Info, count)
 		for i := range o.Levels {
-			var t_96dbfa7d7edcc8301d963c686c940780e559198e binary.Type
-			if t, err := d.PopType(); err != nil {
-				d.SetError(err)
-				return
-			} else {
-				t_96dbfa7d7edcc8301d963c686c940780e559198e = t
-			}
-			d.Struct(t_96dbfa7d7edcc8301d963c686c940780e559198e, &o.Levels[i])
+			d.Struct(&o.Levels[i])
 		}
 	}
 }
