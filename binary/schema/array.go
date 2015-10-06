@@ -78,7 +78,11 @@ func (s *Slice) Representation() string {
 }
 
 func (s *Array) Subspace() binary.EntityList {
-	return s.ValueType.Subspace()
+	sub := s.ValueType.Subspace()
+	if len(sub) > 1 {
+		panic(fmt.Errorf("Array is of complex nested type %s", s))
+	}
+	return sub
 }
 
 func (s *Slice) String() string {
@@ -119,5 +123,9 @@ func (s *Slice) DecodeValue(d binary.Decoder) interface{} {
 }
 
 func (s *Slice) Subspace() binary.EntityList {
-	return s.ValueType.Subspace()
+	sub := s.ValueType.Subspace()
+	if len(sub) > 1 {
+		panic(fmt.Errorf("Slice is of complex nested type %s: %v", s, sub))
+	}
+	return sub
 }

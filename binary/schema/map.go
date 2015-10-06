@@ -71,5 +71,14 @@ func (m *Map) DecodeValue(d binary.Decoder) interface{} {
 }
 
 func (m *Map) Subspace() binary.EntityList {
-	return append(m.KeyType.Subspace(), m.ValueType.Subspace()...)
+	kSub := m.KeyType.Subspace()
+	if len(kSub) > 1 {
+		panic(fmt.Errorf("Key is of complex nested type %s", kSub))
+	}
+
+	vSub := m.ValueType.Subspace()
+	if len(vSub) > 1 {
+		panic(fmt.Errorf("Map is of complex nested type %s", vSub))
+	}
+	return append(kSub, vSub...)
 }
