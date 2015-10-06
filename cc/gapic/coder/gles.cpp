@@ -40,6 +40,53 @@ const schema::Entity* Architecture::StaticSchema() {
     return &entity;
 }
 
+// SliceInfo:
+// gles.SliceInfo{$,Uint64,Uint64}
+const schema::Entity* SliceInfo::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "SliceInfo",
+        "",
+        {
+            schema::Field{"Root", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Base", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Count", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+        },
+    };
+    return &entity;
+}
+
+// AttributeLocationˢ:
+// gles.AttributeLocationˢ{$}
+const schema::Entity* AttributeLocation__S::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "AttributeLocationˢ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// AttributeLocationᵖ:
+// gles.AttributeLocationᵖ{$}
+const schema::Entity* AttributeLocation__P::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "AttributeLocationᵖ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
 // Color:
 // gles.Color{Float32,Float32,Float32,Float32}
 void Color::Encode(Encoder* e) const {
@@ -89,23 +136,6 @@ const schema::Entity* BlendState::StaticSchema() {
             schema::Field{"BlendEquationRgb", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BlendEquationAlpha", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
             schema::Field{"BlendColor", new schema::Struct{ Color::StaticSchema()}},
-        },
-    };
-    return &entity;
-}
-
-// SliceInfo:
-// gles.SliceInfo{$,Uint64,Uint64}
-const schema::Entity* SliceInfo::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "SliceInfo",
-        "",
-        {
-            schema::Field{"Root", new schema::Struct{ memory::Pointer::StaticSchema()}},
-            schema::Field{"Base", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
-            schema::Field{"Count", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
         },
     };
     return &entity;
@@ -557,17 +587,344 @@ const schema::Entity* ClearState::StaticSchema() {
     return &entity;
 }
 
-// ContextCreationInfo:
-// gles.ContextCreationInfo{String,String,String,String,Int32,Int32,Bool}
-void ContextCreationInfo::Encode(Encoder* e) const {
-    e->String(this->mName);
-    e->String(this->mVendor);
-    e->String(this->mExtensions);
-    e->String(this->mVersion);
-    e->Int32(this->mVersionMajor);
-    e->Int32(this->mVersionMinor);
-    e->Bool(this->mPreserveBuffersOnSwap);
+// GLfloatˢ:
+// gles.GLfloatˢ{$}
+const schema::Entity* GLfloat__S::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "GLfloatˢ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
 }
+
+// GLintˢ:
+// gles.GLintˢ{$}
+const schema::Entity* GLint__S::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "GLintˢ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// Constants:
+// gles.Constants{String,String,String,String,String,Int32,Int64,Int32,Int32,Int32,Float32,Int32,Int32,$,$,$,Float32,Int32,Int32,Int32,Int32,Int32,Int32,Float32,Float32,Int32,$,Int32,Int32,Int32,Int32,Int64,Int32,Uint8,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$,Int32,$,Int32,$,Uint8,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,$,$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int64,Int32,Int32,Int64,Int32,Int32,Int32,Int64,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int64,Int32,Int32}
+void Constants::Encode(Encoder* e) const {
+    e->String(this->mRenderer);
+    e->String(this->mVendor);
+    e->String(this->mVersion);
+    e->String(this->mExtensions);
+    e->String(this->mShadingLanguageVersion);
+    e->Int32(this->mSubpixelBits);
+    e->Int64(this->mMaxElementIndex);
+    e->Int32(this->mMax3dTextureSize);
+    e->Int32(this->mMaxTextureSize);
+    e->Int32(this->mMaxArrayTextureLayers);
+    e->Float32(this->mMaxTextureLodBias);
+    e->Int32(this->mMaxCubeMapTextureSize);
+    e->Int32(this->mMaxRenderbufferSize);
+    e->Value(this->mAliasedPointSizeRange);
+    e->Value(this->mAliasedLineWidthRange);
+    e->Value(this->mMultisampleLineWidthRange);
+    e->Float32(this->mMultisampleLineWidthGranularity);
+    e->Int32(this->mMaxDrawBuffers);
+    e->Int32(this->mMaxFramebufferWidth);
+    e->Int32(this->mMaxFramebufferHeight);
+    e->Int32(this->mMaxFramebufferLayers);
+    e->Int32(this->mMaxFramebufferSamples);
+    e->Int32(this->mMaxColorAttachments);
+    e->Float32(this->mMinFragmentInterpolationOffset);
+    e->Float32(this->mMaxFragmentInterpolationOffset);
+    e->Int32(this->mFragmentInterpolationOffsetBits);
+    e->Value(this->mMaxViewportDims);
+    e->Int32(this->mMaxSampleMaskWords);
+    e->Int32(this->mMaxColorTextureSamples);
+    e->Int32(this->mMaxDepthTextureSamples);
+    e->Int32(this->mMaxIntegerSamples);
+    e->Int64(this->mMaxServerWaitTimeout);
+    e->Int32(this->mLayerProvokingVertex);
+    e->Uint8(this->mPrimitiveRestartForPatchesSupported);
+    e->Int32(this->mMaxVertexAttribRelativeOffset);
+    e->Uint32(this->mMaxVertexAttribBindings);
+    e->Int32(this->mMaxVertexAttribStride);
+    e->Int32(this->mMaxElementsIndices);
+    e->Int32(this->mMaxElementsVertices);
+    e->Int32(this->mMaxTextureBufferSize);
+    e->Int32(this->mNumCompressedTextureFormats);
+    e->Value(this->mCompressedTextureFormats);
+    e->Int32(this->mNumProgramBinaryFormats);
+    e->Value(this->mProgramBinaryFormats);
+    e->Int32(this->mNumShaderBinaryFormats);
+    e->Value(this->mShaderBinaryFormats);
+    e->Uint8(this->mShaderCompiler);
+    e->Int32(this->mTextureBufferOffsetAlignment);
+    e->Int32(this->mNumExtensions);
+    e->Int32(this->mMajorVersion);
+    e->Int32(this->mMinorVersion);
+    e->Int32(this->mContextFlags);
+    e->Uint32(this->mMaxVertexAttribs);
+    e->Int32(this->mMaxVertexUniformComponents);
+    e->Int32(this->mMaxVertexUniformVectors);
+    e->Int32(this->mMaxVertexUniformBlocks);
+    e->Int32(this->mMaxVertexOutputComponents);
+    e->Int32(this->mMaxVertexTextureImageUnits);
+    e->Int32(this->mMaxVertexAtomicCounterBuffers);
+    e->Int32(this->mMaxVertexAtomicCounters);
+    e->Int32(this->mMaxVertexShaderStorageBlocks);
+    e->Int32(this->mMaxTessGenLevel);
+    e->Int32(this->mMaxPatchVertices);
+    e->Int32(this->mMaxTessControlUniformComponents);
+    e->Int32(this->mMaxTessControlTextureImageUnits);
+    e->Int32(this->mMaxTessControlOutputComponents);
+    e->Int32(this->mMaxTessPatchComponents);
+    e->Int32(this->mMaxTessControlTotalOutputComponents);
+    e->Int32(this->mMaxTessControlInputComponents);
+    e->Int32(this->mMaxTessControlUniformBlocks);
+    e->Int32(this->mMaxTessControlAtomicCounterBuffers);
+    e->Int32(this->mMaxTessControlAtomicCounters);
+    e->Int32(this->mMaxTessControlShaderStorageBlocks);
+    e->Int32(this->mMaxTessEvaluationUniformComponents);
+    e->Int32(this->mMaxTessEvaluationTextureImageUnits);
+    e->Int32(this->mMaxTessEvaluationOutputComponents);
+    e->Int32(this->mMaxTessEvaluationInputComponents);
+    e->Int32(this->mMaxTessEvaluationUniformBlocks);
+    e->Int32(this->mMaxTessEvaluationAtomicCounterBuffers);
+    e->Int32(this->mMaxTessEvaluationAtomicCounters);
+    e->Int32(this->mMaxTessEvaluationShaderStorageBlocks);
+    e->Int32(this->mMaxGeometryUniformComponents);
+    e->Int32(this->mMaxGeometryUniformBlocks);
+    e->Int32(this->mMaxGeometryInputComponents);
+    e->Int32(this->mMaxGeometryOutputComponents);
+    e->Int32(this->mMaxGeometryOutputVertices);
+    e->Int32(this->mMaxGeometryTotalOutputComponents);
+    e->Int32(this->mMaxGeometryTextureImageUnits);
+    e->Int32(this->mMaxGeometryShaderInvocations);
+    e->Int32(this->mMaxGeometryAtomicCounterBuffers);
+    e->Int32(this->mMaxGeometryAtomicCounters);
+    e->Int32(this->mMaxGeometryShaderStorageBlocks);
+    e->Int32(this->mMaxFragmentUniformComponents);
+    e->Int32(this->mMaxFragmentUniformVectors);
+    e->Int32(this->mMaxFragmentUniformBlocks);
+    e->Int32(this->mMaxFragmentInputComponents);
+    e->Int32(this->mMaxTextureImageUnits);
+    e->Int32(this->mMaxFragmentAtomicCounterBuffers);
+    e->Int32(this->mMaxFragmentAtomicCounters);
+    e->Int32(this->mMaxFragmentShaderStorageBlocks);
+    e->Int32(this->mMinProgramTextureGatherOffset);
+    e->Int32(this->mMaxProgramTextureGatherOffset);
+    e->Int32(this->mMinProgramTexelOffset);
+    e->Int32(this->mMaxProgramTexelOffset);
+    e->Value(this->mMaxComputeWorkGroupCount);
+    e->Value(this->mMaxComputeWorkGroupSize);
+    e->Int32(this->mMaxComputeWorkGroupInvocations);
+    e->Int32(this->mMaxComputeUniformBlocks);
+    e->Int32(this->mMaxComputeTextureImageUnits);
+    e->Int32(this->mMaxComputeSharedMemorySize);
+    e->Int32(this->mMaxComputeUniformComponents);
+    e->Int32(this->mMaxComputeAtomicCounterBuffers);
+    e->Int32(this->mMaxComputeAtomicCounters);
+    e->Int32(this->mMaxCombinedComputeUniformComponents);
+    e->Int32(this->mMaxComputeShaderStorageBlocks);
+    e->Int32(this->mMaxUniformBufferBindings);
+    e->Int64(this->mMaxUniformBlockSize);
+    e->Int32(this->mUniformBufferOffsetAlignment);
+    e->Int32(this->mMaxCombinedUniformBlocks);
+    e->Int64(this->mMaxCombinedVertexUniformComponents);
+    e->Int32(this->mMaxCombinedTessControlUniformComponents);
+    e->Int32(this->mMaxCombinedTessEvaluationUniformComponents);
+    e->Int32(this->mMaxCombinedGeometryUniformComponents);
+    e->Int64(this->mMaxCombinedFragmentUniformComponents);
+    e->Int32(this->mMaxVaryingComponents);
+    e->Int32(this->mMaxVaryingVectors);
+    e->Int32(this->mMaxCombinedTextureImageUnits);
+    e->Int32(this->mMaxCombinedShaderOutputResources);
+    e->Int32(this->mMaxUniformLocations);
+    e->Int32(this->mMaxAtomicCounterBufferBindings);
+    e->Int32(this->mMaxAtomicCounterBufferSize);
+    e->Int32(this->mMaxCombinedAtomicCounterBuffers);
+    e->Int32(this->mMaxCombinedAtomicCounters);
+    e->Int32(this->mMaxImageUnits);
+    e->Int32(this->mMaxVertexImageUniforms);
+    e->Int32(this->mMaxTessControlImageUniforms);
+    e->Int32(this->mMaxTessEvaluationImageUniforms);
+    e->Int32(this->mMaxGeometryImageUniforms);
+    e->Int32(this->mMaxFragmentImageUniforms);
+    e->Int32(this->mMaxComputeImageUniforms);
+    e->Int32(this->mMaxCombinedImageUniforms);
+    e->Int32(this->mMaxShaderStorageBufferBindings);
+    e->Int64(this->mMaxShaderStorageBlockSize);
+    e->Int32(this->mMaxCombinedShaderStorageBlocks);
+    e->Int32(this->mShaderStorageBufferOffsetAlignment);
+}
+const schema::Entity* Constants::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Constants",
+        "",
+        {
+            schema::Field{"Renderer", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"Vendor", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"Version", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"Extensions", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"ShadingLanguageVersion", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"SubpixelBits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxElementIndex", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"Max3dTextureSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTextureSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxArrayTextureLayers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTextureLodBias", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"MaxCubeMapTextureSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxRenderbufferSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"AliasedPointSizeRange", new schema::Struct{ GLfloat__S::StaticSchema()}},
+            schema::Field{"AliasedLineWidthRange", new schema::Struct{ GLfloat__S::StaticSchema()}},
+            schema::Field{"MultisampleLineWidthRange", new schema::Struct{ GLfloat__S::StaticSchema()}},
+            schema::Field{"MultisampleLineWidthGranularity", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"MaxDrawBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFramebufferWidth", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFramebufferHeight", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFramebufferLayers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFramebufferSamples", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxColorAttachments", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MinFragmentInterpolationOffset", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"MaxFragmentInterpolationOffset", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"FragmentInterpolationOffsetBits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxViewportDims", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"MaxSampleMaskWords", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxColorTextureSamples", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxDepthTextureSamples", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxIntegerSamples", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxServerWaitTimeout", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"LayerProvokingVertex", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"PrimitiveRestartForPatchesSupported", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"MaxVertexAttribRelativeOffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexAttribBindings", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}},
+            schema::Field{"MaxVertexAttribStride", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxElementsIndices", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxElementsVertices", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTextureBufferSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"NumCompressedTextureFormats", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"CompressedTextureFormats", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"NumProgramBinaryFormats", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"ProgramBinaryFormats", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"NumShaderBinaryFormats", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"ShaderBinaryFormats", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"ShaderCompiler", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"TextureBufferOffsetAlignment", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"NumExtensions", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MajorVersion", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MinorVersion", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"ContextFlags", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexAttribs", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}},
+            schema::Field{"MaxVertexUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexUniformVectors", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessGenLevel", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxPatchVertices", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessPatchComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlTotalOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlInputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationInputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryInputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryOutputVertices", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryTotalOutputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryShaderInvocations", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentUniformVectors", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentInputComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MinProgramTextureGatherOffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxProgramTextureGatherOffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MinProgramTexelOffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxProgramTexelOffset", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeWorkGroupCount", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"MaxComputeWorkGroupSize", new schema::Struct{ GLint__S::StaticSchema()}},
+            schema::Field{"MaxComputeWorkGroupInvocations", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeSharedMemorySize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedComputeUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxUniformBufferBindings", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxUniformBlockSize", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"UniformBufferOffsetAlignment", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedUniformBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedVertexUniformComponents", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"MaxCombinedTessControlUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedTessEvaluationUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedGeometryUniformComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedFragmentUniformComponents", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"MaxVaryingComponents", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVaryingVectors", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedTextureImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedShaderOutputResources", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxUniformLocations", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxAtomicCounterBufferBindings", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxAtomicCounterBufferSize", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedAtomicCounterBuffers", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedAtomicCounters", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxImageUnits", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxVertexImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessControlImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxTessEvaluationImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxGeometryImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxFragmentImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxComputeImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxCombinedImageUniforms", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxShaderStorageBufferBindings", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"MaxShaderStorageBlockSize", new schema::Primitive{"GLint64", schema::Primitive::Int64}},
+            schema::Field{"MaxCombinedShaderStorageBlocks", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"ShaderStorageBufferOffsetAlignment", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+        },
+    };
+    return &entity;
+}
+
+// ContextCreationInfo:
+// gles.ContextCreationInfo{Bool}
 const schema::Entity* ContextCreationInfo::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -575,12 +932,6 @@ const schema::Entity* ContextCreationInfo::StaticSchema() {
         "ContextCreationInfo",
         "",
         {
-            schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Vendor", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Extensions", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Version", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"VersionMajor", new schema::Primitive{"GLint", schema::Primitive::Int32}},
-            schema::Field{"VersionMinor", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"PreserveBuffersOnSwap", new schema::Primitive{"bool", schema::Primitive::Bool}},
         },
     };
@@ -880,16 +1231,62 @@ const schema::Entity* Query::StaticSchema() {
 
 // Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
 
-// Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$}
+// Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
+
+// GLenumᵖ:
+// gles.GLenumᵖ{$}
+const schema::Entity* GLenum__P::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "GLenumᵖ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// U32ᵖ:
+// gles.U32ᵖ{$}
+const schema::Entity* U32__P::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "U32ᵖ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// U8ᵖ:
+// gles.U8ᵖ{$}
+const schema::Entity* U8__P::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "U8ᵖ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
 
 // ContextInfo:
-// gles.ContextInfo{$,String,String,String,String,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
+// gles.ContextInfo{$,Uint32,$,$,$,$,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
 void ContextInfo::Encode(Encoder* e) const {
     e->Value(this->mobservations);
-    e->String(this->mName);
-    e->String(this->mVendor);
-    e->String(this->mExtensions);
-    e->String(this->mVersion);
+    e->Uint32(this->mConstantCount);
+    e->Value(this->mConstantNames);
+    e->Value(this->mConstantOffsets);
+    e->Value(this->mConstantSizes);
+    e->Value(this->mConstantData);
     e->Int32(this->mBackbufferWidth);
     e->Int32(this->mBackbufferHeight);
     e->Uint32(this->mBackbufferColorFmt);
@@ -906,10 +1303,11 @@ const schema::Entity* ContextInfo::StaticSchema() {
         "",
         {
             schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
-            schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Vendor", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Extensions", new schema::Primitive{"string", schema::Primitive::String}},
-            schema::Field{"Version", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"ConstantCount", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
+            schema::Field{"ConstantNames", new schema::Struct{ GLenum__P::StaticSchema()}},
+            schema::Field{"ConstantOffsets", new schema::Struct{ U32__P::StaticSchema()}},
+            schema::Field{"ConstantSizes", new schema::Struct{ U32__P::StaticSchema()}},
+            schema::Field{"ConstantData", new schema::Struct{ U8__P::StaticSchema()}},
             schema::Field{"BackbufferWidth", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"BackbufferHeight", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"BackbufferColorFmt", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
@@ -1416,21 +1814,6 @@ const schema::Entity* GLenum__S::StaticSchema() {
     return &entity;
 }
 
-// GLenumᵖ:
-// gles.GLenumᵖ{$}
-const schema::Entity* GLenum__P::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "GLenumᵖ",
-        "",
-        {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
-        },
-    };
-    return &entity;
-}
-
 // GLenumᶜᵖ:
 // gles.GLenumᶜᵖ{$}
 const schema::Entity* GLenum__CP::StaticSchema() {
@@ -1486,21 +1869,6 @@ const schema::Entity* GLfloat__4__A::StaticSchema() {
         "",
         {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLfloat", schema::Primitive::Float32}, 4}},
-        },
-    };
-    return &entity;
-}
-
-// GLfloatˢ:
-// gles.GLfloatˢ{$}
-const schema::Entity* GLfloat__S::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "GLfloatˢ",
-        "",
-        {
-            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
     return &entity;
@@ -1606,21 +1974,6 @@ const schema::Entity* GLint__4__A::StaticSchema() {
         "",
         {
             schema::Field{"Elements", new schema::Array{"", new schema::Primitive{"GLint", schema::Primitive::Int32}, 4}},
-        },
-    };
-    return &entity;
-}
-
-// GLintˢ:
-// gles.GLintˢ{$}
-const schema::Entity* GLint__S::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "GLintˢ",
-        "",
-        {
-            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
         },
     };
     return &entity;
@@ -20444,21 +20797,6 @@ const schema::Entity* U32__S::StaticSchema() {
     return &entity;
 }
 
-// U32ᵖ:
-// gles.U32ᵖ{$}
-const schema::Entity* U32__P::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "U32ᵖ",
-        "",
-        {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
-        },
-    };
-    return &entity;
-}
-
 // U64ˢ:
 // gles.U64ˢ{$}
 const schema::Entity* U64__S::StaticSchema() {
@@ -20469,21 +20807,6 @@ const schema::Entity* U64__S::StaticSchema() {
         "",
         {
             schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
-        },
-    };
-    return &entity;
-}
-
-// U8ᵖ:
-// gles.U8ᵖ{$}
-const schema::Entity* U8__P::StaticSchema() {
-    static schema::Entity entity {
-        "gles",
-        "",
-        "U8ᵖ",
-        "",
-        {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
     return &entity;
@@ -21009,6 +21332,36 @@ const schema::Entity* VertexArrayId__S::StaticSchema() {
         "",
         {
             schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// VertexBufferBindingIndexˢ:
+// gles.VertexBufferBindingIndexˢ{$}
+const schema::Entity* VertexBufferBindingIndex__S::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "VertexBufferBindingIndexˢ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// VertexBufferBindingIndexᵖ:
+// gles.VertexBufferBindingIndexᵖ{$}
+const schema::Entity* VertexBufferBindingIndex__P::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "VertexBufferBindingIndexᵖ",
+        "",
+        {
+            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
         },
     };
     return &entity;

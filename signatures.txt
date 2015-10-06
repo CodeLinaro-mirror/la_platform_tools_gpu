@@ -179,6 +179,12 @@ gfxapi.Texture2D{[]$}
 Architecture : size 28
 gles.Architecture{$,Uint32,Uint32,Uint32,Bool}
 
+AttributeLocationˢ : size 32
+gles.AttributeLocationˢ{$}
+
+AttributeLocationᵖ : size 33
+gles.AttributeLocationᵖ{$}
+
 BlendState : size 29
 gles.BlendState{Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,$}
 
@@ -257,14 +263,17 @@ gles.ClearState{$,Float32,Int32}
 Color : size 19
 gles.Color{Float32,Float32,Float32,Float32}
 
-ContextCreationInfo : size 36
-gles.ContextCreationInfo{String,String,String,String,Int32,Int32,Bool}
+Constants : size 183
+gles.Constants{String,String,String,String,String,Int32,Int64,Int32,Int32,Int32,Float32,Int32,Int32,$,$,$,Float32,Int32,Int32,Int32,Int32,Int32,Int32,Float32,Float32,Int32,$,Int32,Int32,Int32,Int32,Int64,Int32,Uint8,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$,Int32,$,Int32,$,Uint8,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,$,$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int64,Int32,Int32,Int64,Int32,Int32,Int32,Int64,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int64,Int32,Int32}
 
-ContextInfo : size 34
-gles.ContextInfo{$,String,String,String,String,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
+ContextCreationInfo : size 30
+gles.ContextCreationInfo{Bool}
 
-Context : size 63
-gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$}
+ContextInfo : size 43
+gles.ContextInfo{$,Uint32,$,$,$,$,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
+
+Context : size 66
+gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
 
 CubemapLevel : size 27
 gles.CubemapLevel{map[Uint32]$}
@@ -3047,6 +3056,12 @@ gles.VertexAttributeValue{$}
 VertexAttribute : size 30
 gles.VertexAttribute{$,Int32,Uint32}
 
+VertexBufferBindingIndexˢ : size 39
+gles.VertexBufferBindingIndexˢ{$}
+
+VertexBufferBindingIndexᵖ : size 40
+gles.VertexBufferBindingIndexᵖ{$}
+
 VertexBufferBinding : size 33
 gles.VertexBufferBinding{Uint32,Int32,Int32,Uint32}
 
@@ -3735,9 +3750,9 @@ resultUseResource : size 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1245
-Total: 40008
-Compact: 40013
-Full: 127438
+Count: 1250
+Total: 40341
+Compact: 40346
+Full: 132473
 Average: 32
-Largest: 69
+Largest: 183

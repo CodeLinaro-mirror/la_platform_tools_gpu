@@ -38,6 +38,57 @@ namespace gles {
         bool mLittleEndian;
     };
 
+    class SliceInfo: public Encodable {
+    public:
+        SliceInfo() = default;
+        SliceInfo(memory::Pointer Root, uint64_t Base, uint64_t Count) :
+            mRoot(Root),
+            mBase(Base),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mRoot);
+            e->Uint64(this->mBase);
+            e->Uint64(this->mCount);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mRoot;
+        uint64_t mBase;
+        uint64_t mCount;
+    };
+
+    class AttributeLocation__S: public Encodable {
+    public:
+        AttributeLocation__S() = default;
+        AttributeLocation__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class AttributeLocation__P: public Encodable {
+    public:
+        AttributeLocation__P() = default;
+        AttributeLocation__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
     class Color: public Encodable {
     public:
         Color() = default;
@@ -80,27 +131,6 @@ namespace gles {
         uint32_t mBlendEquationRgb;
         uint32_t mBlendEquationAlpha;
         Color mBlendColor;
-    };
-
-    class SliceInfo: public Encodable {
-    public:
-        SliceInfo() = default;
-        SliceInfo(memory::Pointer Root, uint64_t Base, uint64_t Count) :
-            mRoot(Root),
-            mBase(Base),
-            mCount(Count) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mRoot);
-            e->Uint64(this->mBase);
-            e->Uint64(this->mCount);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        memory::Pointer mRoot;
-        uint64_t mBase;
-        uint64_t mCount;
     };
 
     class U8__S: public Encodable {
@@ -541,28 +571,349 @@ namespace gles {
         int32_t mClearStencil;
     };
 
-    class ContextCreationInfo: public Encodable {
+    class GLfloat__S: public Encodable {
     public:
-        ContextCreationInfo() = default;
-        ContextCreationInfo(char* Name, char* Vendor, char* Extensions, char* Version, int32_t VersionMajor, int32_t VersionMinor, bool PreserveBuffersOnSwap) :
-            mName(Name),
+        GLfloat__S() = default;
+        GLfloat__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class GLint__S: public Encodable {
+    public:
+        GLint__S() = default;
+        GLint__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class Constants: public Encodable {
+    public:
+        Constants() = default;
+        Constants(char* Renderer, char* Vendor, char* Version, char* Extensions, char* ShadingLanguageVersion, int32_t SubpixelBits, int64_t MaxElementIndex, int32_t Max3dTextureSize, int32_t MaxTextureSize, int32_t MaxArrayTextureLayers, float MaxTextureLodBias, int32_t MaxCubeMapTextureSize, int32_t MaxRenderbufferSize, GLfloat__S AliasedPointSizeRange, GLfloat__S AliasedLineWidthRange, GLfloat__S MultisampleLineWidthRange, float MultisampleLineWidthGranularity, int32_t MaxDrawBuffers, int32_t MaxFramebufferWidth, int32_t MaxFramebufferHeight, int32_t MaxFramebufferLayers, int32_t MaxFramebufferSamples, int32_t MaxColorAttachments, float MinFragmentInterpolationOffset, float MaxFragmentInterpolationOffset, int32_t FragmentInterpolationOffsetBits, GLint__S MaxViewportDims, int32_t MaxSampleMaskWords, int32_t MaxColorTextureSamples, int32_t MaxDepthTextureSamples, int32_t MaxIntegerSamples, int64_t MaxServerWaitTimeout, int32_t LayerProvokingVertex, uint8_t PrimitiveRestartForPatchesSupported, int32_t MaxVertexAttribRelativeOffset, uint32_t MaxVertexAttribBindings, int32_t MaxVertexAttribStride, int32_t MaxElementsIndices, int32_t MaxElementsVertices, int32_t MaxTextureBufferSize, int32_t NumCompressedTextureFormats, GLint__S CompressedTextureFormats, int32_t NumProgramBinaryFormats, GLint__S ProgramBinaryFormats, int32_t NumShaderBinaryFormats, GLint__S ShaderBinaryFormats, uint8_t ShaderCompiler, int32_t TextureBufferOffsetAlignment, int32_t NumExtensions, int32_t MajorVersion, int32_t MinorVersion, int32_t ContextFlags, uint32_t MaxVertexAttribs, int32_t MaxVertexUniformComponents, int32_t MaxVertexUniformVectors, int32_t MaxVertexUniformBlocks, int32_t MaxVertexOutputComponents, int32_t MaxVertexTextureImageUnits, int32_t MaxVertexAtomicCounterBuffers, int32_t MaxVertexAtomicCounters, int32_t MaxVertexShaderStorageBlocks, int32_t MaxTessGenLevel, int32_t MaxPatchVertices, int32_t MaxTessControlUniformComponents, int32_t MaxTessControlTextureImageUnits, int32_t MaxTessControlOutputComponents, int32_t MaxTessPatchComponents, int32_t MaxTessControlTotalOutputComponents, int32_t MaxTessControlInputComponents, int32_t MaxTessControlUniformBlocks, int32_t MaxTessControlAtomicCounterBuffers, int32_t MaxTessControlAtomicCounters, int32_t MaxTessControlShaderStorageBlocks, int32_t MaxTessEvaluationUniformComponents, int32_t MaxTessEvaluationTextureImageUnits, int32_t MaxTessEvaluationOutputComponents, int32_t MaxTessEvaluationInputComponents, int32_t MaxTessEvaluationUniformBlocks, int32_t MaxTessEvaluationAtomicCounterBuffers, int32_t MaxTessEvaluationAtomicCounters, int32_t MaxTessEvaluationShaderStorageBlocks, int32_t MaxGeometryUniformComponents, int32_t MaxGeometryUniformBlocks, int32_t MaxGeometryInputComponents, int32_t MaxGeometryOutputComponents, int32_t MaxGeometryOutputVertices, int32_t MaxGeometryTotalOutputComponents, int32_t MaxGeometryTextureImageUnits, int32_t MaxGeometryShaderInvocations, int32_t MaxGeometryAtomicCounterBuffers, int32_t MaxGeometryAtomicCounters, int32_t MaxGeometryShaderStorageBlocks, int32_t MaxFragmentUniformComponents, int32_t MaxFragmentUniformVectors, int32_t MaxFragmentUniformBlocks, int32_t MaxFragmentInputComponents, int32_t MaxTextureImageUnits, int32_t MaxFragmentAtomicCounterBuffers, int32_t MaxFragmentAtomicCounters, int32_t MaxFragmentShaderStorageBlocks, int32_t MinProgramTextureGatherOffset, int32_t MaxProgramTextureGatherOffset, int32_t MinProgramTexelOffset, int32_t MaxProgramTexelOffset, GLint__S MaxComputeWorkGroupCount, GLint__S MaxComputeWorkGroupSize, int32_t MaxComputeWorkGroupInvocations, int32_t MaxComputeUniformBlocks, int32_t MaxComputeTextureImageUnits, int32_t MaxComputeSharedMemorySize, int32_t MaxComputeUniformComponents, int32_t MaxComputeAtomicCounterBuffers, int32_t MaxComputeAtomicCounters, int32_t MaxCombinedComputeUniformComponents, int32_t MaxComputeShaderStorageBlocks, int32_t MaxUniformBufferBindings, int64_t MaxUniformBlockSize, int32_t UniformBufferOffsetAlignment, int32_t MaxCombinedUniformBlocks, int64_t MaxCombinedVertexUniformComponents, int32_t MaxCombinedTessControlUniformComponents, int32_t MaxCombinedTessEvaluationUniformComponents, int32_t MaxCombinedGeometryUniformComponents, int64_t MaxCombinedFragmentUniformComponents, int32_t MaxVaryingComponents, int32_t MaxVaryingVectors, int32_t MaxCombinedTextureImageUnits, int32_t MaxCombinedShaderOutputResources, int32_t MaxUniformLocations, int32_t MaxAtomicCounterBufferBindings, int32_t MaxAtomicCounterBufferSize, int32_t MaxCombinedAtomicCounterBuffers, int32_t MaxCombinedAtomicCounters, int32_t MaxImageUnits, int32_t MaxVertexImageUniforms, int32_t MaxTessControlImageUniforms, int32_t MaxTessEvaluationImageUniforms, int32_t MaxGeometryImageUniforms, int32_t MaxFragmentImageUniforms, int32_t MaxComputeImageUniforms, int32_t MaxCombinedImageUniforms, int32_t MaxShaderStorageBufferBindings, int64_t MaxShaderStorageBlockSize, int32_t MaxCombinedShaderStorageBlocks, int32_t ShaderStorageBufferOffsetAlignment) :
+            mRenderer(Renderer),
             mVendor(Vendor),
-            mExtensions(Extensions),
             mVersion(Version),
-            mVersionMajor(VersionMajor),
-            mVersionMinor(VersionMinor),
-            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+            mExtensions(Extensions),
+            mShadingLanguageVersion(ShadingLanguageVersion),
+            mSubpixelBits(SubpixelBits),
+            mMaxElementIndex(MaxElementIndex),
+            mMax3dTextureSize(Max3dTextureSize),
+            mMaxTextureSize(MaxTextureSize),
+            mMaxArrayTextureLayers(MaxArrayTextureLayers),
+            mMaxTextureLodBias(MaxTextureLodBias),
+            mMaxCubeMapTextureSize(MaxCubeMapTextureSize),
+            mMaxRenderbufferSize(MaxRenderbufferSize),
+            mAliasedPointSizeRange(AliasedPointSizeRange),
+            mAliasedLineWidthRange(AliasedLineWidthRange),
+            mMultisampleLineWidthRange(MultisampleLineWidthRange),
+            mMultisampleLineWidthGranularity(MultisampleLineWidthGranularity),
+            mMaxDrawBuffers(MaxDrawBuffers),
+            mMaxFramebufferWidth(MaxFramebufferWidth),
+            mMaxFramebufferHeight(MaxFramebufferHeight),
+            mMaxFramebufferLayers(MaxFramebufferLayers),
+            mMaxFramebufferSamples(MaxFramebufferSamples),
+            mMaxColorAttachments(MaxColorAttachments),
+            mMinFragmentInterpolationOffset(MinFragmentInterpolationOffset),
+            mMaxFragmentInterpolationOffset(MaxFragmentInterpolationOffset),
+            mFragmentInterpolationOffsetBits(FragmentInterpolationOffsetBits),
+            mMaxViewportDims(MaxViewportDims),
+            mMaxSampleMaskWords(MaxSampleMaskWords),
+            mMaxColorTextureSamples(MaxColorTextureSamples),
+            mMaxDepthTextureSamples(MaxDepthTextureSamples),
+            mMaxIntegerSamples(MaxIntegerSamples),
+            mMaxServerWaitTimeout(MaxServerWaitTimeout),
+            mLayerProvokingVertex(LayerProvokingVertex),
+            mPrimitiveRestartForPatchesSupported(PrimitiveRestartForPatchesSupported),
+            mMaxVertexAttribRelativeOffset(MaxVertexAttribRelativeOffset),
+            mMaxVertexAttribBindings(MaxVertexAttribBindings),
+            mMaxVertexAttribStride(MaxVertexAttribStride),
+            mMaxElementsIndices(MaxElementsIndices),
+            mMaxElementsVertices(MaxElementsVertices),
+            mMaxTextureBufferSize(MaxTextureBufferSize),
+            mNumCompressedTextureFormats(NumCompressedTextureFormats),
+            mCompressedTextureFormats(CompressedTextureFormats),
+            mNumProgramBinaryFormats(NumProgramBinaryFormats),
+            mProgramBinaryFormats(ProgramBinaryFormats),
+            mNumShaderBinaryFormats(NumShaderBinaryFormats),
+            mShaderBinaryFormats(ShaderBinaryFormats),
+            mShaderCompiler(ShaderCompiler),
+            mTextureBufferOffsetAlignment(TextureBufferOffsetAlignment),
+            mNumExtensions(NumExtensions),
+            mMajorVersion(MajorVersion),
+            mMinorVersion(MinorVersion),
+            mContextFlags(ContextFlags),
+            mMaxVertexAttribs(MaxVertexAttribs),
+            mMaxVertexUniformComponents(MaxVertexUniformComponents),
+            mMaxVertexUniformVectors(MaxVertexUniformVectors),
+            mMaxVertexUniformBlocks(MaxVertexUniformBlocks),
+            mMaxVertexOutputComponents(MaxVertexOutputComponents),
+            mMaxVertexTextureImageUnits(MaxVertexTextureImageUnits),
+            mMaxVertexAtomicCounterBuffers(MaxVertexAtomicCounterBuffers),
+            mMaxVertexAtomicCounters(MaxVertexAtomicCounters),
+            mMaxVertexShaderStorageBlocks(MaxVertexShaderStorageBlocks),
+            mMaxTessGenLevel(MaxTessGenLevel),
+            mMaxPatchVertices(MaxPatchVertices),
+            mMaxTessControlUniformComponents(MaxTessControlUniformComponents),
+            mMaxTessControlTextureImageUnits(MaxTessControlTextureImageUnits),
+            mMaxTessControlOutputComponents(MaxTessControlOutputComponents),
+            mMaxTessPatchComponents(MaxTessPatchComponents),
+            mMaxTessControlTotalOutputComponents(MaxTessControlTotalOutputComponents),
+            mMaxTessControlInputComponents(MaxTessControlInputComponents),
+            mMaxTessControlUniformBlocks(MaxTessControlUniformBlocks),
+            mMaxTessControlAtomicCounterBuffers(MaxTessControlAtomicCounterBuffers),
+            mMaxTessControlAtomicCounters(MaxTessControlAtomicCounters),
+            mMaxTessControlShaderStorageBlocks(MaxTessControlShaderStorageBlocks),
+            mMaxTessEvaluationUniformComponents(MaxTessEvaluationUniformComponents),
+            mMaxTessEvaluationTextureImageUnits(MaxTessEvaluationTextureImageUnits),
+            mMaxTessEvaluationOutputComponents(MaxTessEvaluationOutputComponents),
+            mMaxTessEvaluationInputComponents(MaxTessEvaluationInputComponents),
+            mMaxTessEvaluationUniformBlocks(MaxTessEvaluationUniformBlocks),
+            mMaxTessEvaluationAtomicCounterBuffers(MaxTessEvaluationAtomicCounterBuffers),
+            mMaxTessEvaluationAtomicCounters(MaxTessEvaluationAtomicCounters),
+            mMaxTessEvaluationShaderStorageBlocks(MaxTessEvaluationShaderStorageBlocks),
+            mMaxGeometryUniformComponents(MaxGeometryUniformComponents),
+            mMaxGeometryUniformBlocks(MaxGeometryUniformBlocks),
+            mMaxGeometryInputComponents(MaxGeometryInputComponents),
+            mMaxGeometryOutputComponents(MaxGeometryOutputComponents),
+            mMaxGeometryOutputVertices(MaxGeometryOutputVertices),
+            mMaxGeometryTotalOutputComponents(MaxGeometryTotalOutputComponents),
+            mMaxGeometryTextureImageUnits(MaxGeometryTextureImageUnits),
+            mMaxGeometryShaderInvocations(MaxGeometryShaderInvocations),
+            mMaxGeometryAtomicCounterBuffers(MaxGeometryAtomicCounterBuffers),
+            mMaxGeometryAtomicCounters(MaxGeometryAtomicCounters),
+            mMaxGeometryShaderStorageBlocks(MaxGeometryShaderStorageBlocks),
+            mMaxFragmentUniformComponents(MaxFragmentUniformComponents),
+            mMaxFragmentUniformVectors(MaxFragmentUniformVectors),
+            mMaxFragmentUniformBlocks(MaxFragmentUniformBlocks),
+            mMaxFragmentInputComponents(MaxFragmentInputComponents),
+            mMaxTextureImageUnits(MaxTextureImageUnits),
+            mMaxFragmentAtomicCounterBuffers(MaxFragmentAtomicCounterBuffers),
+            mMaxFragmentAtomicCounters(MaxFragmentAtomicCounters),
+            mMaxFragmentShaderStorageBlocks(MaxFragmentShaderStorageBlocks),
+            mMinProgramTextureGatherOffset(MinProgramTextureGatherOffset),
+            mMaxProgramTextureGatherOffset(MaxProgramTextureGatherOffset),
+            mMinProgramTexelOffset(MinProgramTexelOffset),
+            mMaxProgramTexelOffset(MaxProgramTexelOffset),
+            mMaxComputeWorkGroupCount(MaxComputeWorkGroupCount),
+            mMaxComputeWorkGroupSize(MaxComputeWorkGroupSize),
+            mMaxComputeWorkGroupInvocations(MaxComputeWorkGroupInvocations),
+            mMaxComputeUniformBlocks(MaxComputeUniformBlocks),
+            mMaxComputeTextureImageUnits(MaxComputeTextureImageUnits),
+            mMaxComputeSharedMemorySize(MaxComputeSharedMemorySize),
+            mMaxComputeUniformComponents(MaxComputeUniformComponents),
+            mMaxComputeAtomicCounterBuffers(MaxComputeAtomicCounterBuffers),
+            mMaxComputeAtomicCounters(MaxComputeAtomicCounters),
+            mMaxCombinedComputeUniformComponents(MaxCombinedComputeUniformComponents),
+            mMaxComputeShaderStorageBlocks(MaxComputeShaderStorageBlocks),
+            mMaxUniformBufferBindings(MaxUniformBufferBindings),
+            mMaxUniformBlockSize(MaxUniformBlockSize),
+            mUniformBufferOffsetAlignment(UniformBufferOffsetAlignment),
+            mMaxCombinedUniformBlocks(MaxCombinedUniformBlocks),
+            mMaxCombinedVertexUniformComponents(MaxCombinedVertexUniformComponents),
+            mMaxCombinedTessControlUniformComponents(MaxCombinedTessControlUniformComponents),
+            mMaxCombinedTessEvaluationUniformComponents(MaxCombinedTessEvaluationUniformComponents),
+            mMaxCombinedGeometryUniformComponents(MaxCombinedGeometryUniformComponents),
+            mMaxCombinedFragmentUniformComponents(MaxCombinedFragmentUniformComponents),
+            mMaxVaryingComponents(MaxVaryingComponents),
+            mMaxVaryingVectors(MaxVaryingVectors),
+            mMaxCombinedTextureImageUnits(MaxCombinedTextureImageUnits),
+            mMaxCombinedShaderOutputResources(MaxCombinedShaderOutputResources),
+            mMaxUniformLocations(MaxUniformLocations),
+            mMaxAtomicCounterBufferBindings(MaxAtomicCounterBufferBindings),
+            mMaxAtomicCounterBufferSize(MaxAtomicCounterBufferSize),
+            mMaxCombinedAtomicCounterBuffers(MaxCombinedAtomicCounterBuffers),
+            mMaxCombinedAtomicCounters(MaxCombinedAtomicCounters),
+            mMaxImageUnits(MaxImageUnits),
+            mMaxVertexImageUniforms(MaxVertexImageUniforms),
+            mMaxTessControlImageUniforms(MaxTessControlImageUniforms),
+            mMaxTessEvaluationImageUniforms(MaxTessEvaluationImageUniforms),
+            mMaxGeometryImageUniforms(MaxGeometryImageUniforms),
+            mMaxFragmentImageUniforms(MaxFragmentImageUniforms),
+            mMaxComputeImageUniforms(MaxComputeImageUniforms),
+            mMaxCombinedImageUniforms(MaxCombinedImageUniforms),
+            mMaxShaderStorageBufferBindings(MaxShaderStorageBufferBindings),
+            mMaxShaderStorageBlockSize(MaxShaderStorageBlockSize),
+            mMaxCombinedShaderStorageBlocks(MaxCombinedShaderStorageBlocks),
+            mShaderStorageBufferOffsetAlignment(ShaderStorageBufferOffsetAlignment) {}
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        char* mName;
+        char* mRenderer;
         char* mVendor;
-        char* mExtensions;
         char* mVersion;
-        int32_t mVersionMajor;
-        int32_t mVersionMinor;
+        char* mExtensions;
+        char* mShadingLanguageVersion;
+        int32_t mSubpixelBits;
+        int64_t mMaxElementIndex;
+        int32_t mMax3dTextureSize;
+        int32_t mMaxTextureSize;
+        int32_t mMaxArrayTextureLayers;
+        float mMaxTextureLodBias;
+        int32_t mMaxCubeMapTextureSize;
+        int32_t mMaxRenderbufferSize;
+        GLfloat__S mAliasedPointSizeRange;
+        GLfloat__S mAliasedLineWidthRange;
+        GLfloat__S mMultisampleLineWidthRange;
+        float mMultisampleLineWidthGranularity;
+        int32_t mMaxDrawBuffers;
+        int32_t mMaxFramebufferWidth;
+        int32_t mMaxFramebufferHeight;
+        int32_t mMaxFramebufferLayers;
+        int32_t mMaxFramebufferSamples;
+        int32_t mMaxColorAttachments;
+        float mMinFragmentInterpolationOffset;
+        float mMaxFragmentInterpolationOffset;
+        int32_t mFragmentInterpolationOffsetBits;
+        GLint__S mMaxViewportDims;
+        int32_t mMaxSampleMaskWords;
+        int32_t mMaxColorTextureSamples;
+        int32_t mMaxDepthTextureSamples;
+        int32_t mMaxIntegerSamples;
+        int64_t mMaxServerWaitTimeout;
+        int32_t mLayerProvokingVertex;
+        uint8_t mPrimitiveRestartForPatchesSupported;
+        int32_t mMaxVertexAttribRelativeOffset;
+        uint32_t mMaxVertexAttribBindings;
+        int32_t mMaxVertexAttribStride;
+        int32_t mMaxElementsIndices;
+        int32_t mMaxElementsVertices;
+        int32_t mMaxTextureBufferSize;
+        int32_t mNumCompressedTextureFormats;
+        GLint__S mCompressedTextureFormats;
+        int32_t mNumProgramBinaryFormats;
+        GLint__S mProgramBinaryFormats;
+        int32_t mNumShaderBinaryFormats;
+        GLint__S mShaderBinaryFormats;
+        uint8_t mShaderCompiler;
+        int32_t mTextureBufferOffsetAlignment;
+        int32_t mNumExtensions;
+        int32_t mMajorVersion;
+        int32_t mMinorVersion;
+        int32_t mContextFlags;
+        uint32_t mMaxVertexAttribs;
+        int32_t mMaxVertexUniformComponents;
+        int32_t mMaxVertexUniformVectors;
+        int32_t mMaxVertexUniformBlocks;
+        int32_t mMaxVertexOutputComponents;
+        int32_t mMaxVertexTextureImageUnits;
+        int32_t mMaxVertexAtomicCounterBuffers;
+        int32_t mMaxVertexAtomicCounters;
+        int32_t mMaxVertexShaderStorageBlocks;
+        int32_t mMaxTessGenLevel;
+        int32_t mMaxPatchVertices;
+        int32_t mMaxTessControlUniformComponents;
+        int32_t mMaxTessControlTextureImageUnits;
+        int32_t mMaxTessControlOutputComponents;
+        int32_t mMaxTessPatchComponents;
+        int32_t mMaxTessControlTotalOutputComponents;
+        int32_t mMaxTessControlInputComponents;
+        int32_t mMaxTessControlUniformBlocks;
+        int32_t mMaxTessControlAtomicCounterBuffers;
+        int32_t mMaxTessControlAtomicCounters;
+        int32_t mMaxTessControlShaderStorageBlocks;
+        int32_t mMaxTessEvaluationUniformComponents;
+        int32_t mMaxTessEvaluationTextureImageUnits;
+        int32_t mMaxTessEvaluationOutputComponents;
+        int32_t mMaxTessEvaluationInputComponents;
+        int32_t mMaxTessEvaluationUniformBlocks;
+        int32_t mMaxTessEvaluationAtomicCounterBuffers;
+        int32_t mMaxTessEvaluationAtomicCounters;
+        int32_t mMaxTessEvaluationShaderStorageBlocks;
+        int32_t mMaxGeometryUniformComponents;
+        int32_t mMaxGeometryUniformBlocks;
+        int32_t mMaxGeometryInputComponents;
+        int32_t mMaxGeometryOutputComponents;
+        int32_t mMaxGeometryOutputVertices;
+        int32_t mMaxGeometryTotalOutputComponents;
+        int32_t mMaxGeometryTextureImageUnits;
+        int32_t mMaxGeometryShaderInvocations;
+        int32_t mMaxGeometryAtomicCounterBuffers;
+        int32_t mMaxGeometryAtomicCounters;
+        int32_t mMaxGeometryShaderStorageBlocks;
+        int32_t mMaxFragmentUniformComponents;
+        int32_t mMaxFragmentUniformVectors;
+        int32_t mMaxFragmentUniformBlocks;
+        int32_t mMaxFragmentInputComponents;
+        int32_t mMaxTextureImageUnits;
+        int32_t mMaxFragmentAtomicCounterBuffers;
+        int32_t mMaxFragmentAtomicCounters;
+        int32_t mMaxFragmentShaderStorageBlocks;
+        int32_t mMinProgramTextureGatherOffset;
+        int32_t mMaxProgramTextureGatherOffset;
+        int32_t mMinProgramTexelOffset;
+        int32_t mMaxProgramTexelOffset;
+        GLint__S mMaxComputeWorkGroupCount;
+        GLint__S mMaxComputeWorkGroupSize;
+        int32_t mMaxComputeWorkGroupInvocations;
+        int32_t mMaxComputeUniformBlocks;
+        int32_t mMaxComputeTextureImageUnits;
+        int32_t mMaxComputeSharedMemorySize;
+        int32_t mMaxComputeUniformComponents;
+        int32_t mMaxComputeAtomicCounterBuffers;
+        int32_t mMaxComputeAtomicCounters;
+        int32_t mMaxCombinedComputeUniformComponents;
+        int32_t mMaxComputeShaderStorageBlocks;
+        int32_t mMaxUniformBufferBindings;
+        int64_t mMaxUniformBlockSize;
+        int32_t mUniformBufferOffsetAlignment;
+        int32_t mMaxCombinedUniformBlocks;
+        int64_t mMaxCombinedVertexUniformComponents;
+        int32_t mMaxCombinedTessControlUniformComponents;
+        int32_t mMaxCombinedTessEvaluationUniformComponents;
+        int32_t mMaxCombinedGeometryUniformComponents;
+        int64_t mMaxCombinedFragmentUniformComponents;
+        int32_t mMaxVaryingComponents;
+        int32_t mMaxVaryingVectors;
+        int32_t mMaxCombinedTextureImageUnits;
+        int32_t mMaxCombinedShaderOutputResources;
+        int32_t mMaxUniformLocations;
+        int32_t mMaxAtomicCounterBufferBindings;
+        int32_t mMaxAtomicCounterBufferSize;
+        int32_t mMaxCombinedAtomicCounterBuffers;
+        int32_t mMaxCombinedAtomicCounters;
+        int32_t mMaxImageUnits;
+        int32_t mMaxVertexImageUniforms;
+        int32_t mMaxTessControlImageUniforms;
+        int32_t mMaxTessEvaluationImageUniforms;
+        int32_t mMaxGeometryImageUniforms;
+        int32_t mMaxFragmentImageUniforms;
+        int32_t mMaxComputeImageUniforms;
+        int32_t mMaxCombinedImageUniforms;
+        int32_t mMaxShaderStorageBufferBindings;
+        int64_t mMaxShaderStorageBlockSize;
+        int32_t mMaxCombinedShaderStorageBlocks;
+        int32_t mShaderStorageBufferOffsetAlignment;
+    };
+
+    class ContextCreationInfo: public Encodable {
+    public:
+        ContextCreationInfo() = default;
+        ContextCreationInfo(bool PreserveBuffersOnSwap) :
+            mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+        virtual void Encode(Encoder* e) const{
+            e->Bool(this->mPreserveBuffersOnSwap);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
         bool mPreserveBuffersOnSwap;
     };
 
@@ -829,17 +1180,63 @@ namespace gles {
 
     // Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
 
-    // Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$}
+    // Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
+
+    class GLenum__P: public Encodable {
+    public:
+        GLenum__P() = default;
+        GLenum__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
+    class U32__P: public Encodable {
+    public:
+        U32__P() = default;
+        U32__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
+    class U8__P: public Encodable {
+    public:
+        U8__P() = default;
+        U8__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
 
     class ContextInfo: public Encodable {
     public:
         ContextInfo() = default;
-        ContextInfo(atom::Observations observations, char* Name, char* Vendor, char* Extensions, char* Version, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
+        ContextInfo(atom::Observations observations, uint32_t ConstantCount, GLenum__P ConstantNames, U32__P ConstantOffsets, U32__P ConstantSizes, U8__P ConstantData, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
             mobservations(observations),
-            mName(Name),
-            mVendor(Vendor),
-            mExtensions(Extensions),
-            mVersion(Version),
+            mConstantCount(ConstantCount),
+            mConstantNames(ConstantNames),
+            mConstantOffsets(ConstantOffsets),
+            mConstantSizes(ConstantSizes),
+            mConstantData(ConstantData),
             mBackbufferWidth(BackbufferWidth),
             mBackbufferHeight(BackbufferHeight),
             mBackbufferColorFmt(BackbufferColorFmt),
@@ -853,10 +1250,11 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
-        char* mName;
-        char* mVendor;
-        char* mExtensions;
-        char* mVersion;
+        uint32_t mConstantCount;
+        GLenum__P mConstantNames;
+        U32__P mConstantOffsets;
+        U32__P mConstantSizes;
+        U8__P mConstantData;
         int32_t mBackbufferWidth;
         int32_t mBackbufferHeight;
         uint32_t mBackbufferColorFmt;
@@ -1335,21 +1733,6 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
-    class GLenum__P: public Encodable {
-    public:
-        GLenum__P() = default;
-        GLenum__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mPointer);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
-    };
-
     class GLenum__CP: public Encodable {
     public:
         GLenum__CP() = default;
@@ -1417,21 +1800,6 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         float* mElements;
-    };
-
-    class GLfloat__S: public Encodable {
-    public:
-        GLfloat__S() = default;
-        GLfloat__S(SliceInfo SliceInfo) :
-            mSliceInfo(SliceInfo) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mSliceInfo);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        SliceInfo mSliceInfo;
     };
 
     class GLfloat__P: public Encodable {
@@ -1546,21 +1914,6 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         int32_t* mElements;
-    };
-
-    class GLint__S: public Encodable {
-    public:
-        GLint__S() = default;
-        GLint__S(SliceInfo SliceInfo) :
-            mSliceInfo(SliceInfo) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mSliceInfo);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        SliceInfo mSliceInfo;
     };
 
     class GLint__P: public Encodable {
@@ -18744,21 +19097,6 @@ namespace gles {
         SliceInfo mSliceInfo;
     };
 
-    class U32__P: public Encodable {
-    public:
-        U32__P() = default;
-        U32__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mPointer);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
-    };
-
     class U64__S: public Encodable {
     public:
         U64__S() = default;
@@ -18772,21 +19110,6 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
-    };
-
-    class U8__P: public Encodable {
-    public:
-        U8__P() = default;
-        U8__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
-        virtual void Encode(Encoder* e) const{
-            e->Value(this->mPointer);
-        }
-        virtual const schema::Entity* Schema() const {
-            return StaticSchema();
-        }
-        static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
     };
 
     class UniformIndex__S: public Encodable {
@@ -19357,6 +19680,36 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
+    };
+
+    class VertexBufferBindingIndex__S: public Encodable {
+    public:
+        VertexBufferBindingIndex__S() = default;
+        VertexBufferBindingIndex__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class VertexBufferBindingIndex__P: public Encodable {
+    public:
+        VertexBufferBindingIndex__P() = default;
+        VertexBufferBindingIndex__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
     };
 
     class Void__S: public Encodable {

@@ -31,10 +31,6 @@
 
 namespace gapii {
 
-namespace FramebufferConstants {
-static const uint32_t MAX_DRAW_BUFFERS = 8;
-}
-
 namespace GLbitfield {
 static const uint32_t GL_CURRENT_BIT = 1;
 static const uint32_t GL_POINT_BIT = 2;
@@ -5638,13 +5634,6 @@ static const uint32_t GL_MATERIAL_SIDE_HINT_PGI = 107052;
 static const uint32_t GL_MAX_VERTEX_HINT_PGI = 107053;
 }
 
-namespace Constants {
-static const uint32_t MAX_VERTEX_ATTRIBS = 16;
-static const uint32_t MAX_VERTEX_ATTRIB_BINDINGS = 16;
-static const uint32_t MAX_VERTEX_ATTRIB_STRIDE = 2048;
-static const uint32_t MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 2047;
-}
-
 namespace ExtensionId {
 static const uint32_t GL_AMD_performance_monitor = 1;
 static const uint32_t GL_ANGLE_framebuffer_blit = 2;
@@ -5983,31 +5972,10 @@ struct Buffer {
 typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferIdToBuffer__R;
 
 struct ContextCreationInfo {
-    inline ContextCreationInfo()
-        : mName(""),
-          mVendor(""),
-          mExtensions(""),
-          mVersion(""),
-          mVersionMajor(0),
-          mVersionMinor(0),
-          mPreserveBuffersOnSwap(false) {}
-    inline ContextCreationInfo(std::string Name, std::string Vendor, std::string Extensions,
-                               std::string Version, GLint VersionMajor, GLint VersionMinor,
-                               bool PreserveBuffersOnSwap)
-        : mName(Name),
-          mVendor(Vendor),
-          mExtensions(Extensions),
-          mVersion(Version),
-          mVersionMajor(VersionMajor),
-          mVersionMinor(VersionMinor),
-          mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
+    inline ContextCreationInfo() : mPreserveBuffersOnSwap(false) {}
+    inline ContextCreationInfo(bool PreserveBuffersOnSwap)
+        : mPreserveBuffersOnSwap(PreserveBuffersOnSwap) {}
 
-    std::string mName;
-    std::string mVendor;
-    std::string mExtensions;
-    std::string mVersion;
-    GLint mVersionMajor;
-    GLint mVersionMinor;
     bool mPreserveBuffersOnSwap;
 };
 
@@ -6431,6 +6399,515 @@ struct Objects {
     QueryIdToQuery__R mQueries;
 };
 
+struct Constants {
+    inline Constants()
+        : mRenderer(""),
+          mVendor(""),
+          mVersion(""),
+          mExtensions(""),
+          mShadingLanguageVersion(""),
+          mSubpixelBits((GLint)(4)),
+          mMaxElementIndex((GLint64)(16777215)),
+          mMax3dTextureSize((GLint)(256)),
+          mMaxTextureSize((GLint)(2048)),
+          mMaxArrayTextureLayers((GLint)(256)),
+          mMaxTextureLodBias((GLfloat)(2)),
+          mMaxCubeMapTextureSize((GLint)(2048)),
+          mMaxRenderbufferSize((GLint)(2048)),
+          mAliasedPointSizeRange(Slice<GLfloat>()),
+          mAliasedLineWidthRange(Slice<GLfloat>()),
+          mMultisampleLineWidthRange(Slice<GLfloat>()),
+          mMultisampleLineWidthGranularity(0),
+          mMaxDrawBuffers((GLint)(4)),
+          mMaxFramebufferWidth((GLint)(2048)),
+          mMaxFramebufferHeight((GLint)(2048)),
+          mMaxFramebufferLayers((GLint)(256)),
+          mMaxFramebufferSamples((GLint)(4)),
+          mMaxColorAttachments((GLint)(4)),
+          mMinFragmentInterpolationOffset((GLfloat)(-0.5)),
+          mMaxFragmentInterpolationOffset((GLfloat)(0.5)),
+          mFragmentInterpolationOffsetBits((GLint)(4)),
+          mMaxViewportDims(Slice<GLint>()),
+          mMaxSampleMaskWords((GLint)(1)),
+          mMaxColorTextureSamples((GLint)(1)),
+          mMaxDepthTextureSamples((GLint)(1)),
+          mMaxIntegerSamples((GLint)(1)),
+          mMaxServerWaitTimeout((GLint64)(0)),
+          mLayerProvokingVertex(0),
+          mPrimitiveRestartForPatchesSupported(0),
+          mMaxVertexAttribRelativeOffset((GLint)(2047)),
+          mMaxVertexAttribBindings((VertexBufferBindingIndex)(16)),
+          mMaxVertexAttribStride((GLint)(2048)),
+          mMaxElementsIndices(0),
+          mMaxElementsVertices(0),
+          mMaxTextureBufferSize((GLint)(65536)),
+          mNumCompressedTextureFormats((GLint)(10)),
+          mCompressedTextureFormats(Slice<GLint>()),
+          mNumProgramBinaryFormats((GLint)(0)),
+          mProgramBinaryFormats(Slice<GLint>()),
+          mNumShaderBinaryFormats((GLint)(0)),
+          mShaderBinaryFormats(Slice<GLint>()),
+          mShaderCompiler(0),
+          mTextureBufferOffsetAlignment((GLint)(256)),
+          mNumExtensions(0),
+          mMajorVersion((GLint)(3)),
+          mMinorVersion(0),
+          mContextFlags(0),
+          mMaxVertexAttribs((AttributeLocation)(16)),
+          mMaxVertexUniformComponents((GLint)(1024)),
+          mMaxVertexUniformVectors((GLint)(256)),
+          mMaxVertexUniformBlocks((GLint)(12)),
+          mMaxVertexOutputComponents((GLint)(64)),
+          mMaxVertexTextureImageUnits((GLint)(16)),
+          mMaxVertexAtomicCounterBuffers((GLint)(0)),
+          mMaxVertexAtomicCounters((GLint)(0)),
+          mMaxVertexShaderStorageBlocks((GLint)(0)),
+          mMaxTessGenLevel((GLint)(64)),
+          mMaxPatchVertices((GLint)(32)),
+          mMaxTessControlUniformComponents((GLint)(1024)),
+          mMaxTessControlTextureImageUnits((GLint)(16)),
+          mMaxTessControlOutputComponents((GLint)(64)),
+          mMaxTessPatchComponents((GLint)(120)),
+          mMaxTessControlTotalOutputComponents((GLint)(4096)),
+          mMaxTessControlInputComponents((GLint)(64)),
+          mMaxTessControlUniformBlocks((GLint)(12)),
+          mMaxTessControlAtomicCounterBuffers((GLint)(0)),
+          mMaxTessControlAtomicCounters((GLint)(0)),
+          mMaxTessControlShaderStorageBlocks((GLint)(0)),
+          mMaxTessEvaluationUniformComponents((GLint)(1024)),
+          mMaxTessEvaluationTextureImageUnits((GLint)(16)),
+          mMaxTessEvaluationOutputComponents((GLint)(64)),
+          mMaxTessEvaluationInputComponents((GLint)(64)),
+          mMaxTessEvaluationUniformBlocks((GLint)(12)),
+          mMaxTessEvaluationAtomicCounterBuffers((GLint)(0)),
+          mMaxTessEvaluationAtomicCounters((GLint)(0)),
+          mMaxTessEvaluationShaderStorageBlocks((GLint)(0)),
+          mMaxGeometryUniformComponents((GLint)(1024)),
+          mMaxGeometryUniformBlocks((GLint)(12)),
+          mMaxGeometryInputComponents((GLint)(64)),
+          mMaxGeometryOutputComponents((GLint)(64)),
+          mMaxGeometryOutputVertices((GLint)(256)),
+          mMaxGeometryTotalOutputComponents((GLint)(1024)),
+          mMaxGeometryTextureImageUnits((GLint)(16)),
+          mMaxGeometryShaderInvocations((GLint)(32)),
+          mMaxGeometryAtomicCounterBuffers((GLint)(0)),
+          mMaxGeometryAtomicCounters((GLint)(0)),
+          mMaxGeometryShaderStorageBlocks((GLint)(0)),
+          mMaxFragmentUniformComponents((GLint)(1024)),
+          mMaxFragmentUniformVectors((GLint)(256)),
+          mMaxFragmentUniformBlocks((GLint)(12)),
+          mMaxFragmentInputComponents((GLint)(60)),
+          mMaxTextureImageUnits((GLint)(16)),
+          mMaxFragmentAtomicCounterBuffers((GLint)(1)),
+          mMaxFragmentAtomicCounters((GLint)(8)),
+          mMaxFragmentShaderStorageBlocks((GLint)(4)),
+          mMinProgramTextureGatherOffset(0),
+          mMaxProgramTextureGatherOffset(0),
+          mMinProgramTexelOffset((GLint)(-8)),
+          mMaxProgramTexelOffset((GLint)(7)),
+          mMaxComputeWorkGroupCount(Slice<GLint>()),
+          mMaxComputeWorkGroupSize(Slice<GLint>()),
+          mMaxComputeWorkGroupInvocations((GLint)(128)),
+          mMaxComputeUniformBlocks((GLint)(12)),
+          mMaxComputeTextureImageUnits((GLint)(16)),
+          mMaxComputeSharedMemorySize((GLint)(16384)),
+          mMaxComputeUniformComponents((GLint)(1024)),
+          mMaxComputeAtomicCounterBuffers((GLint)(1)),
+          mMaxComputeAtomicCounters((GLint)(8)),
+          mMaxCombinedComputeUniformComponents(0),
+          mMaxComputeShaderStorageBlocks((GLint)(4)),
+          mMaxUniformBufferBindings((GLint)(72)),
+          mMaxUniformBlockSize((GLint64)(16384)),
+          mUniformBufferOffsetAlignment((GLint)(256)),
+          mMaxCombinedUniformBlocks((GLint)(60)),
+          mMaxCombinedVertexUniformComponents(0),
+          mMaxCombinedTessControlUniformComponents(0),
+          mMaxCombinedTessEvaluationUniformComponents(0),
+          mMaxCombinedGeometryUniformComponents(0),
+          mMaxCombinedFragmentUniformComponents(0),
+          mMaxVaryingComponents((GLint)(60)),
+          mMaxVaryingVectors((GLint)(15)),
+          mMaxCombinedTextureImageUnits((GLint)(96)),
+          mMaxCombinedShaderOutputResources((GLint)(4)),
+          mMaxUniformLocations((GLint)(1024)),
+          mMaxAtomicCounterBufferBindings((GLint)(1)),
+          mMaxAtomicCounterBufferSize((GLint)(32)),
+          mMaxCombinedAtomicCounterBuffers((GLint)(1)),
+          mMaxCombinedAtomicCounters((GLint)(8)),
+          mMaxImageUnits((GLint)(4)),
+          mMaxVertexImageUniforms((GLint)(0)),
+          mMaxTessControlImageUniforms((GLint)(0)),
+          mMaxTessEvaluationImageUniforms((GLint)(0)),
+          mMaxGeometryImageUniforms((GLint)(0)),
+          mMaxFragmentImageUniforms((GLint)(4)),
+          mMaxComputeImageUniforms((GLint)(4)),
+          mMaxCombinedImageUniforms((GLint)(4)),
+          mMaxShaderStorageBufferBindings((GLint)(4)),
+          mMaxShaderStorageBlockSize((GLint64)(134217728)),
+          mMaxCombinedShaderStorageBlocks((GLint)(4)),
+          mShaderStorageBufferOffsetAlignment((GLint)(256)) {}
+    inline Constants(
+            std::string Renderer, std::string Vendor, std::string Version, std::string Extensions,
+            std::string ShadingLanguageVersion, GLint SubpixelBits, GLint64 MaxElementIndex,
+            GLint Max3dTextureSize, GLint MaxTextureSize, GLint MaxArrayTextureLayers,
+            GLfloat MaxTextureLodBias, GLint MaxCubeMapTextureSize, GLint MaxRenderbufferSize,
+            Slice<GLfloat> AliasedPointSizeRange, Slice<GLfloat> AliasedLineWidthRange,
+            Slice<GLfloat> MultisampleLineWidthRange, GLfloat MultisampleLineWidthGranularity,
+            GLint MaxDrawBuffers, GLint MaxFramebufferWidth, GLint MaxFramebufferHeight,
+            GLint MaxFramebufferLayers, GLint MaxFramebufferSamples, GLint MaxColorAttachments,
+            GLfloat MinFragmentInterpolationOffset, GLfloat MaxFragmentInterpolationOffset,
+            GLint FragmentInterpolationOffsetBits, Slice<GLint> MaxViewportDims,
+            GLint MaxSampleMaskWords, GLint MaxColorTextureSamples, GLint MaxDepthTextureSamples,
+            GLint MaxIntegerSamples, GLint64 MaxServerWaitTimeout, GLint LayerProvokingVertex,
+            GLboolean PrimitiveRestartForPatchesSupported, GLint MaxVertexAttribRelativeOffset,
+            VertexBufferBindingIndex MaxVertexAttribBindings, GLint MaxVertexAttribStride,
+            GLint MaxElementsIndices, GLint MaxElementsVertices, GLint MaxTextureBufferSize,
+            GLint NumCompressedTextureFormats, Slice<GLint> CompressedTextureFormats,
+            GLint NumProgramBinaryFormats, Slice<GLint> ProgramBinaryFormats,
+            GLint NumShaderBinaryFormats, Slice<GLint> ShaderBinaryFormats,
+            GLboolean ShaderCompiler, GLint TextureBufferOffsetAlignment, GLint NumExtensions,
+            GLint MajorVersion, GLint MinorVersion, GLint ContextFlags,
+            AttributeLocation MaxVertexAttribs, GLint MaxVertexUniformComponents,
+            GLint MaxVertexUniformVectors, GLint MaxVertexUniformBlocks,
+            GLint MaxVertexOutputComponents, GLint MaxVertexTextureImageUnits,
+            GLint MaxVertexAtomicCounterBuffers, GLint MaxVertexAtomicCounters,
+            GLint MaxVertexShaderStorageBlocks, GLint MaxTessGenLevel, GLint MaxPatchVertices,
+            GLint MaxTessControlUniformComponents, GLint MaxTessControlTextureImageUnits,
+            GLint MaxTessControlOutputComponents, GLint MaxTessPatchComponents,
+            GLint MaxTessControlTotalOutputComponents, GLint MaxTessControlInputComponents,
+            GLint MaxTessControlUniformBlocks, GLint MaxTessControlAtomicCounterBuffers,
+            GLint MaxTessControlAtomicCounters, GLint MaxTessControlShaderStorageBlocks,
+            GLint MaxTessEvaluationUniformComponents, GLint MaxTessEvaluationTextureImageUnits,
+            GLint MaxTessEvaluationOutputComponents, GLint MaxTessEvaluationInputComponents,
+            GLint MaxTessEvaluationUniformBlocks, GLint MaxTessEvaluationAtomicCounterBuffers,
+            GLint MaxTessEvaluationAtomicCounters, GLint MaxTessEvaluationShaderStorageBlocks,
+            GLint MaxGeometryUniformComponents, GLint MaxGeometryUniformBlocks,
+            GLint MaxGeometryInputComponents, GLint MaxGeometryOutputComponents,
+            GLint MaxGeometryOutputVertices, GLint MaxGeometryTotalOutputComponents,
+            GLint MaxGeometryTextureImageUnits, GLint MaxGeometryShaderInvocations,
+            GLint MaxGeometryAtomicCounterBuffers, GLint MaxGeometryAtomicCounters,
+            GLint MaxGeometryShaderStorageBlocks, GLint MaxFragmentUniformComponents,
+            GLint MaxFragmentUniformVectors, GLint MaxFragmentUniformBlocks,
+            GLint MaxFragmentInputComponents, GLint MaxTextureImageUnits,
+            GLint MaxFragmentAtomicCounterBuffers, GLint MaxFragmentAtomicCounters,
+            GLint MaxFragmentShaderStorageBlocks, GLint MinProgramTextureGatherOffset,
+            GLint MaxProgramTextureGatherOffset, GLint MinProgramTexelOffset,
+            GLint MaxProgramTexelOffset, Slice<GLint> MaxComputeWorkGroupCount,
+            Slice<GLint> MaxComputeWorkGroupSize, GLint MaxComputeWorkGroupInvocations,
+            GLint MaxComputeUniformBlocks, GLint MaxComputeTextureImageUnits,
+            GLint MaxComputeSharedMemorySize, GLint MaxComputeUniformComponents,
+            GLint MaxComputeAtomicCounterBuffers, GLint MaxComputeAtomicCounters,
+            GLint MaxCombinedComputeUniformComponents, GLint MaxComputeShaderStorageBlocks,
+            GLint MaxUniformBufferBindings, GLint64 MaxUniformBlockSize,
+            GLint UniformBufferOffsetAlignment, GLint MaxCombinedUniformBlocks,
+            GLint64 MaxCombinedVertexUniformComponents,
+            GLint MaxCombinedTessControlUniformComponents,
+            GLint MaxCombinedTessEvaluationUniformComponents,
+            GLint MaxCombinedGeometryUniformComponents,
+            GLint64 MaxCombinedFragmentUniformComponents, GLint MaxVaryingComponents,
+            GLint MaxVaryingVectors, GLint MaxCombinedTextureImageUnits,
+            GLint MaxCombinedShaderOutputResources, GLint MaxUniformLocations,
+            GLint MaxAtomicCounterBufferBindings, GLint MaxAtomicCounterBufferSize,
+            GLint MaxCombinedAtomicCounterBuffers, GLint MaxCombinedAtomicCounters,
+            GLint MaxImageUnits, GLint MaxVertexImageUniforms, GLint MaxTessControlImageUniforms,
+            GLint MaxTessEvaluationImageUniforms, GLint MaxGeometryImageUniforms,
+            GLint MaxFragmentImageUniforms, GLint MaxComputeImageUniforms,
+            GLint MaxCombinedImageUniforms, GLint MaxShaderStorageBufferBindings,
+            GLint64 MaxShaderStorageBlockSize, GLint MaxCombinedShaderStorageBlocks,
+            GLint ShaderStorageBufferOffsetAlignment)
+        : mRenderer(Renderer),
+          mVendor(Vendor),
+          mVersion(Version),
+          mExtensions(Extensions),
+          mShadingLanguageVersion(ShadingLanguageVersion),
+          mSubpixelBits(SubpixelBits),
+          mMaxElementIndex(MaxElementIndex),
+          mMax3dTextureSize(Max3dTextureSize),
+          mMaxTextureSize(MaxTextureSize),
+          mMaxArrayTextureLayers(MaxArrayTextureLayers),
+          mMaxTextureLodBias(MaxTextureLodBias),
+          mMaxCubeMapTextureSize(MaxCubeMapTextureSize),
+          mMaxRenderbufferSize(MaxRenderbufferSize),
+          mAliasedPointSizeRange(AliasedPointSizeRange),
+          mAliasedLineWidthRange(AliasedLineWidthRange),
+          mMultisampleLineWidthRange(MultisampleLineWidthRange),
+          mMultisampleLineWidthGranularity(MultisampleLineWidthGranularity),
+          mMaxDrawBuffers(MaxDrawBuffers),
+          mMaxFramebufferWidth(MaxFramebufferWidth),
+          mMaxFramebufferHeight(MaxFramebufferHeight),
+          mMaxFramebufferLayers(MaxFramebufferLayers),
+          mMaxFramebufferSamples(MaxFramebufferSamples),
+          mMaxColorAttachments(MaxColorAttachments),
+          mMinFragmentInterpolationOffset(MinFragmentInterpolationOffset),
+          mMaxFragmentInterpolationOffset(MaxFragmentInterpolationOffset),
+          mFragmentInterpolationOffsetBits(FragmentInterpolationOffsetBits),
+          mMaxViewportDims(MaxViewportDims),
+          mMaxSampleMaskWords(MaxSampleMaskWords),
+          mMaxColorTextureSamples(MaxColorTextureSamples),
+          mMaxDepthTextureSamples(MaxDepthTextureSamples),
+          mMaxIntegerSamples(MaxIntegerSamples),
+          mMaxServerWaitTimeout(MaxServerWaitTimeout),
+          mLayerProvokingVertex(LayerProvokingVertex),
+          mPrimitiveRestartForPatchesSupported(PrimitiveRestartForPatchesSupported),
+          mMaxVertexAttribRelativeOffset(MaxVertexAttribRelativeOffset),
+          mMaxVertexAttribBindings(MaxVertexAttribBindings),
+          mMaxVertexAttribStride(MaxVertexAttribStride),
+          mMaxElementsIndices(MaxElementsIndices),
+          mMaxElementsVertices(MaxElementsVertices),
+          mMaxTextureBufferSize(MaxTextureBufferSize),
+          mNumCompressedTextureFormats(NumCompressedTextureFormats),
+          mCompressedTextureFormats(CompressedTextureFormats),
+          mNumProgramBinaryFormats(NumProgramBinaryFormats),
+          mProgramBinaryFormats(ProgramBinaryFormats),
+          mNumShaderBinaryFormats(NumShaderBinaryFormats),
+          mShaderBinaryFormats(ShaderBinaryFormats),
+          mShaderCompiler(ShaderCompiler),
+          mTextureBufferOffsetAlignment(TextureBufferOffsetAlignment),
+          mNumExtensions(NumExtensions),
+          mMajorVersion(MajorVersion),
+          mMinorVersion(MinorVersion),
+          mContextFlags(ContextFlags),
+          mMaxVertexAttribs(MaxVertexAttribs),
+          mMaxVertexUniformComponents(MaxVertexUniformComponents),
+          mMaxVertexUniformVectors(MaxVertexUniformVectors),
+          mMaxVertexUniformBlocks(MaxVertexUniformBlocks),
+          mMaxVertexOutputComponents(MaxVertexOutputComponents),
+          mMaxVertexTextureImageUnits(MaxVertexTextureImageUnits),
+          mMaxVertexAtomicCounterBuffers(MaxVertexAtomicCounterBuffers),
+          mMaxVertexAtomicCounters(MaxVertexAtomicCounters),
+          mMaxVertexShaderStorageBlocks(MaxVertexShaderStorageBlocks),
+          mMaxTessGenLevel(MaxTessGenLevel),
+          mMaxPatchVertices(MaxPatchVertices),
+          mMaxTessControlUniformComponents(MaxTessControlUniformComponents),
+          mMaxTessControlTextureImageUnits(MaxTessControlTextureImageUnits),
+          mMaxTessControlOutputComponents(MaxTessControlOutputComponents),
+          mMaxTessPatchComponents(MaxTessPatchComponents),
+          mMaxTessControlTotalOutputComponents(MaxTessControlTotalOutputComponents),
+          mMaxTessControlInputComponents(MaxTessControlInputComponents),
+          mMaxTessControlUniformBlocks(MaxTessControlUniformBlocks),
+          mMaxTessControlAtomicCounterBuffers(MaxTessControlAtomicCounterBuffers),
+          mMaxTessControlAtomicCounters(MaxTessControlAtomicCounters),
+          mMaxTessControlShaderStorageBlocks(MaxTessControlShaderStorageBlocks),
+          mMaxTessEvaluationUniformComponents(MaxTessEvaluationUniformComponents),
+          mMaxTessEvaluationTextureImageUnits(MaxTessEvaluationTextureImageUnits),
+          mMaxTessEvaluationOutputComponents(MaxTessEvaluationOutputComponents),
+          mMaxTessEvaluationInputComponents(MaxTessEvaluationInputComponents),
+          mMaxTessEvaluationUniformBlocks(MaxTessEvaluationUniformBlocks),
+          mMaxTessEvaluationAtomicCounterBuffers(MaxTessEvaluationAtomicCounterBuffers),
+          mMaxTessEvaluationAtomicCounters(MaxTessEvaluationAtomicCounters),
+          mMaxTessEvaluationShaderStorageBlocks(MaxTessEvaluationShaderStorageBlocks),
+          mMaxGeometryUniformComponents(MaxGeometryUniformComponents),
+          mMaxGeometryUniformBlocks(MaxGeometryUniformBlocks),
+          mMaxGeometryInputComponents(MaxGeometryInputComponents),
+          mMaxGeometryOutputComponents(MaxGeometryOutputComponents),
+          mMaxGeometryOutputVertices(MaxGeometryOutputVertices),
+          mMaxGeometryTotalOutputComponents(MaxGeometryTotalOutputComponents),
+          mMaxGeometryTextureImageUnits(MaxGeometryTextureImageUnits),
+          mMaxGeometryShaderInvocations(MaxGeometryShaderInvocations),
+          mMaxGeometryAtomicCounterBuffers(MaxGeometryAtomicCounterBuffers),
+          mMaxGeometryAtomicCounters(MaxGeometryAtomicCounters),
+          mMaxGeometryShaderStorageBlocks(MaxGeometryShaderStorageBlocks),
+          mMaxFragmentUniformComponents(MaxFragmentUniformComponents),
+          mMaxFragmentUniformVectors(MaxFragmentUniformVectors),
+          mMaxFragmentUniformBlocks(MaxFragmentUniformBlocks),
+          mMaxFragmentInputComponents(MaxFragmentInputComponents),
+          mMaxTextureImageUnits(MaxTextureImageUnits),
+          mMaxFragmentAtomicCounterBuffers(MaxFragmentAtomicCounterBuffers),
+          mMaxFragmentAtomicCounters(MaxFragmentAtomicCounters),
+          mMaxFragmentShaderStorageBlocks(MaxFragmentShaderStorageBlocks),
+          mMinProgramTextureGatherOffset(MinProgramTextureGatherOffset),
+          mMaxProgramTextureGatherOffset(MaxProgramTextureGatherOffset),
+          mMinProgramTexelOffset(MinProgramTexelOffset),
+          mMaxProgramTexelOffset(MaxProgramTexelOffset),
+          mMaxComputeWorkGroupCount(MaxComputeWorkGroupCount),
+          mMaxComputeWorkGroupSize(MaxComputeWorkGroupSize),
+          mMaxComputeWorkGroupInvocations(MaxComputeWorkGroupInvocations),
+          mMaxComputeUniformBlocks(MaxComputeUniformBlocks),
+          mMaxComputeTextureImageUnits(MaxComputeTextureImageUnits),
+          mMaxComputeSharedMemorySize(MaxComputeSharedMemorySize),
+          mMaxComputeUniformComponents(MaxComputeUniformComponents),
+          mMaxComputeAtomicCounterBuffers(MaxComputeAtomicCounterBuffers),
+          mMaxComputeAtomicCounters(MaxComputeAtomicCounters),
+          mMaxCombinedComputeUniformComponents(MaxCombinedComputeUniformComponents),
+          mMaxComputeShaderStorageBlocks(MaxComputeShaderStorageBlocks),
+          mMaxUniformBufferBindings(MaxUniformBufferBindings),
+          mMaxUniformBlockSize(MaxUniformBlockSize),
+          mUniformBufferOffsetAlignment(UniformBufferOffsetAlignment),
+          mMaxCombinedUniformBlocks(MaxCombinedUniformBlocks),
+          mMaxCombinedVertexUniformComponents(MaxCombinedVertexUniformComponents),
+          mMaxCombinedTessControlUniformComponents(MaxCombinedTessControlUniformComponents),
+          mMaxCombinedTessEvaluationUniformComponents(MaxCombinedTessEvaluationUniformComponents),
+          mMaxCombinedGeometryUniformComponents(MaxCombinedGeometryUniformComponents),
+          mMaxCombinedFragmentUniformComponents(MaxCombinedFragmentUniformComponents),
+          mMaxVaryingComponents(MaxVaryingComponents),
+          mMaxVaryingVectors(MaxVaryingVectors),
+          mMaxCombinedTextureImageUnits(MaxCombinedTextureImageUnits),
+          mMaxCombinedShaderOutputResources(MaxCombinedShaderOutputResources),
+          mMaxUniformLocations(MaxUniformLocations),
+          mMaxAtomicCounterBufferBindings(MaxAtomicCounterBufferBindings),
+          mMaxAtomicCounterBufferSize(MaxAtomicCounterBufferSize),
+          mMaxCombinedAtomicCounterBuffers(MaxCombinedAtomicCounterBuffers),
+          mMaxCombinedAtomicCounters(MaxCombinedAtomicCounters),
+          mMaxImageUnits(MaxImageUnits),
+          mMaxVertexImageUniforms(MaxVertexImageUniforms),
+          mMaxTessControlImageUniforms(MaxTessControlImageUniforms),
+          mMaxTessEvaluationImageUniforms(MaxTessEvaluationImageUniforms),
+          mMaxGeometryImageUniforms(MaxGeometryImageUniforms),
+          mMaxFragmentImageUniforms(MaxFragmentImageUniforms),
+          mMaxComputeImageUniforms(MaxComputeImageUniforms),
+          mMaxCombinedImageUniforms(MaxCombinedImageUniforms),
+          mMaxShaderStorageBufferBindings(MaxShaderStorageBufferBindings),
+          mMaxShaderStorageBlockSize(MaxShaderStorageBlockSize),
+          mMaxCombinedShaderStorageBlocks(MaxCombinedShaderStorageBlocks),
+          mShaderStorageBufferOffsetAlignment(ShaderStorageBufferOffsetAlignment) {}
+
+    std::string mRenderer;
+    std::string mVendor;
+    std::string mVersion;
+    std::string mExtensions;
+    std::string mShadingLanguageVersion;
+    GLint mSubpixelBits;
+    GLint64 mMaxElementIndex;
+    GLint mMax3dTextureSize;
+    GLint mMaxTextureSize;
+    GLint mMaxArrayTextureLayers;
+    GLfloat mMaxTextureLodBias;
+    GLint mMaxCubeMapTextureSize;
+    GLint mMaxRenderbufferSize;
+    Slice<GLfloat> mAliasedPointSizeRange;
+    Slice<GLfloat> mAliasedLineWidthRange;
+    Slice<GLfloat> mMultisampleLineWidthRange;
+    GLfloat mMultisampleLineWidthGranularity;
+    GLint mMaxDrawBuffers;
+    GLint mMaxFramebufferWidth;
+    GLint mMaxFramebufferHeight;
+    GLint mMaxFramebufferLayers;
+    GLint mMaxFramebufferSamples;
+    GLint mMaxColorAttachments;
+    GLfloat mMinFragmentInterpolationOffset;
+    GLfloat mMaxFragmentInterpolationOffset;
+    GLint mFragmentInterpolationOffsetBits;
+    Slice<GLint> mMaxViewportDims;
+    GLint mMaxSampleMaskWords;
+    GLint mMaxColorTextureSamples;
+    GLint mMaxDepthTextureSamples;
+    GLint mMaxIntegerSamples;
+    GLint64 mMaxServerWaitTimeout;
+    GLint mLayerProvokingVertex;
+    GLboolean mPrimitiveRestartForPatchesSupported;
+    GLint mMaxVertexAttribRelativeOffset;
+    VertexBufferBindingIndex mMaxVertexAttribBindings;
+    GLint mMaxVertexAttribStride;
+    GLint mMaxElementsIndices;
+    GLint mMaxElementsVertices;
+    GLint mMaxTextureBufferSize;
+    GLint mNumCompressedTextureFormats;
+    Slice<GLint> mCompressedTextureFormats;
+    GLint mNumProgramBinaryFormats;
+    Slice<GLint> mProgramBinaryFormats;
+    GLint mNumShaderBinaryFormats;
+    Slice<GLint> mShaderBinaryFormats;
+    GLboolean mShaderCompiler;
+    GLint mTextureBufferOffsetAlignment;
+    GLint mNumExtensions;
+    GLint mMajorVersion;
+    GLint mMinorVersion;
+    GLint mContextFlags;
+    AttributeLocation mMaxVertexAttribs;
+    GLint mMaxVertexUniformComponents;
+    GLint mMaxVertexUniformVectors;
+    GLint mMaxVertexUniformBlocks;
+    GLint mMaxVertexOutputComponents;
+    GLint mMaxVertexTextureImageUnits;
+    GLint mMaxVertexAtomicCounterBuffers;
+    GLint mMaxVertexAtomicCounters;
+    GLint mMaxVertexShaderStorageBlocks;
+    GLint mMaxTessGenLevel;
+    GLint mMaxPatchVertices;
+    GLint mMaxTessControlUniformComponents;
+    GLint mMaxTessControlTextureImageUnits;
+    GLint mMaxTessControlOutputComponents;
+    GLint mMaxTessPatchComponents;
+    GLint mMaxTessControlTotalOutputComponents;
+    GLint mMaxTessControlInputComponents;
+    GLint mMaxTessControlUniformBlocks;
+    GLint mMaxTessControlAtomicCounterBuffers;
+    GLint mMaxTessControlAtomicCounters;
+    GLint mMaxTessControlShaderStorageBlocks;
+    GLint mMaxTessEvaluationUniformComponents;
+    GLint mMaxTessEvaluationTextureImageUnits;
+    GLint mMaxTessEvaluationOutputComponents;
+    GLint mMaxTessEvaluationInputComponents;
+    GLint mMaxTessEvaluationUniformBlocks;
+    GLint mMaxTessEvaluationAtomicCounterBuffers;
+    GLint mMaxTessEvaluationAtomicCounters;
+    GLint mMaxTessEvaluationShaderStorageBlocks;
+    GLint mMaxGeometryUniformComponents;
+    GLint mMaxGeometryUniformBlocks;
+    GLint mMaxGeometryInputComponents;
+    GLint mMaxGeometryOutputComponents;
+    GLint mMaxGeometryOutputVertices;
+    GLint mMaxGeometryTotalOutputComponents;
+    GLint mMaxGeometryTextureImageUnits;
+    GLint mMaxGeometryShaderInvocations;
+    GLint mMaxGeometryAtomicCounterBuffers;
+    GLint mMaxGeometryAtomicCounters;
+    GLint mMaxGeometryShaderStorageBlocks;
+    GLint mMaxFragmentUniformComponents;
+    GLint mMaxFragmentUniformVectors;
+    GLint mMaxFragmentUniformBlocks;
+    GLint mMaxFragmentInputComponents;
+    GLint mMaxTextureImageUnits;
+    GLint mMaxFragmentAtomicCounterBuffers;
+    GLint mMaxFragmentAtomicCounters;
+    GLint mMaxFragmentShaderStorageBlocks;
+    GLint mMinProgramTextureGatherOffset;
+    GLint mMaxProgramTextureGatherOffset;
+    GLint mMinProgramTexelOffset;
+    GLint mMaxProgramTexelOffset;
+    Slice<GLint> mMaxComputeWorkGroupCount;
+    Slice<GLint> mMaxComputeWorkGroupSize;
+    GLint mMaxComputeWorkGroupInvocations;
+    GLint mMaxComputeUniformBlocks;
+    GLint mMaxComputeTextureImageUnits;
+    GLint mMaxComputeSharedMemorySize;
+    GLint mMaxComputeUniformComponents;
+    GLint mMaxComputeAtomicCounterBuffers;
+    GLint mMaxComputeAtomicCounters;
+    GLint mMaxCombinedComputeUniformComponents;
+    GLint mMaxComputeShaderStorageBlocks;
+    GLint mMaxUniformBufferBindings;
+    GLint64 mMaxUniformBlockSize;
+    GLint mUniformBufferOffsetAlignment;
+    GLint mMaxCombinedUniformBlocks;
+    GLint64 mMaxCombinedVertexUniformComponents;
+    GLint mMaxCombinedTessControlUniformComponents;
+    GLint mMaxCombinedTessEvaluationUniformComponents;
+    GLint mMaxCombinedGeometryUniformComponents;
+    GLint64 mMaxCombinedFragmentUniformComponents;
+    GLint mMaxVaryingComponents;
+    GLint mMaxVaryingVectors;
+    GLint mMaxCombinedTextureImageUnits;
+    GLint mMaxCombinedShaderOutputResources;
+    GLint mMaxUniformLocations;
+    GLint mMaxAtomicCounterBufferBindings;
+    GLint mMaxAtomicCounterBufferSize;
+    GLint mMaxCombinedAtomicCounterBuffers;
+    GLint mMaxCombinedAtomicCounters;
+    GLint mMaxImageUnits;
+    GLint mMaxVertexImageUniforms;
+    GLint mMaxTessControlImageUniforms;
+    GLint mMaxTessEvaluationImageUniforms;
+    GLint mMaxGeometryImageUniforms;
+    GLint mMaxFragmentImageUniforms;
+    GLint mMaxComputeImageUniforms;
+    GLint mMaxCombinedImageUniforms;
+    GLint mMaxShaderStorageBufferBindings;
+    GLint64 mMaxShaderStorageBlockSize;
+    GLint mMaxCombinedShaderStorageBlocks;
+    GLint mShaderStorageBufferOffsetAlignment;
+};
+
 struct Context {
     inline Context()
         : mIdentifier(0),
@@ -6449,7 +6926,8 @@ struct Context {
           mCapabilities(GLenumToBool()),
           mGenerateMipmapHint(GLenum::GL_DONT_CARE),
           mPixelStorage(GLenumToGLint()),
-          mInstances(Objects()) {}
+          mInstances(Objects()),
+          mConstants(Constants()) {}
     inline Context(ContextID Identifier, ContextCreationInfo Info, BlendState Blending,
                    RasterizerState Rasterizing, ClearState Clearing,
                    GLenumToFramebufferId BoundFramebuffers,
@@ -6458,7 +6936,7 @@ struct Context {
                    AttributeLocationToVertexAttributeValue VertexAttributes,
                    GLenumToTextureUnit__R TextureUnits, uint32_t ActiveTextureUnit,
                    GLenumToBool Capabilities, uint32_t GenerateMipmapHint,
-                   GLenumToGLint PixelStorage, Objects Instances)
+                   GLenumToGLint PixelStorage, Objects Instances, Constants Constants)
         : mIdentifier(Identifier),
           mInfo(Info),
           mBlending(Blending),
@@ -6475,7 +6953,8 @@ struct Context {
           mCapabilities(Capabilities),
           mGenerateMipmapHint(GenerateMipmapHint),
           mPixelStorage(PixelStorage),
-          mInstances(Instances) {}
+          mInstances(Instances),
+          mConstants(Constants) {}
 
     ContextID mIdentifier;
     ContextCreationInfo mInfo;
@@ -6494,6 +6973,7 @@ struct Context {
     uint32_t mGenerateMipmapHint;
     GLenumToGLint mPixelStorage;
     Objects mInstances;
+    Constants mConstants;
 };
 
 typedef std::unordered_map<CGLContextObj, std::shared_ptr<Context>> CGLContextObjToContext__R;

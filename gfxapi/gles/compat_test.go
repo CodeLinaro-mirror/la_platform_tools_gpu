@@ -43,6 +43,39 @@ func p(addr uint64) memory.Pointer {
 
 type glShaderSourceCompatTest glslCompatTest
 
+func newContextInfo(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) atom.Atom {
+	names := []GLenum{}
+	offsets := []uint32{}
+	sizes := []uint32{}
+	data := ""
+	for name, value := range map[GLenum]string{
+		GLenum_GL_VERSION: "OpenGL ES 2.0",
+	} {
+		names = append(names, name)
+		offsets = append(offsets, uint32(len(data)))
+		sizes = append(sizes, uint32(len(value)))
+		data = data + value
+	}
+
+	return NewContextInfo(
+		uint32(len(names)),
+		p(0x10000),
+		p(0x20000),
+		p(0x30000),
+		p(0x40000),
+		GLsizei(width),
+		GLsizei(height),
+		GLenum_GL_RGB565,
+		GLenum_GL_DEPTH_COMPONENT16,
+		GLenum_GL_STENCIL_INDEX8,
+		true,
+		preserveBuffersOnSwap).
+		AddRead(atom.Data(a, d, l, p(0x10000), names)).
+		AddRead(atom.Data(a, d, l, p(0x20000), offsets)).
+		AddRead(atom.Data(a, d, l, p(0x30000), sizes)).
+		AddRead(atom.Data(a, d, l, p(0x40000), data))
+}
+
 func (c glShaderSourceCompatTest) run(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
@@ -68,7 +101,7 @@ func (c glShaderSourceCompatTest) run(t *testing.T) {
 	for _, a := range []atom.Atom{
 		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
 		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
-		NewContextInfo("", "", "", "OpenGL ES 2.0", 64, 64, GLenum_GL_RGB565, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_STENCIL_INDEX8, true, true),
+		newContextInfo(a, d, l, 64, 64, true),
 		NewGlCreateShader(shaderType, 0x10),
 		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
 			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
@@ -140,7 +173,7 @@ func TestGlVertexAttribPointerCompatTest(t *testing.T) {
 	for _, a := range []atom.Atom{
 		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
 		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
-		NewContextInfo("", "", "", "OpenGL ES 2.0", 64, 64, GLenum_GL_RGB565, GLenum_GL_DEPTH_COMPONENT16, GLenum_GL_STENCIL_INDEX8, true, true),
+		newContextInfo(a, d, l, 64, 64, true),
 		NewGlEnableVertexAttribArray(0),
 		NewGlVertexAttribPointer(0, 2, GLenum_GL_FLOAT, GLboolean(0), 8, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), positions)),

@@ -779,10 +779,6 @@ static const uint16_t StopTimer = 751;
 static const uint16_t FlushPostBuffer = 752;
 }  // namespace FunctionIds
 
-enum class FramebufferConstants : uint32_t {
-    MAX_DRAW_BUFFERS = 8,
-};
-
 enum class GLbitfield : uint32_t {
     GL_CURRENT_BIT = 1,
     GL_POINT_BIT = 2,
@@ -6384,13 +6380,6 @@ enum class GLenum : uint32_t {
     GL_VERTEX_CONSISTENT_HINT_PGI = 107051,
     GL_MATERIAL_SIDE_HINT_PGI = 107052,
     GL_MAX_VERTEX_HINT_PGI = 107053,
-};
-
-enum class Constants : uint32_t {
-    MAX_VERTEX_ATTRIBS = 16,
-    MAX_VERTEX_ATTRIB_BINDINGS = 16,
-    MAX_VERTEX_ATTRIB_STRIDE = 2048,
-    MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 2047,
 };
 
 enum class ExtensionId : uint32_t {

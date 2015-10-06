@@ -22,6 +22,9 @@
 #include <gapic/log.h>
 #include <gapic/target.h>
 #include <gapic/thread.h>
+#include <gapii/gles_constants.h>
+
+#include <vector>
 
 #if TARGET_OS == GAPID_OS_WINDOWS
 #include "windows/wgl.h"
@@ -213,12 +216,68 @@ void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
                          uint32_t backbuffer_color_fmt, uint32_t backbuffer_depth_fmt,
                          uint32_t backbuffer_stencil_fmt, bool reset_viewport_scissor,
                          bool preserve_buffers_on_swap) {
+    using namespace GLenum;
+
+    struct Constants {
+        void add(uint32_t name, void* value, uint32_t size, int alignment) {
+            while(data.size() % alignment != 0) {
+                data.push_back(0);
+            }
+            names.push_back(name);
+            offsets.push_back(data.size());
+            sizes.push_back(size);
+            uint8_t* v = reinterpret_cast<uint8_t*>(value);
+            data.insert(data.end(), v, v + size);
+        }
+
+        std::vector<uint32_t> names;  // GLenum
+        std::vector<uint32_t> offsets;
+        std::vector<uint32_t> sizes;
+        std::vector<uint8_t> data;
+    } constants;
+
     std::shared_ptr<Context> ctx = GlesSpy::Contexts[GlesSpy::CurrentThread];
-    char* name = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_RENDERER));
-    char* vendor = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_VENDOR));
-    char* extensions = ""; // TODO
-    char* version = reinterpret_cast<char*>(mImports.glGetString(GLenum::GL_VERSION));
-    GlesSpy::contextInfo(name, vendor, extensions, version,
+    while (mImports.glGetError() != GLenum::GL_NO_ERROR) { }  // clear errors
+
+    GLint major_version = 0;
+    mImports.glGetIntegerv(GLenum::GL_MAJOR_VERSION, &major_version);
+    bool is_gles_30_or_newer = (mImports.glGetError() == GL_NO_ERROR) && (major_version >= 3);
+
+    // Record implementation dependent constants from glGetString.
+    uint32_t strings[] { GL_EXTENSIONS, GL_RENDERER, GL_SHADING_LANGUAGE_VERSION, GL_VENDOR, GL_VERSION };
+    for (uint32_t name : strings) {
+        char* value = reinterpret_cast<char*>(mImports.glGetString(name));
+        if (mImports.glGetError() == GL_NO_ERROR) {
+            constants.add(name, value, strlen(value), 1);
+            constants.data.push_back(0);  // add null-terminator, just in case.
+        }
+    }
+
+    // Record implementation dependent constants from glGetShaderPrecisionFormat.
+    uint32_t precisions[] { GL_LOW_FLOAT, GL_MEDIUM_FLOAT, GL_HIGH_FLOAT, GL_LOW_INT, GL_MEDIUM_INT, GL_HIGH_INT };
+    for (uint32_t name : precisions) {
+        GLint values[6];
+        mImports.glGetShaderPrecisionFormat(GL_VERTEX_SHADER, name, &values[0], &values[2]);
+        mImports.glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, name, &values[3], &values[5]);
+        if (mImports.glGetError() == GL_NO_ERROR) {
+            constants.add(name, values, sizeof(values), sizeof(GLint));
+        }
+    }
+
+    // Record implementation dependent constants from glGet* family of methods.
+    std::vector<uint8_t> buffer;
+    for (const ConstantDesc* desc = kGLESConstantDescs; desc->name != 0; desc++) {
+        if (GetConstant(mImports, is_gles_30_or_newer, desc, &buffer)) {
+            int alignment = GetSizeOfGLType(desc->type);
+            constants.add(desc->name, buffer.data(), buffer.size(), alignment);
+        }
+    }
+
+    GlesSpy::contextInfo(constants.names.size(),
+                         constants.names.data(),
+                         constants.offsets.data(),
+                         constants.sizes.data(),
+                         constants.data.data(),
                          backbuffer_width, backbuffer_height,
                          backbuffer_color_fmt, backbuffer_depth_fmt,
                          backbuffer_stencil_fmt, reset_viewport_scissor,

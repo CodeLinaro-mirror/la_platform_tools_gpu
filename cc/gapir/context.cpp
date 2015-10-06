@@ -161,10 +161,11 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         uint32_t color_fmt = stack->pop<uint32_t>();
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
-        const char* version = stack->pop<const char*>();
-        const char* extensions = stack->pop<const char*>();
-        const char* vendor = stack->pop<const char*>();
-        const char* name = stack->pop<const char*>();
+        const uint8_t* constant_data = stack->pop<uint8_t*>();
+        const uint32_t* constant_sizes = stack->pop<uint32_t*>();
+        const uint32_t* constant_offsets = stack->pop<uint32_t*>();
+        const uint32_t* constant_names = stack->pop<uint32_t*>();
+        const uint32_t constant_count = stack->pop<uint32_t>();
 
         if (!stack->isValid()) {
             GAPID_WARNING("Error during calling function replayCreateRenderer");

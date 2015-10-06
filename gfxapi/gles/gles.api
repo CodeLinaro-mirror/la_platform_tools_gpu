@@ -517,13 +517,7 @@ class Objects {
 
 @internal
 class ContextCreationInfo {
-  string Name
-  string Vendor
-  string Extensions
-  string Version
-  GLint  VersionMajor          // TODO: Needs setting.
-  GLint  VersionMinor          // TODO: Needs setting.
-  bool   PreserveBuffersOnSwap
+  bool PreserveBuffersOnSwap
 }
 
 @internal
@@ -545,6 +539,7 @@ class Context {
   GLenum                                        GenerateMipmapHint = GL_DONT_CARE
   map!(GLenum, GLint)                           PixelStorage
   Objects                                       Instances
+  Constants                                     Constants
 }
 
 type u64 ThreadID
@@ -615,17 +610,10 @@ macro ref!Context CreateContext() {
   ctx.PixelStorage[GL_PACK_ALIGNMENT] = 4
   ctx.PixelStorage[GL_UNPACK_ALIGNMENT] = 4
 
-  ctx.Instances.VertexArrays[0] = NewVertexArray()
+  ctx.Instances.VertexArrays[0] = NewVertexArray(ctx)
 
-  for i in (0 .. as!AttributeLocation(MAX_VERTEX_ATTRIBS)) {
-    v := make!Vec4f(1)
-    v[0] = Vec4f(0.0, 0.0, 0.0, 1.0)
-    ctx.VertexAttributes[i] = VertexAttributeValue(Value: as!u8[](v))
-  }
-
-  for i in (0 .. 64) {  // TODO: Count
-    ctx.TextureUnits[GL_TEXTURE0 + as!GLenum(i)] = new!TextureUnit()
-  }
+  // NB: Postpone initialization of things that depend on constants
+  //     until contextInfo because we do not know the constants yet.
 
   return ctx
 }
