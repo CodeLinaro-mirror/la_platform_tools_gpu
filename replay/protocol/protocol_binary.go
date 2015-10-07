@@ -69,7 +69,7 @@ func doEncodePayload(e binary.Encoder, o *Payload) {
 	e.Data(o.Constants)
 	e.Uint32(uint32(len(o.Resources)))
 	for i := range o.Resources {
-		e.Value(&o.Resources[i])
+		e.Struct(&o.Resources[i])
 	}
 	e.Uint32(uint32(len(o.Opcodes)))
 	e.Data(o.Opcodes)
@@ -81,10 +81,17 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 		o.Constants = make([]byte, count)
 		d.Data(o.Constants)
 	}
+	var ent_6233a674930897af785febe2f53bca85fac74752 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_6233a674930897af785febe2f53bca85fac74752 = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			d.Value(&o.Resources[i])
+			d.Struct(ent_6233a674930897af785febe2f53bca85fac74752, &o.Resources[i])
 		}
 	}
 	if count := d.Uint32(); count > 0 {

@@ -247,15 +247,15 @@ func doEncodeMemoryInfo(e binary.Encoder, o *MemoryInfo) {
 	e.Data(o.Data)
 	e.Uint32(uint32(len(o.Reads)))
 	for i := range o.Reads {
-		e.Value(&o.Reads[i])
+		e.Struct(&o.Reads[i])
 	}
 	e.Uint32(uint32(len(o.Writes)))
 	for i := range o.Writes {
-		e.Value(&o.Writes[i])
+		e.Struct(&o.Writes[i])
 	}
 	e.Uint32(uint32(len(o.Observed)))
 	for i := range o.Observed {
-		e.Value(&o.Observed[i])
+		e.Struct(&o.Observed[i])
 	}
 }
 func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
@@ -263,22 +263,43 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
 		o.Data = make([]uint8, count)
 		d.Data(o.Data)
 	}
+	var ent_46843000c5853355719e7521b21f8838f3acc1fb *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_46843000c5853355719e7521b21f8838f3acc1fb = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Reads = make(memory.RangeList, count)
 		for i := range o.Reads {
-			d.Value(&o.Reads[i])
+			d.Struct(ent_46843000c5853355719e7521b21f8838f3acc1fb, &o.Reads[i])
 		}
+	}
+	var ent_5be69fd9e7979b70ee26b3a527ab6ff776008113 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_5be69fd9e7979b70ee26b3a527ab6ff776008113 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Writes = make(memory.RangeList, count)
 		for i := range o.Writes {
-			d.Value(&o.Writes[i])
+			d.Struct(ent_5be69fd9e7979b70ee26b3a527ab6ff776008113, &o.Writes[i])
 		}
+	}
+	var ent_0724f441e79bf9de1963fc961ba43ff03f832fa8 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_0724f441e79bf9de1963fc961ba43ff03f832fa8 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Observed = make(memory.RangeList, count)
 		for i := range o.Observed {
-			d.Value(&o.Observed[i])
+			d.Struct(ent_0724f441e79bf9de1963fc961ba43ff03f832fa8, &o.Observed[i])
 		}
 	}
 }
@@ -393,14 +414,21 @@ func (*Report) Class() binary.Class {
 func doEncodeReport(e binary.Encoder, o *Report) {
 	e.Uint32(uint32(len(o.Items)))
 	for i := range o.Items {
-		e.Value(&o.Items[i])
+		e.Struct(&o.Items[i])
 	}
 }
 func doDecodeReport(d binary.Decoder, o *Report) {
+	var ent_24e824fbfe817f6e820610a8a02af6ed729ee2fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_24e824fbfe817f6e820610a8a02af6ed729ee2fa = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Items = make([]ReportItem, count)
 		for i := range o.Items {
-			d.Value(&o.Items[i])
+			d.Struct(ent_24e824fbfe817f6e820610a8a02af6ed729ee2fa, &o.Items[i])
 		}
 	}
 }
@@ -481,44 +509,72 @@ func (*Resources) Class() binary.Class {
 func doEncodeResources(e binary.Encoder, o *Resources) {
 	e.Uint32(uint32(len(o.Textures1D)))
 	for i := range o.Textures1D {
-		e.Value(&o.Textures1D[i])
+		e.Struct(&o.Textures1D[i])
 	}
 	e.Uint32(uint32(len(o.Textures2D)))
 	for i := range o.Textures2D {
-		e.Value(&o.Textures2D[i])
+		e.Struct(&o.Textures2D[i])
 	}
 	e.Uint32(uint32(len(o.Textures3D)))
 	for i := range o.Textures3D {
-		e.Value(&o.Textures3D[i])
+		e.Struct(&o.Textures3D[i])
 	}
 	e.Uint32(uint32(len(o.Cubemaps)))
 	for i := range o.Cubemaps {
-		e.Value(&o.Cubemaps[i])
+		e.Struct(&o.Cubemaps[i])
 	}
 }
 func doDecodeResources(d binary.Decoder, o *Resources) {
+	var ent_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Textures1D = make([]ResourceInfo, count)
 		for i := range o.Textures1D {
-			d.Value(&o.Textures1D[i])
+			d.Struct(ent_b4df353ab1d582ba3a5b1749ac5442fad90b8c2f, &o.Textures1D[i])
 		}
+	}
+	var ent_c3226edef71d45d22b0a9c9071f78090390ec6d0 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_c3226edef71d45d22b0a9c9071f78090390ec6d0 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Textures2D = make([]ResourceInfo, count)
 		for i := range o.Textures2D {
-			d.Value(&o.Textures2D[i])
+			d.Struct(ent_c3226edef71d45d22b0a9c9071f78090390ec6d0, &o.Textures2D[i])
 		}
+	}
+	var ent_8d9816329f90d0d89f9c7bb22f2714f500ccdbda *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_8d9816329f90d0d89f9c7bb22f2714f500ccdbda = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Textures3D = make([]ResourceInfo, count)
 		for i := range o.Textures3D {
-			d.Value(&o.Textures3D[i])
+			d.Struct(ent_8d9816329f90d0d89f9c7bb22f2714f500ccdbda, &o.Textures3D[i])
 		}
+	}
+	var ent_7d7a6015257b08fb00305bdb7e9eb9187af74829 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_7d7a6015257b08fb00305bdb7e9eb9187af74829 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.Cubemaps = make([]ResourceInfo, count)
 		for i := range o.Cubemaps {
-			d.Value(&o.Cubemaps[i])
+			d.Struct(ent_7d7a6015257b08fb00305bdb7e9eb9187af74829, &o.Cubemaps[i])
 		}
 	}
 }
@@ -555,34 +611,55 @@ func (*TimingInfo) Class() binary.Class {
 func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) {
 	e.Uint32(uint32(len(o.PerCommand)))
 	for i := range o.PerCommand {
-		e.Value(&o.PerCommand[i])
+		e.Struct(&o.PerCommand[i])
 	}
 	e.Uint32(uint32(len(o.PerDrawCall)))
 	for i := range o.PerDrawCall {
-		e.Value(&o.PerDrawCall[i])
+		e.Struct(&o.PerDrawCall[i])
 	}
 	e.Uint32(uint32(len(o.PerFrame)))
 	for i := range o.PerFrame {
-		e.Value(&o.PerFrame[i])
+		e.Struct(&o.PerFrame[i])
 	}
 }
 func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
+	var ent_bc79380b317a6061b732fb0a24814feacef47c1c *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_bc79380b317a6061b732fb0a24814feacef47c1c = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.PerCommand = make([]AtomTimer, count)
 		for i := range o.PerCommand {
-			d.Value(&o.PerCommand[i])
+			d.Struct(ent_bc79380b317a6061b732fb0a24814feacef47c1c, &o.PerCommand[i])
 		}
+	}
+	var ent_0b1178f5fe291c723fe274eb7315b537beb1a9c8 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_0b1178f5fe291c723fe274eb7315b537beb1a9c8 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.PerDrawCall = make([]AtomRangeTimer, count)
 		for i := range o.PerDrawCall {
-			d.Value(&o.PerDrawCall[i])
+			d.Struct(ent_0b1178f5fe291c723fe274eb7315b537beb1a9c8, &o.PerDrawCall[i])
 		}
+	}
+	var ent_4007a3aff86abab686f7fe8563d561d4d96c5cc6 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_4007a3aff86abab686f7fe8563d561d4d96c5cc6 = ent
 	}
 	if count := d.Uint32(); count > 0 {
 		o.PerFrame = make([]AtomRangeTimer, count)
 		for i := range o.PerFrame {
-			d.Value(&o.PerFrame[i])
+			d.Struct(ent_4007a3aff86abab686f7fe8563d561d4d96c5cc6, &o.PerFrame[i])
 		}
 	}
 }
@@ -758,7 +835,7 @@ func doEncodecallGetFramebufferColor(e binary.Encoder, o *callGetFramebufferColo
 	} else {
 		e.Object(nil)
 	}
-	e.Value(&o.settings)
+	e.Struct(&o.settings)
 }
 func doDecodecallGetFramebufferColor(d binary.Decoder, o *callGetFramebufferColor) {
 	if obj := d.Object(); obj != nil {
@@ -771,7 +848,14 @@ func doDecodecallGetFramebufferColor(d binary.Decoder, o *callGetFramebufferColo
 	} else {
 		o.after = nil
 	}
-	d.Value(&o.settings)
+	var ent_fce65e0023777b929bde1f3d7da272183be446bd *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_fce65e0023777b929bde1f3d7da272183be446bd = ent
+	}
+	d.Struct(ent_fce65e0023777b929bde1f3d7da272183be446bd, &o.settings)
 }
 func (*binaryClasscallGetFramebufferColor) New() binary.Object { return &callGetFramebufferColor{} }
 func (*binaryClasscallGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
@@ -1310,10 +1394,17 @@ func (*resultGetSchema) Class() binary.Class {
 	return (*binaryClassresultGetSchema)(nil)
 }
 func doEncoderesultGetSchema(e binary.Encoder, o *resultGetSchema) {
-	e.Value(&o.value)
+	e.Struct(&o.value)
 }
 func doDecoderesultGetSchema(d binary.Decoder, o *resultGetSchema) {
-	d.Value(&o.value)
+	var ent_e4eb441698e1087e227cf358c8557e8a3ea6a162 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_e4eb441698e1087e227cf358c8557e8a3ea6a162 = ent
+	}
+	d.Struct(ent_e4eb441698e1087e227cf358c8557e8a3ea6a162, &o.value)
 }
 func (*binaryClassresultGetSchema) New() binary.Object { return &resultGetSchema{} }
 func (*binaryClassresultGetSchema) Encode(e binary.Encoder, obj binary.Object) {

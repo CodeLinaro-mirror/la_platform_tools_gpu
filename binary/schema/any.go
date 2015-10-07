@@ -62,3 +62,7 @@ func (Any) DecodeValue(d binary.Decoder) interface{} {
 		return unboxed
 	}
 }
+
+func (*Any) Subspace() binary.EntityList {
+	return nil
+}

@@ -69,3 +69,7 @@ func (m *Map) DecodeValue(d binary.Decoder) interface{} {
 	}
 	return v
 }
+
+func (m *Map) Subspace() binary.EntityList {
+	return append(m.KeyType.Subspace(), m.ValueType.Subspace()...)
+}

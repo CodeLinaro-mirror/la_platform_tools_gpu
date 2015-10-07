@@ -55,6 +55,7 @@ type Module struct {
 	Path       string            // The directory name this module was scanned from.
 	Directives map[string]string // The set of codergen directives encountered in the files.
 	Structs    []*Struct         // The structs encountered.
+	Frozen     []*Struct         // The frozen structs encountered.
 	Constants  schema.Constants  // All the const declarations and their types.
 	Services   []*Service        // The service interfaces discovered.
 	Imports    Imports           // The set of package imports encountered.

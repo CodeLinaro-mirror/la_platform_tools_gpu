@@ -31,7 +31,7 @@
   «}¶
   func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) {»¶
     {{range .Fields}}
-      {{Call "Go.Decode" (Var .Type "o." .Name)}}
+      {{Call "Go.PopDecode" (Var .Type "o." .Name)}}
     {{end}}
   «}¶
   {{$base := 18}}
@@ -75,6 +75,71 @@
   {{end}}
 {{end}}
 
+{{define "Go.doDecode"}}
+func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
+  {{range .Fields}}
+    {{Call "Go.PopDecode" (Var .Type "o." .Name)}}
+  {{end}}
+  return d.Error()¶
+«}¶
+{{end}}
+
+{{define "Go.UpgradeClass"}}
+  {{$name := .Tags.Get "name"}}
+  {{if not $name}}
+    {{Error "Did not specify name directive for Frozen %s" .Name}}
+  {{end}}
+  {{$className  := (print "binaryClass" .Name)}}
+  {{$currentClassName := (print "binaryClass" $name)}}
+  type {{$className}} struct{ binary.FrozenClassBase }¶
+  func (*{{.Name}}) Class() binary.Class {»¶
+    return &{{$className}}{}¶
+  «}¶
+  {{$base := 18}}
+  {{$wrap := gt (len .Name) (add $base 7)}}
+  {{template "Go.doDecode" .}}
+  {{$doUpgradeDecode := (print "doUpgradeDecodeǀ" .Name "ǁ" $name)}}
+  func {{$doUpgradeDecode}}(d binary.Decoder, o *{{$name}}) {»¶
+    old := &{{.Name}}{}¶
+    doDecode{{.Name}}(d, old)¶
+    if d.Error() != nil {»¶
+      return¶
+   «}¶
+    old.upgrade(o)  // This upgrade() method is not code generated.¶
+  «}¶
+  func (*{{$className}}) Decode(d binary.Decoder) binary.Object {»¶
+    obj := &{{$name}}{}¶
+    {{$doUpgradeDecode}}(d, obj)¶
+    return obj¶
+  «}¶
+  func (*{{$className}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶
+    {{$doUpgradeDecode}}(d, obj.(*{{$name}}))¶
+  «}¶
+  ¶
+  {{if File.Directive "Schema" true}}
+    {{$wrap := gt (len .Name) (add $base 4)}}
+    func (*binaryClass{{.Name}}) Schema() *binary.Entity{{if not $wrap}}║{{end}} {»{{if $wrap}}¶{{else}}•{{end}}
+      return schema{{.Name}}{{if $wrap}}¶{{else}}•{{end}}
+    «}¶
+    ¶
+    var schema{{.Name}} = &binary.Entity{»¶
+      Package:║"{{.Package}}",¶
+      {{if .Display}}Display:║"{{.Display}}",¶{{end}}
+      Identity:║"{{.Identity}}",¶
+      {{if .Version}}Version:║"{{.Version}}",¶{{end}}
+      {{if not (len .Fields)}}
+	Fields:║[]binary.Field{},¶
+      {{else}}
+	Fields: []binary.Field{»¶
+	  {{range .Fields}}
+	    {Declared:║"{{.Declared}}", Type: {{Call "Go.Schema" .Type}}},¶
+	  {{end}}
+	«},¶
+      {{end}}
+    «}¶
+   {{end}}
+{{end}}
+
 {{define "Go.Encode.Primitive"}}
   {{if eq .Type.Native .Type.Name}}
     e.{{.Type.Method}}({{.Name}})¶
@@ -84,7 +149,7 @@
 {{end}}
 
 {{define "Go.Encode.Struct"}}
-  e.Value(&{{.Name}})¶
+  e.Struct(&{{.Name}})¶
 {{end}}
 
 {{define "Go.Encode.Pointer"}}
@@ -146,7 +211,13 @@
 {{end}}
 
 {{define "Go.Decode.Struct"}}
+  {{if (File.Directive "Schema" false)}}
+  // Schema is off¶
+  _ = {{Call "Go.UniqueID" .}}¶
   d.Value(&{{.Name}})¶
+  {{else}}
+  d.Struct({{Call "Go.UniqueID" .}}, &{{.Name}})¶
+  {{end}}
 {{end}}
 
 {{define "Go.Decode.Pointer"}}
@@ -189,6 +260,7 @@
 {{end}}
 
 {{define "Go.Decode.Slice"}}
+  {{Call "Go.PopEntity" (Var .Type.ValueType .Name "[i]")}}
   {{template "Go.Decode_Length" $}}
     for i := range {{.Name}} {»¶
       {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
@@ -201,15 +273,40 @@
 {{end}}
 
 {{define "Go.Decode.Array"}}
+  {{Call "Go.PopEntity" (Var .Type.ValueType .Name "[i]")}}
   for i := range {{.Name}} {»¶
     {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
   «}¶
+{{end}}
+
+{{define "Go.PopEntity"}}
+{{end}}
+
+{{define "Go.UniqueID"}}
+{{(print "ent_" .Unique)}}
+{{end}}
+
+{{define "Go.PopEntity.Struct"}}
+var•{{Call "Go.UniqueID" .}}•*binary.Entity¶
+if ent, err := d.PopEntity(); err != nil {»¶
+  d.SetError(err)¶
+  return¶
+«} else {»¶
+  {{Call "Go.UniqueID" .}}•= ent¶
+«}¶
+{{end}}
+
+{{define "Go.PopDecode"}}
+{{Call "Go.PopEntity" .}}
+{{Call "Go.Decode" .}}
 {{end}}
 
 {{define "Go.Decode.Map"}}
   if count := d.Uint32(); count > 0 {»¶
     {{.Name}} = make({{.Type}}, count)¶
     m := {{.Name}}¶
+    {{Call "Go.PopEntity" (Var .Type.KeyType "k")}}
+    {{Call "Go.PopEntity" (Var .Type.ValueType "v")}}
     for i := uint32(0); i < count; i++ {»¶
       var k {{.Type.KeyType}}¶
       var v {{.Type.ValueType}}¶
@@ -272,7 +369,7 @@
 {{end}}
 
 {{define "Go.BinaryImports"}}
-  {{if len .Structs}}
+  {{if (len .Structs) or (len .Frozen)}}
     {{File.Import "android.googlesource.com/platform/tools/gpu/binary"}}
     {{if not .IsTest}}
       {{File.Import "android.googlesource.com/platform/tools/gpu/binary/registry"}}
@@ -287,6 +384,12 @@
   {{range .Structs}}
     {{range .Fields}}
       {{Call "Go.Import" .Type}}
+    {{end}}
+  {{end}}
+  {{range .Frozen}}
+    {{range .Fields}}
+      {{Call "Go.Import" .Type}}
+      {{Call "Go.ImportAny" .Type}}
     {{end}}
   {{end}}
 {{end}}
@@ -305,11 +408,16 @@
         registry.Global.AddFallbacks(Namespace)¶
       {{end}}
       {{range .Structs}}{{template "Go.Init" .}}{{end}}
+      {{range .Frozen}}{{template "Go.Init" .}}{{end}}
     «}¶
   {{end}}
   {{range .Structs}}
     ¶
     {{template "Go.Class" .}}
+  {{end}}
+  {{range .Frozen}}
+    ¶
+    {{template "Go.UpgradeClass" .}}
   {{end}}
   {{if and (File.Directive "Schema" true) (len .Constants)}}
     ¶

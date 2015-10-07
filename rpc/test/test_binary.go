@@ -419,10 +419,17 @@ func (*callSetStruct) Class() binary.Class {
 	return (*binaryClasscallSetStruct)(nil)
 }
 func doEncodecallSetStruct(e binary.Encoder, o *callSetStruct) {
-	e.Value(&o.s)
+	e.Struct(&o.s)
 }
 func doDecodecallSetStruct(d binary.Decoder, o *callSetStruct) {
-	d.Value(&o.s)
+	var ent_5c7b027bf1450e20e81eddae2dd90e0879199561 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_5c7b027bf1450e20e81eddae2dd90e0879199561 = ent
+	}
+	d.Struct(ent_5c7b027bf1450e20e81eddae2dd90e0879199561, &o.s)
 }
 func (*binaryClasscallSetStruct) New() binary.Object { return &callSetStruct{} }
 func (*binaryClasscallSetStruct) Encode(e binary.Encoder, obj binary.Object) {
@@ -721,10 +728,17 @@ func (*resultGetStruct) Class() binary.Class {
 	return (*binaryClassresultGetStruct)(nil)
 }
 func doEncoderesultGetStruct(e binary.Encoder, o *resultGetStruct) {
-	e.Value(&o.value)
+	e.Struct(&o.value)
 }
 func doDecoderesultGetStruct(d binary.Decoder, o *resultGetStruct) {
-	d.Value(&o.value)
+	var ent_fb61cd7b6964528ad3848da40de0a8e742abec39 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_fb61cd7b6964528ad3848da40de0a8e742abec39 = ent
+	}
+	d.Struct(ent_fb61cd7b6964528ad3848da40de0a8e742abec39, &o.value)
 }
 func (*binaryClassresultGetStruct) New() binary.Object { return &resultGetStruct{} }
 func (*binaryClassresultGetStruct) Encode(e binary.Encoder, obj binary.Object) {
@@ -754,10 +768,17 @@ func (*resultResolveResource) Class() binary.Class {
 	return (*binaryClassresultResolveResource)(nil)
 }
 func doEncoderesultResolveResource(e binary.Encoder, o *resultResolveResource) {
-	e.Value(&o.value)
+	e.Struct(&o.value)
 }
 func doDecoderesultResolveResource(d binary.Decoder, o *resultResolveResource) {
-	d.Value(&o.value)
+	var ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f = ent
+	}
+	d.Struct(ent_8d9b5efa6b2ee245e8bc314ec8b3e9159547be7f, &o.value)
 }
 func (*binaryClassresultResolveResource) New() binary.Object { return &resultResolveResource{} }
 func (*binaryClassresultResolveResource) Encode(e binary.Encoder, obj binary.Object) {

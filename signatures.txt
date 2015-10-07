@@ -3668,6 +3668,12 @@ test.Voidˢ{$}
 Voidᵖ : size 18
 test.Voidᵖ{$}
 
+X : size 12
+test.X{Int32,Int32,String}
+
+Y : size 14
+test.Y{String,$,String}
+
 callAdd : size 17
 test.callAdd{Uint32,Uint32}
 
@@ -3729,9 +3735,9 @@ resultUseResource : size 25
 test.resultUseResource{}
 
 Schema stats:
-Count: 1243
-Total: 37492
-Compact: 39983
-Full: 127349
+Count: 1245
+Total: 37518
+Compact: 40013
+Full: 127438
 Average: 30
 Largest: 67

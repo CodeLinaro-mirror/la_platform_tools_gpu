@@ -77,6 +77,10 @@ func (s *Slice) Representation() string {
 	return fmt.Sprintf("%r", s)
 }
 
+func (s *Array) Subspace() binary.EntityList {
+	return s.ValueType.Subspace()
+}
+
 func (s *Slice) String() string {
 	return fmt.Sprint(s)
 }
@@ -112,4 +116,8 @@ func (s *Slice) DecodeValue(d binary.Decoder) interface{} {
 		v[i] = s.ValueType.DecodeValue(d)
 	}
 	return v
+}
+
+func (s *Slice) Subspace() binary.EntityList {
+	return s.ValueType.Subspace()
 }

@@ -16,6 +16,7 @@ package cyclic
 
 import (
 	"bytes"
+	"reflect"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -23,43 +24,24 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
-func TestValue(t *testing.T) {
-	for _, entry := range []test.Entry{
-		{
-			Name:   "One",
-			Values: []binary.Object{test.ObjectA},
-			Data: []byte{
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'A',
-			},
-		},
-		{
-			Name:   "Repeat",
-			Values: []binary.Object{test.ObjectA, test.ObjectA},
-			Data: []byte{
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'A',
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'A',
-			},
-		},
-		{
-			Name:   "Many",
-			Values: []binary.Object{test.ObjectA, test.ObjectB, test.ObjectA},
-			Data: []byte{
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'A',
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'B',
-				0x07,
-				'O', 'b', 'j', 'e', 'c', 't', 'A',
-			},
-		},
-	} {
-		b := &bytes.Buffer{}
-		test.EncodeValue(t, entry, Encoder(vle.Writer(b)), b)
-		r := bytes.NewReader(entry.Data)
-		test.DecodeValue(t, entry, Decoder(vle.Reader(r)), r)
+func EncodeObject(t *testing.T, entry test.Entry, e binary.Encoder, buf *bytes.Buffer) {
+	for i, o := range entry.Values {
+		e.Object(o)
+		if e.Error() != nil {
+			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, e.Error())
+		}
+	}
+	test.VerifyData(t, entry, buf)
+}
+
+func DecodeObject(t *testing.T, entry test.Entry, d binary.Decoder, reader *bytes.Reader) {
+	for i, o := range entry.Values {
+		got := d.Object()
+		if d.Error() != nil {
+			t.Errorf("%v[%v] Object gave unexpected error: %v", entry.Name, i, d.Error())
+		} else if !reflect.DeepEqual(o, got) {
+			t.Errorf("%v[%v] unexpected object. Expected: %+v, got: %+v", entry.Name, i, o, got)
+		}
 	}
 }
 
@@ -117,9 +99,9 @@ func TestObject(t *testing.T) {
 		},
 	} {
 		b := &bytes.Buffer{}
-		test.EncodeObject(t, entry, Encoder(vle.Writer(b)), b)
+		EncodeObject(t, entry, Encoder(vle.Writer(b)), b)
 		r := bytes.NewReader(entry.Data)
-		test.DecodeObject(t, entry, Decoder(vle.Reader(r)), r)
+		DecodeObject(t, entry, Decoder(vle.Reader(r)), r)
 	}
 }
 

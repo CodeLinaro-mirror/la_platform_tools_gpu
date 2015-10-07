@@ -29,6 +29,7 @@ const (
 	binaryPackage  = "android.googlesource.com/platform/tools/gpu/binary"
 	binaryGenerate = binaryPackage + ".Generate"
 	schemaPackage  = "android.googlesource.com/platform/tools/gpu/binary/schema"
+	binaryFrozen   = binaryPackage + ".Frozen"
 )
 
 // findBinaryObject looks for the binary.Object type in the imports, returning it

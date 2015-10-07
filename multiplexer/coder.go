@@ -14,28 +14,11 @@
 
 package multiplexer
 
-import "sync/atomic"
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-type channelId uint32
-
-func remote(i channelId) channelId {
-	return ^i
+type encoder interface {
+	binary.Writer
+	Value(binary.Object)
 }
 
-func (i *channelId) increment() (old channelId) {
-	return channelId(atomic.AddUint32((*uint32)(i), 1) - 1)
-}
-
-func (i channelId) encode(e encoder) error {
-	e.Uint32(uint32(i))
-	return e.Error()
-}
-
-func (i *channelId) decode(d decoder) error {
-	val := d.Uint32()
-	if d.Error() != nil {
-		return d.Error()
-	}
-	*i = channelId(val)
-	return nil
-}
+type decoder binary.Reader

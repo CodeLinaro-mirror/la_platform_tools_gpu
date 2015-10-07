@@ -172,6 +172,10 @@ func (p *Primitive) DecodeValue(d binary.Decoder) interface{} {
 	}
 }
 
+func (p *Primitive) Subspace() binary.EntityList {
+	return nil
+}
+
 // This will convert a string to a Method, or return an error if the string was
 // not a valid method name.
 func ParseMethod(s string) (Method, error) {

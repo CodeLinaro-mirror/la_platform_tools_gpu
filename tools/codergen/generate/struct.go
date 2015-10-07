@@ -50,12 +50,17 @@ func (m *Module) addStruct(n *types.TypeName) {
 	}
 	tagged := false
 	var invalidStruct error
+	frozen := false
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
 		tags := Tags(t.Tag(i))
 		if decl.Anonymous() &&
-			decl.Type().String() == binaryGenerate &&
+			(decl.Type().String() == binaryGenerate ||
+				decl.Type().String() == binaryFrozen) &&
 			!tags.Flag("disable") {
+			if decl.Type().String() == binaryFrozen {
+				frozen = true
+			}
 			tagged = true
 			s.Tags = tags
 			continue
@@ -81,7 +86,11 @@ func (m *Module) addStruct(n *types.TypeName) {
 			s.Display = ""
 		}
 		s.Version = s.Tag("version", "")
-		m.Structs = append(m.Structs, s)
+		if frozen {
+			m.Frozen = append(m.Frozen, s)
+		} else {
+			m.Structs = append(m.Structs, s)
+		}
 	}
 }
 

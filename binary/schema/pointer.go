@@ -56,3 +56,7 @@ func (p *Pointer) EncodeValue(e binary.Encoder, value interface{}) {
 func (p *Pointer) DecodeValue(d binary.Decoder) interface{} {
 	return d.Object()
 }
+
+func (p *Pointer) Subspace() binary.EntityList {
+	return nil
+}

@@ -108,13 +108,16 @@
   {{     if not $.ErrHandler}}{{Template "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
   {{else if IsStaticArray $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
   {{else if IsMap         $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
-  {{else if IsClass       $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsClass       $.Type}}{{Error "Decode Structs is not supported %v" $.Type}}
   {{else if IsPointer     $.Type}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+  {{else if IsStaticArray $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsMap         $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsPointer     $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
   {{else if IsPseudonym   $.Type}}
     {{$ty := $.Type.To | Unpack}}
     {{     if IsStaticArray $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else if IsMap         $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
-    {{else if IsClass       $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
+    {{else if IsClass       $ty}}{{Error "Decode Structs is not supported %v (aka %v)" $.Type $.ty}}
     {{else if IsPointer     $ty}}if d.Value(&{{$.Name}}); d.Error() != nil { {{$.ErrHandler}} }
     {{else if IsPseudonym   $ty}}{{Template "Go.DecodePOD" "Type" $ty.To "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
     {{else}}{{Template "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}

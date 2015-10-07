@@ -23,18 +23,23 @@ type Object interface {
 	Class() Class
 }
 
+// Provides a decoder interface which maybe used to decode a stream
+// from an old version into a newer version.
+type UpgradeDecoder interface {
+	// Decode reads a single object from the supplied Decoder.
+	Decode(Decoder) Object
+	// DecodeTo reads into the supplied object from the supplied Decoder.
+	// The object must be a type the Class understands, the implementation is
+	// allowed to panic if it is not.
+	DecodeTo(Decoder, Object)
+}
+
 // Class represents a struct type in the binary registry.
 type Class interface {
-	// New can be used to build a new default initialized instance of the type.
-	New() Object
-
 	// Encode writes the supplied object to the supplied Encoder.
 	// The object must be a type the Class understands, the implementation is
 	// allowed to panic if it is not.
 	Encode(Encoder, Object)
-
-	// Decode reads a single object from the supplied Decoder.
-	Decode(Decoder) Object
 
 	// DecodeTo reads into the supplied object from the supplied Decoder.
 	// The object must be a type the Class understands, the implementation is
@@ -43,6 +48,15 @@ type Class interface {
 
 	// Returns the type descriptor for the class.
 	Schema() *Entity
+}
+
+type FrozenClassBase struct{}
+
+// FrozenClass' provides Encode() so that they satisfy the above Class
+// interface, but they should never be called.
+func (c *FrozenClassBase) Encode(e Encoder, o Object) {
+	e.SetError(fmt.Errorf(
+		"Attempt to encode a frozen object of type %T id %v", o, o.Class().Schema()))
 }
 
 // Generate is used to tag structures that need an auto generated Class.
@@ -67,3 +81,17 @@ type Generate struct{}
 func (Generate) Class() Class { panic(fmt.Errorf("Class() not implemented")) }
 
 var _ Object = Generate{} // Verify that Generate implements Object.
+
+// Frozen is used to tag structures that represent past versions of types
+// which may appear in old capture files. Frozen must be include a "name" tag
+// which identifies the name of the struct now in use. Manual upgrading is
+// provided with a function of the form:
+//
+//  func (before *FrozenStruct) upgrade(after *GenerateStruct)
+//
+// See binary/test/frozen.go for examples
+type Frozen struct{}
+
+func (Frozen) Class() Class { panic(fmt.Errorf("Class() not implemented")) }
+
+var _ Object = Frozen{} // Verify that Frozen implements FrozenObject.

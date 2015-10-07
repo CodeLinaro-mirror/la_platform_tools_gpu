@@ -21,7 +21,7 @@ import (
 	"io"
 	"sync"
 
-	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -117,7 +117,7 @@ func (m *Multiplexer) recv() {
 		m.closeAllChannels()
 		m.closeConnection()
 	}()
-	d := cyclic.Decoder(vle.Reader(m.in))
+	d := flat.Decoder(vle.Reader(m.in))
 	for {
 		var ty msgType
 		if err := ty.decode(d); err != nil {
@@ -154,7 +154,6 @@ func (m *Multiplexer) recv() {
 			d.Value(msg)
 			if d.Error() != nil {
 				m.err = fmt.Errorf("Multiplexer failed to decode %T message %v", msg, d.Error())
-				log.Warningf(m.logger, "%v", m.err)
 				return
 			}
 			id := remote(msg.c)

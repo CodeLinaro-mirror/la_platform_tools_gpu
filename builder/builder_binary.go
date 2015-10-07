@@ -180,7 +180,7 @@ func doEncodeGetFramebufferColor(e binary.Encoder, o *GetFramebufferColor) {
 	} else {
 		e.Object(nil)
 	}
-	e.Value(&o.Settings)
+	e.Struct(&o.Settings)
 }
 func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) {
 	if obj := d.Object(); obj != nil {
@@ -193,7 +193,14 @@ func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) {
 	} else {
 		o.After = nil
 	}
-	d.Value(&o.Settings)
+	var ent_f6ac466dd492ca02e3ee3bbaf8f8990814b98e0e *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_f6ac466dd492ca02e3ee3bbaf8f8990814b98e0e = ent
+	}
+	d.Struct(ent_f6ac466dd492ca02e3ee3bbaf8f8990814b98e0e, &o.Settings)
 }
 func (*binaryClassGetFramebufferColor) New() binary.Object { return &GetFramebufferColor{} }
 func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
@@ -776,14 +783,21 @@ func (*captureFramebufferDimensions) Class() binary.Class {
 func doEncodecaptureFramebufferDimensions(e binary.Encoder, o *captureFramebufferDimensions) {
 	e.Uint32(uint32(len(o.Dimensions)))
 	for i := range o.Dimensions {
-		e.Value(&o.Dimensions[i])
+		e.Struct(&o.Dimensions[i])
 	}
 }
 func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebufferDimensions) {
+	var ent_78844b5fbd7f105cd9461d9c433227f112f03166 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_78844b5fbd7f105cd9461d9c433227f112f03166 = ent
+	}
 	if count := d.Uint32(); count > 0 {
 		o.Dimensions = make([]atomFramebufferDimensions, count)
 		for i := range o.Dimensions {
-			d.Value(&o.Dimensions[i])
+			d.Struct(ent_78844b5fbd7f105cd9461d9c433227f112f03166, &o.Dimensions[i])
 		}
 	}
 }
