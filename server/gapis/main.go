@@ -32,6 +32,7 @@ var (
 	logsPath             = flag.String("logs", "logs", "Directory to place log files")
 	localDevicePort      = flag.Int("local_gapir_port", 9284, "Port number of the \"gapir\" running on the local device")
 	shutdownOnDisconnect = flag.Bool("shutdown_on_disconnect", false, "Shutdown server when no connections remain")
+	noGapir              = flag.Bool("no_gapir", false, "Never run up gapir if it can't be found")
 )
 
 func main() {
@@ -48,7 +49,9 @@ func main() {
 	dataAbsPath, _ := filepath.Abs(*dataPath)
 
 	replay.ConfigureLocalReplayDevice(false, // disable disk-cache
-		replay.Replayd, *localDevicePort, gapirLogPath)
+		replay.Replayd, *localDevicePort, gapirLogPath,
+		*noGapir, // never launch
+	)
 
 	server.Run(server.Config{
 		HttpAddress:          *http,

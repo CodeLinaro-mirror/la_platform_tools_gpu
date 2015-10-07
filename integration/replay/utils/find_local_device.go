@@ -37,7 +37,8 @@ func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
 		true, // disable disk-cache
 		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.Replayd)),
 		gapirPort,
-		"", // log path
+		"",    // log path
+		false, // gapir launch enabled
 	)
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {
