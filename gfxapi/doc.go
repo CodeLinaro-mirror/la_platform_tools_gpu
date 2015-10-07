@@ -14,3 +14,8 @@
 
 // Package gfxapi exposes the shared behavior of all graphics api's.
 package gfxapi
+
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.service.gfxapi
+// binary: java.indent = "  "
+// binary: java.member_prefix = my

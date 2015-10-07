@@ -14,8 +14,19 @@
 
 package gfxapi
 
-import "android.googlesource.com/platform/tools/gpu/image"
+import (
+	"android.googlesource.com/platform/tools/gpu/image"
+	"android.googlesource.com/platform/tools/gpu/service/path"
+)
 
 // interface compliance test
-var _ = image.Thumbnailer((*Texture2D)(nil))
-var _ = image.Thumbnailer((*Cubemap)(nil))
+var (
+	_ = []image.Thumbnailer{
+		(*Texture2D)(nil),
+		(*Cubemap)(nil),
+	}
+	_ = []path.Converter{
+		(*Texture2D)(nil),
+		(*Cubemap)(nil),
+	}
+)
