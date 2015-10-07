@@ -96,7 +96,7 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		start := compact.b.Len()
 		// now encode the entity directly to bypass the table
 		schema.EncodeEntity(compact.e, &s.Entity, true)
-		size := compact.b.Len() - start
+		size := compact.b.Len() - start + 2
 		total += size
 		if largest < size {
 			largest = size

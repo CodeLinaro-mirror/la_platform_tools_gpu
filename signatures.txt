@@ -1,3743 +1,3743 @@
 
-boolSlice : size 18
+boolSlice : size 20
 any.boolSlice{[]Bool}
 
-bool_ : size 13
+bool_ : size 15
 any.bool_{Bool}
 
-float32Slice : size 21
+float32Slice : size 23
 any.float32Slice{[]Float32}
 
-float32_ : size 16
+float32_ : size 18
 any.float32_{Float32}
 
-float64Slice : size 21
+float64Slice : size 23
 any.float64Slice{[]Float64}
 
-float64_ : size 16
+float64_ : size 18
 any.float64_{Float64}
 
-int16Slice : size 19
+int16Slice : size 21
 any.int16Slice{[]Int16}
 
-int16_ : size 14
+int16_ : size 16
 any.int16_{Int16}
 
-int32Slice : size 19
+int32Slice : size 21
 any.int32Slice{[]Int32}
 
-int32_ : size 14
+int32_ : size 16
 any.int32_{Int32}
 
-int64Slice : size 19
+int64Slice : size 21
 any.int64Slice{[]Int64}
 
-int64_ : size 14
+int64_ : size 16
 any.int64_{Int64}
 
-int8Slice : size 18
+int8Slice : size 20
 any.int8Slice{[]Int8}
 
-int8_ : size 13
+int8_ : size 15
 any.int8_{Int8}
 
-intSlice : size 17
+intSlice : size 19
 any.intSlice{[]Int32}
 
-int_ : size 12
+int_ : size 14
 any.int_{Int32}
 
-objectSlice : size 20
+objectSlice : size 22
 any.objectSlice{[]?}
 
-object_ : size 15
+object_ : size 17
 any.object_{?}
 
-stringSlice : size 20
+stringSlice : size 22
 any.stringSlice{[]String}
 
-string_ : size 15
+string_ : size 17
 any.string_{String}
 
-uint16Slice : size 20
+uint16Slice : size 22
 any.uint16Slice{[]Uint16}
 
-uint16_ : size 15
+uint16_ : size 17
 any.uint16_{Uint16}
 
-uint32Slice : size 20
+uint32Slice : size 22
 any.uint32Slice{[]Uint32}
 
-uint32_ : size 15
+uint32_ : size 17
 any.uint32_{Uint32}
 
-uint64Slice : size 20
+uint64Slice : size 22
 any.uint64Slice{[]Uint64}
 
-uint64_ : size 15
+uint64_ : size 17
 any.uint64_{Uint64}
 
-uint8Slice : size 19
+uint8Slice : size 21
 any.uint8Slice{[]Uint8}
 
-uint8_ : size 14
+uint8_ : size 16
 any.uint8_{Uint8}
 
-FramebufferObservation : size 34
+FramebufferObservation : size 36
 atom.FramebufferObservation{Uint32,Uint32,[]Uint8}
 
-Group : size 19
+Group : size 21
 atom.Group{String,$,[]$}
 
-List : size 14
+List : size 16
 atom.List{[]&}
 
-Metadata : size 23
+Metadata : size 25
 atom.Metadata{[20]Uint8,String,Bool,Bool,String}
 
-Observations : size 26
+Observations : size 28
 atom.Observations{[]$,[]$}
 
-Observation : size 24
+Observation : size 26
 atom.Observation{$,[20]Uint8}
 
-Range : size 15
+Range : size 17
 atom.Range{Uint64,Uint64}
 
-Resource : size 21
+Resource : size 23
 atom.Resource{[20]Uint8,[]Uint8}
 
-BuildReport : size 28
+BuildReport : size 30
 builder.BuildReport{*$,*$}
 
-Follow : size 18
+Follow : size 20
 builder.Follow{?}
 
-GetFramebufferColor : size 38
+GetFramebufferColor : size 40
 builder.GetFramebufferColor{*$,*$,$}
 
-GetFramebufferDepth : size 36
+GetFramebufferDepth : size 38
 builder.GetFramebufferDepth{*$,*$}
 
-GetHierarchy : size 26
+GetHierarchy : size 28
 builder.GetHierarchy{*$}
 
-GetResourceData : size 29
+GetResourceData : size 31
 builder.GetResourceData{*$}
 
-GetResources : size 26
+GetResources : size 28
 builder.GetResources{*$}
 
-GetState : size 22
+GetState : size 24
 builder.GetState{*$}
 
-GetTimingInfo : size 31
+GetTimingInfo : size 33
 builder.GetTimingInfo{*$,*$,Int32}
 
-Get : size 15
+Get : size 17
 builder.Get{?}
 
-IndexLimits : size 24
+IndexLimits : size 26
 builder.IndexLimits{Uint32,Uint32}
 
-RenderFramebufferColor : size 42
+RenderFramebufferColor : size 44
 builder.RenderFramebufferColor{*$,*$,Uint32,Uint32,Int32}
 
-RenderFramebufferDepth : size 41
+RenderFramebufferDepth : size 43
 builder.RenderFramebufferDepth{*$,*$,Uint32,Uint32}
 
-Set : size 16
+Set : size 18
 builder.Set{?,~}
 
-atomFramebufferDimensions : size 39
+atomFramebufferDimensions : size 41
 builder.atomFramebufferDimensions{Uint64,Uint32,Uint32}
 
-calcIndexLimits : size 32
+calcIndexLimits : size 34
 builder.calcIndexLimits{Int32,Int32,Bool,[20]Uint8}
 
-captureFramebufferDimensions : size 42
+captureFramebufferDimensions : size 44
 builder.captureFramebufferDimensions{[]$}
 
-getCaptureFramebufferDimensions : size 45
+getCaptureFramebufferDimensions : size 47
 builder.getCaptureFramebufferDimensions{*$}
 
-testAtom : size 32
+testAtom : size 34
 builder.testAtom{[20]Uint8,String,[]Bool,~,*$,map[String]String}
 
-testStruct : size 25
+testStruct : size 27
 builder.testStruct{String,*$}
 
-CubemapLevel : size 40
+CubemapLevel : size 42
 gfxapi.CubemapLevel{$,$,$,$,$,$}
 
-Cubemap : size 21
+Cubemap : size 23
 gfxapi.Cubemap{[]$}
 
-Texture2D : size 23
+Texture2D : size 25
 gfxapi.Texture2D{[]$}
 
-Architecture : size 26
+Architecture : size 28
 gles.Architecture{$,Uint32,Uint32,Uint32,Bool}
 
-BlendState : size 27
+BlendState : size 29
 gles.BlendState{Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,$}
 
-BufferDataPointer : size 28
+BufferDataPointer : size 30
 gles.BufferDataPointer{$}
 
-BufferIdˢ : size 21
+BufferIdˢ : size 23
 gles.BufferIdˢ{$}
 
-BufferIdᵖ : size 22
+BufferIdᵖ : size 24
 gles.BufferIdᵖ{$}
 
-BufferIdᶜᵖ : size 25
+BufferIdᶜᵖ : size 27
 gles.BufferIdᶜᵖ{$}
 
-Buffer : size 24
+Buffer : size 26
 gles.Buffer{$,Int32,Uint32,Uint32,Int32,$}
 
-CGLContextObj : size 24
+CGLContextObj : size 26
 gles.CGLContextObj{$}
 
-CGLContextObjˢ : size 26
+CGLContextObjˢ : size 28
 gles.CGLContextObjˢ{$}
 
-CGLContextObjᵖ : size 27
+CGLContextObjᵖ : size 29
 gles.CGLContextObjᵖ{$}
 
-CGLCreateContext : size 36
+CGLCreateContext : size 38
 gles.CGLCreateContext{$,$,$,$,Int64}
 
-CGLFlushDrawable : size 30
+CGLFlushDrawable : size 32
 gles.CGLFlushDrawable{$,$,Int64}
 
-CGLGetSurface : size 36
+CGLGetSurface : size 38
 gles.CGLGetSurface{$,$,$,$,$,Int64}
 
-CGLPixelFormatObj : size 28
+CGLPixelFormatObj : size 30
 gles.CGLPixelFormatObj{$}
 
-CGLSetCurrentContext : size 34
+CGLSetCurrentContext : size 36
 gles.CGLSetCurrentContext{$,$,Int64}
 
-CGSConnectionID : size 26
+CGSConnectionID : size 28
 gles.CGSConnectionID{$}
 
-CGSConnectionIDˢ : size 28
+CGSConnectionIDˢ : size 30
 gles.CGSConnectionIDˢ{$}
 
-CGSConnectionIDᵖ : size 29
+CGSConnectionIDᵖ : size 31
 gles.CGSConnectionIDᵖ{$}
 
-CGSGetSurfaceBounds : size 38
+CGSGetSurfaceBounds : size 40
 gles.CGSGetSurfaceBounds{$,$,Int32,Int32,$,Int64}
 
-CGSSurfaceIDˢ : size 25
+CGSSurfaceIDˢ : size 27
 gles.CGSSurfaceIDˢ{$}
 
-CGSSurfaceIDᵖ : size 26
+CGSSurfaceIDᵖ : size 28
 gles.CGSSurfaceIDᵖ{$}
 
-CGSWindowIDˢ : size 24
+CGSWindowIDˢ : size 26
 gles.CGSWindowIDˢ{$}
 
-CGSWindowIDᵖ : size 25
+CGSWindowIDᵖ : size 27
 gles.CGSWindowIDᵖ{$}
 
-Charˢ : size 17
+Charˢ : size 19
 gles.Charˢ{$}
 
-Charᵖ : size 18
+Charᵖ : size 20
 gles.Charᵖ{$}
 
-ClearState : size 23
+ClearState : size 25
 gles.ClearState{$,Float32,Int32}
 
-Color : size 17
+Color : size 19
 gles.Color{Float32,Float32,Float32,Float32}
 
-ContextCreationInfo : size 34
+ContextCreationInfo : size 36
 gles.ContextCreationInfo{String,String,String,String,Int32,Int32,Bool}
 
-ContextInfo : size 32
+ContextInfo : size 34
 gles.ContextInfo{$,String,String,String,String,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
 
-Context : size 61
+Context : size 63
 gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$}
 
-CubemapLevel : size 25
+CubemapLevel : size 27
 gles.CubemapLevel{map[Uint32]$}
 
-EGLConfig : size 20
+EGLConfig : size 22
 gles.EGLConfig{$}
 
-EGLContext : size 21
+EGLContext : size 23
 gles.EGLContext{$}
 
-EGLDisplay : size 21
+EGLDisplay : size 23
 gles.EGLDisplay{$}
 
-EGLSurface : size 21
+EGLSurface : size 23
 gles.EGLSurface{$}
 
-EGLintˢ : size 19
+EGLintˢ : size 21
 gles.EGLintˢ{$}
 
-EGLintᵖ : size 20
+EGLintᵖ : size 22
 gles.EGLintᵖ{$}
 
-EglCreateContext : size 41
+EglCreateContext : size 43
 gles.EglCreateContext{$,$,$,$,$,$}
 
-EglInitialize : size 33
+EglInitialize : size 35
 gles.EglInitialize{$,$,$,$,Int64}
 
-EglMakeCurrent : size 37
+EglMakeCurrent : size 39
 gles.EglMakeCurrent{$,$,$,$,$,Int64}
 
-EglQuerySurface : size 36
+EglQuerySurface : size 38
 gles.EglQuerySurface{$,$,$,Int64,$,Int64}
 
-EglSwapBuffers : size 31
+EglSwapBuffers : size 33
 gles.EglSwapBuffers{$,$,$,Int64}
 
-F64ˢ : size 16
+F64ˢ : size 18
 gles.F64ˢ{$}
 
-F64ᵖ : size 17
+F64ᵖ : size 19
 gles.F64ᵖ{$}
 
-FlushPostBuffer : size 25
+FlushPostBuffer : size 27
 gles.FlushPostBuffer{$}
 
-FramebufferAttachmentInfo : size 37
+FramebufferAttachmentInfo : size 39
 gles.FramebufferAttachmentInfo{Uint32,Uint32,Int32,Uint32}
 
-FramebufferIdˢ : size 26
+FramebufferIdˢ : size 28
 gles.FramebufferIdˢ{$}
 
-FramebufferIdᵖ : size 27
+FramebufferIdᵖ : size 29
 gles.FramebufferIdᵖ{$}
 
-FramebufferIdᶜᵖ : size 30
+FramebufferIdᶜᵖ : size 32
 gles.FramebufferIdᶜᵖ{$}
 
-Framebuffer : size 24
+Framebuffer : size 26
 gles.Framebuffer{map[Uint32]$}
 
-GLDEBUGPROC : size 22
+GLDEBUGPROC : size 24
 gles.GLDEBUGPROC{$}
 
-GLXContext : size 21
+GLXContext : size 23
 gles.GLXContext{$}
 
-GLXDrawable : size 22
+GLXDrawable : size 24
 gles.GLXDrawable{$}
 
-GLbooleanˢ : size 22
+GLbooleanˢ : size 24
 gles.GLbooleanˢ{$}
 
-GLbooleanᵖ : size 23
+GLbooleanᵖ : size 25
 gles.GLbooleanᵖ{$}
 
-GLcharˢ : size 19
+GLcharˢ : size 21
 gles.GLcharˢ{$}
 
-GLcharᵖ : size 20
+GLcharᵖ : size 22
 gles.GLcharᵖ{$}
 
-GLcharᶜᵖ : size 23
+GLcharᶜᵖ : size 25
 gles.GLcharᶜᵖ{$}
 
-GLcharᶜᵖˢ : size 25
+GLcharᶜᵖˢ : size 27
 gles.GLcharᶜᵖˢ{$}
 
-GLcharᶜᵖᵖ : size 26
+GLcharᶜᵖᵖ : size 28
 gles.GLcharᶜᵖᵖ{$}
 
-GLcharᶜᵖᶜᵖ : size 29
+GLcharᶜᵖᶜᵖ : size 31
 gles.GLcharᶜᵖᶜᵖ{$}
 
-GLeglImageOES : size 24
+GLeglImageOES : size 26
 gles.GLeglImageOES{$}
 
-GLenumˢ : size 19
+GLenumˢ : size 21
 gles.GLenumˢ{$}
 
-GLenumᵖ : size 20
+GLenumᵖ : size 22
 gles.GLenumᵖ{$}
 
-GLenumᶜᵖ : size 23
+GLenumᶜᵖ : size 25
 gles.GLenumᶜᵖ{$}
 
-GLfloatː2ᵃ : size 24
+GLfloatː2ᵃ : size 26
 gles.GLfloatː2ᵃ{[2]Float32}
 
-GLfloatː3ᵃ : size 24
+GLfloatː3ᵃ : size 26
 gles.GLfloatː3ᵃ{[3]Float32}
 
-GLfloatː4ᵃ : size 24
+GLfloatː4ᵃ : size 26
 gles.GLfloatː4ᵃ{[4]Float32}
 
-GLfloatˢ : size 20
+GLfloatˢ : size 22
 gles.GLfloatˢ{$}
 
-GLfloatᵖ : size 21
+GLfloatᵖ : size 23
 gles.GLfloatᵖ{$}
 
-GLfloatᶜᵖ : size 24
+GLfloatᶜᵖ : size 26
 gles.GLfloatᶜᵖ{$}
 
-GLint64ˢ : size 20
+GLint64ˢ : size 22
 gles.GLint64ˢ{$}
 
-GLint64ᵖ : size 21
+GLint64ᵖ : size 23
 gles.GLint64ᵖ{$}
 
-GLintː2ᵃ : size 22
+GLintː2ᵃ : size 24
 gles.GLintː2ᵃ{[2]Int32}
 
-GLintː3ᵃ : size 22
+GLintː3ᵃ : size 24
 gles.GLintː3ᵃ{[3]Int32}
 
-GLintː4ᵃ : size 22
+GLintː4ᵃ : size 24
 gles.GLintː4ᵃ{[4]Int32}
 
-GLintˢ : size 18
+GLintˢ : size 20
 gles.GLintˢ{$}
 
-GLintᵖ : size 19
+GLintᵖ : size 21
 gles.GLintᵖ{$}
 
-GLintᶜᵖ : size 22
+GLintᶜᵖ : size 24
 gles.GLintᶜᵖ{$}
 
-GLsizeiˢ : size 20
+GLsizeiˢ : size 22
 gles.GLsizeiˢ{$}
 
-GLsizeiᵖ : size 21
+GLsizeiᵖ : size 23
 gles.GLsizeiᵖ{$}
 
-GLsizeiᶜᵖ : size 24
+GLsizeiᶜᵖ : size 26
 gles.GLsizeiᶜᵖ{$}
 
-GLubyteˢ : size 20
+GLubyteˢ : size 22
 gles.GLubyteˢ{$}
 
-GLubyteᵖ : size 21
+GLubyteᵖ : size 23
 gles.GLubyteᵖ{$}
 
-GLubyteᶜᵖ : size 24
+GLubyteᶜᵖ : size 26
 gles.GLubyteᶜᵖ{$}
 
-GLuint64ˢ : size 21
+GLuint64ˢ : size 23
 gles.GLuint64ˢ{$}
 
-GLuint64ᵖ : size 22
+GLuint64ᵖ : size 24
 gles.GLuint64ᵖ{$}
 
-GLuint64ᶜᵖ : size 25
+GLuint64ᶜᵖ : size 27
 gles.GLuint64ᶜᵖ{$}
 
-GLuintː2ᵃ : size 23
+GLuintː2ᵃ : size 25
 gles.GLuintː2ᵃ{[2]Uint32}
 
-GLuintː3ᵃ : size 23
+GLuintː3ᵃ : size 25
 gles.GLuintː3ᵃ{[3]Uint32}
 
-GLuintː4ᵃ : size 23
+GLuintː4ᵃ : size 25
 gles.GLuintː4ᵃ{[4]Uint32}
 
-GLuintˢ : size 19
+GLuintˢ : size 21
 gles.GLuintˢ{$}
 
-GLuintᵖ : size 20
+GLuintᵖ : size 22
 gles.GLuintᵖ{$}
 
-GLuintᶜᵖ : size 23
+GLuintᶜᵖ : size 25
 gles.GLuintᶜᵖ{$}
 
-GLvoidˢ : size 19
+GLvoidˢ : size 21
 gles.GLvoidˢ{$}
 
-GLvoidᵖ : size 20
+GLvoidᵖ : size 22
 gles.GLvoidᵖ{$}
 
-GlActiveShaderProgramEXT : size 36
+GlActiveShaderProgramEXT : size 38
 gles.GlActiveShaderProgramEXT{$,Uint32,Uint32}
 
-GlActiveShaderProgram : size 33
+GlActiveShaderProgram : size 35
 gles.GlActiveShaderProgram{$,Uint32,Uint32}
 
-GlActiveTexture : size 26
+GlActiveTexture : size 28
 gles.GlActiveTexture{$,Uint32}
 
-GlAlphaFuncQCOM : size 27
+GlAlphaFuncQCOM : size 29
 gles.GlAlphaFuncQCOM{$,Uint32,Float32}
 
-GlApplyFramebufferAttachmentCMAAINTEL : size 47
+GlApplyFramebufferAttachmentCMAAINTEL : size 49
 gles.GlApplyFramebufferAttachmentCMAAINTEL{$}
 
-GlAttachShader : size 26
+GlAttachShader : size 28
 gles.GlAttachShader{$,Uint32,Uint32}
 
-GlBeginConditionalRenderNV : size 38
+GlBeginConditionalRenderNV : size 40
 gles.GlBeginConditionalRenderNV{$,Uint32,Uint32}
 
-GlBeginPerfMonitorAMD : size 32
+GlBeginPerfMonitorAMD : size 34
 gles.GlBeginPerfMonitorAMD{$,Uint32}
 
-GlBeginPerfQueryINTEL : size 32
+GlBeginPerfQueryINTEL : size 34
 gles.GlBeginPerfQueryINTEL{$,Uint32}
 
-GlBeginQueryEXT : size 27
+GlBeginQueryEXT : size 29
 gles.GlBeginQueryEXT{$,Uint32,Uint32}
 
-GlBeginQuery : size 24
+GlBeginQuery : size 26
 gles.GlBeginQuery{$,Uint32,Uint32}
 
-GlBeginTransformFeedback : size 35
+GlBeginTransformFeedback : size 37
 gles.GlBeginTransformFeedback{$,Uint32}
 
-GlBindAttribLocation : size 33
+GlBindAttribLocation : size 35
 gles.GlBindAttribLocation{$,Uint32,Uint32,String}
 
-GlBindBufferBase : size 29
+GlBindBufferBase : size 31
 gles.GlBindBufferBase{$,Uint32,Uint32,Uint32}
 
-GlBindBufferRange : size 32
+GlBindBufferRange : size 34
 gles.GlBindBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlBindBuffer : size 24
+GlBindBuffer : size 26
 gles.GlBindBuffer{$,Uint32,Uint32}
 
-GlBindFragDataLocationEXT : size 38
+GlBindFragDataLocationEXT : size 40
 gles.GlBindFragDataLocationEXT{$,Uint32,Uint32,String}
 
-GlBindFragDataLocationIndexedEXT : size 46
+GlBindFragDataLocationIndexedEXT : size 48
 gles.GlBindFragDataLocationIndexedEXT{$,Uint32,Uint32,Uint32,String}
 
-GlBindFramebuffer : size 29
+GlBindFramebuffer : size 31
 gles.GlBindFramebuffer{$,Uint32,Uint32}
 
-GlBindImageTexture : size 35
+GlBindImageTexture : size 37
 gles.GlBindImageTexture{$,Uint32,Uint32,Int32,Uint8,Int32,Uint32,Uint32}
 
-GlBindProgramPipelineEXT : size 35
+GlBindProgramPipelineEXT : size 37
 gles.GlBindProgramPipelineEXT{$,Uint32}
 
-GlBindProgramPipeline : size 32
+GlBindProgramPipeline : size 34
 gles.GlBindProgramPipeline{$,Uint32}
 
-GlBindRenderbuffer : size 30
+GlBindRenderbuffer : size 32
 gles.GlBindRenderbuffer{$,Uint32,Uint32}
 
-GlBindSampler : size 25
+GlBindSampler : size 27
 gles.GlBindSampler{$,Uint32,Uint32}
 
-GlBindTexture : size 25
+GlBindTexture : size 27
 gles.GlBindTexture{$,Uint32,Uint32}
 
-GlBindTransformFeedback : size 35
+GlBindTransformFeedback : size 37
 gles.GlBindTransformFeedback{$,Uint32,Uint32}
 
-GlBindVertexArrayOES : size 31
+GlBindVertexArrayOES : size 33
 gles.GlBindVertexArrayOES{$,Uint32}
 
-GlBindVertexArray : size 28
+GlBindVertexArray : size 30
 gles.GlBindVertexArray{$,Uint32}
 
-GlBindVertexBuffer : size 32
+GlBindVertexBuffer : size 34
 gles.GlBindVertexBuffer{$,Uint32,Uint32,Int32,Int32}
 
-GlBlendBarrierKHR : size 27
+GlBlendBarrierKHR : size 29
 gles.GlBlendBarrierKHR{$}
 
-GlBlendBarrierNV : size 26
+GlBlendBarrierNV : size 28
 gles.GlBlendBarrierNV{$}
 
-GlBlendBarrier : size 24
+GlBlendBarrier : size 26
 gles.GlBlendBarrier{$}
 
-GlBlendColor : size 26
+GlBlendColor : size 28
 gles.GlBlendColor{$,Float32,Float32,Float32,Float32}
 
-GlBlendEquationSeparateiEXT : size 40
+GlBlendEquationSeparateiEXT : size 42
 gles.GlBlendEquationSeparateiEXT{$,Uint32,Uint32,Uint32}
 
-GlBlendEquationSeparateiOES : size 40
+GlBlendEquationSeparateiOES : size 42
 gles.GlBlendEquationSeparateiOES{$,Uint32,Uint32,Uint32}
 
-GlBlendEquationSeparatei : size 37
+GlBlendEquationSeparatei : size 39
 gles.GlBlendEquationSeparatei{$,Uint32,Uint32,Uint32}
 
-GlBlendEquationSeparate : size 35
+GlBlendEquationSeparate : size 37
 gles.GlBlendEquationSeparate{$,Uint32,Uint32}
 
-GlBlendEquationiEXT : size 31
+GlBlendEquationiEXT : size 33
 gles.GlBlendEquationiEXT{$,Uint32,Uint32}
 
-GlBlendEquationiOES : size 31
+GlBlendEquationiOES : size 33
 gles.GlBlendEquationiOES{$,Uint32,Uint32}
 
-GlBlendEquationi : size 28
+GlBlendEquationi : size 30
 gles.GlBlendEquationi{$,Uint32,Uint32}
 
-GlBlendEquation : size 26
+GlBlendEquation : size 28
 gles.GlBlendEquation{$,Uint32}
 
-GlBlendFuncSeparateiEXT : size 38
+GlBlendFuncSeparateiEXT : size 40
 gles.GlBlendFuncSeparateiEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlBlendFuncSeparateiOES : size 38
+GlBlendFuncSeparateiOES : size 40
 gles.GlBlendFuncSeparateiOES{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlBlendFuncSeparatei : size 35
+GlBlendFuncSeparatei : size 37
 gles.GlBlendFuncSeparatei{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlBlendFuncSeparate : size 33
+GlBlendFuncSeparate : size 35
 gles.GlBlendFuncSeparate{$,Uint32,Uint32,Uint32,Uint32}
 
-GlBlendFunciEXT : size 28
+GlBlendFunciEXT : size 30
 gles.GlBlendFunciEXT{$,Uint32,Uint32,Uint32}
 
-GlBlendFunciOES : size 28
+GlBlendFunciOES : size 30
 gles.GlBlendFunciOES{$,Uint32,Uint32,Uint32}
 
-GlBlendFunci : size 25
+GlBlendFunci : size 27
 gles.GlBlendFunci{$,Uint32,Uint32,Uint32}
 
-GlBlendFunc : size 23
+GlBlendFunc : size 25
 gles.GlBlendFunc{$,Uint32,Uint32}
 
-GlBlendParameteriNV : size 31
+GlBlendParameteriNV : size 33
 gles.GlBlendParameteriNV{$,Uint32,Int32}
 
-GlBlitFramebufferANGLE : size 42
+GlBlitFramebufferANGLE : size 44
 gles.GlBlitFramebufferANGLE{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 
-GlBlitFramebufferNV : size 39
+GlBlitFramebufferNV : size 41
 gles.GlBlitFramebufferNV{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 
-GlBlitFramebuffer : size 37
+GlBlitFramebuffer : size 39
 gles.GlBlitFramebuffer{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 
-GlBufferData : size 28
+GlBufferData : size 30
 gles.GlBufferData{$,Uint32,Int32,$,Uint32}
 
-GlBufferStorageEXT : size 34
+GlBufferStorageEXT : size 36
 gles.GlBufferStorageEXT{$,Uint32,Int32,$,Uint32}
 
-GlBufferSubData : size 31
+GlBufferSubData : size 33
 gles.GlBufferSubData{$,Uint32,Int32,Int32,$}
 
-GlCheckFramebufferStatus : size 36
+GlCheckFramebufferStatus : size 38
 gles.GlCheckFramebufferStatus{$,Uint32,Uint32}
 
-GlClearBufferfi : size 29
+GlClearBufferfi : size 31
 gles.GlClearBufferfi{$,Uint32,Int32,Float32,Int32}
 
-GlClearBufferfv : size 30
+GlClearBufferfv : size 32
 gles.GlClearBufferfv{$,Uint32,Int32,$}
 
-GlClearBufferiv : size 30
+GlClearBufferiv : size 32
 gles.GlClearBufferiv{$,Uint32,Int32,$}
 
-GlClearBufferuiv : size 31
+GlClearBufferuiv : size 33
 gles.GlClearBufferuiv{$,Uint32,Int32,$}
 
-GlClearColor : size 26
+GlClearColor : size 28
 gles.GlClearColor{$,Float32,Float32,Float32,Float32}
 
-GlClearDepthf : size 24
+GlClearDepthf : size 26
 gles.GlClearDepthf{$,Float32}
 
-GlClearStencil : size 25
+GlClearStencil : size 27
 gles.GlClearStencil{$,Int32}
 
-GlClear : size 18
+GlClear : size 20
 gles.GlClear{$,Uint32}
 
-GlClientWaitSyncAPPLE : size 35
+GlClientWaitSyncAPPLE : size 37
 gles.GlClientWaitSyncAPPLE{$,Uint64,Uint32,Uint64,Uint32}
 
-GlClientWaitSync : size 30
+GlClientWaitSync : size 32
 gles.GlClientWaitSync{$,Uint64,Uint32,Uint64,Uint32}
 
-GlColorMaskiEXT : size 30
+GlColorMaskiEXT : size 32
 gles.GlColorMaskiEXT{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 
-GlColorMaskiOES : size 30
+GlColorMaskiOES : size 32
 gles.GlColorMaskiOES{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 
-GlColorMaski : size 27
+GlColorMaski : size 29
 gles.GlColorMaski{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 
-GlColorMask : size 25
+GlColorMask : size 27
 gles.GlColorMask{$,Uint8,Uint8,Uint8,Uint8}
 
-GlCompileShader : size 26
+GlCompileShader : size 28
 gles.GlCompileShader{$,Uint32}
 
-GlCompressedTexImage2D : size 42
+GlCompressedTexImage2D : size 44
 gles.GlCompressedTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,$}
 
-GlCompressedTexImage3DOES : size 46
+GlCompressedTexImage3DOES : size 48
 gles.GlCompressedTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
 
-GlCompressedTexImage3D : size 43
+GlCompressedTexImage3D : size 45
 gles.GlCompressedTexImage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
 
-GlCompressedTexSubImage2D : size 46
+GlCompressedTexSubImage2D : size 48
 gles.GlCompressedTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 
-GlCompressedTexSubImage3DOES : size 51
+GlCompressedTexSubImage3DOES : size 53
 gles.GlCompressedTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 
-GlCompressedTexSubImage3D : size 48
+GlCompressedTexSubImage3D : size 50
 gles.GlCompressedTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 
-GlCopyBufferSubDataNV : size 36
+GlCopyBufferSubDataNV : size 38
 gles.GlCopyBufferSubDataNV{$,Uint32,Uint32,Int32,Int32,Int32}
 
-GlCopyBufferSubData : size 34
+GlCopyBufferSubData : size 36
 gles.GlCopyBufferSubData{$,Uint32,Uint32,Int32,Int32,Int32}
 
-GlCopyImageSubDataEXT : size 46
+GlCopyImageSubDataEXT : size 48
 gles.GlCopyImageSubDataEXT{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyImageSubDataOES : size 46
+GlCopyImageSubDataOES : size 48
 gles.GlCopyImageSubDataOES{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyImageSubData : size 43
+GlCopyImageSubData : size 45
 gles.GlCopyImageSubData{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyPathNV : size 24
+GlCopyPathNV : size 26
 gles.GlCopyPathNV{$,Uint32,Uint32}
 
-GlCopyTexImage2D : size 34
+GlCopyTexImage2D : size 36
 gles.GlCopyTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyTexSubImage2D : size 37
+GlCopyTexSubImage2D : size 39
 gles.GlCopyTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyTexSubImage3DOES : size 41
+GlCopyTexSubImage3DOES : size 43
 gles.GlCopyTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyTexSubImage3D : size 38
+GlCopyTexSubImage3D : size 40
 gles.GlCopyTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 
-GlCopyTextureLevelsAPPLE : size 38
+GlCopyTextureLevelsAPPLE : size 40
 gles.GlCopyTextureLevelsAPPLE{$,Uint32,Uint32,Int32,Int32}
 
-GlCoverFillPathInstancedNV : size 47
+GlCoverFillPathInstancedNV : size 49
 gles.GlCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
 
-GlCoverFillPathNV : size 29
+GlCoverFillPathNV : size 31
 gles.GlCoverFillPathNV{$,Uint32,Uint32}
 
-GlCoverStrokePathInstancedNV : size 49
+GlCoverStrokePathInstancedNV : size 51
 gles.GlCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
 
-GlCoverStrokePathNV : size 31
+GlCoverStrokePathNV : size 33
 gles.GlCoverStrokePathNV{$,Uint32,Uint32}
 
-GlCoverageMaskNV : size 27
+GlCoverageMaskNV : size 29
 gles.GlCoverageMaskNV{$,Uint8}
 
-GlCoverageModulationNV : size 33
+GlCoverageModulationNV : size 35
 gles.GlCoverageModulationNV{$,Uint32}
 
-GlCoverageModulationTableNV : size 41
+GlCoverageModulationTableNV : size 43
 gles.GlCoverageModulationTableNV{$,Int32,$}
 
-GlCoverageOperationNV : size 32
+GlCoverageOperationNV : size 34
 gles.GlCoverageOperationNV{$,Uint32}
 
-GlCreatePerfQueryINTEL : size 36
+GlCreatePerfQueryINTEL : size 38
 gles.GlCreatePerfQueryINTEL{$,Uint32,$}
 
-GlCreateProgram : size 26
+GlCreateProgram : size 28
 gles.GlCreateProgram{$,Uint32}
 
-GlCreateShaderProgramvEXT : size 41
+GlCreateShaderProgramvEXT : size 43
 gles.GlCreateShaderProgramvEXT{$,Uint32,Int32,$,Uint32}
 
-GlCreateShaderProgramv : size 38
+GlCreateShaderProgramv : size 40
 gles.GlCreateShaderProgramv{$,Uint32,Int32,$,Uint32}
 
-GlCreateShader : size 26
+GlCreateShader : size 28
 gles.GlCreateShader{$,Uint32,Uint32}
 
-GlCullFace : size 21
+GlCullFace : size 23
 gles.GlCullFace{$,Uint32}
 
-GlDebugMessageCallbackKHR : size 41
+GlDebugMessageCallbackKHR : size 43
 gles.GlDebugMessageCallbackKHR{$,$,$}
 
-GlDebugMessageCallback : size 38
+GlDebugMessageCallback : size 40
 gles.GlDebugMessageCallback{$,$,$}
 
-GlDebugMessageControlKHR : size 42
+GlDebugMessageControlKHR : size 44
 gles.GlDebugMessageControlKHR{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
 
-GlDebugMessageControl : size 39
+GlDebugMessageControl : size 41
 gles.GlDebugMessageControl{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
 
-GlDebugMessageInsertKHR : size 41
+GlDebugMessageInsertKHR : size 43
 gles.GlDebugMessageInsertKHR{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
 
-GlDebugMessageInsert : size 38
+GlDebugMessageInsert : size 40
 gles.GlDebugMessageInsert{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
 
-GlDeleteBuffers : size 29
+GlDeleteBuffers : size 31
 gles.GlDeleteBuffers{$,Int32,$}
 
-GlDeleteFencesNV : size 30
+GlDeleteFencesNV : size 32
 gles.GlDeleteFencesNV{$,Int32,$}
 
-GlDeleteFramebuffers : size 34
+GlDeleteFramebuffers : size 36
 gles.GlDeleteFramebuffers{$,Int32,$}
 
-GlDeletePathsNV : size 27
+GlDeletePathsNV : size 29
 gles.GlDeletePathsNV{$,Uint32,Int32}
 
-GlDeletePerfMonitorsAMD : size 37
+GlDeletePerfMonitorsAMD : size 39
 gles.GlDeletePerfMonitorsAMD{$,Int32,$}
 
-GlDeletePerfQueryINTEL : size 33
+GlDeletePerfQueryINTEL : size 35
 gles.GlDeletePerfQueryINTEL{$,Uint32}
 
-GlDeleteProgramPipelinesEXT : size 41
+GlDeleteProgramPipelinesEXT : size 43
 gles.GlDeleteProgramPipelinesEXT{$,Int32,$}
 
-GlDeleteProgramPipelines : size 38
+GlDeleteProgramPipelines : size 40
 gles.GlDeleteProgramPipelines{$,Int32,$}
 
-GlDeleteProgram : size 26
+GlDeleteProgram : size 28
 gles.GlDeleteProgram{$,Uint32}
 
-GlDeleteQueriesEXT : size 32
+GlDeleteQueriesEXT : size 34
 gles.GlDeleteQueriesEXT{$,Int32,$}
 
-GlDeleteQueries : size 29
+GlDeleteQueries : size 31
 gles.GlDeleteQueries{$,Int32,$}
 
-GlDeleteRenderbuffers : size 35
+GlDeleteRenderbuffers : size 37
 gles.GlDeleteRenderbuffers{$,Int32,$}
 
-GlDeleteSamplers : size 30
+GlDeleteSamplers : size 32
 gles.GlDeleteSamplers{$,Int32,$}
 
-GlDeleteShader : size 25
+GlDeleteShader : size 27
 gles.GlDeleteShader{$,Uint32}
 
-GlDeleteSyncAPPLE : size 28
+GlDeleteSyncAPPLE : size 30
 gles.GlDeleteSyncAPPLE{$,Uint64}
 
-GlDeleteSync : size 23
+GlDeleteSync : size 25
 gles.GlDeleteSync{$,Uint64}
 
-GlDeleteTextures : size 30
+GlDeleteTextures : size 32
 gles.GlDeleteTextures{$,Int32,$}
 
-GlDeleteTransformFeedbacks : size 40
+GlDeleteTransformFeedbacks : size 42
 gles.GlDeleteTransformFeedbacks{$,Int32,$}
 
-GlDeleteVertexArraysOES : size 37
+GlDeleteVertexArraysOES : size 39
 gles.GlDeleteVertexArraysOES{$,Int32,$}
 
-GlDeleteVertexArrays : size 34
+GlDeleteVertexArrays : size 36
 gles.GlDeleteVertexArrays{$,Int32,$}
 
-GlDepthFunc : size 22
+GlDepthFunc : size 24
 gles.GlDepthFunc{$,Uint32}
 
-GlDepthMask : size 22
+GlDepthMask : size 24
 gles.GlDepthMask{$,Uint8}
 
-GlDepthRangeArrayfvNV : size 36
+GlDepthRangeArrayfvNV : size 38
 gles.GlDepthRangeArrayfvNV{$,Uint32,Int32,$}
 
-GlDepthRangeIndexedfNV : size 35
+GlDepthRangeIndexedfNV : size 37
 gles.GlDepthRangeIndexedfNV{$,Uint32,Float32,Float32}
 
-GlDepthRangef : size 25
+GlDepthRangef : size 27
 gles.GlDepthRangef{$,Float32,Float32}
 
-GlDetachShader : size 26
+GlDetachShader : size 28
 gles.GlDetachShader{$,Uint32,Uint32}
 
-GlDisableDriverControlQCOM : size 37
+GlDisableDriverControlQCOM : size 39
 gles.GlDisableDriverControlQCOM{$,Uint32}
 
-GlDisableVertexAttribArray : size 37
+GlDisableVertexAttribArray : size 39
 gles.GlDisableVertexAttribArray{$,Uint32}
 
-GlDisableiEXT : size 25
+GlDisableiEXT : size 27
 gles.GlDisableiEXT{$,Uint32,Uint32}
 
-GlDisableiNV : size 24
+GlDisableiNV : size 26
 gles.GlDisableiNV{$,Uint32,Uint32}
 
-GlDisableiOES : size 25
+GlDisableiOES : size 27
 gles.GlDisableiOES{$,Uint32,Uint32}
 
-GlDisablei : size 22
+GlDisablei : size 24
 gles.GlDisablei{$,Uint32,Uint32}
 
-GlDisable : size 20
+GlDisable : size 22
 gles.GlDisable{$,Uint32}
 
-GlDiscardFramebufferEXT : size 38
+GlDiscardFramebufferEXT : size 40
 gles.GlDiscardFramebufferEXT{$,Uint32,Int32,$}
 
-GlDispatchComputeIndirect : size 36
+GlDispatchComputeIndirect : size 38
 gles.GlDispatchComputeIndirect{$,Int32}
 
-GlDispatchCompute : size 30
+GlDispatchCompute : size 32
 gles.GlDispatchCompute{$,Uint32,Uint32,Uint32}
 
-GlDrawArraysIndirect : size 34
+GlDrawArraysIndirect : size 36
 gles.GlDrawArraysIndirect{$,Uint32,$}
 
-GlDrawArraysInstancedANGLE : size 40
+GlDrawArraysInstancedANGLE : size 42
 gles.GlDrawArraysInstancedANGLE{$,Uint32,Int32,Int32,Int32}
 
-GlDrawArraysInstancedBaseInstanceEXT : size 51
+GlDrawArraysInstancedBaseInstanceEXT : size 53
 gles.GlDrawArraysInstancedBaseInstanceEXT{$,Uint32,Int32,Int32,Int32,Uint32}
 
-GlDrawArraysInstancedEXT : size 38
+GlDrawArraysInstancedEXT : size 40
 gles.GlDrawArraysInstancedEXT{$,Uint32,Int32,Int32,Int32}
 
-GlDrawArraysInstancedNV : size 37
+GlDrawArraysInstancedNV : size 39
 gles.GlDrawArraysInstancedNV{$,Uint32,Int32,Int32,Int32}
 
-GlDrawArraysInstanced : size 35
+GlDrawArraysInstanced : size 37
 gles.GlDrawArraysInstanced{$,Uint32,Int32,Int32,Int32}
 
-GlDrawArrays : size 25
+GlDrawArrays : size 27
 gles.GlDrawArrays{$,Uint32,Int32,Int32}
 
-GlDrawBuffersEXT : size 30
+GlDrawBuffersEXT : size 32
 gles.GlDrawBuffersEXT{$,Int32,$}
 
-GlDrawBuffersIndexedEXT : size 40
+GlDrawBuffersIndexedEXT : size 42
 gles.GlDrawBuffersIndexedEXT{$,Int32,$,$}
 
-GlDrawBuffersNV : size 29
+GlDrawBuffersNV : size 31
 gles.GlDrawBuffersNV{$,Int32,$}
 
-GlDrawBuffers : size 27
+GlDrawBuffers : size 29
 gles.GlDrawBuffers{$,Int32,$}
 
-GlDrawElementsBaseVertexEXT : size 44
+GlDrawElementsBaseVertexEXT : size 46
 gles.GlDrawElementsBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsBaseVertexOES : size 44
+GlDrawElementsBaseVertexOES : size 46
 gles.GlDrawElementsBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsBaseVertex : size 41
+GlDrawElementsBaseVertex : size 43
 gles.GlDrawElementsBaseVertex{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsIndirect : size 37
+GlDrawElementsIndirect : size 39
 gles.GlDrawElementsIndirect{$,Uint32,Uint32,$}
 
-GlDrawElementsInstancedANGLE : size 45
+GlDrawElementsInstancedANGLE : size 47
 gles.GlDrawElementsInstancedANGLE{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsInstancedBaseInstanceEXT : size 56
+GlDrawElementsInstancedBaseInstanceEXT : size 58
 gles.GlDrawElementsInstancedBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Uint32}
 
-GlDrawElementsInstancedBaseVertexBaseInstanceEXT : size 67
+GlDrawElementsInstancedBaseVertexBaseInstanceEXT : size 69
 gles.GlDrawElementsInstancedBaseVertexBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Int32,Uint32}
 
-GlDrawElementsInstancedBaseVertexEXT : size 54
+GlDrawElementsInstancedBaseVertexEXT : size 56
 gles.GlDrawElementsInstancedBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32,Int32}
 
-GlDrawElementsInstancedBaseVertexOES : size 54
+GlDrawElementsInstancedBaseVertexOES : size 56
 gles.GlDrawElementsInstancedBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32,Int32}
 
-GlDrawElementsInstancedBaseVertex : size 51
+GlDrawElementsInstancedBaseVertex : size 53
 gles.GlDrawElementsInstancedBaseVertex{$,Uint32,Int32,Uint32,$,Int32,Int32}
 
-GlDrawElementsInstancedEXT : size 43
+GlDrawElementsInstancedEXT : size 45
 gles.GlDrawElementsInstancedEXT{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsInstancedNV : size 42
+GlDrawElementsInstancedNV : size 44
 gles.GlDrawElementsInstancedNV{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElementsInstanced : size 40
+GlDrawElementsInstanced : size 42
 gles.GlDrawElementsInstanced{$,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawElements : size 30
+GlDrawElements : size 32
 gles.GlDrawElements{$,Uint32,Int32,Uint32,$}
 
-GlDrawRangeElementsBaseVertexEXT : size 51
+GlDrawRangeElementsBaseVertexEXT : size 53
 gles.GlDrawRangeElementsBaseVertexEXT{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawRangeElementsBaseVertexOES : size 51
+GlDrawRangeElementsBaseVertexOES : size 53
 gles.GlDrawRangeElementsBaseVertexOES{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawRangeElementsBaseVertex : size 48
+GlDrawRangeElementsBaseVertex : size 50
 gles.GlDrawRangeElementsBaseVertex{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 
-GlDrawRangeElements : size 37
+GlDrawRangeElements : size 39
 gles.GlDrawRangeElements{$,Uint32,Uint32,Uint32,Int32,Uint32,$}
 
-GlEGLImageTargetRenderbufferStorageOES : size 52
+GlEGLImageTargetRenderbufferStorageOES : size 54
 gles.GlEGLImageTargetRenderbufferStorageOES{$,Uint32,$}
 
-GlEGLImageTargetTexture2DOES : size 42
+GlEGLImageTargetTexture2DOES : size 44
 gles.GlEGLImageTargetTexture2DOES{$,Uint32,$}
 
-GlEnableDriverControlQCOM : size 36
+GlEnableDriverControlQCOM : size 38
 gles.GlEnableDriverControlQCOM{$,Uint32}
 
-GlEnableVertexAttribArray : size 36
+GlEnableVertexAttribArray : size 38
 gles.GlEnableVertexAttribArray{$,Uint32}
 
-GlEnableiEXT : size 24
+GlEnableiEXT : size 26
 gles.GlEnableiEXT{$,Uint32,Uint32}
 
-GlEnableiNV : size 23
+GlEnableiNV : size 25
 gles.GlEnableiNV{$,Uint32,Uint32}
 
-GlEnableiOES : size 24
+GlEnableiOES : size 26
 gles.GlEnableiOES{$,Uint32,Uint32}
 
-GlEnablei : size 21
+GlEnablei : size 23
 gles.GlEnablei{$,Uint32,Uint32}
 
-GlEnable : size 19
+GlEnable : size 21
 gles.GlEnable{$,Uint32}
 
-GlEndConditionalRenderNV : size 34
+GlEndConditionalRenderNV : size 36
 gles.GlEndConditionalRenderNV{$}
 
-GlEndPerfMonitorAMD : size 30
+GlEndPerfMonitorAMD : size 32
 gles.GlEndPerfMonitorAMD{$,Uint32}
 
-GlEndPerfQueryINTEL : size 30
+GlEndPerfQueryINTEL : size 32
 gles.GlEndPerfQueryINTEL{$,Uint32}
 
-GlEndQueryEXT : size 24
+GlEndQueryEXT : size 26
 gles.GlEndQueryEXT{$,Uint32}
 
-GlEndQuery : size 21
+GlEndQuery : size 23
 gles.GlEndQuery{$,Uint32}
 
-GlEndTilingQCOM : size 26
+GlEndTilingQCOM : size 28
 gles.GlEndTilingQCOM{$,Uint32}
 
-GlEndTransformFeedback : size 32
+GlEndTransformFeedback : size 34
 gles.GlEndTransformFeedback{$}
 
-GlExtGetBufferPointervQCOM : size 40
+GlExtGetBufferPointervQCOM : size 42
 gles.GlExtGetBufferPointervQCOM{$,Uint32,$}
 
-GlExtGetBuffersQCOM : size 36
+GlExtGetBuffersQCOM : size 38
 gles.GlExtGetBuffersQCOM{$,$,Int32,$}
 
-GlExtGetFramebuffersQCOM : size 41
+GlExtGetFramebuffersQCOM : size 43
 gles.GlExtGetFramebuffersQCOM{$,$,Int32,$}
 
-GlExtGetProgramBinarySourceQCOM : size 49
+GlExtGetProgramBinarySourceQCOM : size 51
 gles.GlExtGetProgramBinarySourceQCOM{$,Uint32,Uint32,$,$}
 
-GlExtGetProgramsQCOM : size 37
+GlExtGetProgramsQCOM : size 39
 gles.GlExtGetProgramsQCOM{$,$,Int32,$}
 
-GlExtGetRenderbuffersQCOM : size 42
+GlExtGetRenderbuffersQCOM : size 44
 gles.GlExtGetRenderbuffersQCOM{$,$,Int32,$}
 
-GlExtGetShadersQCOM : size 36
+GlExtGetShadersQCOM : size 38
 gles.GlExtGetShadersQCOM{$,$,Int32,$}
 
-GlExtGetTexLevelParameterivQCOM : size 48
+GlExtGetTexLevelParameterivQCOM : size 50
 gles.GlExtGetTexLevelParameterivQCOM{$,Uint32,Uint32,Int32,Uint32,$}
 
-GlExtGetTexSubImageQCOM : size 46
+GlExtGetTexSubImageQCOM : size 48
 gles.GlExtGetTexSubImageQCOM{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlExtGetTexturesQCOM : size 37
+GlExtGetTexturesQCOM : size 39
 gles.GlExtGetTexturesQCOM{$,$,Int32,$}
 
-GlExtIsProgramBinaryQCOM : size 36
+GlExtIsProgramBinaryQCOM : size 38
 gles.GlExtIsProgramBinaryQCOM{$,Uint32,Uint8}
 
-GlExtTexObjectStateOverrideiQCOM : size 45
+GlExtTexObjectStateOverrideiQCOM : size 47
 gles.GlExtTexObjectStateOverrideiQCOM{$,Uint32,Uint32,Int32}
 
-GlFenceSyncAPPLE : size 29
+GlFenceSyncAPPLE : size 31
 gles.GlFenceSyncAPPLE{$,Uint32,Uint32,Uint64}
 
-GlFenceSync : size 24
+GlFenceSync : size 26
 gles.GlFenceSync{$,Uint32,Uint32,Uint64}
 
-GlFinishFenceNV : size 26
+GlFinishFenceNV : size 28
 gles.GlFinishFenceNV{$,Uint32}
 
-GlFinish : size 18
+GlFinish : size 20
 gles.GlFinish{$}
 
-GlFlushMappedBufferRangeEXT : size 40
+GlFlushMappedBufferRangeEXT : size 42
 gles.GlFlushMappedBufferRangeEXT{$,Uint32,Int32,Int32}
 
-GlFlushMappedBufferRange : size 37
+GlFlushMappedBufferRange : size 39
 gles.GlFlushMappedBufferRange{$,Uint32,Int32,Int32}
 
-GlFlush : size 17
+GlFlush : size 19
 gles.GlFlush{$}
 
-GlFragmentCoverageColorNV : size 36
+GlFragmentCoverageColorNV : size 38
 gles.GlFragmentCoverageColorNV{$,Uint32}
 
-GlFramebufferParameteri : size 36
+GlFramebufferParameteri : size 38
 gles.GlFramebufferParameteri{$,Uint32,Uint32,Int32}
 
-GlFramebufferRenderbuffer : size 39
+GlFramebufferRenderbuffer : size 41
 gles.GlFramebufferRenderbuffer{$,Uint32,Uint32,Uint32,Uint32}
 
-GlFramebufferSampleLocationsfvNV : size 48
+GlFramebufferSampleLocationsfvNV : size 50
 gles.GlFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
 
-GlFramebufferTexture2DMultisampleEXT : size 52
+GlFramebufferTexture2DMultisampleEXT : size 54
 gles.GlFramebufferTexture2DMultisampleEXT{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlFramebufferTexture2DMultisampleIMG : size 52
+GlFramebufferTexture2DMultisampleIMG : size 54
 gles.GlFramebufferTexture2DMultisampleIMG{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlFramebufferTexture2D : size 37
+GlFramebufferTexture2D : size 39
 gles.GlFramebufferTexture2D{$,Uint32,Uint32,Uint32,Uint32,Int32}
 
-GlFramebufferTexture3DOES : size 41
+GlFramebufferTexture3DOES : size 43
 gles.GlFramebufferTexture3DOES{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlFramebufferTextureEXT : size 37
+GlFramebufferTextureEXT : size 39
 gles.GlFramebufferTextureEXT{$,Uint32,Uint32,Uint32,Int32}
 
-GlFramebufferTextureLayer : size 40
+GlFramebufferTextureLayer : size 42
 gles.GlFramebufferTextureLayer{$,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlFramebufferTextureMultiviewOVR : size 48
+GlFramebufferTextureMultiviewOVR : size 50
 gles.GlFramebufferTextureMultiviewOVR{$,Uint32,Uint32,Uint32,Int32,Int32,Int32}
 
-GlFramebufferTextureOES : size 37
+GlFramebufferTextureOES : size 39
 gles.GlFramebufferTextureOES{$,Uint32,Uint32,Uint32,Int32}
 
-GlFramebufferTexture : size 34
+GlFramebufferTexture : size 36
 gles.GlFramebufferTexture{$,Uint32,Uint32,Uint32,Int32}
 
-GlFrontFace : size 22
+GlFrontFace : size 24
 gles.GlFrontFace{$,Uint32}
 
-GlGenBuffers : size 26
+GlGenBuffers : size 28
 gles.GlGenBuffers{$,Int32,$}
 
-GlGenFencesNV : size 27
+GlGenFencesNV : size 29
 gles.GlGenFencesNV{$,Int32,$}
 
-GlGenFramebuffers : size 31
+GlGenFramebuffers : size 33
 gles.GlGenFramebuffers{$,Int32,$}
 
-GlGenPathsNV : size 24
+GlGenPathsNV : size 26
 gles.GlGenPathsNV{$,Int32,Uint32}
 
-GlGenPerfMonitorsAMD : size 34
+GlGenPerfMonitorsAMD : size 36
 gles.GlGenPerfMonitorsAMD{$,Int32,$}
 
-GlGenProgramPipelinesEXT : size 38
+GlGenProgramPipelinesEXT : size 40
 gles.GlGenProgramPipelinesEXT{$,Int32,$}
 
-GlGenProgramPipelines : size 35
+GlGenProgramPipelines : size 37
 gles.GlGenProgramPipelines{$,Int32,$}
 
-GlGenQueriesEXT : size 29
+GlGenQueriesEXT : size 31
 gles.GlGenQueriesEXT{$,Int32,$}
 
-GlGenQueries : size 26
+GlGenQueries : size 28
 gles.GlGenQueries{$,Int32,$}
 
-GlGenRenderbuffers : size 32
+GlGenRenderbuffers : size 34
 gles.GlGenRenderbuffers{$,Int32,$}
 
-GlGenSamplers : size 27
+GlGenSamplers : size 29
 gles.GlGenSamplers{$,Int32,$}
 
-GlGenTextures : size 27
+GlGenTextures : size 29
 gles.GlGenTextures{$,Int32,$}
 
-GlGenTransformFeedbacks : size 37
+GlGenTransformFeedbacks : size 39
 gles.GlGenTransformFeedbacks{$,Int32,$}
 
-GlGenVertexArraysOES : size 34
+GlGenVertexArraysOES : size 36
 gles.GlGenVertexArraysOES{$,Int32,$}
 
-GlGenVertexArrays : size 31
+GlGenVertexArrays : size 33
 gles.GlGenVertexArrays{$,Int32,$}
 
-GlGenerateMipmap : size 27
+GlGenerateMipmap : size 29
 gles.GlGenerateMipmap{$,Uint32}
 
-GlGetActiveAttrib : size 42
+GlGetActiveAttrib : size 44
 gles.GlGetActiveAttrib{$,Uint32,Uint32,Int32,$,$,$,$}
 
-GlGetActiveUniformBlockName : size 46
+GlGetActiveUniformBlockName : size 48
 gles.GlGetActiveUniformBlockName{$,Uint32,Uint32,Int32,$,$}
 
-GlGetActiveUniformBlockiv : size 41
+GlGetActiveUniformBlockiv : size 43
 gles.GlGetActiveUniformBlockiv{$,Uint32,Uint32,Uint32,$}
 
-GlGetActiveUniformsiv : size 40
+GlGetActiveUniformsiv : size 42
 gles.GlGetActiveUniformsiv{$,Uint32,Int32,$,Uint32,$}
 
-GlGetActiveUniform : size 43
+GlGetActiveUniform : size 45
 gles.GlGetActiveUniform{$,Uint32,Uint32,Int32,$,$,$,$}
 
-GlGetAttachedShaders : size 38
+GlGetAttachedShaders : size 40
 gles.GlGetAttachedShaders{$,Uint32,Int32,$,$}
 
-GlGetAttribLocation : size 32
+GlGetAttribLocation : size 34
 gles.GlGetAttribLocation{$,Uint32,String,Int32}
 
-GlGetBooleani_v : size 30
+GlGetBooleani_v : size 32
 gles.GlGetBooleani_v{$,Uint32,Uint32,$}
 
-GlGetBooleanv : size 27
+GlGetBooleanv : size 29
 gles.GlGetBooleanv{$,Uint32,$}
 
-GlGetBufferParameteri64v : size 39
+GlGetBufferParameteri64v : size 41
 gles.GlGetBufferParameteri64v{$,Uint32,Uint32,$}
 
-GlGetBufferParameteriv : size 37
+GlGetBufferParameteriv : size 39
 gles.GlGetBufferParameteriv{$,Uint32,Uint32,$}
 
-GlGetBufferPointervOES : size 37
+GlGetBufferPointervOES : size 39
 gles.GlGetBufferPointervOES{$,Uint32,Uint32,$}
 
-GlGetBufferPointerv : size 34
+GlGetBufferPointerv : size 36
 gles.GlGetBufferPointerv{$,Uint32,Uint32,$}
 
-GlGetCoverageModulationTableNV : size 44
+GlGetCoverageModulationTableNV : size 46
 gles.GlGetCoverageModulationTableNV{$,Int32,$}
 
-GlGetDebugMessageLogKHR : size 54
+GlGetDebugMessageLogKHR : size 56
 gles.GlGetDebugMessageLogKHR{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
 
-GlGetDebugMessageLog : size 51
+GlGetDebugMessageLog : size 53
 gles.GlGetDebugMessageLog{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
 
-GlGetDriverControlStringQCOM : size 46
+GlGetDriverControlStringQCOM : size 48
 gles.GlGetDriverControlStringQCOM{$,Uint32,Int32,$,$}
 
-GlGetDriverControlsQCOM : size 40
+GlGetDriverControlsQCOM : size 42
 gles.GlGetDriverControlsQCOM{$,$,Int32,$}
 
-GlGetError : size 21
+GlGetError : size 23
 gles.GlGetError{$,Uint32}
 
-GlGetFenceivNV : size 29
+GlGetFenceivNV : size 31
 gles.GlGetFenceivNV{$,Uint32,Uint32,$}
 
-GlGetFirstPerfQueryIdINTEL : size 39
+GlGetFirstPerfQueryIdINTEL : size 41
 gles.GlGetFirstPerfQueryIdINTEL{$,$}
 
-GlGetFloati_vNV : size 30
+GlGetFloati_vNV : size 32
 gles.GlGetFloati_vNV{$,Uint32,Uint32,$}
 
-GlGetFloatv : size 25
+GlGetFloatv : size 27
 gles.GlGetFloatv{$,Uint32,$}
 
-GlGetFragDataIndexEXT : size 34
+GlGetFragDataIndexEXT : size 36
 gles.GlGetFragDataIndexEXT{$,Uint32,String,Int32}
 
-GlGetFragDataLocation : size 34
+GlGetFragDataLocation : size 36
 gles.GlGetFragDataLocation{$,Uint32,String,Int32}
 
-GlGetFramebufferAttachmentParameteriv : size 53
+GlGetFramebufferAttachmentParameteriv : size 55
 gles.GlGetFramebufferAttachmentParameteriv{$,Uint32,Uint32,Uint32,$}
 
-GlGetFramebufferParameteriv : size 42
+GlGetFramebufferParameteriv : size 44
 gles.GlGetFramebufferParameteriv{$,Uint32,Uint32,$}
 
-GlGetGraphicsResetStatusEXT : size 38
+GlGetGraphicsResetStatusEXT : size 40
 gles.GlGetGraphicsResetStatusEXT{$,Uint32}
 
-GlGetGraphicsResetStatusKHR : size 38
+GlGetGraphicsResetStatusKHR : size 40
 gles.GlGetGraphicsResetStatusKHR{$,Uint32}
 
-GlGetGraphicsResetStatus : size 35
+GlGetGraphicsResetStatus : size 37
 gles.GlGetGraphicsResetStatus{$,Uint32}
 
-GlGetImageHandleNV : size 34
+GlGetImageHandleNV : size 36
 gles.GlGetImageHandleNV{$,Uint32,Int32,Uint8,Int32,Uint32,Uint64}
 
-GlGetInteger64i_v : size 32
+GlGetInteger64i_v : size 34
 gles.GlGetInteger64i_v{$,Uint32,Uint32,$}
 
-GlGetInteger64vAPPLE : size 34
+GlGetInteger64vAPPLE : size 36
 gles.GlGetInteger64vAPPLE{$,Uint32,$}
 
-GlGetInteger64v : size 29
+GlGetInteger64v : size 31
 gles.GlGetInteger64v{$,Uint32,$}
 
-GlGetIntegeri_vEXT : size 33
+GlGetIntegeri_vEXT : size 35
 gles.GlGetIntegeri_vEXT{$,Uint32,Uint32,$}
 
-GlGetIntegeri_v : size 30
+GlGetIntegeri_v : size 32
 gles.GlGetIntegeri_v{$,Uint32,Uint32,$}
 
-GlGetIntegerv : size 27
+GlGetIntegerv : size 29
 gles.GlGetIntegerv{$,Uint32,$}
 
-GlGetInternalformatSampleivNV : size 47
+GlGetInternalformatSampleivNV : size 49
 gles.GlGetInternalformatSampleivNV{$,Uint32,Uint32,Int32,Uint32,Int32,$}
 
-GlGetInternalformativ : size 38
+GlGetInternalformativ : size 40
 gles.GlGetInternalformativ{$,Uint32,Uint32,Uint32,Int32,$}
 
-GlGetMultisamplefv : size 33
+GlGetMultisamplefv : size 35
 gles.GlGetMultisamplefv{$,Uint32,Uint32,$}
 
-GlGetNextPerfQueryIdINTEL : size 39
+GlGetNextPerfQueryIdINTEL : size 41
 gles.GlGetNextPerfQueryIdINTEL{$,Uint32,$}
 
-GlGetObjectLabelEXT : size 38
+GlGetObjectLabelEXT : size 40
 gles.GlGetObjectLabelEXT{$,Uint32,Uint32,Int32,$,$}
 
-GlGetObjectLabelKHR : size 38
+GlGetObjectLabelKHR : size 40
 gles.GlGetObjectLabelKHR{$,Uint32,Uint32,Int32,$,$}
 
-GlGetObjectLabel : size 35
+GlGetObjectLabel : size 37
 gles.GlGetObjectLabel{$,Uint32,Uint32,Int32,$,$}
 
-GlGetObjectPtrLabelKHR : size 42
+GlGetObjectPtrLabelKHR : size 44
 gles.GlGetObjectPtrLabelKHR{$,$,Int32,$,$}
 
-GlGetObjectPtrLabel : size 39
+GlGetObjectPtrLabel : size 41
 gles.GlGetObjectPtrLabel{$,$,Int32,$,$}
 
-GlGetPathCommandsNV : size 33
+GlGetPathCommandsNV : size 35
 gles.GlGetPathCommandsNV{$,Uint32,$}
 
-GlGetPathCoordsNV : size 31
+GlGetPathCoordsNV : size 33
 gles.GlGetPathCoordsNV{$,Uint32,$}
 
-GlGetPathDashArrayNV : size 34
+GlGetPathDashArrayNV : size 36
 gles.GlGetPathDashArrayNV{$,Uint32,$}
 
-GlGetPathLengthNV : size 31
+GlGetPathLengthNV : size 33
 gles.GlGetPathLengthNV{$,Uint32,Int32,Int32,Float32}
 
-GlGetPathMetricRangeNV : size 39
+GlGetPathMetricRangeNV : size 41
 gles.GlGetPathMetricRangeNV{$,Uint32,Uint32,Int32,Int32,$}
 
-GlGetPathMetricsNV : size 39
+GlGetPathMetricsNV : size 41
 gles.GlGetPathMetricsNV{$,Uint32,Int32,Uint32,$,Uint32,Int32,$}
 
-GlGetPathParameterfvNV : size 37
+GlGetPathParameterfvNV : size 39
 gles.GlGetPathParameterfvNV{$,Uint32,Uint32,$}
 
-GlGetPathParameterivNV : size 37
+GlGetPathParameterivNV : size 39
 gles.GlGetPathParameterivNV{$,Uint32,Uint32,$}
 
-GlGetPathSpacingNV : size 41
+GlGetPathSpacingNV : size 43
 gles.GlGetPathSpacingNV{$,Uint32,Int32,Uint32,$,Uint32,Float32,Float32,Uint32,$}
 
-GlGetPerfCounterInfoINTEL : size 60
+GlGetPerfCounterInfoINTEL : size 62
 gles.GlGetPerfCounterInfoINTEL{$,Uint32,Uint32,Uint32,$,Uint32,$,$,$,$,$,$}
 
-GlGetPerfMonitorCounterDataAMD : size 49
+GlGetPerfMonitorCounterDataAMD : size 51
 gles.GlGetPerfMonitorCounterDataAMD{$,Uint32,Uint32,Int32,$,$}
 
-GlGetPerfMonitorCounterInfoAMD : size 46
+GlGetPerfMonitorCounterInfoAMD : size 48
 gles.GlGetPerfMonitorCounterInfoAMD{$,Uint32,Uint32,Uint32,$}
 
-GlGetPerfMonitorCounterStringAMD : size 51
+GlGetPerfMonitorCounterStringAMD : size 53
 gles.GlGetPerfMonitorCounterStringAMD{$,Uint32,Uint32,Int32,$,$}
 
-GlGetPerfMonitorCountersAMD : size 48
+GlGetPerfMonitorCountersAMD : size 50
 gles.GlGetPerfMonitorCountersAMD{$,Uint32,$,$,Int32,$}
 
-GlGetPerfMonitorGroupStringAMD : size 48
+GlGetPerfMonitorGroupStringAMD : size 50
 gles.GlGetPerfMonitorGroupStringAMD{$,Uint32,Int32,$,$}
 
-GlGetPerfMonitorGroupsAMD : size 42
+GlGetPerfMonitorGroupsAMD : size 44
 gles.GlGetPerfMonitorGroupsAMD{$,$,Int32,$}
 
-GlGetPerfQueryDataINTEL : size 42
+GlGetPerfQueryDataINTEL : size 44
 gles.GlGetPerfQueryDataINTEL{$,Uint32,Uint32,Int32,$,$}
 
-GlGetPerfQueryIdByNameINTEL : size 43
+GlGetPerfQueryIdByNameINTEL : size 45
 gles.GlGetPerfQueryIdByNameINTEL{$,$,$}
 
-GlGetPerfQueryInfoINTEL : size 50
+GlGetPerfQueryInfoINTEL : size 52
 gles.GlGetPerfQueryInfoINTEL{$,Uint32,Uint32,$,$,$,$,$}
 
-GlGetPointervKHR : size 30
+GlGetPointervKHR : size 32
 gles.GlGetPointervKHR{$,Uint32,$}
 
-GlGetPointerv : size 27
+GlGetPointerv : size 29
 gles.GlGetPointerv{$,Uint32,$}
 
-GlGetProgramBinaryOES : size 42
+GlGetProgramBinaryOES : size 44
 gles.GlGetProgramBinaryOES{$,Uint32,Int32,$,$,$}
 
-GlGetProgramBinary : size 39
+GlGetProgramBinary : size 41
 gles.GlGetProgramBinary{$,Uint32,Int32,$,$,$}
 
-GlGetProgramInfoLog : size 37
+GlGetProgramInfoLog : size 39
 gles.GlGetProgramInfoLog{$,Uint32,Int32,$,$}
 
-GlGetProgramInterfaceiv : size 39
+GlGetProgramInterfaceiv : size 41
 gles.GlGetProgramInterfaceiv{$,Uint32,Uint32,Uint32,$}
 
-GlGetProgramPipelineInfoLogEXT : size 48
+GlGetProgramPipelineInfoLogEXT : size 50
 gles.GlGetProgramPipelineInfoLogEXT{$,Uint32,Int32,$,$}
 
-GlGetProgramPipelineInfoLog : size 45
+GlGetProgramPipelineInfoLog : size 47
 gles.GlGetProgramPipelineInfoLog{$,Uint32,Int32,$,$}
 
-GlGetProgramPipelineivEXT : size 40
+GlGetProgramPipelineivEXT : size 42
 gles.GlGetProgramPipelineivEXT{$,Uint32,Uint32,$}
 
-GlGetProgramPipelineiv : size 37
+GlGetProgramPipelineiv : size 39
 gles.GlGetProgramPipelineiv{$,Uint32,Uint32,$}
 
-GlGetProgramResourceIndex : size 39
+GlGetProgramResourceIndex : size 41
 gles.GlGetProgramResourceIndex{$,Uint32,Uint32,String,Uint32}
 
-GlGetProgramResourceLocationIndexEXT : size 50
+GlGetProgramResourceLocationIndexEXT : size 52
 gles.GlGetProgramResourceLocationIndexEXT{$,Uint32,Uint32,String,Int32}
 
-GlGetProgramResourceLocation : size 42
+GlGetProgramResourceLocation : size 44
 gles.GlGetProgramResourceLocation{$,Uint32,Uint32,String,Int32}
 
-GlGetProgramResourceName : size 44
+GlGetProgramResourceName : size 46
 gles.GlGetProgramResourceName{$,Uint32,Uint32,Uint32,Int32,$,$}
 
-GlGetProgramResourcefvNV : size 48
+GlGetProgramResourcefvNV : size 50
 gles.GlGetProgramResourcefvNV{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
 
-GlGetProgramResourceiv : size 46
+GlGetProgramResourceiv : size 48
 gles.GlGetProgramResourceiv{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
 
-GlGetProgramiv : size 29
+GlGetProgramiv : size 31
 gles.GlGetProgramiv{$,Uint32,Uint32,$}
 
-GlGetQueryObjecti64vEXT : size 38
+GlGetQueryObjecti64vEXT : size 40
 gles.GlGetQueryObjecti64vEXT{$,Uint32,Uint32,$}
 
-GlGetQueryObjecti64v : size 35
+GlGetQueryObjecti64v : size 37
 gles.GlGetQueryObjecti64v{$,Uint32,Uint32,$}
 
-GlGetQueryObjectivEXT : size 36
+GlGetQueryObjectivEXT : size 38
 gles.GlGetQueryObjectivEXT{$,Uint32,Uint32,$}
 
-GlGetQueryObjectui64vEXT : size 39
+GlGetQueryObjectui64vEXT : size 41
 gles.GlGetQueryObjectui64vEXT{$,Uint32,Uint32,$}
 
-GlGetQueryObjectui64v : size 36
+GlGetQueryObjectui64v : size 38
 gles.GlGetQueryObjectui64v{$,Uint32,Uint32,$}
 
-GlGetQueryObjectuivEXT : size 37
+GlGetQueryObjectuivEXT : size 39
 gles.GlGetQueryObjectuivEXT{$,Uint32,Uint32,$}
 
-GlGetQueryObjectuiv : size 34
+GlGetQueryObjectuiv : size 36
 gles.GlGetQueryObjectuiv{$,Uint32,Uint32,$}
 
-GlGetQueryivEXT : size 30
+GlGetQueryivEXT : size 32
 gles.GlGetQueryivEXT{$,Uint32,Uint32,$}
 
-GlGetQueryiv : size 27
+GlGetQueryiv : size 29
 gles.GlGetQueryiv{$,Uint32,Uint32,$}
 
-GlGetRenderbufferParameteriv : size 43
+GlGetRenderbufferParameteriv : size 45
 gles.GlGetRenderbufferParameteriv{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIivEXT : size 42
+GlGetSamplerParameterIivEXT : size 44
 gles.GlGetSamplerParameterIivEXT{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIivOES : size 42
+GlGetSamplerParameterIivOES : size 44
 gles.GlGetSamplerParameterIivOES{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIiv : size 39
+GlGetSamplerParameterIiv : size 41
 gles.GlGetSamplerParameterIiv{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIuivEXT : size 43
+GlGetSamplerParameterIuivEXT : size 45
 gles.GlGetSamplerParameterIuivEXT{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIuivOES : size 43
+GlGetSamplerParameterIuivOES : size 45
 gles.GlGetSamplerParameterIuivOES{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterIuiv : size 40
+GlGetSamplerParameterIuiv : size 42
 gles.GlGetSamplerParameterIuiv{$,Uint32,Uint32,$}
 
-GlGetSamplerParameterfv : size 38
+GlGetSamplerParameterfv : size 40
 gles.GlGetSamplerParameterfv{$,Uint32,Uint32,$}
 
-GlGetSamplerParameteriv : size 38
+GlGetSamplerParameteriv : size 40
 gles.GlGetSamplerParameteriv{$,Uint32,Uint32,$}
 
-GlGetShaderInfoLog : size 36
+GlGetShaderInfoLog : size 38
 gles.GlGetShaderInfoLog{$,Uint32,Int32,$,$}
 
-GlGetShaderPrecisionFormat : size 44
+GlGetShaderPrecisionFormat : size 46
 gles.GlGetShaderPrecisionFormat{$,Uint32,Uint32,$,$}
 
-GlGetShaderSource : size 35
+GlGetShaderSource : size 37
 gles.GlGetShaderSource{$,Uint32,Int32,$,$}
 
-GlGetShaderiv : size 28
+GlGetShaderiv : size 30
 gles.GlGetShaderiv{$,Uint32,Uint32,$}
 
-GlGetStringi : size 27
+GlGetStringi : size 29
 gles.GlGetStringi{$,Uint32,Uint32,$}
 
-GlGetString : size 25
+GlGetString : size 27
 gles.GlGetString{$,Uint32,$}
 
-GlGetSyncivAPPLE : size 35
+GlGetSyncivAPPLE : size 37
 gles.GlGetSyncivAPPLE{$,Uint64,Uint32,Int32,$,$}
 
-GlGetSynciv : size 30
+GlGetSynciv : size 32
 gles.GlGetSynciv{$,Uint64,Uint32,Int32,$,$}
 
-GlGetTexLevelParameterfv : size 40
+GlGetTexLevelParameterfv : size 42
 gles.GlGetTexLevelParameterfv{$,Uint32,Int32,Uint32,$}
 
-GlGetTexLevelParameteriv : size 40
+GlGetTexLevelParameteriv : size 42
 gles.GlGetTexLevelParameteriv{$,Uint32,Int32,Uint32,$}
 
-GlGetTexParameterIivEXT : size 38
+GlGetTexParameterIivEXT : size 40
 gles.GlGetTexParameterIivEXT{$,Uint32,Uint32,$}
 
-GlGetTexParameterIivOES : size 38
+GlGetTexParameterIivOES : size 40
 gles.GlGetTexParameterIivOES{$,Uint32,Uint32,$}
 
-GlGetTexParameterIiv : size 35
+GlGetTexParameterIiv : size 37
 gles.GlGetTexParameterIiv{$,Uint32,Uint32,$}
 
-GlGetTexParameterIuivEXT : size 39
+GlGetTexParameterIuivEXT : size 41
 gles.GlGetTexParameterIuivEXT{$,Uint32,Uint32,$}
 
-GlGetTexParameterIuivOES : size 39
+GlGetTexParameterIuivOES : size 41
 gles.GlGetTexParameterIuivOES{$,Uint32,Uint32,$}
 
-GlGetTexParameterIuiv : size 36
+GlGetTexParameterIuiv : size 38
 gles.GlGetTexParameterIuiv{$,Uint32,Uint32,$}
 
-GlGetTexParameterfv : size 34
+GlGetTexParameterfv : size 36
 gles.GlGetTexParameterfv{$,Uint32,Uint32,$}
 
-GlGetTexParameteriv : size 34
+GlGetTexParameteriv : size 36
 gles.GlGetTexParameteriv{$,Uint32,Uint32,$}
 
-GlGetTextureHandleNV : size 32
+GlGetTextureHandleNV : size 34
 gles.GlGetTextureHandleNV{$,Uint32,Uint64}
 
-GlGetTextureSamplerHandleNV : size 40
+GlGetTextureSamplerHandleNV : size 42
 gles.GlGetTextureSamplerHandleNV{$,Uint32,Uint32,Uint64}
 
-GlGetTransformFeedbackVarying : size 54
+GlGetTransformFeedbackVarying : size 56
 gles.GlGetTransformFeedbackVarying{$,Uint32,Uint32,Int32,$,$,$,$}
 
-GlGetTranslatedShaderSourceANGLE : size 50
+GlGetTranslatedShaderSourceANGLE : size 52
 gles.GlGetTranslatedShaderSourceANGLE{$,Uint32,Int32,$,$}
 
-GlGetUniformBlockIndex : size 35
+GlGetUniformBlockIndex : size 37
 gles.GlGetUniformBlockIndex{$,Uint32,String,Uint32}
 
-GlGetUniformIndices : size 37
+GlGetUniformIndices : size 39
 gles.GlGetUniformIndices{$,Uint32,Int32,$,$}
 
-GlGetUniformLocation : size 33
+GlGetUniformLocation : size 35
 gles.GlGetUniformLocation{$,Uint32,String,Int32}
 
-GlGetUniformfv : size 29
+GlGetUniformfv : size 31
 gles.GlGetUniformfv{$,Uint32,Int32,$}
 
-GlGetUniformiv : size 29
+GlGetUniformiv : size 31
 gles.GlGetUniformiv{$,Uint32,Int32,$}
 
-GlGetUniformuiv : size 30
+GlGetUniformuiv : size 32
 gles.GlGetUniformuiv{$,Uint32,Int32,$}
 
-GlGetVertexAttribIiv : size 35
+GlGetVertexAttribIiv : size 37
 gles.GlGetVertexAttribIiv{$,Uint32,Uint32,$}
 
-GlGetVertexAttribIuiv : size 36
+GlGetVertexAttribIuiv : size 38
 gles.GlGetVertexAttribIuiv{$,Uint32,Uint32,$}
 
-GlGetVertexAttribPointerv : size 40
+GlGetVertexAttribPointerv : size 42
 gles.GlGetVertexAttribPointerv{$,Uint32,Uint32,$}
 
-GlGetVertexAttribfv : size 34
+GlGetVertexAttribfv : size 36
 gles.GlGetVertexAttribfv{$,Uint32,Uint32,$}
 
-GlGetVertexAttribiv : size 34
+GlGetVertexAttribiv : size 36
 gles.GlGetVertexAttribiv{$,Uint32,Uint32,$}
 
-GlGetnUniformfvEXT : size 34
+GlGetnUniformfvEXT : size 36
 gles.GlGetnUniformfvEXT{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformfvKHR : size 34
+GlGetnUniformfvKHR : size 36
 gles.GlGetnUniformfvKHR{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformfv : size 31
+GlGetnUniformfv : size 33
 gles.GlGetnUniformfv{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformivEXT : size 34
+GlGetnUniformivEXT : size 36
 gles.GlGetnUniformivEXT{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformivKHR : size 34
+GlGetnUniformivKHR : size 36
 gles.GlGetnUniformivKHR{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformiv : size 31
+GlGetnUniformiv : size 33
 gles.GlGetnUniformiv{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformuivKHR : size 35
+GlGetnUniformuivKHR : size 37
 gles.GlGetnUniformuivKHR{$,Uint32,Int32,Int32,$}
 
-GlGetnUniformuiv : size 32
+GlGetnUniformuiv : size 34
 gles.GlGetnUniformuiv{$,Uint32,Int32,Int32,$}
 
-GlHint : size 18
+GlHint : size 20
 gles.GlHint{$,Uint32,Uint32}
 
-GlInsertEventMarkerEXT : size 36
+GlInsertEventMarkerEXT : size 38
 gles.GlInsertEventMarkerEXT{$,Int32,$}
 
-GlInterpolatePathsNV : size 34
+GlInterpolatePathsNV : size 36
 gles.GlInterpolatePathsNV{$,Uint32,Uint32,Uint32,Float32}
 
-GlInvalidateFramebuffer : size 38
+GlInvalidateFramebuffer : size 40
 gles.GlInvalidateFramebuffer{$,Uint32,Int32,$}
 
-GlInvalidateSubFramebuffer : size 45
+GlInvalidateSubFramebuffer : size 47
 gles.GlInvalidateSubFramebuffer{$,Uint32,Int32,$,Int32,Int32,Int32,Int32}
 
-GlIsBuffer : size 22
+GlIsBuffer : size 24
 gles.GlIsBuffer{$,Uint32,Uint8}
 
-GlIsEnablediEXT : size 28
+GlIsEnablediEXT : size 30
 gles.GlIsEnablediEXT{$,Uint32,Uint32,Uint8}
 
-GlIsEnablediNV : size 27
+GlIsEnablediNV : size 29
 gles.GlIsEnablediNV{$,Uint32,Uint32,Uint8}
 
-GlIsEnablediOES : size 28
+GlIsEnablediOES : size 30
 gles.GlIsEnablediOES{$,Uint32,Uint32,Uint8}
 
-GlIsEnabledi : size 25
+GlIsEnabledi : size 27
 gles.GlIsEnabledi{$,Uint32,Uint32,Uint8}
 
-GlIsEnabled : size 23
+GlIsEnabled : size 25
 gles.GlIsEnabled{$,Uint32,Uint8}
 
-GlIsFenceNV : size 23
+GlIsFenceNV : size 25
 gles.GlIsFenceNV{$,Uint32,Uint8}
 
-GlIsFramebuffer : size 27
+GlIsFramebuffer : size 29
 gles.GlIsFramebuffer{$,Uint32,Uint8}
 
-GlIsImageHandleResidentNV : size 37
+GlIsImageHandleResidentNV : size 39
 gles.GlIsImageHandleResidentNV{$,Uint64,Uint8}
 
-GlIsPathNV : size 22
+GlIsPathNV : size 24
 gles.GlIsPathNV{$,Uint32,Uint8}
 
-GlIsPointInFillPathNV : size 36
+GlIsPointInFillPathNV : size 38
 gles.GlIsPointInFillPathNV{$,Uint32,Uint32,Float32,Float32,Uint8}
 
-GlIsPointInStrokePathNV : size 37
+GlIsPointInStrokePathNV : size 39
 gles.GlIsPointInStrokePathNV{$,Uint32,Float32,Float32,Uint8}
 
-GlIsProgramPipelineEXT : size 34
+GlIsProgramPipelineEXT : size 36
 gles.GlIsProgramPipelineEXT{$,Uint32,Uint8}
 
-GlIsProgramPipeline : size 31
+GlIsProgramPipeline : size 33
 gles.GlIsProgramPipeline{$,Uint32,Uint8}
 
-GlIsProgram : size 23
+GlIsProgram : size 25
 gles.GlIsProgram{$,Uint32,Uint8}
 
-GlIsQueryEXT : size 24
+GlIsQueryEXT : size 26
 gles.GlIsQueryEXT{$,Uint32,Uint8}
 
-GlIsQuery : size 21
+GlIsQuery : size 23
 gles.GlIsQuery{$,Uint32,Uint8}
 
-GlIsRenderbuffer : size 28
+GlIsRenderbuffer : size 30
 gles.GlIsRenderbuffer{$,Uint32,Uint8}
 
-GlIsSampler : size 23
+GlIsSampler : size 25
 gles.GlIsSampler{$,Uint32,Uint8}
 
-GlIsShader : size 22
+GlIsShader : size 24
 gles.GlIsShader{$,Uint32,Uint8}
 
-GlIsSyncAPPLE : size 25
+GlIsSyncAPPLE : size 27
 gles.GlIsSyncAPPLE{$,Uint64,Uint8}
 
-GlIsSync : size 20
+GlIsSync : size 22
 gles.GlIsSync{$,Uint64,Uint8}
 
-GlIsTextureHandleResidentNV : size 39
+GlIsTextureHandleResidentNV : size 41
 gles.GlIsTextureHandleResidentNV{$,Uint64,Uint8}
 
-GlIsTexture : size 23
+GlIsTexture : size 25
 gles.GlIsTexture{$,Uint32,Uint8}
 
-GlIsTransformFeedback : size 33
+GlIsTransformFeedback : size 35
 gles.GlIsTransformFeedback{$,Uint32,Uint8}
 
-GlIsVertexArrayOES : size 30
+GlIsVertexArrayOES : size 32
 gles.GlIsVertexArrayOES{$,Uint32,Uint8}
 
-GlIsVertexArray : size 27
+GlIsVertexArray : size 29
 gles.GlIsVertexArray{$,Uint32,Uint8}
 
-GlLabelObjectEXT : size 32
+GlLabelObjectEXT : size 34
 gles.GlLabelObjectEXT{$,Uint32,Uint32,Int32,$}
 
-GlLineWidth : size 22
+GlLineWidth : size 24
 gles.GlLineWidth{$,Float32}
 
-GlLinkProgram : size 24
+GlLinkProgram : size 26
 gles.GlLinkProgram{$,Uint32}
 
-GlMakeImageHandleNonResidentNV : size 41
+GlMakeImageHandleNonResidentNV : size 43
 gles.GlMakeImageHandleNonResidentNV{$,Uint64}
 
-GlMakeImageHandleResidentNV : size 39
+GlMakeImageHandleResidentNV : size 41
 gles.GlMakeImageHandleResidentNV{$,Uint64,Uint32}
 
-GlMakeTextureHandleNonResidentNV : size 43
+GlMakeTextureHandleNonResidentNV : size 45
 gles.GlMakeTextureHandleNonResidentNV{$,Uint64}
 
-GlMakeTextureHandleResidentNV : size 40
+GlMakeTextureHandleResidentNV : size 42
 gles.GlMakeTextureHandleResidentNV{$,Uint64}
 
-GlMapBufferOES : size 29
+GlMapBufferOES : size 31
 gles.GlMapBufferOES{$,Uint32,Uint32,$}
 
-GlMapBufferRangeEXT : size 36
+GlMapBufferRangeEXT : size 38
 gles.GlMapBufferRangeEXT{$,Uint32,Int32,Int32,Uint32,$}
 
-GlMapBufferRange : size 33
+GlMapBufferRange : size 35
 gles.GlMapBufferRange{$,Uint32,Int32,Int32,Uint32,$}
 
-GlMatrixLoad3x2fNV : size 32
+GlMatrixLoad3x2fNV : size 34
 gles.GlMatrixLoad3x2fNV{$,Uint32,$}
 
-GlMatrixLoad3x3fNV : size 32
+GlMatrixLoad3x3fNV : size 34
 gles.GlMatrixLoad3x3fNV{$,Uint32,$}
 
-GlMatrixLoadTranspose3x3fNV : size 41
+GlMatrixLoadTranspose3x3fNV : size 43
 gles.GlMatrixLoadTranspose3x3fNV{$,Uint32,$}
 
-GlMatrixMult3x2fNV : size 32
+GlMatrixMult3x2fNV : size 34
 gles.GlMatrixMult3x2fNV{$,Uint32,$}
 
-GlMatrixMult3x3fNV : size 32
+GlMatrixMult3x3fNV : size 34
 gles.GlMatrixMult3x3fNV{$,Uint32,$}
 
-GlMatrixMultTranspose3x3fNV : size 41
+GlMatrixMultTranspose3x3fNV : size 43
 gles.GlMatrixMultTranspose3x3fNV{$,Uint32,$}
 
-GlMemoryBarrierByRegion : size 34
+GlMemoryBarrierByRegion : size 36
 gles.GlMemoryBarrierByRegion{$,Uint32}
 
-GlMemoryBarrier : size 26
+GlMemoryBarrier : size 28
 gles.GlMemoryBarrier{$,Uint32}
 
-GlMinSampleShadingOES : size 32
+GlMinSampleShadingOES : size 34
 gles.GlMinSampleShadingOES{$,Float32}
 
-GlMinSampleShading : size 29
+GlMinSampleShading : size 31
 gles.GlMinSampleShading{$,Float32}
 
-GlMultiDrawArraysEXT : size 38
+GlMultiDrawArraysEXT : size 40
 gles.GlMultiDrawArraysEXT{$,Uint32,$,$,Int32}
 
-GlMultiDrawArraysIndirectEXT : size 44
+GlMultiDrawArraysIndirectEXT : size 46
 gles.GlMultiDrawArraysIndirectEXT{$,Uint32,$,Int32,Int32}
 
-GlMultiDrawElementsBaseVertexEXT : size 54
+GlMultiDrawElementsBaseVertexEXT : size 56
 gles.GlMultiDrawElementsBaseVertexEXT{$,Uint32,$,Uint32,$,Int32,$}
 
-GlMultiDrawElementsBaseVertexOES : size 54
+GlMultiDrawElementsBaseVertexOES : size 56
 gles.GlMultiDrawElementsBaseVertexOES{$,Uint32,$,Uint32,$,Int32,$}
 
-GlMultiDrawElementsEXT : size 41
+GlMultiDrawElementsEXT : size 43
 gles.GlMultiDrawElementsEXT{$,Uint32,$,Uint32,$,Int32}
 
-GlMultiDrawElementsIndirectEXT : size 47
+GlMultiDrawElementsIndirectEXT : size 49
 gles.GlMultiDrawElementsIndirectEXT{$,Uint32,Uint32,$,Int32,Int32}
 
-GlNamedFramebufferSampleLocationsfvNV : size 53
+GlNamedFramebufferSampleLocationsfvNV : size 55
 gles.GlNamedFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
 
-GlObjectLabelKHR : size 32
+GlObjectLabelKHR : size 34
 gles.GlObjectLabelKHR{$,Uint32,Uint32,Int32,$}
 
-GlObjectLabel : size 29
+GlObjectLabel : size 31
 gles.GlObjectLabel{$,Uint32,Uint32,Int32,$}
 
-GlObjectPtrLabelKHR : size 36
+GlObjectPtrLabelKHR : size 38
 gles.GlObjectPtrLabelKHR{$,$,Int32,$}
 
-GlObjectPtrLabel : size 33
+GlObjectPtrLabel : size 35
 gles.GlObjectPtrLabel{$,$,Int32,$}
 
-GlPatchParameteriEXT : size 32
+GlPatchParameteriEXT : size 34
 gles.GlPatchParameteriEXT{$,Uint32,Int32}
 
-GlPatchParameteriOES : size 32
+GlPatchParameteriOES : size 34
 gles.GlPatchParameteriOES{$,Uint32,Int32}
 
-GlPatchParameteri : size 29
+GlPatchParameteri : size 31
 gles.GlPatchParameteri{$,Uint32,Int32}
 
-GlPathCommandsNV : size 36
+GlPathCommandsNV : size 38
 gles.GlPathCommandsNV{$,Uint32,Int32,$,Int32,Uint32,$}
 
-GlPathCoordsNV : size 30
+GlPathCoordsNV : size 32
 gles.GlPathCoordsNV{$,Uint32,Int32,Uint32,$}
 
-GlPathCoverDepthFuncNV : size 33
+GlPathCoverDepthFuncNV : size 35
 gles.GlPathCoverDepthFuncNV{$,Uint32}
 
-GlPathDashArrayNV : size 32
+GlPathDashArrayNV : size 34
 gles.GlPathDashArrayNV{$,Uint32,Int32,$}
 
-GlPathGlyphIndexArrayNV : size 44
+GlPathGlyphIndexArrayNV : size 46
 gles.GlPathGlyphIndexArrayNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Float32,Uint32}
 
-GlPathGlyphIndexRangeNV : size 42
+GlPathGlyphIndexRangeNV : size 44
 gles.GlPathGlyphIndexRangeNV{$,Uint32,$,Uint32,Uint32,Float32,Uint32,Uint32}
 
-GlPathGlyphRangeNV : size 39
+GlPathGlyphRangeNV : size 41
 gles.GlPathGlyphRangeNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Uint32,Float32}
 
-GlPathGlyphsNV : size 38
+GlPathGlyphsNV : size 40
 gles.GlPathGlyphsNV{$,Uint32,Uint32,$,Uint32,Int32,Uint32,$,Uint32,Uint32,Float32}
 
-GlPathMemoryGlyphIndexArrayNV : size 51
+GlPathMemoryGlyphIndexArrayNV : size 53
 gles.GlPathMemoryGlyphIndexArrayNV{$,Uint32,Uint32,Int32,$,Int32,Uint32,Int32,Uint32,Float32,Uint32}
 
-GlPathParameterfNV : size 31
+GlPathParameterfNV : size 33
 gles.GlPathParameterfNV{$,Uint32,Uint32,Float32}
 
-GlPathParameterfvNV : size 34
+GlPathParameterfvNV : size 36
 gles.GlPathParameterfvNV{$,Uint32,Uint32,$}
 
-GlPathParameteriNV : size 31
+GlPathParameteriNV : size 33
 gles.GlPathParameteriNV{$,Uint32,Uint32,Int32}
 
-GlPathParameterivNV : size 34
+GlPathParameterivNV : size 36
 gles.GlPathParameterivNV{$,Uint32,Uint32,$}
 
-GlPathStencilDepthOffsetNV : size 38
+GlPathStencilDepthOffsetNV : size 40
 gles.GlPathStencilDepthOffsetNV{$,Float32,Float32}
 
-GlPathStencilFuncNV : size 32
+GlPathStencilFuncNV : size 34
 gles.GlPathStencilFuncNV{$,Uint32,Int32,Uint32}
 
-GlPathStringNV : size 30
+GlPathStringNV : size 32
 gles.GlPathStringNV{$,Uint32,Uint32,Int32,$}
 
-GlPathSubCommandsNV : size 41
+GlPathSubCommandsNV : size 43
 gles.GlPathSubCommandsNV{$,Uint32,Int32,Int32,Int32,$,Int32,Uint32,$}
 
-GlPathSubCoordsNV : size 34
+GlPathSubCoordsNV : size 36
 gles.GlPathSubCoordsNV{$,Uint32,Int32,Int32,Uint32,$}
 
-GlPauseTransformFeedback : size 34
+GlPauseTransformFeedback : size 36
 gles.GlPauseTransformFeedback{$}
 
-GlPixelStorei : size 25
+GlPixelStorei : size 27
 gles.GlPixelStorei{$,Uint32,Int32}
 
-GlPointAlongPathNV : size 45
+GlPointAlongPathNV : size 47
 gles.GlPointAlongPathNV{$,Uint32,Int32,Int32,Float32,$,$,$,$,Uint8}
 
-GlPolygonModeNV : size 27
+GlPolygonModeNV : size 29
 gles.GlPolygonModeNV{$,Uint32,Uint32}
 
-GlPolygonOffset : size 27
+GlPolygonOffset : size 29
 gles.GlPolygonOffset{$,Float32,Float32}
 
-GlPopDebugGroupKHR : size 28
+GlPopDebugGroupKHR : size 30
 gles.GlPopDebugGroupKHR{$}
 
-GlPopDebugGroup : size 25
+GlPopDebugGroup : size 27
 gles.GlPopDebugGroup{$}
 
-GlPopGroupMarkerEXT : size 29
+GlPopGroupMarkerEXT : size 31
 gles.GlPopGroupMarkerEXT{$}
 
-GlPrimitiveBoundingBoxEXT : size 43
+GlPrimitiveBoundingBoxEXT : size 45
 gles.GlPrimitiveBoundingBoxEXT{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 
-GlPrimitiveBoundingBoxOES : size 43
+GlPrimitiveBoundingBoxOES : size 45
 gles.GlPrimitiveBoundingBoxOES{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 
-GlPrimitiveBoundingBox : size 40
+GlPrimitiveBoundingBox : size 42
 gles.GlPrimitiveBoundingBox{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 
-GlProgramBinaryOES : size 34
+GlProgramBinaryOES : size 36
 gles.GlProgramBinaryOES{$,Uint32,Uint32,$,Int32}
 
-GlProgramBinary : size 31
+GlProgramBinary : size 33
 gles.GlProgramBinary{$,Uint32,Uint32,$,Int32}
 
-GlProgramParameteriEXT : size 35
+GlProgramParameteriEXT : size 37
 gles.GlProgramParameteriEXT{$,Uint32,Uint32,Int32}
 
-GlProgramParameteri : size 32
+GlProgramParameteri : size 34
 gles.GlProgramParameteri{$,Uint32,Uint32,Int32}
 
-GlProgramPathFragmentInputGenNV : size 48
+GlProgramPathFragmentInputGenNV : size 50
 gles.GlProgramPathFragmentInputGenNV{$,Uint32,Int32,Uint32,Int32,$}
 
-GlProgramUniform1fEXT : size 34
+GlProgramUniform1fEXT : size 36
 gles.GlProgramUniform1fEXT{$,Uint32,Int32,Float32}
 
-GlProgramUniform1fvEXT : size 38
+GlProgramUniform1fvEXT : size 40
 gles.GlProgramUniform1fvEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1fv : size 35
+GlProgramUniform1fv : size 37
 gles.GlProgramUniform1fv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1f : size 31
+GlProgramUniform1f : size 33
 gles.GlProgramUniform1f{$,Uint32,Int32,Float32}
 
-GlProgramUniform1iEXT : size 34
+GlProgramUniform1iEXT : size 36
 gles.GlProgramUniform1iEXT{$,Uint32,Int32,Int32}
 
-GlProgramUniform1ivEXT : size 38
+GlProgramUniform1ivEXT : size 40
 gles.GlProgramUniform1ivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1iv : size 35
+GlProgramUniform1iv : size 37
 gles.GlProgramUniform1iv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1i : size 31
+GlProgramUniform1i : size 33
 gles.GlProgramUniform1i{$,Uint32,Int32,Int32}
 
-GlProgramUniform1uiEXT : size 35
+GlProgramUniform1uiEXT : size 37
 gles.GlProgramUniform1uiEXT{$,Uint32,Int32,Uint32}
 
-GlProgramUniform1uivEXT : size 39
+GlProgramUniform1uivEXT : size 41
 gles.GlProgramUniform1uivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1uiv : size 36
+GlProgramUniform1uiv : size 38
 gles.GlProgramUniform1uiv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform1ui : size 32
+GlProgramUniform1ui : size 34
 gles.GlProgramUniform1ui{$,Uint32,Int32,Uint32}
 
-GlProgramUniform2fEXT : size 35
+GlProgramUniform2fEXT : size 37
 gles.GlProgramUniform2fEXT{$,Uint32,Int32,Float32,Float32}
 
-GlProgramUniform2fvEXT : size 38
+GlProgramUniform2fvEXT : size 40
 gles.GlProgramUniform2fvEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2fv : size 35
+GlProgramUniform2fv : size 37
 gles.GlProgramUniform2fv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2f : size 32
+GlProgramUniform2f : size 34
 gles.GlProgramUniform2f{$,Uint32,Int32,Float32,Float32}
 
-GlProgramUniform2iEXT : size 35
+GlProgramUniform2iEXT : size 37
 gles.GlProgramUniform2iEXT{$,Uint32,Int32,Int32,Int32}
 
-GlProgramUniform2ivEXT : size 38
+GlProgramUniform2ivEXT : size 40
 gles.GlProgramUniform2ivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2iv : size 35
+GlProgramUniform2iv : size 37
 gles.GlProgramUniform2iv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2i : size 32
+GlProgramUniform2i : size 34
 gles.GlProgramUniform2i{$,Uint32,Int32,Int32,Int32}
 
-GlProgramUniform2uiEXT : size 36
+GlProgramUniform2uiEXT : size 38
 gles.GlProgramUniform2uiEXT{$,Uint32,Int32,Uint32,Uint32}
 
-GlProgramUniform2uivEXT : size 39
+GlProgramUniform2uivEXT : size 41
 gles.GlProgramUniform2uivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2uiv : size 36
+GlProgramUniform2uiv : size 38
 gles.GlProgramUniform2uiv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform2ui : size 33
+GlProgramUniform2ui : size 35
 gles.GlProgramUniform2ui{$,Uint32,Int32,Uint32,Uint32}
 
-GlProgramUniform3fEXT : size 36
+GlProgramUniform3fEXT : size 38
 gles.GlProgramUniform3fEXT{$,Uint32,Int32,Float32,Float32,Float32}
 
-GlProgramUniform3fvEXT : size 38
+GlProgramUniform3fvEXT : size 40
 gles.GlProgramUniform3fvEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3fv : size 35
+GlProgramUniform3fv : size 37
 gles.GlProgramUniform3fv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3f : size 33
+GlProgramUniform3f : size 35
 gles.GlProgramUniform3f{$,Uint32,Int32,Float32,Float32,Float32}
 
-GlProgramUniform3iEXT : size 36
+GlProgramUniform3iEXT : size 38
 gles.GlProgramUniform3iEXT{$,Uint32,Int32,Int32,Int32,Int32}
 
-GlProgramUniform3ivEXT : size 38
+GlProgramUniform3ivEXT : size 40
 gles.GlProgramUniform3ivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3iv : size 35
+GlProgramUniform3iv : size 37
 gles.GlProgramUniform3iv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3i : size 33
+GlProgramUniform3i : size 35
 gles.GlProgramUniform3i{$,Uint32,Int32,Int32,Int32,Int32}
 
-GlProgramUniform3uiEXT : size 37
+GlProgramUniform3uiEXT : size 39
 gles.GlProgramUniform3uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32}
 
-GlProgramUniform3uivEXT : size 39
+GlProgramUniform3uivEXT : size 41
 gles.GlProgramUniform3uivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3uiv : size 36
+GlProgramUniform3uiv : size 38
 gles.GlProgramUniform3uiv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform3ui : size 34
+GlProgramUniform3ui : size 36
 gles.GlProgramUniform3ui{$,Uint32,Int32,Uint32,Uint32,Uint32}
 
-GlProgramUniform4fEXT : size 37
+GlProgramUniform4fEXT : size 39
 gles.GlProgramUniform4fEXT{$,Uint32,Int32,Float32,Float32,Float32,Float32}
 
-GlProgramUniform4fvEXT : size 38
+GlProgramUniform4fvEXT : size 40
 gles.GlProgramUniform4fvEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4fv : size 35
+GlProgramUniform4fv : size 37
 gles.GlProgramUniform4fv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4f : size 34
+GlProgramUniform4f : size 36
 gles.GlProgramUniform4f{$,Uint32,Int32,Float32,Float32,Float32,Float32}
 
-GlProgramUniform4iEXT : size 37
+GlProgramUniform4iEXT : size 39
 gles.GlProgramUniform4iEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32}
 
-GlProgramUniform4ivEXT : size 38
+GlProgramUniform4ivEXT : size 40
 gles.GlProgramUniform4ivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4iv : size 35
+GlProgramUniform4iv : size 37
 gles.GlProgramUniform4iv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4i : size 34
+GlProgramUniform4i : size 36
 gles.GlProgramUniform4i{$,Uint32,Int32,Int32,Int32,Int32,Int32}
 
-GlProgramUniform4uiEXT : size 38
+GlProgramUniform4uiEXT : size 40
 gles.GlProgramUniform4uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
 
-GlProgramUniform4uivEXT : size 39
+GlProgramUniform4uivEXT : size 41
 gles.GlProgramUniform4uivEXT{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4uiv : size 36
+GlProgramUniform4uiv : size 38
 gles.GlProgramUniform4uiv{$,Uint32,Int32,Int32,$}
 
-GlProgramUniform4ui : size 35
+GlProgramUniform4ui : size 37
 gles.GlProgramUniform4ui{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
 
-GlProgramUniformHandleui64NV : size 41
+GlProgramUniformHandleui64NV : size 43
 gles.GlProgramUniformHandleui64NV{$,Uint32,Int32,Uint64}
 
-GlProgramUniformHandleui64vNV : size 45
+GlProgramUniformHandleui64vNV : size 47
 gles.GlProgramUniformHandleui64vNV{$,Uint32,Int32,Int32,$}
 
-GlProgramUniformMatrix2fvEXT : size 45
+GlProgramUniformMatrix2fvEXT : size 47
 gles.GlProgramUniformMatrix2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix2fv : size 42
+GlProgramUniformMatrix2fv : size 44
 gles.GlProgramUniformMatrix2fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix2x3fvEXT : size 47
+GlProgramUniformMatrix2x3fvEXT : size 49
 gles.GlProgramUniformMatrix2x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix2x3fv : size 44
+GlProgramUniformMatrix2x3fv : size 46
 gles.GlProgramUniformMatrix2x3fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix2x4fvEXT : size 47
+GlProgramUniformMatrix2x4fvEXT : size 49
 gles.GlProgramUniformMatrix2x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix2x4fv : size 44
+GlProgramUniformMatrix2x4fv : size 46
 gles.GlProgramUniformMatrix2x4fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3fvEXT : size 45
+GlProgramUniformMatrix3fvEXT : size 47
 gles.GlProgramUniformMatrix3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3fv : size 42
+GlProgramUniformMatrix3fv : size 44
 gles.GlProgramUniformMatrix3fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3x2fvEXT : size 47
+GlProgramUniformMatrix3x2fvEXT : size 49
 gles.GlProgramUniformMatrix3x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3x2fv : size 44
+GlProgramUniformMatrix3x2fv : size 46
 gles.GlProgramUniformMatrix3x2fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3x4fvEXT : size 47
+GlProgramUniformMatrix3x4fvEXT : size 49
 gles.GlProgramUniformMatrix3x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix3x4fv : size 44
+GlProgramUniformMatrix3x4fv : size 46
 gles.GlProgramUniformMatrix3x4fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4fvEXT : size 45
+GlProgramUniformMatrix4fvEXT : size 47
 gles.GlProgramUniformMatrix4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4fv : size 42
+GlProgramUniformMatrix4fv : size 44
 gles.GlProgramUniformMatrix4fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4x2fvEXT : size 47
+GlProgramUniformMatrix4x2fvEXT : size 49
 gles.GlProgramUniformMatrix4x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4x2fv : size 44
+GlProgramUniformMatrix4x2fv : size 46
 gles.GlProgramUniformMatrix4x2fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4x3fvEXT : size 47
+GlProgramUniformMatrix4x3fvEXT : size 49
 gles.GlProgramUniformMatrix4x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 
-GlProgramUniformMatrix4x3fv : size 44
+GlProgramUniformMatrix4x3fv : size 46
 gles.GlProgramUniformMatrix4x3fv{$,Uint32,Int32,Int32,Uint8,$}
 
-GlPushDebugGroupKHR : size 35
+GlPushDebugGroupKHR : size 37
 gles.GlPushDebugGroupKHR{$,Uint32,Uint32,Int32,$}
 
-GlPushDebugGroup : size 32
+GlPushDebugGroup : size 34
 gles.GlPushDebugGroup{$,Uint32,Uint32,Int32,$}
 
-GlPushGroupMarkerEXT : size 34
+GlPushGroupMarkerEXT : size 36
 gles.GlPushGroupMarkerEXT{$,Int32,$}
 
-GlQueryCounterEXT : size 29
+GlQueryCounterEXT : size 31
 gles.GlQueryCounterEXT{$,Uint32,Uint32}
 
-GlRasterSamplesEXT : size 30
+GlRasterSamplesEXT : size 32
 gles.GlRasterSamplesEXT{$,Uint32,Uint8}
 
-GlReadBufferIndexedEXT : size 34
+GlReadBufferIndexedEXT : size 36
 gles.GlReadBufferIndexedEXT{$,Uint32,Int32}
 
-GlReadBufferNV : size 25
+GlReadBufferNV : size 27
 gles.GlReadBufferNV{$,Uint32}
 
-GlReadBuffer : size 23
+GlReadBuffer : size 25
 gles.GlReadBuffer{$,Uint32}
 
-GlReadPixels : size 31
+GlReadPixels : size 33
 gles.GlReadPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlReadnPixelsEXT : size 36
+GlReadnPixelsEXT : size 38
 gles.GlReadnPixelsEXT{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 
-GlReadnPixelsKHR : size 36
+GlReadnPixelsKHR : size 38
 gles.GlReadnPixelsKHR{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 
-GlReadnPixels : size 33
+GlReadnPixels : size 35
 gles.GlReadnPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 
-GlReleaseShaderCompiler : size 33
+GlReleaseShaderCompiler : size 35
 gles.GlReleaseShaderCompiler{$}
 
-GlRenderbufferStorageMultisampleANGLE : size 52
+GlRenderbufferStorageMultisampleANGLE : size 54
 gles.GlRenderbufferStorageMultisampleANGLE{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorageMultisampleAPPLE : size 52
+GlRenderbufferStorageMultisampleAPPLE : size 54
 gles.GlRenderbufferStorageMultisampleAPPLE{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorageMultisampleEXT : size 50
+GlRenderbufferStorageMultisampleEXT : size 52
 gles.GlRenderbufferStorageMultisampleEXT{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorageMultisampleIMG : size 50
+GlRenderbufferStorageMultisampleIMG : size 52
 gles.GlRenderbufferStorageMultisampleIMG{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorageMultisampleNV : size 49
+GlRenderbufferStorageMultisampleNV : size 51
 gles.GlRenderbufferStorageMultisampleNV{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorageMultisample : size 47
+GlRenderbufferStorageMultisample : size 49
 gles.GlRenderbufferStorageMultisample{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlRenderbufferStorage : size 35
+GlRenderbufferStorage : size 37
 gles.GlRenderbufferStorage{$,Uint32,Uint32,Int32,Int32}
 
-GlResolveDepthValuesNV : size 32
+GlResolveDepthValuesNV : size 34
 gles.GlResolveDepthValuesNV{$}
 
-GlResolveMultisampleFramebufferAPPLE : size 46
+GlResolveMultisampleFramebufferAPPLE : size 48
 gles.GlResolveMultisampleFramebufferAPPLE{$}
 
-GlResumeTransformFeedback : size 35
+GlResumeTransformFeedback : size 37
 gles.GlResumeTransformFeedback{$}
 
-GlSampleCoverage : size 28
+GlSampleCoverage : size 30
 gles.GlSampleCoverage{$,Float32,Uint8}
 
-GlSampleMaski : size 25
+GlSampleMaski : size 27
 gles.GlSampleMaski{$,Uint32,Uint32}
 
-GlSamplerParameterIivEXT : size 39
+GlSamplerParameterIivEXT : size 41
 gles.GlSamplerParameterIivEXT{$,Uint32,Uint32,$}
 
-GlSamplerParameterIivOES : size 39
+GlSamplerParameterIivOES : size 41
 gles.GlSamplerParameterIivOES{$,Uint32,Uint32,$}
 
-GlSamplerParameterIiv : size 36
+GlSamplerParameterIiv : size 38
 gles.GlSamplerParameterIiv{$,Uint32,Uint32,$}
 
-GlSamplerParameterIuivEXT : size 40
+GlSamplerParameterIuivEXT : size 42
 gles.GlSamplerParameterIuivEXT{$,Uint32,Uint32,$}
 
-GlSamplerParameterIuivOES : size 40
+GlSamplerParameterIuivOES : size 42
 gles.GlSamplerParameterIuivOES{$,Uint32,Uint32,$}
 
-GlSamplerParameterIuiv : size 37
+GlSamplerParameterIuiv : size 39
 gles.GlSamplerParameterIuiv{$,Uint32,Uint32,$}
 
-GlSamplerParameterfv : size 35
+GlSamplerParameterfv : size 37
 gles.GlSamplerParameterfv{$,Uint32,Uint32,$}
 
-GlSamplerParameterf : size 32
+GlSamplerParameterf : size 34
 gles.GlSamplerParameterf{$,Uint32,Uint32,Float32}
 
-GlSamplerParameteriv : size 35
+GlSamplerParameteriv : size 37
 gles.GlSamplerParameteriv{$,Uint32,Uint32,$}
 
-GlSamplerParameteri : size 32
+GlSamplerParameteri : size 34
 gles.GlSamplerParameteri{$,Uint32,Uint32,Int32}
 
-GlScissorArrayvNV : size 32
+GlScissorArrayvNV : size 34
 gles.GlScissorArrayvNV{$,Uint32,Int32,$}
 
-GlScissorIndexedNV : size 33
+GlScissorIndexedNV : size 35
 gles.GlScissorIndexedNV{$,Uint32,Int32,Int32,Int32,Int32}
 
-GlScissorIndexedvNV : size 33
+GlScissorIndexedvNV : size 35
 gles.GlScissorIndexedvNV{$,Uint32,$}
 
-GlScissor : size 23
+GlScissor : size 25
 gles.GlScissor{$,Int32,Int32,Int32,Int32}
 
-GlSelectPerfMonitorCountersAMD : size 47
+GlSelectPerfMonitorCountersAMD : size 49
 gles.GlSelectPerfMonitorCountersAMD{$,Uint32,Uint8,Uint32,Int32,$}
 
-GlSetFenceNV : size 24
+GlSetFenceNV : size 26
 gles.GlSetFenceNV{$,Uint32,Uint32}
 
-GlShaderBinary : size 33
+GlShaderBinary : size 35
 gles.GlShaderBinary{$,Int32,$,Uint32,$,Int32}
 
-GlShaderSource : size 32
+GlShaderSource : size 34
 gles.GlShaderSource{$,Uint32,Int32,$,$}
 
-GlStartTilingQCOM : size 32
+GlStartTilingQCOM : size 34
 gles.GlStartTilingQCOM{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlStencilFillPathInstancedNV : size 50
+GlStencilFillPathInstancedNV : size 52
 gles.GlStencilFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,$}
 
-GlStencilFillPathNV : size 32
+GlStencilFillPathNV : size 34
 gles.GlStencilFillPathNV{$,Uint32,Uint32,Uint32}
 
-GlStencilFuncSeparate : size 35
+GlStencilFuncSeparate : size 37
 gles.GlStencilFuncSeparate{$,Uint32,Uint32,Int32,Uint32}
 
-GlStencilFunc : size 26
+GlStencilFunc : size 28
 gles.GlStencilFunc{$,Uint32,Int32,Uint32}
 
-GlStencilMaskSeparate : size 33
+GlStencilMaskSeparate : size 35
 gles.GlStencilMaskSeparate{$,Uint32,Uint32}
 
-GlStencilMask : size 24
+GlStencilMask : size 26
 gles.GlStencilMask{$,Uint32}
 
-GlStencilOpSeparate : size 33
+GlStencilOpSeparate : size 35
 gles.GlStencilOpSeparate{$,Uint32,Uint32,Uint32,Uint32}
 
-GlStencilOp : size 24
+GlStencilOp : size 26
 gles.GlStencilOp{$,Uint32,Uint32,Uint32}
 
-GlStencilStrokePathInstancedNV : size 52
+GlStencilStrokePathInstancedNV : size 54
 gles.GlStencilStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,$}
 
-GlStencilStrokePathNV : size 34
+GlStencilStrokePathNV : size 36
 gles.GlStencilStrokePathNV{$,Uint32,Int32,Uint32}
 
-GlStencilThenCoverFillPathInstancedNV : size 60
+GlStencilThenCoverFillPathInstancedNV : size 62
 gles.GlStencilThenCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,Uint32,$}
 
-GlStencilThenCoverFillPathNV : size 42
+GlStencilThenCoverFillPathNV : size 44
 gles.GlStencilThenCoverFillPathNV{$,Uint32,Uint32,Uint32,Uint32}
 
-GlStencilThenCoverStrokePathInstancedNV : size 62
+GlStencilThenCoverStrokePathInstancedNV : size 64
 gles.GlStencilThenCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,Uint32,$}
 
-GlStencilThenCoverStrokePathNV : size 44
+GlStencilThenCoverStrokePathNV : size 46
 gles.GlStencilThenCoverStrokePathNV{$,Uint32,Int32,Uint32,Uint32}
 
-GlSubpixelPrecisionBiasNV : size 37
+GlSubpixelPrecisionBiasNV : size 39
 gles.GlSubpixelPrecisionBiasNV{$,Uint32,Uint32}
 
-GlTestFenceNV : size 25
+GlTestFenceNV : size 27
 gles.GlTestFenceNV{$,Uint32,Uint8}
 
-GlTexBufferEXT : size 27
+GlTexBufferEXT : size 29
 gles.GlTexBufferEXT{$,Uint32,Uint32,Uint32}
 
-GlTexBufferOES : size 27
+GlTexBufferOES : size 29
 gles.GlTexBufferOES{$,Uint32,Uint32,Uint32}
 
-GlTexBufferRangeEXT : size 34
+GlTexBufferRangeEXT : size 36
 gles.GlTexBufferRangeEXT{$,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlTexBufferRangeOES : size 34
+GlTexBufferRangeOES : size 36
 gles.GlTexBufferRangeOES{$,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlTexBufferRange : size 31
+GlTexBufferRange : size 33
 gles.GlTexBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
 
-GlTexBuffer : size 24
+GlTexBuffer : size 26
 gles.GlTexBuffer{$,Uint32,Uint32,Uint32}
 
-GlTexImage2D : size 33
+GlTexImage2D : size 35
 gles.GlTexImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTexImage3DOES : size 37
+GlTexImage3DOES : size 39
 gles.GlTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTexImage3D : size 34
+GlTexImage3D : size 36
 gles.GlTexImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTexPageCommitmentEXT : size 41
+GlTexPageCommitmentEXT : size 43
 gles.GlTexPageCommitmentEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint8}
 
-GlTexParameterIivEXT : size 35
+GlTexParameterIivEXT : size 37
 gles.GlTexParameterIivEXT{$,Uint32,Uint32,$}
 
-GlTexParameterIivOES : size 35
+GlTexParameterIivOES : size 37
 gles.GlTexParameterIivOES{$,Uint32,Uint32,$}
 
-GlTexParameterIiv : size 32
+GlTexParameterIiv : size 34
 gles.GlTexParameterIiv{$,Uint32,Uint32,$}
 
-GlTexParameterIuivEXT : size 36
+GlTexParameterIuivEXT : size 38
 gles.GlTexParameterIuivEXT{$,Uint32,Uint32,$}
 
-GlTexParameterIuivOES : size 36
+GlTexParameterIuivOES : size 38
 gles.GlTexParameterIuivOES{$,Uint32,Uint32,$}
 
-GlTexParameterIuiv : size 33
+GlTexParameterIuiv : size 35
 gles.GlTexParameterIuiv{$,Uint32,Uint32,$}
 
-GlTexParameterfv : size 31
+GlTexParameterfv : size 33
 gles.GlTexParameterfv{$,Uint32,Uint32,$}
 
-GlTexParameterf : size 28
+GlTexParameterf : size 30
 gles.GlTexParameterf{$,Uint32,Uint32,Float32}
 
-GlTexParameteriv : size 31
+GlTexParameteriv : size 33
 gles.GlTexParameteriv{$,Uint32,Uint32,$}
 
-GlTexParameteri : size 28
+GlTexParameteri : size 30
 gles.GlTexParameteri{$,Uint32,Uint32,Int32}
 
-GlTexStorage1DEXT : size 31
+GlTexStorage1DEXT : size 33
 gles.GlTexStorage1DEXT{$,Uint32,Int32,Uint32,Int32}
 
-GlTexStorage2DEXT : size 32
+GlTexStorage2DEXT : size 34
 gles.GlTexStorage2DEXT{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlTexStorage2DMultisample : size 41
+GlTexStorage2DMultisample : size 43
 gles.GlTexStorage2DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Uint8}
 
-GlTexStorage2D : size 29
+GlTexStorage2D : size 31
 gles.GlTexStorage2D{$,Uint32,Int32,Uint32,Int32,Int32}
 
-GlTexStorage3DEXT : size 33
+GlTexStorage3DEXT : size 35
 gles.GlTexStorage3DEXT{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
 
-GlTexStorage3DMultisampleOES : size 45
+GlTexStorage3DMultisampleOES : size 47
 gles.GlTexStorage3DMultisampleOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
 
-GlTexStorage3DMultisample : size 42
+GlTexStorage3DMultisample : size 44
 gles.GlTexStorage3DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
 
-GlTexStorage3D : size 30
+GlTexStorage3D : size 32
 gles.GlTexStorage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
 
-GlTexSubImage2D : size 36
+GlTexSubImage2D : size 38
 gles.GlTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTexSubImage3DOES : size 41
+GlTexSubImage3DOES : size 43
 gles.GlTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTexSubImage3D : size 38
+GlTexSubImage3D : size 40
 gles.GlTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 
-GlTextureStorage1DEXT : size 36
+GlTextureStorage1DEXT : size 38
 gles.GlTextureStorage1DEXT{$,Uint32,Uint32,Int32,Uint32,Int32}
 
-GlTextureStorage2DEXT : size 37
+GlTextureStorage2DEXT : size 39
 gles.GlTextureStorage2DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32}
 
-GlTextureStorage3DEXT : size 38
+GlTextureStorage3DEXT : size 40
 gles.GlTextureStorage3DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32,Int32}
 
-GlTextureViewEXT : size 34
+GlTextureViewEXT : size 36
 gles.GlTextureViewEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlTextureViewOES : size 34
+GlTextureViewOES : size 36
 gles.GlTextureViewOES{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlTransformFeedbackVaryings : size 43
+GlTransformFeedbackVaryings : size 45
 gles.GlTransformFeedbackVaryings{$,Uint32,Int32,$,Uint32}
 
-GlTransformPathNV : size 33
+GlTransformPathNV : size 35
 gles.GlTransformPathNV{$,Uint32,Uint32,Uint32,$}
 
-GlUniform1fv : size 27
+GlUniform1fv : size 29
 gles.GlUniform1fv{$,Int32,Int32,$}
 
-GlUniform1f : size 23
+GlUniform1f : size 25
 gles.GlUniform1f{$,Int32,Float32}
 
-GlUniform1iv : size 27
+GlUniform1iv : size 29
 gles.GlUniform1iv{$,Int32,Int32,$}
 
-GlUniform1i : size 23
+GlUniform1i : size 25
 gles.GlUniform1i{$,Int32,Int32}
 
-GlUniform1uiv : size 28
+GlUniform1uiv : size 30
 gles.GlUniform1uiv{$,Int32,Int32,$}
 
-GlUniform1ui : size 24
+GlUniform1ui : size 26
 gles.GlUniform1ui{$,Int32,Uint32}
 
-GlUniform2fv : size 27
+GlUniform2fv : size 29
 gles.GlUniform2fv{$,Int32,Int32,$}
 
-GlUniform2f : size 24
+GlUniform2f : size 26
 gles.GlUniform2f{$,Int32,Float32,Float32}
 
-GlUniform2iv : size 27
+GlUniform2iv : size 29
 gles.GlUniform2iv{$,Int32,Int32,$}
 
-GlUniform2i : size 24
+GlUniform2i : size 26
 gles.GlUniform2i{$,Int32,Int32,Int32}
 
-GlUniform2uiv : size 28
+GlUniform2uiv : size 30
 gles.GlUniform2uiv{$,Int32,Int32,$}
 
-GlUniform2ui : size 25
+GlUniform2ui : size 27
 gles.GlUniform2ui{$,Int32,Uint32,Uint32}
 
-GlUniform3fv : size 27
+GlUniform3fv : size 29
 gles.GlUniform3fv{$,Int32,Int32,$}
 
-GlUniform3f : size 25
+GlUniform3f : size 27
 gles.GlUniform3f{$,Int32,Float32,Float32,Float32}
 
-GlUniform3iv : size 27
+GlUniform3iv : size 29
 gles.GlUniform3iv{$,Int32,Int32,$}
 
-GlUniform3i : size 25
+GlUniform3i : size 27
 gles.GlUniform3i{$,Int32,Int32,Int32,Int32}
 
-GlUniform3uiv : size 28
+GlUniform3uiv : size 30
 gles.GlUniform3uiv{$,Int32,Int32,$}
 
-GlUniform3ui : size 26
+GlUniform3ui : size 28
 gles.GlUniform3ui{$,Int32,Uint32,Uint32,Uint32}
 
-GlUniform4fv : size 27
+GlUniform4fv : size 29
 gles.GlUniform4fv{$,Int32,Int32,$}
 
-GlUniform4f : size 26
+GlUniform4f : size 28
 gles.GlUniform4f{$,Int32,Float32,Float32,Float32,Float32}
 
-GlUniform4iv : size 27
+GlUniform4iv : size 29
 gles.GlUniform4iv{$,Int32,Int32,$}
 
-GlUniform4i : size 26
+GlUniform4i : size 28
 gles.GlUniform4i{$,Int32,Int32,Int32,Int32,Int32}
 
-GlUniform4uiv : size 28
+GlUniform4uiv : size 30
 gles.GlUniform4uiv{$,Int32,Int32,$}
 
-GlUniform4ui : size 27
+GlUniform4ui : size 29
 gles.GlUniform4ui{$,Int32,Uint32,Uint32,Uint32,Uint32}
 
-GlUniformBlockBinding : size 34
+GlUniformBlockBinding : size 36
 gles.GlUniformBlockBinding{$,Uint32,Uint32,Uint32}
 
-GlUniformHandleui64NV : size 33
+GlUniformHandleui64NV : size 35
 gles.GlUniformHandleui64NV{$,Int32,Uint64}
 
-GlUniformHandleui64vNV : size 37
+GlUniformHandleui64vNV : size 39
 gles.GlUniformHandleui64vNV{$,Int32,Int32,$}
 
-GlUniformMatrix2fv : size 34
+GlUniformMatrix2fv : size 36
 gles.GlUniformMatrix2fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix2x3fvNV : size 38
+GlUniformMatrix2x3fvNV : size 40
 gles.GlUniformMatrix2x3fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix2x3fv : size 36
+GlUniformMatrix2x3fv : size 38
 gles.GlUniformMatrix2x3fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix2x4fvNV : size 38
+GlUniformMatrix2x4fvNV : size 40
 gles.GlUniformMatrix2x4fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix2x4fv : size 36
+GlUniformMatrix2x4fv : size 38
 gles.GlUniformMatrix2x4fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix3fv : size 34
+GlUniformMatrix3fv : size 36
 gles.GlUniformMatrix3fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix3x2fvNV : size 38
+GlUniformMatrix3x2fvNV : size 40
 gles.GlUniformMatrix3x2fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix3x2fv : size 36
+GlUniformMatrix3x2fv : size 38
 gles.GlUniformMatrix3x2fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix3x4fvNV : size 38
+GlUniformMatrix3x4fvNV : size 40
 gles.GlUniformMatrix3x4fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix3x4fv : size 36
+GlUniformMatrix3x4fv : size 38
 gles.GlUniformMatrix3x4fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix4fv : size 34
+GlUniformMatrix4fv : size 36
 gles.GlUniformMatrix4fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix4x2fvNV : size 38
+GlUniformMatrix4x2fvNV : size 40
 gles.GlUniformMatrix4x2fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix4x2fv : size 36
+GlUniformMatrix4x2fv : size 38
 gles.GlUniformMatrix4x2fv{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix4x3fvNV : size 38
+GlUniformMatrix4x3fvNV : size 40
 gles.GlUniformMatrix4x3fvNV{$,Int32,Int32,Uint8,$}
 
-GlUniformMatrix4x3fv : size 36
+GlUniformMatrix4x3fv : size 38
 gles.GlUniformMatrix4x3fv{$,Int32,Int32,Uint8,$}
 
-GlUnmapBufferOES : size 28
+GlUnmapBufferOES : size 30
 gles.GlUnmapBufferOES{$,Uint32,Uint8}
 
-GlUnmapBuffer : size 25
+GlUnmapBuffer : size 27
 gles.GlUnmapBuffer{$,Uint32,Uint8}
 
-GlUseProgramStagesEXT : size 34
+GlUseProgramStagesEXT : size 36
 gles.GlUseProgramStagesEXT{$,Uint32,Uint32,Uint32}
 
-GlUseProgramStages : size 31
+GlUseProgramStages : size 33
 gles.GlUseProgramStages{$,Uint32,Uint32,Uint32}
 
-GlUseProgram : size 23
+GlUseProgram : size 25
 gles.GlUseProgram{$,Uint32}
 
-GlValidateProgramPipelineEXT : size 39
+GlValidateProgramPipelineEXT : size 41
 gles.GlValidateProgramPipelineEXT{$,Uint32}
 
-GlValidateProgramPipeline : size 36
+GlValidateProgramPipeline : size 38
 gles.GlValidateProgramPipeline{$,Uint32}
 
-GlValidateProgram : size 28
+GlValidateProgram : size 30
 gles.GlValidateProgram{$,Uint32}
 
-GlVertexAttrib1fv : size 31
+GlVertexAttrib1fv : size 33
 gles.GlVertexAttrib1fv{$,Uint32,$}
 
-GlVertexAttrib1f : size 28
+GlVertexAttrib1f : size 30
 gles.GlVertexAttrib1f{$,Uint32,Float32}
 
-GlVertexAttrib2fv : size 31
+GlVertexAttrib2fv : size 33
 gles.GlVertexAttrib2fv{$,Uint32,$}
 
-GlVertexAttrib2f : size 29
+GlVertexAttrib2f : size 31
 gles.GlVertexAttrib2f{$,Uint32,Float32,Float32}
 
-GlVertexAttrib3fv : size 31
+GlVertexAttrib3fv : size 33
 gles.GlVertexAttrib3fv{$,Uint32,$}
 
-GlVertexAttrib3f : size 30
+GlVertexAttrib3f : size 32
 gles.GlVertexAttrib3f{$,Uint32,Float32,Float32,Float32}
 
-GlVertexAttrib4fv : size 31
+GlVertexAttrib4fv : size 33
 gles.GlVertexAttrib4fv{$,Uint32,$}
 
-GlVertexAttrib4f : size 31
+GlVertexAttrib4f : size 33
 gles.GlVertexAttrib4f{$,Uint32,Float32,Float32,Float32,Float32}
 
-GlVertexAttribBinding : size 33
+GlVertexAttribBinding : size 35
 gles.GlVertexAttribBinding{$,Uint32,Uint32}
 
-GlVertexAttribDivisorANGLE : size 38
+GlVertexAttribDivisorANGLE : size 40
 gles.GlVertexAttribDivisorANGLE{$,Uint32,Uint32}
 
-GlVertexAttribDivisorEXT : size 36
+GlVertexAttribDivisorEXT : size 38
 gles.GlVertexAttribDivisorEXT{$,Uint32,Uint32}
 
-GlVertexAttribDivisorNV : size 35
+GlVertexAttribDivisorNV : size 37
 gles.GlVertexAttribDivisorNV{$,Uint32,Uint32}
 
-GlVertexAttribDivisor : size 33
+GlVertexAttribDivisor : size 35
 gles.GlVertexAttribDivisor{$,Uint32,Uint32}
 
-GlVertexAttribFormat : size 35
+GlVertexAttribFormat : size 37
 gles.GlVertexAttribFormat{$,Uint32,Int32,Uint32,Uint8,Uint32}
 
-GlVertexAttribI4iv : size 32
+GlVertexAttribI4iv : size 34
 gles.GlVertexAttribI4iv{$,Uint32,$}
 
-GlVertexAttribI4i : size 32
+GlVertexAttribI4i : size 34
 gles.GlVertexAttribI4i{$,Uint32,Int32,Int32,Int32,Int32}
 
-GlVertexAttribI4uiv : size 33
+GlVertexAttribI4uiv : size 35
 gles.GlVertexAttribI4uiv{$,Uint32,$}
 
-GlVertexAttribI4ui : size 33
+GlVertexAttribI4ui : size 35
 gles.GlVertexAttribI4ui{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 
-GlVertexAttribIFormat : size 35
+GlVertexAttribIFormat : size 37
 gles.GlVertexAttribIFormat{$,Uint32,Int32,Uint32,Uint32}
 
-GlVertexAttribIPointer : size 39
+GlVertexAttribIPointer : size 41
 gles.GlVertexAttribIPointer{$,Uint32,Int32,Uint32,Int32,$}
 
-GlVertexAttribPointer : size 39
+GlVertexAttribPointer : size 41
 gles.GlVertexAttribPointer{$,Uint32,Int32,Uint32,Uint8,Int32,$}
 
-GlVertexBindingDivisor : size 34
+GlVertexBindingDivisor : size 36
 gles.GlVertexBindingDivisor{$,Uint32,Uint32}
 
-GlViewportArrayvNV : size 33
+GlViewportArrayvNV : size 35
 gles.GlViewportArrayvNV{$,Uint32,Int32,$}
 
-GlViewportIndexedfNV : size 35
+GlViewportIndexedfNV : size 37
 gles.GlViewportIndexedfNV{$,Uint32,Float32,Float32,Float32,Float32}
 
-GlViewportIndexedfvNV : size 35
+GlViewportIndexedfvNV : size 37
 gles.GlViewportIndexedfvNV{$,Uint32,$}
 
-GlViewport : size 24
+GlViewport : size 26
 gles.GlViewport{$,Int32,Int32,Int32,Int32}
 
-GlWaitSyncAPPLE : size 28
+GlWaitSyncAPPLE : size 30
 gles.GlWaitSyncAPPLE{$,Uint64,Uint32,Uint64}
 
-GlWaitSync : size 23
+GlWaitSync : size 25
 gles.GlWaitSync{$,Uint64,Uint32,Uint64}
 
-GlWeightPathsNV : size 33
+GlWeightPathsNV : size 35
 gles.GlWeightPathsNV{$,Uint32,Int32,$,$}
 
-GlXCreateContext : size 39
+GlXCreateContext : size 41
 gles.GlXCreateContext{$,$,$,$,Bool,$}
 
-GlXCreateNewContext : size 43
+GlXCreateNewContext : size 45
 gles.GlXCreateNewContext{$,$,$,Uint32,$,Bool,$}
 
-GlXMakeContextCurrent : size 44
+GlXMakeContextCurrent : size 46
 gles.GlXMakeContextCurrent{$,$,$,$,$,Int64}
 
-GlXMakeCurrent : size 34
+GlXMakeCurrent : size 36
 gles.GlXMakeCurrent{$,$,$,$,Int64}
 
-GlXQueryDrawable : size 37
+GlXQueryDrawable : size 39
 gles.GlXQueryDrawable{$,$,$,Int64,$,Int64}
 
-GlXSwapBuffers : size 30
+GlXSwapBuffers : size 32
 gles.GlXSwapBuffers{$,$,$}
 
-HDC : size 14
+HDC : size 16
 gles.HDC{$}
 
-HGLRC : size 16
+HGLRC : size 18
 gles.HGLRC{$}
 
-Image : size 20
+Image : size 22
 gles.Image{Int32,Int32,$,Uint32,Uint32}
 
-IndicesPointer : size 25
+IndicesPointer : size 27
 gles.IndicesPointer{$}
 
-Intˢ : size 16
+Intˢ : size 18
 gles.Intˢ{$}
 
-Intᵖ : size 17
+Intᵖ : size 19
 gles.Intᵖ{$}
 
-Mat2f : size 18
+Mat2f : size 20
 gles.Mat2f{[2]$}
 
-Mat2fˢ : size 18
+Mat2fˢ : size 20
 gles.Mat2fˢ{$}
 
-Mat2fᵖ : size 19
+Mat2fᵖ : size 21
 gles.Mat2fᵖ{$}
 
-Mat2x3f : size 20
+Mat2x3f : size 22
 gles.Mat2x3f{[2]$}
 
-Mat2x3fˢ : size 20
+Mat2x3fˢ : size 22
 gles.Mat2x3fˢ{$}
 
-Mat2x3fᵖ : size 21
+Mat2x3fᵖ : size 23
 gles.Mat2x3fᵖ{$}
 
-Mat2x4f : size 20
+Mat2x4f : size 22
 gles.Mat2x4f{[2]$}
 
-Mat2x4fˢ : size 20
+Mat2x4fˢ : size 22
 gles.Mat2x4fˢ{$}
 
-Mat2x4fᵖ : size 21
+Mat2x4fᵖ : size 23
 gles.Mat2x4fᵖ{$}
 
-Mat3f : size 18
+Mat3f : size 20
 gles.Mat3f{[3]$}
 
-Mat3fˢ : size 18
+Mat3fˢ : size 20
 gles.Mat3fˢ{$}
 
-Mat3fᵖ : size 19
+Mat3fᵖ : size 21
 gles.Mat3fᵖ{$}
 
-Mat3x2f : size 20
+Mat3x2f : size 22
 gles.Mat3x2f{[3]$}
 
-Mat3x2fˢ : size 20
+Mat3x2fˢ : size 22
 gles.Mat3x2fˢ{$}
 
-Mat3x2fᵖ : size 21
+Mat3x2fᵖ : size 23
 gles.Mat3x2fᵖ{$}
 
-Mat3x4f : size 20
+Mat3x4f : size 22
 gles.Mat3x4f{[3]$}
 
-Mat3x4fˢ : size 20
+Mat3x4fˢ : size 22
 gles.Mat3x4fˢ{$}
 
-Mat3x4fᵖ : size 21
+Mat3x4fᵖ : size 23
 gles.Mat3x4fᵖ{$}
 
-Mat4f : size 18
+Mat4f : size 20
 gles.Mat4f{[4]$}
 
-Mat4fˢ : size 18
+Mat4fˢ : size 20
 gles.Mat4fˢ{$}
 
-Mat4fᵖ : size 19
+Mat4fᵖ : size 21
 gles.Mat4fᵖ{$}
 
-Mat4x2f : size 20
+Mat4x2f : size 22
 gles.Mat4x2f{[4]$}
 
-Mat4x2fˢ : size 20
+Mat4x2fˢ : size 22
 gles.Mat4x2fˢ{$}
 
-Mat4x2fᵖ : size 21
+Mat4x2fᵖ : size 23
 gles.Mat4x2fᵖ{$}
 
-Mat4x3f : size 20
+Mat4x3f : size 22
 gles.Mat4x3f{[4]$}
 
-Mat4x3fˢ : size 20
+Mat4x3fˢ : size 22
 gles.Mat4x3fˢ{$}
 
-Mat4x3fᵖ : size 21
+Mat4x3fᵖ : size 23
 gles.Mat4x3fᵖ{$}
 
-Objects : size 63
+Objects : size 65
 gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
 
-PipelineIdˢ : size 23
+PipelineIdˢ : size 25
 gles.PipelineIdˢ{$}
 
-PipelineIdᵖ : size 24
+PipelineIdᵖ : size 26
 gles.PipelineIdᵖ{$}
 
-PipelineIdᶜᵖ : size 27
+PipelineIdᶜᵖ : size 29
 gles.PipelineIdᶜᵖ{$}
 
-ProgramIdˢ : size 22
+ProgramIdˢ : size 24
 gles.ProgramIdˢ{$}
 
-ProgramIdᵖ : size 23
+ProgramIdᵖ : size 25
 gles.ProgramIdᵖ{$}
 
-Program : size 38
+Program : size 40
 gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
 
-QueryIdˢ : size 20
+QueryIdˢ : size 22
 gles.QueryIdˢ{$}
 
-QueryIdᵖ : size 21
+QueryIdᵖ : size 23
 gles.QueryIdᵖ{$}
 
-QueryIdᶜᵖ : size 24
+QueryIdᶜᵖ : size 26
 gles.QueryIdᶜᵖ{$}
 
-Query : size 13
+Query : size 15
 gles.Query{}
 
-RasterizerState : size 47
+RasterizerState : size 49
 gles.RasterizerState{Uint8,Uint32,Float32,Float32,Uint8,Uint8,Uint8,Uint8,map[Uint32]Uint32,$,$,Uint32,Uint32,Float32,Float32,Float32,Float32,Uint8}
 
-Rect : size 16
+Rect : size 18
 gles.Rect{Int32,Int32,Int32,Int32}
 
-RenderbufferIdˢ : size 27
+RenderbufferIdˢ : size 29
 gles.RenderbufferIdˢ{$}
 
-RenderbufferIdᵖ : size 28
+RenderbufferIdᵖ : size 30
 gles.RenderbufferIdᵖ{$}
 
-RenderbufferIdᶜᵖ : size 31
+RenderbufferIdᶜᵖ : size 33
 gles.RenderbufferIdᶜᵖ{$}
 
-Renderbuffer : size 26
+Renderbuffer : size 28
 gles.Renderbuffer{Int32,Int32,$,Uint32}
 
-ReplayBindRenderer : size 29
+ReplayBindRenderer : size 31
 gles.ReplayBindRenderer{$,Uint32}
 
-ReplayCreateRenderer : size 31
+ReplayCreateRenderer : size 33
 gles.ReplayCreateRenderer{$,Uint32}
 
-S64ˢ : size 16
+S64ˢ : size 18
 gles.S64ˢ{$}
 
-S64ᵖ : size 17
+S64ᵖ : size 19
 gles.S64ᵖ{$}
 
-SamplerIdˢ : size 22
+SamplerIdˢ : size 24
 gles.SamplerIdˢ{$}
 
-SamplerIdᵖ : size 23
+SamplerIdᵖ : size 25
 gles.SamplerIdᵖ{$}
 
-SamplerIdᶜᵖ : size 26
+SamplerIdᶜᵖ : size 28
 gles.SamplerIdᶜᵖ{$}
 
-ShaderIdˢ : size 21
+ShaderIdˢ : size 23
 gles.ShaderIdˢ{$}
 
-ShaderIdᵖ : size 22
+ShaderIdᵖ : size 24
 gles.ShaderIdᵖ{$}
 
-ShaderIdᶜᵖ : size 25
+ShaderIdᶜᵖ : size 27
 gles.ShaderIdᶜᵖ{$}
 
-Shader : size 24
+Shader : size 26
 gles.Shader{$,Bool,Bool,$,String,Uint32}
 
-SliceInfo : size 22
+SliceInfo : size 24
 gles.SliceInfo{$,Uint64,Uint64}
 
-StartTimer : size 21
+StartTimer : size 23
 gles.StartTimer{$,Uint8}
 
-State : size 53
+State : size 55
 gles.State{Uint32,Uint64,map[Uint64]*$,map[$]*$,map[$]*$,map[$]*$,map[$]*$}
 
-StopTimer : size 21
+StopTimer : size 23
 gles.StopTimer{$,Uint8,Uint64}
 
-SwitchThread : size 23
+SwitchThread : size 25
 gles.SwitchThread{$,Uint64}
 
-TextureIdˢ : size 22
+TextureIdˢ : size 24
 gles.TextureIdˢ{$}
 
-TextureIdᵖ : size 23
+TextureIdᵖ : size 25
 gles.TextureIdᵖ{$}
 
-TextureIdᶜᵖ : size 26
+TextureIdᶜᵖ : size 28
 gles.TextureIdᶜᵖ{$}
 
-TexturePointer : size 25
+TexturePointer : size 27
 gles.TexturePointer{$}
 
-TextureUnit : size 22
+TextureUnit : size 24
 gles.TextureUnit{map[Uint32]Uint32}
 
-Texture : size 37
+Texture : size 39
 gles.Texture{Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
 
-TransformFeedbackIdˢ : size 32
+TransformFeedbackIdˢ : size 34
 gles.TransformFeedbackIdˢ{$}
 
-TransformFeedbackIdᵖ : size 33
+TransformFeedbackIdᵖ : size 35
 gles.TransformFeedbackIdᵖ{$}
 
-TransformFeedbackIdᶜᵖ : size 36
+TransformFeedbackIdᶜᵖ : size 38
 gles.TransformFeedbackIdᶜᵖ{$}
 
-U16ˢ : size 16
+U16ˢ : size 18
 gles.U16ˢ{$}
 
-U16ᵖ : size 17
+U16ᵖ : size 19
 gles.U16ᵖ{$}
 
-U32ˢ : size 16
+U32ˢ : size 18
 gles.U32ˢ{$}
 
-U32ᵖ : size 17
+U32ᵖ : size 19
 gles.U32ᵖ{$}
 
-U64ˢ : size 16
+U64ˢ : size 18
 gles.U64ˢ{$}
 
-U64ᵖ : size 17
+U64ᵖ : size 19
 gles.U64ᵖ{$}
 
-U8ˢ : size 15
+U8ˢ : size 17
 gles.U8ˢ{$}
 
-U8ᵖ : size 16
+U8ᵖ : size 18
 gles.U8ᵖ{$}
 
-UniformIndexˢ : size 25
+UniformIndexˢ : size 27
 gles.UniformIndexˢ{$}
 
-UniformIndexᵖ : size 26
+UniformIndexᵖ : size 28
 gles.UniformIndexᵖ{$}
 
-UniformIndexᶜᵖ : size 29
+UniformIndexᶜᵖ : size 31
 gles.UniformIndexᶜᵖ{$}
 
-Uniform : size 20
+Uniform : size 22
 gles.Uniform{String,Uint32,$}
 
-Vec2f : size 16
+Vec2f : size 18
 gles.Vec2f{[2]Float32}
 
-Vec2fː2ᵃ : size 24
+Vec2fː2ᵃ : size 26
 gles.Vec2fː2ᵃ{[2]$}
 
-Vec2fː3ᵃ : size 24
+Vec2fː3ᵃ : size 26
 gles.Vec2fː3ᵃ{[3]$}
 
-Vec2fː4ᵃ : size 24
+Vec2fː4ᵃ : size 26
 gles.Vec2fː4ᵃ{[4]$}
 
-Vec2fˢ : size 18
+Vec2fˢ : size 20
 gles.Vec2fˢ{$}
 
-Vec2fᵖ : size 19
+Vec2fᵖ : size 21
 gles.Vec2fᵖ{$}
 
-Vec2i : size 16
+Vec2i : size 18
 gles.Vec2i{[2]Int32}
 
-Vec2iˢ : size 18
+Vec2iˢ : size 20
 gles.Vec2iˢ{$}
 
-Vec2iᵖ : size 19
+Vec2iᵖ : size 21
 gles.Vec2iᵖ{$}
 
-Vec2u : size 16
+Vec2u : size 18
 gles.Vec2u{[2]Uint32}
 
-Vec2uˢ : size 18
+Vec2uˢ : size 20
 gles.Vec2uˢ{$}
 
-Vec2uᵖ : size 19
+Vec2uᵖ : size 21
 gles.Vec2uᵖ{$}
 
-Vec3f : size 16
+Vec3f : size 18
 gles.Vec3f{[3]Float32}
 
-Vec3fː2ᵃ : size 24
+Vec3fː2ᵃ : size 26
 gles.Vec3fː2ᵃ{[2]$}
 
-Vec3fː3ᵃ : size 24
+Vec3fː3ᵃ : size 26
 gles.Vec3fː3ᵃ{[3]$}
 
-Vec3fː4ᵃ : size 24
+Vec3fː4ᵃ : size 26
 gles.Vec3fː4ᵃ{[4]$}
 
-Vec3fˢ : size 18
+Vec3fˢ : size 20
 gles.Vec3fˢ{$}
 
-Vec3fᵖ : size 19
+Vec3fᵖ : size 21
 gles.Vec3fᵖ{$}
 
-Vec3i : size 16
+Vec3i : size 18
 gles.Vec3i{[3]Int32}
 
-Vec3iˢ : size 18
+Vec3iˢ : size 20
 gles.Vec3iˢ{$}
 
-Vec3iᵖ : size 19
+Vec3iᵖ : size 21
 gles.Vec3iᵖ{$}
 
-Vec3u : size 16
+Vec3u : size 18
 gles.Vec3u{[3]Uint32}
 
-Vec3uˢ : size 18
+Vec3uˢ : size 20
 gles.Vec3uˢ{$}
 
-Vec3uᵖ : size 19
+Vec3uᵖ : size 21
 gles.Vec3uᵖ{$}
 
-Vec4f : size 16
+Vec4f : size 18
 gles.Vec4f{[4]Float32}
 
-Vec4fː2ᵃ : size 24
+Vec4fː2ᵃ : size 26
 gles.Vec4fː2ᵃ{[2]$}
 
-Vec4fː3ᵃ : size 24
+Vec4fː3ᵃ : size 26
 gles.Vec4fː3ᵃ{[3]$}
 
-Vec4fː4ᵃ : size 24
+Vec4fː4ᵃ : size 26
 gles.Vec4fː4ᵃ{[4]$}
 
-Vec4fˢ : size 18
+Vec4fˢ : size 20
 gles.Vec4fˢ{$}
 
-Vec4fᵖ : size 19
+Vec4fᵖ : size 21
 gles.Vec4fᵖ{$}
 
-Vec4i : size 16
+Vec4i : size 18
 gles.Vec4i{[4]Int32}
 
-Vec4iˢ : size 18
+Vec4iˢ : size 20
 gles.Vec4iˢ{$}
 
-Vec4iᵖ : size 19
+Vec4iᵖ : size 21
 gles.Vec4iᵖ{$}
 
-Vec4u : size 16
+Vec4u : size 18
 gles.Vec4u{[4]Uint32}
 
-Vec4uˢ : size 18
+Vec4uˢ : size 20
 gles.Vec4uˢ{$}
 
-Vec4uᵖ : size 19
+Vec4uᵖ : size 21
 gles.Vec4uᵖ{$}
 
-VertexArrayIdˢ : size 26
+VertexArrayIdˢ : size 28
 gles.VertexArrayIdˢ{$}
 
-VertexArrayIdᵖ : size 27
+VertexArrayIdᵖ : size 29
 gles.VertexArrayIdᵖ{$}
 
-VertexArrayIdᶜᵖ : size 30
+VertexArrayIdᶜᵖ : size 32
 gles.VertexArrayIdᶜᵖ{$}
 
-VertexArray : size 31
+VertexArray : size 33
 gles.VertexArray{map[Uint32]*$,map[Uint32]*$}
 
-VertexAttributeArray : size 39
+VertexAttributeArray : size 41
 gles.VertexAttributeArray{Bool,Int32,Uint32,Uint8,Int32,$,Uint32,Bool,Uint32}
 
-VertexAttributeValue : size 31
+VertexAttributeValue : size 33
 gles.VertexAttributeValue{$}
 
-VertexAttribute : size 28
+VertexAttribute : size 30
 gles.VertexAttribute{$,Int32,Uint32}
 
-VertexBufferBinding : size 31
+VertexBufferBinding : size 33
 gles.VertexBufferBinding{Uint32,Int32,Int32,Uint32}
 
-VertexPointer : size 24
+VertexPointer : size 26
 gles.VertexPointer{$}
 
-Voidˢ : size 17
+Voidˢ : size 19
 gles.Voidˢ{$}
 
-Voidᵖ : size 18
+Voidᵖ : size 20
 gles.Voidᵖ{$}
 
-Voidᵖˢ : size 20
+Voidᵖˢ : size 22
 gles.Voidᵖˢ{$}
 
-Voidᵖᵖ : size 21
+Voidᵖᵖ : size 23
 gles.Voidᵖᵖ{$}
 
-Voidᶜᵖ : size 21
+Voidᶜᵖ : size 23
 gles.Voidᶜᵖ{$}
 
-Voidᶜᵖˢ : size 23
+Voidᶜᵖˢ : size 25
 gles.Voidᶜᵖˢ{$}
 
-Voidᶜᵖᵖ : size 24
+Voidᶜᵖᵖ : size 26
 gles.Voidᶜᵖᵖ{$}
 
-Voidᶜᵖᶜᵖ : size 27
+Voidᶜᵖᶜᵖ : size 29
 gles.Voidᶜᵖᶜᵖ{$}
 
-WglCreateContextAttribsARB : size 48
+WglCreateContextAttribsARB : size 50
 gles.WglCreateContextAttribsARB{$,$,$,$,$}
 
-WglCreateContext : size 32
+WglCreateContext : size 34
 gles.WglCreateContext{$,$,$}
 
-WglMakeCurrent : size 31
+WglMakeCurrent : size 33
 gles.WglMakeCurrent{$,$,$,Int64}
 
-WglSwapBuffers : size 27
+WglSwapBuffers : size 29
 gles.WglSwapBuffers{$,$}
 
-directCall : size 19
+directCall : size 21
 gles.directCall{?}
 
-generate_types : size 28
+generate_types : size 30
 gles.generate_types{$,$}
 
-Image : size 19
+Image : size 21
 image.Image{?,Uint32,Uint32,[]Uint8}
 
-Info : size 20
+Info : size 22
 image.Info{?,Uint32,Uint32,*$}
 
-LazyConverter : size 30
+LazyConverter : size 32
 image.LazyConverter{[20]Uint8,Uint32,Uint32,?,?,Int32}
 
-LazyResizer : size 28
+LazyResizer : size 30
 image.LazyResizer{[20]Uint8,?,Uint32,Uint32,Uint32,Uint32}
 
-fmtATC_RGBA_EXPLICIT_ALPHA_AMD : size 39
+fmtATC_RGBA_EXPLICIT_ALPHA_AMD : size 41
 image.fmtATC_RGBA_EXPLICIT_ALPHA_AMD{}
 
-fmtATC_RGB_AMD : size 23
+fmtATC_RGB_AMD : size 25
 image.fmtATC_RGB_AMD{}
 
-fmtAlpha : size 17
+fmtAlpha : size 19
 image.fmtAlpha{}
 
-fmtETC1_RGB8_OES : size 25
+fmtETC1_RGB8_OES : size 27
 image.fmtETC1_RGB8_OES{}
 
-fmtFloat32 : size 19
+fmtFloat32 : size 21
 image.fmtFloat32{}
 
-fmtLuminanceAlpha : size 26
+fmtLuminanceAlpha : size 28
 image.fmtLuminanceAlpha{}
 
-fmtLuminance : size 21
+fmtLuminance : size 23
 image.fmtLuminance{}
 
-fmtPNG : size 15
+fmtPNG : size 17
 image.fmtPNG{}
 
-fmtRGB565 : size 18
+fmtRGB565 : size 20
 image.fmtRGB565{}
 
-fmtRGBAF32 : size 19
+fmtRGBAF32 : size 21
 image.fmtRGBAF32{}
 
-fmtRGBA : size 16
+fmtRGBA : size 18
 image.fmtRGBA{}
 
-fmtRGB : size 15
+fmtRGB : size 17
 image.fmtRGB{}
 
-Pointer : size 19
+Pointer : size 21
 memory.Pointer{Uint64,Uint32}
 
-Range : size 17
+Range : size 19
 memory.Range{Uint64,Uint64}
 
-msgCloseChannel : size 31
+msgCloseChannel : size 33
 multiplexer.msgCloseChannel{Uint32}
 
-msgData : size 25
+msgData : size 27
 multiplexer.msgData{Uint32,[]Uint8}
 
-msgOpenChannel : size 30
+msgOpenChannel : size 32
 multiplexer.msgOpenChannel{Uint32}
 
-ArrayIndex : size 20
+ArrayIndex : size 22
 path.ArrayIndex{?,Uint64}
 
-As : size 12
+As : size 14
 path.As{?,~}
 
-Atoms : size 16
+Atoms : size 18
 path.Atoms{*$}
 
-Atom : size 16
+Atom : size 18
 path.Atom{*$,Uint64}
 
-Blob : size 15
+Blob : size 17
 path.Blob{[20]Uint8}
 
-Capture : size 18
+Capture : size 20
 path.Capture{[20]Uint8}
 
-Device : size 17
+Device : size 19
 path.Device{[20]Uint8}
 
-Field : size 15
+Field : size 17
 path.Field{?,String}
 
-Hierarchy : size 20
+Hierarchy : size 22
 path.Hierarchy{*$}
 
-ImageInfo : size 20
+ImageInfo : size 22
 path.ImageInfo{[20]Uint8}
 
-MapIndex : size 18
+MapIndex : size 20
 path.MapIndex{?,~}
 
-MemoryRange : size 25
+MemoryRange : size 27
 path.MemoryRange{*$,Uint64,Uint64,Uint64}
 
-Report : size 20
+Report : size 22
 path.Report{*$,*$}
 
-Resources : size 20
+Resources : size 22
 path.Resources{*$}
 
-Resource : size 22
+Resource : size 24
 path.Resource{[20]Uint8,*$}
 
-Slice : size 16
+Slice : size 18
 path.Slice{?,Uint64,Uint64}
 
-State : size 16
+State : size 18
 path.State{*$}
 
-Thumbnail : size 21
+Thumbnail : size 23
 path.Thumbnail{?,Uint32,Uint32,~}
 
-TimingInfo : size 21
+TimingInfo : size 23
 path.TimingInfo{[20]Uint8}
 
-Payload : size 29
+Payload : size 31
 protocol.Payload{Uint32,Uint32,[]Uint8,[]$,[]Uint8}
 
-ResourceInfo : size 26
+ResourceInfo : size 28
 protocol.ResourceInfo{String,Uint32}
 
-Error : size 13
+Error : size 15
 rpc.Error{String}
 
-delay : size 13
+delay : size 15
 rpc.delay{String}
 
-request : size 15
+request : size 17
 rpc.request{String}
 
-response : size 16
+response : size 18
 rpc.response{String}
 
-AtomRangeTimer : size 28
+AtomRangeTimer : size 30
 service.AtomRangeTimer{Uint64,Uint64,Uint64}
 
-AtomTimer : size 22
+AtomTimer : size 24
 service.AtomTimer{Uint64,Uint64}
 
-Capture : size 26
+Capture : size 28
 service.Capture{String,[20]Uint8,[][20]Uint8}
 
-Device : size 27
+Device : size 29
 service.Device{String,String,String,Uint8,Uint8,Uint64,String,String,String,String}
 
-MemoryInfo : size 32
+MemoryInfo : size 34
 service.MemoryInfo{[]Uint8,[]$,[]$,[]$}
 
-RenderSettings : size 28
+RenderSettings : size 30
 service.RenderSettings{Uint32,Uint32,Int32}
 
-ReportItem : size 24
+ReportItem : size 26
 service.ReportItem{Int32,String,Uint64}
 
-Report : size 21
+Report : size 23
 service.Report{[]$}
 
-ResourceInfo : size 29
+ResourceInfo : size 31
 service.ResourceInfo{[20]Uint8,String,[]Uint64}
 
-Resources : size 36
+Resources : size 38
 service.Resources{[]$,[]$,[]$,[]$}
 
-TimingInfo : size 33
+TimingInfo : size 35
 service.TimingInfo{[]$,[]$,[]$}
 
-callFollow : size 22
+callFollow : size 24
 service.callFollow{?}
 
-callGetCaptures : size 26
+callGetCaptures : size 28
 service.callGetCaptures{}
 
-callGetDevices : size 25
+callGetDevices : size 27
 service.callGetDevices{}
 
-callGetFramebufferColor : size 42
+callGetFramebufferColor : size 44
 service.callGetFramebufferColor{*$,*$,$}
 
-callGetFramebufferDepth : size 40
+callGetFramebufferDepth : size 42
 service.callGetFramebufferDepth{*$,*$}
 
-callGetSchema : size 24
+callGetSchema : size 26
 service.callGetSchema{}
 
-callGetTimingInfo : size 35
+callGetTimingInfo : size 37
 service.callGetTimingInfo{*$,*$,Int32}
 
-callGet : size 19
+callGet : size 21
 service.callGet{?}
 
-callImportCapture : size 31
+callImportCapture : size 33
 service.callImportCapture{String,[]Uint8}
 
-callLoadCapture : size 27
+callLoadCapture : size 29
 service.callLoadCapture{String}
 
-callSet : size 20
+callSet : size 22
 service.callSet{?,~}
 
-resultFollow : size 24
+resultFollow : size 26
 service.resultFollow{?}
 
-resultGetCaptures : size 32
+resultGetCaptures : size 34
 service.resultGetCaptures{[]*$}
 
-resultGetDevices : size 31
+resultGetDevices : size 33
 service.resultGetDevices{[]*$}
 
-resultGetFramebufferColor : size 40
+resultGetFramebufferColor : size 42
 service.resultGetFramebufferColor{*$}
 
-resultGetFramebufferDepth : size 40
+resultGetFramebufferDepth : size 42
 service.resultGetFramebufferDepth{*$}
 
-resultGetSchema : size 29
+resultGetSchema : size 31
 service.resultGetSchema{$}
 
-resultGetTimingInfo : size 34
+resultGetTimingInfo : size 36
 service.resultGetTimingInfo{*$}
 
-resultGet : size 21
+resultGet : size 23
 service.resultGet{~}
 
-resultImportCapture : size 33
+resultImportCapture : size 35
 service.resultImportCapture{*$}
 
-resultLoadCapture : size 31
+resultLoadCapture : size 33
 service.resultLoadCapture{*$}
 
-resultSet : size 21
+resultSet : size 23
 service.resultSet{?}
 
-AtomA : size 15
+AtomA : size 17
 test.AtomA{Uint64,Uint32}
 
-AtomB : size 15
+AtomB : size 17
 test.AtomB{Uint64,Bool}
 
-AtomC : size 14
+AtomC : size 16
 test.AtomC{String}
 
-Boolˢ : size 17
+Boolˢ : size 19
 test.Boolˢ{$}
 
-Boolᵖ : size 18
+Boolᵖ : size 20
 test.Boolᵖ{$}
 
-Charˢ : size 17
+Charˢ : size 19
 test.Charˢ{$}
 
-Charᵖ : size 18
+Charᵖ : size 20
 test.Charᵖ{$}
 
-Charᵖˢ : size 20
+Charᵖˢ : size 22
 test.Charᵖˢ{$}
 
-Charᵖᵖ : size 21
+Charᵖᵖ : size 23
 test.Charᵖᵖ{$}
 
-CmdBool : size 18
+CmdBool : size 20
 test.CmdBool{$,Bool}
 
-CmdCharptrToString : size 31
+CmdCharptrToString : size 33
 test.CmdCharptrToString{$,$}
 
-CmdCharsliceToString : size 34
+CmdCharsliceToString : size 36
 test.CmdCharsliceToString{$,$,Uint32}
 
-CmdClone : size 22
+CmdClone : size 24
 test.CmdClone{$,$,Uint32}
 
-CmdCopy : size 21
+CmdCopy : size 23
 test.CmdCopy{$,$,Uint32}
 
-CmdF32 : size 17
+CmdF32 : size 19
 test.CmdF32{$,Float32}
 
-CmdF64 : size 17
+CmdF64 : size 19
 test.CmdF64{$,Float64}
 
-CmdMake : size 18
+CmdMake : size 20
 test.CmdMake{$,Uint32}
 
-CmdPointer : size 23
+CmdPointer : size 25
 test.CmdPointer{$,$}
 
-CmdRemapped : size 22
+CmdRemapped : size 24
 test.CmdRemapped{$,Uint32}
 
-CmdS16 : size 17
+CmdS16 : size 19
 test.CmdS16{$,Int16}
 
-CmdS32 : size 17
+CmdS32 : size 19
 test.CmdS32{$,Int32}
 
-CmdS64 : size 17
+CmdS64 : size 19
 test.CmdS64{$,Int64}
 
-CmdS8 : size 16
+CmdS8 : size 18
 test.CmdS8{$,Int8}
 
-CmdSliceCasts : size 27
+CmdSliceCasts : size 29
 test.CmdSliceCasts{$,$,Uint32}
 
-CmdString : size 20
+CmdString : size 22
 test.CmdString{$,String}
 
-CmdU16 : size 17
+CmdU16 : size 19
 test.CmdU16{$,Uint16}
 
-CmdU32 : size 17
+CmdU32 : size 19
 test.CmdU32{$,Uint32}
 
-CmdU64 : size 17
+CmdU64 : size 19
 test.CmdU64{$,Uint64}
 
-CmdU8 : size 16
+CmdU8 : size 18
 test.CmdU8{$,Uint8}
 
-CmdUnknownRet : size 24
+CmdUnknownRet : size 26
 test.CmdUnknownRet{$,Int64}
 
-CmdUnknownWritePtr : size 31
+CmdUnknownWritePtr : size 33
 test.CmdUnknownWritePtr{$,$}
 
-CmdUnknownWriteSlice : size 33
+CmdUnknownWriteSlice : size 35
 test.CmdUnknownWriteSlice{$,$}
 
-CmdVoid3InArrays : size 35
+CmdVoid3InArrays : size 37
 test.CmdVoid3InArrays{$,$,$,$}
 
-CmdVoid3Remapped : size 29
+CmdVoid3Remapped : size 31
 test.CmdVoid3Remapped{$,Uint32,Uint32,Uint32}
 
-CmdVoid3Strings : size 28
+CmdVoid3Strings : size 30
 test.CmdVoid3Strings{$,String,String,String}
 
-CmdVoidBool : size 22
+CmdVoidBool : size 24
 test.CmdVoidBool{$,Bool}
 
-CmdVoidF32 : size 21
+CmdVoidF32 : size 23
 test.CmdVoidF32{$,Float32}
 
-CmdVoidF64 : size 21
+CmdVoidF64 : size 23
 test.CmdVoidF64{$,Float64}
 
-CmdVoidInArrayOfPointers : size 38
+CmdVoidInArrayOfPointers : size 40
 test.CmdVoidInArrayOfPointers{$,$,Int32}
 
-CmdVoidInArrayOfRemapped : size 37
+CmdVoidInArrayOfRemapped : size 39
 test.CmdVoidInArrayOfRemapped{$,$}
 
-CmdVoidOutArrayOfRemapped : size 38
+CmdVoidOutArrayOfRemapped : size 40
 test.CmdVoidOutArrayOfRemapped{$,$}
 
-CmdVoidOutArrayOfUnknownRemapped : size 45
+CmdVoidOutArrayOfUnknownRemapped : size 47
 test.CmdVoidOutArrayOfUnknownRemapped{$,$}
 
-CmdVoidReadBool : size 28
+CmdVoidReadBool : size 30
 test.CmdVoidReadBool{$,$}
 
-CmdVoidReadF32 : size 27
+CmdVoidReadF32 : size 29
 test.CmdVoidReadF32{$,$}
 
-CmdVoidReadF64 : size 27
+CmdVoidReadF64 : size 29
 test.CmdVoidReadF64{$,$}
 
-CmdVoidReadPtrs : size 34
+CmdVoidReadPtrs : size 36
 test.CmdVoidReadPtrs{$,$,$,$}
 
-CmdVoidReadS16 : size 27
+CmdVoidReadS16 : size 29
 test.CmdVoidReadS16{$,$}
 
-CmdVoidReadS32 : size 27
+CmdVoidReadS32 : size 29
 test.CmdVoidReadS32{$,$}
 
-CmdVoidReadS64 : size 27
+CmdVoidReadS64 : size 29
 test.CmdVoidReadS64{$,$}
 
-CmdVoidReadS8 : size 26
+CmdVoidReadS8 : size 28
 test.CmdVoidReadS8{$,$}
 
-CmdVoidReadU16 : size 27
+CmdVoidReadU16 : size 29
 test.CmdVoidReadU16{$,$}
 
-CmdVoidReadU32 : size 27
+CmdVoidReadU32 : size 29
 test.CmdVoidReadU32{$,$}
 
-CmdVoidReadU64 : size 27
+CmdVoidReadU64 : size 29
 test.CmdVoidReadU64{$,$}
 
-CmdVoidReadU8 : size 26
+CmdVoidReadU8 : size 28
 test.CmdVoidReadU8{$,$}
 
-CmdVoidS16 : size 21
+CmdVoidS16 : size 23
 test.CmdVoidS16{$,Int16}
 
-CmdVoidS32 : size 21
+CmdVoidS32 : size 23
 test.CmdVoidS32{$,Int32}
 
-CmdVoidS64 : size 21
+CmdVoidS64 : size 23
 test.CmdVoidS64{$,Int64}
 
-CmdVoidS8 : size 20
+CmdVoidS8 : size 22
 test.CmdVoidS8{$,Int8}
 
-CmdVoidString : size 24
+CmdVoidString : size 26
 test.CmdVoidString{$,String}
 
-CmdVoidU16 : size 21
+CmdVoidU16 : size 23
 test.CmdVoidU16{$,Uint16}
 
-CmdVoidU32 : size 21
+CmdVoidU32 : size 23
 test.CmdVoidU32{$,Uint32}
 
-CmdVoidU64 : size 21
+CmdVoidU64 : size 23
 test.CmdVoidU64{$,Uint64}
 
-CmdVoidU8 : size 20
+CmdVoidU8 : size 22
 test.CmdVoidU8{$,Uint8}
 
-CmdVoidWriteBool : size 29
+CmdVoidWriteBool : size 31
 test.CmdVoidWriteBool{$,$}
 
-CmdVoidWriteF32 : size 28
+CmdVoidWriteF32 : size 30
 test.CmdVoidWriteF32{$,$}
 
-CmdVoidWriteF64 : size 28
+CmdVoidWriteF64 : size 30
 test.CmdVoidWriteF64{$,$}
 
-CmdVoidWritePtrs : size 35
+CmdVoidWritePtrs : size 37
 test.CmdVoidWritePtrs{$,$,$,$}
 
-CmdVoidWriteS16 : size 28
+CmdVoidWriteS16 : size 30
 test.CmdVoidWriteS16{$,$}
 
-CmdVoidWriteS32 : size 28
+CmdVoidWriteS32 : size 30
 test.CmdVoidWriteS32{$,$}
 
-CmdVoidWriteS64 : size 28
+CmdVoidWriteS64 : size 30
 test.CmdVoidWriteS64{$,$}
 
-CmdVoidWriteS8 : size 27
+CmdVoidWriteS8 : size 29
 test.CmdVoidWriteS8{$,$}
 
-CmdVoidWriteU16 : size 28
+CmdVoidWriteU16 : size 30
 test.CmdVoidWriteU16{$,$}
 
-CmdVoidWriteU32 : size 28
+CmdVoidWriteU32 : size 30
 test.CmdVoidWriteU32{$,$}
 
-CmdVoidWriteU64 : size 28
+CmdVoidWriteU64 : size 30
 test.CmdVoidWriteU64{$,$}
 
-CmdVoidWriteU8 : size 27
+CmdVoidWriteU8 : size 29
 test.CmdVoidWriteU8{$,$}
 
-CmdVoid : size 17
+CmdVoid : size 19
 test.CmdVoid{$}
 
-F32ˢ : size 16
+F32ˢ : size 18
 test.F32ˢ{$}
 
-F32ᵖ : size 17
+F32ᵖ : size 19
 test.F32ᵖ{$}
 
-F64ˢ : size 16
+F64ˢ : size 18
 test.F64ˢ{$}
 
-F64ᵖ : size 17
+F64ᵖ : size 19
 test.F64ᵖ{$}
 
-Imported : size 17
+Imported : size 19
 test.Imported{Uint32}
 
-Included : size 17
+Included : size 19
 test.Included{String}
 
-Intˢ : size 16
+Intˢ : size 18
 test.Intˢ{$}
 
-Intᵖ : size 17
+Intᵖ : size 19
 test.Intᵖ{$}
 
-ListNode : size 21
+ListNode : size 23
 test.ListNode{String,*$}
 
-Remappedˢ : size 21
+Remappedˢ : size 23
 test.Remappedˢ{$}
 
-Remappedᵖ : size 22
+Remappedᵖ : size 24
 test.Remappedᵖ{$}
 
-Resource : size 19
+Resource : size 21
 test.Resource{Uint32,Float32,String}
 
-S16ˢ : size 16
+S16ˢ : size 18
 test.S16ˢ{$}
 
-S16ᵖ : size 17
+S16ᵖ : size 19
 test.S16ᵖ{$}
 
-S32ˢ : size 16
+S32ˢ : size 18
 test.S32ˢ{$}
 
-S32ᵖ : size 17
+S32ᵖ : size 19
 test.S32ᵖ{$}
 
-S64ˢ : size 16
+S64ˢ : size 18
 test.S64ˢ{$}
 
-S64ᵖ : size 17
+S64ᵖ : size 19
 test.S64ᵖ{$}
 
-S8ˢ : size 15
+S8ˢ : size 17
 test.S8ˢ{$}
 
-S8ᵖ : size 16
+S8ᵖ : size 18
 test.S8ᵖ{$}
 
-SliceInfo : size 22
+SliceInfo : size 24
 test.SliceInfo{$,Uint64,Uint64}
 
-State : size 26
+State : size 28
 test.State{$,$,$,$,String}
 
-Struct : size 17
+Struct : size 19
 test.Struct{String,Uint32,Int32}
 
-Tester : size 20
+Tester : size 22
 test.Tester{$,$}
 
-TypeA : size 14
+TypeA : size 16
 test.TypeA{String}
 
-TypeB : size 14
+TypeB : size 16
 test.TypeB{String}
 
-U16ˢ : size 16
+U16ˢ : size 18
 test.U16ˢ{$}
 
-U16ᵖ : size 17
+U16ᵖ : size 19
 test.U16ᵖ{$}
 
-U32ˢ : size 16
+U32ˢ : size 18
 test.U32ˢ{$}
 
-U32ᵖ : size 17
+U32ᵖ : size 19
 test.U32ᵖ{$}
 
-U64ˢ : size 16
+U64ˢ : size 18
 test.U64ˢ{$}
 
-U64ᵖ : size 17
+U64ᵖ : size 19
 test.U64ᵖ{$}
 
-U8ˢ : size 15
+U8ˢ : size 17
 test.U8ˢ{$}
 
-U8ᵖ : size 16
+U8ᵖ : size 18
 test.U8ᵖ{$}
 
-Voidˢ : size 17
+Voidˢ : size 19
 test.Voidˢ{$}
 
-Voidᵖ : size 18
+Voidᵖ : size 20
 test.Voidᵖ{$}
 
-X : size 12
+X : size 14
 test.X{Int32,Int32,String}
 
-Y : size 14
+Y : size 16
 test.Y{String,$,String}
 
-callAdd : size 17
+callAdd : size 19
 test.callAdd{Uint32,Uint32}
 
-callEnumToString : size 25
+callEnumToString : size 27
 test.callEnumToString{Int32}
 
-callGetListNodeChainArray : size 33
+callGetListNodeChainArray : size 35
 test.callGetListNodeChainArray{}
 
-callGetListNodeChain : size 28
+callGetListNodeChain : size 30
 test.callGetListNodeChain{}
 
-callGetResource : size 23
+callGetResource : size 25
 test.callGetResource{}
 
-callGetSingleListNode : size 29
+callGetSingleListNode : size 31
 test.callGetSingleListNode{}
 
-callGetStruct : size 21
+callGetStruct : size 23
 test.callGetStruct{}
 
-callResolveResource : size 30
+callResolveResource : size 32
 test.callResolveResource{[20]Uint8}
 
-callSetStruct : size 24
+callSetStruct : size 26
 test.callSetStruct{$}
 
-callUseResource : size 26
+callUseResource : size 28
 test.callUseResource{[20]Uint8}
 
-resultAdd : size 18
+resultAdd : size 20
 test.resultAdd{Uint32}
 
-resultEnumToString : size 27
+resultEnumToString : size 29
 test.resultEnumToString{String}
 
-resultGetListNodeChainArray : size 40
+resultGetListNodeChainArray : size 42
 test.resultGetListNodeChainArray{[]*$}
 
-resultGetListNodeChain : size 34
+resultGetListNodeChain : size 36
 test.resultGetListNodeChain{*$}
 
-resultGetResource : size 28
+resultGetResource : size 30
 test.resultGetResource{[20]Uint8}
 
-resultGetSingleListNode : size 35
+resultGetSingleListNode : size 37
 test.resultGetSingleListNode{*$}
 
-resultGetStruct : size 26
+resultGetStruct : size 28
 test.resultGetStruct{$}
 
-resultResolveResource : size 32
+resultResolveResource : size 34
 test.resultResolveResource{$}
 
-resultSetStruct : size 23
+resultSetStruct : size 25
 test.resultSetStruct{}
 
-resultUseResource : size 25
+resultUseResource : size 27
 test.resultUseResource{}
 
 Schema stats:
 Count: 1245
-Total: 37518
+Total: 40008
 Compact: 40013
 Full: 127438
-Average: 30
-Largest: 67
+Average: 32
+Largest: 69
