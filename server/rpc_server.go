@@ -66,7 +66,8 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger, shutd
 		log.Errorf(logger, "Error binding to port: %v: %v", addr, err)
 		return err
 	}
-
+	// The following message is parsed by launchers to detect the selected port. DO NOT CHANGE!
+	fmt.Printf("Bound on port '%d'\n", listener.Addr().(*net.TCPAddr).Port)
 	shutdown := false
 	var newCloser func(conn net.Conn) io.Closer
 	if shutdownOnDisconnect {
