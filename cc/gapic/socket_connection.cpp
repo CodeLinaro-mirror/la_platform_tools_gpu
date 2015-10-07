@@ -33,6 +33,7 @@
 #include <errno.h>
 #include <netdb.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
@@ -120,6 +121,14 @@ int bind(int sockfd, const struct sockaddr *addr, size_t addrlen) {
 #endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
+int getsockname(int sockfd, struct sockaddr *addr, socklen_t* addrlen) {
+#if TARGET_OS == GAPID_OS_WINDOWS
+    return ::getsockname(sockfd, addr, static_cast<int*>(addrlen));
+#else  // TARGET_OS == GAPID_OS_WINDOWS
+    return ::getsockname(sockfd, addr, addrlen);
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
+}
+
 int error() {
 #if TARGET_OS == GAPID_OS_WINDOWS
     return ::WSAGetLastError();
@@ -196,6 +205,14 @@ std::unique_ptr<Connection> SocketConnection::createSocket(
         GAPID_WARNING("bind() failed: %s.", strerror(gapic::error()));
         return nullptr;
     }
+    struct sockaddr_in sin;
+    socklen_t len = sizeof(sin);
+    if (-1 == gapic::getsockname(sock, (struct sockaddr *)&sin, &len)) {
+        GAPID_WARNING("getsockname() failed: %s.", strerror(gapic::error()));
+        return nullptr;
+    }
+    // The following message is parsed by launchers to detect the selected port. DO NOT CHANGE!
+    printf("Bound on port '%d'\n", sin.sin_port);
 
     if (-1 == gapic::listen(sock, 10)) {
         GAPID_WARNING("listen() failed: %s.", strerror(gapic::error()));
