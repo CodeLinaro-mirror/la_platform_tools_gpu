@@ -164,8 +164,6 @@ func (a api) Replay(
 	)
 
 	// Device-dependent transforms.
-	transforms.Add(halfFloatOESToHalfFloatARB(device))
-
 	if c, err := compat(device, d, l); err == nil {
 		transforms.Add(c)
 	} else {
@@ -242,32 +240,6 @@ func (a api) QueryCallDurations(ctx replay.Context, mgr *replay.Manager, flags s
 		out <- replay.CallTiming{Error: err}
 	}
 	return out
-}
-
-// halfFloatOESToHalfFloatARB returns a transform that converts all vertex streams
-// declared of type GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB, if unsupported by the target device.
-func halfFloatOESToHalfFloatARB(device *service.Device) atom.Transformer {
-	if v, err := ParseVersion(device.Version); err == nil {
-		if v.IsES && device.HasExtension("GL_OES_vertex_half_float") {
-			return nil
-		}
-	}
-	// TODO: fallback to full GL_FLOAT unpacking if GL_ARB_half_float_vertex isn't supported.
-	return atom.Transform("HalfFloatOESToHalfFloatARB", func(id atom.ID, a atom.Atom, out atom.Writer) {
-		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
-			cmd.Type == GLenum_GL_HALF_FLOAT_OES {
-			out.Write(id, &GlVertexAttribPointer{
-				Location:   cmd.Location,
-				Size:       cmd.Size,
-				Type:       GLenum_GL_HALF_FLOAT_ARB,
-				Normalized: cmd.Normalized,
-				Stride:     cmd.Stride,
-				Data:       cmd.Data,
-			})
-		} else {
-			out.Write(id, a)
-		}
-	})
 }
 
 // destroyResourcesAtEOS is a transform that destroys all textures,

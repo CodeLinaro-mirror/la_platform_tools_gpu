@@ -16,6 +16,7 @@ package gles
 
 import (
 	"fmt"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
@@ -41,6 +42,24 @@ const (
 // the target platform, we remap the uses to this array.
 const DefaultVertexArrayId = VertexArrayId(0xFFFF0001)
 
+type extensions map[string]struct{}
+
+func parseExtensions(list string) extensions {
+	out := extensions{}
+	for _, s := range strings.Split(list, " ") {
+		out[s] = struct{}{}
+	}
+	return out
+}
+
+func (e extensions) get(name string) support {
+	if _, ok := e[name]; ok {
+		return supported
+	} else {
+		return unsupported
+	}
+}
+
 func (s support) String() string {
 	switch s {
 	case unsupported:
@@ -55,25 +74,29 @@ func (s support) String() string {
 }
 
 type features struct {
+	halfFloatOES               support // support for GL_OES_vertex_half_float
 	vertexArrayObjects         support // support for VBOs
 	uncompressedTextureFormats map[GLenum]struct{}
 	compressedTextureFormats   map[GLenum]struct{}
 }
 
-func getFeatures(version, extensions string, l log.Logger) (features, error) {
+func getFeatures(version string, extensions string, l log.Logger) (features, error) {
 	v, err := ParseVersion(version)
 	if err != nil {
 		return features{}, err
 	}
 
-	utfs, err := getSupportedUncompressedTextureFormats(*v, extensions)
+	ext := parseExtensions(extensions)
+
+	utfs, err := getSupportedUncompressedTextureFormats(*v, ext)
 	if err != nil {
 		log.W(l, "getSupportedUncompressedTextureFormats returned error: %v", err)
 	}
 
 	f := features{
+		halfFloatOES:               ext.get("GL_OES_vertex_half_float"),
 		uncompressedTextureFormats: utfs,
-		compressedTextureFormats:   getSupportedCompressedTextureFormats(extensions),
+		compressedTextureFormats:   getSupportedCompressedTextureFormats(ext),
 	}
 
 	// TODO: Properly check the specifications for these flags.
@@ -170,6 +193,10 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 
 		// TODO: glVertexAttribIPointer
 		case *GlVertexAttribPointer:
+			if a.Type == GLenum_GL_HALF_FLOAT_OES && target.halfFloatOES == unsupported {
+				// Convert GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB.
+				a = NewGlVertexAttribPointer(a.Location, a.Size, GLenum_GL_HALF_FLOAT_ARB, a.Normalized, a.Stride, a.Data.Pointer)
+			}
 			if target.vertexArrayObjects == required &&
 				getContext(s).BoundBuffers[GLenum_GL_ARRAY_BUFFER] == 0 {
 				// Client-pointers are not supported, we need to copy this data to a buffer.
@@ -179,6 +206,9 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 				a.Mutate(s, d, l)
 				return
 			}
+			a.Mutate(s, d, l)
+			out.Write(i, a)
+			return
 
 		case *GlDrawArrays:
 			if target.vertexArrayObjects == required {
