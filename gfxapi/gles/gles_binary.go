@@ -5447,12 +5447,14 @@ func (*GLfloatː2ᵃ) Class() binary.Class {
 }
 func doEncodeGLfloatː2ᵃ(e binary.Encoder, o *GLfloatː2ᵃ) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeGLfloatː2ᵃ(d binary.Decoder, o *GLfloatː2ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5481,12 +5483,14 @@ func (*GLfloatː3ᵃ) Class() binary.Class {
 }
 func doEncodeGLfloatː3ᵃ(e binary.Encoder, o *GLfloatː3ᵃ) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeGLfloatː3ᵃ(d binary.Decoder, o *GLfloatː3ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5515,12 +5519,14 @@ func (*GLfloatː4ᵃ) Class() binary.Class {
 }
 func doEncodeGLfloatː4ᵃ(e binary.Encoder, o *GLfloatː4ᵃ) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeGLfloatː4ᵃ(d binary.Decoder, o *GLfloatː4ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassGLfloatː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5669,12 +5675,14 @@ func (*GLintː2ᵃ) Class() binary.Class {
 }
 func doEncodeGLintː2ᵃ(e binary.Encoder, o *GLintː2ᵃ) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeGLintː2ᵃ(d binary.Decoder, o *GLintː2ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5703,12 +5711,14 @@ func (*GLintː3ᵃ) Class() binary.Class {
 }
 func doEncodeGLintː3ᵃ(e binary.Encoder, o *GLintː3ᵃ) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeGLintː3ᵃ(d binary.Decoder, o *GLintː3ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -5737,12 +5747,14 @@ func (*GLintː4ᵃ) Class() binary.Class {
 }
 func doEncodeGLintː4ᵃ(e binary.Encoder, o *GLintː4ᵃ) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeGLintː4ᵃ(d binary.Decoder, o *GLintː4ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassGLintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6191,12 +6203,14 @@ func (*GLuintː2ᵃ) Class() binary.Class {
 }
 func doEncodeGLuintː2ᵃ(e binary.Encoder, o *GLuintː2ᵃ) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeGLuintː2ᵃ(d binary.Decoder, o *GLuintː2ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6225,12 +6239,14 @@ func (*GLuintː3ᵃ) Class() binary.Class {
 }
 func doEncodeGLuintː3ᵃ(e binary.Encoder, o *GLuintː3ᵃ) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeGLuintː3ᵃ(d binary.Decoder, o *GLuintː3ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -6259,12 +6275,14 @@ func (*GLuintː4ᵃ) Class() binary.Class {
 }
 func doEncodeGLuintː4ᵃ(e binary.Encoder, o *GLuintː4ᵃ) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeGLuintː4ᵃ(d binary.Decoder, o *GLuintː4ᵃ) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassGLuintː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -44595,12 +44613,14 @@ func (*Vec2f) Class() binary.Class {
 }
 func doEncodeVec2f(e binary.Encoder, o *Vec2f) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeVec2f(d binary.Decoder, o *Vec2f) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44629,12 +44649,14 @@ func (*Mat2f) Class() binary.Class {
 }
 func doEncodeMat2f(e binary.Encoder, o *Mat2f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat2f(d binary.Decoder, o *Mat2f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44723,12 +44745,14 @@ func (*Vec3f) Class() binary.Class {
 }
 func doEncodeVec3f(e binary.Encoder, o *Vec3f) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeVec3f(d binary.Decoder, o *Vec3f) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44757,12 +44781,14 @@ func (*Mat2x3f) Class() binary.Class {
 }
 func doEncodeMat2x3f(e binary.Encoder, o *Mat2x3f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat2x3f(d binary.Decoder, o *Mat2x3f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat2x3f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44851,12 +44877,14 @@ func (*Vec4f) Class() binary.Class {
 }
 func doEncodeVec4f(e binary.Encoder, o *Vec4f) {
 	for i := range o.Elements {
-		e.Float32(float32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Float32(float32((*curr)))
 	}
 }
 func doDecodeVec4f(d binary.Decoder, o *Vec4f) {
 	for i := range o.Elements {
-		o.Elements[i] = GLfloat(d.Float32())
+		curr := &o.Elements[i]
+		(*curr) = GLfloat(d.Float32())
 	}
 }
 func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44885,12 +44913,14 @@ func (*Mat2x4f) Class() binary.Class {
 }
 func doEncodeMat2x4f(e binary.Encoder, o *Mat2x4f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat2x4f(d binary.Decoder, o *Mat2x4f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat2x4f) Encode(e binary.Encoder, obj binary.Object) {
@@ -44979,12 +45009,14 @@ func (*Mat3f) Class() binary.Class {
 }
 func doEncodeMat3f(e binary.Encoder, o *Mat3f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat3f(d binary.Decoder, o *Mat3f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) {
@@ -45073,12 +45105,14 @@ func (*Mat3x2f) Class() binary.Class {
 }
 func doEncodeMat3x2f(e binary.Encoder, o *Mat3x2f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat3x2f(d binary.Decoder, o *Mat3x2f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat3x2f) Encode(e binary.Encoder, obj binary.Object) {
@@ -45167,12 +45201,14 @@ func (*Mat3x4f) Class() binary.Class {
 }
 func doEncodeMat3x4f(e binary.Encoder, o *Mat3x4f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat3x4f(d binary.Decoder, o *Mat3x4f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat3x4f) Encode(e binary.Encoder, obj binary.Object) {
@@ -45261,12 +45297,14 @@ func (*Mat4f) Class() binary.Class {
 }
 func doEncodeMat4f(e binary.Encoder, o *Mat4f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat4f(d binary.Decoder, o *Mat4f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) {
@@ -45355,12 +45393,14 @@ func (*Mat4x2f) Class() binary.Class {
 }
 func doEncodeMat4x2f(e binary.Encoder, o *Mat4x2f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat4x2f(d binary.Decoder, o *Mat4x2f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat4x2f) Encode(e binary.Encoder, obj binary.Object) {
@@ -45449,12 +45489,14 @@ func (*Mat4x3f) Class() binary.Class {
 }
 func doEncodeMat4x3f(e binary.Encoder, o *Mat4x3f) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMat4x3f(d binary.Decoder, o *Mat4x3f) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassMat4x3f) Encode(e binary.Encoder, obj binary.Object) {
@@ -46289,12 +46331,14 @@ func (*Vec2fː2ᵃ) Class() binary.Class {
 }
 func doEncodeVec2fː2ᵃ(e binary.Encoder, o *Vec2fː2ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec2fː2ᵃ(d binary.Decoder, o *Vec2fː2ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec2fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46323,12 +46367,14 @@ func (*Vec2fː3ᵃ) Class() binary.Class {
 }
 func doEncodeVec2fː3ᵃ(e binary.Encoder, o *Vec2fː3ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec2fː3ᵃ(d binary.Decoder, o *Vec2fː3ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec2fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46357,12 +46403,14 @@ func (*Vec2fː4ᵃ) Class() binary.Class {
 }
 func doEncodeVec2fː4ᵃ(e binary.Encoder, o *Vec2fː4ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec2fː4ᵃ(d binary.Decoder, o *Vec2fː4ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec2fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46451,12 +46499,14 @@ func (*Vec2i) Class() binary.Class {
 }
 func doEncodeVec2i(e binary.Encoder, o *Vec2i) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeVec2i(d binary.Decoder, o *Vec2i) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) {
@@ -46545,12 +46595,14 @@ func (*Vec2u) Class() binary.Class {
 }
 func doEncodeVec2u(e binary.Encoder, o *Vec2u) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeVec2u(d binary.Decoder, o *Vec2u) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec2u) Encode(e binary.Encoder, obj binary.Object) {
@@ -46639,12 +46691,14 @@ func (*Vec3fː2ᵃ) Class() binary.Class {
 }
 func doEncodeVec3fː2ᵃ(e binary.Encoder, o *Vec3fː2ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec3fː2ᵃ(d binary.Decoder, o *Vec3fː2ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec3fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46673,12 +46727,14 @@ func (*Vec3fː3ᵃ) Class() binary.Class {
 }
 func doEncodeVec3fː3ᵃ(e binary.Encoder, o *Vec3fː3ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec3fː3ᵃ(d binary.Decoder, o *Vec3fː3ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec3fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46707,12 +46763,14 @@ func (*Vec3fː4ᵃ) Class() binary.Class {
 }
 func doEncodeVec3fː4ᵃ(e binary.Encoder, o *Vec3fː4ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec3fː4ᵃ(d binary.Decoder, o *Vec3fː4ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec3fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -46801,12 +46859,14 @@ func (*Vec3i) Class() binary.Class {
 }
 func doEncodeVec3i(e binary.Encoder, o *Vec3i) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeVec3i(d binary.Decoder, o *Vec3i) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) {
@@ -46895,12 +46955,14 @@ func (*Vec3u) Class() binary.Class {
 }
 func doEncodeVec3u(e binary.Encoder, o *Vec3u) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeVec3u(d binary.Decoder, o *Vec3u) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec3u) Encode(e binary.Encoder, obj binary.Object) {
@@ -46989,12 +47051,14 @@ func (*Vec4fː2ᵃ) Class() binary.Class {
 }
 func doEncodeVec4fː2ᵃ(e binary.Encoder, o *Vec4fː2ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec4fː2ᵃ(d binary.Decoder, o *Vec4fː2ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec4fː2ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -47023,12 +47087,14 @@ func (*Vec4fː3ᵃ) Class() binary.Class {
 }
 func doEncodeVec4fː3ᵃ(e binary.Encoder, o *Vec4fː3ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec4fː3ᵃ(d binary.Decoder, o *Vec4fː3ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec4fː3ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -47057,12 +47123,14 @@ func (*Vec4fː4ᵃ) Class() binary.Class {
 }
 func doEncodeVec4fː4ᵃ(e binary.Encoder, o *Vec4fː4ᵃ) {
 	for i := range o.Elements {
-		e.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeVec4fː4ᵃ(d binary.Decoder, o *Vec4fː4ᵃ) {
 	for i := range o.Elements {
-		d.Struct(&o.Elements[i])
+		curr := &o.Elements[i]
+		d.Struct(&(*curr))
 	}
 }
 func (*binaryClassVec4fː4ᵃ) Encode(e binary.Encoder, obj binary.Object) {
@@ -47151,12 +47219,14 @@ func (*Vec4i) Class() binary.Class {
 }
 func doEncodeVec4i(e binary.Encoder, o *Vec4i) {
 	for i := range o.Elements {
-		e.Int32(int32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Int32(int32((*curr)))
 	}
 }
 func doDecodeVec4i(d binary.Decoder, o *Vec4i) {
 	for i := range o.Elements {
-		o.Elements[i] = GLint(d.Int32())
+		curr := &o.Elements[i]
+		(*curr) = GLint(d.Int32())
 	}
 }
 func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) {
@@ -47245,12 +47315,14 @@ func (*Vec4u) Class() binary.Class {
 }
 func doEncodeVec4u(e binary.Encoder, o *Vec4u) {
 	for i := range o.Elements {
-		e.Uint32(uint32(o.Elements[i]))
+		curr := &o.Elements[i]
+		e.Uint32(uint32((*curr)))
 	}
 }
 func doDecodeVec4u(d binary.Decoder, o *Vec4u) {
 	for i := range o.Elements {
-		o.Elements[i] = GLuint(d.Uint32())
+		curr := &o.Elements[i]
+		(*curr) = GLuint(d.Uint32())
 	}
 }
 func (*binaryClassVec4u) Encode(e binary.Encoder, obj binary.Object) {

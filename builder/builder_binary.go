@@ -728,14 +728,16 @@ func (*captureFramebufferDimensions) Class() binary.Class {
 func doEncodecaptureFramebufferDimensions(e binary.Encoder, o *captureFramebufferDimensions) {
 	e.Uint32(uint32(len(o.Dimensions)))
 	for i := range o.Dimensions {
-		e.Struct(&o.Dimensions[i])
+		curr := &o.Dimensions[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebufferDimensions) {
 	if count := d.Count(); count > 0 {
 		o.Dimensions = make([]atomFramebufferDimensions, count)
 		for i := range o.Dimensions {
-			d.Struct(&o.Dimensions[i])
+			curr := &o.Dimensions[i]
+			d.Struct(&(*curr))
 		}
 	}
 }

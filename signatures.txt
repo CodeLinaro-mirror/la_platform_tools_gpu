@@ -3902,6 +3902,18 @@ service.resultLoadCapture{*$}
 resultSet : full 41 compact 23
 service.resultSet{?}
 
+Anonymous : full 29 compact 21
+test.Anonymous{$}
+
+ArrayInMap : full 44 compact 26
+test.ArrayInMap{map[Uint32][3]$}
+
+ArrayOfArrays : full 44 compact 29
+test.ArrayOfArrays{[2][3]$}
+
+Array : full 34 compact 19
+test.Array{[3]$}
+
 AtomA : full 51 compact 17
 test.AtomA{Uint64,Uint32}
 
@@ -4130,6 +4142,12 @@ test.CmdVoidWriteU8{$,$}
 CmdVoid : full 52 compact 19
 test.CmdVoid{$}
 
+Complex : full 277 compact 65
+test.Complex{[]map[$][3]$,[][3]map[$]$,[3][]map[$]$,[3]map[$][]$,map[$][3][]$,map[$][][3]$}
+
+Contains : full 37 compact 20
+test.Contains{$}
+
 F32ˢ : full 30 compact 17
 test.F32ˢ{$}
 
@@ -4154,8 +4172,29 @@ test.Intˢ{$}
 Intᵖ : full 36 compact 18
 test.Intᵖ{$}
 
+Leaf : full 26 compact 15
+test.Leaf{Uint32}
+
 ListNode : full 50 compact 22
 test.ListNode{String,*$}
+
+MapInArray : full 49 compact 25
+test.MapInArray{[2]map[Uint32]Uint32}
+
+MapInSlice : full 48 compact 24
+test.MapInSlice{[]map[Uint32]Uint32}
+
+MapKeyValue : full 41 compact 26
+test.MapKeyValue{map[$]$}
+
+MapKey : full 37 compact 20
+test.MapKey{map[$]Uint32}
+
+MapOfMaps : full 49 compact 26
+test.MapOfMaps{map[Uint32]map[$]$}
+
+MapValue : full 39 compact 22
+test.MapValue{map[Uint32]$}
 
 Remappedˢ : full 35 compact 22
 test.Remappedˢ{$}
@@ -4190,8 +4229,17 @@ test.S8ˢ{$}
 S8ᵖ : full 35 compact 17
 test.S8ᵖ{$}
 
+SliceInMap : full 43 compact 25
+test.SliceInMap{map[Uint32][]$}
+
 SliceInfo : full 70 compact 23
 test.SliceInfo{$,Uint64,Uint64}
+
+SliceOfSlices : full 42 compact 27
+test.SliceOfSlices{[][]$}
+
+Slice : full 33 compact 18
+test.Slice{[]$}
 
 State : full 79 compact 24
 test.State{$,$,$,$,String}
@@ -4305,12 +4353,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1435
-Full: 149634
-Total: 148651
+Count: 1451
+Full: 150532
+Total: 149523
 Average: 103
 Largest: 4837
-Compact: 46002
-Total: 45024
+Compact: 46436
+Total: 45432
 Average: 31
 Largest: 174

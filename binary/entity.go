@@ -80,14 +80,44 @@ func (e *Entity) Format(f fmt.State, c rune) {
 	fmt.Fprint(f, "}")
 }
 
+// appendSubTypes, appends the sub-types of 't' to the list 'l' and returns
+// it. Inlines are expanded. If 't' is inline then append the expansion
+// of its sub-types to the list 'l' and return it. If 't' is not inline
+// just append 't' and return it.
+func appendSubTypes(l TypeList, t SubspaceType) TypeList {
+	if !t.HasSubspace() {
+		return l
+	}
+	s := t.Subspace()
+	if !s.Inline {
+		return append(l, t)
+	}
+	for _, sub := range s.SubTypes {
+		l = appendSubTypes(l, sub)
+	}
+	return l
+}
+
+// Subspace, returns the subspace for the entity. The subspace of the
+// entity is the the catenation of the field subtypes with inlines expanded.
 func (e *Entity) Subspace() *Subspace {
-	var sub TypeList
+	sub := TypeList{}
 	for _, f := range e.Fields {
 		if f.Type.HasSubspace() {
-			sub = append(sub, f.Type)
+			sub = appendSubTypes(sub, f.Type)
 		}
 	}
 	return &Subspace{SubTypes: sub}
+}
+
+// ExpandSubTypes, returns the list of sub-types of this subspace with
+// any inline sub-types expanded.
+func (s *Subspace) ExpandSubTypes() TypeList {
+	l := TypeList{}
+	for _, t := range s.SubTypes {
+		l = appendSubTypes(l, t)
+	}
+	return l
 }
 
 // FieldList is a slice of fields.
@@ -101,17 +131,14 @@ type Field struct {
 
 // Subspace represents the sub-types which need decoder support for nested types.
 type Subspace struct {
+	Inline   bool     // true if the schema object inlines the encoding (arrays)
 	Counted  bool     // true if the schema type is a counted (slice, map)
 	SubTypes TypeList // the complete list of subtypes
 }
 
-// Type represents the common interface to all type objects in the schema.
-type Type interface {
-	String() string         // The true name of the type.
-	Representation() string // The encoded representation of the type.
-	EncodeValue(e Encoder, value interface{})
-	DecodeValue(d Decoder) interface{}
-	Format(f fmt.State, c rune)
+// SubspaceType is the interface provides by schema types in order for them
+// to provide sub-type information to the decoder.
+type SubspaceType interface {
 	// Returns true if Subspace() will return non-nil.
 	HasSubspace() bool
 	// Subspace returns the subspace for this type. The subspace represents
@@ -120,9 +147,19 @@ type Type interface {
 	Subspace() *Subspace
 }
 
+// Type represents the common interface to all type objects in the schema.
+type Type interface {
+	SubspaceType
+	String() string         // The true name of the type.
+	Representation() string // The encoded representation of the type.
+	EncodeValue(e Encoder, value interface{})
+	DecodeValue(d Decoder) interface{}
+	Format(f fmt.State, c rune)
+}
+
 // TypeList used to represent the entities of any composed subtypes which
 // need decoding.
-type TypeList []Type
+type TypeList []SubspaceType
 
 func trimPackage(n string) string {
 	i := strings.LastIndex(n, ".")

@@ -480,7 +480,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Encode.Slice"}}
   {{template "Go.Encode_Length" $}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 
@@ -490,7 +491,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Encode.Array"}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 
@@ -557,7 +559,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Slice"}}
   {{template "Go.Decode_Length" $}}
     for i := range {{.Name}} {»¶
-      {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+      curr := &{{.Name}}[i]¶
+      {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
     «}¶
   «}¶
 {{end}}
@@ -568,7 +571,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Decode.Array"}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 
@@ -1057,6 +1061,8 @@ const java_binary_tmpl = `{{/*
     {{Call "Java.Encode" (Var .Type.ValueType .Name "[i]")}}¶
   «}
 {{end}}
+
+{{define "Java.Type.Map"}}{{Error "Java map handling not implemented"}}{{end}}
 
 {{define "Java.Encode.Map"}}throw new RuntimeException("Java map handling not implemented");{{end}}
 

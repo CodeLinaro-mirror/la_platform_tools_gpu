@@ -546,8 +546,9 @@ func (*resultGetListNodeChainArray) Class() binary.Class {
 func doEncoderesultGetListNodeChainArray(e binary.Encoder, o *resultGetListNodeChainArray) {
 	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if o.value[i] != nil {
-			e.Object(o.value[i])
+		curr := &o.value[i]
+		if (*curr) != nil {
+			e.Object((*curr))
 		} else {
 			e.Object(nil)
 		}
@@ -557,10 +558,11 @@ func doDecoderesultGetListNodeChainArray(d binary.Decoder, o *resultGetListNodeC
 	if count := d.Count(); count > 0 {
 		o.value = make([]*ListNode, count)
 		for i := range o.value {
+			curr := &o.value[i]
 			if obj := d.Object(); obj != nil {
-				o.value[i] = obj.(*ListNode)
+				(*curr) = obj.(*ListNode)
 			} else {
-				o.value[i] = nil
+				(*curr) = nil
 			}
 		}
 	}

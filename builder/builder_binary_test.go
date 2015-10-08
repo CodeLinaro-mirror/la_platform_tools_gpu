@@ -66,7 +66,8 @@ func doEncodetestAtom(e binary.Encoder, o *testAtom) {
 	e.String(o.Str)
 	e.Uint32(uint32(len(o.Sli)))
 	for i := range o.Sli {
-		e.Bool(o.Sli[i])
+		curr := &o.Sli[i]
+		e.Bool((*curr))
 	}
 	schema.Any{}.EncodeValue(e, o.Any)
 	if o.Ptr != nil {
@@ -86,7 +87,8 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 	if count := d.Count(); count > 0 {
 		o.Sli = make([]bool, count)
 		for i := range o.Sli {
-			o.Sli[i] = bool(d.Bool())
+			curr := &o.Sli[i]
+			(*curr) = bool(d.Bool())
 		}
 	}
 	o.Any = schema.Any{}.DecodeValue(d)

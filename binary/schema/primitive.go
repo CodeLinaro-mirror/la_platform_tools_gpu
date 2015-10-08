@@ -105,7 +105,11 @@ func (p *Primitive) Format(f fmt.State, c rune) {
 	case 'r': // Private format specifier, supports Type.Representation
 		fmt.Fprint(f, methodToBase[p.Method])
 	default:
-		fmt.Fprint(f, p.Name)
+		if p.Name == "" {
+			fmt.Fprint(f, p.Method)
+		} else {
+			fmt.Fprint(f, p.Name)
+		}
 	}
 }
 
