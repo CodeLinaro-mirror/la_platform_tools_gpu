@@ -1,0 +1,3 @@
+This directory contains source copied from the NDK.
+We've done this to remove vast swathes of additional dependencies for the build
+machines.

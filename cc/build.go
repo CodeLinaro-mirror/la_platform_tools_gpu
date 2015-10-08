@@ -380,13 +380,15 @@ func Graph() {
 	if os.Getenv("ANDROID_NDK_ROOT") != "" {
 		// A bit of the Android crazy linker from the NDK. This is used to
 		// relink the program to use spy interceptors on non-rooted devices.
-		crazy := ndk.Paths.NDK.Join("sources", "android", "crazy_linker", "src")
+		crazy := CCRoot.Join("ndk", "crazy_linker", "src")
 		crazy_source := build.FileSet{
 			crazy.Join("crazy_linker_elf_symbols.cpp"),
 			crazy.Join("crazy_linker_elf_view.cpp"),
 			crazy.Join("crazy_linker_error.cpp"),
 			crazy.Join("linker_phdr.cpp"),
 		}
+
+		app_glue := CCRoot.Join("ndk", "native_app_glue")
 
 		android_target := Target{
 			GapicTests: cpp.Config{
@@ -399,8 +401,8 @@ func Graph() {
 			},
 			Replayd: cpp.Config{
 				Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
-				IncludeSearchPaths: build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue")},
-				AdditionalSources:  build.FileSet{ndk.Paths.NDK.Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
+				IncludeSearchPaths: build.FileSet{app_glue.Join()},
+				AdditionalSources:  build.FileSet{app_glue.Join("android_native_app_glue.c")},
 			},
 			Spy: cpp.Config{
 				Libraries:          build.FileSet{"log", "z", "m", "dl"},
