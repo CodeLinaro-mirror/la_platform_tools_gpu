@@ -212,7 +212,8 @@ std::unique_ptr<Connection> SocketConnection::createSocket(
         return nullptr;
     }
     // The following message is parsed by launchers to detect the selected port. DO NOT CHANGE!
-    printf("Bound on port '%d'\n", sin.sin_port);
+    printf("Bound on port '%d'\n", ntohs(sin.sin_port));
+    fflush(stdout); // Force the message for piped readers
 
     if (-1 == gapic::listen(sock, 10)) {
         GAPID_WARNING("listen() failed: %s.", strerror(gapic::error()));
