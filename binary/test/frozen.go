@@ -23,10 +23,10 @@ type X_V1 struct {
 }
 
 type X struct {
-	binary.Generate
-	a int32
-	b int32
-	c string
+	binary.Generate `java:"disable"`
+	a               int32
+	b               int32
+	c               string
 }
 
 func (before *X_V1) upgrade(after *X) {
@@ -36,8 +36,8 @@ func (before *X_V1) upgrade(after *X) {
 }
 
 type Y struct {
-	binary.Generate
-	begin string
-	x     X
-	end   string
+	binary.Generate `java:"disable"`
+	begin           string
+	x               X
+	end             string
 }
