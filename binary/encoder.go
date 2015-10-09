@@ -18,8 +18,8 @@ package binary
 type Encoder interface {
 	Writer
 	// Entity writes a binary.Entity to the stream.
-	// See Entity for details of what is included in the compact form.
-	Entity(e *Entity, compact bool)
+	// See Entity for details of what modes are supported.
+	Entity(e *Entity)
 	// Object encodes an Object with no type preamble and no sharing.
 	Value(obj Object)
 	// Object encodes a struct with no type preamble and no sharing.
@@ -31,4 +31,8 @@ type Encoder interface {
 	// time it sees them. The type of obj must have been previously registered
 	// with binary.registry.Add.
 	Object(obj Object)
+	// GetMode gets the current mode of the encoder.
+	GetMode() Mode
+	// SetMode controls the current mode of the encoder.
+	SetMode(mode Mode)
 }

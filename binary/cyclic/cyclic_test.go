@@ -25,6 +25,7 @@ import (
 )
 
 func EncodeObject(t *testing.T, entry test.Entry, e binary.Encoder, buf *bytes.Buffer) {
+	e.SetMode(binary.Compact)
 	for i, o := range entry.Values {
 		e.Object(o)
 		if e.Error() != nil {

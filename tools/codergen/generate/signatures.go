@@ -39,20 +39,16 @@ type stream struct {
 	b       bytes.Buffer
 	e       binary.Encoder
 	d       binary.Decoder
-	compact bool
+	mode    binary.Mode
 	count   int
 	size    int
 	largest int
 	total   int
 }
 
-func newStream(compact bool) *stream {
-	s := &stream{compact: compact}
-	if compact {
-		s.name = "compact"
-	} else {
-		s.name = "full"
-	}
+func newStream(mode binary.Mode) *stream {
+	s := &stream{mode: mode}
+	s.name = fmt.Sprint(mode)
 	s.reset()
 	return s
 }
@@ -60,23 +56,24 @@ func newStream(compact bool) *stream {
 func (s *stream) reset() {
 	s.b.Reset()
 	s.e = cyclic.Encoder(vle.Writer(&s.b))
+	s.e.SetMode(s.mode)
 	s.d = cyclic.Decoder(vle.Reader(&s.b))
 }
 
 func (s *stream) test(e *binary.Entity) {
-	s.e.Entity(e, s.compact)
+	s.e.Entity(e)
 	s.size += s.b.Len()
 	if s.e.Error() != nil {
 		panic(fmt.Errorf("Failed encoding %s entity for %q, %v", s.name, e.Signature(), s.e.Error()))
 	}
-	got := s.d.Entity(s.compact)
+	got := s.d.Entity()
 	if got == nil || s.d.Error() != nil {
 		panic(fmt.Errorf("Failed reading %s entity for %q, %v", s.name, e.Signature(), s.d.Error()))
 	}
 	if e.Signature() != got.Signature() {
 		panic(fmt.Errorf("Signature of %s entity did not match, expected %q got %q", s.name, e.Signature(), got.Signature()))
 	}
-	if !s.compact {
+	if s.mode != binary.Compact {
 		es := fmt.Sprint(e)
 		gots := fmt.Sprint(got)
 		if es != gots {
@@ -87,10 +84,10 @@ func (s *stream) test(e *binary.Entity) {
 
 func (s *stream) measure(e *binary.Entity) int {
 	s.reset()
-	s.e.Entity(e, s.compact)
+	s.e.Entity(e)
 	start := s.b.Len()
 	// now encode the entity directly to bypass the table
-	schema.EncodeEntity(s.e, e, s.compact)
+	schema.EncodeEntity(s.e, e)
 	size := s.b.Len() - start + 2
 	s.total += size
 	s.count++
@@ -112,8 +109,8 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))
-	full := newStream(false)
-	compact := newStream(true)
+	full := newStream(binary.Full)
+	compact := newStream(binary.Compact)
 	// pre write the entire schema so the lookup table is full, and verify the encode/decode behaviour while doing it
 	for _, s := range structs {
 		full.test(&s.Entity)

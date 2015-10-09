@@ -46,7 +46,7 @@ func encodeX_V1_Struct(t *testing.T, e binary.Encoder) {
 func encodeX_V1_Variant(t *testing.T, e binary.Encoder) {
 	x1 := X_V1{}
 	// TODO (should we allow encoding of a schema of a frozen class).
-	e.Entity(x1.Class().Schema(), true)
+	e.Entity(x1.Class().Schema())
 	encodeX_V1_Struct(t, e)
 }
 
@@ -64,7 +64,7 @@ func encodeY_V1_Variant(t *testing.T, e binary.Encoder) {
 			{Declared: "end", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		},
 	}
-	e.Entity(schemaY1, true)
+	e.Entity(schemaY1)
 	e.String(begin)
 	encodeX_V1_Struct(t, e)
 	e.String(end)

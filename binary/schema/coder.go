@@ -36,52 +36,52 @@ const (
 	MapTag
 )
 
-func EncodeType(e binary.Encoder, t binary.Type, compact bool) {
+func EncodeType(e binary.Encoder, t binary.Type) {
 	switch t := t.(type) {
 	case *Primitive:
 		e.Uint8(uint8(PrimitiveTag) | (uint8(t.Method) << 4))
-		if !compact {
+		if e.GetMode() != binary.Compact {
 			e.String(t.Name)
 		}
 	case *Struct:
 		e.Uint8(uint8(StructTag))
-		e.Entity(t.Entity, compact)
-		if !compact {
+		e.Entity(t.Entity)
+		if e.GetMode() != binary.Compact {
 			e.String(t.Relative)
 		}
 	case *Pointer:
 		e.Uint8(uint8(PointerTag))
-		EncodeType(e, t.Type, compact)
+		EncodeType(e, t.Type)
 	case *Interface:
 		e.Uint8(uint8(InterfaceTag))
-		if !compact {
+		if e.GetMode() != binary.Compact {
 			e.String(t.Name)
 		}
 	case *Variant:
 		e.Uint8(uint8(VariantTag))
-		if !compact {
+		if e.GetMode() != binary.Compact {
 			e.String(t.Name)
 		}
 	case *Any:
 		e.Uint8(uint8(AnyTag))
 	case *Slice:
 		e.Uint8(uint8(SliceTag))
-		EncodeType(e, t.ValueType, compact)
-		if !compact {
+		EncodeType(e, t.ValueType)
+		if e.GetMode() != binary.Compact {
 			e.String(t.Alias)
 		}
 	case *Array:
 		e.Uint8(uint8(ArrayTag))
 		e.Uint32(t.Size)
-		EncodeType(e, t.ValueType, compact)
-		if !compact {
+		EncodeType(e, t.ValueType)
+		if e.GetMode() != binary.Compact {
 			e.String(t.Alias)
 		}
 	case *Map:
 		e.Uint8(uint8(MapTag))
-		EncodeType(e, t.KeyType, compact)
-		EncodeType(e, t.ValueType, compact)
-		if !compact {
+		EncodeType(e, t.KeyType)
+		EncodeType(e, t.ValueType)
+		if e.GetMode() != binary.Compact {
 			e.String(t.Alias)
 		}
 	default:
@@ -89,36 +89,36 @@ func EncodeType(e binary.Encoder, t binary.Type, compact bool) {
 	}
 }
 
-func DecodeType(d binary.Decoder, compact bool) binary.Type {
+func DecodeType(d binary.Decoder) binary.Type {
 	tag := TypeTag(d.Uint8())
 	switch tag & 0xf {
 	case PrimitiveTag:
 		t := &Primitive{}
 		t.Method = Method(tag >> 4)
-		if !compact {
+		if d.GetMode() != binary.Compact {
 			t.Name = d.String()
 		}
 		return t
 	case StructTag:
 		t := &Struct{}
-		t.Entity = d.Entity(compact)
-		if !compact {
+		t.Entity = d.Entity()
+		if d.GetMode() != binary.Compact {
 			t.Relative = d.String()
 		}
 		return t
 	case PointerTag:
 		t := &Pointer{}
-		t.Type = DecodeType(d, compact)
+		t.Type = DecodeType(d)
 		return t
 	case InterfaceTag:
 		t := &Interface{}
-		if !compact {
+		if d.GetMode() != binary.Compact {
 			t.Name = d.String()
 		}
 		return t
 	case VariantTag:
 		t := &Variant{}
-		if !compact {
+		if d.GetMode() != binary.Compact {
 			t.Name = d.String()
 		}
 		return t
@@ -126,24 +126,24 @@ func DecodeType(d binary.Decoder, compact bool) binary.Type {
 		return &Any{}
 	case SliceTag:
 		t := &Slice{}
-		t.ValueType = DecodeType(d, compact)
-		if !compact {
+		t.ValueType = DecodeType(d)
+		if d.GetMode() != binary.Compact {
 			t.Alias = d.String()
 		}
 		return t
 	case ArrayTag:
 		t := &Array{}
 		t.Size = d.Uint32()
-		t.ValueType = DecodeType(d, compact)
-		if !compact {
+		t.ValueType = DecodeType(d)
+		if d.GetMode() != binary.Compact {
 			t.Alias = d.String()
 		}
 		return t
 	case MapTag:
 		t := &Map{}
-		t.KeyType = DecodeType(d, compact)
-		t.ValueType = DecodeType(d, compact)
-		if !compact {
+		t.KeyType = DecodeType(d)
+		t.ValueType = DecodeType(d)
+		if d.GetMode() != binary.Compact {
 			t.Alias = d.String()
 		}
 		return t
@@ -152,21 +152,21 @@ func DecodeType(d binary.Decoder, compact bool) binary.Type {
 	}
 }
 
-func EncodeEntity(e binary.Encoder, c *binary.Entity, compact bool) {
+func EncodeEntity(e binary.Encoder, c *binary.Entity) {
 	e.String(c.Package)
 	e.String(c.Identity)
 	e.String(c.Version)
-	if !compact {
+	if e.GetMode() != binary.Compact {
 		e.String(c.Display)
 	}
 	e.Uint32(uint32(len(c.Fields)))
 	for _, f := range c.Fields {
-		EncodeType(e, f.Type, compact)
-		if !compact {
+		EncodeType(e, f.Type)
+		if e.GetMode() != binary.Compact {
 			e.String(f.Declared)
 		}
 	}
-	if !compact {
+	if e.GetMode() != binary.Compact {
 		e.Uint32(uint32(len(c.Metadata)))
 		for _, m := range c.Metadata {
 			e.Object(m)
@@ -174,21 +174,21 @@ func EncodeEntity(e binary.Encoder, c *binary.Entity, compact bool) {
 	}
 }
 
-func DecodeEntity(d binary.Decoder, c *binary.Entity, compact bool) {
+func DecodeEntity(d binary.Decoder, c *binary.Entity) {
 	c.Package = d.String()
 	c.Identity = d.String()
 	c.Version = d.String()
-	if !compact {
+	if d.GetMode() != binary.Compact {
 		c.Display = d.String()
 	}
 	c.Fields = make(binary.FieldList, d.Uint32())
 	for i := range c.Fields {
-		c.Fields[i].Type = DecodeType(d, compact)
-		if !compact {
+		c.Fields[i].Type = DecodeType(d)
+		if d.GetMode() != binary.Compact {
 			c.Fields[i].Declared = d.String()
 		}
 	}
-	if !compact {
+	if d.GetMode() != binary.Compact {
 		c.Metadata = make([]binary.Object, d.Uint32())
 		for i := range c.Metadata {
 			c.Metadata[i] = d.Object()
@@ -197,7 +197,7 @@ func DecodeEntity(d binary.Decoder, c *binary.Entity, compact bool) {
 }
 
 func EncodeConstants(e binary.Encoder, c *ConstantSet) {
-	EncodeType(e, c.Type, false)
+	EncodeType(e, c.Type)
 	e.Uint32(uint32(len(c.Entries)))
 	for _, entry := range c.Entries {
 		e.String(entry.Name)
@@ -206,7 +206,7 @@ func EncodeConstants(e binary.Encoder, c *ConstantSet) {
 }
 
 func DecodeConstants(d binary.Decoder, c *ConstantSet) {
-	c.Type = DecodeType(d, false)
+	c.Type = DecodeType(d)
 	c.Entries = make([]Constant, d.Uint32())
 	for i := range c.Entries {
 		c.Entries[i].Name = d.String()

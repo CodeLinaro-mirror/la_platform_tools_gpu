@@ -30,3 +30,5 @@
 // decoding object types.
 //
 package binary
+
+// binary: Schema = false

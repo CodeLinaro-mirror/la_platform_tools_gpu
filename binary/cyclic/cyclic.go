@@ -29,8 +29,8 @@ import (
 func Encoder(writer binary.Writer) binary.Encoder {
 	return &encoder{
 		Writer:   writer,
-		entities: map[*binary.Entity]uint32{},
-		objects:  map[binary.Object]uint32{},
+		entities: map[*binary.Entity]uint32{nil: 0},
+		objects:  map[binary.Object]uint32{nil: 0},
 	}
 }
 
@@ -39,16 +39,18 @@ func Decoder(reader binary.Reader) *decoder {
 	return &decoder{
 		Reader:    reader,
 		Namespace: registry.Global,
-		entities:  map[uint32]*binary.Entity{},
-		objects:   map[uint32]binary.Object{},
+		entities:  map[uint32]*binary.Entity{0: nil},
+		objects:   map[uint32]binary.Object{0: nil},
 		substack:  substack{},
 	}
 }
 
 type encoder struct {
 	binary.Writer
-	entities map[*binary.Entity]uint32
-	objects  map[binary.Object]uint32
+	entities      map[*binary.Entity]uint32
+	objects       map[binary.Object]uint32
+	controlNeeded bool
+	control       Control
 }
 
 type decoder struct {
@@ -57,33 +59,57 @@ type decoder struct {
 	entities  map[uint32]*binary.Entity
 	objects   map[uint32]binary.Object
 	substack  substack
+	control   Control
 }
 
-func (e *encoder) Entity(s *binary.Entity, compact bool) {
-	if s == nil {
-		e.Uint32(0)
-		return
+// writeSid write out the stream id and whether the data follows
+// It may also trigger a control block to be written
+// You are not allowed to call this function with a sid of 0 and encoded set to true
+func (e *encoder) writeSid(sid uint32, encoded bool) {
+	if e.controlNeeded {
+		e.controlNeeded = false // set early to prevent recursive triggering
+		e.Uint32(1)             // encoded sid 0 is a special marker
+		e.control.write(e)      // and write the control block itself
 	}
-	if sid, found := e.entities[s]; found {
-		e.Uint32(sid << 1)
-	} else {
-		sid = uint32(len(e.entities)) + 1
-		e.entities[s] = sid
-		e.Uint32((sid << 1) | 1)
-		schema.EncodeEntity(e, s, compact)
+	v := sid << 1
+	if encoded {
+		v |= 1
 	}
+	e.Uint32(v)
 }
 
-func (d *decoder) Entity(compact bool) *binary.Entity {
+// readSid returns the stream id and whether the data follows
+// If it returns a sid of zero, encoded will always be false.
+func (d *decoder) readSid() (uint32, bool) {
 	v := d.Uint32()
-	if v == 0 {
-		return nil
+	if v == 1 { // encoded sis 0 is a special marker
+		// read control block.
+		d.control.read(d)
+		// read the real sid
+		v = d.Uint32()
 	}
+	encoded := (v & 1) != 0
 	sid := v >> 1
-	if (v & 1) != 0 {
+	return sid, encoded
+}
+
+func (e *encoder) Entity(s *binary.Entity) {
+	if sid, found := e.entities[s]; found {
+		e.writeSid(sid, false)
+	} else {
+		sid = uint32(len(e.entities))
+		e.entities[s] = sid
+		e.writeSid(sid, true)
+		schema.EncodeEntity(e, s)
+	}
+}
+
+func (d *decoder) Entity() *binary.Entity {
+	sid, encoded := d.readSid()
+	if encoded {
 		s := &binary.Entity{}
 		d.entities[sid] = s
-		schema.DecodeEntity(d, s, compact)
+		schema.DecodeEntity(d, s)
 		return s
 	}
 	s, found := d.entities[sid]
@@ -136,16 +162,16 @@ func (d *decoder) Struct(obj binary.Object) {
 
 func (e *encoder) Variant(obj binary.Object) {
 	if obj == nil {
-		e.Entity(nil, true)
+		e.Entity(nil)
 		return
 	}
 	class := obj.Class()
-	e.Entity(class.Schema(), true)
+	e.Entity(class.Schema())
 	class.Encode(e, obj)
 }
 
 func (d *decoder) Variant() binary.Object {
-	entity := d.Entity(true)
+	entity := d.Entity()
 	if entity == nil {
 		return nil
 	}
@@ -166,38 +192,26 @@ func (d *decoder) Variant() binary.Object {
 }
 
 func (e *encoder) Object(obj binary.Object) {
-	if obj == nil {
-		e.Uint32(0)
-		return
-	}
 	if sid, found := e.objects[obj]; found {
-		e.Uint32(sid << 1)
+		e.writeSid(sid, false)
 	} else {
-		sid = uint32(len(e.objects)) + 1
+		sid = uint32(len(e.objects))
 		e.objects[obj] = sid
-		e.Uint32((sid << 1) | 1)
+		e.writeSid(sid, true)
 		e.Variant(obj)
 	}
 }
 
 func (d *decoder) Object() binary.Object {
-	v := d.Uint32()
-	if v == 0 {
-		return nil
-	}
-	sid := v >> 1
-	decode := (v & 1) != 0
+	sid, decode := d.readSid()
 	o, found := d.objects[sid]
-	switch {
-	case found && decode:
-		// TODO consider whether we want to reintroduce some skipping ability
-		// just for this
-		d.Variant()
-	case decode:
+	if decode {
+		if found {
+			d.SetError(fmt.Errorf("Object sid %v occured more than once", sid))
+		}
 		o = d.Variant()
 		d.objects[sid] = o
-	case found:
-	default:
+	} else if !found {
 		d.SetError(fmt.Errorf("Unknown object sid %v", sid))
 	}
 	return o
@@ -213,4 +227,19 @@ func (d *decoder) Count() uint32 {
 		d.SetError(err)
 	}
 	return count
+}
+
+func (e *encoder) GetMode() binary.Mode {
+	return e.control.Mode
+}
+
+func (e *encoder) SetMode(mode binary.Mode) {
+	if e.control.Mode != mode {
+		e.controlNeeded = true
+		e.control.Mode = mode
+	}
+}
+
+func (d *decoder) GetMode() binary.Mode {
+	return d.control.Mode
 }

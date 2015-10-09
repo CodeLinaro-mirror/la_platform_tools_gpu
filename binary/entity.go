@@ -20,7 +20,7 @@ import (
 )
 
 // Entity represents the encodable type information for an object.
-// In it's compact form, the entity contains only the information strictly required to generate it's signature, and not
+// In it's compact mode, the entity contains only the information strictly required to generate it's signature, and not
 // any of metadata or display names.
 type Entity struct {
 	Package  string    // The package that declared the struct.

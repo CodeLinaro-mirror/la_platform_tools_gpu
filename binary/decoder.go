@@ -18,8 +18,7 @@ package binary
 type Decoder interface {
 	Reader
 	// Entity supports reading a binary.Entity from the stream.
-	// See Entity for details of what is included in the compact form.
-	Entity(compact bool) *Entity
+	Entity() *Entity
 	// Value decodes an Object from the stream.
 	Value(Object)
 	// Struct decodes an sub-structure from the stream. The type of the
@@ -39,4 +38,6 @@ type Decoder interface {
 	// Decode a collection count from the stream. Must be used to decode
 	// counts on streams where collections can contain sub-structures.
 	Count() uint32
+	// GetMode gets the current mode of the decoder.
+	GetMode() Mode
 }

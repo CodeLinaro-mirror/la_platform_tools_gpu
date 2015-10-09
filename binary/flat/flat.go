@@ -56,11 +56,11 @@ func (d *decoder) Struct(obj binary.Object) {
 	d.Value(obj)
 }
 
-func (e *encoder) Entity(*binary.Entity, bool) {
+func (e *encoder) Entity(*binary.Entity) {
 	panic(fmt.Errorf("Flat encoders do not support Schema objects"))
 }
 
-func (d *decoder) Entity(bool) *binary.Entity {
+func (d *decoder) Entity() *binary.Entity {
 	panic(fmt.Errorf("Flat decoders do not support Schema objects"))
 }
 
@@ -85,4 +85,16 @@ func (d *decoder) Lookup(ent *binary.Entity) binary.UpgradeDecoder {
 
 func (d *decoder) Count() uint32 {
 	return d.Uint32()
+}
+
+func (e *encoder) GetMode() binary.Mode {
+	panic("e.GetMode() called on flat encoder")
+}
+
+func (e *encoder) SetMode(mode binary.Mode) {
+	panic("e.SetMode() called on flat encoder")
+}
+
+func (d *decoder) GetMode() binary.Mode {
+	panic("d.GetMode() called on flat decoder")
 }
