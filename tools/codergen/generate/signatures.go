@@ -40,7 +40,10 @@ type stream struct {
 	e       binary.Encoder
 	d       binary.Decoder
 	compact bool
+	count   int
 	size    int
+	largest int
+	total   int
 }
 
 func newStream(compact bool) *stream {
@@ -50,9 +53,14 @@ func newStream(compact bool) *stream {
 	} else {
 		s.name = "full"
 	}
+	s.reset()
+	return s
+}
+
+func (s *stream) reset() {
+	s.b.Reset()
 	s.e = cyclic.Encoder(vle.Writer(&s.b))
 	s.d = cyclic.Decoder(vle.Reader(&s.b))
-	return s
 }
 
 func (s *stream) test(e *binary.Entity) {
@@ -77,6 +85,27 @@ func (s *stream) test(e *binary.Entity) {
 	}
 }
 
+func (s *stream) measure(e *binary.Entity) int {
+	s.reset()
+	s.e.Entity(e, s.compact)
+	start := s.b.Len()
+	// now encode the entity directly to bypass the table
+	schema.EncodeEntity(s.e, e, s.compact)
+	size := s.b.Len() - start + 2
+	s.total += size
+	s.count++
+	if s.largest < size {
+		s.largest = size
+	}
+	return size
+}
+
+func (s *stream) stats(w io.Writer) {
+	fmt.Fprintln(w, "Total:", s.total)
+	fmt.Fprintln(w, "Average:", s.total/s.count)
+	fmt.Fprintln(w, "Largest:", s.largest)
+}
+
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}
 	for _, m := range modules {
@@ -85,32 +114,23 @@ func WriteAllSignatures(w io.Writer, modules Modules) {
 	sort.Sort(byID(structs))
 	full := newStream(false)
 	compact := newStream(true)
-	total := 0
-	largest := 0
 	// pre write the entire schema so the lookup table is full, and verify the encode/decode behaviour while doing it
 	for _, s := range structs {
 		full.test(&s.Entity)
 		compact.test(&s.Entity)
 	}
 	for _, s := range structs {
-		start := compact.b.Len()
-		// now encode the entity directly to bypass the table
-		schema.EncodeEntity(compact.e, &s.Entity, true)
-		size := compact.b.Len() - start + 2
-		total += size
-		if largest < size {
-			largest = size
-		}
+		fs := full.measure(&s.Entity)
+		cs := compact.measure(&s.Entity)
 		fmt.Fprintln(w)
-		fmt.Fprintln(w, s.Name(), ": size", size)
+		fmt.Fprintln(w, s.Name(), ": full", fs, "compact", cs)
 		fmt.Fprintln(w, s.Entity.Signature())
 	}
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, "Schema stats:")
 	fmt.Fprintln(w, "Count:", len(structs))
-	fmt.Fprintln(w, "Total:", total)
-	fmt.Fprintln(w, "Compact:", compact.size)
 	fmt.Fprintln(w, "Full:", full.size)
-	fmt.Fprintln(w, "Average:", total/len(structs))
-	fmt.Fprintln(w, "Largest:", largest)
+	full.stats(w)
+	fmt.Fprintln(w, "Compact:", compact.size)
+	compact.stats(w)
 }
