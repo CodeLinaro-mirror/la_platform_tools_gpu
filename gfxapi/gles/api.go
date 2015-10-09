@@ -1527,6 +1527,56 @@ func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
 	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// U8ᵖ is a pointer to a uint8 element.
+type U8ᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
+func NewU8ᵖ(addr uint64) U8ᵖ {
+	return U8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that U8ᵖ points to.
+func (p U8ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// Read reads and returns the uint8 element at the pointer.
+func (p U8ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the uint8 element at the pointer.
+func (p U8ᵖ) Write(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]uint8{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p U8ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p U8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p U8ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new U8ˢ from the pointer using start and end indices.
+func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
 type VertexArrayIdᶜᵖ struct {
 	binary.Generate
@@ -1625,56 +1675,6 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
-}
-
-// U8ᵖ is a pointer to a uint8 element.
-type U8ᵖ struct {
-	binary.Generate
-	memory.Pointer
-}
-
-// NewU8ᵖ returns a U8ᵖ that points to addr in the application pool.
-func NewU8ᵖ(addr uint64) U8ᵖ {
-	return U8ᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
-}
-
-// ElementSize returns the size in bytes of an element that U8ᵖ points to.
-func (p U8ᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
-	return uint64(1)
-}
-
-// Read reads and returns the uint8 element at the pointer.
-func (p U8ᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint8 {
-	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
-}
-
-// Write writes value to the uint8 element at the pointer.
-func (p U8ᵖ) Write(value uint8, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]uint8{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
-}
-
-// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p U8ᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
-	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p U8ᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
-	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-func (p U8ᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) U8ᵖ {
-	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-	return p
-}
-
-// Slice returns a new U8ˢ from the pointer using start and end indices.
-func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
-	if start > end {
-		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
-	}
-	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // U16ᵖ is a pointer to a uint16 element.
@@ -4826,6 +4826,106 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// VertexBufferBindingIndexᵖ is a pointer to a VertexBufferBindingIndex element.
+type VertexBufferBindingIndexᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewVertexBufferBindingIndexᵖ returns a VertexBufferBindingIndexᵖ that points to addr in the application pool.
+func NewVertexBufferBindingIndexᵖ(addr uint64) VertexBufferBindingIndexᵖ {
+	return VertexBufferBindingIndexᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that VertexBufferBindingIndexᵖ points to.
+func (p VertexBufferBindingIndexᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the VertexBufferBindingIndex element at the pointer.
+func (p VertexBufferBindingIndexᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndex {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the VertexBufferBindingIndex element at the pointer.
+func (p VertexBufferBindingIndexᵖ) Write(value VertexBufferBindingIndex, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]VertexBufferBindingIndex{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p VertexBufferBindingIndexᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p VertexBufferBindingIndexᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p VertexBufferBindingIndexᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new VertexBufferBindingIndexˢ from the pointer using start and end indices.
+func (p VertexBufferBindingIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexBufferBindingIndexˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// AttributeLocationᵖ is a pointer to a AttributeLocation element.
+type AttributeLocationᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewAttributeLocationᵖ returns a AttributeLocationᵖ that points to addr in the application pool.
+func NewAttributeLocationᵖ(addr uint64) AttributeLocationᵖ {
+	return AttributeLocationᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that AttributeLocationᵖ points to.
+func (p AttributeLocationᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the AttributeLocation element at the pointer.
+func (p AttributeLocationᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocation {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the AttributeLocation element at the pointer.
+func (p AttributeLocationᵖ) Write(value AttributeLocation, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]AttributeLocation{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p AttributeLocationᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p AttributeLocationᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p AttributeLocationᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new AttributeLocationˢ from the pointer using start and end indices.
+func (p AttributeLocationᵖ) Slice(start, end uint64, ϟs *gfxapi.State) AttributeLocationˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return AttributeLocationˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 type GLintː2ᵃ struct {
 	binary.Generate
 	Elements [2]GLint
@@ -4897,6 +4997,163 @@ type Vec3fː4ᵃ struct {
 type Vec4fː4ᵃ struct {
 	binary.Generate
 	Elements [4]Vec4f
+}
+
+// AttributeLocationˢ is a slice of AttributeLocation.
+type AttributeLocationˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeAttributeLocationˢ returns a AttributeLocationˢ backed by a new memory pool.
+func MakeAttributeLocationˢ(count uint64, ϟs *gfxapi.State) AttributeLocationˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return AttributeLocationˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the AttributeLocationˢ in a new memory pool.
+func (s AttributeLocationˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := AttributeLocationˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that AttributeLocationˢ points to.
+func (s AttributeLocationˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s AttributeLocationˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s AttributeLocationˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s AttributeLocationˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s AttributeLocationˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsAttributeLocationˢ returns s cast to a AttributeLocationˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsAttributeLocationˢ(s Slice, ϟs *gfxapi.State) AttributeLocationˢ {
+	out := AttributeLocationˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the AttributeLocation elements in this AttributeLocationˢ.
+func (s AttributeLocationˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []AttributeLocation {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]AttributeLocation, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if ϟv := d.Uint32(); d.Error() == nil {
+			res[i] = AttributeLocation(ϟv)
+		} else {
+			panic(d.Error())
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s AttributeLocationˢ) Write(src []AttributeLocation, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst AttributeLocationˢ) Copy(src AttributeLocationˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s AttributeLocationˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s AttributeLocationˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s AttributeLocationˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s AttributeLocationˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) AttributeLocationˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a AttributeLocationᵖ to the i'th element in this AttributeLocationˢ.
+func (s AttributeLocationˢ) Index(i uint64, ϟs *gfxapi.State) AttributeLocationᵖ {
+	return AttributeLocationᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the AttributeLocationˢ using start and end indices.
+func (s AttributeLocationˢ) Slice(start, end uint64, ϟs *gfxapi.State) AttributeLocationˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return AttributeLocationˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the AttributeLocationˢ slice.
+func (s AttributeLocationˢ) String() string {
+	return fmt.Sprintf("AttributeLocation(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // BufferIdˢ is a slice of BufferId.
@@ -13835,6 +14092,163 @@ func (s VertexArrayIdˢ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArray
 // String returns a string description of the VertexArrayIdˢ slice.
 func (s VertexArrayIdˢ) String() string {
 	return fmt.Sprintf("VertexArrayId(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// VertexBufferBindingIndexˢ is a slice of VertexBufferBindingIndex.
+type VertexBufferBindingIndexˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeVertexBufferBindingIndexˢ returns a VertexBufferBindingIndexˢ backed by a new memory pool.
+func MakeVertexBufferBindingIndexˢ(count uint64, ϟs *gfxapi.State) VertexBufferBindingIndexˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the VertexBufferBindingIndexˢ in a new memory pool.
+func (s VertexBufferBindingIndexˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that VertexBufferBindingIndexˢ points to.
+func (s VertexBufferBindingIndexˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s VertexBufferBindingIndexˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s VertexBufferBindingIndexˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s VertexBufferBindingIndexˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s VertexBufferBindingIndexˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsVertexBufferBindingIndexˢ returns s cast to a VertexBufferBindingIndexˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsVertexBufferBindingIndexˢ(s Slice, ϟs *gfxapi.State) VertexBufferBindingIndexˢ {
+	out := VertexBufferBindingIndexˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the VertexBufferBindingIndex elements in this VertexBufferBindingIndexˢ.
+func (s VertexBufferBindingIndexˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []VertexBufferBindingIndex {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]VertexBufferBindingIndex, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if ϟv := d.Uint32(); d.Error() == nil {
+			res[i] = VertexBufferBindingIndex(ϟv)
+		} else {
+			panic(d.Error())
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s VertexBufferBindingIndexˢ) Write(src []VertexBufferBindingIndex, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if e.Uint32(uint32(src[i])); e.Error() != nil {
+			panic(e.Error())
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst VertexBufferBindingIndexˢ) Copy(src VertexBufferBindingIndexˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s VertexBufferBindingIndexˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s VertexBufferBindingIndexˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s VertexBufferBindingIndexˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s VertexBufferBindingIndexˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) VertexBufferBindingIndexˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a VertexBufferBindingIndexᵖ to the i'th element in this VertexBufferBindingIndexˢ.
+func (s VertexBufferBindingIndexˢ) Index(i uint64, ϟs *gfxapi.State) VertexBufferBindingIndexᵖ {
+	return VertexBufferBindingIndexᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the VertexBufferBindingIndexˢ using start and end indices.
+func (s VertexBufferBindingIndexˢ) Slice(start, end uint64, ϟs *gfxapi.State) VertexBufferBindingIndexˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the VertexBufferBindingIndexˢ slice.
+func (s VertexBufferBindingIndexˢ) String() string {
+	return fmt.Sprintf("VertexBufferBindingIndex(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // Voidˢ is a slice of void.
@@ -40938,10 +41352,11 @@ func (a *SwitchThread) Observations() *atom.Observations { return &a.observation
 type ContextInfo struct {
 	binary.Generate
 	observations          atom.Observations
-	Name                  string
-	Vendor                string
-	Extensions            string
-	Version               string
+	ConstantCount         uint32
+	ConstantNames         GLenumᵖ
+	ConstantOffsets       U32ᵖ
+	ConstantSizes         U32ᵖ
+	ConstantData          U8ᵖ
 	BackbufferWidth       GLsizei
 	BackbufferHeight      GLsizei
 	BackbufferColorFmt    GLenum
@@ -40952,7 +41367,7 @@ type ContextInfo struct {
 }
 
 func (a *ContextInfo) String() string {
-	return fmt.Sprintf("contextInfo(name: %v, vendor: %v, extensions: %v, version: %v, backbuffer_width: %v, backbuffer_height: %v, backbuffer_color_fmt: %v, backbuffer_depth_fmt: %v, backbuffer_stencil_fmt: %v, reset_viewport_scissor: %v, preserve_buffers_on_swap: %v)", a.Name, a.Vendor, a.Extensions, a.Version, a.BackbufferWidth, a.BackbufferHeight, a.BackbufferColorFmt, a.BackbufferDepthFmt, a.BackbufferStencilFmt, a.ResetViewportScissor, a.PreserveBuffersOnSwap)
+	return fmt.Sprintf("contextInfo(constant_count: %v, constant_names: %v, constant_offsets: %v, constant_sizes: %v, constant_data: %v, backbuffer_width: %v, backbuffer_height: %v, backbuffer_color_fmt: %v, backbuffer_depth_fmt: %v, backbuffer_stencil_fmt: %v, reset_viewport_scissor: %v, preserve_buffers_on_swap: %v)", a.ConstantCount, a.ConstantNames, a.ConstantOffsets, a.ConstantSizes, a.ConstantData, a.BackbufferWidth, a.BackbufferHeight, a.BackbufferColorFmt, a.BackbufferDepthFmt, a.BackbufferStencilFmt, a.ResetViewportScissor, a.PreserveBuffersOnSwap)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
@@ -41069,6 +41484,158 @@ func (a *FlushPostBuffer) AddWrite(rng memory.Range, id binary.ID) *FlushPostBuf
 func (c *FlushPostBuffer) API() gfxapi.ID                   { return api{}.ID() }
 func (c *FlushPostBuffer) Flags() atom.Flags                { return 0 }
 func (a *FlushPostBuffer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// class Constants
+////////////////////////////////////////////////////////////////////////////////
+type Constants struct {
+	binary.Generate
+	Renderer                                   string
+	Vendor                                     string
+	Version                                    string
+	Extensions                                 string
+	ShadingLanguageVersion                     string
+	SubpixelBits                               GLint
+	MaxElementIndex                            GLint64
+	Max3dTextureSize                           GLint
+	MaxTextureSize                             GLint
+	MaxArrayTextureLayers                      GLint
+	MaxTextureLodBias                          GLfloat
+	MaxCubeMapTextureSize                      GLint
+	MaxRenderbufferSize                        GLint
+	AliasedPointSizeRange                      GLfloatˢ
+	AliasedLineWidthRange                      GLfloatˢ
+	MultisampleLineWidthRange                  GLfloatˢ
+	MultisampleLineWidthGranularity            GLfloat
+	MaxDrawBuffers                             GLint
+	MaxFramebufferWidth                        GLint
+	MaxFramebufferHeight                       GLint
+	MaxFramebufferLayers                       GLint
+	MaxFramebufferSamples                      GLint
+	MaxColorAttachments                        GLint
+	MinFragmentInterpolationOffset             GLfloat
+	MaxFragmentInterpolationOffset             GLfloat
+	FragmentInterpolationOffsetBits            GLint
+	MaxViewportDims                            GLintˢ
+	MaxSampleMaskWords                         GLint
+	MaxColorTextureSamples                     GLint
+	MaxDepthTextureSamples                     GLint
+	MaxIntegerSamples                          GLint
+	MaxServerWaitTimeout                       GLint64
+	LayerProvokingVertex                       GLint
+	PrimitiveRestartForPatchesSupported        GLboolean
+	MaxVertexAttribRelativeOffset              GLint
+	MaxVertexAttribBindings                    VertexBufferBindingIndex
+	MaxVertexAttribStride                      GLint
+	MaxElementsIndices                         GLint
+	MaxElementsVertices                        GLint
+	MaxTextureBufferSize                       GLint
+	NumCompressedTextureFormats                GLint
+	CompressedTextureFormats                   GLintˢ
+	NumProgramBinaryFormats                    GLint
+	ProgramBinaryFormats                       GLintˢ
+	NumShaderBinaryFormats                     GLint
+	ShaderBinaryFormats                        GLintˢ
+	ShaderCompiler                             GLboolean
+	TextureBufferOffsetAlignment               GLint
+	NumExtensions                              GLint
+	MajorVersion                               GLint
+	MinorVersion                               GLint
+	ContextFlags                               GLint
+	MaxVertexAttribs                           AttributeLocation
+	MaxVertexUniformComponents                 GLint
+	MaxVertexUniformVectors                    GLint
+	MaxVertexUniformBlocks                     GLint
+	MaxVertexOutputComponents                  GLint
+	MaxVertexTextureImageUnits                 GLint
+	MaxVertexAtomicCounterBuffers              GLint
+	MaxVertexAtomicCounters                    GLint
+	MaxVertexShaderStorageBlocks               GLint
+	MaxTessGenLevel                            GLint
+	MaxPatchVertices                           GLint
+	MaxTessControlUniformComponents            GLint
+	MaxTessControlTextureImageUnits            GLint
+	MaxTessControlOutputComponents             GLint
+	MaxTessPatchComponents                     GLint
+	MaxTessControlTotalOutputComponents        GLint
+	MaxTessControlInputComponents              GLint
+	MaxTessControlUniformBlocks                GLint
+	MaxTessControlAtomicCounterBuffers         GLint
+	MaxTessControlAtomicCounters               GLint
+	MaxTessControlShaderStorageBlocks          GLint
+	MaxTessEvaluationUniformComponents         GLint
+	MaxTessEvaluationTextureImageUnits         GLint
+	MaxTessEvaluationOutputComponents          GLint
+	MaxTessEvaluationInputComponents           GLint
+	MaxTessEvaluationUniformBlocks             GLint
+	MaxTessEvaluationAtomicCounterBuffers      GLint
+	MaxTessEvaluationAtomicCounters            GLint
+	MaxTessEvaluationShaderStorageBlocks       GLint
+	MaxGeometryUniformComponents               GLint
+	MaxGeometryUniformBlocks                   GLint
+	MaxGeometryInputComponents                 GLint
+	MaxGeometryOutputComponents                GLint
+	MaxGeometryOutputVertices                  GLint
+	MaxGeometryTotalOutputComponents           GLint
+	MaxGeometryTextureImageUnits               GLint
+	MaxGeometryShaderInvocations               GLint
+	MaxGeometryAtomicCounterBuffers            GLint
+	MaxGeometryAtomicCounters                  GLint
+	MaxGeometryShaderStorageBlocks             GLint
+	MaxFragmentUniformComponents               GLint
+	MaxFragmentUniformVectors                  GLint
+	MaxFragmentUniformBlocks                   GLint
+	MaxFragmentInputComponents                 GLint
+	MaxTextureImageUnits                       GLint
+	MaxFragmentAtomicCounterBuffers            GLint
+	MaxFragmentAtomicCounters                  GLint
+	MaxFragmentShaderStorageBlocks             GLint
+	MinProgramTextureGatherOffset              GLint
+	MaxProgramTextureGatherOffset              GLint
+	MinProgramTexelOffset                      GLint
+	MaxProgramTexelOffset                      GLint
+	MaxComputeWorkGroupCount                   GLintˢ
+	MaxComputeWorkGroupSize                    GLintˢ
+	MaxComputeWorkGroupInvocations             GLint
+	MaxComputeUniformBlocks                    GLint
+	MaxComputeTextureImageUnits                GLint
+	MaxComputeSharedMemorySize                 GLint
+	MaxComputeUniformComponents                GLint
+	MaxComputeAtomicCounterBuffers             GLint
+	MaxComputeAtomicCounters                   GLint
+	MaxCombinedComputeUniformComponents        GLint
+	MaxComputeShaderStorageBlocks              GLint
+	MaxUniformBufferBindings                   GLint
+	MaxUniformBlockSize                        GLint64
+	UniformBufferOffsetAlignment               GLint
+	MaxCombinedUniformBlocks                   GLint
+	MaxCombinedVertexUniformComponents         GLint64
+	MaxCombinedTessControlUniformComponents    GLint
+	MaxCombinedTessEvaluationUniformComponents GLint
+	MaxCombinedGeometryUniformComponents       GLint
+	MaxCombinedFragmentUniformComponents       GLint64
+	MaxVaryingComponents                       GLint
+	MaxVaryingVectors                          GLint
+	MaxCombinedTextureImageUnits               GLint
+	MaxCombinedShaderOutputResources           GLint
+	MaxUniformLocations                        GLint
+	MaxAtomicCounterBufferBindings             GLint
+	MaxAtomicCounterBufferSize                 GLint
+	MaxCombinedAtomicCounterBuffers            GLint
+	MaxCombinedAtomicCounters                  GLint
+	MaxImageUnits                              GLint
+	MaxVertexImageUniforms                     GLint
+	MaxTessControlImageUniforms                GLint
+	MaxTessEvaluationImageUniforms             GLint
+	MaxGeometryImageUniforms                   GLint
+	MaxFragmentImageUniforms                   GLint
+	MaxComputeImageUniforms                    GLint
+	MaxCombinedImageUniforms                   GLint
+	MaxShaderStorageBufferBindings             GLint
+	MaxShaderStorageBlockSize                  GLint64
+	MaxCombinedShaderStorageBlocks             GLint
+	ShaderStorageBufferOffsetAlignment         GLint
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexArray
@@ -41376,12 +41943,6 @@ type Objects struct {
 ////////////////////////////////////////////////////////////////////////////////
 type ContextCreationInfo struct {
 	binary.Generate
-	Name                  string
-	Vendor                string
-	Extensions            string
-	Version               string
-	VersionMajor          GLint
-	VersionMinor          GLint
 	PreserveBuffersOnSwap bool
 }
 
@@ -41407,16 +41968,8 @@ type Context struct {
 	GenerateMipmapHint GLenum
 	PixelStorage       GLenumːGLintᵐ
 	Instances          Objects
+	Constants          Constants
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// enum FramebufferConstants
-////////////////////////////////////////////////////////////////////////////////
-type FramebufferConstants uint32
-
-const (
-	FramebufferConstants_MAX_DRAW_BUFFERS = FramebufferConstants(8)
-)
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum GLbitfield
@@ -47032,18 +47585,6 @@ const (
 )
 
 ////////////////////////////////////////////////////////////////////////////////
-// enum Constants
-////////////////////////////////////////////////////////////////////////////////
-type Constants uint32
-
-const (
-	Constants_MAX_VERTEX_ATTRIBS                = Constants(16)
-	Constants_MAX_VERTEX_ATTRIB_BINDINGS        = Constants(16)
-	Constants_MAX_VERTEX_ATTRIB_STRIDE          = Constants(2048)
-	Constants_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = Constants(2047)
-)
-
-////////////////////////////////////////////////////////////////////////////////
 // enum ExtensionId
 ////////////////////////////////////////////////////////////////////////////////
 type ExtensionId uint32
@@ -49421,8 +49962,8 @@ func NewReplayBindRenderer(Id uint32) *ReplayBindRenderer {
 func NewSwitchThread(ThreadID ThreadID) *SwitchThread {
 	return &SwitchThread{ThreadID: ThreadID}
 }
-func NewContextInfo(Name string, Vendor string, Extensions string, Version string, Backbuffer_width GLsizei, Backbuffer_height GLsizei, Backbuffer_color_fmt GLenum, Backbuffer_depth_fmt GLenum, Backbuffer_stencil_fmt GLenum, Reset_viewport_scissor bool, Preserve_buffers_on_swap bool) *ContextInfo {
-	return &ContextInfo{Name: Name, Vendor: Vendor, Extensions: Extensions, Version: Version, BackbufferWidth: Backbuffer_width, BackbufferHeight: Backbuffer_height, BackbufferColorFmt: Backbuffer_color_fmt, BackbufferDepthFmt: Backbuffer_depth_fmt, BackbufferStencilFmt: Backbuffer_stencil_fmt, ResetViewportScissor: Reset_viewport_scissor, PreserveBuffersOnSwap: Preserve_buffers_on_swap}
+func NewContextInfo(Constant_count uint32, Constant_names memory.Pointer, Constant_offsets memory.Pointer, Constant_sizes memory.Pointer, Constant_data memory.Pointer, Backbuffer_width GLsizei, Backbuffer_height GLsizei, Backbuffer_color_fmt GLenum, Backbuffer_depth_fmt GLenum, Backbuffer_stencil_fmt GLenum, Reset_viewport_scissor bool, Preserve_buffers_on_swap bool) *ContextInfo {
+	return &ContextInfo{ConstantCount: Constant_count, ConstantNames: GLenumᵖ{Pointer: Constant_names}, ConstantOffsets: U32ᵖ{Pointer: Constant_offsets}, ConstantSizes: U32ᵖ{Pointer: Constant_sizes}, ConstantData: U8ᵖ{Pointer: Constant_data}, BackbufferWidth: Backbuffer_width, BackbufferHeight: Backbuffer_height, BackbufferColorFmt: Backbuffer_color_fmt, BackbufferDepthFmt: Backbuffer_depth_fmt, BackbufferStencilFmt: Backbuffer_stencil_fmt, ResetViewportScissor: Reset_viewport_scissor, PreserveBuffersOnSwap: Preserve_buffers_on_swap}
 }
 func NewStartTimer(Index uint8) *StartTimer {
 	return &StartTimer{Index: Index}

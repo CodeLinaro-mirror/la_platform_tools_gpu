@@ -35,10 +35,11 @@ cmd void switchThread(ThreadID threadID) {
 }
 
 @synthetic
-cmd void contextInfo(string  name,
-                     string  vendor,
-                     string  extensions,
-                     string  version,
+cmd void contextInfo(u32     constant_count,
+                     GLenum* constant_names,
+                     u32*    constant_offsets,
+                     u32*    constant_sizes,
+                     u8*     constant_data,
                      GLsizei backbuffer_width,
                      GLsizei backbuffer_height,
                      GLenum  backbuffer_color_fmt,
@@ -47,10 +48,16 @@ cmd void contextInfo(string  name,
                      bool    reset_viewport_scissor,
                      bool    preserve_buffers_on_swap) {
   ctx := GetContext()
-  ctx.Info.Name = name
-  ctx.Info.Vendor = vendor
-  ctx.Info.Extensions = extensions
-  ctx.Info.Version = version
+  const_names := constant_names[0:constant_count]
+  const_offsets := constant_offsets[0:constant_count]
+  const_sizes := constant_sizes[0:constant_count]
+  for i in (0 .. constant_count) {
+    name := const_names[i]
+    offset := const_offsets[i]
+    size := const_sizes[i]
+    data := constant_data[offset:offset + size]
+    SetConstant(ctx, name, data)
+  }
   ctx.Info.PreserveBuffersOnSwap = preserve_buffers_on_swap
 
   backbuffer := ctx.Instances.Framebuffers[0]
@@ -81,6 +88,24 @@ cmd void contextInfo(string  name,
     ctx.Rasterizing.Scissor.Height = backbuffer_height
     ctx.Rasterizing.Viewport.Width = backbuffer_width
     ctx.Rasterizing.Viewport.Height = backbuffer_height
+  }
+
+  // Initialize state which depends on constants,
+  // but do not overwrite any existing state.
+
+  for i in (0 .. ctx.Constants.MaxVertexAttribs) {
+    if !(i in ctx.VertexAttributes) {
+      v := make!Vec4f(1)
+      v[0] = Vec4f(0.0, 0.0, 0.0, 1.0)
+      ctx.VertexAttributes[i] = VertexAttributeValue(Value: as!u8[](v))
+    }
+  }
+
+  for i in (0 .. ctx.Constants.MaxCombinedTextureImageUnits) {
+    name := GL_TEXTURE0 + as!GLenum(i)
+    if !(name in ctx.TextureUnits) {
+      ctx.TextureUnits[name] = new!TextureUnit()
+    }
   }
 }
 

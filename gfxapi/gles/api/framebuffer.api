@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-enum FramebufferConstants {
-  MAX_DRAW_BUFFERS = 8 // TODO
-}
-
 @Doc("https://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml","OpenGL ES 2.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glBindFramebuffer.xhtml","OpenGL ES 3.0")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindFramebuffer.xhtml","OpenGL ES 3.1")
@@ -169,7 +165,8 @@ cmd void glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) 
   minRequiredVersion(3, 0)
   switch (buffer) {
     case GL_COLOR: {
-      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      ctx := GetContext()
+      glErrorInvalidValueIf(drawbuffer >= ctx.Constants.MaxDrawBuffers)
       read(value[0:4])
     }
     case GL_DEPTH: {
@@ -189,7 +186,8 @@ cmd void glClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint* value) {
   minRequiredVersion(3, 0)
   switch (buffer) {
     case GL_COLOR: {
-      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      ctx := GetContext()
+      glErrorInvalidValueIf(drawbuffer >= ctx.Constants.MaxDrawBuffers)
       read(value[0:4])
     }
     case GL_STENCIL: {
@@ -209,7 +207,8 @@ cmd void glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) 
   minRequiredVersion(3, 0)
   switch (buffer) {
     case GL_COLOR: {
-      glErrorInvalidValueIf(drawbuffer >= as!GLint(MAX_DRAW_BUFFERS))
+      ctx := GetContext()
+      glErrorInvalidValueIf(drawbuffer >= ctx.Constants.MaxDrawBuffers)
       read(value[0:4])
     }
     default: {

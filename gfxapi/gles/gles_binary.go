@@ -20,9 +20,11 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Architecture)(nil).Class())
+	Namespace.Add((*SliceInfo)(nil).Class())
+	Namespace.Add((*AttributeLocationˢ)(nil).Class())
+	Namespace.Add((*AttributeLocationᵖ)(nil).Class())
 	Namespace.Add((*Color)(nil).Class())
 	Namespace.Add((*BlendState)(nil).Class())
-	Namespace.Add((*SliceInfo)(nil).Class())
 	Namespace.Add((*U8ˢ)(nil).Class())
 	Namespace.Add((*Buffer)(nil).Class())
 	Namespace.Add((*BufferDataPointer)(nil).Class())
@@ -49,6 +51,9 @@ func init() {
 	Namespace.Add((*Charˢ)(nil).Class())
 	Namespace.Add((*Charᵖ)(nil).Class())
 	Namespace.Add((*ClearState)(nil).Class())
+	Namespace.Add((*GLfloatˢ)(nil).Class())
+	Namespace.Add((*GLintˢ)(nil).Class())
+	Namespace.Add((*Constants)(nil).Class())
 	Namespace.Add((*ContextCreationInfo)(nil).Class())
 	Namespace.Add((*Rect)(nil).Class())
 	Namespace.Add((*RasterizerState)(nil).Class())
@@ -72,6 +77,9 @@ func init() {
 	Namespace.Add((*Query)(nil).Class())
 	Namespace.Add((*Objects)(nil).Class())
 	Namespace.Add((*Context)(nil).Class())
+	Namespace.Add((*GLenumᵖ)(nil).Class())
+	Namespace.Add((*U32ᵖ)(nil).Class())
+	Namespace.Add((*U8ᵖ)(nil).Class())
 	Namespace.Add((*ContextInfo)(nil).Class())
 	Namespace.Add((*EGLConfig)(nil).Class())
 	Namespace.Add((*EGLContext)(nil).Class())
@@ -102,12 +110,10 @@ func init() {
 	Namespace.Add((*GLcharᶜᵖᶜᵖ)(nil).Class())
 	Namespace.Add((*GLeglImageOES)(nil).Class())
 	Namespace.Add((*GLenumˢ)(nil).Class())
-	Namespace.Add((*GLenumᵖ)(nil).Class())
 	Namespace.Add((*GLenumᶜᵖ)(nil).Class())
 	Namespace.Add((*GLfloatː2ᵃ)(nil).Class())
 	Namespace.Add((*GLfloatː3ᵃ)(nil).Class())
 	Namespace.Add((*GLfloatː4ᵃ)(nil).Class())
-	Namespace.Add((*GLfloatˢ)(nil).Class())
 	Namespace.Add((*GLfloatᵖ)(nil).Class())
 	Namespace.Add((*GLfloatᶜᵖ)(nil).Class())
 	Namespace.Add((*GLint64ˢ)(nil).Class())
@@ -115,7 +121,6 @@ func init() {
 	Namespace.Add((*GLintː2ᵃ)(nil).Class())
 	Namespace.Add((*GLintː3ᵃ)(nil).Class())
 	Namespace.Add((*GLintː4ᵃ)(nil).Class())
-	Namespace.Add((*GLintˢ)(nil).Class())
 	Namespace.Add((*GLintᵖ)(nil).Class())
 	Namespace.Add((*GLintᶜᵖ)(nil).Class())
 	Namespace.Add((*GLsizeiˢ)(nil).Class())
@@ -944,9 +949,7 @@ func init() {
 	Namespace.Add((*U16ˢ)(nil).Class())
 	Namespace.Add((*U16ᵖ)(nil).Class())
 	Namespace.Add((*U32ˢ)(nil).Class())
-	Namespace.Add((*U32ᵖ)(nil).Class())
 	Namespace.Add((*U64ˢ)(nil).Class())
-	Namespace.Add((*U8ᵖ)(nil).Class())
 	Namespace.Add((*UniformIndexˢ)(nil).Class())
 	Namespace.Add((*Vec2fː2ᵃ)(nil).Class())
 	Namespace.Add((*Vec2fː3ᵃ)(nil).Class())
@@ -982,6 +985,8 @@ func init() {
 	Namespace.Add((*Vec4uˢ)(nil).Class())
 	Namespace.Add((*Vec4uᵖ)(nil).Class())
 	Namespace.Add((*VertexArrayIdˢ)(nil).Class())
+	Namespace.Add((*VertexBufferBindingIndexˢ)(nil).Class())
+	Namespace.Add((*VertexBufferBindingIndexᵖ)(nil).Class())
 	Namespace.Add((*Voidˢ)(nil).Class())
 	Namespace.Add((*Voidᵖˢ)(nil).Class())
 	Namespace.Add((*Voidᶜᵖˢ)(nil).Class())
@@ -1041,6 +1046,129 @@ var schemaArchitecture = &binary.Entity{
 		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
+
+type binaryClassSliceInfo struct{}
+
+func (*SliceInfo) Class() binary.Class {
+	return (*binaryClassSliceInfo)(nil)
+}
+func doEncodeSliceInfo(e binary.Encoder, o *SliceInfo) {
+	e.Struct(&o.Root)
+	e.Uint64(o.Base)
+	e.Uint64(o.Count)
+}
+func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) {
+	var ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb = ent
+	}
+	d.Struct(ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb, &o.Root)
+	o.Base = uint64(d.Uint64())
+	o.Count = uint64(d.Uint64())
+}
+func (*binaryClassSliceInfo) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeSliceInfo(e, obj.(*SliceInfo))
+}
+func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
+	obj := &SliceInfo{}
+	doDecodeSliceInfo(d, obj)
+	return obj
+}
+func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeSliceInfo(d, obj.(*SliceInfo))
+}
+func (*binaryClassSliceInfo) Schema() *binary.Entity { return schemaSliceInfo }
+
+var schemaSliceInfo = &binary.Entity{
+	Package:  "gles",
+	Identity: "SliceInfo",
+	Fields: []binary.Field{
+		{Declared: "Root", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
+
+type binaryClassAttributeLocationˢ struct{}
+
+func (*AttributeLocationˢ) Class() binary.Class {
+	return (*binaryClassAttributeLocationˢ)(nil)
+}
+func doEncodeAttributeLocationˢ(e binary.Encoder, o *AttributeLocationˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeAttributeLocationˢ(d binary.Decoder, o *AttributeLocationˢ) {
+	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
+	}
+	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
+}
+func (*binaryClassAttributeLocationˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAttributeLocationˢ(e, obj.(*AttributeLocationˢ))
+}
+func (*binaryClassAttributeLocationˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &AttributeLocationˢ{}
+	doDecodeAttributeLocationˢ(d, obj)
+	return obj
+}
+func (*binaryClassAttributeLocationˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAttributeLocationˢ(d, obj.(*AttributeLocationˢ))
+}
+func (*binaryClassAttributeLocationˢ) Schema() *binary.Entity { return schemaAttributeLocationˢ }
+
+var schemaAttributeLocationˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "AttributeLocationˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassAttributeLocationᵖ struct{}
+
+func (*AttributeLocationᵖ) Class() binary.Class {
+	return (*binaryClassAttributeLocationᵖ)(nil)
+}
+func doEncodeAttributeLocationᵖ(e binary.Encoder, o *AttributeLocationᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeAttributeLocationᵖ(d binary.Decoder, o *AttributeLocationᵖ) {
+	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
+	}
+	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
+}
+func (*binaryClassAttributeLocationᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAttributeLocationᵖ(e, obj.(*AttributeLocationᵖ))
+}
+func (*binaryClassAttributeLocationᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &AttributeLocationᵖ{}
+	doDecodeAttributeLocationᵖ(d, obj)
+	return obj
+}
+func (*binaryClassAttributeLocationᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAttributeLocationᵖ(d, obj.(*AttributeLocationᵖ))
+}
+func (*binaryClassAttributeLocationᵖ) Schema() *binary.Entity { return schemaAttributeLocationᵖ }
+
+var schemaAttributeLocationᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "AttributeLocationᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -1139,51 +1267,6 @@ var schemaBlendState = &binary.Entity{
 		{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BlendColor", Type: &schema.Struct{Entity: (*Color)(nil).Class().Schema()}},
-	},
-}
-
-type binaryClassSliceInfo struct{}
-
-func (*SliceInfo) Class() binary.Class {
-	return (*binaryClassSliceInfo)(nil)
-}
-func doEncodeSliceInfo(e binary.Encoder, o *SliceInfo) {
-	e.Struct(&o.Root)
-	e.Uint64(o.Base)
-	e.Uint64(o.Count)
-}
-func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) {
-	var ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb = ent
-	}
-	d.Struct(ent_ef00dda320800d751b86c76e24fb3f7f37d44fbb, &o.Root)
-	o.Base = uint64(d.Uint64())
-	o.Count = uint64(d.Uint64())
-}
-func (*binaryClassSliceInfo) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeSliceInfo(e, obj.(*SliceInfo))
-}
-func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &SliceInfo{}
-	doDecodeSliceInfo(d, obj)
-	return obj
-}
-func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeSliceInfo(d, obj.(*SliceInfo))
-}
-func (*binaryClassSliceInfo) Schema() *binary.Entity { return schemaSliceInfo }
-
-var schemaSliceInfo = &binary.Entity{
-	Package:  "gles",
-	Identity: "SliceInfo",
-	Fields: []binary.Field{
-		{Declared: "Root", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
-		{Declared: "Base", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -2360,27 +2443,620 @@ var schemaClearState = &binary.Entity{
 	},
 }
 
+type binaryClassGLfloatˢ struct{}
+
+func (*GLfloatˢ) Class() binary.Class {
+	return (*binaryClassGLfloatˢ)(nil)
+}
+func doEncodeGLfloatˢ(e binary.Encoder, o *GLfloatˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeGLfloatˢ(d binary.Decoder, o *GLfloatˢ) {
+	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
+	}
+	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
+}
+func (*binaryClassGLfloatˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLfloatˢ(e, obj.(*GLfloatˢ))
+}
+func (*binaryClassGLfloatˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLfloatˢ{}
+	doDecodeGLfloatˢ(d, obj)
+	return obj
+}
+func (*binaryClassGLfloatˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLfloatˢ(d, obj.(*GLfloatˢ))
+}
+func (*binaryClassGLfloatˢ) Schema() *binary.Entity { return schemaGLfloatˢ }
+
+var schemaGLfloatˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLfloatˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLintˢ struct{}
+
+func (*GLintˢ) Class() binary.Class {
+	return (*binaryClassGLintˢ)(nil)
+}
+func doEncodeGLintˢ(e binary.Encoder, o *GLintˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeGLintˢ(d binary.Decoder, o *GLintˢ) {
+	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
+	}
+	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
+}
+func (*binaryClassGLintˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLintˢ(e, obj.(*GLintˢ))
+}
+func (*binaryClassGLintˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLintˢ{}
+	doDecodeGLintˢ(d, obj)
+	return obj
+}
+func (*binaryClassGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLintˢ(d, obj.(*GLintˢ))
+}
+func (*binaryClassGLintˢ) Schema() *binary.Entity { return schemaGLintˢ }
+
+var schemaGLintˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLintˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassConstants struct{}
+
+func (*Constants) Class() binary.Class {
+	return (*binaryClassConstants)(nil)
+}
+func doEncodeConstants(e binary.Encoder, o *Constants) {
+	e.String(o.Renderer)
+	e.String(o.Vendor)
+	e.String(o.Version)
+	e.String(o.Extensions)
+	e.String(o.ShadingLanguageVersion)
+	e.Int32(int32(o.SubpixelBits))
+	e.Int64(int64(o.MaxElementIndex))
+	e.Int32(int32(o.Max3dTextureSize))
+	e.Int32(int32(o.MaxTextureSize))
+	e.Int32(int32(o.MaxArrayTextureLayers))
+	e.Float32(float32(o.MaxTextureLodBias))
+	e.Int32(int32(o.MaxCubeMapTextureSize))
+	e.Int32(int32(o.MaxRenderbufferSize))
+	e.Struct(&o.AliasedPointSizeRange)
+	e.Struct(&o.AliasedLineWidthRange)
+	e.Struct(&o.MultisampleLineWidthRange)
+	e.Float32(float32(o.MultisampleLineWidthGranularity))
+	e.Int32(int32(o.MaxDrawBuffers))
+	e.Int32(int32(o.MaxFramebufferWidth))
+	e.Int32(int32(o.MaxFramebufferHeight))
+	e.Int32(int32(o.MaxFramebufferLayers))
+	e.Int32(int32(o.MaxFramebufferSamples))
+	e.Int32(int32(o.MaxColorAttachments))
+	e.Float32(float32(o.MinFragmentInterpolationOffset))
+	e.Float32(float32(o.MaxFragmentInterpolationOffset))
+	e.Int32(int32(o.FragmentInterpolationOffsetBits))
+	e.Struct(&o.MaxViewportDims)
+	e.Int32(int32(o.MaxSampleMaskWords))
+	e.Int32(int32(o.MaxColorTextureSamples))
+	e.Int32(int32(o.MaxDepthTextureSamples))
+	e.Int32(int32(o.MaxIntegerSamples))
+	e.Int64(int64(o.MaxServerWaitTimeout))
+	e.Int32(int32(o.LayerProvokingVertex))
+	e.Uint8(uint8(o.PrimitiveRestartForPatchesSupported))
+	e.Int32(int32(o.MaxVertexAttribRelativeOffset))
+	e.Uint32(uint32(o.MaxVertexAttribBindings))
+	e.Int32(int32(o.MaxVertexAttribStride))
+	e.Int32(int32(o.MaxElementsIndices))
+	e.Int32(int32(o.MaxElementsVertices))
+	e.Int32(int32(o.MaxTextureBufferSize))
+	e.Int32(int32(o.NumCompressedTextureFormats))
+	e.Struct(&o.CompressedTextureFormats)
+	e.Int32(int32(o.NumProgramBinaryFormats))
+	e.Struct(&o.ProgramBinaryFormats)
+	e.Int32(int32(o.NumShaderBinaryFormats))
+	e.Struct(&o.ShaderBinaryFormats)
+	e.Uint8(uint8(o.ShaderCompiler))
+	e.Int32(int32(o.TextureBufferOffsetAlignment))
+	e.Int32(int32(o.NumExtensions))
+	e.Int32(int32(o.MajorVersion))
+	e.Int32(int32(o.MinorVersion))
+	e.Int32(int32(o.ContextFlags))
+	e.Uint32(uint32(o.MaxVertexAttribs))
+	e.Int32(int32(o.MaxVertexUniformComponents))
+	e.Int32(int32(o.MaxVertexUniformVectors))
+	e.Int32(int32(o.MaxVertexUniformBlocks))
+	e.Int32(int32(o.MaxVertexOutputComponents))
+	e.Int32(int32(o.MaxVertexTextureImageUnits))
+	e.Int32(int32(o.MaxVertexAtomicCounterBuffers))
+	e.Int32(int32(o.MaxVertexAtomicCounters))
+	e.Int32(int32(o.MaxVertexShaderStorageBlocks))
+	e.Int32(int32(o.MaxTessGenLevel))
+	e.Int32(int32(o.MaxPatchVertices))
+	e.Int32(int32(o.MaxTessControlUniformComponents))
+	e.Int32(int32(o.MaxTessControlTextureImageUnits))
+	e.Int32(int32(o.MaxTessControlOutputComponents))
+	e.Int32(int32(o.MaxTessPatchComponents))
+	e.Int32(int32(o.MaxTessControlTotalOutputComponents))
+	e.Int32(int32(o.MaxTessControlInputComponents))
+	e.Int32(int32(o.MaxTessControlUniformBlocks))
+	e.Int32(int32(o.MaxTessControlAtomicCounterBuffers))
+	e.Int32(int32(o.MaxTessControlAtomicCounters))
+	e.Int32(int32(o.MaxTessControlShaderStorageBlocks))
+	e.Int32(int32(o.MaxTessEvaluationUniformComponents))
+	e.Int32(int32(o.MaxTessEvaluationTextureImageUnits))
+	e.Int32(int32(o.MaxTessEvaluationOutputComponents))
+	e.Int32(int32(o.MaxTessEvaluationInputComponents))
+	e.Int32(int32(o.MaxTessEvaluationUniformBlocks))
+	e.Int32(int32(o.MaxTessEvaluationAtomicCounterBuffers))
+	e.Int32(int32(o.MaxTessEvaluationAtomicCounters))
+	e.Int32(int32(o.MaxTessEvaluationShaderStorageBlocks))
+	e.Int32(int32(o.MaxGeometryUniformComponents))
+	e.Int32(int32(o.MaxGeometryUniformBlocks))
+	e.Int32(int32(o.MaxGeometryInputComponents))
+	e.Int32(int32(o.MaxGeometryOutputComponents))
+	e.Int32(int32(o.MaxGeometryOutputVertices))
+	e.Int32(int32(o.MaxGeometryTotalOutputComponents))
+	e.Int32(int32(o.MaxGeometryTextureImageUnits))
+	e.Int32(int32(o.MaxGeometryShaderInvocations))
+	e.Int32(int32(o.MaxGeometryAtomicCounterBuffers))
+	e.Int32(int32(o.MaxGeometryAtomicCounters))
+	e.Int32(int32(o.MaxGeometryShaderStorageBlocks))
+	e.Int32(int32(o.MaxFragmentUniformComponents))
+	e.Int32(int32(o.MaxFragmentUniformVectors))
+	e.Int32(int32(o.MaxFragmentUniformBlocks))
+	e.Int32(int32(o.MaxFragmentInputComponents))
+	e.Int32(int32(o.MaxTextureImageUnits))
+	e.Int32(int32(o.MaxFragmentAtomicCounterBuffers))
+	e.Int32(int32(o.MaxFragmentAtomicCounters))
+	e.Int32(int32(o.MaxFragmentShaderStorageBlocks))
+	e.Int32(int32(o.MinProgramTextureGatherOffset))
+	e.Int32(int32(o.MaxProgramTextureGatherOffset))
+	e.Int32(int32(o.MinProgramTexelOffset))
+	e.Int32(int32(o.MaxProgramTexelOffset))
+	e.Struct(&o.MaxComputeWorkGroupCount)
+	e.Struct(&o.MaxComputeWorkGroupSize)
+	e.Int32(int32(o.MaxComputeWorkGroupInvocations))
+	e.Int32(int32(o.MaxComputeUniformBlocks))
+	e.Int32(int32(o.MaxComputeTextureImageUnits))
+	e.Int32(int32(o.MaxComputeSharedMemorySize))
+	e.Int32(int32(o.MaxComputeUniformComponents))
+	e.Int32(int32(o.MaxComputeAtomicCounterBuffers))
+	e.Int32(int32(o.MaxComputeAtomicCounters))
+	e.Int32(int32(o.MaxCombinedComputeUniformComponents))
+	e.Int32(int32(o.MaxComputeShaderStorageBlocks))
+	e.Int32(int32(o.MaxUniformBufferBindings))
+	e.Int64(int64(o.MaxUniformBlockSize))
+	e.Int32(int32(o.UniformBufferOffsetAlignment))
+	e.Int32(int32(o.MaxCombinedUniformBlocks))
+	e.Int64(int64(o.MaxCombinedVertexUniformComponents))
+	e.Int32(int32(o.MaxCombinedTessControlUniformComponents))
+	e.Int32(int32(o.MaxCombinedTessEvaluationUniformComponents))
+	e.Int32(int32(o.MaxCombinedGeometryUniformComponents))
+	e.Int64(int64(o.MaxCombinedFragmentUniformComponents))
+	e.Int32(int32(o.MaxVaryingComponents))
+	e.Int32(int32(o.MaxVaryingVectors))
+	e.Int32(int32(o.MaxCombinedTextureImageUnits))
+	e.Int32(int32(o.MaxCombinedShaderOutputResources))
+	e.Int32(int32(o.MaxUniformLocations))
+	e.Int32(int32(o.MaxAtomicCounterBufferBindings))
+	e.Int32(int32(o.MaxAtomicCounterBufferSize))
+	e.Int32(int32(o.MaxCombinedAtomicCounterBuffers))
+	e.Int32(int32(o.MaxCombinedAtomicCounters))
+	e.Int32(int32(o.MaxImageUnits))
+	e.Int32(int32(o.MaxVertexImageUniforms))
+	e.Int32(int32(o.MaxTessControlImageUniforms))
+	e.Int32(int32(o.MaxTessEvaluationImageUniforms))
+	e.Int32(int32(o.MaxGeometryImageUniforms))
+	e.Int32(int32(o.MaxFragmentImageUniforms))
+	e.Int32(int32(o.MaxComputeImageUniforms))
+	e.Int32(int32(o.MaxCombinedImageUniforms))
+	e.Int32(int32(o.MaxShaderStorageBufferBindings))
+	e.Int64(int64(o.MaxShaderStorageBlockSize))
+	e.Int32(int32(o.MaxCombinedShaderStorageBlocks))
+	e.Int32(int32(o.ShaderStorageBufferOffsetAlignment))
+}
+func doDecodeConstants(d binary.Decoder, o *Constants) {
+	o.Renderer = string(d.String())
+	o.Vendor = string(d.String())
+	o.Version = string(d.String())
+	o.Extensions = string(d.String())
+	o.ShadingLanguageVersion = string(d.String())
+	o.SubpixelBits = GLint(d.Int32())
+	o.MaxElementIndex = GLint64(d.Int64())
+	o.Max3dTextureSize = GLint(d.Int32())
+	o.MaxTextureSize = GLint(d.Int32())
+	o.MaxArrayTextureLayers = GLint(d.Int32())
+	o.MaxTextureLodBias = GLfloat(d.Float32())
+	o.MaxCubeMapTextureSize = GLint(d.Int32())
+	o.MaxRenderbufferSize = GLint(d.Int32())
+	var ent_da438cf0e9e98e42fa717940c3df5933d0e06eab *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_da438cf0e9e98e42fa717940c3df5933d0e06eab = ent
+	}
+	d.Struct(ent_da438cf0e9e98e42fa717940c3df5933d0e06eab, &o.AliasedPointSizeRange)
+	var ent_dbd3a60a2f3186a7196abb162d0719ee9ad366aa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_dbd3a60a2f3186a7196abb162d0719ee9ad366aa = ent
+	}
+	d.Struct(ent_dbd3a60a2f3186a7196abb162d0719ee9ad366aa, &o.AliasedLineWidthRange)
+	var ent_85bf432ed6cf19c94a822b4fa3a8af5dd6ef62c5 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_85bf432ed6cf19c94a822b4fa3a8af5dd6ef62c5 = ent
+	}
+	d.Struct(ent_85bf432ed6cf19c94a822b4fa3a8af5dd6ef62c5, &o.MultisampleLineWidthRange)
+	o.MultisampleLineWidthGranularity = GLfloat(d.Float32())
+	o.MaxDrawBuffers = GLint(d.Int32())
+	o.MaxFramebufferWidth = GLint(d.Int32())
+	o.MaxFramebufferHeight = GLint(d.Int32())
+	o.MaxFramebufferLayers = GLint(d.Int32())
+	o.MaxFramebufferSamples = GLint(d.Int32())
+	o.MaxColorAttachments = GLint(d.Int32())
+	o.MinFragmentInterpolationOffset = GLfloat(d.Float32())
+	o.MaxFragmentInterpolationOffset = GLfloat(d.Float32())
+	o.FragmentInterpolationOffsetBits = GLint(d.Int32())
+	var ent_619af3b6f0b0c13b37d9ad62dceb3d74fc1271a5 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_619af3b6f0b0c13b37d9ad62dceb3d74fc1271a5 = ent
+	}
+	d.Struct(ent_619af3b6f0b0c13b37d9ad62dceb3d74fc1271a5, &o.MaxViewportDims)
+	o.MaxSampleMaskWords = GLint(d.Int32())
+	o.MaxColorTextureSamples = GLint(d.Int32())
+	o.MaxDepthTextureSamples = GLint(d.Int32())
+	o.MaxIntegerSamples = GLint(d.Int32())
+	o.MaxServerWaitTimeout = GLint64(d.Int64())
+	o.LayerProvokingVertex = GLint(d.Int32())
+	o.PrimitiveRestartForPatchesSupported = GLboolean(d.Uint8())
+	o.MaxVertexAttribRelativeOffset = GLint(d.Int32())
+	o.MaxVertexAttribBindings = VertexBufferBindingIndex(d.Uint32())
+	o.MaxVertexAttribStride = GLint(d.Int32())
+	o.MaxElementsIndices = GLint(d.Int32())
+	o.MaxElementsVertices = GLint(d.Int32())
+	o.MaxTextureBufferSize = GLint(d.Int32())
+	o.NumCompressedTextureFormats = GLint(d.Int32())
+	var ent_f1183fd647e9b9572d4b6868094b0257ef31880d *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_f1183fd647e9b9572d4b6868094b0257ef31880d = ent
+	}
+	d.Struct(ent_f1183fd647e9b9572d4b6868094b0257ef31880d, &o.CompressedTextureFormats)
+	o.NumProgramBinaryFormats = GLint(d.Int32())
+	var ent_1f1a1b81a1063d915e11c1ffc89b29359fdf2b13 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_1f1a1b81a1063d915e11c1ffc89b29359fdf2b13 = ent
+	}
+	d.Struct(ent_1f1a1b81a1063d915e11c1ffc89b29359fdf2b13, &o.ProgramBinaryFormats)
+	o.NumShaderBinaryFormats = GLint(d.Int32())
+	var ent_5ee43bc416eb7bb33dceab601efb7fc6c02218a3 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_5ee43bc416eb7bb33dceab601efb7fc6c02218a3 = ent
+	}
+	d.Struct(ent_5ee43bc416eb7bb33dceab601efb7fc6c02218a3, &o.ShaderBinaryFormats)
+	o.ShaderCompiler = GLboolean(d.Uint8())
+	o.TextureBufferOffsetAlignment = GLint(d.Int32())
+	o.NumExtensions = GLint(d.Int32())
+	o.MajorVersion = GLint(d.Int32())
+	o.MinorVersion = GLint(d.Int32())
+	o.ContextFlags = GLint(d.Int32())
+	o.MaxVertexAttribs = AttributeLocation(d.Uint32())
+	o.MaxVertexUniformComponents = GLint(d.Int32())
+	o.MaxVertexUniformVectors = GLint(d.Int32())
+	o.MaxVertexUniformBlocks = GLint(d.Int32())
+	o.MaxVertexOutputComponents = GLint(d.Int32())
+	o.MaxVertexTextureImageUnits = GLint(d.Int32())
+	o.MaxVertexAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxVertexAtomicCounters = GLint(d.Int32())
+	o.MaxVertexShaderStorageBlocks = GLint(d.Int32())
+	o.MaxTessGenLevel = GLint(d.Int32())
+	o.MaxPatchVertices = GLint(d.Int32())
+	o.MaxTessControlUniformComponents = GLint(d.Int32())
+	o.MaxTessControlTextureImageUnits = GLint(d.Int32())
+	o.MaxTessControlOutputComponents = GLint(d.Int32())
+	o.MaxTessPatchComponents = GLint(d.Int32())
+	o.MaxTessControlTotalOutputComponents = GLint(d.Int32())
+	o.MaxTessControlInputComponents = GLint(d.Int32())
+	o.MaxTessControlUniformBlocks = GLint(d.Int32())
+	o.MaxTessControlAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxTessControlAtomicCounters = GLint(d.Int32())
+	o.MaxTessControlShaderStorageBlocks = GLint(d.Int32())
+	o.MaxTessEvaluationUniformComponents = GLint(d.Int32())
+	o.MaxTessEvaluationTextureImageUnits = GLint(d.Int32())
+	o.MaxTessEvaluationOutputComponents = GLint(d.Int32())
+	o.MaxTessEvaluationInputComponents = GLint(d.Int32())
+	o.MaxTessEvaluationUniformBlocks = GLint(d.Int32())
+	o.MaxTessEvaluationAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxTessEvaluationAtomicCounters = GLint(d.Int32())
+	o.MaxTessEvaluationShaderStorageBlocks = GLint(d.Int32())
+	o.MaxGeometryUniformComponents = GLint(d.Int32())
+	o.MaxGeometryUniformBlocks = GLint(d.Int32())
+	o.MaxGeometryInputComponents = GLint(d.Int32())
+	o.MaxGeometryOutputComponents = GLint(d.Int32())
+	o.MaxGeometryOutputVertices = GLint(d.Int32())
+	o.MaxGeometryTotalOutputComponents = GLint(d.Int32())
+	o.MaxGeometryTextureImageUnits = GLint(d.Int32())
+	o.MaxGeometryShaderInvocations = GLint(d.Int32())
+	o.MaxGeometryAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxGeometryAtomicCounters = GLint(d.Int32())
+	o.MaxGeometryShaderStorageBlocks = GLint(d.Int32())
+	o.MaxFragmentUniformComponents = GLint(d.Int32())
+	o.MaxFragmentUniformVectors = GLint(d.Int32())
+	o.MaxFragmentUniformBlocks = GLint(d.Int32())
+	o.MaxFragmentInputComponents = GLint(d.Int32())
+	o.MaxTextureImageUnits = GLint(d.Int32())
+	o.MaxFragmentAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxFragmentAtomicCounters = GLint(d.Int32())
+	o.MaxFragmentShaderStorageBlocks = GLint(d.Int32())
+	o.MinProgramTextureGatherOffset = GLint(d.Int32())
+	o.MaxProgramTextureGatherOffset = GLint(d.Int32())
+	o.MinProgramTexelOffset = GLint(d.Int32())
+	o.MaxProgramTexelOffset = GLint(d.Int32())
+	var ent_c78bb191aec406d14b86f8e217525523ffb0d52a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_c78bb191aec406d14b86f8e217525523ffb0d52a = ent
+	}
+	d.Struct(ent_c78bb191aec406d14b86f8e217525523ffb0d52a, &o.MaxComputeWorkGroupCount)
+	var ent_9578b1546bf5f101302a670dfc0b97a27aa78352 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_9578b1546bf5f101302a670dfc0b97a27aa78352 = ent
+	}
+	d.Struct(ent_9578b1546bf5f101302a670dfc0b97a27aa78352, &o.MaxComputeWorkGroupSize)
+	o.MaxComputeWorkGroupInvocations = GLint(d.Int32())
+	o.MaxComputeUniformBlocks = GLint(d.Int32())
+	o.MaxComputeTextureImageUnits = GLint(d.Int32())
+	o.MaxComputeSharedMemorySize = GLint(d.Int32())
+	o.MaxComputeUniformComponents = GLint(d.Int32())
+	o.MaxComputeAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxComputeAtomicCounters = GLint(d.Int32())
+	o.MaxCombinedComputeUniformComponents = GLint(d.Int32())
+	o.MaxComputeShaderStorageBlocks = GLint(d.Int32())
+	o.MaxUniformBufferBindings = GLint(d.Int32())
+	o.MaxUniformBlockSize = GLint64(d.Int64())
+	o.UniformBufferOffsetAlignment = GLint(d.Int32())
+	o.MaxCombinedUniformBlocks = GLint(d.Int32())
+	o.MaxCombinedVertexUniformComponents = GLint64(d.Int64())
+	o.MaxCombinedTessControlUniformComponents = GLint(d.Int32())
+	o.MaxCombinedTessEvaluationUniformComponents = GLint(d.Int32())
+	o.MaxCombinedGeometryUniformComponents = GLint(d.Int32())
+	o.MaxCombinedFragmentUniformComponents = GLint64(d.Int64())
+	o.MaxVaryingComponents = GLint(d.Int32())
+	o.MaxVaryingVectors = GLint(d.Int32())
+	o.MaxCombinedTextureImageUnits = GLint(d.Int32())
+	o.MaxCombinedShaderOutputResources = GLint(d.Int32())
+	o.MaxUniformLocations = GLint(d.Int32())
+	o.MaxAtomicCounterBufferBindings = GLint(d.Int32())
+	o.MaxAtomicCounterBufferSize = GLint(d.Int32())
+	o.MaxCombinedAtomicCounterBuffers = GLint(d.Int32())
+	o.MaxCombinedAtomicCounters = GLint(d.Int32())
+	o.MaxImageUnits = GLint(d.Int32())
+	o.MaxVertexImageUniforms = GLint(d.Int32())
+	o.MaxTessControlImageUniforms = GLint(d.Int32())
+	o.MaxTessEvaluationImageUniforms = GLint(d.Int32())
+	o.MaxGeometryImageUniforms = GLint(d.Int32())
+	o.MaxFragmentImageUniforms = GLint(d.Int32())
+	o.MaxComputeImageUniforms = GLint(d.Int32())
+	o.MaxCombinedImageUniforms = GLint(d.Int32())
+	o.MaxShaderStorageBufferBindings = GLint(d.Int32())
+	o.MaxShaderStorageBlockSize = GLint64(d.Int64())
+	o.MaxCombinedShaderStorageBlocks = GLint(d.Int32())
+	o.ShaderStorageBufferOffsetAlignment = GLint(d.Int32())
+}
+func (*binaryClassConstants) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeConstants(e, obj.(*Constants))
+}
+func (*binaryClassConstants) Decode(d binary.Decoder) binary.Object {
+	obj := &Constants{}
+	doDecodeConstants(d, obj)
+	return obj
+}
+func (*binaryClassConstants) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeConstants(d, obj.(*Constants))
+}
+func (*binaryClassConstants) Schema() *binary.Entity { return schemaConstants }
+
+var schemaConstants = &binary.Entity{
+	Package:  "gles",
+	Identity: "Constants",
+	Fields: []binary.Field{
+		{Declared: "Renderer", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "ShadingLanguageVersion", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "SubpixelBits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxElementIndex", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "Max3dTextureSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTextureSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxArrayTextureLayers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTextureLodBias", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxCubeMapTextureSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxRenderbufferSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "AliasedPointSizeRange", Type: &schema.Struct{Entity: (*GLfloatˢ)(nil).Class().Schema()}},
+		{Declared: "AliasedLineWidthRange", Type: &schema.Struct{Entity: (*GLfloatˢ)(nil).Class().Schema()}},
+		{Declared: "MultisampleLineWidthRange", Type: &schema.Struct{Entity: (*GLfloatˢ)(nil).Class().Schema()}},
+		{Declared: "MultisampleLineWidthGranularity", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxDrawBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFramebufferWidth", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFramebufferHeight", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFramebufferLayers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFramebufferSamples", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxColorAttachments", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MinFragmentInterpolationOffset", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "MaxFragmentInterpolationOffset", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "FragmentInterpolationOffsetBits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxViewportDims", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "MaxSampleMaskWords", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxColorTextureSamples", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxDepthTextureSamples", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxIntegerSamples", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxServerWaitTimeout", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "LayerProvokingVertex", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "PrimitiveRestartForPatchesSupported", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "MaxVertexAttribRelativeOffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexAttribBindings", Type: &schema.Primitive{Name: "VertexBufferBindingIndex", Method: schema.Uint32}},
+		{Declared: "MaxVertexAttribStride", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxElementsIndices", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxElementsVertices", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTextureBufferSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "NumCompressedTextureFormats", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "CompressedTextureFormats", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "NumProgramBinaryFormats", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "ProgramBinaryFormats", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "NumShaderBinaryFormats", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "ShaderBinaryFormats", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "ShaderCompiler", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+		{Declared: "TextureBufferOffsetAlignment", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "NumExtensions", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MajorVersion", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MinorVersion", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "ContextFlags", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexAttribs", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "MaxVertexUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexUniformVectors", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessGenLevel", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxPatchVertices", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessPatchComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlTotalOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlInputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationInputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryInputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryOutputVertices", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryTotalOutputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryShaderInvocations", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentUniformVectors", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentInputComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MinProgramTextureGatherOffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxProgramTextureGatherOffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MinProgramTexelOffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxProgramTexelOffset", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeWorkGroupCount", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "MaxComputeWorkGroupSize", Type: &schema.Struct{Entity: (*GLintˢ)(nil).Class().Schema()}},
+		{Declared: "MaxComputeWorkGroupInvocations", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeSharedMemorySize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedComputeUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxUniformBufferBindings", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxUniformBlockSize", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "UniformBufferOffsetAlignment", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedUniformBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedVertexUniformComponents", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "MaxCombinedTessControlUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedTessEvaluationUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedGeometryUniformComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedFragmentUniformComponents", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "MaxVaryingComponents", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVaryingVectors", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedTextureImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedShaderOutputResources", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxUniformLocations", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxAtomicCounterBufferBindings", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxAtomicCounterBufferSize", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedAtomicCounterBuffers", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedAtomicCounters", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxImageUnits", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxVertexImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessControlImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxTessEvaluationImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxGeometryImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxFragmentImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxComputeImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxCombinedImageUniforms", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxShaderStorageBufferBindings", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "MaxShaderStorageBlockSize", Type: &schema.Primitive{Name: "GLint64", Method: schema.Int64}},
+		{Declared: "MaxCombinedShaderStorageBlocks", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "ShaderStorageBufferOffsetAlignment", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
 type binaryClassContextCreationInfo struct{}
 
 func (*ContextCreationInfo) Class() binary.Class {
 	return (*binaryClassContextCreationInfo)(nil)
 }
 func doEncodeContextCreationInfo(e binary.Encoder, o *ContextCreationInfo) {
-	e.String(o.Name)
-	e.String(o.Vendor)
-	e.String(o.Extensions)
-	e.String(o.Version)
-	e.Int32(int32(o.VersionMajor))
-	e.Int32(int32(o.VersionMinor))
 	e.Bool(o.PreserveBuffersOnSwap)
 }
 func doDecodeContextCreationInfo(d binary.Decoder, o *ContextCreationInfo) {
-	o.Name = string(d.String())
-	o.Vendor = string(d.String())
-	o.Extensions = string(d.String())
-	o.Version = string(d.String())
-	o.VersionMajor = GLint(d.Int32())
-	o.VersionMinor = GLint(d.Int32())
 	o.PreserveBuffersOnSwap = bool(d.Bool())
 }
 func (*binaryClassContextCreationInfo) Encode(e binary.Encoder, obj binary.Object) {
@@ -2400,12 +3076,6 @@ var schemaContextCreationInfo = &binary.Entity{
 	Package:  "gles",
 	Identity: "ContextCreationInfo",
 	Fields: []binary.Field{
-		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "VersionMajor", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
-		{Declared: "VersionMinor", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "PreserveBuffersOnSwap", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -3866,6 +4536,7 @@ func doEncodeContext(e binary.Encoder, o *Context) {
 		e.Int32(int32(v))
 	}
 	e.Struct(&o.Instances)
+	e.Struct(&o.Constants)
 }
 func doDecodeContext(d binary.Decoder, o *Context) {
 	o.Identifier = ContextID(d.Uint32())
@@ -4001,6 +4672,14 @@ func doDecodeContext(d binary.Decoder, o *Context) {
 		ent_3bcc9527b12b019aafcd7b6b5a8b15a52ae688db = ent
 	}
 	d.Struct(ent_3bcc9527b12b019aafcd7b6b5a8b15a52ae688db, &o.Instances)
+	var ent_0a76ba39c6d434f9aee1ffa5c9af770c6b931205 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_0a76ba39c6d434f9aee1ffa5c9af770c6b931205 = ent
+	}
+	d.Struct(ent_0a76ba39c6d434f9aee1ffa5c9af770c6b931205, &o.Constants)
 }
 func (*binaryClassContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeContext(e, obj.(*Context))
@@ -4036,6 +4715,124 @@ var schemaContext = &binary.Entity{
 		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "PixelStorage", Type: &schema.Map{Alias: "GLenumːGLintᵐ", KeyType: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}}},
 		{Declared: "Instances", Type: &schema.Struct{Entity: (*Objects)(nil).Class().Schema()}},
+		{Declared: "Constants", Type: &schema.Struct{Entity: (*Constants)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLenumᵖ struct{}
+
+func (*GLenumᵖ) Class() binary.Class {
+	return (*binaryClassGLenumᵖ)(nil)
+}
+func doEncodeGLenumᵖ(e binary.Encoder, o *GLenumᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeGLenumᵖ(d binary.Decoder, o *GLenumᵖ) {
+	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
+	}
+	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
+}
+func (*binaryClassGLenumᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLenumᵖ(e, obj.(*GLenumᵖ))
+}
+func (*binaryClassGLenumᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLenumᵖ{}
+	doDecodeGLenumᵖ(d, obj)
+	return obj
+}
+func (*binaryClassGLenumᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLenumᵖ(d, obj.(*GLenumᵖ))
+}
+func (*binaryClassGLenumᵖ) Schema() *binary.Entity { return schemaGLenumᵖ }
+
+var schemaGLenumᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLenumᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassU32ᵖ struct{}
+
+func (*U32ᵖ) Class() binary.Class {
+	return (*binaryClassU32ᵖ)(nil)
+}
+func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) {
+	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
+	}
+	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
+}
+func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeU32ᵖ(e, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &U32ᵖ{}
+	doDecodeU32ᵖ(d, obj)
+	return obj
+}
+func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Schema() *binary.Entity { return schemaU32ᵖ }
+
+var schemaU32ᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "U32ᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassU8ᵖ struct{}
+
+func (*U8ᵖ) Class() binary.Class {
+	return (*binaryClassU8ᵖ)(nil)
+}
+func doEncodeU8ᵖ(e binary.Encoder, o *U8ᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) {
+	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
+	}
+	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
+}
+func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeU8ᵖ(e, obj.(*U8ᵖ))
+}
+func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &U8ᵖ{}
+	doDecodeU8ᵖ(d, obj)
+	return obj
+}
+func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
+}
+func (*binaryClassU8ᵖ) Schema() *binary.Entity { return schemaU8ᵖ }
+
+var schemaU8ᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "U8ᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -4046,10 +4843,11 @@ func (*ContextInfo) Class() binary.Class {
 }
 func doEncodeContextInfo(e binary.Encoder, o *ContextInfo) {
 	e.Struct(&o.observations)
-	e.String(o.Name)
-	e.String(o.Vendor)
-	e.String(o.Extensions)
-	e.String(o.Version)
+	e.Uint32(o.ConstantCount)
+	e.Struct(&o.ConstantNames)
+	e.Struct(&o.ConstantOffsets)
+	e.Struct(&o.ConstantSizes)
+	e.Struct(&o.ConstantData)
 	e.Int32(int32(o.BackbufferWidth))
 	e.Int32(int32(o.BackbufferHeight))
 	e.Uint32(uint32(o.BackbufferColorFmt))
@@ -4067,10 +4865,39 @@ func doDecodeContextInfo(d binary.Decoder, o *ContextInfo) {
 		ent_ff910d22367a209e1a92357e3aac7f549243486c = ent
 	}
 	d.Struct(ent_ff910d22367a209e1a92357e3aac7f549243486c, &o.observations)
-	o.Name = string(d.String())
-	o.Vendor = string(d.String())
-	o.Extensions = string(d.String())
-	o.Version = string(d.String())
+	o.ConstantCount = uint32(d.Uint32())
+	var ent_a5f8e7d5ba5e97efed6dff77124271f0b1b98463 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5f8e7d5ba5e97efed6dff77124271f0b1b98463 = ent
+	}
+	d.Struct(ent_a5f8e7d5ba5e97efed6dff77124271f0b1b98463, &o.ConstantNames)
+	var ent_17cfb1cf319a60be2f161c520d8543a2c96c9ab0 *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_17cfb1cf319a60be2f161c520d8543a2c96c9ab0 = ent
+	}
+	d.Struct(ent_17cfb1cf319a60be2f161c520d8543a2c96c9ab0, &o.ConstantOffsets)
+	var ent_180b9c0c2e100e89ed761ee48003ca68c4463a1c *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_180b9c0c2e100e89ed761ee48003ca68c4463a1c = ent
+	}
+	d.Struct(ent_180b9c0c2e100e89ed761ee48003ca68c4463a1c, &o.ConstantSizes)
+	var ent_b8037171eee5933bd1e70b54338f1150a8faebcb *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_b8037171eee5933bd1e70b54338f1150a8faebcb = ent
+	}
+	d.Struct(ent_b8037171eee5933bd1e70b54338f1150a8faebcb, &o.ConstantData)
 	o.BackbufferWidth = GLsizei(d.Int32())
 	o.BackbufferHeight = GLsizei(d.Int32())
 	o.BackbufferColorFmt = GLenum(d.Uint32())
@@ -4097,10 +4924,11 @@ var schemaContextInfo = &binary.Entity{
 	Identity: "ContextInfo",
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
-		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Vendor", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Extensions", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		{Declared: "Version", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "ConstantCount", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "ConstantNames", Type: &schema.Struct{Entity: (*GLenumᵖ)(nil).Class().Schema()}},
+		{Declared: "ConstantOffsets", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
+		{Declared: "ConstantSizes", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
+		{Declared: "ConstantData", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "BackbufferWidth", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "BackbufferHeight", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "BackbufferColorFmt", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -5427,45 +6255,6 @@ var schemaGLenumˢ = &binary.Entity{
 	},
 }
 
-type binaryClassGLenumᵖ struct{}
-
-func (*GLenumᵖ) Class() binary.Class {
-	return (*binaryClassGLenumᵖ)(nil)
-}
-func doEncodeGLenumᵖ(e binary.Encoder, o *GLenumᵖ) {
-	e.Struct(&o.Pointer)
-}
-func doDecodeGLenumᵖ(d binary.Decoder, o *GLenumᵖ) {
-	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
-	}
-	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
-}
-func (*binaryClassGLenumᵖ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeGLenumᵖ(e, obj.(*GLenumᵖ))
-}
-func (*binaryClassGLenumᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &GLenumᵖ{}
-	doDecodeGLenumᵖ(d, obj)
-	return obj
-}
-func (*binaryClassGLenumᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeGLenumᵖ(d, obj.(*GLenumᵖ))
-}
-func (*binaryClassGLenumᵖ) Schema() *binary.Entity { return schemaGLenumᵖ }
-
-var schemaGLenumᵖ = &binary.Entity{
-	Package:  "gles",
-	Identity: "GLenumᵖ",
-	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
-	},
-}
-
 type binaryClassGLenumᶜᵖ struct{}
 
 func (*GLenumᶜᵖ) Class() binary.Class {
@@ -5610,45 +6399,6 @@ var schemaGLfloatː4ᵃ = &binary.Entity{
 	Identity: "GLfloatː4ᵃ",
 	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}, Size: 4}},
-	},
-}
-
-type binaryClassGLfloatˢ struct{}
-
-func (*GLfloatˢ) Class() binary.Class {
-	return (*binaryClassGLfloatˢ)(nil)
-}
-func doEncodeGLfloatˢ(e binary.Encoder, o *GLfloatˢ) {
-	e.Struct(&o.SliceInfo)
-}
-func doDecodeGLfloatˢ(d binary.Decoder, o *GLfloatˢ) {
-	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
-	}
-	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
-}
-func (*binaryClassGLfloatˢ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeGLfloatˢ(e, obj.(*GLfloatˢ))
-}
-func (*binaryClassGLfloatˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &GLfloatˢ{}
-	doDecodeGLfloatˢ(d, obj)
-	return obj
-}
-func (*binaryClassGLfloatˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeGLfloatˢ(d, obj.(*GLfloatˢ))
-}
-func (*binaryClassGLfloatˢ) Schema() *binary.Entity { return schemaGLfloatˢ }
-
-var schemaGLfloatˢ = &binary.Entity{
-	Package:  "gles",
-	Identity: "GLfloatˢ",
-	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -5913,45 +6663,6 @@ var schemaGLintː4ᵃ = &binary.Entity{
 	Identity: "GLintː4ᵃ",
 	Fields: []binary.Field{
 		{Declared: "Elements", Type: &schema.Array{Alias: "", ValueType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, Size: 4}},
-	},
-}
-
-type binaryClassGLintˢ struct{}
-
-func (*GLintˢ) Class() binary.Class {
-	return (*binaryClassGLintˢ)(nil)
-}
-func doEncodeGLintˢ(e binary.Encoder, o *GLintˢ) {
-	e.Struct(&o.SliceInfo)
-}
-func doDecodeGLintˢ(d binary.Decoder, o *GLintˢ) {
-	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
-	}
-	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
-}
-func (*binaryClassGLintˢ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeGLintˢ(e, obj.(*GLintˢ))
-}
-func (*binaryClassGLintˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &GLintˢ{}
-	doDecodeGLintˢ(d, obj)
-	return obj
-}
-func (*binaryClassGLintˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeGLintˢ(d, obj.(*GLintˢ))
-}
-func (*binaryClassGLintˢ) Schema() *binary.Entity { return schemaGLintˢ }
-
-var schemaGLintˢ = &binary.Entity{
-	Package:  "gles",
-	Identity: "GLintˢ",
-	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
@@ -50347,45 +51058,6 @@ var schemaU32ˢ = &binary.Entity{
 	},
 }
 
-type binaryClassU32ᵖ struct{}
-
-func (*U32ᵖ) Class() binary.Class {
-	return (*binaryClassU32ᵖ)(nil)
-}
-func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) {
-	e.Struct(&o.Pointer)
-}
-func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) {
-	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
-	}
-	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
-}
-func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeU32ᵖ(e, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U32ᵖ{}
-	doDecodeU32ᵖ(d, obj)
-	return obj
-}
-func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Schema() *binary.Entity { return schemaU32ᵖ }
-
-var schemaU32ᵖ = &binary.Entity{
-	Package:  "gles",
-	Identity: "U32ᵖ",
-	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
-	},
-}
-
 type binaryClassU64ˢ struct{}
 
 func (*U64ˢ) Class() binary.Class {
@@ -50422,45 +51094,6 @@ var schemaU64ˢ = &binary.Entity{
 	Identity: "U64ˢ",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
-	},
-}
-
-type binaryClassU8ᵖ struct{}
-
-func (*U8ᵖ) Class() binary.Class {
-	return (*binaryClassU8ᵖ)(nil)
-}
-func doEncodeU8ᵖ(e binary.Encoder, o *U8ᵖ) {
-	e.Struct(&o.Pointer)
-}
-func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) {
-	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
-	if ent, err := d.PopEntity(); err != nil {
-		d.SetError(err)
-		return
-	} else {
-		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
-	}
-	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
-}
-func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeU8ᵖ(e, obj.(*U8ᵖ))
-}
-func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U8ᵖ{}
-	doDecodeU8ᵖ(d, obj)
-	return obj
-}
-func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
-}
-func (*binaryClassU8ᵖ) Schema() *binary.Entity { return schemaU8ᵖ }
-
-var schemaU8ᵖ = &binary.Entity{
-	Package:  "gles",
-	Identity: "U8ᵖ",
-	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
 }
 
@@ -51847,6 +52480,88 @@ var schemaVertexArrayIdˢ = &binary.Entity{
 	},
 }
 
+type binaryClassVertexBufferBindingIndexˢ struct{}
+
+func (*VertexBufferBindingIndexˢ) Class() binary.Class {
+	return (*binaryClassVertexBufferBindingIndexˢ)(nil)
+}
+func doEncodeVertexBufferBindingIndexˢ(e binary.Encoder, o *VertexBufferBindingIndexˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeVertexBufferBindingIndexˢ(d binary.Decoder, o *VertexBufferBindingIndexˢ) {
+	var ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a = ent
+	}
+	d.Struct(ent_226f6b5f9058e1d0000970ecab93e5a1de3d282a, &o.SliceInfo)
+}
+func (*binaryClassVertexBufferBindingIndexˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeVertexBufferBindingIndexˢ(e, obj.(*VertexBufferBindingIndexˢ))
+}
+func (*binaryClassVertexBufferBindingIndexˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &VertexBufferBindingIndexˢ{}
+	doDecodeVertexBufferBindingIndexˢ(d, obj)
+	return obj
+}
+func (*binaryClassVertexBufferBindingIndexˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeVertexBufferBindingIndexˢ(d, obj.(*VertexBufferBindingIndexˢ))
+}
+func (*binaryClassVertexBufferBindingIndexˢ) Schema() *binary.Entity {
+	return schemaVertexBufferBindingIndexˢ
+}
+
+var schemaVertexBufferBindingIndexˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "VertexBufferBindingIndexˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassVertexBufferBindingIndexᵖ struct{}
+
+func (*VertexBufferBindingIndexᵖ) Class() binary.Class {
+	return (*binaryClassVertexBufferBindingIndexᵖ)(nil)
+}
+func doEncodeVertexBufferBindingIndexᵖ(e binary.Encoder, o *VertexBufferBindingIndexᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeVertexBufferBindingIndexᵖ(d binary.Decoder, o *VertexBufferBindingIndexᵖ) {
+	var ent_a5e5009b5574807f52f1b6df5a221cae948f06fa *binary.Entity
+	if ent, err := d.PopEntity(); err != nil {
+		d.SetError(err)
+		return
+	} else {
+		ent_a5e5009b5574807f52f1b6df5a221cae948f06fa = ent
+	}
+	d.Struct(ent_a5e5009b5574807f52f1b6df5a221cae948f06fa, &o.Pointer)
+}
+func (*binaryClassVertexBufferBindingIndexᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeVertexBufferBindingIndexᵖ(e, obj.(*VertexBufferBindingIndexᵖ))
+}
+func (*binaryClassVertexBufferBindingIndexᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &VertexBufferBindingIndexᵖ{}
+	doDecodeVertexBufferBindingIndexᵖ(d, obj)
+	return obj
+}
+func (*binaryClassVertexBufferBindingIndexᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeVertexBufferBindingIndexᵖ(d, obj.(*VertexBufferBindingIndexᵖ))
+}
+func (*binaryClassVertexBufferBindingIndexᵖ) Schema() *binary.Entity {
+	return schemaVertexBufferBindingIndexᵖ
+}
+
+var schemaVertexBufferBindingIndexᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "VertexBufferBindingIndexᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassVoidˢ struct{}
 
 func (*Voidˢ) Class() binary.Class {
@@ -52305,42 +53020,6 @@ var schemagenerate_types = &binary.Entity{
 
 var ConstantValues schema.Constants
 
-var _Constants_map = map[Constants]string{}
-
-func init() {
-	_Constants_map[16] = "MAX_VERTEX_ATTRIBS"
-	_Constants_map[16] = "MAX_VERTEX_ATTRIB_BINDINGS"
-	_Constants_map[2047] = "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET"
-	_Constants_map[2048] = "MAX_VERTEX_ATTRIB_STRIDE"
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "Constants", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: "MAX_VERTEX_ATTRIBS", Value: uint32(16)},
-			{Name: "MAX_VERTEX_ATTRIB_BINDINGS", Value: uint32(16)},
-			{Name: "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET", Value: uint32(2047)},
-			{Name: "MAX_VERTEX_ATTRIB_STRIDE", Value: uint32(2048)},
-		},
-	})
-}
-
-func (v Constants) String() string {
-	if s, ok := _Constants_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("Constants(%d)", v)
-}
-
-func (v *Constants) Parse(s string) error {
-	for k, t := range _Constants_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in Constants", s)
-}
-
 var _ExtensionId_map = map[ExtensionId]string{}
 
 func init() {
@@ -52549,36 +53228,6 @@ func (v *ExtensionId) Parse(s string) error {
 		}
 	}
 	return fmt.Errorf("%s not in ExtensionId", s)
-}
-
-var _FramebufferConstants_map = map[FramebufferConstants]string{}
-
-func init() {
-	_FramebufferConstants_map[8] = "MAX_DRAW_BUFFERS"
-
-	ConstantValues = append(ConstantValues, schema.ConstantSet{
-		Type: &schema.Primitive{Name: "FramebufferConstants", Method: schema.Uint32},
-		Entries: []schema.Constant{
-			{Name: "MAX_DRAW_BUFFERS", Value: uint32(8)},
-		},
-	})
-}
-
-func (v FramebufferConstants) String() string {
-	if s, ok := _FramebufferConstants_map[v]; ok {
-		return s
-	}
-	return fmt.Sprintf("FramebufferConstants(%d)", v)
-}
-
-func (v *FramebufferConstants) Parse(s string) error {
-	for k, t := range _FramebufferConstants_map {
-		if s == t {
-			*v = k
-			return nil
-		}
-	}
-	return fmt.Errorf("%s not in FramebufferConstants", s)
 }
 
 var _GLbitfield_map = map[GLbitfield]string{}

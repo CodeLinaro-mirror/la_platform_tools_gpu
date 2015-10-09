@@ -165,20 +165,39 @@ func checkReplay(t *testing.T, expectedContext replay.Context, expectedBatchCoun
 	}
 }
 
-func setContextInfo(width, height int, preserveBuffersOnSwap bool) atom.Atom {
-	return &gles.ContextInfo{
-		Name:                  "test-driver",
-		Vendor:                "Super-Awesome-Graphics-Inc",
-		Extensions:            "",
-		Version:               "OpenGL ES 2.0",
-		BackbufferWidth:       gles.GLsizei(width),
-		BackbufferHeight:      gles.GLsizei(height),
-		BackbufferColorFmt:    gles.GLenum_GL_RGB565,
-		BackbufferDepthFmt:    gles.GLenum_GL_DEPTH_COMPONENT16,
-		BackbufferStencilFmt:  gles.GLenum_GL_STENCIL_INDEX8,
-		ResetViewportScissor:  true,
-		PreserveBuffersOnSwap: preserveBuffersOnSwap,
+func newContextInfo(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) atom.Atom {
+	names := []gles.GLenum{}
+	offsets := []uint32{}
+	sizes := []uint32{}
+	data := ""
+	for name, value := range map[gles.GLenum]string{
+		gles.GLenum_GL_RENDERER: "test-driver",
+		gles.GLenum_GL_VENDOR:   "Super-Awesome-Graphics-Inc",
+		gles.GLenum_GL_VERSION:  "OpenGL ES 2.0",
+	} {
+		names = append(names, name)
+		offsets = append(offsets, uint32(len(data)))
+		sizes = append(sizes, uint32(len(value)))
+		data = data + value
 	}
+
+	return gles.NewContextInfo(
+		uint32(len(names)),
+		p(0x10000),
+		p(0x20000),
+		p(0x30000),
+		p(0x40000),
+		gles.GLsizei(width),
+		gles.GLsizei(height),
+		gles.GLenum_GL_RGB565,
+		gles.GLenum_GL_DEPTH_COMPONENT16,
+		gles.GLenum_GL_STENCIL_INDEX8,
+		true,
+		preserveBuffersOnSwap).
+		AddRead(atom.Data(a, d, l, p(0x10000), names)).
+		AddRead(atom.Data(a, d, l, p(0x20000), offsets)).
+		AddRead(atom.Data(a, d, l, p(0x30000), sizes)).
+		AddRead(atom.Data(a, d, l, p(0x40000), data))
 }
 
 // firstAtomID is the identifier of the first atom after initContext.
@@ -197,7 +216,7 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, p(0x1000000), eglContext).
 			AddRead(atom.Data(a, d, l, p(0x1000000), eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
-		setContextInfo(width, height, preserveBuffersOnSwap),
+		newContextInfo(a, d, l, width, height, preserveBuffersOnSwap),
 	)
 	return atoms
 }
@@ -297,7 +316,7 @@ func TestResizeRenderer(t *testing.T) {
 		gles.NewGlVertexAttribPointer(pos, 3, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 0, p(0x100000)),
 	)
 	triangle := atoms.Add(
-		setContextInfo(64, 64, false), // Resize just before clearing and drawing.
+		newContextInfo(a, d, l, 64, 64, false), // Resize just before clearing and drawing.
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		gles.NewGlClear(gles.GLbitfield_GL_COLOR_BUFFER_BIT),
 		gles.NewGlDrawArrays(gles.GLenum_GL_TRIANGLES, 0, 3).

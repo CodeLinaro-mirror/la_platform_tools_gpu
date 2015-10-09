@@ -131,10 +131,14 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 				break
 			}
 
-			source, err := getFeatures(a.Version, a.Extensions, l)
+			// Mutate to set the Version and Extensions strings.
+			a.Mutate(s, d, l)
+			out.Write(i, a)
+
+			source, err := getFeatures(ctx.Constants.Version, ctx.Constants.Extensions, l)
 			if err != nil {
 				log.E(l, "Error '%v' when getting feature list for version: '%s', extensions: '%s'.",
-					err, a.Version, a.Extensions)
+					err, ctx.Constants.Version, ctx.Constants.Extensions)
 				break
 			}
 
@@ -145,13 +149,11 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 				// Replay device requires VAO, but capture did not enforce it.
 				// Satisfy the target by creating and binding a single VAO
 				// which we will use instead of the default VAO (id 0).
-				a.Mutate(s, d, l)
-				out.Write(i, a)
 				out.Write(atom.NoID, NewGlGenVertexArrays(1, memory.Tmp).
 					AddWrite(atom.Data(s.Architecture, d, l, memory.Tmp, VertexArrayId(DefaultVertexArrayId))))
 				out.Write(atom.NoID, NewGlBindVertexArray(DefaultVertexArrayId))
-				return
 			}
+			return
 
 		case *GlBindVertexArray:
 			if a.Array == VertexArrayId(0) {

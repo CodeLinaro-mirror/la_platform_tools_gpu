@@ -15,14 +15,6 @@
 // TODO: Many variables have names like vao2 as a workaround for colliding
 //       local names.  Rename them back once we fix the naming issue.
 
-@internal
-enum Constants {
-  MAX_VERTEX_ATTRIBS                = 16  ,
-  MAX_VERTEX_ATTRIB_BINDINGS        = 16  ,
-  MAX_VERTEX_ATTRIB_STRIDE          = 2048,
-  MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 2047
-}
-
 type GLuint VertexBufferBindingIndex
 type GLuint AttributeLocation
 
@@ -59,12 +51,12 @@ class VertexAttributeValue {
   u8[] Value // Used if VertexAttributeArray is disabled.
 }
 
-macro ref!VertexArray NewVertexArray() {
+macro ref!VertexArray NewVertexArray(ref!Context ctx) {
   array := new!VertexArray()
-  for i in (0 .. as!VertexBufferBindingIndex(MAX_VERTEX_ATTRIB_BINDINGS)) {
+  for i in (0 .. ctx.Constants.MaxVertexAttribBindings) {
     array.VertexBufferBindings[i] = new!VertexBufferBinding()
   }
-  for i in (0 .. as!AttributeLocation(MAX_VERTEX_ATTRIBS)) {
+  for i in (0 .. ctx.Constants.MaxVertexAttribs) {
     array.VertexAttributeArrays[i] = new!VertexAttributeArray(Binding: as!VertexBufferBindingIndex(i))
   }
   return array
@@ -121,7 +113,7 @@ macro void ReadVertexArrays(ref!Context ctx, u32 first_index, u32 index_count, u
     // Only the default vertex array can contain client data pointer.
     if ctx.BoundVertexArray == 0 {
       vao3 := ctx.Instances.VertexArrays[0]
-      for i in (0 .. as!AttributeLocation(MAX_VERTEX_ATTRIBS)) {
+      for i in (0 .. ctx.Constants.MaxVertexAttribs) {
         arr := vao3.VertexAttributeArrays[i]
         if arr.Enabled {
           binding := vao3.VertexBufferBindings[arr.Binding]
@@ -162,16 +154,16 @@ macro void BindVertexArray(VertexArrayId array) {
   ctx := GetContext()
   // TODO: glErrorInvalidOperationIf(!((array == 0) || (array in ctx.UsedNames.VertexArrays)))
   if !(array in ctx.Instances.VertexArrays) {
-    ctx.Instances.VertexArrays[array] = NewVertexArray()
+    ctx.Instances.VertexArrays[array] = NewVertexArray(ctx)
   }
   ctx.BoundVertexArray = array
 }
 
 macro void BindVertexBuffer(ref!Context ctx, VertexBufferBindingIndex binding_index, BufferId buffer, GLintptr offset, GLsizei stride) {
-  glErrorInvalidValueIf(binding_index >= as!VertexBufferBindingIndex(MAX_VERTEX_ATTRIB_BINDINGS))
+  glErrorInvalidValueIf(binding_index >= ctx.Constants.MaxVertexAttribBindings)
   glErrorInvalidValueIf(offset < 0)
   glErrorInvalidValueIf(stride < 0)
-  glErrorInvalidValueIf(stride > as!GLsizei(MAX_VERTEX_ATTRIB_STRIDE))
+  glErrorInvalidValueIf(stride > as!GLsizei(ctx.Constants.MaxVertexAttribStride))
   // TODO: glErrorInvalidOperationIf(!((buffer == 0) || (buffer in ctx.UsedNames.Buffers))) // SPEC: html is different
   if !(buffer in ctx.Instances.Buffers) {
     ctx.Instances.Buffers[buffer] = new!Buffer()
@@ -225,8 +217,8 @@ macro void DeleteVertexArrays(GLsizei count, const VertexArrayId* arrays) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.2")
 cmd void glDisableVertexAttribArray(AttributeLocation location) {
   minRequiredVersion(2, 0)
-  glErrorInvalidValueIf(location >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(location >= ctx.Constants.MaxVertexAttribs)
   vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
   vao.VertexAttributeArrays[location].Enabled = false
 }
@@ -237,8 +229,8 @@ cmd void glDisableVertexAttribArray(AttributeLocation location) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnableVertexAttribArray.xhtml","OpenGL ES 3.2")
 cmd void glEnableVertexAttribArray(AttributeLocation location) {
   minRequiredVersion(2, 0)
-  glErrorInvalidValueIf(location >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(location >= ctx.Constants.MaxVertexAttribs)
   vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
   vao.VertexAttributeArrays[location].Enabled = true
 }
@@ -268,8 +260,8 @@ macro void GenVertexArrays(GLsizei count, VertexArrayId* arrays) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribIiv(AttributeLocation index, GLenum pname, GLint* params) {
   minRequiredVersion(3, 0)
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
   if pname == GL_CURRENT_VERTEX_ATTRIB {
     attr := ctx.VertexAttributes[index]
     write(params[0:4])
@@ -284,8 +276,8 @@ cmd void glGetVertexAttribIiv(AttributeLocation index, GLenum pname, GLint* para
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribIuiv(AttributeLocation index, GLenum pname, GLuint* params) {
   minRequiredVersion(3, 0)
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
   if pname == GL_CURRENT_VERTEX_ATTRIB {
     attr := ctx.VertexAttributes[index]
     write(params[0:4])
@@ -301,9 +293,9 @@ cmd void glGetVertexAttribIuiv(AttributeLocation index, GLenum pname, GLuint* pa
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttribPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribPointerv(AttributeLocation index, GLenum pname, void** pointer) {
   minRequiredVersion(2, 0)
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
-  glErrorInvalidEnumIf(pname != GL_VERTEX_ATTRIB_ARRAY_POINTER)
   ctx := GetContext()
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
+  glErrorInvalidEnumIf(pname != GL_VERTEX_ATTRIB_ARRAY_POINTER)
   vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
   pointer[0] = as!void*(vao.VertexAttributeArrays[index].Pointer)
 }
@@ -314,8 +306,8 @@ cmd void glGetVertexAttribPointerv(AttributeLocation index, GLenum pname, void**
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribfv(AttributeLocation index, GLenum pname, GLfloat* params) {
   minRequiredVersion(2, 0)
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
   if pname == GL_CURRENT_VERTEX_ATTRIB {
     attr := ctx.VertexAttributes[index]
     write(params[0:4])
@@ -331,8 +323,8 @@ cmd void glGetVertexAttribfv(AttributeLocation index, GLenum pname, GLfloat* par
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetVertexAttrib.xhtml","OpenGL ES 3.2")
 cmd void glGetVertexAttribiv(AttributeLocation index, GLenum pname, GLint* params) {
   minRequiredVersion(2, 0)
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
   if pname == GL_CURRENT_VERTEX_ATTRIB {
     attr := ctx.VertexAttributes[index]
     write(params[0:4])
@@ -356,8 +348,8 @@ macro GLboolean IsVertexArray(VertexArrayId array) {
 }
 
 macro void VertexAttribF(AttributeLocation location, Vec4f value) {
-  glErrorInvalidValueIf(location >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(location >= ctx.Constants.MaxVertexAttribs)
   vals := make!Vec4f(1)
   vals[0] = value
   ctx.VertexAttributes[location] = VertexAttributeValue(Value: as!u8[](vals))
@@ -447,8 +439,8 @@ cmd void glVertexAttrib4fv(AttributeLocation location, const GLfloat* value) {
 }
 
 macro void VertexAttribBinding(ref!Context ctx, AttributeLocation index, VertexBufferBindingIndex binding_index) {
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
-  glErrorInvalidValueIf(binding_index >= as!VertexBufferBindingIndex(MAX_VERTEX_ATTRIB_BINDINGS))
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
+  glErrorInvalidValueIf(binding_index >= ctx.Constants.MaxVertexAttribBindings)
   // NB: Some callers may use the default VertexArray and some may not.
   //     Therefore the caller should do the check if it is needed.
   vao5 := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
@@ -487,7 +479,7 @@ macro void VertexAttribFormat(ref!Context       ctx,
                               GLboolean         normalized,
                               GLuint            relativeOffset,
                               bool              integer) {
-  glErrorInvalidValueIf(index >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
+  glErrorInvalidValueIf(index >= ctx.Constants.MaxVertexAttribs)
   glErrorInvalidValueIf(!((1 <= size) && (size <= 4)))
   if (integer) {
     switch (type) {
@@ -520,7 +512,7 @@ macro void VertexAttribFormat(ref!Context       ctx,
   }
   // NB: Some callers may use the default VertexArray and some may not.
   //     Therefore the caller should do the check if it is needed.
-  glErrorInvalidValueIf(relativeOffset > as!GLuint(MAX_VERTEX_ATTRIB_RELATIVE_OFFSET))
+  glErrorInvalidValueIf(relativeOffset > as!GLuint(ctx.Constants.MaxVertexAttribRelativeOffset))
   vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
   format := vao.VertexAttributeArrays[index]
   format.Size = size
@@ -546,8 +538,8 @@ cmd void glVertexAttribFormat(AttributeLocation index,
 }
 
 macro void VertexAttribI(AttributeLocation location, Vec4i value) {
-  glErrorInvalidValueIf(location >= as!AttributeLocation(MAX_VERTEX_ATTRIBS))
   ctx := GetContext()
+  glErrorInvalidValueIf(location >= ctx.Constants.MaxVertexAttribs)
   vals := make!Vec4i(1)
   vals[0] = value
   ctx.VertexAttributes[location] = VertexAttributeValue(Value: as!u8[](vals))
@@ -607,7 +599,7 @@ macro void VertexAttribPointer(ref!Context       ctx,
   boundArrayBuffer := ctx.BoundBuffers[GL_ARRAY_BUFFER]
   // Do not allow use of client's memory for non-default vertex array.
   glErrorInvalidValueIf(stride < 0) // SPEC: missing in pdf
-  glErrorInvalidValueIf(stride > as!GLsizei(MAX_VERTEX_ATTRIB_STRIDE)) // SPEC: missing in html
+  glErrorInvalidValueIf(stride > as!GLsizei(ctx.Constants.MaxVertexAttribStride)) // SPEC: missing in html
   glErrorInvalidOperationIf((ctx.BoundVertexArray != 0) && (boundArrayBuffer == 0) && (pointer != null))
   VertexAttribFormat(ctx, index, size, type, normalized, 0, integer)
   binding_index := as!VertexBufferBindingIndex(index)
@@ -664,7 +656,7 @@ cmd void glVertexAttribPointer(AttributeLocation location,
 cmd void glVertexBindingDivisor(VertexBufferBindingIndex binding_index, GLuint divisor) {
   minRequiredVersion(3, 1)
   ctx := GetContext()
-  glErrorInvalidValueIf(binding_index >= as!VertexBufferBindingIndex(MAX_VERTEX_ATTRIB_BINDINGS))
+  glErrorInvalidValueIf(binding_index >= ctx.Constants.MaxVertexAttribBindings)
   glErrorInvalidOperationIf(ctx.BoundVertexArray == 0)
   vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
   vao.VertexBufferBindings[binding_index].Divisor = divisor
