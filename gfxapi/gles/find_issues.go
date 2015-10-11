@@ -21,8 +21,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -85,7 +88,76 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 		return nil
 	}))
 
-	if a, ok := a.(*atom.FramebufferObservation); ok {
+	// null-terminated byte slice to string
+	ntbs := func(b []byte) string {
+		s := string(b)
+		for i, r := range s {
+			if r == 0 {
+				return s[:i]
+			}
+		}
+		return s
+	}
+
+	switch a := a.(type) {
+	case *GlShaderSource:
+		shader := getContext(t.state).Instances.Shaders[a.Shader]
+		var errs []error
+		switch shader.Type {
+		case GLenum_GL_VERTEX_SHADER:
+			_, _, errs = glsl.Parse(shader.Source, ast.LangVertexShader)
+		case GLenum_GL_FRAGMENT_SHADER:
+			_, _, errs = glsl.Parse(shader.Source, ast.LangFragmentShader)
+		default:
+			t.onIssue(i, log.Error, fmt.Errorf("Unknown shader type %v", shader.Type))
+		}
+		for _, err := range errs {
+			t.onIssue(i, log.Error, err)
+		}
+
+	case *GlCompileShader:
+		const buflen = 2048
+		out.Write(atom.NoID, NewGlGetShaderiv(a.Shader, GLenum_GL_COMPILE_STATUS, memory.Tmp))
+		out.Write(atom.NoID, NewGlGetShaderInfoLog(a.Shader, buflen, memory.Nullptr, memory.Tmp.Offset(4)))
+		out.Write(atom.NoID, replay.Custom(func(_ atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+			b.Post(value.RemappedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
+				if err != nil {
+					return err
+				}
+				b.ReserveMemory(memory.Tmp.Range(4 + buflen))
+				msg := make([]byte, buflen)
+				res := d.Uint32()
+				d.Data(msg)
+				if res != uint32(GLenum_GL_TRUE) {
+					t.onIssue(i, log.Error, fmt.Errorf("Shader %d failed to compile. Error: %v", a.Shader, ntbs(msg)))
+				}
+				return d.Error()
+			})
+			return nil
+		}))
+
+	case *GlLinkProgram:
+		const buflen = 2048
+		out.Write(atom.NoID, NewGlGetProgramiv(a.Program, GLenum_GL_LINK_STATUS, memory.Tmp))
+		out.Write(atom.NoID, NewGlGetProgramInfoLog(a.Program, buflen, memory.Nullptr, memory.Tmp.Offset(4)))
+		out.Write(atom.NoID, replay.Custom(func(_ atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+			b.Post(value.RemappedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
+				if err != nil {
+					return err
+				}
+				b.ReserveMemory(memory.Tmp.Range(4 + buflen))
+				msg := make([]byte, buflen)
+				res := d.Uint32()
+				d.Data(msg)
+				if res != uint32(GLenum_GL_TRUE) {
+					t.onIssue(i, log.Error, fmt.Errorf("Program %d failed to compile. Error: %v", a.Program, ntbs(msg)))
+				}
+				return d.Error()
+			})
+			return nil
+		}))
+
+	case *atom.FramebufferObservation:
 		// Check that the framebuffer matches the FramebufferObservation's image.
 		// TODO: Also check formats.
 		w, h, _, _, err := getState(t.state).getFramebufferAttachmentInfo(gfxapi.FramebufferAttachmentColor)
@@ -121,7 +193,7 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 }
 
 func (t *findIssues) Flush(out atom.Writer) {
-	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+	out.Write(atom.NoID, replay.Custom(func(_ atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 		b.Post(value.AbsolutePointer(0x0), 0, func(d binary.Decoder, err error) error {
 			for _, c := range t.out {
 				close(c)
