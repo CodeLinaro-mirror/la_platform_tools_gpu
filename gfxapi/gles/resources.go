@@ -57,7 +57,7 @@ func (t *Texture) ResourceData(s *gfxapi.State, d database.Database, l log.Logge
 		levels := make([]image.Info, len(t.Texture2D))
 		for i, level := range t.Texture2D {
 			levels[i] = image.Info{
-				Format: imageFormat(level.Format),
+				Format: imageFormat(level.TexelFormat, level.TexelType),
 				Width:  uint32(level.Width),
 				Height: uint32(level.Height),
 				Data:   &path.Blob{ID: level.Data.ResourceID(s, d, l)},
@@ -70,7 +70,7 @@ func (t *Texture) ResourceData(s *gfxapi.State, d database.Database, l log.Logge
 		for i, level := range t.Cubemap {
 			for j, face := range level.Faces {
 				img := image.Info{
-					Format: imageFormat(face.Format),
+					Format: imageFormat(face.TexelFormat, face.TexelType),
 					Width:  uint32(face.Width),
 					Height: uint32(face.Height),
 					Data:   &path.Blob{ID: face.Data.ResourceID(s, d, l)},

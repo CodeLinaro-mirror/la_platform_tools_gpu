@@ -45,7 +45,7 @@ func decompressTexImage2D(i atom.ID, a *GlCompressedTexImage2D, s *gfxapi.State,
 		Data:       data.Slice(0, uint64(a.ImageSize), s).ResourceID(s, d, l),
 		Width:      uint32(a.Width),
 		Height:     uint32(a.Height),
-		FormatFrom: imageFormat(a.Format),
+		FormatFrom: imageFormat(a.Format, 0),
 		FormatTo:   image.RGBA(),
 	}, d, l)
 	if err != nil {
@@ -104,7 +104,7 @@ func convertTexImage2D(i atom.ID, a *GlTexImage2D, s *gfxapi.State, d database.D
 		a.Observations().ApplyReads(s.Memory[memory.ApplicationPool])
 	}
 
-	srcFmt := imageFormat(a.Format)
+	srcFmt := imageFormat(a.Format, a.Type)
 	srcSize := srcFmt.Size(srcStridePixels, int(a.Height))
 	dstSize := a.Width * a.Height * 4
 
@@ -148,7 +148,7 @@ func convertTexSubImage2D(i atom.ID, a *GlTexSubImage2D, s *gfxapi.State, d data
 		srcStridePixels = int(a.Width)
 	}
 
-	srcFmt := imageFormat(a.Format)
+	srcFmt := imageFormat(a.Format, a.Type)
 	srcSize := srcFmt.Size(srcStridePixels, int(a.Height))
 	dstSize := int(a.Width) * int(a.Height) * 4
 

@@ -545,40 +545,40 @@ func (p HDC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 type BOOL int64
 type CGLError int64
 
-// CGLPixelFormatObj is a pointer to a void element.
-type CGLPixelFormatObj struct {
+// CGLTexelFormatObj is a pointer to a void element.
+type CGLTexelFormatObj struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewCGLPixelFormatObj returns a CGLPixelFormatObj that points to addr in the application pool.
-func NewCGLPixelFormatObj(addr uint64) CGLPixelFormatObj {
-	return CGLPixelFormatObj{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewCGLTexelFormatObj returns a CGLTexelFormatObj that points to addr in the application pool.
+func NewCGLTexelFormatObj(addr uint64) CGLTexelFormatObj {
+	return CGLTexelFormatObj{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that CGLPixelFormatObj points to.
-func (p CGLPixelFormatObj) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that CGLTexelFormatObj points to.
+func (p CGLTexelFormatObj) ElementSize(ϟs *gfxapi.State) uint64 {
 	return uint64(1)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p CGLPixelFormatObj) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLPixelFormatObj {
+func (p CGLTexelFormatObj) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLTexelFormatObj {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p CGLPixelFormatObj) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLPixelFormatObj {
+func (p CGLTexelFormatObj) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLTexelFormatObj {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p CGLPixelFormatObj) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLPixelFormatObj {
+func (p CGLTexelFormatObj) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) CGLTexelFormatObj {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // Slice returns a new Voidˢ from the pointer using start and end indices.
-func (p CGLPixelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
+func (p CGLTexelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
@@ -40980,7 +40980,7 @@ func (a *WglSwapBuffers) Observations() *atom.Observations { return &a.observati
 type CGLCreateContext struct {
 	binary.Generate
 	observations atom.Observations
-	Pix          CGLPixelFormatObj
+	Pix          CGLTexelFormatObj
 	Share        CGLContextObj
 	Ctx          CGLContextObjᵖ
 	Result       CGLError
@@ -41717,11 +41717,12 @@ type Rect struct {
 ////////////////////////////////////////////////////////////////////////////////
 type Image struct {
 	binary.Generate
-	Width  GLsizei
-	Height GLsizei
-	Data   U8ˢ
-	Size   uint32
-	Format GLenum
+	Width       GLsizei
+	Height      GLsizei
+	Data        U8ˢ
+	Size        uint32
+	TexelFormat GLenum
+	TexelType   GLenum
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41729,10 +41730,10 @@ type Image struct {
 ////////////////////////////////////////////////////////////////////////////////
 type Renderbuffer struct {
 	binary.Generate
-	Width  GLsizei
-	Height GLsizei
-	Data   U8ˢ
-	Format GLenum
+	Width       GLsizei
+	Height      GLsizei
+	Data        U8ˢ
+	TexelFormat GLenum
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41742,7 +41743,8 @@ type Texture struct {
 	binary.Generate
 	ID            TextureId
 	Kind          TextureKind
-	Format        GLenum
+	TexelFormat   GLenum
+	TexelType     GLenum
 	Texture2D     GLintːImageᵐ
 	Cubemap       GLintːCubemapLevelᵐ
 	MagFilter     GLenum
@@ -49930,7 +49932,7 @@ func NewWglSwapBuffers(Hdc memory.Pointer) *WglSwapBuffers {
 	return &WglSwapBuffers{Hdc: HDC{Pointer: Hdc}}
 }
 func NewCGLCreateContext(Pix memory.Pointer, Share memory.Pointer, Ctx memory.Pointer, Result CGLError) *CGLCreateContext {
-	return &CGLCreateContext{Pix: CGLPixelFormatObj{Pointer: Pix}, Share: CGLContextObj{Pointer: Share}, Ctx: CGLContextObjᵖ{Pointer: Ctx}, Result: Result}
+	return &CGLCreateContext{Pix: CGLTexelFormatObj{Pointer: Pix}, Share: CGLContextObj{Pointer: Share}, Ctx: CGLContextObjᵖ{Pointer: Ctx}, Result: Result}
 }
 func NewCGLSetCurrentContext(Ctx memory.Pointer, Result CGLError) *CGLSetCurrentContext {
 	return &CGLSetCurrentContext{Ctx: CGLContextObj{Pointer: Ctx}, Result: Result}

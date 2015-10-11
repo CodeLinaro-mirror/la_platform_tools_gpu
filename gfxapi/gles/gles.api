@@ -317,7 +317,8 @@ class Image {
   GLsizei Height
   u8[]    Data
   u32     Size
-  GLenum  Format
+  GLenum  TexelFormat
+  GLenum  TexelType
 }
 
 @internal
@@ -325,7 +326,7 @@ class Renderbuffer {
   GLsizei Width
   GLsizei Height
   u8[]    Data
-  GLenum  Format
+  GLenum  TexelFormat
 }
 
 @internal
@@ -333,7 +334,8 @@ class Renderbuffer {
 class Texture {
   TextureId                 ID
   TextureKind               Kind
-  GLenum                    Format
+  GLenum                    TexelFormat
+  GLenum                    TexelType
   map!(GLint, Image)        Texture2D
   map!(GLint, CubemapLevel) Cubemap
   GLenum                    MagFilter     = GL_LINEAR
@@ -763,7 +765,7 @@ cmd void wglSwapBuffers(HDC hdc) {  }
 // CGL APIs
 /////////////////////////////////////////////////////////////////
 type int   CGLError
-type void* CGLPixelFormatObj
+type void* CGLTexelFormatObj
 type void* CGLContextObj
 type void* CGSConnectionID
 type s32   CGSWindowID
@@ -773,7 +775,7 @@ map!(CGLContextObj, ref!Context) CGLContexts
 
 @no_replay
 ///http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
-cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj* ctx) {
+cmd CGLError CGLCreateContext(CGLTexelFormatObj pix, CGLContextObj share, CGLContextObj* ctx) {
   context := as!CGLContextObj(?)
   CGLContexts[context] = CreateContext()
   ctx[0] = context

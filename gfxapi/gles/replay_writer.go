@@ -869,7 +869,7 @@ func (c HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) val
 func (c HDC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return Voidᵖ(c).value()
 }
-func (c CGLPixelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+func (c CGLTexelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return Voidᵖ(c).value()
 }
 func (c CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
@@ -21923,7 +21923,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 		case GLenum_GL_RENDERBUFFER_HEIGHT:
 			return GLint(rb.Height)
 		case GLenum_GL_RENDERBUFFER_INTERNAL_FORMAT:
-			return GLint(rb.Format)
+			return GLint(rb.TexelFormat)
 		default:
 			// TODO: better unmatched handling
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.Parameter, ϟa))
@@ -22286,7 +22286,7 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ctx := GetContext_1879_result               // Contextʳ
 	id := ctx.BoundRenderbuffers.Get(ϟa.Target) // RenderbufferId
 	rb := ctx.Instances.Renderbuffers.Get(id)   // Renderbufferʳ
-	rb.Format = ϟa.Format
+	rb.TexelFormat = ϟa.Format
 	rb.Width = ϟa.Width
 	rb.Height = ϟa.Height
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
@@ -39053,20 +39053,20 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	tu := ctx.TextureUnits.Get(ctx.ActiveTextureUnit) // TextureUnitʳ
 	switch ϟa.Target {
 	case GLenum_GL_TEXTURE_2D:
-		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                   // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_2D)                                                        // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), TexelFormat: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
 		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
 		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
-		t.OnAccess(ϟs).Format = ϟa.Format
+		t.OnAccess(ϟs).TexelFormat = ϟa.Format
 		_, _, _ = id, t, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                             // TextureId
-		t := ctx.Instances.Textures.Get(id)                                                           // Textureʳ
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), Format: ϟa.Format} // Image
+		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                  // TextureId
+		t := ctx.Instances.Textures.Get(id)                                                                // Textureʳ
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: uint32(ϟa.ImageSize), TexelFormat: ϟa.Format} // Image
 		if ((ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(Voidᶜᵖ{}))) {
 			l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
 		}
@@ -39074,7 +39074,7 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 		cube.Faces[ϟa.Target] = l
 		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
 		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
-		t.OnAccess(ϟs).Format = ϟa.Format
+		t.OnAccess(ϟs).TexelFormat = ϟa.Format
 		_, _, _, _ = id, t, l, cube
 	default:
 		v := ϟa.Target
@@ -40776,7 +40776,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		imageSize_4463_format := ϟa.Format                                                                                                                                // GLenum
 		imageSize_4463_type := ϟa.Type                                                                                                                                    // GLenum
 		imageSize_4463_result := (imageSize_4463_width) * ((imageSize_4463_height) * (externs{ϟa, ϟs, ϟd, ϟl, ϟb}.pixelSize(imageSize_4463_format, imageSize_4463_type))) // u32
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: imageSize_4463_result, Format: ϟa.Format}                                                                    // Image
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: imageSize_4463_result, TexelFormat: ϟa.Format, TexelType: ϟa.Type}                                           // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -40786,7 +40786,8 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		}
 		t.OnAccess(ϟs).Texture2D[ϟa.Level] = l
 		t.OnAccess(ϟs).Kind = TextureKind_TEXTURE2D
-		t.OnAccess(ϟs).Format = ϟa.Format
+		t.OnAccess(ϟs).TexelFormat = ϟa.Format
+		t.OnAccess(ϟs).TexelType = ϟa.Type
 		_, _, _, _, _, _, _, _ = id, t, imageSize_4463_width, imageSize_4463_height, imageSize_4463_format, imageSize_4463_type, imageSize_4463_result, l
 	case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := tu.Bindings.Get(GLenum_GL_TEXTURE_CUBE_MAP)                                                                                                                 // TextureId
@@ -40796,7 +40797,7 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		imageSize_4464_format := ϟa.Format                                                                                                                                // GLenum
 		imageSize_4464_type := ϟa.Type                                                                                                                                    // GLenum
 		imageSize_4464_result := (imageSize_4464_width) * ((imageSize_4464_height) * (externs{ϟa, ϟs, ϟd, ϟl, ϟb}.pixelSize(imageSize_4464_format, imageSize_4464_type))) // u32
-		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: imageSize_4464_result, Format: ϟa.Format}                                                                    // Image
+		l := Image{Width: ϟa.Width, Height: ϟa.Height, Size: imageSize_4464_result, TexelFormat: ϟa.Format, TexelType: ϟa.Type}                                           // Image
 		if (ϟa.Data) != (TexturePointer(Voidᶜᵖ{})) {
 			if (ctx.BoundBuffers.Get(GLenum_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0))) {
 				l.Data = U8ᵖ(ϟa.Data).Slice(uint64(uint32(0)), uint64(l.Size), ϟs).Clone(ϟa, ϟs, ϟd, ϟl, ϟb)
@@ -40808,7 +40809,8 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 		cube.Faces[ϟa.Target] = l
 		t.OnAccess(ϟs).Cubemap[ϟa.Level] = cube
 		t.OnAccess(ϟs).Kind = TextureKind_CUBEMAP
-		t.OnAccess(ϟs).Format = ϟa.Format
+		t.OnAccess(ϟs).TexelFormat = ϟa.Format
+		t.OnAccess(ϟs).TexelType = ϟa.Type
 		_, _, _, _, _, _, _, _, _ = id, t, imageSize_4464_width, imageSize_4464_height, imageSize_4464_format, imageSize_4464_type, imageSize_4464_result, l, cube
 	default:
 		v := ϟa.Target
@@ -44558,13 +44560,13 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	stencil_buffer := ctx.Instances.Renderbuffers.Get(stencil_id)                                 // Renderbufferʳ
 	color_buffer.Width = ϟa.BackbufferWidth
 	color_buffer.Height = ϟa.BackbufferHeight
-	color_buffer.Format = ϟa.BackbufferColorFmt
+	color_buffer.TexelFormat = ϟa.BackbufferColorFmt
 	depth_buffer.Width = ϟa.BackbufferWidth
 	depth_buffer.Height = ϟa.BackbufferHeight
-	depth_buffer.Format = ϟa.BackbufferDepthFmt
+	depth_buffer.TexelFormat = ϟa.BackbufferDepthFmt
 	stencil_buffer.Width = ϟa.BackbufferWidth
 	stencil_buffer.Height = ϟa.BackbufferHeight
-	stencil_buffer.Format = ϟa.BackbufferStencilFmt
+	stencil_buffer.TexelFormat = ϟa.BackbufferStencilFmt
 	if ϟa.ResetViewportScissor {
 		ctx.Rasterizing.Scissor.Width = ϟa.BackbufferWidth
 		ctx.Rasterizing.Scissor.Height = ϟa.BackbufferHeight

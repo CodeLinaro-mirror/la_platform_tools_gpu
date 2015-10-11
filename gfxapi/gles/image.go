@@ -96,19 +96,38 @@ func pixelSize(format GLenum, ty GLenum) uint32 {
 	}
 }
 
-// imageFormat returns the package image format for the given GL format.
-func imageFormat(f GLenum) image.Format {
-	switch f {
+// imageFormat returns the package image format for the given GL format and type.
+func imageFormat(format GLenum, ty GLenum) image.Format {
+	switch format {
 	case GLenum_GL_ALPHA:
-		return image.Alpha()
+		switch ty {
+		case GLenum_GL_UNSIGNED_BYTE:
+			return image.Alpha()
+		}
 	case GLenum_GL_LUMINANCE:
-		return image.Luminance()
+		switch ty {
+		case GLenum_GL_UNSIGNED_BYTE:
+			return image.Luminance()
+		}
 	case GLenum_GL_LUMINANCE_ALPHA:
-		return image.LuminanceAlpha()
+		switch ty {
+		case GLenum_GL_UNSIGNED_BYTE:
+			return image.LuminanceAlpha()
+		}
 	case GLenum_GL_RGB:
-		return image.RGB()
+		switch ty {
+		case GLenum_GL_UNSIGNED_BYTE:
+			return image.RGB()
+		case GLenum_GL_UNSIGNED_SHORT_5_6_5:
+			return image.RGB565()
+		}
 	case GLenum_GL_RGBA:
-		return image.RGBA()
+		switch ty {
+		case GLenum_GL_UNSIGNED_BYTE:
+			return image.RGBA()
+		case GLenum_GL_UNSIGNED_SHORT_5_5_5_1:
+			return image.RGBA5551()
+		}
 	case GLenum_GL_ATC_RGB_AMD:
 		return image.ATC_RGB_AMD()
 	case GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
@@ -116,5 +135,5 @@ func imageFormat(f GLenum) image.Format {
 	case GLenum_GL_ETC1_RGB8_OES:
 		return image.ETC1_RGB8_OES()
 	}
-	panic(fmt.Errorf("Unsupported input format: %s", f.String()))
+	panic(fmt.Errorf("Unsupported input format-type pair: (%s, %s)", format.String(), ty.String()))
 }

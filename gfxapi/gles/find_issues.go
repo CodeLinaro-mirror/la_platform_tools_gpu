@@ -87,7 +87,8 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 
 	if a, ok := a.(*atom.FramebufferObservation); ok {
 		// Check that the framebuffer matches the FramebufferObservation's image.
-		w, h, _, err := getState(t.state).getFramebufferAttachmentSizeAndFmt(gfxapi.FramebufferAttachmentColor)
+		// TODO: Also check formats.
+		w, h, _, _, err := getState(t.state).getFramebufferAttachmentInfo(gfxapi.FramebufferAttachmentColor)
 		if err != nil {
 			t.onIssue(i, log.Error, fmt.Errorf("Failed to resolve framebuffer dimensions: %v", err))
 			return

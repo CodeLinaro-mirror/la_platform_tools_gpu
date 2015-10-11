@@ -6540,7 +6540,7 @@ typedef void *HGLRC;
 typedef void *HDC;
 typedef int BOOL;
 typedef int CGLError;
-typedef void *CGLPixelFormatObj;
+typedef void *CGLTexelFormatObj;
 typedef void *CGLContextObj;
 typedef void *CGSConnectionID;
 typedef int32_t CGSWindowID;

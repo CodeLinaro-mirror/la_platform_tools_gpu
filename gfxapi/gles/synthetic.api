@@ -73,15 +73,15 @@ cmd void contextInfo(u32     constant_count,
 
   color_buffer.Width = backbuffer_width
   color_buffer.Height = backbuffer_height
-  color_buffer.Format = backbuffer_color_fmt
+  color_buffer.TexelFormat = backbuffer_color_fmt
 
   depth_buffer.Width = backbuffer_width
   depth_buffer.Height = backbuffer_height
-  depth_buffer.Format = backbuffer_depth_fmt
+  depth_buffer.TexelFormat = backbuffer_depth_fmt
 
   stencil_buffer.Width = backbuffer_width
   stencil_buffer.Height = backbuffer_height
-  stencil_buffer.Format = backbuffer_stencil_fmt
+  stencil_buffer.TexelFormat = backbuffer_stencil_fmt
 
   if reset_viewport_scissor {
     ctx.Rasterizing.Scissor.Width = backbuffer_width

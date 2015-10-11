@@ -168,10 +168,10 @@ cmd void glCompressedTexImage2D(GLenum         target,
       id := tu.Bindings[GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    as!u32(image_size),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
+        Width:        width,
+        Height:       height,
+        Size:         as!u32(image_size),
+        TexelFormat:  format,
       )
       if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
         l.Data = clone(as!u8*(data)[0:l.Size])
@@ -179,17 +179,17 @@ cmd void glCompressedTexImage2D(GLenum         target,
       t.Texture2D[level] = l
       t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
       // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
+      t.TexelFormat = format
     }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
       id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    as!u32(image_size),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
+        Width:       width,
+        Height:      height,
+        Size:        as!u32(image_size),
+        TexelFormat: format,
       )
       if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
         l.Data = clone(as!u8*(data)[0:l.Size])
@@ -199,7 +199,7 @@ cmd void glCompressedTexImage2D(GLenum         target,
       t.Cubemap[level] = cube
       t.Kind = CUBEMAP // TODO: Warning/Error if kind has changed?
       // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
+      t.TexelFormat = format
     }
   }
 }
@@ -1105,10 +1105,11 @@ cmd void glTexImage2D(GLenum         target,
       id := tu.Bindings[GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    imageSize(as!u32(width), as!u32(height), format, type),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
+        Width:       width,
+        Height:      height,
+        Size:        imageSize(as!u32(width), as!u32(height), format, type),
+        TexelFormat: format,
+        TexelType:   type,
       )
       if (data != null) {
         if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
@@ -1121,17 +1122,19 @@ cmd void glTexImage2D(GLenum         target,
       t.Texture2D[level] = l
       t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
       // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
+      t.TexelFormat = format
+      t.TexelType = type
     }
     case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
       id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:   width,
-        Height:  height,
-        Size:    imageSize(as!u32(width), as!u32(height), format, type),
-        Format:  as!GLenum(format) /* TODO: Implicit cast? */,
+        Width:       width,
+        Height:      height,
+        Size:        imageSize(as!u32(width), as!u32(height), format, type),
+        TexelFormat: format,
+        TexelType:   type,
       )
       if (data != null) {
         if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
@@ -1145,7 +1148,8 @@ cmd void glTexImage2D(GLenum         target,
       t.Cubemap[level] = cube
       t.Kind = CUBEMAP // TODO: Warning/Error if kind has changed?
       // TODO: Warning/Error if format has changed
-      t.Format = as!GLenum(format) // TODO: Implicit cast?
+      t.TexelFormat = format
+      t.TexelType = type
     }
   }
 }
@@ -1761,4 +1765,3 @@ macro void TexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffse
     read(as!u8*(data)[0:size])
   }
 }
-

@@ -34,7 +34,7 @@ func init() {
 	Namespace.Add((*CGLContextObj)(nil).Class())
 	Namespace.Add((*CGLContextObjˢ)(nil).Class())
 	Namespace.Add((*CGLContextObjᵖ)(nil).Class())
-	Namespace.Add((*CGLPixelFormatObj)(nil).Class())
+	Namespace.Add((*CGLTexelFormatObj)(nil).Class())
 	Namespace.Add((*CGLCreateContext)(nil).Class())
 	Namespace.Add((*CGLFlushDrawable)(nil).Class())
 	Namespace.Add((*CGSConnectionIDᵖ)(nil).Class())
@@ -1538,33 +1538,33 @@ var schemaCGLContextObjᵖ = &binary.Entity{
 	},
 }
 
-type binaryClassCGLPixelFormatObj struct{}
+type binaryClassCGLTexelFormatObj struct{}
 
-func (*CGLPixelFormatObj) Class() binary.Class {
-	return (*binaryClassCGLPixelFormatObj)(nil)
+func (*CGLTexelFormatObj) Class() binary.Class {
+	return (*binaryClassCGLTexelFormatObj)(nil)
 }
-func doEncodeCGLPixelFormatObj(e binary.Encoder, o *CGLPixelFormatObj) {
+func doEncodeCGLTexelFormatObj(e binary.Encoder, o *CGLTexelFormatObj) {
 	e.Struct(&o.Pointer)
 }
-func doDecodeCGLPixelFormatObj(d binary.Decoder, o *CGLPixelFormatObj) {
+func doDecodeCGLTexelFormatObj(d binary.Decoder, o *CGLTexelFormatObj) {
 	d.Struct(&o.Pointer)
 }
-func (*binaryClassCGLPixelFormatObj) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeCGLPixelFormatObj(e, obj.(*CGLPixelFormatObj))
+func (*binaryClassCGLTexelFormatObj) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCGLTexelFormatObj(e, obj.(*CGLTexelFormatObj))
 }
-func (*binaryClassCGLPixelFormatObj) Decode(d binary.Decoder) binary.Object {
-	obj := &CGLPixelFormatObj{}
-	doDecodeCGLPixelFormatObj(d, obj)
+func (*binaryClassCGLTexelFormatObj) Decode(d binary.Decoder) binary.Object {
+	obj := &CGLTexelFormatObj{}
+	doDecodeCGLTexelFormatObj(d, obj)
 	return obj
 }
-func (*binaryClassCGLPixelFormatObj) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeCGLPixelFormatObj(d, obj.(*CGLPixelFormatObj))
+func (*binaryClassCGLTexelFormatObj) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCGLTexelFormatObj(d, obj.(*CGLTexelFormatObj))
 }
-func (*binaryClassCGLPixelFormatObj) Schema() *binary.Entity { return schemaCGLPixelFormatObj }
+func (*binaryClassCGLTexelFormatObj) Schema() *binary.Entity { return schemaCGLTexelFormatObj }
 
-var schemaCGLPixelFormatObj = &binary.Entity{
+var schemaCGLTexelFormatObj = &binary.Entity{
 	Package:  "gles",
-	Identity: "CGLPixelFormatObj",
+	Identity: "CGLTexelFormatObj",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
@@ -1607,7 +1607,7 @@ var schemaCGLCreateContext = &binary.Entity{
 	Identity: "CGLCreateContext",
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
-		{Declared: "Pix", Type: &schema.Struct{Entity: (*CGLPixelFormatObj)(nil).Class().Schema()}},
+		{Declared: "Pix", Type: &schema.Struct{Entity: (*CGLTexelFormatObj)(nil).Class().Schema()}},
 		{Declared: "Share", Type: &schema.Struct{Entity: (*CGLContextObj)(nil).Class().Schema()}},
 		{Declared: "Ctx", Type: &schema.Struct{Entity: (*CGLContextObjᵖ)(nil).Class().Schema()}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
@@ -2927,13 +2927,13 @@ func doEncodeRenderbuffer(e binary.Encoder, o *Renderbuffer) {
 	e.Int32(int32(o.Width))
 	e.Int32(int32(o.Height))
 	e.Struct(&o.Data)
-	e.Uint32(uint32(o.Format))
+	e.Uint32(uint32(o.TexelFormat))
 }
 func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 	d.Struct(&o.Data)
-	o.Format = GLenum(d.Uint32())
+	o.TexelFormat = GLenum(d.Uint32())
 }
 func (*binaryClassRenderbuffer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbuffer(e, obj.(*Renderbuffer))
@@ -2955,7 +2955,7 @@ var schemaRenderbuffer = &binary.Entity{
 		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TexelFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -2969,14 +2969,16 @@ func doEncodeImage(e binary.Encoder, o *Image) {
 	e.Int32(int32(o.Height))
 	e.Struct(&o.Data)
 	e.Uint32(o.Size)
-	e.Uint32(uint32(o.Format))
+	e.Uint32(uint32(o.TexelFormat))
+	e.Uint32(uint32(o.TexelType))
 }
 func doDecodeImage(d binary.Decoder, o *Image) {
 	o.Width = GLsizei(d.Int32())
 	o.Height = GLsizei(d.Int32())
 	d.Struct(&o.Data)
 	o.Size = uint32(d.Uint32())
-	o.Format = GLenum(d.Uint32())
+	o.TexelFormat = GLenum(d.Uint32())
+	o.TexelType = GLenum(d.Uint32())
 }
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImage(e, obj.(*Image))
@@ -2999,7 +3001,8 @@ var schemaImage = &binary.Entity{
 		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Data", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TexelFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TexelType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -3057,7 +3060,8 @@ func (*Texture) Class() binary.Class {
 func doEncodeTexture(e binary.Encoder, o *Texture) {
 	e.Uint32(uint32(o.ID))
 	e.Uint32(uint32(o.Kind))
-	e.Uint32(uint32(o.Format))
+	e.Uint32(uint32(o.TexelFormat))
+	e.Uint32(uint32(o.TexelType))
 	e.Uint32(uint32(len(o.Texture2D)))
 	for k, v := range o.Texture2D {
 		e.Int32(int32(k))
@@ -3081,7 +3085,8 @@ func doEncodeTexture(e binary.Encoder, o *Texture) {
 func doDecodeTexture(d binary.Decoder, o *Texture) {
 	o.ID = TextureId(d.Uint32())
 	o.Kind = TextureKind(d.Uint32())
-	o.Format = GLenum(d.Uint32())
+	o.TexelFormat = GLenum(d.Uint32())
+	o.TexelType = GLenum(d.Uint32())
 	if count := d.Count(); count > 0 {
 		o.Texture2D = make(GLintːImageᵐ, count)
 		m := o.Texture2D
@@ -3133,7 +3138,8 @@ var schemaTexture = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "ID", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
-		{Declared: "Format", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TexelFormat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TexelType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture2D", Type: &schema.Map{Alias: "GLintːImageᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*Image)(nil).Class().Schema()}}},
 		{Declared: "Cubemap", Type: &schema.Map{Alias: "GLintːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "GLint", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*CubemapLevel)(nil).Class().Schema()}}},
 		{Declared: "MagFilter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},

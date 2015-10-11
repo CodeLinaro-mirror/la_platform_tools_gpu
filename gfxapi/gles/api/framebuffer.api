@@ -727,7 +727,7 @@ cmd void glGetRenderbufferParameteriv(GLenum target, GLenum parameter, GLint* va
   values[0] = switch (parameter) {
     case GL_RENDERBUFFER_WIDTH:           as!GLint(rb.Width)
     case GL_RENDERBUFFER_HEIGHT:          as!GLint(rb.Height)
-    case GL_RENDERBUFFER_INTERNAL_FORMAT: as!GLint(rb.Format)
+    case GL_RENDERBUFFER_INTERNAL_FORMAT: as!GLint(rb.TexelFormat)
   // TODO:
   // case GL_RENDERBUFFER_RED_SIZE:        ?
   // case GL_RENDERBUFFER_GREEN_SIZE:      ?
@@ -854,7 +854,7 @@ cmd void glReadPixels(GLint   x,
   }
   ctx := GetContext()
   if (ctx.BoundBuffers[GL_PIXEL_PACK_BUFFER] == 0) && (data != null) {
-    requiredSize := imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)
+    requiredSize := imageSize(as!u32(width), as!u32(height), format, type)
     write(data[0:requiredSize])
   }
 }
@@ -891,7 +891,7 @@ macro void ReadnPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum f
   }
   ctx := GetContext()
   if (ctx.BoundBuffers[GL_PIXEL_PACK_BUFFER] == 0) && (data != null) {
-    requiredSize := imageSize(as!u32(width), as!u32(height), as!GLenum(format), type)
+    requiredSize := imageSize(as!u32(width), as!u32(height), format, type)
     glErrorInvalidOperationIf(as!GLsizei(requiredSize) > bufSize)
     write(data[0:requiredSize])
   }
@@ -930,7 +930,7 @@ cmd void glRenderbufferStorage(GLenum target, GLenum format, GLsizei width, GLsi
   ctx := GetContext()
   id := ctx.BoundRenderbuffers[target]
   rb := ctx.Instances.Renderbuffers[id]
-  rb.Format = format
+  rb.TexelFormat = format
   rb.Width = width
   rb.Height = height
 }
@@ -1009,4 +1009,3 @@ cmd void glStencilMaskSeparate(GLenum face, GLuint mask) {
     }
   }
 }
-

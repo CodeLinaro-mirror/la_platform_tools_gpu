@@ -5850,7 +5850,7 @@ typedef int BOOL;
 
 typedef int CGLError;
 
-typedef void* CGLPixelFormatObj;
+typedef void* CGLTexelFormatObj;
 
 typedef void* CGLContextObj;
 
@@ -6130,29 +6130,42 @@ typedef std::unordered_map<uint32_t, bool> GLenumToBool;
 typedef std::unordered_map<uint32_t, GLint> GLenumToGLint;
 
 struct Renderbuffer {
-    inline Renderbuffer() : mWidth(0), mHeight(0), mData(Slice<uint8_t>()), mFormat(0) {}
-    inline Renderbuffer(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t Format)
-        : mWidth(Width), mHeight(Height), mData(Data), mFormat(Format) {}
+    inline Renderbuffer() : mWidth(0), mHeight(0), mData(Slice<uint8_t>()), mTexelFormat(0) {}
+    inline Renderbuffer(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t TexelFormat)
+        : mWidth(Width), mHeight(Height), mData(Data), mTexelFormat(TexelFormat) {}
 
     GLsizei mWidth;
     GLsizei mHeight;
     Slice<uint8_t> mData;
-    uint32_t mFormat;
+    uint32_t mTexelFormat;
 };
 
 typedef std::unordered_map<RenderbufferId, std::shared_ptr<Renderbuffer>>
         RenderbufferIdToRenderbuffer__R;
 
 struct Image {
-    inline Image() : mWidth(0), mHeight(0), mData(Slice<uint8_t>()), mSize(0), mFormat(0) {}
-    inline Image(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t Size, uint32_t Format)
-        : mWidth(Width), mHeight(Height), mData(Data), mSize(Size), mFormat(Format) {}
+    inline Image()
+        : mWidth(0),
+          mHeight(0),
+          mData(Slice<uint8_t>()),
+          mSize(0),
+          mTexelFormat(0),
+          mTexelType(0) {}
+    inline Image(GLsizei Width, GLsizei Height, Slice<uint8_t> Data, uint32_t Size,
+                 uint32_t TexelFormat, uint32_t TexelType)
+        : mWidth(Width),
+          mHeight(Height),
+          mData(Data),
+          mSize(Size),
+          mTexelFormat(TexelFormat),
+          mTexelType(TexelType) {}
 
     GLsizei mWidth;
     GLsizei mHeight;
     Slice<uint8_t> mData;
     uint32_t mSize;
-    uint32_t mFormat;
+    uint32_t mTexelFormat;
+    uint32_t mTexelType;
 };
 
 typedef std::unordered_map<GLint, Image> GLintToImage;
@@ -6172,7 +6185,8 @@ struct Texture {
     inline Texture()
         : mID(0),
           mKind(0),
-          mFormat(0),
+          mTexelFormat(0),
+          mTexelType(0),
           mTexture2D(GLintToImage()),
           mCubemap(GLintToCubemapLevel()),
           mMagFilter(GLenum::GL_LINEAR),
@@ -6184,13 +6198,14 @@ struct Texture {
           mSwizzleB(GLenum::GL_BLUE),
           mSwizzleA(GLenum::GL_ALPHA),
           mMaxAnisotropy(1) {}
-    inline Texture(TextureId ID, uint32_t Kind, uint32_t Format, GLintToImage Texture2D,
-                   GLintToCubemapLevel Cubemap, uint32_t MagFilter, uint32_t MinFilter,
-                   uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG,
-                   uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy)
+    inline Texture(TextureId ID, uint32_t Kind, uint32_t TexelFormat, uint32_t TexelType,
+                   GLintToImage Texture2D, GLintToCubemapLevel Cubemap, uint32_t MagFilter,
+                   uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR,
+                   uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy)
         : mID(ID),
           mKind(Kind),
-          mFormat(Format),
+          mTexelFormat(TexelFormat),
+          mTexelType(TexelType),
           mTexture2D(Texture2D),
           mCubemap(Cubemap),
           mMagFilter(MagFilter),
@@ -6205,7 +6220,8 @@ struct Texture {
 
     TextureId mID;
     uint32_t mKind;
-    uint32_t mFormat;
+    uint32_t mTexelFormat;
+    uint32_t mTexelType;
     GLintToImage mTexture2D;
     GLintToCubemapLevel mCubemap;
     uint32_t mMagFilter;

@@ -289,13 +289,13 @@ const schema::Entity* CGLContextObj__P::StaticSchema() {
     return &entity;
 }
 
-// CGLPixelFormatObj:
-// gles.CGLPixelFormatObj{$}
-const schema::Entity* CGLPixelFormatObj::StaticSchema() {
+// CGLTexelFormatObj:
+// gles.CGLTexelFormatObj{$}
+const schema::Entity* CGLTexelFormatObj::StaticSchema() {
     static schema::Entity entity {
         "gles",
         "",
-        "CGLPixelFormatObj",
+        "CGLTexelFormatObj",
         "",
         {
             schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
@@ -321,7 +321,7 @@ const schema::Entity* CGLCreateContext::StaticSchema() {
         "",
         {
             schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
-            schema::Field{"Pix", new schema::Struct{ CGLPixelFormatObj::StaticSchema()}},
+            schema::Field{"Pix", new schema::Struct{ CGLTexelFormatObj::StaticSchema()}},
             schema::Field{"Share", new schema::Struct{ CGLContextObj::StaticSchema()}},
             schema::Field{"Ctx", new schema::Struct{ CGLContextObj__P::StaticSchema()}},
             schema::Field{"Result", new schema::Primitive{"CGLError", schema::Primitive::Int64}},
@@ -987,7 +987,7 @@ void Renderbuffer::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
     e->Value(this->mData);
-    e->Uint32(this->mFormat);
+    e->Uint32(this->mTexelFormat);
 }
 const schema::Entity* Renderbuffer::StaticSchema() {
     static schema::Entity entity {
@@ -999,20 +999,21 @@ const schema::Entity* Renderbuffer::StaticSchema() {
             schema::Field{"Width", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Data", new schema::Struct{ U8__S::StaticSchema()}},
-            schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"TexelFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // Image:
-// gles.Image{Int32,Int32,$,Uint32,Uint32}
+// gles.Image{Int32,Int32,$,Uint32,Uint32,Uint32}
 void Image::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
     e->Value(this->mData);
     e->Uint32(this->mSize);
-    e->Uint32(this->mFormat);
+    e->Uint32(this->mTexelFormat);
+    e->Uint32(this->mTexelType);
 }
 const schema::Entity* Image::StaticSchema() {
     static schema::Entity entity {
@@ -1025,7 +1026,8 @@ const schema::Entity* Image::StaticSchema() {
             schema::Field{"Height", new schema::Primitive{"GLsizei", schema::Primitive::Int32}},
             schema::Field{"Data", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"Size", new schema::Primitive{"uint32", schema::Primitive::Uint32}},
-            schema::Field{"Format", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"TexelFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"TexelType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1033,7 +1035,7 @@ const schema::Entity* Image::StaticSchema() {
 
 // Can't encode CubemapLevel contains maps: gles.CubemapLevel{map[Uint32]$}
 
-// Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+// Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
 
 // FramebufferAttachmentInfo:
 // gles.FramebufferAttachmentInfo{Uint32,Uint32,Int32,Uint32}

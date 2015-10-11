@@ -25968,7 +25968,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
         /* switch(parameter) */
             /* case GLenum::GL_RENDERBUFFER_WIDTH: */(((parameter) == (GLenum::GL_RENDERBUFFER_WIDTH))) ? ((GLint)(l_rb->mWidth)) :
             /* case GLenum::GL_RENDERBUFFER_HEIGHT: */(((parameter) == (GLenum::GL_RENDERBUFFER_HEIGHT))) ? ((GLint)(l_rb->mHeight)) :
-            /* case GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT: */(((parameter) == (GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT))) ? ((GLint)(l_rb->mFormat)) :
+            /* case GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT: */(((parameter) == (GLenum::GL_RENDERBUFFER_INTERNAL_FORMAT))) ? ((GLint)(l_rb->mTexelFormat)) :
             /* default: */ 0 /* clang-format on */);
     } while (false);
     observe(observations.mWrites);
@@ -26387,7 +26387,7 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
         std::shared_ptr<Context> l_ctx = l_GetContext_1879_result;
         RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
         std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
-        l_rb->mFormat = format;
+        l_rb->mTexelFormat = format;
         l_rb->mWidth = width;
         l_rb->mHeight = height;
         observe(observations.mReads);
@@ -45139,7 +45139,7 @@ inline void GlesSpy::glBindTexture(uint32_t target, uint32_t texture) {
         std::shared_ptr<Context> l_ctx = l_GetContext_4277_result;
         if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
             l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture(
-                    texture, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    texture, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                     GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                     GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         }
@@ -45251,7 +45251,8 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_TEXTURE_2D: {
                 TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_2D];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
+                Image l_l =
+                        Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format, 0);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -45259,7 +45260,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                 }
                 l_t->mTexture2D[level] = l_l;
                 l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = format;
+                l_t->mTexelFormat = format;
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
@@ -45270,7 +45271,8 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
                 TextureId l_id = l_tu->mBindings[GLenum::GL_TEXTURE_CUBE_MAP];
                 std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-                Image l_l = Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format);
+                Image l_l =
+                        Image(width, height, Slice<uint8_t>(), (uint32_t)(image_size), format, 0);
                 if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                     data != nullptr) {
                     l_l.mData =
@@ -45280,7 +45282,7 @@ inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint
                 l_cube.mFaces[target] = l_l;
                 l_t->mCubemap[level] = l_cube;
                 l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = format;
+                l_t->mTexelFormat = format;
                 break;
             }
         }
@@ -45989,7 +45991,7 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
             TextureId l_id = (TextureId)(
                     slice(textures, (uint64_t)((GLsizei)(0)), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>(new Texture(
-                    l_id, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                    l_id, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                     GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                     GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
             write(l_t, (uint64_t)(l_i), l_id);
@@ -47491,7 +47493,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 uint32_t l_imageSize_4463_result =
                         l_imageSize_4463_width * l_imageSize_4463_height *
                         pixelSize(l_imageSize_4463_format, l_imageSize_4463_type);
-                Image l_l = Image(width, height, Slice<uint8_t>(), l_imageSize_4463_result, format);
+                Image l_l = Image(width, height, Slice<uint8_t>(), l_imageSize_4463_result, format,
+                                  type);
                 if (data != nullptr) {
                     if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
@@ -47502,7 +47505,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 }
                 l_t->mTexture2D[level] = l_l;
                 l_t->mKind = TextureKind::TEXTURE2D;
-                l_t->mFormat = format;
+                l_t->mTexelFormat = format;
+                l_t->mTexelType = type;
                 break;
             }
             case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
@@ -47520,7 +47524,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 uint32_t l_imageSize_4464_result =
                         l_imageSize_4464_width * l_imageSize_4464_height *
                         pixelSize(l_imageSize_4464_format, l_imageSize_4464_type);
-                Image l_l = Image(width, height, Slice<uint8_t>(), l_imageSize_4464_result, format);
+                Image l_l = Image(width, height, Slice<uint8_t>(), l_imageSize_4464_result, format,
+                                  type);
                 if (data != nullptr) {
                     if (l_ctx->mBoundBuffers[GLenum::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
                         l_l.mData = clone(
@@ -47533,7 +47538,8 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, int32_t intern
                 l_cube.mFaces[target] = l_l;
                 l_t->mCubemap[level] = l_cube;
                 l_t->mKind = TextureKind::CUBEMAP;
-                l_t->mFormat = format;
+                l_t->mTexelFormat = format;
+                l_t->mTexelType = type;
                 break;
             }
         }
@@ -51589,7 +51595,7 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -51792,7 +51798,7 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -51895,7 +51901,7 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -52127,7 +52133,7 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -52224,7 +52230,7 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -52379,7 +52385,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer(
                 Slice<uint8_t>(), (GLsizeiptr)(0), GLenum::GL_STATIC_DRAW, 0, 0, Slice<uint8_t>()));
         l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture(
-                0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
+                0, 0, 0, 0, GLintToImage(), GLintToCubemapLevel(), GLenum::GL_LINEAR,
                 GLenum::GL_NEAREST_MIPMAP_LINEAR, GLenum::GL_REPEAT, GLenum::GL_REPEAT,
                 GLenum::GL_RED, GLenum::GL_GREEN, GLenum::GL_BLUE, GLenum::GL_ALPHA, 1));
         l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
@@ -52437,7 +52443,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
     observe(observations.mWrites);
 
     gapic::coder::gles::CGLCreateContext coder(
-            observations, gapic::coder::gles::CGLPixelFormatObj(gapic::coder::memory::Pointer(
+            observations, gapic::coder::gles::CGLTexelFormatObj(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(pix), 0)),
             gapic::coder::gles::CGLContextObj(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(share), 0)),
@@ -53472,13 +53478,13 @@ inline void GlesSpy::contextInfo(uint32_t constant_count, uint32_t* constant_nam
                 l_ctx->mInstances.mRenderbuffers[l_stencil_id];
         l_color_buffer->mWidth = backbuffer_width;
         l_color_buffer->mHeight = backbuffer_height;
-        l_color_buffer->mFormat = backbuffer_color_fmt;
+        l_color_buffer->mTexelFormat = backbuffer_color_fmt;
         l_depth_buffer->mWidth = backbuffer_width;
         l_depth_buffer->mHeight = backbuffer_height;
-        l_depth_buffer->mFormat = backbuffer_depth_fmt;
+        l_depth_buffer->mTexelFormat = backbuffer_depth_fmt;
         l_stencil_buffer->mWidth = backbuffer_width;
         l_stencil_buffer->mHeight = backbuffer_height;
-        l_stencil_buffer->mFormat = backbuffer_stencil_fmt;
+        l_stencil_buffer->mTexelFormat = backbuffer_stencil_fmt;
         if (reset_viewport_scissor) {
             l_ctx->mRasterizing.mScissor.mWidth = backbuffer_width;
             l_ctx->mRasterizing.mScissor.mHeight = backbuffer_height;

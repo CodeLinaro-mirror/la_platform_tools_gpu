@@ -276,10 +276,10 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
-    class CGLPixelFormatObj: public Encodable {
+    class CGLTexelFormatObj: public Encodable {
     public:
-        CGLPixelFormatObj() = default;
-        CGLPixelFormatObj(memory::Pointer Pointer) :
+        CGLTexelFormatObj() = default;
+        CGLTexelFormatObj(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
@@ -294,7 +294,7 @@ namespace gles {
     class CGLCreateContext: public Encodable {
     public:
         CGLCreateContext() = default;
-        CGLCreateContext(atom::Observations observations, CGLPixelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
+        CGLCreateContext(atom::Observations observations, CGLTexelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
             mobservations(observations),
             mPix(Pix),
             mShare(Share),
@@ -306,7 +306,7 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
-        CGLPixelFormatObj mPix;
+        CGLTexelFormatObj mPix;
         CGLContextObj mShare;
         CGLContextObj__P mCtx;
         int64_t mResult;
@@ -958,11 +958,11 @@ namespace gles {
     class Renderbuffer: public Encodable {
     public:
         Renderbuffer() = default;
-        Renderbuffer(int32_t Width, int32_t Height, U8__S Data, uint32_t Format) :
+        Renderbuffer(int32_t Width, int32_t Height, U8__S Data, uint32_t TexelFormat) :
             mWidth(Width),
             mHeight(Height),
             mData(Data),
-            mFormat(Format) {}
+            mTexelFormat(TexelFormat) {}
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -971,18 +971,19 @@ namespace gles {
         int32_t mWidth;
         int32_t mHeight;
         U8__S mData;
-        uint32_t mFormat;
+        uint32_t mTexelFormat;
     };
 
     class Image: public Encodable {
     public:
         Image() = default;
-        Image(int32_t Width, int32_t Height, U8__S Data, uint32_t Size, uint32_t Format) :
+        Image(int32_t Width, int32_t Height, U8__S Data, uint32_t Size, uint32_t TexelFormat, uint32_t TexelType) :
             mWidth(Width),
             mHeight(Height),
             mData(Data),
             mSize(Size),
-            mFormat(Format) {}
+            mTexelFormat(TexelFormat),
+            mTexelType(TexelType) {}
         virtual void Encode(Encoder* e) const;
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -992,12 +993,13 @@ namespace gles {
         int32_t mHeight;
         U8__S mData;
         uint32_t mSize;
-        uint32_t mFormat;
+        uint32_t mTexelFormat;
+        uint32_t mTexelType;
     };
 
     // Can't encode CubemapLevel contains maps: gles.CubemapLevel{map[Uint32]$}
 
-    // Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+    // Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
 
     class FramebufferAttachmentInfo: public Encodable {
     public:

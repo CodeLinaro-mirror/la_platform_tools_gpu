@@ -221,11 +221,11 @@ gles.CGLFlushDrawable{$,$,Int64}
 CGLGetSurface : size 38
 gles.CGLGetSurface{$,$,$,$,$,Int64}
 
-CGLPixelFormatObj : size 30
-gles.CGLPixelFormatObj{$}
-
 CGLSetCurrentContext : size 36
 gles.CGLSetCurrentContext{$,$,Int64}
+
+CGLTexelFormatObj : size 30
+gles.CGLTexelFormatObj{$}
 
 CGSConnectionID : size 28
 gles.CGSConnectionID{$}
@@ -2672,8 +2672,8 @@ gles.HDC{$}
 HGLRC : size 18
 gles.HGLRC{$}
 
-Image : size 22
-gles.Image{Int32,Int32,$,Uint32,Uint32}
+Image : size 23
+gles.Image{Int32,Int32,$,Uint32,Uint32,Uint32}
 
 IndicesPointer : size 27
 gles.IndicesPointer{$}
@@ -2879,8 +2879,8 @@ gles.TexturePointer{$}
 TextureUnit : size 24
 gles.TextureUnit{map[Uint32]Uint32}
 
-Texture : size 39
-gles.Texture{Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+Texture : size 40
+gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
 
 TransformFeedbackIdˢ : size 34
 gles.TransformFeedbackIdˢ{$}
@@ -3148,6 +3148,9 @@ image.fmtPNG{}
 
 fmtRGB565 : size 20
 image.fmtRGB565{}
+
+fmtRGBA5551 : size 22
+image.fmtRGBA5551{}
 
 fmtRGBAF32 : size 21
 image.fmtRGBAF32{}
@@ -3750,9 +3753,9 @@ resultUseResource : size 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1250
-Total: 40341
-Compact: 40346
-Full: 132473
+Count: 1251
+Total: 40365
+Compact: 40370
+Full: 132549
 Average: 32
 Largest: 183
