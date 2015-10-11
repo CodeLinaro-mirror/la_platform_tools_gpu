@@ -30,15 +30,15 @@ func RGB565() Format { return &fmtRGB565{} }
 func init() {
 	RegisterConverter(RGB565(), RGBA(),
 		func(src []byte, width, height int) ([]byte, error) {
-			dst, i, j := make([]byte, width*height*4), 0, 0
+			dst, j := make([]byte, width*height*4), 0
 			for y := 0; y < height; y++ {
 				for x := 0; x < width; x++ {
-					rgb := (uint16(src[0]) << 8) | uint16(src[1])
-					r := uint8((rgb & 0xF800) >> 11)
-					g := uint8((rgb & 0x07E0) >> 5)
-					b := uint8((rgb & 0x001F))
+					rgb := (uint16(src[1]) << 8) | uint16(src[0])
+					src = src[2:]
+					r := uint8((float32(rgb&0xF800) / 0xF800) * 255)
+					g := uint8((float32(rgb&0x07E0) / 0x07E0) * 255)
+					b := uint8((float32(rgb&0x001F) / 0x001F) * 255)
 					dst[j+0], dst[j+1], dst[j+2], dst[j+3] = r, g, b, 255
-					i += 2
 					j += 4
 				}
 			}
