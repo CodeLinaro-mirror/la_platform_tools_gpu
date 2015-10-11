@@ -155,6 +155,14 @@ func compat(device *service.Device, d database.Database, l log.Logger) (atom.Tra
 			}
 			return
 
+		case *GlBindTexture:
+			ctx := getContext(s)
+			if !ctx.Instances.Textures.Contains(a.Texture) {
+				// glGenTextures() was not used to generate the texture. Legal in GLES 2.
+				out.Write(atom.NoID, NewGlGenTextures(1, memory.Tmp).
+					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp, VertexArrayId(a.Texture))))
+			}
+
 		case *GlBindVertexArray:
 			if a.Array == VertexArrayId(0) {
 				ctx := getContext(s)
