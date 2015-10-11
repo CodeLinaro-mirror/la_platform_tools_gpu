@@ -31,6 +31,7 @@ func init() {
 	Namespace.Add((*fmtRGB)(nil).Class())
 	Namespace.Add((*fmtRGB565)(nil).Class())
 	Namespace.Add((*fmtRGBA)(nil).Class())
+	Namespace.Add((*fmtRGBA5551)(nil).Class())
 	Namespace.Add((*fmtRGBAF32)(nil).Class())
 }
 
@@ -549,6 +550,34 @@ func (*binaryClassfmtRGBA) Schema() *binary.Entity { return schemafmtRGBA }
 var schemafmtRGBA = &binary.Entity{
 	Package:  "image",
 	Identity: "fmtRGBA",
+	Fields:   []binary.Field{},
+}
+
+type binaryClassfmtRGBA5551 struct{}
+
+func (*fmtRGBA5551) Class() binary.Class {
+	return (*binaryClassfmtRGBA5551)(nil)
+}
+func doEncodefmtRGBA5551(e binary.Encoder, o *fmtRGBA5551) {
+}
+func doDecodefmtRGBA5551(d binary.Decoder, o *fmtRGBA5551) {
+}
+func (*binaryClassfmtRGBA5551) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtRGBA5551(e, obj.(*fmtRGBA5551))
+}
+func (*binaryClassfmtRGBA5551) Decode(d binary.Decoder) binary.Object {
+	obj := &fmtRGBA5551{}
+	doDecodefmtRGBA5551(d, obj)
+	return obj
+}
+func (*binaryClassfmtRGBA5551) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtRGBA5551(d, obj.(*fmtRGBA5551))
+}
+func (*binaryClassfmtRGBA5551) Schema() *binary.Entity { return schemafmtRGBA5551 }
+
+var schemafmtRGBA5551 = &binary.Entity{
+	Package:  "image",
+	Identity: "fmtRGBA5551",
 	Fields:   []binary.Field{},
 }
 
