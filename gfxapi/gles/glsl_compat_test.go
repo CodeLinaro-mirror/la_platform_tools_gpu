@@ -174,7 +174,22 @@ void f() {
 		compat: `#version 130
 out vec4 FragColor;
 void f() {
-    FragColor = vec4(1.);
+    FragColor = vec4(vec4(1.));
+}
+`,
+	}, {
+		name:   "Declare FragData",
+		target: OpenGL_3_0,
+		lang:   ast.LangFragmentShader,
+		source: `#version 110
+void f() {
+    gl_FragData[1] = vec4(1.);
+}
+`,
+		compat: `#version 130
+layout(location = 1) out vec4 FragData1;
+void f() {
+    FragData1 = vec4(1.);
 }
 `,
 	}, {
@@ -211,6 +226,23 @@ vec4 f() {
 uniform sampler2D s;
 vec4 f() {
     return texture(s, vec2(0.));
+}
+`,
+	}, {
+		name:   "texture rename",
+		target: OpenGL_3_0,
+		lang:   ast.LangFragmentShader,
+		source: `#version 110
+vec4 f(sampler2D texture, vec2 uv) {
+    return texture2D(texture, uv);
+}
+vec4 g(sampler2D texture, vec2 uv) {}
+`,
+		compat: `#version 130
+vec4 f(sampler2D texture__, vec2 uv) {
+    return texture(texture__, uv);
+}
+vec4 g(sampler2D texture__, vec2 uv) {
 }
 `,
 	},

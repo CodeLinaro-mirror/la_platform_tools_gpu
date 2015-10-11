@@ -33,8 +33,10 @@ const (
 	glslVaryingToOut     glslTransform = 0x08
 	glslDepTextureFuncs  glslTransform = 0x10
 	glslDeclareFragColor glslTransform = 0x20
+	glslDeclareFragData  glslTransform = 0x40
 
 	compatFragColor = "FragColor"
+	compatFragData  = "FragData"
 )
 
 func (t glslTransform) stripPrecision() bool   { return t&glslStripPrecision != 0 }
@@ -43,35 +45,67 @@ func (t glslTransform) varyingToIn() bool      { return t&glslVaryingToIn != 0 }
 func (t glslTransform) varyingToOut() bool     { return t&glslVaryingToOut != 0 }
 func (t glslTransform) depTextureFuncs() bool  { return t&glslDepTextureFuncs != 0 }
 func (t glslTransform) declareFragColor() bool { return t&glslDeclareFragColor != 0 }
+func (t glslTransform) declareFragData() bool  { return t&glslDeclareFragData != 0 }
 
 type glslTransformState struct {
 	glslTransform
 	FragColor *ast.VariableSym
+	FragData  map[int]*ast.VariableSym
 }
 
 func (t glslTransform) apply(n interface{}) {
-	s := glslTransformState{glslTransform: t}
-	s.apply(n)
+	s := glslTransformState{
+		glslTransform: t,
+		FragData:      map[int]*ast.VariableSym{},
+	}
+	s.apply(n, nil)
 }
 
-func (t *glslTransformState) apply(n interface{}) {
-	ast.VisitChildren(n, t.apply)
+var vec4 = &ast.BuiltinType{Type: ast.TVec4}
 
-	switch n := n.(type) {
+func (t *glslTransformState) apply(child, parent interface{}) interface{} {
+	ast.TransformChildren(child, t.apply)
+
+	addOut := func(n *ast.Ast, v *ast.VariableSym) *ast.MultiVarDecl {
+		decl := &ast.MultiVarDecl{
+			Quals: &ast.TypeQualifiers{Storage: ast.StorOut},
+			Type:  v.Type(),
+			Vars:  []*ast.VariableSym{v},
+		}
+		decls := make([]interface{}, len(n.Decls)+1)
+		copy(decls[1:], n.Decls)
+		n.Decls = decls
+		n.Decls[0] = decl
+		return decl
+	}
+	fixReservedNames := func(name *string) {
+		if t.depTextureFuncs() {
+			switch *name {
+			case "texture", "textureProj", "textureLod", "textureProjLod",
+				"shadow", "shadowProj", "shadowLod", "shadowProjLod":
+				// These weren't keywords before the texture-lookup renames, but are now.
+				// Rename these usages.
+				*name += "__"
+			}
+		}
+	}
+
+	switch n := child.(type) {
 	case *ast.Ast:
 		if t.stripPrecision() {
 			n.Decls = removePrecisions(n.Decls)
 		}
 		if t.declareFragColor() && t.FragColor != nil {
-			// out vec4 FragColor;
-			decls := make([]interface{}, len(n.Decls)+1)
-			copy(decls[1:], n.Decls)
-			n.Decls = decls
-
-			n.Decls[0] = &ast.MultiVarDecl{
-				Quals: &ast.TypeQualifiers{Storage: ast.StorOut},
-				Type:  t.FragColor.Type(),
-				Vars:  []*ast.VariableSym{t.FragColor},
+			addOut(n, t.FragColor) // out vec4 FragColor;
+		}
+		if t.declareFragData() {
+			for idx, fragdata := range t.FragData {
+				decl := addOut(n, fragdata) // layout(location = N) out vec4 FragDataN;
+				decl.Quals.Layout = &ast.LayoutQualifier{
+					Ids: []ast.LayoutQualifierID{
+						ast.LayoutQualifierID{Name: "location", Value: ast.IntValue(idx)},
+					},
+				}
 			}
 		}
 	case *ast.IfStmt:
@@ -100,45 +134,54 @@ func (t *glslTransformState) apply(n interface{}) {
 		if t.stripPrecision() {
 			n.Precision = ast.NoneP
 		}
-
-	case *ast.VarRefExpr:
-		if v, ok := n.Sym.(*ast.VariableSym); ok {
-			if v.Name() == "gl_FragColor" {
-				if t.declareFragColor() {
-					if t.FragColor == nil {
-						ty := &ast.BuiltinType{Type: ast.TVec4}
-						t.FragColor = &ast.VariableSym{SymType: ty, SymName: compatFragColor}
+	case *ast.IndexExpr:
+		if t.declareFragData() {
+			if vr, ok := n.Base.(*ast.VarRefExpr); ok {
+				if v, ok := vr.Sym.(*ast.VariableSym); ok {
+					if constExpr, ok := n.Index.(*ast.ConstantExpr); ok {
+						if index, ok := constExpr.Value.(ast.IntValue); ok {
+							idx := int(index)
+							if v.Name() == "gl_FragData" {
+								name := fmt.Sprintf("%s%d", compatFragData, idx)
+								sym, found := t.FragData[idx]
+								if !found {
+									sym = &ast.VariableSym{SymType: vec4, SymName: name}
+								}
+								t.FragData[idx] = sym
+								return &ast.VarRefExpr{Sym: sym}
+							}
+						}
 					}
-					n.Sym = t.FragColor
 				}
 			}
 		}
+	case *ast.FunctionDecl:
 		if t.depTextureFuncs() {
-			if f, ok := n.Sym.(*ast.FunctionDecl); ok {
-				var sym ast.Symbol
-				switch f.Name() {
-				case "texture1D", "texture1DProj", "texture1DLod", "texture1DProjLod",
-					"shadow1D", "shadow1DProj", "shadow1DLod", "shadow1DProjLod":
-					sym = parser.FindBuiltin(strings.Replace(f.Name(), "1D", "", -1)) // drop 1D
+			// Texture-lookup functions got renamed.
+			// Fix up old names to match the new names.
+			var sym ast.Symbol
+			switch n.Name() {
+			case "texture1D", "texture1DProj", "texture1DLod", "texture1DProjLod",
+				"shadow1D", "shadow1DProj", "shadow1DLod", "shadow1DProjLod":
+				sym = parser.FindBuiltin(strings.Replace(n.Name(), "1D", "", -1)) // drop 1D
 
-				case "texture2D", "texture2DProj", "texture2DLod", "texture2DProjLod",
-					"shadow2D", "shadow2DProj", "shadow2DLod", "shadow2DProjLod":
-					sym = parser.FindBuiltin(strings.Replace(f.Name(), "2D", "", -1)) // drop 2D
+			case "texture2D", "texture2DProj", "texture2DLod", "texture2DProjLod",
+				"shadow2D", "shadow2DProj", "shadow2DLod", "shadow2DProjLod":
+				sym = parser.FindBuiltin(strings.Replace(n.Name(), "2D", "", -1)) // drop 2D
 
-				case "texture3D", "texture3DProj", "texture3DLod", "texture3DProjLod":
-					// TODO: For the proj versions, the texture coordinate is divided by coord.q.
-					sym = parser.FindBuiltin(strings.Replace(f.Name(), "3D", "", -1)) // drop 3D
+			case "texture3D", "texture3DProj", "texture3DLod", "texture3DProjLod":
+				// TODO: For the proj versions, the texture coordinate is divided by coord.q.
+				sym = parser.FindBuiltin(strings.Replace(n.Name(), "3D", "", -1)) // drop 3D
 
-				case "textureCube", "textureCubeLod":
-					sym = parser.FindBuiltin(strings.Replace(f.Name(), "Cube", "", -1)) // drop Cube
-				}
-				if v, ok := sym.(ast.ValueSymbol); ok {
-					n.Sym = v
-				}
+			case "textureCube", "textureCubeLod":
+				sym = parser.FindBuiltin(strings.Replace(n.Name(), "Cube", "", -1)) // drop Cube
+			}
+			if v, ok := sym.(ast.ValueSymbol); ok {
+				return v // replace usage
 			}
 		}
-
 	case *ast.VariableSym:
+		fixReservedNames(&n.SymName)
 		if n.Quals != nil {
 			switch {
 			case n.Quals.Storage == ast.StorAttribute && t.attributeToIn():
@@ -149,7 +192,28 @@ func (t *glslTransformState) apply(n interface{}) {
 				n.Quals.Storage = ast.StorIn
 			}
 		}
+		if t.declareFragColor() {
+			if n.Name() == "gl_FragColor" {
+				if t.FragColor == nil {
+					t.FragColor = &ast.VariableSym{SymType: vec4, SymName: compatFragColor}
+				}
+				return t.FragColor // replace usage
+			}
+		}
+	case *ast.FuncParameterSym:
+		fixReservedNames(&n.SymName)
+	case *ast.BinaryExpr:
+		if left, ok := n.Left.(*ast.VarRefExpr); ok && left.Sym == t.FragColor {
+			// Force cast RHS to vec4.
+			// TODO: Only add cast if necessary.
+			n.Right = &ast.CallExpr{
+				Args:   []ast.Expression{n.Right},
+				Callee: &ast.VarRefExpr{Sym: &ast.VariableSym{SymType: vec4, SymName: "vec4"}},
+			}
+		}
 	}
+
+	return child
 }
 
 func glslCompat(src string, lang ast.Language, device *service.Device) (string, error) {
@@ -187,6 +251,7 @@ func glslCompat(src string, lang ast.Language, device *service.Device) (string, 
 		case ast.LangFragmentShader:
 			transform |= glslVaryingToIn
 			transform |= glslDeclareFragColor
+			transform |= glslDeclareFragData
 		}
 		transform |= glslDepTextureFuncs
 	}
