@@ -37,10 +37,8 @@ func doDecodePointer(d binary.Decoder, o *Pointer) {
 func (*binaryClassPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePointer(e, obj.(*Pointer))
 }
-func (*binaryClassPointer) Decode(d binary.Decoder) binary.Object {
-	obj := &Pointer{}
-	doDecodePointer(d, obj)
-	return obj
+func (*binaryClassPointer) New() binary.Object {
+	return &Pointer{}
 }
 func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePointer(d, obj.(*Pointer))
@@ -72,10 +70,8 @@ func doDecodeRange(d binary.Decoder, o *Range) {
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRange(e, obj.(*Range))
 }
-func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
-	obj := &Range{}
-	doDecodeRange(d, obj)
-	return obj
+func (*binaryClassRange) New() binary.Object {
+	return &Range{}
 }
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))

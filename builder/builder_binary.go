@@ -70,10 +70,8 @@ func doDecodeBuildReport(d binary.Decoder, o *BuildReport) {
 func (*binaryClassBuildReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBuildReport(e, obj.(*BuildReport))
 }
-func (*binaryClassBuildReport) Decode(d binary.Decoder) binary.Object {
-	obj := &BuildReport{}
-	doDecodeBuildReport(d, obj)
-	return obj
+func (*binaryClassBuildReport) New() binary.Object {
+	return &BuildReport{}
 }
 func (*binaryClassBuildReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBuildReport(d, obj.(*BuildReport))
@@ -107,10 +105,8 @@ func doDecodeFollow(d binary.Decoder, o *Follow) {
 func (*binaryClassFollow) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFollow(e, obj.(*Follow))
 }
-func (*binaryClassFollow) Decode(d binary.Decoder) binary.Object {
-	obj := &Follow{}
-	doDecodeFollow(d, obj)
-	return obj
+func (*binaryClassFollow) New() binary.Object {
+	return &Follow{}
 }
 func (*binaryClassFollow) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFollow(d, obj.(*Follow))
@@ -143,10 +139,8 @@ func doDecodeGet(d binary.Decoder, o *Get) {
 func (*binaryClassGet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGet(e, obj.(*Get))
 }
-func (*binaryClassGet) Decode(d binary.Decoder) binary.Object {
-	obj := &Get{}
-	doDecodeGet(d, obj)
-	return obj
+func (*binaryClassGet) New() binary.Object {
+	return &Get{}
 }
 func (*binaryClassGet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGet(d, obj.(*Get))
@@ -195,10 +189,8 @@ func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) {
 func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferColor(e, obj.(*GetFramebufferColor))
 }
-func (*binaryClassGetFramebufferColor) Decode(d binary.Decoder) binary.Object {
-	obj := &GetFramebufferColor{}
-	doDecodeGetFramebufferColor(d, obj)
-	return obj
+func (*binaryClassGetFramebufferColor) New() binary.Object {
+	return &GetFramebufferColor{}
 }
 func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetFramebufferColor(d, obj.(*GetFramebufferColor))
@@ -247,10 +239,8 @@ func doDecodeGetFramebufferDepth(d binary.Decoder, o *GetFramebufferDepth) {
 func (*binaryClassGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetFramebufferDepth(e, obj.(*GetFramebufferDepth))
 }
-func (*binaryClassGetFramebufferDepth) Decode(d binary.Decoder) binary.Object {
-	obj := &GetFramebufferDepth{}
-	doDecodeGetFramebufferDepth(d, obj)
-	return obj
+func (*binaryClassGetFramebufferDepth) New() binary.Object {
+	return &GetFramebufferDepth{}
 }
 func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetFramebufferDepth(d, obj.(*GetFramebufferDepth))
@@ -288,10 +278,8 @@ func doDecodeGetHierarchy(d binary.Decoder, o *GetHierarchy) {
 func (*binaryClassGetHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetHierarchy(e, obj.(*GetHierarchy))
 }
-func (*binaryClassGetHierarchy) Decode(d binary.Decoder) binary.Object {
-	obj := &GetHierarchy{}
-	doDecodeGetHierarchy(d, obj)
-	return obj
+func (*binaryClassGetHierarchy) New() binary.Object {
+	return &GetHierarchy{}
 }
 func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetHierarchy(d, obj.(*GetHierarchy))
@@ -328,10 +316,8 @@ func doDecodeGetResourceData(d binary.Decoder, o *GetResourceData) {
 func (*binaryClassGetResourceData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResourceData(e, obj.(*GetResourceData))
 }
-func (*binaryClassGetResourceData) Decode(d binary.Decoder) binary.Object {
-	obj := &GetResourceData{}
-	doDecodeGetResourceData(d, obj)
-	return obj
+func (*binaryClassGetResourceData) New() binary.Object {
+	return &GetResourceData{}
 }
 func (*binaryClassGetResourceData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetResourceData(d, obj.(*GetResourceData))
@@ -368,10 +354,8 @@ func doDecodeGetResources(d binary.Decoder, o *GetResources) {
 func (*binaryClassGetResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetResources(e, obj.(*GetResources))
 }
-func (*binaryClassGetResources) Decode(d binary.Decoder) binary.Object {
-	obj := &GetResources{}
-	doDecodeGetResources(d, obj)
-	return obj
+func (*binaryClassGetResources) New() binary.Object {
+	return &GetResources{}
 }
 func (*binaryClassGetResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetResources(d, obj.(*GetResources))
@@ -408,10 +392,8 @@ func doDecodeGetState(d binary.Decoder, o *GetState) {
 func (*binaryClassGetState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetState(e, obj.(*GetState))
 }
-func (*binaryClassGetState) Decode(d binary.Decoder) binary.Object {
-	obj := &GetState{}
-	doDecodeGetState(d, obj)
-	return obj
+func (*binaryClassGetState) New() binary.Object {
+	return &GetState{}
 }
 func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetState(d, obj.(*GetState))
@@ -460,10 +442,8 @@ func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) {
 func (*binaryClassGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGetTimingInfo(e, obj.(*GetTimingInfo))
 }
-func (*binaryClassGetTimingInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &GetTimingInfo{}
-	doDecodeGetTimingInfo(d, obj)
-	return obj
+func (*binaryClassGetTimingInfo) New() binary.Object {
+	return &GetTimingInfo{}
 }
 func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGetTimingInfo(d, obj.(*GetTimingInfo))
@@ -496,10 +476,8 @@ func doDecodeIndexLimits(d binary.Decoder, o *IndexLimits) {
 func (*binaryClassIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIndexLimits(e, obj.(*IndexLimits))
 }
-func (*binaryClassIndexLimits) Decode(d binary.Decoder) binary.Object {
-	obj := &IndexLimits{}
-	doDecodeIndexLimits(d, obj)
-	return obj
+func (*binaryClassIndexLimits) New() binary.Object {
+	return &IndexLimits{}
 }
 func (*binaryClassIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIndexLimits(d, obj.(*IndexLimits))
@@ -553,10 +531,8 @@ func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor)
 func (*binaryClassRenderFramebufferColor) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferColor(e, obj.(*RenderFramebufferColor))
 }
-func (*binaryClassRenderFramebufferColor) Decode(d binary.Decoder) binary.Object {
-	obj := &RenderFramebufferColor{}
-	doDecodeRenderFramebufferColor(d, obj)
-	return obj
+func (*binaryClassRenderFramebufferColor) New() binary.Object {
+	return &RenderFramebufferColor{}
 }
 func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderFramebufferColor(d, obj.(*RenderFramebufferColor))
@@ -611,10 +587,8 @@ func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth)
 func (*binaryClassRenderFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderFramebufferDepth(e, obj.(*RenderFramebufferDepth))
 }
-func (*binaryClassRenderFramebufferDepth) Decode(d binary.Decoder) binary.Object {
-	obj := &RenderFramebufferDepth{}
-	doDecodeRenderFramebufferDepth(d, obj)
-	return obj
+func (*binaryClassRenderFramebufferDepth) New() binary.Object {
+	return &RenderFramebufferDepth{}
 }
 func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRenderFramebufferDepth(d, obj.(*RenderFramebufferDepth))
@@ -652,10 +626,8 @@ func doDecodeSet(d binary.Decoder, o *Set) {
 func (*binaryClassSet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSet(e, obj.(*Set))
 }
-func (*binaryClassSet) Decode(d binary.Decoder) binary.Object {
-	obj := &Set{}
-	doDecodeSet(d, obj)
-	return obj
+func (*binaryClassSet) New() binary.Object {
+	return &Set{}
 }
 func (*binaryClassSet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSet(d, obj.(*Set))
@@ -689,10 +661,8 @@ func doDecodeatomFramebufferDimensions(d binary.Decoder, o *atomFramebufferDimen
 func (*binaryClassatomFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeatomFramebufferDimensions(e, obj.(*atomFramebufferDimensions))
 }
-func (*binaryClassatomFramebufferDimensions) Decode(d binary.Decoder) binary.Object {
-	obj := &atomFramebufferDimensions{}
-	doDecodeatomFramebufferDimensions(d, obj)
-	return obj
+func (*binaryClassatomFramebufferDimensions) New() binary.Object {
+	return &atomFramebufferDimensions{}
 }
 func (*binaryClassatomFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeatomFramebufferDimensions(d, obj.(*atomFramebufferDimensions))
@@ -731,10 +701,8 @@ func doDecodecalcIndexLimits(d binary.Decoder, o *calcIndexLimits) {
 func (*binaryClasscalcIndexLimits) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecalcIndexLimits(e, obj.(*calcIndexLimits))
 }
-func (*binaryClasscalcIndexLimits) Decode(d binary.Decoder) binary.Object {
-	obj := &calcIndexLimits{}
-	doDecodecalcIndexLimits(d, obj)
-	return obj
+func (*binaryClasscalcIndexLimits) New() binary.Object {
+	return &calcIndexLimits{}
 }
 func (*binaryClasscalcIndexLimits) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecalcIndexLimits(d, obj.(*calcIndexLimits))
@@ -774,10 +742,8 @@ func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebuffe
 func (*binaryClasscaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodecaptureFramebufferDimensions(e, obj.(*captureFramebufferDimensions))
 }
-func (*binaryClasscaptureFramebufferDimensions) Decode(d binary.Decoder) binary.Object {
-	obj := &captureFramebufferDimensions{}
-	doDecodecaptureFramebufferDimensions(d, obj)
-	return obj
+func (*binaryClasscaptureFramebufferDimensions) New() binary.Object {
+	return &captureFramebufferDimensions{}
 }
 func (*binaryClasscaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodecaptureFramebufferDimensions(d, obj.(*captureFramebufferDimensions))
@@ -816,10 +782,8 @@ func doDecodegetCaptureFramebufferDimensions(d binary.Decoder, o *getCaptureFram
 func (*binaryClassgetCaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodegetCaptureFramebufferDimensions(e, obj.(*getCaptureFramebufferDimensions))
 }
-func (*binaryClassgetCaptureFramebufferDimensions) Decode(d binary.Decoder) binary.Object {
-	obj := &getCaptureFramebufferDimensions{}
-	doDecodegetCaptureFramebufferDimensions(d, obj)
-	return obj
+func (*binaryClassgetCaptureFramebufferDimensions) New() binary.Object {
+	return &getCaptureFramebufferDimensions{}
 }
 func (*binaryClassgetCaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodegetCaptureFramebufferDimensions(d, obj.(*getCaptureFramebufferDimensions))

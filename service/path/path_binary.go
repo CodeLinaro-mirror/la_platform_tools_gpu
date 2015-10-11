@@ -56,10 +56,8 @@ func doDecodeArrayIndex(d binary.Decoder, o *ArrayIndex) {
 func (*binaryClassArrayIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeArrayIndex(e, obj.(*ArrayIndex))
 }
-func (*binaryClassArrayIndex) Decode(d binary.Decoder) binary.Object {
-	obj := &ArrayIndex{}
-	doDecodeArrayIndex(d, obj)
-	return obj
+func (*binaryClassArrayIndex) New() binary.Object {
+	return &ArrayIndex{}
 }
 func (*binaryClassArrayIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeArrayIndex(d, obj.(*ArrayIndex))
@@ -95,10 +93,8 @@ func doDecodeAs(d binary.Decoder, o *As) {
 func (*binaryClassAs) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAs(e, obj.(*As))
 }
-func (*binaryClassAs) Decode(d binary.Decoder) binary.Object {
-	obj := &As{}
-	doDecodeAs(d, obj)
-	return obj
+func (*binaryClassAs) New() binary.Object {
+	return &As{}
 }
 func (*binaryClassAs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAs(d, obj.(*As))
@@ -128,10 +124,8 @@ func doDecodeCapture(d binary.Decoder, o *Capture) {
 func (*binaryClassCapture) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCapture(e, obj.(*Capture))
 }
-func (*binaryClassCapture) Decode(d binary.Decoder) binary.Object {
-	obj := &Capture{}
-	doDecodeCapture(d, obj)
-	return obj
+func (*binaryClassCapture) New() binary.Object {
+	return &Capture{}
 }
 func (*binaryClassCapture) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCapture(d, obj.(*Capture))
@@ -168,10 +162,8 @@ func doDecodeAtoms(d binary.Decoder, o *Atoms) {
 func (*binaryClassAtoms) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtoms(e, obj.(*Atoms))
 }
-func (*binaryClassAtoms) Decode(d binary.Decoder) binary.Object {
-	obj := &Atoms{}
-	doDecodeAtoms(d, obj)
-	return obj
+func (*binaryClassAtoms) New() binary.Object {
+	return &Atoms{}
 }
 func (*binaryClassAtoms) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtoms(d, obj.(*Atoms))
@@ -210,10 +202,8 @@ func doDecodeAtom(d binary.Decoder, o *Atom) {
 func (*binaryClassAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtom(e, obj.(*Atom))
 }
-func (*binaryClassAtom) Decode(d binary.Decoder) binary.Object {
-	obj := &Atom{}
-	doDecodeAtom(d, obj)
-	return obj
+func (*binaryClassAtom) New() binary.Object {
+	return &Atom{}
 }
 func (*binaryClassAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtom(d, obj.(*Atom))
@@ -243,10 +233,8 @@ func doDecodeBlob(d binary.Decoder, o *Blob) {
 func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBlob(e, obj.(*Blob))
 }
-func (*binaryClassBlob) Decode(d binary.Decoder) binary.Object {
-	obj := &Blob{}
-	doDecodeBlob(d, obj)
-	return obj
+func (*binaryClassBlob) New() binary.Object {
+	return &Blob{}
 }
 func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBlob(d, obj.(*Blob))
@@ -275,10 +263,8 @@ func doDecodeDevice(d binary.Decoder, o *Device) {
 func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeDevice(e, obj.(*Device))
 }
-func (*binaryClassDevice) Decode(d binary.Decoder) binary.Object {
-	obj := &Device{}
-	doDecodeDevice(d, obj)
-	return obj
+func (*binaryClassDevice) New() binary.Object {
+	return &Device{}
 }
 func (*binaryClassDevice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeDevice(d, obj.(*Device))
@@ -313,10 +299,8 @@ func doDecodeField(d binary.Decoder, o *Field) {
 func (*binaryClassField) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeField(e, obj.(*Field))
 }
-func (*binaryClassField) Decode(d binary.Decoder) binary.Object {
-	obj := &Field{}
-	doDecodeField(d, obj)
-	return obj
+func (*binaryClassField) New() binary.Object {
+	return &Field{}
 }
 func (*binaryClassField) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeField(d, obj.(*Field))
@@ -354,10 +338,8 @@ func doDecodeHierarchy(d binary.Decoder, o *Hierarchy) {
 func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHierarchy(e, obj.(*Hierarchy))
 }
-func (*binaryClassHierarchy) Decode(d binary.Decoder) binary.Object {
-	obj := &Hierarchy{}
-	doDecodeHierarchy(d, obj)
-	return obj
+func (*binaryClassHierarchy) New() binary.Object {
+	return &Hierarchy{}
 }
 func (*binaryClassHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeHierarchy(d, obj.(*Hierarchy))
@@ -386,10 +368,8 @@ func doDecodeImageInfo(d binary.Decoder, o *ImageInfo) {
 func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImageInfo(e, obj.(*ImageInfo))
 }
-func (*binaryClassImageInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &ImageInfo{}
-	doDecodeImageInfo(d, obj)
-	return obj
+func (*binaryClassImageInfo) New() binary.Object {
+	return &ImageInfo{}
 }
 func (*binaryClassImageInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImageInfo(d, obj.(*ImageInfo))
@@ -424,10 +404,8 @@ func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 func (*binaryClassMapIndex) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMapIndex(e, obj.(*MapIndex))
 }
-func (*binaryClassMapIndex) Decode(d binary.Decoder) binary.Object {
-	obj := &MapIndex{}
-	doDecodeMapIndex(d, obj)
-	return obj
+func (*binaryClassMapIndex) New() binary.Object {
+	return &MapIndex{}
 }
 func (*binaryClassMapIndex) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMapIndex(d, obj.(*MapIndex))
@@ -471,10 +449,8 @@ func doDecodeMemoryRange(d binary.Decoder, o *MemoryRange) {
 func (*binaryClassMemoryRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMemoryRange(e, obj.(*MemoryRange))
 }
-func (*binaryClassMemoryRange) Decode(d binary.Decoder) binary.Object {
-	obj := &MemoryRange{}
-	doDecodeMemoryRange(d, obj)
-	return obj
+func (*binaryClassMemoryRange) New() binary.Object {
+	return &MemoryRange{}
 }
 func (*binaryClassMemoryRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMemoryRange(d, obj.(*MemoryRange))
@@ -524,10 +500,8 @@ func doDecodeReport(d binary.Decoder, o *Report) {
 func (*binaryClassReport) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeReport(e, obj.(*Report))
 }
-func (*binaryClassReport) Decode(d binary.Decoder) binary.Object {
-	obj := &Report{}
-	doDecodeReport(d, obj)
-	return obj
+func (*binaryClassReport) New() binary.Object {
+	return &Report{}
 }
 func (*binaryClassReport) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeReport(d, obj.(*Report))
@@ -567,10 +541,8 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
 }
-func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
-	obj := &Resource{}
-	doDecodeResource(d, obj)
-	return obj
+func (*binaryClassResource) New() binary.Object {
+	return &Resource{}
 }
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))
@@ -608,10 +580,8 @@ func doDecodeResources(d binary.Decoder, o *Resources) {
 func (*binaryClassResources) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResources(e, obj.(*Resources))
 }
-func (*binaryClassResources) Decode(d binary.Decoder) binary.Object {
-	obj := &Resources{}
-	doDecodeResources(d, obj)
-	return obj
+func (*binaryClassResources) New() binary.Object {
+	return &Resources{}
 }
 func (*binaryClassResources) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResources(d, obj.(*Resources))
@@ -648,10 +618,8 @@ func doDecodeSlice(d binary.Decoder, o *Slice) {
 func (*binaryClassSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSlice(e, obj.(*Slice))
 }
-func (*binaryClassSlice) Decode(d binary.Decoder) binary.Object {
-	obj := &Slice{}
-	doDecodeSlice(d, obj)
-	return obj
+func (*binaryClassSlice) New() binary.Object {
+	return &Slice{}
 }
 func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSlice(d, obj.(*Slice))
@@ -690,10 +658,8 @@ func doDecodeState(d binary.Decoder, o *State) {
 func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeState(e, obj.(*State))
 }
-func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
-	obj := &State{}
-	doDecodeState(d, obj)
-	return obj
+func (*binaryClassState) New() binary.Object {
+	return &State{}
 }
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
@@ -732,10 +698,8 @@ func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 func (*binaryClassThumbnail) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeThumbnail(e, obj.(*Thumbnail))
 }
-func (*binaryClassThumbnail) Decode(d binary.Decoder) binary.Object {
-	obj := &Thumbnail{}
-	doDecodeThumbnail(d, obj)
-	return obj
+func (*binaryClassThumbnail) New() binary.Object {
+	return &Thumbnail{}
 }
 func (*binaryClassThumbnail) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeThumbnail(d, obj.(*Thumbnail))
@@ -767,10 +731,8 @@ func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTimingInfo(e, obj.(*TimingInfo))
 }
-func (*binaryClassTimingInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &TimingInfo{}
-	doDecodeTimingInfo(d, obj)
-	return obj
+func (*binaryClassTimingInfo) New() binary.Object {
+	return &TimingInfo{}
 }
 func (*binaryClassTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTimingInfo(d, obj.(*TimingInfo))

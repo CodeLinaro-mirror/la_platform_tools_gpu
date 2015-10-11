@@ -32,10 +32,8 @@ func doDecodeError(d binary.Decoder, o *Error) {
 func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeError(e, obj.(*Error))
 }
-func (*binaryClassError) Decode(d binary.Decoder) binary.Object {
-	obj := &Error{}
-	doDecodeError(d, obj)
-	return obj
+func (*binaryClassError) New() binary.Object {
+	return &Error{}
 }
 func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeError(d, obj.(*Error))

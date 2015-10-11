@@ -37,10 +37,8 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResourceInfo(e, obj.(*ResourceInfo))
 }
-func (*binaryClassResourceInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &ResourceInfo{}
-	doDecodeResourceInfo(d, obj)
-	return obj
+func (*binaryClassResourceInfo) New() binary.Object {
+	return &ResourceInfo{}
 }
 func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResourceInfo(d, obj.(*ResourceInfo))
@@ -94,10 +92,8 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePayload(e, obj.(*Payload))
 }
-func (*binaryClassPayload) Decode(d binary.Decoder) binary.Object {
-	obj := &Payload{}
-	doDecodePayload(d, obj)
-	return obj
+func (*binaryClassPayload) New() binary.Object {
+	return &Payload{}
 }
 func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodePayload(d, obj.(*Payload))

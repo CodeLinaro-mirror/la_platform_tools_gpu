@@ -141,10 +141,8 @@ func doDecodeSliceInfo(d binary.Decoder, o *SliceInfo) {
 func (*binaryClassSliceInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSliceInfo(e, obj.(*SliceInfo))
 }
-func (*binaryClassSliceInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &SliceInfo{}
-	doDecodeSliceInfo(d, obj)
-	return obj
+func (*binaryClassSliceInfo) New() binary.Object {
+	return &SliceInfo{}
 }
 func (*binaryClassSliceInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeSliceInfo(d, obj.(*SliceInfo))
@@ -175,10 +173,8 @@ func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) {
 func (*binaryClassBoolˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBoolˢ(e, obj.(*Boolˢ))
 }
-func (*binaryClassBoolˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Boolˢ{}
-	doDecodeBoolˢ(d, obj)
-	return obj
+func (*binaryClassBoolˢ) New() binary.Object {
+	return &Boolˢ{}
 }
 func (*binaryClassBoolˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBoolˢ(d, obj.(*Boolˢ))
@@ -207,10 +203,8 @@ func doDecodeBoolᵖ(d binary.Decoder, o *Boolᵖ) {
 func (*binaryClassBoolᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBoolᵖ(e, obj.(*Boolᵖ))
 }
-func (*binaryClassBoolᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Boolᵖ{}
-	doDecodeBoolᵖ(d, obj)
-	return obj
+func (*binaryClassBoolᵖ) New() binary.Object {
+	return &Boolᵖ{}
 }
 func (*binaryClassBoolᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeBoolᵖ(d, obj.(*Boolᵖ))
@@ -239,10 +233,8 @@ func doDecodeCharˢ(d binary.Decoder, o *Charˢ) {
 func (*binaryClassCharˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharˢ(e, obj.(*Charˢ))
 }
-func (*binaryClassCharˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Charˢ{}
-	doDecodeCharˢ(d, obj)
-	return obj
+func (*binaryClassCharˢ) New() binary.Object {
+	return &Charˢ{}
 }
 func (*binaryClassCharˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharˢ(d, obj.(*Charˢ))
@@ -271,10 +263,8 @@ func doDecodeCharᵖ(d binary.Decoder, o *Charᵖ) {
 func (*binaryClassCharᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharᵖ(e, obj.(*Charᵖ))
 }
-func (*binaryClassCharᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Charᵖ{}
-	doDecodeCharᵖ(d, obj)
-	return obj
+func (*binaryClassCharᵖ) New() binary.Object {
+	return &Charᵖ{}
 }
 func (*binaryClassCharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖ(d, obj.(*Charᵖ))
@@ -303,10 +293,8 @@ func doDecodeCharᵖˢ(d binary.Decoder, o *Charᵖˢ) {
 func (*binaryClassCharᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharᵖˢ(e, obj.(*Charᵖˢ))
 }
-func (*binaryClassCharᵖˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Charᵖˢ{}
-	doDecodeCharᵖˢ(d, obj)
-	return obj
+func (*binaryClassCharᵖˢ) New() binary.Object {
+	return &Charᵖˢ{}
 }
 func (*binaryClassCharᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖˢ(d, obj.(*Charᵖˢ))
@@ -335,10 +323,8 @@ func doDecodeCharᵖᵖ(d binary.Decoder, o *Charᵖᵖ) {
 func (*binaryClassCharᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharᵖᵖ(e, obj.(*Charᵖᵖ))
 }
-func (*binaryClassCharᵖᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Charᵖᵖ{}
-	doDecodeCharᵖᵖ(d, obj)
-	return obj
+func (*binaryClassCharᵖᵖ) New() binary.Object {
+	return &Charᵖᵖ{}
 }
 func (*binaryClassCharᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCharᵖᵖ(d, obj.(*Charᵖᵖ))
@@ -369,10 +355,8 @@ func doDecodeCmdBool(d binary.Decoder, o *CmdBool) {
 func (*binaryClassCmdBool) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdBool(e, obj.(*CmdBool))
 }
-func (*binaryClassCmdBool) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdBool{}
-	doDecodeCmdBool(d, obj)
-	return obj
+func (*binaryClassCmdBool) New() binary.Object {
+	return &CmdBool{}
 }
 func (*binaryClassCmdBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdBool(d, obj.(*CmdBool))
@@ -404,10 +388,8 @@ func doDecodeCmdCharptrToString(d binary.Decoder, o *CmdCharptrToString) {
 func (*binaryClassCmdCharptrToString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdCharptrToString(e, obj.(*CmdCharptrToString))
 }
-func (*binaryClassCmdCharptrToString) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdCharptrToString{}
-	doDecodeCmdCharptrToString(d, obj)
-	return obj
+func (*binaryClassCmdCharptrToString) New() binary.Object {
+	return &CmdCharptrToString{}
 }
 func (*binaryClassCmdCharptrToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCharptrToString(d, obj.(*CmdCharptrToString))
@@ -441,10 +423,8 @@ func doDecodeCmdCharsliceToString(d binary.Decoder, o *CmdCharsliceToString) {
 func (*binaryClassCmdCharsliceToString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdCharsliceToString(e, obj.(*CmdCharsliceToString))
 }
-func (*binaryClassCmdCharsliceToString) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdCharsliceToString{}
-	doDecodeCmdCharsliceToString(d, obj)
-	return obj
+func (*binaryClassCmdCharsliceToString) New() binary.Object {
+	return &CmdCharsliceToString{}
 }
 func (*binaryClassCmdCharsliceToString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCharsliceToString(d, obj.(*CmdCharsliceToString))
@@ -475,10 +455,8 @@ func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) {
 func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU8ᵖ(e, obj.(*U8ᵖ))
 }
-func (*binaryClassU8ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U8ᵖ{}
-	doDecodeU8ᵖ(d, obj)
-	return obj
+func (*binaryClassU8ᵖ) New() binary.Object {
+	return &U8ᵖ{}
 }
 func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ᵖ(d, obj.(*U8ᵖ))
@@ -511,10 +489,8 @@ func doDecodeCmdClone(d binary.Decoder, o *CmdClone) {
 func (*binaryClassCmdClone) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdClone(e, obj.(*CmdClone))
 }
-func (*binaryClassCmdClone) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdClone{}
-	doDecodeCmdClone(d, obj)
-	return obj
+func (*binaryClassCmdClone) New() binary.Object {
+	return &CmdClone{}
 }
 func (*binaryClassCmdClone) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdClone(d, obj.(*CmdClone))
@@ -549,10 +525,8 @@ func doDecodeCmdCopy(d binary.Decoder, o *CmdCopy) {
 func (*binaryClassCmdCopy) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdCopy(e, obj.(*CmdCopy))
 }
-func (*binaryClassCmdCopy) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdCopy{}
-	doDecodeCmdCopy(d, obj)
-	return obj
+func (*binaryClassCmdCopy) New() binary.Object {
+	return &CmdCopy{}
 }
 func (*binaryClassCmdCopy) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdCopy(d, obj.(*CmdCopy))
@@ -585,10 +559,8 @@ func doDecodeCmdF32(d binary.Decoder, o *CmdF32) {
 func (*binaryClassCmdF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdF32(e, obj.(*CmdF32))
 }
-func (*binaryClassCmdF32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdF32{}
-	doDecodeCmdF32(d, obj)
-	return obj
+func (*binaryClassCmdF32) New() binary.Object {
+	return &CmdF32{}
 }
 func (*binaryClassCmdF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdF32(d, obj.(*CmdF32))
@@ -620,10 +592,8 @@ func doDecodeCmdF64(d binary.Decoder, o *CmdF64) {
 func (*binaryClassCmdF64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdF64(e, obj.(*CmdF64))
 }
-func (*binaryClassCmdF64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdF64{}
-	doDecodeCmdF64(d, obj)
-	return obj
+func (*binaryClassCmdF64) New() binary.Object {
+	return &CmdF64{}
 }
 func (*binaryClassCmdF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdF64(d, obj.(*CmdF64))
@@ -655,10 +625,8 @@ func doDecodeCmdMake(d binary.Decoder, o *CmdMake) {
 func (*binaryClassCmdMake) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdMake(e, obj.(*CmdMake))
 }
-func (*binaryClassCmdMake) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdMake{}
-	doDecodeCmdMake(d, obj)
-	return obj
+func (*binaryClassCmdMake) New() binary.Object {
+	return &CmdMake{}
 }
 func (*binaryClassCmdMake) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdMake(d, obj.(*CmdMake))
@@ -688,10 +656,8 @@ func doDecodeVoidᵖ(d binary.Decoder, o *Voidᵖ) {
 func (*binaryClassVoidᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖ(e, obj.(*Voidᵖ))
 }
-func (*binaryClassVoidᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Voidᵖ{}
-	doDecodeVoidᵖ(d, obj)
-	return obj
+func (*binaryClassVoidᵖ) New() binary.Object {
+	return &Voidᵖ{}
 }
 func (*binaryClassVoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidᵖ(d, obj.(*Voidᵖ))
@@ -722,10 +688,8 @@ func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) {
 func (*binaryClassCmdPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdPointer(e, obj.(*CmdPointer))
 }
-func (*binaryClassCmdPointer) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdPointer{}
-	doDecodeCmdPointer(d, obj)
-	return obj
+func (*binaryClassCmdPointer) New() binary.Object {
+	return &CmdPointer{}
 }
 func (*binaryClassCmdPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdPointer(d, obj.(*CmdPointer))
@@ -757,10 +721,8 @@ func doDecodeCmdRemapped(d binary.Decoder, o *CmdRemapped) {
 func (*binaryClassCmdRemapped) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdRemapped(e, obj.(*CmdRemapped))
 }
-func (*binaryClassCmdRemapped) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdRemapped{}
-	doDecodeCmdRemapped(d, obj)
-	return obj
+func (*binaryClassCmdRemapped) New() binary.Object {
+	return &CmdRemapped{}
 }
 func (*binaryClassCmdRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdRemapped(d, obj.(*CmdRemapped))
@@ -792,10 +754,8 @@ func doDecodeCmdS16(d binary.Decoder, o *CmdS16) {
 func (*binaryClassCmdS16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdS16(e, obj.(*CmdS16))
 }
-func (*binaryClassCmdS16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdS16{}
-	doDecodeCmdS16(d, obj)
-	return obj
+func (*binaryClassCmdS16) New() binary.Object {
+	return &CmdS16{}
 }
 func (*binaryClassCmdS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS16(d, obj.(*CmdS16))
@@ -827,10 +787,8 @@ func doDecodeCmdS32(d binary.Decoder, o *CmdS32) {
 func (*binaryClassCmdS32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdS32(e, obj.(*CmdS32))
 }
-func (*binaryClassCmdS32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdS32{}
-	doDecodeCmdS32(d, obj)
-	return obj
+func (*binaryClassCmdS32) New() binary.Object {
+	return &CmdS32{}
 }
 func (*binaryClassCmdS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS32(d, obj.(*CmdS32))
@@ -862,10 +820,8 @@ func doDecodeCmdS64(d binary.Decoder, o *CmdS64) {
 func (*binaryClassCmdS64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdS64(e, obj.(*CmdS64))
 }
-func (*binaryClassCmdS64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdS64{}
-	doDecodeCmdS64(d, obj)
-	return obj
+func (*binaryClassCmdS64) New() binary.Object {
+	return &CmdS64{}
 }
 func (*binaryClassCmdS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS64(d, obj.(*CmdS64))
@@ -897,10 +853,8 @@ func doDecodeCmdS8(d binary.Decoder, o *CmdS8) {
 func (*binaryClassCmdS8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdS8(e, obj.(*CmdS8))
 }
-func (*binaryClassCmdS8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdS8{}
-	doDecodeCmdS8(d, obj)
-	return obj
+func (*binaryClassCmdS8) New() binary.Object {
+	return &CmdS8{}
 }
 func (*binaryClassCmdS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdS8(d, obj.(*CmdS8))
@@ -930,10 +884,8 @@ func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) {
 func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU16ᵖ(e, obj.(*U16ᵖ))
 }
-func (*binaryClassU16ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U16ᵖ{}
-	doDecodeU16ᵖ(d, obj)
-	return obj
+func (*binaryClassU16ᵖ) New() binary.Object {
+	return &U16ᵖ{}
 }
 func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ᵖ(d, obj.(*U16ᵖ))
@@ -966,10 +918,8 @@ func doDecodeCmdSliceCasts(d binary.Decoder, o *CmdSliceCasts) {
 func (*binaryClassCmdSliceCasts) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdSliceCasts(e, obj.(*CmdSliceCasts))
 }
-func (*binaryClassCmdSliceCasts) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdSliceCasts{}
-	doDecodeCmdSliceCasts(d, obj)
-	return obj
+func (*binaryClassCmdSliceCasts) New() binary.Object {
+	return &CmdSliceCasts{}
 }
 func (*binaryClassCmdSliceCasts) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdSliceCasts(d, obj.(*CmdSliceCasts))
@@ -1002,10 +952,8 @@ func doDecodeCmdString(d binary.Decoder, o *CmdString) {
 func (*binaryClassCmdString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdString(e, obj.(*CmdString))
 }
-func (*binaryClassCmdString) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdString{}
-	doDecodeCmdString(d, obj)
-	return obj
+func (*binaryClassCmdString) New() binary.Object {
+	return &CmdString{}
 }
 func (*binaryClassCmdString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdString(d, obj.(*CmdString))
@@ -1037,10 +985,8 @@ func doDecodeCmdU16(d binary.Decoder, o *CmdU16) {
 func (*binaryClassCmdU16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdU16(e, obj.(*CmdU16))
 }
-func (*binaryClassCmdU16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdU16{}
-	doDecodeCmdU16(d, obj)
-	return obj
+func (*binaryClassCmdU16) New() binary.Object {
+	return &CmdU16{}
 }
 func (*binaryClassCmdU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU16(d, obj.(*CmdU16))
@@ -1072,10 +1018,8 @@ func doDecodeCmdU32(d binary.Decoder, o *CmdU32) {
 func (*binaryClassCmdU32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdU32(e, obj.(*CmdU32))
 }
-func (*binaryClassCmdU32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdU32{}
-	doDecodeCmdU32(d, obj)
-	return obj
+func (*binaryClassCmdU32) New() binary.Object {
+	return &CmdU32{}
 }
 func (*binaryClassCmdU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU32(d, obj.(*CmdU32))
@@ -1107,10 +1051,8 @@ func doDecodeCmdU64(d binary.Decoder, o *CmdU64) {
 func (*binaryClassCmdU64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdU64(e, obj.(*CmdU64))
 }
-func (*binaryClassCmdU64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdU64{}
-	doDecodeCmdU64(d, obj)
-	return obj
+func (*binaryClassCmdU64) New() binary.Object {
+	return &CmdU64{}
 }
 func (*binaryClassCmdU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU64(d, obj.(*CmdU64))
@@ -1142,10 +1084,8 @@ func doDecodeCmdU8(d binary.Decoder, o *CmdU8) {
 func (*binaryClassCmdU8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdU8(e, obj.(*CmdU8))
 }
-func (*binaryClassCmdU8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdU8{}
-	doDecodeCmdU8(d, obj)
-	return obj
+func (*binaryClassCmdU8) New() binary.Object {
+	return &CmdU8{}
 }
 func (*binaryClassCmdU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdU8(d, obj.(*CmdU8))
@@ -1177,10 +1117,8 @@ func doDecodeCmdUnknownRet(d binary.Decoder, o *CmdUnknownRet) {
 func (*binaryClassCmdUnknownRet) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdUnknownRet(e, obj.(*CmdUnknownRet))
 }
-func (*binaryClassCmdUnknownRet) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdUnknownRet{}
-	doDecodeCmdUnknownRet(d, obj)
-	return obj
+func (*binaryClassCmdUnknownRet) New() binary.Object {
+	return &CmdUnknownRet{}
 }
 func (*binaryClassCmdUnknownRet) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownRet(d, obj.(*CmdUnknownRet))
@@ -1210,10 +1148,8 @@ func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) {
 func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIntᵖ(e, obj.(*Intᵖ))
 }
-func (*binaryClassIntᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Intᵖ{}
-	doDecodeIntᵖ(d, obj)
-	return obj
+func (*binaryClassIntᵖ) New() binary.Object {
+	return &Intᵖ{}
 }
 func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntᵖ(d, obj.(*Intᵖ))
@@ -1244,10 +1180,8 @@ func doDecodeCmdUnknownWritePtr(d binary.Decoder, o *CmdUnknownWritePtr) {
 func (*binaryClassCmdUnknownWritePtr) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdUnknownWritePtr(e, obj.(*CmdUnknownWritePtr))
 }
-func (*binaryClassCmdUnknownWritePtr) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdUnknownWritePtr{}
-	doDecodeCmdUnknownWritePtr(d, obj)
-	return obj
+func (*binaryClassCmdUnknownWritePtr) New() binary.Object {
+	return &CmdUnknownWritePtr{}
 }
 func (*binaryClassCmdUnknownWritePtr) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownWritePtr(d, obj.(*CmdUnknownWritePtr))
@@ -1279,10 +1213,8 @@ func doDecodeCmdUnknownWriteSlice(d binary.Decoder, o *CmdUnknownWriteSlice) {
 func (*binaryClassCmdUnknownWriteSlice) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdUnknownWriteSlice(e, obj.(*CmdUnknownWriteSlice))
 }
-func (*binaryClassCmdUnknownWriteSlice) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdUnknownWriteSlice{}
-	doDecodeCmdUnknownWriteSlice(d, obj)
-	return obj
+func (*binaryClassCmdUnknownWriteSlice) New() binary.Object {
+	return &CmdUnknownWriteSlice{}
 }
 func (*binaryClassCmdUnknownWriteSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdUnknownWriteSlice(d, obj.(*CmdUnknownWriteSlice))
@@ -1312,10 +1244,8 @@ func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) {
 func (*binaryClassCmdVoid) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoid(e, obj.(*CmdVoid))
 }
-func (*binaryClassCmdVoid) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoid{}
-	doDecodeCmdVoid(d, obj)
-	return obj
+func (*binaryClassCmdVoid) New() binary.Object {
+	return &CmdVoid{}
 }
 func (*binaryClassCmdVoid) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid(d, obj.(*CmdVoid))
@@ -1344,10 +1274,8 @@ func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) {
 func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU32ᵖ(e, obj.(*U32ᵖ))
 }
-func (*binaryClassU32ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U32ᵖ{}
-	doDecodeU32ᵖ(d, obj)
-	return obj
+func (*binaryClassU32ᵖ) New() binary.Object {
+	return &U32ᵖ{}
 }
 func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ᵖ(d, obj.(*U32ᵖ))
@@ -1382,10 +1310,8 @@ func doDecodeCmdVoid3InArrays(d binary.Decoder, o *CmdVoid3InArrays) {
 func (*binaryClassCmdVoid3InArrays) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoid3InArrays(e, obj.(*CmdVoid3InArrays))
 }
-func (*binaryClassCmdVoid3InArrays) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoid3InArrays{}
-	doDecodeCmdVoid3InArrays(d, obj)
-	return obj
+func (*binaryClassCmdVoid3InArrays) New() binary.Object {
+	return &CmdVoid3InArrays{}
 }
 func (*binaryClassCmdVoid3InArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3InArrays(d, obj.(*CmdVoid3InArrays))
@@ -1423,10 +1349,8 @@ func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) {
 func (*binaryClassCmdVoid3Remapped) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoid3Remapped(e, obj.(*CmdVoid3Remapped))
 }
-func (*binaryClassCmdVoid3Remapped) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoid3Remapped{}
-	doDecodeCmdVoid3Remapped(d, obj)
-	return obj
+func (*binaryClassCmdVoid3Remapped) New() binary.Object {
+	return &CmdVoid3Remapped{}
 }
 func (*binaryClassCmdVoid3Remapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3Remapped(d, obj.(*CmdVoid3Remapped))
@@ -1464,10 +1388,8 @@ func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) {
 func (*binaryClassCmdVoid3Strings) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoid3Strings(e, obj.(*CmdVoid3Strings))
 }
-func (*binaryClassCmdVoid3Strings) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoid3Strings{}
-	doDecodeCmdVoid3Strings(d, obj)
-	return obj
+func (*binaryClassCmdVoid3Strings) New() binary.Object {
+	return &CmdVoid3Strings{}
 }
 func (*binaryClassCmdVoid3Strings) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoid3Strings(d, obj.(*CmdVoid3Strings))
@@ -1501,10 +1423,8 @@ func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) {
 func (*binaryClassCmdVoidBool) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidBool(e, obj.(*CmdVoidBool))
 }
-func (*binaryClassCmdVoidBool) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidBool{}
-	doDecodeCmdVoidBool(d, obj)
-	return obj
+func (*binaryClassCmdVoidBool) New() binary.Object {
+	return &CmdVoidBool{}
 }
 func (*binaryClassCmdVoidBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidBool(d, obj.(*CmdVoidBool))
@@ -1536,10 +1456,8 @@ func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) {
 func (*binaryClassCmdVoidF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidF32(e, obj.(*CmdVoidF32))
 }
-func (*binaryClassCmdVoidF32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidF32{}
-	doDecodeCmdVoidF32(d, obj)
-	return obj
+func (*binaryClassCmdVoidF32) New() binary.Object {
+	return &CmdVoidF32{}
 }
 func (*binaryClassCmdVoidF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidF32(d, obj.(*CmdVoidF32))
@@ -1571,10 +1489,8 @@ func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) {
 func (*binaryClassCmdVoidF64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidF64(e, obj.(*CmdVoidF64))
 }
-func (*binaryClassCmdVoidF64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidF64{}
-	doDecodeCmdVoidF64(d, obj)
-	return obj
+func (*binaryClassCmdVoidF64) New() binary.Object {
+	return &CmdVoidF64{}
 }
 func (*binaryClassCmdVoidF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidF64(d, obj.(*CmdVoidF64))
@@ -1608,10 +1524,8 @@ func doDecodeCmdVoidInArrayOfPointers(d binary.Decoder, o *CmdVoidInArrayOfPoint
 func (*binaryClassCmdVoidInArrayOfPointers) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidInArrayOfPointers(e, obj.(*CmdVoidInArrayOfPointers))
 }
-func (*binaryClassCmdVoidInArrayOfPointers) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidInArrayOfPointers{}
-	doDecodeCmdVoidInArrayOfPointers(d, obj)
-	return obj
+func (*binaryClassCmdVoidInArrayOfPointers) New() binary.Object {
+	return &CmdVoidInArrayOfPointers{}
 }
 func (*binaryClassCmdVoidInArrayOfPointers) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidInArrayOfPointers(d, obj.(*CmdVoidInArrayOfPointers))
@@ -1644,10 +1558,8 @@ func doDecodeRemappedᵖ(d binary.Decoder, o *Remappedᵖ) {
 func (*binaryClassRemappedᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRemappedᵖ(e, obj.(*Remappedᵖ))
 }
-func (*binaryClassRemappedᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &Remappedᵖ{}
-	doDecodeRemappedᵖ(d, obj)
-	return obj
+func (*binaryClassRemappedᵖ) New() binary.Object {
+	return &Remappedᵖ{}
 }
 func (*binaryClassRemappedᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRemappedᵖ(d, obj.(*Remappedᵖ))
@@ -1678,10 +1590,8 @@ func doDecodeCmdVoidInArrayOfRemapped(d binary.Decoder, o *CmdVoidInArrayOfRemap
 func (*binaryClassCmdVoidInArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidInArrayOfRemapped(e, obj.(*CmdVoidInArrayOfRemapped))
 }
-func (*binaryClassCmdVoidInArrayOfRemapped) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidInArrayOfRemapped{}
-	doDecodeCmdVoidInArrayOfRemapped(d, obj)
-	return obj
+func (*binaryClassCmdVoidInArrayOfRemapped) New() binary.Object {
+	return &CmdVoidInArrayOfRemapped{}
 }
 func (*binaryClassCmdVoidInArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidInArrayOfRemapped(d, obj.(*CmdVoidInArrayOfRemapped))
@@ -1715,10 +1625,8 @@ func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRem
 func (*binaryClassCmdVoidOutArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidOutArrayOfRemapped(e, obj.(*CmdVoidOutArrayOfRemapped))
 }
-func (*binaryClassCmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidOutArrayOfRemapped{}
-	doDecodeCmdVoidOutArrayOfRemapped(d, obj)
-	return obj
+func (*binaryClassCmdVoidOutArrayOfRemapped) New() binary.Object {
+	return &CmdVoidOutArrayOfRemapped{}
 }
 func (*binaryClassCmdVoidOutArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidOutArrayOfRemapped(d, obj.(*CmdVoidOutArrayOfRemapped))
@@ -1752,10 +1660,8 @@ func doDecodeCmdVoidOutArrayOfUnknownRemapped(d binary.Decoder, o *CmdVoidOutArr
 func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidOutArrayOfUnknownRemapped(e, obj.(*CmdVoidOutArrayOfUnknownRemapped))
 }
-func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidOutArrayOfUnknownRemapped{}
-	doDecodeCmdVoidOutArrayOfUnknownRemapped(d, obj)
-	return obj
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) New() binary.Object {
+	return &CmdVoidOutArrayOfUnknownRemapped{}
 }
 func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidOutArrayOfUnknownRemapped(d, obj.(*CmdVoidOutArrayOfUnknownRemapped))
@@ -1789,10 +1695,8 @@ func doDecodeCmdVoidReadBool(d binary.Decoder, o *CmdVoidReadBool) {
 func (*binaryClassCmdVoidReadBool) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadBool(e, obj.(*CmdVoidReadBool))
 }
-func (*binaryClassCmdVoidReadBool) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadBool{}
-	doDecodeCmdVoidReadBool(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadBool) New() binary.Object {
+	return &CmdVoidReadBool{}
 }
 func (*binaryClassCmdVoidReadBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadBool(d, obj.(*CmdVoidReadBool))
@@ -1822,10 +1726,8 @@ func doDecodeF32ᵖ(d binary.Decoder, o *F32ᵖ) {
 func (*binaryClassF32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF32ᵖ(e, obj.(*F32ᵖ))
 }
-func (*binaryClassF32ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &F32ᵖ{}
-	doDecodeF32ᵖ(d, obj)
-	return obj
+func (*binaryClassF32ᵖ) New() binary.Object {
+	return &F32ᵖ{}
 }
 func (*binaryClassF32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF32ᵖ(d, obj.(*F32ᵖ))
@@ -1856,10 +1758,8 @@ func doDecodeCmdVoidReadF32(d binary.Decoder, o *CmdVoidReadF32) {
 func (*binaryClassCmdVoidReadF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadF32(e, obj.(*CmdVoidReadF32))
 }
-func (*binaryClassCmdVoidReadF32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadF32{}
-	doDecodeCmdVoidReadF32(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadF32) New() binary.Object {
+	return &CmdVoidReadF32{}
 }
 func (*binaryClassCmdVoidReadF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadF32(d, obj.(*CmdVoidReadF32))
@@ -1889,10 +1789,8 @@ func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) {
 func (*binaryClassF64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF64ᵖ(e, obj.(*F64ᵖ))
 }
-func (*binaryClassF64ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &F64ᵖ{}
-	doDecodeF64ᵖ(d, obj)
-	return obj
+func (*binaryClassF64ᵖ) New() binary.Object {
+	return &F64ᵖ{}
 }
 func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ᵖ(d, obj.(*F64ᵖ))
@@ -1923,10 +1821,8 @@ func doDecodeCmdVoidReadF64(d binary.Decoder, o *CmdVoidReadF64) {
 func (*binaryClassCmdVoidReadF64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadF64(e, obj.(*CmdVoidReadF64))
 }
-func (*binaryClassCmdVoidReadF64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadF64{}
-	doDecodeCmdVoidReadF64(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadF64) New() binary.Object {
+	return &CmdVoidReadF64{}
 }
 func (*binaryClassCmdVoidReadF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadF64(d, obj.(*CmdVoidReadF64))
@@ -1962,10 +1858,8 @@ func doDecodeCmdVoidReadPtrs(d binary.Decoder, o *CmdVoidReadPtrs) {
 func (*binaryClassCmdVoidReadPtrs) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadPtrs(e, obj.(*CmdVoidReadPtrs))
 }
-func (*binaryClassCmdVoidReadPtrs) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadPtrs{}
-	doDecodeCmdVoidReadPtrs(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadPtrs) New() binary.Object {
+	return &CmdVoidReadPtrs{}
 }
 func (*binaryClassCmdVoidReadPtrs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadPtrs(d, obj.(*CmdVoidReadPtrs))
@@ -1997,10 +1891,8 @@ func doDecodeS16ᵖ(d binary.Decoder, o *S16ᵖ) {
 func (*binaryClassS16ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS16ᵖ(e, obj.(*S16ᵖ))
 }
-func (*binaryClassS16ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &S16ᵖ{}
-	doDecodeS16ᵖ(d, obj)
-	return obj
+func (*binaryClassS16ᵖ) New() binary.Object {
+	return &S16ᵖ{}
 }
 func (*binaryClassS16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS16ᵖ(d, obj.(*S16ᵖ))
@@ -2031,10 +1923,8 @@ func doDecodeCmdVoidReadS16(d binary.Decoder, o *CmdVoidReadS16) {
 func (*binaryClassCmdVoidReadS16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadS16(e, obj.(*CmdVoidReadS16))
 }
-func (*binaryClassCmdVoidReadS16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadS16{}
-	doDecodeCmdVoidReadS16(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadS16) New() binary.Object {
+	return &CmdVoidReadS16{}
 }
 func (*binaryClassCmdVoidReadS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS16(d, obj.(*CmdVoidReadS16))
@@ -2064,10 +1954,8 @@ func doDecodeS32ᵖ(d binary.Decoder, o *S32ᵖ) {
 func (*binaryClassS32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS32ᵖ(e, obj.(*S32ᵖ))
 }
-func (*binaryClassS32ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &S32ᵖ{}
-	doDecodeS32ᵖ(d, obj)
-	return obj
+func (*binaryClassS32ᵖ) New() binary.Object {
+	return &S32ᵖ{}
 }
 func (*binaryClassS32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS32ᵖ(d, obj.(*S32ᵖ))
@@ -2098,10 +1986,8 @@ func doDecodeCmdVoidReadS32(d binary.Decoder, o *CmdVoidReadS32) {
 func (*binaryClassCmdVoidReadS32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadS32(e, obj.(*CmdVoidReadS32))
 }
-func (*binaryClassCmdVoidReadS32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadS32{}
-	doDecodeCmdVoidReadS32(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadS32) New() binary.Object {
+	return &CmdVoidReadS32{}
 }
 func (*binaryClassCmdVoidReadS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS32(d, obj.(*CmdVoidReadS32))
@@ -2131,10 +2017,8 @@ func doDecodeS64ᵖ(d binary.Decoder, o *S64ᵖ) {
 func (*binaryClassS64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS64ᵖ(e, obj.(*S64ᵖ))
 }
-func (*binaryClassS64ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &S64ᵖ{}
-	doDecodeS64ᵖ(d, obj)
-	return obj
+func (*binaryClassS64ᵖ) New() binary.Object {
+	return &S64ᵖ{}
 }
 func (*binaryClassS64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ᵖ(d, obj.(*S64ᵖ))
@@ -2165,10 +2049,8 @@ func doDecodeCmdVoidReadS64(d binary.Decoder, o *CmdVoidReadS64) {
 func (*binaryClassCmdVoidReadS64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadS64(e, obj.(*CmdVoidReadS64))
 }
-func (*binaryClassCmdVoidReadS64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadS64{}
-	doDecodeCmdVoidReadS64(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadS64) New() binary.Object {
+	return &CmdVoidReadS64{}
 }
 func (*binaryClassCmdVoidReadS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS64(d, obj.(*CmdVoidReadS64))
@@ -2198,10 +2080,8 @@ func doDecodeS8ᵖ(d binary.Decoder, o *S8ᵖ) {
 func (*binaryClassS8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS8ᵖ(e, obj.(*S8ᵖ))
 }
-func (*binaryClassS8ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &S8ᵖ{}
-	doDecodeS8ᵖ(d, obj)
-	return obj
+func (*binaryClassS8ᵖ) New() binary.Object {
+	return &S8ᵖ{}
 }
 func (*binaryClassS8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS8ᵖ(d, obj.(*S8ᵖ))
@@ -2232,10 +2112,8 @@ func doDecodeCmdVoidReadS8(d binary.Decoder, o *CmdVoidReadS8) {
 func (*binaryClassCmdVoidReadS8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadS8(e, obj.(*CmdVoidReadS8))
 }
-func (*binaryClassCmdVoidReadS8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadS8{}
-	doDecodeCmdVoidReadS8(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadS8) New() binary.Object {
+	return &CmdVoidReadS8{}
 }
 func (*binaryClassCmdVoidReadS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadS8(d, obj.(*CmdVoidReadS8))
@@ -2267,10 +2145,8 @@ func doDecodeCmdVoidReadU16(d binary.Decoder, o *CmdVoidReadU16) {
 func (*binaryClassCmdVoidReadU16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadU16(e, obj.(*CmdVoidReadU16))
 }
-func (*binaryClassCmdVoidReadU16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadU16{}
-	doDecodeCmdVoidReadU16(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadU16) New() binary.Object {
+	return &CmdVoidReadU16{}
 }
 func (*binaryClassCmdVoidReadU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU16(d, obj.(*CmdVoidReadU16))
@@ -2302,10 +2178,8 @@ func doDecodeCmdVoidReadU32(d binary.Decoder, o *CmdVoidReadU32) {
 func (*binaryClassCmdVoidReadU32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadU32(e, obj.(*CmdVoidReadU32))
 }
-func (*binaryClassCmdVoidReadU32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadU32{}
-	doDecodeCmdVoidReadU32(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadU32) New() binary.Object {
+	return &CmdVoidReadU32{}
 }
 func (*binaryClassCmdVoidReadU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU32(d, obj.(*CmdVoidReadU32))
@@ -2335,10 +2209,8 @@ func doDecodeU64ᵖ(d binary.Decoder, o *U64ᵖ) {
 func (*binaryClassU64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU64ᵖ(e, obj.(*U64ᵖ))
 }
-func (*binaryClassU64ᵖ) Decode(d binary.Decoder) binary.Object {
-	obj := &U64ᵖ{}
-	doDecodeU64ᵖ(d, obj)
-	return obj
+func (*binaryClassU64ᵖ) New() binary.Object {
+	return &U64ᵖ{}
 }
 func (*binaryClassU64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ᵖ(d, obj.(*U64ᵖ))
@@ -2369,10 +2241,8 @@ func doDecodeCmdVoidReadU64(d binary.Decoder, o *CmdVoidReadU64) {
 func (*binaryClassCmdVoidReadU64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadU64(e, obj.(*CmdVoidReadU64))
 }
-func (*binaryClassCmdVoidReadU64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadU64{}
-	doDecodeCmdVoidReadU64(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadU64) New() binary.Object {
+	return &CmdVoidReadU64{}
 }
 func (*binaryClassCmdVoidReadU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU64(d, obj.(*CmdVoidReadU64))
@@ -2404,10 +2274,8 @@ func doDecodeCmdVoidReadU8(d binary.Decoder, o *CmdVoidReadU8) {
 func (*binaryClassCmdVoidReadU8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidReadU8(e, obj.(*CmdVoidReadU8))
 }
-func (*binaryClassCmdVoidReadU8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidReadU8{}
-	doDecodeCmdVoidReadU8(d, obj)
-	return obj
+func (*binaryClassCmdVoidReadU8) New() binary.Object {
+	return &CmdVoidReadU8{}
 }
 func (*binaryClassCmdVoidReadU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidReadU8(d, obj.(*CmdVoidReadU8))
@@ -2439,10 +2307,8 @@ func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) {
 func (*binaryClassCmdVoidS16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidS16(e, obj.(*CmdVoidS16))
 }
-func (*binaryClassCmdVoidS16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidS16{}
-	doDecodeCmdVoidS16(d, obj)
-	return obj
+func (*binaryClassCmdVoidS16) New() binary.Object {
+	return &CmdVoidS16{}
 }
 func (*binaryClassCmdVoidS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS16(d, obj.(*CmdVoidS16))
@@ -2474,10 +2340,8 @@ func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) {
 func (*binaryClassCmdVoidS32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidS32(e, obj.(*CmdVoidS32))
 }
-func (*binaryClassCmdVoidS32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidS32{}
-	doDecodeCmdVoidS32(d, obj)
-	return obj
+func (*binaryClassCmdVoidS32) New() binary.Object {
+	return &CmdVoidS32{}
 }
 func (*binaryClassCmdVoidS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS32(d, obj.(*CmdVoidS32))
@@ -2509,10 +2373,8 @@ func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) {
 func (*binaryClassCmdVoidS64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidS64(e, obj.(*CmdVoidS64))
 }
-func (*binaryClassCmdVoidS64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidS64{}
-	doDecodeCmdVoidS64(d, obj)
-	return obj
+func (*binaryClassCmdVoidS64) New() binary.Object {
+	return &CmdVoidS64{}
 }
 func (*binaryClassCmdVoidS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS64(d, obj.(*CmdVoidS64))
@@ -2544,10 +2406,8 @@ func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) {
 func (*binaryClassCmdVoidS8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidS8(e, obj.(*CmdVoidS8))
 }
-func (*binaryClassCmdVoidS8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidS8{}
-	doDecodeCmdVoidS8(d, obj)
-	return obj
+func (*binaryClassCmdVoidS8) New() binary.Object {
+	return &CmdVoidS8{}
 }
 func (*binaryClassCmdVoidS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidS8(d, obj.(*CmdVoidS8))
@@ -2579,10 +2439,8 @@ func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) {
 func (*binaryClassCmdVoidString) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidString(e, obj.(*CmdVoidString))
 }
-func (*binaryClassCmdVoidString) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidString{}
-	doDecodeCmdVoidString(d, obj)
-	return obj
+func (*binaryClassCmdVoidString) New() binary.Object {
+	return &CmdVoidString{}
 }
 func (*binaryClassCmdVoidString) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidString(d, obj.(*CmdVoidString))
@@ -2614,10 +2472,8 @@ func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) {
 func (*binaryClassCmdVoidU16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidU16(e, obj.(*CmdVoidU16))
 }
-func (*binaryClassCmdVoidU16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidU16{}
-	doDecodeCmdVoidU16(d, obj)
-	return obj
+func (*binaryClassCmdVoidU16) New() binary.Object {
+	return &CmdVoidU16{}
 }
 func (*binaryClassCmdVoidU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU16(d, obj.(*CmdVoidU16))
@@ -2649,10 +2505,8 @@ func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) {
 func (*binaryClassCmdVoidU32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidU32(e, obj.(*CmdVoidU32))
 }
-func (*binaryClassCmdVoidU32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidU32{}
-	doDecodeCmdVoidU32(d, obj)
-	return obj
+func (*binaryClassCmdVoidU32) New() binary.Object {
+	return &CmdVoidU32{}
 }
 func (*binaryClassCmdVoidU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU32(d, obj.(*CmdVoidU32))
@@ -2684,10 +2538,8 @@ func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) {
 func (*binaryClassCmdVoidU64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidU64(e, obj.(*CmdVoidU64))
 }
-func (*binaryClassCmdVoidU64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidU64{}
-	doDecodeCmdVoidU64(d, obj)
-	return obj
+func (*binaryClassCmdVoidU64) New() binary.Object {
+	return &CmdVoidU64{}
 }
 func (*binaryClassCmdVoidU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU64(d, obj.(*CmdVoidU64))
@@ -2719,10 +2571,8 @@ func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) {
 func (*binaryClassCmdVoidU8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidU8(e, obj.(*CmdVoidU8))
 }
-func (*binaryClassCmdVoidU8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidU8{}
-	doDecodeCmdVoidU8(d, obj)
-	return obj
+func (*binaryClassCmdVoidU8) New() binary.Object {
+	return &CmdVoidU8{}
 }
 func (*binaryClassCmdVoidU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidU8(d, obj.(*CmdVoidU8))
@@ -2754,10 +2604,8 @@ func doDecodeCmdVoidWriteBool(d binary.Decoder, o *CmdVoidWriteBool) {
 func (*binaryClassCmdVoidWriteBool) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteBool(e, obj.(*CmdVoidWriteBool))
 }
-func (*binaryClassCmdVoidWriteBool) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteBool{}
-	doDecodeCmdVoidWriteBool(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteBool) New() binary.Object {
+	return &CmdVoidWriteBool{}
 }
 func (*binaryClassCmdVoidWriteBool) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteBool(d, obj.(*CmdVoidWriteBool))
@@ -2789,10 +2637,8 @@ func doDecodeCmdVoidWriteF32(d binary.Decoder, o *CmdVoidWriteF32) {
 func (*binaryClassCmdVoidWriteF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteF32(e, obj.(*CmdVoidWriteF32))
 }
-func (*binaryClassCmdVoidWriteF32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteF32{}
-	doDecodeCmdVoidWriteF32(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteF32) New() binary.Object {
+	return &CmdVoidWriteF32{}
 }
 func (*binaryClassCmdVoidWriteF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteF32(d, obj.(*CmdVoidWriteF32))
@@ -2824,10 +2670,8 @@ func doDecodeCmdVoidWriteF64(d binary.Decoder, o *CmdVoidWriteF64) {
 func (*binaryClassCmdVoidWriteF64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteF64(e, obj.(*CmdVoidWriteF64))
 }
-func (*binaryClassCmdVoidWriteF64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteF64{}
-	doDecodeCmdVoidWriteF64(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteF64) New() binary.Object {
+	return &CmdVoidWriteF64{}
 }
 func (*binaryClassCmdVoidWriteF64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteF64(d, obj.(*CmdVoidWriteF64))
@@ -2863,10 +2707,8 @@ func doDecodeCmdVoidWritePtrs(d binary.Decoder, o *CmdVoidWritePtrs) {
 func (*binaryClassCmdVoidWritePtrs) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWritePtrs(e, obj.(*CmdVoidWritePtrs))
 }
-func (*binaryClassCmdVoidWritePtrs) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWritePtrs{}
-	doDecodeCmdVoidWritePtrs(d, obj)
-	return obj
+func (*binaryClassCmdVoidWritePtrs) New() binary.Object {
+	return &CmdVoidWritePtrs{}
 }
 func (*binaryClassCmdVoidWritePtrs) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWritePtrs(d, obj.(*CmdVoidWritePtrs))
@@ -2900,10 +2742,8 @@ func doDecodeCmdVoidWriteS16(d binary.Decoder, o *CmdVoidWriteS16) {
 func (*binaryClassCmdVoidWriteS16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteS16(e, obj.(*CmdVoidWriteS16))
 }
-func (*binaryClassCmdVoidWriteS16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteS16{}
-	doDecodeCmdVoidWriteS16(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteS16) New() binary.Object {
+	return &CmdVoidWriteS16{}
 }
 func (*binaryClassCmdVoidWriteS16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS16(d, obj.(*CmdVoidWriteS16))
@@ -2935,10 +2775,8 @@ func doDecodeCmdVoidWriteS32(d binary.Decoder, o *CmdVoidWriteS32) {
 func (*binaryClassCmdVoidWriteS32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteS32(e, obj.(*CmdVoidWriteS32))
 }
-func (*binaryClassCmdVoidWriteS32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteS32{}
-	doDecodeCmdVoidWriteS32(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteS32) New() binary.Object {
+	return &CmdVoidWriteS32{}
 }
 func (*binaryClassCmdVoidWriteS32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS32(d, obj.(*CmdVoidWriteS32))
@@ -2970,10 +2808,8 @@ func doDecodeCmdVoidWriteS64(d binary.Decoder, o *CmdVoidWriteS64) {
 func (*binaryClassCmdVoidWriteS64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteS64(e, obj.(*CmdVoidWriteS64))
 }
-func (*binaryClassCmdVoidWriteS64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteS64{}
-	doDecodeCmdVoidWriteS64(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteS64) New() binary.Object {
+	return &CmdVoidWriteS64{}
 }
 func (*binaryClassCmdVoidWriteS64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS64(d, obj.(*CmdVoidWriteS64))
@@ -3005,10 +2841,8 @@ func doDecodeCmdVoidWriteS8(d binary.Decoder, o *CmdVoidWriteS8) {
 func (*binaryClassCmdVoidWriteS8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteS8(e, obj.(*CmdVoidWriteS8))
 }
-func (*binaryClassCmdVoidWriteS8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteS8{}
-	doDecodeCmdVoidWriteS8(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteS8) New() binary.Object {
+	return &CmdVoidWriteS8{}
 }
 func (*binaryClassCmdVoidWriteS8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteS8(d, obj.(*CmdVoidWriteS8))
@@ -3040,10 +2874,8 @@ func doDecodeCmdVoidWriteU16(d binary.Decoder, o *CmdVoidWriteU16) {
 func (*binaryClassCmdVoidWriteU16) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteU16(e, obj.(*CmdVoidWriteU16))
 }
-func (*binaryClassCmdVoidWriteU16) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteU16{}
-	doDecodeCmdVoidWriteU16(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteU16) New() binary.Object {
+	return &CmdVoidWriteU16{}
 }
 func (*binaryClassCmdVoidWriteU16) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU16(d, obj.(*CmdVoidWriteU16))
@@ -3075,10 +2907,8 @@ func doDecodeCmdVoidWriteU32(d binary.Decoder, o *CmdVoidWriteU32) {
 func (*binaryClassCmdVoidWriteU32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteU32(e, obj.(*CmdVoidWriteU32))
 }
-func (*binaryClassCmdVoidWriteU32) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteU32{}
-	doDecodeCmdVoidWriteU32(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteU32) New() binary.Object {
+	return &CmdVoidWriteU32{}
 }
 func (*binaryClassCmdVoidWriteU32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU32(d, obj.(*CmdVoidWriteU32))
@@ -3110,10 +2940,8 @@ func doDecodeCmdVoidWriteU64(d binary.Decoder, o *CmdVoidWriteU64) {
 func (*binaryClassCmdVoidWriteU64) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteU64(e, obj.(*CmdVoidWriteU64))
 }
-func (*binaryClassCmdVoidWriteU64) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteU64{}
-	doDecodeCmdVoidWriteU64(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteU64) New() binary.Object {
+	return &CmdVoidWriteU64{}
 }
 func (*binaryClassCmdVoidWriteU64) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU64(d, obj.(*CmdVoidWriteU64))
@@ -3145,10 +2973,8 @@ func doDecodeCmdVoidWriteU8(d binary.Decoder, o *CmdVoidWriteU8) {
 func (*binaryClassCmdVoidWriteU8) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoidWriteU8(e, obj.(*CmdVoidWriteU8))
 }
-func (*binaryClassCmdVoidWriteU8) Decode(d binary.Decoder) binary.Object {
-	obj := &CmdVoidWriteU8{}
-	doDecodeCmdVoidWriteU8(d, obj)
-	return obj
+func (*binaryClassCmdVoidWriteU8) New() binary.Object {
+	return &CmdVoidWriteU8{}
 }
 func (*binaryClassCmdVoidWriteU8) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeCmdVoidWriteU8(d, obj.(*CmdVoidWriteU8))
@@ -3178,10 +3004,8 @@ func doDecodeF32ˢ(d binary.Decoder, o *F32ˢ) {
 func (*binaryClassF32ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF32ˢ(e, obj.(*F32ˢ))
 }
-func (*binaryClassF32ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &F32ˢ{}
-	doDecodeF32ˢ(d, obj)
-	return obj
+func (*binaryClassF32ˢ) New() binary.Object {
+	return &F32ˢ{}
 }
 func (*binaryClassF32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF32ˢ(d, obj.(*F32ˢ))
@@ -3210,10 +3034,8 @@ func doDecodeF64ˢ(d binary.Decoder, o *F64ˢ) {
 func (*binaryClassF64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF64ˢ(e, obj.(*F64ˢ))
 }
-func (*binaryClassF64ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &F64ˢ{}
-	doDecodeF64ˢ(d, obj)
-	return obj
+func (*binaryClassF64ˢ) New() binary.Object {
+	return &F64ˢ{}
 }
 func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeF64ˢ(d, obj.(*F64ˢ))
@@ -3242,10 +3064,8 @@ func doDecodeImported(d binary.Decoder, o *Imported) {
 func (*binaryClassImported) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImported(e, obj.(*Imported))
 }
-func (*binaryClassImported) Decode(d binary.Decoder) binary.Object {
-	obj := &Imported{}
-	doDecodeImported(d, obj)
-	return obj
+func (*binaryClassImported) New() binary.Object {
+	return &Imported{}
 }
 func (*binaryClassImported) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImported(d, obj.(*Imported))
@@ -3274,10 +3094,8 @@ func doDecodeIncluded(d binary.Decoder, o *Included) {
 func (*binaryClassIncluded) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIncluded(e, obj.(*Included))
 }
-func (*binaryClassIncluded) Decode(d binary.Decoder) binary.Object {
-	obj := &Included{}
-	doDecodeIncluded(d, obj)
-	return obj
+func (*binaryClassIncluded) New() binary.Object {
+	return &Included{}
 }
 func (*binaryClassIncluded) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIncluded(d, obj.(*Included))
@@ -3306,10 +3124,8 @@ func doDecodeIntˢ(d binary.Decoder, o *Intˢ) {
 func (*binaryClassIntˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIntˢ(e, obj.(*Intˢ))
 }
-func (*binaryClassIntˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Intˢ{}
-	doDecodeIntˢ(d, obj)
-	return obj
+func (*binaryClassIntˢ) New() binary.Object {
+	return &Intˢ{}
 }
 func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeIntˢ(d, obj.(*Intˢ))
@@ -3338,10 +3154,8 @@ func doDecodeRemappedˢ(d binary.Decoder, o *Remappedˢ) {
 func (*binaryClassRemappedˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRemappedˢ(e, obj.(*Remappedˢ))
 }
-func (*binaryClassRemappedˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Remappedˢ{}
-	doDecodeRemappedˢ(d, obj)
-	return obj
+func (*binaryClassRemappedˢ) New() binary.Object {
+	return &Remappedˢ{}
 }
 func (*binaryClassRemappedˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRemappedˢ(d, obj.(*Remappedˢ))
@@ -3370,10 +3184,8 @@ func doDecodeS16ˢ(d binary.Decoder, o *S16ˢ) {
 func (*binaryClassS16ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS16ˢ(e, obj.(*S16ˢ))
 }
-func (*binaryClassS16ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &S16ˢ{}
-	doDecodeS16ˢ(d, obj)
-	return obj
+func (*binaryClassS16ˢ) New() binary.Object {
+	return &S16ˢ{}
 }
 func (*binaryClassS16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS16ˢ(d, obj.(*S16ˢ))
@@ -3402,10 +3214,8 @@ func doDecodeS32ˢ(d binary.Decoder, o *S32ˢ) {
 func (*binaryClassS32ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS32ˢ(e, obj.(*S32ˢ))
 }
-func (*binaryClassS32ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &S32ˢ{}
-	doDecodeS32ˢ(d, obj)
-	return obj
+func (*binaryClassS32ˢ) New() binary.Object {
+	return &S32ˢ{}
 }
 func (*binaryClassS32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS32ˢ(d, obj.(*S32ˢ))
@@ -3434,10 +3244,8 @@ func doDecodeS64ˢ(d binary.Decoder, o *S64ˢ) {
 func (*binaryClassS64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS64ˢ(e, obj.(*S64ˢ))
 }
-func (*binaryClassS64ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &S64ˢ{}
-	doDecodeS64ˢ(d, obj)
-	return obj
+func (*binaryClassS64ˢ) New() binary.Object {
+	return &S64ˢ{}
 }
 func (*binaryClassS64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS64ˢ(d, obj.(*S64ˢ))
@@ -3466,10 +3274,8 @@ func doDecodeS8ˢ(d binary.Decoder, o *S8ˢ) {
 func (*binaryClassS8ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS8ˢ(e, obj.(*S8ˢ))
 }
-func (*binaryClassS8ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &S8ˢ{}
-	doDecodeS8ˢ(d, obj)
-	return obj
+func (*binaryClassS8ˢ) New() binary.Object {
+	return &S8ˢ{}
 }
 func (*binaryClassS8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeS8ˢ(d, obj.(*S8ˢ))
@@ -3498,10 +3304,8 @@ func doDecodeU8ˢ(d binary.Decoder, o *U8ˢ) {
 func (*binaryClassU8ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU8ˢ(e, obj.(*U8ˢ))
 }
-func (*binaryClassU8ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &U8ˢ{}
-	doDecodeU8ˢ(d, obj)
-	return obj
+func (*binaryClassU8ˢ) New() binary.Object {
+	return &U8ˢ{}
 }
 func (*binaryClassU8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU8ˢ(d, obj.(*U8ˢ))
@@ -3530,10 +3334,8 @@ func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) {
 func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU16ˢ(e, obj.(*U16ˢ))
 }
-func (*binaryClassU16ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &U16ˢ{}
-	doDecodeU16ˢ(d, obj)
-	return obj
+func (*binaryClassU16ˢ) New() binary.Object {
+	return &U16ˢ{}
 }
 func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU16ˢ(d, obj.(*U16ˢ))
@@ -3562,10 +3364,8 @@ func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) {
 func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU32ˢ(e, obj.(*U32ˢ))
 }
-func (*binaryClassU32ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &U32ˢ{}
-	doDecodeU32ˢ(d, obj)
-	return obj
+func (*binaryClassU32ˢ) New() binary.Object {
+	return &U32ˢ{}
 }
 func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU32ˢ(d, obj.(*U32ˢ))
@@ -3602,10 +3402,8 @@ func doDecodeState(d binary.Decoder, o *State) {
 func (*binaryClassState) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeState(e, obj.(*State))
 }
-func (*binaryClassState) Decode(d binary.Decoder) binary.Object {
-	obj := &State{}
-	doDecodeState(d, obj)
-	return obj
+func (*binaryClassState) New() binary.Object {
+	return &State{}
 }
 func (*binaryClassState) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeState(d, obj.(*State))
@@ -3640,10 +3438,8 @@ func doDecodeTester(d binary.Decoder, o *Tester) {
 func (*binaryClassTester) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTester(e, obj.(*Tester))
 }
-func (*binaryClassTester) Decode(d binary.Decoder) binary.Object {
-	obj := &Tester{}
-	doDecodeTester(d, obj)
-	return obj
+func (*binaryClassTester) New() binary.Object {
+	return &Tester{}
 }
 func (*binaryClassTester) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTester(d, obj.(*Tester))
@@ -3673,10 +3469,8 @@ func doDecodeU64ˢ(d binary.Decoder, o *U64ˢ) {
 func (*binaryClassU64ˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU64ˢ(e, obj.(*U64ˢ))
 }
-func (*binaryClassU64ˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &U64ˢ{}
-	doDecodeU64ˢ(d, obj)
-	return obj
+func (*binaryClassU64ˢ) New() binary.Object {
+	return &U64ˢ{}
 }
 func (*binaryClassU64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeU64ˢ(d, obj.(*U64ˢ))
@@ -3705,10 +3499,8 @@ func doDecodeVoidˢ(d binary.Decoder, o *Voidˢ) {
 func (*binaryClassVoidˢ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidˢ(e, obj.(*Voidˢ))
 }
-func (*binaryClassVoidˢ) Decode(d binary.Decoder) binary.Object {
-	obj := &Voidˢ{}
-	doDecodeVoidˢ(d, obj)
-	return obj
+func (*binaryClassVoidˢ) New() binary.Object {
+	return &Voidˢ{}
 }
 func (*binaryClassVoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeVoidˢ(d, obj.(*Voidˢ))

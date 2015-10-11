@@ -347,7 +347,7 @@ const go_binary_tmpl = `{{/*
   func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) {»¶
     doEncode{{.Name}}(e, obj.(*{{.Name}}))¶
   «}¶
-  func (*binaryClass{{.Name}}) New(d binary.Decoder) binary.Object {»¶
+  func (*binaryClass{{.Name}}) New() binary.Object {»¶
     return &{{.Name}}{}¶
   «}¶
   func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶
@@ -410,7 +410,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
    «}¶
     old.upgrade(o)  // This upgrade() method is not code generated.¶
   «}¶
-  func (*{{$className}}) New(d binary.Decoder) binary.Object {»¶
+  func (*{{$className}}) New() binary.Object {»¶
     return &{{$name}}{}¶
   «}¶
   func (*{{$className}}) DecodeTo(d binary.Decoder, obj binary.Object) {»¶

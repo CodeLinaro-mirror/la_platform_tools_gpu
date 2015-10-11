@@ -50,10 +50,8 @@ func doDecodeFramebufferObservation(d binary.Decoder, o *FramebufferObservation)
 func (*binaryClassFramebufferObservation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferObservation(e, obj.(*FramebufferObservation))
 }
-func (*binaryClassFramebufferObservation) Decode(d binary.Decoder) binary.Object {
-	obj := &FramebufferObservation{}
-	doDecodeFramebufferObservation(d, obj)
-	return obj
+func (*binaryClassFramebufferObservation) New() binary.Object {
+	return &FramebufferObservation{}
 }
 func (*binaryClassFramebufferObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeFramebufferObservation(d, obj.(*FramebufferObservation))
@@ -86,10 +84,8 @@ func doDecodeRange(d binary.Decoder, o *Range) {
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRange(e, obj.(*Range))
 }
-func (*binaryClassRange) Decode(d binary.Decoder) binary.Object {
-	obj := &Range{}
-	doDecodeRange(d, obj)
-	return obj
+func (*binaryClassRange) New() binary.Object {
+	return &Range{}
 }
 func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeRange(d, obj.(*Range))
@@ -131,10 +127,8 @@ func doDecodeGroup(d binary.Decoder, o *Group) {
 func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGroup(e, obj.(*Group))
 }
-func (*binaryClassGroup) Decode(d binary.Decoder) binary.Object {
-	obj := &Group{}
-	doDecodeGroup(d, obj)
-	return obj
+func (*binaryClassGroup) New() binary.Object {
+	return &Group{}
 }
 func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeGroup(d, obj.(*Group))
@@ -177,10 +171,8 @@ func doDecodeList(d binary.Decoder, o *List) {
 func (*binaryClassList) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeList(e, obj.(*List))
 }
-func (*binaryClassList) Decode(d binary.Decoder) binary.Object {
-	obj := &List{}
-	doDecodeList(d, obj)
-	return obj
+func (*binaryClassList) New() binary.Object {
+	return &List{}
 }
 func (*binaryClassList) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeList(d, obj.(*List))
@@ -217,10 +209,8 @@ func doDecodeMetadata(d binary.Decoder, o *Metadata) {
 func (*binaryClassMetadata) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMetadata(e, obj.(*Metadata))
 }
-func (*binaryClassMetadata) Decode(d binary.Decoder) binary.Object {
-	obj := &Metadata{}
-	doDecodeMetadata(d, obj)
-	return obj
+func (*binaryClassMetadata) New() binary.Object {
+	return &Metadata{}
 }
 func (*binaryClassMetadata) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeMetadata(d, obj.(*Metadata))
@@ -255,10 +245,8 @@ func doDecodeObservation(d binary.Decoder, o *Observation) {
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeObservation(e, obj.(*Observation))
 }
-func (*binaryClassObservation) Decode(d binary.Decoder) binary.Object {
-	obj := &Observation{}
-	doDecodeObservation(d, obj)
-	return obj
+func (*binaryClassObservation) New() binary.Object {
+	return &Observation{}
 }
 func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservation(d, obj.(*Observation))
@@ -306,10 +294,8 @@ func doDecodeObservations(d binary.Decoder, o *Observations) {
 func (*binaryClassObservations) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeObservations(e, obj.(*Observations))
 }
-func (*binaryClassObservations) Decode(d binary.Decoder) binary.Object {
-	obj := &Observations{}
-	doDecodeObservations(d, obj)
-	return obj
+func (*binaryClassObservations) New() binary.Object {
+	return &Observations{}
 }
 func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeObservations(d, obj.(*Observations))
@@ -345,10 +331,8 @@ func doDecodeResource(d binary.Decoder, o *Resource) {
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeResource(e, obj.(*Resource))
 }
-func (*binaryClassResource) Decode(d binary.Decoder) binary.Object {
-	obj := &Resource{}
-	doDecodeResource(d, obj)
-	return obj
+func (*binaryClassResource) New() binary.Object {
+	return &Resource{}
 }
 func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeResource(d, obj.(*Resource))

@@ -30,10 +30,8 @@ func doDecodedelay(d binary.Decoder, o *delay) {
 func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedelay(e, obj.(*delay))
 }
-func (*binaryClassdelay) Decode(d binary.Decoder) binary.Object {
-	obj := &delay{}
-	doDecodedelay(d, obj)
-	return obj
+func (*binaryClassdelay) New() binary.Object {
+	return &delay{}
 }
 func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodedelay(d, obj.(*delay))
@@ -62,10 +60,8 @@ func doDecoderequest(d binary.Decoder, o *request) {
 func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderequest(e, obj.(*request))
 }
-func (*binaryClassrequest) Decode(d binary.Decoder) binary.Object {
-	obj := &request{}
-	doDecoderequest(d, obj)
-	return obj
+func (*binaryClassrequest) New() binary.Object {
+	return &request{}
 }
 func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderequest(d, obj.(*request))
@@ -94,10 +90,8 @@ func doDecoderesponse(d binary.Decoder, o *response) {
 func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) {
 	doEncoderesponse(e, obj.(*response))
 }
-func (*binaryClassresponse) Decode(d binary.Decoder) binary.Object {
-	obj := &response{}
-	doDecoderesponse(d, obj)
-	return obj
+func (*binaryClassresponse) New() binary.Object {
+	return &response{}
 }
 func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecoderesponse(d, obj.(*response))

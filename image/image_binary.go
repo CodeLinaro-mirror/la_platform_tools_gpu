@@ -63,10 +63,8 @@ func doDecodeImage(d binary.Decoder, o *Image) {
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeImage(e, obj.(*Image))
 }
-func (*binaryClassImage) Decode(d binary.Decoder) binary.Object {
-	obj := &Image{}
-	doDecodeImage(d, obj)
-	return obj
+func (*binaryClassImage) New() binary.Object {
+	return &Image{}
 }
 func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeImage(d, obj.(*Image))
@@ -116,10 +114,8 @@ func doDecodeInfo(d binary.Decoder, o *Info) {
 func (*binaryClassInfo) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeInfo(e, obj.(*Info))
 }
-func (*binaryClassInfo) Decode(d binary.Decoder) binary.Object {
-	obj := &Info{}
-	doDecodeInfo(d, obj)
-	return obj
+func (*binaryClassInfo) New() binary.Object {
+	return &Info{}
 }
 func (*binaryClassInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeInfo(d, obj.(*Info))
@@ -169,10 +165,8 @@ func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) {
 func (*binaryClassLazyConverter) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeLazyConverter(e, obj.(*LazyConverter))
 }
-func (*binaryClassLazyConverter) Decode(d binary.Decoder) binary.Object {
-	obj := &LazyConverter{}
-	doDecodeLazyConverter(d, obj)
-	return obj
+func (*binaryClassLazyConverter) New() binary.Object {
+	return &LazyConverter{}
 }
 func (*binaryClassLazyConverter) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeLazyConverter(d, obj.(*LazyConverter))
@@ -220,10 +214,8 @@ func doDecodeLazyResizer(d binary.Decoder, o *LazyResizer) {
 func (*binaryClassLazyResizer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeLazyResizer(e, obj.(*LazyResizer))
 }
-func (*binaryClassLazyResizer) Decode(d binary.Decoder) binary.Object {
-	obj := &LazyResizer{}
-	doDecodeLazyResizer(d, obj)
-	return obj
+func (*binaryClassLazyResizer) New() binary.Object {
+	return &LazyResizer{}
 }
 func (*binaryClassLazyResizer) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeLazyResizer(d, obj.(*LazyResizer))
@@ -255,10 +247,8 @@ func doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d binary.Decoder, o *fmtATC_RGBA_EXP
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(e, obj.(*fmtATC_RGBA_EXPLICIT_ALPHA_AMD))
 }
-func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtATC_RGBA_EXPLICIT_ALPHA_AMD{}
-	doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d, obj)
-	return obj
+func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) New() binary.Object {
+	return &fmtATC_RGBA_EXPLICIT_ALPHA_AMD{}
 }
 func (*binaryClassfmtATC_RGBA_EXPLICIT_ALPHA_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGBA_EXPLICIT_ALPHA_AMD(d, obj.(*fmtATC_RGBA_EXPLICIT_ALPHA_AMD))
@@ -285,10 +275,8 @@ func doDecodefmtATC_RGB_AMD(d binary.Decoder, o *fmtATC_RGB_AMD) {
 func (*binaryClassfmtATC_RGB_AMD) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtATC_RGB_AMD(e, obj.(*fmtATC_RGB_AMD))
 }
-func (*binaryClassfmtATC_RGB_AMD) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtATC_RGB_AMD{}
-	doDecodefmtATC_RGB_AMD(d, obj)
-	return obj
+func (*binaryClassfmtATC_RGB_AMD) New() binary.Object {
+	return &fmtATC_RGB_AMD{}
 }
 func (*binaryClassfmtATC_RGB_AMD) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtATC_RGB_AMD(d, obj.(*fmtATC_RGB_AMD))
@@ -313,10 +301,8 @@ func doDecodefmtAlpha(d binary.Decoder, o *fmtAlpha) {
 func (*binaryClassfmtAlpha) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtAlpha(e, obj.(*fmtAlpha))
 }
-func (*binaryClassfmtAlpha) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtAlpha{}
-	doDecodefmtAlpha(d, obj)
-	return obj
+func (*binaryClassfmtAlpha) New() binary.Object {
+	return &fmtAlpha{}
 }
 func (*binaryClassfmtAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtAlpha(d, obj.(*fmtAlpha))
@@ -341,10 +327,8 @@ func doDecodefmtETC1_RGB8_OES(d binary.Decoder, o *fmtETC1_RGB8_OES) {
 func (*binaryClassfmtETC1_RGB8_OES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtETC1_RGB8_OES(e, obj.(*fmtETC1_RGB8_OES))
 }
-func (*binaryClassfmtETC1_RGB8_OES) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtETC1_RGB8_OES{}
-	doDecodefmtETC1_RGB8_OES(d, obj)
-	return obj
+func (*binaryClassfmtETC1_RGB8_OES) New() binary.Object {
+	return &fmtETC1_RGB8_OES{}
 }
 func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtETC1_RGB8_OES(d, obj.(*fmtETC1_RGB8_OES))
@@ -369,10 +353,8 @@ func doDecodefmtFloat32(d binary.Decoder, o *fmtFloat32) {
 func (*binaryClassfmtFloat32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtFloat32(e, obj.(*fmtFloat32))
 }
-func (*binaryClassfmtFloat32) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtFloat32{}
-	doDecodefmtFloat32(d, obj)
-	return obj
+func (*binaryClassfmtFloat32) New() binary.Object {
+	return &fmtFloat32{}
 }
 func (*binaryClassfmtFloat32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtFloat32(d, obj.(*fmtFloat32))
@@ -397,10 +379,8 @@ func doDecodefmtLuminance(d binary.Decoder, o *fmtLuminance) {
 func (*binaryClassfmtLuminance) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtLuminance(e, obj.(*fmtLuminance))
 }
-func (*binaryClassfmtLuminance) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtLuminance{}
-	doDecodefmtLuminance(d, obj)
-	return obj
+func (*binaryClassfmtLuminance) New() binary.Object {
+	return &fmtLuminance{}
 }
 func (*binaryClassfmtLuminance) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminance(d, obj.(*fmtLuminance))
@@ -425,10 +405,8 @@ func doDecodefmtLuminanceAlpha(d binary.Decoder, o *fmtLuminanceAlpha) {
 func (*binaryClassfmtLuminanceAlpha) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtLuminanceAlpha(e, obj.(*fmtLuminanceAlpha))
 }
-func (*binaryClassfmtLuminanceAlpha) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtLuminanceAlpha{}
-	doDecodefmtLuminanceAlpha(d, obj)
-	return obj
+func (*binaryClassfmtLuminanceAlpha) New() binary.Object {
+	return &fmtLuminanceAlpha{}
 }
 func (*binaryClassfmtLuminanceAlpha) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtLuminanceAlpha(d, obj.(*fmtLuminanceAlpha))
@@ -453,10 +431,8 @@ func doDecodefmtPNG(d binary.Decoder, o *fmtPNG) {
 func (*binaryClassfmtPNG) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtPNG(e, obj.(*fmtPNG))
 }
-func (*binaryClassfmtPNG) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtPNG{}
-	doDecodefmtPNG(d, obj)
-	return obj
+func (*binaryClassfmtPNG) New() binary.Object {
+	return &fmtPNG{}
 }
 func (*binaryClassfmtPNG) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtPNG(d, obj.(*fmtPNG))
@@ -481,10 +457,8 @@ func doDecodefmtRGB(d binary.Decoder, o *fmtRGB) {
 func (*binaryClassfmtRGB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGB(e, obj.(*fmtRGB))
 }
-func (*binaryClassfmtRGB) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtRGB{}
-	doDecodefmtRGB(d, obj)
-	return obj
+func (*binaryClassfmtRGB) New() binary.Object {
+	return &fmtRGB{}
 }
 func (*binaryClassfmtRGB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGB(d, obj.(*fmtRGB))
@@ -509,10 +483,8 @@ func doDecodefmtRGB565(d binary.Decoder, o *fmtRGB565) {
 func (*binaryClassfmtRGB565) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGB565(e, obj.(*fmtRGB565))
 }
-func (*binaryClassfmtRGB565) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtRGB565{}
-	doDecodefmtRGB565(d, obj)
-	return obj
+func (*binaryClassfmtRGB565) New() binary.Object {
+	return &fmtRGB565{}
 }
 func (*binaryClassfmtRGB565) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGB565(d, obj.(*fmtRGB565))
@@ -537,10 +509,8 @@ func doDecodefmtRGBA(d binary.Decoder, o *fmtRGBA) {
 func (*binaryClassfmtRGBA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGBA(e, obj.(*fmtRGBA))
 }
-func (*binaryClassfmtRGBA) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtRGBA{}
-	doDecodefmtRGBA(d, obj)
-	return obj
+func (*binaryClassfmtRGBA) New() binary.Object {
+	return &fmtRGBA{}
 }
 func (*binaryClassfmtRGBA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGBA(d, obj.(*fmtRGBA))
@@ -565,10 +535,8 @@ func doDecodefmtRGBA5551(d binary.Decoder, o *fmtRGBA5551) {
 func (*binaryClassfmtRGBA5551) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGBA5551(e, obj.(*fmtRGBA5551))
 }
-func (*binaryClassfmtRGBA5551) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtRGBA5551{}
-	doDecodefmtRGBA5551(d, obj)
-	return obj
+func (*binaryClassfmtRGBA5551) New() binary.Object {
+	return &fmtRGBA5551{}
 }
 func (*binaryClassfmtRGBA5551) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGBA5551(d, obj.(*fmtRGBA5551))
@@ -593,10 +561,8 @@ func doDecodefmtRGBAF32(d binary.Decoder, o *fmtRGBAF32) {
 func (*binaryClassfmtRGBAF32) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodefmtRGBAF32(e, obj.(*fmtRGBAF32))
 }
-func (*binaryClassfmtRGBAF32) Decode(d binary.Decoder) binary.Object {
-	obj := &fmtRGBAF32{}
-	doDecodefmtRGBAF32(d, obj)
-	return obj
+func (*binaryClassfmtRGBAF32) New() binary.Object {
+	return &fmtRGBAF32{}
 }
 func (*binaryClassfmtRGBAF32) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodefmtRGBAF32(d, obj.(*fmtRGBAF32))

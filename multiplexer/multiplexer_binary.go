@@ -34,10 +34,8 @@ func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) {
 func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
 }
-func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) binary.Object {
-	obj := &msgCloseChannel{}
-	doDecodemsgCloseChannel(d, obj)
-	return obj
+func (*binaryClassmsgCloseChannel) New() binary.Object {
+	return &msgCloseChannel{}
 }
 func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
@@ -72,10 +70,8 @@ func doDecodemsgData(d binary.Decoder, o *msgData) {
 func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgData(e, obj.(*msgData))
 }
-func (*binaryClassmsgData) Decode(d binary.Decoder) binary.Object {
-	obj := &msgData{}
-	doDecodemsgData(d, obj)
-	return obj
+func (*binaryClassmsgData) New() binary.Object {
+	return &msgData{}
 }
 func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgData(d, obj.(*msgData))
@@ -105,10 +101,8 @@ func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) {
 func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
 }
-func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) binary.Object {
-	obj := &msgOpenChannel{}
-	doDecodemsgOpenChannel(d, obj)
-	return obj
+func (*binaryClassmsgOpenChannel) New() binary.Object {
+	return &msgOpenChannel{}
 }
 func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))

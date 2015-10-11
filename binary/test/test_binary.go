@@ -36,10 +36,8 @@ func doDecodeTypeA(d binary.Decoder, o *TypeA) {
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeA(e, obj.(*TypeA))
 }
-func (*binaryClassTypeA) Decode(d binary.Decoder) binary.Object {
-	obj := &TypeA{}
-	doDecodeTypeA(d, obj)
-	return obj
+func (*binaryClassTypeA) New() binary.Object {
+	return &TypeA{}
 }
 func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTypeA(d, obj.(*TypeA))
@@ -68,10 +66,8 @@ func doDecodeTypeB(d binary.Decoder, o *TypeB) {
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTypeB(e, obj.(*TypeB))
 }
-func (*binaryClassTypeB) Decode(d binary.Decoder) binary.Object {
-	obj := &TypeB{}
-	doDecodeTypeB(d, obj)
-	return obj
+func (*binaryClassTypeB) New() binary.Object {
+	return &TypeB{}
 }
 func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeTypeB(d, obj.(*TypeB))
@@ -104,10 +100,8 @@ func doDecodeX(d binary.Decoder, o *X) {
 func (*binaryClassX) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeX(e, obj.(*X))
 }
-func (*binaryClassX) Decode(d binary.Decoder) binary.Object {
-	obj := &X{}
-	doDecodeX(d, obj)
-	return obj
+func (*binaryClassX) New() binary.Object {
+	return &X{}
 }
 func (*binaryClassX) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeX(d, obj.(*X))
@@ -142,10 +136,8 @@ func doDecodeY(d binary.Decoder, o *Y) {
 func (*binaryClassY) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeY(e, obj.(*Y))
 }
-func (*binaryClassY) Decode(d binary.Decoder) binary.Object {
-	obj := &Y{}
-	doDecodeY(d, obj)
-	return obj
+func (*binaryClassY) New() binary.Object {
+	return &Y{}
 }
 func (*binaryClassY) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeY(d, obj.(*Y))
@@ -179,10 +171,8 @@ func doUpgradeDecodeǀX_V1ǁX(d binary.Decoder, o *X) {
 	}
 	old.upgrade(o)  // This upgrade() method is not code generated.
 }
-func (*binaryClassX_V1) Decode(d binary.Decoder) binary.Object {
-	obj := &X{}
-	doUpgradeDecodeǀX_V1ǁX(d, obj)
-	return obj
+func (*binaryClassX_V1) New() binary.Object {
+	return &X{}
 }
 func (*binaryClassX_V1) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doUpgradeDecodeǀX_V1ǁX(d, obj.(*X))

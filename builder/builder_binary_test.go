@@ -39,10 +39,8 @@ func doDecodetestStruct(d binary.Decoder, o *testStruct) {
 func (*binaryClasstestStruct) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestStruct(e, obj.(*testStruct))
 }
-func (*binaryClasstestStruct) Decode(d binary.Decoder) binary.Object {
-	obj := &testStruct{}
-	doDecodetestStruct(d, obj)
-	return obj
+func (*binaryClasstestStruct) New() binary.Object {
+	return &testStruct{}
 }
 func (*binaryClasstestStruct) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestStruct(d, obj.(*testStruct))
@@ -112,10 +110,8 @@ func doDecodetestAtom(d binary.Decoder, o *testAtom) {
 func (*binaryClasstestAtom) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodetestAtom(e, obj.(*testAtom))
 }
-func (*binaryClasstestAtom) Decode(d binary.Decoder) binary.Object {
-	obj := &testAtom{}
-	doDecodetestAtom(d, obj)
-	return obj
+func (*binaryClasstestAtom) New() binary.Object {
+	return &testAtom{}
 }
 func (*binaryClasstestAtom) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodetestAtom(d, obj.(*testAtom))

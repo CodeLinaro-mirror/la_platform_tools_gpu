@@ -37,10 +37,8 @@ func doDecodeAtomA(d binary.Decoder, o *AtomA) {
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomA(e, obj.(*AtomA))
 }
-func (*binaryClassAtomA) Decode(d binary.Decoder) binary.Object {
-	obj := &AtomA{}
-	doDecodeAtomA(d, obj)
-	return obj
+func (*binaryClassAtomA) New() binary.Object {
+	return &AtomA{}
 }
 func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomA(d, obj.(*AtomA))
@@ -72,10 +70,8 @@ func doDecodeAtomB(d binary.Decoder, o *AtomB) {
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomB(e, obj.(*AtomB))
 }
-func (*binaryClassAtomB) Decode(d binary.Decoder) binary.Object {
-	obj := &AtomB{}
-	doDecodeAtomB(d, obj)
-	return obj
+func (*binaryClassAtomB) New() binary.Object {
+	return &AtomB{}
 }
 func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomB(d, obj.(*AtomB))
@@ -105,10 +101,8 @@ func doDecodeAtomC(d binary.Decoder, o *AtomC) {
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAtomC(e, obj.(*AtomC))
 }
-func (*binaryClassAtomC) Decode(d binary.Decoder) binary.Object {
-	obj := &AtomC{}
-	doDecodeAtomC(d, obj)
-	return obj
+func (*binaryClassAtomC) New() binary.Object {
+	return &AtomC{}
 }
 func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodeAtomC(d, obj.(*AtomC))

@@ -36,10 +36,8 @@ func doDecodedirectCall(d binary.Decoder, o *directCall) {
 func (*binaryClassdirectCall) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodedirectCall(e, obj.(*directCall))
 }
-func (*binaryClassdirectCall) Decode(d binary.Decoder) binary.Object {
-	obj := &directCall{}
-	doDecodedirectCall(d, obj)
-	return obj
+func (*binaryClassdirectCall) New() binary.Object {
+	return &directCall{}
 }
 func (*binaryClassdirectCall) DecodeTo(d binary.Decoder, obj binary.Object) {
 	doDecodedirectCall(d, obj.(*directCall))
