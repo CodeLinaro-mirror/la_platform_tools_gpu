@@ -9273,6 +9273,28 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlFramebufferTexture2DOES(Stack* stack, bool pushReturn) {
+    int32_t level = stack->pop<int32_t>();
+    uint32_t texture = stack->pop<uint32_t>();
+    GLenum texture_target = stack->pop<GLenum>();
+    GLenum framebuffer_attachment = stack->pop<GLenum>();
+    GLenum framebuffer_target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferTexture2DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ")",
+                   framebuffer_target, framebuffer_attachment, texture_target, texture, level);
+        if (glFramebufferTexture2DOES != nullptr) {
+            glFramebufferTexture2DOES(framebuffer_target, framebuffer_attachment, texture_target,
+                                      texture, level);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture2DOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferTexture2DOES");
+        return false;
+    }
+}
+
 bool callGlDisable(Stack* stack, bool pushReturn) {
     GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
@@ -15179,6 +15201,7 @@ PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample = nullptr;
 PFNGLSTENCILMASK glStencilMask = nullptr;
 PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate = nullptr;
+PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES = nullptr;
 PFNGLDISABLE glDisable = nullptr;
 PFNGLDISABLEI glDisablei = nullptr;
 PFNGLENABLE glEnable = nullptr;
@@ -16019,6 +16042,7 @@ void Register(Interpreter* interpreter) {
                                   callGlRenderbufferStorageMultisample);
     interpreter->registerFunction(Ids::GlStencilMask, callGlStencilMask);
     interpreter->registerFunction(Ids::GlStencilMaskSeparate, callGlStencilMaskSeparate);
+    interpreter->registerFunction(Ids::GlFramebufferTexture2DOES, callGlFramebufferTexture2DOES);
     interpreter->registerFunction(Ids::GlDisable, callGlDisable);
     interpreter->registerFunction(Ids::GlDisablei, callGlDisablei);
     interpreter->registerFunction(Ids::GlEnable, callGlEnable);
@@ -17248,6 +17272,8 @@ void Initialize() {
             reinterpret_cast<PFNGLSTENCILMASK>(gapic::GetGfxProcAddress("glStencilMask", false));
     glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
             gapic::GetGfxProcAddress("glStencilMaskSeparate", false));
+    glFramebufferTexture2DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DOES>(
+            gapic::GetGfxProcAddress("glFramebufferTexture2DOES", false));
     glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable", false));
     glDisablei = reinterpret_cast<PFNGLDISABLEI>(gapic::GetGfxProcAddress("glDisablei", false));
     glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable", false));

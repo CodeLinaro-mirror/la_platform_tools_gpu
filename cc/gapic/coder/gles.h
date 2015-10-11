@@ -7109,6 +7109,29 @@ namespace gles {
         int32_t mSamples;
     };
 
+    class GlFramebufferTexture2DOES: public Encodable {
+    public:
+        GlFramebufferTexture2DOES() = default;
+        GlFramebufferTexture2DOES(atom::Observations observations, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
+            mobservations(observations),
+            mFramebufferTarget(FramebufferTarget),
+            mFramebufferAttachment(FramebufferAttachment),
+            mTextureTarget(TextureTarget),
+            mTexture(Texture),
+            mLevel(Level) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFramebufferTarget;
+        uint32_t mFramebufferAttachment;
+        uint32_t mTextureTarget;
+        uint32_t mTexture;
+        int32_t mLevel;
+    };
+
     class GlFramebufferTexture3DOES: public Encodable {
     public:
         GlFramebufferTexture3DOES() = default;

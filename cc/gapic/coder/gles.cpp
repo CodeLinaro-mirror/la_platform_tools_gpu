@@ -7386,6 +7386,34 @@ const schema::Entity* GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
     return &entity;
 }
 
+// GlFramebufferTexture2DOES:
+// gles.GlFramebufferTexture2DOES{$,Uint32,Uint32,Uint32,Uint32,Int32}
+void GlFramebufferTexture2DOES::Encode(Encoder* e) const {
+    e->Value(this->mobservations);
+    e->Uint32(this->mFramebufferTarget);
+    e->Uint32(this->mFramebufferAttachment);
+    e->Uint32(this->mTextureTarget);
+    e->Uint32(this->mTexture);
+    e->Int32(this->mLevel);
+}
+const schema::Entity* GlFramebufferTexture2DOES::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "GlFramebufferTexture2DOES",
+        "",
+        {
+            schema::Field{"observations", new schema::Struct{ atom::Observations::StaticSchema()}},
+            schema::Field{"FramebufferTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"FramebufferAttachment", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"TextureTarget", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"Texture", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
+            schema::Field{"Level", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+        },
+    };
+    return &entity;
+}
+
 // GlFramebufferTexture3DOES:
 // gles.GlFramebufferTexture3DOES{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 void GlFramebufferTexture3DOES::Encode(Encoder* e) const {

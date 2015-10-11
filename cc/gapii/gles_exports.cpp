@@ -803,6 +803,9 @@ EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t sa
                                                      int32_t height);
 EXPORT void STDCALL glStencilMask(uint32_t mask);
 EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask);
+EXPORT void STDCALL
+glFramebufferTexture2DOES(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
+                          uint32_t texture_target, uint32_t texture, int32_t level);
 EXPORT void STDCALL glDisable(uint32_t capability);
 EXPORT void STDCALL glDisablei(uint32_t target, uint32_t index);
 EXPORT void STDCALL glEnable(uint32_t capability);
@@ -1718,6 +1721,7 @@ const Symbol kGLESExports[] = {
          reinterpret_cast<void*>(glRenderbufferStorageMultisample)},
         {"glStencilMask", reinterpret_cast<void*>(glStencilMask)},
         {"glStencilMaskSeparate", reinterpret_cast<void*>(glStencilMaskSeparate)},
+        {"glFramebufferTexture2DOES", reinterpret_cast<void*>(glFramebufferTexture2DOES)},
         {"glDisable", reinterpret_cast<void*>(glDisable)},
         {"glDisablei", reinterpret_cast<void*>(glDisablei)},
         {"glEnable", reinterpret_cast<void*>(glEnable)},
@@ -4714,6 +4718,14 @@ EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glStencilMaskSeparate(face, mask);
+}
+EXPORT void STDCALL
+glFramebufferTexture2DOES(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
+                          uint32_t texture_target, uint32_t texture, int32_t level) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferTexture2DOES(framebuffer_target, framebuffer_attachment, texture_target,
+                                 texture, level);
 }
 EXPORT void STDCALL glDisable(uint32_t capability) {
     Spy* s = spy();

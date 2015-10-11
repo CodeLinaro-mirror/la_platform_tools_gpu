@@ -22,6 +22,7 @@ import "api/fragment_operations.api"
 import "api/framebuffer.api"
 import "api/glbitfield.api"
 import "api/glenum.api"
+import "api/gles1_extensions.api"
 import "api/other.api"
 import "api/programs_and_shaders.api"
 import "api/rasterization.api"
@@ -142,29 +143,30 @@ enum ExtensionId {
   GL_OES_draw_buffers_indexed                 = 66,
   GL_OES_draw_elements_base_vertex            = 67,
   GL_OES_EGL_image                            = 68,
-  GL_OES_geometry_shader                      = 69,
-  GL_OES_get_program_binary                   = 70,
-  GL_OES_mapbuffer                            = 71,
-  GL_OES_primitive_bounding_box               = 72,
-  GL_OES_sample_shading                       = 73,
-  GL_OES_tessellation_shader                  = 74,
-  GL_OES_texture_3D                           = 75,
-  GL_OES_texture_border_clamp                 = 76,
-  GL_OES_texture_buffer                       = 77,
-  GL_OES_texture_storage_multisample_2d_array = 78,
-  GL_OES_texture_view                         = 79,
-  GL_OES_vertex_array_object                  = 80,
-  GL_OVR_multiview                            = 81,
-  GL_QCOM_alpha_test                          = 82,
-  GL_QCOM_driver_control                      = 83,
-  GL_QCOM_extended_get                        = 84,
-  GL_QCOM_extended_get2                       = 85,
-  GL_QCOM_tiled_rendering                     = 86,
-  GL_AMD_compressed_ATC_texture               = 87,
-  GL_OES_texture_half_float                   = 88,
-  GL_OES_vertex_half_float                    = 89,
-  GL_INTEL_framebuffer_CMAA                   = 90,
-  GL_EXT_blend_func_extended                  = 91,
+  GL_OES_framebuffer_object                   = 69
+  GL_OES_geometry_shader                      = 70,
+  GL_OES_get_program_binary                   = 71,
+  GL_OES_mapbuffer                            = 72,
+  GL_OES_primitive_bounding_box               = 73,
+  GL_OES_sample_shading                       = 74,
+  GL_OES_tessellation_shader                  = 75,
+  GL_OES_texture_3D                           = 76,
+  GL_OES_texture_border_clamp                 = 77,
+  GL_OES_texture_buffer                       = 78,
+  GL_OES_texture_storage_multisample_2d_array = 79,
+  GL_OES_texture_view                         = 80,
+  GL_OES_vertex_array_object                  = 81,
+  GL_OVR_multiview                            = 82,
+  GL_QCOM_alpha_test                          = 83,
+  GL_QCOM_driver_control                      = 84,
+  GL_QCOM_extended_get                        = 85,
+  GL_QCOM_extended_get2                       = 86,
+  GL_QCOM_tiled_rendering                     = 87,
+  GL_AMD_compressed_ATC_texture               = 88,
+  GL_OES_texture_half_float                   = 89,
+  GL_OES_vertex_half_float                    = 90,
+  GL_INTEL_framebuffer_CMAA                   = 91,
+  GL_EXT_blend_func_extended                  = 92,
 }
 
 enum TextureKind {

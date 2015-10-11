@@ -1118,6 +1118,9 @@ gles.GlFramebufferTexture2DMultisampleEXT{$,Uint32,Uint32,Uint32,Uint32,Int32,In
 GlFramebufferTexture2DMultisampleIMG : size 54
 gles.GlFramebufferTexture2DMultisampleIMG{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 
+GlFramebufferTexture2DOES : size 42
+gles.GlFramebufferTexture2DOES{$,Uint32,Uint32,Uint32,Uint32,Int32}
+
 GlFramebufferTexture2D : size 39
 gles.GlFramebufferTexture2D{$,Uint32,Uint32,Uint32,Uint32,Int32}
 
@@ -3753,9 +3756,9 @@ resultUseResource : size 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1251
-Total: 40365
-Compact: 40370
-Full: 132549
+Count: 1252
+Total: 40407
+Compact: 40412
+Full: 132730
 Average: 32
 Largest: 183

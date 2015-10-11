@@ -943,6 +943,10 @@ struct GlesImports {
                                                                int32_t height);
     typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
     typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(uint32_t face, uint32_t mask);
+    typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DOES)(uint32_t framebuffer_target,
+                                                        uint32_t framebuffer_attachment,
+                                                        uint32_t texture_target, uint32_t texture,
+                                                        int32_t level);
     typedef void(STDCALL *PFNGLDISABLE)(uint32_t capability);
     typedef void(STDCALL *PFNGLDISABLEI)(uint32_t target, uint32_t index);
     typedef void(STDCALL *PFNGLENABLE)(uint32_t capability);
@@ -1884,6 +1888,7 @@ struct GlesImports {
     PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
     PFNGLSTENCILMASK glStencilMask;
     PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate;
+    PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES;
     PFNGLDISABLE glDisable;
     PFNGLDISABLEI glDisablei;
     PFNGLENABLE glEnable;

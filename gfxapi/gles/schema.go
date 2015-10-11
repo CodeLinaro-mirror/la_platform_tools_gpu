@@ -4201,6 +4201,15 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
+	sc_GlFramebufferTexture2DOES := (*GlFramebufferTexture2DOES)(nil).Class().Schema()
+	sc_GlFramebufferTexture2DOES.Metadata = append(sc_GlFramebufferTexture2DOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFramebufferTexture2DOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
 	sc_GlDisable := (*GlDisable)(nil).Class().Schema()
 	sc_GlDisable.Metadata = append(sc_GlDisable.Metadata, &atom.Metadata{
 		API:              apiID,

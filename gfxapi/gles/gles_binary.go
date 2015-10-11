@@ -372,6 +372,7 @@ func init() {
 	Namespace.Add((*GlFramebufferTexture2D)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2DMultisampleEXT)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2DMultisampleIMG)(nil).Class())
+	Namespace.Add((*GlFramebufferTexture2DOES)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture3DOES)(nil).Class())
 	Namespace.Add((*GlFramebufferTextureEXT)(nil).Class())
 	Namespace.Add((*GlFramebufferTextureLayer)(nil).Class())
@@ -16100,6 +16101,55 @@ var schemaGlFramebufferTexture2DMultisampleIMG = &binary.Entity{
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Samples", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlFramebufferTexture2DOES struct{}
+
+func (*GlFramebufferTexture2DOES) Class() binary.Class {
+	return (*binaryClassGlFramebufferTexture2DOES)(nil)
+}
+func doEncodeGlFramebufferTexture2DOES(e binary.Encoder, o *GlFramebufferTexture2DOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.FramebufferTarget))
+	e.Uint32(uint32(o.FramebufferAttachment))
+	e.Uint32(uint32(o.TextureTarget))
+	e.Uint32(uint32(o.Texture))
+	e.Int32(int32(o.Level))
+}
+func doDecodeGlFramebufferTexture2DOES(d binary.Decoder, o *GlFramebufferTexture2DOES) {
+	d.Struct(&o.observations)
+	o.FramebufferTarget = GLenum(d.Uint32())
+	o.FramebufferAttachment = GLenum(d.Uint32())
+	o.TextureTarget = GLenum(d.Uint32())
+	o.Texture = TextureId(d.Uint32())
+	o.Level = GLint(d.Int32())
+}
+func (*binaryClassGlFramebufferTexture2DOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFramebufferTexture2DOES(e, obj.(*GlFramebufferTexture2DOES))
+}
+func (*binaryClassGlFramebufferTexture2DOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFramebufferTexture2DOES{}
+	doDecodeGlFramebufferTexture2DOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFramebufferTexture2DOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFramebufferTexture2DOES(d, obj.(*GlFramebufferTexture2DOES))
+}
+func (*binaryClassGlFramebufferTexture2DOES) Schema() *binary.Entity {
+	return schemaGlFramebufferTexture2DOES
+}
+
+var schemaGlFramebufferTexture2DOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFramebufferTexture2DOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
 }
 
@@ -42478,29 +42528,30 @@ func init() {
 	_ExtensionId_map[66] = "GL_OES_draw_buffers_indexed"
 	_ExtensionId_map[67] = "GL_OES_draw_elements_base_vertex"
 	_ExtensionId_map[68] = "GL_OES_EGL_image"
-	_ExtensionId_map[69] = "GL_OES_geometry_shader"
-	_ExtensionId_map[70] = "GL_OES_get_program_binary"
-	_ExtensionId_map[71] = "GL_OES_mapbuffer"
-	_ExtensionId_map[72] = "GL_OES_primitive_bounding_box"
-	_ExtensionId_map[73] = "GL_OES_sample_shading"
-	_ExtensionId_map[74] = "GL_OES_tessellation_shader"
-	_ExtensionId_map[75] = "GL_OES_texture_3D"
-	_ExtensionId_map[76] = "GL_OES_texture_border_clamp"
-	_ExtensionId_map[77] = "GL_OES_texture_buffer"
-	_ExtensionId_map[78] = "GL_OES_texture_storage_multisample_2d_array"
-	_ExtensionId_map[79] = "GL_OES_texture_view"
-	_ExtensionId_map[80] = "GL_OES_vertex_array_object"
-	_ExtensionId_map[81] = "GL_OVR_multiview"
-	_ExtensionId_map[82] = "GL_QCOM_alpha_test"
-	_ExtensionId_map[83] = "GL_QCOM_driver_control"
-	_ExtensionId_map[84] = "GL_QCOM_extended_get"
-	_ExtensionId_map[85] = "GL_QCOM_extended_get2"
-	_ExtensionId_map[86] = "GL_QCOM_tiled_rendering"
-	_ExtensionId_map[87] = "GL_AMD_compressed_ATC_texture"
-	_ExtensionId_map[88] = "GL_OES_texture_half_float"
-	_ExtensionId_map[89] = "GL_OES_vertex_half_float"
-	_ExtensionId_map[90] = "GL_INTEL_framebuffer_CMAA"
-	_ExtensionId_map[91] = "GL_EXT_blend_func_extended"
+	_ExtensionId_map[69] = "GL_OES_framebuffer_object"
+	_ExtensionId_map[70] = "GL_OES_geometry_shader"
+	_ExtensionId_map[71] = "GL_OES_get_program_binary"
+	_ExtensionId_map[72] = "GL_OES_mapbuffer"
+	_ExtensionId_map[73] = "GL_OES_primitive_bounding_box"
+	_ExtensionId_map[74] = "GL_OES_sample_shading"
+	_ExtensionId_map[75] = "GL_OES_tessellation_shader"
+	_ExtensionId_map[76] = "GL_OES_texture_3D"
+	_ExtensionId_map[77] = "GL_OES_texture_border_clamp"
+	_ExtensionId_map[78] = "GL_OES_texture_buffer"
+	_ExtensionId_map[79] = "GL_OES_texture_storage_multisample_2d_array"
+	_ExtensionId_map[80] = "GL_OES_texture_view"
+	_ExtensionId_map[81] = "GL_OES_vertex_array_object"
+	_ExtensionId_map[82] = "GL_OVR_multiview"
+	_ExtensionId_map[83] = "GL_QCOM_alpha_test"
+	_ExtensionId_map[84] = "GL_QCOM_driver_control"
+	_ExtensionId_map[85] = "GL_QCOM_extended_get"
+	_ExtensionId_map[86] = "GL_QCOM_extended_get2"
+	_ExtensionId_map[87] = "GL_QCOM_tiled_rendering"
+	_ExtensionId_map[88] = "GL_AMD_compressed_ATC_texture"
+	_ExtensionId_map[89] = "GL_OES_texture_half_float"
+	_ExtensionId_map[90] = "GL_OES_vertex_half_float"
+	_ExtensionId_map[91] = "GL_INTEL_framebuffer_CMAA"
+	_ExtensionId_map[92] = "GL_EXT_blend_func_extended"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ExtensionId", Method: schema.Uint32},
@@ -42573,29 +42624,30 @@ func init() {
 			{Name: "GL_OES_draw_buffers_indexed", Value: uint32(66)},
 			{Name: "GL_OES_draw_elements_base_vertex", Value: uint32(67)},
 			{Name: "GL_OES_EGL_image", Value: uint32(68)},
-			{Name: "GL_OES_geometry_shader", Value: uint32(69)},
-			{Name: "GL_OES_get_program_binary", Value: uint32(70)},
-			{Name: "GL_OES_mapbuffer", Value: uint32(71)},
-			{Name: "GL_OES_primitive_bounding_box", Value: uint32(72)},
-			{Name: "GL_OES_sample_shading", Value: uint32(73)},
-			{Name: "GL_OES_tessellation_shader", Value: uint32(74)},
-			{Name: "GL_OES_texture_3D", Value: uint32(75)},
-			{Name: "GL_OES_texture_border_clamp", Value: uint32(76)},
-			{Name: "GL_OES_texture_buffer", Value: uint32(77)},
-			{Name: "GL_OES_texture_storage_multisample_2d_array", Value: uint32(78)},
-			{Name: "GL_OES_texture_view", Value: uint32(79)},
-			{Name: "GL_OES_vertex_array_object", Value: uint32(80)},
-			{Name: "GL_OVR_multiview", Value: uint32(81)},
-			{Name: "GL_QCOM_alpha_test", Value: uint32(82)},
-			{Name: "GL_QCOM_driver_control", Value: uint32(83)},
-			{Name: "GL_QCOM_extended_get", Value: uint32(84)},
-			{Name: "GL_QCOM_extended_get2", Value: uint32(85)},
-			{Name: "GL_QCOM_tiled_rendering", Value: uint32(86)},
-			{Name: "GL_AMD_compressed_ATC_texture", Value: uint32(87)},
-			{Name: "GL_OES_texture_half_float", Value: uint32(88)},
-			{Name: "GL_OES_vertex_half_float", Value: uint32(89)},
-			{Name: "GL_INTEL_framebuffer_CMAA", Value: uint32(90)},
-			{Name: "GL_EXT_blend_func_extended", Value: uint32(91)},
+			{Name: "GL_OES_framebuffer_object", Value: uint32(69)},
+			{Name: "GL_OES_geometry_shader", Value: uint32(70)},
+			{Name: "GL_OES_get_program_binary", Value: uint32(71)},
+			{Name: "GL_OES_mapbuffer", Value: uint32(72)},
+			{Name: "GL_OES_primitive_bounding_box", Value: uint32(73)},
+			{Name: "GL_OES_sample_shading", Value: uint32(74)},
+			{Name: "GL_OES_tessellation_shader", Value: uint32(75)},
+			{Name: "GL_OES_texture_3D", Value: uint32(76)},
+			{Name: "GL_OES_texture_border_clamp", Value: uint32(77)},
+			{Name: "GL_OES_texture_buffer", Value: uint32(78)},
+			{Name: "GL_OES_texture_storage_multisample_2d_array", Value: uint32(79)},
+			{Name: "GL_OES_texture_view", Value: uint32(80)},
+			{Name: "GL_OES_vertex_array_object", Value: uint32(81)},
+			{Name: "GL_OVR_multiview", Value: uint32(82)},
+			{Name: "GL_QCOM_alpha_test", Value: uint32(83)},
+			{Name: "GL_QCOM_driver_control", Value: uint32(84)},
+			{Name: "GL_QCOM_extended_get", Value: uint32(85)},
+			{Name: "GL_QCOM_extended_get2", Value: uint32(86)},
+			{Name: "GL_QCOM_tiled_rendering", Value: uint32(87)},
+			{Name: "GL_AMD_compressed_ATC_texture", Value: uint32(88)},
+			{Name: "GL_OES_texture_half_float", Value: uint32(89)},
+			{Name: "GL_OES_vertex_half_float", Value: uint32(90)},
+			{Name: "GL_INTEL_framebuffer_CMAA", Value: uint32(91)},
+			{Name: "GL_EXT_blend_func_extended", Value: uint32(92)},
 		},
 	})
 }

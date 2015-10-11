@@ -457,6 +457,14 @@ cmd void glFramebufferTexture2D(GLenum    framebuffer_target,
                                 TextureId texture,
                                 GLint     level) {
   minRequiredVersion(2, 0)
+  FramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target, texture, level)
+}
+
+macro void FramebufferTexture2D(GLenum    framebuffer_target,
+                                GLenum    framebuffer_attachment,
+                                GLenum    texture_target,
+                                TextureId texture,
+                                GLint     level) {
   switch (framebuffer_target) {
     case GL_FRAMEBUFFER: {
       // version 2.0

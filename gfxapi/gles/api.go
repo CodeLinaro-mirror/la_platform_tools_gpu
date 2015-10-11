@@ -31601,6 +31601,42 @@ func (c *GlStencilMaskSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlStencilMaskSeparate) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlFramebufferTexture2DOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFramebufferTexture2DOES struct {
+	binary.Generate
+	observations          atom.Observations
+	FramebufferTarget     GLenum
+	FramebufferAttachment GLenum
+	TextureTarget         GLenum
+	Texture               TextureId
+	Level                 GLint
+}
+
+func (a *GlFramebufferTexture2DOES) String() string {
+	return fmt.Sprintf("glFramebufferTexture2DOES(framebuffer_target: %v, framebuffer_attachment: %v, texture_target: %v, texture: %v, level: %v)", a.FramebufferTarget, a.FramebufferAttachment, a.TextureTarget, a.Texture, a.Level)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferTexture2DOES) AddRead(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferTexture2DOES) AddWrite(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFramebufferTexture2DOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFramebufferTexture2DOES) Flags() atom.Flags                { return 0 }
+func (a *GlFramebufferTexture2DOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // GlDisable
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisable struct {
@@ -47660,29 +47696,30 @@ const (
 	ExtensionId_GL_OES_draw_buffers_indexed                 = ExtensionId(66)
 	ExtensionId_GL_OES_draw_elements_base_vertex            = ExtensionId(67)
 	ExtensionId_GL_OES_EGL_image                            = ExtensionId(68)
-	ExtensionId_GL_OES_geometry_shader                      = ExtensionId(69)
-	ExtensionId_GL_OES_get_program_binary                   = ExtensionId(70)
-	ExtensionId_GL_OES_mapbuffer                            = ExtensionId(71)
-	ExtensionId_GL_OES_primitive_bounding_box               = ExtensionId(72)
-	ExtensionId_GL_OES_sample_shading                       = ExtensionId(73)
-	ExtensionId_GL_OES_tessellation_shader                  = ExtensionId(74)
-	ExtensionId_GL_OES_texture_3D                           = ExtensionId(75)
-	ExtensionId_GL_OES_texture_border_clamp                 = ExtensionId(76)
-	ExtensionId_GL_OES_texture_buffer                       = ExtensionId(77)
-	ExtensionId_GL_OES_texture_storage_multisample_2d_array = ExtensionId(78)
-	ExtensionId_GL_OES_texture_view                         = ExtensionId(79)
-	ExtensionId_GL_OES_vertex_array_object                  = ExtensionId(80)
-	ExtensionId_GL_OVR_multiview                            = ExtensionId(81)
-	ExtensionId_GL_QCOM_alpha_test                          = ExtensionId(82)
-	ExtensionId_GL_QCOM_driver_control                      = ExtensionId(83)
-	ExtensionId_GL_QCOM_extended_get                        = ExtensionId(84)
-	ExtensionId_GL_QCOM_extended_get2                       = ExtensionId(85)
-	ExtensionId_GL_QCOM_tiled_rendering                     = ExtensionId(86)
-	ExtensionId_GL_AMD_compressed_ATC_texture               = ExtensionId(87)
-	ExtensionId_GL_OES_texture_half_float                   = ExtensionId(88)
-	ExtensionId_GL_OES_vertex_half_float                    = ExtensionId(89)
-	ExtensionId_GL_INTEL_framebuffer_CMAA                   = ExtensionId(90)
-	ExtensionId_GL_EXT_blend_func_extended                  = ExtensionId(91)
+	ExtensionId_GL_OES_framebuffer_object                   = ExtensionId(69)
+	ExtensionId_GL_OES_geometry_shader                      = ExtensionId(70)
+	ExtensionId_GL_OES_get_program_binary                   = ExtensionId(71)
+	ExtensionId_GL_OES_mapbuffer                            = ExtensionId(72)
+	ExtensionId_GL_OES_primitive_bounding_box               = ExtensionId(73)
+	ExtensionId_GL_OES_sample_shading                       = ExtensionId(74)
+	ExtensionId_GL_OES_tessellation_shader                  = ExtensionId(75)
+	ExtensionId_GL_OES_texture_3D                           = ExtensionId(76)
+	ExtensionId_GL_OES_texture_border_clamp                 = ExtensionId(77)
+	ExtensionId_GL_OES_texture_buffer                       = ExtensionId(78)
+	ExtensionId_GL_OES_texture_storage_multisample_2d_array = ExtensionId(79)
+	ExtensionId_GL_OES_texture_view                         = ExtensionId(80)
+	ExtensionId_GL_OES_vertex_array_object                  = ExtensionId(81)
+	ExtensionId_GL_OVR_multiview                            = ExtensionId(82)
+	ExtensionId_GL_QCOM_alpha_test                          = ExtensionId(83)
+	ExtensionId_GL_QCOM_driver_control                      = ExtensionId(84)
+	ExtensionId_GL_QCOM_extended_get                        = ExtensionId(85)
+	ExtensionId_GL_QCOM_extended_get2                       = ExtensionId(86)
+	ExtensionId_GL_QCOM_tiled_rendering                     = ExtensionId(87)
+	ExtensionId_GL_AMD_compressed_ATC_texture               = ExtensionId(88)
+	ExtensionId_GL_OES_texture_half_float                   = ExtensionId(89)
+	ExtensionId_GL_OES_vertex_half_float                    = ExtensionId(90)
+	ExtensionId_GL_INTEL_framebuffer_CMAA                   = ExtensionId(91)
+	ExtensionId_GL_EXT_blend_func_extended                  = ExtensionId(92)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49114,6 +49151,9 @@ func NewGlStencilMask(Mask GLuint) *GlStencilMask {
 }
 func NewGlStencilMaskSeparate(Face GLenum, Mask GLuint) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{Face: Face, Mask: Mask}
+}
+func NewGlFramebufferTexture2DOES(Framebuffer_target GLenum, Framebuffer_attachment GLenum, Texture_target GLenum, Texture TextureId, Level GLint) *GlFramebufferTexture2DOES {
+	return &GlFramebufferTexture2DOES{FramebufferTarget: Framebuffer_target, FramebufferAttachment: Framebuffer_attachment, TextureTarget: Texture_target, Texture: Texture, Level: Level}
 }
 func NewGlDisable(Capability GLenum) *GlDisable {
 	return &GlDisable{Capability: Capability}

@@ -913,6 +913,8 @@ void GlesImports::Resolve() {
     glStencilMask = reinterpret_cast<PFNGLSTENCILMASK>(GetGfxProcAddress("glStencilMask", true));
     glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
             GetGfxProcAddress("glStencilMaskSeparate", true));
+    glFramebufferTexture2DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DOES>(
+            GetGfxProcAddress("glFramebufferTexture2DOES", true));
     glDisable = reinterpret_cast<PFNGLDISABLE>(GetGfxProcAddress("glDisable", true));
     glDisablei = reinterpret_cast<PFNGLDISABLEI>(GetGfxProcAddress("glDisablei", true));
     glEnable = reinterpret_cast<PFNGLENABLE>(GetGfxProcAddress("glEnable", true));
