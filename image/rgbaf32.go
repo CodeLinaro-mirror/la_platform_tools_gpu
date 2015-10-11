@@ -85,7 +85,10 @@ type rgbaF32 struct {
 // image to no greater than twice the width or height than the target
 // dimensions, then uses a bilinear interpolator to calculate the final image
 // at the requested size.
-func (fmtRGBAF32) Resize(data []byte, srcW, srcH, dstW, dstH int) ([]byte, error) {
+func (f fmtRGBAF32) Resize(data []byte, srcW, srcH, dstW, dstH int) ([]byte, error) {
+	if err := f.Check(data, srcW, srcH); err != nil {
+		return nil, err
+	}
 	r := endian.Reader(bytes.NewReader(data), endian.Little)
 	bufA, bufB := make([]rgbaF32, srcW*srcH), make([]rgbaF32, srcW*srcH)
 	for i := range bufA {
