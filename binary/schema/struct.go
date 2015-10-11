@@ -60,7 +60,9 @@ func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
 		d.SetError(fmt.Errorf("Unknown type id %v for %s", s.Entity, s))
 		return nil
 	}
-	return u.Decode(d)
+	o := u.New()
+	u.DecodeTo(d, o)
+	return o
 }
 
 func (s *Struct) Subspace() *binary.Subspace {

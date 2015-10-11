@@ -26,10 +26,12 @@ type Object interface {
 // UpgradeDecoder provides a decoder interface which maybe used to
 // decode a stream from an old version into a newer version.
 type UpgradeDecoder interface {
-	// Decode reads a single object from the supplied Decoder.
-	Decode(Decoder) Object
+	// New constructs a new Object that this decoder handles.
+	// For a frozen decoder, this would be the new version, not the frozen one, and as such the type returned may not
+	// match the schema this decoder was registered against.
+	New() Object
 	// DecodeTo reads into the supplied object from the supplied Decoder.
-	// The object must be a type the UpgradeDecoder understands, the
+	// The object must be the same concrete type that New would create, the
 	// implementation is allowed to panic if it is not.
 	DecodeTo(Decoder, Object)
 }

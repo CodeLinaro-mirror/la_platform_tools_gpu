@@ -181,7 +181,8 @@ func (d *decoder) Variant() binary.Object {
 	} else {
 		l := len(d.substack.stack)
 		d.substack.pushStruct(entity)
-		o := u.Decode(d)
+		o := u.New()
+		u.DecodeTo(d, o)
 		if l != len(d.substack.stack) {
 			d.SetError(fmt.Errorf(
 				"Decoding type %q altered the substack. Subtypes: %v. Before %d now %d",
