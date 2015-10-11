@@ -22,19 +22,20 @@
 // loaded into memory. Some code from the NDK version of the crazy
 // linker is used.
 
+#include <gapii/gles_exports.h>
+#include <gapic/log.h>
+
+#include <crazy_linker_elf_view.h>
+#include <crazy_linker_elf_symbols.h>
+#include <crazy_linker_error.h>
+#include <linker_phdr.h>
+
+#include <unordered_map>
+
 #include <dlfcn.h>
 #include <link.h>
 #include <sys/mman.h>
 #include <unistd.h>
-
-#include <unordered_map>
-
-#include "gapic/log.h"
-#include "gapii/gles_exports.h"
-#include "crazy_linker_elf_view.h"
-#include "crazy_linker_elf_symbols.h"
-#include "crazy_linker_error.h"
-#include "linker_phdr.h"
 
 namespace {
 
@@ -300,8 +301,7 @@ class ElfReloc {
                plt_relocations_(0),
                plt_relocations_size_(0),
                relocations_(0),
-               relocations_size_(0),
-               has_text_relocations_(false) {}
+               relocations_size_(0) {}
 
   // Read the dynamic section in the ELF header to locate the relocation
   // tables. This is analogous to ElfRelocations::Init in the crazy linker.
@@ -330,8 +330,6 @@ class ElfReloc {
   // Address and size of the relocation table.
   ELF::Addr relocations_;
   size_t relocations_size_;
-
-  bool has_text_relocations_;
 };
 
 bool ElfReloc::Init(const crazy::ElfView& view, crazy::Error* error) {
@@ -385,14 +383,6 @@ bool ElfReloc::Init(const crazy::ElfView& view, crazy::Error* error) {
         else
           has_rel_relocations = true;
         break;
-      case DT_TEXTREL:
-        has_text_relocations_ = true;
-        break;
-      case DT_FLAGS:
-        if (dyn_value & DF_TEXTREL) {
-          has_text_relocations_ = true;
-        }
-        break;
       default:
         ;
     }
@@ -419,11 +409,6 @@ bool ElfReloc::ApplyInterceptorRelocations(const char* name,
                                            const crazy::ElfSymbols& symbols,
                                            const SymbolResolver& resolver,
                                            size_t load_bias) {
-  if (has_text_relocations_) {
-    GAPID_WARNING("%s has text relocations", name);
-    return false;
-  }
-
   // There are two types of relocation DT_REL and DT_RELA. The only difference
   // is that RELA relocations have an addend. This is an additional offset
   // from the location, it primarily exists to make the job of the static
@@ -492,19 +477,17 @@ static const void* me = NULL;
 // spy interceptor functions in the SymbolResolver are used in preference
 // to the 'real' ones. It does nothing when it is called for spy.so itself.
 int LinkInterceptorsCb(struct dl_phdr_info *info, size_t size, void *data) {
-  // dl_iterate_phdr has counter-intuitive success and failure, so I made these:
-  const int kPHDRSuccess = 0;
-  const int kPHDRFailure = 1;
+  const int kContinue = 0;
 
   if (info->dlpi_addr == 0 || info->dlpi_phdr == 0) {
     // For some unknown reason dl_iterate_phdr calls us with zeros, so
     // just ignore it and move on.
-    return kPHDRSuccess;
+    return kContinue;
   }
 
   if (data == NULL) {
     GAPID_FATAL("LinkInterceptorsCb not passed a symbol resolver");
-    return kPHDRFailure;
+    return kContinue;
   }
 
   const SymbolResolver& resolver = *static_cast<SymbolResolver*>(data);
@@ -516,45 +499,40 @@ int LinkInterceptorsCb(struct dl_phdr_info *info, size_t size, void *data) {
   // Identify the shared object we are looking at.
   Dl_info dl_info;
   if (!dladdr_check(info->dlpi_phdr, &dl_info)) {
-    return kPHDRFailure;
+    return kContinue;
   }
   const char* dlname = dl_info.dli_fname;
 
   // Identify the shared object which contains this code (i.e. the spy).
   Dl_info dl_self;
   if (!dladdr_check(&me, &dl_self)) {
-    return kPHDRFailure;
+    return kContinue;
   } else if (dl_info.dli_fbase == dl_self.dli_fbase) {
     // Don't insert interceptors into ourself, that would cause a loop.
-    return kPHDRSuccess;
+    return kContinue;
   }
 
-  if (elfView.InitUnmapped(
-          info->dlpi_addr, info->dlpi_phdr, info->dlpi_phnum, &error) &&
-      // The load_bias must match the load address, because of a bug in the NDK
-      // version of the crazy linker. The only case it is not likely to match
-      // is when the ELF library was embedded in a zipfile. Ironically that
-      // support was written by me (anton@).
-      elfView.load_bias() == info->dlpi_addr &&
-      elfReloc.Init(elfView, &error) &&
-      elfSymbols.Init(&elfView) &&
-      phdr_table_make_writable(
-          info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error) &&
-      elfReloc.ApplyInterceptorRelocations(
-          dlname, elfSymbols, resolver, elfView.load_bias()) &&
-      phdr_table_reset_load_prot(
-          info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error)) {
-    GAPID_DEBUG("%s: success for addr %p phdr %p bias=%x", dlname, info->dlpi_addr, info->dlpi_phdr, elfView.load_bias());
-
-    return kPHDRSuccess;
+  if (!elfView.InitUnmapped(info->dlpi_addr, info->dlpi_phdr, info->dlpi_phnum, &error)) {
+    GAPID_WARNING("%s: elfView.InitUnmapped failed", dlname);
+  } else if (elfView.load_bias() != info->dlpi_addr) {
+    // The load_bias must match the load address, because of a bug in the NDK
+    // version of the crazy linker. The only case it is not likely to match
+    // is when the ELF library was embedded in a zipfile. Ironically that
+    // support was written by me (anton@).
+    GAPID_WARNING("%s: load bias not dlpi_addr for addr %p phdr %p bias=%x: %s",
+        dlname, info->dlpi_addr, info->dlpi_phdr, elfView.load_bias(), dlname);
+  } else if (!elfReloc.Init(elfView, &error)) {
+    GAPID_WARNING("%s: elfReloc.Init failed: %s", dlname, error.c_str());
+  } else if (!elfSymbols.Init(&elfView)) {
+    GAPID_WARNING("%s: elfSymbols.Init failed", dlname);
+  } else if (!phdr_table_make_writable(info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error)) {
+    GAPID_WARNING("%s: phdr_table_make_writable failed: %s", dlname, error.c_str());
+  } else if (!elfReloc.ApplyInterceptorRelocations(dlname, elfSymbols, resolver, elfView.load_bias())) {
+    GAPID_WARNING("%s: elfReloc.ApplyInterceptorRelocations failed", dlname);
+  } else if (!phdr_table_reset_load_prot(info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error)) {
+    GAPID_WARNING("%s: phdr_table_reset_load_prot failed: %s", dlname, error.c_str());
   }
-
-  if (elfView.load_bias() != info->dlpi_addr) {
-    GAPID_WARNING("%s: load bias not dlpi_addr for addr %p phdr %p bias=%x: %s", dlname, info->dlpi_addr, info->dlpi_phdr, elfView.load_bias(), dlname);
-  }
-
-  GAPID_WARNING("%s: failure for addr %p phdr %p: %s", dlname, info->dlpi_addr, info->dlpi_phdr, error.c_str());
-  return kPHDRFailure;
+  return kContinue;
 }
 
 void LinkInterceptors() {
