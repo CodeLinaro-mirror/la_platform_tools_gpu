@@ -300,8 +300,7 @@ func resolveThumbnail(v interface{}, p *path.Thumbnail, d database.Database, l l
 	}
 
 	if _, ok := img.Format.(image.Resizer); !ok {
-		// Image format does not support resizing - just return what we have.
-		return img, nil
+		return nil, fmt.Errorf("Image format %v does not support resizing", img.Format)
 	}
 
 	// Image format supports resizing. See if the image should be.
