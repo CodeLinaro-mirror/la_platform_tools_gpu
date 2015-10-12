@@ -93,6 +93,10 @@ cmd void contextInfo(u32     constant_count,
   // Initialize state which depends on constants,
   // but do not overwrite any existing state.
 
+  if !(as!VertexArrayId(0) in ctx.Instances.VertexArrays) {
+    ctx.Instances.VertexArrays[0] = NewVertexArray(ctx)
+  }
+
   for i in (0 .. ctx.Constants.MaxVertexAttribs) {
     if !(i in ctx.VertexAttributes) {
       v := make!Vec4f(1)

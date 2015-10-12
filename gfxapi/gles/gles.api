@@ -627,8 +627,6 @@ macro ref!Context CreateContext() {
   ctx.PixelStorage[GL_PACK_ALIGNMENT] = 4
   ctx.PixelStorage[GL_UNPACK_ALIGNMENT] = 4
 
-  ctx.Instances.VertexArrays[0] = NewVertexArray(ctx)
-
   // NB: Postpone initialization of things that depend on constants
   //     until contextInfo because we do not know the constants yet.
 
