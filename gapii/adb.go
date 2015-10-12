@@ -23,7 +23,11 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-const preloadPath = "/data/gapii.so"
+// The installation file name of the GAPII library on the Android device.
+const SoInstallName = "libgapii.so"
+
+// The installation path of the GAPII library on the Android device.
+const SoInstallPath = "/data/local/tmp/" + SoInstallName
 
 var abiToSo = map[string]string{
 	"armeabi":     "android-arm",
@@ -89,15 +93,15 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, debug bool) error {
 		log.Errorf(l, "Failed finding gapii: %s", err)
 		return err
 	}
-	log.Infof(l, "Pushing %s to %s", gapiiPath, preloadPath)
-	err = d.Push(gapiiPath, preloadPath)
+	log.Infof(l, "Pushing %s to %s", gapiiPath, SoInstallPath)
+	err = d.Push(gapiiPath, SoInstallPath)
 	if err != nil {
-		log.Errorf(l, "Failed pushing %s to %s: %s", gapiiPath, preloadPath, err)
+		log.Errorf(l, "Failed pushing %s to %s: %s", gapiiPath, SoInstallPath, err)
 		return err
 	}
 
 	log.Infof(l, "Setting LD_PRELOAD on %s", p.Name)
-	err = p.SetWrapProperties("LD_PRELOAD=" + preloadPath)
+	err = p.SetWrapProperties("LD_PRELOAD=" + SoInstallPath)
 	if err != nil {
 		log.Errorf(l, "Failed setting LD_PRELOAD: %s", err)
 		return err

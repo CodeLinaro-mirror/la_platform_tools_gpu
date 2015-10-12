@@ -20,6 +20,7 @@ import (
 
 	"os"
 
+	"android.googlesource.com/platform/tools/gpu/gapii"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/maker/config"
@@ -403,6 +404,11 @@ func Graph() {
 				Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
 				IncludeSearchPaths: build.FileSet{app_glue.Join()},
 				AdditionalSources:  build.FileSet{app_glue.Join("android_native_app_glue.c")},
+			},
+			Gapii: cpp.Config{
+				Defines: map[string]string{
+					"GAPII_SO_NAME": `"` + gapii.SoInstallName + `"`,
+				},
 			},
 			Spy: cpp.Config{
 				Libraries:          build.FileSet{"log", "z", "m", "dl"},
