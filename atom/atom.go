@@ -24,6 +24,7 @@ package atom
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -61,5 +62,12 @@ const NoID = ID(1<<63 - 1) // use max int64 for the benefit of java
 
 // AtomCast is automatically called by the generated decoders.
 func AtomCast(obj binary.Object) Atom {
+	if o, found := obj.(*schema.Object); found {
+		a, err := Wrap(o)
+		if err != nil {
+			panic(err)
+		}
+		return a
+	}
 	return obj.(Atom)
 }

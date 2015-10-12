@@ -23,6 +23,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -155,7 +156,8 @@ func ReadCapture(name string, in io.Reader, l log.Logger) (*atom.List, error) {
 		return list, fmt.Errorf("Invalid capture tag '%s'", tag)
 	}
 	for {
-		if obj := d.Variant(); d.Error() != nil {
+		obj := d.Variant()
+		if d.Error() != nil {
 			if d.Error() != io.EOF {
 				log.Warningf(l, "Decode of capture errored after decoding %d atoms: %v", len(list.Atoms), d.Error())
 				if len(list.Atoms) > 0 {
@@ -164,12 +166,18 @@ func ReadCapture(name string, in io.Reader, l log.Logger) (*atom.List, error) {
 				}
 			}
 			break
-		} else {
-			atom, ok := obj.(atom.Atom)
-			if !ok {
-				return list, fmt.Errorf("Expected atom, got '%T' after decoding %d atoms", obj, len(list.Atoms))
+		}
+		switch obj := obj.(type) {
+		case atom.Atom:
+			list.Atoms = append(list.Atoms, obj)
+		case *schema.Object:
+			a, err := atom.Wrap(obj)
+			if err != nil {
+				return list, err
 			}
-			list.Atoms = append(list.Atoms, atom)
+			list.Atoms = append(list.Atoms, a)
+		default:
+			return list, fmt.Errorf("Expected atom, got '%T' after decoding %d atoms", obj, len(list.Atoms))
 		}
 	}
 	return list, nil

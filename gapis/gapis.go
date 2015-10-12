@@ -19,7 +19,6 @@ package gapis
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -55,13 +54,7 @@ func Connect(address, data string, logger log.Logger) (service.Service, schema.M
 
 	namespace := registry.NewNamespace()
 	for _, entity := range message.Entities {
-		class := (*schema.ObjectClass)(entity)
-		// Find the atom metadata, if present
-		if meta := atom.FindMetadata(entity); meta != nil {
-			namespace.Add(newAtomClass(class, meta))
-		} else {
-			namespace.Add(class)
-		}
+		namespace.Add((*schema.ObjectClass)(entity))
 	}
 
 	// Replace the current client with the schema aggregated namespace.

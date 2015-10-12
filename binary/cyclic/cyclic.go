@@ -37,11 +37,12 @@ func Encoder(writer binary.Writer) binary.Encoder {
 // Decoder creates a binary.Decoder that reads from the provided binary.Reader.
 func Decoder(reader binary.Reader) *decoder {
 	return &decoder{
-		Reader:    reader,
-		Namespace: registry.Global,
-		entities:  map[uint32]*binary.Entity{0: nil},
-		objects:   map[uint32]binary.Object{0: nil},
-		substack:  substack{},
+		Reader:       reader,
+		Namespace:    registry.Global,
+		AllowDynamic: true,
+		entities:     map[uint32]*binary.Entity{0: nil},
+		objects:      map[uint32]binary.Object{0: nil},
+		substack:     substack{},
 	}
 }
 

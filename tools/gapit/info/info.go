@@ -21,7 +21,6 @@ import (
 	"os"
 
 	"android.googlesource.com/platform/tools/gpu/gapii"
-	_ "android.googlesource.com/platform/tools/gpu/gfxapi/all"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )
