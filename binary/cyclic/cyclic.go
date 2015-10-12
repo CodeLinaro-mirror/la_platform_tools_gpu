@@ -55,11 +55,12 @@ type encoder struct {
 
 type decoder struct {
 	binary.Reader
-	Namespace *registry.Namespace
-	entities  map[uint32]*binary.Entity
-	objects   map[uint32]binary.Object
-	substack  substack
-	control   Control
+	Namespace    *registry.Namespace
+	AllowDynamic bool
+	entities     map[uint32]*binary.Entity
+	objects      map[uint32]binary.Object
+	substack     substack
+	control      Control
 }
 
 // writeSid write out the stream id and whether the data follows
@@ -133,20 +134,19 @@ func (d *decoder) Value(obj binary.Object) {
 
 func (d *decoder) doStruct(t binary.Type, obj binary.Object) {
 	l := len(d.substack.stack)
-	ent := d.substack.pushExpectStruct(t)
-	if ent == nil {
+	entity := d.substack.pushExpectStruct(t)
+	if entity == nil {
 		d.SetError(
 			fmt.Errorf("Struct() decoder expected %T got %s", obj, t))
 	} else {
-		sign := ent.Signature()
-		if u := d.Namespace.LookupUpgrader(sign); u == nil {
-			d.SetError(fmt.Errorf("Unknown type %v sign %v", t, sign))
+		if u := d.Lookup(entity); u == nil {
+			d.SetError(fmt.Errorf("Unknown type %v signature %q", t, entity.Signature()))
 		} else {
 			u.DecodeTo(d, obj)
 			if l != len(d.substack.stack) {
 				d.SetError(fmt.Errorf(
 					"Decoding type %q altered the substack. Subtypes: %v. Before %d now %d",
-					sign, t.Subspace(), l, len(d.substack.stack)))
+					entity.Signature(), t.Subspace(), l, len(d.substack.stack)))
 			}
 		}
 	}
@@ -219,7 +219,11 @@ func (d *decoder) Object() binary.Object {
 }
 
 func (d *decoder) Lookup(entity *binary.Entity) binary.UpgradeDecoder {
-	return d.Namespace.LookupUpgrader(entity.Signature())
+	u := d.Namespace.LookupUpgrader(entity.Signature())
+	if u == nil && d.AllowDynamic {
+		u = (*schema.ObjectClass)(entity)
+	}
+	return u
 }
 
 func (d *decoder) Count() uint32 {
