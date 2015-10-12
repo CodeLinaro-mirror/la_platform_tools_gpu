@@ -7,15 +7,15 @@ set -ex
 PROGDIR=`dirname $0`
 PROGDIR=`cd $PROGDIR && pwd`
 
-# Use osx-x64 instead of darwin-x64 for Mac.
+# Use osx-X86_64 instead of darwin-x64 for Mac.
 # TODO: Switch the build to use darwin-x64 to be consistent with
 # other Android repositories.
-HOST_OS=$(uname | tr A-Z a-z | sed -e "s/darwin/osx/g")"-x64"
+HOST_OS=$(uname | tr A-Z a-z | sed -e "s/darwin/osx/g")"-X86_64"
 
 source $PROGDIR/setup_env_common.txt
 source $PROGDIR/setup_toolchain_$HOST_OS.txt
 
-if [[ $HOST_OS == "linux-x64" ]]; then
+if [[ $HOST_OS == "linux-X86_64" ]]; then
   crosscompile_windows=1
 else
   crosscompile_windows=0
@@ -80,11 +80,13 @@ export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_TEST_FLAGS="-v -x"
 
 go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
+strip $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis
 
 # Kill any existing replay daemon before running tests.
 killall gapir || true
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 --disable=code cc
+strip $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapir
 
 # Kill any existing replay daemon before running tests.
 killall gapir || true
@@ -105,17 +107,18 @@ killall gapir || true
 
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -targetos=windows --disable=code cc:gapir
+  strip $GPU_BUILD_ROOT/bin/windows-X86_64/$BUILD_FLAVOR/gapis.exe
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
-  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-x64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/gapis
+  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-X86_64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC -s" $GPU_RELATIVE_SOURCE_PATH/server/gapis
 fi
 
 # Create zip files for the build artifacts.
 if [[ -n "$DIST_DIR" ]]; then
   mkdir -p $DIST_DIR
   cd $GPU_BUILD_ROOT
-  for TARGET_OS in linux-x64 windows-x64 osx-x64; do
-      if [[ $TARGET_OS == $HOST_OS || ( $HOST_OS == linux-x64 && $TARGET_OS == windows-x64 && $crosscompile_windows == 1 ) ]]; then
-          if [[ $TARGET_OS == windows-x64 ]]; then
+  for TARGET_OS in linux-X86_64 windows-X86_64 osx-X86_64; do
+      if [[ $TARGET_OS == $HOST_OS || ( $HOST_OS == linux-X86_64 && $TARGET_OS == windows-X86_64 && $crosscompile_windows == 1 ) ]]; then
+          if [[ $TARGET_OS == windows-X86_64 ]]; then
             EXE_EXTENSION=".exe"
           else
             EXE_EXTENSION=""
