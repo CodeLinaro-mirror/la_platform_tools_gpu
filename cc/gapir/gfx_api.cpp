@@ -9273,28 +9273,6 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     }
 }
 
-bool callGlFramebufferTexture2DOES(Stack* stack, bool pushReturn) {
-    int32_t level = stack->pop<int32_t>();
-    uint32_t texture = stack->pop<uint32_t>();
-    GLenum texture_target = stack->pop<GLenum>();
-    GLenum framebuffer_attachment = stack->pop<GLenum>();
-    GLenum framebuffer_target = stack->pop<GLenum>();
-    if (stack->isValid()) {
-        GAPID_INFO("glFramebufferTexture2DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ")",
-                   framebuffer_target, framebuffer_attachment, texture_target, texture, level);
-        if (glFramebufferTexture2DOES != nullptr) {
-            glFramebufferTexture2DOES(framebuffer_target, framebuffer_attachment, texture_target,
-                                      texture, level);
-        } else {
-            GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture2DOES");
-        }
-        return true;
-    } else {
-        GAPID_WARNING("Error during calling function glFramebufferTexture2DOES");
-        return false;
-    }
-}
-
 bool callGlDisable(Stack* stack, bool pushReturn) {
     GLenum capability = stack->pop<GLenum>();
     if (stack->isValid()) {
@@ -14732,6 +14710,3249 @@ bool callGlGetQueryObjectui64v(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlAlphaFunc(Stack* stack, bool pushReturn) {
+    float ref = stack->pop<float>();
+    GLenum func = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glAlphaFunc(%u, %f)", func, ref);
+        if (glAlphaFunc != nullptr) {
+            glAlphaFunc(func, ref);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glAlphaFunc");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glAlphaFunc");
+        return false;
+    }
+}
+
+bool callGlAlphaFuncx(Stack* stack, bool pushReturn) {
+    int32_t ref = stack->pop<int32_t>();
+    GLenum func = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glAlphaFuncx(%u, %" PRId32 ")", func, ref);
+        if (glAlphaFuncx != nullptr) {
+            glAlphaFuncx(func, ref);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glAlphaFuncx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glAlphaFuncx");
+        return false;
+    }
+}
+
+bool callGlAlphaFuncxOES(Stack* stack, bool pushReturn) {
+    int32_t ref = stack->pop<int32_t>();
+    GLenum func = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glAlphaFuncxOES(%u, %" PRId32 ")", func, ref);
+        if (glAlphaFuncxOES != nullptr) {
+            glAlphaFuncxOES(func, ref);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glAlphaFuncxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glAlphaFuncxOES");
+        return false;
+    }
+}
+
+bool callGlBindFramebufferOES(Stack* stack, bool pushReturn) {
+    uint32_t framebuffer = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindFramebufferOES(%u, %" PRIu32 ")", target, framebuffer);
+        if (glBindFramebufferOES != nullptr) {
+            glBindFramebufferOES(target, framebuffer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBindFramebufferOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindFramebufferOES");
+        return false;
+    }
+}
+
+bool callGlBindRenderbufferOES(Stack* stack, bool pushReturn) {
+    uint32_t renderbuffer = stack->pop<uint32_t>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBindRenderbufferOES(%u, %" PRIu32 ")", target, renderbuffer);
+        if (glBindRenderbufferOES != nullptr) {
+            glBindRenderbufferOES(target, renderbuffer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBindRenderbufferOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBindRenderbufferOES");
+        return false;
+    }
+}
+
+bool callGlBlendEquationOES(Stack* stack, bool pushReturn) {
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendEquationOES(%u)", mode);
+        if (glBlendEquationOES != nullptr) {
+            glBlendEquationOES(mode);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquationOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendEquationOES");
+        return false;
+    }
+}
+
+bool callGlBlendEquationSeparateOES(Stack* stack, bool pushReturn) {
+    GLenum modeAlpha = stack->pop<GLenum>();
+    GLenum modeRGB = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendEquationSeparateOES(%u, %u)", modeRGB, modeAlpha);
+        if (glBlendEquationSeparateOES != nullptr) {
+            glBlendEquationSeparateOES(modeRGB, modeAlpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparateOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendEquationSeparateOES");
+        return false;
+    }
+}
+
+bool callGlBlendFuncSeparateOES(Stack* stack, bool pushReturn) {
+    GLenum dstAlpha = stack->pop<GLenum>();
+    GLenum srcAlpha = stack->pop<GLenum>();
+    GLenum dstRGB = stack->pop<GLenum>();
+    GLenum srcRGB = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glBlendFuncSeparateOES(%u, %u, %u, %u)", srcRGB, dstRGB, srcAlpha, dstAlpha);
+        if (glBlendFuncSeparateOES != nullptr) {
+            glBlendFuncSeparateOES(srcRGB, dstRGB, srcAlpha, dstAlpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparateOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glBlendFuncSeparateOES");
+        return false;
+    }
+}
+
+bool callGlCheckFramebufferStatusOES(Stack* stack, bool pushReturn) {
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glCheckFramebufferStatusOES(%u)", target);
+        if (glCheckFramebufferStatusOES != nullptr) {
+            GLenum return_value = glCheckFramebufferStatusOES(target);
+            GAPID_INFO("Returned: %u", return_value);
+            if (pushReturn) {
+                stack->push<GLenum>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glCheckFramebufferStatusOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glCheckFramebufferStatusOES");
+        return false;
+    }
+}
+
+bool callGlClearColorx(Stack* stack, bool pushReturn) {
+    int32_t alpha = stack->pop<int32_t>();
+    int32_t blue = stack->pop<int32_t>();
+    int32_t green = stack->pop<int32_t>();
+    int32_t red = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClearColorx(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", red, green,
+                   blue, alpha);
+        if (glClearColorx != nullptr) {
+            glClearColorx(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClearColorx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClearColorx");
+        return false;
+    }
+}
+
+bool callGlClearColorxOES(Stack* stack, bool pushReturn) {
+    int32_t alpha = stack->pop<int32_t>();
+    int32_t blue = stack->pop<int32_t>();
+    int32_t green = stack->pop<int32_t>();
+    int32_t red = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClearColorxOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", red,
+                   green, blue, alpha);
+        if (glClearColorxOES != nullptr) {
+            glClearColorxOES(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClearColorxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClearColorxOES");
+        return false;
+    }
+}
+
+bool callGlClearDepthfOES(Stack* stack, bool pushReturn) {
+    float depth = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClearDepthfOES(%f)", depth);
+        if (glClearDepthfOES != nullptr) {
+            glClearDepthfOES(depth);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClearDepthfOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClearDepthfOES");
+        return false;
+    }
+}
+
+bool callGlClearDepthx(Stack* stack, bool pushReturn) {
+    int32_t depth = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClearDepthx(%" PRId32 ")", depth);
+        if (glClearDepthx != nullptr) {
+            glClearDepthx(depth);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClearDepthx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClearDepthx");
+        return false;
+    }
+}
+
+bool callGlClearDepthxOES(Stack* stack, bool pushReturn) {
+    int32_t depth = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClearDepthxOES(%" PRId32 ")", depth);
+        if (glClearDepthxOES != nullptr) {
+            glClearDepthxOES(depth);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClearDepthxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClearDepthxOES");
+        return false;
+    }
+}
+
+bool callGlClientActiveTexture(Stack* stack, bool pushReturn) {
+    GLenum texture = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClientActiveTexture(%u)", texture);
+        if (glClientActiveTexture != nullptr) {
+            glClientActiveTexture(texture);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClientActiveTexture");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClientActiveTexture");
+        return false;
+    }
+}
+
+bool callGlClipPlanef(Stack* stack, bool pushReturn) {
+    float* eqn = stack->pop<float*>();
+    GLenum p = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanef(%u, %p)", p, eqn);
+        if (glClipPlanef != nullptr) {
+            glClipPlanef(p, eqn);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanef");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanef");
+        return false;
+    }
+}
+
+bool callGlClipPlanefIMG(Stack* stack, bool pushReturn) {
+    float* eqn = stack->pop<float*>();
+    GLenum p = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanefIMG(%u, %p)", p, eqn);
+        if (glClipPlanefIMG != nullptr) {
+            glClipPlanefIMG(p, eqn);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanefIMG");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanefIMG");
+        return false;
+    }
+}
+
+bool callGlClipPlanefOES(Stack* stack, bool pushReturn) {
+    float* equation = stack->pop<float*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanefOES(%u, %p)", plane, equation);
+        if (glClipPlanefOES != nullptr) {
+            glClipPlanefOES(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanefOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanefOES");
+        return false;
+    }
+}
+
+bool callGlClipPlanex(Stack* stack, bool pushReturn) {
+    int32_t* equation = stack->pop<int32_t*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanex(%u, %p)", plane, equation);
+        if (glClipPlanex != nullptr) {
+            glClipPlanex(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanex");
+        return false;
+    }
+}
+
+bool callGlClipPlanexIMG(Stack* stack, bool pushReturn) {
+    int32_t* eqn = stack->pop<int32_t*>();
+    GLenum p = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanexIMG(%u, %p)", p, eqn);
+        if (glClipPlanexIMG != nullptr) {
+            glClipPlanexIMG(p, eqn);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanexIMG");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanexIMG");
+        return false;
+    }
+}
+
+bool callGlClipPlanexOES(Stack* stack, bool pushReturn) {
+    int32_t* equation = stack->pop<int32_t*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glClipPlanexOES(%u, %p)", plane, equation);
+        if (glClipPlanexOES != nullptr) {
+            glClipPlanexOES(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glClipPlanexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glClipPlanexOES");
+        return false;
+    }
+}
+
+bool callGlColor4f(Stack* stack, bool pushReturn) {
+    float alpha = stack->pop<float>();
+    float blue = stack->pop<float>();
+    float green = stack->pop<float>();
+    float red = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColor4f(%f, %f, %f, %f)", red, green, blue, alpha);
+        if (glColor4f != nullptr) {
+            glColor4f(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColor4f");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColor4f");
+        return false;
+    }
+}
+
+bool callGlColor4ub(Stack* stack, bool pushReturn) {
+    uint8_t alpha = stack->pop<uint8_t>();
+    uint8_t blue = stack->pop<uint8_t>();
+    uint8_t green = stack->pop<uint8_t>();
+    uint8_t red = stack->pop<uint8_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColor4ub(%" PRIu8 ", %" PRIu8 ", %" PRIu8 ", %" PRIu8 ")", red, green, blue,
+                   alpha);
+        if (glColor4ub != nullptr) {
+            glColor4ub(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColor4ub");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColor4ub");
+        return false;
+    }
+}
+
+bool callGlColor4x(Stack* stack, bool pushReturn) {
+    int32_t alpha = stack->pop<int32_t>();
+    int32_t blue = stack->pop<int32_t>();
+    int32_t green = stack->pop<int32_t>();
+    int32_t red = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColor4x(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", red, green,
+                   blue, alpha);
+        if (glColor4x != nullptr) {
+            glColor4x(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColor4x");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColor4x");
+        return false;
+    }
+}
+
+bool callGlColor4xOES(Stack* stack, bool pushReturn) {
+    int32_t alpha = stack->pop<int32_t>();
+    int32_t blue = stack->pop<int32_t>();
+    int32_t green = stack->pop<int32_t>();
+    int32_t red = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColor4xOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", red, green,
+                   blue, alpha);
+        if (glColor4xOES != nullptr) {
+            glColor4xOES(red, green, blue, alpha);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColor4xOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColor4xOES");
+        return false;
+    }
+}
+
+bool callGlColorPointer(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColorPointer(%" PRId32 ", %u, %" PRId32 ", %p)", size, type, stride, pointer);
+        if (glColorPointer != nullptr) {
+            glColorPointer(size, type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColorPointer");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColorPointer");
+        return false;
+    }
+}
+
+bool callGlCurrentPaletteMatrixOES(Stack* stack, bool pushReturn) {
+    uint32_t matrixpaletteindex = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glCurrentPaletteMatrixOES(%" PRIu32 ")", matrixpaletteindex);
+        if (glCurrentPaletteMatrixOES != nullptr) {
+            glCurrentPaletteMatrixOES(matrixpaletteindex);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glCurrentPaletteMatrixOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glCurrentPaletteMatrixOES");
+        return false;
+    }
+}
+
+bool callGlDeleteFramebuffersOES(Stack* stack, bool pushReturn) {
+    uint32_t* framebuffers = stack->pop<uint32_t*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDeleteFramebuffersOES(%" PRId32 ", %p)", n, framebuffers);
+        if (glDeleteFramebuffersOES != nullptr) {
+            glDeleteFramebuffersOES(n, framebuffers);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDeleteFramebuffersOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDeleteFramebuffersOES");
+        return false;
+    }
+}
+
+bool callGlDeleteRenderbuffersOES(Stack* stack, bool pushReturn) {
+    uint32_t* renderbuffers = stack->pop<uint32_t*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDeleteRenderbuffersOES(%" PRId32 ", %p)", n, renderbuffers);
+        if (glDeleteRenderbuffersOES != nullptr) {
+            glDeleteRenderbuffersOES(n, renderbuffers);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDeleteRenderbuffersOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDeleteRenderbuffersOES");
+        return false;
+    }
+}
+
+bool callGlDepthRangefOES(Stack* stack, bool pushReturn) {
+    float f = stack->pop<float>();
+    float n = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDepthRangefOES(%f, %f)", n, f);
+        if (glDepthRangefOES != nullptr) {
+            glDepthRangefOES(n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDepthRangefOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDepthRangefOES");
+        return false;
+    }
+}
+
+bool callGlDepthRangex(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDepthRangex(%" PRId32 ", %" PRId32 ")", n, f);
+        if (glDepthRangex != nullptr) {
+            glDepthRangex(n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDepthRangex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDepthRangex");
+        return false;
+    }
+}
+
+bool callGlDepthRangexOES(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDepthRangexOES(%" PRId32 ", %" PRId32 ")", n, f);
+        if (glDepthRangexOES != nullptr) {
+            glDepthRangexOES(n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDepthRangexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDepthRangexOES");
+        return false;
+    }
+}
+
+bool callGlDisableClientState(Stack* stack, bool pushReturn) {
+    GLenum array = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDisableClientState(%u)", array);
+        if (glDisableClientState != nullptr) {
+            glDisableClientState(array);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDisableClientState");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDisableClientState");
+        return false;
+    }
+}
+
+bool callGlDrawTexfOES(Stack* stack, bool pushReturn) {
+    float height = stack->pop<float>();
+    float width = stack->pop<float>();
+    float z = stack->pop<float>();
+    float y = stack->pop<float>();
+    float x = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexfOES(%f, %f, %f, %f, %f)", x, y, z, width, height);
+        if (glDrawTexfOES != nullptr) {
+            glDrawTexfOES(x, y, z, width, height);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexfOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexfOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexfvOES(Stack* stack, bool pushReturn) {
+    float* coords = stack->pop<float*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexfvOES(%p)", coords);
+        if (glDrawTexfvOES != nullptr) {
+            glDrawTexfvOES(coords);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexfvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexfvOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexiOES(Stack* stack, bool pushReturn) {
+    int32_t height = stack->pop<int32_t>();
+    int32_t width = stack->pop<int32_t>();
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexiOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
+                   x, y, z, width, height);
+        if (glDrawTexiOES != nullptr) {
+            glDrawTexiOES(x, y, z, width, height);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexiOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexiOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexivOES(Stack* stack, bool pushReturn) {
+    int32_t* coords = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexivOES(%p)", coords);
+        if (glDrawTexivOES != nullptr) {
+            glDrawTexivOES(coords);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexivOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexivOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexsOES(Stack* stack, bool pushReturn) {
+    int16_t height = stack->pop<int16_t>();
+    int16_t width = stack->pop<int16_t>();
+    int16_t z = stack->pop<int16_t>();
+    int16_t y = stack->pop<int16_t>();
+    int16_t x = stack->pop<int16_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexsOES(%" PRId16 ", %" PRId16 ", %" PRId16 ", %" PRId16 ", %" PRId16 ")",
+                   x, y, z, width, height);
+        if (glDrawTexsOES != nullptr) {
+            glDrawTexsOES(x, y, z, width, height);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexsOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexsOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexsvOES(Stack* stack, bool pushReturn) {
+    int16_t* coords = stack->pop<int16_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexsvOES(%p)", coords);
+        if (glDrawTexsvOES != nullptr) {
+            glDrawTexsvOES(coords);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexsvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexsvOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexxOES(Stack* stack, bool pushReturn) {
+    int32_t height = stack->pop<int32_t>();
+    int32_t width = stack->pop<int32_t>();
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexxOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
+                   x, y, z, width, height);
+        if (glDrawTexxOES != nullptr) {
+            glDrawTexxOES(x, y, z, width, height);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexxOES");
+        return false;
+    }
+}
+
+bool callGlDrawTexxvOES(Stack* stack, bool pushReturn) {
+    int32_t* coords = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glDrawTexxvOES(%p)", coords);
+        if (glDrawTexxvOES != nullptr) {
+            glDrawTexxvOES(coords);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glDrawTexxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glDrawTexxvOES");
+        return false;
+    }
+}
+
+bool callGlEnableClientState(Stack* stack, bool pushReturn) {
+    GLenum array = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glEnableClientState(%u)", array);
+        if (glEnableClientState != nullptr) {
+            glEnableClientState(array);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glEnableClientState");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glEnableClientState");
+        return false;
+    }
+}
+
+bool callGlFogf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogf(%u, %f)", pname, param);
+        if (glFogf != nullptr) {
+            glFogf(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogf");
+        return false;
+    }
+}
+
+bool callGlFogfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogfv(%u, %p)", pname, params);
+        if (glFogfv != nullptr) {
+            glFogfv(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogfv");
+        return false;
+    }
+}
+
+bool callGlFogx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogx(%u, %" PRId32 ")", pname, param);
+        if (glFogx != nullptr) {
+            glFogx(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogx");
+        return false;
+    }
+}
+
+bool callGlFogxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogxOES(%u, %" PRId32 ")", pname, param);
+        if (glFogxOES != nullptr) {
+            glFogxOES(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogxOES");
+        return false;
+    }
+}
+
+bool callGlFogxv(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogxv(%u, %p)", pname, param);
+        if (glFogxv != nullptr) {
+            glFogxv(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogxv");
+        return false;
+    }
+}
+
+bool callGlFogxvOES(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFogxvOES(%u, %p)", pname, param);
+        if (glFogxvOES != nullptr) {
+            glFogxvOES(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFogxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFogxvOES");
+        return false;
+    }
+}
+
+bool callGlFramebufferRenderbufferOES(Stack* stack, bool pushReturn) {
+    uint32_t renderbuffer = stack->pop<uint32_t>();
+    GLenum renderbuffertarget = stack->pop<GLenum>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferRenderbufferOES(%u, %u, %u, %" PRIu32 ")", target, attachment,
+                   renderbuffertarget, renderbuffer);
+        if (glFramebufferRenderbufferOES != nullptr) {
+            glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferRenderbufferOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferRenderbufferOES");
+        return false;
+    }
+}
+
+bool callGlFramebufferTexture2DOES(Stack* stack, bool pushReturn) {
+    int32_t level = stack->pop<int32_t>();
+    uint32_t texture = stack->pop<uint32_t>();
+    GLenum textarget = stack->pop<GLenum>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFramebufferTexture2DOES(%u, %u, %u, %" PRIu32 ", %" PRId32 ")", target,
+                   attachment, textarget, texture, level);
+        if (glFramebufferTexture2DOES != nullptr) {
+            glFramebufferTexture2DOES(target, attachment, textarget, texture, level);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture2DOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFramebufferTexture2DOES");
+        return false;
+    }
+}
+
+bool callGlFrustumf(Stack* stack, bool pushReturn) {
+    float f = stack->pop<float>();
+    float n = stack->pop<float>();
+    float t = stack->pop<float>();
+    float b = stack->pop<float>();
+    float r = stack->pop<float>();
+    float l = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFrustumf(%f, %f, %f, %f, %f, %f)", l, r, b, t, n, f);
+        if (glFrustumf != nullptr) {
+            glFrustumf(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFrustumf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFrustumf");
+        return false;
+    }
+}
+
+bool callGlFrustumfOES(Stack* stack, bool pushReturn) {
+    float f = stack->pop<float>();
+    float n = stack->pop<float>();
+    float t = stack->pop<float>();
+    float b = stack->pop<float>();
+    float r = stack->pop<float>();
+    float l = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFrustumfOES(%f, %f, %f, %f, %f, %f)", l, r, b, t, n, f);
+        if (glFrustumfOES != nullptr) {
+            glFrustumfOES(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFrustumfOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFrustumfOES");
+        return false;
+    }
+}
+
+bool callGlFrustumx(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    int32_t t = stack->pop<int32_t>();
+    int32_t b = stack->pop<int32_t>();
+    int32_t r = stack->pop<int32_t>();
+    int32_t l = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFrustumx(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ")",
+                   l, r, b, t, n, f);
+        if (glFrustumx != nullptr) {
+            glFrustumx(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFrustumx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFrustumx");
+        return false;
+    }
+}
+
+bool callGlFrustumxOES(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    int32_t t = stack->pop<int32_t>();
+    int32_t b = stack->pop<int32_t>();
+    int32_t r = stack->pop<int32_t>();
+    int32_t l = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glFrustumxOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ")",
+                   l, r, b, t, n, f);
+        if (glFrustumxOES != nullptr) {
+            glFrustumxOES(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glFrustumxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glFrustumxOES");
+        return false;
+    }
+}
+
+bool callGlGenFramebuffersOES(Stack* stack, bool pushReturn) {
+    uint32_t* framebuffers = stack->pop<uint32_t*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGenFramebuffersOES(%" PRId32 ", %p)", n, framebuffers);
+        if (glGenFramebuffersOES != nullptr) {
+            glGenFramebuffersOES(n, framebuffers);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGenFramebuffersOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGenFramebuffersOES");
+        return false;
+    }
+}
+
+bool callGlGenRenderbuffersOES(Stack* stack, bool pushReturn) {
+    uint32_t* renderbuffers = stack->pop<uint32_t*>();
+    int32_t n = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGenRenderbuffersOES(%" PRId32 ", %p)", n, renderbuffers);
+        if (glGenRenderbuffersOES != nullptr) {
+            glGenRenderbuffersOES(n, renderbuffers);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGenRenderbuffersOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGenRenderbuffersOES");
+        return false;
+    }
+}
+
+bool callGlGenerateMipmapOES(Stack* stack, bool pushReturn) {
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGenerateMipmapOES(%u)", target);
+        if (glGenerateMipmapOES != nullptr) {
+            glGenerateMipmapOES(target);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGenerateMipmapOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGenerateMipmapOES");
+        return false;
+    }
+}
+
+bool callGlGetClipPlanef(Stack* stack, bool pushReturn) {
+    float* equation = stack->pop<float*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetClipPlanef(%u, %p)", plane, equation);
+        if (glGetClipPlanef != nullptr) {
+            glGetClipPlanef(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetClipPlanef");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetClipPlanef");
+        return false;
+    }
+}
+
+bool callGlGetClipPlanefOES(Stack* stack, bool pushReturn) {
+    float* equation = stack->pop<float*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetClipPlanefOES(%u, %p)", plane, equation);
+        if (glGetClipPlanefOES != nullptr) {
+            glGetClipPlanefOES(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetClipPlanefOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetClipPlanefOES");
+        return false;
+    }
+}
+
+bool callGlGetClipPlanex(Stack* stack, bool pushReturn) {
+    int32_t* equation = stack->pop<int32_t*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetClipPlanex(%u, %p)", plane, equation);
+        if (glGetClipPlanex != nullptr) {
+            glGetClipPlanex(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetClipPlanex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetClipPlanex");
+        return false;
+    }
+}
+
+bool callGlGetClipPlanexOES(Stack* stack, bool pushReturn) {
+    int32_t* equation = stack->pop<int32_t*>();
+    GLenum plane = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetClipPlanexOES(%u, %p)", plane, equation);
+        if (glGetClipPlanexOES != nullptr) {
+            glGetClipPlanexOES(plane, equation);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetClipPlanexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetClipPlanexOES");
+        return false;
+    }
+}
+
+bool callGlGetFixedv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetFixedv(%u, %p)", pname, params);
+        if (glGetFixedv != nullptr) {
+            glGetFixedv(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetFixedv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetFixedv");
+        return false;
+    }
+}
+
+bool callGlGetFixedvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetFixedvOES(%u, %p)", pname, params);
+        if (glGetFixedvOES != nullptr) {
+            glGetFixedvOES(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetFixedvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetFixedvOES");
+        return false;
+    }
+}
+
+bool callGlGetFramebufferAttachmentParameterivOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum attachment = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetFramebufferAttachmentParameterivOES(%u, %u, %u, %p)", target, attachment,
+                   pname, params);
+        if (glGetFramebufferAttachmentParameterivOES != nullptr) {
+            glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params);
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function "
+                    "glGetFramebufferAttachmentParameterivOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetFramebufferAttachmentParameterivOES");
+        return false;
+    }
+}
+
+bool callGlGetLightfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetLightfv(%u, %u, %p)", light, pname, params);
+        if (glGetLightfv != nullptr) {
+            glGetLightfv(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetLightfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetLightfv");
+        return false;
+    }
+}
+
+bool callGlGetLightxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetLightxv(%u, %u, %p)", light, pname, params);
+        if (glGetLightxv != nullptr) {
+            glGetLightxv(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetLightxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetLightxv");
+        return false;
+    }
+}
+
+bool callGlGetLightxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetLightxvOES(%u, %u, %p)", light, pname, params);
+        if (glGetLightxvOES != nullptr) {
+            glGetLightxvOES(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetLightxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetLightxvOES");
+        return false;
+    }
+}
+
+bool callGlGetMaterialfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetMaterialfv(%u, %u, %p)", face, pname, params);
+        if (glGetMaterialfv != nullptr) {
+            glGetMaterialfv(face, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetMaterialfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetMaterialfv");
+        return false;
+    }
+}
+
+bool callGlGetMaterialxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetMaterialxv(%u, %u, %p)", face, pname, params);
+        if (glGetMaterialxv != nullptr) {
+            glGetMaterialxv(face, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetMaterialxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetMaterialxv");
+        return false;
+    }
+}
+
+bool callGlGetMaterialxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetMaterialxvOES(%u, %u, %p)", face, pname, params);
+        if (glGetMaterialxvOES != nullptr) {
+            glGetMaterialxvOES(face, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetMaterialxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetMaterialxvOES");
+        return false;
+    }
+}
+
+bool callGlGetRenderbufferParameterivOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetRenderbufferParameterivOES(%u, %u, %p)", target, pname, params);
+        if (glGetRenderbufferParameterivOES != nullptr) {
+            glGetRenderbufferParameterivOES(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetRenderbufferParameterivOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetRenderbufferParameterivOES");
+        return false;
+    }
+}
+
+bool callGlGetTexEnvfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexEnvfv(%u, %u, %p)", target, pname, params);
+        if (glGetTexEnvfv != nullptr) {
+            glGetTexEnvfv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexEnvfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexEnvfv");
+        return false;
+    }
+}
+
+bool callGlGetTexEnviv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexEnviv(%u, %u, %p)", target, pname, params);
+        if (glGetTexEnviv != nullptr) {
+            glGetTexEnviv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexEnviv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexEnviv");
+        return false;
+    }
+}
+
+bool callGlGetTexEnvxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexEnvxv(%u, %u, %p)", target, pname, params);
+        if (glGetTexEnvxv != nullptr) {
+            glGetTexEnvxv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexEnvxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexEnvxv");
+        return false;
+    }
+}
+
+bool callGlGetTexEnvxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexEnvxvOES(%u, %u, %p)", target, pname, params);
+        if (glGetTexEnvxvOES != nullptr) {
+            glGetTexEnvxvOES(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexEnvxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexEnvxvOES");
+        return false;
+    }
+}
+
+bool callGlGetTexGenfvOES(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexGenfvOES(%u, %u, %p)", coord, pname, params);
+        if (glGetTexGenfvOES != nullptr) {
+            glGetTexGenfvOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexGenfvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexGenfvOES");
+        return false;
+    }
+}
+
+bool callGlGetTexGenivOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexGenivOES(%u, %u, %p)", coord, pname, params);
+        if (glGetTexGenivOES != nullptr) {
+            glGetTexGenivOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexGenivOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexGenivOES");
+        return false;
+    }
+}
+
+bool callGlGetTexGenxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexGenxvOES(%u, %u, %p)", coord, pname, params);
+        if (glGetTexGenxvOES != nullptr) {
+            glGetTexGenxvOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexGenxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexGenxvOES");
+        return false;
+    }
+}
+
+bool callGlGetTexParameterxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexParameterxv(%u, %u, %p)", target, pname, params);
+        if (glGetTexParameterxv != nullptr) {
+            glGetTexParameterxv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameterxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexParameterxv");
+        return false;
+    }
+}
+
+bool callGlGetTexParameterxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glGetTexParameterxvOES(%u, %u, %p)", target, pname, params);
+        if (glGetTexParameterxvOES != nullptr) {
+            glGetTexParameterxvOES(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameterxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glGetTexParameterxvOES");
+        return false;
+    }
+}
+
+bool callGlIsFramebufferOES(Stack* stack, bool pushReturn) {
+    uint32_t framebuffer = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glIsFramebufferOES(%" PRIu32 ")", framebuffer);
+        if (glIsFramebufferOES != nullptr) {
+            uint8_t return_value = glIsFramebufferOES(framebuffer);
+            GAPID_INFO("Returned: %" PRIu8 "", return_value);
+            if (pushReturn) {
+                stack->push<uint8_t>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glIsFramebufferOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glIsFramebufferOES");
+        return false;
+    }
+}
+
+bool callGlIsRenderbufferOES(Stack* stack, bool pushReturn) {
+    uint32_t renderbuffer = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glIsRenderbufferOES(%" PRIu32 ")", renderbuffer);
+        if (glIsRenderbufferOES != nullptr) {
+            uint8_t return_value = glIsRenderbufferOES(renderbuffer);
+            GAPID_INFO("Returned: %" PRIu8 "", return_value);
+            if (pushReturn) {
+                stack->push<uint8_t>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glIsRenderbufferOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glIsRenderbufferOES");
+        return false;
+    }
+}
+
+bool callGlLightModelf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelf(%u, %f)", pname, param);
+        if (glLightModelf != nullptr) {
+            glLightModelf(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelf");
+        return false;
+    }
+}
+
+bool callGlLightModelfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelfv(%u, %p)", pname, params);
+        if (glLightModelfv != nullptr) {
+            glLightModelfv(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelfv");
+        return false;
+    }
+}
+
+bool callGlLightModelx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelx(%u, %" PRId32 ")", pname, param);
+        if (glLightModelx != nullptr) {
+            glLightModelx(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelx");
+        return false;
+    }
+}
+
+bool callGlLightModelxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelxOES(%u, %" PRId32 ")", pname, param);
+        if (glLightModelxOES != nullptr) {
+            glLightModelxOES(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelxOES");
+        return false;
+    }
+}
+
+bool callGlLightModelxv(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelxv(%u, %p)", pname, param);
+        if (glLightModelxv != nullptr) {
+            glLightModelxv(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelxv");
+        return false;
+    }
+}
+
+bool callGlLightModelxvOES(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightModelxvOES(%u, %p)", pname, param);
+        if (glLightModelxvOES != nullptr) {
+            glLightModelxvOES(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightModelxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightModelxvOES");
+        return false;
+    }
+}
+
+bool callGlLightf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightf(%u, %u, %f)", light, pname, param);
+        if (glLightf != nullptr) {
+            glLightf(light, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightf");
+        return false;
+    }
+}
+
+bool callGlLightfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightfv(%u, %u, %p)", light, pname, params);
+        if (glLightfv != nullptr) {
+            glLightfv(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightfv");
+        return false;
+    }
+}
+
+bool callGlLightx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightx(%u, %u, %" PRId32 ")", light, pname, param);
+        if (glLightx != nullptr) {
+            glLightx(light, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightx");
+        return false;
+    }
+}
+
+bool callGlLightxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightxOES(%u, %u, %" PRId32 ")", light, pname, param);
+        if (glLightxOES != nullptr) {
+            glLightxOES(light, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightxOES");
+        return false;
+    }
+}
+
+bool callGlLightxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightxv(%u, %u, %p)", light, pname, params);
+        if (glLightxv != nullptr) {
+            glLightxv(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightxv");
+        return false;
+    }
+}
+
+bool callGlLightxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum light = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLightxvOES(%u, %u, %p)", light, pname, params);
+        if (glLightxvOES != nullptr) {
+            glLightxvOES(light, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLightxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLightxvOES");
+        return false;
+    }
+}
+
+bool callGlLineWidthx(Stack* stack, bool pushReturn) {
+    int32_t width = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLineWidthx(%" PRId32 ")", width);
+        if (glLineWidthx != nullptr) {
+            glLineWidthx(width);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLineWidthx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLineWidthx");
+        return false;
+    }
+}
+
+bool callGlLineWidthxOES(Stack* stack, bool pushReturn) {
+    int32_t width = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLineWidthxOES(%" PRId32 ")", width);
+        if (glLineWidthxOES != nullptr) {
+            glLineWidthxOES(width);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLineWidthxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLineWidthxOES");
+        return false;
+    }
+}
+
+bool callGlLoadIdentity(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glLoadIdentity()");
+        if (glLoadIdentity != nullptr) {
+            glLoadIdentity();
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLoadIdentity");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLoadIdentity");
+        return false;
+    }
+}
+
+bool callGlLoadMatrixf(Stack* stack, bool pushReturn) {
+    float* m = stack->pop<float*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLoadMatrixf(%p)", m);
+        if (glLoadMatrixf != nullptr) {
+            glLoadMatrixf(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLoadMatrixf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLoadMatrixf");
+        return false;
+    }
+}
+
+bool callGlLoadMatrixx(Stack* stack, bool pushReturn) {
+    int32_t* m = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLoadMatrixx(%p)", m);
+        if (glLoadMatrixx != nullptr) {
+            glLoadMatrixx(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLoadMatrixx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLoadMatrixx");
+        return false;
+    }
+}
+
+bool callGlLoadMatrixxOES(Stack* stack, bool pushReturn) {
+    int32_t* m = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLoadMatrixxOES(%p)", m);
+        if (glLoadMatrixxOES != nullptr) {
+            glLoadMatrixxOES(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLoadMatrixxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLoadMatrixxOES");
+        return false;
+    }
+}
+
+bool callGlLoadPaletteFromModelViewMatrixOES(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glLoadPaletteFromModelViewMatrixOES()");
+        if (glLoadPaletteFromModelViewMatrixOES != nullptr) {
+            glLoadPaletteFromModelViewMatrixOES();
+        } else {
+            GAPID_WARNING(
+                    "Attempted to call unsupported function glLoadPaletteFromModelViewMatrixOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLoadPaletteFromModelViewMatrixOES");
+        return false;
+    }
+}
+
+bool callGlLogicOp(Stack* stack, bool pushReturn) {
+    GLenum opcode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glLogicOp(%u)", opcode);
+        if (glLogicOp != nullptr) {
+            glLogicOp(opcode);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glLogicOp");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glLogicOp");
+        return false;
+    }
+}
+
+bool callGlMaterialf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialf(%u, %u, %f)", face, pname, param);
+        if (glMaterialf != nullptr) {
+            glMaterialf(face, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialf");
+        return false;
+    }
+}
+
+bool callGlMaterialfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialfv(%u, %u, %p)", face, pname, params);
+        if (glMaterialfv != nullptr) {
+            glMaterialfv(face, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialfv");
+        return false;
+    }
+}
+
+bool callGlMaterialx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialx(%u, %u, %" PRId32 ")", face, pname, param);
+        if (glMaterialx != nullptr) {
+            glMaterialx(face, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialx");
+        return false;
+    }
+}
+
+bool callGlMaterialxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialxOES(%u, %u, %" PRId32 ")", face, pname, param);
+        if (glMaterialxOES != nullptr) {
+            glMaterialxOES(face, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialxOES");
+        return false;
+    }
+}
+
+bool callGlMaterialxv(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialxv(%u, %u, %p)", face, pname, param);
+        if (glMaterialxv != nullptr) {
+            glMaterialxv(face, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialxv");
+        return false;
+    }
+}
+
+bool callGlMaterialxvOES(Stack* stack, bool pushReturn) {
+    int32_t* param = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum face = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMaterialxvOES(%u, %u, %p)", face, pname, param);
+        if (glMaterialxvOES != nullptr) {
+            glMaterialxvOES(face, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMaterialxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMaterialxvOES");
+        return false;
+    }
+}
+
+bool callGlMatrixIndexPointerOES(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMatrixIndexPointerOES(%" PRId32 ", %u, %" PRId32 ", %p)", size, type, stride,
+                   pointer);
+        if (glMatrixIndexPointerOES != nullptr) {
+            glMatrixIndexPointerOES(size, type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMatrixIndexPointerOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMatrixIndexPointerOES");
+        return false;
+    }
+}
+
+bool callGlMatrixMode(Stack* stack, bool pushReturn) {
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMatrixMode(%u)", mode);
+        if (glMatrixMode != nullptr) {
+            glMatrixMode(mode);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMatrixMode");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMatrixMode");
+        return false;
+    }
+}
+
+bool callGlMultMatrixf(Stack* stack, bool pushReturn) {
+    float* m = stack->pop<float*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultMatrixf(%p)", m);
+        if (glMultMatrixf != nullptr) {
+            glMultMatrixf(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultMatrixf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultMatrixf");
+        return false;
+    }
+}
+
+bool callGlMultMatrixx(Stack* stack, bool pushReturn) {
+    int32_t* m = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultMatrixx(%p)", m);
+        if (glMultMatrixx != nullptr) {
+            glMultMatrixx(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultMatrixx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultMatrixx");
+        return false;
+    }
+}
+
+bool callGlMultMatrixxOES(Stack* stack, bool pushReturn) {
+    int32_t* m = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultMatrixxOES(%p)", m);
+        if (glMultMatrixxOES != nullptr) {
+            glMultMatrixxOES(m);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultMatrixxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultMatrixxOES");
+        return false;
+    }
+}
+
+bool callGlMultiTexCoord4f(Stack* stack, bool pushReturn) {
+    float v3 = stack->pop<float>();
+    float v2 = stack->pop<float>();
+    float v1 = stack->pop<float>();
+    float v0 = stack->pop<float>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultiTexCoord4f(%u, %f, %f, %f, %f)", target, v0, v1, v2, v3);
+        if (glMultiTexCoord4f != nullptr) {
+            glMultiTexCoord4f(target, v0, v1, v2, v3);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultiTexCoord4f");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultiTexCoord4f");
+        return false;
+    }
+}
+
+bool callGlMultiTexCoord4x(Stack* stack, bool pushReturn) {
+    int32_t v3 = stack->pop<int32_t>();
+    int32_t v2 = stack->pop<int32_t>();
+    int32_t v1 = stack->pop<int32_t>();
+    int32_t v0 = stack->pop<int32_t>();
+    GLenum texture = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultiTexCoord4x(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
+                   texture, v0, v1, v2, v3);
+        if (glMultiTexCoord4x != nullptr) {
+            glMultiTexCoord4x(texture, v0, v1, v2, v3);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultiTexCoord4x");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultiTexCoord4x");
+        return false;
+    }
+}
+
+bool callGlMultiTexCoord4xOES(Stack* stack, bool pushReturn) {
+    int32_t v3 = stack->pop<int32_t>();
+    int32_t v2 = stack->pop<int32_t>();
+    int32_t v1 = stack->pop<int32_t>();
+    int32_t v0 = stack->pop<int32_t>();
+    GLenum texture = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMultiTexCoord4xOES(%u, %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")",
+                   texture, v0, v1, v2, v3);
+        if (glMultiTexCoord4xOES != nullptr) {
+            glMultiTexCoord4xOES(texture, v0, v1, v2, v3);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMultiTexCoord4xOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMultiTexCoord4xOES");
+        return false;
+    }
+}
+
+bool callGlNormal3f(Stack* stack, bool pushReturn) {
+    float nz = stack->pop<float>();
+    float ny = stack->pop<float>();
+    float nx = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNormal3f(%f, %f, %f)", nx, ny, nz);
+        if (glNormal3f != nullptr) {
+            glNormal3f(nx, ny, nz);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glNormal3f");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNormal3f");
+        return false;
+    }
+}
+
+bool callGlNormal3x(Stack* stack, bool pushReturn) {
+    int32_t nz = stack->pop<int32_t>();
+    int32_t ny = stack->pop<int32_t>();
+    int32_t nx = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNormal3x(%" PRId32 ", %" PRId32 ", %" PRId32 ")", nx, ny, nz);
+        if (glNormal3x != nullptr) {
+            glNormal3x(nx, ny, nz);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glNormal3x");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNormal3x");
+        return false;
+    }
+}
+
+bool callGlNormal3xOES(Stack* stack, bool pushReturn) {
+    int32_t nz = stack->pop<int32_t>();
+    int32_t ny = stack->pop<int32_t>();
+    int32_t nx = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNormal3xOES(%" PRId32 ", %" PRId32 ", %" PRId32 ")", nx, ny, nz);
+        if (glNormal3xOES != nullptr) {
+            glNormal3xOES(nx, ny, nz);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glNormal3xOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNormal3xOES");
+        return false;
+    }
+}
+
+bool callGlNormalPointer(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNormalPointer(%u, %" PRId32 ", %p)", type, stride, pointer);
+        if (glNormalPointer != nullptr) {
+            glNormalPointer(type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glNormalPointer");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNormalPointer");
+        return false;
+    }
+}
+
+bool callGlOrthof(Stack* stack, bool pushReturn) {
+    float f = stack->pop<float>();
+    float n = stack->pop<float>();
+    float t = stack->pop<float>();
+    float b = stack->pop<float>();
+    float r = stack->pop<float>();
+    float l = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glOrthof(%f, %f, %f, %f, %f, %f)", l, r, b, t, n, f);
+        if (glOrthof != nullptr) {
+            glOrthof(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glOrthof");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glOrthof");
+        return false;
+    }
+}
+
+bool callGlOrthofOES(Stack* stack, bool pushReturn) {
+    float f = stack->pop<float>();
+    float n = stack->pop<float>();
+    float t = stack->pop<float>();
+    float b = stack->pop<float>();
+    float r = stack->pop<float>();
+    float l = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glOrthofOES(%f, %f, %f, %f, %f, %f)", l, r, b, t, n, f);
+        if (glOrthofOES != nullptr) {
+            glOrthofOES(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glOrthofOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glOrthofOES");
+        return false;
+    }
+}
+
+bool callGlOrthox(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    int32_t t = stack->pop<int32_t>();
+    int32_t b = stack->pop<int32_t>();
+    int32_t r = stack->pop<int32_t>();
+    int32_t l = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glOrthox(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ")",
+                   l, r, b, t, n, f);
+        if (glOrthox != nullptr) {
+            glOrthox(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glOrthox");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glOrthox");
+        return false;
+    }
+}
+
+bool callGlOrthoxOES(Stack* stack, bool pushReturn) {
+    int32_t f = stack->pop<int32_t>();
+    int32_t n = stack->pop<int32_t>();
+    int32_t t = stack->pop<int32_t>();
+    int32_t b = stack->pop<int32_t>();
+    int32_t r = stack->pop<int32_t>();
+    int32_t l = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glOrthoxOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32
+                   ", %" PRId32 ")",
+                   l, r, b, t, n, f);
+        if (glOrthoxOES != nullptr) {
+            glOrthoxOES(l, r, b, t, n, f);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glOrthoxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glOrthoxOES");
+        return false;
+    }
+}
+
+bool callGlPointParameterf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterf(%u, %f)", pname, param);
+        if (glPointParameterf != nullptr) {
+            glPointParameterf(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterf");
+        return false;
+    }
+}
+
+bool callGlPointParameterfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterfv(%u, %p)", pname, params);
+        if (glPointParameterfv != nullptr) {
+            glPointParameterfv(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterfv");
+        return false;
+    }
+}
+
+bool callGlPointParameterx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterx(%u, %" PRId32 ")", pname, param);
+        if (glPointParameterx != nullptr) {
+            glPointParameterx(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterx");
+        return false;
+    }
+}
+
+bool callGlPointParameterxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterxOES(%u, %" PRId32 ")", pname, param);
+        if (glPointParameterxOES != nullptr) {
+            glPointParameterxOES(pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterxOES");
+        return false;
+    }
+}
+
+bool callGlPointParameterxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterxv(%u, %p)", pname, params);
+        if (glPointParameterxv != nullptr) {
+            glPointParameterxv(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterxv");
+        return false;
+    }
+}
+
+bool callGlPointParameterxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointParameterxvOES(%u, %p)", pname, params);
+        if (glPointParameterxvOES != nullptr) {
+            glPointParameterxvOES(pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointParameterxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointParameterxvOES");
+        return false;
+    }
+}
+
+bool callGlPointSize(Stack* stack, bool pushReturn) {
+    float size = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointSize(%f)", size);
+        if (glPointSize != nullptr) {
+            glPointSize(size);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointSize");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointSize");
+        return false;
+    }
+}
+
+bool callGlPointSizePointerOES(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointSizePointerOES(%u, %" PRId32 ", %p)", type, stride, pointer);
+        if (glPointSizePointerOES != nullptr) {
+            glPointSizePointerOES(type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointSizePointerOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointSizePointerOES");
+        return false;
+    }
+}
+
+bool callGlPointSizex(Stack* stack, bool pushReturn) {
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointSizex(%" PRId32 ")", size);
+        if (glPointSizex != nullptr) {
+            glPointSizex(size);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointSizex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointSizex");
+        return false;
+    }
+}
+
+bool callGlPointSizexOES(Stack* stack, bool pushReturn) {
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointSizexOES(%" PRId32 ")", size);
+        if (glPointSizexOES != nullptr) {
+            glPointSizexOES(size);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointSizexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointSizexOES");
+        return false;
+    }
+}
+
+bool callGlPolygonOffsetx(Stack* stack, bool pushReturn) {
+    int32_t units = stack->pop<int32_t>();
+    int32_t factor = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPolygonOffsetx(%" PRId32 ", %" PRId32 ")", factor, units);
+        if (glPolygonOffsetx != nullptr) {
+            glPolygonOffsetx(factor, units);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPolygonOffsetx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPolygonOffsetx");
+        return false;
+    }
+}
+
+bool callGlPolygonOffsetxOES(Stack* stack, bool pushReturn) {
+    int32_t units = stack->pop<int32_t>();
+    int32_t factor = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPolygonOffsetxOES(%" PRId32 ", %" PRId32 ")", factor, units);
+        if (glPolygonOffsetxOES != nullptr) {
+            glPolygonOffsetxOES(factor, units);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPolygonOffsetxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPolygonOffsetxOES");
+        return false;
+    }
+}
+
+bool callGlPopMatrix(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glPopMatrix()");
+        if (glPopMatrix != nullptr) {
+            glPopMatrix();
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPopMatrix");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPopMatrix");
+        return false;
+    }
+}
+
+bool callGlPushMatrix(Stack* stack, bool pushReturn) {
+    if (stack->isValid()) {
+        GAPID_INFO("glPushMatrix()");
+        if (glPushMatrix != nullptr) {
+            glPushMatrix();
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPushMatrix");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPushMatrix");
+        return false;
+    }
+}
+
+bool callGlQueryMatrixxOES(Stack* stack, bool pushReturn) {
+    int32_t* exponent = stack->pop<int32_t*>();
+    int32_t* mantissa = stack->pop<int32_t*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glQueryMatrixxOES(%p, %p)", mantissa, exponent);
+        if (glQueryMatrixxOES != nullptr) {
+            GLbitfield return_value = glQueryMatrixxOES(mantissa, exponent);
+            GAPID_INFO("Returned: %u", return_value);
+            if (pushReturn) {
+                stack->push<GLbitfield>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glQueryMatrixxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glQueryMatrixxOES");
+        return false;
+    }
+}
+
+bool callGlRenderbufferStorageOES(Stack* stack, bool pushReturn) {
+    int32_t height = stack->pop<int32_t>();
+    int32_t width = stack->pop<int32_t>();
+    GLenum internalformat = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glRenderbufferStorageOES(%u, %u, %" PRId32 ", %" PRId32 ")", target,
+                   internalformat, width, height);
+        if (glRenderbufferStorageOES != nullptr) {
+            glRenderbufferStorageOES(target, internalformat, width, height);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glRenderbufferStorageOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glRenderbufferStorageOES");
+        return false;
+    }
+}
+
+bool callGlRotatef(Stack* stack, bool pushReturn) {
+    float z = stack->pop<float>();
+    float y = stack->pop<float>();
+    float x = stack->pop<float>();
+    float angle = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glRotatef(%f, %f, %f, %f)", angle, x, y, z);
+        if (glRotatef != nullptr) {
+            glRotatef(angle, x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glRotatef");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glRotatef");
+        return false;
+    }
+}
+
+bool callGlRotatex(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    int32_t angle = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glRotatex(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", angle, x, y, z);
+        if (glRotatex != nullptr) {
+            glRotatex(angle, x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glRotatex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glRotatex");
+        return false;
+    }
+}
+
+bool callGlRotatexOES(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    int32_t angle = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glRotatexOES(%" PRId32 ", %" PRId32 ", %" PRId32 ", %" PRId32 ")", angle, x, y,
+                   z);
+        if (glRotatexOES != nullptr) {
+            glRotatexOES(angle, x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glRotatexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glRotatexOES");
+        return false;
+    }
+}
+
+bool callGlSampleCoveragex(Stack* stack, bool pushReturn) {
+    uint8_t invert = stack->pop<uint8_t>();
+    int32_t value = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glSampleCoveragex(%" PRId32 ", %" PRIu8 ")", value, invert);
+        if (glSampleCoveragex != nullptr) {
+            glSampleCoveragex(value, invert);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glSampleCoveragex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glSampleCoveragex");
+        return false;
+    }
+}
+
+bool callGlSampleCoveragexOES(Stack* stack, bool pushReturn) {
+    uint8_t invert = stack->pop<uint8_t>();
+    int32_t value = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glSampleCoveragexOES(%" PRId32 ", %" PRIu8 ")", value, invert);
+        if (glSampleCoveragexOES != nullptr) {
+            glSampleCoveragexOES(value, invert);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glSampleCoveragexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glSampleCoveragexOES");
+        return false;
+    }
+}
+
+bool callGlScalef(Stack* stack, bool pushReturn) {
+    float z = stack->pop<float>();
+    float y = stack->pop<float>();
+    float x = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glScalef(%f, %f, %f)", x, y, z);
+        if (glScalef != nullptr) {
+            glScalef(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glScalef");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glScalef");
+        return false;
+    }
+}
+
+bool callGlScalex(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glScalex(%" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, z);
+        if (glScalex != nullptr) {
+            glScalex(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glScalex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glScalex");
+        return false;
+    }
+}
+
+bool callGlScalexOES(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glScalexOES(%" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, z);
+        if (glScalexOES != nullptr) {
+            glScalexOES(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glScalexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glScalexOES");
+        return false;
+    }
+}
+
+bool callGlShadeModel(Stack* stack, bool pushReturn) {
+    GLenum mode = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glShadeModel(%u)", mode);
+        if (glShadeModel != nullptr) {
+            glShadeModel(mode);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glShadeModel");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glShadeModel");
+        return false;
+    }
+}
+
+bool callGlTexCoordPointer(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexCoordPointer(%" PRId32 ", %u, %" PRId32 ", %p)", size, type, stride,
+                   pointer);
+        if (glTexCoordPointer != nullptr) {
+            glTexCoordPointer(size, type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexCoordPointer");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexCoordPointer");
+        return false;
+    }
+}
+
+bool callGlTexEnvf(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvf(%u, %u, %f)", target, pname, param);
+        if (glTexEnvf != nullptr) {
+            glTexEnvf(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvf");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvf");
+        return false;
+    }
+}
+
+bool callGlTexEnvfv(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvfv(%u, %u, %p)", target, pname, params);
+        if (glTexEnvfv != nullptr) {
+            glTexEnvfv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvfv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvfv");
+        return false;
+    }
+}
+
+bool callGlTexEnvi(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvi(%u, %u, %" PRId32 ")", target, pname, param);
+        if (glTexEnvi != nullptr) {
+            glTexEnvi(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvi");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvi");
+        return false;
+    }
+}
+
+bool callGlTexEnviv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnviv(%u, %u, %p)", target, pname, params);
+        if (glTexEnviv != nullptr) {
+            glTexEnviv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnviv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnviv");
+        return false;
+    }
+}
+
+bool callGlTexEnvx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvx(%u, %u, %" PRId32 ")", target, pname, param);
+        if (glTexEnvx != nullptr) {
+            glTexEnvx(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvx");
+        return false;
+    }
+}
+
+bool callGlTexEnvxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvxOES(%u, %u, %" PRId32 ")", target, pname, param);
+        if (glTexEnvxOES != nullptr) {
+            glTexEnvxOES(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvxOES");
+        return false;
+    }
+}
+
+bool callGlTexEnvxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvxv(%u, %u, %p)", target, pname, params);
+        if (glTexEnvxv != nullptr) {
+            glTexEnvxv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvxv");
+        return false;
+    }
+}
+
+bool callGlTexEnvxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexEnvxvOES(%u, %u, %p)", target, pname, params);
+        if (glTexEnvxvOES != nullptr) {
+            glTexEnvxvOES(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexEnvxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexEnvxvOES");
+        return false;
+    }
+}
+
+bool callGlTexGenfOES(Stack* stack, bool pushReturn) {
+    float param = stack->pop<float>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGenfOES(%u, %u, %f)", coord, pname, param);
+        if (glTexGenfOES != nullptr) {
+            glTexGenfOES(coord, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGenfOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGenfOES");
+        return false;
+    }
+}
+
+bool callGlTexGenfvOES(Stack* stack, bool pushReturn) {
+    float* params = stack->pop<float*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGenfvOES(%u, %u, %p)", coord, pname, params);
+        if (glTexGenfvOES != nullptr) {
+            glTexGenfvOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGenfvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGenfvOES");
+        return false;
+    }
+}
+
+bool callGlTexGeniOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGeniOES(%u, %u, %" PRId32 ")", coord, pname, param);
+        if (glTexGeniOES != nullptr) {
+            glTexGeniOES(coord, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGeniOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGeniOES");
+        return false;
+    }
+}
+
+bool callGlTexGenivOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGenivOES(%u, %u, %p)", coord, pname, params);
+        if (glTexGenivOES != nullptr) {
+            glTexGenivOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGenivOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGenivOES");
+        return false;
+    }
+}
+
+bool callGlTexGenxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGenxOES(%u, %u, %" PRId32 ")", coord, pname, param);
+        if (glTexGenxOES != nullptr) {
+            glTexGenxOES(coord, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGenxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGenxOES");
+        return false;
+    }
+}
+
+bool callGlTexGenxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum coord = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexGenxvOES(%u, %u, %p)", coord, pname, params);
+        if (glTexGenxvOES != nullptr) {
+            glTexGenxvOES(coord, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexGenxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexGenxvOES");
+        return false;
+    }
+}
+
+bool callGlTexParameterx(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterx(%u, %u, %" PRId32 ")", target, pname, param);
+        if (glTexParameterx != nullptr) {
+            glTexParameterx(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterx");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterx");
+        return false;
+    }
+}
+
+bool callGlTexParameterxOES(Stack* stack, bool pushReturn) {
+    int32_t param = stack->pop<int32_t>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterxOES(%u, %u, %" PRId32 ")", target, pname, param);
+        if (glTexParameterxOES != nullptr) {
+            glTexParameterxOES(target, pname, param);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterxOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterxOES");
+        return false;
+    }
+}
+
+bool callGlTexParameterxv(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterxv(%u, %u, %p)", target, pname, params);
+        if (glTexParameterxv != nullptr) {
+            glTexParameterxv(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterxv");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterxv");
+        return false;
+    }
+}
+
+bool callGlTexParameterxvOES(Stack* stack, bool pushReturn) {
+    int32_t* params = stack->pop<int32_t*>();
+    GLenum pname = stack->pop<GLenum>();
+    GLenum target = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexParameterxvOES(%u, %u, %p)", target, pname, params);
+        if (glTexParameterxvOES != nullptr) {
+            glTexParameterxvOES(target, pname, params);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterxvOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexParameterxvOES");
+        return false;
+    }
+}
+
+bool callGlTranslatef(Stack* stack, bool pushReturn) {
+    float z = stack->pop<float>();
+    float y = stack->pop<float>();
+    float x = stack->pop<float>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTranslatef(%f, %f, %f)", x, y, z);
+        if (glTranslatef != nullptr) {
+            glTranslatef(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTranslatef");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTranslatef");
+        return false;
+    }
+}
+
+bool callGlTranslatex(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTranslatex(%" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, z);
+        if (glTranslatex != nullptr) {
+            glTranslatex(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTranslatex");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTranslatex");
+        return false;
+    }
+}
+
+bool callGlTranslatexOES(Stack* stack, bool pushReturn) {
+    int32_t z = stack->pop<int32_t>();
+    int32_t y = stack->pop<int32_t>();
+    int32_t x = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTranslatexOES(%" PRId32 ", %" PRId32 ", %" PRId32 ")", x, y, z);
+        if (glTranslatexOES != nullptr) {
+            glTranslatexOES(x, y, z);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTranslatexOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTranslatexOES");
+        return false;
+    }
+}
+
+bool callGlVertexPointer(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glVertexPointer(%" PRId32 ", %u, %" PRId32 ", %p)", size, type, stride,
+                   pointer);
+        if (glVertexPointer != nullptr) {
+            glVertexPointer(size, type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glVertexPointer");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glVertexPointer");
+        return false;
+    }
+}
+
+bool callGlWeightPointerOES(Stack* stack, bool pushReturn) {
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glWeightPointerOES(%" PRId32 ", %u, %" PRId32 ", %p)", size, type, stride,
+                   pointer);
+        if (glWeightPointerOES != nullptr) {
+            glWeightPointerOES(size, type, stride, pointer);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glWeightPointerOES");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glWeightPointerOES");
+        return false;
+    }
+}
+
+bool callGlColorPointerBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glColorPointerBounds(%" PRId32 ", %u, %" PRId32 ", %p, %" PRId32 ")", size,
+                   type, stride, pointer, count);
+        if (glColorPointerBounds != nullptr) {
+            glColorPointerBounds(size, type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glColorPointerBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glColorPointerBounds");
+        return false;
+    }
+}
+
+bool callGlNormalPointerBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glNormalPointerBounds(%u, %" PRId32 ", %p, %" PRId32 ")", type, stride, pointer,
+                   count);
+        if (glNormalPointerBounds != nullptr) {
+            glNormalPointerBounds(type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glNormalPointerBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glNormalPointerBounds");
+        return false;
+    }
+}
+
+bool callGlTexCoordPointerBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glTexCoordPointerBounds(%" PRId32 ", %u, %" PRId32 ", %p, %" PRId32 ")", size,
+                   type, stride, pointer, count);
+        if (glTexCoordPointerBounds != nullptr) {
+            glTexCoordPointerBounds(size, type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glTexCoordPointerBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glTexCoordPointerBounds");
+        return false;
+    }
+}
+
+bool callGlVertexPointerBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glVertexPointerBounds(%" PRId32 ", %u, %" PRId32 ", %p, %" PRId32 ")", size,
+                   type, stride, pointer, count);
+        if (glVertexPointerBounds != nullptr) {
+            glVertexPointerBounds(size, type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glVertexPointerBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glVertexPointerBounds");
+        return false;
+    }
+}
+
+bool callGlPointSizePointerOESBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    if (stack->isValid()) {
+        GAPID_INFO("glPointSizePointerOESBounds(%u, %" PRId32 ", %p, %" PRId32 ")", type, stride,
+                   pointer, count);
+        if (glPointSizePointerOESBounds != nullptr) {
+            glPointSizePointerOESBounds(type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glPointSizePointerOESBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glPointSizePointerOESBounds");
+        return false;
+    }
+}
+
+bool callGlMatrixIndexPointerOESBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glMatrixIndexPointerOESBounds(%" PRId32 ", %u, %" PRId32 ", %p, %" PRId32 ")",
+                   size, type, stride, pointer, count);
+        if (glMatrixIndexPointerOESBounds != nullptr) {
+            glMatrixIndexPointerOESBounds(size, type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glMatrixIndexPointerOESBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glMatrixIndexPointerOESBounds");
+        return false;
+    }
+}
+
+bool callGlWeightPointerOESBounds(Stack* stack, bool pushReturn) {
+    int32_t count = stack->pop<int32_t>();
+    void* pointer = stack->pop<void*>();
+    int32_t stride = stack->pop<int32_t>();
+    GLenum type = stack->pop<GLenum>();
+    int32_t size = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        GAPID_INFO("glWeightPointerOESBounds(%" PRId32 ", %u, %" PRId32 ", %p, %" PRId32 ")", size,
+                   type, stride, pointer, count);
+        if (glWeightPointerOESBounds != nullptr) {
+            glWeightPointerOESBounds(size, type, stride, pointer, count);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glWeightPointerOESBounds");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glWeightPointerOESBounds");
+        return false;
+    }
+}
+
 }  // end of anonymous namespace
 
 PFNGLBLENDBARRIERKHR glBlendBarrierKHR = nullptr;
@@ -15201,7 +18422,6 @@ PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample = nullptr;
 PFNGLSTENCILMASK glStencilMask = nullptr;
 PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate = nullptr;
-PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES = nullptr;
 PFNGLDISABLE glDisable = nullptr;
 PFNGLDISABLEI glDisablei = nullptr;
 PFNGLENABLE glEnable = nullptr;
@@ -15481,6 +18701,186 @@ PFNCGSGETSURFACEBOUNDS CGSGetSurfaceBounds = nullptr;
 PFNCGLFLUSHDRAWABLE CGLFlushDrawable = nullptr;
 PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v = nullptr;
 PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v = nullptr;
+PFNGLALPHAFUNC glAlphaFunc = nullptr;
+PFNGLALPHAFUNCX glAlphaFuncx = nullptr;
+PFNGLALPHAFUNCXOES glAlphaFuncxOES = nullptr;
+PFNGLBINDFRAMEBUFFEROES glBindFramebufferOES = nullptr;
+PFNGLBINDRENDERBUFFEROES glBindRenderbufferOES = nullptr;
+PFNGLBLENDEQUATIONOES glBlendEquationOES = nullptr;
+PFNGLBLENDEQUATIONSEPARATEOES glBlendEquationSeparateOES = nullptr;
+PFNGLBLENDFUNCSEPARATEOES glBlendFuncSeparateOES = nullptr;
+PFNGLCHECKFRAMEBUFFERSTATUSOES glCheckFramebufferStatusOES = nullptr;
+PFNGLCLEARCOLORX glClearColorx = nullptr;
+PFNGLCLEARCOLORXOES glClearColorxOES = nullptr;
+PFNGLCLEARDEPTHFOES glClearDepthfOES = nullptr;
+PFNGLCLEARDEPTHX glClearDepthx = nullptr;
+PFNGLCLEARDEPTHXOES glClearDepthxOES = nullptr;
+PFNGLCLIENTACTIVETEXTURE glClientActiveTexture = nullptr;
+PFNGLCLIPPLANEF glClipPlanef = nullptr;
+PFNGLCLIPPLANEFIMG glClipPlanefIMG = nullptr;
+PFNGLCLIPPLANEFOES glClipPlanefOES = nullptr;
+PFNGLCLIPPLANEX glClipPlanex = nullptr;
+PFNGLCLIPPLANEXIMG glClipPlanexIMG = nullptr;
+PFNGLCLIPPLANEXOES glClipPlanexOES = nullptr;
+PFNGLCOLOR4F glColor4f = nullptr;
+PFNGLCOLOR4UB glColor4ub = nullptr;
+PFNGLCOLOR4X glColor4x = nullptr;
+PFNGLCOLOR4XOES glColor4xOES = nullptr;
+PFNGLCOLORPOINTER glColorPointer = nullptr;
+PFNGLCURRENTPALETTEMATRIXOES glCurrentPaletteMatrixOES = nullptr;
+PFNGLDELETEFRAMEBUFFERSOES glDeleteFramebuffersOES = nullptr;
+PFNGLDELETERENDERBUFFERSOES glDeleteRenderbuffersOES = nullptr;
+PFNGLDEPTHRANGEFOES glDepthRangefOES = nullptr;
+PFNGLDEPTHRANGEX glDepthRangex = nullptr;
+PFNGLDEPTHRANGEXOES glDepthRangexOES = nullptr;
+PFNGLDISABLECLIENTSTATE glDisableClientState = nullptr;
+PFNGLDRAWTEXFOES glDrawTexfOES = nullptr;
+PFNGLDRAWTEXFVOES glDrawTexfvOES = nullptr;
+PFNGLDRAWTEXIOES glDrawTexiOES = nullptr;
+PFNGLDRAWTEXIVOES glDrawTexivOES = nullptr;
+PFNGLDRAWTEXSOES glDrawTexsOES = nullptr;
+PFNGLDRAWTEXSVOES glDrawTexsvOES = nullptr;
+PFNGLDRAWTEXXOES glDrawTexxOES = nullptr;
+PFNGLDRAWTEXXVOES glDrawTexxvOES = nullptr;
+PFNGLENABLECLIENTSTATE glEnableClientState = nullptr;
+PFNGLFOGF glFogf = nullptr;
+PFNGLFOGFV glFogfv = nullptr;
+PFNGLFOGX glFogx = nullptr;
+PFNGLFOGXOES glFogxOES = nullptr;
+PFNGLFOGXV glFogxv = nullptr;
+PFNGLFOGXVOES glFogxvOES = nullptr;
+PFNGLFRAMEBUFFERRENDERBUFFEROES glFramebufferRenderbufferOES = nullptr;
+PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES = nullptr;
+PFNGLFRUSTUMF glFrustumf = nullptr;
+PFNGLFRUSTUMFOES glFrustumfOES = nullptr;
+PFNGLFRUSTUMX glFrustumx = nullptr;
+PFNGLFRUSTUMXOES glFrustumxOES = nullptr;
+PFNGLGENFRAMEBUFFERSOES glGenFramebuffersOES = nullptr;
+PFNGLGENRENDERBUFFERSOES glGenRenderbuffersOES = nullptr;
+PFNGLGENERATEMIPMAPOES glGenerateMipmapOES = nullptr;
+PFNGLGETCLIPPLANEF glGetClipPlanef = nullptr;
+PFNGLGETCLIPPLANEFOES glGetClipPlanefOES = nullptr;
+PFNGLGETCLIPPLANEX glGetClipPlanex = nullptr;
+PFNGLGETCLIPPLANEXOES glGetClipPlanexOES = nullptr;
+PFNGLGETFIXEDV glGetFixedv = nullptr;
+PFNGLGETFIXEDVOES glGetFixedvOES = nullptr;
+PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVOES glGetFramebufferAttachmentParameterivOES = nullptr;
+PFNGLGETLIGHTFV glGetLightfv = nullptr;
+PFNGLGETLIGHTXV glGetLightxv = nullptr;
+PFNGLGETLIGHTXVOES glGetLightxvOES = nullptr;
+PFNGLGETMATERIALFV glGetMaterialfv = nullptr;
+PFNGLGETMATERIALXV glGetMaterialxv = nullptr;
+PFNGLGETMATERIALXVOES glGetMaterialxvOES = nullptr;
+PFNGLGETRENDERBUFFERPARAMETERIVOES glGetRenderbufferParameterivOES = nullptr;
+PFNGLGETTEXENVFV glGetTexEnvfv = nullptr;
+PFNGLGETTEXENVIV glGetTexEnviv = nullptr;
+PFNGLGETTEXENVXV glGetTexEnvxv = nullptr;
+PFNGLGETTEXENVXVOES glGetTexEnvxvOES = nullptr;
+PFNGLGETTEXGENFVOES glGetTexGenfvOES = nullptr;
+PFNGLGETTEXGENIVOES glGetTexGenivOES = nullptr;
+PFNGLGETTEXGENXVOES glGetTexGenxvOES = nullptr;
+PFNGLGETTEXPARAMETERXV glGetTexParameterxv = nullptr;
+PFNGLGETTEXPARAMETERXVOES glGetTexParameterxvOES = nullptr;
+PFNGLISFRAMEBUFFEROES glIsFramebufferOES = nullptr;
+PFNGLISRENDERBUFFEROES glIsRenderbufferOES = nullptr;
+PFNGLLIGHTMODELF glLightModelf = nullptr;
+PFNGLLIGHTMODELFV glLightModelfv = nullptr;
+PFNGLLIGHTMODELX glLightModelx = nullptr;
+PFNGLLIGHTMODELXOES glLightModelxOES = nullptr;
+PFNGLLIGHTMODELXV glLightModelxv = nullptr;
+PFNGLLIGHTMODELXVOES glLightModelxvOES = nullptr;
+PFNGLLIGHTF glLightf = nullptr;
+PFNGLLIGHTFV glLightfv = nullptr;
+PFNGLLIGHTX glLightx = nullptr;
+PFNGLLIGHTXOES glLightxOES = nullptr;
+PFNGLLIGHTXV glLightxv = nullptr;
+PFNGLLIGHTXVOES glLightxvOES = nullptr;
+PFNGLLINEWIDTHX glLineWidthx = nullptr;
+PFNGLLINEWIDTHXOES glLineWidthxOES = nullptr;
+PFNGLLOADIDENTITY glLoadIdentity = nullptr;
+PFNGLLOADMATRIXF glLoadMatrixf = nullptr;
+PFNGLLOADMATRIXX glLoadMatrixx = nullptr;
+PFNGLLOADMATRIXXOES glLoadMatrixxOES = nullptr;
+PFNGLLOADPALETTEFROMMODELVIEWMATRIXOES glLoadPaletteFromModelViewMatrixOES = nullptr;
+PFNGLLOGICOP glLogicOp = nullptr;
+PFNGLMATERIALF glMaterialf = nullptr;
+PFNGLMATERIALFV glMaterialfv = nullptr;
+PFNGLMATERIALX glMaterialx = nullptr;
+PFNGLMATERIALXOES glMaterialxOES = nullptr;
+PFNGLMATERIALXV glMaterialxv = nullptr;
+PFNGLMATERIALXVOES glMaterialxvOES = nullptr;
+PFNGLMATRIXINDEXPOINTEROES glMatrixIndexPointerOES = nullptr;
+PFNGLMATRIXMODE glMatrixMode = nullptr;
+PFNGLMULTMATRIXF glMultMatrixf = nullptr;
+PFNGLMULTMATRIXX glMultMatrixx = nullptr;
+PFNGLMULTMATRIXXOES glMultMatrixxOES = nullptr;
+PFNGLMULTITEXCOORD4F glMultiTexCoord4f = nullptr;
+PFNGLMULTITEXCOORD4X glMultiTexCoord4x = nullptr;
+PFNGLMULTITEXCOORD4XOES glMultiTexCoord4xOES = nullptr;
+PFNGLNORMAL3F glNormal3f = nullptr;
+PFNGLNORMAL3X glNormal3x = nullptr;
+PFNGLNORMAL3XOES glNormal3xOES = nullptr;
+PFNGLNORMALPOINTER glNormalPointer = nullptr;
+PFNGLORTHOF glOrthof = nullptr;
+PFNGLORTHOFOES glOrthofOES = nullptr;
+PFNGLORTHOX glOrthox = nullptr;
+PFNGLORTHOXOES glOrthoxOES = nullptr;
+PFNGLPOINTPARAMETERF glPointParameterf = nullptr;
+PFNGLPOINTPARAMETERFV glPointParameterfv = nullptr;
+PFNGLPOINTPARAMETERX glPointParameterx = nullptr;
+PFNGLPOINTPARAMETERXOES glPointParameterxOES = nullptr;
+PFNGLPOINTPARAMETERXV glPointParameterxv = nullptr;
+PFNGLPOINTPARAMETERXVOES glPointParameterxvOES = nullptr;
+PFNGLPOINTSIZE glPointSize = nullptr;
+PFNGLPOINTSIZEPOINTEROES glPointSizePointerOES = nullptr;
+PFNGLPOINTSIZEX glPointSizex = nullptr;
+PFNGLPOINTSIZEXOES glPointSizexOES = nullptr;
+PFNGLPOLYGONOFFSETX glPolygonOffsetx = nullptr;
+PFNGLPOLYGONOFFSETXOES glPolygonOffsetxOES = nullptr;
+PFNGLPOPMATRIX glPopMatrix = nullptr;
+PFNGLPUSHMATRIX glPushMatrix = nullptr;
+PFNGLQUERYMATRIXXOES glQueryMatrixxOES = nullptr;
+PFNGLRENDERBUFFERSTORAGEOES glRenderbufferStorageOES = nullptr;
+PFNGLROTATEF glRotatef = nullptr;
+PFNGLROTATEX glRotatex = nullptr;
+PFNGLROTATEXOES glRotatexOES = nullptr;
+PFNGLSAMPLECOVERAGEX glSampleCoveragex = nullptr;
+PFNGLSAMPLECOVERAGEXOES glSampleCoveragexOES = nullptr;
+PFNGLSCALEF glScalef = nullptr;
+PFNGLSCALEX glScalex = nullptr;
+PFNGLSCALEXOES glScalexOES = nullptr;
+PFNGLSHADEMODEL glShadeModel = nullptr;
+PFNGLTEXCOORDPOINTER glTexCoordPointer = nullptr;
+PFNGLTEXENVF glTexEnvf = nullptr;
+PFNGLTEXENVFV glTexEnvfv = nullptr;
+PFNGLTEXENVI glTexEnvi = nullptr;
+PFNGLTEXENVIV glTexEnviv = nullptr;
+PFNGLTEXENVX glTexEnvx = nullptr;
+PFNGLTEXENVXOES glTexEnvxOES = nullptr;
+PFNGLTEXENVXV glTexEnvxv = nullptr;
+PFNGLTEXENVXVOES glTexEnvxvOES = nullptr;
+PFNGLTEXGENFOES glTexGenfOES = nullptr;
+PFNGLTEXGENFVOES glTexGenfvOES = nullptr;
+PFNGLTEXGENIOES glTexGeniOES = nullptr;
+PFNGLTEXGENIVOES glTexGenivOES = nullptr;
+PFNGLTEXGENXOES glTexGenxOES = nullptr;
+PFNGLTEXGENXVOES glTexGenxvOES = nullptr;
+PFNGLTEXPARAMETERX glTexParameterx = nullptr;
+PFNGLTEXPARAMETERXOES glTexParameterxOES = nullptr;
+PFNGLTEXPARAMETERXV glTexParameterxv = nullptr;
+PFNGLTEXPARAMETERXVOES glTexParameterxvOES = nullptr;
+PFNGLTRANSLATEF glTranslatef = nullptr;
+PFNGLTRANSLATEX glTranslatex = nullptr;
+PFNGLTRANSLATEXOES glTranslatexOES = nullptr;
+PFNGLVERTEXPOINTER glVertexPointer = nullptr;
+PFNGLWEIGHTPOINTEROES glWeightPointerOES = nullptr;
+PFNGLCOLORPOINTERBOUNDS glColorPointerBounds = nullptr;
+PFNGLNORMALPOINTERBOUNDS glNormalPointerBounds = nullptr;
+PFNGLTEXCOORDPOINTERBOUNDS glTexCoordPointerBounds = nullptr;
+PFNGLVERTEXPOINTERBOUNDS glVertexPointerBounds = nullptr;
+PFNGLPOINTSIZEPOINTEROESBOUNDS glPointSizePointerOESBounds = nullptr;
+PFNGLMATRIXINDEXPOINTEROESBOUNDS glMatrixIndexPointerOESBounds = nullptr;
+PFNGLWEIGHTPOINTEROESBOUNDS glWeightPointerOESBounds = nullptr;
 
 void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlBlendBarrierKHR, callGlBlendBarrierKHR);
@@ -16042,7 +19442,6 @@ void Register(Interpreter* interpreter) {
                                   callGlRenderbufferStorageMultisample);
     interpreter->registerFunction(Ids::GlStencilMask, callGlStencilMask);
     interpreter->registerFunction(Ids::GlStencilMaskSeparate, callGlStencilMaskSeparate);
-    interpreter->registerFunction(Ids::GlFramebufferTexture2DOES, callGlFramebufferTexture2DOES);
     interpreter->registerFunction(Ids::GlDisable, callGlDisable);
     interpreter->registerFunction(Ids::GlDisablei, callGlDisablei);
     interpreter->registerFunction(Ids::GlEnable, callGlEnable);
@@ -16333,6 +19732,193 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::CGLFlushDrawable, callCGLFlushDrawable);
     interpreter->registerFunction(Ids::GlGetQueryObjecti64v, callGlGetQueryObjecti64v);
     interpreter->registerFunction(Ids::GlGetQueryObjectui64v, callGlGetQueryObjectui64v);
+    interpreter->registerFunction(Ids::GlAlphaFunc, callGlAlphaFunc);
+    interpreter->registerFunction(Ids::GlAlphaFuncx, callGlAlphaFuncx);
+    interpreter->registerFunction(Ids::GlAlphaFuncxOES, callGlAlphaFuncxOES);
+    interpreter->registerFunction(Ids::GlBindFramebufferOES, callGlBindFramebufferOES);
+    interpreter->registerFunction(Ids::GlBindRenderbufferOES, callGlBindRenderbufferOES);
+    interpreter->registerFunction(Ids::GlBlendEquationOES, callGlBlendEquationOES);
+    interpreter->registerFunction(Ids::GlBlendEquationSeparateOES, callGlBlendEquationSeparateOES);
+    interpreter->registerFunction(Ids::GlBlendFuncSeparateOES, callGlBlendFuncSeparateOES);
+    interpreter->registerFunction(Ids::GlCheckFramebufferStatusOES,
+                                  callGlCheckFramebufferStatusOES);
+    interpreter->registerFunction(Ids::GlClearColorx, callGlClearColorx);
+    interpreter->registerFunction(Ids::GlClearColorxOES, callGlClearColorxOES);
+    interpreter->registerFunction(Ids::GlClearDepthfOES, callGlClearDepthfOES);
+    interpreter->registerFunction(Ids::GlClearDepthx, callGlClearDepthx);
+    interpreter->registerFunction(Ids::GlClearDepthxOES, callGlClearDepthxOES);
+    interpreter->registerFunction(Ids::GlClientActiveTexture, callGlClientActiveTexture);
+    interpreter->registerFunction(Ids::GlClipPlanef, callGlClipPlanef);
+    interpreter->registerFunction(Ids::GlClipPlanefIMG, callGlClipPlanefIMG);
+    interpreter->registerFunction(Ids::GlClipPlanefOES, callGlClipPlanefOES);
+    interpreter->registerFunction(Ids::GlClipPlanex, callGlClipPlanex);
+    interpreter->registerFunction(Ids::GlClipPlanexIMG, callGlClipPlanexIMG);
+    interpreter->registerFunction(Ids::GlClipPlanexOES, callGlClipPlanexOES);
+    interpreter->registerFunction(Ids::GlColor4f, callGlColor4f);
+    interpreter->registerFunction(Ids::GlColor4ub, callGlColor4ub);
+    interpreter->registerFunction(Ids::GlColor4x, callGlColor4x);
+    interpreter->registerFunction(Ids::GlColor4xOES, callGlColor4xOES);
+    interpreter->registerFunction(Ids::GlColorPointer, callGlColorPointer);
+    interpreter->registerFunction(Ids::GlCurrentPaletteMatrixOES, callGlCurrentPaletteMatrixOES);
+    interpreter->registerFunction(Ids::GlDeleteFramebuffersOES, callGlDeleteFramebuffersOES);
+    interpreter->registerFunction(Ids::GlDeleteRenderbuffersOES, callGlDeleteRenderbuffersOES);
+    interpreter->registerFunction(Ids::GlDepthRangefOES, callGlDepthRangefOES);
+    interpreter->registerFunction(Ids::GlDepthRangex, callGlDepthRangex);
+    interpreter->registerFunction(Ids::GlDepthRangexOES, callGlDepthRangexOES);
+    interpreter->registerFunction(Ids::GlDisableClientState, callGlDisableClientState);
+    interpreter->registerFunction(Ids::GlDrawTexfOES, callGlDrawTexfOES);
+    interpreter->registerFunction(Ids::GlDrawTexfvOES, callGlDrawTexfvOES);
+    interpreter->registerFunction(Ids::GlDrawTexiOES, callGlDrawTexiOES);
+    interpreter->registerFunction(Ids::GlDrawTexivOES, callGlDrawTexivOES);
+    interpreter->registerFunction(Ids::GlDrawTexsOES, callGlDrawTexsOES);
+    interpreter->registerFunction(Ids::GlDrawTexsvOES, callGlDrawTexsvOES);
+    interpreter->registerFunction(Ids::GlDrawTexxOES, callGlDrawTexxOES);
+    interpreter->registerFunction(Ids::GlDrawTexxvOES, callGlDrawTexxvOES);
+    interpreter->registerFunction(Ids::GlEnableClientState, callGlEnableClientState);
+    interpreter->registerFunction(Ids::GlFogf, callGlFogf);
+    interpreter->registerFunction(Ids::GlFogfv, callGlFogfv);
+    interpreter->registerFunction(Ids::GlFogx, callGlFogx);
+    interpreter->registerFunction(Ids::GlFogxOES, callGlFogxOES);
+    interpreter->registerFunction(Ids::GlFogxv, callGlFogxv);
+    interpreter->registerFunction(Ids::GlFogxvOES, callGlFogxvOES);
+    interpreter->registerFunction(Ids::GlFramebufferRenderbufferOES,
+                                  callGlFramebufferRenderbufferOES);
+    interpreter->registerFunction(Ids::GlFramebufferTexture2DOES, callGlFramebufferTexture2DOES);
+    interpreter->registerFunction(Ids::GlFrustumf, callGlFrustumf);
+    interpreter->registerFunction(Ids::GlFrustumfOES, callGlFrustumfOES);
+    interpreter->registerFunction(Ids::GlFrustumx, callGlFrustumx);
+    interpreter->registerFunction(Ids::GlFrustumxOES, callGlFrustumxOES);
+    interpreter->registerFunction(Ids::GlGenFramebuffersOES, callGlGenFramebuffersOES);
+    interpreter->registerFunction(Ids::GlGenRenderbuffersOES, callGlGenRenderbuffersOES);
+    interpreter->registerFunction(Ids::GlGenerateMipmapOES, callGlGenerateMipmapOES);
+    interpreter->registerFunction(Ids::GlGetClipPlanef, callGlGetClipPlanef);
+    interpreter->registerFunction(Ids::GlGetClipPlanefOES, callGlGetClipPlanefOES);
+    interpreter->registerFunction(Ids::GlGetClipPlanex, callGlGetClipPlanex);
+    interpreter->registerFunction(Ids::GlGetClipPlanexOES, callGlGetClipPlanexOES);
+    interpreter->registerFunction(Ids::GlGetFixedv, callGlGetFixedv);
+    interpreter->registerFunction(Ids::GlGetFixedvOES, callGlGetFixedvOES);
+    interpreter->registerFunction(Ids::GlGetFramebufferAttachmentParameterivOES,
+                                  callGlGetFramebufferAttachmentParameterivOES);
+    interpreter->registerFunction(Ids::GlGetLightfv, callGlGetLightfv);
+    interpreter->registerFunction(Ids::GlGetLightxv, callGlGetLightxv);
+    interpreter->registerFunction(Ids::GlGetLightxvOES, callGlGetLightxvOES);
+    interpreter->registerFunction(Ids::GlGetMaterialfv, callGlGetMaterialfv);
+    interpreter->registerFunction(Ids::GlGetMaterialxv, callGlGetMaterialxv);
+    interpreter->registerFunction(Ids::GlGetMaterialxvOES, callGlGetMaterialxvOES);
+    interpreter->registerFunction(Ids::GlGetRenderbufferParameterivOES,
+                                  callGlGetRenderbufferParameterivOES);
+    interpreter->registerFunction(Ids::GlGetTexEnvfv, callGlGetTexEnvfv);
+    interpreter->registerFunction(Ids::GlGetTexEnviv, callGlGetTexEnviv);
+    interpreter->registerFunction(Ids::GlGetTexEnvxv, callGlGetTexEnvxv);
+    interpreter->registerFunction(Ids::GlGetTexEnvxvOES, callGlGetTexEnvxvOES);
+    interpreter->registerFunction(Ids::GlGetTexGenfvOES, callGlGetTexGenfvOES);
+    interpreter->registerFunction(Ids::GlGetTexGenivOES, callGlGetTexGenivOES);
+    interpreter->registerFunction(Ids::GlGetTexGenxvOES, callGlGetTexGenxvOES);
+    interpreter->registerFunction(Ids::GlGetTexParameterxv, callGlGetTexParameterxv);
+    interpreter->registerFunction(Ids::GlGetTexParameterxvOES, callGlGetTexParameterxvOES);
+    interpreter->registerFunction(Ids::GlIsFramebufferOES, callGlIsFramebufferOES);
+    interpreter->registerFunction(Ids::GlIsRenderbufferOES, callGlIsRenderbufferOES);
+    interpreter->registerFunction(Ids::GlLightModelf, callGlLightModelf);
+    interpreter->registerFunction(Ids::GlLightModelfv, callGlLightModelfv);
+    interpreter->registerFunction(Ids::GlLightModelx, callGlLightModelx);
+    interpreter->registerFunction(Ids::GlLightModelxOES, callGlLightModelxOES);
+    interpreter->registerFunction(Ids::GlLightModelxv, callGlLightModelxv);
+    interpreter->registerFunction(Ids::GlLightModelxvOES, callGlLightModelxvOES);
+    interpreter->registerFunction(Ids::GlLightf, callGlLightf);
+    interpreter->registerFunction(Ids::GlLightfv, callGlLightfv);
+    interpreter->registerFunction(Ids::GlLightx, callGlLightx);
+    interpreter->registerFunction(Ids::GlLightxOES, callGlLightxOES);
+    interpreter->registerFunction(Ids::GlLightxv, callGlLightxv);
+    interpreter->registerFunction(Ids::GlLightxvOES, callGlLightxvOES);
+    interpreter->registerFunction(Ids::GlLineWidthx, callGlLineWidthx);
+    interpreter->registerFunction(Ids::GlLineWidthxOES, callGlLineWidthxOES);
+    interpreter->registerFunction(Ids::GlLoadIdentity, callGlLoadIdentity);
+    interpreter->registerFunction(Ids::GlLoadMatrixf, callGlLoadMatrixf);
+    interpreter->registerFunction(Ids::GlLoadMatrixx, callGlLoadMatrixx);
+    interpreter->registerFunction(Ids::GlLoadMatrixxOES, callGlLoadMatrixxOES);
+    interpreter->registerFunction(Ids::GlLoadPaletteFromModelViewMatrixOES,
+                                  callGlLoadPaletteFromModelViewMatrixOES);
+    interpreter->registerFunction(Ids::GlLogicOp, callGlLogicOp);
+    interpreter->registerFunction(Ids::GlMaterialf, callGlMaterialf);
+    interpreter->registerFunction(Ids::GlMaterialfv, callGlMaterialfv);
+    interpreter->registerFunction(Ids::GlMaterialx, callGlMaterialx);
+    interpreter->registerFunction(Ids::GlMaterialxOES, callGlMaterialxOES);
+    interpreter->registerFunction(Ids::GlMaterialxv, callGlMaterialxv);
+    interpreter->registerFunction(Ids::GlMaterialxvOES, callGlMaterialxvOES);
+    interpreter->registerFunction(Ids::GlMatrixIndexPointerOES, callGlMatrixIndexPointerOES);
+    interpreter->registerFunction(Ids::GlMatrixMode, callGlMatrixMode);
+    interpreter->registerFunction(Ids::GlMultMatrixf, callGlMultMatrixf);
+    interpreter->registerFunction(Ids::GlMultMatrixx, callGlMultMatrixx);
+    interpreter->registerFunction(Ids::GlMultMatrixxOES, callGlMultMatrixxOES);
+    interpreter->registerFunction(Ids::GlMultiTexCoord4f, callGlMultiTexCoord4f);
+    interpreter->registerFunction(Ids::GlMultiTexCoord4x, callGlMultiTexCoord4x);
+    interpreter->registerFunction(Ids::GlMultiTexCoord4xOES, callGlMultiTexCoord4xOES);
+    interpreter->registerFunction(Ids::GlNormal3f, callGlNormal3f);
+    interpreter->registerFunction(Ids::GlNormal3x, callGlNormal3x);
+    interpreter->registerFunction(Ids::GlNormal3xOES, callGlNormal3xOES);
+    interpreter->registerFunction(Ids::GlNormalPointer, callGlNormalPointer);
+    interpreter->registerFunction(Ids::GlOrthof, callGlOrthof);
+    interpreter->registerFunction(Ids::GlOrthofOES, callGlOrthofOES);
+    interpreter->registerFunction(Ids::GlOrthox, callGlOrthox);
+    interpreter->registerFunction(Ids::GlOrthoxOES, callGlOrthoxOES);
+    interpreter->registerFunction(Ids::GlPointParameterf, callGlPointParameterf);
+    interpreter->registerFunction(Ids::GlPointParameterfv, callGlPointParameterfv);
+    interpreter->registerFunction(Ids::GlPointParameterx, callGlPointParameterx);
+    interpreter->registerFunction(Ids::GlPointParameterxOES, callGlPointParameterxOES);
+    interpreter->registerFunction(Ids::GlPointParameterxv, callGlPointParameterxv);
+    interpreter->registerFunction(Ids::GlPointParameterxvOES, callGlPointParameterxvOES);
+    interpreter->registerFunction(Ids::GlPointSize, callGlPointSize);
+    interpreter->registerFunction(Ids::GlPointSizePointerOES, callGlPointSizePointerOES);
+    interpreter->registerFunction(Ids::GlPointSizex, callGlPointSizex);
+    interpreter->registerFunction(Ids::GlPointSizexOES, callGlPointSizexOES);
+    interpreter->registerFunction(Ids::GlPolygonOffsetx, callGlPolygonOffsetx);
+    interpreter->registerFunction(Ids::GlPolygonOffsetxOES, callGlPolygonOffsetxOES);
+    interpreter->registerFunction(Ids::GlPopMatrix, callGlPopMatrix);
+    interpreter->registerFunction(Ids::GlPushMatrix, callGlPushMatrix);
+    interpreter->registerFunction(Ids::GlQueryMatrixxOES, callGlQueryMatrixxOES);
+    interpreter->registerFunction(Ids::GlRenderbufferStorageOES, callGlRenderbufferStorageOES);
+    interpreter->registerFunction(Ids::GlRotatef, callGlRotatef);
+    interpreter->registerFunction(Ids::GlRotatex, callGlRotatex);
+    interpreter->registerFunction(Ids::GlRotatexOES, callGlRotatexOES);
+    interpreter->registerFunction(Ids::GlSampleCoveragex, callGlSampleCoveragex);
+    interpreter->registerFunction(Ids::GlSampleCoveragexOES, callGlSampleCoveragexOES);
+    interpreter->registerFunction(Ids::GlScalef, callGlScalef);
+    interpreter->registerFunction(Ids::GlScalex, callGlScalex);
+    interpreter->registerFunction(Ids::GlScalexOES, callGlScalexOES);
+    interpreter->registerFunction(Ids::GlShadeModel, callGlShadeModel);
+    interpreter->registerFunction(Ids::GlTexCoordPointer, callGlTexCoordPointer);
+    interpreter->registerFunction(Ids::GlTexEnvf, callGlTexEnvf);
+    interpreter->registerFunction(Ids::GlTexEnvfv, callGlTexEnvfv);
+    interpreter->registerFunction(Ids::GlTexEnvi, callGlTexEnvi);
+    interpreter->registerFunction(Ids::GlTexEnviv, callGlTexEnviv);
+    interpreter->registerFunction(Ids::GlTexEnvx, callGlTexEnvx);
+    interpreter->registerFunction(Ids::GlTexEnvxOES, callGlTexEnvxOES);
+    interpreter->registerFunction(Ids::GlTexEnvxv, callGlTexEnvxv);
+    interpreter->registerFunction(Ids::GlTexEnvxvOES, callGlTexEnvxvOES);
+    interpreter->registerFunction(Ids::GlTexGenfOES, callGlTexGenfOES);
+    interpreter->registerFunction(Ids::GlTexGenfvOES, callGlTexGenfvOES);
+    interpreter->registerFunction(Ids::GlTexGeniOES, callGlTexGeniOES);
+    interpreter->registerFunction(Ids::GlTexGenivOES, callGlTexGenivOES);
+    interpreter->registerFunction(Ids::GlTexGenxOES, callGlTexGenxOES);
+    interpreter->registerFunction(Ids::GlTexGenxvOES, callGlTexGenxvOES);
+    interpreter->registerFunction(Ids::GlTexParameterx, callGlTexParameterx);
+    interpreter->registerFunction(Ids::GlTexParameterxOES, callGlTexParameterxOES);
+    interpreter->registerFunction(Ids::GlTexParameterxv, callGlTexParameterxv);
+    interpreter->registerFunction(Ids::GlTexParameterxvOES, callGlTexParameterxvOES);
+    interpreter->registerFunction(Ids::GlTranslatef, callGlTranslatef);
+    interpreter->registerFunction(Ids::GlTranslatex, callGlTranslatex);
+    interpreter->registerFunction(Ids::GlTranslatexOES, callGlTranslatexOES);
+    interpreter->registerFunction(Ids::GlVertexPointer, callGlVertexPointer);
+    interpreter->registerFunction(Ids::GlWeightPointerOES, callGlWeightPointerOES);
+    interpreter->registerFunction(Ids::GlColorPointerBounds, callGlColorPointerBounds);
+    interpreter->registerFunction(Ids::GlNormalPointerBounds, callGlNormalPointerBounds);
+    interpreter->registerFunction(Ids::GlTexCoordPointerBounds, callGlTexCoordPointerBounds);
+    interpreter->registerFunction(Ids::GlVertexPointerBounds, callGlVertexPointerBounds);
+    interpreter->registerFunction(Ids::GlPointSizePointerOESBounds,
+                                  callGlPointSizePointerOESBounds);
+    interpreter->registerFunction(Ids::GlMatrixIndexPointerOESBounds,
+                                  callGlMatrixIndexPointerOESBounds);
+    interpreter->registerFunction(Ids::GlWeightPointerOESBounds, callGlWeightPointerOESBounds);
 }
 void Initialize() {
     glBlendBarrierKHR = reinterpret_cast<PFNGLBLENDBARRIERKHR>(
@@ -17272,8 +20858,6 @@ void Initialize() {
             reinterpret_cast<PFNGLSTENCILMASK>(gapic::GetGfxProcAddress("glStencilMask", false));
     glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
             gapic::GetGfxProcAddress("glStencilMaskSeparate", false));
-    glFramebufferTexture2DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DOES>(
-            gapic::GetGfxProcAddress("glFramebufferTexture2DOES", false));
     glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable", false));
     glDisablei = reinterpret_cast<PFNGLDISABLEI>(gapic::GetGfxProcAddress("glDisablei", false));
     glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable", false));
@@ -17800,6 +21384,327 @@ void Initialize() {
             gapic::GetGfxProcAddress("glGetQueryObjecti64v", false));
     glGetQueryObjectui64v = reinterpret_cast<PFNGLGETQUERYOBJECTUI64V>(
             gapic::GetGfxProcAddress("glGetQueryObjectui64v", false));
+    glAlphaFunc = reinterpret_cast<PFNGLALPHAFUNC>(gapic::GetGfxProcAddress("glAlphaFunc", false));
+    glAlphaFuncx =
+            reinterpret_cast<PFNGLALPHAFUNCX>(gapic::GetGfxProcAddress("glAlphaFuncx", false));
+    glAlphaFuncxOES = reinterpret_cast<PFNGLALPHAFUNCXOES>(
+            gapic::GetGfxProcAddress("glAlphaFuncxOES", false));
+    glBindFramebufferOES = reinterpret_cast<PFNGLBINDFRAMEBUFFEROES>(
+            gapic::GetGfxProcAddress("glBindFramebufferOES", false));
+    glBindRenderbufferOES = reinterpret_cast<PFNGLBINDRENDERBUFFEROES>(
+            gapic::GetGfxProcAddress("glBindRenderbufferOES", false));
+    glBlendEquationOES = reinterpret_cast<PFNGLBLENDEQUATIONOES>(
+            gapic::GetGfxProcAddress("glBlendEquationOES", false));
+    glBlendEquationSeparateOES = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATEOES>(
+            gapic::GetGfxProcAddress("glBlendEquationSeparateOES", false));
+    glBlendFuncSeparateOES = reinterpret_cast<PFNGLBLENDFUNCSEPARATEOES>(
+            gapic::GetGfxProcAddress("glBlendFuncSeparateOES", false));
+    glCheckFramebufferStatusOES = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUSOES>(
+            gapic::GetGfxProcAddress("glCheckFramebufferStatusOES", false));
+    glClearColorx =
+            reinterpret_cast<PFNGLCLEARCOLORX>(gapic::GetGfxProcAddress("glClearColorx", false));
+    glClearColorxOES = reinterpret_cast<PFNGLCLEARCOLORXOES>(
+            gapic::GetGfxProcAddress("glClearColorxOES", false));
+    glClearDepthfOES = reinterpret_cast<PFNGLCLEARDEPTHFOES>(
+            gapic::GetGfxProcAddress("glClearDepthfOES", false));
+    glClearDepthx =
+            reinterpret_cast<PFNGLCLEARDEPTHX>(gapic::GetGfxProcAddress("glClearDepthx", false));
+    glClearDepthxOES = reinterpret_cast<PFNGLCLEARDEPTHXOES>(
+            gapic::GetGfxProcAddress("glClearDepthxOES", false));
+    glClientActiveTexture = reinterpret_cast<PFNGLCLIENTACTIVETEXTURE>(
+            gapic::GetGfxProcAddress("glClientActiveTexture", false));
+    glClipPlanef =
+            reinterpret_cast<PFNGLCLIPPLANEF>(gapic::GetGfxProcAddress("glClipPlanef", false));
+    glClipPlanefIMG = reinterpret_cast<PFNGLCLIPPLANEFIMG>(
+            gapic::GetGfxProcAddress("glClipPlanefIMG", false));
+    glClipPlanefOES = reinterpret_cast<PFNGLCLIPPLANEFOES>(
+            gapic::GetGfxProcAddress("glClipPlanefOES", false));
+    glClipPlanex =
+            reinterpret_cast<PFNGLCLIPPLANEX>(gapic::GetGfxProcAddress("glClipPlanex", false));
+    glClipPlanexIMG = reinterpret_cast<PFNGLCLIPPLANEXIMG>(
+            gapic::GetGfxProcAddress("glClipPlanexIMG", false));
+    glClipPlanexOES = reinterpret_cast<PFNGLCLIPPLANEXOES>(
+            gapic::GetGfxProcAddress("glClipPlanexOES", false));
+    glColor4f = reinterpret_cast<PFNGLCOLOR4F>(gapic::GetGfxProcAddress("glColor4f", false));
+    glColor4ub = reinterpret_cast<PFNGLCOLOR4UB>(gapic::GetGfxProcAddress("glColor4ub", false));
+    glColor4x = reinterpret_cast<PFNGLCOLOR4X>(gapic::GetGfxProcAddress("glColor4x", false));
+    glColor4xOES =
+            reinterpret_cast<PFNGLCOLOR4XOES>(gapic::GetGfxProcAddress("glColor4xOES", false));
+    glColorPointer =
+            reinterpret_cast<PFNGLCOLORPOINTER>(gapic::GetGfxProcAddress("glColorPointer", false));
+    glCurrentPaletteMatrixOES = reinterpret_cast<PFNGLCURRENTPALETTEMATRIXOES>(
+            gapic::GetGfxProcAddress("glCurrentPaletteMatrixOES", false));
+    glDeleteFramebuffersOES = reinterpret_cast<PFNGLDELETEFRAMEBUFFERSOES>(
+            gapic::GetGfxProcAddress("glDeleteFramebuffersOES", false));
+    glDeleteRenderbuffersOES = reinterpret_cast<PFNGLDELETERENDERBUFFERSOES>(
+            gapic::GetGfxProcAddress("glDeleteRenderbuffersOES", false));
+    glDepthRangefOES = reinterpret_cast<PFNGLDEPTHRANGEFOES>(
+            gapic::GetGfxProcAddress("glDepthRangefOES", false));
+    glDepthRangex =
+            reinterpret_cast<PFNGLDEPTHRANGEX>(gapic::GetGfxProcAddress("glDepthRangex", false));
+    glDepthRangexOES = reinterpret_cast<PFNGLDEPTHRANGEXOES>(
+            gapic::GetGfxProcAddress("glDepthRangexOES", false));
+    glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(
+            gapic::GetGfxProcAddress("glDisableClientState", false));
+    glDrawTexfOES =
+            reinterpret_cast<PFNGLDRAWTEXFOES>(gapic::GetGfxProcAddress("glDrawTexfOES", false));
+    glDrawTexfvOES =
+            reinterpret_cast<PFNGLDRAWTEXFVOES>(gapic::GetGfxProcAddress("glDrawTexfvOES", false));
+    glDrawTexiOES =
+            reinterpret_cast<PFNGLDRAWTEXIOES>(gapic::GetGfxProcAddress("glDrawTexiOES", false));
+    glDrawTexivOES =
+            reinterpret_cast<PFNGLDRAWTEXIVOES>(gapic::GetGfxProcAddress("glDrawTexivOES", false));
+    glDrawTexsOES =
+            reinterpret_cast<PFNGLDRAWTEXSOES>(gapic::GetGfxProcAddress("glDrawTexsOES", false));
+    glDrawTexsvOES =
+            reinterpret_cast<PFNGLDRAWTEXSVOES>(gapic::GetGfxProcAddress("glDrawTexsvOES", false));
+    glDrawTexxOES =
+            reinterpret_cast<PFNGLDRAWTEXXOES>(gapic::GetGfxProcAddress("glDrawTexxOES", false));
+    glDrawTexxvOES =
+            reinterpret_cast<PFNGLDRAWTEXXVOES>(gapic::GetGfxProcAddress("glDrawTexxvOES", false));
+    glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
+            gapic::GetGfxProcAddress("glEnableClientState", false));
+    glFogf = reinterpret_cast<PFNGLFOGF>(gapic::GetGfxProcAddress("glFogf", false));
+    glFogfv = reinterpret_cast<PFNGLFOGFV>(gapic::GetGfxProcAddress("glFogfv", false));
+    glFogx = reinterpret_cast<PFNGLFOGX>(gapic::GetGfxProcAddress("glFogx", false));
+    glFogxOES = reinterpret_cast<PFNGLFOGXOES>(gapic::GetGfxProcAddress("glFogxOES", false));
+    glFogxv = reinterpret_cast<PFNGLFOGXV>(gapic::GetGfxProcAddress("glFogxv", false));
+    glFogxvOES = reinterpret_cast<PFNGLFOGXVOES>(gapic::GetGfxProcAddress("glFogxvOES", false));
+    glFramebufferRenderbufferOES = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFEROES>(
+            gapic::GetGfxProcAddress("glFramebufferRenderbufferOES", false));
+    glFramebufferTexture2DOES = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2DOES>(
+            gapic::GetGfxProcAddress("glFramebufferTexture2DOES", false));
+    glFrustumf = reinterpret_cast<PFNGLFRUSTUMF>(gapic::GetGfxProcAddress("glFrustumf", false));
+    glFrustumfOES =
+            reinterpret_cast<PFNGLFRUSTUMFOES>(gapic::GetGfxProcAddress("glFrustumfOES", false));
+    glFrustumx = reinterpret_cast<PFNGLFRUSTUMX>(gapic::GetGfxProcAddress("glFrustumx", false));
+    glFrustumxOES =
+            reinterpret_cast<PFNGLFRUSTUMXOES>(gapic::GetGfxProcAddress("glFrustumxOES", false));
+    glGenFramebuffersOES = reinterpret_cast<PFNGLGENFRAMEBUFFERSOES>(
+            gapic::GetGfxProcAddress("glGenFramebuffersOES", false));
+    glGenRenderbuffersOES = reinterpret_cast<PFNGLGENRENDERBUFFERSOES>(
+            gapic::GetGfxProcAddress("glGenRenderbuffersOES", false));
+    glGenerateMipmapOES = reinterpret_cast<PFNGLGENERATEMIPMAPOES>(
+            gapic::GetGfxProcAddress("glGenerateMipmapOES", false));
+    glGetClipPlanef = reinterpret_cast<PFNGLGETCLIPPLANEF>(
+            gapic::GetGfxProcAddress("glGetClipPlanef", false));
+    glGetClipPlanefOES = reinterpret_cast<PFNGLGETCLIPPLANEFOES>(
+            gapic::GetGfxProcAddress("glGetClipPlanefOES", false));
+    glGetClipPlanex = reinterpret_cast<PFNGLGETCLIPPLANEX>(
+            gapic::GetGfxProcAddress("glGetClipPlanex", false));
+    glGetClipPlanexOES = reinterpret_cast<PFNGLGETCLIPPLANEXOES>(
+            gapic::GetGfxProcAddress("glGetClipPlanexOES", false));
+    glGetFixedv = reinterpret_cast<PFNGLGETFIXEDV>(gapic::GetGfxProcAddress("glGetFixedv", false));
+    glGetFixedvOES =
+            reinterpret_cast<PFNGLGETFIXEDVOES>(gapic::GetGfxProcAddress("glGetFixedvOES", false));
+    glGetFramebufferAttachmentParameterivOES =
+            reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVOES>(
+                    gapic::GetGfxProcAddress("glGetFramebufferAttachmentParameterivOES", false));
+    glGetLightfv =
+            reinterpret_cast<PFNGLGETLIGHTFV>(gapic::GetGfxProcAddress("glGetLightfv", false));
+    glGetLightxv =
+            reinterpret_cast<PFNGLGETLIGHTXV>(gapic::GetGfxProcAddress("glGetLightxv", false));
+    glGetLightxvOES = reinterpret_cast<PFNGLGETLIGHTXVOES>(
+            gapic::GetGfxProcAddress("glGetLightxvOES", false));
+    glGetMaterialfv = reinterpret_cast<PFNGLGETMATERIALFV>(
+            gapic::GetGfxProcAddress("glGetMaterialfv", false));
+    glGetMaterialxv = reinterpret_cast<PFNGLGETMATERIALXV>(
+            gapic::GetGfxProcAddress("glGetMaterialxv", false));
+    glGetMaterialxvOES = reinterpret_cast<PFNGLGETMATERIALXVOES>(
+            gapic::GetGfxProcAddress("glGetMaterialxvOES", false));
+    glGetRenderbufferParameterivOES = reinterpret_cast<PFNGLGETRENDERBUFFERPARAMETERIVOES>(
+            gapic::GetGfxProcAddress("glGetRenderbufferParameterivOES", false));
+    glGetTexEnvfv =
+            reinterpret_cast<PFNGLGETTEXENVFV>(gapic::GetGfxProcAddress("glGetTexEnvfv", false));
+    glGetTexEnviv =
+            reinterpret_cast<PFNGLGETTEXENVIV>(gapic::GetGfxProcAddress("glGetTexEnviv", false));
+    glGetTexEnvxv =
+            reinterpret_cast<PFNGLGETTEXENVXV>(gapic::GetGfxProcAddress("glGetTexEnvxv", false));
+    glGetTexEnvxvOES = reinterpret_cast<PFNGLGETTEXENVXVOES>(
+            gapic::GetGfxProcAddress("glGetTexEnvxvOES", false));
+    glGetTexGenfvOES = reinterpret_cast<PFNGLGETTEXGENFVOES>(
+            gapic::GetGfxProcAddress("glGetTexGenfvOES", false));
+    glGetTexGenivOES = reinterpret_cast<PFNGLGETTEXGENIVOES>(
+            gapic::GetGfxProcAddress("glGetTexGenivOES", false));
+    glGetTexGenxvOES = reinterpret_cast<PFNGLGETTEXGENXVOES>(
+            gapic::GetGfxProcAddress("glGetTexGenxvOES", false));
+    glGetTexParameterxv = reinterpret_cast<PFNGLGETTEXPARAMETERXV>(
+            gapic::GetGfxProcAddress("glGetTexParameterxv", false));
+    glGetTexParameterxvOES = reinterpret_cast<PFNGLGETTEXPARAMETERXVOES>(
+            gapic::GetGfxProcAddress("glGetTexParameterxvOES", false));
+    glIsFramebufferOES = reinterpret_cast<PFNGLISFRAMEBUFFEROES>(
+            gapic::GetGfxProcAddress("glIsFramebufferOES", false));
+    glIsRenderbufferOES = reinterpret_cast<PFNGLISRENDERBUFFEROES>(
+            gapic::GetGfxProcAddress("glIsRenderbufferOES", false));
+    glLightModelf =
+            reinterpret_cast<PFNGLLIGHTMODELF>(gapic::GetGfxProcAddress("glLightModelf", false));
+    glLightModelfv =
+            reinterpret_cast<PFNGLLIGHTMODELFV>(gapic::GetGfxProcAddress("glLightModelfv", false));
+    glLightModelx =
+            reinterpret_cast<PFNGLLIGHTMODELX>(gapic::GetGfxProcAddress("glLightModelx", false));
+    glLightModelxOES = reinterpret_cast<PFNGLLIGHTMODELXOES>(
+            gapic::GetGfxProcAddress("glLightModelxOES", false));
+    glLightModelxv =
+            reinterpret_cast<PFNGLLIGHTMODELXV>(gapic::GetGfxProcAddress("glLightModelxv", false));
+    glLightModelxvOES = reinterpret_cast<PFNGLLIGHTMODELXVOES>(
+            gapic::GetGfxProcAddress("glLightModelxvOES", false));
+    glLightf = reinterpret_cast<PFNGLLIGHTF>(gapic::GetGfxProcAddress("glLightf", false));
+    glLightfv = reinterpret_cast<PFNGLLIGHTFV>(gapic::GetGfxProcAddress("glLightfv", false));
+    glLightx = reinterpret_cast<PFNGLLIGHTX>(gapic::GetGfxProcAddress("glLightx", false));
+    glLightxOES = reinterpret_cast<PFNGLLIGHTXOES>(gapic::GetGfxProcAddress("glLightxOES", false));
+    glLightxv = reinterpret_cast<PFNGLLIGHTXV>(gapic::GetGfxProcAddress("glLightxv", false));
+    glLightxvOES =
+            reinterpret_cast<PFNGLLIGHTXVOES>(gapic::GetGfxProcAddress("glLightxvOES", false));
+    glLineWidthx =
+            reinterpret_cast<PFNGLLINEWIDTHX>(gapic::GetGfxProcAddress("glLineWidthx", false));
+    glLineWidthxOES = reinterpret_cast<PFNGLLINEWIDTHXOES>(
+            gapic::GetGfxProcAddress("glLineWidthxOES", false));
+    glLoadIdentity =
+            reinterpret_cast<PFNGLLOADIDENTITY>(gapic::GetGfxProcAddress("glLoadIdentity", false));
+    glLoadMatrixf =
+            reinterpret_cast<PFNGLLOADMATRIXF>(gapic::GetGfxProcAddress("glLoadMatrixf", false));
+    glLoadMatrixx =
+            reinterpret_cast<PFNGLLOADMATRIXX>(gapic::GetGfxProcAddress("glLoadMatrixx", false));
+    glLoadMatrixxOES = reinterpret_cast<PFNGLLOADMATRIXXOES>(
+            gapic::GetGfxProcAddress("glLoadMatrixxOES", false));
+    glLoadPaletteFromModelViewMatrixOES = reinterpret_cast<PFNGLLOADPALETTEFROMMODELVIEWMATRIXOES>(
+            gapic::GetGfxProcAddress("glLoadPaletteFromModelViewMatrixOES", false));
+    glLogicOp = reinterpret_cast<PFNGLLOGICOP>(gapic::GetGfxProcAddress("glLogicOp", false));
+    glMaterialf = reinterpret_cast<PFNGLMATERIALF>(gapic::GetGfxProcAddress("glMaterialf", false));
+    glMaterialfv =
+            reinterpret_cast<PFNGLMATERIALFV>(gapic::GetGfxProcAddress("glMaterialfv", false));
+    glMaterialx = reinterpret_cast<PFNGLMATERIALX>(gapic::GetGfxProcAddress("glMaterialx", false));
+    glMaterialxOES =
+            reinterpret_cast<PFNGLMATERIALXOES>(gapic::GetGfxProcAddress("glMaterialxOES", false));
+    glMaterialxv =
+            reinterpret_cast<PFNGLMATERIALXV>(gapic::GetGfxProcAddress("glMaterialxv", false));
+    glMaterialxvOES = reinterpret_cast<PFNGLMATERIALXVOES>(
+            gapic::GetGfxProcAddress("glMaterialxvOES", false));
+    glMatrixIndexPointerOES = reinterpret_cast<PFNGLMATRIXINDEXPOINTEROES>(
+            gapic::GetGfxProcAddress("glMatrixIndexPointerOES", false));
+    glMatrixMode =
+            reinterpret_cast<PFNGLMATRIXMODE>(gapic::GetGfxProcAddress("glMatrixMode", false));
+    glMultMatrixf =
+            reinterpret_cast<PFNGLMULTMATRIXF>(gapic::GetGfxProcAddress("glMultMatrixf", false));
+    glMultMatrixx =
+            reinterpret_cast<PFNGLMULTMATRIXX>(gapic::GetGfxProcAddress("glMultMatrixx", false));
+    glMultMatrixxOES = reinterpret_cast<PFNGLMULTMATRIXXOES>(
+            gapic::GetGfxProcAddress("glMultMatrixxOES", false));
+    glMultiTexCoord4f = reinterpret_cast<PFNGLMULTITEXCOORD4F>(
+            gapic::GetGfxProcAddress("glMultiTexCoord4f", false));
+    glMultiTexCoord4x = reinterpret_cast<PFNGLMULTITEXCOORD4X>(
+            gapic::GetGfxProcAddress("glMultiTexCoord4x", false));
+    glMultiTexCoord4xOES = reinterpret_cast<PFNGLMULTITEXCOORD4XOES>(
+            gapic::GetGfxProcAddress("glMultiTexCoord4xOES", false));
+    glNormal3f = reinterpret_cast<PFNGLNORMAL3F>(gapic::GetGfxProcAddress("glNormal3f", false));
+    glNormal3x = reinterpret_cast<PFNGLNORMAL3X>(gapic::GetGfxProcAddress("glNormal3x", false));
+    glNormal3xOES =
+            reinterpret_cast<PFNGLNORMAL3XOES>(gapic::GetGfxProcAddress("glNormal3xOES", false));
+    glNormalPointer = reinterpret_cast<PFNGLNORMALPOINTER>(
+            gapic::GetGfxProcAddress("glNormalPointer", false));
+    glOrthof = reinterpret_cast<PFNGLORTHOF>(gapic::GetGfxProcAddress("glOrthof", false));
+    glOrthofOES = reinterpret_cast<PFNGLORTHOFOES>(gapic::GetGfxProcAddress("glOrthofOES", false));
+    glOrthox = reinterpret_cast<PFNGLORTHOX>(gapic::GetGfxProcAddress("glOrthox", false));
+    glOrthoxOES = reinterpret_cast<PFNGLORTHOXOES>(gapic::GetGfxProcAddress("glOrthoxOES", false));
+    glPointParameterf = reinterpret_cast<PFNGLPOINTPARAMETERF>(
+            gapic::GetGfxProcAddress("glPointParameterf", false));
+    glPointParameterfv = reinterpret_cast<PFNGLPOINTPARAMETERFV>(
+            gapic::GetGfxProcAddress("glPointParameterfv", false));
+    glPointParameterx = reinterpret_cast<PFNGLPOINTPARAMETERX>(
+            gapic::GetGfxProcAddress("glPointParameterx", false));
+    glPointParameterxOES = reinterpret_cast<PFNGLPOINTPARAMETERXOES>(
+            gapic::GetGfxProcAddress("glPointParameterxOES", false));
+    glPointParameterxv = reinterpret_cast<PFNGLPOINTPARAMETERXV>(
+            gapic::GetGfxProcAddress("glPointParameterxv", false));
+    glPointParameterxvOES = reinterpret_cast<PFNGLPOINTPARAMETERXVOES>(
+            gapic::GetGfxProcAddress("glPointParameterxvOES", false));
+    glPointSize = reinterpret_cast<PFNGLPOINTSIZE>(gapic::GetGfxProcAddress("glPointSize", false));
+    glPointSizePointerOES = reinterpret_cast<PFNGLPOINTSIZEPOINTEROES>(
+            gapic::GetGfxProcAddress("glPointSizePointerOES", false));
+    glPointSizex =
+            reinterpret_cast<PFNGLPOINTSIZEX>(gapic::GetGfxProcAddress("glPointSizex", false));
+    glPointSizexOES = reinterpret_cast<PFNGLPOINTSIZEXOES>(
+            gapic::GetGfxProcAddress("glPointSizexOES", false));
+    glPolygonOffsetx = reinterpret_cast<PFNGLPOLYGONOFFSETX>(
+            gapic::GetGfxProcAddress("glPolygonOffsetx", false));
+    glPolygonOffsetxOES = reinterpret_cast<PFNGLPOLYGONOFFSETXOES>(
+            gapic::GetGfxProcAddress("glPolygonOffsetxOES", false));
+    glPopMatrix = reinterpret_cast<PFNGLPOPMATRIX>(gapic::GetGfxProcAddress("glPopMatrix", false));
+    glPushMatrix =
+            reinterpret_cast<PFNGLPUSHMATRIX>(gapic::GetGfxProcAddress("glPushMatrix", false));
+    glQueryMatrixxOES = reinterpret_cast<PFNGLQUERYMATRIXXOES>(
+            gapic::GetGfxProcAddress("glQueryMatrixxOES", false));
+    glRenderbufferStorageOES = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEOES>(
+            gapic::GetGfxProcAddress("glRenderbufferStorageOES", false));
+    glRotatef = reinterpret_cast<PFNGLROTATEF>(gapic::GetGfxProcAddress("glRotatef", false));
+    glRotatex = reinterpret_cast<PFNGLROTATEX>(gapic::GetGfxProcAddress("glRotatex", false));
+    glRotatexOES =
+            reinterpret_cast<PFNGLROTATEXOES>(gapic::GetGfxProcAddress("glRotatexOES", false));
+    glSampleCoveragex = reinterpret_cast<PFNGLSAMPLECOVERAGEX>(
+            gapic::GetGfxProcAddress("glSampleCoveragex", false));
+    glSampleCoveragexOES = reinterpret_cast<PFNGLSAMPLECOVERAGEXOES>(
+            gapic::GetGfxProcAddress("glSampleCoveragexOES", false));
+    glScalef = reinterpret_cast<PFNGLSCALEF>(gapic::GetGfxProcAddress("glScalef", false));
+    glScalex = reinterpret_cast<PFNGLSCALEX>(gapic::GetGfxProcAddress("glScalex", false));
+    glScalexOES = reinterpret_cast<PFNGLSCALEXOES>(gapic::GetGfxProcAddress("glScalexOES", false));
+    glShadeModel =
+            reinterpret_cast<PFNGLSHADEMODEL>(gapic::GetGfxProcAddress("glShadeModel", false));
+    glTexCoordPointer = reinterpret_cast<PFNGLTEXCOORDPOINTER>(
+            gapic::GetGfxProcAddress("glTexCoordPointer", false));
+    glTexEnvf = reinterpret_cast<PFNGLTEXENVF>(gapic::GetGfxProcAddress("glTexEnvf", false));
+    glTexEnvfv = reinterpret_cast<PFNGLTEXENVFV>(gapic::GetGfxProcAddress("glTexEnvfv", false));
+    glTexEnvi = reinterpret_cast<PFNGLTEXENVI>(gapic::GetGfxProcAddress("glTexEnvi", false));
+    glTexEnviv = reinterpret_cast<PFNGLTEXENVIV>(gapic::GetGfxProcAddress("glTexEnviv", false));
+    glTexEnvx = reinterpret_cast<PFNGLTEXENVX>(gapic::GetGfxProcAddress("glTexEnvx", false));
+    glTexEnvxOES =
+            reinterpret_cast<PFNGLTEXENVXOES>(gapic::GetGfxProcAddress("glTexEnvxOES", false));
+    glTexEnvxv = reinterpret_cast<PFNGLTEXENVXV>(gapic::GetGfxProcAddress("glTexEnvxv", false));
+    glTexEnvxvOES =
+            reinterpret_cast<PFNGLTEXENVXVOES>(gapic::GetGfxProcAddress("glTexEnvxvOES", false));
+    glTexGenfOES =
+            reinterpret_cast<PFNGLTEXGENFOES>(gapic::GetGfxProcAddress("glTexGenfOES", false));
+    glTexGenfvOES =
+            reinterpret_cast<PFNGLTEXGENFVOES>(gapic::GetGfxProcAddress("glTexGenfvOES", false));
+    glTexGeniOES =
+            reinterpret_cast<PFNGLTEXGENIOES>(gapic::GetGfxProcAddress("glTexGeniOES", false));
+    glTexGenivOES =
+            reinterpret_cast<PFNGLTEXGENIVOES>(gapic::GetGfxProcAddress("glTexGenivOES", false));
+    glTexGenxOES =
+            reinterpret_cast<PFNGLTEXGENXOES>(gapic::GetGfxProcAddress("glTexGenxOES", false));
+    glTexGenxvOES =
+            reinterpret_cast<PFNGLTEXGENXVOES>(gapic::GetGfxProcAddress("glTexGenxvOES", false));
+    glTexParameterx = reinterpret_cast<PFNGLTEXPARAMETERX>(
+            gapic::GetGfxProcAddress("glTexParameterx", false));
+    glTexParameterxOES = reinterpret_cast<PFNGLTEXPARAMETERXOES>(
+            gapic::GetGfxProcAddress("glTexParameterxOES", false));
+    glTexParameterxv = reinterpret_cast<PFNGLTEXPARAMETERXV>(
+            gapic::GetGfxProcAddress("glTexParameterxv", false));
+    glTexParameterxvOES = reinterpret_cast<PFNGLTEXPARAMETERXVOES>(
+            gapic::GetGfxProcAddress("glTexParameterxvOES", false));
+    glTranslatef =
+            reinterpret_cast<PFNGLTRANSLATEF>(gapic::GetGfxProcAddress("glTranslatef", false));
+    glTranslatex =
+            reinterpret_cast<PFNGLTRANSLATEX>(gapic::GetGfxProcAddress("glTranslatex", false));
+    glTranslatexOES = reinterpret_cast<PFNGLTRANSLATEXOES>(
+            gapic::GetGfxProcAddress("glTranslatexOES", false));
+    glVertexPointer = reinterpret_cast<PFNGLVERTEXPOINTER>(
+            gapic::GetGfxProcAddress("glVertexPointer", false));
+    glWeightPointerOES = reinterpret_cast<PFNGLWEIGHTPOINTEROES>(
+            gapic::GetGfxProcAddress("glWeightPointerOES", false));
+    glColorPointerBounds = reinterpret_cast<PFNGLCOLORPOINTERBOUNDS>(
+            gapic::GetGfxProcAddress("glColorPointerBounds", false));
+    glNormalPointerBounds = reinterpret_cast<PFNGLNORMALPOINTERBOUNDS>(
+            gapic::GetGfxProcAddress("glNormalPointerBounds", false));
+    glTexCoordPointerBounds = reinterpret_cast<PFNGLTEXCOORDPOINTERBOUNDS>(
+            gapic::GetGfxProcAddress("glTexCoordPointerBounds", false));
+    glVertexPointerBounds = reinterpret_cast<PFNGLVERTEXPOINTERBOUNDS>(
+            gapic::GetGfxProcAddress("glVertexPointerBounds", false));
+    glPointSizePointerOESBounds = reinterpret_cast<PFNGLPOINTSIZEPOINTEROESBOUNDS>(
+            gapic::GetGfxProcAddress("glPointSizePointerOESBounds", false));
+    glMatrixIndexPointerOESBounds = reinterpret_cast<PFNGLMATRIXINDEXPOINTEROESBOUNDS>(
+            gapic::GetGfxProcAddress("glMatrixIndexPointerOESBounds", false));
+    glWeightPointerOESBounds = reinterpret_cast<PFNGLWEIGHTPOINTEROESBOUNDS>(
+            gapic::GetGfxProcAddress("glWeightPointerOESBounds", false));
 }
 
 }  // namespace gfxapi

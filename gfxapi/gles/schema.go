@@ -4201,15 +4201,6 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_GlFramebufferTexture2DOES := (*GlFramebufferTexture2DOES)(nil).Class().Schema()
-	sc_GlFramebufferTexture2DOES.Metadata = append(sc_GlFramebufferTexture2DOES.Metadata, &atom.Metadata{
-		API:              apiID,
-		DisplayName:      "glFramebufferTexture2DOES",
-		DrawCall:         false,
-		EndOfFrame:       false,
-		DocumentationUrl: "[]",
-	})
-
 	sc_GlDisable := (*GlDisable)(nil).Class().Schema()
 	sc_GlDisable.Metadata = append(sc_GlDisable.Metadata, &atom.Metadata{
 		API:              apiID,
@@ -6716,6 +6707,1626 @@ func init() {
 	sc_GlGetQueryObjectui64v.Metadata = append(sc_GlGetQueryObjectui64v.Metadata, &atom.Metadata{
 		API:              apiID,
 		DisplayName:      "glGetQueryObjectui64v",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlAlphaFunc := (*GlAlphaFunc)(nil).Class().Schema()
+	sc_GlAlphaFunc.Metadata = append(sc_GlAlphaFunc.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glAlphaFunc",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlAlphaFuncx := (*GlAlphaFuncx)(nil).Class().Schema()
+	sc_GlAlphaFuncx.Metadata = append(sc_GlAlphaFuncx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glAlphaFuncx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlAlphaFuncxOES := (*GlAlphaFuncxOES)(nil).Class().Schema()
+	sc_GlAlphaFuncxOES.Metadata = append(sc_GlAlphaFuncxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glAlphaFuncxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBindFramebufferOES := (*GlBindFramebufferOES)(nil).Class().Schema()
+	sc_GlBindFramebufferOES.Metadata = append(sc_GlBindFramebufferOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBindFramebufferOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBindRenderbufferOES := (*GlBindRenderbufferOES)(nil).Class().Schema()
+	sc_GlBindRenderbufferOES.Metadata = append(sc_GlBindRenderbufferOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBindRenderbufferOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendEquationOES := (*GlBlendEquationOES)(nil).Class().Schema()
+	sc_GlBlendEquationOES.Metadata = append(sc_GlBlendEquationOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendEquationOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendEquationSeparateOES := (*GlBlendEquationSeparateOES)(nil).Class().Schema()
+	sc_GlBlendEquationSeparateOES.Metadata = append(sc_GlBlendEquationSeparateOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendEquationSeparateOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlBlendFuncSeparateOES := (*GlBlendFuncSeparateOES)(nil).Class().Schema()
+	sc_GlBlendFuncSeparateOES.Metadata = append(sc_GlBlendFuncSeparateOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glBlendFuncSeparateOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlCheckFramebufferStatusOES := (*GlCheckFramebufferStatusOES)(nil).Class().Schema()
+	sc_GlCheckFramebufferStatusOES.Metadata = append(sc_GlCheckFramebufferStatusOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glCheckFramebufferStatusOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClearColorx := (*GlClearColorx)(nil).Class().Schema()
+	sc_GlClearColorx.Metadata = append(sc_GlClearColorx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClearColorx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClearColorxOES := (*GlClearColorxOES)(nil).Class().Schema()
+	sc_GlClearColorxOES.Metadata = append(sc_GlClearColorxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClearColorxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClearDepthfOES := (*GlClearDepthfOES)(nil).Class().Schema()
+	sc_GlClearDepthfOES.Metadata = append(sc_GlClearDepthfOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClearDepthfOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClearDepthx := (*GlClearDepthx)(nil).Class().Schema()
+	sc_GlClearDepthx.Metadata = append(sc_GlClearDepthx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClearDepthx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClearDepthxOES := (*GlClearDepthxOES)(nil).Class().Schema()
+	sc_GlClearDepthxOES.Metadata = append(sc_GlClearDepthxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClearDepthxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClientActiveTexture := (*GlClientActiveTexture)(nil).Class().Schema()
+	sc_GlClientActiveTexture.Metadata = append(sc_GlClientActiveTexture.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClientActiveTexture",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanef := (*GlClipPlanef)(nil).Class().Schema()
+	sc_GlClipPlanef.Metadata = append(sc_GlClipPlanef.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanef",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanefIMG := (*GlClipPlanefIMG)(nil).Class().Schema()
+	sc_GlClipPlanefIMG.Metadata = append(sc_GlClipPlanefIMG.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanefIMG",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanefOES := (*GlClipPlanefOES)(nil).Class().Schema()
+	sc_GlClipPlanefOES.Metadata = append(sc_GlClipPlanefOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanefOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanex := (*GlClipPlanex)(nil).Class().Schema()
+	sc_GlClipPlanex.Metadata = append(sc_GlClipPlanex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanexIMG := (*GlClipPlanexIMG)(nil).Class().Schema()
+	sc_GlClipPlanexIMG.Metadata = append(sc_GlClipPlanexIMG.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanexIMG",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlClipPlanexOES := (*GlClipPlanexOES)(nil).Class().Schema()
+	sc_GlClipPlanexOES.Metadata = append(sc_GlClipPlanexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glClipPlanexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColor4f := (*GlColor4f)(nil).Class().Schema()
+	sc_GlColor4f.Metadata = append(sc_GlColor4f.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColor4f",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColor4ub := (*GlColor4ub)(nil).Class().Schema()
+	sc_GlColor4ub.Metadata = append(sc_GlColor4ub.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColor4ub",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColor4x := (*GlColor4x)(nil).Class().Schema()
+	sc_GlColor4x.Metadata = append(sc_GlColor4x.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColor4x",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColor4xOES := (*GlColor4xOES)(nil).Class().Schema()
+	sc_GlColor4xOES.Metadata = append(sc_GlColor4xOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColor4xOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColorPointer := (*GlColorPointer)(nil).Class().Schema()
+	sc_GlColorPointer.Metadata = append(sc_GlColorPointer.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColorPointer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlCurrentPaletteMatrixOES := (*GlCurrentPaletteMatrixOES)(nil).Class().Schema()
+	sc_GlCurrentPaletteMatrixOES.Metadata = append(sc_GlCurrentPaletteMatrixOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glCurrentPaletteMatrixOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDeleteFramebuffersOES := (*GlDeleteFramebuffersOES)(nil).Class().Schema()
+	sc_GlDeleteFramebuffersOES.Metadata = append(sc_GlDeleteFramebuffersOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDeleteFramebuffersOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDeleteRenderbuffersOES := (*GlDeleteRenderbuffersOES)(nil).Class().Schema()
+	sc_GlDeleteRenderbuffersOES.Metadata = append(sc_GlDeleteRenderbuffersOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDeleteRenderbuffersOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDepthRangefOES := (*GlDepthRangefOES)(nil).Class().Schema()
+	sc_GlDepthRangefOES.Metadata = append(sc_GlDepthRangefOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDepthRangefOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDepthRangex := (*GlDepthRangex)(nil).Class().Schema()
+	sc_GlDepthRangex.Metadata = append(sc_GlDepthRangex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDepthRangex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDepthRangexOES := (*GlDepthRangexOES)(nil).Class().Schema()
+	sc_GlDepthRangexOES.Metadata = append(sc_GlDepthRangexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDepthRangexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDisableClientState := (*GlDisableClientState)(nil).Class().Schema()
+	sc_GlDisableClientState.Metadata = append(sc_GlDisableClientState.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDisableClientState",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexfOES := (*GlDrawTexfOES)(nil).Class().Schema()
+	sc_GlDrawTexfOES.Metadata = append(sc_GlDrawTexfOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexfOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexfvOES := (*GlDrawTexfvOES)(nil).Class().Schema()
+	sc_GlDrawTexfvOES.Metadata = append(sc_GlDrawTexfvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexfvOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexiOES := (*GlDrawTexiOES)(nil).Class().Schema()
+	sc_GlDrawTexiOES.Metadata = append(sc_GlDrawTexiOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexiOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexivOES := (*GlDrawTexivOES)(nil).Class().Schema()
+	sc_GlDrawTexivOES.Metadata = append(sc_GlDrawTexivOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexivOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexsOES := (*GlDrawTexsOES)(nil).Class().Schema()
+	sc_GlDrawTexsOES.Metadata = append(sc_GlDrawTexsOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexsOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexsvOES := (*GlDrawTexsvOES)(nil).Class().Schema()
+	sc_GlDrawTexsvOES.Metadata = append(sc_GlDrawTexsvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexsvOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexxOES := (*GlDrawTexxOES)(nil).Class().Schema()
+	sc_GlDrawTexxOES.Metadata = append(sc_GlDrawTexxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexxOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlDrawTexxvOES := (*GlDrawTexxvOES)(nil).Class().Schema()
+	sc_GlDrawTexxvOES.Metadata = append(sc_GlDrawTexxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glDrawTexxvOES",
+		DrawCall:         true,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlEnableClientState := (*GlEnableClientState)(nil).Class().Schema()
+	sc_GlEnableClientState.Metadata = append(sc_GlEnableClientState.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glEnableClientState",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogf := (*GlFogf)(nil).Class().Schema()
+	sc_GlFogf.Metadata = append(sc_GlFogf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogfv := (*GlFogfv)(nil).Class().Schema()
+	sc_GlFogfv.Metadata = append(sc_GlFogfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogx := (*GlFogx)(nil).Class().Schema()
+	sc_GlFogx.Metadata = append(sc_GlFogx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogxOES := (*GlFogxOES)(nil).Class().Schema()
+	sc_GlFogxOES.Metadata = append(sc_GlFogxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogxv := (*GlFogxv)(nil).Class().Schema()
+	sc_GlFogxv.Metadata = append(sc_GlFogxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFogxvOES := (*GlFogxvOES)(nil).Class().Schema()
+	sc_GlFogxvOES.Metadata = append(sc_GlFogxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFogxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFramebufferRenderbufferOES := (*GlFramebufferRenderbufferOES)(nil).Class().Schema()
+	sc_GlFramebufferRenderbufferOES.Metadata = append(sc_GlFramebufferRenderbufferOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFramebufferRenderbufferOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFramebufferTexture2DOES := (*GlFramebufferTexture2DOES)(nil).Class().Schema()
+	sc_GlFramebufferTexture2DOES.Metadata = append(sc_GlFramebufferTexture2DOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFramebufferTexture2DOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFrustumf := (*GlFrustumf)(nil).Class().Schema()
+	sc_GlFrustumf.Metadata = append(sc_GlFrustumf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFrustumf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFrustumfOES := (*GlFrustumfOES)(nil).Class().Schema()
+	sc_GlFrustumfOES.Metadata = append(sc_GlFrustumfOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFrustumfOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFrustumx := (*GlFrustumx)(nil).Class().Schema()
+	sc_GlFrustumx.Metadata = append(sc_GlFrustumx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFrustumx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlFrustumxOES := (*GlFrustumxOES)(nil).Class().Schema()
+	sc_GlFrustumxOES.Metadata = append(sc_GlFrustumxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glFrustumxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGenFramebuffersOES := (*GlGenFramebuffersOES)(nil).Class().Schema()
+	sc_GlGenFramebuffersOES.Metadata = append(sc_GlGenFramebuffersOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGenFramebuffersOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGenRenderbuffersOES := (*GlGenRenderbuffersOES)(nil).Class().Schema()
+	sc_GlGenRenderbuffersOES.Metadata = append(sc_GlGenRenderbuffersOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGenRenderbuffersOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGenerateMipmapOES := (*GlGenerateMipmapOES)(nil).Class().Schema()
+	sc_GlGenerateMipmapOES.Metadata = append(sc_GlGenerateMipmapOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGenerateMipmapOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetClipPlanef := (*GlGetClipPlanef)(nil).Class().Schema()
+	sc_GlGetClipPlanef.Metadata = append(sc_GlGetClipPlanef.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetClipPlanef",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetClipPlanefOES := (*GlGetClipPlanefOES)(nil).Class().Schema()
+	sc_GlGetClipPlanefOES.Metadata = append(sc_GlGetClipPlanefOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetClipPlanefOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetClipPlanex := (*GlGetClipPlanex)(nil).Class().Schema()
+	sc_GlGetClipPlanex.Metadata = append(sc_GlGetClipPlanex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetClipPlanex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetClipPlanexOES := (*GlGetClipPlanexOES)(nil).Class().Schema()
+	sc_GlGetClipPlanexOES.Metadata = append(sc_GlGetClipPlanexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetClipPlanexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetFixedv := (*GlGetFixedv)(nil).Class().Schema()
+	sc_GlGetFixedv.Metadata = append(sc_GlGetFixedv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetFixedv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetFixedvOES := (*GlGetFixedvOES)(nil).Class().Schema()
+	sc_GlGetFixedvOES.Metadata = append(sc_GlGetFixedvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetFixedvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetFramebufferAttachmentParameterivOES := (*GlGetFramebufferAttachmentParameterivOES)(nil).Class().Schema()
+	sc_GlGetFramebufferAttachmentParameterivOES.Metadata = append(sc_GlGetFramebufferAttachmentParameterivOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetFramebufferAttachmentParameterivOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetLightfv := (*GlGetLightfv)(nil).Class().Schema()
+	sc_GlGetLightfv.Metadata = append(sc_GlGetLightfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetLightfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetLightxv := (*GlGetLightxv)(nil).Class().Schema()
+	sc_GlGetLightxv.Metadata = append(sc_GlGetLightxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetLightxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetLightxvOES := (*GlGetLightxvOES)(nil).Class().Schema()
+	sc_GlGetLightxvOES.Metadata = append(sc_GlGetLightxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetLightxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetMaterialfv := (*GlGetMaterialfv)(nil).Class().Schema()
+	sc_GlGetMaterialfv.Metadata = append(sc_GlGetMaterialfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetMaterialfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetMaterialxv := (*GlGetMaterialxv)(nil).Class().Schema()
+	sc_GlGetMaterialxv.Metadata = append(sc_GlGetMaterialxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetMaterialxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetMaterialxvOES := (*GlGetMaterialxvOES)(nil).Class().Schema()
+	sc_GlGetMaterialxvOES.Metadata = append(sc_GlGetMaterialxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetMaterialxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetRenderbufferParameterivOES := (*GlGetRenderbufferParameterivOES)(nil).Class().Schema()
+	sc_GlGetRenderbufferParameterivOES.Metadata = append(sc_GlGetRenderbufferParameterivOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetRenderbufferParameterivOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexEnvfv := (*GlGetTexEnvfv)(nil).Class().Schema()
+	sc_GlGetTexEnvfv.Metadata = append(sc_GlGetTexEnvfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexEnvfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexEnviv := (*GlGetTexEnviv)(nil).Class().Schema()
+	sc_GlGetTexEnviv.Metadata = append(sc_GlGetTexEnviv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexEnviv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexEnvxv := (*GlGetTexEnvxv)(nil).Class().Schema()
+	sc_GlGetTexEnvxv.Metadata = append(sc_GlGetTexEnvxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexEnvxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexEnvxvOES := (*GlGetTexEnvxvOES)(nil).Class().Schema()
+	sc_GlGetTexEnvxvOES.Metadata = append(sc_GlGetTexEnvxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexEnvxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexGenfvOES := (*GlGetTexGenfvOES)(nil).Class().Schema()
+	sc_GlGetTexGenfvOES.Metadata = append(sc_GlGetTexGenfvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexGenfvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexGenivOES := (*GlGetTexGenivOES)(nil).Class().Schema()
+	sc_GlGetTexGenivOES.Metadata = append(sc_GlGetTexGenivOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexGenivOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexGenxvOES := (*GlGetTexGenxvOES)(nil).Class().Schema()
+	sc_GlGetTexGenxvOES.Metadata = append(sc_GlGetTexGenxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexGenxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexParameterxv := (*GlGetTexParameterxv)(nil).Class().Schema()
+	sc_GlGetTexParameterxv.Metadata = append(sc_GlGetTexParameterxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexParameterxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlGetTexParameterxvOES := (*GlGetTexParameterxvOES)(nil).Class().Schema()
+	sc_GlGetTexParameterxvOES.Metadata = append(sc_GlGetTexParameterxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glGetTexParameterxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlIsFramebufferOES := (*GlIsFramebufferOES)(nil).Class().Schema()
+	sc_GlIsFramebufferOES.Metadata = append(sc_GlIsFramebufferOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glIsFramebufferOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlIsRenderbufferOES := (*GlIsRenderbufferOES)(nil).Class().Schema()
+	sc_GlIsRenderbufferOES.Metadata = append(sc_GlIsRenderbufferOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glIsRenderbufferOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelf := (*GlLightModelf)(nil).Class().Schema()
+	sc_GlLightModelf.Metadata = append(sc_GlLightModelf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelfv := (*GlLightModelfv)(nil).Class().Schema()
+	sc_GlLightModelfv.Metadata = append(sc_GlLightModelfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelx := (*GlLightModelx)(nil).Class().Schema()
+	sc_GlLightModelx.Metadata = append(sc_GlLightModelx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelxOES := (*GlLightModelxOES)(nil).Class().Schema()
+	sc_GlLightModelxOES.Metadata = append(sc_GlLightModelxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelxv := (*GlLightModelxv)(nil).Class().Schema()
+	sc_GlLightModelxv.Metadata = append(sc_GlLightModelxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightModelxvOES := (*GlLightModelxvOES)(nil).Class().Schema()
+	sc_GlLightModelxvOES.Metadata = append(sc_GlLightModelxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightModelxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightf := (*GlLightf)(nil).Class().Schema()
+	sc_GlLightf.Metadata = append(sc_GlLightf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightfv := (*GlLightfv)(nil).Class().Schema()
+	sc_GlLightfv.Metadata = append(sc_GlLightfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightx := (*GlLightx)(nil).Class().Schema()
+	sc_GlLightx.Metadata = append(sc_GlLightx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightxOES := (*GlLightxOES)(nil).Class().Schema()
+	sc_GlLightxOES.Metadata = append(sc_GlLightxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightxv := (*GlLightxv)(nil).Class().Schema()
+	sc_GlLightxv.Metadata = append(sc_GlLightxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLightxvOES := (*GlLightxvOES)(nil).Class().Schema()
+	sc_GlLightxvOES.Metadata = append(sc_GlLightxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLightxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLineWidthx := (*GlLineWidthx)(nil).Class().Schema()
+	sc_GlLineWidthx.Metadata = append(sc_GlLineWidthx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLineWidthx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLineWidthxOES := (*GlLineWidthxOES)(nil).Class().Schema()
+	sc_GlLineWidthxOES.Metadata = append(sc_GlLineWidthxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLineWidthxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLoadIdentity := (*GlLoadIdentity)(nil).Class().Schema()
+	sc_GlLoadIdentity.Metadata = append(sc_GlLoadIdentity.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLoadIdentity",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLoadMatrixf := (*GlLoadMatrixf)(nil).Class().Schema()
+	sc_GlLoadMatrixf.Metadata = append(sc_GlLoadMatrixf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLoadMatrixf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLoadMatrixx := (*GlLoadMatrixx)(nil).Class().Schema()
+	sc_GlLoadMatrixx.Metadata = append(sc_GlLoadMatrixx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLoadMatrixx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLoadMatrixxOES := (*GlLoadMatrixxOES)(nil).Class().Schema()
+	sc_GlLoadMatrixxOES.Metadata = append(sc_GlLoadMatrixxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLoadMatrixxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLoadPaletteFromModelViewMatrixOES := (*GlLoadPaletteFromModelViewMatrixOES)(nil).Class().Schema()
+	sc_GlLoadPaletteFromModelViewMatrixOES.Metadata = append(sc_GlLoadPaletteFromModelViewMatrixOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLoadPaletteFromModelViewMatrixOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlLogicOp := (*GlLogicOp)(nil).Class().Schema()
+	sc_GlLogicOp.Metadata = append(sc_GlLogicOp.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glLogicOp",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialf := (*GlMaterialf)(nil).Class().Schema()
+	sc_GlMaterialf.Metadata = append(sc_GlMaterialf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialfv := (*GlMaterialfv)(nil).Class().Schema()
+	sc_GlMaterialfv.Metadata = append(sc_GlMaterialfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialx := (*GlMaterialx)(nil).Class().Schema()
+	sc_GlMaterialx.Metadata = append(sc_GlMaterialx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialxOES := (*GlMaterialxOES)(nil).Class().Schema()
+	sc_GlMaterialxOES.Metadata = append(sc_GlMaterialxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialxv := (*GlMaterialxv)(nil).Class().Schema()
+	sc_GlMaterialxv.Metadata = append(sc_GlMaterialxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMaterialxvOES := (*GlMaterialxvOES)(nil).Class().Schema()
+	sc_GlMaterialxvOES.Metadata = append(sc_GlMaterialxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMaterialxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMatrixIndexPointerOES := (*GlMatrixIndexPointerOES)(nil).Class().Schema()
+	sc_GlMatrixIndexPointerOES.Metadata = append(sc_GlMatrixIndexPointerOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMatrixIndexPointerOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMatrixMode := (*GlMatrixMode)(nil).Class().Schema()
+	sc_GlMatrixMode.Metadata = append(sc_GlMatrixMode.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMatrixMode",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultMatrixf := (*GlMultMatrixf)(nil).Class().Schema()
+	sc_GlMultMatrixf.Metadata = append(sc_GlMultMatrixf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultMatrixf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultMatrixx := (*GlMultMatrixx)(nil).Class().Schema()
+	sc_GlMultMatrixx.Metadata = append(sc_GlMultMatrixx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultMatrixx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultMatrixxOES := (*GlMultMatrixxOES)(nil).Class().Schema()
+	sc_GlMultMatrixxOES.Metadata = append(sc_GlMultMatrixxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultMatrixxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultiTexCoord4f := (*GlMultiTexCoord4f)(nil).Class().Schema()
+	sc_GlMultiTexCoord4f.Metadata = append(sc_GlMultiTexCoord4f.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultiTexCoord4f",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultiTexCoord4x := (*GlMultiTexCoord4x)(nil).Class().Schema()
+	sc_GlMultiTexCoord4x.Metadata = append(sc_GlMultiTexCoord4x.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultiTexCoord4x",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMultiTexCoord4xOES := (*GlMultiTexCoord4xOES)(nil).Class().Schema()
+	sc_GlMultiTexCoord4xOES.Metadata = append(sc_GlMultiTexCoord4xOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMultiTexCoord4xOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNormal3f := (*GlNormal3f)(nil).Class().Schema()
+	sc_GlNormal3f.Metadata = append(sc_GlNormal3f.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNormal3f",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNormal3x := (*GlNormal3x)(nil).Class().Schema()
+	sc_GlNormal3x.Metadata = append(sc_GlNormal3x.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNormal3x",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNormal3xOES := (*GlNormal3xOES)(nil).Class().Schema()
+	sc_GlNormal3xOES.Metadata = append(sc_GlNormal3xOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNormal3xOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNormalPointer := (*GlNormalPointer)(nil).Class().Schema()
+	sc_GlNormalPointer.Metadata = append(sc_GlNormalPointer.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNormalPointer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlOrthof := (*GlOrthof)(nil).Class().Schema()
+	sc_GlOrthof.Metadata = append(sc_GlOrthof.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glOrthof",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlOrthofOES := (*GlOrthofOES)(nil).Class().Schema()
+	sc_GlOrthofOES.Metadata = append(sc_GlOrthofOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glOrthofOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlOrthox := (*GlOrthox)(nil).Class().Schema()
+	sc_GlOrthox.Metadata = append(sc_GlOrthox.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glOrthox",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlOrthoxOES := (*GlOrthoxOES)(nil).Class().Schema()
+	sc_GlOrthoxOES.Metadata = append(sc_GlOrthoxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glOrthoxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterf := (*GlPointParameterf)(nil).Class().Schema()
+	sc_GlPointParameterf.Metadata = append(sc_GlPointParameterf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterfv := (*GlPointParameterfv)(nil).Class().Schema()
+	sc_GlPointParameterfv.Metadata = append(sc_GlPointParameterfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterx := (*GlPointParameterx)(nil).Class().Schema()
+	sc_GlPointParameterx.Metadata = append(sc_GlPointParameterx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterxOES := (*GlPointParameterxOES)(nil).Class().Schema()
+	sc_GlPointParameterxOES.Metadata = append(sc_GlPointParameterxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterxv := (*GlPointParameterxv)(nil).Class().Schema()
+	sc_GlPointParameterxv.Metadata = append(sc_GlPointParameterxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointParameterxvOES := (*GlPointParameterxvOES)(nil).Class().Schema()
+	sc_GlPointParameterxvOES.Metadata = append(sc_GlPointParameterxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointParameterxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointSize := (*GlPointSize)(nil).Class().Schema()
+	sc_GlPointSize.Metadata = append(sc_GlPointSize.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointSize",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointSizePointerOES := (*GlPointSizePointerOES)(nil).Class().Schema()
+	sc_GlPointSizePointerOES.Metadata = append(sc_GlPointSizePointerOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointSizePointerOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointSizex := (*GlPointSizex)(nil).Class().Schema()
+	sc_GlPointSizex.Metadata = append(sc_GlPointSizex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointSizex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointSizexOES := (*GlPointSizexOES)(nil).Class().Schema()
+	sc_GlPointSizexOES.Metadata = append(sc_GlPointSizexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointSizexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPolygonOffsetx := (*GlPolygonOffsetx)(nil).Class().Schema()
+	sc_GlPolygonOffsetx.Metadata = append(sc_GlPolygonOffsetx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPolygonOffsetx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPolygonOffsetxOES := (*GlPolygonOffsetxOES)(nil).Class().Schema()
+	sc_GlPolygonOffsetxOES.Metadata = append(sc_GlPolygonOffsetxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPolygonOffsetxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPopMatrix := (*GlPopMatrix)(nil).Class().Schema()
+	sc_GlPopMatrix.Metadata = append(sc_GlPopMatrix.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPopMatrix",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPushMatrix := (*GlPushMatrix)(nil).Class().Schema()
+	sc_GlPushMatrix.Metadata = append(sc_GlPushMatrix.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPushMatrix",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlQueryMatrixxOES := (*GlQueryMatrixxOES)(nil).Class().Schema()
+	sc_GlQueryMatrixxOES.Metadata = append(sc_GlQueryMatrixxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glQueryMatrixxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlRenderbufferStorageOES := (*GlRenderbufferStorageOES)(nil).Class().Schema()
+	sc_GlRenderbufferStorageOES.Metadata = append(sc_GlRenderbufferStorageOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glRenderbufferStorageOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlRotatef := (*GlRotatef)(nil).Class().Schema()
+	sc_GlRotatef.Metadata = append(sc_GlRotatef.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glRotatef",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlRotatex := (*GlRotatex)(nil).Class().Schema()
+	sc_GlRotatex.Metadata = append(sc_GlRotatex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glRotatex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlRotatexOES := (*GlRotatexOES)(nil).Class().Schema()
+	sc_GlRotatexOES.Metadata = append(sc_GlRotatexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glRotatexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlSampleCoveragex := (*GlSampleCoveragex)(nil).Class().Schema()
+	sc_GlSampleCoveragex.Metadata = append(sc_GlSampleCoveragex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glSampleCoveragex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlSampleCoveragexOES := (*GlSampleCoveragexOES)(nil).Class().Schema()
+	sc_GlSampleCoveragexOES.Metadata = append(sc_GlSampleCoveragexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glSampleCoveragexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlScalef := (*GlScalef)(nil).Class().Schema()
+	sc_GlScalef.Metadata = append(sc_GlScalef.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glScalef",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlScalex := (*GlScalex)(nil).Class().Schema()
+	sc_GlScalex.Metadata = append(sc_GlScalex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glScalex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlScalexOES := (*GlScalexOES)(nil).Class().Schema()
+	sc_GlScalexOES.Metadata = append(sc_GlScalexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glScalexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlShadeModel := (*GlShadeModel)(nil).Class().Schema()
+	sc_GlShadeModel.Metadata = append(sc_GlShadeModel.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glShadeModel",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexCoordPointer := (*GlTexCoordPointer)(nil).Class().Schema()
+	sc_GlTexCoordPointer.Metadata = append(sc_GlTexCoordPointer.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexCoordPointer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvf := (*GlTexEnvf)(nil).Class().Schema()
+	sc_GlTexEnvf.Metadata = append(sc_GlTexEnvf.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvf",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvfv := (*GlTexEnvfv)(nil).Class().Schema()
+	sc_GlTexEnvfv.Metadata = append(sc_GlTexEnvfv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvfv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvi := (*GlTexEnvi)(nil).Class().Schema()
+	sc_GlTexEnvi.Metadata = append(sc_GlTexEnvi.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvi",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnviv := (*GlTexEnviv)(nil).Class().Schema()
+	sc_GlTexEnviv.Metadata = append(sc_GlTexEnviv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnviv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvx := (*GlTexEnvx)(nil).Class().Schema()
+	sc_GlTexEnvx.Metadata = append(sc_GlTexEnvx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvxOES := (*GlTexEnvxOES)(nil).Class().Schema()
+	sc_GlTexEnvxOES.Metadata = append(sc_GlTexEnvxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvxv := (*GlTexEnvxv)(nil).Class().Schema()
+	sc_GlTexEnvxv.Metadata = append(sc_GlTexEnvxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexEnvxvOES := (*GlTexEnvxvOES)(nil).Class().Schema()
+	sc_GlTexEnvxvOES.Metadata = append(sc_GlTexEnvxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexEnvxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGenfOES := (*GlTexGenfOES)(nil).Class().Schema()
+	sc_GlTexGenfOES.Metadata = append(sc_GlTexGenfOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGenfOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGenfvOES := (*GlTexGenfvOES)(nil).Class().Schema()
+	sc_GlTexGenfvOES.Metadata = append(sc_GlTexGenfvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGenfvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGeniOES := (*GlTexGeniOES)(nil).Class().Schema()
+	sc_GlTexGeniOES.Metadata = append(sc_GlTexGeniOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGeniOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGenivOES := (*GlTexGenivOES)(nil).Class().Schema()
+	sc_GlTexGenivOES.Metadata = append(sc_GlTexGenivOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGenivOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGenxOES := (*GlTexGenxOES)(nil).Class().Schema()
+	sc_GlTexGenxOES.Metadata = append(sc_GlTexGenxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGenxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexGenxvOES := (*GlTexGenxvOES)(nil).Class().Schema()
+	sc_GlTexGenxvOES.Metadata = append(sc_GlTexGenxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexGenxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterx := (*GlTexParameterx)(nil).Class().Schema()
+	sc_GlTexParameterx.Metadata = append(sc_GlTexParameterx.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterx",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterxOES := (*GlTexParameterxOES)(nil).Class().Schema()
+	sc_GlTexParameterxOES.Metadata = append(sc_GlTexParameterxOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterxOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterxv := (*GlTexParameterxv)(nil).Class().Schema()
+	sc_GlTexParameterxv.Metadata = append(sc_GlTexParameterxv.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterxv",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexParameterxvOES := (*GlTexParameterxvOES)(nil).Class().Schema()
+	sc_GlTexParameterxvOES.Metadata = append(sc_GlTexParameterxvOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexParameterxvOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTranslatef := (*GlTranslatef)(nil).Class().Schema()
+	sc_GlTranslatef.Metadata = append(sc_GlTranslatef.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTranslatef",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTranslatex := (*GlTranslatex)(nil).Class().Schema()
+	sc_GlTranslatex.Metadata = append(sc_GlTranslatex.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTranslatex",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTranslatexOES := (*GlTranslatexOES)(nil).Class().Schema()
+	sc_GlTranslatexOES.Metadata = append(sc_GlTranslatexOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTranslatexOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlVertexPointer := (*GlVertexPointer)(nil).Class().Schema()
+	sc_GlVertexPointer.Metadata = append(sc_GlVertexPointer.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glVertexPointer",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlWeightPointerOES := (*GlWeightPointerOES)(nil).Class().Schema()
+	sc_GlWeightPointerOES.Metadata = append(sc_GlWeightPointerOES.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glWeightPointerOES",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlColorPointerBounds := (*GlColorPointerBounds)(nil).Class().Schema()
+	sc_GlColorPointerBounds.Metadata = append(sc_GlColorPointerBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glColorPointerBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlNormalPointerBounds := (*GlNormalPointerBounds)(nil).Class().Schema()
+	sc_GlNormalPointerBounds.Metadata = append(sc_GlNormalPointerBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glNormalPointerBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlTexCoordPointerBounds := (*GlTexCoordPointerBounds)(nil).Class().Schema()
+	sc_GlTexCoordPointerBounds.Metadata = append(sc_GlTexCoordPointerBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glTexCoordPointerBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlVertexPointerBounds := (*GlVertexPointerBounds)(nil).Class().Schema()
+	sc_GlVertexPointerBounds.Metadata = append(sc_GlVertexPointerBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glVertexPointerBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlPointSizePointerOESBounds := (*GlPointSizePointerOESBounds)(nil).Class().Schema()
+	sc_GlPointSizePointerOESBounds.Metadata = append(sc_GlPointSizePointerOESBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glPointSizePointerOESBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlMatrixIndexPointerOESBounds := (*GlMatrixIndexPointerOESBounds)(nil).Class().Schema()
+	sc_GlMatrixIndexPointerOESBounds.Metadata = append(sc_GlMatrixIndexPointerOESBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glMatrixIndexPointerOESBounds",
+		DrawCall:         false,
+		EndOfFrame:       false,
+		DocumentationUrl: "[]",
+	})
+
+	sc_GlWeightPointerOESBounds := (*GlWeightPointerOESBounds)(nil).Class().Schema()
+	sc_GlWeightPointerOESBounds.Metadata = append(sc_GlWeightPointerOESBounds.Metadata, &atom.Metadata{
+		API:              apiID,
+		DisplayName:      "glWeightPointerOESBounds",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

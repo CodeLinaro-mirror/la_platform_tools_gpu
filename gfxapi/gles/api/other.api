@@ -17,7 +17,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnable.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glDisable(GLenum capability) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (capability) {
     case GL_BLEND, GL_CULL_FACE, GL_DEPTH_TEST, GL_DITHER, GL_POLYGON_OFFSET_FILL,
         GL_SAMPLE_ALPHA_TO_COVERAGE, GL_SAMPLE_COVERAGE, GL_SCISSOR_TEST, GL_STENCIL_TEST: {
@@ -67,7 +67,7 @@ macro void Disablei(GLenum target, GLuint index) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glEnable.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glEnable.xhtml","OpenGL ES 3.2")
 cmd void glEnable(GLenum capability) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (capability) {
     case GL_BLEND, GL_CULL_FACE, GL_DEPTH_TEST, GL_DITHER, GL_POLYGON_OFFSET_FILL,
         GL_SAMPLE_ALPHA_TO_COVERAGE, GL_SAMPLE_COVERAGE, GL_SCISSOR_TEST, GL_STENCIL_TEST: {
@@ -117,7 +117,7 @@ macro void Enablei(GLenum target, GLuint index) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFinish.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFinish.xhtml","OpenGL ES 3.2")
 cmd void glFinish() {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
 }
 
@@ -126,7 +126,7 @@ cmd void glFinish() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFlush.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFlush.xhtml","OpenGL ES 3.2")
 cmd void glFlush() {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
 }
 
@@ -161,7 +161,7 @@ macro void FlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr len
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetError.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetError.xhtml","OpenGL ES 3.2")
 cmd GLenum glGetError() {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   return ?
 }
@@ -182,7 +182,7 @@ macro GLenum GetGraphicsResetStatus() {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glHint.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glHint.xhtml","OpenGL ES 3.2")
 cmd void glHint(GLenum target, GLenum mode) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_GENERATE_MIPMAP_HINT: {
       // version 2.0

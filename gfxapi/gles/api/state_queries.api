@@ -178,7 +178,7 @@ cmd void glGetBooleani_v(GLenum param, GLuint index, GLboolean* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGet.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGet.xhtml","OpenGL ES 3.2")
 cmd void glGetBooleanv(GLenum param, GLboolean* values) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   v := values[0:stateVariableSize(param)]
   ctx := GetContext()
   switch (param) {
@@ -228,7 +228,7 @@ cmd void glGetBooleanv(GLenum param, GLboolean* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGet.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGet.xhtml","OpenGL ES 3.2")
 cmd void glGetFloatv(GLenum param, GLfloat* values) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   v := values[0:stateVariableSize(param)]
   ctx := GetContext()
   switch (param) {
@@ -305,7 +305,7 @@ cmd void glGetIntegeri_v(GLenum param, GLuint index, GLint* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGet.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGet.xhtml","OpenGL ES 3.2")
 cmd void glGetIntegerv(GLenum param, GLint* values) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   v := values[0:stateVariableSize(param)]
   ctx := GetContext()
   switch (param) {
@@ -584,7 +584,7 @@ cmd void glGetInternalformativ(GLenum  target,
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetString.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetString.xhtml","OpenGL ES 3.2")
 cmd const GLubyte* glGetString(GLenum param) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (param) {
     case GL_EXTENSIONS, GL_RENDERER, GL_SHADING_LANGUAGE_VERSION, GL_VENDOR, GL_VERSION: {
       // version 2.0
@@ -619,7 +619,7 @@ cmd const GLubyte* glGetStringi(GLenum name, GLuint index) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsEnabled.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsEnabled.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsEnabled(GLenum capability) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (capability) {
     case GL_BLEND, GL_CULL_FACE, GL_DEPTH_TEST, GL_DITHER, GL_POLYGON_OFFSET_FILL,
         GL_SAMPLE_ALPHA_TO_COVERAGE, GL_SAMPLE_COVERAGE, GL_SCISSOR_TEST, GL_STENCIL_TEST: {

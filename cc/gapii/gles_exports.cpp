@@ -803,9 +803,6 @@ EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t sa
                                                      int32_t height);
 EXPORT void STDCALL glStencilMask(uint32_t mask);
 EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask);
-EXPORT void STDCALL
-glFramebufferTexture2DOES(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
-                          uint32_t texture_target, uint32_t texture, int32_t level);
 EXPORT void STDCALL glDisable(uint32_t capability);
 EXPORT void STDCALL glDisablei(uint32_t target, uint32_t index);
 EXPORT void STDCALL glEnable(uint32_t capability);
@@ -1210,6 +1207,203 @@ EXPORT int STDCALL CGSGetSurfaceBounds(void* cid, int32_t wid, int32_t sid, doub
 EXPORT int STDCALL CGLFlushDrawable(void* ctx);
 EXPORT void STDCALL glGetQueryObjecti64v(uint32_t query, uint32_t parameter, int64_t* value);
 EXPORT void STDCALL glGetQueryObjectui64v(uint32_t query, uint32_t parameter, uint64_t* value);
+EXPORT void STDCALL glAlphaFunc(uint32_t func, float ref);
+EXPORT void STDCALL glAlphaFuncx(uint32_t func, int32_t ref);
+EXPORT void STDCALL glAlphaFuncxOES(uint32_t func, int32_t ref);
+EXPORT void STDCALL glBindFramebufferOES(uint32_t target, uint32_t framebuffer);
+EXPORT void STDCALL glBindRenderbufferOES(uint32_t target, uint32_t renderbuffer);
+EXPORT void STDCALL glBlendEquationOES(uint32_t mode);
+EXPORT void STDCALL glBlendEquationSeparateOES(uint32_t modeRGB, uint32_t modeAlpha);
+EXPORT void STDCALL
+glBlendFuncSeparateOES(uint32_t srcRGB, uint32_t dstRGB, uint32_t srcAlpha, uint32_t dstAlpha);
+EXPORT uint32_t STDCALL glCheckFramebufferStatusOES(uint32_t target);
+EXPORT void STDCALL glClearColorx(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+EXPORT void STDCALL glClearColorxOES(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+EXPORT void STDCALL glClearDepthfOES(float depth);
+EXPORT void STDCALL glClearDepthx(int32_t depth);
+EXPORT void STDCALL glClearDepthxOES(int32_t depth);
+EXPORT void STDCALL glClientActiveTexture(uint32_t texture);
+EXPORT void STDCALL glClipPlanef(uint32_t p, float* eqn);
+EXPORT void STDCALL glClipPlanefIMG(uint32_t p, float* eqn);
+EXPORT void STDCALL glClipPlanefOES(uint32_t plane, float* equation);
+EXPORT void STDCALL glClipPlanex(uint32_t plane, int32_t* equation);
+EXPORT void STDCALL glClipPlanexIMG(uint32_t p, int32_t* eqn);
+EXPORT void STDCALL glClipPlanexOES(uint32_t plane, int32_t* equation);
+EXPORT void STDCALL glColor4f(float red, float green, float blue, float alpha);
+EXPORT void STDCALL glColor4ub(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+EXPORT void STDCALL glColor4x(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+EXPORT void STDCALL glColor4xOES(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+EXPORT void STDCALL glColorPointer(int32_t size, uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glCurrentPaletteMatrixOES(uint32_t matrixpaletteindex);
+EXPORT void STDCALL glDeleteFramebuffersOES(int32_t n, uint32_t* framebuffers);
+EXPORT void STDCALL glDeleteRenderbuffersOES(int32_t n, uint32_t* renderbuffers);
+EXPORT void STDCALL glDepthRangefOES(float n, float f);
+EXPORT void STDCALL glDepthRangex(int32_t n, int32_t f);
+EXPORT void STDCALL glDepthRangexOES(int32_t n, int32_t f);
+EXPORT void STDCALL glDisableClientState(uint32_t array);
+EXPORT void STDCALL glDrawTexfOES(float x, float y, float z, float width, float height);
+EXPORT void STDCALL glDrawTexfvOES(float* coords);
+EXPORT void STDCALL glDrawTexiOES(int32_t x, int32_t y, int32_t z, int32_t width, int32_t height);
+EXPORT void STDCALL glDrawTexivOES(int32_t* coords);
+EXPORT void STDCALL glDrawTexsOES(int16_t x, int16_t y, int16_t z, int16_t width, int16_t height);
+EXPORT void STDCALL glDrawTexsvOES(int16_t* coords);
+EXPORT void STDCALL glDrawTexxOES(int32_t x, int32_t y, int32_t z, int32_t width, int32_t height);
+EXPORT void STDCALL glDrawTexxvOES(int32_t* coords);
+EXPORT void STDCALL glEnableClientState(uint32_t array);
+EXPORT void STDCALL glFogf(uint32_t pname, float param);
+EXPORT void STDCALL glFogfv(uint32_t pname, float* params);
+EXPORT void STDCALL glFogx(uint32_t pname, int32_t param);
+EXPORT void STDCALL glFogxOES(uint32_t pname, int32_t param);
+EXPORT void STDCALL glFogxv(uint32_t pname, int32_t* param);
+EXPORT void STDCALL glFogxvOES(uint32_t pname, int32_t* param);
+EXPORT void STDCALL glFramebufferRenderbufferOES(uint32_t target, uint32_t attachment,
+                                                 uint32_t renderbuffertarget,
+                                                 uint32_t renderbuffer);
+EXPORT void STDCALL glFramebufferTexture2DOES(uint32_t target, uint32_t attachment,
+                                              uint32_t textarget, uint32_t texture, int32_t level);
+EXPORT void STDCALL glFrustumf(float l, float r, float b, float t, float n, float f);
+EXPORT void STDCALL glFrustumfOES(float l, float r, float b, float t, float n, float f);
+EXPORT void STDCALL glFrustumx(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f);
+EXPORT void STDCALL glFrustumxOES(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f);
+EXPORT void STDCALL glGenFramebuffersOES(int32_t n, uint32_t* framebuffers);
+EXPORT void STDCALL glGenRenderbuffersOES(int32_t n, uint32_t* renderbuffers);
+EXPORT void STDCALL glGenerateMipmapOES(uint32_t target);
+EXPORT void STDCALL glGetClipPlanef(uint32_t plane, float* equation);
+EXPORT void STDCALL glGetClipPlanefOES(uint32_t plane, float* equation);
+EXPORT void STDCALL glGetClipPlanex(uint32_t plane, int32_t* equation);
+EXPORT void STDCALL glGetClipPlanexOES(uint32_t plane, int32_t* equation);
+EXPORT void STDCALL glGetFixedv(uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetFixedvOES(uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetFramebufferAttachmentParameterivOES(uint32_t target, uint32_t attachment,
+                                                             uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetLightfv(uint32_t light, uint32_t pname, float* params);
+EXPORT void STDCALL glGetLightxv(uint32_t light, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetLightxvOES(uint32_t light, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetMaterialfv(uint32_t face, uint32_t pname, float* params);
+EXPORT void STDCALL glGetMaterialxv(uint32_t face, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetMaterialxvOES(uint32_t face, uint32_t pname, int32_t* params);
+EXPORT void STDCALL
+glGetRenderbufferParameterivOES(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexEnvfv(uint32_t target, uint32_t pname, float* params);
+EXPORT void STDCALL glGetTexEnviv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexEnvxv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexGenfvOES(uint32_t coord, uint32_t pname, float* params);
+EXPORT void STDCALL glGetTexGenivOES(uint32_t coord, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexParameterxv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glGetTexParameterxvOES(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT uint8_t STDCALL glIsFramebufferOES(uint32_t framebuffer);
+EXPORT uint8_t STDCALL glIsRenderbufferOES(uint32_t renderbuffer);
+EXPORT void STDCALL glLightModelf(uint32_t pname, float param);
+EXPORT void STDCALL glLightModelfv(uint32_t pname, float* params);
+EXPORT void STDCALL glLightModelx(uint32_t pname, int32_t param);
+EXPORT void STDCALL glLightModelxOES(uint32_t pname, int32_t param);
+EXPORT void STDCALL glLightModelxv(uint32_t pname, int32_t* param);
+EXPORT void STDCALL glLightModelxvOES(uint32_t pname, int32_t* param);
+EXPORT void STDCALL glLightf(uint32_t light, uint32_t pname, float param);
+EXPORT void STDCALL glLightfv(uint32_t light, uint32_t pname, float* params);
+EXPORT void STDCALL glLightx(uint32_t light, uint32_t pname, int32_t param);
+EXPORT void STDCALL glLightxOES(uint32_t light, uint32_t pname, int32_t param);
+EXPORT void STDCALL glLightxv(uint32_t light, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glLightxvOES(uint32_t light, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glLineWidthx(int32_t width);
+EXPORT void STDCALL glLineWidthxOES(int32_t width);
+EXPORT void STDCALL glLoadIdentity();
+EXPORT void STDCALL glLoadMatrixf(float* m);
+EXPORT void STDCALL glLoadMatrixx(int32_t* m);
+EXPORT void STDCALL glLoadMatrixxOES(int32_t* m);
+EXPORT void STDCALL glLoadPaletteFromModelViewMatrixOES();
+EXPORT void STDCALL glLogicOp(uint32_t opcode);
+EXPORT void STDCALL glMaterialf(uint32_t face, uint32_t pname, float param);
+EXPORT void STDCALL glMaterialfv(uint32_t face, uint32_t pname, float* params);
+EXPORT void STDCALL glMaterialx(uint32_t face, uint32_t pname, int32_t param);
+EXPORT void STDCALL glMaterialxOES(uint32_t face, uint32_t pname, int32_t param);
+EXPORT void STDCALL glMaterialxv(uint32_t face, uint32_t pname, int32_t* param);
+EXPORT void STDCALL glMaterialxvOES(uint32_t face, uint32_t pname, int32_t* param);
+EXPORT void STDCALL
+glMatrixIndexPointerOES(int32_t size, uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glMatrixMode(uint32_t mode);
+EXPORT void STDCALL glMultMatrixf(float* m);
+EXPORT void STDCALL glMultMatrixx(int32_t* m);
+EXPORT void STDCALL glMultMatrixxOES(int32_t* m);
+EXPORT void STDCALL glMultiTexCoord4f(uint32_t target, float v0, float v1, float v2, float v3);
+EXPORT void STDCALL
+glMultiTexCoord4x(uint32_t texture, int32_t v0, int32_t v1, int32_t v2, int32_t v3);
+EXPORT void STDCALL
+glMultiTexCoord4xOES(uint32_t texture, int32_t v0, int32_t v1, int32_t v2, int32_t v3);
+EXPORT void STDCALL glNormal3f(float nx, float ny, float nz);
+EXPORT void STDCALL glNormal3x(int32_t nx, int32_t ny, int32_t nz);
+EXPORT void STDCALL glNormal3xOES(int32_t nx, int32_t ny, int32_t nz);
+EXPORT void STDCALL glNormalPointer(uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glOrthof(float l, float r, float b, float t, float n, float f);
+EXPORT void STDCALL glOrthofOES(float l, float r, float b, float t, float n, float f);
+EXPORT void STDCALL glOrthox(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f);
+EXPORT void STDCALL glOrthoxOES(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f);
+EXPORT void STDCALL glPointParameterf(uint32_t pname, float param);
+EXPORT void STDCALL glPointParameterfv(uint32_t pname, float* params);
+EXPORT void STDCALL glPointParameterx(uint32_t pname, int32_t param);
+EXPORT void STDCALL glPointParameterxOES(uint32_t pname, int32_t param);
+EXPORT void STDCALL glPointParameterxv(uint32_t pname, int32_t* params);
+EXPORT void STDCALL glPointParameterxvOES(uint32_t pname, int32_t* params);
+EXPORT void STDCALL glPointSize(float size);
+EXPORT void STDCALL glPointSizePointerOES(uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glPointSizex(int32_t size);
+EXPORT void STDCALL glPointSizexOES(int32_t size);
+EXPORT void STDCALL glPolygonOffsetx(int32_t factor, int32_t units);
+EXPORT void STDCALL glPolygonOffsetxOES(int32_t factor, int32_t units);
+EXPORT void STDCALL glPopMatrix();
+EXPORT void STDCALL glPushMatrix();
+EXPORT uint32_t STDCALL glQueryMatrixxOES(int32_t* mantissa, int32_t* exponent);
+EXPORT void STDCALL
+glRenderbufferStorageOES(uint32_t target, uint32_t internalformat, int32_t width, int32_t height);
+EXPORT void STDCALL glRotatef(float angle, float x, float y, float z);
+EXPORT void STDCALL glRotatex(int32_t angle, int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glRotatexOES(int32_t angle, int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glSampleCoveragex(int32_t value, uint8_t invert);
+EXPORT void STDCALL glSampleCoveragexOES(int32_t value, uint8_t invert);
+EXPORT void STDCALL glScalef(float x, float y, float z);
+EXPORT void STDCALL glScalex(int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glScalexOES(int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glShadeModel(uint32_t mode);
+EXPORT void STDCALL glTexCoordPointer(int32_t size, uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glTexEnvf(uint32_t target, uint32_t pname, float param);
+EXPORT void STDCALL glTexEnvfv(uint32_t target, uint32_t pname, float* params);
+EXPORT void STDCALL glTexEnvi(uint32_t target, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexEnviv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexEnvx(uint32_t target, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexEnvxOES(uint32_t target, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexEnvxv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexGenfOES(uint32_t coord, uint32_t pname, float param);
+EXPORT void STDCALL glTexGenfvOES(uint32_t coord, uint32_t pname, float* params);
+EXPORT void STDCALL glTexGeniOES(uint32_t coord, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexGenivOES(uint32_t coord, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexGenxOES(uint32_t coord, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexParameterx(uint32_t target, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexParameterxOES(uint32_t target, uint32_t pname, int32_t param);
+EXPORT void STDCALL glTexParameterxv(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTexParameterxvOES(uint32_t target, uint32_t pname, int32_t* params);
+EXPORT void STDCALL glTranslatef(float x, float y, float z);
+EXPORT void STDCALL glTranslatex(int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glTranslatexOES(int32_t x, int32_t y, int32_t z);
+EXPORT void STDCALL glVertexPointer(int32_t size, uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL glWeightPointerOES(int32_t size, uint32_t type, int32_t stride, void* pointer);
+EXPORT void STDCALL
+glColorPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count);
+EXPORT void STDCALL
+glNormalPointerBounds(uint32_t type, int32_t stride, void* pointer, int32_t count);
+EXPORT void STDCALL
+glTexCoordPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count);
+EXPORT void STDCALL
+glVertexPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count);
+EXPORT void STDCALL
+glPointSizePointerOESBounds(uint32_t type, int32_t stride, void* pointer, int32_t count);
+EXPORT void STDCALL glMatrixIndexPointerOESBounds(int32_t size, uint32_t type, int32_t stride,
+                                                  void* pointer, int32_t count);
+EXPORT void STDCALL
+glWeightPointerOESBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count);
 
 EXPORT void* STDCALL eglGetProcAddress(const char* name);
 EXPORT void* STDCALL wglGetProcAddress(const char* name);
@@ -1721,7 +1915,6 @@ const Symbol kGLESExports[] = {
          reinterpret_cast<void*>(glRenderbufferStorageMultisample)},
         {"glStencilMask", reinterpret_cast<void*>(glStencilMask)},
         {"glStencilMaskSeparate", reinterpret_cast<void*>(glStencilMaskSeparate)},
-        {"glFramebufferTexture2DOES", reinterpret_cast<void*>(glFramebufferTexture2DOES)},
         {"glDisable", reinterpret_cast<void*>(glDisable)},
         {"glDisablei", reinterpret_cast<void*>(glDisablei)},
         {"glEnable", reinterpret_cast<void*>(glEnable)},
@@ -2001,6 +2194,189 @@ const Symbol kGLESExports[] = {
         {"CGLFlushDrawable", reinterpret_cast<void*>(CGLFlushDrawable)},
         {"glGetQueryObjecti64v", reinterpret_cast<void*>(glGetQueryObjecti64v)},
         {"glGetQueryObjectui64v", reinterpret_cast<void*>(glGetQueryObjectui64v)},
+        {"glAlphaFunc", reinterpret_cast<void*>(glAlphaFunc)},
+        {"glAlphaFuncx", reinterpret_cast<void*>(glAlphaFuncx)},
+        {"glAlphaFuncxOES", reinterpret_cast<void*>(glAlphaFuncxOES)},
+        {"glBindFramebufferOES", reinterpret_cast<void*>(glBindFramebufferOES)},
+        {"glBindRenderbufferOES", reinterpret_cast<void*>(glBindRenderbufferOES)},
+        {"glBlendEquationOES", reinterpret_cast<void*>(glBlendEquationOES)},
+        {"glBlendEquationSeparateOES", reinterpret_cast<void*>(glBlendEquationSeparateOES)},
+        {"glBlendFuncSeparateOES", reinterpret_cast<void*>(glBlendFuncSeparateOES)},
+        {"glCheckFramebufferStatusOES", reinterpret_cast<void*>(glCheckFramebufferStatusOES)},
+        {"glClearColorx", reinterpret_cast<void*>(glClearColorx)},
+        {"glClearColorxOES", reinterpret_cast<void*>(glClearColorxOES)},
+        {"glClearDepthfOES", reinterpret_cast<void*>(glClearDepthfOES)},
+        {"glClearDepthx", reinterpret_cast<void*>(glClearDepthx)},
+        {"glClearDepthxOES", reinterpret_cast<void*>(glClearDepthxOES)},
+        {"glClientActiveTexture", reinterpret_cast<void*>(glClientActiveTexture)},
+        {"glClipPlanef", reinterpret_cast<void*>(glClipPlanef)},
+        {"glClipPlanefIMG", reinterpret_cast<void*>(glClipPlanefIMG)},
+        {"glClipPlanefOES", reinterpret_cast<void*>(glClipPlanefOES)},
+        {"glClipPlanex", reinterpret_cast<void*>(glClipPlanex)},
+        {"glClipPlanexIMG", reinterpret_cast<void*>(glClipPlanexIMG)},
+        {"glClipPlanexOES", reinterpret_cast<void*>(glClipPlanexOES)},
+        {"glColor4f", reinterpret_cast<void*>(glColor4f)},
+        {"glColor4ub", reinterpret_cast<void*>(glColor4ub)},
+        {"glColor4x", reinterpret_cast<void*>(glColor4x)},
+        {"glColor4xOES", reinterpret_cast<void*>(glColor4xOES)},
+        {"glColorPointer", reinterpret_cast<void*>(glColorPointer)},
+        {"glCurrentPaletteMatrixOES", reinterpret_cast<void*>(glCurrentPaletteMatrixOES)},
+        {"glDeleteFramebuffersOES", reinterpret_cast<void*>(glDeleteFramebuffersOES)},
+        {"glDeleteRenderbuffersOES", reinterpret_cast<void*>(glDeleteRenderbuffersOES)},
+        {"glDepthRangefOES", reinterpret_cast<void*>(glDepthRangefOES)},
+        {"glDepthRangex", reinterpret_cast<void*>(glDepthRangex)},
+        {"glDepthRangexOES", reinterpret_cast<void*>(glDepthRangexOES)},
+        {"glDisableClientState", reinterpret_cast<void*>(glDisableClientState)},
+        {"glDrawTexfOES", reinterpret_cast<void*>(glDrawTexfOES)},
+        {"glDrawTexfvOES", reinterpret_cast<void*>(glDrawTexfvOES)},
+        {"glDrawTexiOES", reinterpret_cast<void*>(glDrawTexiOES)},
+        {"glDrawTexivOES", reinterpret_cast<void*>(glDrawTexivOES)},
+        {"glDrawTexsOES", reinterpret_cast<void*>(glDrawTexsOES)},
+        {"glDrawTexsvOES", reinterpret_cast<void*>(glDrawTexsvOES)},
+        {"glDrawTexxOES", reinterpret_cast<void*>(glDrawTexxOES)},
+        {"glDrawTexxvOES", reinterpret_cast<void*>(glDrawTexxvOES)},
+        {"glEnableClientState", reinterpret_cast<void*>(glEnableClientState)},
+        {"glFogf", reinterpret_cast<void*>(glFogf)},
+        {"glFogfv", reinterpret_cast<void*>(glFogfv)},
+        {"glFogx", reinterpret_cast<void*>(glFogx)},
+        {"glFogxOES", reinterpret_cast<void*>(glFogxOES)},
+        {"glFogxv", reinterpret_cast<void*>(glFogxv)},
+        {"glFogxvOES", reinterpret_cast<void*>(glFogxvOES)},
+        {"glFramebufferRenderbufferOES", reinterpret_cast<void*>(glFramebufferRenderbufferOES)},
+        {"glFramebufferTexture2DOES", reinterpret_cast<void*>(glFramebufferTexture2DOES)},
+        {"glFrustumf", reinterpret_cast<void*>(glFrustumf)},
+        {"glFrustumfOES", reinterpret_cast<void*>(glFrustumfOES)},
+        {"glFrustumx", reinterpret_cast<void*>(glFrustumx)},
+        {"glFrustumxOES", reinterpret_cast<void*>(glFrustumxOES)},
+        {"glGenFramebuffersOES", reinterpret_cast<void*>(glGenFramebuffersOES)},
+        {"glGenRenderbuffersOES", reinterpret_cast<void*>(glGenRenderbuffersOES)},
+        {"glGenerateMipmapOES", reinterpret_cast<void*>(glGenerateMipmapOES)},
+        {"glGetClipPlanef", reinterpret_cast<void*>(glGetClipPlanef)},
+        {"glGetClipPlanefOES", reinterpret_cast<void*>(glGetClipPlanefOES)},
+        {"glGetClipPlanex", reinterpret_cast<void*>(glGetClipPlanex)},
+        {"glGetClipPlanexOES", reinterpret_cast<void*>(glGetClipPlanexOES)},
+        {"glGetFixedv", reinterpret_cast<void*>(glGetFixedv)},
+        {"glGetFixedvOES", reinterpret_cast<void*>(glGetFixedvOES)},
+        {"glGetFramebufferAttachmentParameterivOES",
+         reinterpret_cast<void*>(glGetFramebufferAttachmentParameterivOES)},
+        {"glGetLightfv", reinterpret_cast<void*>(glGetLightfv)},
+        {"glGetLightxv", reinterpret_cast<void*>(glGetLightxv)},
+        {"glGetLightxvOES", reinterpret_cast<void*>(glGetLightxvOES)},
+        {"glGetMaterialfv", reinterpret_cast<void*>(glGetMaterialfv)},
+        {"glGetMaterialxv", reinterpret_cast<void*>(glGetMaterialxv)},
+        {"glGetMaterialxvOES", reinterpret_cast<void*>(glGetMaterialxvOES)},
+        {"glGetRenderbufferParameterivOES",
+         reinterpret_cast<void*>(glGetRenderbufferParameterivOES)},
+        {"glGetTexEnvfv", reinterpret_cast<void*>(glGetTexEnvfv)},
+        {"glGetTexEnviv", reinterpret_cast<void*>(glGetTexEnviv)},
+        {"glGetTexEnvxv", reinterpret_cast<void*>(glGetTexEnvxv)},
+        {"glGetTexEnvxvOES", reinterpret_cast<void*>(glGetTexEnvxvOES)},
+        {"glGetTexGenfvOES", reinterpret_cast<void*>(glGetTexGenfvOES)},
+        {"glGetTexGenivOES", reinterpret_cast<void*>(glGetTexGenivOES)},
+        {"glGetTexGenxvOES", reinterpret_cast<void*>(glGetTexGenxvOES)},
+        {"glGetTexParameterxv", reinterpret_cast<void*>(glGetTexParameterxv)},
+        {"glGetTexParameterxvOES", reinterpret_cast<void*>(glGetTexParameterxvOES)},
+        {"glIsFramebufferOES", reinterpret_cast<void*>(glIsFramebufferOES)},
+        {"glIsRenderbufferOES", reinterpret_cast<void*>(glIsRenderbufferOES)},
+        {"glLightModelf", reinterpret_cast<void*>(glLightModelf)},
+        {"glLightModelfv", reinterpret_cast<void*>(glLightModelfv)},
+        {"glLightModelx", reinterpret_cast<void*>(glLightModelx)},
+        {"glLightModelxOES", reinterpret_cast<void*>(glLightModelxOES)},
+        {"glLightModelxv", reinterpret_cast<void*>(glLightModelxv)},
+        {"glLightModelxvOES", reinterpret_cast<void*>(glLightModelxvOES)},
+        {"glLightf", reinterpret_cast<void*>(glLightf)},
+        {"glLightfv", reinterpret_cast<void*>(glLightfv)},
+        {"glLightx", reinterpret_cast<void*>(glLightx)},
+        {"glLightxOES", reinterpret_cast<void*>(glLightxOES)},
+        {"glLightxv", reinterpret_cast<void*>(glLightxv)},
+        {"glLightxvOES", reinterpret_cast<void*>(glLightxvOES)},
+        {"glLineWidthx", reinterpret_cast<void*>(glLineWidthx)},
+        {"glLineWidthxOES", reinterpret_cast<void*>(glLineWidthxOES)},
+        {"glLoadIdentity", reinterpret_cast<void*>(glLoadIdentity)},
+        {"glLoadMatrixf", reinterpret_cast<void*>(glLoadMatrixf)},
+        {"glLoadMatrixx", reinterpret_cast<void*>(glLoadMatrixx)},
+        {"glLoadMatrixxOES", reinterpret_cast<void*>(glLoadMatrixxOES)},
+        {"glLoadPaletteFromModelViewMatrixOES",
+         reinterpret_cast<void*>(glLoadPaletteFromModelViewMatrixOES)},
+        {"glLogicOp", reinterpret_cast<void*>(glLogicOp)},
+        {"glMaterialf", reinterpret_cast<void*>(glMaterialf)},
+        {"glMaterialfv", reinterpret_cast<void*>(glMaterialfv)},
+        {"glMaterialx", reinterpret_cast<void*>(glMaterialx)},
+        {"glMaterialxOES", reinterpret_cast<void*>(glMaterialxOES)},
+        {"glMaterialxv", reinterpret_cast<void*>(glMaterialxv)},
+        {"glMaterialxvOES", reinterpret_cast<void*>(glMaterialxvOES)},
+        {"glMatrixIndexPointerOES", reinterpret_cast<void*>(glMatrixIndexPointerOES)},
+        {"glMatrixMode", reinterpret_cast<void*>(glMatrixMode)},
+        {"glMultMatrixf", reinterpret_cast<void*>(glMultMatrixf)},
+        {"glMultMatrixx", reinterpret_cast<void*>(glMultMatrixx)},
+        {"glMultMatrixxOES", reinterpret_cast<void*>(glMultMatrixxOES)},
+        {"glMultiTexCoord4f", reinterpret_cast<void*>(glMultiTexCoord4f)},
+        {"glMultiTexCoord4x", reinterpret_cast<void*>(glMultiTexCoord4x)},
+        {"glMultiTexCoord4xOES", reinterpret_cast<void*>(glMultiTexCoord4xOES)},
+        {"glNormal3f", reinterpret_cast<void*>(glNormal3f)},
+        {"glNormal3x", reinterpret_cast<void*>(glNormal3x)},
+        {"glNormal3xOES", reinterpret_cast<void*>(glNormal3xOES)},
+        {"glNormalPointer", reinterpret_cast<void*>(glNormalPointer)},
+        {"glOrthof", reinterpret_cast<void*>(glOrthof)},
+        {"glOrthofOES", reinterpret_cast<void*>(glOrthofOES)},
+        {"glOrthox", reinterpret_cast<void*>(glOrthox)},
+        {"glOrthoxOES", reinterpret_cast<void*>(glOrthoxOES)},
+        {"glPointParameterf", reinterpret_cast<void*>(glPointParameterf)},
+        {"glPointParameterfv", reinterpret_cast<void*>(glPointParameterfv)},
+        {"glPointParameterx", reinterpret_cast<void*>(glPointParameterx)},
+        {"glPointParameterxOES", reinterpret_cast<void*>(glPointParameterxOES)},
+        {"glPointParameterxv", reinterpret_cast<void*>(glPointParameterxv)},
+        {"glPointParameterxvOES", reinterpret_cast<void*>(glPointParameterxvOES)},
+        {"glPointSize", reinterpret_cast<void*>(glPointSize)},
+        {"glPointSizePointerOES", reinterpret_cast<void*>(glPointSizePointerOES)},
+        {"glPointSizex", reinterpret_cast<void*>(glPointSizex)},
+        {"glPointSizexOES", reinterpret_cast<void*>(glPointSizexOES)},
+        {"glPolygonOffsetx", reinterpret_cast<void*>(glPolygonOffsetx)},
+        {"glPolygonOffsetxOES", reinterpret_cast<void*>(glPolygonOffsetxOES)},
+        {"glPopMatrix", reinterpret_cast<void*>(glPopMatrix)},
+        {"glPushMatrix", reinterpret_cast<void*>(glPushMatrix)},
+        {"glQueryMatrixxOES", reinterpret_cast<void*>(glQueryMatrixxOES)},
+        {"glRenderbufferStorageOES", reinterpret_cast<void*>(glRenderbufferStorageOES)},
+        {"glRotatef", reinterpret_cast<void*>(glRotatef)},
+        {"glRotatex", reinterpret_cast<void*>(glRotatex)},
+        {"glRotatexOES", reinterpret_cast<void*>(glRotatexOES)},
+        {"glSampleCoveragex", reinterpret_cast<void*>(glSampleCoveragex)},
+        {"glSampleCoveragexOES", reinterpret_cast<void*>(glSampleCoveragexOES)},
+        {"glScalef", reinterpret_cast<void*>(glScalef)},
+        {"glScalex", reinterpret_cast<void*>(glScalex)},
+        {"glScalexOES", reinterpret_cast<void*>(glScalexOES)},
+        {"glShadeModel", reinterpret_cast<void*>(glShadeModel)},
+        {"glTexCoordPointer", reinterpret_cast<void*>(glTexCoordPointer)},
+        {"glTexEnvf", reinterpret_cast<void*>(glTexEnvf)},
+        {"glTexEnvfv", reinterpret_cast<void*>(glTexEnvfv)},
+        {"glTexEnvi", reinterpret_cast<void*>(glTexEnvi)},
+        {"glTexEnviv", reinterpret_cast<void*>(glTexEnviv)},
+        {"glTexEnvx", reinterpret_cast<void*>(glTexEnvx)},
+        {"glTexEnvxOES", reinterpret_cast<void*>(glTexEnvxOES)},
+        {"glTexEnvxv", reinterpret_cast<void*>(glTexEnvxv)},
+        {"glTexEnvxvOES", reinterpret_cast<void*>(glTexEnvxvOES)},
+        {"glTexGenfOES", reinterpret_cast<void*>(glTexGenfOES)},
+        {"glTexGenfvOES", reinterpret_cast<void*>(glTexGenfvOES)},
+        {"glTexGeniOES", reinterpret_cast<void*>(glTexGeniOES)},
+        {"glTexGenivOES", reinterpret_cast<void*>(glTexGenivOES)},
+        {"glTexGenxOES", reinterpret_cast<void*>(glTexGenxOES)},
+        {"glTexGenxvOES", reinterpret_cast<void*>(glTexGenxvOES)},
+        {"glTexParameterx", reinterpret_cast<void*>(glTexParameterx)},
+        {"glTexParameterxOES", reinterpret_cast<void*>(glTexParameterxOES)},
+        {"glTexParameterxv", reinterpret_cast<void*>(glTexParameterxv)},
+        {"glTexParameterxvOES", reinterpret_cast<void*>(glTexParameterxvOES)},
+        {"glTranslatef", reinterpret_cast<void*>(glTranslatef)},
+        {"glTranslatex", reinterpret_cast<void*>(glTranslatex)},
+        {"glTranslatexOES", reinterpret_cast<void*>(glTranslatexOES)},
+        {"glVertexPointer", reinterpret_cast<void*>(glVertexPointer)},
+        {"glWeightPointerOES", reinterpret_cast<void*>(glWeightPointerOES)},
+        {"glColorPointerBounds", reinterpret_cast<void*>(glColorPointerBounds)},
+        {"glNormalPointerBounds", reinterpret_cast<void*>(glNormalPointerBounds)},
+        {"glTexCoordPointerBounds", reinterpret_cast<void*>(glTexCoordPointerBounds)},
+        {"glVertexPointerBounds", reinterpret_cast<void*>(glVertexPointerBounds)},
+        {"glPointSizePointerOESBounds", reinterpret_cast<void*>(glPointSizePointerOESBounds)},
+        {"glMatrixIndexPointerOESBounds", reinterpret_cast<void*>(glMatrixIndexPointerOESBounds)},
+        {"glWeightPointerOESBounds", reinterpret_cast<void*>(glWeightPointerOESBounds)},
         {"eglGetProcAddress", reinterpret_cast<void*>(eglGetProcAddress)},
         {"wglGetProcAddress", reinterpret_cast<void*>(wglGetProcAddress)},
         {"glXGetProcAddress", reinterpret_cast<void*>(glXGetProcAddress)},
@@ -4719,14 +5095,6 @@ EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     gapic::Lock<Spy> lock__(s);
     s->glStencilMaskSeparate(face, mask);
 }
-EXPORT void STDCALL
-glFramebufferTexture2DOES(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
-                          uint32_t texture_target, uint32_t texture, int32_t level) {
-    Spy* s = spy();
-    gapic::Lock<Spy> lock__(s);
-    s->glFramebufferTexture2DOES(framebuffer_target, framebuffer_attachment, texture_target,
-                                 texture, level);
-}
 EXPORT void STDCALL glDisable(uint32_t capability) {
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
@@ -6258,6 +6626,924 @@ EXPORT void STDCALL glGetQueryObjectui64v(uint32_t query, uint32_t parameter, ui
     Spy* s = spy();
     gapic::Lock<Spy> lock__(s);
     s->glGetQueryObjectui64v(query, parameter, value);
+}
+EXPORT void STDCALL glAlphaFunc(uint32_t func, float ref) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glAlphaFunc(func, ref);
+}
+EXPORT void STDCALL glAlphaFuncx(uint32_t func, int32_t ref) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glAlphaFuncx(func, ref);
+}
+EXPORT void STDCALL glAlphaFuncxOES(uint32_t func, int32_t ref) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glAlphaFuncxOES(func, ref);
+}
+EXPORT void STDCALL glBindFramebufferOES(uint32_t target, uint32_t framebuffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBindFramebufferOES(target, framebuffer);
+}
+EXPORT void STDCALL glBindRenderbufferOES(uint32_t target, uint32_t renderbuffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBindRenderbufferOES(target, renderbuffer);
+}
+EXPORT void STDCALL glBlendEquationOES(uint32_t mode) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendEquationOES(mode);
+}
+EXPORT void STDCALL glBlendEquationSeparateOES(uint32_t modeRGB, uint32_t modeAlpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendEquationSeparateOES(modeRGB, modeAlpha);
+}
+EXPORT void STDCALL
+glBlendFuncSeparateOES(uint32_t srcRGB, uint32_t dstRGB, uint32_t srcAlpha, uint32_t dstAlpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glBlendFuncSeparateOES(srcRGB, dstRGB, srcAlpha, dstAlpha);
+}
+EXPORT uint32_t STDCALL glCheckFramebufferStatusOES(uint32_t target) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glCheckFramebufferStatusOES(target);
+}
+EXPORT void STDCALL glClearColorx(int32_t red, int32_t green, int32_t blue, int32_t alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClearColorx(red, green, blue, alpha);
+}
+EXPORT void STDCALL glClearColorxOES(int32_t red, int32_t green, int32_t blue, int32_t alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClearColorxOES(red, green, blue, alpha);
+}
+EXPORT void STDCALL glClearDepthfOES(float depth) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClearDepthfOES(depth);
+}
+EXPORT void STDCALL glClearDepthx(int32_t depth) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClearDepthx(depth);
+}
+EXPORT void STDCALL glClearDepthxOES(int32_t depth) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClearDepthxOES(depth);
+}
+EXPORT void STDCALL glClientActiveTexture(uint32_t texture) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClientActiveTexture(texture);
+}
+EXPORT void STDCALL glClipPlanef(uint32_t p, float* eqn) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanef(p, eqn);
+}
+EXPORT void STDCALL glClipPlanefIMG(uint32_t p, float* eqn) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanefIMG(p, eqn);
+}
+EXPORT void STDCALL glClipPlanefOES(uint32_t plane, float* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanefOES(plane, equation);
+}
+EXPORT void STDCALL glClipPlanex(uint32_t plane, int32_t* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanex(plane, equation);
+}
+EXPORT void STDCALL glClipPlanexIMG(uint32_t p, int32_t* eqn) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanexIMG(p, eqn);
+}
+EXPORT void STDCALL glClipPlanexOES(uint32_t plane, int32_t* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glClipPlanexOES(plane, equation);
+}
+EXPORT void STDCALL glColor4f(float red, float green, float blue, float alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColor4f(red, green, blue, alpha);
+}
+EXPORT void STDCALL glColor4ub(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColor4ub(red, green, blue, alpha);
+}
+EXPORT void STDCALL glColor4x(int32_t red, int32_t green, int32_t blue, int32_t alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColor4x(red, green, blue, alpha);
+}
+EXPORT void STDCALL glColor4xOES(int32_t red, int32_t green, int32_t blue, int32_t alpha) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColor4xOES(red, green, blue, alpha);
+}
+EXPORT void STDCALL glColorPointer(int32_t size, uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColorPointer(size, type, stride, pointer);
+}
+EXPORT void STDCALL glCurrentPaletteMatrixOES(uint32_t matrixpaletteindex) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glCurrentPaletteMatrixOES(matrixpaletteindex);
+}
+EXPORT void STDCALL glDeleteFramebuffersOES(int32_t n, uint32_t* framebuffers) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDeleteFramebuffersOES(n, framebuffers);
+}
+EXPORT void STDCALL glDeleteRenderbuffersOES(int32_t n, uint32_t* renderbuffers) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDeleteRenderbuffersOES(n, renderbuffers);
+}
+EXPORT void STDCALL glDepthRangefOES(float n, float f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDepthRangefOES(n, f);
+}
+EXPORT void STDCALL glDepthRangex(int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDepthRangex(n, f);
+}
+EXPORT void STDCALL glDepthRangexOES(int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDepthRangexOES(n, f);
+}
+EXPORT void STDCALL glDisableClientState(uint32_t array) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDisableClientState(array);
+}
+EXPORT void STDCALL glDrawTexfOES(float x, float y, float z, float width, float height) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexfOES(x, y, z, width, height);
+}
+EXPORT void STDCALL glDrawTexfvOES(float* coords) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexfvOES(coords);
+}
+EXPORT void STDCALL glDrawTexiOES(int32_t x, int32_t y, int32_t z, int32_t width, int32_t height) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexiOES(x, y, z, width, height);
+}
+EXPORT void STDCALL glDrawTexivOES(int32_t* coords) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexivOES(coords);
+}
+EXPORT void STDCALL glDrawTexsOES(int16_t x, int16_t y, int16_t z, int16_t width, int16_t height) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexsOES(x, y, z, width, height);
+}
+EXPORT void STDCALL glDrawTexsvOES(int16_t* coords) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexsvOES(coords);
+}
+EXPORT void STDCALL glDrawTexxOES(int32_t x, int32_t y, int32_t z, int32_t width, int32_t height) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexxOES(x, y, z, width, height);
+}
+EXPORT void STDCALL glDrawTexxvOES(int32_t* coords) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glDrawTexxvOES(coords);
+}
+EXPORT void STDCALL glEnableClientState(uint32_t array) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glEnableClientState(array);
+}
+EXPORT void STDCALL glFogf(uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogf(pname, param);
+}
+EXPORT void STDCALL glFogfv(uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogfv(pname, params);
+}
+EXPORT void STDCALL glFogx(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogx(pname, param);
+}
+EXPORT void STDCALL glFogxOES(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogxOES(pname, param);
+}
+EXPORT void STDCALL glFogxv(uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogxv(pname, param);
+}
+EXPORT void STDCALL glFogxvOES(uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFogxvOES(pname, param);
+}
+EXPORT void STDCALL glFramebufferRenderbufferOES(uint32_t target, uint32_t attachment,
+                                                 uint32_t renderbuffertarget,
+                                                 uint32_t renderbuffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer);
+}
+EXPORT void STDCALL glFramebufferTexture2DOES(uint32_t target, uint32_t attachment,
+                                              uint32_t textarget, uint32_t texture, int32_t level) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFramebufferTexture2DOES(target, attachment, textarget, texture, level);
+}
+EXPORT void STDCALL glFrustumf(float l, float r, float b, float t, float n, float f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFrustumf(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glFrustumfOES(float l, float r, float b, float t, float n, float f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFrustumfOES(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glFrustumx(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFrustumx(l, r, b, t, n, f);
+}
+EXPORT void STDCALL
+glFrustumxOES(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glFrustumxOES(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glGenFramebuffersOES(int32_t n, uint32_t* framebuffers) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGenFramebuffersOES(n, framebuffers);
+}
+EXPORT void STDCALL glGenRenderbuffersOES(int32_t n, uint32_t* renderbuffers) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGenRenderbuffersOES(n, renderbuffers);
+}
+EXPORT void STDCALL glGenerateMipmapOES(uint32_t target) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGenerateMipmapOES(target);
+}
+EXPORT void STDCALL glGetClipPlanef(uint32_t plane, float* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetClipPlanef(plane, equation);
+}
+EXPORT void STDCALL glGetClipPlanefOES(uint32_t plane, float* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetClipPlanefOES(plane, equation);
+}
+EXPORT void STDCALL glGetClipPlanex(uint32_t plane, int32_t* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetClipPlanex(plane, equation);
+}
+EXPORT void STDCALL glGetClipPlanexOES(uint32_t plane, int32_t* equation) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetClipPlanexOES(plane, equation);
+}
+EXPORT void STDCALL glGetFixedv(uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetFixedv(pname, params);
+}
+EXPORT void STDCALL glGetFixedvOES(uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetFixedvOES(pname, params);
+}
+EXPORT void STDCALL glGetFramebufferAttachmentParameterivOES(uint32_t target, uint32_t attachment,
+                                                             uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params);
+}
+EXPORT void STDCALL glGetLightfv(uint32_t light, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetLightfv(light, pname, params);
+}
+EXPORT void STDCALL glGetLightxv(uint32_t light, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetLightxv(light, pname, params);
+}
+EXPORT void STDCALL glGetLightxvOES(uint32_t light, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetLightxvOES(light, pname, params);
+}
+EXPORT void STDCALL glGetMaterialfv(uint32_t face, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetMaterialfv(face, pname, params);
+}
+EXPORT void STDCALL glGetMaterialxv(uint32_t face, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetMaterialxv(face, pname, params);
+}
+EXPORT void STDCALL glGetMaterialxvOES(uint32_t face, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetMaterialxvOES(face, pname, params);
+}
+EXPORT void STDCALL
+glGetRenderbufferParameterivOES(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetRenderbufferParameterivOES(target, pname, params);
+}
+EXPORT void STDCALL glGetTexEnvfv(uint32_t target, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexEnvfv(target, pname, params);
+}
+EXPORT void STDCALL glGetTexEnviv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexEnviv(target, pname, params);
+}
+EXPORT void STDCALL glGetTexEnvxv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexEnvxv(target, pname, params);
+}
+EXPORT void STDCALL glGetTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexEnvxvOES(target, pname, params);
+}
+EXPORT void STDCALL glGetTexGenfvOES(uint32_t coord, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexGenfvOES(coord, pname, params);
+}
+EXPORT void STDCALL glGetTexGenivOES(uint32_t coord, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexGenivOES(coord, pname, params);
+}
+EXPORT void STDCALL glGetTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexGenxvOES(coord, pname, params);
+}
+EXPORT void STDCALL glGetTexParameterxv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexParameterxv(target, pname, params);
+}
+EXPORT void STDCALL glGetTexParameterxvOES(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glGetTexParameterxvOES(target, pname, params);
+}
+EXPORT uint8_t STDCALL glIsFramebufferOES(uint32_t framebuffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glIsFramebufferOES(framebuffer);
+}
+EXPORT uint8_t STDCALL glIsRenderbufferOES(uint32_t renderbuffer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glIsRenderbufferOES(renderbuffer);
+}
+EXPORT void STDCALL glLightModelf(uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelf(pname, param);
+}
+EXPORT void STDCALL glLightModelfv(uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelfv(pname, params);
+}
+EXPORT void STDCALL glLightModelx(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelx(pname, param);
+}
+EXPORT void STDCALL glLightModelxOES(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelxOES(pname, param);
+}
+EXPORT void STDCALL glLightModelxv(uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelxv(pname, param);
+}
+EXPORT void STDCALL glLightModelxvOES(uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightModelxvOES(pname, param);
+}
+EXPORT void STDCALL glLightf(uint32_t light, uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightf(light, pname, param);
+}
+EXPORT void STDCALL glLightfv(uint32_t light, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightfv(light, pname, params);
+}
+EXPORT void STDCALL glLightx(uint32_t light, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightx(light, pname, param);
+}
+EXPORT void STDCALL glLightxOES(uint32_t light, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightxOES(light, pname, param);
+}
+EXPORT void STDCALL glLightxv(uint32_t light, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightxv(light, pname, params);
+}
+EXPORT void STDCALL glLightxvOES(uint32_t light, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLightxvOES(light, pname, params);
+}
+EXPORT void STDCALL glLineWidthx(int32_t width) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLineWidthx(width);
+}
+EXPORT void STDCALL glLineWidthxOES(int32_t width) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLineWidthxOES(width);
+}
+EXPORT void STDCALL glLoadIdentity() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLoadIdentity();
+}
+EXPORT void STDCALL glLoadMatrixf(float* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLoadMatrixf(m);
+}
+EXPORT void STDCALL glLoadMatrixx(int32_t* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLoadMatrixx(m);
+}
+EXPORT void STDCALL glLoadMatrixxOES(int32_t* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLoadMatrixxOES(m);
+}
+EXPORT void STDCALL glLoadPaletteFromModelViewMatrixOES() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLoadPaletteFromModelViewMatrixOES();
+}
+EXPORT void STDCALL glLogicOp(uint32_t opcode) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glLogicOp(opcode);
+}
+EXPORT void STDCALL glMaterialf(uint32_t face, uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialf(face, pname, param);
+}
+EXPORT void STDCALL glMaterialfv(uint32_t face, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialfv(face, pname, params);
+}
+EXPORT void STDCALL glMaterialx(uint32_t face, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialx(face, pname, param);
+}
+EXPORT void STDCALL glMaterialxOES(uint32_t face, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialxOES(face, pname, param);
+}
+EXPORT void STDCALL glMaterialxv(uint32_t face, uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialxv(face, pname, param);
+}
+EXPORT void STDCALL glMaterialxvOES(uint32_t face, uint32_t pname, int32_t* param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMaterialxvOES(face, pname, param);
+}
+EXPORT void STDCALL
+glMatrixIndexPointerOES(int32_t size, uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMatrixIndexPointerOES(size, type, stride, pointer);
+}
+EXPORT void STDCALL glMatrixMode(uint32_t mode) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMatrixMode(mode);
+}
+EXPORT void STDCALL glMultMatrixf(float* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultMatrixf(m);
+}
+EXPORT void STDCALL glMultMatrixx(int32_t* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultMatrixx(m);
+}
+EXPORT void STDCALL glMultMatrixxOES(int32_t* m) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultMatrixxOES(m);
+}
+EXPORT void STDCALL glMultiTexCoord4f(uint32_t target, float v0, float v1, float v2, float v3) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultiTexCoord4f(target, v0, v1, v2, v3);
+}
+EXPORT void STDCALL
+glMultiTexCoord4x(uint32_t texture, int32_t v0, int32_t v1, int32_t v2, int32_t v3) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultiTexCoord4x(texture, v0, v1, v2, v3);
+}
+EXPORT void STDCALL
+glMultiTexCoord4xOES(uint32_t texture, int32_t v0, int32_t v1, int32_t v2, int32_t v3) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMultiTexCoord4xOES(texture, v0, v1, v2, v3);
+}
+EXPORT void STDCALL glNormal3f(float nx, float ny, float nz) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNormal3f(nx, ny, nz);
+}
+EXPORT void STDCALL glNormal3x(int32_t nx, int32_t ny, int32_t nz) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNormal3x(nx, ny, nz);
+}
+EXPORT void STDCALL glNormal3xOES(int32_t nx, int32_t ny, int32_t nz) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNormal3xOES(nx, ny, nz);
+}
+EXPORT void STDCALL glNormalPointer(uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNormalPointer(type, stride, pointer);
+}
+EXPORT void STDCALL glOrthof(float l, float r, float b, float t, float n, float f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glOrthof(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glOrthofOES(float l, float r, float b, float t, float n, float f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glOrthofOES(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glOrthox(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glOrthox(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glOrthoxOES(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n, int32_t f) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glOrthoxOES(l, r, b, t, n, f);
+}
+EXPORT void STDCALL glPointParameterf(uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterf(pname, param);
+}
+EXPORT void STDCALL glPointParameterfv(uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterfv(pname, params);
+}
+EXPORT void STDCALL glPointParameterx(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterx(pname, param);
+}
+EXPORT void STDCALL glPointParameterxOES(uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterxOES(pname, param);
+}
+EXPORT void STDCALL glPointParameterxv(uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterxv(pname, params);
+}
+EXPORT void STDCALL glPointParameterxvOES(uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointParameterxvOES(pname, params);
+}
+EXPORT void STDCALL glPointSize(float size) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointSize(size);
+}
+EXPORT void STDCALL glPointSizePointerOES(uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointSizePointerOES(type, stride, pointer);
+}
+EXPORT void STDCALL glPointSizex(int32_t size) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointSizex(size);
+}
+EXPORT void STDCALL glPointSizexOES(int32_t size) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointSizexOES(size);
+}
+EXPORT void STDCALL glPolygonOffsetx(int32_t factor, int32_t units) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPolygonOffsetx(factor, units);
+}
+EXPORT void STDCALL glPolygonOffsetxOES(int32_t factor, int32_t units) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPolygonOffsetxOES(factor, units);
+}
+EXPORT void STDCALL glPopMatrix() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPopMatrix();
+}
+EXPORT void STDCALL glPushMatrix() {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPushMatrix();
+}
+EXPORT uint32_t STDCALL glQueryMatrixxOES(int32_t* mantissa, int32_t* exponent) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    return s->glQueryMatrixxOES(mantissa, exponent);
+}
+EXPORT void STDCALL
+glRenderbufferStorageOES(uint32_t target, uint32_t internalformat, int32_t width, int32_t height) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glRenderbufferStorageOES(target, internalformat, width, height);
+}
+EXPORT void STDCALL glRotatef(float angle, float x, float y, float z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glRotatef(angle, x, y, z);
+}
+EXPORT void STDCALL glRotatex(int32_t angle, int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glRotatex(angle, x, y, z);
+}
+EXPORT void STDCALL glRotatexOES(int32_t angle, int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glRotatexOES(angle, x, y, z);
+}
+EXPORT void STDCALL glSampleCoveragex(int32_t value, uint8_t invert) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glSampleCoveragex(value, invert);
+}
+EXPORT void STDCALL glSampleCoveragexOES(int32_t value, uint8_t invert) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glSampleCoveragexOES(value, invert);
+}
+EXPORT void STDCALL glScalef(float x, float y, float z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glScalef(x, y, z);
+}
+EXPORT void STDCALL glScalex(int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glScalex(x, y, z);
+}
+EXPORT void STDCALL glScalexOES(int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glScalexOES(x, y, z);
+}
+EXPORT void STDCALL glShadeModel(uint32_t mode) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glShadeModel(mode);
+}
+EXPORT void STDCALL glTexCoordPointer(int32_t size, uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexCoordPointer(size, type, stride, pointer);
+}
+EXPORT void STDCALL glTexEnvf(uint32_t target, uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvf(target, pname, param);
+}
+EXPORT void STDCALL glTexEnvfv(uint32_t target, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvfv(target, pname, params);
+}
+EXPORT void STDCALL glTexEnvi(uint32_t target, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvi(target, pname, param);
+}
+EXPORT void STDCALL glTexEnviv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnviv(target, pname, params);
+}
+EXPORT void STDCALL glTexEnvx(uint32_t target, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvx(target, pname, param);
+}
+EXPORT void STDCALL glTexEnvxOES(uint32_t target, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvxOES(target, pname, param);
+}
+EXPORT void STDCALL glTexEnvxv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvxv(target, pname, params);
+}
+EXPORT void STDCALL glTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexEnvxvOES(target, pname, params);
+}
+EXPORT void STDCALL glTexGenfOES(uint32_t coord, uint32_t pname, float param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGenfOES(coord, pname, param);
+}
+EXPORT void STDCALL glTexGenfvOES(uint32_t coord, uint32_t pname, float* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGenfvOES(coord, pname, params);
+}
+EXPORT void STDCALL glTexGeniOES(uint32_t coord, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGeniOES(coord, pname, param);
+}
+EXPORT void STDCALL glTexGenivOES(uint32_t coord, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGenivOES(coord, pname, params);
+}
+EXPORT void STDCALL glTexGenxOES(uint32_t coord, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGenxOES(coord, pname, param);
+}
+EXPORT void STDCALL glTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexGenxvOES(coord, pname, params);
+}
+EXPORT void STDCALL glTexParameterx(uint32_t target, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterx(target, pname, param);
+}
+EXPORT void STDCALL glTexParameterxOES(uint32_t target, uint32_t pname, int32_t param) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterxOES(target, pname, param);
+}
+EXPORT void STDCALL glTexParameterxv(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterxv(target, pname, params);
+}
+EXPORT void STDCALL glTexParameterxvOES(uint32_t target, uint32_t pname, int32_t* params) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexParameterxvOES(target, pname, params);
+}
+EXPORT void STDCALL glTranslatef(float x, float y, float z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTranslatef(x, y, z);
+}
+EXPORT void STDCALL glTranslatex(int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTranslatex(x, y, z);
+}
+EXPORT void STDCALL glTranslatexOES(int32_t x, int32_t y, int32_t z) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTranslatexOES(x, y, z);
+}
+EXPORT void STDCALL glVertexPointer(int32_t size, uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glVertexPointer(size, type, stride, pointer);
+}
+EXPORT void STDCALL glWeightPointerOES(int32_t size, uint32_t type, int32_t stride, void* pointer) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glWeightPointerOES(size, type, stride, pointer);
+}
+EXPORT void STDCALL
+glColorPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glColorPointerBounds(size, type, stride, pointer, count);
+}
+EXPORT void STDCALL
+glNormalPointerBounds(uint32_t type, int32_t stride, void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glNormalPointerBounds(type, stride, pointer, count);
+}
+EXPORT void STDCALL
+glTexCoordPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glTexCoordPointerBounds(size, type, stride, pointer, count);
+}
+EXPORT void STDCALL
+glVertexPointerBounds(int32_t size, uint32_t type, int32_t stride, void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glVertexPointerBounds(size, type, stride, pointer, count);
+}
+EXPORT void STDCALL
+glPointSizePointerOESBounds(uint32_t type, int32_t stride, void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glPointSizePointerOESBounds(type, stride, pointer, count);
+}
+EXPORT void STDCALL glMatrixIndexPointerOESBounds(int32_t size, uint32_t type, int32_t stride,
+                                                  void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glMatrixIndexPointerOESBounds(size, type, stride, pointer, count);
+}
+EXPORT void STDCALL glWeightPointerOESBounds(int32_t size, uint32_t type, int32_t stride,
+                                             void* pointer, int32_t count) {
+    Spy* s = spy();
+    gapic::Lock<Spy> lock__(s);
+    s->glWeightPointerOESBounds(size, type, stride, pointer, count);
 }
 
 EXPORT void* STDCALL eglGetProcAddress(const char* name) { return GetSpyProcAddress(name); }

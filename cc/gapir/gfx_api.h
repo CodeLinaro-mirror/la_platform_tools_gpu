@@ -490,294 +490,473 @@ static const uint16_t GlRenderbufferStorage = 462;
 static const uint16_t GlRenderbufferStorageMultisample = 463;
 static const uint16_t GlStencilMask = 464;
 static const uint16_t GlStencilMaskSeparate = 465;
-static const uint16_t GlFramebufferTexture2DOES = 466;
-static const uint16_t GlDisable = 467;
-static const uint16_t GlDisablei = 468;
-static const uint16_t GlEnable = 469;
-static const uint16_t GlEnablei = 470;
-static const uint16_t GlFinish = 471;
-static const uint16_t GlFlush = 472;
-static const uint16_t GlFlushMappedBufferRange = 473;
-static const uint16_t GlGetError = 474;
-static const uint16_t GlGetGraphicsResetStatus = 475;
-static const uint16_t GlHint = 476;
-static const uint16_t GlActiveShaderProgram = 477;
-static const uint16_t GlAttachShader = 478;
-static const uint16_t GlBindAttribLocation = 479;
-static const uint16_t GlBindProgramPipeline = 480;
-static const uint16_t GlCompileShader = 481;
-static const uint16_t GlCreateProgram = 482;
-static const uint16_t GlCreateShader = 483;
-static const uint16_t GlCreateShaderProgramv = 484;
-static const uint16_t GlDeleteProgram = 485;
-static const uint16_t GlDeleteProgramPipelines = 486;
-static const uint16_t GlDeleteShader = 487;
-static const uint16_t GlDetachShader = 488;
-static const uint16_t GlDispatchCompute = 489;
-static const uint16_t GlDispatchComputeIndirect = 490;
-static const uint16_t GlGenProgramPipelines = 491;
-static const uint16_t GlGetActiveAttrib = 492;
-static const uint16_t GlGetActiveUniform = 493;
-static const uint16_t GlGetActiveUniformBlockName = 494;
-static const uint16_t GlGetActiveUniformBlockiv = 495;
-static const uint16_t GlGetActiveUniformsiv = 496;
-static const uint16_t GlGetAttachedShaders = 497;
-static const uint16_t GlGetAttribLocation = 498;
-static const uint16_t GlGetFragDataLocation = 499;
-static const uint16_t GlGetProgramBinary = 500;
-static const uint16_t GlGetProgramInfoLog = 501;
-static const uint16_t GlGetProgramInterfaceiv = 502;
-static const uint16_t GlGetProgramPipelineInfoLog = 503;
-static const uint16_t GlGetProgramPipelineiv = 504;
-static const uint16_t GlGetProgramResourceIndex = 505;
-static const uint16_t GlGetProgramResourceLocation = 506;
-static const uint16_t GlGetProgramResourceName = 507;
-static const uint16_t GlGetProgramResourceiv = 508;
-static const uint16_t GlGetProgramiv = 509;
-static const uint16_t GlGetShaderInfoLog = 510;
-static const uint16_t GlGetShaderPrecisionFormat = 511;
-static const uint16_t GlGetShaderSource = 512;
-static const uint16_t GlGetShaderiv = 513;
-static const uint16_t GlGetUniformBlockIndex = 514;
-static const uint16_t GlGetUniformIndices = 515;
-static const uint16_t GlGetUniformLocation = 516;
-static const uint16_t GlGetUniformfv = 517;
-static const uint16_t GlGetUniformiv = 518;
-static const uint16_t GlGetUniformuiv = 519;
-static const uint16_t GlGetnUniformfv = 520;
-static const uint16_t GlGetnUniformiv = 521;
-static const uint16_t GlGetnUniformuiv = 522;
-static const uint16_t GlIsProgram = 523;
-static const uint16_t GlIsProgramPipeline = 524;
-static const uint16_t GlIsShader = 525;
-static const uint16_t GlLinkProgram = 526;
-static const uint16_t GlMemoryBarrier = 527;
-static const uint16_t GlMemoryBarrierByRegion = 528;
-static const uint16_t GlProgramBinary = 529;
-static const uint16_t GlProgramParameteri = 530;
-static const uint16_t GlProgramUniform1f = 531;
-static const uint16_t GlProgramUniform1fv = 532;
-static const uint16_t GlProgramUniform1i = 533;
-static const uint16_t GlProgramUniform1iv = 534;
-static const uint16_t GlProgramUniform1ui = 535;
-static const uint16_t GlProgramUniform1uiv = 536;
-static const uint16_t GlProgramUniform2f = 537;
-static const uint16_t GlProgramUniform2fv = 538;
-static const uint16_t GlProgramUniform2i = 539;
-static const uint16_t GlProgramUniform2iv = 540;
-static const uint16_t GlProgramUniform2ui = 541;
-static const uint16_t GlProgramUniform2uiv = 542;
-static const uint16_t GlProgramUniform3f = 543;
-static const uint16_t GlProgramUniform3fv = 544;
-static const uint16_t GlProgramUniform3i = 545;
-static const uint16_t GlProgramUniform3iv = 546;
-static const uint16_t GlProgramUniform3ui = 547;
-static const uint16_t GlProgramUniform3uiv = 548;
-static const uint16_t GlProgramUniform4f = 549;
-static const uint16_t GlProgramUniform4fv = 550;
-static const uint16_t GlProgramUniform4i = 551;
-static const uint16_t GlProgramUniform4iv = 552;
-static const uint16_t GlProgramUniform4ui = 553;
-static const uint16_t GlProgramUniform4uiv = 554;
-static const uint16_t GlProgramUniformMatrix2fv = 555;
-static const uint16_t GlProgramUniformMatrix2x3fv = 556;
-static const uint16_t GlProgramUniformMatrix2x4fv = 557;
-static const uint16_t GlProgramUniformMatrix3fv = 558;
-static const uint16_t GlProgramUniformMatrix3x2fv = 559;
-static const uint16_t GlProgramUniformMatrix3x4fv = 560;
-static const uint16_t GlProgramUniformMatrix4fv = 561;
-static const uint16_t GlProgramUniformMatrix4x2fv = 562;
-static const uint16_t GlProgramUniformMatrix4x3fv = 563;
-static const uint16_t GlReleaseShaderCompiler = 564;
-static const uint16_t GlShaderBinary = 565;
-static const uint16_t GlShaderSource = 566;
-static const uint16_t GlUniform1f = 567;
-static const uint16_t GlUniform1fv = 568;
-static const uint16_t GlUniform1i = 569;
-static const uint16_t GlUniform1iv = 570;
-static const uint16_t GlUniform1ui = 571;
-static const uint16_t GlUniform1uiv = 572;
-static const uint16_t GlUniform2f = 573;
-static const uint16_t GlUniform2fv = 574;
-static const uint16_t GlUniform2i = 575;
-static const uint16_t GlUniform2iv = 576;
-static const uint16_t GlUniform2ui = 577;
-static const uint16_t GlUniform2uiv = 578;
-static const uint16_t GlUniform3f = 579;
-static const uint16_t GlUniform3fv = 580;
-static const uint16_t GlUniform3i = 581;
-static const uint16_t GlUniform3iv = 582;
-static const uint16_t GlUniform3ui = 583;
-static const uint16_t GlUniform3uiv = 584;
-static const uint16_t GlUniform4f = 585;
-static const uint16_t GlUniform4fv = 586;
-static const uint16_t GlUniform4i = 587;
-static const uint16_t GlUniform4iv = 588;
-static const uint16_t GlUniform4ui = 589;
-static const uint16_t GlUniform4uiv = 590;
-static const uint16_t GlUniformBlockBinding = 591;
-static const uint16_t GlUniformMatrix2fv = 592;
-static const uint16_t GlUniformMatrix2x3fv = 593;
-static const uint16_t GlUniformMatrix2x4fv = 594;
-static const uint16_t GlUniformMatrix3fv = 595;
-static const uint16_t GlUniformMatrix3x2fv = 596;
-static const uint16_t GlUniformMatrix3x4fv = 597;
-static const uint16_t GlUniformMatrix4fv = 598;
-static const uint16_t GlUniformMatrix4x2fv = 599;
-static const uint16_t GlUniformMatrix4x3fv = 600;
-static const uint16_t GlUseProgram = 601;
-static const uint16_t GlUseProgramStages = 602;
-static const uint16_t GlValidateProgram = 603;
-static const uint16_t GlValidateProgramPipeline = 604;
-static const uint16_t GlCullFace = 605;
-static const uint16_t GlDepthRangef = 606;
-static const uint16_t GlFrontFace = 607;
-static const uint16_t GlGetMultisamplefv = 608;
-static const uint16_t GlLineWidth = 609;
-static const uint16_t GlMinSampleShading = 610;
-static const uint16_t GlPolygonOffset = 611;
-static const uint16_t GlViewport = 612;
-static const uint16_t GlGetBooleaniV = 613;
-static const uint16_t GlGetBooleanv = 614;
-static const uint16_t GlGetFloatv = 615;
-static const uint16_t GlGetInteger64iV = 616;
-static const uint16_t GlGetInteger64v = 617;
-static const uint16_t GlGetIntegeriV = 618;
-static const uint16_t GlGetIntegerv = 619;
-static const uint16_t GlGetInternalformativ = 620;
-static const uint16_t GlGetString = 621;
-static const uint16_t GlGetStringi = 622;
-static const uint16_t GlIsEnabled = 623;
-static const uint16_t GlIsEnabledi = 624;
-static const uint16_t GlClientWaitSync = 625;
-static const uint16_t GlDeleteSync = 626;
-static const uint16_t GlFenceSync = 627;
-static const uint16_t GlGetSynciv = 628;
-static const uint16_t GlIsSync = 629;
-static const uint16_t GlWaitSync = 630;
-static const uint16_t GlActiveTexture = 631;
-static const uint16_t GlBindImageTexture = 632;
-static const uint16_t GlBindSampler = 633;
-static const uint16_t GlBindTexture = 634;
-static const uint16_t GlCompressedTexImage2D = 635;
-static const uint16_t GlCompressedTexImage3D = 636;
-static const uint16_t GlCompressedTexSubImage2D = 637;
-static const uint16_t GlCompressedTexSubImage3D = 638;
-static const uint16_t GlCopyImageSubData = 639;
-static const uint16_t GlCopyTexImage2D = 640;
-static const uint16_t GlCopyTexSubImage2D = 641;
-static const uint16_t GlCopyTexSubImage3D = 642;
-static const uint16_t GlDeleteSamplers = 643;
-static const uint16_t GlDeleteTextures = 644;
-static const uint16_t GlGenSamplers = 645;
-static const uint16_t GlGenTextures = 646;
-static const uint16_t GlGenerateMipmap = 647;
-static const uint16_t GlGetSamplerParameterIiv = 648;
-static const uint16_t GlGetSamplerParameterIuiv = 649;
-static const uint16_t GlGetSamplerParameterfv = 650;
-static const uint16_t GlGetSamplerParameteriv = 651;
-static const uint16_t GlGetTexLevelParameterfv = 652;
-static const uint16_t GlGetTexLevelParameteriv = 653;
-static const uint16_t GlGetTexParameterIiv = 654;
-static const uint16_t GlGetTexParameterIuiv = 655;
-static const uint16_t GlGetTexParameterfv = 656;
-static const uint16_t GlGetTexParameteriv = 657;
-static const uint16_t GlIsSampler = 658;
-static const uint16_t GlIsTexture = 659;
-static const uint16_t GlPixelStorei = 660;
-static const uint16_t GlSamplerParameterIiv = 661;
-static const uint16_t GlSamplerParameterIuiv = 662;
-static const uint16_t GlSamplerParameterf = 663;
-static const uint16_t GlSamplerParameterfv = 664;
-static const uint16_t GlSamplerParameteri = 665;
-static const uint16_t GlSamplerParameteriv = 666;
-static const uint16_t GlTexBuffer = 667;
-static const uint16_t GlTexBufferRange = 668;
-static const uint16_t GlTexImage2D = 669;
-static const uint16_t GlTexImage3D = 670;
-static const uint16_t GlTexParameterIiv = 671;
-static const uint16_t GlTexParameterIuiv = 672;
-static const uint16_t GlTexParameterf = 673;
-static const uint16_t GlTexParameterfv = 674;
-static const uint16_t GlTexParameteri = 675;
-static const uint16_t GlTexParameteriv = 676;
-static const uint16_t GlTexStorage2D = 677;
-static const uint16_t GlTexStorage2DMultisample = 678;
-static const uint16_t GlTexStorage3D = 679;
-static const uint16_t GlTexStorage3DMultisample = 680;
-static const uint16_t GlTexSubImage2D = 681;
-static const uint16_t GlTexSubImage3D = 682;
-static const uint16_t GlBeginTransformFeedback = 683;
-static const uint16_t GlBindTransformFeedback = 684;
-static const uint16_t GlDeleteTransformFeedbacks = 685;
-static const uint16_t GlEndTransformFeedback = 686;
-static const uint16_t GlGenTransformFeedbacks = 687;
-static const uint16_t GlGetTransformFeedbackVarying = 688;
-static const uint16_t GlIsTransformFeedback = 689;
-static const uint16_t GlPauseTransformFeedback = 690;
-static const uint16_t GlResumeTransformFeedback = 691;
-static const uint16_t GlTransformFeedbackVaryings = 692;
-static const uint16_t GlBindVertexArray = 693;
-static const uint16_t GlBindVertexBuffer = 694;
-static const uint16_t GlDeleteVertexArrays = 695;
-static const uint16_t GlDisableVertexAttribArray = 696;
-static const uint16_t GlEnableVertexAttribArray = 697;
-static const uint16_t GlGenVertexArrays = 698;
-static const uint16_t GlGetVertexAttribIiv = 699;
-static const uint16_t GlGetVertexAttribIuiv = 700;
-static const uint16_t GlGetVertexAttribPointerv = 701;
-static const uint16_t GlGetVertexAttribfv = 702;
-static const uint16_t GlGetVertexAttribiv = 703;
-static const uint16_t GlIsVertexArray = 704;
-static const uint16_t GlVertexAttrib1f = 705;
-static const uint16_t GlVertexAttrib1fv = 706;
-static const uint16_t GlVertexAttrib2f = 707;
-static const uint16_t GlVertexAttrib2fv = 708;
-static const uint16_t GlVertexAttrib3f = 709;
-static const uint16_t GlVertexAttrib3fv = 710;
-static const uint16_t GlVertexAttrib4f = 711;
-static const uint16_t GlVertexAttrib4fv = 712;
-static const uint16_t GlVertexAttribBinding = 713;
-static const uint16_t GlVertexAttribDivisor = 714;
-static const uint16_t GlVertexAttribFormat = 715;
-static const uint16_t GlVertexAttribI4i = 716;
-static const uint16_t GlVertexAttribI4iv = 717;
-static const uint16_t GlVertexAttribI4ui = 718;
-static const uint16_t GlVertexAttribI4uiv = 719;
-static const uint16_t GlVertexAttribIFormat = 720;
-static const uint16_t GlVertexAttribIPointer = 721;
-static const uint16_t GlVertexAttribPointer = 722;
-static const uint16_t GlVertexBindingDivisor = 723;
-static const uint16_t EglInitialize = 724;
-static const uint16_t EglCreateContext = 725;
-static const uint16_t EglMakeCurrent = 726;
-static const uint16_t EglSwapBuffers = 727;
-static const uint16_t EglQuerySurface = 728;
-static const uint16_t GlXCreateContext = 729;
-static const uint16_t GlXCreateNewContext = 730;
-static const uint16_t GlXMakeContextCurrent = 731;
-static const uint16_t GlXMakeCurrent = 732;
-static const uint16_t GlXSwapBuffers = 733;
-static const uint16_t GlXQueryDrawable = 734;
-static const uint16_t WglCreateContext = 735;
-static const uint16_t WglCreateContextAttribsARB = 736;
-static const uint16_t WglMakeCurrent = 737;
-static const uint16_t WglSwapBuffers = 738;
-static const uint16_t CGLCreateContext = 739;
-static const uint16_t CGLSetCurrentContext = 740;
-static const uint16_t CGLGetSurface = 741;
-static const uint16_t CGSGetSurfaceBounds = 742;
-static const uint16_t CGLFlushDrawable = 743;
-static const uint16_t GlGetQueryObjecti64v = 744;
-static const uint16_t GlGetQueryObjectui64v = 745;
-static const uint16_t Architecture = 746;
-static const uint16_t ReplayCreateRenderer = 747;
-static const uint16_t ReplayBindRenderer = 748;
-static const uint16_t SwitchThread = 749;
-static const uint16_t ContextInfo = 750;
-static const uint16_t StartTimer = 751;
-static const uint16_t StopTimer = 752;
-static const uint16_t FlushPostBuffer = 753;
+static const uint16_t GlDisable = 466;
+static const uint16_t GlDisablei = 467;
+static const uint16_t GlEnable = 468;
+static const uint16_t GlEnablei = 469;
+static const uint16_t GlFinish = 470;
+static const uint16_t GlFlush = 471;
+static const uint16_t GlFlushMappedBufferRange = 472;
+static const uint16_t GlGetError = 473;
+static const uint16_t GlGetGraphicsResetStatus = 474;
+static const uint16_t GlHint = 475;
+static const uint16_t GlActiveShaderProgram = 476;
+static const uint16_t GlAttachShader = 477;
+static const uint16_t GlBindAttribLocation = 478;
+static const uint16_t GlBindProgramPipeline = 479;
+static const uint16_t GlCompileShader = 480;
+static const uint16_t GlCreateProgram = 481;
+static const uint16_t GlCreateShader = 482;
+static const uint16_t GlCreateShaderProgramv = 483;
+static const uint16_t GlDeleteProgram = 484;
+static const uint16_t GlDeleteProgramPipelines = 485;
+static const uint16_t GlDeleteShader = 486;
+static const uint16_t GlDetachShader = 487;
+static const uint16_t GlDispatchCompute = 488;
+static const uint16_t GlDispatchComputeIndirect = 489;
+static const uint16_t GlGenProgramPipelines = 490;
+static const uint16_t GlGetActiveAttrib = 491;
+static const uint16_t GlGetActiveUniform = 492;
+static const uint16_t GlGetActiveUniformBlockName = 493;
+static const uint16_t GlGetActiveUniformBlockiv = 494;
+static const uint16_t GlGetActiveUniformsiv = 495;
+static const uint16_t GlGetAttachedShaders = 496;
+static const uint16_t GlGetAttribLocation = 497;
+static const uint16_t GlGetFragDataLocation = 498;
+static const uint16_t GlGetProgramBinary = 499;
+static const uint16_t GlGetProgramInfoLog = 500;
+static const uint16_t GlGetProgramInterfaceiv = 501;
+static const uint16_t GlGetProgramPipelineInfoLog = 502;
+static const uint16_t GlGetProgramPipelineiv = 503;
+static const uint16_t GlGetProgramResourceIndex = 504;
+static const uint16_t GlGetProgramResourceLocation = 505;
+static const uint16_t GlGetProgramResourceName = 506;
+static const uint16_t GlGetProgramResourceiv = 507;
+static const uint16_t GlGetProgramiv = 508;
+static const uint16_t GlGetShaderInfoLog = 509;
+static const uint16_t GlGetShaderPrecisionFormat = 510;
+static const uint16_t GlGetShaderSource = 511;
+static const uint16_t GlGetShaderiv = 512;
+static const uint16_t GlGetUniformBlockIndex = 513;
+static const uint16_t GlGetUniformIndices = 514;
+static const uint16_t GlGetUniformLocation = 515;
+static const uint16_t GlGetUniformfv = 516;
+static const uint16_t GlGetUniformiv = 517;
+static const uint16_t GlGetUniformuiv = 518;
+static const uint16_t GlGetnUniformfv = 519;
+static const uint16_t GlGetnUniformiv = 520;
+static const uint16_t GlGetnUniformuiv = 521;
+static const uint16_t GlIsProgram = 522;
+static const uint16_t GlIsProgramPipeline = 523;
+static const uint16_t GlIsShader = 524;
+static const uint16_t GlLinkProgram = 525;
+static const uint16_t GlMemoryBarrier = 526;
+static const uint16_t GlMemoryBarrierByRegion = 527;
+static const uint16_t GlProgramBinary = 528;
+static const uint16_t GlProgramParameteri = 529;
+static const uint16_t GlProgramUniform1f = 530;
+static const uint16_t GlProgramUniform1fv = 531;
+static const uint16_t GlProgramUniform1i = 532;
+static const uint16_t GlProgramUniform1iv = 533;
+static const uint16_t GlProgramUniform1ui = 534;
+static const uint16_t GlProgramUniform1uiv = 535;
+static const uint16_t GlProgramUniform2f = 536;
+static const uint16_t GlProgramUniform2fv = 537;
+static const uint16_t GlProgramUniform2i = 538;
+static const uint16_t GlProgramUniform2iv = 539;
+static const uint16_t GlProgramUniform2ui = 540;
+static const uint16_t GlProgramUniform2uiv = 541;
+static const uint16_t GlProgramUniform3f = 542;
+static const uint16_t GlProgramUniform3fv = 543;
+static const uint16_t GlProgramUniform3i = 544;
+static const uint16_t GlProgramUniform3iv = 545;
+static const uint16_t GlProgramUniform3ui = 546;
+static const uint16_t GlProgramUniform3uiv = 547;
+static const uint16_t GlProgramUniform4f = 548;
+static const uint16_t GlProgramUniform4fv = 549;
+static const uint16_t GlProgramUniform4i = 550;
+static const uint16_t GlProgramUniform4iv = 551;
+static const uint16_t GlProgramUniform4ui = 552;
+static const uint16_t GlProgramUniform4uiv = 553;
+static const uint16_t GlProgramUniformMatrix2fv = 554;
+static const uint16_t GlProgramUniformMatrix2x3fv = 555;
+static const uint16_t GlProgramUniformMatrix2x4fv = 556;
+static const uint16_t GlProgramUniformMatrix3fv = 557;
+static const uint16_t GlProgramUniformMatrix3x2fv = 558;
+static const uint16_t GlProgramUniformMatrix3x4fv = 559;
+static const uint16_t GlProgramUniformMatrix4fv = 560;
+static const uint16_t GlProgramUniformMatrix4x2fv = 561;
+static const uint16_t GlProgramUniformMatrix4x3fv = 562;
+static const uint16_t GlReleaseShaderCompiler = 563;
+static const uint16_t GlShaderBinary = 564;
+static const uint16_t GlShaderSource = 565;
+static const uint16_t GlUniform1f = 566;
+static const uint16_t GlUniform1fv = 567;
+static const uint16_t GlUniform1i = 568;
+static const uint16_t GlUniform1iv = 569;
+static const uint16_t GlUniform1ui = 570;
+static const uint16_t GlUniform1uiv = 571;
+static const uint16_t GlUniform2f = 572;
+static const uint16_t GlUniform2fv = 573;
+static const uint16_t GlUniform2i = 574;
+static const uint16_t GlUniform2iv = 575;
+static const uint16_t GlUniform2ui = 576;
+static const uint16_t GlUniform2uiv = 577;
+static const uint16_t GlUniform3f = 578;
+static const uint16_t GlUniform3fv = 579;
+static const uint16_t GlUniform3i = 580;
+static const uint16_t GlUniform3iv = 581;
+static const uint16_t GlUniform3ui = 582;
+static const uint16_t GlUniform3uiv = 583;
+static const uint16_t GlUniform4f = 584;
+static const uint16_t GlUniform4fv = 585;
+static const uint16_t GlUniform4i = 586;
+static const uint16_t GlUniform4iv = 587;
+static const uint16_t GlUniform4ui = 588;
+static const uint16_t GlUniform4uiv = 589;
+static const uint16_t GlUniformBlockBinding = 590;
+static const uint16_t GlUniformMatrix2fv = 591;
+static const uint16_t GlUniformMatrix2x3fv = 592;
+static const uint16_t GlUniformMatrix2x4fv = 593;
+static const uint16_t GlUniformMatrix3fv = 594;
+static const uint16_t GlUniformMatrix3x2fv = 595;
+static const uint16_t GlUniformMatrix3x4fv = 596;
+static const uint16_t GlUniformMatrix4fv = 597;
+static const uint16_t GlUniformMatrix4x2fv = 598;
+static const uint16_t GlUniformMatrix4x3fv = 599;
+static const uint16_t GlUseProgram = 600;
+static const uint16_t GlUseProgramStages = 601;
+static const uint16_t GlValidateProgram = 602;
+static const uint16_t GlValidateProgramPipeline = 603;
+static const uint16_t GlCullFace = 604;
+static const uint16_t GlDepthRangef = 605;
+static const uint16_t GlFrontFace = 606;
+static const uint16_t GlGetMultisamplefv = 607;
+static const uint16_t GlLineWidth = 608;
+static const uint16_t GlMinSampleShading = 609;
+static const uint16_t GlPolygonOffset = 610;
+static const uint16_t GlViewport = 611;
+static const uint16_t GlGetBooleaniV = 612;
+static const uint16_t GlGetBooleanv = 613;
+static const uint16_t GlGetFloatv = 614;
+static const uint16_t GlGetInteger64iV = 615;
+static const uint16_t GlGetInteger64v = 616;
+static const uint16_t GlGetIntegeriV = 617;
+static const uint16_t GlGetIntegerv = 618;
+static const uint16_t GlGetInternalformativ = 619;
+static const uint16_t GlGetString = 620;
+static const uint16_t GlGetStringi = 621;
+static const uint16_t GlIsEnabled = 622;
+static const uint16_t GlIsEnabledi = 623;
+static const uint16_t GlClientWaitSync = 624;
+static const uint16_t GlDeleteSync = 625;
+static const uint16_t GlFenceSync = 626;
+static const uint16_t GlGetSynciv = 627;
+static const uint16_t GlIsSync = 628;
+static const uint16_t GlWaitSync = 629;
+static const uint16_t GlActiveTexture = 630;
+static const uint16_t GlBindImageTexture = 631;
+static const uint16_t GlBindSampler = 632;
+static const uint16_t GlBindTexture = 633;
+static const uint16_t GlCompressedTexImage2D = 634;
+static const uint16_t GlCompressedTexImage3D = 635;
+static const uint16_t GlCompressedTexSubImage2D = 636;
+static const uint16_t GlCompressedTexSubImage3D = 637;
+static const uint16_t GlCopyImageSubData = 638;
+static const uint16_t GlCopyTexImage2D = 639;
+static const uint16_t GlCopyTexSubImage2D = 640;
+static const uint16_t GlCopyTexSubImage3D = 641;
+static const uint16_t GlDeleteSamplers = 642;
+static const uint16_t GlDeleteTextures = 643;
+static const uint16_t GlGenSamplers = 644;
+static const uint16_t GlGenTextures = 645;
+static const uint16_t GlGenerateMipmap = 646;
+static const uint16_t GlGetSamplerParameterIiv = 647;
+static const uint16_t GlGetSamplerParameterIuiv = 648;
+static const uint16_t GlGetSamplerParameterfv = 649;
+static const uint16_t GlGetSamplerParameteriv = 650;
+static const uint16_t GlGetTexLevelParameterfv = 651;
+static const uint16_t GlGetTexLevelParameteriv = 652;
+static const uint16_t GlGetTexParameterIiv = 653;
+static const uint16_t GlGetTexParameterIuiv = 654;
+static const uint16_t GlGetTexParameterfv = 655;
+static const uint16_t GlGetTexParameteriv = 656;
+static const uint16_t GlIsSampler = 657;
+static const uint16_t GlIsTexture = 658;
+static const uint16_t GlPixelStorei = 659;
+static const uint16_t GlSamplerParameterIiv = 660;
+static const uint16_t GlSamplerParameterIuiv = 661;
+static const uint16_t GlSamplerParameterf = 662;
+static const uint16_t GlSamplerParameterfv = 663;
+static const uint16_t GlSamplerParameteri = 664;
+static const uint16_t GlSamplerParameteriv = 665;
+static const uint16_t GlTexBuffer = 666;
+static const uint16_t GlTexBufferRange = 667;
+static const uint16_t GlTexImage2D = 668;
+static const uint16_t GlTexImage3D = 669;
+static const uint16_t GlTexParameterIiv = 670;
+static const uint16_t GlTexParameterIuiv = 671;
+static const uint16_t GlTexParameterf = 672;
+static const uint16_t GlTexParameterfv = 673;
+static const uint16_t GlTexParameteri = 674;
+static const uint16_t GlTexParameteriv = 675;
+static const uint16_t GlTexStorage2D = 676;
+static const uint16_t GlTexStorage2DMultisample = 677;
+static const uint16_t GlTexStorage3D = 678;
+static const uint16_t GlTexStorage3DMultisample = 679;
+static const uint16_t GlTexSubImage2D = 680;
+static const uint16_t GlTexSubImage3D = 681;
+static const uint16_t GlBeginTransformFeedback = 682;
+static const uint16_t GlBindTransformFeedback = 683;
+static const uint16_t GlDeleteTransformFeedbacks = 684;
+static const uint16_t GlEndTransformFeedback = 685;
+static const uint16_t GlGenTransformFeedbacks = 686;
+static const uint16_t GlGetTransformFeedbackVarying = 687;
+static const uint16_t GlIsTransformFeedback = 688;
+static const uint16_t GlPauseTransformFeedback = 689;
+static const uint16_t GlResumeTransformFeedback = 690;
+static const uint16_t GlTransformFeedbackVaryings = 691;
+static const uint16_t GlBindVertexArray = 692;
+static const uint16_t GlBindVertexBuffer = 693;
+static const uint16_t GlDeleteVertexArrays = 694;
+static const uint16_t GlDisableVertexAttribArray = 695;
+static const uint16_t GlEnableVertexAttribArray = 696;
+static const uint16_t GlGenVertexArrays = 697;
+static const uint16_t GlGetVertexAttribIiv = 698;
+static const uint16_t GlGetVertexAttribIuiv = 699;
+static const uint16_t GlGetVertexAttribPointerv = 700;
+static const uint16_t GlGetVertexAttribfv = 701;
+static const uint16_t GlGetVertexAttribiv = 702;
+static const uint16_t GlIsVertexArray = 703;
+static const uint16_t GlVertexAttrib1f = 704;
+static const uint16_t GlVertexAttrib1fv = 705;
+static const uint16_t GlVertexAttrib2f = 706;
+static const uint16_t GlVertexAttrib2fv = 707;
+static const uint16_t GlVertexAttrib3f = 708;
+static const uint16_t GlVertexAttrib3fv = 709;
+static const uint16_t GlVertexAttrib4f = 710;
+static const uint16_t GlVertexAttrib4fv = 711;
+static const uint16_t GlVertexAttribBinding = 712;
+static const uint16_t GlVertexAttribDivisor = 713;
+static const uint16_t GlVertexAttribFormat = 714;
+static const uint16_t GlVertexAttribI4i = 715;
+static const uint16_t GlVertexAttribI4iv = 716;
+static const uint16_t GlVertexAttribI4ui = 717;
+static const uint16_t GlVertexAttribI4uiv = 718;
+static const uint16_t GlVertexAttribIFormat = 719;
+static const uint16_t GlVertexAttribIPointer = 720;
+static const uint16_t GlVertexAttribPointer = 721;
+static const uint16_t GlVertexBindingDivisor = 722;
+static const uint16_t EglInitialize = 723;
+static const uint16_t EglCreateContext = 724;
+static const uint16_t EglMakeCurrent = 725;
+static const uint16_t EglSwapBuffers = 726;
+static const uint16_t EglQuerySurface = 727;
+static const uint16_t GlXCreateContext = 728;
+static const uint16_t GlXCreateNewContext = 729;
+static const uint16_t GlXMakeContextCurrent = 730;
+static const uint16_t GlXMakeCurrent = 731;
+static const uint16_t GlXSwapBuffers = 732;
+static const uint16_t GlXQueryDrawable = 733;
+static const uint16_t WglCreateContext = 734;
+static const uint16_t WglCreateContextAttribsARB = 735;
+static const uint16_t WglMakeCurrent = 736;
+static const uint16_t WglSwapBuffers = 737;
+static const uint16_t CGLCreateContext = 738;
+static const uint16_t CGLSetCurrentContext = 739;
+static const uint16_t CGLGetSurface = 740;
+static const uint16_t CGSGetSurfaceBounds = 741;
+static const uint16_t CGLFlushDrawable = 742;
+static const uint16_t GlGetQueryObjecti64v = 743;
+static const uint16_t GlGetQueryObjectui64v = 744;
+static const uint16_t GlAlphaFunc = 745;
+static const uint16_t GlAlphaFuncx = 746;
+static const uint16_t GlAlphaFuncxOES = 747;
+static const uint16_t GlBindFramebufferOES = 748;
+static const uint16_t GlBindRenderbufferOES = 749;
+static const uint16_t GlBlendEquationOES = 750;
+static const uint16_t GlBlendEquationSeparateOES = 751;
+static const uint16_t GlBlendFuncSeparateOES = 752;
+static const uint16_t GlCheckFramebufferStatusOES = 753;
+static const uint16_t GlClearColorx = 754;
+static const uint16_t GlClearColorxOES = 755;
+static const uint16_t GlClearDepthfOES = 756;
+static const uint16_t GlClearDepthx = 757;
+static const uint16_t GlClearDepthxOES = 758;
+static const uint16_t GlClientActiveTexture = 759;
+static const uint16_t GlClipPlanef = 760;
+static const uint16_t GlClipPlanefIMG = 761;
+static const uint16_t GlClipPlanefOES = 762;
+static const uint16_t GlClipPlanex = 763;
+static const uint16_t GlClipPlanexIMG = 764;
+static const uint16_t GlClipPlanexOES = 765;
+static const uint16_t GlColor4f = 766;
+static const uint16_t GlColor4ub = 767;
+static const uint16_t GlColor4x = 768;
+static const uint16_t GlColor4xOES = 769;
+static const uint16_t GlColorPointer = 770;
+static const uint16_t GlCurrentPaletteMatrixOES = 771;
+static const uint16_t GlDeleteFramebuffersOES = 772;
+static const uint16_t GlDeleteRenderbuffersOES = 773;
+static const uint16_t GlDepthRangefOES = 774;
+static const uint16_t GlDepthRangex = 775;
+static const uint16_t GlDepthRangexOES = 776;
+static const uint16_t GlDisableClientState = 777;
+static const uint16_t GlDrawTexfOES = 778;
+static const uint16_t GlDrawTexfvOES = 779;
+static const uint16_t GlDrawTexiOES = 780;
+static const uint16_t GlDrawTexivOES = 781;
+static const uint16_t GlDrawTexsOES = 782;
+static const uint16_t GlDrawTexsvOES = 783;
+static const uint16_t GlDrawTexxOES = 784;
+static const uint16_t GlDrawTexxvOES = 785;
+static const uint16_t GlEnableClientState = 786;
+static const uint16_t GlFogf = 787;
+static const uint16_t GlFogfv = 788;
+static const uint16_t GlFogx = 789;
+static const uint16_t GlFogxOES = 790;
+static const uint16_t GlFogxv = 791;
+static const uint16_t GlFogxvOES = 792;
+static const uint16_t GlFramebufferRenderbufferOES = 793;
+static const uint16_t GlFramebufferTexture2DOES = 794;
+static const uint16_t GlFrustumf = 795;
+static const uint16_t GlFrustumfOES = 796;
+static const uint16_t GlFrustumx = 797;
+static const uint16_t GlFrustumxOES = 798;
+static const uint16_t GlGenFramebuffersOES = 799;
+static const uint16_t GlGenRenderbuffersOES = 800;
+static const uint16_t GlGenerateMipmapOES = 801;
+static const uint16_t GlGetClipPlanef = 802;
+static const uint16_t GlGetClipPlanefOES = 803;
+static const uint16_t GlGetClipPlanex = 804;
+static const uint16_t GlGetClipPlanexOES = 805;
+static const uint16_t GlGetFixedv = 806;
+static const uint16_t GlGetFixedvOES = 807;
+static const uint16_t GlGetFramebufferAttachmentParameterivOES = 808;
+static const uint16_t GlGetLightfv = 809;
+static const uint16_t GlGetLightxv = 810;
+static const uint16_t GlGetLightxvOES = 811;
+static const uint16_t GlGetMaterialfv = 812;
+static const uint16_t GlGetMaterialxv = 813;
+static const uint16_t GlGetMaterialxvOES = 814;
+static const uint16_t GlGetRenderbufferParameterivOES = 815;
+static const uint16_t GlGetTexEnvfv = 816;
+static const uint16_t GlGetTexEnviv = 817;
+static const uint16_t GlGetTexEnvxv = 818;
+static const uint16_t GlGetTexEnvxvOES = 819;
+static const uint16_t GlGetTexGenfvOES = 820;
+static const uint16_t GlGetTexGenivOES = 821;
+static const uint16_t GlGetTexGenxvOES = 822;
+static const uint16_t GlGetTexParameterxv = 823;
+static const uint16_t GlGetTexParameterxvOES = 824;
+static const uint16_t GlIsFramebufferOES = 825;
+static const uint16_t GlIsRenderbufferOES = 826;
+static const uint16_t GlLightModelf = 827;
+static const uint16_t GlLightModelfv = 828;
+static const uint16_t GlLightModelx = 829;
+static const uint16_t GlLightModelxOES = 830;
+static const uint16_t GlLightModelxv = 831;
+static const uint16_t GlLightModelxvOES = 832;
+static const uint16_t GlLightf = 833;
+static const uint16_t GlLightfv = 834;
+static const uint16_t GlLightx = 835;
+static const uint16_t GlLightxOES = 836;
+static const uint16_t GlLightxv = 837;
+static const uint16_t GlLightxvOES = 838;
+static const uint16_t GlLineWidthx = 839;
+static const uint16_t GlLineWidthxOES = 840;
+static const uint16_t GlLoadIdentity = 841;
+static const uint16_t GlLoadMatrixf = 842;
+static const uint16_t GlLoadMatrixx = 843;
+static const uint16_t GlLoadMatrixxOES = 844;
+static const uint16_t GlLoadPaletteFromModelViewMatrixOES = 845;
+static const uint16_t GlLogicOp = 846;
+static const uint16_t GlMaterialf = 847;
+static const uint16_t GlMaterialfv = 848;
+static const uint16_t GlMaterialx = 849;
+static const uint16_t GlMaterialxOES = 850;
+static const uint16_t GlMaterialxv = 851;
+static const uint16_t GlMaterialxvOES = 852;
+static const uint16_t GlMatrixIndexPointerOES = 853;
+static const uint16_t GlMatrixMode = 854;
+static const uint16_t GlMultMatrixf = 855;
+static const uint16_t GlMultMatrixx = 856;
+static const uint16_t GlMultMatrixxOES = 857;
+static const uint16_t GlMultiTexCoord4f = 858;
+static const uint16_t GlMultiTexCoord4x = 859;
+static const uint16_t GlMultiTexCoord4xOES = 860;
+static const uint16_t GlNormal3f = 861;
+static const uint16_t GlNormal3x = 862;
+static const uint16_t GlNormal3xOES = 863;
+static const uint16_t GlNormalPointer = 864;
+static const uint16_t GlOrthof = 865;
+static const uint16_t GlOrthofOES = 866;
+static const uint16_t GlOrthox = 867;
+static const uint16_t GlOrthoxOES = 868;
+static const uint16_t GlPointParameterf = 869;
+static const uint16_t GlPointParameterfv = 870;
+static const uint16_t GlPointParameterx = 871;
+static const uint16_t GlPointParameterxOES = 872;
+static const uint16_t GlPointParameterxv = 873;
+static const uint16_t GlPointParameterxvOES = 874;
+static const uint16_t GlPointSize = 875;
+static const uint16_t GlPointSizePointerOES = 876;
+static const uint16_t GlPointSizex = 877;
+static const uint16_t GlPointSizexOES = 878;
+static const uint16_t GlPolygonOffsetx = 879;
+static const uint16_t GlPolygonOffsetxOES = 880;
+static const uint16_t GlPopMatrix = 881;
+static const uint16_t GlPushMatrix = 882;
+static const uint16_t GlQueryMatrixxOES = 883;
+static const uint16_t GlRenderbufferStorageOES = 884;
+static const uint16_t GlRotatef = 885;
+static const uint16_t GlRotatex = 886;
+static const uint16_t GlRotatexOES = 887;
+static const uint16_t GlSampleCoveragex = 888;
+static const uint16_t GlSampleCoveragexOES = 889;
+static const uint16_t GlScalef = 890;
+static const uint16_t GlScalex = 891;
+static const uint16_t GlScalexOES = 892;
+static const uint16_t GlShadeModel = 893;
+static const uint16_t GlTexCoordPointer = 894;
+static const uint16_t GlTexEnvf = 895;
+static const uint16_t GlTexEnvfv = 896;
+static const uint16_t GlTexEnvi = 897;
+static const uint16_t GlTexEnviv = 898;
+static const uint16_t GlTexEnvx = 899;
+static const uint16_t GlTexEnvxOES = 900;
+static const uint16_t GlTexEnvxv = 901;
+static const uint16_t GlTexEnvxvOES = 902;
+static const uint16_t GlTexGenfOES = 903;
+static const uint16_t GlTexGenfvOES = 904;
+static const uint16_t GlTexGeniOES = 905;
+static const uint16_t GlTexGenivOES = 906;
+static const uint16_t GlTexGenxOES = 907;
+static const uint16_t GlTexGenxvOES = 908;
+static const uint16_t GlTexParameterx = 909;
+static const uint16_t GlTexParameterxOES = 910;
+static const uint16_t GlTexParameterxv = 911;
+static const uint16_t GlTexParameterxvOES = 912;
+static const uint16_t GlTranslatef = 913;
+static const uint16_t GlTranslatex = 914;
+static const uint16_t GlTranslatexOES = 915;
+static const uint16_t GlVertexPointer = 916;
+static const uint16_t GlWeightPointerOES = 917;
+static const uint16_t GlColorPointerBounds = 918;
+static const uint16_t GlNormalPointerBounds = 919;
+static const uint16_t GlTexCoordPointerBounds = 920;
+static const uint16_t GlVertexPointerBounds = 921;
+static const uint16_t GlPointSizePointerOESBounds = 922;
+static const uint16_t GlMatrixIndexPointerOESBounds = 923;
+static const uint16_t GlWeightPointerOESBounds = 924;
+static const uint16_t Architecture = 925;
+static const uint16_t ReplayCreateRenderer = 926;
+static const uint16_t ReplayBindRenderer = 927;
+static const uint16_t SwitchThread = 928;
+static const uint16_t ContextInfo = 929;
+static const uint16_t StartTimer = 930;
+static const uint16_t StopTimer = 931;
+static const uint16_t FlushPostBuffer = 932;
 }  // namespace FunctionIds
 
 enum class GLbitfield : uint32_t {
@@ -6384,98 +6563,109 @@ enum class GLenum : uint32_t {
 };
 
 enum class ExtensionId : uint32_t {
-    GL_AMD_performance_monitor = 1,
-    GL_ANGLE_framebuffer_blit = 2,
-    GL_ANGLE_framebuffer_multisample = 3,
-    GL_ANGLE_instanced_arrays = 4,
-    GL_ANGLE_translated_shader_source = 5,
-    GL_APPLE_copy_texture_levels = 6,
-    GL_APPLE_framebuffer_multisample = 7,
-    GL_APPLE_sync = 8,
-    GL_EXT_base_instance = 9,
-    GL_EXT_buffer_storage = 10,
-    GL_EXT_copy_image = 11,
-    GL_EXT_debug_label = 12,
-    GL_EXT_debug_marker = 13,
-    GL_EXT_discard_framebuffer = 14,
-    GL_EXT_disjoint_timer_query = 15,
-    GL_EXT_draw_buffers = 16,
-    GL_EXT_draw_buffers_indexed = 17,
-    GL_EXT_draw_elements_base_vertex = 18,
-    GL_EXT_draw_instanced = 19,
-    GL_EXT_geometry_shader = 20,
-    GL_EXT_instanced_arrays = 21,
-    GL_EXT_map_buffer_range = 22,
-    GL_EXT_multi_draw_arrays = 23,
-    GL_EXT_multi_draw_indirect = 24,
-    GL_EXT_multisampled_render_to_texture = 25,
-    GL_EXT_multiview_draw_buffers = 26,
-    GL_EXT_occlusion_query_boolean = 27,
-    GL_EXT_primitive_bounding_box = 28,
-    GL_EXT_raster_multisample = 29,
-    GL_EXT_robustness = 30,
-    GL_EXT_separate_shader_objects = 31,
-    GL_EXT_sparse_texture = 32,
-    GL_EXT_tessellation_shader = 33,
-    GL_EXT_texture_border_clamp = 34,
-    GL_EXT_texture_buffer = 35,
-    GL_EXT_texture_filter_minmax = 36,
-    GL_EXT_texture_storage = 37,
-    GL_EXT_texture_view = 38,
-    GL_IMG_multisampled_render_to_texture = 39,
-    GL_INTEL_performance_query = 40,
-    GL_KHR_blend_equation_advanced = 41,
-    GL_KHR_debug = 42,
-    GL_KHR_robustness = 43,
-    GL_NV_bindless_texture = 44,
-    GL_NV_blend_equation_advanced = 45,
-    GL_NV_conditional_render = 46,
-    GL_NV_conservative_raster = 47,
-    GL_NV_copy_buffer = 48,
-    GL_NV_coverage_sample = 49,
-    GL_NV_draw_buffers = 50,
-    GL_NV_draw_instanced = 51,
-    GL_NV_fence = 52,
-    GL_NV_fragment_coverage_to_color = 53,
-    GL_NV_framebuffer_blit = 54,
-    GL_NV_framebuffer_mixed_samples = 55,
-    GL_NV_framebuffer_multisample = 56,
-    GL_NV_instanced_arrays = 57,
-    GL_NV_internalformat_sample_query = 58,
-    GL_NV_non_square_matrices = 59,
-    GL_NV_path_rendering = 60,
-    GL_NV_polygon_mode = 61,
-    GL_NV_read_buffer = 62,
-    GL_NV_sample_locations = 63,
-    GL_NV_viewport_array = 64,
-    GL_OES_copy_image = 65,
-    GL_OES_draw_buffers_indexed = 66,
-    GL_OES_draw_elements_base_vertex = 67,
-    GL_OES_EGL_image = 68,
-    GL_OES_framebuffer_object = 69,
-    GL_OES_geometry_shader = 70,
-    GL_OES_get_program_binary = 71,
-    GL_OES_mapbuffer = 72,
-    GL_OES_primitive_bounding_box = 73,
-    GL_OES_sample_shading = 74,
-    GL_OES_tessellation_shader = 75,
-    GL_OES_texture_3D = 76,
-    GL_OES_texture_border_clamp = 77,
-    GL_OES_texture_buffer = 78,
-    GL_OES_texture_storage_multisample_2d_array = 79,
-    GL_OES_texture_view = 80,
-    GL_OES_vertex_array_object = 81,
-    GL_OVR_multiview = 82,
-    GL_QCOM_alpha_test = 83,
-    GL_QCOM_driver_control = 84,
-    GL_QCOM_extended_get = 85,
-    GL_QCOM_extended_get2 = 86,
-    GL_QCOM_tiled_rendering = 87,
-    GL_AMD_compressed_ATC_texture = 88,
-    GL_OES_texture_half_float = 89,
-    GL_OES_vertex_half_float = 90,
-    GL_INTEL_framebuffer_CMAA = 91,
-    GL_EXT_blend_func_extended = 92,
+    GL_AMD_compressed_ATC_texture = 1,
+    GL_AMD_performance_monitor = 2,
+    GL_ANGLE_framebuffer_blit = 3,
+    GL_ANGLE_framebuffer_multisample = 4,
+    GL_ANGLE_instanced_arrays = 5,
+    GL_ANGLE_translated_shader_source = 6,
+    GL_APPLE_copy_texture_levels = 7,
+    GL_APPLE_framebuffer_multisample = 8,
+    GL_APPLE_sync = 9,
+    GL_EXT_base_instance = 10,
+    GL_EXT_blend_func_extended = 11,
+    GL_EXT_buffer_storage = 12,
+    GL_EXT_copy_image = 13,
+    GL_EXT_debug_label = 14,
+    GL_EXT_debug_marker = 15,
+    GL_EXT_discard_framebuffer = 16,
+    GL_EXT_disjoint_timer_query = 17,
+    GL_EXT_draw_buffers = 18,
+    GL_EXT_draw_buffers_indexed = 19,
+    GL_EXT_draw_elements_base_vertex = 20,
+    GL_EXT_draw_instanced = 21,
+    GL_EXT_geometry_shader = 22,
+    GL_EXT_instanced_arrays = 23,
+    GL_EXT_map_buffer_range = 24,
+    GL_EXT_multi_draw_arrays = 25,
+    GL_EXT_multi_draw_indirect = 26,
+    GL_EXT_multisampled_render_to_texture = 27,
+    GL_EXT_multiview_draw_buffers = 28,
+    GL_EXT_occlusion_query_boolean = 29,
+    GL_EXT_primitive_bounding_box = 30,
+    GL_EXT_raster_multisample = 31,
+    GL_EXT_robustness = 32,
+    GL_EXT_separate_shader_objects = 33,
+    GL_EXT_sparse_texture = 34,
+    GL_EXT_tessellation_shader = 35,
+    GL_EXT_texture_border_clamp = 36,
+    GL_EXT_texture_buffer = 37,
+    GL_EXT_texture_filter_minmax = 38,
+    GL_EXT_texture_storage = 39,
+    GL_EXT_texture_view = 40,
+    GL_IMG_multisampled_render_to_texture = 41,
+    GL_IMG_user_clip_plane = 42,
+    GL_INTEL_framebuffer_CMAA = 43,
+    GL_INTEL_performance_query = 44,
+    GL_KHR_blend_equation_advanced = 45,
+    GL_KHR_debug = 46,
+    GL_KHR_robustness = 47,
+    GL_NV_bindless_texture = 48,
+    GL_NV_blend_equation_advanced = 49,
+    GL_NV_conditional_render = 50,
+    GL_NV_conservative_raster = 51,
+    GL_NV_copy_buffer = 52,
+    GL_NV_coverage_sample = 53,
+    GL_NV_draw_buffers = 54,
+    GL_NV_draw_instanced = 55,
+    GL_NV_fence = 56,
+    GL_NV_fragment_coverage_to_color = 57,
+    GL_NV_framebuffer_blit = 58,
+    GL_NV_framebuffer_mixed_samples = 59,
+    GL_NV_framebuffer_multisample = 60,
+    GL_NV_instanced_arrays = 61,
+    GL_NV_internalformat_sample_query = 62,
+    GL_NV_non_square_matrices = 63,
+    GL_NV_path_rendering = 64,
+    GL_NV_polygon_mode = 65,
+    GL_NV_read_buffer = 66,
+    GL_NV_sample_locations = 67,
+    GL_NV_viewport_array = 68,
+    GL_OES_blend_equation_separate = 69,
+    GL_OES_blend_func_separate = 70,
+    GL_OES_blend_subtract = 71,
+    GL_OES_copy_image = 72,
+    GL_OES_draw_buffers_indexed = 73,
+    GL_OES_draw_elements_base_vertex = 74,
+    GL_OES_draw_texture = 75,
+    GL_OES_EGL_image = 76,
+    GL_OES_fixed_point = 77,
+    GL_OES_framebuffer_object = 78,
+    GL_OES_geometry_shader = 79,
+    GL_OES_get_program_binary = 80,
+    GL_OES_mapbuffer = 81,
+    GL_OES_matrix_palette = 82,
+    GL_OES_point_size_array = 83,
+    GL_OES_primitive_bounding_box = 84,
+    GL_OES_query_matrix = 85,
+    GL_OES_sample_shading = 86,
+    GL_OES_single_precision = 87,
+    GL_OES_tessellation_shader = 88,
+    GL_OES_texture_3D = 89,
+    GL_OES_texture_border_clamp = 90,
+    GL_OES_texture_buffer = 91,
+    GL_OES_texture_cube_map = 92,
+    GL_OES_texture_half_float = 93,
+    GL_OES_texture_storage_multisample_2d_array = 94,
+    GL_OES_texture_view = 95,
+    GL_OES_vertex_array_object = 96,
+    GL_OES_vertex_half_float = 97,
+    GL_OVR_multiview = 98,
+    GL_QCOM_alpha_test = 99,
+    GL_QCOM_driver_control = 100,
+    GL_QCOM_extended_get = 101,
+    GL_QCOM_extended_get2 = 102,
+    GL_QCOM_tiled_rendering = 103,
 };
 
 enum class TextureKind : uint32_t {
@@ -6563,6 +6753,7 @@ typedef void *GLDEBUGPROC;
 typedef uint16_t GLhalf;
 typedef float GLclampf;
 typedef void GLvoid;
+typedef int32_t GLclampx;
 typedef uint64_t GLsync;
 typedef void *GLeglImageOES;
 
@@ -7394,10 +7585,6 @@ typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEMULTISAMPLE)(GLenum target, int32_
                                                            int32_t height);
 typedef void(STDCALL *PFNGLSTENCILMASK)(uint32_t mask);
 typedef void(STDCALL *PFNGLSTENCILMASKSEPARATE)(GLenum face, uint32_t mask);
-typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DOES)(GLenum framebuffer_target,
-                                                    GLenum framebuffer_attachment,
-                                                    GLenum texture_target, uint32_t texture,
-                                                    int32_t level);
 typedef void(STDCALL *PFNGLDISABLE)(GLenum capability);
 typedef void(STDCALL *PFNGLDISABLEI)(GLenum target, uint32_t index);
 typedef void(STDCALL *PFNGLENABLE)(GLenum capability);
@@ -7823,6 +8010,213 @@ typedef int(STDCALL *PFNCGSGETSURFACEBOUNDS)(void *cid, int32_t wid, int32_t sid
 typedef int(STDCALL *PFNCGLFLUSHDRAWABLE)(void *ctx);
 typedef void(STDCALL *PFNGLGETQUERYOBJECTI64V)(uint32_t query, GLenum parameter, int64_t *value);
 typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64V)(uint32_t query, GLenum parameter, uint64_t *value);
+typedef void(STDCALL *PFNGLALPHAFUNC)(GLenum func, float ref);
+typedef void(STDCALL *PFNGLALPHAFUNCX)(GLenum func, int32_t ref);
+typedef void(STDCALL *PFNGLALPHAFUNCXOES)(GLenum func, int32_t ref);
+typedef void(STDCALL *PFNGLBINDFRAMEBUFFEROES)(GLenum target, uint32_t framebuffer);
+typedef void(STDCALL *PFNGLBINDRENDERBUFFEROES)(GLenum target, uint32_t renderbuffer);
+typedef void(STDCALL *PFNGLBLENDEQUATIONOES)(GLenum mode);
+typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATEOES)(GLenum modeRGB, GLenum modeAlpha);
+typedef void(STDCALL *PFNGLBLENDFUNCSEPARATEOES)(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha,
+                                                 GLenum dstAlpha);
+typedef GLenum(STDCALL *PFNGLCHECKFRAMEBUFFERSTATUSOES)(GLenum target);
+typedef void(STDCALL *PFNGLCLEARCOLORX)(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+typedef void(STDCALL *PFNGLCLEARCOLORXOES)(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+typedef void(STDCALL *PFNGLCLEARDEPTHFOES)(float depth);
+typedef void(STDCALL *PFNGLCLEARDEPTHX)(int32_t depth);
+typedef void(STDCALL *PFNGLCLEARDEPTHXOES)(int32_t depth);
+typedef void(STDCALL *PFNGLCLIENTACTIVETEXTURE)(GLenum texture);
+typedef void(STDCALL *PFNGLCLIPPLANEF)(GLenum p, float *eqn);
+typedef void(STDCALL *PFNGLCLIPPLANEFIMG)(GLenum p, float *eqn);
+typedef void(STDCALL *PFNGLCLIPPLANEFOES)(GLenum plane, float *equation);
+typedef void(STDCALL *PFNGLCLIPPLANEX)(GLenum plane, int32_t *equation);
+typedef void(STDCALL *PFNGLCLIPPLANEXIMG)(GLenum p, int32_t *eqn);
+typedef void(STDCALL *PFNGLCLIPPLANEXOES)(GLenum plane, int32_t *equation);
+typedef void(STDCALL *PFNGLCOLOR4F)(float red, float green, float blue, float alpha);
+typedef void(STDCALL *PFNGLCOLOR4UB)(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+typedef void(STDCALL *PFNGLCOLOR4X)(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+typedef void(STDCALL *PFNGLCOLOR4XOES)(int32_t red, int32_t green, int32_t blue, int32_t alpha);
+typedef void(STDCALL *PFNGLCOLORPOINTER)(int32_t size, GLenum type, int32_t stride, void *pointer);
+typedef void(STDCALL *PFNGLCURRENTPALETTEMATRIXOES)(uint32_t matrixpaletteindex);
+typedef void(STDCALL *PFNGLDELETEFRAMEBUFFERSOES)(int32_t n, uint32_t *framebuffers);
+typedef void(STDCALL *PFNGLDELETERENDERBUFFERSOES)(int32_t n, uint32_t *renderbuffers);
+typedef void(STDCALL *PFNGLDEPTHRANGEFOES)(float n, float f);
+typedef void(STDCALL *PFNGLDEPTHRANGEX)(int32_t n, int32_t f);
+typedef void(STDCALL *PFNGLDEPTHRANGEXOES)(int32_t n, int32_t f);
+typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(GLenum array);
+typedef void(STDCALL *PFNGLDRAWTEXFOES)(float x, float y, float z, float width, float height);
+typedef void(STDCALL *PFNGLDRAWTEXFVOES)(float *coords);
+typedef void(STDCALL *PFNGLDRAWTEXIOES)(int32_t x, int32_t y, int32_t z, int32_t width,
+                                        int32_t height);
+typedef void(STDCALL *PFNGLDRAWTEXIVOES)(int32_t *coords);
+typedef void(STDCALL *PFNGLDRAWTEXSOES)(int16_t x, int16_t y, int16_t z, int16_t width,
+                                        int16_t height);
+typedef void(STDCALL *PFNGLDRAWTEXSVOES)(int16_t *coords);
+typedef void(STDCALL *PFNGLDRAWTEXXOES)(int32_t x, int32_t y, int32_t z, int32_t width,
+                                        int32_t height);
+typedef void(STDCALL *PFNGLDRAWTEXXVOES)(int32_t *coords);
+typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(GLenum array);
+typedef void(STDCALL *PFNGLFOGF)(GLenum pname, float param);
+typedef void(STDCALL *PFNGLFOGFV)(GLenum pname, float *params);
+typedef void(STDCALL *PFNGLFOGX)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLFOGXOES)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLFOGXV)(GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLFOGXVOES)(GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLFRAMEBUFFERRENDERBUFFEROES)(GLenum target, GLenum attachment,
+                                                       GLenum renderbuffertarget,
+                                                       uint32_t renderbuffer);
+typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2DOES)(GLenum target, GLenum attachment,
+                                                    GLenum textarget, uint32_t texture,
+                                                    int32_t level);
+typedef void(STDCALL *PFNGLFRUSTUMF)(float l, float r, float b, float t, float n, float f);
+typedef void(STDCALL *PFNGLFRUSTUMFOES)(float l, float r, float b, float t, float n, float f);
+typedef void(STDCALL *PFNGLFRUSTUMX)(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n,
+                                     int32_t f);
+typedef void(STDCALL *PFNGLFRUSTUMXOES)(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n,
+                                        int32_t f);
+typedef void(STDCALL *PFNGLGENFRAMEBUFFERSOES)(int32_t n, uint32_t *framebuffers);
+typedef void(STDCALL *PFNGLGENRENDERBUFFERSOES)(int32_t n, uint32_t *renderbuffers);
+typedef void(STDCALL *PFNGLGENERATEMIPMAPOES)(GLenum target);
+typedef void(STDCALL *PFNGLGETCLIPPLANEF)(GLenum plane, float *equation);
+typedef void(STDCALL *PFNGLGETCLIPPLANEFOES)(GLenum plane, float *equation);
+typedef void(STDCALL *PFNGLGETCLIPPLANEX)(GLenum plane, int32_t *equation);
+typedef void(STDCALL *PFNGLGETCLIPPLANEXOES)(GLenum plane, int32_t *equation);
+typedef void(STDCALL *PFNGLGETFIXEDV)(GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETFIXEDVOES)(GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVOES)(GLenum target, GLenum attachment,
+                                                                   GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETLIGHTFV)(GLenum light, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLGETLIGHTXV)(GLenum light, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETLIGHTXVOES)(GLenum light, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETMATERIALFV)(GLenum face, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLGETMATERIALXV)(GLenum face, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETMATERIALXVOES)(GLenum face, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETRENDERBUFFERPARAMETERIVOES)(GLenum target, GLenum pname,
+                                                          int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXENVFV)(GLenum target, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLGETTEXENVIV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXENVXV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXENVXVOES)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXGENFVOES)(GLenum coord, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLGETTEXGENIVOES)(GLenum coord, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXGENXVOES)(GLenum coord, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXPARAMETERXV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLGETTEXPARAMETERXVOES)(GLenum target, GLenum pname, int32_t *params);
+typedef uint8_t(STDCALL *PFNGLISFRAMEBUFFEROES)(uint32_t framebuffer);
+typedef uint8_t(STDCALL *PFNGLISRENDERBUFFEROES)(uint32_t renderbuffer);
+typedef void(STDCALL *PFNGLLIGHTMODELF)(GLenum pname, float param);
+typedef void(STDCALL *PFNGLLIGHTMODELFV)(GLenum pname, float *params);
+typedef void(STDCALL *PFNGLLIGHTMODELX)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLLIGHTMODELXOES)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLLIGHTMODELXV)(GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLLIGHTMODELXVOES)(GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLLIGHTF)(GLenum light, GLenum pname, float param);
+typedef void(STDCALL *PFNGLLIGHTFV)(GLenum light, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLLIGHTX)(GLenum light, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLLIGHTXOES)(GLenum light, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLLIGHTXV)(GLenum light, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLLIGHTXVOES)(GLenum light, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLLINEWIDTHX)(int32_t width);
+typedef void(STDCALL *PFNGLLINEWIDTHXOES)(int32_t width);
+typedef void(STDCALL *PFNGLLOADIDENTITY)();
+typedef void(STDCALL *PFNGLLOADMATRIXF)(float *m);
+typedef void(STDCALL *PFNGLLOADMATRIXX)(int32_t *m);
+typedef void(STDCALL *PFNGLLOADMATRIXXOES)(int32_t *m);
+typedef void(STDCALL *PFNGLLOADPALETTEFROMMODELVIEWMATRIXOES)();
+typedef void(STDCALL *PFNGLLOGICOP)(GLenum opcode);
+typedef void(STDCALL *PFNGLMATERIALF)(GLenum face, GLenum pname, float param);
+typedef void(STDCALL *PFNGLMATERIALFV)(GLenum face, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLMATERIALX)(GLenum face, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLMATERIALXOES)(GLenum face, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLMATERIALXV)(GLenum face, GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLMATERIALXVOES)(GLenum face, GLenum pname, int32_t *param);
+typedef void(STDCALL *PFNGLMATRIXINDEXPOINTEROES)(int32_t size, GLenum type, int32_t stride,
+                                                  void *pointer);
+typedef void(STDCALL *PFNGLMATRIXMODE)(GLenum mode);
+typedef void(STDCALL *PFNGLMULTMATRIXF)(float *m);
+typedef void(STDCALL *PFNGLMULTMATRIXX)(int32_t *m);
+typedef void(STDCALL *PFNGLMULTMATRIXXOES)(int32_t *m);
+typedef void(STDCALL *PFNGLMULTITEXCOORD4F)(GLenum target, float v0, float v1, float v2, float v3);
+typedef void(STDCALL *PFNGLMULTITEXCOORD4X)(GLenum texture, int32_t v0, int32_t v1, int32_t v2,
+                                            int32_t v3);
+typedef void(STDCALL *PFNGLMULTITEXCOORD4XOES)(GLenum texture, int32_t v0, int32_t v1, int32_t v2,
+                                               int32_t v3);
+typedef void(STDCALL *PFNGLNORMAL3F)(float nx, float ny, float nz);
+typedef void(STDCALL *PFNGLNORMAL3X)(int32_t nx, int32_t ny, int32_t nz);
+typedef void(STDCALL *PFNGLNORMAL3XOES)(int32_t nx, int32_t ny, int32_t nz);
+typedef void(STDCALL *PFNGLNORMALPOINTER)(GLenum type, int32_t stride, void *pointer);
+typedef void(STDCALL *PFNGLORTHOF)(float l, float r, float b, float t, float n, float f);
+typedef void(STDCALL *PFNGLORTHOFOES)(float l, float r, float b, float t, float n, float f);
+typedef void(STDCALL *PFNGLORTHOX)(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n,
+                                   int32_t f);
+typedef void(STDCALL *PFNGLORTHOXOES)(int32_t l, int32_t r, int32_t b, int32_t t, int32_t n,
+                                      int32_t f);
+typedef void(STDCALL *PFNGLPOINTPARAMETERF)(GLenum pname, float param);
+typedef void(STDCALL *PFNGLPOINTPARAMETERFV)(GLenum pname, float *params);
+typedef void(STDCALL *PFNGLPOINTPARAMETERX)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLPOINTPARAMETERXOES)(GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLPOINTPARAMETERXV)(GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLPOINTPARAMETERXVOES)(GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLPOINTSIZE)(float size);
+typedef void(STDCALL *PFNGLPOINTSIZEPOINTEROES)(GLenum type, int32_t stride, void *pointer);
+typedef void(STDCALL *PFNGLPOINTSIZEX)(int32_t size);
+typedef void(STDCALL *PFNGLPOINTSIZEXOES)(int32_t size);
+typedef void(STDCALL *PFNGLPOLYGONOFFSETX)(int32_t factor, int32_t units);
+typedef void(STDCALL *PFNGLPOLYGONOFFSETXOES)(int32_t factor, int32_t units);
+typedef void(STDCALL *PFNGLPOPMATRIX)();
+typedef void(STDCALL *PFNGLPUSHMATRIX)();
+typedef GLbitfield(STDCALL *PFNGLQUERYMATRIXXOES)(int32_t *mantissa, int32_t *exponent);
+typedef void(STDCALL *PFNGLRENDERBUFFERSTORAGEOES)(GLenum target, GLenum internalformat,
+                                                   int32_t width, int32_t height);
+typedef void(STDCALL *PFNGLROTATEF)(float angle, float x, float y, float z);
+typedef void(STDCALL *PFNGLROTATEX)(int32_t angle, int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLROTATEXOES)(int32_t angle, int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLSAMPLECOVERAGEX)(int32_t value, uint8_t invert);
+typedef void(STDCALL *PFNGLSAMPLECOVERAGEXOES)(int32_t value, uint8_t invert);
+typedef void(STDCALL *PFNGLSCALEF)(float x, float y, float z);
+typedef void(STDCALL *PFNGLSCALEX)(int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLSCALEXOES)(int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLSHADEMODEL)(GLenum mode);
+typedef void(STDCALL *PFNGLTEXCOORDPOINTER)(int32_t size, GLenum type, int32_t stride,
+                                            void *pointer);
+typedef void(STDCALL *PFNGLTEXENVF)(GLenum target, GLenum pname, float param);
+typedef void(STDCALL *PFNGLTEXENVFV)(GLenum target, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLTEXENVI)(GLenum target, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXENVIV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXENVX)(GLenum target, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXENVXOES)(GLenum target, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXENVXV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXENVXVOES)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXGENFOES)(GLenum coord, GLenum pname, float param);
+typedef void(STDCALL *PFNGLTEXGENFVOES)(GLenum coord, GLenum pname, float *params);
+typedef void(STDCALL *PFNGLTEXGENIOES)(GLenum coord, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXGENIVOES)(GLenum coord, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXGENXOES)(GLenum coord, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXGENXVOES)(GLenum coord, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXPARAMETERX)(GLenum target, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXPARAMETERXOES)(GLenum target, GLenum pname, int32_t param);
+typedef void(STDCALL *PFNGLTEXPARAMETERXV)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTEXPARAMETERXVOES)(GLenum target, GLenum pname, int32_t *params);
+typedef void(STDCALL *PFNGLTRANSLATEF)(float x, float y, float z);
+typedef void(STDCALL *PFNGLTRANSLATEX)(int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLTRANSLATEXOES)(int32_t x, int32_t y, int32_t z);
+typedef void(STDCALL *PFNGLVERTEXPOINTER)(int32_t size, GLenum type, int32_t stride, void *pointer);
+typedef void(STDCALL *PFNGLWEIGHTPOINTEROES)(int32_t size, GLenum type, int32_t stride,
+                                             void *pointer);
+typedef void(STDCALL *PFNGLCOLORPOINTERBOUNDS)(int32_t size, GLenum type, int32_t stride,
+                                               void *pointer, int32_t count);
+typedef void(STDCALL *PFNGLNORMALPOINTERBOUNDS)(GLenum type, int32_t stride, void *pointer,
+                                                int32_t count);
+typedef void(STDCALL *PFNGLTEXCOORDPOINTERBOUNDS)(int32_t size, GLenum type, int32_t stride,
+                                                  void *pointer, int32_t count);
+typedef void(STDCALL *PFNGLVERTEXPOINTERBOUNDS)(int32_t size, GLenum type, int32_t stride,
+                                                void *pointer, int32_t count);
+typedef void(STDCALL *PFNGLPOINTSIZEPOINTEROESBOUNDS)(GLenum type, int32_t stride, void *pointer,
+                                                      int32_t count);
+typedef void(STDCALL *PFNGLMATRIXINDEXPOINTEROESBOUNDS)(int32_t size, GLenum type, int32_t stride,
+                                                        void *pointer, int32_t count);
+typedef void(STDCALL *PFNGLWEIGHTPOINTEROESBOUNDS)(int32_t size, GLenum type, int32_t stride,
+                                                   void *pointer, int32_t count);
 
 extern PFNGLBLENDBARRIERKHR glBlendBarrierKHR;
 extern PFNGLBLENDEQUATIONSEPARATEIEXT glBlendEquationSeparateiEXT;
@@ -8291,7 +8685,6 @@ extern PFNGLRENDERBUFFERSTORAGE glRenderbufferStorage;
 extern PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
 extern PFNGLSTENCILMASK glStencilMask;
 extern PFNGLSTENCILMASKSEPARATE glStencilMaskSeparate;
-extern PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES;
 extern PFNGLDISABLE glDisable;
 extern PFNGLDISABLEI glDisablei;
 extern PFNGLENABLE glEnable;
@@ -8571,6 +8964,186 @@ extern PFNCGSGETSURFACEBOUNDS CGSGetSurfaceBounds;
 extern PFNCGLFLUSHDRAWABLE CGLFlushDrawable;
 extern PFNGLGETQUERYOBJECTI64V glGetQueryObjecti64v;
 extern PFNGLGETQUERYOBJECTUI64V glGetQueryObjectui64v;
+extern PFNGLALPHAFUNC glAlphaFunc;
+extern PFNGLALPHAFUNCX glAlphaFuncx;
+extern PFNGLALPHAFUNCXOES glAlphaFuncxOES;
+extern PFNGLBINDFRAMEBUFFEROES glBindFramebufferOES;
+extern PFNGLBINDRENDERBUFFEROES glBindRenderbufferOES;
+extern PFNGLBLENDEQUATIONOES glBlendEquationOES;
+extern PFNGLBLENDEQUATIONSEPARATEOES glBlendEquationSeparateOES;
+extern PFNGLBLENDFUNCSEPARATEOES glBlendFuncSeparateOES;
+extern PFNGLCHECKFRAMEBUFFERSTATUSOES glCheckFramebufferStatusOES;
+extern PFNGLCLEARCOLORX glClearColorx;
+extern PFNGLCLEARCOLORXOES glClearColorxOES;
+extern PFNGLCLEARDEPTHFOES glClearDepthfOES;
+extern PFNGLCLEARDEPTHX glClearDepthx;
+extern PFNGLCLEARDEPTHXOES glClearDepthxOES;
+extern PFNGLCLIENTACTIVETEXTURE glClientActiveTexture;
+extern PFNGLCLIPPLANEF glClipPlanef;
+extern PFNGLCLIPPLANEFIMG glClipPlanefIMG;
+extern PFNGLCLIPPLANEFOES glClipPlanefOES;
+extern PFNGLCLIPPLANEX glClipPlanex;
+extern PFNGLCLIPPLANEXIMG glClipPlanexIMG;
+extern PFNGLCLIPPLANEXOES glClipPlanexOES;
+extern PFNGLCOLOR4F glColor4f;
+extern PFNGLCOLOR4UB glColor4ub;
+extern PFNGLCOLOR4X glColor4x;
+extern PFNGLCOLOR4XOES glColor4xOES;
+extern PFNGLCOLORPOINTER glColorPointer;
+extern PFNGLCURRENTPALETTEMATRIXOES glCurrentPaletteMatrixOES;
+extern PFNGLDELETEFRAMEBUFFERSOES glDeleteFramebuffersOES;
+extern PFNGLDELETERENDERBUFFERSOES glDeleteRenderbuffersOES;
+extern PFNGLDEPTHRANGEFOES glDepthRangefOES;
+extern PFNGLDEPTHRANGEX glDepthRangex;
+extern PFNGLDEPTHRANGEXOES glDepthRangexOES;
+extern PFNGLDISABLECLIENTSTATE glDisableClientState;
+extern PFNGLDRAWTEXFOES glDrawTexfOES;
+extern PFNGLDRAWTEXFVOES glDrawTexfvOES;
+extern PFNGLDRAWTEXIOES glDrawTexiOES;
+extern PFNGLDRAWTEXIVOES glDrawTexivOES;
+extern PFNGLDRAWTEXSOES glDrawTexsOES;
+extern PFNGLDRAWTEXSVOES glDrawTexsvOES;
+extern PFNGLDRAWTEXXOES glDrawTexxOES;
+extern PFNGLDRAWTEXXVOES glDrawTexxvOES;
+extern PFNGLENABLECLIENTSTATE glEnableClientState;
+extern PFNGLFOGF glFogf;
+extern PFNGLFOGFV glFogfv;
+extern PFNGLFOGX glFogx;
+extern PFNGLFOGXOES glFogxOES;
+extern PFNGLFOGXV glFogxv;
+extern PFNGLFOGXVOES glFogxvOES;
+extern PFNGLFRAMEBUFFERRENDERBUFFEROES glFramebufferRenderbufferOES;
+extern PFNGLFRAMEBUFFERTEXTURE2DOES glFramebufferTexture2DOES;
+extern PFNGLFRUSTUMF glFrustumf;
+extern PFNGLFRUSTUMFOES glFrustumfOES;
+extern PFNGLFRUSTUMX glFrustumx;
+extern PFNGLFRUSTUMXOES glFrustumxOES;
+extern PFNGLGENFRAMEBUFFERSOES glGenFramebuffersOES;
+extern PFNGLGENRENDERBUFFERSOES glGenRenderbuffersOES;
+extern PFNGLGENERATEMIPMAPOES glGenerateMipmapOES;
+extern PFNGLGETCLIPPLANEF glGetClipPlanef;
+extern PFNGLGETCLIPPLANEFOES glGetClipPlanefOES;
+extern PFNGLGETCLIPPLANEX glGetClipPlanex;
+extern PFNGLGETCLIPPLANEXOES glGetClipPlanexOES;
+extern PFNGLGETFIXEDV glGetFixedv;
+extern PFNGLGETFIXEDVOES glGetFixedvOES;
+extern PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVOES glGetFramebufferAttachmentParameterivOES;
+extern PFNGLGETLIGHTFV glGetLightfv;
+extern PFNGLGETLIGHTXV glGetLightxv;
+extern PFNGLGETLIGHTXVOES glGetLightxvOES;
+extern PFNGLGETMATERIALFV glGetMaterialfv;
+extern PFNGLGETMATERIALXV glGetMaterialxv;
+extern PFNGLGETMATERIALXVOES glGetMaterialxvOES;
+extern PFNGLGETRENDERBUFFERPARAMETERIVOES glGetRenderbufferParameterivOES;
+extern PFNGLGETTEXENVFV glGetTexEnvfv;
+extern PFNGLGETTEXENVIV glGetTexEnviv;
+extern PFNGLGETTEXENVXV glGetTexEnvxv;
+extern PFNGLGETTEXENVXVOES glGetTexEnvxvOES;
+extern PFNGLGETTEXGENFVOES glGetTexGenfvOES;
+extern PFNGLGETTEXGENIVOES glGetTexGenivOES;
+extern PFNGLGETTEXGENXVOES glGetTexGenxvOES;
+extern PFNGLGETTEXPARAMETERXV glGetTexParameterxv;
+extern PFNGLGETTEXPARAMETERXVOES glGetTexParameterxvOES;
+extern PFNGLISFRAMEBUFFEROES glIsFramebufferOES;
+extern PFNGLISRENDERBUFFEROES glIsRenderbufferOES;
+extern PFNGLLIGHTMODELF glLightModelf;
+extern PFNGLLIGHTMODELFV glLightModelfv;
+extern PFNGLLIGHTMODELX glLightModelx;
+extern PFNGLLIGHTMODELXOES glLightModelxOES;
+extern PFNGLLIGHTMODELXV glLightModelxv;
+extern PFNGLLIGHTMODELXVOES glLightModelxvOES;
+extern PFNGLLIGHTF glLightf;
+extern PFNGLLIGHTFV glLightfv;
+extern PFNGLLIGHTX glLightx;
+extern PFNGLLIGHTXOES glLightxOES;
+extern PFNGLLIGHTXV glLightxv;
+extern PFNGLLIGHTXVOES glLightxvOES;
+extern PFNGLLINEWIDTHX glLineWidthx;
+extern PFNGLLINEWIDTHXOES glLineWidthxOES;
+extern PFNGLLOADIDENTITY glLoadIdentity;
+extern PFNGLLOADMATRIXF glLoadMatrixf;
+extern PFNGLLOADMATRIXX glLoadMatrixx;
+extern PFNGLLOADMATRIXXOES glLoadMatrixxOES;
+extern PFNGLLOADPALETTEFROMMODELVIEWMATRIXOES glLoadPaletteFromModelViewMatrixOES;
+extern PFNGLLOGICOP glLogicOp;
+extern PFNGLMATERIALF glMaterialf;
+extern PFNGLMATERIALFV glMaterialfv;
+extern PFNGLMATERIALX glMaterialx;
+extern PFNGLMATERIALXOES glMaterialxOES;
+extern PFNGLMATERIALXV glMaterialxv;
+extern PFNGLMATERIALXVOES glMaterialxvOES;
+extern PFNGLMATRIXINDEXPOINTEROES glMatrixIndexPointerOES;
+extern PFNGLMATRIXMODE glMatrixMode;
+extern PFNGLMULTMATRIXF glMultMatrixf;
+extern PFNGLMULTMATRIXX glMultMatrixx;
+extern PFNGLMULTMATRIXXOES glMultMatrixxOES;
+extern PFNGLMULTITEXCOORD4F glMultiTexCoord4f;
+extern PFNGLMULTITEXCOORD4X glMultiTexCoord4x;
+extern PFNGLMULTITEXCOORD4XOES glMultiTexCoord4xOES;
+extern PFNGLNORMAL3F glNormal3f;
+extern PFNGLNORMAL3X glNormal3x;
+extern PFNGLNORMAL3XOES glNormal3xOES;
+extern PFNGLNORMALPOINTER glNormalPointer;
+extern PFNGLORTHOF glOrthof;
+extern PFNGLORTHOFOES glOrthofOES;
+extern PFNGLORTHOX glOrthox;
+extern PFNGLORTHOXOES glOrthoxOES;
+extern PFNGLPOINTPARAMETERF glPointParameterf;
+extern PFNGLPOINTPARAMETERFV glPointParameterfv;
+extern PFNGLPOINTPARAMETERX glPointParameterx;
+extern PFNGLPOINTPARAMETERXOES glPointParameterxOES;
+extern PFNGLPOINTPARAMETERXV glPointParameterxv;
+extern PFNGLPOINTPARAMETERXVOES glPointParameterxvOES;
+extern PFNGLPOINTSIZE glPointSize;
+extern PFNGLPOINTSIZEPOINTEROES glPointSizePointerOES;
+extern PFNGLPOINTSIZEX glPointSizex;
+extern PFNGLPOINTSIZEXOES glPointSizexOES;
+extern PFNGLPOLYGONOFFSETX glPolygonOffsetx;
+extern PFNGLPOLYGONOFFSETXOES glPolygonOffsetxOES;
+extern PFNGLPOPMATRIX glPopMatrix;
+extern PFNGLPUSHMATRIX glPushMatrix;
+extern PFNGLQUERYMATRIXXOES glQueryMatrixxOES;
+extern PFNGLRENDERBUFFERSTORAGEOES glRenderbufferStorageOES;
+extern PFNGLROTATEF glRotatef;
+extern PFNGLROTATEX glRotatex;
+extern PFNGLROTATEXOES glRotatexOES;
+extern PFNGLSAMPLECOVERAGEX glSampleCoveragex;
+extern PFNGLSAMPLECOVERAGEXOES glSampleCoveragexOES;
+extern PFNGLSCALEF glScalef;
+extern PFNGLSCALEX glScalex;
+extern PFNGLSCALEXOES glScalexOES;
+extern PFNGLSHADEMODEL glShadeModel;
+extern PFNGLTEXCOORDPOINTER glTexCoordPointer;
+extern PFNGLTEXENVF glTexEnvf;
+extern PFNGLTEXENVFV glTexEnvfv;
+extern PFNGLTEXENVI glTexEnvi;
+extern PFNGLTEXENVIV glTexEnviv;
+extern PFNGLTEXENVX glTexEnvx;
+extern PFNGLTEXENVXOES glTexEnvxOES;
+extern PFNGLTEXENVXV glTexEnvxv;
+extern PFNGLTEXENVXVOES glTexEnvxvOES;
+extern PFNGLTEXGENFOES glTexGenfOES;
+extern PFNGLTEXGENFVOES glTexGenfvOES;
+extern PFNGLTEXGENIOES glTexGeniOES;
+extern PFNGLTEXGENIVOES glTexGenivOES;
+extern PFNGLTEXGENXOES glTexGenxOES;
+extern PFNGLTEXGENXVOES glTexGenxvOES;
+extern PFNGLTEXPARAMETERX glTexParameterx;
+extern PFNGLTEXPARAMETERXOES glTexParameterxOES;
+extern PFNGLTEXPARAMETERXV glTexParameterxv;
+extern PFNGLTEXPARAMETERXVOES glTexParameterxvOES;
+extern PFNGLTRANSLATEF glTranslatef;
+extern PFNGLTRANSLATEX glTranslatex;
+extern PFNGLTRANSLATEXOES glTranslatexOES;
+extern PFNGLVERTEXPOINTER glVertexPointer;
+extern PFNGLWEIGHTPOINTEROES glWeightPointerOES;
+extern PFNGLCOLORPOINTERBOUNDS glColorPointerBounds;
+extern PFNGLNORMALPOINTERBOUNDS glNormalPointerBounds;
+extern PFNGLTEXCOORDPOINTERBOUNDS glTexCoordPointerBounds;
+extern PFNGLVERTEXPOINTERBOUNDS glVertexPointerBounds;
+extern PFNGLPOINTSIZEPOINTEROESBOUNDS glPointSizePointerOESBounds;
+extern PFNGLMATRIXINDEXPOINTEROESBOUNDS glMatrixIndexPointerOESBounds;
+extern PFNGLWEIGHTPOINTEROESBOUNDS glWeightPointerOESBounds;
 
 }  // namespace gfxapi
 }  // namespace gapir

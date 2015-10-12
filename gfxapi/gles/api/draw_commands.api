@@ -50,7 +50,7 @@ macro void checkIndicesType(GLenum indices_type) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDrawArrays.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDrawArrays.xhtml","OpenGL ES 3.2")
 cmd void glDrawArrays(GLenum draw_mode, GLint first_index, GLsizei indices_count) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   checkPrimitiveType(draw_mode)
   glErrorInvalidValueIf(first_index < 0) // "Recommended behaviour"
   glErrorInvalidValueIf(indices_count < 0)
@@ -138,7 +138,7 @@ cmd void glDrawElements(GLenum         draw_mode,
                         GLsizei        indices_count,
                         GLenum         indices_type,
                         IndicesPointer indices) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   ctx := GetContext()
   DrawElements(ctx, draw_mode, indices_count, indices_type, indices, 1, 0)
 }

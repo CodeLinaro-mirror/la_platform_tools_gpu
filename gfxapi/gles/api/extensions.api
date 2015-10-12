@@ -51,9 +51,7 @@ cmd void glBeginPerfQueryINTEL(GLuint queryHandle) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glBeginQueryEXT(GLenum target, QueryId query) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
 }
 
@@ -365,9 +363,7 @@ cmd void glDeleteProgramPipelinesEXT(GLsizei n, const PipelineId* pipelines) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glDeleteQueriesEXT(GLsizei count, const QueryId* queries) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
   q := queries[0:count]
   ctx := GetContext()
@@ -448,9 +444,7 @@ cmd void glDrawArraysInstancedBaseInstanceEXT(GLenum  mode,
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/draw_instanced.txt","GL_EXT_draw_instanced")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_instanced_arrays.txt","GL_EXT_instanced_arrays")
 cmd void glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount) {
-  requiresExtension(GL_EXT_draw_instanced)
-  requiresExtension(GL_EXT_instanced_arrays)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_draw_instanced, GL_EXT_instanced_arrays)
   DrawArraysInstanced(mode, start, count, primcount)
 }
 
@@ -569,9 +563,7 @@ cmd void glDrawElementsInstancedEXT(GLenum         mode,
                                     GLenum         type,
                                     IndicesPointer indices,
                                     GLsizei        primcount) {
-  requiresExtension(GL_EXT_draw_instanced)
-  requiresExtension(GL_EXT_instanced_arrays)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_draw_instanced, GL_EXT_instanced_arrays)
   DrawElementsInstanced(mode, count, type, indices, primcount)
 }
 
@@ -663,9 +655,7 @@ cmd void glEndPerfQueryINTEL(GLuint queryHandle) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glEndQueryEXT(GLenum target) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
 }
 
@@ -880,9 +870,7 @@ cmd void glGenProgramPipelinesEXT(GLsizei n, PipelineId* pipelines) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glGenQueriesEXT(GLsizei count, QueryId* queries) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
   q := queries[0:count]
   ctx := GetContext()
@@ -1251,9 +1239,7 @@ cmd void glGetQueryObjectui64vEXT(QueryId query, GLenum parameter, GLuint64* val
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glGetQueryObjectuivEXT(QueryId query, GLenum parameter, GLuint* value) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
   value[0] = ?
 }
@@ -1261,9 +1247,7 @@ cmd void glGetQueryObjectuivEXT(QueryId query, GLenum parameter, GLuint* value) 
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd void glGetQueryivEXT(GLenum target, GLenum parameter, GLint* value) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
   value[0] = ?
 }
@@ -1445,9 +1429,7 @@ cmd GLboolean glIsProgramPipelineEXT(PipelineId pipeline) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt","GL_EXT_disjoint_timer_query")
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/EXT_occlusion_query_boolean.txt","GL_EXT_occlusion_query_boolean")
 cmd GLboolean glIsQueryEXT(QueryId query) {
-  requiresExtension(GL_EXT_disjoint_timer_query)
-  requiresExtension(GL_EXT_occlusion_query_boolean)
-  // TODO: Multiple extensions
+  requiresExtension2(GL_EXT_disjoint_timer_query, GL_EXT_occlusion_query_boolean)
 
   ctx := GetContext()
   return as!GLboolean(query in ctx.Instances.Queries)
@@ -2193,10 +2175,7 @@ cmd void glQueryCounterEXT(QueryId query, GLenum target) {
 @Doc("https://www.khronos.org/registry/gles/extensions/EXT/texture_filter_minmax.txt","GL_EXT_texture_filter_minmax")
 @Doc("https://www.khronos.org/registry/gles/extensions/NV/framebuffer_mixed_samples.txt","GL_NV_framebuffer_mixed_samples")
 cmd void glRasterSamplesEXT(GLuint samples, GLboolean fixedsamplelocations) {
-  requiresExtension(GL_EXT_raster_multisample)
-  requiresExtension(GL_EXT_texture_filter_minmax)
-  requiresExtension(GL_NV_framebuffer_mixed_samples)
-  // TODO: Multiple extensions
+  requiresExtension3(GL_EXT_raster_multisample, GL_EXT_texture_filter_minmax, GL_NV_framebuffer_mixed_samples)
   // TODO
 }
 

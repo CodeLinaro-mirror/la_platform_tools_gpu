@@ -17,7 +17,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glActiveTexture.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glActiveTexture.xhtml","OpenGL ES 3.2")
 cmd void glActiveTexture(GLenum unit) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (unit) {
     case GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE10, GL_TEXTURE11, GL_TEXTURE12, GL_TEXTURE13,
         GL_TEXTURE14, GL_TEXTURE15, GL_TEXTURE16, GL_TEXTURE17, GL_TEXTURE18, GL_TEXTURE19,
@@ -79,7 +79,7 @@ cmd void glBindSampler(GLuint unit, SamplerId sampler) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBindTexture.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBindTexture.xhtml","OpenGL ES 3.2")
 cmd void glBindTexture(GLenum target, TextureId texture) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
       // version 2.0
@@ -118,7 +118,7 @@ cmd void glCompressedTexImage2D(GLenum         target,
                                 GLint          border,
                                 GLsizei        image_size,
                                 TexturePointer data) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -186,10 +186,10 @@ cmd void glCompressedTexImage2D(GLenum         target,
       id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:       width,
-        Height:      height,
-        Size:        as!u32(image_size),
-        TexelFormat: format,
+        Width:        width,
+        Height:       height,
+        Size:         as!u32(image_size),
+        TexelFormat:  format,
       )
       if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
         l.Data = clone(as!u8*(data)[0:l.Size])
@@ -278,7 +278,7 @@ cmd void glCompressedTexSubImage2D(GLenum         target,
                                    GLenum         format,
                                    GLsizei        image_size,
                                    TexturePointer data) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -441,7 +441,7 @@ cmd void glCopyTexImage2D(GLenum  target,
                           GLsizei width,
                           GLsizei height,
                           GLint   border) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -481,7 +481,7 @@ cmd void glCopyTexSubImage2D(GLenum  target,
                              GLint   y,
                              GLsizei width,
                              GLsizei height) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -540,7 +540,7 @@ cmd void glDeleteSamplers(GLsizei count, const SamplerId* samplers) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDeleteTextures.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDeleteTextures.xhtml","OpenGL ES 3.2")
 cmd void glDeleteTextures(GLsizei count, const TextureId* textures) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   t := textures[0:count]
   ctx := GetContext()
@@ -563,7 +563,7 @@ cmd void glGenSamplers(GLsizei count, SamplerId* samplers) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGenTextures.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGenTextures.xhtml","OpenGL ES 3.2")
 cmd void glGenTextures(GLsizei count, TextureId* textures) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   t := textures[0:count]
   ctx := GetContext()
@@ -796,7 +796,7 @@ macro void GetTexParameterIuiv(GLenum target, GLenum pname, GLuint* params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   GetTexParameter(target, parameter, values)
 
   ctx := GetContext()
@@ -821,7 +821,7 @@ cmd void glGetTexParameterfv(GLenum target, GLenum parameter, GLfloat* values) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glGetTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glGetTexParameteriv(GLenum target, GLenum parameter, GLint* values) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   GetTexParameter(target, parameter, values)
 
   ctx := GetContext()
@@ -855,7 +855,7 @@ cmd GLboolean glIsSampler(SamplerId sampler) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glIsTexture.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glIsTexture.xhtml","OpenGL ES 3.2")
 cmd GLboolean glIsTexture(TextureId texture) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   return as!GLboolean(texture in ctx.Instances.Textures)
@@ -866,7 +866,7 @@ cmd GLboolean glIsTexture(TextureId texture) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPixelStorei.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPixelStorei.xhtml","OpenGL ES 3.2")
 cmd void glPixelStorei(GLenum parameter, GLint value) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (parameter) {
     case GL_PACK_ALIGNMENT, GL_UNPACK_ALIGNMENT: {
       // version 2.0
@@ -1052,7 +1052,7 @@ cmd void glTexImage2D(GLenum         target,
                       GLenum         format,
                       GLenum         type,
                       TexturePointer data) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,
@@ -1105,11 +1105,11 @@ cmd void glTexImage2D(GLenum         target,
       id := tu.Bindings[GL_TEXTURE_2D]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:       width,
-        Height:      height,
-        Size:        imageSize(as!u32(width), as!u32(height), format, type),
-        TexelFormat: format,
-        TexelType:   type,
+        Width:        width,
+        Height:       height,
+        Size:         imageSize(as!u32(width), as!u32(height), format, type),
+        TexelFormat:  format,
+        TexelType:    type,
       )
       if (data != null) {
         if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
@@ -1130,11 +1130,11 @@ cmd void glTexImage2D(GLenum         target,
       id := tu.Bindings[GL_TEXTURE_CUBE_MAP]
       t := ctx.Instances.Textures[id]
       l := Image(
-        Width:       width,
-        Height:      height,
-        Size:        imageSize(as!u32(width), as!u32(height), format, type),
-        TexelFormat: format,
-        TexelType:   type,
+        Width:        width,
+        Height:       height,
+        Size:         imageSize(as!u32(width), as!u32(height), format, type),
+        TexelFormat:  format,
+        TexelType:    type,
       )
       if (data != null) {
         if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) {
@@ -1285,7 +1285,7 @@ macro void TexParameterIuiv(GLenum target, GLenum pname, const GLuint* params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterf(GLenum target, GLenum parameter, GLfloat value) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
       // version 2.0
@@ -1342,7 +1342,7 @@ cmd void glTexParameterf(GLenum target, GLenum parameter, GLfloat value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   TexParameterv(target, pname, params)
 }
 
@@ -1351,7 +1351,7 @@ cmd void glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameteri(GLenum target, GLenum parameter, GLint value) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP: {
       // version 2.0
@@ -1410,7 +1410,7 @@ cmd void glTexParameteri(GLenum target, GLenum parameter, GLint value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glTexParameter.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glTexParameter.xhtml","OpenGL ES 3.2")
 cmd void glTexParameteriv(GLenum target, GLenum pname, const GLint* params) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   TexParameterv(target, pname, params)
 }
 
@@ -1627,7 +1627,7 @@ cmd void glTexSubImage2D(GLenum         target,
                          GLenum         format,
                          GLenum         type,
                          TexturePointer data) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (target) {
     case GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
         GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GL_TEXTURE_CUBE_MAP_POSITIVE_X,

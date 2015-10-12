@@ -725,6 +725,7 @@ func (p GLDEBUGPROC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 type GLhalf uint16
 type GLfloat float32
 type GLclampf float32
+type GLclampx int32
 type GLsync uint64
 
 // GLeglImageOES is a pointer to a void element.
@@ -4826,6 +4827,206 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
+// GLfixedᶜᵖ is a pointer to a GLfixed element.
+type GLfixedᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLfixedᶜᵖ returns a GLfixedᶜᵖ that points to addr in the application pool.
+func NewGLfixedᶜᵖ(addr uint64) GLfixedᶜᵖ {
+	return GLfixedᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLfixedᶜᵖ points to.
+func (p GLfixedᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLfixed element at the pointer.
+func (p GLfixedᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixed {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLfixed element at the pointer.
+func (p GLfixedᶜᵖ) Write(value GLfixed, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLfixed{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLfixedᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLfixedᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLfixedᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLfixedˢ from the pointer using start and end indices.
+func (p GLfixedᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLfixedᵖ is a pointer to a GLfixed element.
+type GLfixedᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLfixedᵖ returns a GLfixedᵖ that points to addr in the application pool.
+func NewGLfixedᵖ(addr uint64) GLfixedᵖ {
+	return GLfixedᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLfixedᵖ points to.
+func (p GLfixedᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Read reads and returns the GLfixed element at the pointer.
+func (p GLfixedᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixed {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLfixed element at the pointer.
+func (p GLfixedᵖ) Write(value GLfixed, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLfixed{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLfixedᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLfixedᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLfixedᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLfixedˢ from the pointer using start and end indices.
+func (p GLfixedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLshortᶜᵖ is a pointer to a GLshort element.
+type GLshortᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLshortᶜᵖ returns a GLshortᶜᵖ that points to addr in the application pool.
+func NewGLshortᶜᵖ(addr uint64) GLshortᶜᵖ {
+	return GLshortᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLshortᶜᵖ points to.
+func (p GLshortᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(2)
+}
+
+// Read reads and returns the GLshort element at the pointer.
+func (p GLshortᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshort {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLshort element at the pointer.
+func (p GLshortᶜᵖ) Write(value GLshort, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLshort{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLshortᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLshortᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLshortᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLshortˢ from the pointer using start and end indices.
+func (p GLshortᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// GLshortᵖ is a pointer to a GLshort element.
+type GLshortᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewGLshortᵖ returns a GLshortᵖ that points to addr in the application pool.
+func NewGLshortᵖ(addr uint64) GLshortᵖ {
+	return GLshortᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that GLshortᵖ points to.
+func (p GLshortᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(2)
+}
+
+// Read reads and returns the GLshort element at the pointer.
+func (p GLshortᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshort {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the GLshort element at the pointer.
+func (p GLshortᵖ) Write(value GLshort, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]GLshort{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p GLshortᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p GLshortᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p GLshortᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new GLshortˢ from the pointer using start and end indices.
+func (p GLshortᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
 // VertexBufferBindingIndexᵖ is a pointer to a VertexBufferBindingIndex element.
 type VertexBufferBindingIndexᵖ struct {
 	binary.Generate
@@ -7376,6 +7577,163 @@ func (s GLenumˢ) String() string {
 	return fmt.Sprintf("GLenum(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
+// GLfixedˢ is a slice of GLfixed.
+type GLfixedˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeGLfixedˢ returns a GLfixedˢ backed by a new memory pool.
+func MakeGLfixedˢ(count uint64, ϟs *gfxapi.State) GLfixedˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return GLfixedˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the GLfixedˢ in a new memory pool.
+func (s GLfixedˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := GLfixedˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that GLfixedˢ points to.
+func (s GLfixedˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(4)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s GLfixedˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s GLfixedˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s GLfixedˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s GLfixedˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsGLfixedˢ returns s cast to a GLfixedˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsGLfixedˢ(s Slice, ϟs *gfxapi.State) GLfixedˢ {
+	out := GLfixedˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the GLfixed elements in this GLfixedˢ.
+func (s GLfixedˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []GLfixed {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLfixed, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if ϟv := d.Int32(); d.Error() == nil {
+			res[i] = GLfixed(ϟv)
+		} else {
+			panic(d.Error())
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s GLfixedˢ) Write(src []GLfixed, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if e.Int32(int32(src[i])); e.Error() != nil {
+			panic(e.Error())
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst GLfixedˢ) Copy(src GLfixedˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s GLfixedˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s GLfixedˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s GLfixedˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s GLfixedˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLfixedˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a GLfixedᵖ to the i'th element in this GLfixedˢ.
+func (s GLfixedˢ) Index(i uint64, ϟs *gfxapi.State) GLfixedᵖ {
+	return GLfixedᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the GLfixedˢ using start and end indices.
+func (s GLfixedˢ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return GLfixedˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the GLfixedˢ slice.
+func (s GLfixedˢ) String() string {
+	return fmt.Sprintf("GLfixed(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
 // GLfloatˢ is a slice of GLfloat.
 type GLfloatˢ struct {
 	binary.Generate
@@ -7845,6 +8203,163 @@ func (s GLintˢ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
 // String returns a string description of the GLintˢ slice.
 func (s GLintˢ) String() string {
 	return fmt.Sprintf("GLint(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+}
+
+// GLshortˢ is a slice of GLshort.
+type GLshortˢ struct {
+	binary.Generate
+	SliceInfo
+}
+
+// MakeGLshortˢ returns a GLshortˢ backed by a new memory pool.
+func MakeGLshortˢ(count uint64, ϟs *gfxapi.State) GLshortˢ {
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = &memory.Pool{}
+	ϟs.NextPoolID++
+	return GLshortˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+}
+
+// Clone returns a copy of the GLshortˢ in a new memory pool.
+func (s GLshortˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortˢ {
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	pool := &memory.Pool{}
+	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
+	id := ϟs.NextPoolID
+	ϟs.Memory[id] = pool
+	ϟs.NextPoolID++
+	dst := GLshortˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	return dst
+}
+
+// ElementSize returns the size in bytes of an element that GLshortˢ points to.
+func (s GLshortˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(2)
+}
+
+// Range returns the memory range this slice represents in the underlying pool.
+func (s GLshortˢ) Range(ϟs *gfxapi.State) memory.Range {
+	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
+}
+
+// ResourceID returns an identifier to a resource representing the data of
+// this slice.
+func (s GLshortˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
+	if err != nil {
+		panic(err)
+	}
+	return id
+}
+
+// Decoder returns a memory decoder for the slice.
+func (s GLshortˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
+}
+
+// Encoder returns a memory encoder for the slice.
+func (s GLshortˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
+}
+
+// AsGLshortˢ returns s cast to a GLshortˢ.
+// The returned slice length will be calculated so that the returned slice is
+// no longer (in bytes) than s.
+func AsGLshortˢ(s Slice, ϟs *gfxapi.State) GLshortˢ {
+	out := GLshortˢ{SliceInfo: s.Info()}
+	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
+	return out
+}
+
+// Read reads and returns all the GLshort elements in this GLshortˢ.
+func (s GLshortˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []GLshort {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]GLshort, s.Count)
+	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	for i := range res {
+		if ϟv := d.Int16(); d.Error() == nil {
+			res[i] = GLshort(ϟv)
+		} else {
+			panic(d.Error())
+		}
+	}
+	return res
+}
+
+// Write copies elements from src to this slice. The number of elements copied is returned
+// which is the minimum of s.Count and len(src).
+func (s GLshortˢ) Write(src []GLshort, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+	count := min(s.Count, uint64(len(src)))
+	s = s.Slice(0, count, ϟs)
+	e := s.Encoder(ϟs)
+	for i := uint64(0); i < count; i++ {
+		if e.Int16(int16(src[i])); e.Error() != nil {
+			panic(e.Error())
+		}
+	}
+	s.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return count
+}
+
+// Copy copies elements from src to this slice.
+// The number of elements copied is the minimum of dst.Count and src.Count.
+// The slices of this and dst to the copied elements is returned.
+func (dst GLshortˢ) Copy(src GLshortˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s GLshortˢ) {
+	count := min(dst.Count, src.Count)
+	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
+	src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
+	dst.OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return dst, src
+}
+
+// OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
+func (s GLshortˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+		ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+	}
+	return s
+}
+
+// OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
+func (s GLshortˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortˢ {
+	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
+		f(s.Range(ϟs))
+	}
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
+	}
+	return s
+}
+func (s GLshortˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) GLshortˢ {
+	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
+		rng := s.Range(ϟs)
+		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
+	}
+	return s
+}
+
+// Index returns a GLshortᵖ to the i'th element in this GLshortˢ.
+func (s GLshortˢ) Index(i uint64, ϟs *gfxapi.State) GLshortᵖ {
+	return GLshortᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+}
+
+// Slice returns a sub-slice from the GLshortˢ using start and end indices.
+func (s GLshortˢ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
+	if start > end {
+		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
+	}
+	if end > s.Count {
+		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
+	}
+	return GLshortˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+}
+
+// String returns a string description of the GLshortˢ slice.
+func (s GLshortˢ) String() string {
+	return fmt.Sprintf("GLshort(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // GLsizeiˢ is a slice of GLsizei.
@@ -31601,42 +32116,6 @@ func (c *GlStencilMaskSeparate) Flags() atom.Flags                { return 0 }
 func (a *GlStencilMaskSeparate) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
-// GlFramebufferTexture2DOES
-////////////////////////////////////////////////////////////////////////////////
-type GlFramebufferTexture2DOES struct {
-	binary.Generate
-	observations          atom.Observations
-	FramebufferTarget     GLenum
-	FramebufferAttachment GLenum
-	TextureTarget         GLenum
-	Texture               TextureId
-	Level                 GLint
-}
-
-func (a *GlFramebufferTexture2DOES) String() string {
-	return fmt.Sprintf("glFramebufferTexture2DOES(framebuffer_target: %v, framebuffer_attachment: %v, texture_target: %v, texture: %v, level: %v)", a.FramebufferTarget, a.FramebufferAttachment, a.TextureTarget, a.Texture, a.Level)
-}
-
-// AddRead appends a new read observation to the atom of the range rng with
-// the data id.
-// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
-func (a *GlFramebufferTexture2DOES) AddRead(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
-	return a
-}
-
-// AddWrite appends a new write observation to the atom of the range rng with
-// the data id.
-// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
-func (a *GlFramebufferTexture2DOES) AddWrite(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
-	return a
-}
-func (c *GlFramebufferTexture2DOES) API() gfxapi.ID                   { return api{}.ID() }
-func (c *GlFramebufferTexture2DOES) Flags() atom.Flags                { return 0 }
-func (a *GlFramebufferTexture2DOES) Observations() *atom.Observations { return &a.observations }
-
-////////////////////////////////////////////////////////////////////////////////
 // GlDisable
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisable struct {
@@ -41252,6 +41731,6084 @@ func (c *GlGetQueryObjectui64v) Flags() atom.Flags                { return 0 }
 func (a *GlGetQueryObjectui64v) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
+// GlAlphaFunc
+////////////////////////////////////////////////////////////////////////////////
+type GlAlphaFunc struct {
+	binary.Generate
+	observations atom.Observations
+	Func         GLenum
+	Ref          GLfloat
+}
+
+func (a *GlAlphaFunc) String() string {
+	return fmt.Sprintf("glAlphaFunc(func: %v, ref: %v)", a.Func, a.Ref)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFunc pointer is returned so that calls can be chained.
+func (a *GlAlphaFunc) AddRead(rng memory.Range, id binary.ID) *GlAlphaFunc {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFunc pointer is returned so that calls can be chained.
+func (a *GlAlphaFunc) AddWrite(rng memory.Range, id binary.ID) *GlAlphaFunc {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlAlphaFunc) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlAlphaFunc) Flags() atom.Flags                { return 0 }
+func (a *GlAlphaFunc) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlAlphaFuncx
+////////////////////////////////////////////////////////////////////////////////
+type GlAlphaFuncx struct {
+	binary.Generate
+	observations atom.Observations
+	Func         GLenum
+	Ref          GLfixed
+}
+
+func (a *GlAlphaFuncx) String() string {
+	return fmt.Sprintf("glAlphaFuncx(func: %v, ref: %v)", a.Func, a.Ref)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFuncx pointer is returned so that calls can be chained.
+func (a *GlAlphaFuncx) AddRead(rng memory.Range, id binary.ID) *GlAlphaFuncx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFuncx pointer is returned so that calls can be chained.
+func (a *GlAlphaFuncx) AddWrite(rng memory.Range, id binary.ID) *GlAlphaFuncx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlAlphaFuncx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlAlphaFuncx) Flags() atom.Flags                { return 0 }
+func (a *GlAlphaFuncx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlAlphaFuncxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlAlphaFuncxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Func         GLenum
+	Ref          GLfixed
+}
+
+func (a *GlAlphaFuncxOES) String() string {
+	return fmt.Sprintf("glAlphaFuncxOES(func: %v, ref: %v)", a.Func, a.Ref)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFuncxOES pointer is returned so that calls can be chained.
+func (a *GlAlphaFuncxOES) AddRead(rng memory.Range, id binary.ID) *GlAlphaFuncxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlAlphaFuncxOES pointer is returned so that calls can be chained.
+func (a *GlAlphaFuncxOES) AddWrite(rng memory.Range, id binary.ID) *GlAlphaFuncxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlAlphaFuncxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlAlphaFuncxOES) Flags() atom.Flags                { return 0 }
+func (a *GlAlphaFuncxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBindFramebufferOES
+////////////////////////////////////////////////////////////////////////////////
+type GlBindFramebufferOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Framebuffer  GLuint
+}
+
+func (a *GlBindFramebufferOES) String() string {
+	return fmt.Sprintf("glBindFramebufferOES(target: %v, framebuffer: %v)", a.Target, a.Framebuffer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindFramebufferOES pointer is returned so that calls can be chained.
+func (a *GlBindFramebufferOES) AddRead(rng memory.Range, id binary.ID) *GlBindFramebufferOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindFramebufferOES pointer is returned so that calls can be chained.
+func (a *GlBindFramebufferOES) AddWrite(rng memory.Range, id binary.ID) *GlBindFramebufferOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindFramebufferOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBindFramebufferOES) Flags() atom.Flags                { return 0 }
+func (a *GlBindFramebufferOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBindRenderbufferOES
+////////////////////////////////////////////////////////////////////////////////
+type GlBindRenderbufferOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Renderbuffer GLuint
+}
+
+func (a *GlBindRenderbufferOES) String() string {
+	return fmt.Sprintf("glBindRenderbufferOES(target: %v, renderbuffer: %v)", a.Target, a.Renderbuffer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBindRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlBindRenderbufferOES) AddRead(rng memory.Range, id binary.ID) *GlBindRenderbufferOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBindRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlBindRenderbufferOES) AddWrite(rng memory.Range, id binary.ID) *GlBindRenderbufferOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBindRenderbufferOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBindRenderbufferOES) Flags() atom.Flags                { return 0 }
+func (a *GlBindRenderbufferOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBlendEquationOES
+////////////////////////////////////////////////////////////////////////////////
+type GlBlendEquationOES struct {
+	binary.Generate
+	observations atom.Observations
+	Mode         GLenum
+}
+
+func (a *GlBlendEquationOES) String() string {
+	return fmt.Sprintf("glBlendEquationOES(mode: %v)", a.Mode)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBlendEquationOES pointer is returned so that calls can be chained.
+func (a *GlBlendEquationOES) AddRead(rng memory.Range, id binary.ID) *GlBlendEquationOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBlendEquationOES pointer is returned so that calls can be chained.
+func (a *GlBlendEquationOES) AddWrite(rng memory.Range, id binary.ID) *GlBlendEquationOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBlendEquationOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBlendEquationOES) Flags() atom.Flags                { return 0 }
+func (a *GlBlendEquationOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBlendEquationSeparateOES
+////////////////////////////////////////////////////////////////////////////////
+type GlBlendEquationSeparateOES struct {
+	binary.Generate
+	observations atom.Observations
+	ModeRGB      GLenum
+	ModeAlpha    GLenum
+}
+
+func (a *GlBlendEquationSeparateOES) String() string {
+	return fmt.Sprintf("glBlendEquationSeparateOES(modeRGB: %v, modeAlpha: %v)", a.ModeRGB, a.ModeAlpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBlendEquationSeparateOES pointer is returned so that calls can be chained.
+func (a *GlBlendEquationSeparateOES) AddRead(rng memory.Range, id binary.ID) *GlBlendEquationSeparateOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBlendEquationSeparateOES pointer is returned so that calls can be chained.
+func (a *GlBlendEquationSeparateOES) AddWrite(rng memory.Range, id binary.ID) *GlBlendEquationSeparateOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBlendEquationSeparateOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBlendEquationSeparateOES) Flags() atom.Flags                { return 0 }
+func (a *GlBlendEquationSeparateOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlBlendFuncSeparateOES
+////////////////////////////////////////////////////////////////////////////////
+type GlBlendFuncSeparateOES struct {
+	binary.Generate
+	observations atom.Observations
+	SrcRGB       GLenum
+	DstRGB       GLenum
+	SrcAlpha     GLenum
+	DstAlpha     GLenum
+}
+
+func (a *GlBlendFuncSeparateOES) String() string {
+	return fmt.Sprintf("glBlendFuncSeparateOES(srcRGB: %v, dstRGB: %v, srcAlpha: %v, dstAlpha: %v)", a.SrcRGB, a.DstRGB, a.SrcAlpha, a.DstAlpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlBlendFuncSeparateOES pointer is returned so that calls can be chained.
+func (a *GlBlendFuncSeparateOES) AddRead(rng memory.Range, id binary.ID) *GlBlendFuncSeparateOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlBlendFuncSeparateOES pointer is returned so that calls can be chained.
+func (a *GlBlendFuncSeparateOES) AddWrite(rng memory.Range, id binary.ID) *GlBlendFuncSeparateOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlBlendFuncSeparateOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlBlendFuncSeparateOES) Flags() atom.Flags                { return 0 }
+func (a *GlBlendFuncSeparateOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlCheckFramebufferStatusOES
+////////////////////////////////////////////////////////////////////////////////
+type GlCheckFramebufferStatusOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Result       GLenum
+}
+
+func (a *GlCheckFramebufferStatusOES) String() string {
+	return fmt.Sprintf("glCheckFramebufferStatusOES(target: %v) → %v", a.Target, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlCheckFramebufferStatusOES pointer is returned so that calls can be chained.
+func (a *GlCheckFramebufferStatusOES) AddRead(rng memory.Range, id binary.ID) *GlCheckFramebufferStatusOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlCheckFramebufferStatusOES pointer is returned so that calls can be chained.
+func (a *GlCheckFramebufferStatusOES) AddWrite(rng memory.Range, id binary.ID) *GlCheckFramebufferStatusOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlCheckFramebufferStatusOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlCheckFramebufferStatusOES) Flags() atom.Flags                { return 0 }
+func (a *GlCheckFramebufferStatusOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClearColorx
+////////////////////////////////////////////////////////////////////////////////
+type GlClearColorx struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLfixed
+	Green        GLfixed
+	Blue         GLfixed
+	Alpha        GLfixed
+}
+
+func (a *GlClearColorx) String() string {
+	return fmt.Sprintf("glClearColorx(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClearColorx pointer is returned so that calls can be chained.
+func (a *GlClearColorx) AddRead(rng memory.Range, id binary.ID) *GlClearColorx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClearColorx pointer is returned so that calls can be chained.
+func (a *GlClearColorx) AddWrite(rng memory.Range, id binary.ID) *GlClearColorx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClearColorx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClearColorx) Flags() atom.Flags                { return 0 }
+func (a *GlClearColorx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClearColorxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlClearColorxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLfixed
+	Green        GLfixed
+	Blue         GLfixed
+	Alpha        GLfixed
+}
+
+func (a *GlClearColorxOES) String() string {
+	return fmt.Sprintf("glClearColorxOES(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClearColorxOES pointer is returned so that calls can be chained.
+func (a *GlClearColorxOES) AddRead(rng memory.Range, id binary.ID) *GlClearColorxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClearColorxOES pointer is returned so that calls can be chained.
+func (a *GlClearColorxOES) AddWrite(rng memory.Range, id binary.ID) *GlClearColorxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClearColorxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClearColorxOES) Flags() atom.Flags                { return 0 }
+func (a *GlClearColorxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClearDepthfOES
+////////////////////////////////////////////////////////////////////////////////
+type GlClearDepthfOES struct {
+	binary.Generate
+	observations atom.Observations
+	Depth        GLclampf
+}
+
+func (a *GlClearDepthfOES) String() string {
+	return fmt.Sprintf("glClearDepthfOES(depth: %v)", a.Depth)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthfOES pointer is returned so that calls can be chained.
+func (a *GlClearDepthfOES) AddRead(rng memory.Range, id binary.ID) *GlClearDepthfOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthfOES pointer is returned so that calls can be chained.
+func (a *GlClearDepthfOES) AddWrite(rng memory.Range, id binary.ID) *GlClearDepthfOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClearDepthfOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClearDepthfOES) Flags() atom.Flags                { return 0 }
+func (a *GlClearDepthfOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClearDepthx
+////////////////////////////////////////////////////////////////////////////////
+type GlClearDepthx struct {
+	binary.Generate
+	observations atom.Observations
+	Depth        GLfixed
+}
+
+func (a *GlClearDepthx) String() string {
+	return fmt.Sprintf("glClearDepthx(depth: %v)", a.Depth)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthx pointer is returned so that calls can be chained.
+func (a *GlClearDepthx) AddRead(rng memory.Range, id binary.ID) *GlClearDepthx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthx pointer is returned so that calls can be chained.
+func (a *GlClearDepthx) AddWrite(rng memory.Range, id binary.ID) *GlClearDepthx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClearDepthx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClearDepthx) Flags() atom.Flags                { return 0 }
+func (a *GlClearDepthx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClearDepthxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlClearDepthxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Depth        GLfixed
+}
+
+func (a *GlClearDepthxOES) String() string {
+	return fmt.Sprintf("glClearDepthxOES(depth: %v)", a.Depth)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthxOES pointer is returned so that calls can be chained.
+func (a *GlClearDepthxOES) AddRead(rng memory.Range, id binary.ID) *GlClearDepthxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClearDepthxOES pointer is returned so that calls can be chained.
+func (a *GlClearDepthxOES) AddWrite(rng memory.Range, id binary.ID) *GlClearDepthxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClearDepthxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClearDepthxOES) Flags() atom.Flags                { return 0 }
+func (a *GlClearDepthxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClientActiveTexture
+////////////////////////////////////////////////////////////////////////////////
+type GlClientActiveTexture struct {
+	binary.Generate
+	observations atom.Observations
+	Texture      GLenum
+}
+
+func (a *GlClientActiveTexture) String() string {
+	return fmt.Sprintf("glClientActiveTexture(texture: %v)", a.Texture)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClientActiveTexture pointer is returned so that calls can be chained.
+func (a *GlClientActiveTexture) AddRead(rng memory.Range, id binary.ID) *GlClientActiveTexture {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClientActiveTexture pointer is returned so that calls can be chained.
+func (a *GlClientActiveTexture) AddWrite(rng memory.Range, id binary.ID) *GlClientActiveTexture {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClientActiveTexture) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClientActiveTexture) Flags() atom.Flags                { return 0 }
+func (a *GlClientActiveTexture) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanef
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanef struct {
+	binary.Generate
+	observations atom.Observations
+	P            GLenum
+	Eqn          GLfloatᶜᵖ
+}
+
+func (a *GlClipPlanef) String() string {
+	return fmt.Sprintf("glClipPlanef(p: %v, eqn: %v)", a.P, a.Eqn)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanef pointer is returned so that calls can be chained.
+func (a *GlClipPlanef) AddRead(rng memory.Range, id binary.ID) *GlClipPlanef {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanef pointer is returned so that calls can be chained.
+func (a *GlClipPlanef) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanef {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanef) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanef) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanef) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanefIMG
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanefIMG struct {
+	binary.Generate
+	observations atom.Observations
+	P            GLenum
+	Eqn          GLfloatᶜᵖ
+}
+
+func (a *GlClipPlanefIMG) String() string {
+	return fmt.Sprintf("glClipPlanefIMG(p: %v, eqn: %v)", a.P, a.Eqn)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanefIMG pointer is returned so that calls can be chained.
+func (a *GlClipPlanefIMG) AddRead(rng memory.Range, id binary.ID) *GlClipPlanefIMG {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanefIMG pointer is returned so that calls can be chained.
+func (a *GlClipPlanefIMG) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanefIMG {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanefIMG) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanefIMG) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanefIMG) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanefOES
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanefOES struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfloatᶜᵖ
+}
+
+func (a *GlClipPlanefOES) String() string {
+	return fmt.Sprintf("glClipPlanefOES(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanefOES pointer is returned so that calls can be chained.
+func (a *GlClipPlanefOES) AddRead(rng memory.Range, id binary.ID) *GlClipPlanefOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanefOES pointer is returned so that calls can be chained.
+func (a *GlClipPlanefOES) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanefOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanefOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanefOES) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanefOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanex
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanex struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfixedᶜᵖ
+}
+
+func (a *GlClipPlanex) String() string {
+	return fmt.Sprintf("glClipPlanex(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanex pointer is returned so that calls can be chained.
+func (a *GlClipPlanex) AddRead(rng memory.Range, id binary.ID) *GlClipPlanex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanex pointer is returned so that calls can be chained.
+func (a *GlClipPlanex) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanex) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanexIMG
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanexIMG struct {
+	binary.Generate
+	observations atom.Observations
+	P            GLenum
+	Eqn          GLfixedᶜᵖ
+}
+
+func (a *GlClipPlanexIMG) String() string {
+	return fmt.Sprintf("glClipPlanexIMG(p: %v, eqn: %v)", a.P, a.Eqn)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanexIMG pointer is returned so that calls can be chained.
+func (a *GlClipPlanexIMG) AddRead(rng memory.Range, id binary.ID) *GlClipPlanexIMG {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanexIMG pointer is returned so that calls can be chained.
+func (a *GlClipPlanexIMG) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanexIMG {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanexIMG) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanexIMG) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanexIMG) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlClipPlanexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlClipPlanexOES struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfixedᶜᵖ
+}
+
+func (a *GlClipPlanexOES) String() string {
+	return fmt.Sprintf("glClipPlanexOES(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanexOES pointer is returned so that calls can be chained.
+func (a *GlClipPlanexOES) AddRead(rng memory.Range, id binary.ID) *GlClipPlanexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlClipPlanexOES pointer is returned so that calls can be chained.
+func (a *GlClipPlanexOES) AddWrite(rng memory.Range, id binary.ID) *GlClipPlanexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlClipPlanexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlClipPlanexOES) Flags() atom.Flags                { return 0 }
+func (a *GlClipPlanexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColor4f
+////////////////////////////////////////////////////////////////////////////////
+type GlColor4f struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLfloat
+	Green        GLfloat
+	Blue         GLfloat
+	Alpha        GLfloat
+}
+
+func (a *GlColor4f) String() string {
+	return fmt.Sprintf("glColor4f(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColor4f pointer is returned so that calls can be chained.
+func (a *GlColor4f) AddRead(rng memory.Range, id binary.ID) *GlColor4f {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColor4f pointer is returned so that calls can be chained.
+func (a *GlColor4f) AddWrite(rng memory.Range, id binary.ID) *GlColor4f {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColor4f) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColor4f) Flags() atom.Flags                { return 0 }
+func (a *GlColor4f) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColor4ub
+////////////////////////////////////////////////////////////////////////////////
+type GlColor4ub struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLubyte
+	Green        GLubyte
+	Blue         GLubyte
+	Alpha        GLubyte
+}
+
+func (a *GlColor4ub) String() string {
+	return fmt.Sprintf("glColor4ub(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColor4ub pointer is returned so that calls can be chained.
+func (a *GlColor4ub) AddRead(rng memory.Range, id binary.ID) *GlColor4ub {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColor4ub pointer is returned so that calls can be chained.
+func (a *GlColor4ub) AddWrite(rng memory.Range, id binary.ID) *GlColor4ub {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColor4ub) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColor4ub) Flags() atom.Flags                { return 0 }
+func (a *GlColor4ub) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColor4x
+////////////////////////////////////////////////////////////////////////////////
+type GlColor4x struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLfixed
+	Green        GLfixed
+	Blue         GLfixed
+	Alpha        GLfixed
+}
+
+func (a *GlColor4x) String() string {
+	return fmt.Sprintf("glColor4x(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColor4x pointer is returned so that calls can be chained.
+func (a *GlColor4x) AddRead(rng memory.Range, id binary.ID) *GlColor4x {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColor4x pointer is returned so that calls can be chained.
+func (a *GlColor4x) AddWrite(rng memory.Range, id binary.ID) *GlColor4x {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColor4x) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColor4x) Flags() atom.Flags                { return 0 }
+func (a *GlColor4x) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColor4xOES
+////////////////////////////////////////////////////////////////////////////////
+type GlColor4xOES struct {
+	binary.Generate
+	observations atom.Observations
+	Red          GLfixed
+	Green        GLfixed
+	Blue         GLfixed
+	Alpha        GLfixed
+}
+
+func (a *GlColor4xOES) String() string {
+	return fmt.Sprintf("glColor4xOES(red: %v, green: %v, blue: %v, alpha: %v)", a.Red, a.Green, a.Blue, a.Alpha)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColor4xOES pointer is returned so that calls can be chained.
+func (a *GlColor4xOES) AddRead(rng memory.Range, id binary.ID) *GlColor4xOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColor4xOES pointer is returned so that calls can be chained.
+func (a *GlColor4xOES) AddWrite(rng memory.Range, id binary.ID) *GlColor4xOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColor4xOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColor4xOES) Flags() atom.Flags                { return 0 }
+func (a *GlColor4xOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColorPointer
+////////////////////////////////////////////////////////////////////////////////
+type GlColorPointer struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlColorPointer) String() string {
+	return fmt.Sprintf("glColorPointer(size: %v, type: %v, stride: %v, pointer: %v)", a.Size, a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColorPointer pointer is returned so that calls can be chained.
+func (a *GlColorPointer) AddRead(rng memory.Range, id binary.ID) *GlColorPointer {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColorPointer pointer is returned so that calls can be chained.
+func (a *GlColorPointer) AddWrite(rng memory.Range, id binary.ID) *GlColorPointer {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColorPointer) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColorPointer) Flags() atom.Flags                { return 0 }
+func (a *GlColorPointer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlCurrentPaletteMatrixOES
+////////////////////////////////////////////////////////////////////////////////
+type GlCurrentPaletteMatrixOES struct {
+	binary.Generate
+	observations       atom.Observations
+	Matrixpaletteindex GLuint
+}
+
+func (a *GlCurrentPaletteMatrixOES) String() string {
+	return fmt.Sprintf("glCurrentPaletteMatrixOES(matrixpaletteindex: %v)", a.Matrixpaletteindex)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlCurrentPaletteMatrixOES pointer is returned so that calls can be chained.
+func (a *GlCurrentPaletteMatrixOES) AddRead(rng memory.Range, id binary.ID) *GlCurrentPaletteMatrixOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlCurrentPaletteMatrixOES pointer is returned so that calls can be chained.
+func (a *GlCurrentPaletteMatrixOES) AddWrite(rng memory.Range, id binary.ID) *GlCurrentPaletteMatrixOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlCurrentPaletteMatrixOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlCurrentPaletteMatrixOES) Flags() atom.Flags                { return 0 }
+func (a *GlCurrentPaletteMatrixOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDeleteFramebuffersOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDeleteFramebuffersOES struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLsizei
+	Framebuffers GLuintᶜᵖ
+}
+
+func (a *GlDeleteFramebuffersOES) String() string {
+	return fmt.Sprintf("glDeleteFramebuffersOES(n: %v, framebuffers: %v)", a.N, a.Framebuffers)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDeleteFramebuffersOES pointer is returned so that calls can be chained.
+func (a *GlDeleteFramebuffersOES) AddRead(rng memory.Range, id binary.ID) *GlDeleteFramebuffersOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDeleteFramebuffersOES pointer is returned so that calls can be chained.
+func (a *GlDeleteFramebuffersOES) AddWrite(rng memory.Range, id binary.ID) *GlDeleteFramebuffersOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDeleteFramebuffersOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDeleteFramebuffersOES) Flags() atom.Flags                { return 0 }
+func (a *GlDeleteFramebuffersOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDeleteRenderbuffersOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDeleteRenderbuffersOES struct {
+	binary.Generate
+	observations  atom.Observations
+	N             GLsizei
+	Renderbuffers GLuintᶜᵖ
+}
+
+func (a *GlDeleteRenderbuffersOES) String() string {
+	return fmt.Sprintf("glDeleteRenderbuffersOES(n: %v, renderbuffers: %v)", a.N, a.Renderbuffers)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDeleteRenderbuffersOES pointer is returned so that calls can be chained.
+func (a *GlDeleteRenderbuffersOES) AddRead(rng memory.Range, id binary.ID) *GlDeleteRenderbuffersOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDeleteRenderbuffersOES pointer is returned so that calls can be chained.
+func (a *GlDeleteRenderbuffersOES) AddWrite(rng memory.Range, id binary.ID) *GlDeleteRenderbuffersOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDeleteRenderbuffersOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDeleteRenderbuffersOES) Flags() atom.Flags                { return 0 }
+func (a *GlDeleteRenderbuffersOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDepthRangefOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDepthRangefOES struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLclampf
+	F            GLclampf
+}
+
+func (a *GlDepthRangefOES) String() string {
+	return fmt.Sprintf("glDepthRangefOES(n: %v, f: %v)", a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangefOES pointer is returned so that calls can be chained.
+func (a *GlDepthRangefOES) AddRead(rng memory.Range, id binary.ID) *GlDepthRangefOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangefOES pointer is returned so that calls can be chained.
+func (a *GlDepthRangefOES) AddWrite(rng memory.Range, id binary.ID) *GlDepthRangefOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDepthRangefOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDepthRangefOES) Flags() atom.Flags                { return 0 }
+func (a *GlDepthRangefOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDepthRangex
+////////////////////////////////////////////////////////////////////////////////
+type GlDepthRangex struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlDepthRangex) String() string {
+	return fmt.Sprintf("glDepthRangex(n: %v, f: %v)", a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangex pointer is returned so that calls can be chained.
+func (a *GlDepthRangex) AddRead(rng memory.Range, id binary.ID) *GlDepthRangex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangex pointer is returned so that calls can be chained.
+func (a *GlDepthRangex) AddWrite(rng memory.Range, id binary.ID) *GlDepthRangex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDepthRangex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDepthRangex) Flags() atom.Flags                { return 0 }
+func (a *GlDepthRangex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDepthRangexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDepthRangexOES struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlDepthRangexOES) String() string {
+	return fmt.Sprintf("glDepthRangexOES(n: %v, f: %v)", a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangexOES pointer is returned so that calls can be chained.
+func (a *GlDepthRangexOES) AddRead(rng memory.Range, id binary.ID) *GlDepthRangexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDepthRangexOES pointer is returned so that calls can be chained.
+func (a *GlDepthRangexOES) AddWrite(rng memory.Range, id binary.ID) *GlDepthRangexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDepthRangexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDepthRangexOES) Flags() atom.Flags                { return 0 }
+func (a *GlDepthRangexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDisableClientState
+////////////////////////////////////////////////////////////////////////////////
+type GlDisableClientState struct {
+	binary.Generate
+	observations atom.Observations
+	Array        GLenum
+}
+
+func (a *GlDisableClientState) String() string {
+	return fmt.Sprintf("glDisableClientState(array: %v)", a.Array)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDisableClientState pointer is returned so that calls can be chained.
+func (a *GlDisableClientState) AddRead(rng memory.Range, id binary.ID) *GlDisableClientState {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDisableClientState pointer is returned so that calls can be chained.
+func (a *GlDisableClientState) AddWrite(rng memory.Range, id binary.ID) *GlDisableClientState {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDisableClientState) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDisableClientState) Flags() atom.Flags                { return 0 }
+func (a *GlDisableClientState) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexfOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexfOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfloat
+	Y            GLfloat
+	Z            GLfloat
+	Width        GLfloat
+	Height       GLfloat
+}
+
+func (a *GlDrawTexfOES) String() string {
+	return fmt.Sprintf("glDrawTexfOES(x: %v, y: %v, z: %v, width: %v, height: %v)", a.X, a.Y, a.Z, a.Width, a.Height)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexfOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexfOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexfOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexfOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexfOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexfOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexfOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexfOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexfOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexfvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexfvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coords       GLfloatᶜᵖ
+}
+
+func (a *GlDrawTexfvOES) String() string {
+	return fmt.Sprintf("glDrawTexfvOES(coords: %v)", a.Coords)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexfvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexfvOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexfvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexfvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexfvOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexfvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexfvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexfvOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexfvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexiOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexiOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLint
+	Y            GLint
+	Z            GLint
+	Width        GLint
+	Height       GLint
+}
+
+func (a *GlDrawTexiOES) String() string {
+	return fmt.Sprintf("glDrawTexiOES(x: %v, y: %v, z: %v, width: %v, height: %v)", a.X, a.Y, a.Z, a.Width, a.Height)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexiOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexiOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexiOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexiOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexiOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexiOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexiOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexiOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexiOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexivOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexivOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coords       GLintᶜᵖ
+}
+
+func (a *GlDrawTexivOES) String() string {
+	return fmt.Sprintf("glDrawTexivOES(coords: %v)", a.Coords)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexivOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexivOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexivOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexivOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexivOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexivOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexivOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexivOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexivOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexsOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexsOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLshort
+	Y            GLshort
+	Z            GLshort
+	Width        GLshort
+	Height       GLshort
+}
+
+func (a *GlDrawTexsOES) String() string {
+	return fmt.Sprintf("glDrawTexsOES(x: %v, y: %v, z: %v, width: %v, height: %v)", a.X, a.Y, a.Z, a.Width, a.Height)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexsOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexsOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexsOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexsOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexsOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexsOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexsOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexsOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexsOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexsvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexsvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coords       GLshortᶜᵖ
+}
+
+func (a *GlDrawTexsvOES) String() string {
+	return fmt.Sprintf("glDrawTexsvOES(coords: %v)", a.Coords)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexsvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexsvOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexsvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexsvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexsvOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexsvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexsvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexsvOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexsvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexxOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+	Width        GLfixed
+	Height       GLfixed
+}
+
+func (a *GlDrawTexxOES) String() string {
+	return fmt.Sprintf("glDrawTexxOES(x: %v, y: %v, z: %v, width: %v, height: %v)", a.X, a.Y, a.Z, a.Width, a.Height)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexxOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexxOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexxOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexxOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexxOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlDrawTexxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlDrawTexxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coords       GLfixedᶜᵖ
+}
+
+func (a *GlDrawTexxvOES) String() string {
+	return fmt.Sprintf("glDrawTexxvOES(coords: %v)", a.Coords)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexxvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexxvOES) AddRead(rng memory.Range, id binary.ID) *GlDrawTexxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlDrawTexxvOES pointer is returned so that calls can be chained.
+func (a *GlDrawTexxvOES) AddWrite(rng memory.Range, id binary.ID) *GlDrawTexxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlDrawTexxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlDrawTexxvOES) Flags() atom.Flags                { return 0 | atom.DrawCall }
+func (a *GlDrawTexxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlEnableClientState
+////////////////////////////////////////////////////////////////////////////////
+type GlEnableClientState struct {
+	binary.Generate
+	observations atom.Observations
+	Array        GLenum
+}
+
+func (a *GlEnableClientState) String() string {
+	return fmt.Sprintf("glEnableClientState(array: %v)", a.Array)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlEnableClientState pointer is returned so that calls can be chained.
+func (a *GlEnableClientState) AddRead(rng memory.Range, id binary.ID) *GlEnableClientState {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlEnableClientState pointer is returned so that calls can be chained.
+func (a *GlEnableClientState) AddWrite(rng memory.Range, id binary.ID) *GlEnableClientState {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlEnableClientState) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlEnableClientState) Flags() atom.Flags                { return 0 }
+func (a *GlEnableClientState) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogf
+////////////////////////////////////////////////////////////////////////////////
+type GlFogf struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlFogf) String() string {
+	return fmt.Sprintf("glFogf(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogf pointer is returned so that calls can be chained.
+func (a *GlFogf) AddRead(rng memory.Range, id binary.ID) *GlFogf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogf pointer is returned so that calls can be chained.
+func (a *GlFogf) AddWrite(rng memory.Range, id binary.ID) *GlFogf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogf) Flags() atom.Flags                { return 0 }
+func (a *GlFogf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogfv
+////////////////////////////////////////////////////////////////////////////////
+type GlFogfv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlFogfv) String() string {
+	return fmt.Sprintf("glFogfv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogfv pointer is returned so that calls can be chained.
+func (a *GlFogfv) AddRead(rng memory.Range, id binary.ID) *GlFogfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogfv pointer is returned so that calls can be chained.
+func (a *GlFogfv) AddWrite(rng memory.Range, id binary.ID) *GlFogfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogfv) Flags() atom.Flags                { return 0 }
+func (a *GlFogfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogx
+////////////////////////////////////////////////////////////////////////////////
+type GlFogx struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlFogx) String() string {
+	return fmt.Sprintf("glFogx(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogx pointer is returned so that calls can be chained.
+func (a *GlFogx) AddRead(rng memory.Range, id binary.ID) *GlFogx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogx pointer is returned so that calls can be chained.
+func (a *GlFogx) AddWrite(rng memory.Range, id binary.ID) *GlFogx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogx) Flags() atom.Flags                { return 0 }
+func (a *GlFogx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFogxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlFogxOES) String() string {
+	return fmt.Sprintf("glFogxOES(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogxOES pointer is returned so that calls can be chained.
+func (a *GlFogxOES) AddRead(rng memory.Range, id binary.ID) *GlFogxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogxOES pointer is returned so that calls can be chained.
+func (a *GlFogxOES) AddWrite(rng memory.Range, id binary.ID) *GlFogxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogxOES) Flags() atom.Flags                { return 0 }
+func (a *GlFogxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogxv
+////////////////////////////////////////////////////////////////////////////////
+type GlFogxv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlFogxv) String() string {
+	return fmt.Sprintf("glFogxv(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogxv pointer is returned so that calls can be chained.
+func (a *GlFogxv) AddRead(rng memory.Range, id binary.ID) *GlFogxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogxv pointer is returned so that calls can be chained.
+func (a *GlFogxv) AddWrite(rng memory.Range, id binary.ID) *GlFogxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogxv) Flags() atom.Flags                { return 0 }
+func (a *GlFogxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFogxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFogxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlFogxvOES) String() string {
+	return fmt.Sprintf("glFogxvOES(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFogxvOES pointer is returned so that calls can be chained.
+func (a *GlFogxvOES) AddRead(rng memory.Range, id binary.ID) *GlFogxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFogxvOES pointer is returned so that calls can be chained.
+func (a *GlFogxvOES) AddWrite(rng memory.Range, id binary.ID) *GlFogxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFogxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFogxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlFogxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFramebufferRenderbufferOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFramebufferRenderbufferOES struct {
+	binary.Generate
+	observations       atom.Observations
+	Target             GLenum
+	Attachment         GLenum
+	Renderbuffertarget GLenum
+	Renderbuffer       GLuint
+}
+
+func (a *GlFramebufferRenderbufferOES) String() string {
+	return fmt.Sprintf("glFramebufferRenderbufferOES(target: %v, attachment: %v, renderbuffertarget: %v, renderbuffer: %v)", a.Target, a.Attachment, a.Renderbuffertarget, a.Renderbuffer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferRenderbufferOES) AddRead(rng memory.Range, id binary.ID) *GlFramebufferRenderbufferOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferRenderbufferOES) AddWrite(rng memory.Range, id binary.ID) *GlFramebufferRenderbufferOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFramebufferRenderbufferOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFramebufferRenderbufferOES) Flags() atom.Flags                { return 0 }
+func (a *GlFramebufferRenderbufferOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFramebufferTexture2DOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFramebufferTexture2DOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Attachment   GLenum
+	Textarget    GLenum
+	Texture      TextureId
+	Level        GLint
+}
+
+func (a *GlFramebufferTexture2DOES) String() string {
+	return fmt.Sprintf("glFramebufferTexture2DOES(target: %v, attachment: %v, textarget: %v, texture: %v, level: %v)", a.Target, a.Attachment, a.Textarget, a.Texture, a.Level)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferTexture2DOES) AddRead(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFramebufferTexture2DOES pointer is returned so that calls can be chained.
+func (a *GlFramebufferTexture2DOES) AddWrite(rng memory.Range, id binary.ID) *GlFramebufferTexture2DOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFramebufferTexture2DOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFramebufferTexture2DOES) Flags() atom.Flags                { return 0 }
+func (a *GlFramebufferTexture2DOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFrustumf
+////////////////////////////////////////////////////////////////////////////////
+type GlFrustumf struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfloat
+	R            GLfloat
+	B            GLfloat
+	T            GLfloat
+	N            GLfloat
+	F            GLfloat
+}
+
+func (a *GlFrustumf) String() string {
+	return fmt.Sprintf("glFrustumf(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFrustumf pointer is returned so that calls can be chained.
+func (a *GlFrustumf) AddRead(rng memory.Range, id binary.ID) *GlFrustumf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFrustumf pointer is returned so that calls can be chained.
+func (a *GlFrustumf) AddWrite(rng memory.Range, id binary.ID) *GlFrustumf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFrustumf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFrustumf) Flags() atom.Flags                { return 0 }
+func (a *GlFrustumf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFrustumfOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFrustumfOES struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfloat
+	R            GLfloat
+	B            GLfloat
+	T            GLfloat
+	N            GLfloat
+	F            GLfloat
+}
+
+func (a *GlFrustumfOES) String() string {
+	return fmt.Sprintf("glFrustumfOES(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFrustumfOES pointer is returned so that calls can be chained.
+func (a *GlFrustumfOES) AddRead(rng memory.Range, id binary.ID) *GlFrustumfOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFrustumfOES pointer is returned so that calls can be chained.
+func (a *GlFrustumfOES) AddWrite(rng memory.Range, id binary.ID) *GlFrustumfOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFrustumfOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFrustumfOES) Flags() atom.Flags                { return 0 }
+func (a *GlFrustumfOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFrustumx
+////////////////////////////////////////////////////////////////////////////////
+type GlFrustumx struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfixed
+	R            GLfixed
+	B            GLfixed
+	T            GLfixed
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlFrustumx) String() string {
+	return fmt.Sprintf("glFrustumx(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFrustumx pointer is returned so that calls can be chained.
+func (a *GlFrustumx) AddRead(rng memory.Range, id binary.ID) *GlFrustumx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFrustumx pointer is returned so that calls can be chained.
+func (a *GlFrustumx) AddWrite(rng memory.Range, id binary.ID) *GlFrustumx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFrustumx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFrustumx) Flags() atom.Flags                { return 0 }
+func (a *GlFrustumx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlFrustumxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlFrustumxOES struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfixed
+	R            GLfixed
+	B            GLfixed
+	T            GLfixed
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlFrustumxOES) String() string {
+	return fmt.Sprintf("glFrustumxOES(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlFrustumxOES pointer is returned so that calls can be chained.
+func (a *GlFrustumxOES) AddRead(rng memory.Range, id binary.ID) *GlFrustumxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlFrustumxOES pointer is returned so that calls can be chained.
+func (a *GlFrustumxOES) AddWrite(rng memory.Range, id binary.ID) *GlFrustumxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlFrustumxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlFrustumxOES) Flags() atom.Flags                { return 0 }
+func (a *GlFrustumxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGenFramebuffersOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGenFramebuffersOES struct {
+	binary.Generate
+	observations atom.Observations
+	N            GLsizei
+	Framebuffers GLuintᵖ
+}
+
+func (a *GlGenFramebuffersOES) String() string {
+	return fmt.Sprintf("glGenFramebuffersOES(n: %v, framebuffers: %v)", a.N, a.Framebuffers)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGenFramebuffersOES pointer is returned so that calls can be chained.
+func (a *GlGenFramebuffersOES) AddRead(rng memory.Range, id binary.ID) *GlGenFramebuffersOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGenFramebuffersOES pointer is returned so that calls can be chained.
+func (a *GlGenFramebuffersOES) AddWrite(rng memory.Range, id binary.ID) *GlGenFramebuffersOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGenFramebuffersOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGenFramebuffersOES) Flags() atom.Flags                { return 0 }
+func (a *GlGenFramebuffersOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGenRenderbuffersOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGenRenderbuffersOES struct {
+	binary.Generate
+	observations  atom.Observations
+	N             GLsizei
+	Renderbuffers GLuintᵖ
+}
+
+func (a *GlGenRenderbuffersOES) String() string {
+	return fmt.Sprintf("glGenRenderbuffersOES(n: %v, renderbuffers: %v)", a.N, a.Renderbuffers)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGenRenderbuffersOES pointer is returned so that calls can be chained.
+func (a *GlGenRenderbuffersOES) AddRead(rng memory.Range, id binary.ID) *GlGenRenderbuffersOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGenRenderbuffersOES pointer is returned so that calls can be chained.
+func (a *GlGenRenderbuffersOES) AddWrite(rng memory.Range, id binary.ID) *GlGenRenderbuffersOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGenRenderbuffersOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGenRenderbuffersOES) Flags() atom.Flags                { return 0 }
+func (a *GlGenRenderbuffersOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGenerateMipmapOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGenerateMipmapOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+}
+
+func (a *GlGenerateMipmapOES) String() string {
+	return fmt.Sprintf("glGenerateMipmapOES(target: %v)", a.Target)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGenerateMipmapOES pointer is returned so that calls can be chained.
+func (a *GlGenerateMipmapOES) AddRead(rng memory.Range, id binary.ID) *GlGenerateMipmapOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGenerateMipmapOES pointer is returned so that calls can be chained.
+func (a *GlGenerateMipmapOES) AddWrite(rng memory.Range, id binary.ID) *GlGenerateMipmapOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGenerateMipmapOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGenerateMipmapOES) Flags() atom.Flags                { return 0 }
+func (a *GlGenerateMipmapOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetClipPlanef
+////////////////////////////////////////////////////////////////////////////////
+type GlGetClipPlanef struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfloatᵖ
+}
+
+func (a *GlGetClipPlanef) String() string {
+	return fmt.Sprintf("glGetClipPlanef(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanef pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanef) AddRead(rng memory.Range, id binary.ID) *GlGetClipPlanef {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanef pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanef) AddWrite(rng memory.Range, id binary.ID) *GlGetClipPlanef {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetClipPlanef) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetClipPlanef) Flags() atom.Flags                { return 0 }
+func (a *GlGetClipPlanef) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetClipPlanefOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetClipPlanefOES struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfloatᵖ
+}
+
+func (a *GlGetClipPlanefOES) String() string {
+	return fmt.Sprintf("glGetClipPlanefOES(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanefOES pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanefOES) AddRead(rng memory.Range, id binary.ID) *GlGetClipPlanefOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanefOES pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanefOES) AddWrite(rng memory.Range, id binary.ID) *GlGetClipPlanefOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetClipPlanefOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetClipPlanefOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetClipPlanefOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetClipPlanex
+////////////////////////////////////////////////////////////////////////////////
+type GlGetClipPlanex struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfixedᵖ
+}
+
+func (a *GlGetClipPlanex) String() string {
+	return fmt.Sprintf("glGetClipPlanex(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanex pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanex) AddRead(rng memory.Range, id binary.ID) *GlGetClipPlanex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanex pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanex) AddWrite(rng memory.Range, id binary.ID) *GlGetClipPlanex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetClipPlanex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetClipPlanex) Flags() atom.Flags                { return 0 }
+func (a *GlGetClipPlanex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetClipPlanexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetClipPlanexOES struct {
+	binary.Generate
+	observations atom.Observations
+	Plane        GLenum
+	Equation     GLfixedᵖ
+}
+
+func (a *GlGetClipPlanexOES) String() string {
+	return fmt.Sprintf("glGetClipPlanexOES(plane: %v, equation: %v)", a.Plane, a.Equation)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanexOES pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanexOES) AddRead(rng memory.Range, id binary.ID) *GlGetClipPlanexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetClipPlanexOES pointer is returned so that calls can be chained.
+func (a *GlGetClipPlanexOES) AddWrite(rng memory.Range, id binary.ID) *GlGetClipPlanexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetClipPlanexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetClipPlanexOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetClipPlanexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetFixedv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetFixedv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetFixedv) String() string {
+	return fmt.Sprintf("glGetFixedv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetFixedv pointer is returned so that calls can be chained.
+func (a *GlGetFixedv) AddRead(rng memory.Range, id binary.ID) *GlGetFixedv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetFixedv pointer is returned so that calls can be chained.
+func (a *GlGetFixedv) AddWrite(rng memory.Range, id binary.ID) *GlGetFixedv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetFixedv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetFixedv) Flags() atom.Flags                { return 0 }
+func (a *GlGetFixedv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetFixedvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetFixedvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetFixedvOES) String() string {
+	return fmt.Sprintf("glGetFixedvOES(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetFixedvOES pointer is returned so that calls can be chained.
+func (a *GlGetFixedvOES) AddRead(rng memory.Range, id binary.ID) *GlGetFixedvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetFixedvOES pointer is returned so that calls can be chained.
+func (a *GlGetFixedvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetFixedvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetFixedvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetFixedvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetFixedvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetFramebufferAttachmentParameterivOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetFramebufferAttachmentParameterivOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Attachment   GLenum
+	Pname        GLenum
+	Params       GLintᵖ
+}
+
+func (a *GlGetFramebufferAttachmentParameterivOES) String() string {
+	return fmt.Sprintf("glGetFramebufferAttachmentParameterivOES(target: %v, attachment: %v, pname: %v, params: %v)", a.Target, a.Attachment, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetFramebufferAttachmentParameterivOES pointer is returned so that calls can be chained.
+func (a *GlGetFramebufferAttachmentParameterivOES) AddRead(rng memory.Range, id binary.ID) *GlGetFramebufferAttachmentParameterivOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetFramebufferAttachmentParameterivOES pointer is returned so that calls can be chained.
+func (a *GlGetFramebufferAttachmentParameterivOES) AddWrite(rng memory.Range, id binary.ID) *GlGetFramebufferAttachmentParameterivOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetFramebufferAttachmentParameterivOES) API() gfxapi.ID    { return api{}.ID() }
+func (c *GlGetFramebufferAttachmentParameterivOES) Flags() atom.Flags { return 0 }
+func (a *GlGetFramebufferAttachmentParameterivOES) Observations() *atom.Observations {
+	return &a.observations
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetLightfv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetLightfv struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfloatᵖ
+}
+
+func (a *GlGetLightfv) String() string {
+	return fmt.Sprintf("glGetLightfv(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetLightfv pointer is returned so that calls can be chained.
+func (a *GlGetLightfv) AddRead(rng memory.Range, id binary.ID) *GlGetLightfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetLightfv pointer is returned so that calls can be chained.
+func (a *GlGetLightfv) AddWrite(rng memory.Range, id binary.ID) *GlGetLightfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetLightfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetLightfv) Flags() atom.Flags                { return 0 }
+func (a *GlGetLightfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetLightxv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetLightxv struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetLightxv) String() string {
+	return fmt.Sprintf("glGetLightxv(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetLightxv pointer is returned so that calls can be chained.
+func (a *GlGetLightxv) AddRead(rng memory.Range, id binary.ID) *GlGetLightxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetLightxv pointer is returned so that calls can be chained.
+func (a *GlGetLightxv) AddWrite(rng memory.Range, id binary.ID) *GlGetLightxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetLightxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetLightxv) Flags() atom.Flags                { return 0 }
+func (a *GlGetLightxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetLightxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetLightxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetLightxvOES) String() string {
+	return fmt.Sprintf("glGetLightxvOES(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetLightxvOES pointer is returned so that calls can be chained.
+func (a *GlGetLightxvOES) AddRead(rng memory.Range, id binary.ID) *GlGetLightxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetLightxvOES pointer is returned so that calls can be chained.
+func (a *GlGetLightxvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetLightxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetLightxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetLightxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetLightxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetMaterialfv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetMaterialfv struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Params       GLfloatᵖ
+}
+
+func (a *GlGetMaterialfv) String() string {
+	return fmt.Sprintf("glGetMaterialfv(face: %v, pname: %v, params: %v)", a.Face, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialfv pointer is returned so that calls can be chained.
+func (a *GlGetMaterialfv) AddRead(rng memory.Range, id binary.ID) *GlGetMaterialfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialfv pointer is returned so that calls can be chained.
+func (a *GlGetMaterialfv) AddWrite(rng memory.Range, id binary.ID) *GlGetMaterialfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetMaterialfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetMaterialfv) Flags() atom.Flags                { return 0 }
+func (a *GlGetMaterialfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetMaterialxv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetMaterialxv struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetMaterialxv) String() string {
+	return fmt.Sprintf("glGetMaterialxv(face: %v, pname: %v, params: %v)", a.Face, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialxv pointer is returned so that calls can be chained.
+func (a *GlGetMaterialxv) AddRead(rng memory.Range, id binary.ID) *GlGetMaterialxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialxv pointer is returned so that calls can be chained.
+func (a *GlGetMaterialxv) AddWrite(rng memory.Range, id binary.ID) *GlGetMaterialxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetMaterialxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetMaterialxv) Flags() atom.Flags                { return 0 }
+func (a *GlGetMaterialxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetMaterialxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetMaterialxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetMaterialxvOES) String() string {
+	return fmt.Sprintf("glGetMaterialxvOES(face: %v, pname: %v, params: %v)", a.Face, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialxvOES pointer is returned so that calls can be chained.
+func (a *GlGetMaterialxvOES) AddRead(rng memory.Range, id binary.ID) *GlGetMaterialxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetMaterialxvOES pointer is returned so that calls can be chained.
+func (a *GlGetMaterialxvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetMaterialxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetMaterialxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetMaterialxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetMaterialxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetRenderbufferParameterivOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetRenderbufferParameterivOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLintᵖ
+}
+
+func (a *GlGetRenderbufferParameterivOES) String() string {
+	return fmt.Sprintf("glGetRenderbufferParameterivOES(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetRenderbufferParameterivOES pointer is returned so that calls can be chained.
+func (a *GlGetRenderbufferParameterivOES) AddRead(rng memory.Range, id binary.ID) *GlGetRenderbufferParameterivOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetRenderbufferParameterivOES pointer is returned so that calls can be chained.
+func (a *GlGetRenderbufferParameterivOES) AddWrite(rng memory.Range, id binary.ID) *GlGetRenderbufferParameterivOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetRenderbufferParameterivOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetRenderbufferParameterivOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetRenderbufferParameterivOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexEnvfv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexEnvfv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfloatᵖ
+}
+
+func (a *GlGetTexEnvfv) String() string {
+	return fmt.Sprintf("glGetTexEnvfv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvfv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvfv) AddRead(rng memory.Range, id binary.ID) *GlGetTexEnvfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvfv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvfv) AddWrite(rng memory.Range, id binary.ID) *GlGetTexEnvfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexEnvfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexEnvfv) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexEnvfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexEnviv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexEnviv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLintᵖ
+}
+
+func (a *GlGetTexEnviv) String() string {
+	return fmt.Sprintf("glGetTexEnviv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnviv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnviv) AddRead(rng memory.Range, id binary.ID) *GlGetTexEnviv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnviv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnviv) AddWrite(rng memory.Range, id binary.ID) *GlGetTexEnviv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexEnviv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexEnviv) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexEnviv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexEnvxv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexEnvxv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetTexEnvxv) String() string {
+	return fmt.Sprintf("glGetTexEnvxv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvxv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvxv) AddRead(rng memory.Range, id binary.ID) *GlGetTexEnvxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvxv pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvxv) AddWrite(rng memory.Range, id binary.ID) *GlGetTexEnvxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexEnvxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexEnvxv) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexEnvxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexEnvxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexEnvxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetTexEnvxvOES) String() string {
+	return fmt.Sprintf("glGetTexEnvxvOES(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvxvOES) AddRead(rng memory.Range, id binary.ID) *GlGetTexEnvxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexEnvxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexEnvxvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetTexEnvxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexEnvxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexEnvxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexEnvxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexGenfvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexGenfvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLfloatᵖ
+}
+
+func (a *GlGetTexGenfvOES) String() string {
+	return fmt.Sprintf("glGetTexGenfvOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenfvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenfvOES) AddRead(rng memory.Range, id binary.ID) *GlGetTexGenfvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenfvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenfvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetTexGenfvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexGenfvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexGenfvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexGenfvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexGenivOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexGenivOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLintᵖ
+}
+
+func (a *GlGetTexGenivOES) String() string {
+	return fmt.Sprintf("glGetTexGenivOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenivOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenivOES) AddRead(rng memory.Range, id binary.ID) *GlGetTexGenivOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenivOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenivOES) AddWrite(rng memory.Range, id binary.ID) *GlGetTexGenivOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexGenivOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexGenivOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexGenivOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexGenxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexGenxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetTexGenxvOES) String() string {
+	return fmt.Sprintf("glGetTexGenxvOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenxvOES) AddRead(rng memory.Range, id binary.ID) *GlGetTexGenxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexGenxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexGenxvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetTexGenxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexGenxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexGenxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexGenxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexParameterxv
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexParameterxv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetTexParameterxv) String() string {
+	return fmt.Sprintf("glGetTexParameterxv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexParameterxv pointer is returned so that calls can be chained.
+func (a *GlGetTexParameterxv) AddRead(rng memory.Range, id binary.ID) *GlGetTexParameterxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexParameterxv pointer is returned so that calls can be chained.
+func (a *GlGetTexParameterxv) AddWrite(rng memory.Range, id binary.ID) *GlGetTexParameterxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexParameterxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexParameterxv) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexParameterxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlGetTexParameterxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlGetTexParameterxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᵖ
+}
+
+func (a *GlGetTexParameterxvOES) String() string {
+	return fmt.Sprintf("glGetTexParameterxvOES(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlGetTexParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexParameterxvOES) AddRead(rng memory.Range, id binary.ID) *GlGetTexParameterxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlGetTexParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlGetTexParameterxvOES) AddWrite(rng memory.Range, id binary.ID) *GlGetTexParameterxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlGetTexParameterxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlGetTexParameterxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlGetTexParameterxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlIsFramebufferOES
+////////////////////////////////////////////////////////////////////////////////
+type GlIsFramebufferOES struct {
+	binary.Generate
+	observations atom.Observations
+	Framebuffer  GLuint
+	Result       GLboolean
+}
+
+func (a *GlIsFramebufferOES) String() string {
+	return fmt.Sprintf("glIsFramebufferOES(framebuffer: %v) → %v", a.Framebuffer, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlIsFramebufferOES pointer is returned so that calls can be chained.
+func (a *GlIsFramebufferOES) AddRead(rng memory.Range, id binary.ID) *GlIsFramebufferOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlIsFramebufferOES pointer is returned so that calls can be chained.
+func (a *GlIsFramebufferOES) AddWrite(rng memory.Range, id binary.ID) *GlIsFramebufferOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlIsFramebufferOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlIsFramebufferOES) Flags() atom.Flags                { return 0 }
+func (a *GlIsFramebufferOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlIsRenderbufferOES
+////////////////////////////////////////////////////////////////////////////////
+type GlIsRenderbufferOES struct {
+	binary.Generate
+	observations atom.Observations
+	Renderbuffer GLuint
+	Result       GLboolean
+}
+
+func (a *GlIsRenderbufferOES) String() string {
+	return fmt.Sprintf("glIsRenderbufferOES(renderbuffer: %v) → %v", a.Renderbuffer, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlIsRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlIsRenderbufferOES) AddRead(rng memory.Range, id binary.ID) *GlIsRenderbufferOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlIsRenderbufferOES pointer is returned so that calls can be chained.
+func (a *GlIsRenderbufferOES) AddWrite(rng memory.Range, id binary.ID) *GlIsRenderbufferOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlIsRenderbufferOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlIsRenderbufferOES) Flags() atom.Flags                { return 0 }
+func (a *GlIsRenderbufferOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelf
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelf struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlLightModelf) String() string {
+	return fmt.Sprintf("glLightModelf(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelf pointer is returned so that calls can be chained.
+func (a *GlLightModelf) AddRead(rng memory.Range, id binary.ID) *GlLightModelf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelf pointer is returned so that calls can be chained.
+func (a *GlLightModelf) AddWrite(rng memory.Range, id binary.ID) *GlLightModelf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelf) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelfv
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelfv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlLightModelfv) String() string {
+	return fmt.Sprintf("glLightModelfv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelfv pointer is returned so that calls can be chained.
+func (a *GlLightModelfv) AddRead(rng memory.Range, id binary.ID) *GlLightModelfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelfv pointer is returned so that calls can be chained.
+func (a *GlLightModelfv) AddWrite(rng memory.Range, id binary.ID) *GlLightModelfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelfv) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelx
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelx struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlLightModelx) String() string {
+	return fmt.Sprintf("glLightModelx(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelx pointer is returned so that calls can be chained.
+func (a *GlLightModelx) AddRead(rng memory.Range, id binary.ID) *GlLightModelx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelx pointer is returned so that calls can be chained.
+func (a *GlLightModelx) AddWrite(rng memory.Range, id binary.ID) *GlLightModelx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelx) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlLightModelxOES) String() string {
+	return fmt.Sprintf("glLightModelxOES(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxOES pointer is returned so that calls can be chained.
+func (a *GlLightModelxOES) AddRead(rng memory.Range, id binary.ID) *GlLightModelxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxOES pointer is returned so that calls can be chained.
+func (a *GlLightModelxOES) AddWrite(rng memory.Range, id binary.ID) *GlLightModelxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelxOES) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelxv
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelxv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlLightModelxv) String() string {
+	return fmt.Sprintf("glLightModelxv(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxv pointer is returned so that calls can be chained.
+func (a *GlLightModelxv) AddRead(rng memory.Range, id binary.ID) *GlLightModelxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxv pointer is returned so that calls can be chained.
+func (a *GlLightModelxv) AddWrite(rng memory.Range, id binary.ID) *GlLightModelxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelxv) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightModelxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLightModelxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlLightModelxvOES) String() string {
+	return fmt.Sprintf("glLightModelxvOES(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxvOES pointer is returned so that calls can be chained.
+func (a *GlLightModelxvOES) AddRead(rng memory.Range, id binary.ID) *GlLightModelxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightModelxvOES pointer is returned so that calls can be chained.
+func (a *GlLightModelxvOES) AddWrite(rng memory.Range, id binary.ID) *GlLightModelxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightModelxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightModelxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlLightModelxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightf
+////////////////////////////////////////////////////////////////////////////////
+type GlLightf struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlLightf) String() string {
+	return fmt.Sprintf("glLightf(light: %v, pname: %v, param: %v)", a.Light, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightf pointer is returned so that calls can be chained.
+func (a *GlLightf) AddRead(rng memory.Range, id binary.ID) *GlLightf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightf pointer is returned so that calls can be chained.
+func (a *GlLightf) AddWrite(rng memory.Range, id binary.ID) *GlLightf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightf) Flags() atom.Flags                { return 0 }
+func (a *GlLightf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightfv
+////////////////////////////////////////////////////////////////////////////////
+type GlLightfv struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlLightfv) String() string {
+	return fmt.Sprintf("glLightfv(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightfv pointer is returned so that calls can be chained.
+func (a *GlLightfv) AddRead(rng memory.Range, id binary.ID) *GlLightfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightfv pointer is returned so that calls can be chained.
+func (a *GlLightfv) AddWrite(rng memory.Range, id binary.ID) *GlLightfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightfv) Flags() atom.Flags                { return 0 }
+func (a *GlLightfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightx
+////////////////////////////////////////////////////////////////////////////////
+type GlLightx struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlLightx) String() string {
+	return fmt.Sprintf("glLightx(light: %v, pname: %v, param: %v)", a.Light, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightx pointer is returned so that calls can be chained.
+func (a *GlLightx) AddRead(rng memory.Range, id binary.ID) *GlLightx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightx pointer is returned so that calls can be chained.
+func (a *GlLightx) AddWrite(rng memory.Range, id binary.ID) *GlLightx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightx) Flags() atom.Flags                { return 0 }
+func (a *GlLightx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLightxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlLightxOES) String() string {
+	return fmt.Sprintf("glLightxOES(light: %v, pname: %v, param: %v)", a.Light, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightxOES pointer is returned so that calls can be chained.
+func (a *GlLightxOES) AddRead(rng memory.Range, id binary.ID) *GlLightxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightxOES pointer is returned so that calls can be chained.
+func (a *GlLightxOES) AddWrite(rng memory.Range, id binary.ID) *GlLightxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightxOES) Flags() atom.Flags                { return 0 }
+func (a *GlLightxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightxv
+////////////////////////////////////////////////////////////////////////////////
+type GlLightxv struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlLightxv) String() string {
+	return fmt.Sprintf("glLightxv(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightxv pointer is returned so that calls can be chained.
+func (a *GlLightxv) AddRead(rng memory.Range, id binary.ID) *GlLightxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightxv pointer is returned so that calls can be chained.
+func (a *GlLightxv) AddWrite(rng memory.Range, id binary.ID) *GlLightxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightxv) Flags() atom.Flags                { return 0 }
+func (a *GlLightxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLightxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLightxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Light        GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlLightxvOES) String() string {
+	return fmt.Sprintf("glLightxvOES(light: %v, pname: %v, params: %v)", a.Light, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLightxvOES pointer is returned so that calls can be chained.
+func (a *GlLightxvOES) AddRead(rng memory.Range, id binary.ID) *GlLightxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLightxvOES pointer is returned so that calls can be chained.
+func (a *GlLightxvOES) AddWrite(rng memory.Range, id binary.ID) *GlLightxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLightxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLightxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlLightxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLineWidthx
+////////////////////////////////////////////////////////////////////////////////
+type GlLineWidthx struct {
+	binary.Generate
+	observations atom.Observations
+	Width        GLfixed
+}
+
+func (a *GlLineWidthx) String() string {
+	return fmt.Sprintf("glLineWidthx(width: %v)", a.Width)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLineWidthx pointer is returned so that calls can be chained.
+func (a *GlLineWidthx) AddRead(rng memory.Range, id binary.ID) *GlLineWidthx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLineWidthx pointer is returned so that calls can be chained.
+func (a *GlLineWidthx) AddWrite(rng memory.Range, id binary.ID) *GlLineWidthx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLineWidthx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLineWidthx) Flags() atom.Flags                { return 0 }
+func (a *GlLineWidthx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLineWidthxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLineWidthxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Width        GLfixed
+}
+
+func (a *GlLineWidthxOES) String() string {
+	return fmt.Sprintf("glLineWidthxOES(width: %v)", a.Width)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLineWidthxOES pointer is returned so that calls can be chained.
+func (a *GlLineWidthxOES) AddRead(rng memory.Range, id binary.ID) *GlLineWidthxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLineWidthxOES pointer is returned so that calls can be chained.
+func (a *GlLineWidthxOES) AddWrite(rng memory.Range, id binary.ID) *GlLineWidthxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLineWidthxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLineWidthxOES) Flags() atom.Flags                { return 0 }
+func (a *GlLineWidthxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLoadIdentity
+////////////////////////////////////////////////////////////////////////////////
+type GlLoadIdentity struct {
+	binary.Generate
+	observations atom.Observations
+}
+
+func (a *GlLoadIdentity) String() string {
+	return fmt.Sprintf("glLoadIdentity()")
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLoadIdentity pointer is returned so that calls can be chained.
+func (a *GlLoadIdentity) AddRead(rng memory.Range, id binary.ID) *GlLoadIdentity {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLoadIdentity pointer is returned so that calls can be chained.
+func (a *GlLoadIdentity) AddWrite(rng memory.Range, id binary.ID) *GlLoadIdentity {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLoadIdentity) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLoadIdentity) Flags() atom.Flags                { return 0 }
+func (a *GlLoadIdentity) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLoadMatrixf
+////////////////////////////////////////////////////////////////////////////////
+type GlLoadMatrixf struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfloatᶜᵖ
+}
+
+func (a *GlLoadMatrixf) String() string {
+	return fmt.Sprintf("glLoadMatrixf(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixf pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixf) AddRead(rng memory.Range, id binary.ID) *GlLoadMatrixf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixf pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixf) AddWrite(rng memory.Range, id binary.ID) *GlLoadMatrixf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLoadMatrixf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLoadMatrixf) Flags() atom.Flags                { return 0 }
+func (a *GlLoadMatrixf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLoadMatrixx
+////////////////////////////////////////////////////////////////////////////////
+type GlLoadMatrixx struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfixedᶜᵖ
+}
+
+func (a *GlLoadMatrixx) String() string {
+	return fmt.Sprintf("glLoadMatrixx(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixx pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixx) AddRead(rng memory.Range, id binary.ID) *GlLoadMatrixx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixx pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixx) AddWrite(rng memory.Range, id binary.ID) *GlLoadMatrixx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLoadMatrixx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLoadMatrixx) Flags() atom.Flags                { return 0 }
+func (a *GlLoadMatrixx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLoadMatrixxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLoadMatrixxOES struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfixedᶜᵖ
+}
+
+func (a *GlLoadMatrixxOES) String() string {
+	return fmt.Sprintf("glLoadMatrixxOES(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixxOES) AddRead(rng memory.Range, id binary.ID) *GlLoadMatrixxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLoadMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlLoadMatrixxOES) AddWrite(rng memory.Range, id binary.ID) *GlLoadMatrixxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLoadMatrixxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLoadMatrixxOES) Flags() atom.Flags                { return 0 }
+func (a *GlLoadMatrixxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLoadPaletteFromModelViewMatrixOES
+////////////////////////////////////////////////////////////////////////////////
+type GlLoadPaletteFromModelViewMatrixOES struct {
+	binary.Generate
+	observations atom.Observations
+}
+
+func (a *GlLoadPaletteFromModelViewMatrixOES) String() string {
+	return fmt.Sprintf("glLoadPaletteFromModelViewMatrixOES()")
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLoadPaletteFromModelViewMatrixOES pointer is returned so that calls can be chained.
+func (a *GlLoadPaletteFromModelViewMatrixOES) AddRead(rng memory.Range, id binary.ID) *GlLoadPaletteFromModelViewMatrixOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLoadPaletteFromModelViewMatrixOES pointer is returned so that calls can be chained.
+func (a *GlLoadPaletteFromModelViewMatrixOES) AddWrite(rng memory.Range, id binary.ID) *GlLoadPaletteFromModelViewMatrixOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLoadPaletteFromModelViewMatrixOES) API() gfxapi.ID    { return api{}.ID() }
+func (c *GlLoadPaletteFromModelViewMatrixOES) Flags() atom.Flags { return 0 }
+func (a *GlLoadPaletteFromModelViewMatrixOES) Observations() *atom.Observations {
+	return &a.observations
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// GlLogicOp
+////////////////////////////////////////////////////////////////////////////////
+type GlLogicOp struct {
+	binary.Generate
+	observations atom.Observations
+	Opcode       GLenum
+}
+
+func (a *GlLogicOp) String() string {
+	return fmt.Sprintf("glLogicOp(opcode: %v)", a.Opcode)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlLogicOp pointer is returned so that calls can be chained.
+func (a *GlLogicOp) AddRead(rng memory.Range, id binary.ID) *GlLogicOp {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlLogicOp pointer is returned so that calls can be chained.
+func (a *GlLogicOp) AddWrite(rng memory.Range, id binary.ID) *GlLogicOp {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlLogicOp) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlLogicOp) Flags() atom.Flags                { return 0 }
+func (a *GlLogicOp) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialf
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialf struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlMaterialf) String() string {
+	return fmt.Sprintf("glMaterialf(face: %v, pname: %v, param: %v)", a.Face, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialf pointer is returned so that calls can be chained.
+func (a *GlMaterialf) AddRead(rng memory.Range, id binary.ID) *GlMaterialf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialf pointer is returned so that calls can be chained.
+func (a *GlMaterialf) AddWrite(rng memory.Range, id binary.ID) *GlMaterialf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialf) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialfv
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialfv struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlMaterialfv) String() string {
+	return fmt.Sprintf("glMaterialfv(face: %v, pname: %v, params: %v)", a.Face, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialfv pointer is returned so that calls can be chained.
+func (a *GlMaterialfv) AddRead(rng memory.Range, id binary.ID) *GlMaterialfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialfv pointer is returned so that calls can be chained.
+func (a *GlMaterialfv) AddWrite(rng memory.Range, id binary.ID) *GlMaterialfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialfv) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialx
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialx struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlMaterialx) String() string {
+	return fmt.Sprintf("glMaterialx(face: %v, pname: %v, param: %v)", a.Face, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialx pointer is returned so that calls can be chained.
+func (a *GlMaterialx) AddRead(rng memory.Range, id binary.ID) *GlMaterialx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialx pointer is returned so that calls can be chained.
+func (a *GlMaterialx) AddWrite(rng memory.Range, id binary.ID) *GlMaterialx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialx) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlMaterialxOES) String() string {
+	return fmt.Sprintf("glMaterialxOES(face: %v, pname: %v, param: %v)", a.Face, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxOES pointer is returned so that calls can be chained.
+func (a *GlMaterialxOES) AddRead(rng memory.Range, id binary.ID) *GlMaterialxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxOES pointer is returned so that calls can be chained.
+func (a *GlMaterialxOES) AddWrite(rng memory.Range, id binary.ID) *GlMaterialxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialxOES) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialxv
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialxv struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlMaterialxv) String() string {
+	return fmt.Sprintf("glMaterialxv(face: %v, pname: %v, param: %v)", a.Face, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxv pointer is returned so that calls can be chained.
+func (a *GlMaterialxv) AddRead(rng memory.Range, id binary.ID) *GlMaterialxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxv pointer is returned so that calls can be chained.
+func (a *GlMaterialxv) AddWrite(rng memory.Range, id binary.ID) *GlMaterialxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialxv) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMaterialxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlMaterialxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Face         GLenum
+	Pname        GLenum
+	Param        GLfixedᶜᵖ
+}
+
+func (a *GlMaterialxvOES) String() string {
+	return fmt.Sprintf("glMaterialxvOES(face: %v, pname: %v, param: %v)", a.Face, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxvOES pointer is returned so that calls can be chained.
+func (a *GlMaterialxvOES) AddRead(rng memory.Range, id binary.ID) *GlMaterialxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMaterialxvOES pointer is returned so that calls can be chained.
+func (a *GlMaterialxvOES) AddWrite(rng memory.Range, id binary.ID) *GlMaterialxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMaterialxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMaterialxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlMaterialxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMatrixIndexPointerOES
+////////////////////////////////////////////////////////////////////////////////
+type GlMatrixIndexPointerOES struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlMatrixIndexPointerOES) String() string {
+	return fmt.Sprintf("glMatrixIndexPointerOES(size: %v, type: %v, stride: %v, pointer: %v)", a.Size, a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMatrixIndexPointerOES pointer is returned so that calls can be chained.
+func (a *GlMatrixIndexPointerOES) AddRead(rng memory.Range, id binary.ID) *GlMatrixIndexPointerOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMatrixIndexPointerOES pointer is returned so that calls can be chained.
+func (a *GlMatrixIndexPointerOES) AddWrite(rng memory.Range, id binary.ID) *GlMatrixIndexPointerOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMatrixIndexPointerOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMatrixIndexPointerOES) Flags() atom.Flags                { return 0 }
+func (a *GlMatrixIndexPointerOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMatrixMode
+////////////////////////////////////////////////////////////////////////////////
+type GlMatrixMode struct {
+	binary.Generate
+	observations atom.Observations
+	Mode         GLenum
+}
+
+func (a *GlMatrixMode) String() string {
+	return fmt.Sprintf("glMatrixMode(mode: %v)", a.Mode)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMatrixMode pointer is returned so that calls can be chained.
+func (a *GlMatrixMode) AddRead(rng memory.Range, id binary.ID) *GlMatrixMode {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMatrixMode pointer is returned so that calls can be chained.
+func (a *GlMatrixMode) AddWrite(rng memory.Range, id binary.ID) *GlMatrixMode {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMatrixMode) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMatrixMode) Flags() atom.Flags                { return 0 }
+func (a *GlMatrixMode) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultMatrixf
+////////////////////////////////////////////////////////////////////////////////
+type GlMultMatrixf struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfloatᶜᵖ
+}
+
+func (a *GlMultMatrixf) String() string {
+	return fmt.Sprintf("glMultMatrixf(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixf pointer is returned so that calls can be chained.
+func (a *GlMultMatrixf) AddRead(rng memory.Range, id binary.ID) *GlMultMatrixf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixf pointer is returned so that calls can be chained.
+func (a *GlMultMatrixf) AddWrite(rng memory.Range, id binary.ID) *GlMultMatrixf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultMatrixf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultMatrixf) Flags() atom.Flags                { return 0 }
+func (a *GlMultMatrixf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultMatrixx
+////////////////////////////////////////////////////////////////////////////////
+type GlMultMatrixx struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfixedᶜᵖ
+}
+
+func (a *GlMultMatrixx) String() string {
+	return fmt.Sprintf("glMultMatrixx(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixx pointer is returned so that calls can be chained.
+func (a *GlMultMatrixx) AddRead(rng memory.Range, id binary.ID) *GlMultMatrixx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixx pointer is returned so that calls can be chained.
+func (a *GlMultMatrixx) AddWrite(rng memory.Range, id binary.ID) *GlMultMatrixx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultMatrixx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultMatrixx) Flags() atom.Flags                { return 0 }
+func (a *GlMultMatrixx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultMatrixxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlMultMatrixxOES struct {
+	binary.Generate
+	observations atom.Observations
+	M            GLfixedᶜᵖ
+}
+
+func (a *GlMultMatrixxOES) String() string {
+	return fmt.Sprintf("glMultMatrixxOES(m: %v)", a.M)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlMultMatrixxOES) AddRead(rng memory.Range, id binary.ID) *GlMultMatrixxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlMultMatrixxOES) AddWrite(rng memory.Range, id binary.ID) *GlMultMatrixxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultMatrixxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultMatrixxOES) Flags() atom.Flags                { return 0 }
+func (a *GlMultMatrixxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultiTexCoord4f
+////////////////////////////////////////////////////////////////////////////////
+type GlMultiTexCoord4f struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	V0           GLfloat
+	V1           GLfloat
+	V2           GLfloat
+	V3           GLfloat
+}
+
+func (a *GlMultiTexCoord4f) String() string {
+	return fmt.Sprintf("glMultiTexCoord4f(target: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Target, a.V0, a.V1, a.V2, a.V3)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4f pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4f) AddRead(rng memory.Range, id binary.ID) *GlMultiTexCoord4f {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4f pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4f) AddWrite(rng memory.Range, id binary.ID) *GlMultiTexCoord4f {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultiTexCoord4f) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultiTexCoord4f) Flags() atom.Flags                { return 0 }
+func (a *GlMultiTexCoord4f) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultiTexCoord4x
+////////////////////////////////////////////////////////////////////////////////
+type GlMultiTexCoord4x struct {
+	binary.Generate
+	observations atom.Observations
+	Texture      GLenum
+	V0           GLfixed
+	V1           GLfixed
+	V2           GLfixed
+	V3           GLfixed
+}
+
+func (a *GlMultiTexCoord4x) String() string {
+	return fmt.Sprintf("glMultiTexCoord4x(texture: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Texture, a.V0, a.V1, a.V2, a.V3)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4x pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4x) AddRead(rng memory.Range, id binary.ID) *GlMultiTexCoord4x {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4x pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4x) AddWrite(rng memory.Range, id binary.ID) *GlMultiTexCoord4x {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultiTexCoord4x) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultiTexCoord4x) Flags() atom.Flags                { return 0 }
+func (a *GlMultiTexCoord4x) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMultiTexCoord4xOES
+////////////////////////////////////////////////////////////////////////////////
+type GlMultiTexCoord4xOES struct {
+	binary.Generate
+	observations atom.Observations
+	Texture      GLenum
+	V0           GLfixed
+	V1           GLfixed
+	V2           GLfixed
+	V3           GLfixed
+}
+
+func (a *GlMultiTexCoord4xOES) String() string {
+	return fmt.Sprintf("glMultiTexCoord4xOES(texture: %v, v0: %v, v1: %v, v2: %v, v3: %v)", a.Texture, a.V0, a.V1, a.V2, a.V3)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4xOES pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4xOES) AddRead(rng memory.Range, id binary.ID) *GlMultiTexCoord4xOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMultiTexCoord4xOES pointer is returned so that calls can be chained.
+func (a *GlMultiTexCoord4xOES) AddWrite(rng memory.Range, id binary.ID) *GlMultiTexCoord4xOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMultiTexCoord4xOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMultiTexCoord4xOES) Flags() atom.Flags                { return 0 }
+func (a *GlMultiTexCoord4xOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlNormal3f
+////////////////////////////////////////////////////////////////////////////////
+type GlNormal3f struct {
+	binary.Generate
+	observations atom.Observations
+	Nx           GLfloat
+	Ny           GLfloat
+	Nz           GLfloat
+}
+
+func (a *GlNormal3f) String() string {
+	return fmt.Sprintf("glNormal3f(nx: %v, ny: %v, nz: %v)", a.Nx, a.Ny, a.Nz)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlNormal3f pointer is returned so that calls can be chained.
+func (a *GlNormal3f) AddRead(rng memory.Range, id binary.ID) *GlNormal3f {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlNormal3f pointer is returned so that calls can be chained.
+func (a *GlNormal3f) AddWrite(rng memory.Range, id binary.ID) *GlNormal3f {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlNormal3f) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlNormal3f) Flags() atom.Flags                { return 0 }
+func (a *GlNormal3f) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlNormal3x
+////////////////////////////////////////////////////////////////////////////////
+type GlNormal3x struct {
+	binary.Generate
+	observations atom.Observations
+	Nx           GLfixed
+	Ny           GLfixed
+	Nz           GLfixed
+}
+
+func (a *GlNormal3x) String() string {
+	return fmt.Sprintf("glNormal3x(nx: %v, ny: %v, nz: %v)", a.Nx, a.Ny, a.Nz)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlNormal3x pointer is returned so that calls can be chained.
+func (a *GlNormal3x) AddRead(rng memory.Range, id binary.ID) *GlNormal3x {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlNormal3x pointer is returned so that calls can be chained.
+func (a *GlNormal3x) AddWrite(rng memory.Range, id binary.ID) *GlNormal3x {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlNormal3x) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlNormal3x) Flags() atom.Flags                { return 0 }
+func (a *GlNormal3x) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlNormal3xOES
+////////////////////////////////////////////////////////////////////////////////
+type GlNormal3xOES struct {
+	binary.Generate
+	observations atom.Observations
+	Nx           GLfixed
+	Ny           GLfixed
+	Nz           GLfixed
+}
+
+func (a *GlNormal3xOES) String() string {
+	return fmt.Sprintf("glNormal3xOES(nx: %v, ny: %v, nz: %v)", a.Nx, a.Ny, a.Nz)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlNormal3xOES pointer is returned so that calls can be chained.
+func (a *GlNormal3xOES) AddRead(rng memory.Range, id binary.ID) *GlNormal3xOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlNormal3xOES pointer is returned so that calls can be chained.
+func (a *GlNormal3xOES) AddWrite(rng memory.Range, id binary.ID) *GlNormal3xOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlNormal3xOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlNormal3xOES) Flags() atom.Flags                { return 0 }
+func (a *GlNormal3xOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlNormalPointer
+////////////////////////////////////////////////////////////////////////////////
+type GlNormalPointer struct {
+	binary.Generate
+	observations atom.Observations
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlNormalPointer) String() string {
+	return fmt.Sprintf("glNormalPointer(type: %v, stride: %v, pointer: %v)", a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlNormalPointer pointer is returned so that calls can be chained.
+func (a *GlNormalPointer) AddRead(rng memory.Range, id binary.ID) *GlNormalPointer {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlNormalPointer pointer is returned so that calls can be chained.
+func (a *GlNormalPointer) AddWrite(rng memory.Range, id binary.ID) *GlNormalPointer {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlNormalPointer) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlNormalPointer) Flags() atom.Flags                { return 0 }
+func (a *GlNormalPointer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlOrthof
+////////////////////////////////////////////////////////////////////////////////
+type GlOrthof struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfloat
+	R            GLfloat
+	B            GLfloat
+	T            GLfloat
+	N            GLfloat
+	F            GLfloat
+}
+
+func (a *GlOrthof) String() string {
+	return fmt.Sprintf("glOrthof(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlOrthof pointer is returned so that calls can be chained.
+func (a *GlOrthof) AddRead(rng memory.Range, id binary.ID) *GlOrthof {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlOrthof pointer is returned so that calls can be chained.
+func (a *GlOrthof) AddWrite(rng memory.Range, id binary.ID) *GlOrthof {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlOrthof) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlOrthof) Flags() atom.Flags                { return 0 }
+func (a *GlOrthof) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlOrthofOES
+////////////////////////////////////////////////////////////////////////////////
+type GlOrthofOES struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfloat
+	R            GLfloat
+	B            GLfloat
+	T            GLfloat
+	N            GLfloat
+	F            GLfloat
+}
+
+func (a *GlOrthofOES) String() string {
+	return fmt.Sprintf("glOrthofOES(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlOrthofOES pointer is returned so that calls can be chained.
+func (a *GlOrthofOES) AddRead(rng memory.Range, id binary.ID) *GlOrthofOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlOrthofOES pointer is returned so that calls can be chained.
+func (a *GlOrthofOES) AddWrite(rng memory.Range, id binary.ID) *GlOrthofOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlOrthofOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlOrthofOES) Flags() atom.Flags                { return 0 }
+func (a *GlOrthofOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlOrthox
+////////////////////////////////////////////////////////////////////////////////
+type GlOrthox struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfixed
+	R            GLfixed
+	B            GLfixed
+	T            GLfixed
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlOrthox) String() string {
+	return fmt.Sprintf("glOrthox(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlOrthox pointer is returned so that calls can be chained.
+func (a *GlOrthox) AddRead(rng memory.Range, id binary.ID) *GlOrthox {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlOrthox pointer is returned so that calls can be chained.
+func (a *GlOrthox) AddWrite(rng memory.Range, id binary.ID) *GlOrthox {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlOrthox) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlOrthox) Flags() atom.Flags                { return 0 }
+func (a *GlOrthox) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlOrthoxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlOrthoxOES struct {
+	binary.Generate
+	observations atom.Observations
+	L            GLfixed
+	R            GLfixed
+	B            GLfixed
+	T            GLfixed
+	N            GLfixed
+	F            GLfixed
+}
+
+func (a *GlOrthoxOES) String() string {
+	return fmt.Sprintf("glOrthoxOES(l: %v, r: %v, b: %v, t: %v, n: %v, f: %v)", a.L, a.R, a.B, a.T, a.N, a.F)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlOrthoxOES pointer is returned so that calls can be chained.
+func (a *GlOrthoxOES) AddRead(rng memory.Range, id binary.ID) *GlOrthoxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlOrthoxOES pointer is returned so that calls can be chained.
+func (a *GlOrthoxOES) AddWrite(rng memory.Range, id binary.ID) *GlOrthoxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlOrthoxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlOrthoxOES) Flags() atom.Flags                { return 0 }
+func (a *GlOrthoxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterf
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterf struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlPointParameterf) String() string {
+	return fmt.Sprintf("glPointParameterf(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterf pointer is returned so that calls can be chained.
+func (a *GlPointParameterf) AddRead(rng memory.Range, id binary.ID) *GlPointParameterf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterf pointer is returned so that calls can be chained.
+func (a *GlPointParameterf) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterf) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterfv
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterfv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlPointParameterfv) String() string {
+	return fmt.Sprintf("glPointParameterfv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterfv pointer is returned so that calls can be chained.
+func (a *GlPointParameterfv) AddRead(rng memory.Range, id binary.ID) *GlPointParameterfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterfv pointer is returned so that calls can be chained.
+func (a *GlPointParameterfv) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterfv) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterx
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterx struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlPointParameterx) String() string {
+	return fmt.Sprintf("glPointParameterx(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterx pointer is returned so that calls can be chained.
+func (a *GlPointParameterx) AddRead(rng memory.Range, id binary.ID) *GlPointParameterx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterx pointer is returned so that calls can be chained.
+func (a *GlPointParameterx) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterx) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlPointParameterxOES) String() string {
+	return fmt.Sprintf("glPointParameterxOES(pname: %v, param: %v)", a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxOES pointer is returned so that calls can be chained.
+func (a *GlPointParameterxOES) AddRead(rng memory.Range, id binary.ID) *GlPointParameterxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxOES pointer is returned so that calls can be chained.
+func (a *GlPointParameterxOES) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterxOES) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterxv
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterxv struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlPointParameterxv) String() string {
+	return fmt.Sprintf("glPointParameterxv(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxv pointer is returned so that calls can be chained.
+func (a *GlPointParameterxv) AddRead(rng memory.Range, id binary.ID) *GlPointParameterxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxv pointer is returned so that calls can be chained.
+func (a *GlPointParameterxv) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterxv) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointParameterxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlPointParameterxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlPointParameterxvOES) String() string {
+	return fmt.Sprintf("glPointParameterxvOES(pname: %v, params: %v)", a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlPointParameterxvOES) AddRead(rng memory.Range, id binary.ID) *GlPointParameterxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlPointParameterxvOES) AddWrite(rng memory.Range, id binary.ID) *GlPointParameterxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointParameterxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointParameterxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlPointParameterxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointSize
+////////////////////////////////////////////////////////////////////////////////
+type GlPointSize struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLfloat
+}
+
+func (a *GlPointSize) String() string {
+	return fmt.Sprintf("glPointSize(size: %v)", a.Size)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointSize pointer is returned so that calls can be chained.
+func (a *GlPointSize) AddRead(rng memory.Range, id binary.ID) *GlPointSize {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointSize pointer is returned so that calls can be chained.
+func (a *GlPointSize) AddWrite(rng memory.Range, id binary.ID) *GlPointSize {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointSize) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointSize) Flags() atom.Flags                { return 0 }
+func (a *GlPointSize) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointSizePointerOES
+////////////////////////////////////////////////////////////////////////////////
+type GlPointSizePointerOES struct {
+	binary.Generate
+	observations atom.Observations
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlPointSizePointerOES) String() string {
+	return fmt.Sprintf("glPointSizePointerOES(type: %v, stride: %v, pointer: %v)", a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointSizePointerOES pointer is returned so that calls can be chained.
+func (a *GlPointSizePointerOES) AddRead(rng memory.Range, id binary.ID) *GlPointSizePointerOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointSizePointerOES pointer is returned so that calls can be chained.
+func (a *GlPointSizePointerOES) AddWrite(rng memory.Range, id binary.ID) *GlPointSizePointerOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointSizePointerOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointSizePointerOES) Flags() atom.Flags                { return 0 }
+func (a *GlPointSizePointerOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointSizex
+////////////////////////////////////////////////////////////////////////////////
+type GlPointSizex struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLfixed
+}
+
+func (a *GlPointSizex) String() string {
+	return fmt.Sprintf("glPointSizex(size: %v)", a.Size)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointSizex pointer is returned so that calls can be chained.
+func (a *GlPointSizex) AddRead(rng memory.Range, id binary.ID) *GlPointSizex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointSizex pointer is returned so that calls can be chained.
+func (a *GlPointSizex) AddWrite(rng memory.Range, id binary.ID) *GlPointSizex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointSizex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointSizex) Flags() atom.Flags                { return 0 }
+func (a *GlPointSizex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointSizexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlPointSizexOES struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLfixed
+}
+
+func (a *GlPointSizexOES) String() string {
+	return fmt.Sprintf("glPointSizexOES(size: %v)", a.Size)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointSizexOES pointer is returned so that calls can be chained.
+func (a *GlPointSizexOES) AddRead(rng memory.Range, id binary.ID) *GlPointSizexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointSizexOES pointer is returned so that calls can be chained.
+func (a *GlPointSizexOES) AddWrite(rng memory.Range, id binary.ID) *GlPointSizexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointSizexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointSizexOES) Flags() atom.Flags                { return 0 }
+func (a *GlPointSizexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPolygonOffsetx
+////////////////////////////////////////////////////////////////////////////////
+type GlPolygonOffsetx struct {
+	binary.Generate
+	observations atom.Observations
+	Factor       GLfixed
+	Units        GLfixed
+}
+
+func (a *GlPolygonOffsetx) String() string {
+	return fmt.Sprintf("glPolygonOffsetx(factor: %v, units: %v)", a.Factor, a.Units)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPolygonOffsetx pointer is returned so that calls can be chained.
+func (a *GlPolygonOffsetx) AddRead(rng memory.Range, id binary.ID) *GlPolygonOffsetx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPolygonOffsetx pointer is returned so that calls can be chained.
+func (a *GlPolygonOffsetx) AddWrite(rng memory.Range, id binary.ID) *GlPolygonOffsetx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPolygonOffsetx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPolygonOffsetx) Flags() atom.Flags                { return 0 }
+func (a *GlPolygonOffsetx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPolygonOffsetxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlPolygonOffsetxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Factor       GLfixed
+	Units        GLfixed
+}
+
+func (a *GlPolygonOffsetxOES) String() string {
+	return fmt.Sprintf("glPolygonOffsetxOES(factor: %v, units: %v)", a.Factor, a.Units)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPolygonOffsetxOES pointer is returned so that calls can be chained.
+func (a *GlPolygonOffsetxOES) AddRead(rng memory.Range, id binary.ID) *GlPolygonOffsetxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPolygonOffsetxOES pointer is returned so that calls can be chained.
+func (a *GlPolygonOffsetxOES) AddWrite(rng memory.Range, id binary.ID) *GlPolygonOffsetxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPolygonOffsetxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPolygonOffsetxOES) Flags() atom.Flags                { return 0 }
+func (a *GlPolygonOffsetxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPopMatrix
+////////////////////////////////////////////////////////////////////////////////
+type GlPopMatrix struct {
+	binary.Generate
+	observations atom.Observations
+}
+
+func (a *GlPopMatrix) String() string {
+	return fmt.Sprintf("glPopMatrix()")
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPopMatrix pointer is returned so that calls can be chained.
+func (a *GlPopMatrix) AddRead(rng memory.Range, id binary.ID) *GlPopMatrix {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPopMatrix pointer is returned so that calls can be chained.
+func (a *GlPopMatrix) AddWrite(rng memory.Range, id binary.ID) *GlPopMatrix {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPopMatrix) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPopMatrix) Flags() atom.Flags                { return 0 }
+func (a *GlPopMatrix) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPushMatrix
+////////////////////////////////////////////////////////////////////////////////
+type GlPushMatrix struct {
+	binary.Generate
+	observations atom.Observations
+}
+
+func (a *GlPushMatrix) String() string {
+	return fmt.Sprintf("glPushMatrix()")
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPushMatrix pointer is returned so that calls can be chained.
+func (a *GlPushMatrix) AddRead(rng memory.Range, id binary.ID) *GlPushMatrix {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPushMatrix pointer is returned so that calls can be chained.
+func (a *GlPushMatrix) AddWrite(rng memory.Range, id binary.ID) *GlPushMatrix {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPushMatrix) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPushMatrix) Flags() atom.Flags                { return 0 }
+func (a *GlPushMatrix) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlQueryMatrixxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlQueryMatrixxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Mantissa     GLfixedᵖ
+	Exponent     GLintᵖ
+	Result       GLbitfield
+}
+
+func (a *GlQueryMatrixxOES) String() string {
+	return fmt.Sprintf("glQueryMatrixxOES(mantissa: %v, exponent: %v) → %v", a.Mantissa, a.Exponent, a.Result)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlQueryMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlQueryMatrixxOES) AddRead(rng memory.Range, id binary.ID) *GlQueryMatrixxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlQueryMatrixxOES pointer is returned so that calls can be chained.
+func (a *GlQueryMatrixxOES) AddWrite(rng memory.Range, id binary.ID) *GlQueryMatrixxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlQueryMatrixxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlQueryMatrixxOES) Flags() atom.Flags                { return 0 }
+func (a *GlQueryMatrixxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlRenderbufferStorageOES
+////////////////////////////////////////////////////////////////////////////////
+type GlRenderbufferStorageOES struct {
+	binary.Generate
+	observations   atom.Observations
+	Target         GLenum
+	Internalformat GLenum
+	Width          GLsizei
+	Height         GLsizei
+}
+
+func (a *GlRenderbufferStorageOES) String() string {
+	return fmt.Sprintf("glRenderbufferStorageOES(target: %v, internalformat: %v, width: %v, height: %v)", a.Target, a.Internalformat, a.Width, a.Height)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlRenderbufferStorageOES pointer is returned so that calls can be chained.
+func (a *GlRenderbufferStorageOES) AddRead(rng memory.Range, id binary.ID) *GlRenderbufferStorageOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlRenderbufferStorageOES pointer is returned so that calls can be chained.
+func (a *GlRenderbufferStorageOES) AddWrite(rng memory.Range, id binary.ID) *GlRenderbufferStorageOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlRenderbufferStorageOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlRenderbufferStorageOES) Flags() atom.Flags                { return 0 }
+func (a *GlRenderbufferStorageOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlRotatef
+////////////////////////////////////////////////////////////////////////////////
+type GlRotatef struct {
+	binary.Generate
+	observations atom.Observations
+	Angle        GLfloat
+	X            GLfloat
+	Y            GLfloat
+	Z            GLfloat
+}
+
+func (a *GlRotatef) String() string {
+	return fmt.Sprintf("glRotatef(angle: %v, x: %v, y: %v, z: %v)", a.Angle, a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlRotatef pointer is returned so that calls can be chained.
+func (a *GlRotatef) AddRead(rng memory.Range, id binary.ID) *GlRotatef {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlRotatef pointer is returned so that calls can be chained.
+func (a *GlRotatef) AddWrite(rng memory.Range, id binary.ID) *GlRotatef {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlRotatef) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlRotatef) Flags() atom.Flags                { return 0 }
+func (a *GlRotatef) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlRotatex
+////////////////////////////////////////////////////////////////////////////////
+type GlRotatex struct {
+	binary.Generate
+	observations atom.Observations
+	Angle        GLfixed
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlRotatex) String() string {
+	return fmt.Sprintf("glRotatex(angle: %v, x: %v, y: %v, z: %v)", a.Angle, a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlRotatex pointer is returned so that calls can be chained.
+func (a *GlRotatex) AddRead(rng memory.Range, id binary.ID) *GlRotatex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlRotatex pointer is returned so that calls can be chained.
+func (a *GlRotatex) AddWrite(rng memory.Range, id binary.ID) *GlRotatex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlRotatex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlRotatex) Flags() atom.Flags                { return 0 }
+func (a *GlRotatex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlRotatexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlRotatexOES struct {
+	binary.Generate
+	observations atom.Observations
+	Angle        GLfixed
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlRotatexOES) String() string {
+	return fmt.Sprintf("glRotatexOES(angle: %v, x: %v, y: %v, z: %v)", a.Angle, a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlRotatexOES pointer is returned so that calls can be chained.
+func (a *GlRotatexOES) AddRead(rng memory.Range, id binary.ID) *GlRotatexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlRotatexOES pointer is returned so that calls can be chained.
+func (a *GlRotatexOES) AddWrite(rng memory.Range, id binary.ID) *GlRotatexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlRotatexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlRotatexOES) Flags() atom.Flags                { return 0 }
+func (a *GlRotatexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlSampleCoveragex
+////////////////////////////////////////////////////////////////////////////////
+type GlSampleCoveragex struct {
+	binary.Generate
+	observations atom.Observations
+	Value        GLclampx
+	Invert       GLboolean
+}
+
+func (a *GlSampleCoveragex) String() string {
+	return fmt.Sprintf("glSampleCoveragex(value: %v, invert: %v)", a.Value, a.Invert)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlSampleCoveragex pointer is returned so that calls can be chained.
+func (a *GlSampleCoveragex) AddRead(rng memory.Range, id binary.ID) *GlSampleCoveragex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlSampleCoveragex pointer is returned so that calls can be chained.
+func (a *GlSampleCoveragex) AddWrite(rng memory.Range, id binary.ID) *GlSampleCoveragex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlSampleCoveragex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlSampleCoveragex) Flags() atom.Flags                { return 0 }
+func (a *GlSampleCoveragex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlSampleCoveragexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlSampleCoveragexOES struct {
+	binary.Generate
+	observations atom.Observations
+	Value        GLclampx
+	Invert       GLboolean
+}
+
+func (a *GlSampleCoveragexOES) String() string {
+	return fmt.Sprintf("glSampleCoveragexOES(value: %v, invert: %v)", a.Value, a.Invert)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlSampleCoveragexOES pointer is returned so that calls can be chained.
+func (a *GlSampleCoveragexOES) AddRead(rng memory.Range, id binary.ID) *GlSampleCoveragexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlSampleCoveragexOES pointer is returned so that calls can be chained.
+func (a *GlSampleCoveragexOES) AddWrite(rng memory.Range, id binary.ID) *GlSampleCoveragexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlSampleCoveragexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlSampleCoveragexOES) Flags() atom.Flags                { return 0 }
+func (a *GlSampleCoveragexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlScalef
+////////////////////////////////////////////////////////////////////////////////
+type GlScalef struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfloat
+	Y            GLfloat
+	Z            GLfloat
+}
+
+func (a *GlScalef) String() string {
+	return fmt.Sprintf("glScalef(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlScalef pointer is returned so that calls can be chained.
+func (a *GlScalef) AddRead(rng memory.Range, id binary.ID) *GlScalef {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlScalef pointer is returned so that calls can be chained.
+func (a *GlScalef) AddWrite(rng memory.Range, id binary.ID) *GlScalef {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlScalef) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlScalef) Flags() atom.Flags                { return 0 }
+func (a *GlScalef) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlScalex
+////////////////////////////////////////////////////////////////////////////////
+type GlScalex struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlScalex) String() string {
+	return fmt.Sprintf("glScalex(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlScalex pointer is returned so that calls can be chained.
+func (a *GlScalex) AddRead(rng memory.Range, id binary.ID) *GlScalex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlScalex pointer is returned so that calls can be chained.
+func (a *GlScalex) AddWrite(rng memory.Range, id binary.ID) *GlScalex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlScalex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlScalex) Flags() atom.Flags                { return 0 }
+func (a *GlScalex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlScalexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlScalexOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlScalexOES) String() string {
+	return fmt.Sprintf("glScalexOES(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlScalexOES pointer is returned so that calls can be chained.
+func (a *GlScalexOES) AddRead(rng memory.Range, id binary.ID) *GlScalexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlScalexOES pointer is returned so that calls can be chained.
+func (a *GlScalexOES) AddWrite(rng memory.Range, id binary.ID) *GlScalexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlScalexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlScalexOES) Flags() atom.Flags                { return 0 }
+func (a *GlScalexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlShadeModel
+////////////////////////////////////////////////////////////////////////////////
+type GlShadeModel struct {
+	binary.Generate
+	observations atom.Observations
+	Mode         GLenum
+}
+
+func (a *GlShadeModel) String() string {
+	return fmt.Sprintf("glShadeModel(mode: %v)", a.Mode)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlShadeModel pointer is returned so that calls can be chained.
+func (a *GlShadeModel) AddRead(rng memory.Range, id binary.ID) *GlShadeModel {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlShadeModel pointer is returned so that calls can be chained.
+func (a *GlShadeModel) AddWrite(rng memory.Range, id binary.ID) *GlShadeModel {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlShadeModel) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlShadeModel) Flags() atom.Flags                { return 0 }
+func (a *GlShadeModel) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexCoordPointer
+////////////////////////////////////////////////////////////////////////////////
+type GlTexCoordPointer struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlTexCoordPointer) String() string {
+	return fmt.Sprintf("glTexCoordPointer(size: %v, type: %v, stride: %v, pointer: %v)", a.Size, a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexCoordPointer pointer is returned so that calls can be chained.
+func (a *GlTexCoordPointer) AddRead(rng memory.Range, id binary.ID) *GlTexCoordPointer {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexCoordPointer pointer is returned so that calls can be chained.
+func (a *GlTexCoordPointer) AddWrite(rng memory.Range, id binary.ID) *GlTexCoordPointer {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexCoordPointer) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexCoordPointer) Flags() atom.Flags                { return 0 }
+func (a *GlTexCoordPointer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvf
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvf struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlTexEnvf) String() string {
+	return fmt.Sprintf("glTexEnvf(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvf pointer is returned so that calls can be chained.
+func (a *GlTexEnvf) AddRead(rng memory.Range, id binary.ID) *GlTexEnvf {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvf pointer is returned so that calls can be chained.
+func (a *GlTexEnvf) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvf {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvf) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvf) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvf) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvfv
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvfv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlTexEnvfv) String() string {
+	return fmt.Sprintf("glTexEnvfv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvfv pointer is returned so that calls can be chained.
+func (a *GlTexEnvfv) AddRead(rng memory.Range, id binary.ID) *GlTexEnvfv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvfv pointer is returned so that calls can be chained.
+func (a *GlTexEnvfv) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvfv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvfv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvfv) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvfv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvi
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvi struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLint
+}
+
+func (a *GlTexEnvi) String() string {
+	return fmt.Sprintf("glTexEnvi(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvi pointer is returned so that calls can be chained.
+func (a *GlTexEnvi) AddRead(rng memory.Range, id binary.ID) *GlTexEnvi {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvi pointer is returned so that calls can be chained.
+func (a *GlTexEnvi) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvi {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvi) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvi) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvi) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnviv
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnviv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLintᶜᵖ
+}
+
+func (a *GlTexEnviv) String() string {
+	return fmt.Sprintf("glTexEnviv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnviv pointer is returned so that calls can be chained.
+func (a *GlTexEnviv) AddRead(rng memory.Range, id binary.ID) *GlTexEnviv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnviv pointer is returned so that calls can be chained.
+func (a *GlTexEnviv) AddWrite(rng memory.Range, id binary.ID) *GlTexEnviv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnviv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnviv) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnviv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvx
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvx struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlTexEnvx) String() string {
+	return fmt.Sprintf("glTexEnvx(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvx pointer is returned so that calls can be chained.
+func (a *GlTexEnvx) AddRead(rng memory.Range, id binary.ID) *GlTexEnvx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvx pointer is returned so that calls can be chained.
+func (a *GlTexEnvx) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvx) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlTexEnvxOES) String() string {
+	return fmt.Sprintf("glTexEnvxOES(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxOES pointer is returned so that calls can be chained.
+func (a *GlTexEnvxOES) AddRead(rng memory.Range, id binary.ID) *GlTexEnvxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxOES pointer is returned so that calls can be chained.
+func (a *GlTexEnvxOES) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvxOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvxv
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvxv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlTexEnvxv) String() string {
+	return fmt.Sprintf("glTexEnvxv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxv pointer is returned so that calls can be chained.
+func (a *GlTexEnvxv) AddRead(rng memory.Range, id binary.ID) *GlTexEnvxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxv pointer is returned so that calls can be chained.
+func (a *GlTexEnvxv) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvxv) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexEnvxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexEnvxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlTexEnvxvOES) String() string {
+	return fmt.Sprintf("glTexEnvxvOES(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxvOES pointer is returned so that calls can be chained.
+func (a *GlTexEnvxvOES) AddRead(rng memory.Range, id binary.ID) *GlTexEnvxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexEnvxvOES pointer is returned so that calls can be chained.
+func (a *GlTexEnvxvOES) AddWrite(rng memory.Range, id binary.ID) *GlTexEnvxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexEnvxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexEnvxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexEnvxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGenfOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGenfOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Param        GLfloat
+}
+
+func (a *GlTexGenfOES) String() string {
+	return fmt.Sprintf("glTexGenfOES(coord: %v, pname: %v, param: %v)", a.Coord, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGenfOES pointer is returned so that calls can be chained.
+func (a *GlTexGenfOES) AddRead(rng memory.Range, id binary.ID) *GlTexGenfOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGenfOES pointer is returned so that calls can be chained.
+func (a *GlTexGenfOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGenfOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGenfOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGenfOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGenfOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGenfvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGenfvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLfloatᶜᵖ
+}
+
+func (a *GlTexGenfvOES) String() string {
+	return fmt.Sprintf("glTexGenfvOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGenfvOES pointer is returned so that calls can be chained.
+func (a *GlTexGenfvOES) AddRead(rng memory.Range, id binary.ID) *GlTexGenfvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGenfvOES pointer is returned so that calls can be chained.
+func (a *GlTexGenfvOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGenfvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGenfvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGenfvOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGenfvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGeniOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGeniOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Param        GLint
+}
+
+func (a *GlTexGeniOES) String() string {
+	return fmt.Sprintf("glTexGeniOES(coord: %v, pname: %v, param: %v)", a.Coord, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGeniOES pointer is returned so that calls can be chained.
+func (a *GlTexGeniOES) AddRead(rng memory.Range, id binary.ID) *GlTexGeniOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGeniOES pointer is returned so that calls can be chained.
+func (a *GlTexGeniOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGeniOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGeniOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGeniOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGeniOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGenivOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGenivOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLintᶜᵖ
+}
+
+func (a *GlTexGenivOES) String() string {
+	return fmt.Sprintf("glTexGenivOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGenivOES pointer is returned so that calls can be chained.
+func (a *GlTexGenivOES) AddRead(rng memory.Range, id binary.ID) *GlTexGenivOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGenivOES pointer is returned so that calls can be chained.
+func (a *GlTexGenivOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGenivOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGenivOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGenivOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGenivOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGenxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGenxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlTexGenxOES) String() string {
+	return fmt.Sprintf("glTexGenxOES(coord: %v, pname: %v, param: %v)", a.Coord, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGenxOES pointer is returned so that calls can be chained.
+func (a *GlTexGenxOES) AddRead(rng memory.Range, id binary.ID) *GlTexGenxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGenxOES pointer is returned so that calls can be chained.
+func (a *GlTexGenxOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGenxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGenxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGenxOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGenxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexGenxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexGenxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Coord        GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlTexGenxvOES) String() string {
+	return fmt.Sprintf("glTexGenxvOES(coord: %v, pname: %v, params: %v)", a.Coord, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexGenxvOES pointer is returned so that calls can be chained.
+func (a *GlTexGenxvOES) AddRead(rng memory.Range, id binary.ID) *GlTexGenxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexGenxvOES pointer is returned so that calls can be chained.
+func (a *GlTexGenxvOES) AddWrite(rng memory.Range, id binary.ID) *GlTexGenxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexGenxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexGenxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexGenxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexParameterx
+////////////////////////////////////////////////////////////////////////////////
+type GlTexParameterx struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlTexParameterx) String() string {
+	return fmt.Sprintf("glTexParameterx(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterx pointer is returned so that calls can be chained.
+func (a *GlTexParameterx) AddRead(rng memory.Range, id binary.ID) *GlTexParameterx {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterx pointer is returned so that calls can be chained.
+func (a *GlTexParameterx) AddWrite(rng memory.Range, id binary.ID) *GlTexParameterx {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexParameterx) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexParameterx) Flags() atom.Flags                { return 0 }
+func (a *GlTexParameterx) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexParameterxOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexParameterxOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Param        GLfixed
+}
+
+func (a *GlTexParameterxOES) String() string {
+	return fmt.Sprintf("glTexParameterxOES(target: %v, pname: %v, param: %v)", a.Target, a.Pname, a.Param)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxOES pointer is returned so that calls can be chained.
+func (a *GlTexParameterxOES) AddRead(rng memory.Range, id binary.ID) *GlTexParameterxOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxOES pointer is returned so that calls can be chained.
+func (a *GlTexParameterxOES) AddWrite(rng memory.Range, id binary.ID) *GlTexParameterxOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexParameterxOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexParameterxOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexParameterxOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexParameterxv
+////////////////////////////////////////////////////////////////////////////////
+type GlTexParameterxv struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlTexParameterxv) String() string {
+	return fmt.Sprintf("glTexParameterxv(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxv pointer is returned so that calls can be chained.
+func (a *GlTexParameterxv) AddRead(rng memory.Range, id binary.ID) *GlTexParameterxv {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxv pointer is returned so that calls can be chained.
+func (a *GlTexParameterxv) AddWrite(rng memory.Range, id binary.ID) *GlTexParameterxv {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexParameterxv) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexParameterxv) Flags() atom.Flags                { return 0 }
+func (a *GlTexParameterxv) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexParameterxvOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTexParameterxvOES struct {
+	binary.Generate
+	observations atom.Observations
+	Target       GLenum
+	Pname        GLenum
+	Params       GLfixedᶜᵖ
+}
+
+func (a *GlTexParameterxvOES) String() string {
+	return fmt.Sprintf("glTexParameterxvOES(target: %v, pname: %v, params: %v)", a.Target, a.Pname, a.Params)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlTexParameterxvOES) AddRead(rng memory.Range, id binary.ID) *GlTexParameterxvOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexParameterxvOES pointer is returned so that calls can be chained.
+func (a *GlTexParameterxvOES) AddWrite(rng memory.Range, id binary.ID) *GlTexParameterxvOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexParameterxvOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexParameterxvOES) Flags() atom.Flags                { return 0 }
+func (a *GlTexParameterxvOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTranslatef
+////////////////////////////////////////////////////////////////////////////////
+type GlTranslatef struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfloat
+	Y            GLfloat
+	Z            GLfloat
+}
+
+func (a *GlTranslatef) String() string {
+	return fmt.Sprintf("glTranslatef(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTranslatef pointer is returned so that calls can be chained.
+func (a *GlTranslatef) AddRead(rng memory.Range, id binary.ID) *GlTranslatef {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTranslatef pointer is returned so that calls can be chained.
+func (a *GlTranslatef) AddWrite(rng memory.Range, id binary.ID) *GlTranslatef {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTranslatef) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTranslatef) Flags() atom.Flags                { return 0 }
+func (a *GlTranslatef) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTranslatex
+////////////////////////////////////////////////////////////////////////////////
+type GlTranslatex struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlTranslatex) String() string {
+	return fmt.Sprintf("glTranslatex(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTranslatex pointer is returned so that calls can be chained.
+func (a *GlTranslatex) AddRead(rng memory.Range, id binary.ID) *GlTranslatex {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTranslatex pointer is returned so that calls can be chained.
+func (a *GlTranslatex) AddWrite(rng memory.Range, id binary.ID) *GlTranslatex {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTranslatex) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTranslatex) Flags() atom.Flags                { return 0 }
+func (a *GlTranslatex) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTranslatexOES
+////////////////////////////////////////////////////////////////////////////////
+type GlTranslatexOES struct {
+	binary.Generate
+	observations atom.Observations
+	X            GLfixed
+	Y            GLfixed
+	Z            GLfixed
+}
+
+func (a *GlTranslatexOES) String() string {
+	return fmt.Sprintf("glTranslatexOES(x: %v, y: %v, z: %v)", a.X, a.Y, a.Z)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTranslatexOES pointer is returned so that calls can be chained.
+func (a *GlTranslatexOES) AddRead(rng memory.Range, id binary.ID) *GlTranslatexOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTranslatexOES pointer is returned so that calls can be chained.
+func (a *GlTranslatexOES) AddWrite(rng memory.Range, id binary.ID) *GlTranslatexOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTranslatexOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTranslatexOES) Flags() atom.Flags                { return 0 }
+func (a *GlTranslatexOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlVertexPointer
+////////////////////////////////////////////////////////////////////////////////
+type GlVertexPointer struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlVertexPointer) String() string {
+	return fmt.Sprintf("glVertexPointer(size: %v, type: %v, stride: %v, pointer: %v)", a.Size, a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlVertexPointer pointer is returned so that calls can be chained.
+func (a *GlVertexPointer) AddRead(rng memory.Range, id binary.ID) *GlVertexPointer {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlVertexPointer pointer is returned so that calls can be chained.
+func (a *GlVertexPointer) AddWrite(rng memory.Range, id binary.ID) *GlVertexPointer {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlVertexPointer) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlVertexPointer) Flags() atom.Flags                { return 0 }
+func (a *GlVertexPointer) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlWeightPointerOES
+////////////////////////////////////////////////////////////////////////////////
+type GlWeightPointerOES struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+}
+
+func (a *GlWeightPointerOES) String() string {
+	return fmt.Sprintf("glWeightPointerOES(size: %v, type: %v, stride: %v, pointer: %v)", a.Size, a.Type, a.Stride, a.Pointer)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlWeightPointerOES pointer is returned so that calls can be chained.
+func (a *GlWeightPointerOES) AddRead(rng memory.Range, id binary.ID) *GlWeightPointerOES {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlWeightPointerOES pointer is returned so that calls can be chained.
+func (a *GlWeightPointerOES) AddWrite(rng memory.Range, id binary.ID) *GlWeightPointerOES {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlWeightPointerOES) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlWeightPointerOES) Flags() atom.Flags                { return 0 }
+func (a *GlWeightPointerOES) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlColorPointerBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlColorPointerBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlColorPointerBounds) String() string {
+	return fmt.Sprintf("glColorPointerBounds(size: %v, type: %v, stride: %v, pointer: %v, count: %v)", a.Size, a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlColorPointerBounds pointer is returned so that calls can be chained.
+func (a *GlColorPointerBounds) AddRead(rng memory.Range, id binary.ID) *GlColorPointerBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlColorPointerBounds pointer is returned so that calls can be chained.
+func (a *GlColorPointerBounds) AddWrite(rng memory.Range, id binary.ID) *GlColorPointerBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlColorPointerBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlColorPointerBounds) Flags() atom.Flags                { return 0 }
+func (a *GlColorPointerBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlNormalPointerBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlNormalPointerBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlNormalPointerBounds) String() string {
+	return fmt.Sprintf("glNormalPointerBounds(type: %v, stride: %v, pointer: %v, count: %v)", a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlNormalPointerBounds pointer is returned so that calls can be chained.
+func (a *GlNormalPointerBounds) AddRead(rng memory.Range, id binary.ID) *GlNormalPointerBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlNormalPointerBounds pointer is returned so that calls can be chained.
+func (a *GlNormalPointerBounds) AddWrite(rng memory.Range, id binary.ID) *GlNormalPointerBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlNormalPointerBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlNormalPointerBounds) Flags() atom.Flags                { return 0 }
+func (a *GlNormalPointerBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlTexCoordPointerBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlTexCoordPointerBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlTexCoordPointerBounds) String() string {
+	return fmt.Sprintf("glTexCoordPointerBounds(size: %v, type: %v, stride: %v, pointer: %v, count: %v)", a.Size, a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlTexCoordPointerBounds pointer is returned so that calls can be chained.
+func (a *GlTexCoordPointerBounds) AddRead(rng memory.Range, id binary.ID) *GlTexCoordPointerBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlTexCoordPointerBounds pointer is returned so that calls can be chained.
+func (a *GlTexCoordPointerBounds) AddWrite(rng memory.Range, id binary.ID) *GlTexCoordPointerBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlTexCoordPointerBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlTexCoordPointerBounds) Flags() atom.Flags                { return 0 }
+func (a *GlTexCoordPointerBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlVertexPointerBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlVertexPointerBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlVertexPointerBounds) String() string {
+	return fmt.Sprintf("glVertexPointerBounds(size: %v, type: %v, stride: %v, pointer: %v, count: %v)", a.Size, a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlVertexPointerBounds pointer is returned so that calls can be chained.
+func (a *GlVertexPointerBounds) AddRead(rng memory.Range, id binary.ID) *GlVertexPointerBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlVertexPointerBounds pointer is returned so that calls can be chained.
+func (a *GlVertexPointerBounds) AddWrite(rng memory.Range, id binary.ID) *GlVertexPointerBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlVertexPointerBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlVertexPointerBounds) Flags() atom.Flags                { return 0 }
+func (a *GlVertexPointerBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlPointSizePointerOESBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlPointSizePointerOESBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlPointSizePointerOESBounds) String() string {
+	return fmt.Sprintf("glPointSizePointerOESBounds(type: %v, stride: %v, pointer: %v, count: %v)", a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlPointSizePointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlPointSizePointerOESBounds) AddRead(rng memory.Range, id binary.ID) *GlPointSizePointerOESBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlPointSizePointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlPointSizePointerOESBounds) AddWrite(rng memory.Range, id binary.ID) *GlPointSizePointerOESBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlPointSizePointerOESBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlPointSizePointerOESBounds) Flags() atom.Flags                { return 0 }
+func (a *GlPointSizePointerOESBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlMatrixIndexPointerOESBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlMatrixIndexPointerOESBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlMatrixIndexPointerOESBounds) String() string {
+	return fmt.Sprintf("glMatrixIndexPointerOESBounds(size: %v, type: %v, stride: %v, pointer: %v, count: %v)", a.Size, a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlMatrixIndexPointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlMatrixIndexPointerOESBounds) AddRead(rng memory.Range, id binary.ID) *GlMatrixIndexPointerOESBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlMatrixIndexPointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlMatrixIndexPointerOESBounds) AddWrite(rng memory.Range, id binary.ID) *GlMatrixIndexPointerOESBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlMatrixIndexPointerOESBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlMatrixIndexPointerOESBounds) Flags() atom.Flags                { return 0 }
+func (a *GlMatrixIndexPointerOESBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
+// GlWeightPointerOESBounds
+////////////////////////////////////////////////////////////////////////////////
+type GlWeightPointerOESBounds struct {
+	binary.Generate
+	observations atom.Observations
+	Size         GLint
+	Type         GLenum
+	Stride       GLsizei
+	Pointer      Voidᶜᵖ
+	Count        GLsizei
+}
+
+func (a *GlWeightPointerOESBounds) String() string {
+	return fmt.Sprintf("glWeightPointerOESBounds(size: %v, type: %v, stride: %v, pointer: %v, count: %v)", a.Size, a.Type, a.Stride, a.Pointer, a.Count)
+}
+
+// AddRead appends a new read observation to the atom of the range rng with
+// the data id.
+// The GlWeightPointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlWeightPointerOESBounds) AddRead(rng memory.Range, id binary.ID) *GlWeightPointerOESBounds {
+	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	return a
+}
+
+// AddWrite appends a new write observation to the atom of the range rng with
+// the data id.
+// The GlWeightPointerOESBounds pointer is returned so that calls can be chained.
+func (a *GlWeightPointerOESBounds) AddWrite(rng memory.Range, id binary.ID) *GlWeightPointerOESBounds {
+	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	return a
+}
+func (c *GlWeightPointerOESBounds) API() gfxapi.ID                   { return api{}.ID() }
+func (c *GlWeightPointerOESBounds) Flags() atom.Flags                { return 0 }
+func (a *GlWeightPointerOESBounds) Observations() *atom.Observations { return &a.observations }
+
+////////////////////////////////////////////////////////////////////////////////
 // Architecture
 ////////////////////////////////////////////////////////////////////////////////
 type Architecture struct {
@@ -47628,98 +54185,109 @@ const (
 type ExtensionId uint32
 
 const (
-	ExtensionId_GL_AMD_performance_monitor                  = ExtensionId(1)
-	ExtensionId_GL_ANGLE_framebuffer_blit                   = ExtensionId(2)
-	ExtensionId_GL_ANGLE_framebuffer_multisample            = ExtensionId(3)
-	ExtensionId_GL_ANGLE_instanced_arrays                   = ExtensionId(4)
-	ExtensionId_GL_ANGLE_translated_shader_source           = ExtensionId(5)
-	ExtensionId_GL_APPLE_copy_texture_levels                = ExtensionId(6)
-	ExtensionId_GL_APPLE_framebuffer_multisample            = ExtensionId(7)
-	ExtensionId_GL_APPLE_sync                               = ExtensionId(8)
-	ExtensionId_GL_EXT_base_instance                        = ExtensionId(9)
-	ExtensionId_GL_EXT_buffer_storage                       = ExtensionId(10)
-	ExtensionId_GL_EXT_copy_image                           = ExtensionId(11)
-	ExtensionId_GL_EXT_debug_label                          = ExtensionId(12)
-	ExtensionId_GL_EXT_debug_marker                         = ExtensionId(13)
-	ExtensionId_GL_EXT_discard_framebuffer                  = ExtensionId(14)
-	ExtensionId_GL_EXT_disjoint_timer_query                 = ExtensionId(15)
-	ExtensionId_GL_EXT_draw_buffers                         = ExtensionId(16)
-	ExtensionId_GL_EXT_draw_buffers_indexed                 = ExtensionId(17)
-	ExtensionId_GL_EXT_draw_elements_base_vertex            = ExtensionId(18)
-	ExtensionId_GL_EXT_draw_instanced                       = ExtensionId(19)
-	ExtensionId_GL_EXT_geometry_shader                      = ExtensionId(20)
-	ExtensionId_GL_EXT_instanced_arrays                     = ExtensionId(21)
-	ExtensionId_GL_EXT_map_buffer_range                     = ExtensionId(22)
-	ExtensionId_GL_EXT_multi_draw_arrays                    = ExtensionId(23)
-	ExtensionId_GL_EXT_multi_draw_indirect                  = ExtensionId(24)
-	ExtensionId_GL_EXT_multisampled_render_to_texture       = ExtensionId(25)
-	ExtensionId_GL_EXT_multiview_draw_buffers               = ExtensionId(26)
-	ExtensionId_GL_EXT_occlusion_query_boolean              = ExtensionId(27)
-	ExtensionId_GL_EXT_primitive_bounding_box               = ExtensionId(28)
-	ExtensionId_GL_EXT_raster_multisample                   = ExtensionId(29)
-	ExtensionId_GL_EXT_robustness                           = ExtensionId(30)
-	ExtensionId_GL_EXT_separate_shader_objects              = ExtensionId(31)
-	ExtensionId_GL_EXT_sparse_texture                       = ExtensionId(32)
-	ExtensionId_GL_EXT_tessellation_shader                  = ExtensionId(33)
-	ExtensionId_GL_EXT_texture_border_clamp                 = ExtensionId(34)
-	ExtensionId_GL_EXT_texture_buffer                       = ExtensionId(35)
-	ExtensionId_GL_EXT_texture_filter_minmax                = ExtensionId(36)
-	ExtensionId_GL_EXT_texture_storage                      = ExtensionId(37)
-	ExtensionId_GL_EXT_texture_view                         = ExtensionId(38)
-	ExtensionId_GL_IMG_multisampled_render_to_texture       = ExtensionId(39)
-	ExtensionId_GL_INTEL_performance_query                  = ExtensionId(40)
-	ExtensionId_GL_KHR_blend_equation_advanced              = ExtensionId(41)
-	ExtensionId_GL_KHR_debug                                = ExtensionId(42)
-	ExtensionId_GL_KHR_robustness                           = ExtensionId(43)
-	ExtensionId_GL_NV_bindless_texture                      = ExtensionId(44)
-	ExtensionId_GL_NV_blend_equation_advanced               = ExtensionId(45)
-	ExtensionId_GL_NV_conditional_render                    = ExtensionId(46)
-	ExtensionId_GL_NV_conservative_raster                   = ExtensionId(47)
-	ExtensionId_GL_NV_copy_buffer                           = ExtensionId(48)
-	ExtensionId_GL_NV_coverage_sample                       = ExtensionId(49)
-	ExtensionId_GL_NV_draw_buffers                          = ExtensionId(50)
-	ExtensionId_GL_NV_draw_instanced                        = ExtensionId(51)
-	ExtensionId_GL_NV_fence                                 = ExtensionId(52)
-	ExtensionId_GL_NV_fragment_coverage_to_color            = ExtensionId(53)
-	ExtensionId_GL_NV_framebuffer_blit                      = ExtensionId(54)
-	ExtensionId_GL_NV_framebuffer_mixed_samples             = ExtensionId(55)
-	ExtensionId_GL_NV_framebuffer_multisample               = ExtensionId(56)
-	ExtensionId_GL_NV_instanced_arrays                      = ExtensionId(57)
-	ExtensionId_GL_NV_internalformat_sample_query           = ExtensionId(58)
-	ExtensionId_GL_NV_non_square_matrices                   = ExtensionId(59)
-	ExtensionId_GL_NV_path_rendering                        = ExtensionId(60)
-	ExtensionId_GL_NV_polygon_mode                          = ExtensionId(61)
-	ExtensionId_GL_NV_read_buffer                           = ExtensionId(62)
-	ExtensionId_GL_NV_sample_locations                      = ExtensionId(63)
-	ExtensionId_GL_NV_viewport_array                        = ExtensionId(64)
-	ExtensionId_GL_OES_copy_image                           = ExtensionId(65)
-	ExtensionId_GL_OES_draw_buffers_indexed                 = ExtensionId(66)
-	ExtensionId_GL_OES_draw_elements_base_vertex            = ExtensionId(67)
-	ExtensionId_GL_OES_EGL_image                            = ExtensionId(68)
-	ExtensionId_GL_OES_framebuffer_object                   = ExtensionId(69)
-	ExtensionId_GL_OES_geometry_shader                      = ExtensionId(70)
-	ExtensionId_GL_OES_get_program_binary                   = ExtensionId(71)
-	ExtensionId_GL_OES_mapbuffer                            = ExtensionId(72)
-	ExtensionId_GL_OES_primitive_bounding_box               = ExtensionId(73)
-	ExtensionId_GL_OES_sample_shading                       = ExtensionId(74)
-	ExtensionId_GL_OES_tessellation_shader                  = ExtensionId(75)
-	ExtensionId_GL_OES_texture_3D                           = ExtensionId(76)
-	ExtensionId_GL_OES_texture_border_clamp                 = ExtensionId(77)
-	ExtensionId_GL_OES_texture_buffer                       = ExtensionId(78)
-	ExtensionId_GL_OES_texture_storage_multisample_2d_array = ExtensionId(79)
-	ExtensionId_GL_OES_texture_view                         = ExtensionId(80)
-	ExtensionId_GL_OES_vertex_array_object                  = ExtensionId(81)
-	ExtensionId_GL_OVR_multiview                            = ExtensionId(82)
-	ExtensionId_GL_QCOM_alpha_test                          = ExtensionId(83)
-	ExtensionId_GL_QCOM_driver_control                      = ExtensionId(84)
-	ExtensionId_GL_QCOM_extended_get                        = ExtensionId(85)
-	ExtensionId_GL_QCOM_extended_get2                       = ExtensionId(86)
-	ExtensionId_GL_QCOM_tiled_rendering                     = ExtensionId(87)
-	ExtensionId_GL_AMD_compressed_ATC_texture               = ExtensionId(88)
-	ExtensionId_GL_OES_texture_half_float                   = ExtensionId(89)
-	ExtensionId_GL_OES_vertex_half_float                    = ExtensionId(90)
-	ExtensionId_GL_INTEL_framebuffer_CMAA                   = ExtensionId(91)
-	ExtensionId_GL_EXT_blend_func_extended                  = ExtensionId(92)
+	ExtensionId_GL_AMD_compressed_ATC_texture               = ExtensionId(1)
+	ExtensionId_GL_AMD_performance_monitor                  = ExtensionId(2)
+	ExtensionId_GL_ANGLE_framebuffer_blit                   = ExtensionId(3)
+	ExtensionId_GL_ANGLE_framebuffer_multisample            = ExtensionId(4)
+	ExtensionId_GL_ANGLE_instanced_arrays                   = ExtensionId(5)
+	ExtensionId_GL_ANGLE_translated_shader_source           = ExtensionId(6)
+	ExtensionId_GL_APPLE_copy_texture_levels                = ExtensionId(7)
+	ExtensionId_GL_APPLE_framebuffer_multisample            = ExtensionId(8)
+	ExtensionId_GL_APPLE_sync                               = ExtensionId(9)
+	ExtensionId_GL_EXT_base_instance                        = ExtensionId(10)
+	ExtensionId_GL_EXT_blend_func_extended                  = ExtensionId(11)
+	ExtensionId_GL_EXT_buffer_storage                       = ExtensionId(12)
+	ExtensionId_GL_EXT_copy_image                           = ExtensionId(13)
+	ExtensionId_GL_EXT_debug_label                          = ExtensionId(14)
+	ExtensionId_GL_EXT_debug_marker                         = ExtensionId(15)
+	ExtensionId_GL_EXT_discard_framebuffer                  = ExtensionId(16)
+	ExtensionId_GL_EXT_disjoint_timer_query                 = ExtensionId(17)
+	ExtensionId_GL_EXT_draw_buffers                         = ExtensionId(18)
+	ExtensionId_GL_EXT_draw_buffers_indexed                 = ExtensionId(19)
+	ExtensionId_GL_EXT_draw_elements_base_vertex            = ExtensionId(20)
+	ExtensionId_GL_EXT_draw_instanced                       = ExtensionId(21)
+	ExtensionId_GL_EXT_geometry_shader                      = ExtensionId(22)
+	ExtensionId_GL_EXT_instanced_arrays                     = ExtensionId(23)
+	ExtensionId_GL_EXT_map_buffer_range                     = ExtensionId(24)
+	ExtensionId_GL_EXT_multi_draw_arrays                    = ExtensionId(25)
+	ExtensionId_GL_EXT_multi_draw_indirect                  = ExtensionId(26)
+	ExtensionId_GL_EXT_multisampled_render_to_texture       = ExtensionId(27)
+	ExtensionId_GL_EXT_multiview_draw_buffers               = ExtensionId(28)
+	ExtensionId_GL_EXT_occlusion_query_boolean              = ExtensionId(29)
+	ExtensionId_GL_EXT_primitive_bounding_box               = ExtensionId(30)
+	ExtensionId_GL_EXT_raster_multisample                   = ExtensionId(31)
+	ExtensionId_GL_EXT_robustness                           = ExtensionId(32)
+	ExtensionId_GL_EXT_separate_shader_objects              = ExtensionId(33)
+	ExtensionId_GL_EXT_sparse_texture                       = ExtensionId(34)
+	ExtensionId_GL_EXT_tessellation_shader                  = ExtensionId(35)
+	ExtensionId_GL_EXT_texture_border_clamp                 = ExtensionId(36)
+	ExtensionId_GL_EXT_texture_buffer                       = ExtensionId(37)
+	ExtensionId_GL_EXT_texture_filter_minmax                = ExtensionId(38)
+	ExtensionId_GL_EXT_texture_storage                      = ExtensionId(39)
+	ExtensionId_GL_EXT_texture_view                         = ExtensionId(40)
+	ExtensionId_GL_IMG_multisampled_render_to_texture       = ExtensionId(41)
+	ExtensionId_GL_IMG_user_clip_plane                      = ExtensionId(42)
+	ExtensionId_GL_INTEL_framebuffer_CMAA                   = ExtensionId(43)
+	ExtensionId_GL_INTEL_performance_query                  = ExtensionId(44)
+	ExtensionId_GL_KHR_blend_equation_advanced              = ExtensionId(45)
+	ExtensionId_GL_KHR_debug                                = ExtensionId(46)
+	ExtensionId_GL_KHR_robustness                           = ExtensionId(47)
+	ExtensionId_GL_NV_bindless_texture                      = ExtensionId(48)
+	ExtensionId_GL_NV_blend_equation_advanced               = ExtensionId(49)
+	ExtensionId_GL_NV_conditional_render                    = ExtensionId(50)
+	ExtensionId_GL_NV_conservative_raster                   = ExtensionId(51)
+	ExtensionId_GL_NV_copy_buffer                           = ExtensionId(52)
+	ExtensionId_GL_NV_coverage_sample                       = ExtensionId(53)
+	ExtensionId_GL_NV_draw_buffers                          = ExtensionId(54)
+	ExtensionId_GL_NV_draw_instanced                        = ExtensionId(55)
+	ExtensionId_GL_NV_fence                                 = ExtensionId(56)
+	ExtensionId_GL_NV_fragment_coverage_to_color            = ExtensionId(57)
+	ExtensionId_GL_NV_framebuffer_blit                      = ExtensionId(58)
+	ExtensionId_GL_NV_framebuffer_mixed_samples             = ExtensionId(59)
+	ExtensionId_GL_NV_framebuffer_multisample               = ExtensionId(60)
+	ExtensionId_GL_NV_instanced_arrays                      = ExtensionId(61)
+	ExtensionId_GL_NV_internalformat_sample_query           = ExtensionId(62)
+	ExtensionId_GL_NV_non_square_matrices                   = ExtensionId(63)
+	ExtensionId_GL_NV_path_rendering                        = ExtensionId(64)
+	ExtensionId_GL_NV_polygon_mode                          = ExtensionId(65)
+	ExtensionId_GL_NV_read_buffer                           = ExtensionId(66)
+	ExtensionId_GL_NV_sample_locations                      = ExtensionId(67)
+	ExtensionId_GL_NV_viewport_array                        = ExtensionId(68)
+	ExtensionId_GL_OES_blend_equation_separate              = ExtensionId(69)
+	ExtensionId_GL_OES_blend_func_separate                  = ExtensionId(70)
+	ExtensionId_GL_OES_blend_subtract                       = ExtensionId(71)
+	ExtensionId_GL_OES_copy_image                           = ExtensionId(72)
+	ExtensionId_GL_OES_draw_buffers_indexed                 = ExtensionId(73)
+	ExtensionId_GL_OES_draw_elements_base_vertex            = ExtensionId(74)
+	ExtensionId_GL_OES_draw_texture                         = ExtensionId(75)
+	ExtensionId_GL_OES_EGL_image                            = ExtensionId(76)
+	ExtensionId_GL_OES_fixed_point                          = ExtensionId(77)
+	ExtensionId_GL_OES_framebuffer_object                   = ExtensionId(78)
+	ExtensionId_GL_OES_geometry_shader                      = ExtensionId(79)
+	ExtensionId_GL_OES_get_program_binary                   = ExtensionId(80)
+	ExtensionId_GL_OES_mapbuffer                            = ExtensionId(81)
+	ExtensionId_GL_OES_matrix_palette                       = ExtensionId(82)
+	ExtensionId_GL_OES_point_size_array                     = ExtensionId(83)
+	ExtensionId_GL_OES_primitive_bounding_box               = ExtensionId(84)
+	ExtensionId_GL_OES_query_matrix                         = ExtensionId(85)
+	ExtensionId_GL_OES_sample_shading                       = ExtensionId(86)
+	ExtensionId_GL_OES_single_precision                     = ExtensionId(87)
+	ExtensionId_GL_OES_tessellation_shader                  = ExtensionId(88)
+	ExtensionId_GL_OES_texture_3D                           = ExtensionId(89)
+	ExtensionId_GL_OES_texture_border_clamp                 = ExtensionId(90)
+	ExtensionId_GL_OES_texture_buffer                       = ExtensionId(91)
+	ExtensionId_GL_OES_texture_cube_map                     = ExtensionId(92)
+	ExtensionId_GL_OES_texture_half_float                   = ExtensionId(93)
+	ExtensionId_GL_OES_texture_storage_multisample_2d_array = ExtensionId(94)
+	ExtensionId_GL_OES_texture_view                         = ExtensionId(95)
+	ExtensionId_GL_OES_vertex_array_object                  = ExtensionId(96)
+	ExtensionId_GL_OES_vertex_half_float                    = ExtensionId(97)
+	ExtensionId_GL_OVR_multiview                            = ExtensionId(98)
+	ExtensionId_GL_QCOM_alpha_test                          = ExtensionId(99)
+	ExtensionId_GL_QCOM_driver_control                      = ExtensionId(100)
+	ExtensionId_GL_QCOM_extended_get                        = ExtensionId(101)
+	ExtensionId_GL_QCOM_extended_get2                       = ExtensionId(102)
+	ExtensionId_GL_QCOM_tiled_rendering                     = ExtensionId(103)
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49152,9 +55720,6 @@ func NewGlStencilMask(Mask GLuint) *GlStencilMask {
 func NewGlStencilMaskSeparate(Face GLenum, Mask GLuint) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{Face: Face, Mask: Mask}
 }
-func NewGlFramebufferTexture2DOES(Framebuffer_target GLenum, Framebuffer_attachment GLenum, Texture_target GLenum, Texture TextureId, Level GLint) *GlFramebufferTexture2DOES {
-	return &GlFramebufferTexture2DOES{FramebufferTarget: Framebuffer_target, FramebufferAttachment: Framebuffer_attachment, TextureTarget: Texture_target, Texture: Texture, Level: Level}
-}
 func NewGlDisable(Capability GLenum) *GlDisable {
 	return &GlDisable{Capability: Capability}
 }
@@ -49991,6 +56556,546 @@ func NewGlGetQueryObjecti64v(Query QueryId, Parameter GLenum, Value memory.Point
 }
 func NewGlGetQueryObjectui64v(Query QueryId, Parameter GLenum, Value memory.Pointer) *GlGetQueryObjectui64v {
 	return &GlGetQueryObjectui64v{Query: Query, Parameter: Parameter, Value: U64ᵖ{Pointer: Value}}
+}
+func NewGlAlphaFunc(Func GLenum, Ref GLfloat) *GlAlphaFunc {
+	return &GlAlphaFunc{Func: Func, Ref: Ref}
+}
+func NewGlAlphaFuncx(Func GLenum, Ref GLfixed) *GlAlphaFuncx {
+	return &GlAlphaFuncx{Func: Func, Ref: Ref}
+}
+func NewGlAlphaFuncxOES(Func GLenum, Ref GLfixed) *GlAlphaFuncxOES {
+	return &GlAlphaFuncxOES{Func: Func, Ref: Ref}
+}
+func NewGlBindFramebufferOES(Target GLenum, Framebuffer GLuint) *GlBindFramebufferOES {
+	return &GlBindFramebufferOES{Target: Target, Framebuffer: Framebuffer}
+}
+func NewGlBindRenderbufferOES(Target GLenum, Renderbuffer GLuint) *GlBindRenderbufferOES {
+	return &GlBindRenderbufferOES{Target: Target, Renderbuffer: Renderbuffer}
+}
+func NewGlBlendEquationOES(Mode GLenum) *GlBlendEquationOES {
+	return &GlBlendEquationOES{Mode: Mode}
+}
+func NewGlBlendEquationSeparateOES(ModeRGB GLenum, ModeAlpha GLenum) *GlBlendEquationSeparateOES {
+	return &GlBlendEquationSeparateOES{ModeRGB: ModeRGB, ModeAlpha: ModeAlpha}
+}
+func NewGlBlendFuncSeparateOES(SrcRGB GLenum, DstRGB GLenum, SrcAlpha GLenum, DstAlpha GLenum) *GlBlendFuncSeparateOES {
+	return &GlBlendFuncSeparateOES{SrcRGB: SrcRGB, DstRGB: DstRGB, SrcAlpha: SrcAlpha, DstAlpha: DstAlpha}
+}
+func NewGlCheckFramebufferStatusOES(Target GLenum, Result GLenum) *GlCheckFramebufferStatusOES {
+	return &GlCheckFramebufferStatusOES{Target: Target, Result: Result}
+}
+func NewGlClearColorx(Red GLfixed, Green GLfixed, Blue GLfixed, Alpha GLfixed) *GlClearColorx {
+	return &GlClearColorx{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlClearColorxOES(Red GLfixed, Green GLfixed, Blue GLfixed, Alpha GLfixed) *GlClearColorxOES {
+	return &GlClearColorxOES{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlClearDepthfOES(Depth GLclampf) *GlClearDepthfOES {
+	return &GlClearDepthfOES{Depth: Depth}
+}
+func NewGlClearDepthx(Depth GLfixed) *GlClearDepthx {
+	return &GlClearDepthx{Depth: Depth}
+}
+func NewGlClearDepthxOES(Depth GLfixed) *GlClearDepthxOES {
+	return &GlClearDepthxOES{Depth: Depth}
+}
+func NewGlClientActiveTexture(Texture GLenum) *GlClientActiveTexture {
+	return &GlClientActiveTexture{Texture: Texture}
+}
+func NewGlClipPlanef(P GLenum, Eqn memory.Pointer) *GlClipPlanef {
+	return &GlClipPlanef{P: P, Eqn: GLfloatᶜᵖ{Pointer: Eqn}}
+}
+func NewGlClipPlanefIMG(P GLenum, Eqn memory.Pointer) *GlClipPlanefIMG {
+	return &GlClipPlanefIMG{P: P, Eqn: GLfloatᶜᵖ{Pointer: Eqn}}
+}
+func NewGlClipPlanefOES(Plane GLenum, Equation memory.Pointer) *GlClipPlanefOES {
+	return &GlClipPlanefOES{Plane: Plane, Equation: GLfloatᶜᵖ{Pointer: Equation}}
+}
+func NewGlClipPlanex(Plane GLenum, Equation memory.Pointer) *GlClipPlanex {
+	return &GlClipPlanex{Plane: Plane, Equation: GLfixedᶜᵖ{Pointer: Equation}}
+}
+func NewGlClipPlanexIMG(P GLenum, Eqn memory.Pointer) *GlClipPlanexIMG {
+	return &GlClipPlanexIMG{P: P, Eqn: GLfixedᶜᵖ{Pointer: Eqn}}
+}
+func NewGlClipPlanexOES(Plane GLenum, Equation memory.Pointer) *GlClipPlanexOES {
+	return &GlClipPlanexOES{Plane: Plane, Equation: GLfixedᶜᵖ{Pointer: Equation}}
+}
+func NewGlColor4f(Red GLfloat, Green GLfloat, Blue GLfloat, Alpha GLfloat) *GlColor4f {
+	return &GlColor4f{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlColor4ub(Red GLubyte, Green GLubyte, Blue GLubyte, Alpha GLubyte) *GlColor4ub {
+	return &GlColor4ub{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlColor4x(Red GLfixed, Green GLfixed, Blue GLfixed, Alpha GLfixed) *GlColor4x {
+	return &GlColor4x{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlColor4xOES(Red GLfixed, Green GLfixed, Blue GLfixed, Alpha GLfixed) *GlColor4xOES {
+	return &GlColor4xOES{Red: Red, Green: Green, Blue: Blue, Alpha: Alpha}
+}
+func NewGlColorPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlColorPointer {
+	return &GlColorPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlCurrentPaletteMatrixOES(Matrixpaletteindex GLuint) *GlCurrentPaletteMatrixOES {
+	return &GlCurrentPaletteMatrixOES{Matrixpaletteindex: Matrixpaletteindex}
+}
+func NewGlDeleteFramebuffersOES(N GLsizei, Framebuffers memory.Pointer) *GlDeleteFramebuffersOES {
+	return &GlDeleteFramebuffersOES{N: N, Framebuffers: GLuintᶜᵖ{Pointer: Framebuffers}}
+}
+func NewGlDeleteRenderbuffersOES(N GLsizei, Renderbuffers memory.Pointer) *GlDeleteRenderbuffersOES {
+	return &GlDeleteRenderbuffersOES{N: N, Renderbuffers: GLuintᶜᵖ{Pointer: Renderbuffers}}
+}
+func NewGlDepthRangefOES(N GLclampf, F GLclampf) *GlDepthRangefOES {
+	return &GlDepthRangefOES{N: N, F: F}
+}
+func NewGlDepthRangex(N GLfixed, F GLfixed) *GlDepthRangex {
+	return &GlDepthRangex{N: N, F: F}
+}
+func NewGlDepthRangexOES(N GLfixed, F GLfixed) *GlDepthRangexOES {
+	return &GlDepthRangexOES{N: N, F: F}
+}
+func NewGlDisableClientState(Array GLenum) *GlDisableClientState {
+	return &GlDisableClientState{Array: Array}
+}
+func NewGlDrawTexfOES(X GLfloat, Y GLfloat, Z GLfloat, Width GLfloat, Height GLfloat) *GlDrawTexfOES {
+	return &GlDrawTexfOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
+}
+func NewGlDrawTexfvOES(Coords memory.Pointer) *GlDrawTexfvOES {
+	return &GlDrawTexfvOES{Coords: GLfloatᶜᵖ{Pointer: Coords}}
+}
+func NewGlDrawTexiOES(X GLint, Y GLint, Z GLint, Width GLint, Height GLint) *GlDrawTexiOES {
+	return &GlDrawTexiOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
+}
+func NewGlDrawTexivOES(Coords memory.Pointer) *GlDrawTexivOES {
+	return &GlDrawTexivOES{Coords: GLintᶜᵖ{Pointer: Coords}}
+}
+func NewGlDrawTexsOES(X GLshort, Y GLshort, Z GLshort, Width GLshort, Height GLshort) *GlDrawTexsOES {
+	return &GlDrawTexsOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
+}
+func NewGlDrawTexsvOES(Coords memory.Pointer) *GlDrawTexsvOES {
+	return &GlDrawTexsvOES{Coords: GLshortᶜᵖ{Pointer: Coords}}
+}
+func NewGlDrawTexxOES(X GLfixed, Y GLfixed, Z GLfixed, Width GLfixed, Height GLfixed) *GlDrawTexxOES {
+	return &GlDrawTexxOES{X: X, Y: Y, Z: Z, Width: Width, Height: Height}
+}
+func NewGlDrawTexxvOES(Coords memory.Pointer) *GlDrawTexxvOES {
+	return &GlDrawTexxvOES{Coords: GLfixedᶜᵖ{Pointer: Coords}}
+}
+func NewGlEnableClientState(Array GLenum) *GlEnableClientState {
+	return &GlEnableClientState{Array: Array}
+}
+func NewGlFogf(Pname GLenum, Param GLfloat) *GlFogf {
+	return &GlFogf{Pname: Pname, Param: Param}
+}
+func NewGlFogfv(Pname GLenum, Params memory.Pointer) *GlFogfv {
+	return &GlFogfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlFogx(Pname GLenum, Param GLfixed) *GlFogx {
+	return &GlFogx{Pname: Pname, Param: Param}
+}
+func NewGlFogxOES(Pname GLenum, Param GLfixed) *GlFogxOES {
+	return &GlFogxOES{Pname: Pname, Param: Param}
+}
+func NewGlFogxv(Pname GLenum, Param memory.Pointer) *GlFogxv {
+	return &GlFogxv{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlFogxvOES(Pname GLenum, Param memory.Pointer) *GlFogxvOES {
+	return &GlFogxvOES{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlFramebufferRenderbufferOES(Target GLenum, Attachment GLenum, Renderbuffertarget GLenum, Renderbuffer GLuint) *GlFramebufferRenderbufferOES {
+	return &GlFramebufferRenderbufferOES{Target: Target, Attachment: Attachment, Renderbuffertarget: Renderbuffertarget, Renderbuffer: Renderbuffer}
+}
+func NewGlFramebufferTexture2DOES(Target GLenum, Attachment GLenum, Textarget GLenum, Texture TextureId, Level GLint) *GlFramebufferTexture2DOES {
+	return &GlFramebufferTexture2DOES{Target: Target, Attachment: Attachment, Textarget: Textarget, Texture: Texture, Level: Level}
+}
+func NewGlFrustumf(L GLfloat, R GLfloat, B GLfloat, T GLfloat, N GLfloat, F GLfloat) *GlFrustumf {
+	return &GlFrustumf{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlFrustumfOES(L GLfloat, R GLfloat, B GLfloat, T GLfloat, N GLfloat, F GLfloat) *GlFrustumfOES {
+	return &GlFrustumfOES{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlFrustumx(L GLfixed, R GLfixed, B GLfixed, T GLfixed, N GLfixed, F GLfixed) *GlFrustumx {
+	return &GlFrustumx{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlFrustumxOES(L GLfixed, R GLfixed, B GLfixed, T GLfixed, N GLfixed, F GLfixed) *GlFrustumxOES {
+	return &GlFrustumxOES{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlGenFramebuffersOES(N GLsizei, Framebuffers memory.Pointer) *GlGenFramebuffersOES {
+	return &GlGenFramebuffersOES{N: N, Framebuffers: GLuintᵖ{Pointer: Framebuffers}}
+}
+func NewGlGenRenderbuffersOES(N GLsizei, Renderbuffers memory.Pointer) *GlGenRenderbuffersOES {
+	return &GlGenRenderbuffersOES{N: N, Renderbuffers: GLuintᵖ{Pointer: Renderbuffers}}
+}
+func NewGlGenerateMipmapOES(Target GLenum) *GlGenerateMipmapOES {
+	return &GlGenerateMipmapOES{Target: Target}
+}
+func NewGlGetClipPlanef(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanef {
+	return &GlGetClipPlanef{Plane: Plane, Equation: GLfloatᵖ{Pointer: Equation}}
+}
+func NewGlGetClipPlanefOES(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanefOES {
+	return &GlGetClipPlanefOES{Plane: Plane, Equation: GLfloatᵖ{Pointer: Equation}}
+}
+func NewGlGetClipPlanex(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanex {
+	return &GlGetClipPlanex{Plane: Plane, Equation: GLfixedᵖ{Pointer: Equation}}
+}
+func NewGlGetClipPlanexOES(Plane GLenum, Equation memory.Pointer) *GlGetClipPlanexOES {
+	return &GlGetClipPlanexOES{Plane: Plane, Equation: GLfixedᵖ{Pointer: Equation}}
+}
+func NewGlGetFixedv(Pname GLenum, Params memory.Pointer) *GlGetFixedv {
+	return &GlGetFixedv{Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetFixedvOES(Pname GLenum, Params memory.Pointer) *GlGetFixedvOES {
+	return &GlGetFixedvOES{Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetFramebufferAttachmentParameterivOES(Target GLenum, Attachment GLenum, Pname GLenum, Params memory.Pointer) *GlGetFramebufferAttachmentParameterivOES {
+	return &GlGetFramebufferAttachmentParameterivOES{Target: Target, Attachment: Attachment, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+}
+func NewGlGetLightfv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightfv {
+	return &GlGetLightfv{Light: Light, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+}
+func NewGlGetLightxv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightxv {
+	return &GlGetLightxv{Light: Light, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetLightxvOES(Light GLenum, Pname GLenum, Params memory.Pointer) *GlGetLightxvOES {
+	return &GlGetLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetMaterialfv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialfv {
+	return &GlGetMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+}
+func NewGlGetMaterialxv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialxv {
+	return &GlGetMaterialxv{Face: Face, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetMaterialxvOES(Face GLenum, Pname GLenum, Params memory.Pointer) *GlGetMaterialxvOES {
+	return &GlGetMaterialxvOES{Face: Face, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetRenderbufferParameterivOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetRenderbufferParameterivOES {
+	return &GlGetRenderbufferParameterivOES{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+}
+func NewGlGetTexEnvfv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvfv {
+	return &GlGetTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+}
+func NewGlGetTexEnviv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnviv {
+	return &GlGetTexEnviv{Target: Target, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+}
+func NewGlGetTexEnvxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvxv {
+	return &GlGetTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetTexEnvxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexEnvxvOES {
+	return &GlGetTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetTexGenfvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenfvOES {
+	return &GlGetTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᵖ{Pointer: Params}}
+}
+func NewGlGetTexGenivOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenivOES {
+	return &GlGetTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᵖ{Pointer: Params}}
+}
+func NewGlGetTexGenxvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexGenxvOES {
+	return &GlGetTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetTexParameterxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterxv {
+	return &GlGetTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlGetTexParameterxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlGetTexParameterxvOES {
+	return &GlGetTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᵖ{Pointer: Params}}
+}
+func NewGlIsFramebufferOES(Framebuffer GLuint, Result GLboolean) *GlIsFramebufferOES {
+	return &GlIsFramebufferOES{Framebuffer: Framebuffer, Result: Result}
+}
+func NewGlIsRenderbufferOES(Renderbuffer GLuint, Result GLboolean) *GlIsRenderbufferOES {
+	return &GlIsRenderbufferOES{Renderbuffer: Renderbuffer, Result: Result}
+}
+func NewGlLightModelf(Pname GLenum, Param GLfloat) *GlLightModelf {
+	return &GlLightModelf{Pname: Pname, Param: Param}
+}
+func NewGlLightModelfv(Pname GLenum, Params memory.Pointer) *GlLightModelfv {
+	return &GlLightModelfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlLightModelx(Pname GLenum, Param GLfixed) *GlLightModelx {
+	return &GlLightModelx{Pname: Pname, Param: Param}
+}
+func NewGlLightModelxOES(Pname GLenum, Param GLfixed) *GlLightModelxOES {
+	return &GlLightModelxOES{Pname: Pname, Param: Param}
+}
+func NewGlLightModelxv(Pname GLenum, Param memory.Pointer) *GlLightModelxv {
+	return &GlLightModelxv{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlLightModelxvOES(Pname GLenum, Param memory.Pointer) *GlLightModelxvOES {
+	return &GlLightModelxvOES{Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlLightf(Light GLenum, Pname GLenum, Param GLfloat) *GlLightf {
+	return &GlLightf{Light: Light, Pname: Pname, Param: Param}
+}
+func NewGlLightfv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightfv {
+	return &GlLightfv{Light: Light, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlLightx(Light GLenum, Pname GLenum, Param GLfixed) *GlLightx {
+	return &GlLightx{Light: Light, Pname: Pname, Param: Param}
+}
+func NewGlLightxOES(Light GLenum, Pname GLenum, Param GLfixed) *GlLightxOES {
+	return &GlLightxOES{Light: Light, Pname: Pname, Param: Param}
+}
+func NewGlLightxv(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightxv {
+	return &GlLightxv{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlLightxvOES(Light GLenum, Pname GLenum, Params memory.Pointer) *GlLightxvOES {
+	return &GlLightxvOES{Light: Light, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlLineWidthx(Width GLfixed) *GlLineWidthx {
+	return &GlLineWidthx{Width: Width}
+}
+func NewGlLineWidthxOES(Width GLfixed) *GlLineWidthxOES {
+	return &GlLineWidthxOES{Width: Width}
+}
+func NewGlLoadIdentity() *GlLoadIdentity {
+	return &GlLoadIdentity{}
+}
+func NewGlLoadMatrixf(M memory.Pointer) *GlLoadMatrixf {
+	return &GlLoadMatrixf{M: GLfloatᶜᵖ{Pointer: M}}
+}
+func NewGlLoadMatrixx(M memory.Pointer) *GlLoadMatrixx {
+	return &GlLoadMatrixx{M: GLfixedᶜᵖ{Pointer: M}}
+}
+func NewGlLoadMatrixxOES(M memory.Pointer) *GlLoadMatrixxOES {
+	return &GlLoadMatrixxOES{M: GLfixedᶜᵖ{Pointer: M}}
+}
+func NewGlLoadPaletteFromModelViewMatrixOES() *GlLoadPaletteFromModelViewMatrixOES {
+	return &GlLoadPaletteFromModelViewMatrixOES{}
+}
+func NewGlLogicOp(Opcode GLenum) *GlLogicOp {
+	return &GlLogicOp{Opcode: Opcode}
+}
+func NewGlMaterialf(Face GLenum, Pname GLenum, Param GLfloat) *GlMaterialf {
+	return &GlMaterialf{Face: Face, Pname: Pname, Param: Param}
+}
+func NewGlMaterialfv(Face GLenum, Pname GLenum, Params memory.Pointer) *GlMaterialfv {
+	return &GlMaterialfv{Face: Face, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlMaterialx(Face GLenum, Pname GLenum, Param GLfixed) *GlMaterialx {
+	return &GlMaterialx{Face: Face, Pname: Pname, Param: Param}
+}
+func NewGlMaterialxOES(Face GLenum, Pname GLenum, Param GLfixed) *GlMaterialxOES {
+	return &GlMaterialxOES{Face: Face, Pname: Pname, Param: Param}
+}
+func NewGlMaterialxv(Face GLenum, Pname GLenum, Param memory.Pointer) *GlMaterialxv {
+	return &GlMaterialxv{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlMaterialxvOES(Face GLenum, Pname GLenum, Param memory.Pointer) *GlMaterialxvOES {
+	return &GlMaterialxvOES{Face: Face, Pname: Pname, Param: GLfixedᶜᵖ{Pointer: Param}}
+}
+func NewGlMatrixIndexPointerOES(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlMatrixIndexPointerOES {
+	return &GlMatrixIndexPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlMatrixMode(Mode GLenum) *GlMatrixMode {
+	return &GlMatrixMode{Mode: Mode}
+}
+func NewGlMultMatrixf(M memory.Pointer) *GlMultMatrixf {
+	return &GlMultMatrixf{M: GLfloatᶜᵖ{Pointer: M}}
+}
+func NewGlMultMatrixx(M memory.Pointer) *GlMultMatrixx {
+	return &GlMultMatrixx{M: GLfixedᶜᵖ{Pointer: M}}
+}
+func NewGlMultMatrixxOES(M memory.Pointer) *GlMultMatrixxOES {
+	return &GlMultMatrixxOES{M: GLfixedᶜᵖ{Pointer: M}}
+}
+func NewGlMultiTexCoord4f(Target GLenum, V0 GLfloat, V1 GLfloat, V2 GLfloat, V3 GLfloat) *GlMultiTexCoord4f {
+	return &GlMultiTexCoord4f{Target: Target, V0: V0, V1: V1, V2: V2, V3: V3}
+}
+func NewGlMultiTexCoord4x(Texture GLenum, V0 GLfixed, V1 GLfixed, V2 GLfixed, V3 GLfixed) *GlMultiTexCoord4x {
+	return &GlMultiTexCoord4x{Texture: Texture, V0: V0, V1: V1, V2: V2, V3: V3}
+}
+func NewGlMultiTexCoord4xOES(Texture GLenum, V0 GLfixed, V1 GLfixed, V2 GLfixed, V3 GLfixed) *GlMultiTexCoord4xOES {
+	return &GlMultiTexCoord4xOES{Texture: Texture, V0: V0, V1: V1, V2: V2, V3: V3}
+}
+func NewGlNormal3f(Nx GLfloat, Ny GLfloat, Nz GLfloat) *GlNormal3f {
+	return &GlNormal3f{Nx: Nx, Ny: Ny, Nz: Nz}
+}
+func NewGlNormal3x(Nx GLfixed, Ny GLfixed, Nz GLfixed) *GlNormal3x {
+	return &GlNormal3x{Nx: Nx, Ny: Ny, Nz: Nz}
+}
+func NewGlNormal3xOES(Nx GLfixed, Ny GLfixed, Nz GLfixed) *GlNormal3xOES {
+	return &GlNormal3xOES{Nx: Nx, Ny: Ny, Nz: Nz}
+}
+func NewGlNormalPointer(Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlNormalPointer {
+	return &GlNormalPointer{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlOrthof(L GLfloat, R GLfloat, B GLfloat, T GLfloat, N GLfloat, F GLfloat) *GlOrthof {
+	return &GlOrthof{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlOrthofOES(L GLfloat, R GLfloat, B GLfloat, T GLfloat, N GLfloat, F GLfloat) *GlOrthofOES {
+	return &GlOrthofOES{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlOrthox(L GLfixed, R GLfixed, B GLfixed, T GLfixed, N GLfixed, F GLfixed) *GlOrthox {
+	return &GlOrthox{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlOrthoxOES(L GLfixed, R GLfixed, B GLfixed, T GLfixed, N GLfixed, F GLfixed) *GlOrthoxOES {
+	return &GlOrthoxOES{L: L, R: R, B: B, T: T, N: N, F: F}
+}
+func NewGlPointParameterf(Pname GLenum, Param GLfloat) *GlPointParameterf {
+	return &GlPointParameterf{Pname: Pname, Param: Param}
+}
+func NewGlPointParameterfv(Pname GLenum, Params memory.Pointer) *GlPointParameterfv {
+	return &GlPointParameterfv{Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlPointParameterx(Pname GLenum, Param GLfixed) *GlPointParameterx {
+	return &GlPointParameterx{Pname: Pname, Param: Param}
+}
+func NewGlPointParameterxOES(Pname GLenum, Param GLfixed) *GlPointParameterxOES {
+	return &GlPointParameterxOES{Pname: Pname, Param: Param}
+}
+func NewGlPointParameterxv(Pname GLenum, Params memory.Pointer) *GlPointParameterxv {
+	return &GlPointParameterxv{Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlPointParameterxvOES(Pname GLenum, Params memory.Pointer) *GlPointParameterxvOES {
+	return &GlPointParameterxvOES{Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlPointSize(Size GLfloat) *GlPointSize {
+	return &GlPointSize{Size: Size}
+}
+func NewGlPointSizePointerOES(Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlPointSizePointerOES {
+	return &GlPointSizePointerOES{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlPointSizex(Size GLfixed) *GlPointSizex {
+	return &GlPointSizex{Size: Size}
+}
+func NewGlPointSizexOES(Size GLfixed) *GlPointSizexOES {
+	return &GlPointSizexOES{Size: Size}
+}
+func NewGlPolygonOffsetx(Factor GLfixed, Units GLfixed) *GlPolygonOffsetx {
+	return &GlPolygonOffsetx{Factor: Factor, Units: Units}
+}
+func NewGlPolygonOffsetxOES(Factor GLfixed, Units GLfixed) *GlPolygonOffsetxOES {
+	return &GlPolygonOffsetxOES{Factor: Factor, Units: Units}
+}
+func NewGlPopMatrix() *GlPopMatrix {
+	return &GlPopMatrix{}
+}
+func NewGlPushMatrix() *GlPushMatrix {
+	return &GlPushMatrix{}
+}
+func NewGlQueryMatrixxOES(Mantissa memory.Pointer, Exponent memory.Pointer, Result GLbitfield) *GlQueryMatrixxOES {
+	return &GlQueryMatrixxOES{Mantissa: GLfixedᵖ{Pointer: Mantissa}, Exponent: GLintᵖ{Pointer: Exponent}, Result: Result}
+}
+func NewGlRenderbufferStorageOES(Target GLenum, Internalformat GLenum, Width GLsizei, Height GLsizei) *GlRenderbufferStorageOES {
+	return &GlRenderbufferStorageOES{Target: Target, Internalformat: Internalformat, Width: Width, Height: Height}
+}
+func NewGlRotatef(Angle GLfloat, X GLfloat, Y GLfloat, Z GLfloat) *GlRotatef {
+	return &GlRotatef{Angle: Angle, X: X, Y: Y, Z: Z}
+}
+func NewGlRotatex(Angle GLfixed, X GLfixed, Y GLfixed, Z GLfixed) *GlRotatex {
+	return &GlRotatex{Angle: Angle, X: X, Y: Y, Z: Z}
+}
+func NewGlRotatexOES(Angle GLfixed, X GLfixed, Y GLfixed, Z GLfixed) *GlRotatexOES {
+	return &GlRotatexOES{Angle: Angle, X: X, Y: Y, Z: Z}
+}
+func NewGlSampleCoveragex(Value GLclampx, Invert GLboolean) *GlSampleCoveragex {
+	return &GlSampleCoveragex{Value: Value, Invert: Invert}
+}
+func NewGlSampleCoveragexOES(Value GLclampx, Invert GLboolean) *GlSampleCoveragexOES {
+	return &GlSampleCoveragexOES{Value: Value, Invert: Invert}
+}
+func NewGlScalef(X GLfloat, Y GLfloat, Z GLfloat) *GlScalef {
+	return &GlScalef{X: X, Y: Y, Z: Z}
+}
+func NewGlScalex(X GLfixed, Y GLfixed, Z GLfixed) *GlScalex {
+	return &GlScalex{X: X, Y: Y, Z: Z}
+}
+func NewGlScalexOES(X GLfixed, Y GLfixed, Z GLfixed) *GlScalexOES {
+	return &GlScalexOES{X: X, Y: Y, Z: Z}
+}
+func NewGlShadeModel(Mode GLenum) *GlShadeModel {
+	return &GlShadeModel{Mode: Mode}
+}
+func NewGlTexCoordPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlTexCoordPointer {
+	return &GlTexCoordPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlTexEnvf(Target GLenum, Pname GLenum, Param GLfloat) *GlTexEnvf {
+	return &GlTexEnvf{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexEnvfv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvfv {
+	return &GlTexEnvfv{Target: Target, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlTexEnvi(Target GLenum, Pname GLenum, Param GLint) *GlTexEnvi {
+	return &GlTexEnvi{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexEnviv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnviv {
+	return &GlTexEnviv{Target: Target, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+}
+func NewGlTexEnvx(Target GLenum, Pname GLenum, Param GLfixed) *GlTexEnvx {
+	return &GlTexEnvx{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexEnvxOES(Target GLenum, Pname GLenum, Param GLfixed) *GlTexEnvxOES {
+	return &GlTexEnvxOES{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexEnvxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvxv {
+	return &GlTexEnvxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlTexEnvxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexEnvxvOES {
+	return &GlTexEnvxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlTexGenfOES(Coord GLenum, Pname GLenum, Param GLfloat) *GlTexGenfOES {
+	return &GlTexGenfOES{Coord: Coord, Pname: Pname, Param: Param}
+}
+func NewGlTexGenfvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenfvOES {
+	return &GlTexGenfvOES{Coord: Coord, Pname: Pname, Params: GLfloatᶜᵖ{Pointer: Params}}
+}
+func NewGlTexGeniOES(Coord GLenum, Pname GLenum, Param GLint) *GlTexGeniOES {
+	return &GlTexGeniOES{Coord: Coord, Pname: Pname, Param: Param}
+}
+func NewGlTexGenivOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenivOES {
+	return &GlTexGenivOES{Coord: Coord, Pname: Pname, Params: GLintᶜᵖ{Pointer: Params}}
+}
+func NewGlTexGenxOES(Coord GLenum, Pname GLenum, Param GLfixed) *GlTexGenxOES {
+	return &GlTexGenxOES{Coord: Coord, Pname: Pname, Param: Param}
+}
+func NewGlTexGenxvOES(Coord GLenum, Pname GLenum, Params memory.Pointer) *GlTexGenxvOES {
+	return &GlTexGenxvOES{Coord: Coord, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlTexParameterx(Target GLenum, Pname GLenum, Param GLfixed) *GlTexParameterx {
+	return &GlTexParameterx{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexParameterxOES(Target GLenum, Pname GLenum, Param GLfixed) *GlTexParameterxOES {
+	return &GlTexParameterxOES{Target: Target, Pname: Pname, Param: Param}
+}
+func NewGlTexParameterxv(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterxv {
+	return &GlTexParameterxv{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlTexParameterxvOES(Target GLenum, Pname GLenum, Params memory.Pointer) *GlTexParameterxvOES {
+	return &GlTexParameterxvOES{Target: Target, Pname: Pname, Params: GLfixedᶜᵖ{Pointer: Params}}
+}
+func NewGlTranslatef(X GLfloat, Y GLfloat, Z GLfloat) *GlTranslatef {
+	return &GlTranslatef{X: X, Y: Y, Z: Z}
+}
+func NewGlTranslatex(X GLfixed, Y GLfixed, Z GLfixed) *GlTranslatex {
+	return &GlTranslatex{X: X, Y: Y, Z: Z}
+}
+func NewGlTranslatexOES(X GLfixed, Y GLfixed, Z GLfixed) *GlTranslatexOES {
+	return &GlTranslatexOES{X: X, Y: Y, Z: Z}
+}
+func NewGlVertexPointer(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlVertexPointer {
+	return &GlVertexPointer{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlWeightPointerOES(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer) *GlWeightPointerOES {
+	return &GlWeightPointerOES{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}}
+}
+func NewGlColorPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlColorPointerBounds {
+	return &GlColorPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlNormalPointerBounds(Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlNormalPointerBounds {
+	return &GlNormalPointerBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlTexCoordPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlTexCoordPointerBounds {
+	return &GlTexCoordPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlVertexPointerBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlVertexPointerBounds {
+	return &GlVertexPointerBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlPointSizePointerOESBounds(Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlPointSizePointerOESBounds {
+	return &GlPointSizePointerOESBounds{Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlMatrixIndexPointerOESBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlMatrixIndexPointerOESBounds {
+	return &GlMatrixIndexPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
+}
+func NewGlWeightPointerOESBounds(Size GLint, Type GLenum, Stride GLsizei, Pointer memory.Pointer, Count GLsizei) *GlWeightPointerOESBounds {
+	return &GlWeightPointerOESBounds{Size: Size, Type: Type, Stride: Stride, Pointer: Voidᶜᵖ{Pointer: Pointer}, Count: Count}
 }
 func NewArchitecture(Pointer_alignment uint32, Pointer_size uint32, Integer_size uint32, Little_endian bool) *Architecture {
 	return &Architecture{PointerAlignment: Pointer_alignment, PointerSize: Pointer_size, IntegerSize: Integer_size, LittleEndian: Little_endian}

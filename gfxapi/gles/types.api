@@ -34,6 +34,7 @@ type u16   GLhalf // 16 bit floating-point number encoded as a unsigned 16 bit i
 type f32   GLfloat // 32 bit floating-point number.
 type f32   GLclampf // 32 bit floating-point value clamped to [0, 1]
 type void  GLvoid // Void type.
+type s32   GLclampx // GLES 1.0 fixed point
 
 @replay_remap type u64          GLsync // Sync object handle.
 @replay_custom_value type void* GLeglImageOES

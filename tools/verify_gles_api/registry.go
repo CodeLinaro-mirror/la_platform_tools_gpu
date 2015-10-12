@@ -195,7 +195,7 @@ func (r *Registry) GetVersions(api KhronosAPI, name string) []Version {
 	if found {
 		switch version {
 		case "1.0":
-			return []Version{"1.0", "1.1"}
+			return []Version{"1.0"}
 		case "2.0":
 			return []Version{"2.0", "3.0", "3.1", "3.2"}
 		case "3.0":
@@ -236,12 +236,12 @@ ExtensionLoop:
 	return extensions
 }
 
-var sufix_re = regexp.MustCompile("(64|)(i_|)(I|)([1-4]|[1-4]x[1-4]|)(f|i|ui|fi|i64|)(v|)$")
+var sufix_re = regexp.MustCompile("(64|)(i_|)(I|)([1-4]|[1-4]x[1-4]|)(x|ub|f|i|ui|fi|i64|)(v|)$")
 
 func GetCoreManpage(version Version, cmdName string) (url string, data []byte) {
 	var urlFormat string
 	switch version {
-	case "1.1":
+	case "1.0":
 		urlFormat = "https://www.khronos.org/opengles/sdk/1.1/docs/man/%s.xml"
 	case "2.0":
 		urlFormat = "https://www.khronos.org/opengles/sdk/docs/man/xhtml/%s.xml"
@@ -259,6 +259,7 @@ func GetCoreManpage(version Version, cmdName string) (url string, data []byte) {
 		{"glDisable", "glEnable"},
 		{"glEnd", "glBegin"},
 		{"glGetBoolean", "glGet"},
+		{"glGetFixed", "glGet"},
 		{"glGetFloat", "glGet"},
 		{"glGetInteger", "glGet"},
 		{"glGetnUniform", "glGetUniform"},

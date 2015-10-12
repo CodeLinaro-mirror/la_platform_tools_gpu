@@ -111,6 +111,9 @@ func init() {
 	Namespace.Add((*GLeglImageOES)(nil).Class())
 	Namespace.Add((*GLenumˢ)(nil).Class())
 	Namespace.Add((*GLenumᶜᵖ)(nil).Class())
+	Namespace.Add((*GLfixedˢ)(nil).Class())
+	Namespace.Add((*GLfixedᵖ)(nil).Class())
+	Namespace.Add((*GLfixedᶜᵖ)(nil).Class())
 	Namespace.Add((*GLfloatː2ᵃ)(nil).Class())
 	Namespace.Add((*GLfloatː3ᵃ)(nil).Class())
 	Namespace.Add((*GLfloatː4ᵃ)(nil).Class())
@@ -123,6 +126,9 @@ func init() {
 	Namespace.Add((*GLintː4ᵃ)(nil).Class())
 	Namespace.Add((*GLintᵖ)(nil).Class())
 	Namespace.Add((*GLintᶜᵖ)(nil).Class())
+	Namespace.Add((*GLshortˢ)(nil).Class())
+	Namespace.Add((*GLshortᵖ)(nil).Class())
+	Namespace.Add((*GLshortᶜᵖ)(nil).Class())
 	Namespace.Add((*GLsizeiˢ)(nil).Class())
 	Namespace.Add((*GLsizeiᵖ)(nil).Class())
 	Namespace.Add((*GLsizeiᶜᵖ)(nil).Class())
@@ -143,7 +149,10 @@ func init() {
 	Namespace.Add((*GlActiveShaderProgram)(nil).Class())
 	Namespace.Add((*GlActiveShaderProgramEXT)(nil).Class())
 	Namespace.Add((*GlActiveTexture)(nil).Class())
+	Namespace.Add((*GlAlphaFunc)(nil).Class())
 	Namespace.Add((*GlAlphaFuncQCOM)(nil).Class())
+	Namespace.Add((*GlAlphaFuncx)(nil).Class())
+	Namespace.Add((*GlAlphaFuncxOES)(nil).Class())
 	Namespace.Add((*GlApplyFramebufferAttachmentCMAAINTEL)(nil).Class())
 	Namespace.Add((*GlAttachShader)(nil).Class())
 	Namespace.Add((*GlBeginConditionalRenderNV)(nil).Class())
@@ -159,10 +168,12 @@ func init() {
 	Namespace.Add((*GlBindFragDataLocationEXT)(nil).Class())
 	Namespace.Add((*GlBindFragDataLocationIndexedEXT)(nil).Class())
 	Namespace.Add((*GlBindFramebuffer)(nil).Class())
+	Namespace.Add((*GlBindFramebufferOES)(nil).Class())
 	Namespace.Add((*GlBindImageTexture)(nil).Class())
 	Namespace.Add((*GlBindProgramPipeline)(nil).Class())
 	Namespace.Add((*GlBindProgramPipelineEXT)(nil).Class())
 	Namespace.Add((*GlBindRenderbuffer)(nil).Class())
+	Namespace.Add((*GlBindRenderbufferOES)(nil).Class())
 	Namespace.Add((*GlBindSampler)(nil).Class())
 	Namespace.Add((*GlBindTexture)(nil).Class())
 	Namespace.Add((*GlBindTransformFeedback)(nil).Class())
@@ -174,7 +185,9 @@ func init() {
 	Namespace.Add((*GlBlendBarrierNV)(nil).Class())
 	Namespace.Add((*GlBlendColor)(nil).Class())
 	Namespace.Add((*GlBlendEquation)(nil).Class())
+	Namespace.Add((*GlBlendEquationOES)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparate)(nil).Class())
+	Namespace.Add((*GlBlendEquationSeparateOES)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparatei)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparateiEXT)(nil).Class())
 	Namespace.Add((*GlBlendEquationSeparateiOES)(nil).Class())
@@ -183,6 +196,7 @@ func init() {
 	Namespace.Add((*GlBlendEquationiOES)(nil).Class())
 	Namespace.Add((*GlBlendFunc)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparate)(nil).Class())
+	Namespace.Add((*GlBlendFuncSeparateOES)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparatei)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparateiEXT)(nil).Class())
 	Namespace.Add((*GlBlendFuncSeparateiOES)(nil).Class())
@@ -198,20 +212,39 @@ func init() {
 	Namespace.Add((*GlBufferStorageEXT)(nil).Class())
 	Namespace.Add((*GlBufferSubData)(nil).Class())
 	Namespace.Add((*GlCheckFramebufferStatus)(nil).Class())
+	Namespace.Add((*GlCheckFramebufferStatusOES)(nil).Class())
 	Namespace.Add((*GlClear)(nil).Class())
 	Namespace.Add((*GlClearBufferfi)(nil).Class())
 	Namespace.Add((*GlClearBufferfv)(nil).Class())
 	Namespace.Add((*GlClearBufferiv)(nil).Class())
 	Namespace.Add((*GlClearBufferuiv)(nil).Class())
 	Namespace.Add((*GlClearColor)(nil).Class())
+	Namespace.Add((*GlClearColorx)(nil).Class())
+	Namespace.Add((*GlClearColorxOES)(nil).Class())
 	Namespace.Add((*GlClearDepthf)(nil).Class())
+	Namespace.Add((*GlClearDepthfOES)(nil).Class())
+	Namespace.Add((*GlClearDepthx)(nil).Class())
+	Namespace.Add((*GlClearDepthxOES)(nil).Class())
 	Namespace.Add((*GlClearStencil)(nil).Class())
+	Namespace.Add((*GlClientActiveTexture)(nil).Class())
 	Namespace.Add((*GlClientWaitSync)(nil).Class())
 	Namespace.Add((*GlClientWaitSyncAPPLE)(nil).Class())
+	Namespace.Add((*GlClipPlanef)(nil).Class())
+	Namespace.Add((*GlClipPlanefIMG)(nil).Class())
+	Namespace.Add((*GlClipPlanefOES)(nil).Class())
+	Namespace.Add((*GlClipPlanex)(nil).Class())
+	Namespace.Add((*GlClipPlanexIMG)(nil).Class())
+	Namespace.Add((*GlClipPlanexOES)(nil).Class())
+	Namespace.Add((*GlColor4f)(nil).Class())
+	Namespace.Add((*GlColor4ub)(nil).Class())
+	Namespace.Add((*GlColor4x)(nil).Class())
+	Namespace.Add((*GlColor4xOES)(nil).Class())
 	Namespace.Add((*GlColorMask)(nil).Class())
 	Namespace.Add((*GlColorMaski)(nil).Class())
 	Namespace.Add((*GlColorMaskiEXT)(nil).Class())
 	Namespace.Add((*GlColorMaskiOES)(nil).Class())
+	Namespace.Add((*GlColorPointer)(nil).Class())
+	Namespace.Add((*GlColorPointerBounds)(nil).Class())
 	Namespace.Add((*GlCompileShader)(nil).Class())
 	Namespace.Add((*TexturePointer)(nil).Class())
 	Namespace.Add((*GlCompressedTexImage2D)(nil).Class())
@@ -245,6 +278,7 @@ func init() {
 	Namespace.Add((*GlCreateShaderProgramv)(nil).Class())
 	Namespace.Add((*GlCreateShaderProgramvEXT)(nil).Class())
 	Namespace.Add((*GlCullFace)(nil).Class())
+	Namespace.Add((*GlCurrentPaletteMatrixOES)(nil).Class())
 	Namespace.Add((*GlDebugMessageCallback)(nil).Class())
 	Namespace.Add((*GlDebugMessageCallbackKHR)(nil).Class())
 	Namespace.Add((*GlDebugMessageControl)(nil).Class())
@@ -254,6 +288,7 @@ func init() {
 	Namespace.Add((*GlDeleteBuffers)(nil).Class())
 	Namespace.Add((*GlDeleteFencesNV)(nil).Class())
 	Namespace.Add((*GlDeleteFramebuffers)(nil).Class())
+	Namespace.Add((*GlDeleteFramebuffersOES)(nil).Class())
 	Namespace.Add((*GlDeletePathsNV)(nil).Class())
 	Namespace.Add((*GlDeletePerfMonitorsAMD)(nil).Class())
 	Namespace.Add((*GlDeletePerfQueryINTEL)(nil).Class())
@@ -266,6 +301,7 @@ func init() {
 	Namespace.Add((*GlDeleteQueriesEXT)(nil).Class())
 	Namespace.Add((*RenderbufferIdᶜᵖ)(nil).Class())
 	Namespace.Add((*GlDeleteRenderbuffers)(nil).Class())
+	Namespace.Add((*GlDeleteRenderbuffersOES)(nil).Class())
 	Namespace.Add((*SamplerIdᶜᵖ)(nil).Class())
 	Namespace.Add((*GlDeleteSamplers)(nil).Class())
 	Namespace.Add((*GlDeleteShader)(nil).Class())
@@ -283,8 +319,12 @@ func init() {
 	Namespace.Add((*GlDepthRangeArrayfvNV)(nil).Class())
 	Namespace.Add((*GlDepthRangeIndexedfNV)(nil).Class())
 	Namespace.Add((*GlDepthRangef)(nil).Class())
+	Namespace.Add((*GlDepthRangefOES)(nil).Class())
+	Namespace.Add((*GlDepthRangex)(nil).Class())
+	Namespace.Add((*GlDepthRangexOES)(nil).Class())
 	Namespace.Add((*GlDetachShader)(nil).Class())
 	Namespace.Add((*GlDisable)(nil).Class())
+	Namespace.Add((*GlDisableClientState)(nil).Class())
 	Namespace.Add((*GlDisableDriverControlQCOM)(nil).Class())
 	Namespace.Add((*GlDisableVertexAttribArray)(nil).Class())
 	Namespace.Add((*GlDisablei)(nil).Class())
@@ -324,9 +364,18 @@ func init() {
 	Namespace.Add((*GlDrawRangeElementsBaseVertex)(nil).Class())
 	Namespace.Add((*GlDrawRangeElementsBaseVertexEXT)(nil).Class())
 	Namespace.Add((*GlDrawRangeElementsBaseVertexOES)(nil).Class())
+	Namespace.Add((*GlDrawTexfOES)(nil).Class())
+	Namespace.Add((*GlDrawTexfvOES)(nil).Class())
+	Namespace.Add((*GlDrawTexiOES)(nil).Class())
+	Namespace.Add((*GlDrawTexivOES)(nil).Class())
+	Namespace.Add((*GlDrawTexsOES)(nil).Class())
+	Namespace.Add((*GlDrawTexsvOES)(nil).Class())
+	Namespace.Add((*GlDrawTexxOES)(nil).Class())
+	Namespace.Add((*GlDrawTexxvOES)(nil).Class())
 	Namespace.Add((*GlEGLImageTargetRenderbufferStorageOES)(nil).Class())
 	Namespace.Add((*GlEGLImageTargetTexture2DOES)(nil).Class())
 	Namespace.Add((*GlEnable)(nil).Class())
+	Namespace.Add((*GlEnableClientState)(nil).Class())
 	Namespace.Add((*GlEnableDriverControlQCOM)(nil).Class())
 	Namespace.Add((*GlEnableVertexAttribArray)(nil).Class())
 	Namespace.Add((*GlEnablei)(nil).Class())
@@ -364,9 +413,16 @@ func init() {
 	Namespace.Add((*GlFlush)(nil).Class())
 	Namespace.Add((*GlFlushMappedBufferRange)(nil).Class())
 	Namespace.Add((*GlFlushMappedBufferRangeEXT)(nil).Class())
+	Namespace.Add((*GlFogf)(nil).Class())
+	Namespace.Add((*GlFogfv)(nil).Class())
+	Namespace.Add((*GlFogx)(nil).Class())
+	Namespace.Add((*GlFogxOES)(nil).Class())
+	Namespace.Add((*GlFogxv)(nil).Class())
+	Namespace.Add((*GlFogxvOES)(nil).Class())
 	Namespace.Add((*GlFragmentCoverageColorNV)(nil).Class())
 	Namespace.Add((*GlFramebufferParameteri)(nil).Class())
 	Namespace.Add((*GlFramebufferRenderbuffer)(nil).Class())
+	Namespace.Add((*GlFramebufferRenderbufferOES)(nil).Class())
 	Namespace.Add((*GlFramebufferSampleLocationsfvNV)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture)(nil).Class())
 	Namespace.Add((*GlFramebufferTexture2D)(nil).Class())
@@ -379,9 +435,14 @@ func init() {
 	Namespace.Add((*GlFramebufferTextureMultiviewOVR)(nil).Class())
 	Namespace.Add((*GlFramebufferTextureOES)(nil).Class())
 	Namespace.Add((*GlFrontFace)(nil).Class())
+	Namespace.Add((*GlFrustumf)(nil).Class())
+	Namespace.Add((*GlFrustumfOES)(nil).Class())
+	Namespace.Add((*GlFrustumx)(nil).Class())
+	Namespace.Add((*GlFrustumxOES)(nil).Class())
 	Namespace.Add((*GlGenBuffers)(nil).Class())
 	Namespace.Add((*GlGenFencesNV)(nil).Class())
 	Namespace.Add((*GlGenFramebuffers)(nil).Class())
+	Namespace.Add((*GlGenFramebuffersOES)(nil).Class())
 	Namespace.Add((*GlGenPathsNV)(nil).Class())
 	Namespace.Add((*GlGenPerfMonitorsAMD)(nil).Class())
 	Namespace.Add((*PipelineIdᵖ)(nil).Class())
@@ -391,6 +452,7 @@ func init() {
 	Namespace.Add((*GlGenQueries)(nil).Class())
 	Namespace.Add((*GlGenQueriesEXT)(nil).Class())
 	Namespace.Add((*GlGenRenderbuffers)(nil).Class())
+	Namespace.Add((*GlGenRenderbuffersOES)(nil).Class())
 	Namespace.Add((*SamplerIdᵖ)(nil).Class())
 	Namespace.Add((*GlGenSamplers)(nil).Class())
 	Namespace.Add((*GlGenTextures)(nil).Class())
@@ -400,6 +462,7 @@ func init() {
 	Namespace.Add((*GlGenVertexArrays)(nil).Class())
 	Namespace.Add((*GlGenVertexArraysOES)(nil).Class())
 	Namespace.Add((*GlGenerateMipmap)(nil).Class())
+	Namespace.Add((*GlGenerateMipmapOES)(nil).Class())
 	Namespace.Add((*GlGetActiveAttrib)(nil).Class())
 	Namespace.Add((*GlGetActiveUniform)(nil).Class())
 	Namespace.Add((*GlGetActiveUniformBlockName)(nil).Class())
@@ -414,6 +477,10 @@ func init() {
 	Namespace.Add((*GlGetBufferParameteriv)(nil).Class())
 	Namespace.Add((*GlGetBufferPointerv)(nil).Class())
 	Namespace.Add((*GlGetBufferPointervOES)(nil).Class())
+	Namespace.Add((*GlGetClipPlanef)(nil).Class())
+	Namespace.Add((*GlGetClipPlanefOES)(nil).Class())
+	Namespace.Add((*GlGetClipPlanex)(nil).Class())
+	Namespace.Add((*GlGetClipPlanexOES)(nil).Class())
 	Namespace.Add((*GlGetCoverageModulationTableNV)(nil).Class())
 	Namespace.Add((*GlGetDebugMessageLog)(nil).Class())
 	Namespace.Add((*GlGetDebugMessageLogKHR)(nil).Class())
@@ -422,11 +489,14 @@ func init() {
 	Namespace.Add((*GlGetError)(nil).Class())
 	Namespace.Add((*GlGetFenceivNV)(nil).Class())
 	Namespace.Add((*GlGetFirstPerfQueryIdINTEL)(nil).Class())
+	Namespace.Add((*GlGetFixedv)(nil).Class())
+	Namespace.Add((*GlGetFixedvOES)(nil).Class())
 	Namespace.Add((*GlGetFloati_vNV)(nil).Class())
 	Namespace.Add((*GlGetFloatv)(nil).Class())
 	Namespace.Add((*GlGetFragDataIndexEXT)(nil).Class())
 	Namespace.Add((*GlGetFragDataLocation)(nil).Class())
 	Namespace.Add((*GlGetFramebufferAttachmentParameteriv)(nil).Class())
+	Namespace.Add((*GlGetFramebufferAttachmentParameterivOES)(nil).Class())
 	Namespace.Add((*GlGetFramebufferParameteriv)(nil).Class())
 	Namespace.Add((*GlGetGraphicsResetStatus)(nil).Class())
 	Namespace.Add((*GlGetGraphicsResetStatusEXT)(nil).Class())
@@ -440,6 +510,12 @@ func init() {
 	Namespace.Add((*GlGetIntegerv)(nil).Class())
 	Namespace.Add((*GlGetInternalformatSampleivNV)(nil).Class())
 	Namespace.Add((*GlGetInternalformativ)(nil).Class())
+	Namespace.Add((*GlGetLightfv)(nil).Class())
+	Namespace.Add((*GlGetLightxv)(nil).Class())
+	Namespace.Add((*GlGetLightxvOES)(nil).Class())
+	Namespace.Add((*GlGetMaterialfv)(nil).Class())
+	Namespace.Add((*GlGetMaterialxv)(nil).Class())
+	Namespace.Add((*GlGetMaterialxvOES)(nil).Class())
 	Namespace.Add((*GlGetMultisamplefv)(nil).Class())
 	Namespace.Add((*GlGetNextPerfQueryIdINTEL)(nil).Class())
 	Namespace.Add((*GlGetObjectLabel)(nil).Class())
@@ -495,6 +571,7 @@ func init() {
 	Namespace.Add((*GlGetQueryiv)(nil).Class())
 	Namespace.Add((*GlGetQueryivEXT)(nil).Class())
 	Namespace.Add((*GlGetRenderbufferParameteriv)(nil).Class())
+	Namespace.Add((*GlGetRenderbufferParameterivOES)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIiv)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIivEXT)(nil).Class())
 	Namespace.Add((*GlGetSamplerParameterIivOES)(nil).Class())
@@ -511,6 +588,13 @@ func init() {
 	Namespace.Add((*GlGetStringi)(nil).Class())
 	Namespace.Add((*GlGetSynciv)(nil).Class())
 	Namespace.Add((*GlGetSyncivAPPLE)(nil).Class())
+	Namespace.Add((*GlGetTexEnvfv)(nil).Class())
+	Namespace.Add((*GlGetTexEnviv)(nil).Class())
+	Namespace.Add((*GlGetTexEnvxv)(nil).Class())
+	Namespace.Add((*GlGetTexEnvxvOES)(nil).Class())
+	Namespace.Add((*GlGetTexGenfvOES)(nil).Class())
+	Namespace.Add((*GlGetTexGenivOES)(nil).Class())
+	Namespace.Add((*GlGetTexGenxvOES)(nil).Class())
 	Namespace.Add((*GlGetTexLevelParameterfv)(nil).Class())
 	Namespace.Add((*GlGetTexLevelParameteriv)(nil).Class())
 	Namespace.Add((*GlGetTexParameterIiv)(nil).Class())
@@ -521,6 +605,8 @@ func init() {
 	Namespace.Add((*GlGetTexParameterIuivOES)(nil).Class())
 	Namespace.Add((*GlGetTexParameterfv)(nil).Class())
 	Namespace.Add((*GlGetTexParameteriv)(nil).Class())
+	Namespace.Add((*GlGetTexParameterxv)(nil).Class())
+	Namespace.Add((*GlGetTexParameterxvOES)(nil).Class())
 	Namespace.Add((*GlGetTextureHandleNV)(nil).Class())
 	Namespace.Add((*GlGetTextureSamplerHandleNV)(nil).Class())
 	Namespace.Add((*GlGetTransformFeedbackVarying)(nil).Class())
@@ -558,6 +644,7 @@ func init() {
 	Namespace.Add((*GlIsEnablediOES)(nil).Class())
 	Namespace.Add((*GlIsFenceNV)(nil).Class())
 	Namespace.Add((*GlIsFramebuffer)(nil).Class())
+	Namespace.Add((*GlIsFramebufferOES)(nil).Class())
 	Namespace.Add((*GlIsImageHandleResidentNV)(nil).Class())
 	Namespace.Add((*GlIsPathNV)(nil).Class())
 	Namespace.Add((*GlIsPointInFillPathNV)(nil).Class())
@@ -568,6 +655,7 @@ func init() {
 	Namespace.Add((*GlIsQuery)(nil).Class())
 	Namespace.Add((*GlIsQueryEXT)(nil).Class())
 	Namespace.Add((*GlIsRenderbuffer)(nil).Class())
+	Namespace.Add((*GlIsRenderbufferOES)(nil).Class())
 	Namespace.Add((*GlIsSampler)(nil).Class())
 	Namespace.Add((*GlIsShader)(nil).Class())
 	Namespace.Add((*GlIsSync)(nil).Class())
@@ -578,8 +666,28 @@ func init() {
 	Namespace.Add((*GlIsVertexArray)(nil).Class())
 	Namespace.Add((*GlIsVertexArrayOES)(nil).Class())
 	Namespace.Add((*GlLabelObjectEXT)(nil).Class())
+	Namespace.Add((*GlLightModelf)(nil).Class())
+	Namespace.Add((*GlLightModelfv)(nil).Class())
+	Namespace.Add((*GlLightModelx)(nil).Class())
+	Namespace.Add((*GlLightModelxOES)(nil).Class())
+	Namespace.Add((*GlLightModelxv)(nil).Class())
+	Namespace.Add((*GlLightModelxvOES)(nil).Class())
+	Namespace.Add((*GlLightf)(nil).Class())
+	Namespace.Add((*GlLightfv)(nil).Class())
+	Namespace.Add((*GlLightx)(nil).Class())
+	Namespace.Add((*GlLightxOES)(nil).Class())
+	Namespace.Add((*GlLightxv)(nil).Class())
+	Namespace.Add((*GlLightxvOES)(nil).Class())
 	Namespace.Add((*GlLineWidth)(nil).Class())
+	Namespace.Add((*GlLineWidthx)(nil).Class())
+	Namespace.Add((*GlLineWidthxOES)(nil).Class())
 	Namespace.Add((*GlLinkProgram)(nil).Class())
+	Namespace.Add((*GlLoadIdentity)(nil).Class())
+	Namespace.Add((*GlLoadMatrixf)(nil).Class())
+	Namespace.Add((*GlLoadMatrixx)(nil).Class())
+	Namespace.Add((*GlLoadMatrixxOES)(nil).Class())
+	Namespace.Add((*GlLoadPaletteFromModelViewMatrixOES)(nil).Class())
+	Namespace.Add((*GlLogicOp)(nil).Class())
 	Namespace.Add((*GlMakeImageHandleNonResidentNV)(nil).Class())
 	Namespace.Add((*GlMakeImageHandleResidentNV)(nil).Class())
 	Namespace.Add((*GlMakeTextureHandleNonResidentNV)(nil).Class())
@@ -587,9 +695,18 @@ func init() {
 	Namespace.Add((*GlMapBufferOES)(nil).Class())
 	Namespace.Add((*GlMapBufferRange)(nil).Class())
 	Namespace.Add((*GlMapBufferRangeEXT)(nil).Class())
+	Namespace.Add((*GlMaterialf)(nil).Class())
+	Namespace.Add((*GlMaterialfv)(nil).Class())
+	Namespace.Add((*GlMaterialx)(nil).Class())
+	Namespace.Add((*GlMaterialxOES)(nil).Class())
+	Namespace.Add((*GlMaterialxv)(nil).Class())
+	Namespace.Add((*GlMaterialxvOES)(nil).Class())
+	Namespace.Add((*GlMatrixIndexPointerOES)(nil).Class())
+	Namespace.Add((*GlMatrixIndexPointerOESBounds)(nil).Class())
 	Namespace.Add((*GlMatrixLoad3x2fNV)(nil).Class())
 	Namespace.Add((*GlMatrixLoad3x3fNV)(nil).Class())
 	Namespace.Add((*GlMatrixLoadTranspose3x3fNV)(nil).Class())
+	Namespace.Add((*GlMatrixMode)(nil).Class())
 	Namespace.Add((*GlMatrixMult3x2fNV)(nil).Class())
 	Namespace.Add((*GlMatrixMult3x3fNV)(nil).Class())
 	Namespace.Add((*GlMatrixMultTranspose3x3fNV)(nil).Class())
@@ -597,6 +714,9 @@ func init() {
 	Namespace.Add((*GlMemoryBarrierByRegion)(nil).Class())
 	Namespace.Add((*GlMinSampleShading)(nil).Class())
 	Namespace.Add((*GlMinSampleShadingOES)(nil).Class())
+	Namespace.Add((*GlMultMatrixf)(nil).Class())
+	Namespace.Add((*GlMultMatrixx)(nil).Class())
+	Namespace.Add((*GlMultMatrixxOES)(nil).Class())
 	Namespace.Add((*GlMultiDrawArraysEXT)(nil).Class())
 	Namespace.Add((*GlMultiDrawArraysIndirectEXT)(nil).Class())
 	Namespace.Add((*Voidᶜᵖᶜᵖ)(nil).Class())
@@ -604,11 +724,23 @@ func init() {
 	Namespace.Add((*GlMultiDrawElementsBaseVertexOES)(nil).Class())
 	Namespace.Add((*GlMultiDrawElementsEXT)(nil).Class())
 	Namespace.Add((*GlMultiDrawElementsIndirectEXT)(nil).Class())
+	Namespace.Add((*GlMultiTexCoord4f)(nil).Class())
+	Namespace.Add((*GlMultiTexCoord4x)(nil).Class())
+	Namespace.Add((*GlMultiTexCoord4xOES)(nil).Class())
 	Namespace.Add((*GlNamedFramebufferSampleLocationsfvNV)(nil).Class())
+	Namespace.Add((*GlNormal3f)(nil).Class())
+	Namespace.Add((*GlNormal3x)(nil).Class())
+	Namespace.Add((*GlNormal3xOES)(nil).Class())
+	Namespace.Add((*GlNormalPointer)(nil).Class())
+	Namespace.Add((*GlNormalPointerBounds)(nil).Class())
 	Namespace.Add((*GlObjectLabel)(nil).Class())
 	Namespace.Add((*GlObjectLabelKHR)(nil).Class())
 	Namespace.Add((*GlObjectPtrLabel)(nil).Class())
 	Namespace.Add((*GlObjectPtrLabelKHR)(nil).Class())
+	Namespace.Add((*GlOrthof)(nil).Class())
+	Namespace.Add((*GlOrthofOES)(nil).Class())
+	Namespace.Add((*GlOrthox)(nil).Class())
+	Namespace.Add((*GlOrthoxOES)(nil).Class())
 	Namespace.Add((*GlPatchParameteri)(nil).Class())
 	Namespace.Add((*GlPatchParameteriEXT)(nil).Class())
 	Namespace.Add((*GlPatchParameteriOES)(nil).Class())
@@ -633,11 +765,25 @@ func init() {
 	Namespace.Add((*GlPauseTransformFeedback)(nil).Class())
 	Namespace.Add((*GlPixelStorei)(nil).Class())
 	Namespace.Add((*GlPointAlongPathNV)(nil).Class())
+	Namespace.Add((*GlPointParameterf)(nil).Class())
+	Namespace.Add((*GlPointParameterfv)(nil).Class())
+	Namespace.Add((*GlPointParameterx)(nil).Class())
+	Namespace.Add((*GlPointParameterxOES)(nil).Class())
+	Namespace.Add((*GlPointParameterxv)(nil).Class())
+	Namespace.Add((*GlPointParameterxvOES)(nil).Class())
+	Namespace.Add((*GlPointSize)(nil).Class())
+	Namespace.Add((*GlPointSizePointerOES)(nil).Class())
+	Namespace.Add((*GlPointSizePointerOESBounds)(nil).Class())
+	Namespace.Add((*GlPointSizex)(nil).Class())
+	Namespace.Add((*GlPointSizexOES)(nil).Class())
 	Namespace.Add((*GlPolygonModeNV)(nil).Class())
 	Namespace.Add((*GlPolygonOffset)(nil).Class())
+	Namespace.Add((*GlPolygonOffsetx)(nil).Class())
+	Namespace.Add((*GlPolygonOffsetxOES)(nil).Class())
 	Namespace.Add((*GlPopDebugGroup)(nil).Class())
 	Namespace.Add((*GlPopDebugGroupKHR)(nil).Class())
 	Namespace.Add((*GlPopGroupMarkerEXT)(nil).Class())
+	Namespace.Add((*GlPopMatrix)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBox)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBoxEXT)(nil).Class())
 	Namespace.Add((*GlPrimitiveBoundingBoxOES)(nil).Class())
@@ -717,7 +863,9 @@ func init() {
 	Namespace.Add((*GlPushDebugGroup)(nil).Class())
 	Namespace.Add((*GlPushDebugGroupKHR)(nil).Class())
 	Namespace.Add((*GlPushGroupMarkerEXT)(nil).Class())
+	Namespace.Add((*GlPushMatrix)(nil).Class())
 	Namespace.Add((*GlQueryCounterEXT)(nil).Class())
+	Namespace.Add((*GlQueryMatrixxOES)(nil).Class())
 	Namespace.Add((*GlRasterSamplesEXT)(nil).Class())
 	Namespace.Add((*GlReadBuffer)(nil).Class())
 	Namespace.Add((*GlReadBufferIndexedEXT)(nil).Class())
@@ -734,10 +882,16 @@ func init() {
 	Namespace.Add((*GlRenderbufferStorageMultisampleEXT)(nil).Class())
 	Namespace.Add((*GlRenderbufferStorageMultisampleIMG)(nil).Class())
 	Namespace.Add((*GlRenderbufferStorageMultisampleNV)(nil).Class())
+	Namespace.Add((*GlRenderbufferStorageOES)(nil).Class())
 	Namespace.Add((*GlResolveDepthValuesNV)(nil).Class())
 	Namespace.Add((*GlResolveMultisampleFramebufferAPPLE)(nil).Class())
 	Namespace.Add((*GlResumeTransformFeedback)(nil).Class())
+	Namespace.Add((*GlRotatef)(nil).Class())
+	Namespace.Add((*GlRotatex)(nil).Class())
+	Namespace.Add((*GlRotatexOES)(nil).Class())
 	Namespace.Add((*GlSampleCoverage)(nil).Class())
+	Namespace.Add((*GlSampleCoveragex)(nil).Class())
+	Namespace.Add((*GlSampleCoveragexOES)(nil).Class())
 	Namespace.Add((*GlSampleMaski)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIiv)(nil).Class())
 	Namespace.Add((*GlSamplerParameterIivEXT)(nil).Class())
@@ -749,12 +903,16 @@ func init() {
 	Namespace.Add((*GlSamplerParameterfv)(nil).Class())
 	Namespace.Add((*GlSamplerParameteri)(nil).Class())
 	Namespace.Add((*GlSamplerParameteriv)(nil).Class())
+	Namespace.Add((*GlScalef)(nil).Class())
+	Namespace.Add((*GlScalex)(nil).Class())
+	Namespace.Add((*GlScalexOES)(nil).Class())
 	Namespace.Add((*GlScissor)(nil).Class())
 	Namespace.Add((*GlScissorArrayvNV)(nil).Class())
 	Namespace.Add((*GlScissorIndexedNV)(nil).Class())
 	Namespace.Add((*GlScissorIndexedvNV)(nil).Class())
 	Namespace.Add((*GlSelectPerfMonitorCountersAMD)(nil).Class())
 	Namespace.Add((*GlSetFenceNV)(nil).Class())
+	Namespace.Add((*GlShadeModel)(nil).Class())
 	Namespace.Add((*ShaderIdᶜᵖ)(nil).Class())
 	Namespace.Add((*GlShaderBinary)(nil).Class())
 	Namespace.Add((*GlShaderSource)(nil).Class())
@@ -781,6 +939,22 @@ func init() {
 	Namespace.Add((*GlTexBufferRange)(nil).Class())
 	Namespace.Add((*GlTexBufferRangeEXT)(nil).Class())
 	Namespace.Add((*GlTexBufferRangeOES)(nil).Class())
+	Namespace.Add((*GlTexCoordPointer)(nil).Class())
+	Namespace.Add((*GlTexCoordPointerBounds)(nil).Class())
+	Namespace.Add((*GlTexEnvf)(nil).Class())
+	Namespace.Add((*GlTexEnvfv)(nil).Class())
+	Namespace.Add((*GlTexEnvi)(nil).Class())
+	Namespace.Add((*GlTexEnviv)(nil).Class())
+	Namespace.Add((*GlTexEnvx)(nil).Class())
+	Namespace.Add((*GlTexEnvxOES)(nil).Class())
+	Namespace.Add((*GlTexEnvxv)(nil).Class())
+	Namespace.Add((*GlTexEnvxvOES)(nil).Class())
+	Namespace.Add((*GlTexGenfOES)(nil).Class())
+	Namespace.Add((*GlTexGenfvOES)(nil).Class())
+	Namespace.Add((*GlTexGeniOES)(nil).Class())
+	Namespace.Add((*GlTexGenivOES)(nil).Class())
+	Namespace.Add((*GlTexGenxOES)(nil).Class())
+	Namespace.Add((*GlTexGenxvOES)(nil).Class())
 	Namespace.Add((*GlTexImage2D)(nil).Class())
 	Namespace.Add((*GlTexImage3D)(nil).Class())
 	Namespace.Add((*GlTexImage3DOES)(nil).Class())
@@ -795,6 +969,10 @@ func init() {
 	Namespace.Add((*GlTexParameterfv)(nil).Class())
 	Namespace.Add((*GlTexParameteri)(nil).Class())
 	Namespace.Add((*GlTexParameteriv)(nil).Class())
+	Namespace.Add((*GlTexParameterx)(nil).Class())
+	Namespace.Add((*GlTexParameterxOES)(nil).Class())
+	Namespace.Add((*GlTexParameterxv)(nil).Class())
+	Namespace.Add((*GlTexParameterxvOES)(nil).Class())
 	Namespace.Add((*GlTexStorage1DEXT)(nil).Class())
 	Namespace.Add((*GlTexStorage2D)(nil).Class())
 	Namespace.Add((*GlTexStorage2DEXT)(nil).Class())
@@ -813,6 +991,9 @@ func init() {
 	Namespace.Add((*GlTextureViewOES)(nil).Class())
 	Namespace.Add((*GlTransformFeedbackVaryings)(nil).Class())
 	Namespace.Add((*GlTransformPathNV)(nil).Class())
+	Namespace.Add((*GlTranslatef)(nil).Class())
+	Namespace.Add((*GlTranslatex)(nil).Class())
+	Namespace.Add((*GlTranslatexOES)(nil).Class())
 	Namespace.Add((*GlUniform1f)(nil).Class())
 	Namespace.Add((*GlUniform1fv)(nil).Class())
 	Namespace.Add((*GlUniform1i)(nil).Class())
@@ -885,6 +1066,8 @@ func init() {
 	Namespace.Add((*GlVertexAttribIPointer)(nil).Class())
 	Namespace.Add((*GlVertexAttribPointer)(nil).Class())
 	Namespace.Add((*GlVertexBindingDivisor)(nil).Class())
+	Namespace.Add((*GlVertexPointer)(nil).Class())
+	Namespace.Add((*GlVertexPointerBounds)(nil).Class())
 	Namespace.Add((*GlViewport)(nil).Class())
 	Namespace.Add((*GlViewportArrayvNV)(nil).Class())
 	Namespace.Add((*GlViewportIndexedfNV)(nil).Class())
@@ -892,6 +1075,8 @@ func init() {
 	Namespace.Add((*GlWaitSync)(nil).Class())
 	Namespace.Add((*GlWaitSyncAPPLE)(nil).Class())
 	Namespace.Add((*GlWeightPathsNV)(nil).Class())
+	Namespace.Add((*GlWeightPointerOES)(nil).Class())
+	Namespace.Add((*GlWeightPointerOESBounds)(nil).Class())
 	Namespace.Add((*GlXCreateContext)(nil).Class())
 	Namespace.Add((*GlXCreateNewContext)(nil).Class())
 	Namespace.Add((*GlXMakeContextCurrent)(nil).Class())
@@ -5349,6 +5534,102 @@ var schemaGLenumᶜᵖ = &binary.Entity{
 	},
 }
 
+type binaryClassGLfixedˢ struct{}
+
+func (*GLfixedˢ) Class() binary.Class {
+	return (*binaryClassGLfixedˢ)(nil)
+}
+func doEncodeGLfixedˢ(e binary.Encoder, o *GLfixedˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeGLfixedˢ(d binary.Decoder, o *GLfixedˢ) {
+	d.Struct(&o.SliceInfo)
+}
+func (*binaryClassGLfixedˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLfixedˢ(e, obj.(*GLfixedˢ))
+}
+func (*binaryClassGLfixedˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLfixedˢ{}
+	doDecodeGLfixedˢ(d, obj)
+	return obj
+}
+func (*binaryClassGLfixedˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLfixedˢ(d, obj.(*GLfixedˢ))
+}
+func (*binaryClassGLfixedˢ) Schema() *binary.Entity { return schemaGLfixedˢ }
+
+var schemaGLfixedˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLfixedˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLfixedᵖ struct{}
+
+func (*GLfixedᵖ) Class() binary.Class {
+	return (*binaryClassGLfixedᵖ)(nil)
+}
+func doEncodeGLfixedᵖ(e binary.Encoder, o *GLfixedᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeGLfixedᵖ(d binary.Decoder, o *GLfixedᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGLfixedᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLfixedᵖ(e, obj.(*GLfixedᵖ))
+}
+func (*binaryClassGLfixedᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLfixedᵖ{}
+	doDecodeGLfixedᵖ(d, obj)
+	return obj
+}
+func (*binaryClassGLfixedᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLfixedᵖ(d, obj.(*GLfixedᵖ))
+}
+func (*binaryClassGLfixedᵖ) Schema() *binary.Entity { return schemaGLfixedᵖ }
+
+var schemaGLfixedᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLfixedᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLfixedᶜᵖ struct{}
+
+func (*GLfixedᶜᵖ) Class() binary.Class {
+	return (*binaryClassGLfixedᶜᵖ)(nil)
+}
+func doEncodeGLfixedᶜᵖ(e binary.Encoder, o *GLfixedᶜᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeGLfixedᶜᵖ(d binary.Decoder, o *GLfixedᶜᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGLfixedᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLfixedᶜᵖ(e, obj.(*GLfixedᶜᵖ))
+}
+func (*binaryClassGLfixedᶜᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLfixedᶜᵖ{}
+	doDecodeGLfixedᶜᵖ(d, obj)
+	return obj
+}
+func (*binaryClassGLfixedᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLfixedᶜᵖ(d, obj.(*GLfixedᶜᵖ))
+}
+func (*binaryClassGLfixedᶜᵖ) Schema() *binary.Entity { return schemaGLfixedᶜᵖ }
+
+var schemaGLfixedᶜᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLfixedᶜᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGLfloatː2ᵃ struct{}
 
 func (*GLfloatː2ᵃ) Class() binary.Class {
@@ -5752,6 +6033,102 @@ func (*binaryClassGLintᶜᵖ) Schema() *binary.Entity { return schemaGLintᶜ�
 var schemaGLintᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLintᶜᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLshortˢ struct{}
+
+func (*GLshortˢ) Class() binary.Class {
+	return (*binaryClassGLshortˢ)(nil)
+}
+func doEncodeGLshortˢ(e binary.Encoder, o *GLshortˢ) {
+	e.Struct(&o.SliceInfo)
+}
+func doDecodeGLshortˢ(d binary.Decoder, o *GLshortˢ) {
+	d.Struct(&o.SliceInfo)
+}
+func (*binaryClassGLshortˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLshortˢ(e, obj.(*GLshortˢ))
+}
+func (*binaryClassGLshortˢ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLshortˢ{}
+	doDecodeGLshortˢ(d, obj)
+	return obj
+}
+func (*binaryClassGLshortˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLshortˢ(d, obj.(*GLshortˢ))
+}
+func (*binaryClassGLshortˢ) Schema() *binary.Entity { return schemaGLshortˢ }
+
+var schemaGLshortˢ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLshortˢ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLshortᵖ struct{}
+
+func (*GLshortᵖ) Class() binary.Class {
+	return (*binaryClassGLshortᵖ)(nil)
+}
+func doEncodeGLshortᵖ(e binary.Encoder, o *GLshortᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeGLshortᵖ(d binary.Decoder, o *GLshortᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGLshortᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLshortᵖ(e, obj.(*GLshortᵖ))
+}
+func (*binaryClassGLshortᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLshortᵖ{}
+	doDecodeGLshortᵖ(d, obj)
+	return obj
+}
+func (*binaryClassGLshortᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLshortᵖ(d, obj.(*GLshortᵖ))
+}
+func (*binaryClassGLshortᵖ) Schema() *binary.Entity { return schemaGLshortᵖ }
+
+var schemaGLshortᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLshortᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGLshortᶜᵖ struct{}
+
+func (*GLshortᶜᵖ) Class() binary.Class {
+	return (*binaryClassGLshortᶜᵖ)(nil)
+}
+func doEncodeGLshortᶜᵖ(e binary.Encoder, o *GLshortᶜᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeGLshortᶜᵖ(d binary.Decoder, o *GLshortᶜᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGLshortᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGLshortᶜᵖ(e, obj.(*GLshortᶜᵖ))
+}
+func (*binaryClassGLshortᶜᵖ) Decode(d binary.Decoder) binary.Object {
+	obj := &GLshortᶜᵖ{}
+	doDecodeGLshortᶜᵖ(d, obj)
+	return obj
+}
+func (*binaryClassGLshortᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGLshortᶜᵖ(d, obj.(*GLshortᶜᵖ))
+}
+func (*binaryClassGLshortᶜᵖ) Schema() *binary.Entity { return schemaGLshortᶜᵖ }
+
+var schemaGLshortᶜᵖ = &binary.Entity{
+	Package:  "gles",
+	Identity: "GLshortᶜᵖ",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
@@ -6426,6 +6803,44 @@ var schemaGlActiveTexture = &binary.Entity{
 	},
 }
 
+type binaryClassGlAlphaFunc struct{}
+
+func (*GlAlphaFunc) Class() binary.Class {
+	return (*binaryClassGlAlphaFunc)(nil)
+}
+func doEncodeGlAlphaFunc(e binary.Encoder, o *GlAlphaFunc) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Func))
+	e.Float32(float32(o.Ref))
+}
+func doDecodeGlAlphaFunc(d binary.Decoder, o *GlAlphaFunc) {
+	d.Struct(&o.observations)
+	o.Func = GLenum(d.Uint32())
+	o.Ref = GLfloat(d.Float32())
+}
+func (*binaryClassGlAlphaFunc) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlAlphaFunc(e, obj.(*GlAlphaFunc))
+}
+func (*binaryClassGlAlphaFunc) Decode(d binary.Decoder) binary.Object {
+	obj := &GlAlphaFunc{}
+	doDecodeGlAlphaFunc(d, obj)
+	return obj
+}
+func (*binaryClassGlAlphaFunc) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlAlphaFunc(d, obj.(*GlAlphaFunc))
+}
+func (*binaryClassGlAlphaFunc) Schema() *binary.Entity { return schemaGlAlphaFunc }
+
+var schemaGlAlphaFunc = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlAlphaFunc",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Ref", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
 type binaryClassGlAlphaFuncQCOM struct{}
 
 func (*GlAlphaFuncQCOM) Class() binary.Class {
@@ -6461,6 +6876,82 @@ var schemaGlAlphaFuncQCOM = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Ref", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlAlphaFuncx struct{}
+
+func (*GlAlphaFuncx) Class() binary.Class {
+	return (*binaryClassGlAlphaFuncx)(nil)
+}
+func doEncodeGlAlphaFuncx(e binary.Encoder, o *GlAlphaFuncx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Func))
+	e.Int32(int32(o.Ref))
+}
+func doDecodeGlAlphaFuncx(d binary.Decoder, o *GlAlphaFuncx) {
+	d.Struct(&o.observations)
+	o.Func = GLenum(d.Uint32())
+	o.Ref = GLfixed(d.Int32())
+}
+func (*binaryClassGlAlphaFuncx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlAlphaFuncx(e, obj.(*GlAlphaFuncx))
+}
+func (*binaryClassGlAlphaFuncx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlAlphaFuncx{}
+	doDecodeGlAlphaFuncx(d, obj)
+	return obj
+}
+func (*binaryClassGlAlphaFuncx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlAlphaFuncx(d, obj.(*GlAlphaFuncx))
+}
+func (*binaryClassGlAlphaFuncx) Schema() *binary.Entity { return schemaGlAlphaFuncx }
+
+var schemaGlAlphaFuncx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlAlphaFuncx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Ref", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlAlphaFuncxOES struct{}
+
+func (*GlAlphaFuncxOES) Class() binary.Class {
+	return (*binaryClassGlAlphaFuncxOES)(nil)
+}
+func doEncodeGlAlphaFuncxOES(e binary.Encoder, o *GlAlphaFuncxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Func))
+	e.Int32(int32(o.Ref))
+}
+func doDecodeGlAlphaFuncxOES(d binary.Decoder, o *GlAlphaFuncxOES) {
+	d.Struct(&o.observations)
+	o.Func = GLenum(d.Uint32())
+	o.Ref = GLfixed(d.Int32())
+}
+func (*binaryClassGlAlphaFuncxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlAlphaFuncxOES(e, obj.(*GlAlphaFuncxOES))
+}
+func (*binaryClassGlAlphaFuncxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlAlphaFuncxOES{}
+	doDecodeGlAlphaFuncxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlAlphaFuncxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlAlphaFuncxOES(d, obj.(*GlAlphaFuncxOES))
+}
+func (*binaryClassGlAlphaFuncxOES) Schema() *binary.Entity { return schemaGlAlphaFuncxOES }
+
+var schemaGlAlphaFuncxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlAlphaFuncxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Func", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Ref", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
 	},
 }
 
@@ -7053,6 +7544,44 @@ var schemaGlBindFramebuffer = &binary.Entity{
 	},
 }
 
+type binaryClassGlBindFramebufferOES struct{}
+
+func (*GlBindFramebufferOES) Class() binary.Class {
+	return (*binaryClassGlBindFramebufferOES)(nil)
+}
+func doEncodeGlBindFramebufferOES(e binary.Encoder, o *GlBindFramebufferOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Framebuffer))
+}
+func doDecodeGlBindFramebufferOES(d binary.Decoder, o *GlBindFramebufferOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Framebuffer = GLuint(d.Uint32())
+}
+func (*binaryClassGlBindFramebufferOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlBindFramebufferOES(e, obj.(*GlBindFramebufferOES))
+}
+func (*binaryClassGlBindFramebufferOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlBindFramebufferOES{}
+	doDecodeGlBindFramebufferOES(d, obj)
+	return obj
+}
+func (*binaryClassGlBindFramebufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlBindFramebufferOES(d, obj.(*GlBindFramebufferOES))
+}
+func (*binaryClassGlBindFramebufferOES) Schema() *binary.Entity { return schemaGlBindFramebufferOES }
+
+var schemaGlBindFramebufferOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlBindFramebufferOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlBindImageTexture struct{}
 
 func (*GlBindImageTexture) Class() binary.Class {
@@ -7213,6 +7742,44 @@ var schemaGlBindRenderbuffer = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBindRenderbufferOES struct{}
+
+func (*GlBindRenderbufferOES) Class() binary.Class {
+	return (*binaryClassGlBindRenderbufferOES)(nil)
+}
+func doEncodeGlBindRenderbufferOES(e binary.Encoder, o *GlBindRenderbufferOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Renderbuffer))
+}
+func doDecodeGlBindRenderbufferOES(d binary.Decoder, o *GlBindRenderbufferOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Renderbuffer = GLuint(d.Uint32())
+}
+func (*binaryClassGlBindRenderbufferOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlBindRenderbufferOES(e, obj.(*GlBindRenderbufferOES))
+}
+func (*binaryClassGlBindRenderbufferOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlBindRenderbufferOES{}
+	doDecodeGlBindRenderbufferOES(d, obj)
+	return obj
+}
+func (*binaryClassGlBindRenderbufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlBindRenderbufferOES(d, obj.(*GlBindRenderbufferOES))
+}
+func (*binaryClassGlBindRenderbufferOES) Schema() *binary.Entity { return schemaGlBindRenderbufferOES }
+
+var schemaGlBindRenderbufferOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlBindRenderbufferOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -7621,6 +8188,41 @@ var schemaGlBlendEquation = &binary.Entity{
 	},
 }
 
+type binaryClassGlBlendEquationOES struct{}
+
+func (*GlBlendEquationOES) Class() binary.Class {
+	return (*binaryClassGlBlendEquationOES)(nil)
+}
+func doEncodeGlBlendEquationOES(e binary.Encoder, o *GlBlendEquationOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Mode))
+}
+func doDecodeGlBlendEquationOES(d binary.Decoder, o *GlBlendEquationOES) {
+	d.Struct(&o.observations)
+	o.Mode = GLenum(d.Uint32())
+}
+func (*binaryClassGlBlendEquationOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlBlendEquationOES(e, obj.(*GlBlendEquationOES))
+}
+func (*binaryClassGlBlendEquationOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlBlendEquationOES{}
+	doDecodeGlBlendEquationOES(d, obj)
+	return obj
+}
+func (*binaryClassGlBlendEquationOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlBlendEquationOES(d, obj.(*GlBlendEquationOES))
+}
+func (*binaryClassGlBlendEquationOES) Schema() *binary.Entity { return schemaGlBlendEquationOES }
+
+var schemaGlBlendEquationOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlBlendEquationOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlBlendEquationSeparate struct{}
 
 func (*GlBlendEquationSeparate) Class() binary.Class {
@@ -7658,6 +8260,46 @@ var schemaGlBlendEquationSeparate = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Rgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBlendEquationSeparateOES struct{}
+
+func (*GlBlendEquationSeparateOES) Class() binary.Class {
+	return (*binaryClassGlBlendEquationSeparateOES)(nil)
+}
+func doEncodeGlBlendEquationSeparateOES(e binary.Encoder, o *GlBlendEquationSeparateOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.ModeRGB))
+	e.Uint32(uint32(o.ModeAlpha))
+}
+func doDecodeGlBlendEquationSeparateOES(d binary.Decoder, o *GlBlendEquationSeparateOES) {
+	d.Struct(&o.observations)
+	o.ModeRGB = GLenum(d.Uint32())
+	o.ModeAlpha = GLenum(d.Uint32())
+}
+func (*binaryClassGlBlendEquationSeparateOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlBlendEquationSeparateOES(e, obj.(*GlBlendEquationSeparateOES))
+}
+func (*binaryClassGlBlendEquationSeparateOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlBlendEquationSeparateOES{}
+	doDecodeGlBlendEquationSeparateOES(d, obj)
+	return obj
+}
+func (*binaryClassGlBlendEquationSeparateOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlBlendEquationSeparateOES(d, obj.(*GlBlendEquationSeparateOES))
+}
+func (*binaryClassGlBlendEquationSeparateOES) Schema() *binary.Entity {
+	return schemaGlBlendEquationSeparateOES
+}
+
+var schemaGlBlendEquationSeparateOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlBlendEquationSeparateOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "ModeRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "ModeAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -7983,6 +8625,50 @@ var schemaGlBlendFuncSeparate = &binary.Entity{
 		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlBlendFuncSeparateOES struct{}
+
+func (*GlBlendFuncSeparateOES) Class() binary.Class {
+	return (*binaryClassGlBlendFuncSeparateOES)(nil)
+}
+func doEncodeGlBlendFuncSeparateOES(e binary.Encoder, o *GlBlendFuncSeparateOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.SrcRGB))
+	e.Uint32(uint32(o.DstRGB))
+	e.Uint32(uint32(o.SrcAlpha))
+	e.Uint32(uint32(o.DstAlpha))
+}
+func doDecodeGlBlendFuncSeparateOES(d binary.Decoder, o *GlBlendFuncSeparateOES) {
+	d.Struct(&o.observations)
+	o.SrcRGB = GLenum(d.Uint32())
+	o.DstRGB = GLenum(d.Uint32())
+	o.SrcAlpha = GLenum(d.Uint32())
+	o.DstAlpha = GLenum(d.Uint32())
+}
+func (*binaryClassGlBlendFuncSeparateOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlBlendFuncSeparateOES(e, obj.(*GlBlendFuncSeparateOES))
+}
+func (*binaryClassGlBlendFuncSeparateOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlBlendFuncSeparateOES{}
+	doDecodeGlBlendFuncSeparateOES(d, obj)
+	return obj
+}
+func (*binaryClassGlBlendFuncSeparateOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlBlendFuncSeparateOES(d, obj.(*GlBlendFuncSeparateOES))
+}
+func (*binaryClassGlBlendFuncSeparateOES) Schema() *binary.Entity { return schemaGlBlendFuncSeparateOES }
+
+var schemaGlBlendFuncSeparateOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlBlendFuncSeparateOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "SrcRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstRGB", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "SrcAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "DstAlpha", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -8682,6 +9368,46 @@ var schemaGlCheckFramebufferStatus = &binary.Entity{
 	},
 }
 
+type binaryClassGlCheckFramebufferStatusOES struct{}
+
+func (*GlCheckFramebufferStatusOES) Class() binary.Class {
+	return (*binaryClassGlCheckFramebufferStatusOES)(nil)
+}
+func doEncodeGlCheckFramebufferStatusOES(e binary.Encoder, o *GlCheckFramebufferStatusOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Result))
+}
+func doDecodeGlCheckFramebufferStatusOES(d binary.Decoder, o *GlCheckFramebufferStatusOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Result = GLenum(d.Uint32())
+}
+func (*binaryClassGlCheckFramebufferStatusOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlCheckFramebufferStatusOES(e, obj.(*GlCheckFramebufferStatusOES))
+}
+func (*binaryClassGlCheckFramebufferStatusOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlCheckFramebufferStatusOES{}
+	doDecodeGlCheckFramebufferStatusOES(d, obj)
+	return obj
+}
+func (*binaryClassGlCheckFramebufferStatusOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlCheckFramebufferStatusOES(d, obj.(*GlCheckFramebufferStatusOES))
+}
+func (*binaryClassGlCheckFramebufferStatusOES) Schema() *binary.Entity {
+	return schemaGlCheckFramebufferStatusOES
+}
+
+var schemaGlCheckFramebufferStatusOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlCheckFramebufferStatusOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlClear struct{}
 
 func (*GlClear) Class() binary.Class {
@@ -8928,6 +9654,94 @@ var schemaGlClearColor = &binary.Entity{
 	},
 }
 
+type binaryClassGlClearColorx struct{}
+
+func (*GlClearColorx) Class() binary.Class {
+	return (*binaryClassGlClearColorx)(nil)
+}
+func doEncodeGlClearColorx(e binary.Encoder, o *GlClearColorx) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Red))
+	e.Int32(int32(o.Green))
+	e.Int32(int32(o.Blue))
+	e.Int32(int32(o.Alpha))
+}
+func doDecodeGlClearColorx(d binary.Decoder, o *GlClearColorx) {
+	d.Struct(&o.observations)
+	o.Red = GLfixed(d.Int32())
+	o.Green = GLfixed(d.Int32())
+	o.Blue = GLfixed(d.Int32())
+	o.Alpha = GLfixed(d.Int32())
+}
+func (*binaryClassGlClearColorx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClearColorx(e, obj.(*GlClearColorx))
+}
+func (*binaryClassGlClearColorx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClearColorx{}
+	doDecodeGlClearColorx(d, obj)
+	return obj
+}
+func (*binaryClassGlClearColorx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClearColorx(d, obj.(*GlClearColorx))
+}
+func (*binaryClassGlClearColorx) Schema() *binary.Entity { return schemaGlClearColorx }
+
+var schemaGlClearColorx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClearColorx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlClearColorxOES struct{}
+
+func (*GlClearColorxOES) Class() binary.Class {
+	return (*binaryClassGlClearColorxOES)(nil)
+}
+func doEncodeGlClearColorxOES(e binary.Encoder, o *GlClearColorxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Red))
+	e.Int32(int32(o.Green))
+	e.Int32(int32(o.Blue))
+	e.Int32(int32(o.Alpha))
+}
+func doDecodeGlClearColorxOES(d binary.Decoder, o *GlClearColorxOES) {
+	d.Struct(&o.observations)
+	o.Red = GLfixed(d.Int32())
+	o.Green = GLfixed(d.Int32())
+	o.Blue = GLfixed(d.Int32())
+	o.Alpha = GLfixed(d.Int32())
+}
+func (*binaryClassGlClearColorxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClearColorxOES(e, obj.(*GlClearColorxOES))
+}
+func (*binaryClassGlClearColorxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClearColorxOES{}
+	doDecodeGlClearColorxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlClearColorxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClearColorxOES(d, obj.(*GlClearColorxOES))
+}
+func (*binaryClassGlClearColorxOES) Schema() *binary.Entity { return schemaGlClearColorxOES }
+
+var schemaGlClearColorxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClearColorxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlClearDepthf struct{}
 
 func (*GlClearDepthf) Class() binary.Class {
@@ -8963,6 +9777,111 @@ var schemaGlClearDepthf = &binary.Entity{
 	},
 }
 
+type binaryClassGlClearDepthfOES struct{}
+
+func (*GlClearDepthfOES) Class() binary.Class {
+	return (*binaryClassGlClearDepthfOES)(nil)
+}
+func doEncodeGlClearDepthfOES(e binary.Encoder, o *GlClearDepthfOES) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.Depth))
+}
+func doDecodeGlClearDepthfOES(d binary.Decoder, o *GlClearDepthfOES) {
+	d.Struct(&o.observations)
+	o.Depth = GLclampf(d.Float32())
+}
+func (*binaryClassGlClearDepthfOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClearDepthfOES(e, obj.(*GlClearDepthfOES))
+}
+func (*binaryClassGlClearDepthfOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClearDepthfOES{}
+	doDecodeGlClearDepthfOES(d, obj)
+	return obj
+}
+func (*binaryClassGlClearDepthfOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClearDepthfOES(d, obj.(*GlClearDepthfOES))
+}
+func (*binaryClassGlClearDepthfOES) Schema() *binary.Entity { return schemaGlClearDepthfOES }
+
+var schemaGlClearDepthfOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClearDepthfOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlClearDepthx struct{}
+
+func (*GlClearDepthx) Class() binary.Class {
+	return (*binaryClassGlClearDepthx)(nil)
+}
+func doEncodeGlClearDepthx(e binary.Encoder, o *GlClearDepthx) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Depth))
+}
+func doDecodeGlClearDepthx(d binary.Decoder, o *GlClearDepthx) {
+	d.Struct(&o.observations)
+	o.Depth = GLfixed(d.Int32())
+}
+func (*binaryClassGlClearDepthx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClearDepthx(e, obj.(*GlClearDepthx))
+}
+func (*binaryClassGlClearDepthx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClearDepthx{}
+	doDecodeGlClearDepthx(d, obj)
+	return obj
+}
+func (*binaryClassGlClearDepthx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClearDepthx(d, obj.(*GlClearDepthx))
+}
+func (*binaryClassGlClearDepthx) Schema() *binary.Entity { return schemaGlClearDepthx }
+
+var schemaGlClearDepthx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClearDepthx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlClearDepthxOES struct{}
+
+func (*GlClearDepthxOES) Class() binary.Class {
+	return (*binaryClassGlClearDepthxOES)(nil)
+}
+func doEncodeGlClearDepthxOES(e binary.Encoder, o *GlClearDepthxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Depth))
+}
+func doDecodeGlClearDepthxOES(d binary.Decoder, o *GlClearDepthxOES) {
+	d.Struct(&o.observations)
+	o.Depth = GLfixed(d.Int32())
+}
+func (*binaryClassGlClearDepthxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClearDepthxOES(e, obj.(*GlClearDepthxOES))
+}
+func (*binaryClassGlClearDepthxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClearDepthxOES{}
+	doDecodeGlClearDepthxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlClearDepthxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClearDepthxOES(d, obj.(*GlClearDepthxOES))
+}
+func (*binaryClassGlClearDepthxOES) Schema() *binary.Entity { return schemaGlClearDepthxOES }
+
+var schemaGlClearDepthxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClearDepthxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlClearStencil struct{}
 
 func (*GlClearStencil) Class() binary.Class {
@@ -8995,6 +9914,41 @@ var schemaGlClearStencil = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Stencil", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlClientActiveTexture struct{}
+
+func (*GlClientActiveTexture) Class() binary.Class {
+	return (*binaryClassGlClientActiveTexture)(nil)
+}
+func doEncodeGlClientActiveTexture(e binary.Encoder, o *GlClientActiveTexture) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Texture))
+}
+func doDecodeGlClientActiveTexture(d binary.Decoder, o *GlClientActiveTexture) {
+	d.Struct(&o.observations)
+	o.Texture = GLenum(d.Uint32())
+}
+func (*binaryClassGlClientActiveTexture) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClientActiveTexture(e, obj.(*GlClientActiveTexture))
+}
+func (*binaryClassGlClientActiveTexture) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClientActiveTexture{}
+	doDecodeGlClientActiveTexture(d, obj)
+	return obj
+}
+func (*binaryClassGlClientActiveTexture) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClientActiveTexture(d, obj.(*GlClientActiveTexture))
+}
+func (*binaryClassGlClientActiveTexture) Schema() *binary.Entity { return schemaGlClientActiveTexture }
+
+var schemaGlClientActiveTexture = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClientActiveTexture",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -9083,6 +10037,410 @@ var schemaGlClientWaitSyncAPPLE = &binary.Entity{
 		{Declared: "Flag", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 		{Declared: "Timeout", Type: &schema.Primitive{Name: "GLuint64", Method: schema.Uint64}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlClipPlanef struct{}
+
+func (*GlClipPlanef) Class() binary.Class {
+	return (*binaryClassGlClipPlanef)(nil)
+}
+func doEncodeGlClipPlanef(e binary.Encoder, o *GlClipPlanef) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.P))
+	e.Struct(&o.Eqn)
+}
+func doDecodeGlClipPlanef(d binary.Decoder, o *GlClipPlanef) {
+	d.Struct(&o.observations)
+	o.P = GLenum(d.Uint32())
+	d.Struct(&o.Eqn)
+}
+func (*binaryClassGlClipPlanef) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanef(e, obj.(*GlClipPlanef))
+}
+func (*binaryClassGlClipPlanef) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanef{}
+	doDecodeGlClipPlanef(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanef) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanef(d, obj.(*GlClipPlanef))
+}
+func (*binaryClassGlClipPlanef) Schema() *binary.Entity { return schemaGlClipPlanef }
+
+var schemaGlClipPlanef = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanef",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "P", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Eqn", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlClipPlanefIMG struct{}
+
+func (*GlClipPlanefIMG) Class() binary.Class {
+	return (*binaryClassGlClipPlanefIMG)(nil)
+}
+func doEncodeGlClipPlanefIMG(e binary.Encoder, o *GlClipPlanefIMG) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.P))
+	e.Struct(&o.Eqn)
+}
+func doDecodeGlClipPlanefIMG(d binary.Decoder, o *GlClipPlanefIMG) {
+	d.Struct(&o.observations)
+	o.P = GLenum(d.Uint32())
+	d.Struct(&o.Eqn)
+}
+func (*binaryClassGlClipPlanefIMG) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanefIMG(e, obj.(*GlClipPlanefIMG))
+}
+func (*binaryClassGlClipPlanefIMG) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanefIMG{}
+	doDecodeGlClipPlanefIMG(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanefIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanefIMG(d, obj.(*GlClipPlanefIMG))
+}
+func (*binaryClassGlClipPlanefIMG) Schema() *binary.Entity { return schemaGlClipPlanefIMG }
+
+var schemaGlClipPlanefIMG = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanefIMG",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "P", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Eqn", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlClipPlanefOES struct{}
+
+func (*GlClipPlanefOES) Class() binary.Class {
+	return (*binaryClassGlClipPlanefOES)(nil)
+}
+func doEncodeGlClipPlanefOES(e binary.Encoder, o *GlClipPlanefOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlClipPlanefOES(d binary.Decoder, o *GlClipPlanefOES) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlClipPlanefOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanefOES(e, obj.(*GlClipPlanefOES))
+}
+func (*binaryClassGlClipPlanefOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanefOES{}
+	doDecodeGlClipPlanefOES(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanefOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanefOES(d, obj.(*GlClipPlanefOES))
+}
+func (*binaryClassGlClipPlanefOES) Schema() *binary.Entity { return schemaGlClipPlanefOES }
+
+var schemaGlClipPlanefOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanefOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlClipPlanex struct{}
+
+func (*GlClipPlanex) Class() binary.Class {
+	return (*binaryClassGlClipPlanex)(nil)
+}
+func doEncodeGlClipPlanex(e binary.Encoder, o *GlClipPlanex) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlClipPlanex(d binary.Decoder, o *GlClipPlanex) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlClipPlanex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanex(e, obj.(*GlClipPlanex))
+}
+func (*binaryClassGlClipPlanex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanex{}
+	doDecodeGlClipPlanex(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanex(d, obj.(*GlClipPlanex))
+}
+func (*binaryClassGlClipPlanex) Schema() *binary.Entity { return schemaGlClipPlanex }
+
+var schemaGlClipPlanex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlClipPlanexIMG struct{}
+
+func (*GlClipPlanexIMG) Class() binary.Class {
+	return (*binaryClassGlClipPlanexIMG)(nil)
+}
+func doEncodeGlClipPlanexIMG(e binary.Encoder, o *GlClipPlanexIMG) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.P))
+	e.Struct(&o.Eqn)
+}
+func doDecodeGlClipPlanexIMG(d binary.Decoder, o *GlClipPlanexIMG) {
+	d.Struct(&o.observations)
+	o.P = GLenum(d.Uint32())
+	d.Struct(&o.Eqn)
+}
+func (*binaryClassGlClipPlanexIMG) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanexIMG(e, obj.(*GlClipPlanexIMG))
+}
+func (*binaryClassGlClipPlanexIMG) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanexIMG{}
+	doDecodeGlClipPlanexIMG(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanexIMG) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanexIMG(d, obj.(*GlClipPlanexIMG))
+}
+func (*binaryClassGlClipPlanexIMG) Schema() *binary.Entity { return schemaGlClipPlanexIMG }
+
+var schemaGlClipPlanexIMG = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanexIMG",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "P", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Eqn", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlClipPlanexOES struct{}
+
+func (*GlClipPlanexOES) Class() binary.Class {
+	return (*binaryClassGlClipPlanexOES)(nil)
+}
+func doEncodeGlClipPlanexOES(e binary.Encoder, o *GlClipPlanexOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlClipPlanexOES(d binary.Decoder, o *GlClipPlanexOES) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlClipPlanexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlClipPlanexOES(e, obj.(*GlClipPlanexOES))
+}
+func (*binaryClassGlClipPlanexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlClipPlanexOES{}
+	doDecodeGlClipPlanexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlClipPlanexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlClipPlanexOES(d, obj.(*GlClipPlanexOES))
+}
+func (*binaryClassGlClipPlanexOES) Schema() *binary.Entity { return schemaGlClipPlanexOES }
+
+var schemaGlClipPlanexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlClipPlanexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlColor4f struct{}
+
+func (*GlColor4f) Class() binary.Class {
+	return (*binaryClassGlColor4f)(nil)
+}
+func doEncodeGlColor4f(e binary.Encoder, o *GlColor4f) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.Red))
+	e.Float32(float32(o.Green))
+	e.Float32(float32(o.Blue))
+	e.Float32(float32(o.Alpha))
+}
+func doDecodeGlColor4f(d binary.Decoder, o *GlColor4f) {
+	d.Struct(&o.observations)
+	o.Red = GLfloat(d.Float32())
+	o.Green = GLfloat(d.Float32())
+	o.Blue = GLfloat(d.Float32())
+	o.Alpha = GLfloat(d.Float32())
+}
+func (*binaryClassGlColor4f) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColor4f(e, obj.(*GlColor4f))
+}
+func (*binaryClassGlColor4f) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColor4f{}
+	doDecodeGlColor4f(d, obj)
+	return obj
+}
+func (*binaryClassGlColor4f) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColor4f(d, obj.(*GlColor4f))
+}
+func (*binaryClassGlColor4f) Schema() *binary.Entity { return schemaGlColor4f }
+
+var schemaGlColor4f = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColor4f",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlColor4ub struct{}
+
+func (*GlColor4ub) Class() binary.Class {
+	return (*binaryClassGlColor4ub)(nil)
+}
+func doEncodeGlColor4ub(e binary.Encoder, o *GlColor4ub) {
+	e.Struct(&o.observations)
+	e.Uint8(uint8(o.Red))
+	e.Uint8(uint8(o.Green))
+	e.Uint8(uint8(o.Blue))
+	e.Uint8(uint8(o.Alpha))
+}
+func doDecodeGlColor4ub(d binary.Decoder, o *GlColor4ub) {
+	d.Struct(&o.observations)
+	o.Red = GLubyte(d.Uint8())
+	o.Green = GLubyte(d.Uint8())
+	o.Blue = GLubyte(d.Uint8())
+	o.Alpha = GLubyte(d.Uint8())
+}
+func (*binaryClassGlColor4ub) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColor4ub(e, obj.(*GlColor4ub))
+}
+func (*binaryClassGlColor4ub) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColor4ub{}
+	doDecodeGlColor4ub(d, obj)
+	return obj
+}
+func (*binaryClassGlColor4ub) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColor4ub(d, obj.(*GlColor4ub))
+}
+func (*binaryClassGlColor4ub) Schema() *binary.Entity { return schemaGlColor4ub }
+
+var schemaGlColor4ub = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColor4ub",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLubyte", Method: schema.Uint8}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLubyte", Method: schema.Uint8}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLubyte", Method: schema.Uint8}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLubyte", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassGlColor4x struct{}
+
+func (*GlColor4x) Class() binary.Class {
+	return (*binaryClassGlColor4x)(nil)
+}
+func doEncodeGlColor4x(e binary.Encoder, o *GlColor4x) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Red))
+	e.Int32(int32(o.Green))
+	e.Int32(int32(o.Blue))
+	e.Int32(int32(o.Alpha))
+}
+func doDecodeGlColor4x(d binary.Decoder, o *GlColor4x) {
+	d.Struct(&o.observations)
+	o.Red = GLfixed(d.Int32())
+	o.Green = GLfixed(d.Int32())
+	o.Blue = GLfixed(d.Int32())
+	o.Alpha = GLfixed(d.Int32())
+}
+func (*binaryClassGlColor4x) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColor4x(e, obj.(*GlColor4x))
+}
+func (*binaryClassGlColor4x) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColor4x{}
+	doDecodeGlColor4x(d, obj)
+	return obj
+}
+func (*binaryClassGlColor4x) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColor4x(d, obj.(*GlColor4x))
+}
+func (*binaryClassGlColor4x) Schema() *binary.Entity { return schemaGlColor4x }
+
+var schemaGlColor4x = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColor4x",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlColor4xOES struct{}
+
+func (*GlColor4xOES) Class() binary.Class {
+	return (*binaryClassGlColor4xOES)(nil)
+}
+func doEncodeGlColor4xOES(e binary.Encoder, o *GlColor4xOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Red))
+	e.Int32(int32(o.Green))
+	e.Int32(int32(o.Blue))
+	e.Int32(int32(o.Alpha))
+}
+func doDecodeGlColor4xOES(d binary.Decoder, o *GlColor4xOES) {
+	d.Struct(&o.observations)
+	o.Red = GLfixed(d.Int32())
+	o.Green = GLfixed(d.Int32())
+	o.Blue = GLfixed(d.Int32())
+	o.Alpha = GLfixed(d.Int32())
+}
+func (*binaryClassGlColor4xOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColor4xOES(e, obj.(*GlColor4xOES))
+}
+func (*binaryClassGlColor4xOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColor4xOES{}
+	doDecodeGlColor4xOES(d, obj)
+	return obj
+}
+func (*binaryClassGlColor4xOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColor4xOES(d, obj.(*GlColor4xOES))
+}
+func (*binaryClassGlColor4xOES) Schema() *binary.Entity { return schemaGlColor4xOES }
+
+var schemaGlColor4xOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColor4xOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
 	},
 }
 
@@ -9268,6 +10626,97 @@ var schemaGlColorMaskiOES = &binary.Entity{
 		{Declared: "G", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "B", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 		{Declared: "A", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassGlColorPointer struct{}
+
+func (*GlColorPointer) Class() binary.Class {
+	return (*binaryClassGlColorPointer)(nil)
+}
+func doEncodeGlColorPointer(e binary.Encoder, o *GlColorPointer) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlColorPointer(d binary.Decoder, o *GlColorPointer) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlColorPointer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColorPointer(e, obj.(*GlColorPointer))
+}
+func (*binaryClassGlColorPointer) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColorPointer{}
+	doDecodeGlColorPointer(d, obj)
+	return obj
+}
+func (*binaryClassGlColorPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColorPointer(d, obj.(*GlColorPointer))
+}
+func (*binaryClassGlColorPointer) Schema() *binary.Entity { return schemaGlColorPointer }
+
+var schemaGlColorPointer = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColorPointer",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlColorPointerBounds struct{}
+
+func (*GlColorPointerBounds) Class() binary.Class {
+	return (*binaryClassGlColorPointerBounds)(nil)
+}
+func doEncodeGlColorPointerBounds(e binary.Encoder, o *GlColorPointerBounds) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlColorPointerBounds(d binary.Decoder, o *GlColorPointerBounds) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlColorPointerBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlColorPointerBounds(e, obj.(*GlColorPointerBounds))
+}
+func (*binaryClassGlColorPointerBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlColorPointerBounds{}
+	doDecodeGlColorPointerBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlColorPointerBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlColorPointerBounds(d, obj.(*GlColorPointerBounds))
+}
+func (*binaryClassGlColorPointerBounds) Schema() *binary.Entity { return schemaGlColorPointerBounds }
+
+var schemaGlColorPointerBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlColorPointerBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -10915,6 +12364,43 @@ var schemaGlCullFace = &binary.Entity{
 	},
 }
 
+type binaryClassGlCurrentPaletteMatrixOES struct{}
+
+func (*GlCurrentPaletteMatrixOES) Class() binary.Class {
+	return (*binaryClassGlCurrentPaletteMatrixOES)(nil)
+}
+func doEncodeGlCurrentPaletteMatrixOES(e binary.Encoder, o *GlCurrentPaletteMatrixOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Matrixpaletteindex))
+}
+func doDecodeGlCurrentPaletteMatrixOES(d binary.Decoder, o *GlCurrentPaletteMatrixOES) {
+	d.Struct(&o.observations)
+	o.Matrixpaletteindex = GLuint(d.Uint32())
+}
+func (*binaryClassGlCurrentPaletteMatrixOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlCurrentPaletteMatrixOES(e, obj.(*GlCurrentPaletteMatrixOES))
+}
+func (*binaryClassGlCurrentPaletteMatrixOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlCurrentPaletteMatrixOES{}
+	doDecodeGlCurrentPaletteMatrixOES(d, obj)
+	return obj
+}
+func (*binaryClassGlCurrentPaletteMatrixOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlCurrentPaletteMatrixOES(d, obj.(*GlCurrentPaletteMatrixOES))
+}
+func (*binaryClassGlCurrentPaletteMatrixOES) Schema() *binary.Entity {
+	return schemaGlCurrentPaletteMatrixOES
+}
+
+var schemaGlCurrentPaletteMatrixOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlCurrentPaletteMatrixOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Matrixpaletteindex", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassGlDebugMessageCallback struct{}
 
 func (*GlDebugMessageCallback) Class() binary.Class {
@@ -11308,6 +12794,46 @@ var schemaGlDeleteFramebuffers = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*FramebufferIdᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlDeleteFramebuffersOES struct{}
+
+func (*GlDeleteFramebuffersOES) Class() binary.Class {
+	return (*binaryClassGlDeleteFramebuffersOES)(nil)
+}
+func doEncodeGlDeleteFramebuffersOES(e binary.Encoder, o *GlDeleteFramebuffersOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Struct(&o.Framebuffers)
+}
+func doDecodeGlDeleteFramebuffersOES(d binary.Decoder, o *GlDeleteFramebuffersOES) {
+	d.Struct(&o.observations)
+	o.N = GLsizei(d.Int32())
+	d.Struct(&o.Framebuffers)
+}
+func (*binaryClassGlDeleteFramebuffersOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDeleteFramebuffersOES(e, obj.(*GlDeleteFramebuffersOES))
+}
+func (*binaryClassGlDeleteFramebuffersOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDeleteFramebuffersOES{}
+	doDecodeGlDeleteFramebuffersOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDeleteFramebuffersOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDeleteFramebuffersOES(d, obj.(*GlDeleteFramebuffersOES))
+}
+func (*binaryClassGlDeleteFramebuffersOES) Schema() *binary.Entity {
+	return schemaGlDeleteFramebuffersOES
+}
+
+var schemaGlDeleteFramebuffersOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDeleteFramebuffersOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -11746,6 +13272,46 @@ var schemaGlDeleteRenderbuffers = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*RenderbufferIdᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlDeleteRenderbuffersOES struct{}
+
+func (*GlDeleteRenderbuffersOES) Class() binary.Class {
+	return (*binaryClassGlDeleteRenderbuffersOES)(nil)
+}
+func doEncodeGlDeleteRenderbuffersOES(e binary.Encoder, o *GlDeleteRenderbuffersOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Struct(&o.Renderbuffers)
+}
+func doDecodeGlDeleteRenderbuffersOES(d binary.Decoder, o *GlDeleteRenderbuffersOES) {
+	d.Struct(&o.observations)
+	o.N = GLsizei(d.Int32())
+	d.Struct(&o.Renderbuffers)
+}
+func (*binaryClassGlDeleteRenderbuffersOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDeleteRenderbuffersOES(e, obj.(*GlDeleteRenderbuffersOES))
+}
+func (*binaryClassGlDeleteRenderbuffersOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDeleteRenderbuffersOES{}
+	doDecodeGlDeleteRenderbuffersOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDeleteRenderbuffersOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDeleteRenderbuffersOES(d, obj.(*GlDeleteRenderbuffersOES))
+}
+func (*binaryClassGlDeleteRenderbuffersOES) Schema() *binary.Entity {
+	return schemaGlDeleteRenderbuffersOES
+}
+
+var schemaGlDeleteRenderbuffersOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDeleteRenderbuffersOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -12368,6 +13934,120 @@ var schemaGlDepthRangef = &binary.Entity{
 	},
 }
 
+type binaryClassGlDepthRangefOES struct{}
+
+func (*GlDepthRangefOES) Class() binary.Class {
+	return (*binaryClassGlDepthRangefOES)(nil)
+}
+func doEncodeGlDepthRangefOES(e binary.Encoder, o *GlDepthRangefOES) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.N))
+	e.Float32(float32(o.F))
+}
+func doDecodeGlDepthRangefOES(d binary.Decoder, o *GlDepthRangefOES) {
+	d.Struct(&o.observations)
+	o.N = GLclampf(d.Float32())
+	o.F = GLclampf(d.Float32())
+}
+func (*binaryClassGlDepthRangefOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDepthRangefOES(e, obj.(*GlDepthRangefOES))
+}
+func (*binaryClassGlDepthRangefOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDepthRangefOES{}
+	doDecodeGlDepthRangefOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDepthRangefOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDepthRangefOES(d, obj.(*GlDepthRangefOES))
+}
+func (*binaryClassGlDepthRangefOES) Schema() *binary.Entity { return schemaGlDepthRangefOES }
+
+var schemaGlDepthRangefOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDepthRangefOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLclampf", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlDepthRangex struct{}
+
+func (*GlDepthRangex) Class() binary.Class {
+	return (*binaryClassGlDepthRangex)(nil)
+}
+func doEncodeGlDepthRangex(e binary.Encoder, o *GlDepthRangex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlDepthRangex(d binary.Decoder, o *GlDepthRangex) {
+	d.Struct(&o.observations)
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlDepthRangex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDepthRangex(e, obj.(*GlDepthRangex))
+}
+func (*binaryClassGlDepthRangex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDepthRangex{}
+	doDecodeGlDepthRangex(d, obj)
+	return obj
+}
+func (*binaryClassGlDepthRangex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDepthRangex(d, obj.(*GlDepthRangex))
+}
+func (*binaryClassGlDepthRangex) Schema() *binary.Entity { return schemaGlDepthRangex }
+
+var schemaGlDepthRangex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDepthRangex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlDepthRangexOES struct{}
+
+func (*GlDepthRangexOES) Class() binary.Class {
+	return (*binaryClassGlDepthRangexOES)(nil)
+}
+func doEncodeGlDepthRangexOES(e binary.Encoder, o *GlDepthRangexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlDepthRangexOES(d binary.Decoder, o *GlDepthRangexOES) {
+	d.Struct(&o.observations)
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlDepthRangexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDepthRangexOES(e, obj.(*GlDepthRangexOES))
+}
+func (*binaryClassGlDepthRangexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDepthRangexOES{}
+	doDecodeGlDepthRangexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDepthRangexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDepthRangexOES(d, obj.(*GlDepthRangexOES))
+}
+func (*binaryClassGlDepthRangexOES) Schema() *binary.Entity { return schemaGlDepthRangexOES }
+
+var schemaGlDepthRangexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDepthRangexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlDetachShader struct{}
 
 func (*GlDetachShader) Class() binary.Class {
@@ -12438,6 +14118,41 @@ var schemaGlDisable = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlDisableClientState struct{}
+
+func (*GlDisableClientState) Class() binary.Class {
+	return (*binaryClassGlDisableClientState)(nil)
+}
+func doEncodeGlDisableClientState(e binary.Encoder, o *GlDisableClientState) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Array))
+}
+func doDecodeGlDisableClientState(d binary.Decoder, o *GlDisableClientState) {
+	d.Struct(&o.observations)
+	o.Array = GLenum(d.Uint32())
+}
+func (*binaryClassGlDisableClientState) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDisableClientState(e, obj.(*GlDisableClientState))
+}
+func (*binaryClassGlDisableClientState) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDisableClientState{}
+	doDecodeGlDisableClientState(d, obj)
+	return obj
+}
+func (*binaryClassGlDisableClientState) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDisableClientState(d, obj.(*GlDisableClientState))
+}
+func (*binaryClassGlDisableClientState) Schema() *binary.Entity { return schemaGlDisableClientState }
+
+var schemaGlDisableClientState = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDisableClientState",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Array", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -14193,6 +15908,334 @@ var schemaGlDrawRangeElementsBaseVertexOES = &binary.Entity{
 	},
 }
 
+type binaryClassGlDrawTexfOES struct{}
+
+func (*GlDrawTexfOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexfOES)(nil)
+}
+func doEncodeGlDrawTexfOES(e binary.Encoder, o *GlDrawTexfOES) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.X))
+	e.Float32(float32(o.Y))
+	e.Float32(float32(o.Z))
+	e.Float32(float32(o.Width))
+	e.Float32(float32(o.Height))
+}
+func doDecodeGlDrawTexfOES(d binary.Decoder, o *GlDrawTexfOES) {
+	d.Struct(&o.observations)
+	o.X = GLfloat(d.Float32())
+	o.Y = GLfloat(d.Float32())
+	o.Z = GLfloat(d.Float32())
+	o.Width = GLfloat(d.Float32())
+	o.Height = GLfloat(d.Float32())
+}
+func (*binaryClassGlDrawTexfOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexfOES(e, obj.(*GlDrawTexfOES))
+}
+func (*binaryClassGlDrawTexfOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexfOES{}
+	doDecodeGlDrawTexfOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexfOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexfOES(d, obj.(*GlDrawTexfOES))
+}
+func (*binaryClassGlDrawTexfOES) Schema() *binary.Entity { return schemaGlDrawTexfOES }
+
+var schemaGlDrawTexfOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexfOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlDrawTexfvOES struct{}
+
+func (*GlDrawTexfvOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexfvOES)(nil)
+}
+func doEncodeGlDrawTexfvOES(e binary.Encoder, o *GlDrawTexfvOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Coords)
+}
+func doDecodeGlDrawTexfvOES(d binary.Decoder, o *GlDrawTexfvOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Coords)
+}
+func (*binaryClassGlDrawTexfvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexfvOES(e, obj.(*GlDrawTexfvOES))
+}
+func (*binaryClassGlDrawTexfvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexfvOES{}
+	doDecodeGlDrawTexfvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexfvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexfvOES(d, obj.(*GlDrawTexfvOES))
+}
+func (*binaryClassGlDrawTexfvOES) Schema() *binary.Entity { return schemaGlDrawTexfvOES }
+
+var schemaGlDrawTexfvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexfvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlDrawTexiOES struct{}
+
+func (*GlDrawTexiOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexiOES)(nil)
+}
+func doEncodeGlDrawTexiOES(e binary.Encoder, o *GlDrawTexiOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+	e.Int32(int32(o.Width))
+	e.Int32(int32(o.Height))
+}
+func doDecodeGlDrawTexiOES(d binary.Decoder, o *GlDrawTexiOES) {
+	d.Struct(&o.observations)
+	o.X = GLint(d.Int32())
+	o.Y = GLint(d.Int32())
+	o.Z = GLint(d.Int32())
+	o.Width = GLint(d.Int32())
+	o.Height = GLint(d.Int32())
+}
+func (*binaryClassGlDrawTexiOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexiOES(e, obj.(*GlDrawTexiOES))
+}
+func (*binaryClassGlDrawTexiOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexiOES{}
+	doDecodeGlDrawTexiOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexiOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexiOES(d, obj.(*GlDrawTexiOES))
+}
+func (*binaryClassGlDrawTexiOES) Schema() *binary.Entity { return schemaGlDrawTexiOES }
+
+var schemaGlDrawTexiOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexiOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlDrawTexivOES struct{}
+
+func (*GlDrawTexivOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexivOES)(nil)
+}
+func doEncodeGlDrawTexivOES(e binary.Encoder, o *GlDrawTexivOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Coords)
+}
+func doDecodeGlDrawTexivOES(d binary.Decoder, o *GlDrawTexivOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Coords)
+}
+func (*binaryClassGlDrawTexivOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexivOES(e, obj.(*GlDrawTexivOES))
+}
+func (*binaryClassGlDrawTexivOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexivOES{}
+	doDecodeGlDrawTexivOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexivOES(d, obj.(*GlDrawTexivOES))
+}
+func (*binaryClassGlDrawTexivOES) Schema() *binary.Entity { return schemaGlDrawTexivOES }
+
+var schemaGlDrawTexivOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexivOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlDrawTexsOES struct{}
+
+func (*GlDrawTexsOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexsOES)(nil)
+}
+func doEncodeGlDrawTexsOES(e binary.Encoder, o *GlDrawTexsOES) {
+	e.Struct(&o.observations)
+	e.Int16(int16(o.X))
+	e.Int16(int16(o.Y))
+	e.Int16(int16(o.Z))
+	e.Int16(int16(o.Width))
+	e.Int16(int16(o.Height))
+}
+func doDecodeGlDrawTexsOES(d binary.Decoder, o *GlDrawTexsOES) {
+	d.Struct(&o.observations)
+	o.X = GLshort(d.Int16())
+	o.Y = GLshort(d.Int16())
+	o.Z = GLshort(d.Int16())
+	o.Width = GLshort(d.Int16())
+	o.Height = GLshort(d.Int16())
+}
+func (*binaryClassGlDrawTexsOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexsOES(e, obj.(*GlDrawTexsOES))
+}
+func (*binaryClassGlDrawTexsOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexsOES{}
+	doDecodeGlDrawTexsOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexsOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexsOES(d, obj.(*GlDrawTexsOES))
+}
+func (*binaryClassGlDrawTexsOES) Schema() *binary.Entity { return schemaGlDrawTexsOES }
+
+var schemaGlDrawTexsOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexsOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLshort", Method: schema.Int16}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLshort", Method: schema.Int16}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLshort", Method: schema.Int16}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLshort", Method: schema.Int16}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLshort", Method: schema.Int16}},
+	},
+}
+
+type binaryClassGlDrawTexsvOES struct{}
+
+func (*GlDrawTexsvOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexsvOES)(nil)
+}
+func doEncodeGlDrawTexsvOES(e binary.Encoder, o *GlDrawTexsvOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Coords)
+}
+func doDecodeGlDrawTexsvOES(d binary.Decoder, o *GlDrawTexsvOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Coords)
+}
+func (*binaryClassGlDrawTexsvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexsvOES(e, obj.(*GlDrawTexsvOES))
+}
+func (*binaryClassGlDrawTexsvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexsvOES{}
+	doDecodeGlDrawTexsvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexsvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexsvOES(d, obj.(*GlDrawTexsvOES))
+}
+func (*binaryClassGlDrawTexsvOES) Schema() *binary.Entity { return schemaGlDrawTexsvOES }
+
+var schemaGlDrawTexsvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexsvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*GLshortᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlDrawTexxOES struct{}
+
+func (*GlDrawTexxOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexxOES)(nil)
+}
+func doEncodeGlDrawTexxOES(e binary.Encoder, o *GlDrawTexxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+	e.Int32(int32(o.Width))
+	e.Int32(int32(o.Height))
+}
+func doDecodeGlDrawTexxOES(d binary.Decoder, o *GlDrawTexxOES) {
+	d.Struct(&o.observations)
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+	o.Width = GLfixed(d.Int32())
+	o.Height = GLfixed(d.Int32())
+}
+func (*binaryClassGlDrawTexxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexxOES(e, obj.(*GlDrawTexxOES))
+}
+func (*binaryClassGlDrawTexxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexxOES{}
+	doDecodeGlDrawTexxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexxOES(d, obj.(*GlDrawTexxOES))
+}
+func (*binaryClassGlDrawTexxOES) Schema() *binary.Entity { return schemaGlDrawTexxOES }
+
+var schemaGlDrawTexxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlDrawTexxvOES struct{}
+
+func (*GlDrawTexxvOES) Class() binary.Class {
+	return (*binaryClassGlDrawTexxvOES)(nil)
+}
+func doEncodeGlDrawTexxvOES(e binary.Encoder, o *GlDrawTexxvOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Coords)
+}
+func doDecodeGlDrawTexxvOES(d binary.Decoder, o *GlDrawTexxvOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Coords)
+}
+func (*binaryClassGlDrawTexxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlDrawTexxvOES(e, obj.(*GlDrawTexxvOES))
+}
+func (*binaryClassGlDrawTexxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlDrawTexxvOES{}
+	doDecodeGlDrawTexxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlDrawTexxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlDrawTexxvOES(d, obj.(*GlDrawTexxvOES))
+}
+func (*binaryClassGlDrawTexxvOES) Schema() *binary.Entity { return schemaGlDrawTexxvOES }
+
+var schemaGlDrawTexxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlDrawTexxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coords", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlEGLImageTargetRenderbufferStorageOES struct{}
 
 func (*GlEGLImageTargetRenderbufferStorageOES) Class() binary.Class {
@@ -14305,6 +16348,41 @@ var schemaGlEnable = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Capability", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlEnableClientState struct{}
+
+func (*GlEnableClientState) Class() binary.Class {
+	return (*binaryClassGlEnableClientState)(nil)
+}
+func doEncodeGlEnableClientState(e binary.Encoder, o *GlEnableClientState) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Array))
+}
+func doDecodeGlEnableClientState(d binary.Decoder, o *GlEnableClientState) {
+	d.Struct(&o.observations)
+	o.Array = GLenum(d.Uint32())
+}
+func (*binaryClassGlEnableClientState) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlEnableClientState(e, obj.(*GlEnableClientState))
+}
+func (*binaryClassGlEnableClientState) Decode(d binary.Decoder) binary.Object {
+	obj := &GlEnableClientState{}
+	doDecodeGlEnableClientState(d, obj)
+	return obj
+}
+func (*binaryClassGlEnableClientState) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlEnableClientState(d, obj.(*GlEnableClientState))
+}
+func (*binaryClassGlEnableClientState) Schema() *binary.Entity { return schemaGlEnableClientState }
+
+var schemaGlEnableClientState = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlEnableClientState",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Array", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -15737,6 +17815,234 @@ var schemaGlFlushMappedBufferRangeEXT = &binary.Entity{
 	},
 }
 
+type binaryClassGlFogf struct{}
+
+func (*GlFogf) Class() binary.Class {
+	return (*binaryClassGlFogf)(nil)
+}
+func doEncodeGlFogf(e binary.Encoder, o *GlFogf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlFogf(d binary.Decoder, o *GlFogf) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlFogf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogf(e, obj.(*GlFogf))
+}
+func (*binaryClassGlFogf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogf{}
+	doDecodeGlFogf(d, obj)
+	return obj
+}
+func (*binaryClassGlFogf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogf(d, obj.(*GlFogf))
+}
+func (*binaryClassGlFogf) Schema() *binary.Entity { return schemaGlFogf }
+
+var schemaGlFogf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlFogfv struct{}
+
+func (*GlFogfv) Class() binary.Class {
+	return (*binaryClassGlFogfv)(nil)
+}
+func doEncodeGlFogfv(e binary.Encoder, o *GlFogfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlFogfv(d binary.Decoder, o *GlFogfv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlFogfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogfv(e, obj.(*GlFogfv))
+}
+func (*binaryClassGlFogfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogfv{}
+	doDecodeGlFogfv(d, obj)
+	return obj
+}
+func (*binaryClassGlFogfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogfv(d, obj.(*GlFogfv))
+}
+func (*binaryClassGlFogfv) Schema() *binary.Entity { return schemaGlFogfv }
+
+var schemaGlFogfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlFogx struct{}
+
+func (*GlFogx) Class() binary.Class {
+	return (*binaryClassGlFogx)(nil)
+}
+func doEncodeGlFogx(e binary.Encoder, o *GlFogx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlFogx(d binary.Decoder, o *GlFogx) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlFogx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogx(e, obj.(*GlFogx))
+}
+func (*binaryClassGlFogx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogx{}
+	doDecodeGlFogx(d, obj)
+	return obj
+}
+func (*binaryClassGlFogx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogx(d, obj.(*GlFogx))
+}
+func (*binaryClassGlFogx) Schema() *binary.Entity { return schemaGlFogx }
+
+var schemaGlFogx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlFogxOES struct{}
+
+func (*GlFogxOES) Class() binary.Class {
+	return (*binaryClassGlFogxOES)(nil)
+}
+func doEncodeGlFogxOES(e binary.Encoder, o *GlFogxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlFogxOES(d binary.Decoder, o *GlFogxOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlFogxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogxOES(e, obj.(*GlFogxOES))
+}
+func (*binaryClassGlFogxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogxOES{}
+	doDecodeGlFogxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFogxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogxOES(d, obj.(*GlFogxOES))
+}
+func (*binaryClassGlFogxOES) Schema() *binary.Entity { return schemaGlFogxOES }
+
+var schemaGlFogxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlFogxv struct{}
+
+func (*GlFogxv) Class() binary.Class {
+	return (*binaryClassGlFogxv)(nil)
+}
+func doEncodeGlFogxv(e binary.Encoder, o *GlFogxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlFogxv(d binary.Decoder, o *GlFogxv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlFogxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogxv(e, obj.(*GlFogxv))
+}
+func (*binaryClassGlFogxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogxv{}
+	doDecodeGlFogxv(d, obj)
+	return obj
+}
+func (*binaryClassGlFogxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogxv(d, obj.(*GlFogxv))
+}
+func (*binaryClassGlFogxv) Schema() *binary.Entity { return schemaGlFogxv }
+
+var schemaGlFogxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlFogxvOES struct{}
+
+func (*GlFogxvOES) Class() binary.Class {
+	return (*binaryClassGlFogxvOES)(nil)
+}
+func doEncodeGlFogxvOES(e binary.Encoder, o *GlFogxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlFogxvOES(d binary.Decoder, o *GlFogxvOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlFogxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFogxvOES(e, obj.(*GlFogxvOES))
+}
+func (*binaryClassGlFogxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFogxvOES{}
+	doDecodeGlFogxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFogxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFogxvOES(d, obj.(*GlFogxvOES))
+}
+func (*binaryClassGlFogxvOES) Schema() *binary.Entity { return schemaGlFogxvOES }
+
+var schemaGlFogxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFogxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlFragmentCoverageColorNV struct{}
 
 func (*GlFragmentCoverageColorNV) Class() binary.Class {
@@ -15860,6 +18166,52 @@ var schemaGlFramebufferRenderbuffer = &binary.Entity{
 		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlFramebufferRenderbufferOES struct{}
+
+func (*GlFramebufferRenderbufferOES) Class() binary.Class {
+	return (*binaryClassGlFramebufferRenderbufferOES)(nil)
+}
+func doEncodeGlFramebufferRenderbufferOES(e binary.Encoder, o *GlFramebufferRenderbufferOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Attachment))
+	e.Uint32(uint32(o.Renderbuffertarget))
+	e.Uint32(uint32(o.Renderbuffer))
+}
+func doDecodeGlFramebufferRenderbufferOES(d binary.Decoder, o *GlFramebufferRenderbufferOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Attachment = GLenum(d.Uint32())
+	o.Renderbuffertarget = GLenum(d.Uint32())
+	o.Renderbuffer = GLuint(d.Uint32())
+}
+func (*binaryClassGlFramebufferRenderbufferOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFramebufferRenderbufferOES(e, obj.(*GlFramebufferRenderbufferOES))
+}
+func (*binaryClassGlFramebufferRenderbufferOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFramebufferRenderbufferOES{}
+	doDecodeGlFramebufferRenderbufferOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFramebufferRenderbufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFramebufferRenderbufferOES(d, obj.(*GlFramebufferRenderbufferOES))
+}
+func (*binaryClassGlFramebufferRenderbufferOES) Schema() *binary.Entity {
+	return schemaGlFramebufferRenderbufferOES
+}
+
+var schemaGlFramebufferRenderbufferOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFramebufferRenderbufferOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Renderbuffertarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 	},
 }
 
@@ -16111,17 +18463,17 @@ func (*GlFramebufferTexture2DOES) Class() binary.Class {
 }
 func doEncodeGlFramebufferTexture2DOES(e binary.Encoder, o *GlFramebufferTexture2DOES) {
 	e.Struct(&o.observations)
-	e.Uint32(uint32(o.FramebufferTarget))
-	e.Uint32(uint32(o.FramebufferAttachment))
-	e.Uint32(uint32(o.TextureTarget))
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Attachment))
+	e.Uint32(uint32(o.Textarget))
 	e.Uint32(uint32(o.Texture))
 	e.Int32(int32(o.Level))
 }
 func doDecodeGlFramebufferTexture2DOES(d binary.Decoder, o *GlFramebufferTexture2DOES) {
 	d.Struct(&o.observations)
-	o.FramebufferTarget = GLenum(d.Uint32())
-	o.FramebufferAttachment = GLenum(d.Uint32())
-	o.TextureTarget = GLenum(d.Uint32())
+	o.Target = GLenum(d.Uint32())
+	o.Attachment = GLenum(d.Uint32())
+	o.Textarget = GLenum(d.Uint32())
 	o.Texture = TextureId(d.Uint32())
 	o.Level = GLint(d.Int32())
 }
@@ -16145,9 +18497,9 @@ var schemaGlFramebufferTexture2DOES = &binary.Entity{
 	Identity: "GlFramebufferTexture2DOES",
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
-		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
-		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Textarget", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 		{Declared: "Level", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 	},
@@ -16433,6 +18785,206 @@ var schemaGlFrontFace = &binary.Entity{
 	},
 }
 
+type binaryClassGlFrustumf struct{}
+
+func (*GlFrustumf) Class() binary.Class {
+	return (*binaryClassGlFrustumf)(nil)
+}
+func doEncodeGlFrustumf(e binary.Encoder, o *GlFrustumf) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.L))
+	e.Float32(float32(o.R))
+	e.Float32(float32(o.B))
+	e.Float32(float32(o.T))
+	e.Float32(float32(o.N))
+	e.Float32(float32(o.F))
+}
+func doDecodeGlFrustumf(d binary.Decoder, o *GlFrustumf) {
+	d.Struct(&o.observations)
+	o.L = GLfloat(d.Float32())
+	o.R = GLfloat(d.Float32())
+	o.B = GLfloat(d.Float32())
+	o.T = GLfloat(d.Float32())
+	o.N = GLfloat(d.Float32())
+	o.F = GLfloat(d.Float32())
+}
+func (*binaryClassGlFrustumf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFrustumf(e, obj.(*GlFrustumf))
+}
+func (*binaryClassGlFrustumf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFrustumf{}
+	doDecodeGlFrustumf(d, obj)
+	return obj
+}
+func (*binaryClassGlFrustumf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFrustumf(d, obj.(*GlFrustumf))
+}
+func (*binaryClassGlFrustumf) Schema() *binary.Entity { return schemaGlFrustumf }
+
+var schemaGlFrustumf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFrustumf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlFrustumfOES struct{}
+
+func (*GlFrustumfOES) Class() binary.Class {
+	return (*binaryClassGlFrustumfOES)(nil)
+}
+func doEncodeGlFrustumfOES(e binary.Encoder, o *GlFrustumfOES) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.L))
+	e.Float32(float32(o.R))
+	e.Float32(float32(o.B))
+	e.Float32(float32(o.T))
+	e.Float32(float32(o.N))
+	e.Float32(float32(o.F))
+}
+func doDecodeGlFrustumfOES(d binary.Decoder, o *GlFrustumfOES) {
+	d.Struct(&o.observations)
+	o.L = GLfloat(d.Float32())
+	o.R = GLfloat(d.Float32())
+	o.B = GLfloat(d.Float32())
+	o.T = GLfloat(d.Float32())
+	o.N = GLfloat(d.Float32())
+	o.F = GLfloat(d.Float32())
+}
+func (*binaryClassGlFrustumfOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFrustumfOES(e, obj.(*GlFrustumfOES))
+}
+func (*binaryClassGlFrustumfOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFrustumfOES{}
+	doDecodeGlFrustumfOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFrustumfOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFrustumfOES(d, obj.(*GlFrustumfOES))
+}
+func (*binaryClassGlFrustumfOES) Schema() *binary.Entity { return schemaGlFrustumfOES }
+
+var schemaGlFrustumfOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFrustumfOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlFrustumx struct{}
+
+func (*GlFrustumx) Class() binary.Class {
+	return (*binaryClassGlFrustumx)(nil)
+}
+func doEncodeGlFrustumx(e binary.Encoder, o *GlFrustumx) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.L))
+	e.Int32(int32(o.R))
+	e.Int32(int32(o.B))
+	e.Int32(int32(o.T))
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlFrustumx(d binary.Decoder, o *GlFrustumx) {
+	d.Struct(&o.observations)
+	o.L = GLfixed(d.Int32())
+	o.R = GLfixed(d.Int32())
+	o.B = GLfixed(d.Int32())
+	o.T = GLfixed(d.Int32())
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlFrustumx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFrustumx(e, obj.(*GlFrustumx))
+}
+func (*binaryClassGlFrustumx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFrustumx{}
+	doDecodeGlFrustumx(d, obj)
+	return obj
+}
+func (*binaryClassGlFrustumx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFrustumx(d, obj.(*GlFrustumx))
+}
+func (*binaryClassGlFrustumx) Schema() *binary.Entity { return schemaGlFrustumx }
+
+var schemaGlFrustumx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFrustumx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlFrustumxOES struct{}
+
+func (*GlFrustumxOES) Class() binary.Class {
+	return (*binaryClassGlFrustumxOES)(nil)
+}
+func doEncodeGlFrustumxOES(e binary.Encoder, o *GlFrustumxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.L))
+	e.Int32(int32(o.R))
+	e.Int32(int32(o.B))
+	e.Int32(int32(o.T))
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlFrustumxOES(d binary.Decoder, o *GlFrustumxOES) {
+	d.Struct(&o.observations)
+	o.L = GLfixed(d.Int32())
+	o.R = GLfixed(d.Int32())
+	o.B = GLfixed(d.Int32())
+	o.T = GLfixed(d.Int32())
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlFrustumxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlFrustumxOES(e, obj.(*GlFrustumxOES))
+}
+func (*binaryClassGlFrustumxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlFrustumxOES{}
+	doDecodeGlFrustumxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlFrustumxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlFrustumxOES(d, obj.(*GlFrustumxOES))
+}
+func (*binaryClassGlFrustumxOES) Schema() *binary.Entity { return schemaGlFrustumxOES }
+
+var schemaGlFrustumxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlFrustumxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlGenBuffers struct{}
 
 func (*GlGenBuffers) Class() binary.Class {
@@ -16544,6 +19096,44 @@ var schemaGlGenFramebuffers = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*FramebufferIdᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGenFramebuffersOES struct{}
+
+func (*GlGenFramebuffersOES) Class() binary.Class {
+	return (*binaryClassGlGenFramebuffersOES)(nil)
+}
+func doEncodeGlGenFramebuffersOES(e binary.Encoder, o *GlGenFramebuffersOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Struct(&o.Framebuffers)
+}
+func doDecodeGlGenFramebuffersOES(d binary.Decoder, o *GlGenFramebuffersOES) {
+	d.Struct(&o.observations)
+	o.N = GLsizei(d.Int32())
+	d.Struct(&o.Framebuffers)
+}
+func (*binaryClassGlGenFramebuffersOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGenFramebuffersOES(e, obj.(*GlGenFramebuffersOES))
+}
+func (*binaryClassGlGenFramebuffersOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGenFramebuffersOES{}
+	doDecodeGlGenFramebuffersOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGenFramebuffersOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGenFramebuffersOES(d, obj.(*GlGenFramebuffersOES))
+}
+func (*binaryClassGlGenFramebuffersOES) Schema() *binary.Entity { return schemaGlGenFramebuffersOES }
+
+var schemaGlGenFramebuffersOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGenFramebuffersOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -16879,6 +19469,44 @@ var schemaGlGenRenderbuffers = &binary.Entity{
 	},
 }
 
+type binaryClassGlGenRenderbuffersOES struct{}
+
+func (*GlGenRenderbuffersOES) Class() binary.Class {
+	return (*binaryClassGlGenRenderbuffersOES)(nil)
+}
+func doEncodeGlGenRenderbuffersOES(e binary.Encoder, o *GlGenRenderbuffersOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.N))
+	e.Struct(&o.Renderbuffers)
+}
+func doDecodeGlGenRenderbuffersOES(d binary.Decoder, o *GlGenRenderbuffersOES) {
+	d.Struct(&o.observations)
+	o.N = GLsizei(d.Int32())
+	d.Struct(&o.Renderbuffers)
+}
+func (*binaryClassGlGenRenderbuffersOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGenRenderbuffersOES(e, obj.(*GlGenRenderbuffersOES))
+}
+func (*binaryClassGlGenRenderbuffersOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGenRenderbuffersOES{}
+	doDecodeGlGenRenderbuffersOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGenRenderbuffersOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGenRenderbuffersOES(d, obj.(*GlGenRenderbuffersOES))
+}
+func (*binaryClassGlGenRenderbuffersOES) Schema() *binary.Entity { return schemaGlGenRenderbuffersOES }
+
+var schemaGlGenRenderbuffersOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGenRenderbuffersOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Entity: (*GLuintᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassSamplerIdᵖ struct{}
 
 func (*SamplerIdᵖ) Class() binary.Class {
@@ -17196,6 +19824,41 @@ func (*binaryClassGlGenerateMipmap) Schema() *binary.Entity { return schemaGlGen
 var schemaGlGenerateMipmap = &binary.Entity{
 	Package:  "gles",
 	Identity: "GlGenerateMipmap",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlGenerateMipmapOES struct{}
+
+func (*GlGenerateMipmapOES) Class() binary.Class {
+	return (*binaryClassGlGenerateMipmapOES)(nil)
+}
+func doEncodeGlGenerateMipmapOES(e binary.Encoder, o *GlGenerateMipmapOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+}
+func doDecodeGlGenerateMipmapOES(d binary.Decoder, o *GlGenerateMipmapOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+}
+func (*binaryClassGlGenerateMipmapOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGenerateMipmapOES(e, obj.(*GlGenerateMipmapOES))
+}
+func (*binaryClassGlGenerateMipmapOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGenerateMipmapOES{}
+	doDecodeGlGenerateMipmapOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGenerateMipmapOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGenerateMipmapOES(d, obj.(*GlGenerateMipmapOES))
+}
+func (*binaryClassGlGenerateMipmapOES) Schema() *binary.Entity { return schemaGlGenerateMipmapOES }
+
+var schemaGlGenerateMipmapOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGenerateMipmapOES",
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
@@ -17812,6 +20475,158 @@ var schemaGlGetBufferPointervOES = &binary.Entity{
 	},
 }
 
+type binaryClassGlGetClipPlanef struct{}
+
+func (*GlGetClipPlanef) Class() binary.Class {
+	return (*binaryClassGlGetClipPlanef)(nil)
+}
+func doEncodeGlGetClipPlanef(e binary.Encoder, o *GlGetClipPlanef) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlGetClipPlanef(d binary.Decoder, o *GlGetClipPlanef) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlGetClipPlanef) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetClipPlanef(e, obj.(*GlGetClipPlanef))
+}
+func (*binaryClassGlGetClipPlanef) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetClipPlanef{}
+	doDecodeGlGetClipPlanef(d, obj)
+	return obj
+}
+func (*binaryClassGlGetClipPlanef) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetClipPlanef(d, obj.(*GlGetClipPlanef))
+}
+func (*binaryClassGlGetClipPlanef) Schema() *binary.Entity { return schemaGlGetClipPlanef }
+
+var schemaGlGetClipPlanef = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetClipPlanef",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetClipPlanefOES struct{}
+
+func (*GlGetClipPlanefOES) Class() binary.Class {
+	return (*binaryClassGlGetClipPlanefOES)(nil)
+}
+func doEncodeGlGetClipPlanefOES(e binary.Encoder, o *GlGetClipPlanefOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlGetClipPlanefOES(d binary.Decoder, o *GlGetClipPlanefOES) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlGetClipPlanefOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetClipPlanefOES(e, obj.(*GlGetClipPlanefOES))
+}
+func (*binaryClassGlGetClipPlanefOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetClipPlanefOES{}
+	doDecodeGlGetClipPlanefOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetClipPlanefOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetClipPlanefOES(d, obj.(*GlGetClipPlanefOES))
+}
+func (*binaryClassGlGetClipPlanefOES) Schema() *binary.Entity { return schemaGlGetClipPlanefOES }
+
+var schemaGlGetClipPlanefOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetClipPlanefOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetClipPlanex struct{}
+
+func (*GlGetClipPlanex) Class() binary.Class {
+	return (*binaryClassGlGetClipPlanex)(nil)
+}
+func doEncodeGlGetClipPlanex(e binary.Encoder, o *GlGetClipPlanex) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlGetClipPlanex(d binary.Decoder, o *GlGetClipPlanex) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlGetClipPlanex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetClipPlanex(e, obj.(*GlGetClipPlanex))
+}
+func (*binaryClassGlGetClipPlanex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetClipPlanex{}
+	doDecodeGlGetClipPlanex(d, obj)
+	return obj
+}
+func (*binaryClassGlGetClipPlanex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetClipPlanex(d, obj.(*GlGetClipPlanex))
+}
+func (*binaryClassGlGetClipPlanex) Schema() *binary.Entity { return schemaGlGetClipPlanex }
+
+var schemaGlGetClipPlanex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetClipPlanex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetClipPlanexOES struct{}
+
+func (*GlGetClipPlanexOES) Class() binary.Class {
+	return (*binaryClassGlGetClipPlanexOES)(nil)
+}
+func doEncodeGlGetClipPlanexOES(e binary.Encoder, o *GlGetClipPlanexOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Plane))
+	e.Struct(&o.Equation)
+}
+func doDecodeGlGetClipPlanexOES(d binary.Decoder, o *GlGetClipPlanexOES) {
+	d.Struct(&o.observations)
+	o.Plane = GLenum(d.Uint32())
+	d.Struct(&o.Equation)
+}
+func (*binaryClassGlGetClipPlanexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetClipPlanexOES(e, obj.(*GlGetClipPlanexOES))
+}
+func (*binaryClassGlGetClipPlanexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetClipPlanexOES{}
+	doDecodeGlGetClipPlanexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetClipPlanexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetClipPlanexOES(d, obj.(*GlGetClipPlanexOES))
+}
+func (*binaryClassGlGetClipPlanexOES) Schema() *binary.Entity { return schemaGlGetClipPlanexOES }
+
+var schemaGlGetClipPlanexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetClipPlanexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Plane", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Equation", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlGetCoverageModulationTableNV struct{}
 
 func (*GlGetCoverageModulationTableNV) Class() binary.Class {
@@ -18174,6 +20989,82 @@ var schemaGlGetFirstPerfQueryIdINTEL = &binary.Entity{
 	},
 }
 
+type binaryClassGlGetFixedv struct{}
+
+func (*GlGetFixedv) Class() binary.Class {
+	return (*binaryClassGlGetFixedv)(nil)
+}
+func doEncodeGlGetFixedv(e binary.Encoder, o *GlGetFixedv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetFixedv(d binary.Decoder, o *GlGetFixedv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetFixedv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetFixedv(e, obj.(*GlGetFixedv))
+}
+func (*binaryClassGlGetFixedv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetFixedv{}
+	doDecodeGlGetFixedv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetFixedv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetFixedv(d, obj.(*GlGetFixedv))
+}
+func (*binaryClassGlGetFixedv) Schema() *binary.Entity { return schemaGlGetFixedv }
+
+var schemaGlGetFixedv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetFixedv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetFixedvOES struct{}
+
+func (*GlGetFixedvOES) Class() binary.Class {
+	return (*binaryClassGlGetFixedvOES)(nil)
+}
+func doEncodeGlGetFixedvOES(e binary.Encoder, o *GlGetFixedvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetFixedvOES(d binary.Decoder, o *GlGetFixedvOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetFixedvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetFixedvOES(e, obj.(*GlGetFixedvOES))
+}
+func (*binaryClassGlGetFixedvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetFixedvOES{}
+	doDecodeGlGetFixedvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetFixedvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetFixedvOES(d, obj.(*GlGetFixedvOES))
+}
+func (*binaryClassGlGetFixedvOES) Schema() *binary.Entity { return schemaGlGetFixedvOES }
+
+var schemaGlGetFixedvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetFixedvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlGetFloati_vNV struct{}
 
 func (*GlGetFloati_vNV) Class() binary.Class {
@@ -18378,6 +21269,52 @@ var schemaGlGetFramebufferAttachmentParameteriv = &binary.Entity{
 		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetFramebufferAttachmentParameterivOES struct{}
+
+func (*GlGetFramebufferAttachmentParameterivOES) Class() binary.Class {
+	return (*binaryClassGlGetFramebufferAttachmentParameterivOES)(nil)
+}
+func doEncodeGlGetFramebufferAttachmentParameterivOES(e binary.Encoder, o *GlGetFramebufferAttachmentParameterivOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Attachment))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetFramebufferAttachmentParameterivOES(d binary.Decoder, o *GlGetFramebufferAttachmentParameterivOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Attachment = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetFramebufferAttachmentParameterivOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetFramebufferAttachmentParameterivOES(e, obj.(*GlGetFramebufferAttachmentParameterivOES))
+}
+func (*binaryClassGlGetFramebufferAttachmentParameterivOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetFramebufferAttachmentParameterivOES{}
+	doDecodeGlGetFramebufferAttachmentParameterivOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetFramebufferAttachmentParameterivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetFramebufferAttachmentParameterivOES(d, obj.(*GlGetFramebufferAttachmentParameterivOES))
+}
+func (*binaryClassGlGetFramebufferAttachmentParameterivOES) Schema() *binary.Entity {
+	return schemaGlGetFramebufferAttachmentParameterivOES
+}
+
+var schemaGlGetFramebufferAttachmentParameterivOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetFramebufferAttachmentParameterivOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -18918,6 +21855,252 @@ var schemaGlGetInternalformativ = &binary.Entity{
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "BufSize", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetLightfv struct{}
+
+func (*GlGetLightfv) Class() binary.Class {
+	return (*binaryClassGlGetLightfv)(nil)
+}
+func doEncodeGlGetLightfv(e binary.Encoder, o *GlGetLightfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetLightfv(d binary.Decoder, o *GlGetLightfv) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetLightfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetLightfv(e, obj.(*GlGetLightfv))
+}
+func (*binaryClassGlGetLightfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetLightfv{}
+	doDecodeGlGetLightfv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetLightfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetLightfv(d, obj.(*GlGetLightfv))
+}
+func (*binaryClassGlGetLightfv) Schema() *binary.Entity { return schemaGlGetLightfv }
+
+var schemaGlGetLightfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetLightfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetLightxv struct{}
+
+func (*GlGetLightxv) Class() binary.Class {
+	return (*binaryClassGlGetLightxv)(nil)
+}
+func doEncodeGlGetLightxv(e binary.Encoder, o *GlGetLightxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetLightxv(d binary.Decoder, o *GlGetLightxv) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetLightxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetLightxv(e, obj.(*GlGetLightxv))
+}
+func (*binaryClassGlGetLightxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetLightxv{}
+	doDecodeGlGetLightxv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetLightxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetLightxv(d, obj.(*GlGetLightxv))
+}
+func (*binaryClassGlGetLightxv) Schema() *binary.Entity { return schemaGlGetLightxv }
+
+var schemaGlGetLightxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetLightxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetLightxvOES struct{}
+
+func (*GlGetLightxvOES) Class() binary.Class {
+	return (*binaryClassGlGetLightxvOES)(nil)
+}
+func doEncodeGlGetLightxvOES(e binary.Encoder, o *GlGetLightxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetLightxvOES(d binary.Decoder, o *GlGetLightxvOES) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetLightxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetLightxvOES(e, obj.(*GlGetLightxvOES))
+}
+func (*binaryClassGlGetLightxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetLightxvOES{}
+	doDecodeGlGetLightxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetLightxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetLightxvOES(d, obj.(*GlGetLightxvOES))
+}
+func (*binaryClassGlGetLightxvOES) Schema() *binary.Entity { return schemaGlGetLightxvOES }
+
+var schemaGlGetLightxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetLightxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetMaterialfv struct{}
+
+func (*GlGetMaterialfv) Class() binary.Class {
+	return (*binaryClassGlGetMaterialfv)(nil)
+}
+func doEncodeGlGetMaterialfv(e binary.Encoder, o *GlGetMaterialfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetMaterialfv(d binary.Decoder, o *GlGetMaterialfv) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetMaterialfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetMaterialfv(e, obj.(*GlGetMaterialfv))
+}
+func (*binaryClassGlGetMaterialfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetMaterialfv{}
+	doDecodeGlGetMaterialfv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetMaterialfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetMaterialfv(d, obj.(*GlGetMaterialfv))
+}
+func (*binaryClassGlGetMaterialfv) Schema() *binary.Entity { return schemaGlGetMaterialfv }
+
+var schemaGlGetMaterialfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetMaterialfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetMaterialxv struct{}
+
+func (*GlGetMaterialxv) Class() binary.Class {
+	return (*binaryClassGlGetMaterialxv)(nil)
+}
+func doEncodeGlGetMaterialxv(e binary.Encoder, o *GlGetMaterialxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetMaterialxv(d binary.Decoder, o *GlGetMaterialxv) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetMaterialxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetMaterialxv(e, obj.(*GlGetMaterialxv))
+}
+func (*binaryClassGlGetMaterialxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetMaterialxv{}
+	doDecodeGlGetMaterialxv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetMaterialxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetMaterialxv(d, obj.(*GlGetMaterialxv))
+}
+func (*binaryClassGlGetMaterialxv) Schema() *binary.Entity { return schemaGlGetMaterialxv }
+
+var schemaGlGetMaterialxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetMaterialxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetMaterialxvOES struct{}
+
+func (*GlGetMaterialxvOES) Class() binary.Class {
+	return (*binaryClassGlGetMaterialxvOES)(nil)
+}
+func doEncodeGlGetMaterialxvOES(e binary.Encoder, o *GlGetMaterialxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetMaterialxvOES(d binary.Decoder, o *GlGetMaterialxvOES) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetMaterialxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetMaterialxvOES(e, obj.(*GlGetMaterialxvOES))
+}
+func (*binaryClassGlGetMaterialxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetMaterialxvOES{}
+	doDecodeGlGetMaterialxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetMaterialxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetMaterialxvOES(d, obj.(*GlGetMaterialxvOES))
+}
+func (*binaryClassGlGetMaterialxvOES) Schema() *binary.Entity { return schemaGlGetMaterialxvOES }
+
+var schemaGlGetMaterialxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetMaterialxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -21384,6 +24567,49 @@ var schemaGlGetRenderbufferParameteriv = &binary.Entity{
 	},
 }
 
+type binaryClassGlGetRenderbufferParameterivOES struct{}
+
+func (*GlGetRenderbufferParameterivOES) Class() binary.Class {
+	return (*binaryClassGlGetRenderbufferParameterivOES)(nil)
+}
+func doEncodeGlGetRenderbufferParameterivOES(e binary.Encoder, o *GlGetRenderbufferParameterivOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetRenderbufferParameterivOES(d binary.Decoder, o *GlGetRenderbufferParameterivOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetRenderbufferParameterivOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetRenderbufferParameterivOES(e, obj.(*GlGetRenderbufferParameterivOES))
+}
+func (*binaryClassGlGetRenderbufferParameterivOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetRenderbufferParameterivOES{}
+	doDecodeGlGetRenderbufferParameterivOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetRenderbufferParameterivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetRenderbufferParameterivOES(d, obj.(*GlGetRenderbufferParameterivOES))
+}
+func (*binaryClassGlGetRenderbufferParameterivOES) Schema() *binary.Entity {
+	return schemaGlGetRenderbufferParameterivOES
+}
+
+var schemaGlGetRenderbufferParameterivOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetRenderbufferParameterivOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlGetSamplerParameterIiv struct{}
 
 func (*GlGetSamplerParameterIiv) Class() binary.Class {
@@ -22076,6 +25302,293 @@ var schemaGlGetSyncivAPPLE = &binary.Entity{
 	},
 }
 
+type binaryClassGlGetTexEnvfv struct{}
+
+func (*GlGetTexEnvfv) Class() binary.Class {
+	return (*binaryClassGlGetTexEnvfv)(nil)
+}
+func doEncodeGlGetTexEnvfv(e binary.Encoder, o *GlGetTexEnvfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexEnvfv(d binary.Decoder, o *GlGetTexEnvfv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexEnvfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexEnvfv(e, obj.(*GlGetTexEnvfv))
+}
+func (*binaryClassGlGetTexEnvfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexEnvfv{}
+	doDecodeGlGetTexEnvfv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexEnvfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexEnvfv(d, obj.(*GlGetTexEnvfv))
+}
+func (*binaryClassGlGetTexEnvfv) Schema() *binary.Entity { return schemaGlGetTexEnvfv }
+
+var schemaGlGetTexEnvfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexEnvfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexEnviv struct{}
+
+func (*GlGetTexEnviv) Class() binary.Class {
+	return (*binaryClassGlGetTexEnviv)(nil)
+}
+func doEncodeGlGetTexEnviv(e binary.Encoder, o *GlGetTexEnviv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexEnviv(d binary.Decoder, o *GlGetTexEnviv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexEnviv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexEnviv(e, obj.(*GlGetTexEnviv))
+}
+func (*binaryClassGlGetTexEnviv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexEnviv{}
+	doDecodeGlGetTexEnviv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexEnviv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexEnviv(d, obj.(*GlGetTexEnviv))
+}
+func (*binaryClassGlGetTexEnviv) Schema() *binary.Entity { return schemaGlGetTexEnviv }
+
+var schemaGlGetTexEnviv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexEnviv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexEnvxv struct{}
+
+func (*GlGetTexEnvxv) Class() binary.Class {
+	return (*binaryClassGlGetTexEnvxv)(nil)
+}
+func doEncodeGlGetTexEnvxv(e binary.Encoder, o *GlGetTexEnvxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexEnvxv(d binary.Decoder, o *GlGetTexEnvxv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexEnvxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexEnvxv(e, obj.(*GlGetTexEnvxv))
+}
+func (*binaryClassGlGetTexEnvxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexEnvxv{}
+	doDecodeGlGetTexEnvxv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexEnvxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexEnvxv(d, obj.(*GlGetTexEnvxv))
+}
+func (*binaryClassGlGetTexEnvxv) Schema() *binary.Entity { return schemaGlGetTexEnvxv }
+
+var schemaGlGetTexEnvxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexEnvxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexEnvxvOES struct{}
+
+func (*GlGetTexEnvxvOES) Class() binary.Class {
+	return (*binaryClassGlGetTexEnvxvOES)(nil)
+}
+func doEncodeGlGetTexEnvxvOES(e binary.Encoder, o *GlGetTexEnvxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexEnvxvOES(d binary.Decoder, o *GlGetTexEnvxvOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexEnvxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexEnvxvOES(e, obj.(*GlGetTexEnvxvOES))
+}
+func (*binaryClassGlGetTexEnvxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexEnvxvOES{}
+	doDecodeGlGetTexEnvxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexEnvxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexEnvxvOES(d, obj.(*GlGetTexEnvxvOES))
+}
+func (*binaryClassGlGetTexEnvxvOES) Schema() *binary.Entity { return schemaGlGetTexEnvxvOES }
+
+var schemaGlGetTexEnvxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexEnvxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexGenfvOES struct{}
+
+func (*GlGetTexGenfvOES) Class() binary.Class {
+	return (*binaryClassGlGetTexGenfvOES)(nil)
+}
+func doEncodeGlGetTexGenfvOES(e binary.Encoder, o *GlGetTexGenfvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexGenfvOES(d binary.Decoder, o *GlGetTexGenfvOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexGenfvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexGenfvOES(e, obj.(*GlGetTexGenfvOES))
+}
+func (*binaryClassGlGetTexGenfvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexGenfvOES{}
+	doDecodeGlGetTexGenfvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexGenfvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexGenfvOES(d, obj.(*GlGetTexGenfvOES))
+}
+func (*binaryClassGlGetTexGenfvOES) Schema() *binary.Entity { return schemaGlGetTexGenfvOES }
+
+var schemaGlGetTexGenfvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexGenfvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexGenivOES struct{}
+
+func (*GlGetTexGenivOES) Class() binary.Class {
+	return (*binaryClassGlGetTexGenivOES)(nil)
+}
+func doEncodeGlGetTexGenivOES(e binary.Encoder, o *GlGetTexGenivOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexGenivOES(d binary.Decoder, o *GlGetTexGenivOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexGenivOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexGenivOES(e, obj.(*GlGetTexGenivOES))
+}
+func (*binaryClassGlGetTexGenivOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexGenivOES{}
+	doDecodeGlGetTexGenivOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexGenivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexGenivOES(d, obj.(*GlGetTexGenivOES))
+}
+func (*binaryClassGlGetTexGenivOES) Schema() *binary.Entity { return schemaGlGetTexGenivOES }
+
+var schemaGlGetTexGenivOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexGenivOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexGenxvOES struct{}
+
+func (*GlGetTexGenxvOES) Class() binary.Class {
+	return (*binaryClassGlGetTexGenxvOES)(nil)
+}
+func doEncodeGlGetTexGenxvOES(e binary.Encoder, o *GlGetTexGenxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexGenxvOES(d binary.Decoder, o *GlGetTexGenxvOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexGenxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexGenxvOES(e, obj.(*GlGetTexGenxvOES))
+}
+func (*binaryClassGlGetTexGenxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexGenxvOES{}
+	doDecodeGlGetTexGenxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexGenxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexGenxvOES(d, obj.(*GlGetTexGenxvOES))
+}
+func (*binaryClassGlGetTexGenxvOES) Schema() *binary.Entity { return schemaGlGetTexGenxvOES }
+
+var schemaGlGetTexGenxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexGenxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlGetTexLevelParameterfv struct{}
 
 func (*GlGetTexLevelParameterfv) Class() binary.Class {
@@ -22501,6 +26014,88 @@ var schemaGlGetTexParameteriv = &binary.Entity{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Parameter", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Values", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexParameterxv struct{}
+
+func (*GlGetTexParameterxv) Class() binary.Class {
+	return (*binaryClassGlGetTexParameterxv)(nil)
+}
+func doEncodeGlGetTexParameterxv(e binary.Encoder, o *GlGetTexParameterxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexParameterxv(d binary.Decoder, o *GlGetTexParameterxv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexParameterxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexParameterxv(e, obj.(*GlGetTexParameterxv))
+}
+func (*binaryClassGlGetTexParameterxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexParameterxv{}
+	doDecodeGlGetTexParameterxv(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexParameterxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexParameterxv(d, obj.(*GlGetTexParameterxv))
+}
+func (*binaryClassGlGetTexParameterxv) Schema() *binary.Entity { return schemaGlGetTexParameterxv }
+
+var schemaGlGetTexParameterxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexParameterxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlGetTexParameterxvOES struct{}
+
+func (*GlGetTexParameterxvOES) Class() binary.Class {
+	return (*binaryClassGlGetTexParameterxvOES)(nil)
+}
+func doEncodeGlGetTexParameterxvOES(e binary.Encoder, o *GlGetTexParameterxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlGetTexParameterxvOES(d binary.Decoder, o *GlGetTexParameterxvOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlGetTexParameterxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlGetTexParameterxvOES(e, obj.(*GlGetTexParameterxvOES))
+}
+func (*binaryClassGlGetTexParameterxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlGetTexParameterxvOES{}
+	doDecodeGlGetTexParameterxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlGetTexParameterxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlGetTexParameterxvOES(d, obj.(*GlGetTexParameterxvOES))
+}
+func (*binaryClassGlGetTexParameterxvOES) Schema() *binary.Entity { return schemaGlGetTexParameterxvOES }
+
+var schemaGlGetTexParameterxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlGetTexParameterxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -24060,6 +27655,44 @@ var schemaGlIsFramebuffer = &binary.Entity{
 	},
 }
 
+type binaryClassGlIsFramebufferOES struct{}
+
+func (*GlIsFramebufferOES) Class() binary.Class {
+	return (*binaryClassGlIsFramebufferOES)(nil)
+}
+func doEncodeGlIsFramebufferOES(e binary.Encoder, o *GlIsFramebufferOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Framebuffer))
+	e.Uint8(uint8(o.Result))
+}
+func doDecodeGlIsFramebufferOES(d binary.Decoder, o *GlIsFramebufferOES) {
+	d.Struct(&o.observations)
+	o.Framebuffer = GLuint(d.Uint32())
+	o.Result = GLboolean(d.Uint8())
+}
+func (*binaryClassGlIsFramebufferOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlIsFramebufferOES(e, obj.(*GlIsFramebufferOES))
+}
+func (*binaryClassGlIsFramebufferOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlIsFramebufferOES{}
+	doDecodeGlIsFramebufferOES(d, obj)
+	return obj
+}
+func (*binaryClassGlIsFramebufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlIsFramebufferOES(d, obj.(*GlIsFramebufferOES))
+}
+func (*binaryClassGlIsFramebufferOES) Schema() *binary.Entity { return schemaGlIsFramebufferOES }
+
+var schemaGlIsFramebufferOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlIsFramebufferOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
 type binaryClassGlIsImageHandleResidentNV struct{}
 
 func (*GlIsImageHandleResidentNV) Class() binary.Class {
@@ -24459,6 +28092,44 @@ var schemaGlIsRenderbuffer = &binary.Entity{
 	},
 }
 
+type binaryClassGlIsRenderbufferOES struct{}
+
+func (*GlIsRenderbufferOES) Class() binary.Class {
+	return (*binaryClassGlIsRenderbufferOES)(nil)
+}
+func doEncodeGlIsRenderbufferOES(e binary.Encoder, o *GlIsRenderbufferOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Renderbuffer))
+	e.Uint8(uint8(o.Result))
+}
+func doDecodeGlIsRenderbufferOES(d binary.Decoder, o *GlIsRenderbufferOES) {
+	d.Struct(&o.observations)
+	o.Renderbuffer = GLuint(d.Uint32())
+	o.Result = GLboolean(d.Uint8())
+}
+func (*binaryClassGlIsRenderbufferOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlIsRenderbufferOES(e, obj.(*GlIsRenderbufferOES))
+}
+func (*binaryClassGlIsRenderbufferOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlIsRenderbufferOES{}
+	doDecodeGlIsRenderbufferOES(d, obj)
+	return obj
+}
+func (*binaryClassGlIsRenderbufferOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlIsRenderbufferOES(d, obj.(*GlIsRenderbufferOES))
+}
+func (*binaryClassGlIsRenderbufferOES) Schema() *binary.Entity { return schemaGlIsRenderbufferOES }
+
+var schemaGlIsRenderbufferOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlIsRenderbufferOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
 type binaryClassGlIsSampler struct{}
 
 func (*GlIsSampler) Class() binary.Class {
@@ -24847,6 +28518,480 @@ var schemaGlLabelObjectEXT = &binary.Entity{
 	},
 }
 
+type binaryClassGlLightModelf struct{}
+
+func (*GlLightModelf) Class() binary.Class {
+	return (*binaryClassGlLightModelf)(nil)
+}
+func doEncodeGlLightModelf(e binary.Encoder, o *GlLightModelf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlLightModelf(d binary.Decoder, o *GlLightModelf) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlLightModelf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelf(e, obj.(*GlLightModelf))
+}
+func (*binaryClassGlLightModelf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelf{}
+	doDecodeGlLightModelf(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelf(d, obj.(*GlLightModelf))
+}
+func (*binaryClassGlLightModelf) Schema() *binary.Entity { return schemaGlLightModelf }
+
+var schemaGlLightModelf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlLightModelfv struct{}
+
+func (*GlLightModelfv) Class() binary.Class {
+	return (*binaryClassGlLightModelfv)(nil)
+}
+func doEncodeGlLightModelfv(e binary.Encoder, o *GlLightModelfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlLightModelfv(d binary.Decoder, o *GlLightModelfv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlLightModelfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelfv(e, obj.(*GlLightModelfv))
+}
+func (*binaryClassGlLightModelfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelfv{}
+	doDecodeGlLightModelfv(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelfv(d, obj.(*GlLightModelfv))
+}
+func (*binaryClassGlLightModelfv) Schema() *binary.Entity { return schemaGlLightModelfv }
+
+var schemaGlLightModelfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLightModelx struct{}
+
+func (*GlLightModelx) Class() binary.Class {
+	return (*binaryClassGlLightModelx)(nil)
+}
+func doEncodeGlLightModelx(e binary.Encoder, o *GlLightModelx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlLightModelx(d binary.Decoder, o *GlLightModelx) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlLightModelx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelx(e, obj.(*GlLightModelx))
+}
+func (*binaryClassGlLightModelx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelx{}
+	doDecodeGlLightModelx(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelx(d, obj.(*GlLightModelx))
+}
+func (*binaryClassGlLightModelx) Schema() *binary.Entity { return schemaGlLightModelx }
+
+var schemaGlLightModelx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlLightModelxOES struct{}
+
+func (*GlLightModelxOES) Class() binary.Class {
+	return (*binaryClassGlLightModelxOES)(nil)
+}
+func doEncodeGlLightModelxOES(e binary.Encoder, o *GlLightModelxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlLightModelxOES(d binary.Decoder, o *GlLightModelxOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlLightModelxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelxOES(e, obj.(*GlLightModelxOES))
+}
+func (*binaryClassGlLightModelxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelxOES{}
+	doDecodeGlLightModelxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelxOES(d, obj.(*GlLightModelxOES))
+}
+func (*binaryClassGlLightModelxOES) Schema() *binary.Entity { return schemaGlLightModelxOES }
+
+var schemaGlLightModelxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlLightModelxv struct{}
+
+func (*GlLightModelxv) Class() binary.Class {
+	return (*binaryClassGlLightModelxv)(nil)
+}
+func doEncodeGlLightModelxv(e binary.Encoder, o *GlLightModelxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlLightModelxv(d binary.Decoder, o *GlLightModelxv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlLightModelxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelxv(e, obj.(*GlLightModelxv))
+}
+func (*binaryClassGlLightModelxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelxv{}
+	doDecodeGlLightModelxv(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelxv(d, obj.(*GlLightModelxv))
+}
+func (*binaryClassGlLightModelxv) Schema() *binary.Entity { return schemaGlLightModelxv }
+
+var schemaGlLightModelxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLightModelxvOES struct{}
+
+func (*GlLightModelxvOES) Class() binary.Class {
+	return (*binaryClassGlLightModelxvOES)(nil)
+}
+func doEncodeGlLightModelxvOES(e binary.Encoder, o *GlLightModelxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlLightModelxvOES(d binary.Decoder, o *GlLightModelxvOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlLightModelxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightModelxvOES(e, obj.(*GlLightModelxvOES))
+}
+func (*binaryClassGlLightModelxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightModelxvOES{}
+	doDecodeGlLightModelxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLightModelxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightModelxvOES(d, obj.(*GlLightModelxvOES))
+}
+func (*binaryClassGlLightModelxvOES) Schema() *binary.Entity { return schemaGlLightModelxvOES }
+
+var schemaGlLightModelxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightModelxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLightf struct{}
+
+func (*GlLightf) Class() binary.Class {
+	return (*binaryClassGlLightf)(nil)
+}
+func doEncodeGlLightf(e binary.Encoder, o *GlLightf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlLightf(d binary.Decoder, o *GlLightf) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlLightf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightf(e, obj.(*GlLightf))
+}
+func (*binaryClassGlLightf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightf{}
+	doDecodeGlLightf(d, obj)
+	return obj
+}
+func (*binaryClassGlLightf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightf(d, obj.(*GlLightf))
+}
+func (*binaryClassGlLightf) Schema() *binary.Entity { return schemaGlLightf }
+
+var schemaGlLightf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlLightfv struct{}
+
+func (*GlLightfv) Class() binary.Class {
+	return (*binaryClassGlLightfv)(nil)
+}
+func doEncodeGlLightfv(e binary.Encoder, o *GlLightfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlLightfv(d binary.Decoder, o *GlLightfv) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlLightfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightfv(e, obj.(*GlLightfv))
+}
+func (*binaryClassGlLightfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightfv{}
+	doDecodeGlLightfv(d, obj)
+	return obj
+}
+func (*binaryClassGlLightfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightfv(d, obj.(*GlLightfv))
+}
+func (*binaryClassGlLightfv) Schema() *binary.Entity { return schemaGlLightfv }
+
+var schemaGlLightfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLightx struct{}
+
+func (*GlLightx) Class() binary.Class {
+	return (*binaryClassGlLightx)(nil)
+}
+func doEncodeGlLightx(e binary.Encoder, o *GlLightx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlLightx(d binary.Decoder, o *GlLightx) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlLightx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightx(e, obj.(*GlLightx))
+}
+func (*binaryClassGlLightx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightx{}
+	doDecodeGlLightx(d, obj)
+	return obj
+}
+func (*binaryClassGlLightx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightx(d, obj.(*GlLightx))
+}
+func (*binaryClassGlLightx) Schema() *binary.Entity { return schemaGlLightx }
+
+var schemaGlLightx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlLightxOES struct{}
+
+func (*GlLightxOES) Class() binary.Class {
+	return (*binaryClassGlLightxOES)(nil)
+}
+func doEncodeGlLightxOES(e binary.Encoder, o *GlLightxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlLightxOES(d binary.Decoder, o *GlLightxOES) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlLightxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightxOES(e, obj.(*GlLightxOES))
+}
+func (*binaryClassGlLightxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightxOES{}
+	doDecodeGlLightxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLightxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightxOES(d, obj.(*GlLightxOES))
+}
+func (*binaryClassGlLightxOES) Schema() *binary.Entity { return schemaGlLightxOES }
+
+var schemaGlLightxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlLightxv struct{}
+
+func (*GlLightxv) Class() binary.Class {
+	return (*binaryClassGlLightxv)(nil)
+}
+func doEncodeGlLightxv(e binary.Encoder, o *GlLightxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlLightxv(d binary.Decoder, o *GlLightxv) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlLightxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightxv(e, obj.(*GlLightxv))
+}
+func (*binaryClassGlLightxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightxv{}
+	doDecodeGlLightxv(d, obj)
+	return obj
+}
+func (*binaryClassGlLightxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightxv(d, obj.(*GlLightxv))
+}
+func (*binaryClassGlLightxv) Schema() *binary.Entity { return schemaGlLightxv }
+
+var schemaGlLightxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLightxvOES struct{}
+
+func (*GlLightxvOES) Class() binary.Class {
+	return (*binaryClassGlLightxvOES)(nil)
+}
+func doEncodeGlLightxvOES(e binary.Encoder, o *GlLightxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Light))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlLightxvOES(d binary.Decoder, o *GlLightxvOES) {
+	d.Struct(&o.observations)
+	o.Light = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlLightxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLightxvOES(e, obj.(*GlLightxvOES))
+}
+func (*binaryClassGlLightxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLightxvOES{}
+	doDecodeGlLightxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLightxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLightxvOES(d, obj.(*GlLightxvOES))
+}
+func (*binaryClassGlLightxvOES) Schema() *binary.Entity { return schemaGlLightxvOES }
+
+var schemaGlLightxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLightxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Light", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlLineWidth struct{}
 
 func (*GlLineWidth) Class() binary.Class {
@@ -24882,6 +29027,76 @@ var schemaGlLineWidth = &binary.Entity{
 	},
 }
 
+type binaryClassGlLineWidthx struct{}
+
+func (*GlLineWidthx) Class() binary.Class {
+	return (*binaryClassGlLineWidthx)(nil)
+}
+func doEncodeGlLineWidthx(e binary.Encoder, o *GlLineWidthx) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Width))
+}
+func doDecodeGlLineWidthx(d binary.Decoder, o *GlLineWidthx) {
+	d.Struct(&o.observations)
+	o.Width = GLfixed(d.Int32())
+}
+func (*binaryClassGlLineWidthx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLineWidthx(e, obj.(*GlLineWidthx))
+}
+func (*binaryClassGlLineWidthx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLineWidthx{}
+	doDecodeGlLineWidthx(d, obj)
+	return obj
+}
+func (*binaryClassGlLineWidthx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLineWidthx(d, obj.(*GlLineWidthx))
+}
+func (*binaryClassGlLineWidthx) Schema() *binary.Entity { return schemaGlLineWidthx }
+
+var schemaGlLineWidthx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLineWidthx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlLineWidthxOES struct{}
+
+func (*GlLineWidthxOES) Class() binary.Class {
+	return (*binaryClassGlLineWidthxOES)(nil)
+}
+func doEncodeGlLineWidthxOES(e binary.Encoder, o *GlLineWidthxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Width))
+}
+func doDecodeGlLineWidthxOES(d binary.Decoder, o *GlLineWidthxOES) {
+	d.Struct(&o.observations)
+	o.Width = GLfixed(d.Int32())
+}
+func (*binaryClassGlLineWidthxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLineWidthxOES(e, obj.(*GlLineWidthxOES))
+}
+func (*binaryClassGlLineWidthxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLineWidthxOES{}
+	doDecodeGlLineWidthxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLineWidthxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLineWidthxOES(d, obj.(*GlLineWidthxOES))
+}
+func (*binaryClassGlLineWidthxOES) Schema() *binary.Entity { return schemaGlLineWidthxOES }
+
+var schemaGlLineWidthxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLineWidthxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlLinkProgram struct{}
 
 func (*GlLinkProgram) Class() binary.Class {
@@ -24914,6 +29129,212 @@ var schemaGlLinkProgram = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlLoadIdentity struct{}
+
+func (*GlLoadIdentity) Class() binary.Class {
+	return (*binaryClassGlLoadIdentity)(nil)
+}
+func doEncodeGlLoadIdentity(e binary.Encoder, o *GlLoadIdentity) {
+	e.Struct(&o.observations)
+}
+func doDecodeGlLoadIdentity(d binary.Decoder, o *GlLoadIdentity) {
+	d.Struct(&o.observations)
+}
+func (*binaryClassGlLoadIdentity) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLoadIdentity(e, obj.(*GlLoadIdentity))
+}
+func (*binaryClassGlLoadIdentity) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLoadIdentity{}
+	doDecodeGlLoadIdentity(d, obj)
+	return obj
+}
+func (*binaryClassGlLoadIdentity) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLoadIdentity(d, obj.(*GlLoadIdentity))
+}
+func (*binaryClassGlLoadIdentity) Schema() *binary.Entity { return schemaGlLoadIdentity }
+
+var schemaGlLoadIdentity = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLoadIdentity",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLoadMatrixf struct{}
+
+func (*GlLoadMatrixf) Class() binary.Class {
+	return (*binaryClassGlLoadMatrixf)(nil)
+}
+func doEncodeGlLoadMatrixf(e binary.Encoder, o *GlLoadMatrixf) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlLoadMatrixf(d binary.Decoder, o *GlLoadMatrixf) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlLoadMatrixf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLoadMatrixf(e, obj.(*GlLoadMatrixf))
+}
+func (*binaryClassGlLoadMatrixf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLoadMatrixf{}
+	doDecodeGlLoadMatrixf(d, obj)
+	return obj
+}
+func (*binaryClassGlLoadMatrixf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLoadMatrixf(d, obj.(*GlLoadMatrixf))
+}
+func (*binaryClassGlLoadMatrixf) Schema() *binary.Entity { return schemaGlLoadMatrixf }
+
+var schemaGlLoadMatrixf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLoadMatrixf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLoadMatrixx struct{}
+
+func (*GlLoadMatrixx) Class() binary.Class {
+	return (*binaryClassGlLoadMatrixx)(nil)
+}
+func doEncodeGlLoadMatrixx(e binary.Encoder, o *GlLoadMatrixx) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlLoadMatrixx(d binary.Decoder, o *GlLoadMatrixx) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlLoadMatrixx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLoadMatrixx(e, obj.(*GlLoadMatrixx))
+}
+func (*binaryClassGlLoadMatrixx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLoadMatrixx{}
+	doDecodeGlLoadMatrixx(d, obj)
+	return obj
+}
+func (*binaryClassGlLoadMatrixx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLoadMatrixx(d, obj.(*GlLoadMatrixx))
+}
+func (*binaryClassGlLoadMatrixx) Schema() *binary.Entity { return schemaGlLoadMatrixx }
+
+var schemaGlLoadMatrixx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLoadMatrixx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLoadMatrixxOES struct{}
+
+func (*GlLoadMatrixxOES) Class() binary.Class {
+	return (*binaryClassGlLoadMatrixxOES)(nil)
+}
+func doEncodeGlLoadMatrixxOES(e binary.Encoder, o *GlLoadMatrixxOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlLoadMatrixxOES(d binary.Decoder, o *GlLoadMatrixxOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlLoadMatrixxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLoadMatrixxOES(e, obj.(*GlLoadMatrixxOES))
+}
+func (*binaryClassGlLoadMatrixxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLoadMatrixxOES{}
+	doDecodeGlLoadMatrixxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLoadMatrixxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLoadMatrixxOES(d, obj.(*GlLoadMatrixxOES))
+}
+func (*binaryClassGlLoadMatrixxOES) Schema() *binary.Entity { return schemaGlLoadMatrixxOES }
+
+var schemaGlLoadMatrixxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLoadMatrixxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLoadPaletteFromModelViewMatrixOES struct{}
+
+func (*GlLoadPaletteFromModelViewMatrixOES) Class() binary.Class {
+	return (*binaryClassGlLoadPaletteFromModelViewMatrixOES)(nil)
+}
+func doEncodeGlLoadPaletteFromModelViewMatrixOES(e binary.Encoder, o *GlLoadPaletteFromModelViewMatrixOES) {
+	e.Struct(&o.observations)
+}
+func doDecodeGlLoadPaletteFromModelViewMatrixOES(d binary.Decoder, o *GlLoadPaletteFromModelViewMatrixOES) {
+	d.Struct(&o.observations)
+}
+func (*binaryClassGlLoadPaletteFromModelViewMatrixOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLoadPaletteFromModelViewMatrixOES(e, obj.(*GlLoadPaletteFromModelViewMatrixOES))
+}
+func (*binaryClassGlLoadPaletteFromModelViewMatrixOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLoadPaletteFromModelViewMatrixOES{}
+	doDecodeGlLoadPaletteFromModelViewMatrixOES(d, obj)
+	return obj
+}
+func (*binaryClassGlLoadPaletteFromModelViewMatrixOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLoadPaletteFromModelViewMatrixOES(d, obj.(*GlLoadPaletteFromModelViewMatrixOES))
+}
+func (*binaryClassGlLoadPaletteFromModelViewMatrixOES) Schema() *binary.Entity {
+	return schemaGlLoadPaletteFromModelViewMatrixOES
+}
+
+var schemaGlLoadPaletteFromModelViewMatrixOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLoadPaletteFromModelViewMatrixOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlLogicOp struct{}
+
+func (*GlLogicOp) Class() binary.Class {
+	return (*binaryClassGlLogicOp)(nil)
+}
+func doEncodeGlLogicOp(e binary.Encoder, o *GlLogicOp) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Opcode))
+}
+func doDecodeGlLogicOp(d binary.Decoder, o *GlLogicOp) {
+	d.Struct(&o.observations)
+	o.Opcode = GLenum(d.Uint32())
+}
+func (*binaryClassGlLogicOp) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlLogicOp(e, obj.(*GlLogicOp))
+}
+func (*binaryClassGlLogicOp) Decode(d binary.Decoder) binary.Object {
+	obj := &GlLogicOp{}
+	doDecodeGlLogicOp(d, obj)
+	return obj
+}
+func (*binaryClassGlLogicOp) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlLogicOp(d, obj.(*GlLogicOp))
+}
+func (*binaryClassGlLogicOp) Schema() *binary.Entity { return schemaGlLogicOp }
+
+var schemaGlLogicOp = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlLogicOp",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Opcode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -25203,6 +29624,347 @@ var schemaGlMapBufferRangeEXT = &binary.Entity{
 	},
 }
 
+type binaryClassGlMaterialf struct{}
+
+func (*GlMaterialf) Class() binary.Class {
+	return (*binaryClassGlMaterialf)(nil)
+}
+func doEncodeGlMaterialf(e binary.Encoder, o *GlMaterialf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlMaterialf(d binary.Decoder, o *GlMaterialf) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlMaterialf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialf(e, obj.(*GlMaterialf))
+}
+func (*binaryClassGlMaterialf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialf{}
+	doDecodeGlMaterialf(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialf(d, obj.(*GlMaterialf))
+}
+func (*binaryClassGlMaterialf) Schema() *binary.Entity { return schemaGlMaterialf }
+
+var schemaGlMaterialf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlMaterialfv struct{}
+
+func (*GlMaterialfv) Class() binary.Class {
+	return (*binaryClassGlMaterialfv)(nil)
+}
+func doEncodeGlMaterialfv(e binary.Encoder, o *GlMaterialfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlMaterialfv(d binary.Decoder, o *GlMaterialfv) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlMaterialfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialfv(e, obj.(*GlMaterialfv))
+}
+func (*binaryClassGlMaterialfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialfv{}
+	doDecodeGlMaterialfv(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialfv(d, obj.(*GlMaterialfv))
+}
+func (*binaryClassGlMaterialfv) Schema() *binary.Entity { return schemaGlMaterialfv }
+
+var schemaGlMaterialfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMaterialx struct{}
+
+func (*GlMaterialx) Class() binary.Class {
+	return (*binaryClassGlMaterialx)(nil)
+}
+func doEncodeGlMaterialx(e binary.Encoder, o *GlMaterialx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlMaterialx(d binary.Decoder, o *GlMaterialx) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlMaterialx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialx(e, obj.(*GlMaterialx))
+}
+func (*binaryClassGlMaterialx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialx{}
+	doDecodeGlMaterialx(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialx(d, obj.(*GlMaterialx))
+}
+func (*binaryClassGlMaterialx) Schema() *binary.Entity { return schemaGlMaterialx }
+
+var schemaGlMaterialx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlMaterialxOES struct{}
+
+func (*GlMaterialxOES) Class() binary.Class {
+	return (*binaryClassGlMaterialxOES)(nil)
+}
+func doEncodeGlMaterialxOES(e binary.Encoder, o *GlMaterialxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlMaterialxOES(d binary.Decoder, o *GlMaterialxOES) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlMaterialxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialxOES(e, obj.(*GlMaterialxOES))
+}
+func (*binaryClassGlMaterialxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialxOES{}
+	doDecodeGlMaterialxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialxOES(d, obj.(*GlMaterialxOES))
+}
+func (*binaryClassGlMaterialxOES) Schema() *binary.Entity { return schemaGlMaterialxOES }
+
+var schemaGlMaterialxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlMaterialxv struct{}
+
+func (*GlMaterialxv) Class() binary.Class {
+	return (*binaryClassGlMaterialxv)(nil)
+}
+func doEncodeGlMaterialxv(e binary.Encoder, o *GlMaterialxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlMaterialxv(d binary.Decoder, o *GlMaterialxv) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlMaterialxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialxv(e, obj.(*GlMaterialxv))
+}
+func (*binaryClassGlMaterialxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialxv{}
+	doDecodeGlMaterialxv(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialxv(d, obj.(*GlMaterialxv))
+}
+func (*binaryClassGlMaterialxv) Schema() *binary.Entity { return schemaGlMaterialxv }
+
+var schemaGlMaterialxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMaterialxvOES struct{}
+
+func (*GlMaterialxvOES) Class() binary.Class {
+	return (*binaryClassGlMaterialxvOES)(nil)
+}
+func doEncodeGlMaterialxvOES(e binary.Encoder, o *GlMaterialxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Face))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Param)
+}
+func doDecodeGlMaterialxvOES(d binary.Decoder, o *GlMaterialxvOES) {
+	d.Struct(&o.observations)
+	o.Face = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Param)
+}
+func (*binaryClassGlMaterialxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMaterialxvOES(e, obj.(*GlMaterialxvOES))
+}
+func (*binaryClassGlMaterialxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMaterialxvOES{}
+	doDecodeGlMaterialxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlMaterialxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMaterialxvOES(d, obj.(*GlMaterialxvOES))
+}
+func (*binaryClassGlMaterialxvOES) Schema() *binary.Entity { return schemaGlMaterialxvOES }
+
+var schemaGlMaterialxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMaterialxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMatrixIndexPointerOES struct{}
+
+func (*GlMatrixIndexPointerOES) Class() binary.Class {
+	return (*binaryClassGlMatrixIndexPointerOES)(nil)
+}
+func doEncodeGlMatrixIndexPointerOES(e binary.Encoder, o *GlMatrixIndexPointerOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlMatrixIndexPointerOES(d binary.Decoder, o *GlMatrixIndexPointerOES) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlMatrixIndexPointerOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMatrixIndexPointerOES(e, obj.(*GlMatrixIndexPointerOES))
+}
+func (*binaryClassGlMatrixIndexPointerOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMatrixIndexPointerOES{}
+	doDecodeGlMatrixIndexPointerOES(d, obj)
+	return obj
+}
+func (*binaryClassGlMatrixIndexPointerOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMatrixIndexPointerOES(d, obj.(*GlMatrixIndexPointerOES))
+}
+func (*binaryClassGlMatrixIndexPointerOES) Schema() *binary.Entity {
+	return schemaGlMatrixIndexPointerOES
+}
+
+var schemaGlMatrixIndexPointerOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMatrixIndexPointerOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMatrixIndexPointerOESBounds struct{}
+
+func (*GlMatrixIndexPointerOESBounds) Class() binary.Class {
+	return (*binaryClassGlMatrixIndexPointerOESBounds)(nil)
+}
+func doEncodeGlMatrixIndexPointerOESBounds(e binary.Encoder, o *GlMatrixIndexPointerOESBounds) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlMatrixIndexPointerOESBounds(d binary.Decoder, o *GlMatrixIndexPointerOESBounds) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlMatrixIndexPointerOESBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMatrixIndexPointerOESBounds(e, obj.(*GlMatrixIndexPointerOESBounds))
+}
+func (*binaryClassGlMatrixIndexPointerOESBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMatrixIndexPointerOESBounds{}
+	doDecodeGlMatrixIndexPointerOESBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlMatrixIndexPointerOESBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMatrixIndexPointerOESBounds(d, obj.(*GlMatrixIndexPointerOESBounds))
+}
+func (*binaryClassGlMatrixIndexPointerOESBounds) Schema() *binary.Entity {
+	return schemaGlMatrixIndexPointerOESBounds
+}
+
+var schemaGlMatrixIndexPointerOESBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMatrixIndexPointerOESBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlMatrixLoad3x2fNV struct{}
 
 func (*GlMatrixLoad3x2fNV) Class() binary.Class {
@@ -25316,6 +30078,41 @@ var schemaGlMatrixLoadTranspose3x3fNV = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "MatrixMode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMatrixMode struct{}
+
+func (*GlMatrixMode) Class() binary.Class {
+	return (*binaryClassGlMatrixMode)(nil)
+}
+func doEncodeGlMatrixMode(e binary.Encoder, o *GlMatrixMode) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Mode))
+}
+func doDecodeGlMatrixMode(d binary.Decoder, o *GlMatrixMode) {
+	d.Struct(&o.observations)
+	o.Mode = GLenum(d.Uint32())
+}
+func (*binaryClassGlMatrixMode) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMatrixMode(e, obj.(*GlMatrixMode))
+}
+func (*binaryClassGlMatrixMode) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMatrixMode{}
+	doDecodeGlMatrixMode(d, obj)
+	return obj
+}
+func (*binaryClassGlMatrixMode) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMatrixMode(d, obj.(*GlMatrixMode))
+}
+func (*binaryClassGlMatrixMode) Schema() *binary.Entity { return schemaGlMatrixMode }
+
+var schemaGlMatrixMode = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMatrixMode",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -25574,6 +30371,111 @@ var schemaGlMinSampleShadingOES = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlMultMatrixf struct{}
+
+func (*GlMultMatrixf) Class() binary.Class {
+	return (*binaryClassGlMultMatrixf)(nil)
+}
+func doEncodeGlMultMatrixf(e binary.Encoder, o *GlMultMatrixf) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlMultMatrixf(d binary.Decoder, o *GlMultMatrixf) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlMultMatrixf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultMatrixf(e, obj.(*GlMultMatrixf))
+}
+func (*binaryClassGlMultMatrixf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultMatrixf{}
+	doDecodeGlMultMatrixf(d, obj)
+	return obj
+}
+func (*binaryClassGlMultMatrixf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultMatrixf(d, obj.(*GlMultMatrixf))
+}
+func (*binaryClassGlMultMatrixf) Schema() *binary.Entity { return schemaGlMultMatrixf }
+
+var schemaGlMultMatrixf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultMatrixf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMultMatrixx struct{}
+
+func (*GlMultMatrixx) Class() binary.Class {
+	return (*binaryClassGlMultMatrixx)(nil)
+}
+func doEncodeGlMultMatrixx(e binary.Encoder, o *GlMultMatrixx) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlMultMatrixx(d binary.Decoder, o *GlMultMatrixx) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlMultMatrixx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultMatrixx(e, obj.(*GlMultMatrixx))
+}
+func (*binaryClassGlMultMatrixx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultMatrixx{}
+	doDecodeGlMultMatrixx(d, obj)
+	return obj
+}
+func (*binaryClassGlMultMatrixx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultMatrixx(d, obj.(*GlMultMatrixx))
+}
+func (*binaryClassGlMultMatrixx) Schema() *binary.Entity { return schemaGlMultMatrixx }
+
+var schemaGlMultMatrixx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultMatrixx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlMultMatrixxOES struct{}
+
+func (*GlMultMatrixxOES) Class() binary.Class {
+	return (*binaryClassGlMultMatrixxOES)(nil)
+}
+func doEncodeGlMultMatrixxOES(e binary.Encoder, o *GlMultMatrixxOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.M)
+}
+func doDecodeGlMultMatrixxOES(d binary.Decoder, o *GlMultMatrixxOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.M)
+}
+func (*binaryClassGlMultMatrixxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultMatrixxOES(e, obj.(*GlMultMatrixxOES))
+}
+func (*binaryClassGlMultMatrixxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultMatrixxOES{}
+	doDecodeGlMultMatrixxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlMultMatrixxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultMatrixxOES(d, obj.(*GlMultMatrixxOES))
+}
+func (*binaryClassGlMultMatrixxOES) Schema() *binary.Entity { return schemaGlMultMatrixxOES }
+
+var schemaGlMultMatrixxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultMatrixxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "M", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -25899,6 +30801,147 @@ var schemaGlMultiDrawElementsIndirectEXT = &binary.Entity{
 	},
 }
 
+type binaryClassGlMultiTexCoord4f struct{}
+
+func (*GlMultiTexCoord4f) Class() binary.Class {
+	return (*binaryClassGlMultiTexCoord4f)(nil)
+}
+func doEncodeGlMultiTexCoord4f(e binary.Encoder, o *GlMultiTexCoord4f) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Float32(float32(o.V0))
+	e.Float32(float32(o.V1))
+	e.Float32(float32(o.V2))
+	e.Float32(float32(o.V3))
+}
+func doDecodeGlMultiTexCoord4f(d binary.Decoder, o *GlMultiTexCoord4f) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.V0 = GLfloat(d.Float32())
+	o.V1 = GLfloat(d.Float32())
+	o.V2 = GLfloat(d.Float32())
+	o.V3 = GLfloat(d.Float32())
+}
+func (*binaryClassGlMultiTexCoord4f) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultiTexCoord4f(e, obj.(*GlMultiTexCoord4f))
+}
+func (*binaryClassGlMultiTexCoord4f) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultiTexCoord4f{}
+	doDecodeGlMultiTexCoord4f(d, obj)
+	return obj
+}
+func (*binaryClassGlMultiTexCoord4f) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultiTexCoord4f(d, obj.(*GlMultiTexCoord4f))
+}
+func (*binaryClassGlMultiTexCoord4f) Schema() *binary.Entity { return schemaGlMultiTexCoord4f }
+
+var schemaGlMultiTexCoord4f = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultiTexCoord4f",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "V0", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "V1", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "V2", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "V3", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlMultiTexCoord4x struct{}
+
+func (*GlMultiTexCoord4x) Class() binary.Class {
+	return (*binaryClassGlMultiTexCoord4x)(nil)
+}
+func doEncodeGlMultiTexCoord4x(e binary.Encoder, o *GlMultiTexCoord4x) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Texture))
+	e.Int32(int32(o.V0))
+	e.Int32(int32(o.V1))
+	e.Int32(int32(o.V2))
+	e.Int32(int32(o.V3))
+}
+func doDecodeGlMultiTexCoord4x(d binary.Decoder, o *GlMultiTexCoord4x) {
+	d.Struct(&o.observations)
+	o.Texture = GLenum(d.Uint32())
+	o.V0 = GLfixed(d.Int32())
+	o.V1 = GLfixed(d.Int32())
+	o.V2 = GLfixed(d.Int32())
+	o.V3 = GLfixed(d.Int32())
+}
+func (*binaryClassGlMultiTexCoord4x) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultiTexCoord4x(e, obj.(*GlMultiTexCoord4x))
+}
+func (*binaryClassGlMultiTexCoord4x) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultiTexCoord4x{}
+	doDecodeGlMultiTexCoord4x(d, obj)
+	return obj
+}
+func (*binaryClassGlMultiTexCoord4x) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultiTexCoord4x(d, obj.(*GlMultiTexCoord4x))
+}
+func (*binaryClassGlMultiTexCoord4x) Schema() *binary.Entity { return schemaGlMultiTexCoord4x }
+
+var schemaGlMultiTexCoord4x = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultiTexCoord4x",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "V0", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V1", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V2", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V3", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlMultiTexCoord4xOES struct{}
+
+func (*GlMultiTexCoord4xOES) Class() binary.Class {
+	return (*binaryClassGlMultiTexCoord4xOES)(nil)
+}
+func doEncodeGlMultiTexCoord4xOES(e binary.Encoder, o *GlMultiTexCoord4xOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Texture))
+	e.Int32(int32(o.V0))
+	e.Int32(int32(o.V1))
+	e.Int32(int32(o.V2))
+	e.Int32(int32(o.V3))
+}
+func doDecodeGlMultiTexCoord4xOES(d binary.Decoder, o *GlMultiTexCoord4xOES) {
+	d.Struct(&o.observations)
+	o.Texture = GLenum(d.Uint32())
+	o.V0 = GLfixed(d.Int32())
+	o.V1 = GLfixed(d.Int32())
+	o.V2 = GLfixed(d.Int32())
+	o.V3 = GLfixed(d.Int32())
+}
+func (*binaryClassGlMultiTexCoord4xOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlMultiTexCoord4xOES(e, obj.(*GlMultiTexCoord4xOES))
+}
+func (*binaryClassGlMultiTexCoord4xOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlMultiTexCoord4xOES{}
+	doDecodeGlMultiTexCoord4xOES(d, obj)
+	return obj
+}
+func (*binaryClassGlMultiTexCoord4xOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlMultiTexCoord4xOES(d, obj.(*GlMultiTexCoord4xOES))
+}
+func (*binaryClassGlMultiTexCoord4xOES) Schema() *binary.Entity { return schemaGlMultiTexCoord4xOES }
+
+var schemaGlMultiTexCoord4xOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlMultiTexCoord4xOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "V0", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V1", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V2", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "V3", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlNamedFramebufferSampleLocationsfvNV struct{}
 
 func (*GlNamedFramebufferSampleLocationsfvNV) Class() binary.Class {
@@ -25942,6 +30985,214 @@ var schemaGlNamedFramebufferSampleLocationsfvNV = &binary.Entity{
 		{Declared: "Start", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "V", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlNormal3f struct{}
+
+func (*GlNormal3f) Class() binary.Class {
+	return (*binaryClassGlNormal3f)(nil)
+}
+func doEncodeGlNormal3f(e binary.Encoder, o *GlNormal3f) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.Nx))
+	e.Float32(float32(o.Ny))
+	e.Float32(float32(o.Nz))
+}
+func doDecodeGlNormal3f(d binary.Decoder, o *GlNormal3f) {
+	d.Struct(&o.observations)
+	o.Nx = GLfloat(d.Float32())
+	o.Ny = GLfloat(d.Float32())
+	o.Nz = GLfloat(d.Float32())
+}
+func (*binaryClassGlNormal3f) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlNormal3f(e, obj.(*GlNormal3f))
+}
+func (*binaryClassGlNormal3f) Decode(d binary.Decoder) binary.Object {
+	obj := &GlNormal3f{}
+	doDecodeGlNormal3f(d, obj)
+	return obj
+}
+func (*binaryClassGlNormal3f) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlNormal3f(d, obj.(*GlNormal3f))
+}
+func (*binaryClassGlNormal3f) Schema() *binary.Entity { return schemaGlNormal3f }
+
+var schemaGlNormal3f = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlNormal3f",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Nx", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Ny", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Nz", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlNormal3x struct{}
+
+func (*GlNormal3x) Class() binary.Class {
+	return (*binaryClassGlNormal3x)(nil)
+}
+func doEncodeGlNormal3x(e binary.Encoder, o *GlNormal3x) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Nx))
+	e.Int32(int32(o.Ny))
+	e.Int32(int32(o.Nz))
+}
+func doDecodeGlNormal3x(d binary.Decoder, o *GlNormal3x) {
+	d.Struct(&o.observations)
+	o.Nx = GLfixed(d.Int32())
+	o.Ny = GLfixed(d.Int32())
+	o.Nz = GLfixed(d.Int32())
+}
+func (*binaryClassGlNormal3x) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlNormal3x(e, obj.(*GlNormal3x))
+}
+func (*binaryClassGlNormal3x) Decode(d binary.Decoder) binary.Object {
+	obj := &GlNormal3x{}
+	doDecodeGlNormal3x(d, obj)
+	return obj
+}
+func (*binaryClassGlNormal3x) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlNormal3x(d, obj.(*GlNormal3x))
+}
+func (*binaryClassGlNormal3x) Schema() *binary.Entity { return schemaGlNormal3x }
+
+var schemaGlNormal3x = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlNormal3x",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Nx", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Ny", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Nz", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlNormal3xOES struct{}
+
+func (*GlNormal3xOES) Class() binary.Class {
+	return (*binaryClassGlNormal3xOES)(nil)
+}
+func doEncodeGlNormal3xOES(e binary.Encoder, o *GlNormal3xOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Nx))
+	e.Int32(int32(o.Ny))
+	e.Int32(int32(o.Nz))
+}
+func doDecodeGlNormal3xOES(d binary.Decoder, o *GlNormal3xOES) {
+	d.Struct(&o.observations)
+	o.Nx = GLfixed(d.Int32())
+	o.Ny = GLfixed(d.Int32())
+	o.Nz = GLfixed(d.Int32())
+}
+func (*binaryClassGlNormal3xOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlNormal3xOES(e, obj.(*GlNormal3xOES))
+}
+func (*binaryClassGlNormal3xOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlNormal3xOES{}
+	doDecodeGlNormal3xOES(d, obj)
+	return obj
+}
+func (*binaryClassGlNormal3xOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlNormal3xOES(d, obj.(*GlNormal3xOES))
+}
+func (*binaryClassGlNormal3xOES) Schema() *binary.Entity { return schemaGlNormal3xOES }
+
+var schemaGlNormal3xOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlNormal3xOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Nx", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Ny", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Nz", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlNormalPointer struct{}
+
+func (*GlNormalPointer) Class() binary.Class {
+	return (*binaryClassGlNormalPointer)(nil)
+}
+func doEncodeGlNormalPointer(e binary.Encoder, o *GlNormalPointer) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlNormalPointer(d binary.Decoder, o *GlNormalPointer) {
+	d.Struct(&o.observations)
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlNormalPointer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlNormalPointer(e, obj.(*GlNormalPointer))
+}
+func (*binaryClassGlNormalPointer) Decode(d binary.Decoder) binary.Object {
+	obj := &GlNormalPointer{}
+	doDecodeGlNormalPointer(d, obj)
+	return obj
+}
+func (*binaryClassGlNormalPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlNormalPointer(d, obj.(*GlNormalPointer))
+}
+func (*binaryClassGlNormalPointer) Schema() *binary.Entity { return schemaGlNormalPointer }
+
+var schemaGlNormalPointer = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlNormalPointer",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlNormalPointerBounds struct{}
+
+func (*GlNormalPointerBounds) Class() binary.Class {
+	return (*binaryClassGlNormalPointerBounds)(nil)
+}
+func doEncodeGlNormalPointerBounds(e binary.Encoder, o *GlNormalPointerBounds) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlNormalPointerBounds(d binary.Decoder, o *GlNormalPointerBounds) {
+	d.Struct(&o.observations)
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlNormalPointerBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlNormalPointerBounds(e, obj.(*GlNormalPointerBounds))
+}
+func (*binaryClassGlNormalPointerBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlNormalPointerBounds{}
+	doDecodeGlNormalPointerBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlNormalPointerBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlNormalPointerBounds(d, obj.(*GlNormalPointerBounds))
+}
+func (*binaryClassGlNormalPointerBounds) Schema() *binary.Entity { return schemaGlNormalPointerBounds }
+
+var schemaGlNormalPointerBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlNormalPointerBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -26112,6 +31363,206 @@ var schemaGlObjectPtrLabelKHR = &binary.Entity{
 		{Declared: "Ptr", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Length", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Label", Type: &schema.Struct{Entity: (*GLcharᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlOrthof struct{}
+
+func (*GlOrthof) Class() binary.Class {
+	return (*binaryClassGlOrthof)(nil)
+}
+func doEncodeGlOrthof(e binary.Encoder, o *GlOrthof) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.L))
+	e.Float32(float32(o.R))
+	e.Float32(float32(o.B))
+	e.Float32(float32(o.T))
+	e.Float32(float32(o.N))
+	e.Float32(float32(o.F))
+}
+func doDecodeGlOrthof(d binary.Decoder, o *GlOrthof) {
+	d.Struct(&o.observations)
+	o.L = GLfloat(d.Float32())
+	o.R = GLfloat(d.Float32())
+	o.B = GLfloat(d.Float32())
+	o.T = GLfloat(d.Float32())
+	o.N = GLfloat(d.Float32())
+	o.F = GLfloat(d.Float32())
+}
+func (*binaryClassGlOrthof) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlOrthof(e, obj.(*GlOrthof))
+}
+func (*binaryClassGlOrthof) Decode(d binary.Decoder) binary.Object {
+	obj := &GlOrthof{}
+	doDecodeGlOrthof(d, obj)
+	return obj
+}
+func (*binaryClassGlOrthof) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlOrthof(d, obj.(*GlOrthof))
+}
+func (*binaryClassGlOrthof) Schema() *binary.Entity { return schemaGlOrthof }
+
+var schemaGlOrthof = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlOrthof",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlOrthofOES struct{}
+
+func (*GlOrthofOES) Class() binary.Class {
+	return (*binaryClassGlOrthofOES)(nil)
+}
+func doEncodeGlOrthofOES(e binary.Encoder, o *GlOrthofOES) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.L))
+	e.Float32(float32(o.R))
+	e.Float32(float32(o.B))
+	e.Float32(float32(o.T))
+	e.Float32(float32(o.N))
+	e.Float32(float32(o.F))
+}
+func doDecodeGlOrthofOES(d binary.Decoder, o *GlOrthofOES) {
+	d.Struct(&o.observations)
+	o.L = GLfloat(d.Float32())
+	o.R = GLfloat(d.Float32())
+	o.B = GLfloat(d.Float32())
+	o.T = GLfloat(d.Float32())
+	o.N = GLfloat(d.Float32())
+	o.F = GLfloat(d.Float32())
+}
+func (*binaryClassGlOrthofOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlOrthofOES(e, obj.(*GlOrthofOES))
+}
+func (*binaryClassGlOrthofOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlOrthofOES{}
+	doDecodeGlOrthofOES(d, obj)
+	return obj
+}
+func (*binaryClassGlOrthofOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlOrthofOES(d, obj.(*GlOrthofOES))
+}
+func (*binaryClassGlOrthofOES) Schema() *binary.Entity { return schemaGlOrthofOES }
+
+var schemaGlOrthofOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlOrthofOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlOrthox struct{}
+
+func (*GlOrthox) Class() binary.Class {
+	return (*binaryClassGlOrthox)(nil)
+}
+func doEncodeGlOrthox(e binary.Encoder, o *GlOrthox) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.L))
+	e.Int32(int32(o.R))
+	e.Int32(int32(o.B))
+	e.Int32(int32(o.T))
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlOrthox(d binary.Decoder, o *GlOrthox) {
+	d.Struct(&o.observations)
+	o.L = GLfixed(d.Int32())
+	o.R = GLfixed(d.Int32())
+	o.B = GLfixed(d.Int32())
+	o.T = GLfixed(d.Int32())
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlOrthox) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlOrthox(e, obj.(*GlOrthox))
+}
+func (*binaryClassGlOrthox) Decode(d binary.Decoder) binary.Object {
+	obj := &GlOrthox{}
+	doDecodeGlOrthox(d, obj)
+	return obj
+}
+func (*binaryClassGlOrthox) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlOrthox(d, obj.(*GlOrthox))
+}
+func (*binaryClassGlOrthox) Schema() *binary.Entity { return schemaGlOrthox }
+
+var schemaGlOrthox = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlOrthox",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlOrthoxOES struct{}
+
+func (*GlOrthoxOES) Class() binary.Class {
+	return (*binaryClassGlOrthoxOES)(nil)
+}
+func doEncodeGlOrthoxOES(e binary.Encoder, o *GlOrthoxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.L))
+	e.Int32(int32(o.R))
+	e.Int32(int32(o.B))
+	e.Int32(int32(o.T))
+	e.Int32(int32(o.N))
+	e.Int32(int32(o.F))
+}
+func doDecodeGlOrthoxOES(d binary.Decoder, o *GlOrthoxOES) {
+	d.Struct(&o.observations)
+	o.L = GLfixed(d.Int32())
+	o.R = GLfixed(d.Int32())
+	o.B = GLfixed(d.Int32())
+	o.T = GLfixed(d.Int32())
+	o.N = GLfixed(d.Int32())
+	o.F = GLfixed(d.Int32())
+}
+func (*binaryClassGlOrthoxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlOrthoxOES(e, obj.(*GlOrthoxOES))
+}
+func (*binaryClassGlOrthoxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlOrthoxOES{}
+	doDecodeGlOrthoxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlOrthoxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlOrthoxOES(d, obj.(*GlOrthoxOES))
+}
+func (*binaryClassGlOrthoxOES) Schema() *binary.Entity { return schemaGlOrthoxOES }
+
+var schemaGlOrthoxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlOrthoxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "L", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "R", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "T", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "N", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "F", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
 	},
 }
 
@@ -27223,6 +32674,426 @@ var schemaGlPointAlongPathNV = &binary.Entity{
 	},
 }
 
+type binaryClassGlPointParameterf struct{}
+
+func (*GlPointParameterf) Class() binary.Class {
+	return (*binaryClassGlPointParameterf)(nil)
+}
+func doEncodeGlPointParameterf(e binary.Encoder, o *GlPointParameterf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlPointParameterf(d binary.Decoder, o *GlPointParameterf) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlPointParameterf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterf(e, obj.(*GlPointParameterf))
+}
+func (*binaryClassGlPointParameterf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterf{}
+	doDecodeGlPointParameterf(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterf(d, obj.(*GlPointParameterf))
+}
+func (*binaryClassGlPointParameterf) Schema() *binary.Entity { return schemaGlPointParameterf }
+
+var schemaGlPointParameterf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlPointParameterfv struct{}
+
+func (*GlPointParameterfv) Class() binary.Class {
+	return (*binaryClassGlPointParameterfv)(nil)
+}
+func doEncodeGlPointParameterfv(e binary.Encoder, o *GlPointParameterfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlPointParameterfv(d binary.Decoder, o *GlPointParameterfv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlPointParameterfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterfv(e, obj.(*GlPointParameterfv))
+}
+func (*binaryClassGlPointParameterfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterfv{}
+	doDecodeGlPointParameterfv(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterfv(d, obj.(*GlPointParameterfv))
+}
+func (*binaryClassGlPointParameterfv) Schema() *binary.Entity { return schemaGlPointParameterfv }
+
+var schemaGlPointParameterfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlPointParameterx struct{}
+
+func (*GlPointParameterx) Class() binary.Class {
+	return (*binaryClassGlPointParameterx)(nil)
+}
+func doEncodeGlPointParameterx(e binary.Encoder, o *GlPointParameterx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlPointParameterx(d binary.Decoder, o *GlPointParameterx) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlPointParameterx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterx(e, obj.(*GlPointParameterx))
+}
+func (*binaryClassGlPointParameterx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterx{}
+	doDecodeGlPointParameterx(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterx(d, obj.(*GlPointParameterx))
+}
+func (*binaryClassGlPointParameterx) Schema() *binary.Entity { return schemaGlPointParameterx }
+
+var schemaGlPointParameterx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlPointParameterxOES struct{}
+
+func (*GlPointParameterxOES) Class() binary.Class {
+	return (*binaryClassGlPointParameterxOES)(nil)
+}
+func doEncodeGlPointParameterxOES(e binary.Encoder, o *GlPointParameterxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlPointParameterxOES(d binary.Decoder, o *GlPointParameterxOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlPointParameterxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterxOES(e, obj.(*GlPointParameterxOES))
+}
+func (*binaryClassGlPointParameterxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterxOES{}
+	doDecodeGlPointParameterxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterxOES(d, obj.(*GlPointParameterxOES))
+}
+func (*binaryClassGlPointParameterxOES) Schema() *binary.Entity { return schemaGlPointParameterxOES }
+
+var schemaGlPointParameterxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlPointParameterxv struct{}
+
+func (*GlPointParameterxv) Class() binary.Class {
+	return (*binaryClassGlPointParameterxv)(nil)
+}
+func doEncodeGlPointParameterxv(e binary.Encoder, o *GlPointParameterxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlPointParameterxv(d binary.Decoder, o *GlPointParameterxv) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlPointParameterxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterxv(e, obj.(*GlPointParameterxv))
+}
+func (*binaryClassGlPointParameterxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterxv{}
+	doDecodeGlPointParameterxv(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterxv(d, obj.(*GlPointParameterxv))
+}
+func (*binaryClassGlPointParameterxv) Schema() *binary.Entity { return schemaGlPointParameterxv }
+
+var schemaGlPointParameterxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlPointParameterxvOES struct{}
+
+func (*GlPointParameterxvOES) Class() binary.Class {
+	return (*binaryClassGlPointParameterxvOES)(nil)
+}
+func doEncodeGlPointParameterxvOES(e binary.Encoder, o *GlPointParameterxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlPointParameterxvOES(d binary.Decoder, o *GlPointParameterxvOES) {
+	d.Struct(&o.observations)
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlPointParameterxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointParameterxvOES(e, obj.(*GlPointParameterxvOES))
+}
+func (*binaryClassGlPointParameterxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointParameterxvOES{}
+	doDecodeGlPointParameterxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlPointParameterxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointParameterxvOES(d, obj.(*GlPointParameterxvOES))
+}
+func (*binaryClassGlPointParameterxvOES) Schema() *binary.Entity { return schemaGlPointParameterxvOES }
+
+var schemaGlPointParameterxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointParameterxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlPointSize struct{}
+
+func (*GlPointSize) Class() binary.Class {
+	return (*binaryClassGlPointSize)(nil)
+}
+func doEncodeGlPointSize(e binary.Encoder, o *GlPointSize) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.Size))
+}
+func doDecodeGlPointSize(d binary.Decoder, o *GlPointSize) {
+	d.Struct(&o.observations)
+	o.Size = GLfloat(d.Float32())
+}
+func (*binaryClassGlPointSize) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointSize(e, obj.(*GlPointSize))
+}
+func (*binaryClassGlPointSize) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointSize{}
+	doDecodeGlPointSize(d, obj)
+	return obj
+}
+func (*binaryClassGlPointSize) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointSize(d, obj.(*GlPointSize))
+}
+func (*binaryClassGlPointSize) Schema() *binary.Entity { return schemaGlPointSize }
+
+var schemaGlPointSize = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointSize",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlPointSizePointerOES struct{}
+
+func (*GlPointSizePointerOES) Class() binary.Class {
+	return (*binaryClassGlPointSizePointerOES)(nil)
+}
+func doEncodeGlPointSizePointerOES(e binary.Encoder, o *GlPointSizePointerOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlPointSizePointerOES(d binary.Decoder, o *GlPointSizePointerOES) {
+	d.Struct(&o.observations)
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlPointSizePointerOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointSizePointerOES(e, obj.(*GlPointSizePointerOES))
+}
+func (*binaryClassGlPointSizePointerOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointSizePointerOES{}
+	doDecodeGlPointSizePointerOES(d, obj)
+	return obj
+}
+func (*binaryClassGlPointSizePointerOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointSizePointerOES(d, obj.(*GlPointSizePointerOES))
+}
+func (*binaryClassGlPointSizePointerOES) Schema() *binary.Entity { return schemaGlPointSizePointerOES }
+
+var schemaGlPointSizePointerOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointSizePointerOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlPointSizePointerOESBounds struct{}
+
+func (*GlPointSizePointerOESBounds) Class() binary.Class {
+	return (*binaryClassGlPointSizePointerOESBounds)(nil)
+}
+func doEncodeGlPointSizePointerOESBounds(e binary.Encoder, o *GlPointSizePointerOESBounds) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlPointSizePointerOESBounds(d binary.Decoder, o *GlPointSizePointerOESBounds) {
+	d.Struct(&o.observations)
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlPointSizePointerOESBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointSizePointerOESBounds(e, obj.(*GlPointSizePointerOESBounds))
+}
+func (*binaryClassGlPointSizePointerOESBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointSizePointerOESBounds{}
+	doDecodeGlPointSizePointerOESBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlPointSizePointerOESBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointSizePointerOESBounds(d, obj.(*GlPointSizePointerOESBounds))
+}
+func (*binaryClassGlPointSizePointerOESBounds) Schema() *binary.Entity {
+	return schemaGlPointSizePointerOESBounds
+}
+
+var schemaGlPointSizePointerOESBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointSizePointerOESBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlPointSizex struct{}
+
+func (*GlPointSizex) Class() binary.Class {
+	return (*binaryClassGlPointSizex)(nil)
+}
+func doEncodeGlPointSizex(e binary.Encoder, o *GlPointSizex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+}
+func doDecodeGlPointSizex(d binary.Decoder, o *GlPointSizex) {
+	d.Struct(&o.observations)
+	o.Size = GLfixed(d.Int32())
+}
+func (*binaryClassGlPointSizex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointSizex(e, obj.(*GlPointSizex))
+}
+func (*binaryClassGlPointSizex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointSizex{}
+	doDecodeGlPointSizex(d, obj)
+	return obj
+}
+func (*binaryClassGlPointSizex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointSizex(d, obj.(*GlPointSizex))
+}
+func (*binaryClassGlPointSizex) Schema() *binary.Entity { return schemaGlPointSizex }
+
+var schemaGlPointSizex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointSizex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlPointSizexOES struct{}
+
+func (*GlPointSizexOES) Class() binary.Class {
+	return (*binaryClassGlPointSizexOES)(nil)
+}
+func doEncodeGlPointSizexOES(e binary.Encoder, o *GlPointSizexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+}
+func doDecodeGlPointSizexOES(d binary.Decoder, o *GlPointSizexOES) {
+	d.Struct(&o.observations)
+	o.Size = GLfixed(d.Int32())
+}
+func (*binaryClassGlPointSizexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPointSizexOES(e, obj.(*GlPointSizexOES))
+}
+func (*binaryClassGlPointSizexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPointSizexOES{}
+	doDecodeGlPointSizexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlPointSizexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPointSizexOES(d, obj.(*GlPointSizexOES))
+}
+func (*binaryClassGlPointSizexOES) Schema() *binary.Entity { return schemaGlPointSizexOES }
+
+var schemaGlPointSizexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPointSizexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlPolygonModeNV struct{}
 
 func (*GlPolygonModeNV) Class() binary.Class {
@@ -27296,6 +33167,82 @@ var schemaGlPolygonOffset = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
 		{Declared: "Units", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlPolygonOffsetx struct{}
+
+func (*GlPolygonOffsetx) Class() binary.Class {
+	return (*binaryClassGlPolygonOffsetx)(nil)
+}
+func doEncodeGlPolygonOffsetx(e binary.Encoder, o *GlPolygonOffsetx) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Factor))
+	e.Int32(int32(o.Units))
+}
+func doDecodeGlPolygonOffsetx(d binary.Decoder, o *GlPolygonOffsetx) {
+	d.Struct(&o.observations)
+	o.Factor = GLfixed(d.Int32())
+	o.Units = GLfixed(d.Int32())
+}
+func (*binaryClassGlPolygonOffsetx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPolygonOffsetx(e, obj.(*GlPolygonOffsetx))
+}
+func (*binaryClassGlPolygonOffsetx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPolygonOffsetx{}
+	doDecodeGlPolygonOffsetx(d, obj)
+	return obj
+}
+func (*binaryClassGlPolygonOffsetx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPolygonOffsetx(d, obj.(*GlPolygonOffsetx))
+}
+func (*binaryClassGlPolygonOffsetx) Schema() *binary.Entity { return schemaGlPolygonOffsetx }
+
+var schemaGlPolygonOffsetx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPolygonOffsetx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Factor", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Units", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlPolygonOffsetxOES struct{}
+
+func (*GlPolygonOffsetxOES) Class() binary.Class {
+	return (*binaryClassGlPolygonOffsetxOES)(nil)
+}
+func doEncodeGlPolygonOffsetxOES(e binary.Encoder, o *GlPolygonOffsetxOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Factor))
+	e.Int32(int32(o.Units))
+}
+func doDecodeGlPolygonOffsetxOES(d binary.Decoder, o *GlPolygonOffsetxOES) {
+	d.Struct(&o.observations)
+	o.Factor = GLfixed(d.Int32())
+	o.Units = GLfixed(d.Int32())
+}
+func (*binaryClassGlPolygonOffsetxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPolygonOffsetxOES(e, obj.(*GlPolygonOffsetxOES))
+}
+func (*binaryClassGlPolygonOffsetxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPolygonOffsetxOES{}
+	doDecodeGlPolygonOffsetxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlPolygonOffsetxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPolygonOffsetxOES(d, obj.(*GlPolygonOffsetxOES))
+}
+func (*binaryClassGlPolygonOffsetxOES) Schema() *binary.Entity { return schemaGlPolygonOffsetxOES }
+
+var schemaGlPolygonOffsetxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPolygonOffsetxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Factor", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Units", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
 	},
 }
 
@@ -27390,6 +33337,38 @@ func (*binaryClassGlPopGroupMarkerEXT) Schema() *binary.Entity { return schemaGl
 var schemaGlPopGroupMarkerEXT = &binary.Entity{
 	Package:  "gles",
 	Identity: "GlPopGroupMarkerEXT",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlPopMatrix struct{}
+
+func (*GlPopMatrix) Class() binary.Class {
+	return (*binaryClassGlPopMatrix)(nil)
+}
+func doEncodeGlPopMatrix(e binary.Encoder, o *GlPopMatrix) {
+	e.Struct(&o.observations)
+}
+func doDecodeGlPopMatrix(d binary.Decoder, o *GlPopMatrix) {
+	d.Struct(&o.observations)
+}
+func (*binaryClassGlPopMatrix) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPopMatrix(e, obj.(*GlPopMatrix))
+}
+func (*binaryClassGlPopMatrix) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPopMatrix{}
+	doDecodeGlPopMatrix(d, obj)
+	return obj
+}
+func (*binaryClassGlPopMatrix) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPopMatrix(d, obj.(*GlPopMatrix))
+}
+func (*binaryClassGlPopMatrix) Schema() *binary.Entity { return schemaGlPopMatrix }
+
+var schemaGlPopMatrix = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPopMatrix",
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 	},
@@ -31039,6 +37018,38 @@ var schemaGlPushGroupMarkerEXT = &binary.Entity{
 	},
 }
 
+type binaryClassGlPushMatrix struct{}
+
+func (*GlPushMatrix) Class() binary.Class {
+	return (*binaryClassGlPushMatrix)(nil)
+}
+func doEncodeGlPushMatrix(e binary.Encoder, o *GlPushMatrix) {
+	e.Struct(&o.observations)
+}
+func doDecodeGlPushMatrix(d binary.Decoder, o *GlPushMatrix) {
+	d.Struct(&o.observations)
+}
+func (*binaryClassGlPushMatrix) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlPushMatrix(e, obj.(*GlPushMatrix))
+}
+func (*binaryClassGlPushMatrix) Decode(d binary.Decoder) binary.Object {
+	obj := &GlPushMatrix{}
+	doDecodeGlPushMatrix(d, obj)
+	return obj
+}
+func (*binaryClassGlPushMatrix) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlPushMatrix(d, obj.(*GlPushMatrix))
+}
+func (*binaryClassGlPushMatrix) Schema() *binary.Entity { return schemaGlPushMatrix }
+
+var schemaGlPushMatrix = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlPushMatrix",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlQueryCounterEXT struct{}
 
 func (*GlQueryCounterEXT) Class() binary.Class {
@@ -31074,6 +37085,47 @@ var schemaGlQueryCounterEXT = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlQueryMatrixxOES struct{}
+
+func (*GlQueryMatrixxOES) Class() binary.Class {
+	return (*binaryClassGlQueryMatrixxOES)(nil)
+}
+func doEncodeGlQueryMatrixxOES(e binary.Encoder, o *GlQueryMatrixxOES) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Mantissa)
+	e.Struct(&o.Exponent)
+	e.Uint32(uint32(o.Result))
+}
+func doDecodeGlQueryMatrixxOES(d binary.Decoder, o *GlQueryMatrixxOES) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Mantissa)
+	d.Struct(&o.Exponent)
+	o.Result = GLbitfield(d.Uint32())
+}
+func (*binaryClassGlQueryMatrixxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlQueryMatrixxOES(e, obj.(*GlQueryMatrixxOES))
+}
+func (*binaryClassGlQueryMatrixxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlQueryMatrixxOES{}
+	doDecodeGlQueryMatrixxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlQueryMatrixxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlQueryMatrixxOES(d, obj.(*GlQueryMatrixxOES))
+}
+func (*binaryClassGlQueryMatrixxOES) Schema() *binary.Entity { return schemaGlQueryMatrixxOES }
+
+var schemaGlQueryMatrixxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlQueryMatrixxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Mantissa", Type: &schema.Struct{Entity: (*GLfixedᵖ)(nil).Class().Schema()}},
+		{Declared: "Exponent", Type: &schema.Struct{Entity: (*GLintᵖ)(nil).Class().Schema()}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "GLbitfield", Method: schema.Uint32}},
 	},
 }
 
@@ -31816,6 +37868,52 @@ var schemaGlRenderbufferStorageMultisampleNV = &binary.Entity{
 	},
 }
 
+type binaryClassGlRenderbufferStorageOES struct{}
+
+func (*GlRenderbufferStorageOES) Class() binary.Class {
+	return (*binaryClassGlRenderbufferStorageOES)(nil)
+}
+func doEncodeGlRenderbufferStorageOES(e binary.Encoder, o *GlRenderbufferStorageOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Internalformat))
+	e.Int32(int32(o.Width))
+	e.Int32(int32(o.Height))
+}
+func doDecodeGlRenderbufferStorageOES(d binary.Decoder, o *GlRenderbufferStorageOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Internalformat = GLenum(d.Uint32())
+	o.Width = GLsizei(d.Int32())
+	o.Height = GLsizei(d.Int32())
+}
+func (*binaryClassGlRenderbufferStorageOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlRenderbufferStorageOES(e, obj.(*GlRenderbufferStorageOES))
+}
+func (*binaryClassGlRenderbufferStorageOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlRenderbufferStorageOES{}
+	doDecodeGlRenderbufferStorageOES(d, obj)
+	return obj
+}
+func (*binaryClassGlRenderbufferStorageOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlRenderbufferStorageOES(d, obj.(*GlRenderbufferStorageOES))
+}
+func (*binaryClassGlRenderbufferStorageOES) Schema() *binary.Entity {
+	return schemaGlRenderbufferStorageOES
+}
+
+var schemaGlRenderbufferStorageOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlRenderbufferStorageOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Internalformat", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlResolveDepthValuesNV struct{}
 
 func (*GlResolveDepthValuesNV) Class() binary.Class {
@@ -31916,6 +38014,138 @@ var schemaGlResumeTransformFeedback = &binary.Entity{
 	},
 }
 
+type binaryClassGlRotatef struct{}
+
+func (*GlRotatef) Class() binary.Class {
+	return (*binaryClassGlRotatef)(nil)
+}
+func doEncodeGlRotatef(e binary.Encoder, o *GlRotatef) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.Angle))
+	e.Float32(float32(o.X))
+	e.Float32(float32(o.Y))
+	e.Float32(float32(o.Z))
+}
+func doDecodeGlRotatef(d binary.Decoder, o *GlRotatef) {
+	d.Struct(&o.observations)
+	o.Angle = GLfloat(d.Float32())
+	o.X = GLfloat(d.Float32())
+	o.Y = GLfloat(d.Float32())
+	o.Z = GLfloat(d.Float32())
+}
+func (*binaryClassGlRotatef) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlRotatef(e, obj.(*GlRotatef))
+}
+func (*binaryClassGlRotatef) Decode(d binary.Decoder) binary.Object {
+	obj := &GlRotatef{}
+	doDecodeGlRotatef(d, obj)
+	return obj
+}
+func (*binaryClassGlRotatef) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlRotatef(d, obj.(*GlRotatef))
+}
+func (*binaryClassGlRotatef) Schema() *binary.Entity { return schemaGlRotatef }
+
+var schemaGlRotatef = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlRotatef",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Angle", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlRotatex struct{}
+
+func (*GlRotatex) Class() binary.Class {
+	return (*binaryClassGlRotatex)(nil)
+}
+func doEncodeGlRotatex(e binary.Encoder, o *GlRotatex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Angle))
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlRotatex(d binary.Decoder, o *GlRotatex) {
+	d.Struct(&o.observations)
+	o.Angle = GLfixed(d.Int32())
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlRotatex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlRotatex(e, obj.(*GlRotatex))
+}
+func (*binaryClassGlRotatex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlRotatex{}
+	doDecodeGlRotatex(d, obj)
+	return obj
+}
+func (*binaryClassGlRotatex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlRotatex(d, obj.(*GlRotatex))
+}
+func (*binaryClassGlRotatex) Schema() *binary.Entity { return schemaGlRotatex }
+
+var schemaGlRotatex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlRotatex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Angle", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlRotatexOES struct{}
+
+func (*GlRotatexOES) Class() binary.Class {
+	return (*binaryClassGlRotatexOES)(nil)
+}
+func doEncodeGlRotatexOES(e binary.Encoder, o *GlRotatexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Angle))
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlRotatexOES(d binary.Decoder, o *GlRotatexOES) {
+	d.Struct(&o.observations)
+	o.Angle = GLfixed(d.Int32())
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlRotatexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlRotatexOES(e, obj.(*GlRotatexOES))
+}
+func (*binaryClassGlRotatexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlRotatexOES{}
+	doDecodeGlRotatexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlRotatexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlRotatexOES(d, obj.(*GlRotatexOES))
+}
+func (*binaryClassGlRotatexOES) Schema() *binary.Entity { return schemaGlRotatexOES }
+
+var schemaGlRotatexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlRotatexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Angle", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlSampleCoverage struct{}
 
 func (*GlSampleCoverage) Class() binary.Class {
@@ -31950,6 +38180,82 @@ var schemaGlSampleCoverage = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Value", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassGlSampleCoveragex struct{}
+
+func (*GlSampleCoveragex) Class() binary.Class {
+	return (*binaryClassGlSampleCoveragex)(nil)
+}
+func doEncodeGlSampleCoveragex(e binary.Encoder, o *GlSampleCoveragex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Value))
+	e.Uint8(uint8(o.Invert))
+}
+func doDecodeGlSampleCoveragex(d binary.Decoder, o *GlSampleCoveragex) {
+	d.Struct(&o.observations)
+	o.Value = GLclampx(d.Int32())
+	o.Invert = GLboolean(d.Uint8())
+}
+func (*binaryClassGlSampleCoveragex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlSampleCoveragex(e, obj.(*GlSampleCoveragex))
+}
+func (*binaryClassGlSampleCoveragex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlSampleCoveragex{}
+	doDecodeGlSampleCoveragex(d, obj)
+	return obj
+}
+func (*binaryClassGlSampleCoveragex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlSampleCoveragex(d, obj.(*GlSampleCoveragex))
+}
+func (*binaryClassGlSampleCoveragex) Schema() *binary.Entity { return schemaGlSampleCoveragex }
+
+var schemaGlSampleCoveragex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlSampleCoveragex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "GLclampx", Method: schema.Int32}},
+		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassGlSampleCoveragexOES struct{}
+
+func (*GlSampleCoveragexOES) Class() binary.Class {
+	return (*binaryClassGlSampleCoveragexOES)(nil)
+}
+func doEncodeGlSampleCoveragexOES(e binary.Encoder, o *GlSampleCoveragexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Value))
+	e.Uint8(uint8(o.Invert))
+}
+func doDecodeGlSampleCoveragexOES(d binary.Decoder, o *GlSampleCoveragexOES) {
+	d.Struct(&o.observations)
+	o.Value = GLclampx(d.Int32())
+	o.Invert = GLboolean(d.Uint8())
+}
+func (*binaryClassGlSampleCoveragexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlSampleCoveragexOES(e, obj.(*GlSampleCoveragexOES))
+}
+func (*binaryClassGlSampleCoveragexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlSampleCoveragexOES{}
+	doDecodeGlSampleCoveragexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlSampleCoveragexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlSampleCoveragexOES(d, obj.(*GlSampleCoveragexOES))
+}
+func (*binaryClassGlSampleCoveragexOES) Schema() *binary.Entity { return schemaGlSampleCoveragexOES }
+
+var schemaGlSampleCoveragexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlSampleCoveragexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "GLclampx", Method: schema.Int32}},
 		{Declared: "Invert", Type: &schema.Primitive{Name: "GLboolean", Method: schema.Uint8}},
 	},
 }
@@ -32410,6 +38716,129 @@ var schemaGlSamplerParameteriv = &binary.Entity{
 	},
 }
 
+type binaryClassGlScalef struct{}
+
+func (*GlScalef) Class() binary.Class {
+	return (*binaryClassGlScalef)(nil)
+}
+func doEncodeGlScalef(e binary.Encoder, o *GlScalef) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.X))
+	e.Float32(float32(o.Y))
+	e.Float32(float32(o.Z))
+}
+func doDecodeGlScalef(d binary.Decoder, o *GlScalef) {
+	d.Struct(&o.observations)
+	o.X = GLfloat(d.Float32())
+	o.Y = GLfloat(d.Float32())
+	o.Z = GLfloat(d.Float32())
+}
+func (*binaryClassGlScalef) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlScalef(e, obj.(*GlScalef))
+}
+func (*binaryClassGlScalef) Decode(d binary.Decoder) binary.Object {
+	obj := &GlScalef{}
+	doDecodeGlScalef(d, obj)
+	return obj
+}
+func (*binaryClassGlScalef) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlScalef(d, obj.(*GlScalef))
+}
+func (*binaryClassGlScalef) Schema() *binary.Entity { return schemaGlScalef }
+
+var schemaGlScalef = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlScalef",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlScalex struct{}
+
+func (*GlScalex) Class() binary.Class {
+	return (*binaryClassGlScalex)(nil)
+}
+func doEncodeGlScalex(e binary.Encoder, o *GlScalex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlScalex(d binary.Decoder, o *GlScalex) {
+	d.Struct(&o.observations)
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlScalex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlScalex(e, obj.(*GlScalex))
+}
+func (*binaryClassGlScalex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlScalex{}
+	doDecodeGlScalex(d, obj)
+	return obj
+}
+func (*binaryClassGlScalex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlScalex(d, obj.(*GlScalex))
+}
+func (*binaryClassGlScalex) Schema() *binary.Entity { return schemaGlScalex }
+
+var schemaGlScalex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlScalex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlScalexOES struct{}
+
+func (*GlScalexOES) Class() binary.Class {
+	return (*binaryClassGlScalexOES)(nil)
+}
+func doEncodeGlScalexOES(e binary.Encoder, o *GlScalexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlScalexOES(d binary.Decoder, o *GlScalexOES) {
+	d.Struct(&o.observations)
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlScalexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlScalexOES(e, obj.(*GlScalexOES))
+}
+func (*binaryClassGlScalexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlScalexOES{}
+	doDecodeGlScalexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlScalexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlScalexOES(d, obj.(*GlScalexOES))
+}
+func (*binaryClassGlScalexOES) Schema() *binary.Entity { return schemaGlScalexOES }
+
+var schemaGlScalexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlScalexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlScissor struct{}
 
 func (*GlScissor) Class() binary.Class {
@@ -32664,6 +39093,41 @@ var schemaGlSetFenceNV = &binary.Entity{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "Fence", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "Condition", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassGlShadeModel struct{}
+
+func (*GlShadeModel) Class() binary.Class {
+	return (*binaryClassGlShadeModel)(nil)
+}
+func doEncodeGlShadeModel(e binary.Encoder, o *GlShadeModel) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Mode))
+}
+func doDecodeGlShadeModel(d binary.Decoder, o *GlShadeModel) {
+	d.Struct(&o.observations)
+	o.Mode = GLenum(d.Uint32())
+}
+func (*binaryClassGlShadeModel) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlShadeModel(e, obj.(*GlShadeModel))
+}
+func (*binaryClassGlShadeModel) Decode(d binary.Decoder) binary.Object {
+	obj := &GlShadeModel{}
+	doDecodeGlShadeModel(d, obj)
+	return obj
+}
+func (*binaryClassGlShadeModel) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlShadeModel(d, obj.(*GlShadeModel))
+}
+func (*binaryClassGlShadeModel) Schema() *binary.Entity { return schemaGlShadeModel }
+
+var schemaGlShadeModel = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlShadeModel",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -33834,6 +40298,673 @@ var schemaGlTexBufferRangeOES = &binary.Entity{
 	},
 }
 
+type binaryClassGlTexCoordPointer struct{}
+
+func (*GlTexCoordPointer) Class() binary.Class {
+	return (*binaryClassGlTexCoordPointer)(nil)
+}
+func doEncodeGlTexCoordPointer(e binary.Encoder, o *GlTexCoordPointer) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlTexCoordPointer(d binary.Decoder, o *GlTexCoordPointer) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlTexCoordPointer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexCoordPointer(e, obj.(*GlTexCoordPointer))
+}
+func (*binaryClassGlTexCoordPointer) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexCoordPointer{}
+	doDecodeGlTexCoordPointer(d, obj)
+	return obj
+}
+func (*binaryClassGlTexCoordPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexCoordPointer(d, obj.(*GlTexCoordPointer))
+}
+func (*binaryClassGlTexCoordPointer) Schema() *binary.Entity { return schemaGlTexCoordPointer }
+
+var schemaGlTexCoordPointer = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexCoordPointer",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexCoordPointerBounds struct{}
+
+func (*GlTexCoordPointerBounds) Class() binary.Class {
+	return (*binaryClassGlTexCoordPointerBounds)(nil)
+}
+func doEncodeGlTexCoordPointerBounds(e binary.Encoder, o *GlTexCoordPointerBounds) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlTexCoordPointerBounds(d binary.Decoder, o *GlTexCoordPointerBounds) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlTexCoordPointerBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexCoordPointerBounds(e, obj.(*GlTexCoordPointerBounds))
+}
+func (*binaryClassGlTexCoordPointerBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexCoordPointerBounds{}
+	doDecodeGlTexCoordPointerBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlTexCoordPointerBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexCoordPointerBounds(d, obj.(*GlTexCoordPointerBounds))
+}
+func (*binaryClassGlTexCoordPointerBounds) Schema() *binary.Entity {
+	return schemaGlTexCoordPointerBounds
+}
+
+var schemaGlTexCoordPointerBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexCoordPointerBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexEnvf struct{}
+
+func (*GlTexEnvf) Class() binary.Class {
+	return (*binaryClassGlTexEnvf)(nil)
+}
+func doEncodeGlTexEnvf(e binary.Encoder, o *GlTexEnvf) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlTexEnvf(d binary.Decoder, o *GlTexEnvf) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlTexEnvf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvf(e, obj.(*GlTexEnvf))
+}
+func (*binaryClassGlTexEnvf) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvf{}
+	doDecodeGlTexEnvf(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvf(d, obj.(*GlTexEnvf))
+}
+func (*binaryClassGlTexEnvf) Schema() *binary.Entity { return schemaGlTexEnvf }
+
+var schemaGlTexEnvf = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvf",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlTexEnvfv struct{}
+
+func (*GlTexEnvfv) Class() binary.Class {
+	return (*binaryClassGlTexEnvfv)(nil)
+}
+func doEncodeGlTexEnvfv(e binary.Encoder, o *GlTexEnvfv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexEnvfv(d binary.Decoder, o *GlTexEnvfv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexEnvfv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvfv(e, obj.(*GlTexEnvfv))
+}
+func (*binaryClassGlTexEnvfv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvfv{}
+	doDecodeGlTexEnvfv(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvfv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvfv(d, obj.(*GlTexEnvfv))
+}
+func (*binaryClassGlTexEnvfv) Schema() *binary.Entity { return schemaGlTexEnvfv }
+
+var schemaGlTexEnvfv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvfv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexEnvi struct{}
+
+func (*GlTexEnvi) Class() binary.Class {
+	return (*binaryClassGlTexEnvi)(nil)
+}
+func doEncodeGlTexEnvi(e binary.Encoder, o *GlTexEnvi) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexEnvi(d binary.Decoder, o *GlTexEnvi) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLint(d.Int32())
+}
+func (*binaryClassGlTexEnvi) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvi(e, obj.(*GlTexEnvi))
+}
+func (*binaryClassGlTexEnvi) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvi{}
+	doDecodeGlTexEnvi(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvi) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvi(d, obj.(*GlTexEnvi))
+}
+func (*binaryClassGlTexEnvi) Schema() *binary.Entity { return schemaGlTexEnvi }
+
+var schemaGlTexEnvi = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvi",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexEnviv struct{}
+
+func (*GlTexEnviv) Class() binary.Class {
+	return (*binaryClassGlTexEnviv)(nil)
+}
+func doEncodeGlTexEnviv(e binary.Encoder, o *GlTexEnviv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexEnviv(d binary.Decoder, o *GlTexEnviv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexEnviv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnviv(e, obj.(*GlTexEnviv))
+}
+func (*binaryClassGlTexEnviv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnviv{}
+	doDecodeGlTexEnviv(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnviv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnviv(d, obj.(*GlTexEnviv))
+}
+func (*binaryClassGlTexEnviv) Schema() *binary.Entity { return schemaGlTexEnviv }
+
+var schemaGlTexEnviv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnviv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexEnvx struct{}
+
+func (*GlTexEnvx) Class() binary.Class {
+	return (*binaryClassGlTexEnvx)(nil)
+}
+func doEncodeGlTexEnvx(e binary.Encoder, o *GlTexEnvx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexEnvx(d binary.Decoder, o *GlTexEnvx) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlTexEnvx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvx(e, obj.(*GlTexEnvx))
+}
+func (*binaryClassGlTexEnvx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvx{}
+	doDecodeGlTexEnvx(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvx(d, obj.(*GlTexEnvx))
+}
+func (*binaryClassGlTexEnvx) Schema() *binary.Entity { return schemaGlTexEnvx }
+
+var schemaGlTexEnvx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexEnvxOES struct{}
+
+func (*GlTexEnvxOES) Class() binary.Class {
+	return (*binaryClassGlTexEnvxOES)(nil)
+}
+func doEncodeGlTexEnvxOES(e binary.Encoder, o *GlTexEnvxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexEnvxOES(d binary.Decoder, o *GlTexEnvxOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlTexEnvxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvxOES(e, obj.(*GlTexEnvxOES))
+}
+func (*binaryClassGlTexEnvxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvxOES{}
+	doDecodeGlTexEnvxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvxOES(d, obj.(*GlTexEnvxOES))
+}
+func (*binaryClassGlTexEnvxOES) Schema() *binary.Entity { return schemaGlTexEnvxOES }
+
+var schemaGlTexEnvxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexEnvxv struct{}
+
+func (*GlTexEnvxv) Class() binary.Class {
+	return (*binaryClassGlTexEnvxv)(nil)
+}
+func doEncodeGlTexEnvxv(e binary.Encoder, o *GlTexEnvxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexEnvxv(d binary.Decoder, o *GlTexEnvxv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexEnvxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvxv(e, obj.(*GlTexEnvxv))
+}
+func (*binaryClassGlTexEnvxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvxv{}
+	doDecodeGlTexEnvxv(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvxv(d, obj.(*GlTexEnvxv))
+}
+func (*binaryClassGlTexEnvxv) Schema() *binary.Entity { return schemaGlTexEnvxv }
+
+var schemaGlTexEnvxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexEnvxvOES struct{}
+
+func (*GlTexEnvxvOES) Class() binary.Class {
+	return (*binaryClassGlTexEnvxvOES)(nil)
+}
+func doEncodeGlTexEnvxvOES(e binary.Encoder, o *GlTexEnvxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexEnvxvOES(d binary.Decoder, o *GlTexEnvxvOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexEnvxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexEnvxvOES(e, obj.(*GlTexEnvxvOES))
+}
+func (*binaryClassGlTexEnvxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexEnvxvOES{}
+	doDecodeGlTexEnvxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexEnvxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexEnvxvOES(d, obj.(*GlTexEnvxvOES))
+}
+func (*binaryClassGlTexEnvxvOES) Schema() *binary.Entity { return schemaGlTexEnvxvOES }
+
+var schemaGlTexEnvxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexEnvxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexGenfOES struct{}
+
+func (*GlTexGenfOES) Class() binary.Class {
+	return (*binaryClassGlTexGenfOES)(nil)
+}
+func doEncodeGlTexGenfOES(e binary.Encoder, o *GlTexGenfOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Float32(float32(o.Param))
+}
+func doDecodeGlTexGenfOES(d binary.Decoder, o *GlTexGenfOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfloat(d.Float32())
+}
+func (*binaryClassGlTexGenfOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGenfOES(e, obj.(*GlTexGenfOES))
+}
+func (*binaryClassGlTexGenfOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGenfOES{}
+	doDecodeGlTexGenfOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGenfOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGenfOES(d, obj.(*GlTexGenfOES))
+}
+func (*binaryClassGlTexGenfOES) Schema() *binary.Entity { return schemaGlTexGenfOES }
+
+var schemaGlTexGenfOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGenfOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlTexGenfvOES struct{}
+
+func (*GlTexGenfvOES) Class() binary.Class {
+	return (*binaryClassGlTexGenfvOES)(nil)
+}
+func doEncodeGlTexGenfvOES(e binary.Encoder, o *GlTexGenfvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexGenfvOES(d binary.Decoder, o *GlTexGenfvOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexGenfvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGenfvOES(e, obj.(*GlTexGenfvOES))
+}
+func (*binaryClassGlTexGenfvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGenfvOES{}
+	doDecodeGlTexGenfvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGenfvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGenfvOES(d, obj.(*GlTexGenfvOES))
+}
+func (*binaryClassGlTexGenfvOES) Schema() *binary.Entity { return schemaGlTexGenfvOES }
+
+var schemaGlTexGenfvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGenfvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexGeniOES struct{}
+
+func (*GlTexGeniOES) Class() binary.Class {
+	return (*binaryClassGlTexGeniOES)(nil)
+}
+func doEncodeGlTexGeniOES(e binary.Encoder, o *GlTexGeniOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexGeniOES(d binary.Decoder, o *GlTexGeniOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLint(d.Int32())
+}
+func (*binaryClassGlTexGeniOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGeniOES(e, obj.(*GlTexGeniOES))
+}
+func (*binaryClassGlTexGeniOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGeniOES{}
+	doDecodeGlTexGeniOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGeniOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGeniOES(d, obj.(*GlTexGeniOES))
+}
+func (*binaryClassGlTexGeniOES) Schema() *binary.Entity { return schemaGlTexGeniOES }
+
+var schemaGlTexGeniOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGeniOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexGenivOES struct{}
+
+func (*GlTexGenivOES) Class() binary.Class {
+	return (*binaryClassGlTexGenivOES)(nil)
+}
+func doEncodeGlTexGenivOES(e binary.Encoder, o *GlTexGenivOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexGenivOES(d binary.Decoder, o *GlTexGenivOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexGenivOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGenivOES(e, obj.(*GlTexGenivOES))
+}
+func (*binaryClassGlTexGenivOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGenivOES{}
+	doDecodeGlTexGenivOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGenivOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGenivOES(d, obj.(*GlTexGenivOES))
+}
+func (*binaryClassGlTexGenivOES) Schema() *binary.Entity { return schemaGlTexGenivOES }
+
+var schemaGlTexGenivOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGenivOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexGenxOES struct{}
+
+func (*GlTexGenxOES) Class() binary.Class {
+	return (*binaryClassGlTexGenxOES)(nil)
+}
+func doEncodeGlTexGenxOES(e binary.Encoder, o *GlTexGenxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexGenxOES(d binary.Decoder, o *GlTexGenxOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlTexGenxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGenxOES(e, obj.(*GlTexGenxOES))
+}
+func (*binaryClassGlTexGenxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGenxOES{}
+	doDecodeGlTexGenxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGenxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGenxOES(d, obj.(*GlTexGenxOES))
+}
+func (*binaryClassGlTexGenxOES) Schema() *binary.Entity { return schemaGlTexGenxOES }
+
+var schemaGlTexGenxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGenxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexGenxvOES struct{}
+
+func (*GlTexGenxvOES) Class() binary.Class {
+	return (*binaryClassGlTexGenxvOES)(nil)
+}
+func doEncodeGlTexGenxvOES(e binary.Encoder, o *GlTexGenxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Coord))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexGenxvOES(d binary.Decoder, o *GlTexGenxvOES) {
+	d.Struct(&o.observations)
+	o.Coord = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexGenxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexGenxvOES(e, obj.(*GlTexGenxvOES))
+}
+func (*binaryClassGlTexGenxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexGenxvOES{}
+	doDecodeGlTexGenxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexGenxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexGenxvOES(d, obj.(*GlTexGenxvOES))
+}
+func (*binaryClassGlTexGenxvOES) Schema() *binary.Entity { return schemaGlTexGenxvOES }
+
+var schemaGlTexGenxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexGenxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Coord", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
 type binaryClassGlTexImage2D struct{}
 
 func (*GlTexImage2D) Class() binary.Class {
@@ -34483,6 +41614,170 @@ var schemaGlTexParameteriv = &binary.Entity{
 		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "Params", Type: &schema.Struct{Entity: (*GLintᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexParameterx struct{}
+
+func (*GlTexParameterx) Class() binary.Class {
+	return (*binaryClassGlTexParameterx)(nil)
+}
+func doEncodeGlTexParameterx(e binary.Encoder, o *GlTexParameterx) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexParameterx(d binary.Decoder, o *GlTexParameterx) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlTexParameterx) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexParameterx(e, obj.(*GlTexParameterx))
+}
+func (*binaryClassGlTexParameterx) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexParameterx{}
+	doDecodeGlTexParameterx(d, obj)
+	return obj
+}
+func (*binaryClassGlTexParameterx) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexParameterx(d, obj.(*GlTexParameterx))
+}
+func (*binaryClassGlTexParameterx) Schema() *binary.Entity { return schemaGlTexParameterx }
+
+var schemaGlTexParameterx = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexParameterx",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexParameterxOES struct{}
+
+func (*GlTexParameterxOES) Class() binary.Class {
+	return (*binaryClassGlTexParameterxOES)(nil)
+}
+func doEncodeGlTexParameterxOES(e binary.Encoder, o *GlTexParameterxOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Int32(int32(o.Param))
+}
+func doDecodeGlTexParameterxOES(d binary.Decoder, o *GlTexParameterxOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	o.Param = GLfixed(d.Int32())
+}
+func (*binaryClassGlTexParameterxOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexParameterxOES(e, obj.(*GlTexParameterxOES))
+}
+func (*binaryClassGlTexParameterxOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexParameterxOES{}
+	doDecodeGlTexParameterxOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexParameterxOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexParameterxOES(d, obj.(*GlTexParameterxOES))
+}
+func (*binaryClassGlTexParameterxOES) Schema() *binary.Entity { return schemaGlTexParameterxOES }
+
+var schemaGlTexParameterxOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexParameterxOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTexParameterxv struct{}
+
+func (*GlTexParameterxv) Class() binary.Class {
+	return (*binaryClassGlTexParameterxv)(nil)
+}
+func doEncodeGlTexParameterxv(e binary.Encoder, o *GlTexParameterxv) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexParameterxv(d binary.Decoder, o *GlTexParameterxv) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexParameterxv) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexParameterxv(e, obj.(*GlTexParameterxv))
+}
+func (*binaryClassGlTexParameterxv) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexParameterxv{}
+	doDecodeGlTexParameterxv(d, obj)
+	return obj
+}
+func (*binaryClassGlTexParameterxv) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexParameterxv(d, obj.(*GlTexParameterxv))
+}
+func (*binaryClassGlTexParameterxv) Schema() *binary.Entity { return schemaGlTexParameterxv }
+
+var schemaGlTexParameterxv = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexParameterxv",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTexParameterxvOES struct{}
+
+func (*GlTexParameterxvOES) Class() binary.Class {
+	return (*binaryClassGlTexParameterxvOES)(nil)
+}
+func doEncodeGlTexParameterxvOES(e binary.Encoder, o *GlTexParameterxvOES) {
+	e.Struct(&o.observations)
+	e.Uint32(uint32(o.Target))
+	e.Uint32(uint32(o.Pname))
+	e.Struct(&o.Params)
+}
+func doDecodeGlTexParameterxvOES(d binary.Decoder, o *GlTexParameterxvOES) {
+	d.Struct(&o.observations)
+	o.Target = GLenum(d.Uint32())
+	o.Pname = GLenum(d.Uint32())
+	d.Struct(&o.Params)
+}
+func (*binaryClassGlTexParameterxvOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTexParameterxvOES(e, obj.(*GlTexParameterxvOES))
+}
+func (*binaryClassGlTexParameterxvOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTexParameterxvOES{}
+	doDecodeGlTexParameterxvOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTexParameterxvOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTexParameterxvOES(d, obj.(*GlTexParameterxvOES))
+}
+func (*binaryClassGlTexParameterxvOES) Schema() *binary.Entity { return schemaGlTexParameterxvOES }
+
+var schemaGlTexParameterxvOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTexParameterxvOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Pname", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Params", Type: &schema.Struct{Entity: (*GLfixedᶜᵖ)(nil).Class().Schema()}},
 	},
 }
 
@@ -35424,6 +42719,129 @@ var schemaGlTransformPathNV = &binary.Entity{
 		{Declared: "SrcPath", Type: &schema.Primitive{Name: "GLuint", Method: schema.Uint32}},
 		{Declared: "TransformType", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 		{Declared: "TransformValues", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlTranslatef struct{}
+
+func (*GlTranslatef) Class() binary.Class {
+	return (*binaryClassGlTranslatef)(nil)
+}
+func doEncodeGlTranslatef(e binary.Encoder, o *GlTranslatef) {
+	e.Struct(&o.observations)
+	e.Float32(float32(o.X))
+	e.Float32(float32(o.Y))
+	e.Float32(float32(o.Z))
+}
+func doDecodeGlTranslatef(d binary.Decoder, o *GlTranslatef) {
+	d.Struct(&o.observations)
+	o.X = GLfloat(d.Float32())
+	o.Y = GLfloat(d.Float32())
+	o.Z = GLfloat(d.Float32())
+}
+func (*binaryClassGlTranslatef) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTranslatef(e, obj.(*GlTranslatef))
+}
+func (*binaryClassGlTranslatef) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTranslatef{}
+	doDecodeGlTranslatef(d, obj)
+	return obj
+}
+func (*binaryClassGlTranslatef) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTranslatef(d, obj.(*GlTranslatef))
+}
+func (*binaryClassGlTranslatef) Schema() *binary.Entity { return schemaGlTranslatef }
+
+var schemaGlTranslatef = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTranslatef",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfloat", Method: schema.Float32}},
+	},
+}
+
+type binaryClassGlTranslatex struct{}
+
+func (*GlTranslatex) Class() binary.Class {
+	return (*binaryClassGlTranslatex)(nil)
+}
+func doEncodeGlTranslatex(e binary.Encoder, o *GlTranslatex) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlTranslatex(d binary.Decoder, o *GlTranslatex) {
+	d.Struct(&o.observations)
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlTranslatex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTranslatex(e, obj.(*GlTranslatex))
+}
+func (*binaryClassGlTranslatex) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTranslatex{}
+	doDecodeGlTranslatex(d, obj)
+	return obj
+}
+func (*binaryClassGlTranslatex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTranslatex(d, obj.(*GlTranslatex))
+}
+func (*binaryClassGlTranslatex) Schema() *binary.Entity { return schemaGlTranslatex }
+
+var schemaGlTranslatex = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTranslatex",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+	},
+}
+
+type binaryClassGlTranslatexOES struct{}
+
+func (*GlTranslatexOES) Class() binary.Class {
+	return (*binaryClassGlTranslatexOES)(nil)
+}
+func doEncodeGlTranslatexOES(e binary.Encoder, o *GlTranslatexOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.X))
+	e.Int32(int32(o.Y))
+	e.Int32(int32(o.Z))
+}
+func doDecodeGlTranslatexOES(d binary.Decoder, o *GlTranslatexOES) {
+	d.Struct(&o.observations)
+	o.X = GLfixed(d.Int32())
+	o.Y = GLfixed(d.Int32())
+	o.Z = GLfixed(d.Int32())
+}
+func (*binaryClassGlTranslatexOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlTranslatexOES(e, obj.(*GlTranslatexOES))
+}
+func (*binaryClassGlTranslatexOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlTranslatexOES{}
+	doDecodeGlTranslatexOES(d, obj)
+	return obj
+}
+func (*binaryClassGlTranslatexOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlTranslatexOES(d, obj.(*GlTranslatexOES))
+}
+func (*binaryClassGlTranslatexOES) Schema() *binary.Entity { return schemaGlTranslatexOES }
+
+var schemaGlTranslatexOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlTranslatexOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "X", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "GLfixed", Method: schema.Int32}},
 	},
 }
 
@@ -38425,6 +45843,97 @@ var schemaGlVertexBindingDivisor = &binary.Entity{
 	},
 }
 
+type binaryClassGlVertexPointer struct{}
+
+func (*GlVertexPointer) Class() binary.Class {
+	return (*binaryClassGlVertexPointer)(nil)
+}
+func doEncodeGlVertexPointer(e binary.Encoder, o *GlVertexPointer) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlVertexPointer(d binary.Decoder, o *GlVertexPointer) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlVertexPointer) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlVertexPointer(e, obj.(*GlVertexPointer))
+}
+func (*binaryClassGlVertexPointer) Decode(d binary.Decoder) binary.Object {
+	obj := &GlVertexPointer{}
+	doDecodeGlVertexPointer(d, obj)
+	return obj
+}
+func (*binaryClassGlVertexPointer) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlVertexPointer(d, obj.(*GlVertexPointer))
+}
+func (*binaryClassGlVertexPointer) Schema() *binary.Entity { return schemaGlVertexPointer }
+
+var schemaGlVertexPointer = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlVertexPointer",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlVertexPointerBounds struct{}
+
+func (*GlVertexPointerBounds) Class() binary.Class {
+	return (*binaryClassGlVertexPointerBounds)(nil)
+}
+func doEncodeGlVertexPointerBounds(e binary.Encoder, o *GlVertexPointerBounds) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlVertexPointerBounds(d binary.Decoder, o *GlVertexPointerBounds) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlVertexPointerBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlVertexPointerBounds(e, obj.(*GlVertexPointerBounds))
+}
+func (*binaryClassGlVertexPointerBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlVertexPointerBounds{}
+	doDecodeGlVertexPointerBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlVertexPointerBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlVertexPointerBounds(d, obj.(*GlVertexPointerBounds))
+}
+func (*binaryClassGlVertexPointerBounds) Schema() *binary.Entity { return schemaGlVertexPointerBounds }
+
+var schemaGlVertexPointerBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlVertexPointerBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+	},
+}
+
 type binaryClassGlViewport struct{}
 
 func (*GlViewport) Class() binary.Class {
@@ -38718,6 +46227,99 @@ var schemaGlWeightPathsNV = &binary.Entity{
 		{Declared: "NumPaths", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 		{Declared: "Paths", Type: &schema.Struct{Entity: (*GLuintᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Weights", Type: &schema.Struct{Entity: (*GLfloatᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlWeightPointerOES struct{}
+
+func (*GlWeightPointerOES) Class() binary.Class {
+	return (*binaryClassGlWeightPointerOES)(nil)
+}
+func doEncodeGlWeightPointerOES(e binary.Encoder, o *GlWeightPointerOES) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+}
+func doDecodeGlWeightPointerOES(d binary.Decoder, o *GlWeightPointerOES) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassGlWeightPointerOES) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlWeightPointerOES(e, obj.(*GlWeightPointerOES))
+}
+func (*binaryClassGlWeightPointerOES) Decode(d binary.Decoder) binary.Object {
+	obj := &GlWeightPointerOES{}
+	doDecodeGlWeightPointerOES(d, obj)
+	return obj
+}
+func (*binaryClassGlWeightPointerOES) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlWeightPointerOES(d, obj.(*GlWeightPointerOES))
+}
+func (*binaryClassGlWeightPointerOES) Schema() *binary.Entity { return schemaGlWeightPointerOES }
+
+var schemaGlWeightPointerOES = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlWeightPointerOES",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassGlWeightPointerOESBounds struct{}
+
+func (*GlWeightPointerOESBounds) Class() binary.Class {
+	return (*binaryClassGlWeightPointerOESBounds)(nil)
+}
+func doEncodeGlWeightPointerOESBounds(e binary.Encoder, o *GlWeightPointerOESBounds) {
+	e.Struct(&o.observations)
+	e.Int32(int32(o.Size))
+	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.Stride))
+	e.Struct(&o.Pointer)
+	e.Int32(int32(o.Count))
+}
+func doDecodeGlWeightPointerOESBounds(d binary.Decoder, o *GlWeightPointerOESBounds) {
+	d.Struct(&o.observations)
+	o.Size = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+	o.Stride = GLsizei(d.Int32())
+	d.Struct(&o.Pointer)
+	o.Count = GLsizei(d.Int32())
+}
+func (*binaryClassGlWeightPointerOESBounds) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeGlWeightPointerOESBounds(e, obj.(*GlWeightPointerOESBounds))
+}
+func (*binaryClassGlWeightPointerOESBounds) Decode(d binary.Decoder) binary.Object {
+	obj := &GlWeightPointerOESBounds{}
+	doDecodeGlWeightPointerOESBounds(d, obj)
+	return obj
+}
+func (*binaryClassGlWeightPointerOESBounds) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeGlWeightPointerOESBounds(d, obj.(*GlWeightPointerOESBounds))
+}
+func (*binaryClassGlWeightPointerOESBounds) Schema() *binary.Entity {
+	return schemaGlWeightPointerOESBounds
+}
+
+var schemaGlWeightPointerOESBounds = &binary.Entity{
+	Package:  "gles",
+	Identity: "GlWeightPointerOESBounds",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
+		{Declared: "Pointer", Type: &schema.Struct{Entity: (*Voidᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "GLsizei", Method: schema.Int32}},
 	},
 }
 
@@ -42460,194 +50062,216 @@ var ConstantValues schema.Constants
 var _ExtensionId_map = map[ExtensionId]string{}
 
 func init() {
-	_ExtensionId_map[1] = "GL_AMD_performance_monitor"
-	_ExtensionId_map[2] = "GL_ANGLE_framebuffer_blit"
-	_ExtensionId_map[3] = "GL_ANGLE_framebuffer_multisample"
-	_ExtensionId_map[4] = "GL_ANGLE_instanced_arrays"
-	_ExtensionId_map[5] = "GL_ANGLE_translated_shader_source"
-	_ExtensionId_map[6] = "GL_APPLE_copy_texture_levels"
-	_ExtensionId_map[7] = "GL_APPLE_framebuffer_multisample"
-	_ExtensionId_map[8] = "GL_APPLE_sync"
-	_ExtensionId_map[9] = "GL_EXT_base_instance"
-	_ExtensionId_map[10] = "GL_EXT_buffer_storage"
-	_ExtensionId_map[11] = "GL_EXT_copy_image"
-	_ExtensionId_map[12] = "GL_EXT_debug_label"
-	_ExtensionId_map[13] = "GL_EXT_debug_marker"
-	_ExtensionId_map[14] = "GL_EXT_discard_framebuffer"
-	_ExtensionId_map[15] = "GL_EXT_disjoint_timer_query"
-	_ExtensionId_map[16] = "GL_EXT_draw_buffers"
-	_ExtensionId_map[17] = "GL_EXT_draw_buffers_indexed"
-	_ExtensionId_map[18] = "GL_EXT_draw_elements_base_vertex"
-	_ExtensionId_map[19] = "GL_EXT_draw_instanced"
-	_ExtensionId_map[20] = "GL_EXT_geometry_shader"
-	_ExtensionId_map[21] = "GL_EXT_instanced_arrays"
-	_ExtensionId_map[22] = "GL_EXT_map_buffer_range"
-	_ExtensionId_map[23] = "GL_EXT_multi_draw_arrays"
-	_ExtensionId_map[24] = "GL_EXT_multi_draw_indirect"
-	_ExtensionId_map[25] = "GL_EXT_multisampled_render_to_texture"
-	_ExtensionId_map[26] = "GL_EXT_multiview_draw_buffers"
-	_ExtensionId_map[27] = "GL_EXT_occlusion_query_boolean"
-	_ExtensionId_map[28] = "GL_EXT_primitive_bounding_box"
-	_ExtensionId_map[29] = "GL_EXT_raster_multisample"
-	_ExtensionId_map[30] = "GL_EXT_robustness"
-	_ExtensionId_map[31] = "GL_EXT_separate_shader_objects"
-	_ExtensionId_map[32] = "GL_EXT_sparse_texture"
-	_ExtensionId_map[33] = "GL_EXT_tessellation_shader"
-	_ExtensionId_map[34] = "GL_EXT_texture_border_clamp"
-	_ExtensionId_map[35] = "GL_EXT_texture_buffer"
-	_ExtensionId_map[36] = "GL_EXT_texture_filter_minmax"
-	_ExtensionId_map[37] = "GL_EXT_texture_storage"
-	_ExtensionId_map[38] = "GL_EXT_texture_view"
-	_ExtensionId_map[39] = "GL_IMG_multisampled_render_to_texture"
-	_ExtensionId_map[40] = "GL_INTEL_performance_query"
-	_ExtensionId_map[41] = "GL_KHR_blend_equation_advanced"
-	_ExtensionId_map[42] = "GL_KHR_debug"
-	_ExtensionId_map[43] = "GL_KHR_robustness"
-	_ExtensionId_map[44] = "GL_NV_bindless_texture"
-	_ExtensionId_map[45] = "GL_NV_blend_equation_advanced"
-	_ExtensionId_map[46] = "GL_NV_conditional_render"
-	_ExtensionId_map[47] = "GL_NV_conservative_raster"
-	_ExtensionId_map[48] = "GL_NV_copy_buffer"
-	_ExtensionId_map[49] = "GL_NV_coverage_sample"
-	_ExtensionId_map[50] = "GL_NV_draw_buffers"
-	_ExtensionId_map[51] = "GL_NV_draw_instanced"
-	_ExtensionId_map[52] = "GL_NV_fence"
-	_ExtensionId_map[53] = "GL_NV_fragment_coverage_to_color"
-	_ExtensionId_map[54] = "GL_NV_framebuffer_blit"
-	_ExtensionId_map[55] = "GL_NV_framebuffer_mixed_samples"
-	_ExtensionId_map[56] = "GL_NV_framebuffer_multisample"
-	_ExtensionId_map[57] = "GL_NV_instanced_arrays"
-	_ExtensionId_map[58] = "GL_NV_internalformat_sample_query"
-	_ExtensionId_map[59] = "GL_NV_non_square_matrices"
-	_ExtensionId_map[60] = "GL_NV_path_rendering"
-	_ExtensionId_map[61] = "GL_NV_polygon_mode"
-	_ExtensionId_map[62] = "GL_NV_read_buffer"
-	_ExtensionId_map[63] = "GL_NV_sample_locations"
-	_ExtensionId_map[64] = "GL_NV_viewport_array"
-	_ExtensionId_map[65] = "GL_OES_copy_image"
-	_ExtensionId_map[66] = "GL_OES_draw_buffers_indexed"
-	_ExtensionId_map[67] = "GL_OES_draw_elements_base_vertex"
-	_ExtensionId_map[68] = "GL_OES_EGL_image"
-	_ExtensionId_map[69] = "GL_OES_framebuffer_object"
-	_ExtensionId_map[70] = "GL_OES_geometry_shader"
-	_ExtensionId_map[71] = "GL_OES_get_program_binary"
-	_ExtensionId_map[72] = "GL_OES_mapbuffer"
-	_ExtensionId_map[73] = "GL_OES_primitive_bounding_box"
-	_ExtensionId_map[74] = "GL_OES_sample_shading"
-	_ExtensionId_map[75] = "GL_OES_tessellation_shader"
-	_ExtensionId_map[76] = "GL_OES_texture_3D"
-	_ExtensionId_map[77] = "GL_OES_texture_border_clamp"
-	_ExtensionId_map[78] = "GL_OES_texture_buffer"
-	_ExtensionId_map[79] = "GL_OES_texture_storage_multisample_2d_array"
-	_ExtensionId_map[80] = "GL_OES_texture_view"
-	_ExtensionId_map[81] = "GL_OES_vertex_array_object"
-	_ExtensionId_map[82] = "GL_OVR_multiview"
-	_ExtensionId_map[83] = "GL_QCOM_alpha_test"
-	_ExtensionId_map[84] = "GL_QCOM_driver_control"
-	_ExtensionId_map[85] = "GL_QCOM_extended_get"
-	_ExtensionId_map[86] = "GL_QCOM_extended_get2"
-	_ExtensionId_map[87] = "GL_QCOM_tiled_rendering"
-	_ExtensionId_map[88] = "GL_AMD_compressed_ATC_texture"
-	_ExtensionId_map[89] = "GL_OES_texture_half_float"
-	_ExtensionId_map[90] = "GL_OES_vertex_half_float"
-	_ExtensionId_map[91] = "GL_INTEL_framebuffer_CMAA"
-	_ExtensionId_map[92] = "GL_EXT_blend_func_extended"
+	_ExtensionId_map[1] = "GL_AMD_compressed_ATC_texture"
+	_ExtensionId_map[2] = "GL_AMD_performance_monitor"
+	_ExtensionId_map[3] = "GL_ANGLE_framebuffer_blit"
+	_ExtensionId_map[4] = "GL_ANGLE_framebuffer_multisample"
+	_ExtensionId_map[5] = "GL_ANGLE_instanced_arrays"
+	_ExtensionId_map[6] = "GL_ANGLE_translated_shader_source"
+	_ExtensionId_map[7] = "GL_APPLE_copy_texture_levels"
+	_ExtensionId_map[8] = "GL_APPLE_framebuffer_multisample"
+	_ExtensionId_map[9] = "GL_APPLE_sync"
+	_ExtensionId_map[10] = "GL_EXT_base_instance"
+	_ExtensionId_map[11] = "GL_EXT_blend_func_extended"
+	_ExtensionId_map[12] = "GL_EXT_buffer_storage"
+	_ExtensionId_map[13] = "GL_EXT_copy_image"
+	_ExtensionId_map[14] = "GL_EXT_debug_label"
+	_ExtensionId_map[15] = "GL_EXT_debug_marker"
+	_ExtensionId_map[16] = "GL_EXT_discard_framebuffer"
+	_ExtensionId_map[17] = "GL_EXT_disjoint_timer_query"
+	_ExtensionId_map[18] = "GL_EXT_draw_buffers"
+	_ExtensionId_map[19] = "GL_EXT_draw_buffers_indexed"
+	_ExtensionId_map[20] = "GL_EXT_draw_elements_base_vertex"
+	_ExtensionId_map[21] = "GL_EXT_draw_instanced"
+	_ExtensionId_map[22] = "GL_EXT_geometry_shader"
+	_ExtensionId_map[23] = "GL_EXT_instanced_arrays"
+	_ExtensionId_map[24] = "GL_EXT_map_buffer_range"
+	_ExtensionId_map[25] = "GL_EXT_multi_draw_arrays"
+	_ExtensionId_map[26] = "GL_EXT_multi_draw_indirect"
+	_ExtensionId_map[27] = "GL_EXT_multisampled_render_to_texture"
+	_ExtensionId_map[28] = "GL_EXT_multiview_draw_buffers"
+	_ExtensionId_map[29] = "GL_EXT_occlusion_query_boolean"
+	_ExtensionId_map[30] = "GL_EXT_primitive_bounding_box"
+	_ExtensionId_map[31] = "GL_EXT_raster_multisample"
+	_ExtensionId_map[32] = "GL_EXT_robustness"
+	_ExtensionId_map[33] = "GL_EXT_separate_shader_objects"
+	_ExtensionId_map[34] = "GL_EXT_sparse_texture"
+	_ExtensionId_map[35] = "GL_EXT_tessellation_shader"
+	_ExtensionId_map[36] = "GL_EXT_texture_border_clamp"
+	_ExtensionId_map[37] = "GL_EXT_texture_buffer"
+	_ExtensionId_map[38] = "GL_EXT_texture_filter_minmax"
+	_ExtensionId_map[39] = "GL_EXT_texture_storage"
+	_ExtensionId_map[40] = "GL_EXT_texture_view"
+	_ExtensionId_map[41] = "GL_IMG_multisampled_render_to_texture"
+	_ExtensionId_map[42] = "GL_IMG_user_clip_plane"
+	_ExtensionId_map[43] = "GL_INTEL_framebuffer_CMAA"
+	_ExtensionId_map[44] = "GL_INTEL_performance_query"
+	_ExtensionId_map[45] = "GL_KHR_blend_equation_advanced"
+	_ExtensionId_map[46] = "GL_KHR_debug"
+	_ExtensionId_map[47] = "GL_KHR_robustness"
+	_ExtensionId_map[48] = "GL_NV_bindless_texture"
+	_ExtensionId_map[49] = "GL_NV_blend_equation_advanced"
+	_ExtensionId_map[50] = "GL_NV_conditional_render"
+	_ExtensionId_map[51] = "GL_NV_conservative_raster"
+	_ExtensionId_map[52] = "GL_NV_copy_buffer"
+	_ExtensionId_map[53] = "GL_NV_coverage_sample"
+	_ExtensionId_map[54] = "GL_NV_draw_buffers"
+	_ExtensionId_map[55] = "GL_NV_draw_instanced"
+	_ExtensionId_map[56] = "GL_NV_fence"
+	_ExtensionId_map[57] = "GL_NV_fragment_coverage_to_color"
+	_ExtensionId_map[58] = "GL_NV_framebuffer_blit"
+	_ExtensionId_map[59] = "GL_NV_framebuffer_mixed_samples"
+	_ExtensionId_map[60] = "GL_NV_framebuffer_multisample"
+	_ExtensionId_map[61] = "GL_NV_instanced_arrays"
+	_ExtensionId_map[62] = "GL_NV_internalformat_sample_query"
+	_ExtensionId_map[63] = "GL_NV_non_square_matrices"
+	_ExtensionId_map[64] = "GL_NV_path_rendering"
+	_ExtensionId_map[65] = "GL_NV_polygon_mode"
+	_ExtensionId_map[66] = "GL_NV_read_buffer"
+	_ExtensionId_map[67] = "GL_NV_sample_locations"
+	_ExtensionId_map[68] = "GL_NV_viewport_array"
+	_ExtensionId_map[69] = "GL_OES_blend_equation_separate"
+	_ExtensionId_map[70] = "GL_OES_blend_func_separate"
+	_ExtensionId_map[71] = "GL_OES_blend_subtract"
+	_ExtensionId_map[72] = "GL_OES_copy_image"
+	_ExtensionId_map[73] = "GL_OES_draw_buffers_indexed"
+	_ExtensionId_map[74] = "GL_OES_draw_elements_base_vertex"
+	_ExtensionId_map[75] = "GL_OES_draw_texture"
+	_ExtensionId_map[76] = "GL_OES_EGL_image"
+	_ExtensionId_map[77] = "GL_OES_fixed_point"
+	_ExtensionId_map[78] = "GL_OES_framebuffer_object"
+	_ExtensionId_map[79] = "GL_OES_geometry_shader"
+	_ExtensionId_map[80] = "GL_OES_get_program_binary"
+	_ExtensionId_map[81] = "GL_OES_mapbuffer"
+	_ExtensionId_map[82] = "GL_OES_matrix_palette"
+	_ExtensionId_map[83] = "GL_OES_point_size_array"
+	_ExtensionId_map[84] = "GL_OES_primitive_bounding_box"
+	_ExtensionId_map[85] = "GL_OES_query_matrix"
+	_ExtensionId_map[86] = "GL_OES_sample_shading"
+	_ExtensionId_map[87] = "GL_OES_single_precision"
+	_ExtensionId_map[88] = "GL_OES_tessellation_shader"
+	_ExtensionId_map[89] = "GL_OES_texture_3D"
+	_ExtensionId_map[90] = "GL_OES_texture_border_clamp"
+	_ExtensionId_map[91] = "GL_OES_texture_buffer"
+	_ExtensionId_map[92] = "GL_OES_texture_cube_map"
+	_ExtensionId_map[93] = "GL_OES_texture_half_float"
+	_ExtensionId_map[94] = "GL_OES_texture_storage_multisample_2d_array"
+	_ExtensionId_map[95] = "GL_OES_texture_view"
+	_ExtensionId_map[96] = "GL_OES_vertex_array_object"
+	_ExtensionId_map[97] = "GL_OES_vertex_half_float"
+	_ExtensionId_map[98] = "GL_OVR_multiview"
+	_ExtensionId_map[99] = "GL_QCOM_alpha_test"
+	_ExtensionId_map[100] = "GL_QCOM_driver_control"
+	_ExtensionId_map[101] = "GL_QCOM_extended_get"
+	_ExtensionId_map[102] = "GL_QCOM_extended_get2"
+	_ExtensionId_map[103] = "GL_QCOM_tiled_rendering"
 
 	ConstantValues = append(ConstantValues, schema.ConstantSet{
 		Type: &schema.Primitive{Name: "ExtensionId", Method: schema.Uint32},
 		Entries: []schema.Constant{
-			{Name: "GL_AMD_performance_monitor", Value: uint32(1)},
-			{Name: "GL_ANGLE_framebuffer_blit", Value: uint32(2)},
-			{Name: "GL_ANGLE_framebuffer_multisample", Value: uint32(3)},
-			{Name: "GL_ANGLE_instanced_arrays", Value: uint32(4)},
-			{Name: "GL_ANGLE_translated_shader_source", Value: uint32(5)},
-			{Name: "GL_APPLE_copy_texture_levels", Value: uint32(6)},
-			{Name: "GL_APPLE_framebuffer_multisample", Value: uint32(7)},
-			{Name: "GL_APPLE_sync", Value: uint32(8)},
-			{Name: "GL_EXT_base_instance", Value: uint32(9)},
-			{Name: "GL_EXT_buffer_storage", Value: uint32(10)},
-			{Name: "GL_EXT_copy_image", Value: uint32(11)},
-			{Name: "GL_EXT_debug_label", Value: uint32(12)},
-			{Name: "GL_EXT_debug_marker", Value: uint32(13)},
-			{Name: "GL_EXT_discard_framebuffer", Value: uint32(14)},
-			{Name: "GL_EXT_disjoint_timer_query", Value: uint32(15)},
-			{Name: "GL_EXT_draw_buffers", Value: uint32(16)},
-			{Name: "GL_EXT_draw_buffers_indexed", Value: uint32(17)},
-			{Name: "GL_EXT_draw_elements_base_vertex", Value: uint32(18)},
-			{Name: "GL_EXT_draw_instanced", Value: uint32(19)},
-			{Name: "GL_EXT_geometry_shader", Value: uint32(20)},
-			{Name: "GL_EXT_instanced_arrays", Value: uint32(21)},
-			{Name: "GL_EXT_map_buffer_range", Value: uint32(22)},
-			{Name: "GL_EXT_multi_draw_arrays", Value: uint32(23)},
-			{Name: "GL_EXT_multi_draw_indirect", Value: uint32(24)},
-			{Name: "GL_EXT_multisampled_render_to_texture", Value: uint32(25)},
-			{Name: "GL_EXT_multiview_draw_buffers", Value: uint32(26)},
-			{Name: "GL_EXT_occlusion_query_boolean", Value: uint32(27)},
-			{Name: "GL_EXT_primitive_bounding_box", Value: uint32(28)},
-			{Name: "GL_EXT_raster_multisample", Value: uint32(29)},
-			{Name: "GL_EXT_robustness", Value: uint32(30)},
-			{Name: "GL_EXT_separate_shader_objects", Value: uint32(31)},
-			{Name: "GL_EXT_sparse_texture", Value: uint32(32)},
-			{Name: "GL_EXT_tessellation_shader", Value: uint32(33)},
-			{Name: "GL_EXT_texture_border_clamp", Value: uint32(34)},
-			{Name: "GL_EXT_texture_buffer", Value: uint32(35)},
-			{Name: "GL_EXT_texture_filter_minmax", Value: uint32(36)},
-			{Name: "GL_EXT_texture_storage", Value: uint32(37)},
-			{Name: "GL_EXT_texture_view", Value: uint32(38)},
-			{Name: "GL_IMG_multisampled_render_to_texture", Value: uint32(39)},
-			{Name: "GL_INTEL_performance_query", Value: uint32(40)},
-			{Name: "GL_KHR_blend_equation_advanced", Value: uint32(41)},
-			{Name: "GL_KHR_debug", Value: uint32(42)},
-			{Name: "GL_KHR_robustness", Value: uint32(43)},
-			{Name: "GL_NV_bindless_texture", Value: uint32(44)},
-			{Name: "GL_NV_blend_equation_advanced", Value: uint32(45)},
-			{Name: "GL_NV_conditional_render", Value: uint32(46)},
-			{Name: "GL_NV_conservative_raster", Value: uint32(47)},
-			{Name: "GL_NV_copy_buffer", Value: uint32(48)},
-			{Name: "GL_NV_coverage_sample", Value: uint32(49)},
-			{Name: "GL_NV_draw_buffers", Value: uint32(50)},
-			{Name: "GL_NV_draw_instanced", Value: uint32(51)},
-			{Name: "GL_NV_fence", Value: uint32(52)},
-			{Name: "GL_NV_fragment_coverage_to_color", Value: uint32(53)},
-			{Name: "GL_NV_framebuffer_blit", Value: uint32(54)},
-			{Name: "GL_NV_framebuffer_mixed_samples", Value: uint32(55)},
-			{Name: "GL_NV_framebuffer_multisample", Value: uint32(56)},
-			{Name: "GL_NV_instanced_arrays", Value: uint32(57)},
-			{Name: "GL_NV_internalformat_sample_query", Value: uint32(58)},
-			{Name: "GL_NV_non_square_matrices", Value: uint32(59)},
-			{Name: "GL_NV_path_rendering", Value: uint32(60)},
-			{Name: "GL_NV_polygon_mode", Value: uint32(61)},
-			{Name: "GL_NV_read_buffer", Value: uint32(62)},
-			{Name: "GL_NV_sample_locations", Value: uint32(63)},
-			{Name: "GL_NV_viewport_array", Value: uint32(64)},
-			{Name: "GL_OES_copy_image", Value: uint32(65)},
-			{Name: "GL_OES_draw_buffers_indexed", Value: uint32(66)},
-			{Name: "GL_OES_draw_elements_base_vertex", Value: uint32(67)},
-			{Name: "GL_OES_EGL_image", Value: uint32(68)},
-			{Name: "GL_OES_framebuffer_object", Value: uint32(69)},
-			{Name: "GL_OES_geometry_shader", Value: uint32(70)},
-			{Name: "GL_OES_get_program_binary", Value: uint32(71)},
-			{Name: "GL_OES_mapbuffer", Value: uint32(72)},
-			{Name: "GL_OES_primitive_bounding_box", Value: uint32(73)},
-			{Name: "GL_OES_sample_shading", Value: uint32(74)},
-			{Name: "GL_OES_tessellation_shader", Value: uint32(75)},
-			{Name: "GL_OES_texture_3D", Value: uint32(76)},
-			{Name: "GL_OES_texture_border_clamp", Value: uint32(77)},
-			{Name: "GL_OES_texture_buffer", Value: uint32(78)},
-			{Name: "GL_OES_texture_storage_multisample_2d_array", Value: uint32(79)},
-			{Name: "GL_OES_texture_view", Value: uint32(80)},
-			{Name: "GL_OES_vertex_array_object", Value: uint32(81)},
-			{Name: "GL_OVR_multiview", Value: uint32(82)},
-			{Name: "GL_QCOM_alpha_test", Value: uint32(83)},
-			{Name: "GL_QCOM_driver_control", Value: uint32(84)},
-			{Name: "GL_QCOM_extended_get", Value: uint32(85)},
-			{Name: "GL_QCOM_extended_get2", Value: uint32(86)},
-			{Name: "GL_QCOM_tiled_rendering", Value: uint32(87)},
-			{Name: "GL_AMD_compressed_ATC_texture", Value: uint32(88)},
-			{Name: "GL_OES_texture_half_float", Value: uint32(89)},
-			{Name: "GL_OES_vertex_half_float", Value: uint32(90)},
-			{Name: "GL_INTEL_framebuffer_CMAA", Value: uint32(91)},
-			{Name: "GL_EXT_blend_func_extended", Value: uint32(92)},
+			{Name: "GL_AMD_compressed_ATC_texture", Value: uint32(1)},
+			{Name: "GL_AMD_performance_monitor", Value: uint32(2)},
+			{Name: "GL_ANGLE_framebuffer_blit", Value: uint32(3)},
+			{Name: "GL_ANGLE_framebuffer_multisample", Value: uint32(4)},
+			{Name: "GL_ANGLE_instanced_arrays", Value: uint32(5)},
+			{Name: "GL_ANGLE_translated_shader_source", Value: uint32(6)},
+			{Name: "GL_APPLE_copy_texture_levels", Value: uint32(7)},
+			{Name: "GL_APPLE_framebuffer_multisample", Value: uint32(8)},
+			{Name: "GL_APPLE_sync", Value: uint32(9)},
+			{Name: "GL_EXT_base_instance", Value: uint32(10)},
+			{Name: "GL_EXT_blend_func_extended", Value: uint32(11)},
+			{Name: "GL_EXT_buffer_storage", Value: uint32(12)},
+			{Name: "GL_EXT_copy_image", Value: uint32(13)},
+			{Name: "GL_EXT_debug_label", Value: uint32(14)},
+			{Name: "GL_EXT_debug_marker", Value: uint32(15)},
+			{Name: "GL_EXT_discard_framebuffer", Value: uint32(16)},
+			{Name: "GL_EXT_disjoint_timer_query", Value: uint32(17)},
+			{Name: "GL_EXT_draw_buffers", Value: uint32(18)},
+			{Name: "GL_EXT_draw_buffers_indexed", Value: uint32(19)},
+			{Name: "GL_EXT_draw_elements_base_vertex", Value: uint32(20)},
+			{Name: "GL_EXT_draw_instanced", Value: uint32(21)},
+			{Name: "GL_EXT_geometry_shader", Value: uint32(22)},
+			{Name: "GL_EXT_instanced_arrays", Value: uint32(23)},
+			{Name: "GL_EXT_map_buffer_range", Value: uint32(24)},
+			{Name: "GL_EXT_multi_draw_arrays", Value: uint32(25)},
+			{Name: "GL_EXT_multi_draw_indirect", Value: uint32(26)},
+			{Name: "GL_EXT_multisampled_render_to_texture", Value: uint32(27)},
+			{Name: "GL_EXT_multiview_draw_buffers", Value: uint32(28)},
+			{Name: "GL_EXT_occlusion_query_boolean", Value: uint32(29)},
+			{Name: "GL_EXT_primitive_bounding_box", Value: uint32(30)},
+			{Name: "GL_EXT_raster_multisample", Value: uint32(31)},
+			{Name: "GL_EXT_robustness", Value: uint32(32)},
+			{Name: "GL_EXT_separate_shader_objects", Value: uint32(33)},
+			{Name: "GL_EXT_sparse_texture", Value: uint32(34)},
+			{Name: "GL_EXT_tessellation_shader", Value: uint32(35)},
+			{Name: "GL_EXT_texture_border_clamp", Value: uint32(36)},
+			{Name: "GL_EXT_texture_buffer", Value: uint32(37)},
+			{Name: "GL_EXT_texture_filter_minmax", Value: uint32(38)},
+			{Name: "GL_EXT_texture_storage", Value: uint32(39)},
+			{Name: "GL_EXT_texture_view", Value: uint32(40)},
+			{Name: "GL_IMG_multisampled_render_to_texture", Value: uint32(41)},
+			{Name: "GL_IMG_user_clip_plane", Value: uint32(42)},
+			{Name: "GL_INTEL_framebuffer_CMAA", Value: uint32(43)},
+			{Name: "GL_INTEL_performance_query", Value: uint32(44)},
+			{Name: "GL_KHR_blend_equation_advanced", Value: uint32(45)},
+			{Name: "GL_KHR_debug", Value: uint32(46)},
+			{Name: "GL_KHR_robustness", Value: uint32(47)},
+			{Name: "GL_NV_bindless_texture", Value: uint32(48)},
+			{Name: "GL_NV_blend_equation_advanced", Value: uint32(49)},
+			{Name: "GL_NV_conditional_render", Value: uint32(50)},
+			{Name: "GL_NV_conservative_raster", Value: uint32(51)},
+			{Name: "GL_NV_copy_buffer", Value: uint32(52)},
+			{Name: "GL_NV_coverage_sample", Value: uint32(53)},
+			{Name: "GL_NV_draw_buffers", Value: uint32(54)},
+			{Name: "GL_NV_draw_instanced", Value: uint32(55)},
+			{Name: "GL_NV_fence", Value: uint32(56)},
+			{Name: "GL_NV_fragment_coverage_to_color", Value: uint32(57)},
+			{Name: "GL_NV_framebuffer_blit", Value: uint32(58)},
+			{Name: "GL_NV_framebuffer_mixed_samples", Value: uint32(59)},
+			{Name: "GL_NV_framebuffer_multisample", Value: uint32(60)},
+			{Name: "GL_NV_instanced_arrays", Value: uint32(61)},
+			{Name: "GL_NV_internalformat_sample_query", Value: uint32(62)},
+			{Name: "GL_NV_non_square_matrices", Value: uint32(63)},
+			{Name: "GL_NV_path_rendering", Value: uint32(64)},
+			{Name: "GL_NV_polygon_mode", Value: uint32(65)},
+			{Name: "GL_NV_read_buffer", Value: uint32(66)},
+			{Name: "GL_NV_sample_locations", Value: uint32(67)},
+			{Name: "GL_NV_viewport_array", Value: uint32(68)},
+			{Name: "GL_OES_blend_equation_separate", Value: uint32(69)},
+			{Name: "GL_OES_blend_func_separate", Value: uint32(70)},
+			{Name: "GL_OES_blend_subtract", Value: uint32(71)},
+			{Name: "GL_OES_copy_image", Value: uint32(72)},
+			{Name: "GL_OES_draw_buffers_indexed", Value: uint32(73)},
+			{Name: "GL_OES_draw_elements_base_vertex", Value: uint32(74)},
+			{Name: "GL_OES_draw_texture", Value: uint32(75)},
+			{Name: "GL_OES_EGL_image", Value: uint32(76)},
+			{Name: "GL_OES_fixed_point", Value: uint32(77)},
+			{Name: "GL_OES_framebuffer_object", Value: uint32(78)},
+			{Name: "GL_OES_geometry_shader", Value: uint32(79)},
+			{Name: "GL_OES_get_program_binary", Value: uint32(80)},
+			{Name: "GL_OES_mapbuffer", Value: uint32(81)},
+			{Name: "GL_OES_matrix_palette", Value: uint32(82)},
+			{Name: "GL_OES_point_size_array", Value: uint32(83)},
+			{Name: "GL_OES_primitive_bounding_box", Value: uint32(84)},
+			{Name: "GL_OES_query_matrix", Value: uint32(85)},
+			{Name: "GL_OES_sample_shading", Value: uint32(86)},
+			{Name: "GL_OES_single_precision", Value: uint32(87)},
+			{Name: "GL_OES_tessellation_shader", Value: uint32(88)},
+			{Name: "GL_OES_texture_3D", Value: uint32(89)},
+			{Name: "GL_OES_texture_border_clamp", Value: uint32(90)},
+			{Name: "GL_OES_texture_buffer", Value: uint32(91)},
+			{Name: "GL_OES_texture_cube_map", Value: uint32(92)},
+			{Name: "GL_OES_texture_half_float", Value: uint32(93)},
+			{Name: "GL_OES_texture_storage_multisample_2d_array", Value: uint32(94)},
+			{Name: "GL_OES_texture_view", Value: uint32(95)},
+			{Name: "GL_OES_vertex_array_object", Value: uint32(96)},
+			{Name: "GL_OES_vertex_half_float", Value: uint32(97)},
+			{Name: "GL_OVR_multiview", Value: uint32(98)},
+			{Name: "GL_QCOM_alpha_test", Value: uint32(99)},
+			{Name: "GL_QCOM_driver_control", Value: uint32(100)},
+			{Name: "GL_QCOM_extended_get", Value: uint32(101)},
+			{Name: "GL_QCOM_extended_get2", Value: uint32(102)},
+			{Name: "GL_QCOM_tiled_rendering", Value: uint32(103)},
 		},
 	})
 }

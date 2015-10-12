@@ -191,7 +191,7 @@ macro void GetObjectPtrLabel(const void* ptr, GLsizei bufSize, GLsizei* length, 
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glGetPointerv.xhtml","OpenGL ES 3.2")
 cmd void glGetPointerv(GLenum pname, void** params) {
-  minRequiredVersion(3, 2)
+  minRequiredVersion(1, 0)
   GetPointerv(pname, params)
 }
 

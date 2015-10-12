@@ -126,7 +126,7 @@ cmd GLenum glCheckFramebufferStatus(GLenum target) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glClear.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glClear.xhtml","OpenGL ES 3.2")
 cmd void glClear(GLbitfield mask) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   supportsBits(mask, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT)
   if (GL_COLOR_BUFFER_BIT in mask) {
   }
@@ -222,7 +222,7 @@ cmd void glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glClearColor.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glClearColor.xhtml","OpenGL ES 3.2")
 cmd void glClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Clearing.ClearColor = Color(r, g, b, a)
@@ -233,7 +233,7 @@ cmd void glClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glClearDepthf.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glClearDepthf.xhtml","OpenGL ES 3.2")
 cmd void glClearDepthf(GLfloat depth) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Clearing.ClearDepth = depth
@@ -244,7 +244,7 @@ cmd void glClearDepthf(GLfloat depth) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glClearStencil.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glClearStencil.xhtml","OpenGL ES 3.2")
 cmd void glClearStencil(GLint stencil) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Clearing.ClearStencil = stencil
@@ -255,7 +255,7 @@ cmd void glClearStencil(GLint stencil) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glColorMask.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glColorMask.xhtml","OpenGL ES 3.2")
 cmd void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.ColorMaskRed = red
@@ -307,7 +307,7 @@ cmd void glDeleteRenderbuffers(GLsizei count, const RenderbufferId* renderbuffer
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthMask.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDepthMask.xhtml","OpenGL ES 3.2")
 cmd void glDepthMask(GLboolean enabled) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.DepthMask = enabled
@@ -840,7 +840,7 @@ cmd void glReadPixels(GLint   x,
                       GLenum  format,
                       GLenum  type,
                       void*   data) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (format) {
     case GL_RGBA, GL_RGBA_INTEGER: {
       // version 2.0
@@ -985,7 +985,7 @@ macro void RenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilMask.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilMask.xhtml","OpenGL ES 3.2")
 cmd void glStencilMask(GLuint mask) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.StencilMask[GL_FRONT] = mask

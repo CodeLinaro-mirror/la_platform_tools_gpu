@@ -146,7 +146,7 @@ macro void BlendEquationi(DrawBufferIndex buf, GLenum mode) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glBlendFunc.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glBlendFunc.xhtml","OpenGL ES 3.2")
 cmd void glBlendFunc(GLenum src_factor, GLenum dst_factor) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (src_factor) {
     case GL_CONSTANT_ALPHA, GL_CONSTANT_COLOR, GL_DST_ALPHA, GL_DST_COLOR, GL_ONE,
         GL_ONE_MINUS_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR, GL_ONE_MINUS_DST_ALPHA,
@@ -333,7 +333,7 @@ macro void BlendFunci(DrawBufferIndex buf, GLenum src, GLenum dst) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthFunc.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDepthFunc.xhtml","OpenGL ES 3.2")
 cmd void glDepthFunc(GLenum function) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (function) {
     case GL_ALWAYS, GL_EQUAL, GL_GEQUAL, GL_GREATER, GL_LEQUAL, GL_LESS, GL_NEVER, GL_NOTEQUAL: {
       // version 2.0
@@ -352,7 +352,7 @@ cmd void glDepthFunc(GLenum function) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glSampleCoverage.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glSampleCoverage.xhtml","OpenGL ES 3.2")
 cmd void glSampleCoverage(GLfloat value, GLboolean invert) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.SampleCoverageValue = value
@@ -371,7 +371,7 @@ cmd void glSampleMaski(GLuint maskNumber, GLbitfield mask) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glScissor.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glScissor.xhtml","OpenGL ES 3.2")
 cmd void glScissor(GLint x, GLint y, GLsizei width, GLsizei height) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.Scissor = Rect(x, y, width, height)
@@ -382,7 +382,7 @@ cmd void glScissor(GLint x, GLint y, GLsizei width, GLsizei height) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilFunc.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilFunc.xhtml","OpenGL ES 3.2")
 cmd void glStencilFunc(GLenum func, GLint ref, GLuint mask) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (func) {
     case GL_ALWAYS, GL_EQUAL, GL_GEQUAL, GL_GREATER, GL_LEQUAL, GL_LESS, GL_NEVER, GL_NOTEQUAL: {
       // version 2.0
@@ -424,7 +424,7 @@ cmd void glStencilFuncSeparate(GLenum face, GLenum function, GLint reference_val
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glStencilOp.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glStencilOp.xhtml","OpenGL ES 3.2")
 cmd void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (fail) {
     case GL_DECR, GL_DECR_WRAP, GL_INCR, GL_INCR_WRAP, GL_INVERT, GL_KEEP, GL_REPLACE, GL_ZERO: {
       // version 2.0

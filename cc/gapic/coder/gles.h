@@ -1750,6 +1750,51 @@ namespace gles {
         memory::Pointer mPointer;
     };
 
+    class GLfixed__S: public Encodable {
+    public:
+        GLfixed__S() = default;
+        GLfixed__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class GLfixed__P: public Encodable {
+    public:
+        GLfixed__P() = default;
+        GLfixed__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
+    class GLfixed__CP: public Encodable {
+    public:
+        GLfixed__CP() = default;
+        GLfixed__CP(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
     class GLfloat__2__A: public Encodable {
     public:
         GLfloat__2__A() = default;
@@ -1937,6 +1982,51 @@ namespace gles {
     public:
         GLint__CP() = default;
         GLint__CP(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
+    class GLshort__S: public Encodable {
+    public:
+        GLshort__S() = default;
+        GLshort__S(SliceInfo SliceInfo) :
+            mSliceInfo(SliceInfo) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mSliceInfo);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        SliceInfo mSliceInfo;
+    };
+
+    class GLshort__P: public Encodable {
+    public:
+        GLshort__P() = default;
+        GLshort__P(memory::Pointer Pointer) :
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mPointer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        memory::Pointer mPointer;
+    };
+
+    class GLshort__CP: public Encodable {
+    public:
+        GLshort__CP() = default;
+        GLshort__CP(memory::Pointer Pointer) :
             mPointer(Pointer) {}
         virtual void Encode(Encoder* e) const{
             e->Value(this->mPointer);
@@ -2272,6 +2362,27 @@ namespace gles {
         uint32_t mUnit;
     };
 
+    class GlAlphaFunc: public Encodable {
+    public:
+        GlAlphaFunc() = default;
+        GlAlphaFunc(atom::Observations observations, uint32_t Func, float Ref) :
+            mobservations(observations),
+            mFunc(Func),
+            mRef(Ref) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mFunc);
+            e->Float32(this->mRef);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFunc;
+        float mRef;
+    };
+
     class GlAlphaFuncQCOM: public Encodable {
     public:
         GlAlphaFuncQCOM() = default;
@@ -2291,6 +2402,48 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mFunc;
         float mRef;
+    };
+
+    class GlAlphaFuncx: public Encodable {
+    public:
+        GlAlphaFuncx() = default;
+        GlAlphaFuncx(atom::Observations observations, uint32_t Func, int32_t Ref) :
+            mobservations(observations),
+            mFunc(Func),
+            mRef(Ref) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mFunc);
+            e->Int32(this->mRef);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFunc;
+        int32_t mRef;
+    };
+
+    class GlAlphaFuncxOES: public Encodable {
+    public:
+        GlAlphaFuncxOES() = default;
+        GlAlphaFuncxOES(atom::Observations observations, uint32_t Func, int32_t Ref) :
+            mobservations(observations),
+            mFunc(Func),
+            mRef(Ref) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mFunc);
+            e->Int32(this->mRef);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFunc;
+        int32_t mRef;
     };
 
     class GlApplyFramebufferAttachmentCMAAINTEL: public Encodable {
@@ -2589,6 +2742,27 @@ namespace gles {
         uint32_t mFramebuffer;
     };
 
+    class GlBindFramebufferOES: public Encodable {
+    public:
+        GlBindFramebufferOES() = default;
+        GlBindFramebufferOES(atom::Observations observations, uint32_t Target, uint32_t Framebuffer) :
+            mobservations(observations),
+            mTarget(Target),
+            mFramebuffer(Framebuffer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mTarget);
+            e->Uint32(this->mFramebuffer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mFramebuffer;
+    };
+
     class GlBindImageTexture: public Encodable {
     public:
         GlBindImageTexture() = default;
@@ -2656,6 +2830,27 @@ namespace gles {
     public:
         GlBindRenderbuffer() = default;
         GlBindRenderbuffer(atom::Observations observations, uint32_t Target, uint32_t Renderbuffer) :
+            mobservations(observations),
+            mTarget(Target),
+            mRenderbuffer(Renderbuffer) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mTarget);
+            e->Uint32(this->mRenderbuffer);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mRenderbuffer;
+    };
+
+    class GlBindRenderbufferOES: public Encodable {
+    public:
+        GlBindRenderbufferOES() = default;
+        GlBindRenderbufferOES(atom::Observations observations, uint32_t Target, uint32_t Renderbuffer) :
             mobservations(observations),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
@@ -2877,6 +3072,24 @@ namespace gles {
         uint32_t mEquation;
     };
 
+    class GlBlendEquationOES: public Encodable {
+    public:
+        GlBlendEquationOES() = default;
+        GlBlendEquationOES(atom::Observations observations, uint32_t Mode) :
+            mobservations(observations),
+            mMode(Mode) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mMode);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mMode;
+    };
+
     class GlBlendEquationSeparate: public Encodable {
     public:
         GlBlendEquationSeparate() = default;
@@ -2896,6 +3109,27 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mRgb;
         uint32_t mAlpha;
+    };
+
+    class GlBlendEquationSeparateOES: public Encodable {
+    public:
+        GlBlendEquationSeparateOES() = default;
+        GlBlendEquationSeparateOES(atom::Observations observations, uint32_t ModeRGB, uint32_t ModeAlpha) :
+            mobservations(observations),
+            mModeRGB(ModeRGB),
+            mModeAlpha(ModeAlpha) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mModeRGB);
+            e->Uint32(this->mModeAlpha);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mModeRGB;
+        uint32_t mModeAlpha;
     };
 
     class GlBlendEquationSeparatei: public Encodable {
@@ -3058,6 +3292,27 @@ namespace gles {
         uint32_t mDstFactorRgb;
         uint32_t mSrcFactorAlpha;
         uint32_t mDstFactorAlpha;
+    };
+
+    class GlBlendFuncSeparateOES: public Encodable {
+    public:
+        GlBlendFuncSeparateOES() = default;
+        GlBlendFuncSeparateOES(atom::Observations observations, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+            mobservations(observations),
+            mSrcRGB(SrcRGB),
+            mDstRGB(DstRGB),
+            mSrcAlpha(SrcAlpha),
+            mDstAlpha(DstAlpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mSrcRGB;
+        uint32_t mDstRGB;
+        uint32_t mSrcAlpha;
+        uint32_t mDstAlpha;
     };
 
     class GlBlendFuncSeparatei: public Encodable {
@@ -3405,6 +3660,27 @@ namespace gles {
         uint32_t mResult;
     };
 
+    class GlCheckFramebufferStatusOES: public Encodable {
+    public:
+        GlCheckFramebufferStatusOES() = default;
+        GlCheckFramebufferStatusOES(atom::Observations observations, uint32_t Target, uint32_t Result) :
+            mobservations(observations),
+            mTarget(Target),
+            mResult(Result) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mTarget);
+            e->Uint32(this->mResult);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mResult;
+    };
+
     class GlClear: public Encodable {
     public:
         GlClear() = default;
@@ -3522,6 +3798,48 @@ namespace gles {
         float mA;
     };
 
+    class GlClearColorx: public Encodable {
+    public:
+        GlClearColorx() = default;
+        GlClearColorx(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mRed;
+        int32_t mGreen;
+        int32_t mBlue;
+        int32_t mAlpha;
+    };
+
+    class GlClearColorxOES: public Encodable {
+    public:
+        GlClearColorxOES() = default;
+        GlClearColorxOES(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mRed;
+        int32_t mGreen;
+        int32_t mBlue;
+        int32_t mAlpha;
+    };
+
     class GlClearDepthf: public Encodable {
     public:
         GlClearDepthf() = default;
@@ -3540,6 +3858,60 @@ namespace gles {
         float mDepth;
     };
 
+    class GlClearDepthfOES: public Encodable {
+    public:
+        GlClearDepthfOES() = default;
+        GlClearDepthfOES(atom::Observations observations, float Depth) :
+            mobservations(observations),
+            mDepth(Depth) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Float32(this->mDepth);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mDepth;
+    };
+
+    class GlClearDepthx: public Encodable {
+    public:
+        GlClearDepthx() = default;
+        GlClearDepthx(atom::Observations observations, int32_t Depth) :
+            mobservations(observations),
+            mDepth(Depth) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mDepth);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mDepth;
+    };
+
+    class GlClearDepthxOES: public Encodable {
+    public:
+        GlClearDepthxOES() = default;
+        GlClearDepthxOES(atom::Observations observations, int32_t Depth) :
+            mobservations(observations),
+            mDepth(Depth) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mDepth);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mDepth;
+    };
+
     class GlClearStencil: public Encodable {
     public:
         GlClearStencil() = default;
@@ -3556,6 +3928,24 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         int32_t mStencil;
+    };
+
+    class GlClientActiveTexture: public Encodable {
+    public:
+        GlClientActiveTexture() = default;
+        GlClientActiveTexture(atom::Observations observations, uint32_t Texture) :
+            mobservations(observations),
+            mTexture(Texture) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mTexture);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTexture;
     };
 
     class GlClientWaitSync: public Encodable {
@@ -3598,6 +3988,216 @@ namespace gles {
         uint32_t mFlag;
         uint64_t mTimeout;
         uint32_t mResult;
+    };
+
+    class GlClipPlanef: public Encodable {
+    public:
+        GlClipPlanef() = default;
+        GlClipPlanef(atom::Observations observations, uint32_t P, GLfloat__CP Eqn) :
+            mobservations(observations),
+            mP(P),
+            mEqn(Eqn) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mP);
+            e->Value(this->mEqn);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mP;
+        GLfloat__CP mEqn;
+    };
+
+    class GlClipPlanefIMG: public Encodable {
+    public:
+        GlClipPlanefIMG() = default;
+        GlClipPlanefIMG(atom::Observations observations, uint32_t P, GLfloat__CP Eqn) :
+            mobservations(observations),
+            mP(P),
+            mEqn(Eqn) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mP);
+            e->Value(this->mEqn);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mP;
+        GLfloat__CP mEqn;
+    };
+
+    class GlClipPlanefOES: public Encodable {
+    public:
+        GlClipPlanefOES() = default;
+        GlClipPlanefOES(atom::Observations observations, uint32_t Plane, GLfloat__CP Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfloat__CP mEquation;
+    };
+
+    class GlClipPlanex: public Encodable {
+    public:
+        GlClipPlanex() = default;
+        GlClipPlanex(atom::Observations observations, uint32_t Plane, GLfixed__CP Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfixed__CP mEquation;
+    };
+
+    class GlClipPlanexIMG: public Encodable {
+    public:
+        GlClipPlanexIMG() = default;
+        GlClipPlanexIMG(atom::Observations observations, uint32_t P, GLfixed__CP Eqn) :
+            mobservations(observations),
+            mP(P),
+            mEqn(Eqn) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mP);
+            e->Value(this->mEqn);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mP;
+        GLfixed__CP mEqn;
+    };
+
+    class GlClipPlanexOES: public Encodable {
+    public:
+        GlClipPlanexOES() = default;
+        GlClipPlanexOES(atom::Observations observations, uint32_t Plane, GLfixed__CP Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfixed__CP mEquation;
+    };
+
+    class GlColor4f: public Encodable {
+    public:
+        GlColor4f() = default;
+        GlColor4f(atom::Observations observations, float Red, float Green, float Blue, float Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mRed;
+        float mGreen;
+        float mBlue;
+        float mAlpha;
+    };
+
+    class GlColor4ub: public Encodable {
+    public:
+        GlColor4ub() = default;
+        GlColor4ub(atom::Observations observations, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint8_t mRed;
+        uint8_t mGreen;
+        uint8_t mBlue;
+        uint8_t mAlpha;
+    };
+
+    class GlColor4x: public Encodable {
+    public:
+        GlColor4x() = default;
+        GlColor4x(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mRed;
+        int32_t mGreen;
+        int32_t mBlue;
+        int32_t mAlpha;
+    };
+
+    class GlColor4xOES: public Encodable {
+    public:
+        GlColor4xOES() = default;
+        GlColor4xOES(atom::Observations observations, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+            mobservations(observations),
+            mRed(Red),
+            mGreen(Green),
+            mBlue(Blue),
+            mAlpha(Alpha) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mRed;
+        int32_t mGreen;
+        int32_t mBlue;
+        int32_t mAlpha;
     };
 
     class GlColorMask: public Encodable {
@@ -3688,6 +4288,50 @@ namespace gles {
         uint8_t mG;
         uint8_t mB;
         uint8_t mA;
+    };
+
+    class GlColorPointer: public Encodable {
+    public:
+        GlColorPointer() = default;
+        GlColorPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlColorPointerBounds: public Encodable {
+    public:
+        GlColorPointerBounds() = default;
+        GlColorPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
     };
 
     class GlCompileShader: public Encodable {
@@ -4543,6 +5187,24 @@ namespace gles {
         uint32_t mMode;
     };
 
+    class GlCurrentPaletteMatrixOES: public Encodable {
+    public:
+        GlCurrentPaletteMatrixOES() = default;
+        GlCurrentPaletteMatrixOES(atom::Observations observations, uint32_t Matrixpaletteindex) :
+            mobservations(observations),
+            mMatrixpaletteindex(Matrixpaletteindex) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mMatrixpaletteindex);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mMatrixpaletteindex;
+    };
+
     class GlDebugMessageCallback: public Encodable {
     public:
         GlDebugMessageCallback() = default;
@@ -4746,6 +5408,27 @@ namespace gles {
         atom::Observations mobservations;
         int32_t mCount;
         FramebufferId__CP mFramebuffers;
+    };
+
+    class GlDeleteFramebuffersOES: public Encodable {
+    public:
+        GlDeleteFramebuffersOES() = default;
+        GlDeleteFramebuffersOES(atom::Observations observations, int32_t N, GLuint__CP Framebuffers) :
+            mobservations(observations),
+            mN(N),
+            mFramebuffers(Framebuffers) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Value(this->mFramebuffers);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        GLuint__CP mFramebuffers;
     };
 
     class GlDeletePathsNV: public Encodable {
@@ -4974,6 +5657,27 @@ namespace gles {
         atom::Observations mobservations;
         int32_t mCount;
         RenderbufferId__CP mRenderbuffers;
+    };
+
+    class GlDeleteRenderbuffersOES: public Encodable {
+    public:
+        GlDeleteRenderbuffersOES() = default;
+        GlDeleteRenderbuffersOES(atom::Observations observations, int32_t N, GLuint__CP Renderbuffers) :
+            mobservations(observations),
+            mN(N),
+            mRenderbuffers(Renderbuffers) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Value(this->mRenderbuffers);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        GLuint__CP mRenderbuffers;
     };
 
     class SamplerId__CP: public Encodable {
@@ -5290,6 +5994,69 @@ namespace gles {
         float mFar;
     };
 
+    class GlDepthRangefOES: public Encodable {
+    public:
+        GlDepthRangefOES() = default;
+        GlDepthRangefOES(atom::Observations observations, float N, float F) :
+            mobservations(observations),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Float32(this->mN);
+            e->Float32(this->mF);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mN;
+        float mF;
+    };
+
+    class GlDepthRangex: public Encodable {
+    public:
+        GlDepthRangex() = default;
+        GlDepthRangex(atom::Observations observations, int32_t N, int32_t F) :
+            mobservations(observations),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Int32(this->mF);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        int32_t mF;
+    };
+
+    class GlDepthRangexOES: public Encodable {
+    public:
+        GlDepthRangexOES() = default;
+        GlDepthRangexOES(atom::Observations observations, int32_t N, int32_t F) :
+            mobservations(observations),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Int32(this->mF);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        int32_t mF;
+    };
+
     class GlDetachShader: public Encodable {
     public:
         GlDetachShader() = default;
@@ -5327,6 +6094,24 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCapability;
+    };
+
+    class GlDisableClientState: public Encodable {
+    public:
+        GlDisableClientState() = default;
+        GlDisableClientState(atom::Observations observations, uint32_t Array) :
+            mobservations(observations),
+            mArray(Array) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mArray);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mArray;
     };
 
     class GlDisableDriverControlQCOM: public Encodable {
@@ -6183,6 +6968,170 @@ namespace gles {
         int32_t mBasevertex;
     };
 
+    class GlDrawTexfOES: public Encodable {
+    public:
+        GlDrawTexfOES() = default;
+        GlDrawTexfOES(atom::Observations observations, float X, float Y, float Z, float Width, float Height) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z),
+            mWidth(Width),
+            mHeight(Height) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mX;
+        float mY;
+        float mZ;
+        float mWidth;
+        float mHeight;
+    };
+
+    class GlDrawTexfvOES: public Encodable {
+    public:
+        GlDrawTexfvOES() = default;
+        GlDrawTexfvOES(atom::Observations observations, GLfloat__CP Coords) :
+            mobservations(observations),
+            mCoords(Coords) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mCoords);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfloat__CP mCoords;
+    };
+
+    class GlDrawTexiOES: public Encodable {
+    public:
+        GlDrawTexiOES() = default;
+        GlDrawTexiOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z),
+            mWidth(Width),
+            mHeight(Height) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+        int32_t mWidth;
+        int32_t mHeight;
+    };
+
+    class GlDrawTexivOES: public Encodable {
+    public:
+        GlDrawTexivOES() = default;
+        GlDrawTexivOES(atom::Observations observations, GLint__CP Coords) :
+            mobservations(observations),
+            mCoords(Coords) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mCoords);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLint__CP mCoords;
+    };
+
+    class GlDrawTexsOES: public Encodable {
+    public:
+        GlDrawTexsOES() = default;
+        GlDrawTexsOES(atom::Observations observations, int16_t X, int16_t Y, int16_t Z, int16_t Width, int16_t Height) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z),
+            mWidth(Width),
+            mHeight(Height) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int16_t mX;
+        int16_t mY;
+        int16_t mZ;
+        int16_t mWidth;
+        int16_t mHeight;
+    };
+
+    class GlDrawTexsvOES: public Encodable {
+    public:
+        GlDrawTexsvOES() = default;
+        GlDrawTexsvOES(atom::Observations observations, GLshort__CP Coords) :
+            mobservations(observations),
+            mCoords(Coords) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mCoords);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLshort__CP mCoords;
+    };
+
+    class GlDrawTexxOES: public Encodable {
+    public:
+        GlDrawTexxOES() = default;
+        GlDrawTexxOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z),
+            mWidth(Width),
+            mHeight(Height) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+        int32_t mWidth;
+        int32_t mHeight;
+    };
+
+    class GlDrawTexxvOES: public Encodable {
+    public:
+        GlDrawTexxvOES() = default;
+        GlDrawTexxvOES(atom::Observations observations, GLfixed__CP Coords) :
+            mobservations(observations),
+            mCoords(Coords) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mCoords);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__CP mCoords;
+    };
+
     class GlEGLImageTargetRenderbufferStorageOES: public Encodable {
     public:
         GlEGLImageTargetRenderbufferStorageOES() = default;
@@ -6241,6 +7190,24 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mCapability;
+    };
+
+    class GlEnableClientState: public Encodable {
+    public:
+        GlEnableClientState() = default;
+        GlEnableClientState(atom::Observations observations, uint32_t Array) :
+            mobservations(observations),
+            mArray(Array) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mArray);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mArray;
     };
 
     class GlEnableDriverControlQCOM: public Encodable {
@@ -6936,6 +7903,132 @@ namespace gles {
         int32_t mLength;
     };
 
+    class GlFogf: public Encodable {
+    public:
+        GlFogf() = default;
+        GlFogf(atom::Observations observations, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Float32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlFogfv: public Encodable {
+    public:
+        GlFogfv() = default;
+        GlFogfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlFogx: public Encodable {
+    public:
+        GlFogx() = default;
+        GlFogx(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlFogxOES: public Encodable {
+    public:
+        GlFogxOES() = default;
+        GlFogxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlFogxv: public Encodable {
+    public:
+        GlFogxv() = default;
+        GlFogxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
+    class GlFogxvOES: public Encodable {
+    public:
+        GlFogxvOES() = default;
+        GlFogxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
     class GlFragmentCoverageColorNV: public Encodable {
     public:
         GlFragmentCoverageColorNV() = default;
@@ -6991,6 +8084,27 @@ namespace gles {
         uint32_t mFramebufferTarget;
         uint32_t mFramebufferAttachment;
         uint32_t mRenderbufferTarget;
+        uint32_t mRenderbuffer;
+    };
+
+    class GlFramebufferRenderbufferOES: public Encodable {
+    public:
+        GlFramebufferRenderbufferOES() = default;
+        GlFramebufferRenderbufferOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Renderbuffertarget, uint32_t Renderbuffer) :
+            mobservations(observations),
+            mTarget(Target),
+            mAttachment(Attachment),
+            mRenderbuffertarget(Renderbuffertarget),
+            mRenderbuffer(Renderbuffer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mAttachment;
+        uint32_t mRenderbuffertarget;
         uint32_t mRenderbuffer;
     };
 
@@ -7112,11 +8226,11 @@ namespace gles {
     class GlFramebufferTexture2DOES: public Encodable {
     public:
         GlFramebufferTexture2DOES() = default;
-        GlFramebufferTexture2DOES(atom::Observations observations, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
+        GlFramebufferTexture2DOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level) :
             mobservations(observations),
-            mFramebufferTarget(FramebufferTarget),
-            mFramebufferAttachment(FramebufferAttachment),
-            mTextureTarget(TextureTarget),
+            mTarget(Target),
+            mAttachment(Attachment),
+            mTextarget(Textarget),
             mTexture(Texture),
             mLevel(Level) {}
         virtual void Encode(Encoder* e) const;
@@ -7125,9 +8239,9 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
-        uint32_t mFramebufferTarget;
-        uint32_t mFramebufferAttachment;
-        uint32_t mTextureTarget;
+        uint32_t mTarget;
+        uint32_t mAttachment;
+        uint32_t mTextarget;
         uint32_t mTexture;
         int32_t mLevel;
     };
@@ -7265,6 +8379,106 @@ namespace gles {
         uint32_t mOrientation;
     };
 
+    class GlFrustumf: public Encodable {
+    public:
+        GlFrustumf() = default;
+        GlFrustumf(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mL;
+        float mR;
+        float mB;
+        float mT;
+        float mN;
+        float mF;
+    };
+
+    class GlFrustumfOES: public Encodable {
+    public:
+        GlFrustumfOES() = default;
+        GlFrustumfOES(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mL;
+        float mR;
+        float mB;
+        float mT;
+        float mN;
+        float mF;
+    };
+
+    class GlFrustumx: public Encodable {
+    public:
+        GlFrustumx() = default;
+        GlFrustumx(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mL;
+        int32_t mR;
+        int32_t mB;
+        int32_t mT;
+        int32_t mN;
+        int32_t mF;
+    };
+
+    class GlFrustumxOES: public Encodable {
+    public:
+        GlFrustumxOES() = default;
+        GlFrustumxOES(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mL;
+        int32_t mR;
+        int32_t mB;
+        int32_t mT;
+        int32_t mN;
+        int32_t mF;
+    };
+
     class GlGenBuffers: public Encodable {
     public:
         GlGenBuffers() = default;
@@ -7326,6 +8540,27 @@ namespace gles {
         atom::Observations mobservations;
         int32_t mCount;
         FramebufferId__P mFramebuffers;
+    };
+
+    class GlGenFramebuffersOES: public Encodable {
+    public:
+        GlGenFramebuffersOES() = default;
+        GlGenFramebuffersOES(atom::Observations observations, int32_t N, GLuint__P Framebuffers) :
+            mobservations(observations),
+            mN(N),
+            mFramebuffers(Framebuffers) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Value(this->mFramebuffers);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        GLuint__P mFramebuffers;
     };
 
     class GlGenPathsNV: public Encodable {
@@ -7505,6 +8740,27 @@ namespace gles {
         RenderbufferId__P mRenderbuffers;
     };
 
+    class GlGenRenderbuffersOES: public Encodable {
+    public:
+        GlGenRenderbuffersOES() = default;
+        GlGenRenderbuffersOES(atom::Observations observations, int32_t N, GLuint__P Renderbuffers) :
+            mobservations(observations),
+            mN(N),
+            mRenderbuffers(Renderbuffers) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mN);
+            e->Value(this->mRenderbuffers);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mN;
+        GLuint__P mRenderbuffers;
+    };
+
     class SamplerId__P: public Encodable {
     public:
         SamplerId__P() = default;
@@ -7659,6 +8915,24 @@ namespace gles {
     public:
         GlGenerateMipmap() = default;
         GlGenerateMipmap(atom::Observations observations, uint32_t Target) :
+            mobservations(observations),
+            mTarget(Target) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mTarget);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+    };
+
+    class GlGenerateMipmapOES: public Encodable {
+    public:
+        GlGenerateMipmapOES() = default;
+        GlGenerateMipmapOES(atom::Observations observations, uint32_t Target) :
             mobservations(observations),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
@@ -7965,6 +9239,90 @@ namespace gles {
         Void__P__P mParams;
     };
 
+    class GlGetClipPlanef: public Encodable {
+    public:
+        GlGetClipPlanef() = default;
+        GlGetClipPlanef(atom::Observations observations, uint32_t Plane, GLfloat__P Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfloat__P mEquation;
+    };
+
+    class GlGetClipPlanefOES: public Encodable {
+    public:
+        GlGetClipPlanefOES() = default;
+        GlGetClipPlanefOES(atom::Observations observations, uint32_t Plane, GLfloat__P Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfloat__P mEquation;
+    };
+
+    class GlGetClipPlanex: public Encodable {
+    public:
+        GlGetClipPlanex() = default;
+        GlGetClipPlanex(atom::Observations observations, uint32_t Plane, GLfixed__P Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfixed__P mEquation;
+    };
+
+    class GlGetClipPlanexOES: public Encodable {
+    public:
+        GlGetClipPlanexOES() = default;
+        GlGetClipPlanexOES(atom::Observations observations, uint32_t Plane, GLfixed__P Equation) :
+            mobservations(observations),
+            mPlane(Plane),
+            mEquation(Equation) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPlane);
+            e->Value(this->mEquation);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPlane;
+        GLfixed__P mEquation;
+    };
+
     class GlGetCoverageModulationTableNV: public Encodable {
     public:
         GlGetCoverageModulationTableNV() = default;
@@ -8143,6 +9501,48 @@ namespace gles {
         GLuint__P mQueryId;
     };
 
+    class GlGetFixedv: public Encodable {
+    public:
+        GlGetFixedv() = default;
+        GlGetFixedv(atom::Observations observations, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetFixedvOES: public Encodable {
+    public:
+        GlGetFixedvOES() = default;
+        GlGetFixedvOES(atom::Observations observations, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
     class GlGetFloati_vNV: public Encodable {
     public:
         GlGetFloati_vNV() = default;
@@ -8240,6 +9640,27 @@ namespace gles {
         uint32_t mAttachment;
         uint32_t mParameter;
         GLint__P mValue;
+    };
+
+    class GlGetFramebufferAttachmentParameterivOES: public Encodable {
+    public:
+        GlGetFramebufferAttachmentParameterivOES() = default;
+        GlGetFramebufferAttachmentParameterivOES(atom::Observations observations, uint32_t Target, uint32_t Attachment, uint32_t Pname, GLint__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mAttachment(Attachment),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mAttachment;
+        uint32_t mPname;
+        GLint__P mParams;
     };
 
     class GlGetFramebufferParameteriv: public Encodable {
@@ -8506,6 +9927,120 @@ namespace gles {
         uint32_t mPname;
         int32_t mBufSize;
         GLint__P mParams;
+    };
+
+    class GlGetLightfv: public Encodable {
+    public:
+        GlGetLightfv() = default;
+        GlGetLightfv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfloat__P Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfloat__P mParams;
+    };
+
+    class GlGetLightxv: public Encodable {
+    public:
+        GlGetLightxv() = default;
+        GlGetLightxv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetLightxvOES: public Encodable {
+    public:
+        GlGetLightxvOES() = default;
+        GlGetLightxvOES(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetMaterialfv: public Encodable {
+    public:
+        GlGetMaterialfv() = default;
+        GlGetMaterialfv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfloat__P Params) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfloat__P mParams;
+    };
+
+    class GlGetMaterialxv: public Encodable {
+    public:
+        GlGetMaterialxv() = default;
+        GlGetMaterialxv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetMaterialxvOES: public Encodable {
+    public:
+        GlGetMaterialxvOES() = default;
+        GlGetMaterialxvOES(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfixed__P mParams;
     };
 
     class GlGetMultisamplefv: public Encodable {
@@ -9693,6 +11228,25 @@ namespace gles {
         GLint__P mValues;
     };
 
+    class GlGetRenderbufferParameterivOES: public Encodable {
+    public:
+        GlGetRenderbufferParameterivOES() = default;
+        GlGetRenderbufferParameterivOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLint__P mParams;
+    };
+
     class GlGetSamplerParameterIiv: public Encodable {
     public:
         GlGetSamplerParameterIiv() = default;
@@ -10013,6 +11567,139 @@ namespace gles {
         GLint__P mValues;
     };
 
+    class GlGetTexEnvfv: public Encodable {
+    public:
+        GlGetTexEnvfv() = default;
+        GlGetTexEnvfv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfloat__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfloat__P mParams;
+    };
+
+    class GlGetTexEnviv: public Encodable {
+    public:
+        GlGetTexEnviv() = default;
+        GlGetTexEnviv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLint__P mParams;
+    };
+
+    class GlGetTexEnvxv: public Encodable {
+    public:
+        GlGetTexEnvxv() = default;
+        GlGetTexEnvxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetTexEnvxvOES: public Encodable {
+    public:
+        GlGetTexEnvxvOES() = default;
+        GlGetTexEnvxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetTexGenfvOES: public Encodable {
+    public:
+        GlGetTexGenfvOES() = default;
+        GlGetTexGenfvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfloat__P Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLfloat__P mParams;
+    };
+
+    class GlGetTexGenivOES: public Encodable {
+    public:
+        GlGetTexGenivOES() = default;
+        GlGetTexGenivOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLint__P Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLint__P mParams;
+    };
+
+    class GlGetTexGenxvOES: public Encodable {
+    public:
+        GlGetTexGenxvOES() = default;
+        GlGetTexGenxvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
     class GlGetTexLevelParameterfv: public Encodable {
     public:
         GlGetTexLevelParameterfv() = default;
@@ -10205,6 +11892,44 @@ namespace gles {
         uint32_t mTarget;
         uint32_t mParameter;
         GLint__P mValues;
+    };
+
+    class GlGetTexParameterxv: public Encodable {
+    public:
+        GlGetTexParameterxv() = default;
+        GlGetTexParameterxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__P mParams;
+    };
+
+    class GlGetTexParameterxvOES: public Encodable {
+    public:
+        GlGetTexParameterxvOES() = default;
+        GlGetTexParameterxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__P mParams;
     };
 
     class GlGetTextureHandleNV: public Encodable {
@@ -10958,6 +12683,27 @@ namespace gles {
         uint8_t mResult;
     };
 
+    class GlIsFramebufferOES: public Encodable {
+    public:
+        GlIsFramebufferOES() = default;
+        GlIsFramebufferOES(atom::Observations observations, uint32_t Framebuffer, uint8_t Result) :
+            mobservations(observations),
+            mFramebuffer(Framebuffer),
+            mResult(Result) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mFramebuffer);
+            e->Uint8(this->mResult);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFramebuffer;
+        uint8_t mResult;
+    };
+
     class GlIsImageHandleResidentNV: public Encodable {
     public:
         GlIsImageHandleResidentNV() = default;
@@ -11153,6 +12899,27 @@ namespace gles {
     public:
         GlIsRenderbuffer() = default;
         GlIsRenderbuffer(atom::Observations observations, uint32_t Renderbuffer, uint8_t Result) :
+            mobservations(observations),
+            mRenderbuffer(Renderbuffer),
+            mResult(Result) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mRenderbuffer);
+            e->Uint8(this->mResult);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mRenderbuffer;
+        uint8_t mResult;
+    };
+
+    class GlIsRenderbufferOES: public Encodable {
+    public:
+        GlIsRenderbufferOES() = default;
+        GlIsRenderbufferOES(atom::Observations observations, uint32_t Renderbuffer, uint8_t Result) :
             mobservations(observations),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
@@ -11380,6 +13147,246 @@ namespace gles {
         GLchar__CP mLabel;
     };
 
+    class GlLightModelf: public Encodable {
+    public:
+        GlLightModelf() = default;
+        GlLightModelf(atom::Observations observations, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Float32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlLightModelfv: public Encodable {
+    public:
+        GlLightModelfv() = default;
+        GlLightModelfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlLightModelx: public Encodable {
+    public:
+        GlLightModelx() = default;
+        GlLightModelx(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlLightModelxOES: public Encodable {
+    public:
+        GlLightModelxOES() = default;
+        GlLightModelxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlLightModelxv: public Encodable {
+    public:
+        GlLightModelxv() = default;
+        GlLightModelxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
+    class GlLightModelxvOES: public Encodable {
+    public:
+        GlLightModelxvOES() = default;
+        GlLightModelxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
+    class GlLightf: public Encodable {
+    public:
+        GlLightf() = default;
+        GlLightf(atom::Observations observations, uint32_t Light, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlLightfv: public Encodable {
+    public:
+        GlLightfv() = default;
+        GlLightfv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlLightx: public Encodable {
+    public:
+        GlLightx() = default;
+        GlLightx(atom::Observations observations, uint32_t Light, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlLightxOES: public Encodable {
+    public:
+        GlLightxOES() = default;
+        GlLightxOES(atom::Observations observations, uint32_t Light, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlLightxv: public Encodable {
+    public:
+        GlLightxv() = default;
+        GlLightxv(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlLightxvOES: public Encodable {
+    public:
+        GlLightxvOES() = default;
+        GlLightxvOES(atom::Observations observations, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mLight(Light),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mLight;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
     class GlLineWidth: public Encodable {
     public:
         GlLineWidth() = default;
@@ -11398,6 +13405,42 @@ namespace gles {
         float mWidth;
     };
 
+    class GlLineWidthx: public Encodable {
+    public:
+        GlLineWidthx() = default;
+        GlLineWidthx(atom::Observations observations, int32_t Width) :
+            mobservations(observations),
+            mWidth(Width) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mWidth);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mWidth;
+    };
+
+    class GlLineWidthxOES: public Encodable {
+    public:
+        GlLineWidthxOES() = default;
+        GlLineWidthxOES(atom::Observations observations, int32_t Width) :
+            mobservations(observations),
+            mWidth(Width) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mWidth);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mWidth;
+    };
+
     class GlLinkProgram: public Encodable {
     public:
         GlLinkProgram() = default;
@@ -11414,6 +13457,108 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         uint32_t mProgram;
+    };
+
+    class GlLoadIdentity: public Encodable {
+    public:
+        GlLoadIdentity() = default;
+        GlLoadIdentity(atom::Observations observations) :
+            mobservations(observations) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+    };
+
+    class GlLoadMatrixf: public Encodable {
+    public:
+        GlLoadMatrixf() = default;
+        GlLoadMatrixf(atom::Observations observations, GLfloat__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfloat__CP mM;
+    };
+
+    class GlLoadMatrixx: public Encodable {
+    public:
+        GlLoadMatrixx() = default;
+        GlLoadMatrixx(atom::Observations observations, GLfixed__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__CP mM;
+    };
+
+    class GlLoadMatrixxOES: public Encodable {
+    public:
+        GlLoadMatrixxOES() = default;
+        GlLoadMatrixxOES(atom::Observations observations, GLfixed__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__CP mM;
+    };
+
+    class GlLoadPaletteFromModelViewMatrixOES: public Encodable {
+    public:
+        GlLoadPaletteFromModelViewMatrixOES() = default;
+        GlLoadPaletteFromModelViewMatrixOES(atom::Observations observations) :
+            mobservations(observations) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+    };
+
+    class GlLogicOp: public Encodable {
+    public:
+        GlLogicOp() = default;
+        GlLogicOp(atom::Observations observations, uint32_t Opcode) :
+            mobservations(observations),
+            mOpcode(Opcode) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mOpcode);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mOpcode;
     };
 
     class GlMakeImageHandleNonResidentNV: public Encodable {
@@ -11556,6 +13701,164 @@ namespace gles {
         Void__P mResult;
     };
 
+    class GlMaterialf: public Encodable {
+    public:
+        GlMaterialf() = default;
+        GlMaterialf(atom::Observations observations, uint32_t Face, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlMaterialfv: public Encodable {
+    public:
+        GlMaterialfv() = default;
+        GlMaterialfv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlMaterialx: public Encodable {
+    public:
+        GlMaterialx() = default;
+        GlMaterialx(atom::Observations observations, uint32_t Face, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlMaterialxOES: public Encodable {
+    public:
+        GlMaterialxOES() = default;
+        GlMaterialxOES(atom::Observations observations, uint32_t Face, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlMaterialxv: public Encodable {
+    public:
+        GlMaterialxv() = default;
+        GlMaterialxv(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
+    class GlMaterialxvOES: public Encodable {
+    public:
+        GlMaterialxvOES() = default;
+        GlMaterialxvOES(atom::Observations observations, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+            mobservations(observations),
+            mFace(Face),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mFace;
+        uint32_t mPname;
+        GLfixed__CP mParam;
+    };
+
+    class GlMatrixIndexPointerOES: public Encodable {
+    public:
+        GlMatrixIndexPointerOES() = default;
+        GlMatrixIndexPointerOES(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlMatrixIndexPointerOESBounds: public Encodable {
+    public:
+        GlMatrixIndexPointerOESBounds() = default;
+        GlMatrixIndexPointerOESBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
+    };
+
     class GlMatrixLoad3x2fNV: public Encodable {
     public:
         GlMatrixLoad3x2fNV() = default;
@@ -11617,6 +13920,24 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mMatrixMode;
         GLfloat__CP mM;
+    };
+
+    class GlMatrixMode: public Encodable {
+    public:
+        GlMatrixMode() = default;
+        GlMatrixMode(atom::Observations observations, uint32_t Mode) :
+            mobservations(observations),
+            mMode(Mode) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mMode);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mMode;
     };
 
     class GlMatrixMult3x2fNV: public Encodable {
@@ -11752,6 +14073,60 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mValue;
+    };
+
+    class GlMultMatrixf: public Encodable {
+    public:
+        GlMultMatrixf() = default;
+        GlMultMatrixf(atom::Observations observations, GLfloat__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfloat__CP mM;
+    };
+
+    class GlMultMatrixx: public Encodable {
+    public:
+        GlMultMatrixx() = default;
+        GlMultMatrixx(atom::Observations observations, GLfixed__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__CP mM;
+    };
+
+    class GlMultMatrixxOES: public Encodable {
+    public:
+        GlMultMatrixxOES() = default;
+        GlMultMatrixxOES(atom::Observations observations, GLfixed__CP M) :
+            mobservations(observations),
+            mM(M) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Value(this->mM);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__CP mM;
     };
 
     class GlMultiDrawArraysEXT: public Encodable {
@@ -11907,6 +14282,75 @@ namespace gles {
         int32_t mStride;
     };
 
+    class GlMultiTexCoord4f: public Encodable {
+    public:
+        GlMultiTexCoord4f() = default;
+        GlMultiTexCoord4f(atom::Observations observations, uint32_t Target, float V0, float V1, float V2, float V3) :
+            mobservations(observations),
+            mTarget(Target),
+            mV0(V0),
+            mV1(V1),
+            mV2(V2),
+            mV3(V3) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        float mV0;
+        float mV1;
+        float mV2;
+        float mV3;
+    };
+
+    class GlMultiTexCoord4x: public Encodable {
+    public:
+        GlMultiTexCoord4x() = default;
+        GlMultiTexCoord4x(atom::Observations observations, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+            mobservations(observations),
+            mTexture(Texture),
+            mV0(V0),
+            mV1(V1),
+            mV2(V2),
+            mV3(V3) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTexture;
+        int32_t mV0;
+        int32_t mV1;
+        int32_t mV2;
+        int32_t mV3;
+    };
+
+    class GlMultiTexCoord4xOES: public Encodable {
+    public:
+        GlMultiTexCoord4xOES() = default;
+        GlMultiTexCoord4xOES(atom::Observations observations, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+            mobservations(observations),
+            mTexture(Texture),
+            mV0(V0),
+            mV1(V1),
+            mV2(V2),
+            mV3(V3) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTexture;
+        int32_t mV0;
+        int32_t mV1;
+        int32_t mV2;
+        int32_t mV3;
+    };
+
     class GlNamedFramebufferSampleLocationsfvNV: public Encodable {
     public:
         GlNamedFramebufferSampleLocationsfvNV() = default;
@@ -11926,6 +14370,103 @@ namespace gles {
         uint32_t mStart;
         int32_t mCount;
         GLfloat__CP mV;
+    };
+
+    class GlNormal3f: public Encodable {
+    public:
+        GlNormal3f() = default;
+        GlNormal3f(atom::Observations observations, float Nx, float Ny, float Nz) :
+            mobservations(observations),
+            mNx(Nx),
+            mNy(Ny),
+            mNz(Nz) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mNx;
+        float mNy;
+        float mNz;
+    };
+
+    class GlNormal3x: public Encodable {
+    public:
+        GlNormal3x() = default;
+        GlNormal3x(atom::Observations observations, int32_t Nx, int32_t Ny, int32_t Nz) :
+            mobservations(observations),
+            mNx(Nx),
+            mNy(Ny),
+            mNz(Nz) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mNx;
+        int32_t mNy;
+        int32_t mNz;
+    };
+
+    class GlNormal3xOES: public Encodable {
+    public:
+        GlNormal3xOES() = default;
+        GlNormal3xOES(atom::Observations observations, int32_t Nx, int32_t Ny, int32_t Nz) :
+            mobservations(observations),
+            mNx(Nx),
+            mNy(Ny),
+            mNz(Nz) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mNx;
+        int32_t mNy;
+        int32_t mNz;
+    };
+
+    class GlNormalPointer: public Encodable {
+    public:
+        GlNormalPointer() = default;
+        GlNormalPointer(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlNormalPointerBounds: public Encodable {
+    public:
+        GlNormalPointerBounds() = default;
+        GlNormalPointerBounds(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
     };
 
     class GlObjectLabel: public Encodable {
@@ -12006,6 +14547,106 @@ namespace gles {
         Void__CP mPtr;
         int32_t mLength;
         GLchar__CP mLabel;
+    };
+
+    class GlOrthof: public Encodable {
+    public:
+        GlOrthof() = default;
+        GlOrthof(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mL;
+        float mR;
+        float mB;
+        float mT;
+        float mN;
+        float mF;
+    };
+
+    class GlOrthofOES: public Encodable {
+    public:
+        GlOrthofOES() = default;
+        GlOrthofOES(atom::Observations observations, float L, float R, float B, float T, float N, float F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mL;
+        float mR;
+        float mB;
+        float mT;
+        float mN;
+        float mF;
+    };
+
+    class GlOrthox: public Encodable {
+    public:
+        GlOrthox() = default;
+        GlOrthox(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mL;
+        int32_t mR;
+        int32_t mB;
+        int32_t mT;
+        int32_t mN;
+        int32_t mF;
+    };
+
+    class GlOrthoxOES: public Encodable {
+    public:
+        GlOrthoxOES() = default;
+        GlOrthoxOES(atom::Observations observations, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+            mobservations(observations),
+            mL(L),
+            mR(R),
+            mB(B),
+            mT(T),
+            mN(N),
+            mF(F) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mL;
+        int32_t mR;
+        int32_t mB;
+        int32_t mT;
+        int32_t mN;
+        int32_t mF;
     };
 
     class GlPatchParameteri: public Encodable {
@@ -12565,6 +15206,226 @@ namespace gles {
         uint8_t mResult;
     };
 
+    class GlPointParameterf: public Encodable {
+    public:
+        GlPointParameterf() = default;
+        GlPointParameterf(atom::Observations observations, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Float32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlPointParameterfv: public Encodable {
+    public:
+        GlPointParameterfv() = default;
+        GlPointParameterfv(atom::Observations observations, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlPointParameterx: public Encodable {
+    public:
+        GlPointParameterx() = default;
+        GlPointParameterx(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlPointParameterxOES: public Encodable {
+    public:
+        GlPointParameterxOES() = default;
+        GlPointParameterxOES(atom::Observations observations, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Int32(this->mParam);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlPointParameterxv: public Encodable {
+    public:
+        GlPointParameterxv() = default;
+        GlPointParameterxv(atom::Observations observations, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlPointParameterxvOES: public Encodable {
+    public:
+        GlPointParameterxvOES() = default;
+        GlPointParameterxvOES(atom::Observations observations, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mPname);
+            e->Value(this->mParams);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlPointSize: public Encodable {
+    public:
+        GlPointSize() = default;
+        GlPointSize(atom::Observations observations, float Size) :
+            mobservations(observations),
+            mSize(Size) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Float32(this->mSize);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mSize;
+    };
+
+    class GlPointSizePointerOES: public Encodable {
+    public:
+        GlPointSizePointerOES() = default;
+        GlPointSizePointerOES(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlPointSizePointerOESBounds: public Encodable {
+    public:
+        GlPointSizePointerOESBounds() = default;
+        GlPointSizePointerOESBounds(atom::Observations observations, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
+    };
+
+    class GlPointSizex: public Encodable {
+    public:
+        GlPointSizex() = default;
+        GlPointSizex(atom::Observations observations, int32_t Size) :
+            mobservations(observations),
+            mSize(Size) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mSize);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+    };
+
+    class GlPointSizexOES: public Encodable {
+    public:
+        GlPointSizexOES() = default;
+        GlPointSizexOES(atom::Observations observations, int32_t Size) :
+            mobservations(observations),
+            mSize(Size) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mSize);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+    };
+
     class GlPolygonModeNV: public Encodable {
     public:
         GlPolygonModeNV() = default;
@@ -12607,6 +15468,48 @@ namespace gles {
         float mUnits;
     };
 
+    class GlPolygonOffsetx: public Encodable {
+    public:
+        GlPolygonOffsetx() = default;
+        GlPolygonOffsetx(atom::Observations observations, int32_t Factor, int32_t Units) :
+            mobservations(observations),
+            mFactor(Factor),
+            mUnits(Units) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mFactor);
+            e->Int32(this->mUnits);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mFactor;
+        int32_t mUnits;
+    };
+
+    class GlPolygonOffsetxOES: public Encodable {
+    public:
+        GlPolygonOffsetxOES() = default;
+        GlPolygonOffsetxOES(atom::Observations observations, int32_t Factor, int32_t Units) :
+            mobservations(observations),
+            mFactor(Factor),
+            mUnits(Units) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mFactor);
+            e->Int32(this->mUnits);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mFactor;
+        int32_t mUnits;
+    };
+
     class GlPopDebugGroup: public Encodable {
     public:
         GlPopDebugGroup() = default;
@@ -12641,6 +15544,21 @@ namespace gles {
     public:
         GlPopGroupMarkerEXT() = default;
         GlPopGroupMarkerEXT(atom::Observations observations) :
+            mobservations(observations) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+    };
+
+    class GlPopMatrix: public Encodable {
+    public:
+        GlPopMatrix() = default;
+        GlPopMatrix(atom::Observations observations) :
             mobservations(observations) {}
         virtual void Encode(Encoder* e) const{
             e->Value(this->mobservations);
@@ -14391,6 +17309,21 @@ namespace gles {
         GLchar__CP mMarker;
     };
 
+    class GlPushMatrix: public Encodable {
+    public:
+        GlPushMatrix() = default;
+        GlPushMatrix(atom::Observations observations) :
+            mobservations(observations) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+    };
+
     class GlQueryCounterEXT: public Encodable {
     public:
         GlQueryCounterEXT() = default;
@@ -14410,6 +17343,25 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mQuery;
         uint32_t mTarget;
+    };
+
+    class GlQueryMatrixxOES: public Encodable {
+    public:
+        GlQueryMatrixxOES() = default;
+        GlQueryMatrixxOES(atom::Observations observations, GLfixed__P Mantissa, GLint__P Exponent, uint32_t Result) :
+            mobservations(observations),
+            mMantissa(Mantissa),
+            mExponent(Exponent),
+            mResult(Result) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        GLfixed__P mMantissa;
+        GLint__P mExponent;
+        uint32_t mResult;
     };
 
     class GlRasterSamplesEXT: public Encodable {
@@ -14778,6 +17730,27 @@ namespace gles {
         int32_t mHeight;
     };
 
+    class GlRenderbufferStorageOES: public Encodable {
+    public:
+        GlRenderbufferStorageOES() = default;
+        GlRenderbufferStorageOES(atom::Observations observations, uint32_t Target, uint32_t Internalformat, int32_t Width, int32_t Height) :
+            mobservations(observations),
+            mTarget(Target),
+            mInternalformat(Internalformat),
+            mWidth(Width),
+            mHeight(Height) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mInternalformat;
+        int32_t mWidth;
+        int32_t mHeight;
+    };
+
     class GlResolveDepthValuesNV: public Encodable {
     public:
         GlResolveDepthValuesNV() = default;
@@ -14823,6 +17796,69 @@ namespace gles {
         atom::Observations mobservations;
     };
 
+    class GlRotatef: public Encodable {
+    public:
+        GlRotatef() = default;
+        GlRotatef(atom::Observations observations, float Angle, float X, float Y, float Z) :
+            mobservations(observations),
+            mAngle(Angle),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mAngle;
+        float mX;
+        float mY;
+        float mZ;
+    };
+
+    class GlRotatex: public Encodable {
+    public:
+        GlRotatex() = default;
+        GlRotatex(atom::Observations observations, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mAngle(Angle),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mAngle;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+    };
+
+    class GlRotatexOES: public Encodable {
+    public:
+        GlRotatexOES() = default;
+        GlRotatexOES(atom::Observations observations, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mAngle(Angle),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mAngle;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+    };
+
     class GlSampleCoverage: public Encodable {
     public:
         GlSampleCoverage() = default;
@@ -14841,6 +17877,48 @@ namespace gles {
         static const schema::Entity* StaticSchema();
         atom::Observations mobservations;
         float mValue;
+        uint8_t mInvert;
+    };
+
+    class GlSampleCoveragex: public Encodable {
+    public:
+        GlSampleCoveragex() = default;
+        GlSampleCoveragex(atom::Observations observations, int32_t Value, uint8_t Invert) :
+            mobservations(observations),
+            mValue(Value),
+            mInvert(Invert) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mValue);
+            e->Uint8(this->mInvert);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mValue;
+        uint8_t mInvert;
+    };
+
+    class GlSampleCoveragexOES: public Encodable {
+    public:
+        GlSampleCoveragexOES() = default;
+        GlSampleCoveragexOES(atom::Observations observations, int32_t Value, uint8_t Invert) :
+            mobservations(observations),
+            mValue(Value),
+            mInvert(Invert) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Int32(this->mValue);
+            e->Uint8(this->mInvert);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mValue;
         uint8_t mInvert;
     };
 
@@ -15055,6 +18133,63 @@ namespace gles {
         GLint__CP mParam;
     };
 
+    class GlScalef: public Encodable {
+    public:
+        GlScalef() = default;
+        GlScalef(atom::Observations observations, float X, float Y, float Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mX;
+        float mY;
+        float mZ;
+    };
+
+    class GlScalex: public Encodable {
+    public:
+        GlScalex() = default;
+        GlScalex(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+    };
+
+    class GlScalexOES: public Encodable {
+    public:
+        GlScalexOES() = default;
+        GlScalexOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+    };
+
     class GlScissor: public Encodable {
     public:
         GlScissor() = default;
@@ -15181,6 +18316,24 @@ namespace gles {
         atom::Observations mobservations;
         uint32_t mFence;
         uint32_t mCondition;
+    };
+
+    class GlShadeModel: public Encodable {
+    public:
+        GlShadeModel() = default;
+        GlShadeModel(atom::Observations observations, uint32_t Mode) :
+            mobservations(observations),
+            mMode(Mode) {}
+        virtual void Encode(Encoder* e) const{
+            e->Value(this->mobservations);
+            e->Uint32(this->mMode);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mMode;
     };
 
     class ShaderId__CP: public Encodable {
@@ -15752,6 +18905,316 @@ namespace gles {
         int32_t mSize;
     };
 
+    class GlTexCoordPointer: public Encodable {
+    public:
+        GlTexCoordPointer() = default;
+        GlTexCoordPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlTexCoordPointerBounds: public Encodable {
+    public:
+        GlTexCoordPointerBounds() = default;
+        GlTexCoordPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
+    };
+
+    class GlTexEnvf: public Encodable {
+    public:
+        GlTexEnvf() = default;
+        GlTexEnvf(atom::Observations observations, uint32_t Target, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlTexEnvfv: public Encodable {
+    public:
+        GlTexEnvfv() = default;
+        GlTexEnvfv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlTexEnvi: public Encodable {
+    public:
+        GlTexEnvi() = default;
+        GlTexEnvi(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexEnviv: public Encodable {
+    public:
+        GlTexEnviv() = default;
+        GlTexEnviv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLint__CP mParams;
+    };
+
+    class GlTexEnvx: public Encodable {
+    public:
+        GlTexEnvx() = default;
+        GlTexEnvx(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexEnvxOES: public Encodable {
+    public:
+        GlTexEnvxOES() = default;
+        GlTexEnvxOES(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexEnvxv: public Encodable {
+    public:
+        GlTexEnvxv() = default;
+        GlTexEnvxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlTexEnvxvOES: public Encodable {
+    public:
+        GlTexEnvxvOES() = default;
+        GlTexEnvxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlTexGenfOES: public Encodable {
+    public:
+        GlTexGenfOES() = default;
+        GlTexGenfOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, float Param) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        float mParam;
+    };
+
+    class GlTexGenfvOES: public Encodable {
+    public:
+        GlTexGenfvOES() = default;
+        GlTexGenfvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfloat__CP Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLfloat__CP mParams;
+    };
+
+    class GlTexGeniOES: public Encodable {
+    public:
+        GlTexGeniOES() = default;
+        GlTexGeniOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexGenivOES: public Encodable {
+    public:
+        GlTexGenivOES() = default;
+        GlTexGenivOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLint__CP Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLint__CP mParams;
+    };
+
+    class GlTexGenxOES: public Encodable {
+    public:
+        GlTexGenxOES() = default;
+        GlTexGenxOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexGenxvOES: public Encodable {
+    public:
+        GlTexGenxvOES() = default;
+        GlTexGenxvOES(atom::Observations observations, uint32_t Coord, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mCoord(Coord),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mCoord;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
     class GlTexImage2D: public Encodable {
     public:
         GlTexImage2D() = default;
@@ -16068,6 +19531,82 @@ namespace gles {
         uint32_t mTarget;
         uint32_t mPname;
         GLint__CP mParams;
+    };
+
+    class GlTexParameterx: public Encodable {
+    public:
+        GlTexParameterx() = default;
+        GlTexParameterx(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexParameterxOES: public Encodable {
+    public:
+        GlTexParameterxOES() = default;
+        GlTexParameterxOES(atom::Observations observations, uint32_t Target, uint32_t Pname, int32_t Param) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParam(Param) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        int32_t mParam;
+    };
+
+    class GlTexParameterxv: public Encodable {
+    public:
+        GlTexParameterxv() = default;
+        GlTexParameterxv(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__CP mParams;
+    };
+
+    class GlTexParameterxvOES: public Encodable {
+    public:
+        GlTexParameterxvOES() = default;
+        GlTexParameterxvOES(atom::Observations observations, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+            mobservations(observations),
+            mTarget(Target),
+            mPname(Pname),
+            mParams(Params) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        uint32_t mTarget;
+        uint32_t mPname;
+        GLfixed__CP mParams;
     };
 
     class GlTexStorage1DEXT: public Encodable {
@@ -16540,6 +20079,63 @@ namespace gles {
         uint32_t mSrcPath;
         uint32_t mTransformType;
         GLfloat__CP mTransformValues;
+    };
+
+    class GlTranslatef: public Encodable {
+    public:
+        GlTranslatef() = default;
+        GlTranslatef(atom::Observations observations, float X, float Y, float Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        float mX;
+        float mY;
+        float mZ;
+    };
+
+    class GlTranslatex: public Encodable {
+    public:
+        GlTranslatex() = default;
+        GlTranslatex(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
+    };
+
+    class GlTranslatexOES: public Encodable {
+    public:
+        GlTranslatexOES() = default;
+        GlTranslatexOES(atom::Observations observations, int32_t X, int32_t Y, int32_t Z) :
+            mobservations(observations),
+            mX(X),
+            mY(Y),
+            mZ(Z) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mX;
+        int32_t mY;
+        int32_t mZ;
     };
 
     class GlUniform1f: public Encodable {
@@ -18022,6 +21618,50 @@ namespace gles {
         uint32_t mDivisor;
     };
 
+    class GlVertexPointer: public Encodable {
+    public:
+        GlVertexPointer() = default;
+        GlVertexPointer(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlVertexPointerBounds: public Encodable {
+    public:
+        GlVertexPointerBounds() = default;
+        GlVertexPointerBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
+    };
+
     class GlViewport: public Encodable {
     public:
         GlViewport() = default;
@@ -18163,6 +21803,50 @@ namespace gles {
         int32_t mNumPaths;
         GLuint__CP mPaths;
         GLfloat__CP mWeights;
+    };
+
+    class GlWeightPointerOES: public Encodable {
+    public:
+        GlWeightPointerOES() = default;
+        GlWeightPointerOES(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+    };
+
+    class GlWeightPointerOESBounds: public Encodable {
+    public:
+        GlWeightPointerOESBounds() = default;
+        GlWeightPointerOESBounds(atom::Observations observations, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+            mobservations(observations),
+            mSize(Size),
+            mType(Type),
+            mStride(Stride),
+            mPointer(Pointer),
+            mCount(Count) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        atom::Observations mobservations;
+        int32_t mSize;
+        uint32_t mType;
+        int32_t mStride;
+        Void__CP mPointer;
+        int32_t mCount;
     };
 
     class GlXCreateContext: public Encodable {

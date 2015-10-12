@@ -1,7 +1,6 @@
 LIBRARY
 EXPORTS
   glAccum
-  glAlphaFunc
   glAreTexturesResident
   glArrayElement
   glBegin
@@ -32,33 +31,28 @@ EXPORTS
   glColor4bv
   glColor4d
   glColor4dv
-  glColor4f
   glColor4fv
   glColor4i
   glColor4iv
   glColor4s
   glColor4sv
-  glColor4ub
   glColor4ubv
   glColor4ui
   glColor4uiv
   glColor4us
   glColor4usv
   glColorMaterial
-  glColorPointer
   glCopyPixels
   glCopyTexImage1D
   glCopyTexSubImage1D
   glDebugEntry
   glDeleteLists
   glDepthRange
-  glDisableClientState
   glDrawBuffer
   glDrawPixels
   glEdgeFlag
   glEdgeFlagPointer
   glEdgeFlagv
-  glEnableClientState
   glEnd
   glEndList
   glEvalCoord1d
@@ -74,27 +68,21 @@ EXPORTS
   glEvalPoint1
   glEvalPoint2
   glFeedbackBuffer
-  glFogf
-  glFogfv
   glFogi
   glFogiv
   glFrustum
   glGenLists
   glGetClipPlane
   glGetDoublev
-  glGetLightfv
   glGetLightiv
   glGetMapdv
   glGetMapfv
   glGetMapiv
-  glGetMaterialfv
   glGetMaterialiv
   glGetPixelMapfv
   glGetPixelMapuiv
   glGetPixelMapusv
   glGetPolygonStipple
-  glGetTexEnvfv
-  glGetTexEnviv
   glGetTexGendv
   glGetTexGenfv
   glGetTexGeniv
@@ -114,21 +102,14 @@ EXPORTS
   glInitNames
   glInterleavedArrays
   glIsList
-  glLightf
-  glLightfv
   glLighti
   glLightiv
-  glLightModelf
-  glLightModelfv
   glLightModeli
   glLightModeliv
   glLineStipple
   glListBase
-  glLoadIdentity
   glLoadMatrixd
-  glLoadMatrixf
   glLoadName
-  glLogicOp
   glMap1d
   glMap1f
   glMap2d
@@ -137,11 +118,8 @@ EXPORTS
   glMapGrid1f
   glMapGrid2d
   glMapGrid2f
-  glMaterialf
-  glMaterialfv
   glMateriali
   glMaterialiv
-  glMatrixMode
   GlmfBeginGlsBlock
   GlmfCloseMetaFile
   GlmfEndGlsBlock
@@ -149,19 +127,16 @@ EXPORTS
   GlmfInitPlayback
   GlmfPlayGlsRecord
   glMultMatrixd
-  glMultMatrixf
   glNewList
   glNormal3b
   glNormal3bv
   glNormal3d
   glNormal3dv
-  glNormal3f
   glNormal3fv
   glNormal3i
   glNormal3iv
   glNormal3s
   glNormal3sv
-  glNormalPointer
   glOrtho
   glPassThrough
   glPixelMapfv
@@ -171,17 +146,14 @@ EXPORTS
   glPixelTransferf
   glPixelTransferi
   glPixelZoom
-  glPointSize
   glPolygonMode
   glPolygonStipple
   glPopAttrib
   glPopClientAttrib
-  glPopMatrix
   glPopName
   glPrioritizeTextures
   glPushAttrib
   glPushClientAttrib
-  glPushMatrix
   glPushName
   glRasterPos2d
   glRasterPos2dv
@@ -217,11 +189,8 @@ EXPORTS
   glRectsv
   glRenderMode
   glRotated
-  glRotatef
   glScaled
-  glScalef
   glSelectBuffer
-  glShadeModel
   glTexCoord1d
   glTexCoord1dv
   glTexCoord1f
@@ -254,11 +223,6 @@ EXPORTS
   glTexCoord4iv
   glTexCoord4s
   glTexCoord4sv
-  glTexCoordPointer
-  glTexEnvf
-  glTexEnvfv
-  glTexEnvi
-  glTexEnviv
   glTexGend
   glTexGendv
   glTexGenf
@@ -268,7 +232,6 @@ EXPORTS
   glTexImage1D
   glTexSubImage1D
   glTranslated
-  glTranslatef
   glVertex2d
   glVertex2dv
   glVertex2f
@@ -293,7 +256,6 @@ EXPORTS
   glVertex4iv
   glVertex4s
   glVertex4sv
-  glVertexPointer
   wglChoosePixelFormat
   wglCopyContext
   wglCreateLayerContext

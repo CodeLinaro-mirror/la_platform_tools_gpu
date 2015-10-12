@@ -17,7 +17,7 @@
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glCullFace.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glCullFace.xhtml","OpenGL ES 3.2")
 cmd void glCullFace(GLenum mode) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (mode) {
     case GL_BACK, GL_FRONT, GL_FRONT_AND_BACK: {
       // version 2.0
@@ -36,7 +36,7 @@ cmd void glCullFace(GLenum mode) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glDepthRangef.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glDepthRangef.xhtml","OpenGL ES 3.2")
 cmd void glDepthRangef(GLfloat near, GLfloat far) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.DepthNear = near
@@ -48,7 +48,7 @@ cmd void glDepthRangef(GLfloat near, GLfloat far) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFrontFace.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glFrontFace.xhtml","OpenGL ES 3.2")
 cmd void glFrontFace(GLenum orientation) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
   switch (orientation) {
     case GL_CCW, GL_CW: {
       // version 2.0
@@ -83,7 +83,7 @@ cmd void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glLineWidth.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glLineWidth.xhtml","OpenGL ES 3.2")
 cmd void glLineWidth(GLfloat width) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.LineWidth = width
@@ -104,7 +104,7 @@ macro void MinSampleShading(GLfloat value) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glPolygonOffset.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glPolygonOffset.xhtml","OpenGL ES 3.2")
 cmd void glPolygonOffset(GLfloat scale_factor, GLfloat units) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.PolygonOffsetUnits = units
@@ -116,7 +116,7 @@ cmd void glPolygonOffset(GLfloat scale_factor, GLfloat units) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glViewport.xhtml","OpenGL ES 3.1")
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glViewport.xhtml","OpenGL ES 3.2")
 cmd void glViewport(GLint x, GLint y, GLsizei width, GLsizei height) {
-  minRequiredVersion(2, 0)
+  minRequiredVersion(1, 0)
 
   ctx := GetContext()
   ctx.Rasterizing.Viewport = Rect(x, y, width, height)

@@ -17,6 +17,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -28,50 +29,48 @@ import (
 )
 
 var (
-	apiPath  = flag.String("api", "", "Filename of the api file to verify (required)")
-	cacheDir = flag.String("cache", "", "Directory for caching downloaded files (required)")
-	apiRoot  *semantic.API
+	apiPath   = flag.String("api", "", "Filename of the api file to verify (required)")
+	cacheDir  = flag.String("cache", "", "Directory for caching downloaded files (required)")
+	apiRoot   *semantic.API
+	numErrors = 0
 )
 
 func main() {
 	flag.Parse()
 	if *apiPath == "" || *cacheDir == "" {
 		flag.PrintDefaults()
-		return
+		os.Exit(1)
 	}
 	mappings := resolver.ASTToSemantic{}
 	api, errs := api.Resolve(*apiPath, mappings)
 	if len(errs) > 0 {
 		for _, err := range errs {
-			fmt.Printf("%v", err.Message)
+			PrintError("%v", err.Message)
 		}
-		return
+		os.Exit(2)
 	}
 	apiRoot = api
 	reg := DownloadRegistry()
-	VerifyApi(reg, GLES2API)
+	VerifyApi(reg)
+	if numErrors > 0 {
+		os.Exit(3)
+	}
 }
 
-func VerifyApi(reg *Registry, api KhronosAPI) {
-	VerifyEnum(reg, api, false)
-	VerifyEnum(reg, api, true)
-	expected := make(map[string]struct{})
+func PrintError(format string, a ...interface{}) {
+	fmt.Fprintf(os.Stderr, format, a...)
+	numErrors = numErrors + 1
+}
+
+func VerifyApi(reg *Registry) {
+	VerifyEnum(reg, false)
+	VerifyEnum(reg, true)
 	for _, cmd := range reg.Command {
-		if reg.GetVersions(api, cmd.Name()) != nil || reg.GetExtensions(api, cmd.Name()) != nil {
-			expected[cmd.Name()] = struct{}{}
-			VerifyCommand(reg, cmd, api)
-		}
+		VerifyCommand(reg, cmd)
 	}
-	seen := make(map[string]struct{})
-	for _, f := range apiRoot.Functions {
-		if strings.HasPrefix(f.Name(), "gl") && !strings.HasPrefix(f.Name(), "glX") {
-			seen[f.Name()] = struct{}{}
-		}
-	}
-	CompareSets(expected, seen, "")
 }
 
-func VerifyEnum(r *Registry, api KhronosAPI, bitfields bool) {
+func VerifyEnum(r *Registry, bitfields bool) {
 	name := "GLenum"
 	if bitfields {
 		name = "GLbitfield"
@@ -84,14 +83,15 @@ func VerifyEnum(r *Registry, api KhronosAPI, bitfields bool) {
 				if enum.Name == "GL_TIMEOUT_IGNORED" || enum.Name == "GL_TIMEOUT_IGNORED_APPLE" {
 					continue
 				}
-				if enum.API == "" || enum.API == api {
+				if enum.API == "" || enum.API == GLES1API || enum.API == GLES2API {
 					var value uint32
 					if v, err := strconv.ParseUint(enum.Value, 0, 32); err == nil {
 						value = uint32(v)
 					} else if v, err := strconv.ParseInt(enum.Value, 0, 32); err == nil {
 						value = uint32(v)
 					} else {
-						panic(fmt.Errorf("Failed to parse enum value %v", enum.Value))
+						PrintError("Failed to parse enum value %v", enum.Value)
+						continue
 					}
 					expected[fmt.Sprintf("%s = 0x%08X", enum.Name, value)] = struct{}{}
 				}
@@ -112,12 +112,12 @@ func VerifyEnum(r *Registry, api KhronosAPI, bitfields bool) {
 func CompareSets(expected, seen map[string]struct{}, msg_prefix string) {
 	for k, _ := range expected {
 		if _, found := seen[k]; !found {
-			fmt.Printf("%sMissing %s\n", msg_prefix, k)
+			PrintError("%sMissing %s\n", msg_prefix, k)
 		}
 	}
 	for k, _ := range seen {
 		if _, found := expected[k]; !found {
-			fmt.Printf("%sUnexpected %s\n", msg_prefix, k)
+			PrintError("%sUnexpected %s\n", msg_prefix, k)
 		}
 	}
 	return
@@ -162,50 +162,95 @@ func VerifyType(cmd string, paramIndex int, expected string, seen semantic.Type)
 			return true
 		}
 	}
-	fmt.Printf("%s: Param %v: Expected type %s but seen %s (%T)\n", cmd, paramIndex, expected, name, seen)
+	PrintError("%s: Param %v: Expected type %s but seen %s (%T)\n", cmd, paramIndex, expected, name, seen)
 	return false
 }
 
-func VerifyCommand(reg *Registry, cmd *Command, api KhronosAPI) {
-	cmdName := cmd.Name()
-	versions := reg.GetVersions(api, cmdName)
-	extensions := reg.GetExtensions(api, cmdName)
+func UniqueStrings(strs []string) (res []string) {
+	seen := map[string]struct{}{}
+	for _, str := range strs {
+		if _, ok := seen[str]; !ok {
+			res = append(res, str)
+			seen[str] = struct{}{}
+		}
+	}
+	return
+}
 
-	// Find API function.
+func VerifyCommand(reg *Registry, cmd *Command) {
+	cmdName := cmd.Name()
+	versions := append(reg.GetVersions(GLES1API, cmdName), reg.GetVersions(GLES2API, cmdName)...)
+	extensions := append(reg.GetExtensions(GLES1API, cmdName), reg.GetExtensions(GLES2API, cmdName)...)
+	extensions = UniqueStrings(extensions)
+	if len(versions) == 0 && len(extensions) == 0 {
+		return // It is not a GLES command.
+	}
+
+	// Expected annotations.
+	annots := []string{}
+	if strings.HasPrefix(cmdName, "glDraw") && !strings.HasPrefix(cmdName, "glDrawBuffers") {
+		annots = append(annots, "@DrawCall")
+	}
+	for _, version := range versions {
+		if version == Version("1.0") && len(versions) > 1 {
+			continue // TODO: Add those in the api file.
+		}
+		url, _ := GetCoreManpage(version, cmdName)
+		annots = append(annots, fmt.Sprintf(`@Doc("%s","OpenGL ES %v")`, url, version))
+	}
+	for _, extension := range extensions {
+		url, _ := GetExtensionManpage(extension)
+		annots = append(annots, fmt.Sprintf(`@Doc("%s","%v")`, url, extension))
+	}
+
+	// Expected body.
+	apiCheck := ""
+	if versions != nil {
+		version := strings.Replace(string(versions[0]), ".", ", ", -1)
+		apiCheck = fmt.Sprintf("minRequiredVersion(%v)", version)
+	} else if extensions != nil {
+		overload := ""
+		if len(extensions) > 1 {
+			overload = fmt.Sprintf("%v", len(extensions))
+		}
+		apiCheck = fmt.Sprintf("requiresExtension%s(%s)", overload, strings.Join(extensions, ", "))
+	}
+
+	// Find existing API function.
 	var apiCmd *semantic.Function
 	for _, apiFunction := range apiRoot.Functions {
 		if apiFunction.Name() == cmdName {
 			apiCmd = apiFunction
 		}
 	}
+
+	// Print command to stdout if it is missing.
 	if apiCmd == nil {
+		params := []string{}
+		for _, param := range cmd.Param {
+			params = append(params, param.Type()+" "+param.Name)
+		}
+		fmt.Printf("%s\ncmd %s %s(%s) {\n  %s\n}\n\n", strings.Join(annots, "\n"),
+			cmd.Proto.Type(), cmdName, strings.Join(params, ", "), apiCheck)
 		return
 	}
 
 	// Check documentation strings.
+	expected := make(map[string]struct{})
+	for _, a := range annots {
+		expected[a] = struct{}{}
+	}
 	seen := make(map[string]struct{})
 	for _, a := range apiCmd.Annotations {
 		if a.Name() == "Doc" || a.Name() == "DrawCall" {
 			seen[getSource(a.AST.Node())] = struct{}{}
 		}
 	}
-	expected := make(map[string]struct{})
-	for _, version := range versions {
-		url, _ := GetCoreManpage(version, cmdName)
-		expected[fmt.Sprintf(`@Doc("%s","OpenGL ES %v")`, url, version)] = struct{}{}
-	}
-	for _, extension := range extensions {
-		url, _ := GetExtensionManpage(extension)
-		expected[fmt.Sprintf(`@Doc("%s","%v")`, url, extension)] = struct{}{}
-	}
-	if strings.HasPrefix(cmdName, "glDraw") && !strings.HasPrefix(cmdName, "glDrawBuffers") {
-		expected["@DrawCall"] = struct{}{}
-	}
 	CompareSets(expected, seen, fmt.Sprintf("%s: ", cmdName))
 
 	// Check parameter types.
 	if len(cmd.Param) != len(apiCmd.CallParameters()) {
-		fmt.Printf("%s: Expected %v parameters but seen %v\n", cmdName, len(cmd.Param), len(apiCmd.CallParameters()))
+		PrintError("%s: Expected %v parameters but seen %v\n", cmdName, len(cmd.Param), len(apiCmd.CallParameters()))
 	} else {
 		for i, p := range cmd.Param {
 			VerifyType(cmdName, i, p.Type(), apiCmd.FullParameters[i].Type)
@@ -215,17 +260,9 @@ func VerifyCommand(reg *Registry, cmd *Command, api KhronosAPI) {
 	// Check version.
 	stmts := apiCmd.Block.AST.Statements
 	if len(stmts) == 0 {
-		fmt.Printf("%s: Empty method body\n", cmdName)
+		PrintError("%s: Empty method body\n", cmdName)
 	} else {
-		expected := make(map[string]struct{})
-		if versions != nil {
-			version := strings.Replace(string(versions[0]), ".", ", ", -1)
-			expected[fmt.Sprintf("minRequiredVersion(%v)", version)] = struct{}{}
-		}
-		if extensions != nil {
-			expected[fmt.Sprintf("requiresExtension(%s)", extensions[0])] = struct{}{}
-			// TODO: Handle multiple extensions
-		}
+		expected := map[string]struct{}{apiCheck: {}}
 		seen := map[string]struct{}{getSource(stmts[0].Node()): {}}
 		CompareSets(expected, seen, fmt.Sprintf("%s: ", cmdName))
 	}
