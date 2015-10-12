@@ -605,7 +605,7 @@ func doDecodeobjectSlice(d binary.Decoder, o *objectSlice) {
 		o.value = make([]binary.Object, count)
 		for i := range o.value {
 			if obj := d.Object(); obj != nil {
-				o.value[i] = obj.(binary.Object)
+				o.value[i] = binary.ObjectCast(obj)
 			} else {
 				o.value[i] = nil
 			}
@@ -641,7 +641,7 @@ func doEncodeobject_(e binary.Encoder, o *object_) {
 }
 func doDecodeobject_(d binary.Decoder, o *object_) {
 	if obj := d.Object(); obj != nil {
-		o.value = obj.(binary.Object)
+		o.value = binary.ObjectCast(obj)
 	} else {
 		o.value = nil
 	}

@@ -28,7 +28,7 @@ func doEncodedirectCall(e binary.Encoder, o *directCall) {
 }
 func doDecodedirectCall(d binary.Decoder, o *directCall) {
 	if obj := d.Object(); obj != nil {
-		o.atom = obj.(caller)
+		o.atom = callerCast(obj)
 	} else {
 		o.atom = nil
 	}

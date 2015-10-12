@@ -46,6 +46,11 @@ type Path interface {
 	Validate() error
 }
 
+// PathCast is automatically called by the generated decoders.
+func PathCast(obj binary.Object) Path {
+	return obj.(Path)
+}
+
 // Value is the expanded Path interface for types that represent a reference to
 // a value type.
 // The value referenced by this path may be a struct, array, slice, map or POD

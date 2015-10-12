@@ -58,3 +58,8 @@ type ID uint64
 
 // NoID is used when you have to pass an ID, but don't have one to use.
 const NoID = ID(1<<63 - 1) // use max int64 for the benefit of java
+
+// AtomCast is automatically called by the generated decoders.
+func AtomCast(obj binary.Object) Atom {
+	return obj.(Atom)
+}

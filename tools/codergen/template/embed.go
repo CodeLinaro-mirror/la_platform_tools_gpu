@@ -530,7 +530,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Decode.Interface"}}
   if obj := d.Object(); obj != nil {»¶
-    {{.Name}} = obj.({{.Type.Name}})¶
+    {{.Name}} = {{.Type.Name}}Cast(obj)¶
   «} else {»¶
     {{.Name}} = nil¶
   «}¶
@@ -538,7 +538,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Decode.Variant"}}
   if obj := d.Variant(); obj != nil {»¶
-    {{.Name}} = obj.({{.Type.Name}})¶
+    {{.Name}} = {{.Type.Name}}Cast(obj)¶
   «} else {»¶
     {{.Name}} = nil¶
   «}¶

@@ -97,7 +97,7 @@ func doEncodeFollow(e binary.Encoder, o *Follow) {
 }
 func doDecodeFollow(d binary.Decoder, o *Follow) {
 	if obj := d.Object(); obj != nil {
-		o.Path = obj.(path.Path)
+		o.Path = path.PathCast(obj)
 	} else {
 		o.Path = nil
 	}
@@ -131,7 +131,7 @@ func doEncodeGet(e binary.Encoder, o *Get) {
 }
 func doDecodeGet(d binary.Decoder, o *Get) {
 	if obj := d.Object(); obj != nil {
-		o.Path = obj.(path.Path)
+		o.Path = path.PathCast(obj)
 	} else {
 		o.Path = nil
 	}
@@ -617,7 +617,7 @@ func doEncodeSet(e binary.Encoder, o *Set) {
 }
 func doDecodeSet(d binary.Decoder, o *Set) {
 	if obj := d.Object(); obj != nil {
-		o.Path = obj.(path.Path)
+		o.Path = path.PathCast(obj)
 	} else {
 		o.Path = nil
 	}

@@ -41,6 +41,11 @@ type Format interface {
 	Key() interface{}
 }
 
+// FormatCast is automatically called by the generated decoders.
+func FormatCast(obj binary.Object) Format {
+	return obj.(Format)
+}
+
 func checkSize(data []byte, width, height int, bpp int) error {
 	expected := width * height * bpp / 8
 	actual := len(data)

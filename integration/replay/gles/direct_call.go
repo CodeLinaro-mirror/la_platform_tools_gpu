@@ -37,6 +37,10 @@ type caller interface {
 	Call(s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder)
 }
 
+func callerCast(obj binary.Object) caller {
+	return obj.(caller)
+}
+
 func (c directCall) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 	c.atom.Call(s, d, l, b)
 	return nil

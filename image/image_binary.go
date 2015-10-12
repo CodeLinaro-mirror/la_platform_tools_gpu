@@ -49,7 +49,7 @@ func doEncodeImage(e binary.Encoder, o *Image) {
 }
 func doDecodeImage(d binary.Decoder, o *Image) {
 	if obj := d.Object(); obj != nil {
-		o.Format = obj.(Format)
+		o.Format = FormatCast(obj)
 	} else {
 		o.Format = nil
 	}
@@ -99,7 +99,7 @@ func doEncodeInfo(e binary.Encoder, o *Info) {
 }
 func doDecodeInfo(d binary.Decoder, o *Info) {
 	if obj := d.Object(); obj != nil {
-		o.Format = obj.(Format)
+		o.Format = FormatCast(obj)
 	} else {
 		o.Format = nil
 	}
@@ -151,12 +151,12 @@ func doDecodeLazyConverter(d binary.Decoder, o *LazyConverter) {
 	o.Width = uint32(d.Uint32())
 	o.Height = uint32(d.Uint32())
 	if obj := d.Object(); obj != nil {
-		o.FormatFrom = obj.(Format)
+		o.FormatFrom = FormatCast(obj)
 	} else {
 		o.FormatFrom = nil
 	}
 	if obj := d.Object(); obj != nil {
-		o.FormatTo = obj.(Format)
+		o.FormatTo = FormatCast(obj)
 	} else {
 		o.FormatTo = nil
 	}
@@ -202,7 +202,7 @@ func doEncodeLazyResizer(e binary.Encoder, o *LazyResizer) {
 func doDecodeLazyResizer(d binary.Decoder, o *LazyResizer) {
 	d.Data(o.Data[:20])
 	if obj := d.Object(); obj != nil {
-		o.Format = obj.(Format)
+		o.Format = FormatCast(obj)
 	} else {
 		o.Format = nil
 	}

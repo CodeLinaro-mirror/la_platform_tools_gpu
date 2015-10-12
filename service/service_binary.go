@@ -587,7 +587,7 @@ func doEncodecallFollow(e binary.Encoder, o *callFollow) {
 }
 func doDecodecallFollow(d binary.Decoder, o *callFollow) {
 	if obj := d.Object(); obj != nil {
-		o.p = obj.(path.Path)
+		o.p = path.PathCast(obj)
 	} else {
 		o.p = nil
 	}
@@ -621,7 +621,7 @@ func doEncodecallGet(e binary.Encoder, o *callGet) {
 }
 func doDecodecallGet(d binary.Decoder, o *callGet) {
 	if obj := d.Object(); obj != nil {
-		o.p = obj.(path.Path)
+		o.p = path.PathCast(obj)
 	} else {
 		o.p = nil
 	}
@@ -958,7 +958,7 @@ func doEncodecallSet(e binary.Encoder, o *callSet) {
 }
 func doDecodecallSet(d binary.Decoder, o *callSet) {
 	if obj := d.Object(); obj != nil {
-		o.p = obj.(path.Path)
+		o.p = path.PathCast(obj)
 	} else {
 		o.p = nil
 	}
@@ -994,7 +994,7 @@ func doEncoderesultFollow(e binary.Encoder, o *resultFollow) {
 }
 func doDecoderesultFollow(d binary.Decoder, o *resultFollow) {
 	if obj := d.Object(); obj != nil {
-		o.value = obj.(path.Path)
+		o.value = path.PathCast(obj)
 	} else {
 		o.value = nil
 	}
@@ -1374,7 +1374,7 @@ func doEncoderesultSet(e binary.Encoder, o *resultSet) {
 }
 func doDecoderesultSet(d binary.Decoder, o *resultSet) {
 	if obj := d.Object(); obj != nil {
-		o.value = obj.(path.Path)
+		o.value = path.PathCast(obj)
 	} else {
 		o.value = nil
 	}

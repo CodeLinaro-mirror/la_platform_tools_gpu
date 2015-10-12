@@ -47,7 +47,7 @@ func doEncodeArrayIndex(e binary.Encoder, o *ArrayIndex) {
 }
 func doDecodeArrayIndex(d binary.Decoder, o *ArrayIndex) {
 	if obj := d.Object(); obj != nil {
-		o.Array = obj.(Path)
+		o.Array = PathCast(obj)
 	} else {
 		o.Array = nil
 	}
@@ -84,7 +84,7 @@ func doEncodeAs(e binary.Encoder, o *As) {
 }
 func doDecodeAs(d binary.Decoder, o *As) {
 	if obj := d.Object(); obj != nil {
-		o.Object = obj.(Path)
+		o.Object = PathCast(obj)
 	} else {
 		o.Object = nil
 	}
@@ -290,7 +290,7 @@ func doEncodeField(e binary.Encoder, o *Field) {
 }
 func doDecodeField(d binary.Decoder, o *Field) {
 	if obj := d.Object(); obj != nil {
-		o.Struct = obj.(Path)
+		o.Struct = PathCast(obj)
 	} else {
 		o.Struct = nil
 	}
@@ -395,7 +395,7 @@ func doEncodeMapIndex(e binary.Encoder, o *MapIndex) {
 }
 func doDecodeMapIndex(d binary.Decoder, o *MapIndex) {
 	if obj := d.Object(); obj != nil {
-		o.Map = obj.(Path)
+		o.Map = PathCast(obj)
 	} else {
 		o.Map = nil
 	}
@@ -608,7 +608,7 @@ func doEncodeSlice(e binary.Encoder, o *Slice) {
 }
 func doDecodeSlice(d binary.Decoder, o *Slice) {
 	if obj := d.Object(); obj != nil {
-		o.Array = obj.(Path)
+		o.Array = PathCast(obj)
 	} else {
 		o.Array = nil
 	}
@@ -687,7 +687,7 @@ func doEncodeThumbnail(e binary.Encoder, o *Thumbnail) {
 }
 func doDecodeThumbnail(d binary.Decoder, o *Thumbnail) {
 	if obj := d.Object(); obj != nil {
-		o.Object = obj.(Path)
+		o.Object = PathCast(obj)
 	} else {
 		o.Object = nil
 	}

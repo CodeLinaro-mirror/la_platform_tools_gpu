@@ -161,7 +161,7 @@ func doDecodeList(d binary.Decoder, o *List) {
 		o.Atoms = make([]Atom, count)
 		for i := range o.Atoms {
 			if obj := d.Variant(); obj != nil {
-				o.Atoms[i] = obj.(Atom)
+				o.Atoms[i] = AtomCast(obj)
 			} else {
 				o.Atoms[i] = nil
 			}

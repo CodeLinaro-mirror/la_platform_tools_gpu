@@ -23,6 +23,11 @@ type Object interface {
 	Class() Class
 }
 
+// ObjectCast is automatically called by the generated decoders.
+func ObjectCast(obj Object) Object {
+	return obj
+}
+
 // UpgradeDecoder provides a decoder interface which maybe used to
 // decode a stream from an old version into a newer version.
 type UpgradeDecoder interface {
