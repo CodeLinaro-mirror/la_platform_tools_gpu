@@ -123,7 +123,7 @@ func (s *Slice) EncodeValue(e binary.Encoder, value interface{}) {
 }
 
 func (s *Slice) DecodeValue(d binary.Decoder) interface{} {
-	size := d.Uint32()
+	size := d.Count()
 	v := make([]interface{}, size)
 	for i := range v {
 		v[i] = s.ValueType.DecodeValue(d)

@@ -51,7 +51,7 @@ func (s *Struct) Format(f fmt.State, c rune) {
 }
 
 func (s *Struct) EncodeValue(e binary.Encoder, value interface{}) {
-	e.Value(value.(binary.Object))
+	e.Struct(value.(binary.Object))
 }
 
 func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
@@ -61,7 +61,7 @@ func (s *Struct) DecodeValue(d binary.Decoder) interface{} {
 		return nil
 	}
 	o := u.New()
-	u.DecodeTo(d, o)
+	d.Struct(o)
 	return o
 }
 
