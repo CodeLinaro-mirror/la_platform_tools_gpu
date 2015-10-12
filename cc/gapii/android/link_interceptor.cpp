@@ -22,7 +22,12 @@
 // loaded into memory. Some code from the NDK version of the crazy
 // linker is used.
 
+#include "dlinterceptor.h"
+
+#include <gapic/dl_loader.h>
 #include <gapii/gles_exports.h>
+#include <gapic/mutex.h>
+#include <gapic/lock.h>
 #include <gapic/log.h>
 
 #include <crazy_linker_elf_view.h>
@@ -30,6 +35,7 @@
 #include <crazy_linker_error.h>
 #include <linker_phdr.h>
 
+#include <set>
 #include <unordered_map>
 
 #include <dlfcn.h>
@@ -116,7 +122,9 @@ bool phdr_table_reset_load_prot(const ELF::Phdr* phdr_table,
 // for the interceptor symbols.
 class SymbolResolver {
  public:
-  SymbolResolver();  // Builds the mapping.
+  // Add appends a symbol to the resolver table.
+  template<typename T>
+  void Add(const char* name, T address);
 
   // Lookup a symbol_name. If the symbol is a known interceptor symbol
   // the address of the interceptor is returned. Otherwise zero is returned.
@@ -125,16 +133,9 @@ class SymbolResolver {
   std::unordered_map<std::string, ELF::Addr> mSymbols;
 };
 
-// kGLESExports is a NULL terminated, name to function table containing
-// all the interceptors. It is code generated and lives in gles_exports.cpp.
-// We build the symbol resolver from it.
-using gapii::kGLESExports;
-
-SymbolResolver::SymbolResolver() {
-  for (int i = 0; kGLESExports[i].mName != NULL; ++i) {
-    mSymbols.emplace(kGLESExports[i].mName,
-                     reinterpret_cast<ELF::Addr>(kGLESExports[i].mFunc));
-  }
+template<typename T>
+void SymbolResolver::Add(const char* name, T address) {
+  mSymbols.emplace(name, reinterpret_cast<ELF::Addr>(address));
 }
 
 ELF::Addr SymbolResolver::Lookup(const char* symbol_name) const {
@@ -503,6 +504,11 @@ int LinkInterceptorsCb(struct dl_phdr_info *info, size_t size, void *data) {
   }
   const char* dlname = dl_info.dli_fname;
 
+  if (gapii::DlInterceptor::isDriver(dlname)) {
+    GAPID_DEBUG("Not patching %s as it is a driver", dlname);
+    return kContinue;
+  }
+
   // Identify the shared object which contains this code (i.e. the spy).
   Dl_info dl_self;
   if (!dladdr_check(&me, &dl_self)) {
@@ -535,8 +541,33 @@ int LinkInterceptorsCb(struct dl_phdr_info *info, size_t size, void *data) {
   return kContinue;
 }
 
-void LinkInterceptors() {
+// LinkDlInterceptorCb calls through to LinkInterceptorsCb *once* per loaded .so during
+// the lifetime of the application.
+gapic::Mutex gDlopenMutex;
+int LinkDlInterceptorCb(struct dl_phdr_info *info, size_t size, void *data) {
+  {
+    gapic::Lock<gapic::Mutex> lock(&gDlopenMutex);
+    static std::set<const char*> set;
+    if (!set.insert(info->dlpi_name).second) {
+      return 0; // Already patched this .so
+    }
+  }
+  GAPID_INFO("Patching dlopen for %s", info->dlpi_name);
+  return LinkInterceptorsCb(info, size, data);
+}
+
+
+void LinkGfxInterceptors() {
+  using namespace gapii;
+
   SymbolResolver resolver;
+
+  // kGLESExports is a NULL terminated, name to function table containing
+  // all the interceptors. It is code generated and lives in gles_exports.cpp.
+  // Build the symbol resolver from it.
+  for (int i = 0; kGLESExports[i].mName != NULL; ++i) {
+    resolver.Add(kGLESExports[i].mName, kGLESExports[i].mFunc);
+  }
 
   // Check to see if the interceptors are needed. If the library is being
   // preloaded we don't need to do anything. We just look to see if
@@ -561,6 +592,38 @@ void LinkInterceptors() {
   }
 
   dl_iterate_phdr(LinkInterceptorsCb, &resolver);
+}
+
+void onDlopen(void* handle, const char* name) {
+  using namespace gapii;
+
+  // Patch the newly opened library so that dlopen() and dlsym() are intercepted.
+  SymbolResolver resolver;
+  resolver.Add("dlopen", DlInterceptor::dlopen);
+  resolver.Add("dlsym", DlInterceptor::dlsym);
+  dl_iterate_phdr(LinkDlInterceptorCb, &resolver);
+}
+
+void LinkDlInterceptor() {
+  using namespace gapii;
+
+  DlInterceptor::init(dlopen, dlsym, onDlopen);
+
+  // Intercept external calls to dlopen() and dlsym() with the DlInterceptor functions.
+  SymbolResolver resolver;
+  resolver.Add("dlopen", DlInterceptor::dlopen);
+  resolver.Add("dlsym", DlInterceptor::dlsym);
+
+  // Make sure that internal calls to dlopen() and dlsym() continue to use the real functions.
+  gapic::DlLoader::setCustomLoader(DlInterceptor::load);
+  gapic::DlLoader::setCustomResolver(DlInterceptor::resolve);
+
+  dl_iterate_phdr(LinkDlInterceptorCb, &resolver);
+}
+
+void LinkInterceptors() {
+  LinkGfxInterceptors();
+  LinkDlInterceptor();
 }
 
 }  // anonymous namespace
