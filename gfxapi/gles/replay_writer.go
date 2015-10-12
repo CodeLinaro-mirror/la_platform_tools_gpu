@@ -44386,12 +44386,12 @@ func (ϟa *GlAlphaFunc) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4839_major := uint32(1) // u32
-	minRequiredVersion_4839_minor := uint32(0) // u32
+	minRequiredVersion_4833_major := uint32(1) // u32
+	minRequiredVersion_4833_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4839_major, minRequiredVersion_4839_minor
+	_, _ = minRequiredVersion_4833_major, minRequiredVersion_4833_minor
 	return nil
 }
 
@@ -44410,12 +44410,12 @@ func (ϟa *GlAlphaFuncx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4841_major := uint32(1) // u32
-	minRequiredVersion_4841_minor := uint32(0) // u32
+	minRequiredVersion_4835_major := uint32(1) // u32
+	minRequiredVersion_4835_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4841_major, minRequiredVersion_4841_minor
+	_, _ = minRequiredVersion_4835_major, minRequiredVersion_4835_minor
 	return nil
 }
 
@@ -44434,11 +44434,11 @@ func (ϟa *GlAlphaFuncxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4843_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4837_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4843_ext
+	_ = requiresExtension_4837_ext
 	return nil
 }
 
@@ -44457,11 +44457,11 @@ func (ϟa *GlBindFramebufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4845_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4839_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4845_ext
+	_ = requiresExtension_4839_ext
 	return nil
 }
 
@@ -44480,11 +44480,11 @@ func (ϟa *GlBindRenderbufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4847_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4841_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4847_ext
+	_ = requiresExtension_4841_ext
 	return nil
 }
 
@@ -44503,11 +44503,11 @@ func (ϟa *GlBlendEquationOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4849_ext := ExtensionId_GL_OES_blend_subtract // ExtensionId
+	requiresExtension_4843_ext := ExtensionId_GL_OES_blend_subtract // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4849_ext
+	_ = requiresExtension_4843_ext
 	return nil
 }
 
@@ -44525,11 +44525,11 @@ func (ϟa *GlBlendEquationSeparateOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4851_ext := ExtensionId_GL_OES_blend_equation_separate // ExtensionId
+	requiresExtension_4845_ext := ExtensionId_GL_OES_blend_equation_separate // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4851_ext
+	_ = requiresExtension_4845_ext
 	return nil
 }
 
@@ -44548,11 +44548,11 @@ func (ϟa *GlBlendFuncSeparateOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4853_ext := ExtensionId_GL_OES_blend_func_separate // ExtensionId
+	requiresExtension_4847_ext := ExtensionId_GL_OES_blend_func_separate // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4853_ext
+	_ = requiresExtension_4847_ext
 	return nil
 }
 
@@ -44574,11 +44574,11 @@ func (ϟa *GlCheckFramebufferStatusOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4855_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4849_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4855_ext
+	_ = requiresExtension_4849_ext
 	return nil
 }
 
@@ -44597,12 +44597,12 @@ func (ϟa *GlClearColorx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4857_major := uint32(1) // u32
-	minRequiredVersion_4857_minor := uint32(0) // u32
+	minRequiredVersion_4851_major := uint32(1) // u32
+	minRequiredVersion_4851_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4857_major, minRequiredVersion_4857_minor
+	_, _ = minRequiredVersion_4851_major, minRequiredVersion_4851_minor
 	return nil
 }
 
@@ -44623,11 +44623,11 @@ func (ϟa *GlClearColorxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4859_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4853_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4859_ext
+	_ = requiresExtension_4853_ext
 	return nil
 }
 
@@ -44648,11 +44648,11 @@ func (ϟa *GlClearDepthfOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4861_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_4855_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4861_ext
+	_ = requiresExtension_4855_ext
 	return nil
 }
 
@@ -44670,12 +44670,12 @@ func (ϟa *GlClearDepthx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4863_major := uint32(1) // u32
-	minRequiredVersion_4863_minor := uint32(0) // u32
+	minRequiredVersion_4857_major := uint32(1) // u32
+	minRequiredVersion_4857_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4863_major, minRequiredVersion_4863_minor
+	_, _ = minRequiredVersion_4857_major, minRequiredVersion_4857_minor
 	return nil
 }
 
@@ -44693,11 +44693,11 @@ func (ϟa *GlClearDepthxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4865_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4859_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4865_ext
+	_ = requiresExtension_4859_ext
 	return nil
 }
 
@@ -44715,12 +44715,12 @@ func (ϟa *GlClientActiveTexture) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4867_major := uint32(1) // u32
-	minRequiredVersion_4867_minor := uint32(0) // u32
+	minRequiredVersion_4861_major := uint32(1) // u32
+	minRequiredVersion_4861_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4867_major, minRequiredVersion_4867_minor
+	_, _ = minRequiredVersion_4861_major, minRequiredVersion_4861_minor
 	return nil
 }
 
@@ -44738,12 +44738,12 @@ func (ϟa *GlClipPlanef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4869_major := uint32(1) // u32
-	minRequiredVersion_4869_minor := uint32(0) // u32
+	minRequiredVersion_4863_major := uint32(1) // u32
+	minRequiredVersion_4863_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4869_major, minRequiredVersion_4869_minor
+	_, _ = minRequiredVersion_4863_major, minRequiredVersion_4863_minor
 	return nil
 }
 
@@ -44762,11 +44762,11 @@ func (ϟa *GlClipPlanefIMG) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4871_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
+	requiresExtension_4865_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4871_ext
+	_ = requiresExtension_4865_ext
 	return nil
 }
 
@@ -44785,11 +44785,11 @@ func (ϟa *GlClipPlanefOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4873_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_4867_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4873_ext
+	_ = requiresExtension_4867_ext
 	return nil
 }
 
@@ -44808,12 +44808,12 @@ func (ϟa *GlClipPlanex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4875_major := uint32(1) // u32
-	minRequiredVersion_4875_minor := uint32(0) // u32
+	minRequiredVersion_4869_major := uint32(1) // u32
+	minRequiredVersion_4869_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4875_major, minRequiredVersion_4875_minor
+	_, _ = minRequiredVersion_4869_major, minRequiredVersion_4869_minor
 	return nil
 }
 
@@ -44832,11 +44832,11 @@ func (ϟa *GlClipPlanexIMG) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4877_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
+	requiresExtension_4871_ext := ExtensionId_GL_IMG_user_clip_plane // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4877_ext
+	_ = requiresExtension_4871_ext
 	return nil
 }
 
@@ -44855,11 +44855,11 @@ func (ϟa *GlClipPlanexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4879_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4873_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4879_ext
+	_ = requiresExtension_4873_ext
 	return nil
 }
 
@@ -44878,12 +44878,12 @@ func (ϟa *GlColor4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4881_major := uint32(1) // u32
-	minRequiredVersion_4881_minor := uint32(0) // u32
+	minRequiredVersion_4875_major := uint32(1) // u32
+	minRequiredVersion_4875_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4881_major, minRequiredVersion_4881_minor
+	_, _ = minRequiredVersion_4875_major, minRequiredVersion_4875_minor
 	return nil
 }
 
@@ -44904,12 +44904,12 @@ func (ϟa *GlColor4ub) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4883_major := uint32(1) // u32
-	minRequiredVersion_4883_minor := uint32(0) // u32
+	minRequiredVersion_4877_major := uint32(1) // u32
+	minRequiredVersion_4877_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4883_major, minRequiredVersion_4883_minor
+	_, _ = minRequiredVersion_4877_major, minRequiredVersion_4877_minor
 	return nil
 }
 
@@ -44930,12 +44930,12 @@ func (ϟa *GlColor4x) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4885_major := uint32(1) // u32
-	minRequiredVersion_4885_minor := uint32(0) // u32
+	minRequiredVersion_4879_major := uint32(1) // u32
+	minRequiredVersion_4879_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4885_major, minRequiredVersion_4885_minor
+	_, _ = minRequiredVersion_4879_major, minRequiredVersion_4879_minor
 	return nil
 }
 
@@ -44956,11 +44956,11 @@ func (ϟa *GlColor4xOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4887_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4881_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4887_ext
+	_ = requiresExtension_4881_ext
 	return nil
 }
 
@@ -44981,12 +44981,12 @@ func (ϟa *GlColorPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4889_major := uint32(1) // u32
-	minRequiredVersion_4889_minor := uint32(0) // u32
+	minRequiredVersion_4883_major := uint32(1) // u32
+	minRequiredVersion_4883_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4889_major, minRequiredVersion_4889_minor
+	_, _ = minRequiredVersion_4883_major, minRequiredVersion_4883_minor
 	return nil
 }
 
@@ -45007,11 +45007,11 @@ func (ϟa *GlCurrentPaletteMatrixOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4891_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_4885_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4891_ext
+	_ = requiresExtension_4885_ext
 	return nil
 }
 
@@ -45029,11 +45029,11 @@ func (ϟa *GlDeleteFramebuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4893_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4887_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4893_ext
+	_ = requiresExtension_4887_ext
 	return nil
 }
 
@@ -45052,11 +45052,11 @@ func (ϟa *GlDeleteRenderbuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4895_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4889_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4895_ext
+	_ = requiresExtension_4889_ext
 	return nil
 }
 
@@ -45075,11 +45075,11 @@ func (ϟa *GlDepthRangefOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4897_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_4891_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4897_ext
+	_ = requiresExtension_4891_ext
 	return nil
 }
 
@@ -45098,12 +45098,12 @@ func (ϟa *GlDepthRangex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4899_major := uint32(1) // u32
-	minRequiredVersion_4899_minor := uint32(0) // u32
+	minRequiredVersion_4893_major := uint32(1) // u32
+	minRequiredVersion_4893_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4899_major, minRequiredVersion_4899_minor
+	_, _ = minRequiredVersion_4893_major, minRequiredVersion_4893_minor
 	return nil
 }
 
@@ -45122,11 +45122,11 @@ func (ϟa *GlDepthRangexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4901_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4895_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4901_ext
+	_ = requiresExtension_4895_ext
 	return nil
 }
 
@@ -45145,12 +45145,12 @@ func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4903_major := uint32(1) // u32
-	minRequiredVersion_4903_minor := uint32(0) // u32
+	minRequiredVersion_4897_major := uint32(1) // u32
+	minRequiredVersion_4897_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4903_major, minRequiredVersion_4903_minor
+	_, _ = minRequiredVersion_4897_major, minRequiredVersion_4897_minor
 	return nil
 }
 
@@ -45168,11 +45168,11 @@ func (ϟa *GlDrawTexfOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4905_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4899_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4905_ext
+	_ = requiresExtension_4899_ext
 	return nil
 }
 
@@ -45194,11 +45194,11 @@ func (ϟa *GlDrawTexfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4907_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4901_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4907_ext
+	_ = requiresExtension_4901_ext
 	return nil
 }
 
@@ -45216,11 +45216,11 @@ func (ϟa *GlDrawTexiOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4909_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4903_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4909_ext
+	_ = requiresExtension_4903_ext
 	return nil
 }
 
@@ -45242,11 +45242,11 @@ func (ϟa *GlDrawTexivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4911_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4905_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4911_ext
+	_ = requiresExtension_4905_ext
 	return nil
 }
 
@@ -45264,11 +45264,11 @@ func (ϟa *GlDrawTexsOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4913_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4907_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4913_ext
+	_ = requiresExtension_4907_ext
 	return nil
 }
 
@@ -45290,11 +45290,11 @@ func (ϟa *GlDrawTexsvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4915_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4909_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4915_ext
+	_ = requiresExtension_4909_ext
 	return nil
 }
 
@@ -45312,11 +45312,11 @@ func (ϟa *GlDrawTexxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4917_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4911_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4917_ext
+	_ = requiresExtension_4911_ext
 	return nil
 }
 
@@ -45338,11 +45338,11 @@ func (ϟa *GlDrawTexxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4919_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
+	requiresExtension_4913_ext := ExtensionId_GL_OES_draw_texture // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4919_ext
+	_ = requiresExtension_4913_ext
 	return nil
 }
 
@@ -45360,12 +45360,12 @@ func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4921_major := uint32(1) // u32
-	minRequiredVersion_4921_minor := uint32(0) // u32
+	minRequiredVersion_4915_major := uint32(1) // u32
+	minRequiredVersion_4915_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4921_major, minRequiredVersion_4921_minor
+	_, _ = minRequiredVersion_4915_major, minRequiredVersion_4915_minor
 	return nil
 }
 
@@ -45383,12 +45383,12 @@ func (ϟa *GlFogf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4923_major := uint32(1) // u32
-	minRequiredVersion_4923_minor := uint32(0) // u32
+	minRequiredVersion_4917_major := uint32(1) // u32
+	minRequiredVersion_4917_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4923_major, minRequiredVersion_4923_minor
+	_, _ = minRequiredVersion_4917_major, minRequiredVersion_4917_minor
 	return nil
 }
 
@@ -45407,12 +45407,12 @@ func (ϟa *GlFogfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4925_major := uint32(1) // u32
-	minRequiredVersion_4925_minor := uint32(0) // u32
+	minRequiredVersion_4919_major := uint32(1) // u32
+	minRequiredVersion_4919_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4925_major, minRequiredVersion_4925_minor
+	_, _ = minRequiredVersion_4919_major, minRequiredVersion_4919_minor
 	return nil
 }
 
@@ -45431,12 +45431,12 @@ func (ϟa *GlFogx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database,
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4927_major := uint32(1) // u32
-	minRequiredVersion_4927_minor := uint32(0) // u32
+	minRequiredVersion_4921_major := uint32(1) // u32
+	minRequiredVersion_4921_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4927_major, minRequiredVersion_4927_minor
+	_, _ = minRequiredVersion_4921_major, minRequiredVersion_4921_minor
 	return nil
 }
 
@@ -45455,11 +45455,11 @@ func (ϟa *GlFogxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4929_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4923_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4929_ext
+	_ = requiresExtension_4923_ext
 	return nil
 }
 
@@ -45478,12 +45478,12 @@ func (ϟa *GlFogxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4931_major := uint32(1) // u32
-	minRequiredVersion_4931_minor := uint32(0) // u32
+	minRequiredVersion_4925_major := uint32(1) // u32
+	minRequiredVersion_4925_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4931_major, minRequiredVersion_4931_minor
+	_, _ = minRequiredVersion_4925_major, minRequiredVersion_4925_minor
 	return nil
 }
 
@@ -45502,11 +45502,11 @@ func (ϟa *GlFogxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4933_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4927_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4933_ext
+	_ = requiresExtension_4927_ext
 	return nil
 }
 
@@ -45525,11 +45525,11 @@ func (ϟa *GlFramebufferRenderbufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4935_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4929_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4935_ext
+	_ = requiresExtension_4929_ext
 	return nil
 }
 
@@ -45550,55 +45550,55 @@ func (ϟa *GlFramebufferTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4937_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
-	FramebufferTexture2D_4938_framebuffer_target := ϟa.Target           // GLenum
-	FramebufferTexture2D_4938_framebuffer_attachment := ϟa.Attachment   // GLenum
-	FramebufferTexture2D_4938_texture_target := ϟa.Textarget            // GLenum
-	FramebufferTexture2D_4938_texture := ϟa.Texture                     // TextureId
-	FramebufferTexture2D_4938_level := ϟa.Level                         // GLint
-	switch FramebufferTexture2D_4938_framebuffer_target {
+	requiresExtension_4931_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	FramebufferTexture2D_4932_framebuffer_target := ϟa.Target           // GLenum
+	FramebufferTexture2D_4932_framebuffer_attachment := ϟa.Attachment   // GLenum
+	FramebufferTexture2D_4932_texture_target := ϟa.Textarget            // GLenum
+	FramebufferTexture2D_4932_texture := ϟa.Texture                     // TextureId
+	FramebufferTexture2D_4932_level := ϟa.Level                         // GLint
+	switch FramebufferTexture2D_4932_framebuffer_target {
 	case GLenum_GL_FRAMEBUFFER:
 	case GLenum_GL_DRAW_FRAMEBUFFER, GLenum_GL_READ_FRAMEBUFFER:
-		minRequiredVersion_4939_major := uint32(3) // u32
-		minRequiredVersion_4939_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_4939_major, minRequiredVersion_4939_minor
+		minRequiredVersion_4933_major := uint32(3) // u32
+		minRequiredVersion_4933_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_4933_major, minRequiredVersion_4933_minor
 	default:
-		glErrorInvalidEnum_4940_param := FramebufferTexture2D_4938_framebuffer_target // GLenum
+		glErrorInvalidEnum_4934_param := FramebufferTexture2D_4932_framebuffer_target // GLenum
 		return
-		_ = glErrorInvalidEnum_4940_param
+		_ = glErrorInvalidEnum_4934_param
 	}
-	switch FramebufferTexture2D_4938_framebuffer_attachment {
+	switch FramebufferTexture2D_4932_framebuffer_attachment {
 	case GLenum_GL_COLOR_ATTACHMENT0, GLenum_GL_DEPTH_ATTACHMENT, GLenum_GL_STENCIL_ATTACHMENT:
 	case GLenum_GL_COLOR_ATTACHMENT1, GLenum_GL_COLOR_ATTACHMENT10, GLenum_GL_COLOR_ATTACHMENT11, GLenum_GL_COLOR_ATTACHMENT12, GLenum_GL_COLOR_ATTACHMENT13, GLenum_GL_COLOR_ATTACHMENT14, GLenum_GL_COLOR_ATTACHMENT15, GLenum_GL_COLOR_ATTACHMENT2, GLenum_GL_COLOR_ATTACHMENT3, GLenum_GL_COLOR_ATTACHMENT4, GLenum_GL_COLOR_ATTACHMENT5, GLenum_GL_COLOR_ATTACHMENT6, GLenum_GL_COLOR_ATTACHMENT7, GLenum_GL_COLOR_ATTACHMENT8, GLenum_GL_COLOR_ATTACHMENT9, GLenum_GL_DEPTH_STENCIL_ATTACHMENT:
-		minRequiredVersion_4941_major := uint32(3) // u32
-		minRequiredVersion_4941_minor := uint32(0) // u32
-		_, _ = minRequiredVersion_4941_major, minRequiredVersion_4941_minor
+		minRequiredVersion_4935_major := uint32(3) // u32
+		minRequiredVersion_4935_minor := uint32(0) // u32
+		_, _ = minRequiredVersion_4935_major, minRequiredVersion_4935_minor
 	default:
-		glErrorInvalidEnum_4942_param := FramebufferTexture2D_4938_framebuffer_attachment // GLenum
+		glErrorInvalidEnum_4936_param := FramebufferTexture2D_4932_framebuffer_attachment // GLenum
 		return
-		_ = glErrorInvalidEnum_4942_param
+		_ = glErrorInvalidEnum_4936_param
 	}
-	switch FramebufferTexture2D_4938_texture_target {
+	switch FramebufferTexture2D_4932_texture_target {
 	case GLenum_GL_TEXTURE_2D, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
 	case GLenum_GL_TEXTURE_2D_MULTISAMPLE:
-		minRequiredVersion_4943_major := uint32(3) // u32
-		minRequiredVersion_4943_minor := uint32(1) // u32
-		_, _ = minRequiredVersion_4943_major, minRequiredVersion_4943_minor
+		minRequiredVersion_4937_major := uint32(3) // u32
+		minRequiredVersion_4937_minor := uint32(1) // u32
+		_, _ = minRequiredVersion_4937_major, minRequiredVersion_4937_minor
 	default:
-		glErrorInvalidEnum_4944_param := FramebufferTexture2D_4938_texture_target // GLenum
+		glErrorInvalidEnum_4938_param := FramebufferTexture2D_4932_texture_target // GLenum
 		return
-		_ = glErrorInvalidEnum_4944_param
+		_ = glErrorInvalidEnum_4938_param
 	}
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_4946_msg := "No context bound" // string
+		error_4940_msg := "No context bound" // string
 		return
-		_ = error_4946_msg
+		_ = error_4940_msg
 	}
-	GetContext_4945_result := context // Contextʳ
-	ctx := GetContext_4945_result     // Contextʳ
+	GetContext_4939_result := context // Contextʳ
+	ctx := GetContext_4939_result     // Contextʳ
 	target := func() (result GLenum) {
-		switch FramebufferTexture2D_4938_framebuffer_target {
+		switch FramebufferTexture2D_4932_framebuffer_target {
 		case GLenum_GL_FRAMEBUFFER:
 			return GLenum_GL_DRAW_FRAMEBUFFER
 		case GLenum_GL_DRAW_FRAMEBUFFER:
@@ -45607,24 +45607,24 @@ func (ϟa *GlFramebufferTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 			return GLenum_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
-			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", FramebufferTexture2D_4938_framebuffer_target, ϟa))
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", FramebufferTexture2D_4932_framebuffer_target, ϟa))
 			return result
 		}
 	}() // GLenum
 	framebufferId := ctx.BoundFramebuffers.Get(target)                                          // FramebufferId
 	framebuffer := ctx.Instances.Framebuffers.Get(framebufferId)                                // Framebufferʳ
-	attachment := framebuffer.Attachments.Get(FramebufferTexture2D_4938_framebuffer_attachment) // FramebufferAttachmentInfo
-	if (FramebufferTexture2D_4938_texture) == (TextureId(uint32(0))) {
+	attachment := framebuffer.Attachments.Get(FramebufferTexture2D_4932_framebuffer_attachment) // FramebufferAttachmentInfo
+	if (FramebufferTexture2D_4932_texture) == (TextureId(uint32(0))) {
 		attachment.Type = GLenum_GL_NONE
 		attachment.Object = uint32(0)
 		attachment.TextureLevel = GLint(int32(0))
 		attachment.CubeMapFace = GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	} else {
 		attachment.Type = GLenum_GL_TEXTURE
-		attachment.Object = uint32(FramebufferTexture2D_4938_texture)
-		attachment.TextureLevel = FramebufferTexture2D_4938_level
+		attachment.Object = uint32(FramebufferTexture2D_4932_texture)
+		attachment.TextureLevel = FramebufferTexture2D_4932_level
 		attachment.CubeMapFace = func() (result GLenum) {
-			switch FramebufferTexture2D_4938_texture_target {
+			switch FramebufferTexture2D_4932_texture_target {
 			case GLenum_GL_TEXTURE_2D:
 				return GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 			case GLenum_GL_TEXTURE_CUBE_MAP_POSITIVE_X:
@@ -45641,15 +45641,15 @@ func (ϟa *GlFramebufferTexture2DOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 				return GLenum_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 			default:
 				// TODO: better unmatched handling
-				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", FramebufferTexture2D_4938_texture_target, ϟa))
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", FramebufferTexture2D_4932_texture_target, ϟa))
 				return result
 			}
 		}()
 	}
-	framebuffer.Attachments[FramebufferTexture2D_4938_framebuffer_attachment] = attachment
+	framebuffer.Attachments[FramebufferTexture2D_4932_framebuffer_attachment] = attachment
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_4937_ext, FramebufferTexture2D_4938_framebuffer_target, FramebufferTexture2D_4938_framebuffer_attachment, FramebufferTexture2D_4938_texture_target, FramebufferTexture2D_4938_texture, FramebufferTexture2D_4938_level, context, GetContext_4945_result, ctx, target, framebufferId, framebuffer, attachment
+	_, _, _, _, _, _, _, _, _, _, _, _, _ = requiresExtension_4931_ext, FramebufferTexture2D_4932_framebuffer_target, FramebufferTexture2D_4932_framebuffer_attachment, FramebufferTexture2D_4932_texture_target, FramebufferTexture2D_4932_texture, FramebufferTexture2D_4932_level, context, GetContext_4939_result, ctx, target, framebufferId, framebuffer, attachment
 	return nil
 }
 
@@ -45675,12 +45675,12 @@ func (ϟa *GlFrustumf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4947_major := uint32(1) // u32
-	minRequiredVersion_4947_minor := uint32(0) // u32
+	minRequiredVersion_4941_major := uint32(1) // u32
+	minRequiredVersion_4941_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4947_major, minRequiredVersion_4947_minor
+	_, _ = minRequiredVersion_4941_major, minRequiredVersion_4941_minor
 	return nil
 }
 
@@ -45703,11 +45703,11 @@ func (ϟa *GlFrustumfOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4949_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_4943_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4949_ext
+	_ = requiresExtension_4943_ext
 	return nil
 }
 
@@ -45730,12 +45730,12 @@ func (ϟa *GlFrustumx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4951_major := uint32(1) // u32
-	minRequiredVersion_4951_minor := uint32(0) // u32
+	minRequiredVersion_4945_major := uint32(1) // u32
+	minRequiredVersion_4945_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4951_major, minRequiredVersion_4951_minor
+	_, _ = minRequiredVersion_4945_major, minRequiredVersion_4945_minor
 	return nil
 }
 
@@ -45758,11 +45758,11 @@ func (ϟa *GlFrustumxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4953_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4947_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4953_ext
+	_ = requiresExtension_4947_ext
 	return nil
 }
 
@@ -45785,11 +45785,11 @@ func (ϟa *GlGenFramebuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4955_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4949_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4955_ext
+	_ = requiresExtension_4949_ext
 	return nil
 }
 
@@ -45808,11 +45808,11 @@ func (ϟa *GlGenRenderbuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4957_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4951_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4957_ext
+	_ = requiresExtension_4951_ext
 	return nil
 }
 
@@ -45831,11 +45831,11 @@ func (ϟa *GlGenerateMipmapOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4959_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4953_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4959_ext
+	_ = requiresExtension_4953_ext
 	return nil
 }
 
@@ -45853,12 +45853,12 @@ func (ϟa *GlGetClipPlanef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4961_major := uint32(1) // u32
-	minRequiredVersion_4961_minor := uint32(0) // u32
+	minRequiredVersion_4955_major := uint32(1) // u32
+	minRequiredVersion_4955_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4961_major, minRequiredVersion_4961_minor
+	_, _ = minRequiredVersion_4955_major, minRequiredVersion_4955_minor
 	return nil
 }
 
@@ -45877,11 +45877,11 @@ func (ϟa *GlGetClipPlanefOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4963_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_4957_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4963_ext
+	_ = requiresExtension_4957_ext
 	return nil
 }
 
@@ -45900,12 +45900,12 @@ func (ϟa *GlGetClipPlanex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4965_major := uint32(1) // u32
-	minRequiredVersion_4965_minor := uint32(0) // u32
+	minRequiredVersion_4959_major := uint32(1) // u32
+	minRequiredVersion_4959_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4965_major, minRequiredVersion_4965_minor
+	_, _ = minRequiredVersion_4959_major, minRequiredVersion_4959_minor
 	return nil
 }
 
@@ -45924,11 +45924,11 @@ func (ϟa *GlGetClipPlanexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4967_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4961_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4967_ext
+	_ = requiresExtension_4961_ext
 	return nil
 }
 
@@ -45947,12 +45947,12 @@ func (ϟa *GlGetFixedv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4969_major := uint32(1) // u32
-	minRequiredVersion_4969_minor := uint32(0) // u32
+	minRequiredVersion_4963_major := uint32(1) // u32
+	minRequiredVersion_4963_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4969_major, minRequiredVersion_4969_minor
+	_, _ = minRequiredVersion_4963_major, minRequiredVersion_4963_minor
 	return nil
 }
 
@@ -45971,11 +45971,11 @@ func (ϟa *GlGetFixedvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4971_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4965_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4971_ext
+	_ = requiresExtension_4965_ext
 	return nil
 }
 
@@ -45994,11 +45994,11 @@ func (ϟa *GlGetFramebufferAttachmentParameterivOES) Replay(ϟi atom.ID, ϟs *gf
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4973_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4967_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4973_ext
+	_ = requiresExtension_4967_ext
 	return nil
 }
 
@@ -46019,12 +46019,12 @@ func (ϟa *GlGetLightfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4975_major := uint32(1) // u32
-	minRequiredVersion_4975_minor := uint32(0) // u32
+	minRequiredVersion_4969_major := uint32(1) // u32
+	minRequiredVersion_4969_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4975_major, minRequiredVersion_4975_minor
+	_, _ = minRequiredVersion_4969_major, minRequiredVersion_4969_minor
 	return nil
 }
 
@@ -46044,12 +46044,12 @@ func (ϟa *GlGetLightxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4977_major := uint32(1) // u32
-	minRequiredVersion_4977_minor := uint32(0) // u32
+	minRequiredVersion_4971_major := uint32(1) // u32
+	minRequiredVersion_4971_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4977_major, minRequiredVersion_4977_minor
+	_, _ = minRequiredVersion_4971_major, minRequiredVersion_4971_minor
 	return nil
 }
 
@@ -46069,11 +46069,11 @@ func (ϟa *GlGetLightxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4979_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4973_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4979_ext
+	_ = requiresExtension_4973_ext
 	return nil
 }
 
@@ -46093,12 +46093,12 @@ func (ϟa *GlGetMaterialfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4981_major := uint32(1) // u32
-	minRequiredVersion_4981_minor := uint32(0) // u32
+	minRequiredVersion_4975_major := uint32(1) // u32
+	minRequiredVersion_4975_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4981_major, minRequiredVersion_4981_minor
+	_, _ = minRequiredVersion_4975_major, minRequiredVersion_4975_minor
 	return nil
 }
 
@@ -46118,12 +46118,12 @@ func (ϟa *GlGetMaterialxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4983_major := uint32(1) // u32
-	minRequiredVersion_4983_minor := uint32(0) // u32
+	minRequiredVersion_4977_major := uint32(1) // u32
+	minRequiredVersion_4977_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4983_major, minRequiredVersion_4983_minor
+	_, _ = minRequiredVersion_4977_major, minRequiredVersion_4977_minor
 	return nil
 }
 
@@ -46143,11 +46143,11 @@ func (ϟa *GlGetMaterialxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4985_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4979_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4985_ext
+	_ = requiresExtension_4979_ext
 	return nil
 }
 
@@ -46167,11 +46167,11 @@ func (ϟa *GlGetRenderbufferParameterivOES) Replay(ϟi atom.ID, ϟs *gfxapi.Stat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4987_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_4981_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4987_ext
+	_ = requiresExtension_4981_ext
 	return nil
 }
 
@@ -46191,12 +46191,12 @@ func (ϟa *GlGetTexEnvfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4989_major := uint32(1) // u32
-	minRequiredVersion_4989_minor := uint32(0) // u32
+	minRequiredVersion_4983_major := uint32(1) // u32
+	minRequiredVersion_4983_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4989_major, minRequiredVersion_4989_minor
+	_, _ = minRequiredVersion_4983_major, minRequiredVersion_4983_minor
 	return nil
 }
 
@@ -46216,12 +46216,12 @@ func (ϟa *GlGetTexEnviv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4991_major := uint32(1) // u32
-	minRequiredVersion_4991_minor := uint32(0) // u32
+	minRequiredVersion_4985_major := uint32(1) // u32
+	minRequiredVersion_4985_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4991_major, minRequiredVersion_4991_minor
+	_, _ = minRequiredVersion_4985_major, minRequiredVersion_4985_minor
 	return nil
 }
 
@@ -46241,12 +46241,12 @@ func (ϟa *GlGetTexEnvxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_4993_major := uint32(1) // u32
-	minRequiredVersion_4993_minor := uint32(0) // u32
+	minRequiredVersion_4987_major := uint32(1) // u32
+	minRequiredVersion_4987_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_4993_major, minRequiredVersion_4993_minor
+	_, _ = minRequiredVersion_4987_major, minRequiredVersion_4987_minor
 	return nil
 }
 
@@ -46266,11 +46266,11 @@ func (ϟa *GlGetTexEnvxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4995_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4989_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4995_ext
+	_ = requiresExtension_4989_ext
 	return nil
 }
 
@@ -46290,11 +46290,11 @@ func (ϟa *GlGetTexGenfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4997_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_4991_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4997_ext
+	_ = requiresExtension_4991_ext
 	return nil
 }
 
@@ -46314,11 +46314,11 @@ func (ϟa *GlGetTexGenivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_4999_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_4993_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_4999_ext
+	_ = requiresExtension_4993_ext
 	return nil
 }
 
@@ -46338,11 +46338,11 @@ func (ϟa *GlGetTexGenxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5001_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_4995_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5001_ext
+	_ = requiresExtension_4995_ext
 	return nil
 }
 
@@ -46362,12 +46362,12 @@ func (ϟa *GlGetTexParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5003_major := uint32(1) // u32
-	minRequiredVersion_5003_minor := uint32(0) // u32
+	minRequiredVersion_4997_major := uint32(1) // u32
+	minRequiredVersion_4997_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5003_major, minRequiredVersion_5003_minor
+	_, _ = minRequiredVersion_4997_major, minRequiredVersion_4997_minor
 	return nil
 }
 
@@ -46387,11 +46387,11 @@ func (ϟa *GlGetTexParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5005_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_4999_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5005_ext
+	_ = requiresExtension_4999_ext
 	return nil
 }
 
@@ -46412,11 +46412,11 @@ func (ϟa *GlIsFramebufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5007_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_5001_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5007_ext
+	_ = requiresExtension_5001_ext
 	return nil
 }
 
@@ -46436,11 +46436,11 @@ func (ϟa *GlIsRenderbufferOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5009_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_5003_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5009_ext
+	_ = requiresExtension_5003_ext
 	return nil
 }
 
@@ -46459,12 +46459,12 @@ func (ϟa *GlLightModelf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5011_major := uint32(1) // u32
-	minRequiredVersion_5011_minor := uint32(0) // u32
+	minRequiredVersion_5005_major := uint32(1) // u32
+	minRequiredVersion_5005_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5011_major, minRequiredVersion_5011_minor
+	_, _ = minRequiredVersion_5005_major, minRequiredVersion_5005_minor
 	return nil
 }
 
@@ -46483,12 +46483,12 @@ func (ϟa *GlLightModelfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5013_major := uint32(1) // u32
-	minRequiredVersion_5013_minor := uint32(0) // u32
+	minRequiredVersion_5007_major := uint32(1) // u32
+	minRequiredVersion_5007_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5013_major, minRequiredVersion_5013_minor
+	_, _ = minRequiredVersion_5007_major, minRequiredVersion_5007_minor
 	return nil
 }
 
@@ -46507,12 +46507,12 @@ func (ϟa *GlLightModelx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5015_major := uint32(1) // u32
-	minRequiredVersion_5015_minor := uint32(0) // u32
+	minRequiredVersion_5009_major := uint32(1) // u32
+	minRequiredVersion_5009_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5015_major, minRequiredVersion_5015_minor
+	_, _ = minRequiredVersion_5009_major, minRequiredVersion_5009_minor
 	return nil
 }
 
@@ -46531,11 +46531,11 @@ func (ϟa *GlLightModelxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5017_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5011_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5017_ext
+	_ = requiresExtension_5011_ext
 	return nil
 }
 
@@ -46554,12 +46554,12 @@ func (ϟa *GlLightModelxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5019_major := uint32(1) // u32
-	minRequiredVersion_5019_minor := uint32(0) // u32
+	minRequiredVersion_5013_major := uint32(1) // u32
+	minRequiredVersion_5013_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5019_major, minRequiredVersion_5019_minor
+	_, _ = minRequiredVersion_5013_major, minRequiredVersion_5013_minor
 	return nil
 }
 
@@ -46578,11 +46578,11 @@ func (ϟa *GlLightModelxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5021_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5015_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5021_ext
+	_ = requiresExtension_5015_ext
 	return nil
 }
 
@@ -46601,12 +46601,12 @@ func (ϟa *GlLightf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5023_major := uint32(1) // u32
-	minRequiredVersion_5023_minor := uint32(0) // u32
+	minRequiredVersion_5017_major := uint32(1) // u32
+	minRequiredVersion_5017_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5023_major, minRequiredVersion_5023_minor
+	_, _ = minRequiredVersion_5017_major, minRequiredVersion_5017_minor
 	return nil
 }
 
@@ -46626,12 +46626,12 @@ func (ϟa *GlLightfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5025_major := uint32(1) // u32
-	minRequiredVersion_5025_minor := uint32(0) // u32
+	minRequiredVersion_5019_major := uint32(1) // u32
+	minRequiredVersion_5019_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5025_major, minRequiredVersion_5025_minor
+	_, _ = minRequiredVersion_5019_major, minRequiredVersion_5019_minor
 	return nil
 }
 
@@ -46651,12 +46651,12 @@ func (ϟa *GlLightx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5027_major := uint32(1) // u32
-	minRequiredVersion_5027_minor := uint32(0) // u32
+	minRequiredVersion_5021_major := uint32(1) // u32
+	minRequiredVersion_5021_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5027_major, minRequiredVersion_5027_minor
+	_, _ = minRequiredVersion_5021_major, minRequiredVersion_5021_minor
 	return nil
 }
 
@@ -46676,11 +46676,11 @@ func (ϟa *GlLightxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5029_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5023_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5029_ext
+	_ = requiresExtension_5023_ext
 	return nil
 }
 
@@ -46700,12 +46700,12 @@ func (ϟa *GlLightxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5031_major := uint32(1) // u32
-	minRequiredVersion_5031_minor := uint32(0) // u32
+	minRequiredVersion_5025_major := uint32(1) // u32
+	minRequiredVersion_5025_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5031_major, minRequiredVersion_5031_minor
+	_, _ = minRequiredVersion_5025_major, minRequiredVersion_5025_minor
 	return nil
 }
 
@@ -46725,11 +46725,11 @@ func (ϟa *GlLightxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5033_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5027_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5033_ext
+	_ = requiresExtension_5027_ext
 	return nil
 }
 
@@ -46749,12 +46749,12 @@ func (ϟa *GlLineWidthx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5035_major := uint32(1) // u32
-	minRequiredVersion_5035_minor := uint32(0) // u32
+	minRequiredVersion_5029_major := uint32(1) // u32
+	minRequiredVersion_5029_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5035_major, minRequiredVersion_5035_minor
+	_, _ = minRequiredVersion_5029_major, minRequiredVersion_5029_minor
 	return nil
 }
 
@@ -46772,11 +46772,11 @@ func (ϟa *GlLineWidthxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5037_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5031_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5037_ext
+	_ = requiresExtension_5031_ext
 	return nil
 }
 
@@ -46794,12 +46794,12 @@ func (ϟa *GlLoadIdentity) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5039_major := uint32(1) // u32
-	minRequiredVersion_5039_minor := uint32(0) // u32
+	minRequiredVersion_5033_major := uint32(1) // u32
+	minRequiredVersion_5033_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5039_major, minRequiredVersion_5039_minor
+	_, _ = minRequiredVersion_5033_major, minRequiredVersion_5033_minor
 	return nil
 }
 
@@ -46816,12 +46816,12 @@ func (ϟa *GlLoadMatrixf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5041_major := uint32(1) // u32
-	minRequiredVersion_5041_minor := uint32(0) // u32
+	minRequiredVersion_5035_major := uint32(1) // u32
+	minRequiredVersion_5035_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5041_major, minRequiredVersion_5041_minor
+	_, _ = minRequiredVersion_5035_major, minRequiredVersion_5035_minor
 	return nil
 }
 
@@ -46839,12 +46839,12 @@ func (ϟa *GlLoadMatrixx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5043_major := uint32(1) // u32
-	minRequiredVersion_5043_minor := uint32(0) // u32
+	minRequiredVersion_5037_major := uint32(1) // u32
+	minRequiredVersion_5037_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5043_major, minRequiredVersion_5043_minor
+	_, _ = minRequiredVersion_5037_major, minRequiredVersion_5037_minor
 	return nil
 }
 
@@ -46862,11 +46862,11 @@ func (ϟa *GlLoadMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5045_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5039_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5045_ext
+	_ = requiresExtension_5039_ext
 	return nil
 }
 
@@ -46884,11 +46884,11 @@ func (ϟa *GlLoadPaletteFromModelViewMatrixOES) Replay(ϟi atom.ID, ϟs *gfxapi.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5047_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_5041_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5047_ext
+	_ = requiresExtension_5041_ext
 	return nil
 }
 
@@ -46905,12 +46905,12 @@ func (ϟa *GlLogicOp) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5049_major := uint32(1) // u32
-	minRequiredVersion_5049_minor := uint32(0) // u32
+	minRequiredVersion_5043_major := uint32(1) // u32
+	minRequiredVersion_5043_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5049_major, minRequiredVersion_5049_minor
+	_, _ = minRequiredVersion_5043_major, minRequiredVersion_5043_minor
 	return nil
 }
 
@@ -46928,12 +46928,12 @@ func (ϟa *GlMaterialf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5051_major := uint32(1) // u32
-	minRequiredVersion_5051_minor := uint32(0) // u32
+	minRequiredVersion_5045_major := uint32(1) // u32
+	minRequiredVersion_5045_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5051_major, minRequiredVersion_5051_minor
+	_, _ = minRequiredVersion_5045_major, minRequiredVersion_5045_minor
 	return nil
 }
 
@@ -46953,12 +46953,12 @@ func (ϟa *GlMaterialfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5053_major := uint32(1) // u32
-	minRequiredVersion_5053_minor := uint32(0) // u32
+	minRequiredVersion_5047_major := uint32(1) // u32
+	minRequiredVersion_5047_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5053_major, minRequiredVersion_5053_minor
+	_, _ = minRequiredVersion_5047_major, minRequiredVersion_5047_minor
 	return nil
 }
 
@@ -46978,12 +46978,12 @@ func (ϟa *GlMaterialx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5055_major := uint32(1) // u32
-	minRequiredVersion_5055_minor := uint32(0) // u32
+	minRequiredVersion_5049_major := uint32(1) // u32
+	minRequiredVersion_5049_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5055_major, minRequiredVersion_5055_minor
+	_, _ = minRequiredVersion_5049_major, minRequiredVersion_5049_minor
 	return nil
 }
 
@@ -47003,11 +47003,11 @@ func (ϟa *GlMaterialxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5057_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5051_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5057_ext
+	_ = requiresExtension_5051_ext
 	return nil
 }
 
@@ -47027,12 +47027,12 @@ func (ϟa *GlMaterialxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5059_major := uint32(1) // u32
-	minRequiredVersion_5059_minor := uint32(0) // u32
+	minRequiredVersion_5053_major := uint32(1) // u32
+	minRequiredVersion_5053_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5059_major, minRequiredVersion_5059_minor
+	_, _ = minRequiredVersion_5053_major, minRequiredVersion_5053_minor
 	return nil
 }
 
@@ -47052,11 +47052,11 @@ func (ϟa *GlMaterialxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5061_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5055_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5061_ext
+	_ = requiresExtension_5055_ext
 	return nil
 }
 
@@ -47076,11 +47076,11 @@ func (ϟa *GlMatrixIndexPointerOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5063_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_5057_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5063_ext
+	_ = requiresExtension_5057_ext
 	return nil
 }
 
@@ -47101,12 +47101,12 @@ func (ϟa *GlMatrixMode) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5065_major := uint32(1) // u32
-	minRequiredVersion_5065_minor := uint32(0) // u32
+	minRequiredVersion_5059_major := uint32(1) // u32
+	minRequiredVersion_5059_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5065_major, minRequiredVersion_5065_minor
+	_, _ = minRequiredVersion_5059_major, minRequiredVersion_5059_minor
 	return nil
 }
 
@@ -47124,12 +47124,12 @@ func (ϟa *GlMultMatrixf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5067_major := uint32(1) // u32
-	minRequiredVersion_5067_minor := uint32(0) // u32
+	minRequiredVersion_5061_major := uint32(1) // u32
+	minRequiredVersion_5061_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5067_major, minRequiredVersion_5067_minor
+	_, _ = minRequiredVersion_5061_major, minRequiredVersion_5061_minor
 	return nil
 }
 
@@ -47147,12 +47147,12 @@ func (ϟa *GlMultMatrixx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5069_major := uint32(1) // u32
-	minRequiredVersion_5069_minor := uint32(0) // u32
+	minRequiredVersion_5063_major := uint32(1) // u32
+	minRequiredVersion_5063_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5069_major, minRequiredVersion_5069_minor
+	_, _ = minRequiredVersion_5063_major, minRequiredVersion_5063_minor
 	return nil
 }
 
@@ -47170,11 +47170,11 @@ func (ϟa *GlMultMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5071_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5065_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5071_ext
+	_ = requiresExtension_5065_ext
 	return nil
 }
 
@@ -47192,12 +47192,12 @@ func (ϟa *GlMultiTexCoord4f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5073_major := uint32(1) // u32
-	minRequiredVersion_5073_minor := uint32(0) // u32
+	minRequiredVersion_5067_major := uint32(1) // u32
+	minRequiredVersion_5067_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5073_major, minRequiredVersion_5073_minor
+	_, _ = minRequiredVersion_5067_major, minRequiredVersion_5067_minor
 	return nil
 }
 
@@ -47219,12 +47219,12 @@ func (ϟa *GlMultiTexCoord4x) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5075_major := uint32(1) // u32
-	minRequiredVersion_5075_minor := uint32(0) // u32
+	minRequiredVersion_5069_major := uint32(1) // u32
+	minRequiredVersion_5069_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5075_major, minRequiredVersion_5075_minor
+	_, _ = minRequiredVersion_5069_major, minRequiredVersion_5069_minor
 	return nil
 }
 
@@ -47246,11 +47246,11 @@ func (ϟa *GlMultiTexCoord4xOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5077_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5071_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5077_ext
+	_ = requiresExtension_5071_ext
 	return nil
 }
 
@@ -47272,12 +47272,12 @@ func (ϟa *GlNormal3f) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5079_major := uint32(1) // u32
-	minRequiredVersion_5079_minor := uint32(0) // u32
+	minRequiredVersion_5073_major := uint32(1) // u32
+	minRequiredVersion_5073_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5079_major, minRequiredVersion_5079_minor
+	_, _ = minRequiredVersion_5073_major, minRequiredVersion_5073_minor
 	return nil
 }
 
@@ -47297,12 +47297,12 @@ func (ϟa *GlNormal3x) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5081_major := uint32(1) // u32
-	minRequiredVersion_5081_minor := uint32(0) // u32
+	minRequiredVersion_5075_major := uint32(1) // u32
+	minRequiredVersion_5075_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5081_major, minRequiredVersion_5081_minor
+	_, _ = minRequiredVersion_5075_major, minRequiredVersion_5075_minor
 	return nil
 }
 
@@ -47322,11 +47322,11 @@ func (ϟa *GlNormal3xOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5083_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5077_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5083_ext
+	_ = requiresExtension_5077_ext
 	return nil
 }
 
@@ -47346,12 +47346,12 @@ func (ϟa *GlNormalPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5085_major := uint32(1) // u32
-	minRequiredVersion_5085_minor := uint32(0) // u32
+	minRequiredVersion_5079_major := uint32(1) // u32
+	minRequiredVersion_5079_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5085_major, minRequiredVersion_5085_minor
+	_, _ = minRequiredVersion_5079_major, minRequiredVersion_5079_minor
 	return nil
 }
 
@@ -47371,12 +47371,12 @@ func (ϟa *GlOrthof) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5087_major := uint32(1) // u32
-	minRequiredVersion_5087_minor := uint32(0) // u32
+	minRequiredVersion_5081_major := uint32(1) // u32
+	minRequiredVersion_5081_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5087_major, minRequiredVersion_5087_minor
+	_, _ = minRequiredVersion_5081_major, minRequiredVersion_5081_minor
 	return nil
 }
 
@@ -47399,11 +47399,11 @@ func (ϟa *GlOrthofOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5089_ext := ExtensionId_GL_OES_single_precision // ExtensionId
+	requiresExtension_5083_ext := ExtensionId_GL_OES_single_precision // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5089_ext
+	_ = requiresExtension_5083_ext
 	return nil
 }
 
@@ -47426,12 +47426,12 @@ func (ϟa *GlOrthox) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5091_major := uint32(1) // u32
-	minRequiredVersion_5091_minor := uint32(0) // u32
+	minRequiredVersion_5085_major := uint32(1) // u32
+	minRequiredVersion_5085_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5091_major, minRequiredVersion_5091_minor
+	_, _ = minRequiredVersion_5085_major, minRequiredVersion_5085_minor
 	return nil
 }
 
@@ -47454,11 +47454,11 @@ func (ϟa *GlOrthoxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5093_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5087_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5093_ext
+	_ = requiresExtension_5087_ext
 	return nil
 }
 
@@ -47481,12 +47481,12 @@ func (ϟa *GlPointParameterf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5095_major := uint32(1) // u32
-	minRequiredVersion_5095_minor := uint32(0) // u32
+	minRequiredVersion_5089_major := uint32(1) // u32
+	minRequiredVersion_5089_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5095_major, minRequiredVersion_5095_minor
+	_, _ = minRequiredVersion_5089_major, minRequiredVersion_5089_minor
 	return nil
 }
 
@@ -47505,12 +47505,12 @@ func (ϟa *GlPointParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5097_major := uint32(1) // u32
-	minRequiredVersion_5097_minor := uint32(0) // u32
+	minRequiredVersion_5091_major := uint32(1) // u32
+	minRequiredVersion_5091_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5097_major, minRequiredVersion_5097_minor
+	_, _ = minRequiredVersion_5091_major, minRequiredVersion_5091_minor
 	return nil
 }
 
@@ -47529,12 +47529,12 @@ func (ϟa *GlPointParameterx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5099_major := uint32(1) // u32
-	minRequiredVersion_5099_minor := uint32(0) // u32
+	minRequiredVersion_5093_major := uint32(1) // u32
+	minRequiredVersion_5093_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5099_major, minRequiredVersion_5099_minor
+	_, _ = minRequiredVersion_5093_major, minRequiredVersion_5093_minor
 	return nil
 }
 
@@ -47553,11 +47553,11 @@ func (ϟa *GlPointParameterxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5101_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5095_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5101_ext
+	_ = requiresExtension_5095_ext
 	return nil
 }
 
@@ -47576,12 +47576,12 @@ func (ϟa *GlPointParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5103_major := uint32(1) // u32
-	minRequiredVersion_5103_minor := uint32(0) // u32
+	minRequiredVersion_5097_major := uint32(1) // u32
+	minRequiredVersion_5097_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5103_major, minRequiredVersion_5103_minor
+	_, _ = minRequiredVersion_5097_major, minRequiredVersion_5097_minor
 	return nil
 }
 
@@ -47600,11 +47600,11 @@ func (ϟa *GlPointParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5105_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5099_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5105_ext
+	_ = requiresExtension_5099_ext
 	return nil
 }
 
@@ -47623,12 +47623,12 @@ func (ϟa *GlPointSize) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5107_major := uint32(1) // u32
-	minRequiredVersion_5107_minor := uint32(0) // u32
+	minRequiredVersion_5101_major := uint32(1) // u32
+	minRequiredVersion_5101_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5107_major, minRequiredVersion_5107_minor
+	_, _ = minRequiredVersion_5101_major, minRequiredVersion_5101_minor
 	return nil
 }
 
@@ -47646,11 +47646,11 @@ func (ϟa *GlPointSizePointerOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5109_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
+	requiresExtension_5103_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5109_ext
+	_ = requiresExtension_5103_ext
 	return nil
 }
 
@@ -47670,12 +47670,12 @@ func (ϟa *GlPointSizex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5111_major := uint32(1) // u32
-	minRequiredVersion_5111_minor := uint32(0) // u32
+	minRequiredVersion_5105_major := uint32(1) // u32
+	minRequiredVersion_5105_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5111_major, minRequiredVersion_5111_minor
+	_, _ = minRequiredVersion_5105_major, minRequiredVersion_5105_minor
 	return nil
 }
 
@@ -47693,11 +47693,11 @@ func (ϟa *GlPointSizexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5113_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5107_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5113_ext
+	_ = requiresExtension_5107_ext
 	return nil
 }
 
@@ -47715,12 +47715,12 @@ func (ϟa *GlPolygonOffsetx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5115_major := uint32(1) // u32
-	minRequiredVersion_5115_minor := uint32(0) // u32
+	minRequiredVersion_5109_major := uint32(1) // u32
+	minRequiredVersion_5109_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5115_major, minRequiredVersion_5115_minor
+	_, _ = minRequiredVersion_5109_major, minRequiredVersion_5109_minor
 	return nil
 }
 
@@ -47739,11 +47739,11 @@ func (ϟa *GlPolygonOffsetxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5117_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5111_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5117_ext
+	_ = requiresExtension_5111_ext
 	return nil
 }
 
@@ -47762,12 +47762,12 @@ func (ϟa *GlPopMatrix) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5119_major := uint32(1) // u32
-	minRequiredVersion_5119_minor := uint32(0) // u32
+	minRequiredVersion_5113_major := uint32(1) // u32
+	minRequiredVersion_5113_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5119_major, minRequiredVersion_5119_minor
+	_, _ = minRequiredVersion_5113_major, minRequiredVersion_5113_minor
 	return nil
 }
 
@@ -47784,12 +47784,12 @@ func (ϟa *GlPushMatrix) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5121_major := uint32(1) // u32
-	minRequiredVersion_5121_minor := uint32(0) // u32
+	minRequiredVersion_5115_major := uint32(1) // u32
+	minRequiredVersion_5115_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5121_major, minRequiredVersion_5121_minor
+	_, _ = minRequiredVersion_5115_major, minRequiredVersion_5115_minor
 	return nil
 }
 
@@ -47807,11 +47807,11 @@ func (ϟa *GlQueryMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5123_ext := ExtensionId_GL_OES_query_matrix // ExtensionId
+	requiresExtension_5117_ext := ExtensionId_GL_OES_query_matrix // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5123_ext
+	_ = requiresExtension_5117_ext
 	return nil
 }
 
@@ -47831,11 +47831,11 @@ func (ϟa *GlRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5125_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
+	requiresExtension_5119_ext := ExtensionId_GL_OES_framebuffer_object // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5125_ext
+	_ = requiresExtension_5119_ext
 	return nil
 }
 
@@ -47856,12 +47856,12 @@ func (ϟa *GlRotatef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5127_major := uint32(1) // u32
-	minRequiredVersion_5127_minor := uint32(0) // u32
+	minRequiredVersion_5121_major := uint32(1) // u32
+	minRequiredVersion_5121_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5127_major, minRequiredVersion_5127_minor
+	_, _ = minRequiredVersion_5121_major, minRequiredVersion_5121_minor
 	return nil
 }
 
@@ -47882,12 +47882,12 @@ func (ϟa *GlRotatex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5129_major := uint32(1) // u32
-	minRequiredVersion_5129_minor := uint32(0) // u32
+	minRequiredVersion_5123_major := uint32(1) // u32
+	minRequiredVersion_5123_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5129_major, minRequiredVersion_5129_minor
+	_, _ = minRequiredVersion_5123_major, minRequiredVersion_5123_minor
 	return nil
 }
 
@@ -47908,11 +47908,11 @@ func (ϟa *GlRotatexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5131_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5125_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5131_ext
+	_ = requiresExtension_5125_ext
 	return nil
 }
 
@@ -47933,12 +47933,12 @@ func (ϟa *GlSampleCoveragex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5133_major := uint32(1) // u32
-	minRequiredVersion_5133_minor := uint32(0) // u32
+	minRequiredVersion_5127_major := uint32(1) // u32
+	minRequiredVersion_5127_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5133_major, minRequiredVersion_5133_minor
+	_, _ = minRequiredVersion_5127_major, minRequiredVersion_5127_minor
 	return nil
 }
 
@@ -47957,11 +47957,11 @@ func (ϟa *GlSampleCoveragexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5135_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5129_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5135_ext
+	_ = requiresExtension_5129_ext
 	return nil
 }
 
@@ -47980,12 +47980,12 @@ func (ϟa *GlScalef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5137_major := uint32(1) // u32
-	minRequiredVersion_5137_minor := uint32(0) // u32
+	minRequiredVersion_5131_major := uint32(1) // u32
+	minRequiredVersion_5131_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5137_major, minRequiredVersion_5137_minor
+	_, _ = minRequiredVersion_5131_major, minRequiredVersion_5131_minor
 	return nil
 }
 
@@ -48005,12 +48005,12 @@ func (ϟa *GlScalex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5139_major := uint32(1) // u32
-	minRequiredVersion_5139_minor := uint32(0) // u32
+	minRequiredVersion_5133_major := uint32(1) // u32
+	minRequiredVersion_5133_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5139_major, minRequiredVersion_5139_minor
+	_, _ = minRequiredVersion_5133_major, minRequiredVersion_5133_minor
 	return nil
 }
 
@@ -48030,11 +48030,11 @@ func (ϟa *GlScalexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5141_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5135_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5141_ext
+	_ = requiresExtension_5135_ext
 	return nil
 }
 
@@ -48054,12 +48054,12 @@ func (ϟa *GlShadeModel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5143_major := uint32(1) // u32
-	minRequiredVersion_5143_minor := uint32(0) // u32
+	minRequiredVersion_5137_major := uint32(1) // u32
+	minRequiredVersion_5137_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5143_major, minRequiredVersion_5143_minor
+	_, _ = minRequiredVersion_5137_major, minRequiredVersion_5137_minor
 	return nil
 }
 
@@ -48077,12 +48077,12 @@ func (ϟa *GlTexCoordPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5145_major := uint32(1) // u32
-	minRequiredVersion_5145_minor := uint32(0) // u32
+	minRequiredVersion_5139_major := uint32(1) // u32
+	minRequiredVersion_5139_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5145_major, minRequiredVersion_5145_minor
+	_, _ = minRequiredVersion_5139_major, minRequiredVersion_5139_minor
 	return nil
 }
 
@@ -48103,12 +48103,12 @@ func (ϟa *GlTexEnvf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5147_major := uint32(1) // u32
-	minRequiredVersion_5147_minor := uint32(0) // u32
+	minRequiredVersion_5141_major := uint32(1) // u32
+	minRequiredVersion_5141_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5147_major, minRequiredVersion_5147_minor
+	_, _ = minRequiredVersion_5141_major, minRequiredVersion_5141_minor
 	return nil
 }
 
@@ -48128,12 +48128,12 @@ func (ϟa *GlTexEnvfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5149_major := uint32(1) // u32
-	minRequiredVersion_5149_minor := uint32(0) // u32
+	minRequiredVersion_5143_major := uint32(1) // u32
+	minRequiredVersion_5143_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5149_major, minRequiredVersion_5149_minor
+	_, _ = minRequiredVersion_5143_major, minRequiredVersion_5143_minor
 	return nil
 }
 
@@ -48153,12 +48153,12 @@ func (ϟa *GlTexEnvi) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5151_major := uint32(1) // u32
-	minRequiredVersion_5151_minor := uint32(0) // u32
+	minRequiredVersion_5145_major := uint32(1) // u32
+	minRequiredVersion_5145_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5151_major, minRequiredVersion_5151_minor
+	_, _ = minRequiredVersion_5145_major, minRequiredVersion_5145_minor
 	return nil
 }
 
@@ -48178,12 +48178,12 @@ func (ϟa *GlTexEnviv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5153_major := uint32(1) // u32
-	minRequiredVersion_5153_minor := uint32(0) // u32
+	minRequiredVersion_5147_major := uint32(1) // u32
+	minRequiredVersion_5147_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5153_major, minRequiredVersion_5153_minor
+	_, _ = minRequiredVersion_5147_major, minRequiredVersion_5147_minor
 	return nil
 }
 
@@ -48203,12 +48203,12 @@ func (ϟa *GlTexEnvx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5155_major := uint32(1) // u32
-	minRequiredVersion_5155_minor := uint32(0) // u32
+	minRequiredVersion_5149_major := uint32(1) // u32
+	minRequiredVersion_5149_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5155_major, minRequiredVersion_5155_minor
+	_, _ = minRequiredVersion_5149_major, minRequiredVersion_5149_minor
 	return nil
 }
 
@@ -48228,11 +48228,11 @@ func (ϟa *GlTexEnvxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5157_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5151_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5157_ext
+	_ = requiresExtension_5151_ext
 	return nil
 }
 
@@ -48252,12 +48252,12 @@ func (ϟa *GlTexEnvxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5159_major := uint32(1) // u32
-	minRequiredVersion_5159_minor := uint32(0) // u32
+	minRequiredVersion_5153_major := uint32(1) // u32
+	minRequiredVersion_5153_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5159_major, minRequiredVersion_5159_minor
+	_, _ = minRequiredVersion_5153_major, minRequiredVersion_5153_minor
 	return nil
 }
 
@@ -48277,11 +48277,11 @@ func (ϟa *GlTexEnvxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5161_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5155_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5161_ext
+	_ = requiresExtension_5155_ext
 	return nil
 }
 
@@ -48301,11 +48301,11 @@ func (ϟa *GlTexGenfOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5163_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5157_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5163_ext
+	_ = requiresExtension_5157_ext
 	return nil
 }
 
@@ -48325,11 +48325,11 @@ func (ϟa *GlTexGenfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5165_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5159_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5165_ext
+	_ = requiresExtension_5159_ext
 	return nil
 }
 
@@ -48349,11 +48349,11 @@ func (ϟa *GlTexGeniOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5167_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5161_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5167_ext
+	_ = requiresExtension_5161_ext
 	return nil
 }
 
@@ -48373,11 +48373,11 @@ func (ϟa *GlTexGenivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5169_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5163_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5169_ext
+	_ = requiresExtension_5163_ext
 	return nil
 }
 
@@ -48397,11 +48397,11 @@ func (ϟa *GlTexGenxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5171_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5165_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5171_ext
+	_ = requiresExtension_5165_ext
 	return nil
 }
 
@@ -48421,11 +48421,11 @@ func (ϟa *GlTexGenxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5173_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
+	requiresExtension_5167_ext := ExtensionId_GL_OES_texture_cube_map // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5173_ext
+	_ = requiresExtension_5167_ext
 	return nil
 }
 
@@ -48445,12 +48445,12 @@ func (ϟa *GlTexParameterx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5175_major := uint32(1) // u32
-	minRequiredVersion_5175_minor := uint32(0) // u32
+	minRequiredVersion_5169_major := uint32(1) // u32
+	minRequiredVersion_5169_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5175_major, minRequiredVersion_5175_minor
+	_, _ = minRequiredVersion_5169_major, minRequiredVersion_5169_minor
 	return nil
 }
 
@@ -48470,11 +48470,11 @@ func (ϟa *GlTexParameterxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5177_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5171_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5177_ext
+	_ = requiresExtension_5171_ext
 	return nil
 }
 
@@ -48494,12 +48494,12 @@ func (ϟa *GlTexParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5179_major := uint32(1) // u32
-	minRequiredVersion_5179_minor := uint32(0) // u32
+	minRequiredVersion_5173_major := uint32(1) // u32
+	minRequiredVersion_5173_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5179_major, minRequiredVersion_5179_minor
+	_, _ = minRequiredVersion_5173_major, minRequiredVersion_5173_minor
 	return nil
 }
 
@@ -48519,11 +48519,11 @@ func (ϟa *GlTexParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5181_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5175_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5181_ext
+	_ = requiresExtension_5175_ext
 	return nil
 }
 
@@ -48543,12 +48543,12 @@ func (ϟa *GlTranslatef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5183_major := uint32(1) // u32
-	minRequiredVersion_5183_minor := uint32(0) // u32
+	minRequiredVersion_5177_major := uint32(1) // u32
+	minRequiredVersion_5177_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5183_major, minRequiredVersion_5183_minor
+	_, _ = minRequiredVersion_5177_major, minRequiredVersion_5177_minor
 	return nil
 }
 
@@ -48568,12 +48568,12 @@ func (ϟa *GlTranslatex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5185_major := uint32(1) // u32
-	minRequiredVersion_5185_minor := uint32(0) // u32
+	minRequiredVersion_5179_major := uint32(1) // u32
+	minRequiredVersion_5179_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5185_major, minRequiredVersion_5185_minor
+	_, _ = minRequiredVersion_5179_major, minRequiredVersion_5179_minor
 	return nil
 }
 
@@ -48593,11 +48593,11 @@ func (ϟa *GlTranslatexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5187_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
+	requiresExtension_5181_ext := ExtensionId_GL_OES_fixed_point // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5187_ext
+	_ = requiresExtension_5181_ext
 	return nil
 }
 
@@ -48617,12 +48617,12 @@ func (ϟa *GlVertexPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5189_major := uint32(1) // u32
-	minRequiredVersion_5189_minor := uint32(0) // u32
+	minRequiredVersion_5183_major := uint32(1) // u32
+	minRequiredVersion_5183_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5189_major, minRequiredVersion_5189_minor
+	_, _ = minRequiredVersion_5183_major, minRequiredVersion_5183_minor
 	return nil
 }
 
@@ -48643,11 +48643,11 @@ func (ϟa *GlWeightPointerOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5191_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_5185_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5191_ext
+	_ = requiresExtension_5185_ext
 	return nil
 }
 
@@ -48668,12 +48668,12 @@ func (ϟa *GlColorPointerBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5193_major := uint32(1) // u32
-	minRequiredVersion_5193_minor := uint32(0) // u32
+	minRequiredVersion_5187_major := uint32(1) // u32
+	minRequiredVersion_5187_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5193_major, minRequiredVersion_5193_minor
+	_, _ = minRequiredVersion_5187_major, minRequiredVersion_5187_minor
 	return nil
 }
 
@@ -48695,12 +48695,12 @@ func (ϟa *GlNormalPointerBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5195_major := uint32(1) // u32
-	minRequiredVersion_5195_minor := uint32(0) // u32
+	minRequiredVersion_5189_major := uint32(1) // u32
+	minRequiredVersion_5189_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5195_major, minRequiredVersion_5195_minor
+	_, _ = minRequiredVersion_5189_major, minRequiredVersion_5189_minor
 	return nil
 }
 
@@ -48721,12 +48721,12 @@ func (ϟa *GlTexCoordPointerBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5197_major := uint32(1) // u32
-	minRequiredVersion_5197_minor := uint32(0) // u32
+	minRequiredVersion_5191_major := uint32(1) // u32
+	minRequiredVersion_5191_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5197_major, minRequiredVersion_5197_minor
+	_, _ = minRequiredVersion_5191_major, minRequiredVersion_5191_minor
 	return nil
 }
 
@@ -48748,12 +48748,12 @@ func (ϟa *GlVertexPointerBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_5199_major := uint32(1) // u32
-	minRequiredVersion_5199_minor := uint32(0) // u32
+	minRequiredVersion_5193_major := uint32(1) // u32
+	minRequiredVersion_5193_minor := uint32(0) // u32
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _ = minRequiredVersion_5199_major, minRequiredVersion_5199_minor
+	_, _ = minRequiredVersion_5193_major, minRequiredVersion_5193_minor
 	return nil
 }
 
@@ -48775,11 +48775,11 @@ func (ϟa *GlPointSizePointerOESBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5201_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
+	requiresExtension_5195_ext := ExtensionId_GL_OES_point_size_array // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5201_ext
+	_ = requiresExtension_5195_ext
 	return nil
 }
 
@@ -48800,11 +48800,11 @@ func (ϟa *GlMatrixIndexPointerOESBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State,
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5203_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_5197_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5203_ext
+	_ = requiresExtension_5197_ext
 	return nil
 }
 
@@ -48826,11 +48826,11 @@ func (ϟa *GlWeightPointerOESBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_5205_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
+	requiresExtension_5199_ext := ExtensionId_GL_OES_matrix_palette // ExtensionId
 	return
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = requiresExtension_5205_ext
+	_ = requiresExtension_5199_ext
 	return nil
 }
 
@@ -48892,12 +48892,12 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	context := ϟc.Contexts.Get(ϟc.CurrentThread) // Contextʳ
 	if (context) == ((*Context)(nil)) {
-		error_5208_msg := "No context bound" // string
+		error_5202_msg := "No context bound" // string
 		return
-		_ = error_5208_msg
+		_ = error_5202_msg
 	}
-	GetContext_5207_result := context                                                          // Contextʳ
-	ctx := GetContext_5207_result                                                              // Contextʳ
+	GetContext_5201_result := context                                                          // Contextʳ
+	ctx := GetContext_5201_result                                                              // Contextʳ
 	const_names := ϟa.ConstantNames.Slice(uint64(uint32(0)), uint64(ϟa.ConstantCount), ϟs)     // GLenumˢ
 	const_offsets := ϟa.ConstantOffsets.Slice(uint64(uint32(0)), uint64(ϟa.ConstantCount), ϟs) // U32ˢ
 	const_sizes := ϟa.ConstantSizes.Slice(uint64(uint32(0)), uint64(ϟa.ConstantCount), ϟs)     // U32ˢ
@@ -48906,303 +48906,303 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		offset := const_offsets.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)      // u32
 		size := const_sizes.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)          // u32
 		data := ϟa.ConstantData.Slice(uint64(offset), uint64((offset)+(size)), ϟs) // U8ˢ
-		SetConstant_5209_ctx := ctx                                                // Contextʳ
-		SetConstant_5209_name := name                                              // GLenum
-		SetConstant_5209_value := data                                             // U8ˢ
-		switch SetConstant_5209_name {
+		SetConstant_5203_ctx := ctx                                                // Contextʳ
+		SetConstant_5203_name := name                                              // GLenum
+		SetConstant_5203_value := data                                             // U8ˢ
+		switch SetConstant_5203_name {
 		case GLenum_GL_RENDERER:
-			SetConstant_5209_ctx.Constants.Renderer = string(AsCharˢ(SetConstant_5209_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+			SetConstant_5203_ctx.Constants.Renderer = string(AsCharˢ(SetConstant_5203_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 		case GLenum_GL_VENDOR:
-			SetConstant_5209_ctx.Constants.Vendor = string(AsCharˢ(SetConstant_5209_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+			SetConstant_5203_ctx.Constants.Vendor = string(AsCharˢ(SetConstant_5203_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 		case GLenum_GL_VERSION:
-			SetConstant_5209_ctx.Constants.Version = string(AsCharˢ(SetConstant_5209_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+			SetConstant_5203_ctx.Constants.Version = string(AsCharˢ(SetConstant_5203_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 		case GLenum_GL_EXTENSIONS:
-			SetConstant_5209_ctx.Constants.Extensions = string(AsCharˢ(SetConstant_5209_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+			SetConstant_5203_ctx.Constants.Extensions = string(AsCharˢ(SetConstant_5203_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 		case GLenum_GL_SHADING_LANGUAGE_VERSION:
-			SetConstant_5209_ctx.Constants.ShadingLanguageVersion = string(AsCharˢ(SetConstant_5209_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
+			SetConstant_5203_ctx.Constants.ShadingLanguageVersion = string(AsCharˢ(SetConstant_5203_value, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb))
 		case GLenum_GL_SUBPIXEL_BITS:
-			SetConstant_5209_ctx.Constants.SubpixelBits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.SubpixelBits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ELEMENT_INDEX:
-			SetConstant_5209_ctx.Constants.MaxElementIndex = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxElementIndex = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_3D_TEXTURE_SIZE:
-			SetConstant_5209_ctx.Constants.Max3dTextureSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.Max3dTextureSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TEXTURE_SIZE:
-			SetConstant_5209_ctx.Constants.MaxTextureSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTextureSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ARRAY_TEXTURE_LAYERS:
-			SetConstant_5209_ctx.Constants.MaxArrayTextureLayers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxArrayTextureLayers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TEXTURE_LOD_BIAS:
-			SetConstant_5209_ctx.Constants.MaxTextureLodBias = AsGLfloatˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTextureLodBias = AsGLfloatˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
-			SetConstant_5209_ctx.Constants.MaxCubeMapTextureSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCubeMapTextureSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_RENDERBUFFER_SIZE:
-			SetConstant_5209_ctx.Constants.MaxRenderbufferSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxRenderbufferSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_ALIASED_POINT_SIZE_RANGE:
-			SetConstant_5209_ctx.Constants.AliasedPointSizeRange = AsGLfloatˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.AliasedPointSizeRange = AsGLfloatˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_ALIASED_LINE_WIDTH_RANGE:
-			SetConstant_5209_ctx.Constants.AliasedLineWidthRange = AsGLfloatˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.AliasedLineWidthRange = AsGLfloatˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_MULTISAMPLE_LINE_WIDTH_RANGE:
-			SetConstant_5209_ctx.Constants.MultisampleLineWidthRange = AsGLfloatˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.MultisampleLineWidthRange = AsGLfloatˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY:
-			SetConstant_5209_ctx.Constants.MultisampleLineWidthGranularity = AsGLfloatˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MultisampleLineWidthGranularity = AsGLfloatˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_DRAW_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxDrawBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxDrawBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAMEBUFFER_WIDTH:
-			SetConstant_5209_ctx.Constants.MaxFramebufferWidth = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFramebufferWidth = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAMEBUFFER_HEIGHT:
-			SetConstant_5209_ctx.Constants.MaxFramebufferHeight = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFramebufferHeight = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAMEBUFFER_LAYERS:
-			SetConstant_5209_ctx.Constants.MaxFramebufferLayers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFramebufferLayers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAMEBUFFER_SAMPLES:
-			SetConstant_5209_ctx.Constants.MaxFramebufferSamples = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFramebufferSamples = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COLOR_ATTACHMENTS:
-			SetConstant_5209_ctx.Constants.MaxColorAttachments = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxColorAttachments = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MIN_FRAGMENT_INTERPOLATION_OFFSET:
-			SetConstant_5209_ctx.Constants.MinFragmentInterpolationOffset = AsGLfloatˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MinFragmentInterpolationOffset = AsGLfloatˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_INTERPOLATION_OFFSET:
-			SetConstant_5209_ctx.Constants.MaxFragmentInterpolationOffset = AsGLfloatˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentInterpolationOffset = AsGLfloatˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_FRAGMENT_INTERPOLATION_OFFSET_BITS:
-			SetConstant_5209_ctx.Constants.FragmentInterpolationOffsetBits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.FragmentInterpolationOffsetBits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VIEWPORT_DIMS:
-			SetConstant_5209_ctx.Constants.MaxViewportDims = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.MaxViewportDims = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_MAX_SAMPLE_MASK_WORDS:
-			SetConstant_5209_ctx.Constants.MaxSampleMaskWords = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxSampleMaskWords = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COLOR_TEXTURE_SAMPLES:
-			SetConstant_5209_ctx.Constants.MaxColorTextureSamples = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxColorTextureSamples = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_DEPTH_TEXTURE_SAMPLES:
-			SetConstant_5209_ctx.Constants.MaxDepthTextureSamples = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxDepthTextureSamples = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_INTEGER_SAMPLES:
-			SetConstant_5209_ctx.Constants.MaxIntegerSamples = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxIntegerSamples = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_SERVER_WAIT_TIMEOUT:
-			SetConstant_5209_ctx.Constants.MaxServerWaitTimeout = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxServerWaitTimeout = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_LAYER_PROVOKING_VERTEX:
-			SetConstant_5209_ctx.Constants.LayerProvokingVertex = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.LayerProvokingVertex = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED:
-			SetConstant_5209_ctx.Constants.PrimitiveRestartForPatchesSupported = AsGLbooleanˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.PrimitiveRestartForPatchesSupported = AsGLbooleanˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET:
-			SetConstant_5209_ctx.Constants.MaxVertexAttribRelativeOffset = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAttribRelativeOffset = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATTRIB_BINDINGS:
-			SetConstant_5209_ctx.Constants.MaxVertexAttribBindings = AsVertexBufferBindingIndexˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAttribBindings = AsVertexBufferBindingIndexˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATTRIB_STRIDE:
-			SetConstant_5209_ctx.Constants.MaxVertexAttribStride = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAttribStride = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ELEMENTS_INDICES:
-			SetConstant_5209_ctx.Constants.MaxElementsIndices = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxElementsIndices = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ELEMENTS_VERTICES:
-			SetConstant_5209_ctx.Constants.MaxElementsVertices = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxElementsVertices = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TEXTURE_BUFFER_SIZE:
-			SetConstant_5209_ctx.Constants.MaxTextureBufferSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTextureBufferSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
-			SetConstant_5209_ctx.Constants.NumCompressedTextureFormats = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.NumCompressedTextureFormats = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_COMPRESSED_TEXTURE_FORMATS:
-			SetConstant_5209_ctx.Constants.CompressedTextureFormats = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.CompressedTextureFormats = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_NUM_PROGRAM_BINARY_FORMATS:
-			SetConstant_5209_ctx.Constants.NumProgramBinaryFormats = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.NumProgramBinaryFormats = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_PROGRAM_BINARY_FORMATS:
-			SetConstant_5209_ctx.Constants.ProgramBinaryFormats = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.ProgramBinaryFormats = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_NUM_SHADER_BINARY_FORMATS:
-			SetConstant_5209_ctx.Constants.NumShaderBinaryFormats = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.NumShaderBinaryFormats = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_SHADER_BINARY_FORMATS:
-			SetConstant_5209_ctx.Constants.ShaderBinaryFormats = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.ShaderBinaryFormats = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_SHADER_COMPILER:
-			SetConstant_5209_ctx.Constants.ShaderCompiler = AsGLbooleanˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.ShaderCompiler = AsGLbooleanˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT:
-			SetConstant_5209_ctx.Constants.TextureBufferOffsetAlignment = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.TextureBufferOffsetAlignment = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_NUM_EXTENSIONS:
-			SetConstant_5209_ctx.Constants.NumExtensions = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.NumExtensions = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAJOR_VERSION:
-			SetConstant_5209_ctx.Constants.MajorVersion = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MajorVersion = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MINOR_VERSION:
-			SetConstant_5209_ctx.Constants.MinorVersion = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MinorVersion = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_CONTEXT_FLAGS:
-			SetConstant_5209_ctx.Constants.ContextFlags = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.ContextFlags = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATTRIBS:
-			SetConstant_5209_ctx.Constants.MaxVertexAttribs = AsAttributeLocationˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAttribs = AsAttributeLocationˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxVertexUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_UNIFORM_VECTORS:
-			SetConstant_5209_ctx.Constants.MaxVertexUniformVectors = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexUniformVectors = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxVertexUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxVertexOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxVertexTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxVertexAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxVertexAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxVertexShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_GEN_LEVEL:
-			SetConstant_5209_ctx.Constants.MaxTessGenLevel = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessGenLevel = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_PATCH_VERTICES:
-			SetConstant_5209_ctx.Constants.MaxPatchVertices = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxPatchVertices = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessControlUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxTessControlTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessControlOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_PATCH_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessPatchComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessPatchComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessControlTotalOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlTotalOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_INPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessControlInputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlInputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxTessControlUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxTessControlAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxTessControlAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxTessControlShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationInputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationInputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxGeometryUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxGeometryUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_INPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxGeometryInputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryInputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxGeometryOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_OUTPUT_VERTICES:
-			SetConstant_5209_ctx.Constants.MaxGeometryOutputVertices = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryOutputVertices = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxGeometryTotalOutputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryTotalOutputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxGeometryTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_SHADER_INVOCATIONS:
-			SetConstant_5209_ctx.Constants.MaxGeometryShaderInvocations = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryShaderInvocations = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxGeometryAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxGeometryAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxGeometryShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxFragmentUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
-			SetConstant_5209_ctx.Constants.MaxFragmentUniformVectors = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentUniformVectors = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxFragmentUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_INPUT_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxFragmentInputComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentInputComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxFragmentAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxFragmentAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxFragmentShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET:
-			SetConstant_5209_ctx.Constants.MinProgramTextureGatherOffset = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MinProgramTextureGatherOffset = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET:
-			SetConstant_5209_ctx.Constants.MaxProgramTextureGatherOffset = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxProgramTextureGatherOffset = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MIN_PROGRAM_TEXEL_OFFSET:
-			SetConstant_5209_ctx.Constants.MinProgramTexelOffset = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MinProgramTexelOffset = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_PROGRAM_TEXEL_OFFSET:
-			SetConstant_5209_ctx.Constants.MaxProgramTexelOffset = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxProgramTexelOffset = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_WORK_GROUP_COUNT:
-			SetConstant_5209_ctx.Constants.MaxComputeWorkGroupCount = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.MaxComputeWorkGroupCount = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_MAX_COMPUTE_WORK_GROUP_SIZE:
-			SetConstant_5209_ctx.Constants.MaxComputeWorkGroupSize = AsGLintˢ(SetConstant_5209_value, ϟs)
+			SetConstant_5203_ctx.Constants.MaxComputeWorkGroupSize = AsGLintˢ(SetConstant_5203_value, ϟs)
 		case GLenum_GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS:
-			SetConstant_5209_ctx.Constants.MaxComputeWorkGroupInvocations = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeWorkGroupInvocations = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxComputeUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxComputeTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_SHARED_MEMORY_SIZE:
-			SetConstant_5209_ctx.Constants.MaxComputeSharedMemorySize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeSharedMemorySize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxComputeUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxComputeAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxComputeAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedComputeUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedComputeUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxComputeShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_UNIFORM_BUFFER_BINDINGS:
-			SetConstant_5209_ctx.Constants.MaxUniformBufferBindings = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxUniformBufferBindings = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_UNIFORM_BLOCK_SIZE:
-			SetConstant_5209_ctx.Constants.MaxUniformBlockSize = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxUniformBlockSize = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT:
-			SetConstant_5209_ctx.Constants.UniformBufferOffsetAlignment = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.UniformBufferOffsetAlignment = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_UNIFORM_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxCombinedUniformBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedUniformBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedVertexUniformComponents = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedVertexUniformComponents = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedTessControlUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedTessControlUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedTessEvaluationUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedTessEvaluationUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedGeometryUniformComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedGeometryUniformComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxCombinedFragmentUniformComponents = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedFragmentUniformComponents = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VARYING_COMPONENTS:
-			SetConstant_5209_ctx.Constants.MaxVaryingComponents = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVaryingComponents = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VARYING_VECTORS:
-			SetConstant_5209_ctx.Constants.MaxVaryingVectors = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVaryingVectors = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxCombinedTextureImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedTextureImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES:
-			SetConstant_5209_ctx.Constants.MaxCombinedShaderOutputResources = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedShaderOutputResources = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_UNIFORM_LOCATIONS:
-			SetConstant_5209_ctx.Constants.MaxUniformLocations = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxUniformLocations = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS:
-			SetConstant_5209_ctx.Constants.MaxAtomicCounterBufferBindings = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxAtomicCounterBufferBindings = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE:
-			SetConstant_5209_ctx.Constants.MaxAtomicCounterBufferSize = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxAtomicCounterBufferSize = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS:
-			SetConstant_5209_ctx.Constants.MaxCombinedAtomicCounterBuffers = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedAtomicCounterBuffers = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_ATOMIC_COUNTERS:
-			SetConstant_5209_ctx.Constants.MaxCombinedAtomicCounters = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedAtomicCounters = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_IMAGE_UNITS:
-			SetConstant_5209_ctx.Constants.MaxImageUnits = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxImageUnits = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_VERTEX_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxVertexImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxVertexImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxTessControlImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessControlImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxTessEvaluationImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxTessEvaluationImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_GEOMETRY_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxGeometryImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxGeometryImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_FRAGMENT_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxFragmentImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxFragmentImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMPUTE_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxComputeImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxComputeImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_IMAGE_UNIFORMS:
-			SetConstant_5209_ctx.Constants.MaxCombinedImageUniforms = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedImageUniforms = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS:
-			SetConstant_5209_ctx.Constants.MaxShaderStorageBufferBindings = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxShaderStorageBufferBindings = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_SHADER_STORAGE_BLOCK_SIZE:
-			SetConstant_5209_ctx.Constants.MaxShaderStorageBlockSize = AsGLint64ˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxShaderStorageBlockSize = AsGLint64ˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS:
-			SetConstant_5209_ctx.Constants.MaxCombinedShaderStorageBlocks = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.MaxCombinedShaderStorageBlocks = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		case GLenum_GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT:
-			SetConstant_5209_ctx.Constants.ShaderStorageBufferOffsetAlignment = AsGLintˢ(SetConstant_5209_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
+			SetConstant_5203_ctx.Constants.ShaderStorageBufferOffsetAlignment = AsGLintˢ(SetConstant_5203_value, ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)
 		default:
 		}
-		_, _, _, _, _, _, _ = name, offset, size, data, SetConstant_5209_ctx, SetConstant_5209_name, SetConstant_5209_value
+		_, _, _, _, _, _, _ = name, offset, size, data, SetConstant_5203_ctx, SetConstant_5203_name, SetConstant_5203_value
 	}
 	ctx.Info.PreserveBuffersOnSwap = ϟa.PreserveBuffersOnSwap
 	backbuffer := ctx.Instances.Framebuffers.Get(FramebufferId(uint32(0)))                        // Framebufferʳ
@@ -49227,6 +49227,19 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		ctx.Rasterizing.Viewport.Width = ϟa.BackbufferWidth
 		ctx.Rasterizing.Viewport.Height = ϟa.BackbufferHeight
 	}
+	if !(ctx.Instances.VertexArrays.Contains(VertexArrayId(uint32(0)))) {
+		NewVertexArray_5204_ctx := ctx                                                                                                                                   // Contextʳ
+		array := &VertexArray{VertexBufferBindings: VertexBufferBindingIndexːVertexBufferBindingʳᵐ{}, VertexAttributeArrays: AttributeLocationːVertexAttributeArrayʳᵐ{}} // VertexArrayʳ
+		for i := VertexBufferBindingIndex(VertexBufferBindingIndex(uint32(0))); i < NewVertexArray_5204_ctx.Constants.MaxVertexAttribBindings; i++ {
+			array.VertexBufferBindings[i] = &VertexBufferBinding{Offset: GLintptr(int32(0)), Stride: GLsizei(int32(16)), Divisor: GLuint(uint32(0))}
+		}
+		for i := AttributeLocation(AttributeLocation(uint32(0))); i < NewVertexArray_5204_ctx.Constants.MaxVertexAttribs; i++ {
+			array.VertexAttributeArrays[i] = &VertexAttributeArray{Enabled: false, Size: GLint(int32(4)), Type: GLenum_GL_FLOAT, Normalized: GLboolean(uint8(0)), Stride: GLsizei(int32(0)), RelativeOffset: GLuint(uint32(0)), Integer: false, Binding: VertexBufferBindingIndex(i)}
+		}
+		NewVertexArray_5204_result := array // VertexArrayʳ
+		ctx.Instances.VertexArrays[VertexArrayId(uint32(0))] = NewVertexArray_5204_result
+		_, _, _ = NewVertexArray_5204_ctx, array, NewVertexArray_5204_result
+	}
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := AttributeLocation(AttributeLocation(uint32(0))); i < ctx.Constants.MaxVertexAttribs; i++ {
@@ -49244,7 +49257,7 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 		}
 		_ = name
 	}
-	_, _, _, _, _, _, _, _, _, _, _, _, _ = context, GetContext_5207_result, ctx, const_names, const_offsets, const_sizes, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
+	_, _, _, _, _, _, _, _, _, _, _, _, _ = context, GetContext_5201_result, ctx, const_names, const_offsets, const_sizes, backbuffer, color_id, color_buffer, depth_id, depth_buffer, stencil_id, stencil_buffer
 	return nil
 }
 

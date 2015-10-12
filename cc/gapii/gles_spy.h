@@ -52005,24 +52005,6 @@ inline void* GlesSpy::eglCreateContext(void* display, void* config, void* share_
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4823_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4823_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4823_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4823_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4823_result;
         std::shared_ptr<Context> l_CreateContext_4822_result = l_ctx;
         this->EGLContexts[l_context] = l_CreateContext_4822_result;
         break;
@@ -52059,8 +52041,8 @@ inline int GlesSpy::eglMakeCurrent(void* display, void* draw, void* read, void* 
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_4824_context = this->EGLContexts[context];
-        this->Contexts[this->CurrentThread] = l_SetContext_4824_context;
+        std::shared_ptr<Context> l_SetContext_4823_context = this->EGLContexts[context];
+        this->Contexts[this->CurrentThread] = l_SetContext_4823_context;
         observe(observations.mReads);
         result = mImports.eglMakeCurrent(display, draw, read, context);
         break;
@@ -52208,26 +52190,8 @@ inline void* GlesSpy::glXCreateContext(void* dpy, void* vis, void* shareList, bo
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4826_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4826_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4826_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4826_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4826_result;
-        std::shared_ptr<Context> l_CreateContext_4825_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_4825_result;
+        std::shared_ptr<Context> l_CreateContext_4824_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_4824_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -52311,26 +52275,8 @@ inline void* GlesSpy::glXCreateNewContext(void* display, void* fbconfig, uint32_
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4828_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4828_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4828_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4828_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4828_result;
-        std::shared_ptr<Context> l_CreateContext_4827_result = l_ctx;
-        this->GLXContexts[l_context] = l_CreateContext_4827_result;
+        std::shared_ptr<Context> l_CreateContext_4825_result = l_ctx;
+        this->GLXContexts[l_context] = l_CreateContext_4825_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -52365,8 +52311,8 @@ inline int GlesSpy::glXMakeContextCurrent(void* display, void* draw, void* read,
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_4829_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_4829_context;
+        std::shared_ptr<Context> l_SetContext_4826_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_4826_context;
         observe(observations.mReads);
         result = mImports.glXMakeContextCurrent(display, draw, read, ctx);
         break;
@@ -52402,8 +52348,8 @@ inline int GlesSpy::glXMakeCurrent(void* display, void* drawable, void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_4830_context = this->GLXContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_4830_context;
+        std::shared_ptr<Context> l_SetContext_4827_context = this->GLXContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_4827_context;
         observe(observations.mReads);
         result = mImports.glXMakeCurrent(display, drawable, ctx);
         break;
@@ -52543,26 +52489,8 @@ inline void* GlesSpy::wglCreateContext(void* hdc) {
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4832_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4832_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4832_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4832_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4832_result;
-        std::shared_ptr<Context> l_CreateContext_4831_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_4831_result;
+        std::shared_ptr<Context> l_CreateContext_4828_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_4828_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -52640,26 +52568,8 @@ inline void* GlesSpy::wglCreateContextAttribsARB(void* hdc, void* hShareContext,
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4834_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4834_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4834_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4834_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4834_result;
-        std::shared_ptr<Context> l_CreateContext_4833_result = l_ctx;
-        this->WGLContexts[l_context] = l_CreateContext_4833_result;
+        std::shared_ptr<Context> l_CreateContext_4829_result = l_ctx;
+        this->WGLContexts[l_context] = l_CreateContext_4829_result;
         break;
     } while (false);
     observe(observations.mWrites);
@@ -52692,8 +52602,8 @@ inline int GlesSpy::wglMakeCurrent(void* hdc, void* hglrc) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_4835_context = this->WGLContexts[hglrc];
-        this->Contexts[this->CurrentThread] = l_SetContext_4835_context;
+        std::shared_ptr<Context> l_SetContext_4830_context = this->WGLContexts[hglrc];
+        this->Contexts[this->CurrentThread] = l_SetContext_4830_context;
         observe(observations.mReads);
         result = mImports.wglMakeCurrent(hdc, hglrc);
         break;
@@ -52795,26 +52705,8 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
         l_ctx->mRasterizing.mStencilMask[GLenum::GL_BACK] = (GLuint)(4294967295);
         l_ctx->mPixelStorage[GLenum::GL_PACK_ALIGNMENT] = (GLint)(4);
         l_ctx->mPixelStorage[GLenum::GL_UNPACK_ALIGNMENT] = (GLint)(4);
-        std::shared_ptr<Context> l_NewVertexArray_4837_ctx = l_ctx;
-        std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
-                new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
-                                AttributeLocationToVertexAttributeArray__R()));
-        for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
-             l_i < l_NewVertexArray_4837_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
-            l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
-                    new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
-        }
-        for (AttributeLocation l_i = (AttributeLocation)(0);
-             l_i < l_NewVertexArray_4837_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
-            l_array->mVertexAttributeArrays[l_i] =
-                    std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
-                            false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
-                            nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
-        }
-        std::shared_ptr<VertexArray> l_NewVertexArray_4837_result = l_array;
-        l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_4837_result;
-        std::shared_ptr<Context> l_CreateContext_4836_result = l_ctx;
-        this->CGLContexts[l_context] = l_CreateContext_4836_result;
+        std::shared_ptr<Context> l_CreateContext_4831_result = l_ctx;
+        this->CGLContexts[l_context] = l_CreateContext_4831_result;
         write(slice(ctx, 0, 1), 0, l_context);
         break;
     } while (false);
@@ -52849,8 +52741,8 @@ inline int GlesSpy::CGLSetCurrentContext(void* ctx) {
 
     Observations observations;
     do {
-        std::shared_ptr<Context> l_SetContext_4838_context = this->CGLContexts[ctx];
-        this->Contexts[this->CurrentThread] = l_SetContext_4838_context;
+        std::shared_ptr<Context> l_SetContext_4832_context = this->CGLContexts[ctx];
+        this->Contexts[this->CurrentThread] = l_SetContext_4832_context;
         observe(observations.mReads);
         result = mImports.CGLSetCurrentContext(ctx);
         break;
@@ -53033,8 +52925,8 @@ inline void GlesSpy::glAlphaFunc(uint32_t func, float ref) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4839_major = 1;
-        uint32_t l_minRequiredVersion_4839_minor = 0;
+        uint32_t l_minRequiredVersion_4833_major = 1;
+        uint32_t l_minRequiredVersion_4833_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glAlphaFunc(func, ref);
@@ -53057,8 +52949,8 @@ inline void GlesSpy::glAlphaFuncx(uint32_t func, int32_t ref) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4841_major = 1;
-        uint32_t l_minRequiredVersion_4841_minor = 0;
+        uint32_t l_minRequiredVersion_4835_major = 1;
+        uint32_t l_minRequiredVersion_4835_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glAlphaFuncx(func, ref);
@@ -53081,7 +52973,7 @@ inline void GlesSpy::glAlphaFuncxOES(uint32_t func, int32_t ref) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4843_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4837_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glAlphaFuncxOES(func, ref);
@@ -53106,7 +52998,7 @@ inline void GlesSpy::glBindFramebufferOES(uint32_t target, uint32_t framebuffer)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4845_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4839_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glBindFramebufferOES(target, framebuffer);
@@ -53131,7 +53023,7 @@ inline void GlesSpy::glBindRenderbufferOES(uint32_t target, uint32_t renderbuffe
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4847_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4841_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glBindRenderbufferOES(target, renderbuffer);
@@ -53156,7 +53048,7 @@ inline void GlesSpy::glBlendEquationOES(uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4849_ext = ExtensionId::GL_OES_blend_subtract;
+        uint32_t l_requiresExtension_4843_ext = ExtensionId::GL_OES_blend_subtract;
         break;
         observe(observations.mReads);
         mImports.glBlendEquationOES(mode);
@@ -53181,7 +53073,7 @@ inline void GlesSpy::glBlendEquationSeparateOES(uint32_t modeRGB, uint32_t modeA
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4851_ext = ExtensionId::GL_OES_blend_equation_separate;
+        uint32_t l_requiresExtension_4845_ext = ExtensionId::GL_OES_blend_equation_separate;
         break;
         observe(observations.mReads);
         mImports.glBlendEquationSeparateOES(modeRGB, modeAlpha);
@@ -53207,7 +53099,7 @@ inline void GlesSpy::glBlendFuncSeparateOES(uint32_t srcRGB, uint32_t dstRGB, ui
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4853_ext = ExtensionId::GL_OES_blend_func_separate;
+        uint32_t l_requiresExtension_4847_ext = ExtensionId::GL_OES_blend_func_separate;
         break;
         observe(observations.mReads);
         mImports.glBlendFuncSeparateOES(srcRGB, dstRGB, srcAlpha, dstAlpha);
@@ -53235,7 +53127,7 @@ inline uint32_t GlesSpy::glCheckFramebufferStatusOES(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4855_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4849_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         result = mImports.glCheckFramebufferStatusOES(target);
@@ -53262,8 +53154,8 @@ inline void GlesSpy::glClearColorx(int32_t red, int32_t green, int32_t blue, int
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4857_major = 1;
-        uint32_t l_minRequiredVersion_4857_minor = 0;
+        uint32_t l_minRequiredVersion_4851_major = 1;
+        uint32_t l_minRequiredVersion_4851_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glClearColorx(red, green, blue, alpha);
@@ -53287,7 +53179,7 @@ inline void GlesSpy::glClearColorxOES(int32_t red, int32_t green, int32_t blue, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4859_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4853_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glClearColorxOES(red, green, blue, alpha);
@@ -53310,7 +53202,7 @@ inline void GlesSpy::glClearDepthfOES(float depth) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4861_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_4855_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glClearDepthfOES(depth);
@@ -53333,8 +53225,8 @@ inline void GlesSpy::glClearDepthx(int32_t depth) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4863_major = 1;
-        uint32_t l_minRequiredVersion_4863_minor = 0;
+        uint32_t l_minRequiredVersion_4857_major = 1;
+        uint32_t l_minRequiredVersion_4857_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glClearDepthx(depth);
@@ -53357,7 +53249,7 @@ inline void GlesSpy::glClearDepthxOES(int32_t depth) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4865_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4859_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glClearDepthxOES(depth);
@@ -53382,8 +53274,8 @@ inline void GlesSpy::glClientActiveTexture(uint32_t texture) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4867_major = 1;
-        uint32_t l_minRequiredVersion_4867_minor = 0;
+        uint32_t l_minRequiredVersion_4861_major = 1;
+        uint32_t l_minRequiredVersion_4861_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glClientActiveTexture(texture);
@@ -53406,8 +53298,8 @@ inline void GlesSpy::glClipPlanef(uint32_t p, float* eqn) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4869_major = 1;
-        uint32_t l_minRequiredVersion_4869_minor = 0;
+        uint32_t l_minRequiredVersion_4863_major = 1;
+        uint32_t l_minRequiredVersion_4863_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glClipPlanef(p, eqn);
@@ -53432,7 +53324,7 @@ inline void GlesSpy::glClipPlanefIMG(uint32_t p, float* eqn) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4871_ext = ExtensionId::GL_IMG_user_clip_plane;
+        uint32_t l_requiresExtension_4865_ext = ExtensionId::GL_IMG_user_clip_plane;
         break;
         observe(observations.mReads);
         mImports.glClipPlanefIMG(p, eqn);
@@ -53457,7 +53349,7 @@ inline void GlesSpy::glClipPlanefOES(uint32_t plane, float* equation) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4873_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_4867_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glClipPlanefOES(plane, equation);
@@ -53482,8 +53374,8 @@ inline void GlesSpy::glClipPlanex(uint32_t plane, int32_t* equation) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4875_major = 1;
-        uint32_t l_minRequiredVersion_4875_minor = 0;
+        uint32_t l_minRequiredVersion_4869_major = 1;
+        uint32_t l_minRequiredVersion_4869_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glClipPlanex(plane, equation);
@@ -53508,7 +53400,7 @@ inline void GlesSpy::glClipPlanexIMG(uint32_t p, int32_t* eqn) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4877_ext = ExtensionId::GL_IMG_user_clip_plane;
+        uint32_t l_requiresExtension_4871_ext = ExtensionId::GL_IMG_user_clip_plane;
         break;
         observe(observations.mReads);
         mImports.glClipPlanexIMG(p, eqn);
@@ -53533,7 +53425,7 @@ inline void GlesSpy::glClipPlanexOES(uint32_t plane, int32_t* equation) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4879_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4873_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glClipPlanexOES(plane, equation);
@@ -53558,8 +53450,8 @@ inline void GlesSpy::glColor4f(float red, float green, float blue, float alpha) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4881_major = 1;
-        uint32_t l_minRequiredVersion_4881_minor = 0;
+        uint32_t l_minRequiredVersion_4875_major = 1;
+        uint32_t l_minRequiredVersion_4875_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glColor4f(red, green, blue, alpha);
@@ -53583,8 +53475,8 @@ inline void GlesSpy::glColor4ub(uint8_t red, uint8_t green, uint8_t blue, uint8_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4883_major = 1;
-        uint32_t l_minRequiredVersion_4883_minor = 0;
+        uint32_t l_minRequiredVersion_4877_major = 1;
+        uint32_t l_minRequiredVersion_4877_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glColor4ub(red, green, blue, alpha);
@@ -53608,8 +53500,8 @@ inline void GlesSpy::glColor4x(int32_t red, int32_t green, int32_t blue, int32_t
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4885_major = 1;
-        uint32_t l_minRequiredVersion_4885_minor = 0;
+        uint32_t l_minRequiredVersion_4879_major = 1;
+        uint32_t l_minRequiredVersion_4879_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glColor4x(red, green, blue, alpha);
@@ -53633,7 +53525,7 @@ inline void GlesSpy::glColor4xOES(int32_t red, int32_t green, int32_t blue, int3
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4887_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4881_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glColor4xOES(red, green, blue, alpha);
@@ -53656,8 +53548,8 @@ inline void GlesSpy::glColorPointer(int32_t size, uint32_t type, int32_t stride,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4889_major = 1;
-        uint32_t l_minRequiredVersion_4889_minor = 0;
+        uint32_t l_minRequiredVersion_4883_major = 1;
+        uint32_t l_minRequiredVersion_4883_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glColorPointer(size, type, stride, pointer);
@@ -53685,7 +53577,7 @@ inline void GlesSpy::glCurrentPaletteMatrixOES(uint32_t matrixpaletteindex) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4891_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_4885_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glCurrentPaletteMatrixOES(matrixpaletteindex);
@@ -53710,7 +53602,7 @@ inline void GlesSpy::glDeleteFramebuffersOES(int32_t n, uint32_t* framebuffers) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4893_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4887_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glDeleteFramebuffersOES(n, framebuffers);
@@ -53737,7 +53629,7 @@ inline void GlesSpy::glDeleteRenderbuffersOES(int32_t n, uint32_t* renderbuffers
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4895_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4889_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glDeleteRenderbuffersOES(n, renderbuffers);
@@ -53762,7 +53654,7 @@ inline void GlesSpy::glDepthRangefOES(float n, float f) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4897_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_4891_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glDepthRangefOES(n, f);
@@ -53785,8 +53677,8 @@ inline void GlesSpy::glDepthRangex(int32_t n, int32_t f) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4899_major = 1;
-        uint32_t l_minRequiredVersion_4899_minor = 0;
+        uint32_t l_minRequiredVersion_4893_major = 1;
+        uint32_t l_minRequiredVersion_4893_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glDepthRangex(n, f);
@@ -53809,7 +53701,7 @@ inline void GlesSpy::glDepthRangexOES(int32_t n, int32_t f) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4901_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4895_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glDepthRangexOES(n, f);
@@ -53834,8 +53726,8 @@ inline void GlesSpy::glDisableClientState(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4903_major = 1;
-        uint32_t l_minRequiredVersion_4903_minor = 0;
+        uint32_t l_minRequiredVersion_4897_major = 1;
+        uint32_t l_minRequiredVersion_4897_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glDisableClientState(array);
@@ -53858,7 +53750,7 @@ inline void GlesSpy::glDrawTexfOES(float x, float y, float z, float width, float
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4905_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4899_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexfOES(x, y, z, width, height);
@@ -53881,7 +53773,7 @@ inline void GlesSpy::glDrawTexfvOES(float* coords) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4907_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4901_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexfvOES(coords);
@@ -53907,7 +53799,7 @@ inline void GlesSpy::glDrawTexiOES(int32_t x, int32_t y, int32_t z, int32_t widt
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4909_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4903_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexiOES(x, y, z, width, height);
@@ -53930,7 +53822,7 @@ inline void GlesSpy::glDrawTexivOES(int32_t* coords) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4911_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4905_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexivOES(coords);
@@ -53956,7 +53848,7 @@ inline void GlesSpy::glDrawTexsOES(int16_t x, int16_t y, int16_t z, int16_t widt
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4913_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4907_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexsOES(x, y, z, width, height);
@@ -53979,7 +53871,7 @@ inline void GlesSpy::glDrawTexsvOES(int16_t* coords) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4915_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4909_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexsvOES(coords);
@@ -54005,7 +53897,7 @@ inline void GlesSpy::glDrawTexxOES(int32_t x, int32_t y, int32_t z, int32_t widt
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4917_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4911_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexxOES(x, y, z, width, height);
@@ -54028,7 +53920,7 @@ inline void GlesSpy::glDrawTexxvOES(int32_t* coords) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4919_ext = ExtensionId::GL_OES_draw_texture;
+        uint32_t l_requiresExtension_4913_ext = ExtensionId::GL_OES_draw_texture;
         break;
         observe(observations.mReads);
         mImports.glDrawTexxvOES(coords);
@@ -54055,8 +53947,8 @@ inline void GlesSpy::glEnableClientState(uint32_t array) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4921_major = 1;
-        uint32_t l_minRequiredVersion_4921_minor = 0;
+        uint32_t l_minRequiredVersion_4915_major = 1;
+        uint32_t l_minRequiredVersion_4915_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glEnableClientState(array);
@@ -54079,8 +53971,8 @@ inline void GlesSpy::glFogf(uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4923_major = 1;
-        uint32_t l_minRequiredVersion_4923_minor = 0;
+        uint32_t l_minRequiredVersion_4917_major = 1;
+        uint32_t l_minRequiredVersion_4917_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFogf(pname, param);
@@ -54103,8 +53995,8 @@ inline void GlesSpy::glFogfv(uint32_t pname, float* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4925_major = 1;
-        uint32_t l_minRequiredVersion_4925_minor = 0;
+        uint32_t l_minRequiredVersion_4919_major = 1;
+        uint32_t l_minRequiredVersion_4919_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFogfv(pname, params);
@@ -54129,8 +54021,8 @@ inline void GlesSpy::glFogx(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4927_major = 1;
-        uint32_t l_minRequiredVersion_4927_minor = 0;
+        uint32_t l_minRequiredVersion_4921_major = 1;
+        uint32_t l_minRequiredVersion_4921_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFogx(pname, param);
@@ -54153,7 +54045,7 @@ inline void GlesSpy::glFogxOES(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4929_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4923_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glFogxOES(pname, param);
@@ -54176,8 +54068,8 @@ inline void GlesSpy::glFogxv(uint32_t pname, int32_t* param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4931_major = 1;
-        uint32_t l_minRequiredVersion_4931_minor = 0;
+        uint32_t l_minRequiredVersion_4925_major = 1;
+        uint32_t l_minRequiredVersion_4925_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFogxv(pname, param);
@@ -54202,7 +54094,7 @@ inline void GlesSpy::glFogxvOES(uint32_t pname, int32_t* param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4933_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4927_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glFogxvOES(pname, param);
@@ -54232,7 +54124,7 @@ inline void GlesSpy::glFramebufferRenderbufferOES(uint32_t target, uint32_t atta
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4935_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4929_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer);
@@ -54261,24 +54153,24 @@ inline void GlesSpy::glFramebufferTexture2DOES(uint32_t target, uint32_t attachm
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4937_ext = ExtensionId::GL_OES_framebuffer_object;
-        uint32_t l_FramebufferTexture2D_4938_framebuffer_target = target;
-        uint32_t l_FramebufferTexture2D_4938_framebuffer_attachment = attachment;
-        uint32_t l_FramebufferTexture2D_4938_texture_target = textarget;
-        TextureId l_FramebufferTexture2D_4938_texture = texture;
-        GLint l_FramebufferTexture2D_4938_level = level;
-        switch (l_FramebufferTexture2D_4938_framebuffer_target) {
+        uint32_t l_requiresExtension_4931_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_FramebufferTexture2D_4932_framebuffer_target = target;
+        uint32_t l_FramebufferTexture2D_4932_framebuffer_attachment = attachment;
+        uint32_t l_FramebufferTexture2D_4932_texture_target = textarget;
+        TextureId l_FramebufferTexture2D_4932_texture = texture;
+        GLint l_FramebufferTexture2D_4932_level = level;
+        switch (l_FramebufferTexture2D_4932_framebuffer_target) {
             case GLenum::GL_FRAMEBUFFER: {
                 break;
             }
             case GLenum::GL_DRAW_FRAMEBUFFER:  // fall-through...
             case GLenum::GL_READ_FRAMEBUFFER: {
-                uint32_t l_minRequiredVersion_4939_major = 3;
-                uint32_t l_minRequiredVersion_4939_minor = 0;
+                uint32_t l_minRequiredVersion_4933_major = 3;
+                uint32_t l_minRequiredVersion_4933_minor = 0;
                 break;
             }
         }
-        switch (l_FramebufferTexture2D_4938_framebuffer_attachment) {
+        switch (l_FramebufferTexture2D_4932_framebuffer_attachment) {
             case GLenum::GL_COLOR_ATTACHMENT0:  // fall-through...
             case GLenum::GL_DEPTH_ATTACHMENT:   // fall-through...
             case GLenum::GL_STENCIL_ATTACHMENT: {
@@ -54300,12 +54192,12 @@ inline void GlesSpy::glFramebufferTexture2DOES(uint32_t target, uint32_t attachm
             case GLenum::GL_COLOR_ATTACHMENT8:   // fall-through...
             case GLenum::GL_COLOR_ATTACHMENT9:   // fall-through...
             case GLenum::GL_DEPTH_STENCIL_ATTACHMENT: {
-                uint32_t l_minRequiredVersion_4941_major = 3;
-                uint32_t l_minRequiredVersion_4941_minor = 0;
+                uint32_t l_minRequiredVersion_4935_major = 3;
+                uint32_t l_minRequiredVersion_4935_minor = 0;
                 break;
             }
         }
-        switch (l_FramebufferTexture2D_4938_texture_target) {
+        switch (l_FramebufferTexture2D_4932_texture_target) {
             case GLenum::GL_TEXTURE_2D:                   // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X:  // fall-through...
             case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:  // fall-through...
@@ -54316,50 +54208,50 @@ inline void GlesSpy::glFramebufferTexture2DOES(uint32_t target, uint32_t attachm
                 break;
             }
             case GLenum::GL_TEXTURE_2D_MULTISAMPLE: {
-                uint32_t l_minRequiredVersion_4943_major = 3;
-                uint32_t l_minRequiredVersion_4943_minor = 1;
+                uint32_t l_minRequiredVersion_4937_major = 3;
+                uint32_t l_minRequiredVersion_4937_minor = 1;
                 break;
             }
         }
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_4946_msg = "No context bound";
+            std::string l_error_4940_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_4945_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_4945_result;
+        std::shared_ptr<Context> l_GetContext_4939_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_4939_result;
         uint32_t l_target = /* clang-format off */
-        /* switch(l_FramebufferTexture2D_4938_framebuffer_target) */
-            /* case GLenum::GL_FRAMEBUFFER: */(((l_FramebufferTexture2D_4938_framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
-            /* case GLenum::GL_DRAW_FRAMEBUFFER: */(((l_FramebufferTexture2D_4938_framebuffer_target) == (GLenum::GL_DRAW_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
-            /* case GLenum::GL_READ_FRAMEBUFFER: */(((l_FramebufferTexture2D_4938_framebuffer_target) == (GLenum::GL_READ_FRAMEBUFFER))) ? (GLenum::GL_READ_FRAMEBUFFER) :
+        /* switch(l_FramebufferTexture2D_4932_framebuffer_target) */
+            /* case GLenum::GL_FRAMEBUFFER: */(((l_FramebufferTexture2D_4932_framebuffer_target) == (GLenum::GL_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_DRAW_FRAMEBUFFER: */(((l_FramebufferTexture2D_4932_framebuffer_target) == (GLenum::GL_DRAW_FRAMEBUFFER))) ? (GLenum::GL_DRAW_FRAMEBUFFER) :
+            /* case GLenum::GL_READ_FRAMEBUFFER: */(((l_FramebufferTexture2D_4932_framebuffer_target) == (GLenum::GL_READ_FRAMEBUFFER))) ? (GLenum::GL_READ_FRAMEBUFFER) :
             /* default: */ 0 /* clang-format on */;
         FramebufferId l_framebufferId = l_ctx->mBoundFramebuffers[l_target];
         std::shared_ptr<Framebuffer> l_framebuffer =
                 l_ctx->mInstances.mFramebuffers[l_framebufferId];
         FramebufferAttachmentInfo l_attachment =
-                l_framebuffer->mAttachments[l_FramebufferTexture2D_4938_framebuffer_attachment];
-        if (l_FramebufferTexture2D_4938_texture == (TextureId)(0)) {
+                l_framebuffer->mAttachments[l_FramebufferTexture2D_4932_framebuffer_attachment];
+        if (l_FramebufferTexture2D_4932_texture == (TextureId)(0)) {
             l_attachment.mType = GLenum::GL_NONE;
             l_attachment.mObject = 0;
             l_attachment.mTextureLevel = (GLint)(0);
             l_attachment.mCubeMapFace = GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
         } else {
             l_attachment.mType = GLenum::GL_TEXTURE;
-            l_attachment.mObject = (uint32_t)(l_FramebufferTexture2D_4938_texture);
-            l_attachment.mTextureLevel = l_FramebufferTexture2D_4938_level;
+            l_attachment.mObject = (uint32_t)(l_FramebufferTexture2D_4932_texture);
+            l_attachment.mTextureLevel = l_FramebufferTexture2D_4932_level;
             l_attachment.mCubeMapFace = /* clang-format off */
-            /* switch(l_FramebufferTexture2D_4938_texture_target) */
-                /* case GLenum::GL_TEXTURE_2D: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_2D))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y) :
-                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((l_FramebufferTexture2D_4938_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z) :
+            /* switch(l_FramebufferTexture2D_4932_texture_target) */
+                /* case GLenum::GL_TEXTURE_2D: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_2D))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Y) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_POSITIVE_Z) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_X) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y) :
+                /* case GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((l_FramebufferTexture2D_4932_texture_target) == (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (GLenum::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z) :
                 /* default: */ 0 /* clang-format on */;
         }
-        l_framebuffer->mAttachments[l_FramebufferTexture2D_4938_framebuffer_attachment] =
+        l_framebuffer->mAttachments[l_FramebufferTexture2D_4932_framebuffer_attachment] =
                 l_attachment;
         observe(observations.mReads);
         mImports.glFramebufferTexture2DOES(target, attachment, textarget, texture, level);
@@ -54383,8 +54275,8 @@ inline void GlesSpy::glFrustumf(float l, float r, float b, float t, float n, flo
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4947_major = 1;
-        uint32_t l_minRequiredVersion_4947_minor = 0;
+        uint32_t l_minRequiredVersion_4941_major = 1;
+        uint32_t l_minRequiredVersion_4941_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFrustumf(l, r, b, t, n, f);
@@ -54407,7 +54299,7 @@ inline void GlesSpy::glFrustumfOES(float l, float r, float b, float t, float n, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4949_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_4943_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glFrustumfOES(l, r, b, t, n, f);
@@ -54432,8 +54324,8 @@ inline void GlesSpy::glFrustumx(int32_t l, int32_t r, int32_t b, int32_t t, int3
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4951_major = 1;
-        uint32_t l_minRequiredVersion_4951_minor = 0;
+        uint32_t l_minRequiredVersion_4945_major = 1;
+        uint32_t l_minRequiredVersion_4945_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glFrustumx(l, r, b, t, n, f);
@@ -54459,7 +54351,7 @@ inline void GlesSpy::glFrustumxOES(int32_t l, int32_t r, int32_t b, int32_t t, i
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4953_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4947_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glFrustumxOES(l, r, b, t, n, f);
@@ -54484,7 +54376,7 @@ inline void GlesSpy::glGenFramebuffersOES(int32_t n, uint32_t* framebuffers) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4955_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4949_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glGenFramebuffersOES(n, framebuffers);
@@ -54511,7 +54403,7 @@ inline void GlesSpy::glGenRenderbuffersOES(int32_t n, uint32_t* renderbuffers) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4957_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4951_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glGenRenderbuffersOES(n, renderbuffers);
@@ -54538,7 +54430,7 @@ inline void GlesSpy::glGenerateMipmapOES(uint32_t target) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4959_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4953_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glGenerateMipmapOES(target);
@@ -54561,8 +54453,8 @@ inline void GlesSpy::glGetClipPlanef(uint32_t plane, float* equation) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4961_major = 1;
-        uint32_t l_minRequiredVersion_4961_minor = 0;
+        uint32_t l_minRequiredVersion_4955_major = 1;
+        uint32_t l_minRequiredVersion_4955_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetClipPlanef(plane, equation);
@@ -54589,7 +54481,7 @@ inline void GlesSpy::glGetClipPlanefOES(uint32_t plane, float* equation) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4963_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_4957_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glGetClipPlanefOES(plane, equation);
@@ -54614,8 +54506,8 @@ inline void GlesSpy::glGetClipPlanex(uint32_t plane, int32_t* equation) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4965_major = 1;
-        uint32_t l_minRequiredVersion_4965_minor = 0;
+        uint32_t l_minRequiredVersion_4959_major = 1;
+        uint32_t l_minRequiredVersion_4959_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetClipPlanex(plane, equation);
@@ -54642,7 +54534,7 @@ inline void GlesSpy::glGetClipPlanexOES(uint32_t plane, int32_t* equation) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4967_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4961_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetClipPlanexOES(plane, equation);
@@ -54667,8 +54559,8 @@ inline void GlesSpy::glGetFixedv(uint32_t pname, int32_t* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4969_major = 1;
-        uint32_t l_minRequiredVersion_4969_minor = 0;
+        uint32_t l_minRequiredVersion_4963_major = 1;
+        uint32_t l_minRequiredVersion_4963_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetFixedv(pname, params);
@@ -54693,7 +54585,7 @@ inline void GlesSpy::glGetFixedvOES(uint32_t pname, int32_t* params) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4971_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4965_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetFixedvOES(pname, params);
@@ -54723,7 +54615,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameterivOES(uint32_t target, u
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4973_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4967_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params);
@@ -54749,8 +54641,8 @@ inline void GlesSpy::glGetLightfv(uint32_t light, uint32_t pname, float* params)
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4975_major = 1;
-        uint32_t l_minRequiredVersion_4975_minor = 0;
+        uint32_t l_minRequiredVersion_4969_major = 1;
+        uint32_t l_minRequiredVersion_4969_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetLightfv(light, pname, params);
@@ -54776,8 +54668,8 @@ inline void GlesSpy::glGetLightxv(uint32_t light, uint32_t pname, int32_t* param
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4977_major = 1;
-        uint32_t l_minRequiredVersion_4977_minor = 0;
+        uint32_t l_minRequiredVersion_4971_major = 1;
+        uint32_t l_minRequiredVersion_4971_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetLightxv(light, pname, params);
@@ -54803,7 +54695,7 @@ inline void GlesSpy::glGetLightxvOES(uint32_t light, uint32_t pname, int32_t* pa
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4979_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4973_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetLightxvOES(light, pname, params);
@@ -54829,8 +54721,8 @@ inline void GlesSpy::glGetMaterialfv(uint32_t face, uint32_t pname, float* param
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4981_major = 1;
-        uint32_t l_minRequiredVersion_4981_minor = 0;
+        uint32_t l_minRequiredVersion_4975_major = 1;
+        uint32_t l_minRequiredVersion_4975_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetMaterialfv(face, pname, params);
@@ -54855,8 +54747,8 @@ inline void GlesSpy::glGetMaterialxv(uint32_t face, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4983_major = 1;
-        uint32_t l_minRequiredVersion_4983_minor = 0;
+        uint32_t l_minRequiredVersion_4977_major = 1;
+        uint32_t l_minRequiredVersion_4977_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetMaterialxv(face, pname, params);
@@ -54883,7 +54775,7 @@ inline void GlesSpy::glGetMaterialxvOES(uint32_t face, uint32_t pname, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4985_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4979_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetMaterialxvOES(face, pname, params);
@@ -54911,7 +54803,7 @@ inline void GlesSpy::glGetRenderbufferParameterivOES(uint32_t target, uint32_t p
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4987_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_4981_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glGetRenderbufferParameterivOES(target, pname, params);
@@ -54936,8 +54828,8 @@ inline void GlesSpy::glGetTexEnvfv(uint32_t target, uint32_t pname, float* param
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4989_major = 1;
-        uint32_t l_minRequiredVersion_4989_minor = 0;
+        uint32_t l_minRequiredVersion_4983_major = 1;
+        uint32_t l_minRequiredVersion_4983_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetTexEnvfv(target, pname, params);
@@ -54963,8 +54855,8 @@ inline void GlesSpy::glGetTexEnviv(uint32_t target, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4991_major = 1;
-        uint32_t l_minRequiredVersion_4991_minor = 0;
+        uint32_t l_minRequiredVersion_4985_major = 1;
+        uint32_t l_minRequiredVersion_4985_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetTexEnviv(target, pname, params);
@@ -54989,8 +54881,8 @@ inline void GlesSpy::glGetTexEnvxv(uint32_t target, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_4993_major = 1;
-        uint32_t l_minRequiredVersion_4993_minor = 0;
+        uint32_t l_minRequiredVersion_4987_major = 1;
+        uint32_t l_minRequiredVersion_4987_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetTexEnvxv(target, pname, params);
@@ -55016,7 +54908,7 @@ inline void GlesSpy::glGetTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4995_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4989_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetTexEnvxvOES(target, pname, params);
@@ -55042,7 +54934,7 @@ inline void GlesSpy::glGetTexGenfvOES(uint32_t coord, uint32_t pname, float* par
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4997_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_4991_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glGetTexGenfvOES(coord, pname, params);
@@ -55068,7 +54960,7 @@ inline void GlesSpy::glGetTexGenivOES(uint32_t coord, uint32_t pname, int32_t* p
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_4999_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_4993_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glGetTexGenivOES(coord, pname, params);
@@ -55093,7 +54985,7 @@ inline void GlesSpy::glGetTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* p
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5001_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_4995_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glGetTexGenxvOES(coord, pname, params);
@@ -55121,8 +55013,8 @@ inline void GlesSpy::glGetTexParameterxv(uint32_t target, uint32_t pname, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5003_major = 1;
-        uint32_t l_minRequiredVersion_5003_minor = 0;
+        uint32_t l_minRequiredVersion_4997_major = 1;
+        uint32_t l_minRequiredVersion_4997_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glGetTexParameterxv(target, pname, params);
@@ -55150,7 +55042,7 @@ inline void GlesSpy::glGetTexParameterxvOES(uint32_t target, uint32_t pname, int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5005_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_4999_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glGetTexParameterxvOES(target, pname, params);
@@ -55180,7 +55072,7 @@ inline uint8_t GlesSpy::glIsFramebufferOES(uint32_t framebuffer) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5007_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_5001_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         result = mImports.glIsFramebufferOES(framebuffer);
@@ -55210,7 +55102,7 @@ inline uint8_t GlesSpy::glIsRenderbufferOES(uint32_t renderbuffer) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5009_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_5003_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         result = mImports.glIsRenderbufferOES(renderbuffer);
@@ -55236,8 +55128,8 @@ inline void GlesSpy::glLightModelf(uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5011_major = 1;
-        uint32_t l_minRequiredVersion_5011_minor = 0;
+        uint32_t l_minRequiredVersion_5005_major = 1;
+        uint32_t l_minRequiredVersion_5005_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightModelf(pname, param);
@@ -55260,8 +55152,8 @@ inline void GlesSpy::glLightModelfv(uint32_t pname, float* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5013_major = 1;
-        uint32_t l_minRequiredVersion_5013_minor = 0;
+        uint32_t l_minRequiredVersion_5007_major = 1;
+        uint32_t l_minRequiredVersion_5007_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightModelfv(pname, params);
@@ -55286,8 +55178,8 @@ inline void GlesSpy::glLightModelx(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5015_major = 1;
-        uint32_t l_minRequiredVersion_5015_minor = 0;
+        uint32_t l_minRequiredVersion_5009_major = 1;
+        uint32_t l_minRequiredVersion_5009_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightModelx(pname, param);
@@ -55310,7 +55202,7 @@ inline void GlesSpy::glLightModelxOES(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5017_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5011_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLightModelxOES(pname, param);
@@ -55333,8 +55225,8 @@ inline void GlesSpy::glLightModelxv(uint32_t pname, int32_t* param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5019_major = 1;
-        uint32_t l_minRequiredVersion_5019_minor = 0;
+        uint32_t l_minRequiredVersion_5013_major = 1;
+        uint32_t l_minRequiredVersion_5013_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightModelxv(pname, param);
@@ -55359,7 +55251,7 @@ inline void GlesSpy::glLightModelxvOES(uint32_t pname, int32_t* param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5021_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5015_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLightModelxvOES(pname, param);
@@ -55384,8 +55276,8 @@ inline void GlesSpy::glLightf(uint32_t light, uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5023_major = 1;
-        uint32_t l_minRequiredVersion_5023_minor = 0;
+        uint32_t l_minRequiredVersion_5017_major = 1;
+        uint32_t l_minRequiredVersion_5017_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightf(light, pname, param);
@@ -55408,8 +55300,8 @@ inline void GlesSpy::glLightfv(uint32_t light, uint32_t pname, float* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5025_major = 1;
-        uint32_t l_minRequiredVersion_5025_minor = 0;
+        uint32_t l_minRequiredVersion_5019_major = 1;
+        uint32_t l_minRequiredVersion_5019_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightfv(light, pname, params);
@@ -55435,8 +55327,8 @@ inline void GlesSpy::glLightx(uint32_t light, uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5027_major = 1;
-        uint32_t l_minRequiredVersion_5027_minor = 0;
+        uint32_t l_minRequiredVersion_5021_major = 1;
+        uint32_t l_minRequiredVersion_5021_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightx(light, pname, param);
@@ -55459,7 +55351,7 @@ inline void GlesSpy::glLightxOES(uint32_t light, uint32_t pname, int32_t param) 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5029_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5023_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLightxOES(light, pname, param);
@@ -55482,8 +55374,8 @@ inline void GlesSpy::glLightxv(uint32_t light, uint32_t pname, int32_t* params) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5031_major = 1;
-        uint32_t l_minRequiredVersion_5031_minor = 0;
+        uint32_t l_minRequiredVersion_5025_major = 1;
+        uint32_t l_minRequiredVersion_5025_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLightxv(light, pname, params);
@@ -55509,7 +55401,7 @@ inline void GlesSpy::glLightxvOES(uint32_t light, uint32_t pname, int32_t* param
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5033_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5027_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLightxvOES(light, pname, params);
@@ -55535,8 +55427,8 @@ inline void GlesSpy::glLineWidthx(int32_t width) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5035_major = 1;
-        uint32_t l_minRequiredVersion_5035_minor = 0;
+        uint32_t l_minRequiredVersion_5029_major = 1;
+        uint32_t l_minRequiredVersion_5029_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLineWidthx(width);
@@ -55559,7 +55451,7 @@ inline void GlesSpy::glLineWidthxOES(int32_t width) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5037_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5031_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLineWidthxOES(width);
@@ -55582,8 +55474,8 @@ inline void GlesSpy::glLoadIdentity() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5039_major = 1;
-        uint32_t l_minRequiredVersion_5039_minor = 0;
+        uint32_t l_minRequiredVersion_5033_major = 1;
+        uint32_t l_minRequiredVersion_5033_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLoadIdentity();
@@ -55606,8 +55498,8 @@ inline void GlesSpy::glLoadMatrixf(float* m) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5041_major = 1;
-        uint32_t l_minRequiredVersion_5041_minor = 0;
+        uint32_t l_minRequiredVersion_5035_major = 1;
+        uint32_t l_minRequiredVersion_5035_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLoadMatrixf(m);
@@ -55632,8 +55524,8 @@ inline void GlesSpy::glLoadMatrixx(int32_t* m) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5043_major = 1;
-        uint32_t l_minRequiredVersion_5043_minor = 0;
+        uint32_t l_minRequiredVersion_5037_major = 1;
+        uint32_t l_minRequiredVersion_5037_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLoadMatrixx(m);
@@ -55658,7 +55550,7 @@ inline void GlesSpy::glLoadMatrixxOES(int32_t* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5045_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5039_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glLoadMatrixxOES(m);
@@ -55686,7 +55578,7 @@ inline void GlesSpy::glLoadPaletteFromModelViewMatrixOES() {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5047_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_5041_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glLoadPaletteFromModelViewMatrixOES();
@@ -55709,8 +55601,8 @@ inline void GlesSpy::glLogicOp(uint32_t opcode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5049_major = 1;
-        uint32_t l_minRequiredVersion_5049_minor = 0;
+        uint32_t l_minRequiredVersion_5043_major = 1;
+        uint32_t l_minRequiredVersion_5043_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glLogicOp(opcode);
@@ -55733,8 +55625,8 @@ inline void GlesSpy::glMaterialf(uint32_t face, uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5051_major = 1;
-        uint32_t l_minRequiredVersion_5051_minor = 0;
+        uint32_t l_minRequiredVersion_5045_major = 1;
+        uint32_t l_minRequiredVersion_5045_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMaterialf(face, pname, param);
@@ -55757,8 +55649,8 @@ inline void GlesSpy::glMaterialfv(uint32_t face, uint32_t pname, float* params) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5053_major = 1;
-        uint32_t l_minRequiredVersion_5053_minor = 0;
+        uint32_t l_minRequiredVersion_5047_major = 1;
+        uint32_t l_minRequiredVersion_5047_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMaterialfv(face, pname, params);
@@ -55784,8 +55676,8 @@ inline void GlesSpy::glMaterialx(uint32_t face, uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5055_major = 1;
-        uint32_t l_minRequiredVersion_5055_minor = 0;
+        uint32_t l_minRequiredVersion_5049_major = 1;
+        uint32_t l_minRequiredVersion_5049_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMaterialx(face, pname, param);
@@ -55808,7 +55700,7 @@ inline void GlesSpy::glMaterialxOES(uint32_t face, uint32_t pname, int32_t param
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5057_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5051_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glMaterialxOES(face, pname, param);
@@ -55831,8 +55723,8 @@ inline void GlesSpy::glMaterialxv(uint32_t face, uint32_t pname, int32_t* param)
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5059_major = 1;
-        uint32_t l_minRequiredVersion_5059_minor = 0;
+        uint32_t l_minRequiredVersion_5053_major = 1;
+        uint32_t l_minRequiredVersion_5053_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMaterialxv(face, pname, param);
@@ -55858,7 +55750,7 @@ inline void GlesSpy::glMaterialxvOES(uint32_t face, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5061_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5055_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glMaterialxvOES(face, pname, param);
@@ -55888,7 +55780,7 @@ inline void GlesSpy::glMatrixIndexPointerOES(int32_t size, uint32_t type, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5063_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_5057_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glMatrixIndexPointerOES(size, type, stride, pointer);
@@ -55914,8 +55806,8 @@ inline void GlesSpy::glMatrixMode(uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5065_major = 1;
-        uint32_t l_minRequiredVersion_5065_minor = 0;
+        uint32_t l_minRequiredVersion_5059_major = 1;
+        uint32_t l_minRequiredVersion_5059_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMatrixMode(mode);
@@ -55938,8 +55830,8 @@ inline void GlesSpy::glMultMatrixf(float* m) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5067_major = 1;
-        uint32_t l_minRequiredVersion_5067_minor = 0;
+        uint32_t l_minRequiredVersion_5061_major = 1;
+        uint32_t l_minRequiredVersion_5061_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMultMatrixf(m);
@@ -55964,8 +55856,8 @@ inline void GlesSpy::glMultMatrixx(int32_t* m) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5069_major = 1;
-        uint32_t l_minRequiredVersion_5069_minor = 0;
+        uint32_t l_minRequiredVersion_5063_major = 1;
+        uint32_t l_minRequiredVersion_5063_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMultMatrixx(m);
@@ -55990,7 +55882,7 @@ inline void GlesSpy::glMultMatrixxOES(int32_t* m) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5071_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5065_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glMultMatrixxOES(m);
@@ -56015,8 +55907,8 @@ inline void GlesSpy::glMultiTexCoord4f(uint32_t target, float v0, float v1, floa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5073_major = 1;
-        uint32_t l_minRequiredVersion_5073_minor = 0;
+        uint32_t l_minRequiredVersion_5067_major = 1;
+        uint32_t l_minRequiredVersion_5067_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMultiTexCoord4f(target, v0, v1, v2, v3);
@@ -56041,8 +55933,8 @@ inline void GlesSpy::glMultiTexCoord4x(uint32_t texture, int32_t v0, int32_t v1,
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5075_major = 1;
-        uint32_t l_minRequiredVersion_5075_minor = 0;
+        uint32_t l_minRequiredVersion_5069_major = 1;
+        uint32_t l_minRequiredVersion_5069_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glMultiTexCoord4x(texture, v0, v1, v2, v3);
@@ -56069,7 +55961,7 @@ inline void GlesSpy::glMultiTexCoord4xOES(uint32_t texture, int32_t v0, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5077_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5071_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glMultiTexCoord4xOES(texture, v0, v1, v2, v3);
@@ -56092,8 +55984,8 @@ inline void GlesSpy::glNormal3f(float nx, float ny, float nz) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5079_major = 1;
-        uint32_t l_minRequiredVersion_5079_minor = 0;
+        uint32_t l_minRequiredVersion_5073_major = 1;
+        uint32_t l_minRequiredVersion_5073_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glNormal3f(nx, ny, nz);
@@ -56116,8 +56008,8 @@ inline void GlesSpy::glNormal3x(int32_t nx, int32_t ny, int32_t nz) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5081_major = 1;
-        uint32_t l_minRequiredVersion_5081_minor = 0;
+        uint32_t l_minRequiredVersion_5075_major = 1;
+        uint32_t l_minRequiredVersion_5075_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glNormal3x(nx, ny, nz);
@@ -56140,7 +56032,7 @@ inline void GlesSpy::glNormal3xOES(int32_t nx, int32_t ny, int32_t nz) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5083_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5077_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glNormal3xOES(nx, ny, nz);
@@ -56163,8 +56055,8 @@ inline void GlesSpy::glNormalPointer(uint32_t type, int32_t stride, void* pointe
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5085_major = 1;
-        uint32_t l_minRequiredVersion_5085_minor = 0;
+        uint32_t l_minRequiredVersion_5079_major = 1;
+        uint32_t l_minRequiredVersion_5079_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glNormalPointer(type, stride, pointer);
@@ -56189,8 +56081,8 @@ inline void GlesSpy::glOrthof(float l, float r, float b, float t, float n, float
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5087_major = 1;
-        uint32_t l_minRequiredVersion_5087_minor = 0;
+        uint32_t l_minRequiredVersion_5081_major = 1;
+        uint32_t l_minRequiredVersion_5081_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glOrthof(l, r, b, t, n, f);
@@ -56213,7 +56105,7 @@ inline void GlesSpy::glOrthofOES(float l, float r, float b, float t, float n, fl
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5089_ext = ExtensionId::GL_OES_single_precision;
+        uint32_t l_requiresExtension_5083_ext = ExtensionId::GL_OES_single_precision;
         break;
         observe(observations.mReads);
         mImports.glOrthofOES(l, r, b, t, n, f);
@@ -56238,8 +56130,8 @@ inline void GlesSpy::glOrthox(int32_t l, int32_t r, int32_t b, int32_t t, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5091_major = 1;
-        uint32_t l_minRequiredVersion_5091_minor = 0;
+        uint32_t l_minRequiredVersion_5085_major = 1;
+        uint32_t l_minRequiredVersion_5085_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glOrthox(l, r, b, t, n, f);
@@ -56264,7 +56156,7 @@ inline void GlesSpy::glOrthoxOES(int32_t l, int32_t r, int32_t b, int32_t t, int
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5093_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5087_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glOrthoxOES(l, r, b, t, n, f);
@@ -56287,8 +56179,8 @@ inline void GlesSpy::glPointParameterf(uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5095_major = 1;
-        uint32_t l_minRequiredVersion_5095_minor = 0;
+        uint32_t l_minRequiredVersion_5089_major = 1;
+        uint32_t l_minRequiredVersion_5089_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointParameterf(pname, param);
@@ -56313,8 +56205,8 @@ inline void GlesSpy::glPointParameterfv(uint32_t pname, float* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5097_major = 1;
-        uint32_t l_minRequiredVersion_5097_minor = 0;
+        uint32_t l_minRequiredVersion_5091_major = 1;
+        uint32_t l_minRequiredVersion_5091_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointParameterfv(pname, params);
@@ -56339,8 +56231,8 @@ inline void GlesSpy::glPointParameterx(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5099_major = 1;
-        uint32_t l_minRequiredVersion_5099_minor = 0;
+        uint32_t l_minRequiredVersion_5093_major = 1;
+        uint32_t l_minRequiredVersion_5093_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointParameterx(pname, param);
@@ -56365,7 +56257,7 @@ inline void GlesSpy::glPointParameterxOES(uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5101_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5095_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glPointParameterxOES(pname, param);
@@ -56390,8 +56282,8 @@ inline void GlesSpy::glPointParameterxv(uint32_t pname, int32_t* params) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5103_major = 1;
-        uint32_t l_minRequiredVersion_5103_minor = 0;
+        uint32_t l_minRequiredVersion_5097_major = 1;
+        uint32_t l_minRequiredVersion_5097_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointParameterxv(pname, params);
@@ -56418,7 +56310,7 @@ inline void GlesSpy::glPointParameterxvOES(uint32_t pname, int32_t* params) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5105_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5099_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glPointParameterxvOES(pname, params);
@@ -56443,8 +56335,8 @@ inline void GlesSpy::glPointSize(float size) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5107_major = 1;
-        uint32_t l_minRequiredVersion_5107_minor = 0;
+        uint32_t l_minRequiredVersion_5101_major = 1;
+        uint32_t l_minRequiredVersion_5101_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointSize(size);
@@ -56469,7 +56361,7 @@ inline void GlesSpy::glPointSizePointerOES(uint32_t type, int32_t stride, void* 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5109_ext = ExtensionId::GL_OES_point_size_array;
+        uint32_t l_requiresExtension_5103_ext = ExtensionId::GL_OES_point_size_array;
         break;
         observe(observations.mReads);
         mImports.glPointSizePointerOES(type, stride, pointer);
@@ -56494,8 +56386,8 @@ inline void GlesSpy::glPointSizex(int32_t size) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5111_major = 1;
-        uint32_t l_minRequiredVersion_5111_minor = 0;
+        uint32_t l_minRequiredVersion_5105_major = 1;
+        uint32_t l_minRequiredVersion_5105_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPointSizex(size);
@@ -56518,7 +56410,7 @@ inline void GlesSpy::glPointSizexOES(int32_t size) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5113_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5107_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glPointSizexOES(size);
@@ -56541,8 +56433,8 @@ inline void GlesSpy::glPolygonOffsetx(int32_t factor, int32_t units) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5115_major = 1;
-        uint32_t l_minRequiredVersion_5115_minor = 0;
+        uint32_t l_minRequiredVersion_5109_major = 1;
+        uint32_t l_minRequiredVersion_5109_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPolygonOffsetx(factor, units);
@@ -56567,7 +56459,7 @@ inline void GlesSpy::glPolygonOffsetxOES(int32_t factor, int32_t units) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5117_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5111_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glPolygonOffsetxOES(factor, units);
@@ -56590,8 +56482,8 @@ inline void GlesSpy::glPopMatrix() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5119_major = 1;
-        uint32_t l_minRequiredVersion_5119_minor = 0;
+        uint32_t l_minRequiredVersion_5113_major = 1;
+        uint32_t l_minRequiredVersion_5113_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPopMatrix();
@@ -56614,8 +56506,8 @@ inline void GlesSpy::glPushMatrix() {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5121_major = 1;
-        uint32_t l_minRequiredVersion_5121_minor = 0;
+        uint32_t l_minRequiredVersion_5115_major = 1;
+        uint32_t l_minRequiredVersion_5115_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glPushMatrix();
@@ -56640,7 +56532,7 @@ inline uint32_t GlesSpy::glQueryMatrixxOES(int32_t* mantissa, int32_t* exponent)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5123_ext = ExtensionId::GL_OES_query_matrix;
+        uint32_t l_requiresExtension_5117_ext = ExtensionId::GL_OES_query_matrix;
         break;
         observe(observations.mReads);
         result = mImports.glQueryMatrixxOES(mantissa, exponent);
@@ -56675,7 +56567,7 @@ inline void GlesSpy::glRenderbufferStorageOES(uint32_t target, uint32_t internal
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5125_ext = ExtensionId::GL_OES_framebuffer_object;
+        uint32_t l_requiresExtension_5119_ext = ExtensionId::GL_OES_framebuffer_object;
         break;
         observe(observations.mReads);
         mImports.glRenderbufferStorageOES(target, internalformat, width, height);
@@ -56699,8 +56591,8 @@ inline void GlesSpy::glRotatef(float angle, float x, float y, float z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5127_major = 1;
-        uint32_t l_minRequiredVersion_5127_minor = 0;
+        uint32_t l_minRequiredVersion_5121_major = 1;
+        uint32_t l_minRequiredVersion_5121_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glRotatef(angle, x, y, z);
@@ -56723,8 +56615,8 @@ inline void GlesSpy::glRotatex(int32_t angle, int32_t x, int32_t y, int32_t z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5129_major = 1;
-        uint32_t l_minRequiredVersion_5129_minor = 0;
+        uint32_t l_minRequiredVersion_5123_major = 1;
+        uint32_t l_minRequiredVersion_5123_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glRotatex(angle, x, y, z);
@@ -56747,7 +56639,7 @@ inline void GlesSpy::glRotatexOES(int32_t angle, int32_t x, int32_t y, int32_t z
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5131_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5125_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glRotatexOES(angle, x, y, z);
@@ -56770,8 +56662,8 @@ inline void GlesSpy::glSampleCoveragex(int32_t value, uint8_t invert) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5133_major = 1;
-        uint32_t l_minRequiredVersion_5133_minor = 0;
+        uint32_t l_minRequiredVersion_5127_major = 1;
+        uint32_t l_minRequiredVersion_5127_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glSampleCoveragex(value, invert);
@@ -56796,7 +56688,7 @@ inline void GlesSpy::glSampleCoveragexOES(int32_t value, uint8_t invert) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5135_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5129_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glSampleCoveragexOES(value, invert);
@@ -56819,8 +56711,8 @@ inline void GlesSpy::glScalef(float x, float y, float z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5137_major = 1;
-        uint32_t l_minRequiredVersion_5137_minor = 0;
+        uint32_t l_minRequiredVersion_5131_major = 1;
+        uint32_t l_minRequiredVersion_5131_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glScalef(x, y, z);
@@ -56843,8 +56735,8 @@ inline void GlesSpy::glScalex(int32_t x, int32_t y, int32_t z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5139_major = 1;
-        uint32_t l_minRequiredVersion_5139_minor = 0;
+        uint32_t l_minRequiredVersion_5133_major = 1;
+        uint32_t l_minRequiredVersion_5133_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glScalex(x, y, z);
@@ -56867,7 +56759,7 @@ inline void GlesSpy::glScalexOES(int32_t x, int32_t y, int32_t z) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5141_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5135_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glScalexOES(x, y, z);
@@ -56890,8 +56782,8 @@ inline void GlesSpy::glShadeModel(uint32_t mode) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5143_major = 1;
-        uint32_t l_minRequiredVersion_5143_minor = 0;
+        uint32_t l_minRequiredVersion_5137_major = 1;
+        uint32_t l_minRequiredVersion_5137_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glShadeModel(mode);
@@ -56914,8 +56806,8 @@ inline void GlesSpy::glTexCoordPointer(int32_t size, uint32_t type, int32_t stri
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5145_major = 1;
-        uint32_t l_minRequiredVersion_5145_minor = 0;
+        uint32_t l_minRequiredVersion_5139_major = 1;
+        uint32_t l_minRequiredVersion_5139_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexCoordPointer(size, type, stride, pointer);
@@ -56941,8 +56833,8 @@ inline void GlesSpy::glTexEnvf(uint32_t target, uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5147_major = 1;
-        uint32_t l_minRequiredVersion_5147_minor = 0;
+        uint32_t l_minRequiredVersion_5141_major = 1;
+        uint32_t l_minRequiredVersion_5141_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnvf(target, pname, param);
@@ -56965,8 +56857,8 @@ inline void GlesSpy::glTexEnvfv(uint32_t target, uint32_t pname, float* params) 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5149_major = 1;
-        uint32_t l_minRequiredVersion_5149_minor = 0;
+        uint32_t l_minRequiredVersion_5143_major = 1;
+        uint32_t l_minRequiredVersion_5143_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnvfv(target, pname, params);
@@ -56992,8 +56884,8 @@ inline void GlesSpy::glTexEnvi(uint32_t target, uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5151_major = 1;
-        uint32_t l_minRequiredVersion_5151_minor = 0;
+        uint32_t l_minRequiredVersion_5145_major = 1;
+        uint32_t l_minRequiredVersion_5145_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnvi(target, pname, param);
@@ -57016,8 +56908,8 @@ inline void GlesSpy::glTexEnviv(uint32_t target, uint32_t pname, int32_t* params
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5153_major = 1;
-        uint32_t l_minRequiredVersion_5153_minor = 0;
+        uint32_t l_minRequiredVersion_5147_major = 1;
+        uint32_t l_minRequiredVersion_5147_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnviv(target, pname, params);
@@ -57043,8 +56935,8 @@ inline void GlesSpy::glTexEnvx(uint32_t target, uint32_t pname, int32_t param) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5155_major = 1;
-        uint32_t l_minRequiredVersion_5155_minor = 0;
+        uint32_t l_minRequiredVersion_5149_major = 1;
+        uint32_t l_minRequiredVersion_5149_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnvx(target, pname, param);
@@ -57067,7 +56959,7 @@ inline void GlesSpy::glTexEnvxOES(uint32_t target, uint32_t pname, int32_t param
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5157_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5151_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glTexEnvxOES(target, pname, param);
@@ -57090,8 +56982,8 @@ inline void GlesSpy::glTexEnvxv(uint32_t target, uint32_t pname, int32_t* params
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5159_major = 1;
-        uint32_t l_minRequiredVersion_5159_minor = 0;
+        uint32_t l_minRequiredVersion_5153_major = 1;
+        uint32_t l_minRequiredVersion_5153_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexEnvxv(target, pname, params);
@@ -57117,7 +57009,7 @@ inline void GlesSpy::glTexEnvxvOES(uint32_t target, uint32_t pname, int32_t* par
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5161_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5155_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glTexEnvxvOES(target, pname, params);
@@ -57143,7 +57035,7 @@ inline void GlesSpy::glTexGenfOES(uint32_t coord, uint32_t pname, float param) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5163_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5157_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGenfOES(coord, pname, param);
@@ -57166,7 +57058,7 @@ inline void GlesSpy::glTexGenfvOES(uint32_t coord, uint32_t pname, float* params
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5165_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5159_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGenfvOES(coord, pname, params);
@@ -57192,7 +57084,7 @@ inline void GlesSpy::glTexGeniOES(uint32_t coord, uint32_t pname, int32_t param)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5167_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5161_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGeniOES(coord, pname, param);
@@ -57215,7 +57107,7 @@ inline void GlesSpy::glTexGenivOES(uint32_t coord, uint32_t pname, int32_t* para
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5169_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5163_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGenivOES(coord, pname, params);
@@ -57240,7 +57132,7 @@ inline void GlesSpy::glTexGenxOES(uint32_t coord, uint32_t pname, int32_t param)
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5171_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5165_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGenxOES(coord, pname, param);
@@ -57263,7 +57155,7 @@ inline void GlesSpy::glTexGenxvOES(uint32_t coord, uint32_t pname, int32_t* para
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5173_ext = ExtensionId::GL_OES_texture_cube_map;
+        uint32_t l_requiresExtension_5167_ext = ExtensionId::GL_OES_texture_cube_map;
         break;
         observe(observations.mReads);
         mImports.glTexGenxvOES(coord, pname, params);
@@ -57289,8 +57181,8 @@ inline void GlesSpy::glTexParameterx(uint32_t target, uint32_t pname, int32_t pa
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5175_major = 1;
-        uint32_t l_minRequiredVersion_5175_minor = 0;
+        uint32_t l_minRequiredVersion_5169_major = 1;
+        uint32_t l_minRequiredVersion_5169_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexParameterx(target, pname, param);
@@ -57315,7 +57207,7 @@ inline void GlesSpy::glTexParameterxOES(uint32_t target, uint32_t pname, int32_t
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5177_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5171_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glTexParameterxOES(target, pname, param);
@@ -57338,8 +57230,8 @@ inline void GlesSpy::glTexParameterxv(uint32_t target, uint32_t pname, int32_t* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5179_major = 1;
-        uint32_t l_minRequiredVersion_5179_minor = 0;
+        uint32_t l_minRequiredVersion_5173_major = 1;
+        uint32_t l_minRequiredVersion_5173_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexParameterxv(target, pname, params);
@@ -57367,7 +57259,7 @@ inline void GlesSpy::glTexParameterxvOES(uint32_t target, uint32_t pname, int32_
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5181_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5175_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glTexParameterxvOES(target, pname, params);
@@ -57393,8 +57285,8 @@ inline void GlesSpy::glTranslatef(float x, float y, float z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5183_major = 1;
-        uint32_t l_minRequiredVersion_5183_minor = 0;
+        uint32_t l_minRequiredVersion_5177_major = 1;
+        uint32_t l_minRequiredVersion_5177_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTranslatef(x, y, z);
@@ -57417,8 +57309,8 @@ inline void GlesSpy::glTranslatex(int32_t x, int32_t y, int32_t z) {
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5185_major = 1;
-        uint32_t l_minRequiredVersion_5185_minor = 0;
+        uint32_t l_minRequiredVersion_5179_major = 1;
+        uint32_t l_minRequiredVersion_5179_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTranslatex(x, y, z);
@@ -57441,7 +57333,7 @@ inline void GlesSpy::glTranslatexOES(int32_t x, int32_t y, int32_t z) {
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5187_ext = ExtensionId::GL_OES_fixed_point;
+        uint32_t l_requiresExtension_5181_ext = ExtensionId::GL_OES_fixed_point;
         break;
         observe(observations.mReads);
         mImports.glTranslatexOES(x, y, z);
@@ -57464,8 +57356,8 @@ inline void GlesSpy::glVertexPointer(int32_t size, uint32_t type, int32_t stride
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5189_major = 1;
-        uint32_t l_minRequiredVersion_5189_minor = 0;
+        uint32_t l_minRequiredVersion_5183_major = 1;
+        uint32_t l_minRequiredVersion_5183_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glVertexPointer(size, type, stride, pointer);
@@ -57494,7 +57386,7 @@ inline void GlesSpy::glWeightPointerOES(int32_t size, uint32_t type, int32_t str
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5191_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_5185_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glWeightPointerOES(size, type, stride, pointer);
@@ -57524,8 +57416,8 @@ inline void GlesSpy::glColorPointerBounds(int32_t size, uint32_t type, int32_t s
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5193_major = 1;
-        uint32_t l_minRequiredVersion_5193_minor = 0;
+        uint32_t l_minRequiredVersion_5187_major = 1;
+        uint32_t l_minRequiredVersion_5187_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glColorPointerBounds(size, type, stride, pointer, count);
@@ -57556,8 +57448,8 @@ inline void GlesSpy::glNormalPointerBounds(uint32_t type, int32_t stride, void* 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5195_major = 1;
-        uint32_t l_minRequiredVersion_5195_minor = 0;
+        uint32_t l_minRequiredVersion_5189_major = 1;
+        uint32_t l_minRequiredVersion_5189_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glNormalPointerBounds(type, stride, pointer, count);
@@ -57587,8 +57479,8 @@ inline void GlesSpy::glTexCoordPointerBounds(int32_t size, uint32_t type, int32_
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5197_major = 1;
-        uint32_t l_minRequiredVersion_5197_minor = 0;
+        uint32_t l_minRequiredVersion_5191_major = 1;
+        uint32_t l_minRequiredVersion_5191_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glTexCoordPointerBounds(size, type, stride, pointer, count);
@@ -57619,8 +57511,8 @@ inline void GlesSpy::glVertexPointerBounds(int32_t size, uint32_t type, int32_t 
 
     Observations observations;
     do {
-        uint32_t l_minRequiredVersion_5199_major = 1;
-        uint32_t l_minRequiredVersion_5199_minor = 0;
+        uint32_t l_minRequiredVersion_5193_major = 1;
+        uint32_t l_minRequiredVersion_5193_minor = 0;
         break;
         observe(observations.mReads);
         mImports.glVertexPointerBounds(size, type, stride, pointer, count);
@@ -57651,7 +57543,7 @@ inline void GlesSpy::glPointSizePointerOESBounds(uint32_t type, int32_t stride, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5201_ext = ExtensionId::GL_OES_point_size_array;
+        uint32_t l_requiresExtension_5195_ext = ExtensionId::GL_OES_point_size_array;
         break;
         observe(observations.mReads);
         mImports.glPointSizePointerOESBounds(type, stride, pointer, count);
@@ -57681,7 +57573,7 @@ inline void GlesSpy::glMatrixIndexPointerOESBounds(int32_t size, uint32_t type, 
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5203_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_5197_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glMatrixIndexPointerOESBounds(size, type, stride, pointer, count);
@@ -57712,7 +57604,7 @@ inline void GlesSpy::glWeightPointerOESBounds(int32_t size, uint32_t type, int32
 
     Observations observations;
     do {
-        uint32_t l_requiresExtension_5205_ext = ExtensionId::GL_OES_matrix_palette;
+        uint32_t l_requiresExtension_5199_ext = ExtensionId::GL_OES_matrix_palette;
         break;
         observe(observations.mReads);
         mImports.glWeightPointerOESBounds(size, type, stride, pointer, count);
@@ -57799,11 +57691,11 @@ inline void GlesSpy::contextInfo(uint32_t constant_count, uint32_t* constant_nam
     do {
         std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
         if (l_context == std::shared_ptr<Context>()) {
-            std::string l_error_5208_msg = "No context bound";
+            std::string l_error_5202_msg = "No context bound";
             break;
         }
-        std::shared_ptr<Context> l_GetContext_5207_result = l_context;
-        std::shared_ptr<Context> l_ctx = l_GetContext_5207_result;
+        std::shared_ptr<Context> l_GetContext_5201_result = l_context;
+        std::shared_ptr<Context> l_ctx = l_GetContext_5201_result;
         Slice<uint32_t> l_const_names =
                 slice(constant_names, (uint64_t)(0), (uint64_t)(constant_count));
         Slice<uint32_t> l_const_offsets =
@@ -57816,733 +57708,733 @@ inline void GlesSpy::contextInfo(uint32_t constant_count, uint32_t* constant_nam
             uint32_t l_size = read(l_const_sizes, (uint64_t)(l_i));
             Slice<uint8_t> l_data =
                     slice(constant_data, (uint64_t)(l_offset), (uint64_t)(l_offset + l_size));
-            std::shared_ptr<Context> l_SetConstant_5209_ctx = l_ctx;
-            uint32_t l_SetConstant_5209_name = l_name;
-            Slice<uint8_t> l_SetConstant_5209_value = l_data;
-            switch (l_SetConstant_5209_name) {
+            std::shared_ptr<Context> l_SetConstant_5203_ctx = l_ctx;
+            uint32_t l_SetConstant_5203_name = l_name;
+            Slice<uint8_t> l_SetConstant_5203_value = l_data;
+            switch (l_SetConstant_5203_name) {
                 case GLenum::GL_RENDERER: {
-                    l_SetConstant_5209_ctx->mConstants.mRenderer =
-                            string(l_SetConstant_5209_value.as<char>());
+                    l_SetConstant_5203_ctx->mConstants.mRenderer =
+                            string(l_SetConstant_5203_value.as<char>());
                     break;
                 }
                 case GLenum::GL_VENDOR: {
-                    l_SetConstant_5209_ctx->mConstants.mVendor =
-                            string(l_SetConstant_5209_value.as<char>());
+                    l_SetConstant_5203_ctx->mConstants.mVendor =
+                            string(l_SetConstant_5203_value.as<char>());
                     break;
                 }
                 case GLenum::GL_VERSION: {
-                    l_SetConstant_5209_ctx->mConstants.mVersion =
-                            string(l_SetConstant_5209_value.as<char>());
+                    l_SetConstant_5203_ctx->mConstants.mVersion =
+                            string(l_SetConstant_5203_value.as<char>());
                     break;
                 }
                 case GLenum::GL_EXTENSIONS: {
-                    l_SetConstant_5209_ctx->mConstants.mExtensions =
-                            string(l_SetConstant_5209_value.as<char>());
+                    l_SetConstant_5203_ctx->mConstants.mExtensions =
+                            string(l_SetConstant_5203_value.as<char>());
                     break;
                 }
                 case GLenum::GL_SHADING_LANGUAGE_VERSION: {
-                    l_SetConstant_5209_ctx->mConstants.mShadingLanguageVersion =
-                            string(l_SetConstant_5209_value.as<char>());
+                    l_SetConstant_5203_ctx->mConstants.mShadingLanguageVersion =
+                            string(l_SetConstant_5203_value.as<char>());
                     break;
                 }
                 case GLenum::GL_SUBPIXEL_BITS: {
-                    l_SetConstant_5209_ctx->mConstants.mSubpixelBits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mSubpixelBits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ELEMENT_INDEX: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxElementIndex =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxElementIndex =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_3D_TEXTURE_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMax3dTextureSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMax3dTextureSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TEXTURE_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTextureSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTextureSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ARRAY_TEXTURE_LAYERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxArrayTextureLayers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxArrayTextureLayers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TEXTURE_LOD_BIAS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTextureLodBias =
-                            read(l_SetConstant_5209_value.as<GLfloat>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTextureLodBias =
+                            read(l_SetConstant_5203_value.as<GLfloat>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCubeMapTextureSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCubeMapTextureSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_RENDERBUFFER_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxRenderbufferSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxRenderbufferSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_ALIASED_POINT_SIZE_RANGE: {
-                    l_SetConstant_5209_ctx->mConstants.mAliasedPointSizeRange =
-                            l_SetConstant_5209_value.as<GLfloat>();
+                    l_SetConstant_5203_ctx->mConstants.mAliasedPointSizeRange =
+                            l_SetConstant_5203_value.as<GLfloat>();
                     break;
                 }
                 case GLenum::GL_ALIASED_LINE_WIDTH_RANGE: {
-                    l_SetConstant_5209_ctx->mConstants.mAliasedLineWidthRange =
-                            l_SetConstant_5209_value.as<GLfloat>();
+                    l_SetConstant_5203_ctx->mConstants.mAliasedLineWidthRange =
+                            l_SetConstant_5203_value.as<GLfloat>();
                     break;
                 }
                 case GLenum::GL_MULTISAMPLE_LINE_WIDTH_RANGE: {
-                    l_SetConstant_5209_ctx->mConstants.mMultisampleLineWidthRange =
-                            l_SetConstant_5209_value.as<GLfloat>();
+                    l_SetConstant_5203_ctx->mConstants.mMultisampleLineWidthRange =
+                            l_SetConstant_5203_value.as<GLfloat>();
                     break;
                 }
                 case GLenum::GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY: {
-                    l_SetConstant_5209_ctx->mConstants.mMultisampleLineWidthGranularity =
-                            read(l_SetConstant_5209_value.as<GLfloat>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMultisampleLineWidthGranularity =
+                            read(l_SetConstant_5203_value.as<GLfloat>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_DRAW_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxDrawBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxDrawBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAMEBUFFER_WIDTH: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFramebufferWidth =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFramebufferWidth =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAMEBUFFER_HEIGHT: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFramebufferHeight =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFramebufferHeight =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAMEBUFFER_LAYERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFramebufferLayers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFramebufferLayers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAMEBUFFER_SAMPLES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFramebufferSamples =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFramebufferSamples =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COLOR_ATTACHMENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxColorAttachments =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxColorAttachments =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MIN_FRAGMENT_INTERPOLATION_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMinFragmentInterpolationOffset =
-                            read(l_SetConstant_5209_value.as<GLfloat>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMinFragmentInterpolationOffset =
+                            read(l_SetConstant_5203_value.as<GLfloat>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_INTERPOLATION_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentInterpolationOffset =
-                            read(l_SetConstant_5209_value.as<GLfloat>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentInterpolationOffset =
+                            read(l_SetConstant_5203_value.as<GLfloat>(), 0);
                     break;
                 }
                 case GLenum::GL_FRAGMENT_INTERPOLATION_OFFSET_BITS: {
-                    l_SetConstant_5209_ctx->mConstants.mFragmentInterpolationOffsetBits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mFragmentInterpolationOffsetBits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VIEWPORT_DIMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxViewportDims =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mMaxViewportDims =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_MAX_SAMPLE_MASK_WORDS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxSampleMaskWords =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxSampleMaskWords =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COLOR_TEXTURE_SAMPLES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxColorTextureSamples =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxColorTextureSamples =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_DEPTH_TEXTURE_SAMPLES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxDepthTextureSamples =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxDepthTextureSamples =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_INTEGER_SAMPLES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxIntegerSamples =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxIntegerSamples =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_SERVER_WAIT_TIMEOUT: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxServerWaitTimeout =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxServerWaitTimeout =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_LAYER_PROVOKING_VERTEX: {
-                    l_SetConstant_5209_ctx->mConstants.mLayerProvokingVertex =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mLayerProvokingVertex =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED: {
-                    l_SetConstant_5209_ctx->mConstants.mPrimitiveRestartForPatchesSupported =
-                            read(l_SetConstant_5209_value.as<GLboolean>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mPrimitiveRestartForPatchesSupported =
+                            read(l_SetConstant_5203_value.as<GLboolean>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAttribRelativeOffset =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAttribRelativeOffset =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATTRIB_BINDINGS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAttribBindings =
-                            read(l_SetConstant_5209_value.as<VertexBufferBindingIndex>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAttribBindings =
+                            read(l_SetConstant_5203_value.as<VertexBufferBindingIndex>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATTRIB_STRIDE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAttribStride =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAttribStride =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ELEMENTS_INDICES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxElementsIndices =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxElementsIndices =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ELEMENTS_VERTICES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxElementsVertices =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxElementsVertices =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TEXTURE_BUFFER_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTextureBufferSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTextureBufferSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mNumCompressedTextureFormats =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mNumCompressedTextureFormats =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_COMPRESSED_TEXTURE_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mCompressedTextureFormats =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mCompressedTextureFormats =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_NUM_PROGRAM_BINARY_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mNumProgramBinaryFormats =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mNumProgramBinaryFormats =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_PROGRAM_BINARY_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mProgramBinaryFormats =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mProgramBinaryFormats =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_NUM_SHADER_BINARY_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mNumShaderBinaryFormats =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mNumShaderBinaryFormats =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_SHADER_BINARY_FORMATS: {
-                    l_SetConstant_5209_ctx->mConstants.mShaderBinaryFormats =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mShaderBinaryFormats =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_SHADER_COMPILER: {
-                    l_SetConstant_5209_ctx->mConstants.mShaderCompiler =
-                            read(l_SetConstant_5209_value.as<GLboolean>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mShaderCompiler =
+                            read(l_SetConstant_5203_value.as<GLboolean>(), 0);
                     break;
                 }
                 case GLenum::GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT: {
-                    l_SetConstant_5209_ctx->mConstants.mTextureBufferOffsetAlignment =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mTextureBufferOffsetAlignment =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_NUM_EXTENSIONS: {
-                    l_SetConstant_5209_ctx->mConstants.mNumExtensions =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mNumExtensions =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAJOR_VERSION: {
-                    l_SetConstant_5209_ctx->mConstants.mMajorVersion =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMajorVersion =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MINOR_VERSION: {
-                    l_SetConstant_5209_ctx->mConstants.mMinorVersion =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMinorVersion =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_CONTEXT_FLAGS: {
-                    l_SetConstant_5209_ctx->mConstants.mContextFlags =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mContextFlags =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATTRIBS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAttribs =
-                            read(l_SetConstant_5209_value.as<AttributeLocation>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAttribs =
+                            read(l_SetConstant_5203_value.as<AttributeLocation>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_UNIFORM_VECTORS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexUniformVectors =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexUniformVectors =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_GEN_LEVEL: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessGenLevel =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessGenLevel =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_PATCH_VERTICES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxPatchVertices =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxPatchVertices =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_PATCH_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessPatchComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessPatchComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlTotalOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlTotalOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_INPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlInputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlInputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationInputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationInputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_INPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryInputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryInputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_OUTPUT_VERTICES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryOutputVertices =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryOutputVertices =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryTotalOutputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryTotalOutputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_SHADER_INVOCATIONS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryShaderInvocations =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryShaderInvocations =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentUniformVectors =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentUniformVectors =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_INPUT_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentInputComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentInputComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMinProgramTextureGatherOffset =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMinProgramTextureGatherOffset =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxProgramTextureGatherOffset =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxProgramTextureGatherOffset =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MIN_PROGRAM_TEXEL_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMinProgramTexelOffset =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMinProgramTexelOffset =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_PROGRAM_TEXEL_OFFSET: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxProgramTexelOffset =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxProgramTexelOffset =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_WORK_GROUP_COUNT: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeWorkGroupCount =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeWorkGroupCount =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_WORK_GROUP_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeWorkGroupSize =
-                            l_SetConstant_5209_value.as<GLint>();
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeWorkGroupSize =
+                            l_SetConstant_5203_value.as<GLint>();
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeWorkGroupInvocations =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeWorkGroupInvocations =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_SHARED_MEMORY_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeSharedMemorySize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeSharedMemorySize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedComputeUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedComputeUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_UNIFORM_BUFFER_BINDINGS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxUniformBufferBindings =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxUniformBufferBindings =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_UNIFORM_BLOCK_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxUniformBlockSize =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxUniformBlockSize =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT: {
-                    l_SetConstant_5209_ctx->mConstants.mUniformBufferOffsetAlignment =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mUniformBufferOffsetAlignment =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_UNIFORM_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedUniformBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedUniformBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedVertexUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedVertexUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedTessControlUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedTessControlUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedTessEvaluationUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedTessEvaluationUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedGeometryUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedGeometryUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedFragmentUniformComponents =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedFragmentUniformComponents =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VARYING_COMPONENTS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVaryingComponents =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVaryingComponents =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VARYING_VECTORS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVaryingVectors =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVaryingVectors =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedTextureImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedTextureImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedShaderOutputResources =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedShaderOutputResources =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_UNIFORM_LOCATIONS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxUniformLocations =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxUniformLocations =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxAtomicCounterBufferBindings =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxAtomicCounterBufferBindings =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxAtomicCounterBufferSize =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxAtomicCounterBufferSize =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedAtomicCounterBuffers =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedAtomicCounterBuffers =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_ATOMIC_COUNTERS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedAtomicCounters =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedAtomicCounters =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_IMAGE_UNITS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxImageUnits =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxImageUnits =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_VERTEX_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxVertexImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxVertexImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessControlImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessControlImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxTessEvaluationImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxTessEvaluationImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_GEOMETRY_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxGeometryImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxGeometryImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_FRAGMENT_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxFragmentImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxFragmentImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMPUTE_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxComputeImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxComputeImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_IMAGE_UNIFORMS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedImageUniforms =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedImageUniforms =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxShaderStorageBufferBindings =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxShaderStorageBufferBindings =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_SHADER_STORAGE_BLOCK_SIZE: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxShaderStorageBlockSize =
-                            read(l_SetConstant_5209_value.as<GLint64>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxShaderStorageBlockSize =
+                            read(l_SetConstant_5203_value.as<GLint64>(), 0);
                     break;
                 }
                 case GLenum::GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS: {
-                    l_SetConstant_5209_ctx->mConstants.mMaxCombinedShaderStorageBlocks =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mMaxCombinedShaderStorageBlocks =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
                 case GLenum::GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT: {
-                    l_SetConstant_5209_ctx->mConstants.mShaderStorageBufferOffsetAlignment =
-                            read(l_SetConstant_5209_value.as<GLint>(), 0);
+                    l_SetConstant_5203_ctx->mConstants.mShaderStorageBufferOffsetAlignment =
+                            read(l_SetConstant_5203_value.as<GLint>(), 0);
                     break;
                 }
             }
@@ -58574,6 +58466,26 @@ inline void GlesSpy::contextInfo(uint32_t constant_count, uint32_t* constant_nam
             l_ctx->mRasterizing.mScissor.mHeight = backbuffer_height;
             l_ctx->mRasterizing.mViewport.mWidth = backbuffer_width;
             l_ctx->mRasterizing.mViewport.mHeight = backbuffer_height;
+        }
+        if (!(l_ctx->mInstances.mVertexArrays.count((VertexArrayId)(0)) > 0)) {
+            std::shared_ptr<Context> l_NewVertexArray_5204_ctx = l_ctx;
+            std::shared_ptr<VertexArray> l_array = std::shared_ptr<VertexArray>(
+                    new VertexArray(VertexBufferBindingIndexToVertexBufferBinding__R(),
+                                    AttributeLocationToVertexAttributeArray__R()));
+            for (VertexBufferBindingIndex l_i = (VertexBufferBindingIndex)(0);
+                 l_i < l_NewVertexArray_5204_ctx->mConstants.mMaxVertexAttribBindings; ++l_i) {
+                l_array->mVertexBufferBindings[l_i] = std::shared_ptr<VertexBufferBinding>(
+                        new VertexBufferBinding(0, (GLintptr)(0), (GLsizei)(16), (GLuint)(0)));
+            }
+            for (AttributeLocation l_i = (AttributeLocation)(0);
+                 l_i < l_NewVertexArray_5204_ctx->mConstants.mMaxVertexAttribs; ++l_i) {
+                l_array->mVertexAttributeArrays[l_i] =
+                        std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray(
+                                false, (GLint)(4), GLenum::GL_FLOAT, (GLboolean)(0), (GLsizei)(0),
+                                nullptr, (GLuint)(0), false, (VertexBufferBindingIndex)(l_i)));
+            }
+            std::shared_ptr<VertexArray> l_NewVertexArray_5204_result = l_array;
+            l_ctx->mInstances.mVertexArrays[(VertexArrayId)(0)] = l_NewVertexArray_5204_result;
         }
         observe(observations.mReads);
         for (AttributeLocation l_i = (AttributeLocation)(0);
