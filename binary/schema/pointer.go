@@ -60,3 +60,7 @@ func (p *Pointer) DecodeValue(d binary.Decoder) interface{} {
 func (p *Pointer) Subspace() *binary.Subspace {
 	return nil
 }
+
+func (p *Pointer) HasSubspace() bool {
+	return false
+}

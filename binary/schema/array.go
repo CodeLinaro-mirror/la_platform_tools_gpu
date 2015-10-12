@@ -78,10 +78,20 @@ func (s *Slice) Representation() string {
 }
 
 func (s *Array) Subspace() *binary.Subspace {
-	if s.ValueType.Subspace() != nil {
-		return &binary.Subspace{SubTypes: binary.TypeList{s.ValueType}}
+	if s.ValueType.HasSubspace() {
+		// We don't have examples of this in the stream, so not to bothered
+		// if this isn't an efficient approach.
+		types := make(binary.TypeList, s.Size, s.Size)
+		for i, _ := range types {
+			types[i] = s.ValueType
+		}
+		return &binary.Subspace{SubTypes: types}
 	}
 	return nil
+}
+
+func (s *Array) HasSubspace() bool {
+	return s.ValueType.HasSubspace()
 }
 
 func (s *Slice) String() string {
@@ -123,8 +133,13 @@ func (s *Slice) DecodeValue(d binary.Decoder) interface{} {
 
 func (s *Slice) Subspace() *binary.Subspace {
 	var subs binary.TypeList
-	if s.ValueType.Subspace() != nil {
+	if s.ValueType.HasSubspace() {
 		subs = binary.TypeList{s.ValueType}
 	}
 	return &binary.Subspace{Counted: true, SubTypes: subs}
+}
+
+func (s *Slice) HasSubspace() bool {
+	// Always has to decode a count (even if the loop has no sub-types).
+	return true
 }

@@ -83,7 +83,7 @@ func (e *Entity) Format(f fmt.State, c rune) {
 func (e *Entity) Subspace() *Subspace {
 	var sub TypeList
 	for _, f := range e.Fields {
-		if f.Type.Subspace() != nil {
+		if f.Type.HasSubspace() {
 			sub = append(sub, f.Type)
 		}
 	}
@@ -112,6 +112,8 @@ type Type interface {
 	EncodeValue(e Encoder, value interface{})
 	DecodeValue(d Decoder) interface{}
 	Format(f fmt.State, c rune)
+	// Returns true if Subspace() will return non-nil.
+	HasSubspace() bool
 	// Subspace returns the subspace for this type. The subspace represents
 	// the sub-types which need decoder support for nested types.
 	// Nil means that this kind of schema object never has subtypes.

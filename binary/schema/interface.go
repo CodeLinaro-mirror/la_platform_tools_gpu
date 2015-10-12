@@ -59,6 +59,10 @@ func (i *Interface) Subspace() *binary.Subspace {
 	return nil
 }
 
+func (i *Interface) HasSubspace() bool {
+	return false
+}
+
 // Variant is the Type descriptor for a field who's underlying type is dynamic, but is encoded with Variant not Object.
 type Variant struct {
 	Name string // The simple name of the type.
@@ -96,4 +100,8 @@ func (i *Variant) DecodeValue(d binary.Decoder) interface{} {
 
 func (i *Variant) Subspace() *binary.Subspace {
 	return nil
+}
+
+func (i *Variant) HasSubspace() bool {
+	return false
 }

@@ -176,6 +176,10 @@ func (p *Primitive) Subspace() *binary.Subspace {
 	return nil
 }
 
+func (p *Primitive) HasSubspace() bool {
+	return false
+}
+
 // This will convert a string to a Method, or return an error if the string was
 // not a valid method name.
 func ParseMethod(s string) (Method, error) {

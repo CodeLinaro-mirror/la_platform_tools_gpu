@@ -66,3 +66,7 @@ func (Any) DecodeValue(d binary.Decoder) interface{} {
 func (*Any) Subspace() *binary.Subspace {
 	return nil
 }
+
+func (*Any) HasSubspace() bool {
+	return false
+}

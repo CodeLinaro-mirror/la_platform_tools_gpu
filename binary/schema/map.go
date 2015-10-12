@@ -72,11 +72,16 @@ func (m *Map) DecodeValue(d binary.Decoder) interface{} {
 
 func (m *Map) Subspace() *binary.Subspace {
 	var subs binary.TypeList
-	if m.KeyType.Subspace() != nil {
+	if m.KeyType.HasSubspace() {
 		subs = binary.TypeList{m.KeyType}
 	}
-	if m.ValueType.Subspace() != nil {
+	if m.ValueType.HasSubspace() {
 		subs = append(subs, m.ValueType)
 	}
 	return &binary.Subspace{Counted: true, SubTypes: subs}
+}
+
+func (m *Map) HasSubspace() bool {
+	// Always has to decode a count (even if the loop has no sub-types).
+	return true
 }
