@@ -27,16 +27,85 @@
 #   include <dlfcn.h>
 #endif
 
-namespace gapic {
+namespace {
 
 #if TARGET_OS == GAPID_OS_WINDOWS
 
-DlLoader::DlLoader(const char* name) {
-    mLibrary = reinterpret_cast<void*>(LoadLibraryExA(name, NULL, 0));
-    if (mLibrary == nullptr) {
+void* defaultLoader(const char* name) {
+    void* res = reinterpret_cast<void*>(LoadLibraryExA(name, NULL, 0));
+    if (res == nullptr) {
         GAPID_FATAL("Can't load library %s: %d", name, GetLastError());
     }
+    return res;
 }
+
+void* defaultResolver(void* handle, const char* name) {
+    return reinterpret_cast<void*>(GetProcAddress(reinterpret_cast<HMODULE>(handle), name));
+}
+
+#elif  TARGET_OS == GAPID_OS_OSX
+
+void* defaultLoader(const char* name) {
+    if (name == nullptr) {
+        return nullptr;
+    }
+    // DYLD_FRAMEWORK_PATH takes precedence even with absolute paths.
+    // Use a symlink to get to the real library.
+    // Credit to apitrace (https://github.com/apitrace) for this nasty, but
+    // effective work-around.
+    // TODO: not thread-safe.
+    void* res = nullptr;
+    char tmp[] = "/tmp/dlopen.XXXXXX";
+    if (mktemp(tmp) != nullptr) {
+        if (symlink(name, tmp) == 0) {
+            res = dlopen(tmp, RTLD_NOW | RTLD_LOCAL | RTLD_FIRST);
+            remove(tmp);
+        }
+    }
+    if (res == nullptr) {
+        GAPID_FATAL("Can't load library %s: %s", name, dlerror());
+    }
+    return res;
+}
+
+void* defaultResolver(void* handle, const char* name) {
+    return dlsym(handle, name);
+}
+
+#else  // TARGET_OS
+
+void* defaultLoader(const char* name) {
+    void* res = dlopen(name, RTLD_NOW | RTLD_LOCAL);
+    if (res == nullptr) {
+        GAPID_FATAL("Can't load library %s: %s", name, dlerror());
+    }
+    return res;
+}
+
+void* defaultResolver(void* handle, const char* name) {
+    return dlsym(handle, name);
+}
+
+#endif  // TARGET_OS
+
+}  // anonymous namespace
+
+namespace gapic {
+
+DlLoader::Loader*   DlLoader::sLoader = defaultLoader;
+DlLoader::Resolver* DlLoader::sResolver = defaultResolver;
+
+void DlLoader::setCustomLoader(Loader* loader) {
+    sLoader = loader;
+}
+
+void DlLoader::setCustomResolver(Resolver* resolver) {
+    sResolver = resolver;
+}
+
+DlLoader::DlLoader(const char* name) : mLibrary(sLoader(name)) {}
+
+#if TARGET_OS == GAPID_OS_WINDOWS
 
 DlLoader::~DlLoader() {
     if (mLibrary != nullptr) {
@@ -45,36 +114,10 @@ DlLoader::~DlLoader() {
 }
 
 void* DlLoader::lookup(const char* name) {
-    return reinterpret_cast<void*>(GetProcAddress(reinterpret_cast<HMODULE>(mLibrary), name));
+    return sResolver(mLibrary, name);
 }
 
-#else // if TARGET_OS == GAPID_OS_WINDOWS
-
-DlLoader::DlLoader(const char* name) {
-    if (name == nullptr) {
-        mLibrary = nullptr;
-    } else {
-#if TARGET_OS == GAPID_OS_OSX
-        // DYLD_FRAMEWORK_PATH takes precedence even with absolute paths.
-        // Use a symlink to get to the real library.
-        // Credit to apitrace (https://github.com/apitrace) for this nasty, but
-        // effective work-around.
-        // TODO: not thread-safe.
-        char tmp[] = "/tmp/dlopen.XXXXXX";
-        if (mktemp(tmp) != nullptr) {
-            if (symlink(name, tmp) == 0) {
-                mLibrary = dlopen(tmp, RTLD_NOW | RTLD_LOCAL | RTLD_FIRST);
-                remove(tmp);
-            }
-        }
-#else // TARGET_OS == GAPID_OS_OSX
-        mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
-#endif // TARGET_OS == GAPID_OS_OSX
-        if (mLibrary == nullptr) {
-            GAPID_FATAL("Can't load library %s: %s", name, dlerror());
-        }
-    }
-}
+#else  // TARGET_OS
 
 DlLoader::~DlLoader() {
     if (mLibrary != nullptr) {
@@ -83,9 +126,9 @@ DlLoader::~DlLoader() {
 }
 
 void* DlLoader::lookup(const char* name) {
-    return dlsym((mLibrary ? mLibrary : RTLD_DEFAULT), name);
+    return sResolver((mLibrary ? mLibrary : RTLD_DEFAULT), name);
 }
 
-#endif
+#endif  // TARGET_OS
 
 }  // namespace gapic

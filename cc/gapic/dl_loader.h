@@ -22,6 +22,20 @@ namespace gapic {
 // Utility class for retrieving function pointers from dynamic libraries.
 class DlLoader {
 public:
+    // Loader is a function that can be used to load libraries.
+    typedef void* (Loader)(const char* name);
+
+    // Resolver is a function that can be used to find functions in libraries.
+    typedef void* (Resolver)(void* handle, const char* name);
+
+    // setCustomLoader replaces the default library loader with the specified loader for all
+    // instances of DlLoader.
+    static void setCustomLoader(Loader* loader);
+
+    // setCustomResolver replaces the default function resolver with the specified resolver
+    // for all instances of DlLoader.
+    static void setCustomResolver(Resolver* resolver);
+
     // Loads the specified dynamic library.
     // If the library cannot be loaded then this is a fatal error.
     // For *nix systems, a nullptr can be used to search the application's functions.
@@ -40,6 +54,9 @@ private:
     DlLoader& operator=(const DlLoader&) =delete;
 
     void* mLibrary;
+
+    static Loader* sLoader;
+    static Resolver* sResolver;
 };
 
 }  // namespace gapic

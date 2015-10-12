@@ -60,8 +60,8 @@ Spy::Spy()
   , mObserveFramebufferOnDrawCall(false) {
 
 #if TARGET_OS == GAPID_OS_ANDROID
-  // Use a "localabstract" pipe on Android to prevent depending on the traced application
-  // having the INTERNET permission set, required for opening and listening on a TCP socket.
+    // Use a "localabstract" pipe on Android to prevent depending on the traced application
+    // having the INTERNET permission set, required for opening and listening on a TCP socket.
     auto conn = ConnectionStream::listenPipe("gapii", true);
 #else // TARGET_OS
     auto conn = ConnectionStream::listenSocket("127.0.0.1", "9286");
