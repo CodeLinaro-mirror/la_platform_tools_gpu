@@ -18,6 +18,7 @@ package report
 import (
 	"flag"
 	"fmt"
+	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/gapis"
@@ -46,7 +47,10 @@ func doReport(flags flag.FlagSet) error {
 		return verbs.Usage("Exactly one gfx trace file expected, got %d", flags.NArg())
 	}
 
-	capture := flags.Arg(0)
+	capture, err := filepath.Abs(flags.Arg(0))
+	if err != nil {
+		return fmt.Errorf("Could not find capture file '%s': %v", flags.Arg(0), err)
+	}
 
 	logger := log.Std()
 	defer log.Close(logger)
