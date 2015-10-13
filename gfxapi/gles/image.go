@@ -127,6 +127,8 @@ func imageFormat(format GLenum, ty GLenum) image.Format {
 			return image.RGBA()
 		case GLenum_GL_UNSIGNED_SHORT_5_5_5_1:
 			return image.RGBA5551()
+		case GLenum_GL_UNSIGNED_SHORT_4_4_4_4:
+			return image.RGBA4444()
 		}
 	case GLenum_GL_ATC_RGB_AMD:
 		return image.ATC_RGB_AMD()

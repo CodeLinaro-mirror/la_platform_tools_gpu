@@ -3710,6 +3710,9 @@ image.fmtPNG{}
 fmtRGB565 : full 22 compact 20
 image.fmtRGB565{}
 
+fmtRGBA4444 : full 24 compact 22
+image.fmtRGBA4444{}
+
 fmtRGBA5551 : full 24 compact 22
 image.fmtRGBA5551{}
 
@@ -4314,12 +4317,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1438
-Full: 149849
-Total: 148858
+Count: 1439
+Full: 149873
+Total: 148882
 Average: 103
 Largest: 4837
-Compact: 46071
-Total: 45085
+Compact: 46093
+Total: 45107
 Average: 31
 Largest: 174
