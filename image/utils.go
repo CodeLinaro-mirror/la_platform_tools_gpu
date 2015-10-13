@@ -30,7 +30,7 @@ func max(a, b int) int {
 	}
 }
 
-func toByte(i int32) byte {
+func toByte(i int) byte {
 	if i < 0 {
 		return 0
 	}
@@ -38,4 +38,28 @@ func toByte(i int32) byte {
 		return 255
 	}
 	return byte(i)
+}
+
+func expand4to8(v uint64) uint64 {
+	v &= 0xF
+	return (v << 4) | v
+}
+
+func expand5to8(v uint64) uint64 {
+	v &= 0x1F
+	return (v << 3) | ((v & 0x1C) >> 2)
+}
+
+func expand6to8(v uint64) uint64 {
+	v &= 0x3F
+	return (v << 2) | ((v & 0x30) >> 4)
+}
+
+func expand7to8(v uint64) uint64 {
+	v &= 0x7F
+	return (v << 1) | ((v & 0x40) >> 6)
+}
+
+func alignup(v int, alignment int) int {
+	return alignment * ((v + (alignment - 1)) / alignment)
 }

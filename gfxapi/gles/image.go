@@ -133,7 +133,9 @@ func imageFormat(format GLenum, ty GLenum) image.Format {
 	case GLenum_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
 		return image.ATC_RGBA_EXPLICIT_ALPHA_AMD()
 	case GLenum_GL_ETC1_RGB8_OES:
-		return image.ETC1_RGB8_OES()
+		return image.ETC1_RGB8()
+	case GLenum_GL_COMPRESSED_RGB8_ETC2:
+		return image.ETC2_RGB8()
 	}
 	panic(fmt.Errorf("Unsupported input format-type pair: (%s, %s)", format.String(), ty.String()))
 }

@@ -23,7 +23,8 @@ func init() {
 	Namespace.Add((*fmtATC_RGBA_EXPLICIT_ALPHA_AMD)(nil).Class())
 	Namespace.Add((*fmtATC_RGB_AMD)(nil).Class())
 	Namespace.Add((*fmtAlpha)(nil).Class())
-	Namespace.Add((*fmtETC1_RGB8_OES)(nil).Class())
+	Namespace.Add((*fmtETC1_RGB8)(nil).Class())
+	Namespace.Add((*fmtETC2_RGB8)(nil).Class())
 	Namespace.Add((*fmtFloat32)(nil).Class())
 	Namespace.Add((*fmtLuminance)(nil).Class())
 	Namespace.Add((*fmtLuminanceAlpha)(nil).Class())
@@ -315,29 +316,55 @@ var schemafmtAlpha = &binary.Entity{
 	Fields:   []binary.Field{},
 }
 
-type binaryClassfmtETC1_RGB8_OES struct{}
+type binaryClassfmtETC1_RGB8 struct{}
 
-func (*fmtETC1_RGB8_OES) Class() binary.Class {
-	return (*binaryClassfmtETC1_RGB8_OES)(nil)
+func (*fmtETC1_RGB8) Class() binary.Class {
+	return (*binaryClassfmtETC1_RGB8)(nil)
 }
-func doEncodefmtETC1_RGB8_OES(e binary.Encoder, o *fmtETC1_RGB8_OES) {
+func doEncodefmtETC1_RGB8(e binary.Encoder, o *fmtETC1_RGB8) {
 }
-func doDecodefmtETC1_RGB8_OES(d binary.Decoder, o *fmtETC1_RGB8_OES) {
+func doDecodefmtETC1_RGB8(d binary.Decoder, o *fmtETC1_RGB8) {
 }
-func (*binaryClassfmtETC1_RGB8_OES) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodefmtETC1_RGB8_OES(e, obj.(*fmtETC1_RGB8_OES))
+func (*binaryClassfmtETC1_RGB8) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtETC1_RGB8(e, obj.(*fmtETC1_RGB8))
 }
-func (*binaryClassfmtETC1_RGB8_OES) New() binary.Object {
-	return &fmtETC1_RGB8_OES{}
+func (*binaryClassfmtETC1_RGB8) New() binary.Object {
+	return &fmtETC1_RGB8{}
 }
-func (*binaryClassfmtETC1_RGB8_OES) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodefmtETC1_RGB8_OES(d, obj.(*fmtETC1_RGB8_OES))
+func (*binaryClassfmtETC1_RGB8) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtETC1_RGB8(d, obj.(*fmtETC1_RGB8))
 }
-func (*binaryClassfmtETC1_RGB8_OES) Schema() *binary.Entity { return schemafmtETC1_RGB8_OES }
+func (*binaryClassfmtETC1_RGB8) Schema() *binary.Entity { return schemafmtETC1_RGB8 }
 
-var schemafmtETC1_RGB8_OES = &binary.Entity{
+var schemafmtETC1_RGB8 = &binary.Entity{
 	Package:  "image",
-	Identity: "fmtETC1_RGB8_OES",
+	Identity: "fmtETC1_RGB8",
+	Fields:   []binary.Field{},
+}
+
+type binaryClassfmtETC2_RGB8 struct{}
+
+func (*fmtETC2_RGB8) Class() binary.Class {
+	return (*binaryClassfmtETC2_RGB8)(nil)
+}
+func doEncodefmtETC2_RGB8(e binary.Encoder, o *fmtETC2_RGB8) {
+}
+func doDecodefmtETC2_RGB8(d binary.Decoder, o *fmtETC2_RGB8) {
+}
+func (*binaryClassfmtETC2_RGB8) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtETC2_RGB8(e, obj.(*fmtETC2_RGB8))
+}
+func (*binaryClassfmtETC2_RGB8) New() binary.Object {
+	return &fmtETC2_RGB8{}
+}
+func (*binaryClassfmtETC2_RGB8) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtETC2_RGB8(d, obj.(*fmtETC2_RGB8))
+}
+func (*binaryClassfmtETC2_RGB8) Schema() *binary.Entity { return schemafmtETC2_RGB8 }
+
+var schemafmtETC2_RGB8 = &binary.Entity{
+	Package:  "image",
+	Identity: "fmtETC2_RGB8",
 	Fields:   []binary.Field{},
 }
 

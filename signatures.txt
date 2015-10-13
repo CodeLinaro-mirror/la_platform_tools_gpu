@@ -3689,8 +3689,11 @@ image.fmtATC_RGB_AMD{}
 fmtAlpha : full 21 compact 19
 image.fmtAlpha{}
 
-fmtETC1_RGB8_OES : full 29 compact 27
-image.fmtETC1_RGB8_OES{}
+fmtETC1_RGB8 : full 25 compact 23
+image.fmtETC1_RGB8{}
+
+fmtETC2_RGB8 : full 25 compact 23
+image.fmtETC2_RGB8{}
 
 fmtFloat32 : full 23 compact 21
 image.fmtFloat32{}
@@ -4311,12 +4314,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1437
-Full: 149828
-Total: 148837
+Count: 1438
+Full: 149849
+Total: 148858
 Average: 103
 Largest: 4837
-Compact: 46052
-Total: 45066
+Compact: 46071
+Total: 45085
 Average: 31
 Largest: 174
