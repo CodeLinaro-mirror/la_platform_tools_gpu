@@ -56,8 +56,11 @@ inline bool isLittleEndian() {
 namespace gapii {
 
 Spy::Spy()
-  : mObserveFramebufferOnEOF(false)
-  , mObserveFramebufferOnDrawCall(false) {
+  : mNumFrames(0)
+  , mNumDraws(0)
+  , mNumDrawsPerFrame(0)
+  , mObserveFrameFrequency(0)
+  , mObserveDrawFrequency(0) {
 
 #if TARGET_OS == GAPID_OS_ANDROID
     // Use a "localabstract" pipe on Android to prevent depending on the traced application
@@ -69,15 +72,15 @@ Spy::Spy()
 
     ConnectionHeader header;
     if (header.read(conn.get())) {
-        mObserveFramebufferOnEOF = header.mObserveFramebufferOnEOF != 0;
-        mObserveFramebufferOnDrawCall = header.mObserveFramebufferOnDrawCall != 0;
+        mObserveFrameFrequency = header.mObserveFrameFrequency;
+        mObserveDrawFrequency = header.mObserveDrawFrequency;
     } else {
         GAPID_WARNING("Failed to read connection header");
     }
 
     GAPID_INFO("GAPII connection established. Settings:");
-    GAPID_INFO("Observe framebuffers on EOF:       %s", mObserveFramebufferOnEOF ? "yes" : "no");
-    GAPID_INFO("Observe framebuffers on draw call: %s", mObserveFramebufferOnDrawCall ? "yes" : "no");
+    GAPID_INFO("Observe framebuffer every %d frames", mObserveFrameFrequency);
+    GAPID_INFO("Observe framebuffer every %d draws", mObserveDrawFrequency);
 
     mEncoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(conn));
     mEncoder->String("GapiiTraceFile_V1.1");
@@ -284,24 +287,23 @@ void Spy::setContextInfo(int32_t backbuffer_width, int32_t backbuffer_height,
                          preserve_buffers_on_swap);
 }
 
-int Spy::eglSwapBuffers(void* display, void* surface) {
-    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
-    return GlesSpy::eglSwapBuffers(display, surface);
+void Spy::onPostDrawCallCommand() {
+    if (mObserveDrawFrequency != 0 && (mNumDraws % mObserveDrawFrequency == 0)) {
+        GAPID_INFO("Observe framebuffer after draw call %d", mNumDraws);
+        observeFramebuffer();
+    }
+    mNumDraws++;
+    mNumDrawsPerFrame++;
 }
 
-void Spy::wglSwapBuffers(void* hdc) {
-    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
-    GlesSpy::wglSwapBuffers(hdc);
-}
-
-void Spy::glXSwapBuffers(void* display, void* drawable) {
-    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
-    GlesSpy::glXSwapBuffers(display, drawable);
-}
-
-int Spy::CGLFlushDrawable(void* ctx) {
-    if (mObserveFramebufferOnEOF) { observeFramebuffer(); }
-    return GlesSpy::CGLFlushDrawable(ctx);
+void Spy::onPreEndOfFrameCommand() {
+    if (mObserveFrameFrequency != 0 && (mNumFrames % mObserveFrameFrequency == 0)) {
+        GAPID_INFO("Observe framebuffer after frame %d", mNumFrames);
+        observeFramebuffer();
+    }
+    GAPID_INFO("Number of draws per frame: %d", mNumDrawsPerFrame);
+    mNumFrames++;
+    mNumDrawsPerFrame = 0;
 }
 
 // observeFramebuffer captures the currently bound framebuffer, and writes

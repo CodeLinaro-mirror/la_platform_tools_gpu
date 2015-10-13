@@ -22,15 +22,15 @@ import (
 
 var magic = [4]byte{'s', 'p', 'y', '0'}
 
-const version = 1
+const version = 2
 
-// The GAPII header version 1 is defined as:
+// The GAPII header version 2 is defined as:
 //
 // struct ConnectionHeader {
 //   uint8_t  mMagic[4];                     // 's', 'p', 'y', '0'
-//   uint32_t mVersion;                      // 1
-//   uint8_t  mObserveFramebufferOnEOF;      // non-zero == enabled
-//   uint8_t  mObserveFramebufferOnDrawCall; // non-zero == enabled
+//   uint32_t mVersion;                      // 2
+//   uint32_t mObserveFrameFrequency;        // non-zero == enabled
+//   uint32_t mObserveDrawFrequency;         // non-zero == enabled
 // };
 //
 // All fields are encoded little-endian with no compression, regardless of
@@ -38,20 +38,12 @@ const version = 1
 //   platform/tools/gpu/cc/gapii/connection_header.h
 
 func sendHeader(out io.Writer, options Options) error {
-	b8 := func(b bool) uint8 {
-		if b {
-			return 1
-		} else {
-			return 0
-		}
-	}
-
 	w := endian.Writer(out, endian.Little)
 	for _, m := range magic {
 		w.Uint8(m)
 	}
 	w.Uint32(version)
-	w.Uint8(b8(options.ObserveFramebufferOnEOF))
-	w.Uint8(b8(options.ObserveFramebufferOnDrawCall))
+	w.Uint32(options.ObserveFrameFreqency)
+	w.Uint32(options.ObserveDrawFrequency)
 	return w.Error()
 }

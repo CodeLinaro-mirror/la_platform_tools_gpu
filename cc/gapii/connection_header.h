@@ -40,9 +40,9 @@ public:
     bool read(gapic::StreamReader* reader);
 
     uint8_t  mMagic[4];                     // 's', 'p', 'y', '0'
-    uint32_t mVersion;                      // 1
-    uint8_t  mObserveFramebufferOnEOF;      // non-zero == enabled
-    uint8_t  mObserveFramebufferOnDrawCall; // non-zero == enabled
+    uint32_t mVersion;                      // 2
+    uint32_t mObserveFrameFrequency;        // non-zero == enabled
+    uint32_t mObserveDrawFrequency;         // non-zero == enabled
 };
 
 } // namespace gapii

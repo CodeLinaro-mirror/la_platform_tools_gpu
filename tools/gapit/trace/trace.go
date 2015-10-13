@@ -34,13 +34,14 @@ var (
 		Name:      "trace",
 		ShortHelp: "Captures a gfx trace from an application",
 	}
-	device   = verb.Flags.String("device", "", "the device to capture on")
-	spyport  = verb.Flags.Int("i", 9286, "gapii TCP port to connect to")
-	duration = verb.Flags.Duration("d", 0, "duration to trace for")
-	output   = verb.Flags.String("out", "", "the file to generate")
-	debug    = verb.Flags.Bool("debug", false, "use the debug spy .so")
-	local    = verb.Flags.Bool("local", false, "capture a local program instead of using ADB")
-	observe  = verb.Flags.String("observe", "", "comma-seperated list of points to capture the framebuffer [frame, draw]")
+	device        = verb.Flags.String("device", "", "the device to capture on")
+	spyport       = verb.Flags.Int("i", 9286, "gapii TCP port to connect to")
+	duration      = verb.Flags.Duration("d", 0, "duration to trace for")
+	output        = verb.Flags.String("out", "", "the file to generate")
+	debug         = verb.Flags.Bool("debug", false, "use the debug spy .so")
+	local         = verb.Flags.Bool("local", false, "capture a local program instead of using ADB")
+	observeFrames = verb.Flags.Uint("observeFrames", 0, "capture the framebuffer every n frames (0 to disable)")
+	observeDraws  = verb.Flags.Uint("observeDraws", 0, "capture the framebuffer every n draws (0 to disable)")
 )
 
 const usage = `gapit: A tool to trace graphics calls on android.
@@ -63,19 +64,9 @@ func doTrace(flags flag.FlagSet) error {
 		info = nil
 	}
 
-	options := gapii.Options{}
-	if *observe != "" {
-		for _, o := range strings.Split(*observe, ",") {
-			o = strings.TrimSpace(o)
-			switch o {
-			case "draws", "draw", "d":
-				options.ObserveFramebufferOnDrawCall = true
-			case "frames", "frame", "f":
-				options.ObserveFramebufferOnEOF = true
-			default:
-				return fmt.Errorf("Unknown observation type %s", o)
-			}
-		}
+	options := gapii.Options{
+		ObserveFrameFreqency: uint32(*observeFrames),
+		ObserveDrawFrequency: uint32(*observeDraws),
 	}
 
 	logger := log.Writer(info, os.Stdout, os.Stderr, nil)

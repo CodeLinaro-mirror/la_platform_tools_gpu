@@ -38,10 +38,8 @@ public:
     Bool glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
     Bool glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx);
 
-    int eglSwapBuffers(void* display, void* surface);
-    void wglSwapBuffers(void* hdc);
-    void glXSwapBuffers(void* display, void* drawable);
-    int CGLFlushDrawable(void* ctx);
+    void onPostDrawCallCommand();
+    void onPreEndOfFrameCommand();
 
     inline void RegisterSymbol(const std::string& name, void* symbol) {
         mSymbols.emplace(name, symbol);
@@ -69,8 +67,11 @@ private:
     std::shared_ptr<gapic::Encoder> mEncoder;
     std::unordered_map<std::string, void*> mSymbols;
 
-    bool mObserveFramebufferOnEOF;
-    bool mObserveFramebufferOnDrawCall;
+    int mNumFrames;
+    int mNumDraws;
+    int mNumDrawsPerFrame;
+    int mObserveFrameFrequency;
+    int mObserveDrawFrequency;
 };
 
 } // namespace gapii
