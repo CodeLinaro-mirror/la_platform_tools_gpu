@@ -16,11 +16,13 @@ package image
 
 import (
 	"bytes"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 )
 
 type fmtPNG struct{ binary.Generate }
@@ -49,5 +51,57 @@ func init() {
 			buffer := bytes.Buffer{}
 			png.Encode(&buffer, img)
 			return buffer.Bytes(), nil
+		})
+	RegisterConverter(PNG(), RGBA(),
+		func(src []byte, width, height int) ([]byte, error) {
+			img, err := png.Decode(bytes.NewReader(src))
+			if err != nil {
+				return nil, err
+			}
+			if w := img.Bounds().Dx(); width != w {
+				return nil, fmt.Errorf("PNG width was not as expected. Got: %v, expected: %v", w, width)
+			}
+			if h := img.Bounds().Dy(); height != h {
+				return nil, fmt.Errorf("PNG width was not as expected. Got: %v, expected: %v", h, height)
+			}
+
+			var f Format
+			buf := &bytes.Buffer{}
+			e := endian.Writer(buf, endian.Little)
+
+			switch img.ColorModel() {
+			case color.RGBA64Model:
+				return nil, fmt.Errorf("Unsupported color model 'RGBA64'")
+			case color.RGBAModel, color.NRGBAModel:
+				f = RGBA()
+				for y := 0; y < height; y++ {
+					for x := 0; x < width; x++ {
+						r, g, b, a := img.At(x, y).RGBA()
+						e.Uint8(uint8(r >> 8))
+						e.Uint8(uint8(g >> 8))
+						e.Uint8(uint8(b >> 8))
+						e.Uint8(uint8(a >> 8))
+					}
+				}
+			case color.NRGBA64Model:
+				return nil, fmt.Errorf("Unsupported color model 'NRGBA64'")
+			case color.AlphaModel:
+				return nil, fmt.Errorf("Unsupported color model 'Alpha'")
+			case color.Alpha16Model:
+				return nil, fmt.Errorf("Unsupported color model 'Alpha16'")
+			case color.GrayModel:
+				return nil, fmt.Errorf("Unsupported color model 'Gray'")
+			case color.Gray16Model:
+				f = Float32()
+				for y := 0; y < height; y++ {
+					for x := 0; x < width; x++ {
+						r, _, _, _ := img.At(x, y).RGBA()
+						e.Float32(float32(r) / 0xffff)
+					}
+				}
+			default:
+				return nil, fmt.Errorf("Unrecognised color model")
+			}
+			return Convert(buf.Bytes(), width, height, f, RGBA())
 		})
 }
