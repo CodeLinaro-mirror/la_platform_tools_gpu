@@ -19,31 +19,35 @@ package gapis
 import (
 	"fmt"
 
+	"net"
+
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
+	"android.googlesource.com/platform/tools/gpu/client/process"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
-	"android.googlesource.com/platform/tools/gpu/process"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 const mtu = 1024
 
-// Connect attempts to connect to an existing GAPIS process at the specified
-// address, returning the service interface and schema on success. If no GAPIS
-// instance can be found, then a new instance will be created.
-func Connect(address, data string, logger log.Logger) (service.Service, schema.Message, error) {
-	args := []string{
-		"--rpc", address,
-		"--data", data,
-		"--shutdown_on_disconnect",
+// Connect attempts to connect to a GAPIS process.
+// If port is zero, a new GAPIS server will be started, otherwise a connection will be made to the specified port.
+func Connect(port int, logger log.Logger) (service.Service, schema.Message, error) {
+	var socket net.Conn
+	var err error
+	if port == 0 {
+		args := []string{
+			"--rpc", "localhost:0",
+			"--shutdown_on_disconnect",
+		}
+		socket, err = process.StartAndConnect("gapis", args...)
+	} else {
+		socket, err = process.Connect(port)
 	}
-
-	socket, err := process.ConnectStartIfNeeded(address, "gapis", args...)
 	if err != nil {
 		return nil, schema.Message{}, err
 	}
-
 	multiplexer := multiplexer.New(socket, socket, socket, mtu, logger, nil)
 	client := service.NewClient(multiplexer, nil)
 

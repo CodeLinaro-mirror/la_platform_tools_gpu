@@ -69,7 +69,7 @@ func CreateApplicationContext(theme gxui.Theme, config Config) (*ApplicationCont
 	appCtx.events.Init()
 
 	go func() {
-		client, schema, err := gapis.Connect(config.Gapis, config.DataPath, logger)
+		client, schema, err := gapis.Connect(config.Gapis, logger)
 		if err != nil {
 			log.E(logger, "Failed to connect to GAPIS: %v", err)
 			return

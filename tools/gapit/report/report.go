@@ -33,8 +33,7 @@ var (
 		Name:      "report",
 		ShortHelp: "Check a capture replays without issues",
 	}
-	gapisAddr = verb.Flags.String("gapis", "localhost:6700", "gapis tcp host:port to connect to")
-	dataPath  = verb.Flags.String("data", "data", "Path to the server's data folder")
+	gapisPort = verb.Flags.Int("gapis", 0, "gapis tcp port to connect to, 0 means start new instance.")
 )
 
 func init() {
@@ -55,7 +54,7 @@ func doReport(flags flag.FlagSet) error {
 	logger := log.Std()
 	defer log.Close(logger)
 
-	client, _, err := gapis.Connect(*gapisAddr, *dataPath, logger)
+	client, _, err := gapis.Connect(*gapisPort, logger)
 	if err != nil {
 		return fmt.Errorf("Failed to connect to the GAPIS server: %v", err)
 	}

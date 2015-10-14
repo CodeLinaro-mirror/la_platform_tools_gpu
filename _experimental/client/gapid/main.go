@@ -27,8 +27,8 @@ import (
 )
 
 var (
-	data         = flag.String("data", "data", "path to data")
-	gapis        = flag.String("gapis", "localhost:6700", "gapis tcp host:port to connect to")
+	gapis        = flag.Int("gapis", 0, "gapis tcp port to connect to, 0 means start new instance")
+	gapir        = flag.Int("gapir", 0, "gapir tcp port to connect to, 0 means start new instance")
 	capture      = flag.String("capture", "", "name of the capture to load")
 	gxuiDebug    = flag.Bool("gxuidebug", false, "enable GXUI debug")
 	replayDevice = flag.String("device", "Local machine", "name of the device to replay from")
@@ -46,7 +46,7 @@ func run() error {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
-	dataAbsPath, err := filepath.Abs(*data)
+	logAbsPath, err := filepath.Abs("logs")
 	if err != nil {
 		return err
 	}
@@ -54,8 +54,9 @@ func run() error {
 	go http.ListenAndServe("localhost:6060", nil) // Profiling
 
 	config := client.Config{
-		DataPath:       dataAbsPath,
+		LogPath:        logAbsPath,
 		Gapis:          *gapis,
+		Gapir:          *gapir,
 		GXUIDebug:      *gxuiDebug,
 		InitialCapture: *capture,
 		ReplayDevice:   *replayDevice,

@@ -31,8 +31,9 @@ import (
 )
 
 type Config struct {
-	DataPath       string
-	Gapis          string
+	LogPath        string
+	Gapis          int
+	Gapir          int
 	GXUIDebug      bool
 	InitialCapture string
 	ReplayDevice   string
@@ -293,7 +294,7 @@ func (a app) main(driver gxui.Driver) {
 	}
 
 	// Create the log file
-	logPath, _ := filepath.Abs(filepath.Join(a.DataPath, "..", "logs", "client.log"))
+	logPath, _ := filepath.Abs(filepath.Join(a.LogPath, "client.log"))
 	fmt.Printf("Client log file created at: %s\n", logPath)
 	logFile, err := log.File(logPath)
 	if err != nil {
