@@ -319,6 +319,14 @@ func resolveThumbnail(v interface{}, p *path.Thumbnail, d database.Database, l l
 	targetWidth := uint32(float32(img.Width) * scale)
 	targetHeight := uint32(float32(img.Height) * scale)
 
+	// Prevent scaling to zero size.
+	if targetWidth == 0 {
+		targetWidth = 1
+	}
+	if targetHeight == 0 {
+		targetHeight = 1
+	}
+
 	if targetWidth == img.Width && targetHeight == img.Height {
 		// Image is already at requested target size.
 		return img, err
