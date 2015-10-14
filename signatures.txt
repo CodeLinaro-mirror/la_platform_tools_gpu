@@ -3695,6 +3695,9 @@ image.fmtETC1_RGB8{}
 fmtETC2_RGB8 : full 25 compact 23
 image.fmtETC2_RGB8{}
 
+fmtETC2_RGBA8_EAC : full 30 compact 28
+image.fmtETC2_RGBA8_EAC{}
+
 fmtFloat32 : full 23 compact 21
 image.fmtFloat32{}
 
@@ -4317,12 +4320,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1439
-Full: 149873
-Total: 148882
+Count: 1440
+Full: 149903
+Total: 148912
 Average: 103
 Largest: 4837
-Compact: 46093
-Total: 45107
+Compact: 46121
+Total: 45135
 Average: 31
 Largest: 174

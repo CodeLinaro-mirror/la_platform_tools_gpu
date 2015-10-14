@@ -30,6 +30,7 @@ func TestDecompressors(t *testing.T) {
 	}{
 		{name: "etc1_rgb8", format: image.ETC1_RGB8(), w: 700, h: 530},
 		{name: "etc2_rgb8", format: image.ETC2_RGB8(), w: 700, h: 530},
+		{name: "etc2_rgb8_eac", format: image.ETC2_RGBA8_EAC(), w: 700, h: 530},
 	} {
 		inPath := test.name + ".bin"
 		refPath := test.name + ".png"

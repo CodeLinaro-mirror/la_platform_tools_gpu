@@ -25,6 +25,7 @@ func init() {
 	Namespace.Add((*fmtAlpha)(nil).Class())
 	Namespace.Add((*fmtETC1_RGB8)(nil).Class())
 	Namespace.Add((*fmtETC2_RGB8)(nil).Class())
+	Namespace.Add((*fmtETC2_RGBA8_EAC)(nil).Class())
 	Namespace.Add((*fmtFloat32)(nil).Class())
 	Namespace.Add((*fmtLuminance)(nil).Class())
 	Namespace.Add((*fmtLuminanceAlpha)(nil).Class())
@@ -366,6 +367,32 @@ func (*binaryClassfmtETC2_RGB8) Schema() *binary.Entity { return schemafmtETC2_R
 var schemafmtETC2_RGB8 = &binary.Entity{
 	Package:  "image",
 	Identity: "fmtETC2_RGB8",
+	Fields:   []binary.Field{},
+}
+
+type binaryClassfmtETC2_RGBA8_EAC struct{}
+
+func (*fmtETC2_RGBA8_EAC) Class() binary.Class {
+	return (*binaryClassfmtETC2_RGBA8_EAC)(nil)
+}
+func doEncodefmtETC2_RGBA8_EAC(e binary.Encoder, o *fmtETC2_RGBA8_EAC) {
+}
+func doDecodefmtETC2_RGBA8_EAC(d binary.Decoder, o *fmtETC2_RGBA8_EAC) {
+}
+func (*binaryClassfmtETC2_RGBA8_EAC) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodefmtETC2_RGBA8_EAC(e, obj.(*fmtETC2_RGBA8_EAC))
+}
+func (*binaryClassfmtETC2_RGBA8_EAC) New() binary.Object {
+	return &fmtETC2_RGBA8_EAC{}
+}
+func (*binaryClassfmtETC2_RGBA8_EAC) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodefmtETC2_RGBA8_EAC(d, obj.(*fmtETC2_RGBA8_EAC))
+}
+func (*binaryClassfmtETC2_RGBA8_EAC) Schema() *binary.Entity { return schemafmtETC2_RGBA8_EAC }
+
+var schemafmtETC2_RGBA8_EAC = &binary.Entity{
+	Package:  "image",
+	Identity: "fmtETC2_RGBA8_EAC",
 	Fields:   []binary.Field{},
 }
 
