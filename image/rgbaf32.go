@@ -16,6 +16,7 @@ package image
 
 import (
 	"bytes"
+	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
@@ -88,6 +89,12 @@ type rgbaF32 struct {
 func (f fmtRGBAF32) Resize(data []byte, srcW, srcH, dstW, dstH int) ([]byte, error) {
 	if err := f.Check(data, srcW, srcH); err != nil {
 		return nil, err
+	}
+	if srcW <= 0 || srcH <= 0 {
+		return nil, fmt.Errorf("Invalid source size for Resize: %dx%d", srcW, srcH)
+	}
+	if dstW <= 0 || dstH <= 0 {
+		return nil, fmt.Errorf("Invalid target size for Resize: %dx%d", dstW, dstH)
 	}
 	r := endian.Reader(bytes.NewReader(data), endian.Little)
 	bufA, bufB := make([]rgbaF32, srcW*srcH), make([]rgbaF32, srcW*srcH)
