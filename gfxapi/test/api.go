@@ -281,23 +281,84 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
-// Charᵖᵖ is a pointer to a Charᵖ element.
-// Note: Pointers are stored differently between the application pool and internal pools.
-//  * The application pool stores pointers as an address of an architecture-dependant size.
-//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
-//    pool identifier.
-type Charᵖᵖ struct {
+// Charᶜᵖ is a pointer to a byte element.
+type Charᶜᵖ struct {
 	binary.Generate
 	memory.Pointer
 }
 
-// NewCharᵖᵖ returns a Charᵖᵖ that points to addr in the application pool.
-func NewCharᵖᵖ(addr uint64) Charᵖᵖ {
-	return Charᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+// NewCharᶜᵖ returns a Charᶜᵖ that points to addr in the application pool.
+func NewCharᶜᵖ(addr uint64) Charᶜᵖ {
+	return Charᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
 }
 
-// ElementSize returns the size in bytes of an element that Charᵖᵖ points to.
-func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that Charᶜᵖ points to.
+func (p Charᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	return uint64(1)
+}
+
+// Read reads and returns the byte element at the pointer.
+func (p Charᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) byte {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the byte element at the pointer.
+func (p Charᶜᵖ) Write(value byte, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]byte{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Charᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Charᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Charᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+func (p Charᶜᵖ) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) Charˢ {
+	i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pointer.Pool].At(p.Address), ϟd, ϟl)
+	for {
+		i++
+		if b := d.Uint8(); b == 0 {
+			return Charˢ(p.Slice(0, i, ϟs))
+		}
+	}
+}
+
+// Slice returns a new Charˢ from the pointer using start and end indices.
+func (p Charᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Charᶜᵖᶜᵖ is a pointer to a Charᶜᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type Charᶜᵖᶜᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewCharᶜᵖᶜᵖ returns a Charᶜᵖᶜᵖ that points to addr in the application pool.
+func NewCharᶜᵖᶜᵖ(addr uint64) Charᶜᵖᶜᵖ {
+	return Charᶜᵖᶜᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Charᶜᵖᶜᵖ points to.
+func (p Charᶜᵖᶜᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	if p.Pointer.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
@@ -305,38 +366,96 @@ func (p Charᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
 	}
 }
 
-// Read reads and returns the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖ {
+// Read reads and returns the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᶜᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
 	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
 }
 
-// Write writes value to the Charᵖ element at the pointer.
-func (p Charᵖᵖ) Write(value Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	p.Slice(0, 1, ϟs).Write([]Charᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+// Write writes value to the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᶜᵖ) Write(value Charᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Charᶜᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
 }
 
 // OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+func (p Charᶜᵖᶜᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᶜᵖ {
 	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
 // OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
-func (p Charᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+func (p Charᶜᵖᶜᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᶜᵖ {
 	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
-func (p Charᵖᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖᵖ {
+func (p Charᶜᵖᶜᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᶜᵖ {
 	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
 	return p
 }
 
-// Slice returns a new Charᵖˢ from the pointer using start and end indices.
-func (p Charᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
+// Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
+func (p Charᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+
+// Charᶜᵖᵖ is a pointer to a Charᶜᵖ element.
+// Note: Pointers are stored differently between the application pool and internal pools.
+//  * The application pool stores pointers as an address of an architecture-dependant size.
+//  * Internal pools store pointers as an 64-bit unsigned address and a 32-bit unsigned
+//    pool identifier.
+type Charᶜᵖᵖ struct {
+	binary.Generate
+	memory.Pointer
+}
+
+// NewCharᶜᵖᵖ returns a Charᶜᵖᵖ that points to addr in the application pool.
+func NewCharᶜᵖᵖ(addr uint64) Charᶜᵖᵖ {
+	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: addr, Pool: memory.ApplicationPool}}
+}
+
+// ElementSize returns the size in bytes of an element that Charᶜᵖᵖ points to.
+func (p Charᶜᵖᵖ) ElementSize(ϟs *gfxapi.State) uint64 {
+	if p.Pointer.Pool == memory.ApplicationPool {
+		return uint64(ϟs.Architecture.PointerSize)
+	} else {
+		return 12
+	}
+}
+
+// Read reads and returns the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᵖ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖ {
+	return p.Slice(0, 1, ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)[0]
+}
+
+// Write writes value to the Charᶜᵖ element at the pointer.
+func (p Charᶜᵖᵖ) Write(value Charᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	p.Slice(0, 1, ϟs).Write([]Charᶜᵖ{value}, ϟa, ϟs, ϟd, ϟl, ϟb)
+}
+
+// OnRead calls the backing pool's OnRead callback. p is returned so calls can be chained.
+func (p Charᶜᵖᵖ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᵖ {
+	p.Slice(0, 1, ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// OnWrite calls the backing pool's OnWrite callback. p is returned so calls can be chained.
+func (p Charᶜᵖᵖ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᵖ {
+	p.Slice(0, 1, ϟs).OnWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+func (p Charᶜᵖᵖ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖᵖ {
+	p.Slice(0, 1, ϟs).ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+	return p
+}
+
+// Slice returns a new Charᶜᵖˢ from the pointer using start and end indices.
+func (p Charᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
+	if start > end {
+		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
+	}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
 
 // S8ᵖ is a pointer to a int8 element.
@@ -1154,34 +1273,34 @@ func (s Charˢ) String() string {
 	return fmt.Sprintf("byte(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
-// Charᵖˢ is a slice of Charᵖ.
-type Charᵖˢ struct {
+// Charᶜᵖˢ is a slice of Charᶜᵖ.
+type Charᶜᵖˢ struct {
 	binary.Generate
 	SliceInfo
 }
 
-// MakeCharᵖˢ returns a Charᵖˢ backed by a new memory pool.
-func MakeCharᵖˢ(count uint64, ϟs *gfxapi.State) Charᵖˢ {
+// MakeCharᶜᵖˢ returns a Charᶜᵖˢ backed by a new memory pool.
+func MakeCharᶜᵖˢ(count uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = &memory.Pool{}
 	ϟs.NextPoolID++
-	return Charᵖˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Count: count, Root: memory.Pointer{Pool: id}}}
 }
 
-// Clone returns a copy of the Charᵖˢ in a new memory pool.
-func (s Charᵖˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+// Clone returns a copy of the Charᶜᵖˢ in a new memory pool.
+func (s Charᶜᵖˢ) Clone(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	pool := &memory.Pool{}
 	pool.Write(0, ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)))
 	id := ϟs.NextPoolID
 	ϟs.Memory[id] = pool
 	ϟs.NextPoolID++
-	dst := Charᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
+	dst := Charᶜᵖˢ{SliceInfo: SliceInfo{Count: s.Count, Root: memory.Pointer{Pool: id}}}
 	return dst
 }
 
-// ElementSize returns the size in bytes of an element that Charᵖˢ points to.
-func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
+// ElementSize returns the size in bytes of an element that Charᶜᵖˢ points to.
+func (s Charᶜᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 	if s.Root.Pool == memory.ApplicationPool {
 		return uint64(ϟs.Architecture.PointerSize)
 	} else {
@@ -1190,13 +1309,13 @@ func (s Charᵖˢ) ElementSize(ϟs *gfxapi.State) uint64 {
 }
 
 // Range returns the memory range this slice represents in the underlying pool.
-func (s Charᵖˢ) Range(ϟs *gfxapi.State) memory.Range {
+func (s Charᶜᵖˢ) Range(ϟs *gfxapi.State) memory.Range {
 	return memory.Range{Base: s.Base, Size: s.Count * s.ElementSize(ϟs)}
 }
 
 // ResourceID returns an identifier to a resource representing the data of
 // this slice.
-func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
+func (s Charᶜᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.ID {
 	id, err := ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)).ResourceID(ϟd, ϟl)
 	if err != nil {
 		panic(err)
@@ -1205,27 +1324,27 @@ func (s Charᵖˢ) ResourceID(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 }
 
 // Decoder returns a memory decoder for the slice.
-func (s Charᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
+func (s Charᶜᵖˢ) Decoder(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) binary.Decoder {
 	return ϟs.MemoryDecoder(ϟs.Memory[s.Root.Pool].Slice(s.Range(ϟs)), ϟd, ϟl)
 }
 
 // Encoder returns a memory encoder for the slice.
-func (s Charᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
+func (s Charᶜᵖˢ) Encoder(ϟs *gfxapi.State) binary.Encoder {
 	return ϟs.MemoryEncoder(ϟs.Memory[s.Root.Pool], s.Range(ϟs))
 }
 
-// AsCharᵖˢ returns s cast to a Charᵖˢ.
+// AsCharᶜᵖˢ returns s cast to a Charᶜᵖˢ.
 // The returned slice length will be calculated so that the returned slice is
 // no longer (in bytes) than s.
-func AsCharᵖˢ(s Slice, ϟs *gfxapi.State) Charᵖˢ {
-	out := Charᵖˢ{SliceInfo: s.Info()}
+func AsCharᶜᵖˢ(s Slice, ϟs *gfxapi.State) Charᶜᵖˢ {
+	out := Charᶜᵖˢ{SliceInfo: s.Info()}
 	out.Count = (out.Count * s.ElementSize(ϟs)) / out.ElementSize(ϟs)
 	return out
 }
 
-// Read reads and returns all the Charᵖ elements in this Charᵖˢ.
-func (s Charᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᵖ {
-	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᵖ, s.Count)
+// Read reads and returns all the Charᶜᵖ elements in this Charᶜᵖˢ.
+func (s Charᶜᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []Charᶜᵖ {
+	d, res := s.Decoder(ϟs, ϟd, ϟl), make([]Charᶜᵖ, s.Count)
 	s.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	for i := range res {
 		if s.Root.Pool == memory.ApplicationPool {
@@ -1233,7 +1352,7 @@ func (s Charᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 			if d.Error() != nil {
 				panic(d.Error())
 			}
-			res[i] = NewCharᵖ(ptr)
+			res[i] = NewCharᶜᵖ(ptr)
 		} else {
 			if d.Value(&res[i]); d.Error() != nil {
 				panic(d.Error())
@@ -1245,7 +1364,7 @@ func (s Charᵖˢ) Read(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database,
 
 // Write copies elements from src to this slice. The number of elements copied is returned
 // which is the minimum of s.Count and len(src).
-func (s Charᵖˢ) Write(src []Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
+func (s Charᶜᵖˢ) Write(src []Charᶜᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) uint64 {
 	count := min(s.Count, uint64(len(src)))
 	s = s.Slice(0, count, ϟs)
 	e := s.Encoder(ϟs)
@@ -1267,11 +1386,11 @@ func (s Charᵖˢ) Write(src []Charᵖ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd da
 // Copy copies elements from src to this slice.
 // The number of elements copied is the minimum of dst.Count and src.Count.
 // The slices of this and dst to the copied elements is returned.
-func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Charᵖˢ) {
+func (dst Charᶜᵖˢ) Copy(src Charᶜᵖˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (d, s Charᶜᵖˢ) {
 	count := min(dst.Count, src.Count)
 	dst, src = dst.Slice(0, count, ϟs), src.Slice(0, count, ϟs)
 	if (dst.Root.Pool == memory.ApplicationPool) != (src.Root.Pool == memory.ApplicationPool) {
-		dst.Write(src.Read(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb) // Element-wise copy so we can convert u64 <-> Charᵖᵖ
+		dst.Write(src.Read(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb) // Element-wise copy so we can convert u64 <-> Charᶜᵖᵖ
 	} else {
 		src.OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 		ϟs.Memory[dst.Root.Pool].Write(dst.Base, ϟs.Memory[src.Root.Pool].Slice(src.Range(ϟs)))
@@ -1281,7 +1400,7 @@ func (dst Charᵖˢ) Copy(src Charᵖˢ, ϟa atom.Atom, ϟs *gfxapi.State, ϟd d
 }
 
 // OnRead calls the backing pool's OnRead callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᶜᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnRead; f != nil {
 		f(s.Range(ϟs))
 	}
@@ -1293,7 +1412,7 @@ func (s Charᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 			if d.Error() != nil {
 				panic(d.Error())
 			}
-			ϟb.Push(NewCharᵖ(v).value())
+			ϟb.Push(NewCharᶜᵖ(v).value())
 			ϟb.Store(ptr)
 			ptr += step
 		}
@@ -1302,7 +1421,7 @@ func (s Charᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 }
 
 // OnWrite calls the backing pool's OnWrite callback. s is returned so calls can be chained.
-func (s Charᵖˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᶜᵖˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	if f := ϟs.Memory[s.Root.Pool].OnWrite; f != nil {
 		f(s.Range(ϟs))
 	}
@@ -1311,7 +1430,7 @@ func (s Charᵖˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	}
 	return s
 }
-func (s Charᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᵖˢ {
+func (s Charᶜᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) Charᶜᵖˢ {
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		rng := s.Range(ϟs)
 		ϟb.ReserveMemory(s.Root.Range(uint64(rng.End() - s.Root.Address)))
@@ -1319,25 +1438,25 @@ func (s Charᵖˢ) ReserveMemory(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	return s
 }
 
-// Index returns a Charᵖᵖ to the i'th element in this Charᵖˢ.
-func (s Charᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᵖᵖ {
-	return Charᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
+// Index returns a Charᶜᵖᵖ to the i'th element in this Charᶜᵖˢ.
+func (s Charᶜᵖˢ) Index(i uint64, ϟs *gfxapi.State) Charᶜᵖᵖ {
+	return Charᶜᵖᵖ{Pointer: memory.Pointer{Address: s.Base + i*s.ElementSize(ϟs), Pool: s.Root.Pool}}
 }
 
-// Slice returns a sub-slice from the Charᵖˢ using start and end indices.
-func (s Charᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᵖˢ {
+// Slice returns a sub-slice from the Charᶜᵖˢ using start and end indices.
+func (s Charᶜᵖˢ) Slice(start, end uint64, ϟs *gfxapi.State) Charᶜᵖˢ {
 	if start > end {
 		panic(fmt.Errorf("%v.Slice start (%d) is greater than the end (%d)", s, start, end))
 	}
 	if end > s.Count {
 		panic(fmt.Errorf("%v.Slice(%d, %d) - out of bounds", s, start, end))
 	}
-	return Charᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
+	return Charᶜᵖˢ{SliceInfo: SliceInfo{Root: s.Root, Base: s.Base + start*s.ElementSize(ϟs), Count: end - start}}
 }
 
-// String returns a string description of the Charᵖˢ slice.
-func (s Charᵖˢ) String() string {
-	return fmt.Sprintf("Charᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
+// String returns a string description of the Charᶜᵖˢ slice.
+func (s Charᶜᵖˢ) String() string {
+	return fmt.Sprintf("Charᶜᵖ(%v@%v)[%d]", s.Base, s.Root.Pool, s.Count)
 }
 
 // F32ˢ is a slice of float32.
@@ -4142,37 +4261,37 @@ func (c *CmdVoid3InArrays) Flags() atom.Flags                { return 0 }
 func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
-// CmdVoidInArrayOfPointers
+// CmdVoidInArrayOfStrings
 ////////////////////////////////////////////////////////////////////////////////
-type CmdVoidInArrayOfPointers struct {
+type CmdVoidInArrayOfStrings struct {
 	binary.Generate
 	observations atom.Observations
-	A            Charᵖᵖ
+	Strings      Charᶜᵖᶜᵖ
 	Count        int32
 }
 
-func (a *CmdVoidInArrayOfPointers) String() string {
-	return fmt.Sprintf("cmdVoidInArrayOfPointers(a: %v, count: %v)", a.A, a.Count)
+func (a *CmdVoidInArrayOfStrings) String() string {
+	return fmt.Sprintf("cmdVoidInArrayOfStrings(strings: %v, count: %v)", a.Strings, a.Count)
 }
 
 // AddRead appends a new read observation to the atom of the range rng with
 // the data id.
-// The CmdVoidInArrayOfPointers pointer is returned so that calls can be chained.
-func (a *CmdVoidInArrayOfPointers) AddRead(rng memory.Range, id binary.ID) *CmdVoidInArrayOfPointers {
+// The CmdVoidInArrayOfStrings pointer is returned so that calls can be chained.
+func (a *CmdVoidInArrayOfStrings) AddRead(rng memory.Range, id binary.ID) *CmdVoidInArrayOfStrings {
 	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
 	return a
 }
 
 // AddWrite appends a new write observation to the atom of the range rng with
 // the data id.
-// The CmdVoidInArrayOfPointers pointer is returned so that calls can be chained.
-func (a *CmdVoidInArrayOfPointers) AddWrite(rng memory.Range, id binary.ID) *CmdVoidInArrayOfPointers {
+// The CmdVoidInArrayOfStrings pointer is returned so that calls can be chained.
+func (a *CmdVoidInArrayOfStrings) AddWrite(rng memory.Range, id binary.ID) *CmdVoidInArrayOfStrings {
 	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
 	return a
 }
-func (c *CmdVoidInArrayOfPointers) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidInArrayOfPointers) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidInArrayOfPointers) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidInArrayOfStrings) API() gfxapi.ID                   { return api{}.ID() }
+func (c *CmdVoidInArrayOfStrings) Flags() atom.Flags                { return 0 }
+func (a *CmdVoidInArrayOfStrings) Observations() *atom.Observations { return &a.observations }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadU8
@@ -5627,8 +5746,8 @@ func NewCmdVoid3Strings(A string, B string, C string) *CmdVoid3Strings {
 func NewCmdVoid3InArrays(A memory.Pointer, B memory.Pointer, C memory.Pointer) *CmdVoid3InArrays {
 	return &CmdVoid3InArrays{A: U8ᵖ{Pointer: A}, B: U32ᵖ{Pointer: B}, C: Intᵖ{Pointer: C}}
 }
-func NewCmdVoidInArrayOfPointers(A memory.Pointer, Count int32) *CmdVoidInArrayOfPointers {
-	return &CmdVoidInArrayOfPointers{A: Charᵖᵖ{Pointer: A}, Count: Count}
+func NewCmdVoidInArrayOfStrings(Strings memory.Pointer, Count int32) *CmdVoidInArrayOfStrings {
+	return &CmdVoidInArrayOfStrings{Strings: Charᶜᵖᶜᵖ{Pointer: Strings}, Count: Count}
 }
 func NewCmdVoidReadU8(A memory.Pointer) *CmdVoidReadU8 {
 	return &CmdVoidReadU8{A: U8ᵖ{Pointer: A}}

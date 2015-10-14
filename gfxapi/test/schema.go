@@ -223,10 +223,10 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 
-	sc_CmdVoidInArrayOfPointers := (*CmdVoidInArrayOfPointers)(nil).Class().Schema()
-	sc_CmdVoidInArrayOfPointers.Metadata = append(sc_CmdVoidInArrayOfPointers.Metadata, &atom.Metadata{
+	sc_CmdVoidInArrayOfStrings := (*CmdVoidInArrayOfStrings)(nil).Class().Schema()
+	sc_CmdVoidInArrayOfStrings.Metadata = append(sc_CmdVoidInArrayOfStrings.Metadata, &atom.Metadata{
 		API:              apiID,
-		DisplayName:      "cmdVoidInArrayOfPointers",
+		DisplayName:      "cmdVoidInArrayOfStrings",
 		DrawCall:         false,
 		EndOfFrame:       false,
 		DocumentationUrl: "[]",

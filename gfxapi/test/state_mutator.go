@@ -218,17 +218,17 @@ func (ϟa *CmdVoid3InArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟc.U8s.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb)
 	return nil
 }
-func (ϟa *CmdVoidInArrayOfPointers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
+func (ϟa *CmdVoidInArrayOfStrings) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
 	ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
 	_, _ = ϟc, ϟb
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	slice := ϟa.A.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
+	names := ϟa.Strings.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᶜᵖˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		x := slice.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // char
-		_ = x
+		name := strings.TrimRight(string(Charᵖ(names.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
+		_ = name
 	}
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = slice
+	_ = names
 	return nil
 }
 func (ϟa *CmdVoidReadU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {

@@ -22,8 +22,10 @@ func init() {
 	Namespace.Add((*Boolᵖ)(nil).Class())
 	Namespace.Add((*Charˢ)(nil).Class())
 	Namespace.Add((*Charᵖ)(nil).Class())
-	Namespace.Add((*Charᵖˢ)(nil).Class())
-	Namespace.Add((*Charᵖᵖ)(nil).Class())
+	Namespace.Add((*Charᶜᵖ)(nil).Class())
+	Namespace.Add((*Charᶜᵖˢ)(nil).Class())
+	Namespace.Add((*Charᶜᵖᵖ)(nil).Class())
+	Namespace.Add((*Charᶜᵖᶜᵖ)(nil).Class())
 	Namespace.Add((*CmdBool)(nil).Class())
 	Namespace.Add((*CmdCharptrToString)(nil).Class())
 	Namespace.Add((*CmdCharsliceToString)(nil).Class())
@@ -59,9 +61,9 @@ func init() {
 	Namespace.Add((*CmdVoidBool)(nil).Class())
 	Namespace.Add((*CmdVoidF32)(nil).Class())
 	Namespace.Add((*CmdVoidF64)(nil).Class())
-	Namespace.Add((*CmdVoidInArrayOfPointers)(nil).Class())
 	Namespace.Add((*Remappedᵖ)(nil).Class())
 	Namespace.Add((*CmdVoidInArrayOfRemapped)(nil).Class())
+	Namespace.Add((*CmdVoidInArrayOfStrings)(nil).Class())
 	Namespace.Add((*CmdVoidOutArrayOfRemapped)(nil).Class())
 	Namespace.Add((*CmdVoidOutArrayOfUnknownRemapped)(nil).Class())
 	Namespace.Add((*CmdVoidReadBool)(nil).Class())
@@ -279,61 +281,121 @@ var schemaCharᵖ = &binary.Entity{
 	},
 }
 
-type binaryClassCharᵖˢ struct{}
+type binaryClassCharᶜᵖ struct{}
 
-func (*Charᵖˢ) Class() binary.Class {
-	return (*binaryClassCharᵖˢ)(nil)
+func (*Charᶜᵖ) Class() binary.Class {
+	return (*binaryClassCharᶜᵖ)(nil)
 }
-func doEncodeCharᵖˢ(e binary.Encoder, o *Charᵖˢ) {
+func doEncodeCharᶜᵖ(e binary.Encoder, o *Charᶜᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeCharᶜᵖ(d binary.Decoder, o *Charᶜᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassCharᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCharᶜᵖ(e, obj.(*Charᶜᵖ))
+}
+func (*binaryClassCharᶜᵖ) New() binary.Object {
+	return &Charᶜᵖ{}
+}
+func (*binaryClassCharᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCharᶜᵖ(d, obj.(*Charᶜᵖ))
+}
+func (*binaryClassCharᶜᵖ) Schema() *binary.Entity { return schemaCharᶜᵖ }
+
+var schemaCharᶜᵖ = &binary.Entity{
+	Package:  "test",
+	Identity: "Charᶜᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassCharᶜᵖˢ struct{}
+
+func (*Charᶜᵖˢ) Class() binary.Class {
+	return (*binaryClassCharᶜᵖˢ)(nil)
+}
+func doEncodeCharᶜᵖˢ(e binary.Encoder, o *Charᶜᵖˢ) {
 	e.Struct(&o.SliceInfo)
 }
-func doDecodeCharᵖˢ(d binary.Decoder, o *Charᵖˢ) {
+func doDecodeCharᶜᵖˢ(d binary.Decoder, o *Charᶜᵖˢ) {
 	d.Struct(&o.SliceInfo)
 }
-func (*binaryClassCharᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeCharᵖˢ(e, obj.(*Charᵖˢ))
+func (*binaryClassCharᶜᵖˢ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCharᶜᵖˢ(e, obj.(*Charᶜᵖˢ))
 }
-func (*binaryClassCharᵖˢ) New() binary.Object {
-	return &Charᵖˢ{}
+func (*binaryClassCharᶜᵖˢ) New() binary.Object {
+	return &Charᶜᵖˢ{}
 }
-func (*binaryClassCharᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeCharᵖˢ(d, obj.(*Charᵖˢ))
+func (*binaryClassCharᶜᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCharᶜᵖˢ(d, obj.(*Charᶜᵖˢ))
 }
-func (*binaryClassCharᵖˢ) Schema() *binary.Entity { return schemaCharᵖˢ }
+func (*binaryClassCharᶜᵖˢ) Schema() *binary.Entity { return schemaCharᶜᵖˢ }
 
-var schemaCharᵖˢ = &binary.Entity{
+var schemaCharᶜᵖˢ = &binary.Entity{
 	Package:  "test",
-	Identity: "Charᵖˢ",
+	Identity: "Charᶜᵖˢ",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
 	},
 }
 
-type binaryClassCharᵖᵖ struct{}
+type binaryClassCharᶜᵖᵖ struct{}
 
-func (*Charᵖᵖ) Class() binary.Class {
-	return (*binaryClassCharᵖᵖ)(nil)
+func (*Charᶜᵖᵖ) Class() binary.Class {
+	return (*binaryClassCharᶜᵖᵖ)(nil)
 }
-func doEncodeCharᵖᵖ(e binary.Encoder, o *Charᵖᵖ) {
+func doEncodeCharᶜᵖᵖ(e binary.Encoder, o *Charᶜᵖᵖ) {
 	e.Struct(&o.Pointer)
 }
-func doDecodeCharᵖᵖ(d binary.Decoder, o *Charᵖᵖ) {
+func doDecodeCharᶜᵖᵖ(d binary.Decoder, o *Charᶜᵖᵖ) {
 	d.Struct(&o.Pointer)
 }
-func (*binaryClassCharᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeCharᵖᵖ(e, obj.(*Charᵖᵖ))
+func (*binaryClassCharᶜᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCharᶜᵖᵖ(e, obj.(*Charᶜᵖᵖ))
 }
-func (*binaryClassCharᵖᵖ) New() binary.Object {
-	return &Charᵖᵖ{}
+func (*binaryClassCharᶜᵖᵖ) New() binary.Object {
+	return &Charᶜᵖᵖ{}
 }
-func (*binaryClassCharᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeCharᵖᵖ(d, obj.(*Charᵖᵖ))
+func (*binaryClassCharᶜᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCharᶜᵖᵖ(d, obj.(*Charᶜᵖᵖ))
 }
-func (*binaryClassCharᵖᵖ) Schema() *binary.Entity { return schemaCharᵖᵖ }
+func (*binaryClassCharᶜᵖᵖ) Schema() *binary.Entity { return schemaCharᶜᵖᵖ }
 
-var schemaCharᵖᵖ = &binary.Entity{
+var schemaCharᶜᵖᵖ = &binary.Entity{
 	Package:  "test",
-	Identity: "Charᵖᵖ",
+	Identity: "Charᶜᵖᵖ",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassCharᶜᵖᶜᵖ struct{}
+
+func (*Charᶜᵖᶜᵖ) Class() binary.Class {
+	return (*binaryClassCharᶜᵖᶜᵖ)(nil)
+}
+func doEncodeCharᶜᵖᶜᵖ(e binary.Encoder, o *Charᶜᵖᶜᵖ) {
+	e.Struct(&o.Pointer)
+}
+func doDecodeCharᶜᵖᶜᵖ(d binary.Decoder, o *Charᶜᵖᶜᵖ) {
+	d.Struct(&o.Pointer)
+}
+func (*binaryClassCharᶜᵖᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCharᶜᵖᶜᵖ(e, obj.(*Charᶜᵖᶜᵖ))
+}
+func (*binaryClassCharᶜᵖᶜᵖ) New() binary.Object {
+	return &Charᶜᵖᶜᵖ{}
+}
+func (*binaryClassCharᶜᵖᶜᵖ) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCharᶜᵖᶜᵖ(d, obj.(*Charᶜᵖᶜᵖ))
+}
+func (*binaryClassCharᶜᵖᶜᵖ) Schema() *binary.Entity { return schemaCharᶜᵖᶜᵖ }
+
+var schemaCharᶜᵖᶜᵖ = &binary.Entity{
+	Package:  "test",
+	Identity: "Charᶜᵖᶜᵖ",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
 	},
@@ -1506,44 +1568,6 @@ var schemaCmdVoidF64 = &binary.Entity{
 	},
 }
 
-type binaryClassCmdVoidInArrayOfPointers struct{}
-
-func (*CmdVoidInArrayOfPointers) Class() binary.Class {
-	return (*binaryClassCmdVoidInArrayOfPointers)(nil)
-}
-func doEncodeCmdVoidInArrayOfPointers(e binary.Encoder, o *CmdVoidInArrayOfPointers) {
-	e.Struct(&o.observations)
-	e.Struct(&o.A)
-	e.Int32(o.Count)
-}
-func doDecodeCmdVoidInArrayOfPointers(d binary.Decoder, o *CmdVoidInArrayOfPointers) {
-	d.Struct(&o.observations)
-	d.Struct(&o.A)
-	o.Count = int32(d.Int32())
-}
-func (*binaryClassCmdVoidInArrayOfPointers) Encode(e binary.Encoder, obj binary.Object) {
-	doEncodeCmdVoidInArrayOfPointers(e, obj.(*CmdVoidInArrayOfPointers))
-}
-func (*binaryClassCmdVoidInArrayOfPointers) New() binary.Object {
-	return &CmdVoidInArrayOfPointers{}
-}
-func (*binaryClassCmdVoidInArrayOfPointers) DecodeTo(d binary.Decoder, obj binary.Object) {
-	doDecodeCmdVoidInArrayOfPointers(d, obj.(*CmdVoidInArrayOfPointers))
-}
-func (*binaryClassCmdVoidInArrayOfPointers) Schema() *binary.Entity {
-	return schemaCmdVoidInArrayOfPointers
-}
-
-var schemaCmdVoidInArrayOfPointers = &binary.Entity{
-	Package:  "test",
-	Identity: "CmdVoidInArrayOfPointers",
-	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
-		{Declared: "A", Type: &schema.Struct{Entity: (*Charᵖᵖ)(nil).Class().Schema()}},
-		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
-
 type binaryClassRemappedᵖ struct{}
 
 func (*Remappedᵖ) Class() binary.Class {
@@ -1606,6 +1630,44 @@ var schemaCmdVoidInArrayOfRemapped = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassCmdVoidInArrayOfStrings struct{}
+
+func (*CmdVoidInArrayOfStrings) Class() binary.Class {
+	return (*binaryClassCmdVoidInArrayOfStrings)(nil)
+}
+func doEncodeCmdVoidInArrayOfStrings(e binary.Encoder, o *CmdVoidInArrayOfStrings) {
+	e.Struct(&o.observations)
+	e.Struct(&o.Strings)
+	e.Int32(o.Count)
+}
+func doDecodeCmdVoidInArrayOfStrings(d binary.Decoder, o *CmdVoidInArrayOfStrings) {
+	d.Struct(&o.observations)
+	d.Struct(&o.Strings)
+	o.Count = int32(d.Int32())
+}
+func (*binaryClassCmdVoidInArrayOfStrings) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeCmdVoidInArrayOfStrings(e, obj.(*CmdVoidInArrayOfStrings))
+}
+func (*binaryClassCmdVoidInArrayOfStrings) New() binary.Object {
+	return &CmdVoidInArrayOfStrings{}
+}
+func (*binaryClassCmdVoidInArrayOfStrings) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeCmdVoidInArrayOfStrings(d, obj.(*CmdVoidInArrayOfStrings))
+}
+func (*binaryClassCmdVoidInArrayOfStrings) Schema() *binary.Entity {
+	return schemaCmdVoidInArrayOfStrings
+}
+
+var schemaCmdVoidInArrayOfStrings = &binary.Entity{
+	Package:  "test",
+	Identity: "CmdVoidInArrayOfStrings",
+	Fields: []binary.Field{
+		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "Strings", Type: &schema.Struct{Entity: (*Charᶜᵖᶜᵖ)(nil).Class().Schema()}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 

@@ -131,10 +131,10 @@ cmd void cmdVoid3InArrays(u8* a, u32* b, int* c) {
 ////////////////////////////////////////////////////////////////
 // Commands with input of arrays of pointers
 ////////////////////////////////////////////////////////////////
-cmd void cmdVoidInArrayOfPointers(char** a, s32 count) {
-  slice := a[0:count]
+cmd void cmdVoidInArrayOfStrings(const char* const* strings, s32 count) {
+  names := strings[0:count]
   for i in (0 .. count) {
-    x := slice[i][0]
+    name := as!string(as!char*(names[i]))
   }
 }
 

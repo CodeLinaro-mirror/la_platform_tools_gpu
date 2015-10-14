@@ -491,7 +491,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 	}.check(t, a, d, l)
 }
 
-func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
+func TestOperationsOpCall_InArrayOfStrings(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	a := device.Architecture{
 		PointerAlignment: 4,
@@ -499,9 +499,10 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 		IntegerSize:      4,
 		ByteOrder:        endian.Little,
 	}
-	aRng, aID := atom.Data(a, d, l, p(0x100000), []uint8{10})
-	bRng, bID := atom.Data(a, d, l, p(0x200000), []uint8{20})
-	cRng, cID := atom.Data(a, d, l, p(0x300000), []uint8{40})
+
+	aRng, aID := atom.Data(a, d, l, p(0x100000), "array")
+	bRng, bID := atom.Data(a, d, l, p(0x200000), "of")
+	cRng, cID := atom.Data(a, d, l, p(0x300000), "strings")
 
 	pRng, pID := atom.Data(a, d, l, p(0x500000), []memory.Pointer{
 		p(0x300000), p(0x200000), p(0x100000), p(0x200000), p(0x300000),
@@ -509,48 +510,64 @@ func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
 
 	test{
 		atoms: []atom.Atom{
-			NewCmdVoidInArrayOfPointers(p(0x500000), 5).
-				AddRead(aRng, aID). // p(0x100000): 0x00
-				AddRead(bRng, bID). // 0x200000: 0x04
-				AddRead(cRng, cID). // 0x300000: 0x08
-				AddRead(pRng, pID), // 0x500000: 0x0c, 0x10, 0x14, 0x18, 0x1c
+			// 0x100000: "array"
+			// 0x200000: "of"
+			// 0x300000: "strings"
+			// 0x500000: 0x300000
+			// 0x500004: 0x200000
+			// 0x500008: 0x100000
+			// 0x50000c: 0x200000
+			// 0x500010: 0x300000
+			NewCmdVoidInArrayOfStrings(p(0x500000), 5).
+				AddRead(aRng, aID).
+				AddRead(bRng, bID).
+				AddRead(cRng, cID).
+				AddRead(pRng, pID),
 		},
 		expected: expected{
+			// 0x00: "array"   (6 bytes)
+			// 0x08: "of"      (3 bytes)
+			// 0x0c: "strings" (8 bytes)
+			// 0x14: 0x0c
+			// 0x18: 0x08
+			// 0x1c: 0x00
+			// 0x20: 0x08
+			// 0x24: 0x0c
 			resources: []binary.ID{cID, bID, aID},
 			opcodes: []interface{}{
 				opcode.Label{Value: 0},
 
 				// TODO: Collate sequential reads / writes to reduce 5 Resource opcodes
 				// to one.
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
-				opcode.StoreV{Address: 0x0c},
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
+				opcode.StoreV{Address: 0x14},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
 				opcode.Resource{ID: 0},
 
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
-				opcode.StoreV{Address: 0x10},
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x18},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
 				opcode.Resource{ID: 1},
 
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
-				opcode.StoreV{Address: 0x14},
+				opcode.StoreV{Address: 0x1c},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
 				opcode.Resource{ID: 2},
 
 				// TODO: Resource loads below are redundant
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
-				opcode.StoreV{Address: 0x18},
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x20},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
 				opcode.Resource{ID: 1},
 
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
-				opcode.StoreV{Address: 0x1c},
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
+				opcode.StoreV{Address: 0x24},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
 				opcode.Resource{ID: 0},
 
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x14},
 				opcode.PushI{DataType: protocol.TypeInt32, Value: 5},
-				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfPointers.ID},
+				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfStrings.ID},
 			},
 		},
 	}.check(t, a, d, l)

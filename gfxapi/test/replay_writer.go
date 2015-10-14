@@ -54,7 +54,7 @@ var funcInfoCmdVoidBool = builder.FunctionInfo{ID: 20, ReturnType: protocol.Type
 var funcInfoCmdVoidString = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoCmdVoid3Strings = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoCmdVoid3InArrays = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoCmdVoidInArrayOfPointers = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoCmdVoidInArrayOfStrings = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoCmdVoidReadU8 = builder.FunctionInfo{ID: 25, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoCmdVoidReadS8 = builder.FunctionInfo{ID: 26, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoCmdVoidReadU16 = builder.FunctionInfo{ID: 27, ReturnType: protocol.TypeVoid, Parameters: 1}
@@ -597,30 +597,30 @@ func (ϟa *CmdVoid3InArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Call(funcInfoCmdVoid3InArrays)
 }
 
-var _ = replay.Replayer(&CmdVoidInArrayOfPointers{}) // interface compliance check
-// Replay emits the replay instructions to call cmdVoidInArrayOfPointers(), and performs the
+var _ = replay.Replayer(&CmdVoidInArrayOfStrings{}) // interface compliance check
+// Replay emits the replay instructions to call cmdVoidInArrayOfStrings(), and performs the
 // necessary state-mutation and memory observations to ϟs.
-func (ϟa *CmdVoidInArrayOfPointers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
+func (ϟa *CmdVoidInArrayOfStrings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) (ϟe error) {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	slice := ϟa.A.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
+	names := ϟa.Strings.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᶜᵖˢ
 	for i := int32(int32(0)); i < ϟa.Count; i++ {
-		x := slice.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb).Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb) // char
-		_ = x
+		name := strings.TrimRight(string(Charᵖ(names.Index(uint64(i), ϟs).Read(ϟa, ϟs, ϟd, ϟl, ϟb)).StringSlice(ϟs, ϟd, ϟl).Read(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00") // string
+		_ = name
 	}
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_ = slice
+	_ = names
 	return nil
 }
 
-// Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidInArrayOfPointers().
+// Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidInArrayOfStrings().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
-func (ϟa *CmdVoidInArrayOfPointers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+func (ϟa *CmdVoidInArrayOfStrings) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+	ϟb.Push(ϟa.Strings.value())
 	ϟb.Push(value.S32(ϟa.Count))
-	ϟb.Call(funcInfoCmdVoidInArrayOfPointers)
+	ϟb.Call(funcInfoCmdVoidInArrayOfStrings)
 }
 
 var _ = replay.Replayer(&CmdVoidReadU8{}) // interface compliance check
@@ -1546,7 +1546,21 @@ func (p Charᵖ) value() value.Pointer {
 		return value.AbsolutePointer(0)
 	}
 }
-func (p Charᵖᵖ) value() value.Pointer {
+func (p Charᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Charᶜᵖᶜᵖ) value() value.Pointer {
+	if p.Address != 0 {
+		return value.RemappedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (p Charᶜᵖᵖ) value() value.Pointer {
 	if p.Address != 0 {
 		return value.RemappedPointer(p.Address)
 	} else {
