@@ -39,11 +39,12 @@ func PNG() Format { return &fmtPNG{} }
 func init() {
 	RegisterConverter(RGBA(), PNG(),
 		func(src []byte, width, height int) ([]byte, error) {
-			img := image.NewRGBA(image.Rect(0, 0, width, height))
+			img := image.NewNRGBA(image.Rect(0, 0, width, height))
 			i := 0
 			for y := 0; y < height; y++ {
 				for x := 0; x < width; x++ {
-					img.Set(x, y, color.RGBA{src[i+0], src[i+1], src[i+2], src[i+3]})
+					r, g, b, a := src[i+0], src[i+1], src[i+2], src[i+3]
+					img.Set(x, y, color.NRGBA{r, g, b, a})
 					i += 4
 				}
 			}
@@ -72,15 +73,28 @@ func init() {
 			switch img.ColorModel() {
 			case color.RGBA64Model:
 				return nil, fmt.Errorf("Unsupported color model 'RGBA64'")
-			case color.RGBAModel, color.NRGBAModel:
+			case color.RGBAModel:
+				// PNG cannot indicate pre-multiplied alpha, and at the time of writing
+				// this color format is only used when there is no alpha channel.
 				f = RGBA()
 				for y := 0; y < height; y++ {
 					for x := 0; x < width; x++ {
-						r, g, b, a := img.At(x, y).RGBA()
-						e.Uint8(uint8(r >> 8))
-						e.Uint8(uint8(g >> 8))
-						e.Uint8(uint8(b >> 8))
-						e.Uint8(uint8(a >> 8))
+						c := img.At(x, y).(color.RGBA)
+						e.Uint8(c.R)
+						e.Uint8(c.G)
+						e.Uint8(c.B)
+						e.Uint8(c.A)
+					}
+				}
+			case color.NRGBAModel:
+				f = RGBA()
+				for y := 0; y < height; y++ {
+					for x := 0; x < width; x++ {
+						c := img.At(x, y).(color.NRGBA)
+						e.Uint8(c.R)
+						e.Uint8(c.G)
+						e.Uint8(c.B)
+						e.Uint8(c.A)
 					}
 				}
 			case color.NRGBA64Model:
