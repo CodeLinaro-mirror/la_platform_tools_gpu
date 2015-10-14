@@ -65,11 +65,9 @@ namespace atom {
             mSubGroups(SubGroups) {}
         virtual void Encode(Encoder* e) const{
             e->String(this->mName);
-            e->Value(this->mRange);
-            e->Uint32(this->mSubGroups.size());
-            for (int i = 0; i < this->mSubGroups.size(); i++) {
-                e->Value(this->mSubGroups[i]);
-            }
+            e->Encode(this->mRange);
+            e->Encode(this->mSubGroups);
+
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -86,10 +84,8 @@ namespace atom {
         List(Array<gapic::Encodable*> Atoms) :
             mAtoms(Atoms) {}
         virtual void Encode(Encoder* e) const{
-            e->Uint32(this->mAtoms.size());
-            for (int i = 0; i < this->mAtoms.size(); i++) {
-                e->Variant(this->mAtoms[i]);
-            }
+            e->Encode(this->mAtoms);
+
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -126,7 +122,7 @@ namespace atom {
             mRange(Range),
             mID(ID) {}
         virtual void Encode(Encoder* e) const{
-            e->Value(this->mRange);
+            e->Encode(this->mRange);
             e->Data(this->mID, 20);
         }
         virtual const schema::Entity* Schema() const {
@@ -144,14 +140,10 @@ namespace atom {
             mReads(Reads),
             mWrites(Writes) {}
         virtual void Encode(Encoder* e) const{
-            e->Uint32(this->mReads.size());
-            for (int i = 0; i < this->mReads.size(); i++) {
-                e->Value(this->mReads[i]);
-            }
-            e->Uint32(this->mWrites.size());
-            for (int i = 0; i < this->mWrites.size(); i++) {
-                e->Value(this->mWrites[i]);
-            }
+            e->Encode(this->mReads);
+
+            e->Encode(this->mWrites);
+
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();

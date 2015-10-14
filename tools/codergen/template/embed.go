@@ -129,7 +129,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
-{{define "Cpp.Encode.Struct"}}e->Value({{.Name}});{{end}}
+{{define "Cpp.Encode.Struct"}}e->Encode({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
@@ -140,10 +140,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Slice"}}
-  e->Uint32({{.Name}}.size());¶
-  for (int i = 0; i < {{.Name}}.size(); i++) {»¶
-    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
-  «}
+  e->Encode({{.Name}});¶
 {{end}}
 
 {{define "Cpp.Encode.Array#uint8"}}
@@ -151,10 +148,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Array"}}
-  ••••••••••••¶
-  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
-    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
-  «}
+  e->Array({{.Name}}, {{.Type.Size}});¶
 {{end}}
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
