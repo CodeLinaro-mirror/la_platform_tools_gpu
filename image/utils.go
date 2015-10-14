@@ -47,17 +47,17 @@ func expand4to8(v uint64) uint64 {
 
 func expand5to8(v uint64) uint64 {
 	v &= 0x1F
-	return (v << 3) | ((v & 0x1C) >> 2)
+	return (v << 3) | (v >> 2)
 }
 
 func expand6to8(v uint64) uint64 {
 	v &= 0x3F
-	return (v << 2) | ((v & 0x30) >> 4)
+	return (v << 2) | (v >> 4)
 }
 
 func expand7to8(v uint64) uint64 {
 	v &= 0x7F
-	return (v << 1) | ((v & 0x40) >> 6)
+	return (v << 1) | (v >> 6)
 }
 
 func alignup(v int, alignment int) int {
