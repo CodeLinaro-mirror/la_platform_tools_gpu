@@ -23,8 +23,8 @@ namespace gapii {
 
 ConnectionHeader::ConnectionHeader()
     : mVersion(0)
-    , mObserveFramebufferOnEOF(0)
-    , mObserveFramebufferOnDrawCall(0) {}
+    , mObserveFrameFrequency(0)
+    , mObserveDrawFrequency(0) {}
 
 bool ConnectionHeader::read(gapic::StreamReader* reader) {
     if (!reader->read(mMagic)) {
@@ -43,14 +43,14 @@ bool ConnectionHeader::read(gapic::StreamReader* reader) {
         return false;
     }
     // TODO: Endian-swap version if GAPII is running on a big-endian architecture.
-    if (mVersion != 1) {
-        GAPID_WARNING("Unsupported ConnectionHeader version. Got %d. Only understand 1.",
+    if (mVersion != 2) {
+        GAPID_WARNING("Unsupported ConnectionHeader version. Got %d. Only understand 2.",
             mVersion);
         return false;
     }
 
-    return reader->read(mObserveFramebufferOnEOF) &&
-           reader->read(mObserveFramebufferOnDrawCall);
+    return reader->read(mObserveFrameFrequency) &&
+           reader->read(mObserveDrawFrequency);
 }
 
 } // namespace gapii

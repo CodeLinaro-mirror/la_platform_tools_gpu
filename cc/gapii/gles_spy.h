@@ -6207,6 +6207,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
 
     gapic::coder::gles::GlDrawArrays coder(observations, draw_mode, first_index, indices_count);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawArraysIndirect() const {
@@ -6272,6 +6273,7 @@ inline void GlesSpy::glDrawArraysIndirect(uint32_t draw_mode, void* indirect) {
             observations, draw_mode, gapic::coder::gles::Void__CP(gapic::coder::memory::Pointer(
                                              reinterpret_cast<uintptr_t>(indirect), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstanced() const {
@@ -6401,6 +6403,7 @@ inline void GlesSpy::glDrawArraysInstanced(uint32_t draw_mode, int32_t first_ind
     gapic::coder::gles::GlDrawArraysInstanced coder(observations, draw_mode, first_index,
                                                     indices_count, instance_count);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElements() const { return mImports.glDrawElements != nullptr; }
@@ -6628,6 +6631,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t indices_count,
             gapic::coder::gles::IndicesPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsBaseVertex() const {
@@ -6865,6 +6869,7 @@ inline void GlesSpy::glDrawElementsBaseVertex(uint32_t draw_mode, int32_t indice
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             base_vertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsIndirect() const {
@@ -6944,6 +6949,7 @@ inline void GlesSpy::glDrawElementsIndirect(uint32_t draw_mode, uint32_t indices
             gapic::coder::gles::Void__CP(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indirect), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstanced() const {
@@ -7181,6 +7187,7 @@ inline void GlesSpy::glDrawElementsInstanced(uint32_t draw_mode, int32_t indices
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instance_count);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertex() const {
@@ -7424,6 +7431,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertex(uint32_t draw_mode, int32
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instance_count, base_vertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawRangeElements() const {
@@ -7658,6 +7666,7 @@ inline void GlesSpy::glDrawRangeElements(uint32_t draw_mode, uint32_t start, uin
             gapic::coder::gles::IndicesPointer(
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertex() const {
@@ -7903,6 +7912,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertex(uint32_t draw_mode, uint32_t 
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             base_vertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlPatchParameteri() const { return mImports.glPatchParameteri != nullptr; }
@@ -10036,6 +10046,7 @@ inline void GlesSpy::glDrawArraysInstancedANGLE(uint32_t mode, int32_t first, in
     gapic::coder::gles::GlDrawArraysInstancedANGLE coder(observations, mode, first, count,
                                                          primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedBaseInstanceEXT() const {
@@ -10067,6 +10078,7 @@ inline void GlesSpy::glDrawArraysInstancedBaseInstanceEXT(uint32_t mode, int32_t
     gapic::coder::gles::GlDrawArraysInstancedBaseInstanceEXT coder(observations, mode, first, count,
                                                                    instancecount, baseinstance);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedEXT() const {
@@ -10195,6 +10207,7 @@ inline void GlesSpy::glDrawArraysInstancedEXT(uint32_t mode, int32_t start, int3
 
     gapic::coder::gles::GlDrawArraysInstancedEXT coder(observations, mode, start, count, primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawArraysInstancedNV() const {
@@ -10322,6 +10335,7 @@ inline void GlesSpy::glDrawArraysInstancedNV(uint32_t mode, int32_t first, int32
 
     gapic::coder::gles::GlDrawArraysInstancedNV coder(observations, mode, first, count, primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawBuffersEXT() const { return mImports.glDrawBuffersEXT != nullptr; }
@@ -10636,6 +10650,7 @@ inline void GlesSpy::glDrawElementsBaseVertexEXT(uint32_t mode, int32_t count, u
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsBaseVertexOES() const {
@@ -10870,6 +10885,7 @@ inline void GlesSpy::glDrawElementsBaseVertexOES(uint32_t mode, int32_t count, u
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedANGLE() const {
@@ -11104,6 +11120,7 @@ inline void GlesSpy::glDrawElementsInstancedANGLE(uint32_t mode, int32_t count, 
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseInstanceEXT() const {
@@ -11139,6 +11156,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseInstanceEXT(uint32_t mode, int32
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, baseinstance);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexBaseInstanceEXT() const {
@@ -11176,6 +11194,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexBaseInstanceEXT(uint32_t m
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex, baseinstance);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexEXT() const {
@@ -11419,6 +11438,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexEXT(uint32_t mode, int32_t
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedBaseVertexOES() const {
@@ -11662,6 +11682,7 @@ inline void GlesSpy::glDrawElementsInstancedBaseVertexOES(uint32_t mode, int32_t
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             instancecount, basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedEXT() const {
@@ -11897,6 +11918,7 @@ inline void GlesSpy::glDrawElementsInstancedEXT(uint32_t mode, int32_t count, ui
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawElementsInstancedNV() const {
@@ -12131,6 +12153,7 @@ inline void GlesSpy::glDrawElementsInstancedNV(uint32_t mode, int32_t count, uin
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             primcount);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexEXT() const {
@@ -12375,6 +12398,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexEXT(uint32_t mode, uint32_t st
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawRangeElementsBaseVertexOES() const {
@@ -12619,6 +12643,7 @@ inline void GlesSpy::glDrawRangeElementsBaseVertexOES(uint32_t mode, uint32_t st
                     gapic::coder::memory::Pointer(reinterpret_cast<uintptr_t>(indices), 0)),
             basevertex);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlEGLImageTargetRenderbufferStorageOES() const {
@@ -52076,6 +52101,7 @@ inline int GlesSpy::eglSwapBuffers(void* display, void* surface) {
         return result;
     }
 
+    onPreEndOfFrameCommand();
     Observations observations;
     do {
         observe(observations.mReads);
@@ -52379,6 +52405,7 @@ inline void GlesSpy::glXSwapBuffers(void* display, void* drawable) {
         return;
     }
 
+    onPreEndOfFrameCommand();
     Observations observations;
     do {
         observe(observations.mReads);
@@ -52631,6 +52658,7 @@ inline void GlesSpy::wglSwapBuffers(void* hdc) {
         return;
     }
 
+    onPreEndOfFrameCommand();
     Observations observations;
     do {
         observe(observations.mReads);
@@ -52842,6 +52870,7 @@ inline int GlesSpy::CGLFlushDrawable(void* ctx) {
         return result;
     }
 
+    onPreEndOfFrameCommand();
     Observations observations;
     do {
         observe(observations.mReads);
@@ -53759,6 +53788,7 @@ inline void GlesSpy::glDrawTexfOES(float x, float y, float z, float width, float
 
     gapic::coder::gles::GlDrawTexfOES coder(observations, x, y, z, width, height);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexfvOES() const { return mImports.glDrawTexfvOES != nullptr; }
@@ -53784,6 +53814,7 @@ inline void GlesSpy::glDrawTexfvOES(float* coords) {
             observations, gapic::coder::gles::GLfloat__CP(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(coords), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexiOES() const { return mImports.glDrawTexiOES != nullptr; }
@@ -53808,6 +53839,7 @@ inline void GlesSpy::glDrawTexiOES(int32_t x, int32_t y, int32_t z, int32_t widt
 
     gapic::coder::gles::GlDrawTexiOES coder(observations, x, y, z, width, height);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexivOES() const { return mImports.glDrawTexivOES != nullptr; }
@@ -53833,6 +53865,7 @@ inline void GlesSpy::glDrawTexivOES(int32_t* coords) {
             observations, gapic::coder::gles::GLint__CP(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(coords), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexsOES() const { return mImports.glDrawTexsOES != nullptr; }
@@ -53857,6 +53890,7 @@ inline void GlesSpy::glDrawTexsOES(int16_t x, int16_t y, int16_t z, int16_t widt
 
     gapic::coder::gles::GlDrawTexsOES coder(observations, x, y, z, width, height);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexsvOES() const { return mImports.glDrawTexsvOES != nullptr; }
@@ -53882,6 +53916,7 @@ inline void GlesSpy::glDrawTexsvOES(int16_t* coords) {
             observations, gapic::coder::gles::GLshort__CP(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(coords), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexxOES() const { return mImports.glDrawTexxOES != nullptr; }
@@ -53906,6 +53941,7 @@ inline void GlesSpy::glDrawTexxOES(int32_t x, int32_t y, int32_t z, int32_t widt
 
     gapic::coder::gles::GlDrawTexxOES coder(observations, x, y, z, width, height);
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlDrawTexxvOES() const { return mImports.glDrawTexxvOES != nullptr; }
@@ -53931,6 +53967,7 @@ inline void GlesSpy::glDrawTexxvOES(int32_t* coords) {
             observations, gapic::coder::gles::GLfixed__CP(gapic::coder::memory::Pointer(
                                   reinterpret_cast<uintptr_t>(coords), 0)));
     mEncoder->Variant(&coder);
+    onPostDrawCallCommand();
 }
 
 inline bool GlesSpy::hasGlEnableClientState() const {

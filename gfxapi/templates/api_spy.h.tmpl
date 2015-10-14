@@ -181,6 +181,7 @@
       }
 ¶
     {{end}}
+    {{if GetAnnotation $ "EndOfFrame"}} onPreEndOfFrameCommand(); {{end}}
     Observations observations;
     do {
       {{Global "CurrentCommand" $}}
@@ -190,6 +191,7 @@
 ¶
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
     mEncoder->Variant(&coder);
+    {{if GetAnnotation $ "DrawCall"}} onPostDrawCallCommand(); {{end}}
 
     {{if not (IsVoid $.Return.Type)}}¶
       return result;

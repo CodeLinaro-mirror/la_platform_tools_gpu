@@ -31,10 +31,10 @@ import (
 const CaptureTag = "GapiiTraceFile_V1.1"
 
 type Options struct {
-	// If true, then a framebuffer-observation will be made after every end-of-frame.
-	ObserveFramebufferOnEOF bool
-	// If true, then a framebuffer-observation will be made after every draw call.
-	ObserveFramebufferOnDrawCall bool
+	// If non-zero, then a framebuffer-observation will be made after every n end-of-frames.
+	ObserveFrameFreqency uint32
+	// If non-zero, then a framebuffer-observation will be made after every n draw calls.
+	ObserveDrawFrequency uint32
 }
 
 func closed(s chan struct{}) bool {
