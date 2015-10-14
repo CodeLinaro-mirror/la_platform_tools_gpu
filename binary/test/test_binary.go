@@ -155,6 +155,7 @@ var schemaY = &binary.Entity{
 }
 
 type binaryClassX_V1 struct{ binary.FrozenClassBase }
+
 func (*X_V1) Class() binary.Class {
 	return &binaryClassX_V1{}
 }
@@ -169,7 +170,7 @@ func doUpgradeDecodeǀX_V1ǁX(d binary.Decoder, o *X) {
 	if d.Error() != nil {
 		return
 	}
-	old.upgrade(o)  // This upgrade() method is not code generated.
+	old.upgrade(o) // This upgrade() method is not code generated.
 }
 func (*binaryClassX_V1) New() binary.Object {
 	return &X{}

@@ -14,9 +14,11 @@
 
 package replay
 
+import "android.googlesource.com/platform/tools/gpu/client/gapir"
+
 // Events holds a number of callback functions that can be used to monitor
 // replay activity.
 var Events struct {
 	// OnReplay is called when a replay batch is sent to a device.
-	OnReplay func(Device, Context, Config, []Request)
+	OnReplay func(gapir.Device, Context, Config, []Request)
 }

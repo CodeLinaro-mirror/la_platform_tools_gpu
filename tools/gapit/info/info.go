@@ -20,7 +20,7 @@ import (
 	"io"
 	"os"
 
-	"android.googlesource.com/platform/tools/gpu/gapii"
+	"android.googlesource.com/platform/tools/gpu/client/gapii"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/tools/verbs"
 )

@@ -19,7 +19,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/gapis"
+	"android.googlesource.com/platform/tools/gpu/client/gapis"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service/path"
 	"github.com/google/gxui"

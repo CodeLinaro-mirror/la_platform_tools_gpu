@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package replay
+package gapir
 
 import (
 	"fmt"
@@ -29,21 +29,21 @@ import (
 
 // discovery is used to find replay devices on the local machine and connected
 // Android devices.
-type discovery struct {
+type Discovery struct {
 	sync.Mutex
 	devices []Device
 	logger  log.Logger
 }
 
-func newDiscovery(db database.Database, logger log.Logger) *discovery {
-	m := &discovery{logger: logger}
+func NewDiscovery(db database.Database, logger log.Logger) *Discovery {
+	m := &Discovery{logger: logger}
 	go m.discoverLocalDevices(db)
 	go m.discoverAndroidDevices(db)
 
 	return m
 }
 
-func (d *discovery) device(id binary.ID) Device {
+func (d *Discovery) Device(id binary.ID) Device {
 	d.Lock()
 	defer d.Unlock()
 	for _, d := range d.devices {
@@ -54,14 +54,14 @@ func (d *discovery) device(id binary.ID) Device {
 	return nil
 }
 
-func (d *discovery) getDevices() []Device {
+func (d *Discovery) Devices() []Device {
 	d.Lock()
 	defer d.Unlock()
 
 	return d.devices
 }
 
-func (d *discovery) discoverAndroidDevices(db database.Database) {
+func (d *Discovery) discoverAndroidDevices(db database.Database) {
 	dev := &androidDevice{deviceBase{device: &service.Device{
 		Name:  "Android device",
 		Model: "Unknown",
@@ -82,7 +82,7 @@ func (d *discovery) discoverAndroidDevices(db database.Database) {
 	}
 }
 
-func (d *discovery) discoverLocalDevices(db database.Database) {
+func (d *Discovery) discoverLocalDevices(db database.Database) {
 	dev := &localDevice{deviceBase{device: &service.Device{
 		Name:  "Local machine",
 		Model: "Unknown",

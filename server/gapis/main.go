@@ -21,7 +21,7 @@ import (
 	"runtime"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
-	"android.googlesource.com/platform/tools/gpu/replay"
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/server"
 )
 
@@ -48,8 +48,8 @@ func main() {
 	gapirLogPath, _ := filepath.Abs(filepath.Join(*logsPath, "gapir.log"))
 	dataAbsPath, _ := filepath.Abs(*dataPath)
 
-	replay.ConfigureLocalReplayDevice(false, // disable disk-cache
-		replay.Replayd, *localDevicePort, gapirLogPath,
+	gapir.ConfigureLocalReplayDevice(false, // disable disk-cache
+		gapir.Replayd, *localDevicePort, gapirLogPath,
 		*noGapir, // never launch
 	)
 

@@ -19,8 +19,8 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -32,7 +32,7 @@ func doReplay(t *testing.T, f func(*builder.Builder)) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	arch := device.Info().Architecture()
 
 	connection, err := device.Connect()

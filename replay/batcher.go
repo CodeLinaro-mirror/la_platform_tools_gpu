@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
@@ -40,7 +41,7 @@ type batcher struct {
 	feed     chan Request
 	context  batcherContext
 	database database.Database
-	device   Device
+	device   gapir.Device
 	logger   log.Logger
 }
 

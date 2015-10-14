@@ -12,15 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package utils
+package gapir
 
 import (
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
-
-	"android.googlesource.com/platform/tools/gpu/replay"
 )
 
 const (
@@ -32,16 +30,16 @@ const (
 
 // FindLocalDevice returns the replay Device for the local host. If the local
 // host cannot be found then the test fails and nil is returned.
-func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
-	replay.ConfigureLocalReplayDevice(
+func FindLocalDevice(t *testing.T, d *Discovery) Device {
+	ConfigureLocalReplayDevice(
 		true, // disable disk-cache
-		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(replay.Replayd)),
+		filepath.Join(os.Getenv("GOPATH"), "bin", filepath.Base(Replayd)),
 		gapirPort,
 		"",    // log path
 		false, // gapir launch enabled
 	)
 	for i := 0; i < findLocalDeviceAttempts; i++ {
-		for _, d := range mgr.Devices() {
+		for _, d := range d.Devices() {
 			info := d.Info()
 			t.Logf("Found device: '%s'", info.Name)
 			if info.Name == localDeviceName {

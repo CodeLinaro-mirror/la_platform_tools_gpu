@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
-	"android.googlesource.com/platform/tools/gpu/gapii"
+	"android.googlesource.com/platform/tools/gpu/client/gapii"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"

@@ -12,5 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package utils contains utilities for replay integration tests.
-package utils
+// +build !windows
+
+package gapir
+
+const Replayd = "gapir"

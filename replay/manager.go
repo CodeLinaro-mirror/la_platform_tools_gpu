@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"sync"
 
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -26,7 +27,7 @@ import (
 // discovered devices.
 type Manager struct {
 	database  database.Database
-	discovery *discovery
+	discovery *gapir.Discovery
 	batchers  map[batcherContext]*batcher
 	mutex     sync.Mutex // guards batchers
 	logger    log.Logger
@@ -40,7 +41,7 @@ func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 	// Rework to free the batcher after execution.
 	b, found := m.batchers[ctx]
 	if !found {
-		device := m.discovery.device(ctx.Device)
+		device := m.discovery.Device(ctx.Device)
 		if device == nil {
 			return nil, fmt.Errorf("Unknown device %v", ctx.Device)
 		}
@@ -61,7 +62,7 @@ func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 func New(d database.Database, l log.Logger) *Manager {
 	return &Manager{
 		database:  d,
-		discovery: newDiscovery(d, l),
+		discovery: gapir.NewDiscovery(d, l),
 		batchers:  make(map[batcherContext]*batcher),
 		logger:    l,
 	}
@@ -85,6 +86,11 @@ func (m *Manager) Replay(ctx Context, cfg Config, req Request, generator Generat
 }
 
 // DeviceIDs returns the list of devices that have been discovered.
-func (m *Manager) Devices() []Device {
-	return m.discovery.getDevices()
+func (m *Manager) Devices() []gapir.Device {
+	return m.discovery.Devices()
+}
+
+// Discovery returns the device discovery being used by this manager.
+func (m *Manager) Discovery() *gapir.Discovery {
+	return m.discovery
 }

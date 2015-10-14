@@ -23,11 +23,11 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/check"
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
 	"android.googlesource.com/platform/tools/gpu/image"
-	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -147,7 +147,7 @@ func (c ctxCfg) String() string { return fmt.Sprintf("Context: %+v, Config: %+v"
 func checkReplay(t *testing.T, expectedContext replay.Context, expectedBatchCount int) func() {
 	batchCount := 0
 	uniqueCtxCfgs := map[ctxCfg]struct{}{}
-	replay.Events.OnReplay = func(device replay.Device, context replay.Context, config replay.Config, requests []replay.Request) {
+	replay.Events.OnReplay = func(device gapir.Device, context replay.Context, config replay.Config, requests []replay.Request) {
 		if expectedContext != context {
 			t.Errorf("Expected replay context: %v, got: %v", expectedContext, context)
 		}
@@ -224,7 +224,7 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 func TestClear(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	atoms := initContext(device.Info().Architecture(), d, l, 64, 64, false)
 	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
@@ -244,7 +244,7 @@ func TestClear(t *testing.T) {
 	)
 
 	ctx := replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Capture: gapir.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
 
@@ -262,7 +262,7 @@ func TestClear(t *testing.T) {
 func TestDrawTriangle(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 64, 64, false)
@@ -283,7 +283,7 @@ func TestDrawTriangle(t *testing.T) {
 	)
 
 	ctx := replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Capture: gapir.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
 
@@ -303,7 +303,7 @@ func TestDrawTriangle(t *testing.T) {
 func TestResizeRenderer(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 8, 8, false) // start with a small backbuffer
@@ -324,7 +324,7 @@ func TestResizeRenderer(t *testing.T) {
 	)
 
 	ctx := replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Capture: gapir.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
 
@@ -336,7 +336,7 @@ func TestResizeRenderer(t *testing.T) {
 func TestPreserveBuffersOnSwap(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	a := device.Info().Architecture()
 	atoms := initContext(a, d, l, 64, 64, true)
 	clear := atoms.Add(
@@ -348,7 +348,7 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 	swapC := atoms.Add(gles.NewEglSwapBuffers(memory.Nullptr, memory.Nullptr, 1))
 
 	ctx := replay.Context{
-		Capture: utils.StoreCapture(t, atoms, d, l).ID,
+		Capture: gapir.StoreCapture(t, atoms, d, l).ID,
 		Device:  device.ID(),
 	}
 
@@ -365,7 +365,7 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 func TestIssues(t *testing.T) {
 	d, l := database.NewInMemory(nil), log.Testing(t)
 	mgr := replay.New(d, l)
-	device := utils.FindLocalDevice(t, mgr)
+	device := gapir.FindLocalDevice(t, mgr.Discovery())
 	a := device.Info().Architecture()
 
 	done := &sync.WaitGroup{}
@@ -397,7 +397,7 @@ func TestIssues(t *testing.T) {
 		atoms := initContext(a, d, l, 64, 64, true)
 		atoms.Add(test.atoms...)
 		ctx := replay.Context{
-			Capture: utils.StoreCapture(t, atoms, d, l).ID,
+			Capture: gapir.StoreCapture(t, atoms, d, l).ID,
 			Device:  device.ID(),
 		}
 		done.Add(1)

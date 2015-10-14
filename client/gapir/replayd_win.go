@@ -14,6 +14,6 @@
 
 // +build windows
 
-package replay
+package gapir
 
 const Replayd = "gapir.exe"
