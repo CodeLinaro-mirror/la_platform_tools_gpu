@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package gles
+package gles_test
 
 import (
 	"strings"
@@ -23,10 +23,17 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
+)
+
+var (
+	compat     = gles.VisibleForTestingCompat
+	getContext = gles.VisibleForTestingGetContext
+	glslCompat = gles.VisibleForTestingGlSlCompat
 )
 
 type mockWriter struct {
@@ -44,12 +51,12 @@ func p(addr uint64) memory.Pointer {
 type glShaderSourceCompatTest glslCompatTest
 
 func newContextInfo(a device.Architecture, d database.Database, l log.Logger, width, height int, preserveBuffersOnSwap bool) atom.Atom {
-	names := []GLenum{}
+	names := []gles.GLenum{}
 	offsets := []uint32{}
 	sizes := []uint32{}
 	data := ""
-	for name, value := range map[GLenum]string{
-		GLenum_GL_VERSION: "OpenGL ES 2.0",
+	for name, value := range map[gles.GLenum]string{
+		gles.GLenum_GL_VERSION: "OpenGL ES 2.0",
 	} {
 		names = append(names, name)
 		offsets = append(offsets, uint32(len(data)))
@@ -57,17 +64,17 @@ func newContextInfo(a device.Architecture, d database.Database, l log.Logger, wi
 		data = data + value
 	}
 
-	return NewContextInfo(
+	return gles.NewContextInfo(
 		uint32(len(names)),
 		p(0x10000),
 		p(0x20000),
 		p(0x30000),
 		p(0x40000),
-		GLsizei(width),
-		GLsizei(height),
-		GLenum_GL_RGB565,
-		GLenum_GL_DEPTH_COMPONENT16,
-		GLenum_GL_STENCIL_INDEX8,
+		gles.GLsizei(width),
+		gles.GLsizei(height),
+		gles.GLenum_GL_RGB565,
+		gles.GLenum_GL_DEPTH_COMPONENT16,
+		gles.GLenum_GL_STENCIL_INDEX8,
 		true,
 		preserveBuffersOnSwap).
 		AddRead(atom.Data(a, d, l, p(0x10000), names)).
@@ -92,18 +99,18 @@ func (c glShaderSourceCompatTest) run(t *testing.T) {
 		return
 	}
 
-	shaderType := GLenum_GL_VERTEX_SHADER
+	shaderType := gles.GLenum_GL_VERTEX_SHADER
 	if c.lang == ast.LangFragmentShader {
-		shaderType = GLenum_GL_FRAGMENT_SHADER
+		shaderType = gles.GLenum_GL_FRAGMENT_SHADER
 	}
 
 	mw := &mockWriter{}
 	for _, a := range []atom.Atom{
-		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
-		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
+		gles.NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
+		gles.NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
 		newContextInfo(a, d, l, 64, 64, true),
-		NewGlCreateShader(shaderType, 0x10),
-		NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
+		gles.NewGlCreateShader(shaderType, 0x10),
+		gles.NewGlShaderSource(0x10, 1, p(0x100000), p(0x100010)).
 			AddRead(atom.Data(a, d, l, p(0x100000), p(0x100020))).
 			AddRead(atom.Data(a, d, l, p(0x100010), int32(len(c.source)))).
 			AddRead(atom.Data(a, d, l, p(0x100020), c.source)),
@@ -112,9 +119,9 @@ func (c glShaderSourceCompatTest) run(t *testing.T) {
 	}
 
 	// Find the output glShaderSource atom.
-	var cmd *GlShaderSource
+	var cmd *gles.GlShaderSource
 	for _, a := range mw.atoms {
-		if a, ok := a.(*GlShaderSource); ok {
+		if a, ok := a.(*gles.GlShaderSource); ok {
 			cmd = a
 			break
 		}
@@ -171,13 +178,13 @@ func TestGlVertexAttribPointerCompatTest(t *testing.T) {
 	indices := []uint16{0, 1, 2, 1, 2, 3}
 	mw := &mockWriter{}
 	for _, a := range []atom.Atom{
-		NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
-		NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
+		gles.NewEglCreateContext(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr),
+		gles.NewEglMakeCurrent(memory.Nullptr, memory.Nullptr, memory.Nullptr, memory.Nullptr, 0),
 		newContextInfo(a, d, l, 64, 64, true),
-		NewGlEnableVertexAttribArray(0),
-		NewGlVertexAttribPointer(0, 2, GLenum_GL_FLOAT, GLboolean(0), 8, p(0x100000)).
+		gles.NewGlEnableVertexAttribArray(0),
+		gles.NewGlVertexAttribPointer(0, 2, gles.GLenum_GL_FLOAT, gles.GLboolean(0), 8, p(0x100000)).
 			AddRead(atom.Data(a, d, l, p(0x100000), positions)),
-		NewGlDrawElements(GLenum_GL_TRIANGLES, GLsizei(len(indices)), GLenum_GL_UNSIGNED_SHORT, p(0x200000)).
+		gles.NewGlDrawElements(gles.GLenum_GL_TRIANGLES, gles.GLsizei(len(indices)), gles.GLenum_GL_UNSIGNED_SHORT, p(0x200000)).
 			AddRead(atom.Data(a, d, l, p(0x200000), indices)),
 	} {
 		transform.Transform(atom.NoID, a, mw)
@@ -187,7 +194,7 @@ func TestGlVertexAttribPointerCompatTest(t *testing.T) {
 	s := gfxapi.NewState()
 	for _, a := range mw.atoms {
 		a.Mutate(s, d, l)
-		if _, ok := a.(*GlDrawElements); ok {
+		if _, ok := a.(*gles.GlDrawElements); ok {
 			ctx := getContext(s)
 			vao := ctx.Instances.VertexArrays[ctx.BoundVertexArray]
 			array := vao.VertexAttributeArrays[0]

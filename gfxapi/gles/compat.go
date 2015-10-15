@@ -38,6 +38,14 @@ const (
 	required
 )
 
+var (
+	// We don't include tests directly in the gles package as it adds
+	// signaficantly to the test build time.
+	VisibleForTestingCompat     = compat
+	VisibleForTestingGetContext = getContext
+	VisibleForTestingGlSlCompat = glslCompat
+)
+
 // If the default vertex array object (id 0) is not allowed on
 // the target platform, we remap the uses to this array.
 const DefaultVertexArrayId = VertexArrayId(0xFFFF0001)

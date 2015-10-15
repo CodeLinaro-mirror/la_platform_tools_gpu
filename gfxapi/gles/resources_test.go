@@ -12,8 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package gles
+package gles_test
 
-import "android.googlesource.com/platform/tools/gpu/gfxapi"
+import (
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
+)
 
-var _ = gfxapi.Resource((*Texture)(nil))
+var _ = gfxapi.Resource((*gles.Texture)(nil))
