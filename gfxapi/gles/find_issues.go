@@ -120,7 +120,7 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 		out.Write(atom.NoID, NewGlGetShaderiv(a.Shader, GLenum_GL_COMPILE_STATUS, memory.Tmp))
 		out.Write(atom.NoID, NewGlGetShaderInfoLog(a.Shader, buflen, memory.Nullptr, memory.Tmp.Offset(4)))
 		out.Write(atom.NoID, replay.Custom(func(_ atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-			b.Post(value.RemappedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
+			b.Post(value.ObservedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
 				if err != nil {
 					return err
 				}
@@ -141,7 +141,7 @@ func (t *findIssues) Transform(i atom.ID, a atom.Atom, out atom.Writer) {
 		out.Write(atom.NoID, NewGlGetProgramiv(a.Program, GLenum_GL_LINK_STATUS, memory.Tmp))
 		out.Write(atom.NoID, NewGlGetProgramInfoLog(a.Program, buflen, memory.Nullptr, memory.Tmp.Offset(4)))
 		out.Write(atom.NoID, replay.Custom(func(_ atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-			b.Post(value.RemappedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
+			b.Post(value.ObservedPointer(memory.Tmp.Address), 4+buflen, func(d binary.Decoder, err error) error {
 				if err != nil {
 					return err
 				}

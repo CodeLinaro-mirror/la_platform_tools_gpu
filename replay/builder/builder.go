@@ -64,7 +64,8 @@ type Builder struct {
 	heap, temp      allocator
 	resourceIDToIdx map[binary.ID]uint32
 	resources       []protocol.ResourceInfo
-	reservedMemory  memory.RangeList
+	reservedMemory  memory.RangeList // Reserved memory ranges for regular data.
+	pointerMemory   memory.RangeList // Reserved memory ranges for the pointer table.
 	mappedMemory    mappedMemoryRangeList
 	instructions    []asm.Instruction
 	decoders        []Postback
@@ -91,6 +92,7 @@ func New(architecture device.Architecture) *Builder {
 		resourceIDToIdx: map[binary.ID]uint32{},
 		resources:       []protocol.ResourceInfo{},
 		reservedMemory:  memory.RangeList{},
+		pointerMemory:   memory.RangeList{},
 		mappedMemory:    mappedMemoryRangeList{},
 		instructions:    []asm.Instruction{},
 		architecture:    architecture,
@@ -125,7 +127,7 @@ func (b *Builder) removeInstruction(at int) {
 }
 
 func (b *Builder) remap(ptr value.Pointer) value.Pointer {
-	p, ok := ptr.(value.RemappedPointer)
+	p, ok := ptr.(value.ObservedPointer)
 	if !ok {
 		return ptr
 	}
@@ -166,7 +168,7 @@ func (b *Builder) AllocateMemory(size uint64) value.Pointer {
 // writing to this memory will result in undefined behavior.
 // TODO: REMOVE
 func (b *Builder) AllocateTemporaryMemory(size uint64) value.Pointer {
-	return value.VolatileTemporaryPointer(b.temp.alloc(size))
+	return value.TemporaryPointer(b.temp.alloc(size))
 }
 
 // AllocateTemporaryMemoryChunks allocates a contiguous block of memory in the
@@ -394,6 +396,21 @@ func (b *Builder) Store(addr value.Pointer) {
 	})
 }
 
+// StorePointer writes ptr to the target pointer index.
+// Pointers are stored in a separate address space and can only be loaded using
+// PointerIndex values.
+func (b *Builder) StorePointer(idx value.PointerIndex, ptr value.Pointer) {
+	b.instructions = append(b.instructions,
+		asm.Push{Value: ptr},
+		asm.Store{Destination: idx},
+	)
+	rng := memory.Range{
+		Base: uint64(idx) * uint64(b.architecture.PointerSize),
+		Size: uint64(b.architecture.PointerSize),
+	}
+	interval.Merge(&b.pointerMemory, rng.Span(), true)
+}
+
 // Strcpy pops the source address then the target address from the top of the
 // stack, and then copies at most maxCount-1 bytes from source to target. If
 // maxCount is greater than the source string length, then the target will be
@@ -429,7 +446,7 @@ func (b *Builder) Push(val value.Value) {
 		val = b.remap(p)
 	}
 
-	// HACK: RemappedPointers will use the temporary volatileMemoryLayout to
+	// HACK: ObservedPointers will use the temporary volatileMemoryLayout to
 	// decide the protocol type of the pointer. This will always be
 	// 'unobserved' and therefor a TypeAbsolutePointer instead of a
 	// TypeVolatilePointer. Nothing really cares at the moment though.
@@ -458,7 +475,7 @@ func (b *Builder) ReserveMemory(rng memory.Range) {
 }
 
 // MapMemory maps the memory range rng relative to the absolute pointer that is
-// on the top of the stack. Any RemappedPointers that are used while the pointer
+// on the top of the stack. Any ObservedPointers that are used while the pointer
 // is mapped will be automatically adjusted to the remapped address.
 // The mapped memory range can be unmapped with a call to UnmapMemory.
 func (b *Builder) MapMemory(rng memory.Range) {
@@ -510,7 +527,7 @@ func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 		}
 		b.instructions = append(b.instructions, asm.Resource{
 			Index:       idx,
-			Destination: b.remap(value.RemappedPointer(rng.Base)),
+			Destination: b.remap(value.ObservedPointer(rng.Base)),
 		})
 	}
 	b.ReserveMemory(rng)
@@ -589,31 +606,62 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger, e binary.Encoder) *vol
 	//      ├──────────────────┤
 	//      ├──────────────────┤
 	//      │ reserved range N │
+	//      ├──────────────────┤
+	//      │ pointer  range 0 │
+	//      ├──────────────────┤
+	//      ├──────────────────┤
+	//      │ pointer  range N │
 	// high └──────────────────┘
 
-	tempBase := b.heap.size
-	reservedBase := tempBase + b.temp.size
+	alloc := allocator{alignment: b.heap.alignment}
 
-	reserved := allocator{alignment: b.heap.alignment}
+	// Allocate heap.
+	heapStart := alloc.head
+	alloc.alloc(b.heap.size)
+	heapEnd := alloc.head - 1
+
+	// Allocate temporary memory.
+	tempStart := alloc.head
+	alloc.alloc(b.temp.size)
+	tempEnd := alloc.head - 1
+
+	// Allocate blocks for the reserved memory regions.
+	reservedStart := alloc.head
 	reservedBases := make([]uint64, len(b.reservedMemory))
 	for i, m := range b.reservedMemory {
-		reservedBases[i] = reservedBase + reserved.alloc(m.Size)
+		reservedBases[i] = alloc.alloc(m.Size)
 	}
+	reservedEnd := alloc.head - 1
 
-	size := reservedBase + reserved.size
+	// Allocate blocks for the pointer table.
+	pointerStart := alloc.head
+	pointerBases := make([]uint64, len(b.pointerMemory))
+	for i, m := range b.pointerMemory {
+		pointerBases[i] = alloc.alloc(m.Size)
+	}
+	pointerEnd := alloc.head - 1
+
+	size := alloc.head
 	vml := &volatileMemoryLayout{
-		tempBase:       tempBase,
+		tempBase:       tempStart,
 		reservedBases:  reservedBases,
-		size:           size,
 		reservedMemory: b.reservedMemory,
+		pointerBases:   pointerBases,
+		pointerMemory:  b.pointerMemory,
+		size:           size,
+		architecture:   b.architecture,
 	}
 
 	if config.DebugReplayBuilder {
 		log.Infof(logger, "Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
-		log.Infof(logger, "  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempBase, reservedBase-1)
-		log.Infof(logger, "  Remapped:  [0x%x, 0x%x]", reservedBase, size-1)
+		log.Infof(logger, "  Heap:      [0x%x, 0x%x]", heapStart, heapEnd)
+		log.Infof(logger, "  Temporary: [0x%x, 0x%x]", tempStart, tempEnd)
+		log.Infof(logger, "  Reserved:  [0x%x, 0x%x]", reservedStart, reservedEnd)
 		for _, m := range b.reservedMemory {
+			log.Infof(logger, "    Block:   %v", m)
+		}
+		log.Infof(logger, "  Pointers:  [0x%x, 0x%x]", pointerStart, pointerEnd)
+		for _, m := range b.pointerMemory {
 			log.Infof(logger, "    Block:   %v", m)
 		}
 	}
@@ -623,32 +671,51 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger, e binary.Encoder) *vol
 
 type volatileMemoryLayout struct {
 	tempBase       uint64           // Base address of the temp space.
-	reservedBases  []uint64         // Base address for each reserved entry in reservedMemory.
-	size           uint64           // Total size of volatile memory.
+	reservedBases  []uint64         // Base address for each entry in reservedMemory.
 	reservedMemory memory.RangeList // Reserved memory ranges.
+	pointerBases   []uint64         // Base address for each entry in pointerMemory.
+	pointerMemory  memory.RangeList // Reserved memory ranges for pointer table.
+	size           uint64           // Total size of volatile memory.
+	architecture   device.Architecture
 }
+
+// Pointer value used when an unrecognised pointer is encountered, that cannot
+// be remapped to a sensible location. In these situations we pass a pointer
+// that should cause an access violation if it is dereferenced. We opt to not
+// use 0x00 as this is often overloaded to mean something else.
+// Must match value used in cc/gapir/memory_manager.h
+const unobservedPointer = 0xBADF00D
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
 // the replay/value package.
 // TODO: REMOVE
-func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
-	return l.tempBase + offset
+func (l volatileMemoryLayout) ResolveTemporaryPointer(p value.TemporaryPointer) value.VolatilePointer {
+	return value.VolatilePointer(l.tempBase + uint64(p))
 }
 
-// TranslateRemappedPointer implements the PointerResolver interface method in
+// TranslateObservedPointer implements the PointerResolver interface method in
 // the replay/value package.
-func (l volatileMemoryLayout) TranslateRemappedPointer(offset uint64) (protocol.Type, uint64) {
-	bufferIdx := interval.IndexOf(&l.reservedMemory, offset)
+func (l volatileMemoryLayout) ResolveObservedPointer(p value.ObservedPointer) (protocol.Type, uint64) {
+	bufferIdx := interval.IndexOf(&l.reservedMemory, uint64(p))
 	if bufferIdx < 0 {
-		// Pointer is not observed. This can be legal - for example
+		// Pointer is not observed. However, this can be legal - for example
 		// glVertexAttribPointer may have been passed a pointer that was never
-		// observed. In this situation we pass a pointer that should cause an access
-		// violation if it is dereferenced. We opt to not use 0x00 as this is often
-		// overloaded to mean something else.
-		// Must match value used in cc/gapir/memory_manager.h
-		return protocol.TypeAbsolutePointer, 0xBADF00D
+		// observed.
+		return protocol.TypeAbsolutePointer, unobservedPointer
 	}
 	bufferStart := l.reservedMemory[bufferIdx].First()
-	pointer := l.reservedBases[bufferIdx] + offset - uint64(bufferStart)
+	pointer := l.reservedBases[bufferIdx] + uint64(p) - uint64(bufferStart)
 	return protocol.TypeVolatilePointer, pointer
+}
+
+func (l volatileMemoryLayout) ResolvePointerIndex(i value.PointerIndex) value.VolatilePointer {
+	addr := uint64(i) * uint64(l.architecture.PointerSize)
+	bufferIdx := interval.IndexOf(&l.pointerMemory, addr)
+	if bufferIdx < 0 {
+		// Pointer is not observed.
+		return unobservedPointer
+	}
+	bufferStart := l.pointerMemory[bufferIdx].First()
+	pointer := l.pointerBases[bufferIdx] + addr - uint64(bufferStart)
+	return value.VolatilePointer(pointer)
 }

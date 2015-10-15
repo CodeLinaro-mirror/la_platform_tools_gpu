@@ -118,7 +118,7 @@ func (ϟa *CmdClone) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databas
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdClone().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdClone) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Src.value())
+	ϟb.Push(ϟa.Src.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdClone)
 }
@@ -164,7 +164,7 @@ func (ϟa *CmdCopy) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdCopy().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdCopy) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Src.value())
+	ϟb.Push(ϟa.Src.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Cnt))
 	ϟb.Call(funcInfoCmdCopy)
 }
@@ -185,7 +185,7 @@ func (ϟa *CmdCharsliceToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdCharsliceToString().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdCharsliceToString) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.S.value())
+	ϟb.Push(ϟa.S.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Len))
 	ϟb.Call(funcInfoCmdCharsliceToString)
 }
@@ -206,7 +206,7 @@ func (ϟa *CmdCharptrToString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdCharptrToString().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdCharptrToString) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.S.value())
+	ϟb.Push(ϟa.S.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdCharptrToString)
 }
 
@@ -229,7 +229,7 @@ func (ϟa *CmdSliceCasts) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdSliceCasts().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdSliceCasts) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.S.value())
+	ϟb.Push(ϟa.S.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.L))
 	ϟb.Call(funcInfoCmdSliceCasts)
 }
@@ -288,7 +288,7 @@ func (ϟa *CmdUnknownWritePtr) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdUnknownWritePtr().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdUnknownWritePtr) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.P.value())
+	ϟb.Push(ϟa.P.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdUnknownWritePtr)
 }
 
@@ -315,7 +315,7 @@ func (ϟa *CmdUnknownWriteSlice) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdUnknownWriteSlice().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdUnknownWriteSlice) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdUnknownWriteSlice)
 }
 
@@ -591,9 +591,9 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoid3InArrays().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoid3InArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
-	ϟb.Push(ϟa.B.value())
-	ϟb.Push(ϟa.C.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoid3InArrays)
 }
 
@@ -618,7 +618,7 @@ func (ϟa *CmdVoidInArrayOfStrings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidInArrayOfStrings().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidInArrayOfStrings) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Strings.value())
+	ϟb.Push(ϟa.Strings.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Call(funcInfoCmdVoidInArrayOfStrings)
 }
@@ -640,7 +640,7 @@ func (ϟa *CmdVoidReadU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadU8().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadU8) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadU8)
 }
 
@@ -661,7 +661,7 @@ func (ϟa *CmdVoidReadS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadS8().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadS8) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadS8)
 }
 
@@ -682,7 +682,7 @@ func (ϟa *CmdVoidReadU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadU16().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadU16) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadU16)
 }
 
@@ -703,7 +703,7 @@ func (ϟa *CmdVoidReadS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadS16().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadS16) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadS16)
 }
 
@@ -724,7 +724,7 @@ func (ϟa *CmdVoidReadF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadF32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadF32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadF32)
 }
 
@@ -745,7 +745,7 @@ func (ϟa *CmdVoidReadU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadU32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadU32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadU32)
 }
 
@@ -766,7 +766,7 @@ func (ϟa *CmdVoidReadS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadS32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadS32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadS32)
 }
 
@@ -787,7 +787,7 @@ func (ϟa *CmdVoidReadF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadF64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadF64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadF64)
 }
 
@@ -808,7 +808,7 @@ func (ϟa *CmdVoidReadU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadU64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadU64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadU64)
 }
 
@@ -829,7 +829,7 @@ func (ϟa *CmdVoidReadS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadS64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadS64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadS64)
 }
 
@@ -850,7 +850,7 @@ func (ϟa *CmdVoidReadBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadBool().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadBool) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadBool)
 }
 
@@ -873,9 +873,9 @@ func (ϟa *CmdVoidReadPtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidReadPtrs().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidReadPtrs) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
-	ϟb.Push(ϟa.B.value())
-	ϟb.Push(ϟa.C.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidReadPtrs)
 }
 
@@ -895,7 +895,7 @@ func (ϟa *CmdVoidWriteU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteU8().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteU8) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteU8)
 }
 
@@ -915,7 +915,7 @@ func (ϟa *CmdVoidWriteS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteS8().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteS8) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteS8)
 }
 
@@ -935,7 +935,7 @@ func (ϟa *CmdVoidWriteU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteU16().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteU16) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteU16)
 }
 
@@ -955,7 +955,7 @@ func (ϟa *CmdVoidWriteS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteS16().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteS16) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteS16)
 }
 
@@ -975,7 +975,7 @@ func (ϟa *CmdVoidWriteF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteF32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteF32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteF32)
 }
 
@@ -995,7 +995,7 @@ func (ϟa *CmdVoidWriteU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteU32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteU32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteU32)
 }
 
@@ -1015,7 +1015,7 @@ func (ϟa *CmdVoidWriteS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteS32().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteS32) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteS32)
 }
 
@@ -1035,7 +1035,7 @@ func (ϟa *CmdVoidWriteF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteF64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteF64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteF64)
 }
 
@@ -1055,7 +1055,7 @@ func (ϟa *CmdVoidWriteU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteU64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteU64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteU64)
 }
 
@@ -1075,7 +1075,7 @@ func (ϟa *CmdVoidWriteS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteS64().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteS64) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteS64)
 }
 
@@ -1095,7 +1095,7 @@ func (ϟa *CmdVoidWriteBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWriteBool().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWriteBool) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWriteBool)
 }
 
@@ -1117,9 +1117,9 @@ func (ϟa *CmdVoidWritePtrs) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidWritePtrs().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidWritePtrs) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
-	ϟb.Push(ϟa.B.value())
-	ϟb.Push(ϟa.C.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidWritePtrs)
 }
 
@@ -1432,7 +1432,7 @@ func (ϟa *CmdVoidInArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidInArrayOfRemapped().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidInArrayOfRemapped) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidInArrayOfRemapped)
 }
 
@@ -1452,7 +1452,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidOutArrayOfRemapped().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidOutArrayOfRemapped) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidOutArrayOfRemapped)
 }
 
@@ -1479,7 +1479,7 @@ func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 // Call builds the replay instructions to push the arguments to the stack and invoke cmdVoidOutArrayOfUnknownRemapped().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.A.value())
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoCmdVoidOutArrayOfUnknownRemapped)
 }
 
@@ -1509,131 +1509,5 @@ func (ϟa *CmdRemapped) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 		}
 		ϟb.Clone(0)
 		ϟb.Store(ptr)
-	}
-}
-func (p U8ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U16ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U32ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Intᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Charᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Charᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Charᶜᵖᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Charᶜᵖᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p S8ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p S16ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p F32ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p S32ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p F64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p S64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Boolᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Voidᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Remappedᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
 	}
 }

@@ -259,6 +259,13 @@ func (p EGLConfig) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // EGLContext is a pointer to a void element.
 type EGLContext struct {
@@ -298,6 +305,13 @@ func (p EGLContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p EGLContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // EGLDisplay is a pointer to a void element.
@@ -339,6 +353,13 @@ func (p EGLDisplay) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // EGLSurface is a pointer to a void element.
 type EGLSurface struct {
@@ -378,6 +399,13 @@ func (p EGLSurface) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLXContext is a pointer to a void element.
@@ -419,6 +447,13 @@ func (p GLXContext) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLXContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLXDrawable is a pointer to a void element.
 type GLXDrawable struct {
@@ -458,6 +493,13 @@ func (p GLXDrawable) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLXDrawable) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 type Bool int64
@@ -501,6 +543,13 @@ func (p HGLRC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // HDC is a pointer to a void element.
 type HDC struct {
@@ -540,6 +589,13 @@ func (p HDC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p HDC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 type BOOL int64
@@ -584,6 +640,13 @@ func (p CGLTexelFormatObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p CGLTexelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // CGLContextObj is a pointer to a void element.
 type CGLContextObj struct {
@@ -624,6 +687,13 @@ func (p CGLContextObj) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // CGSConnectionID is a pointer to a void element.
 type CGSConnectionID struct {
@@ -663,6 +733,13 @@ func (p CGSConnectionID) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p CGSConnectionID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 type CGSWindowID int32
@@ -720,6 +797,13 @@ func (p GLDEBUGPROC) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLDEBUGPROC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 type GLhalf uint16
@@ -807,6 +891,13 @@ func (p Voidᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Voidᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Voidᵖ is a pointer to a void element.
 type Voidᵖ struct {
@@ -846,6 +937,13 @@ func (p Voidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Voidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Voidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Voidᵖᵖ is a pointer to a Voidᵖ element.
@@ -905,6 +1003,13 @@ func (p Voidᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᵖˢ {
 	}
 	return Voidᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Voidᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLuintᶜᵖ is a pointer to a GLuint element.
 type GLuintᶜᵖ struct {
@@ -955,6 +1060,13 @@ func (p GLuintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 	}
 	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLuintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLuintᵖ is a pointer to a GLuint element.
 type GLuintᵖ struct {
@@ -1004,6 +1116,13 @@ func (p GLuintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuintˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLuintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLuintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLcharᶜᵖ is a pointer to a GLchar element.
@@ -1066,6 +1185,13 @@ func (p GLcharᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	}
 	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLcharᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLcharᵖ is a pointer to a GLchar element.
 type GLcharᵖ struct {
@@ -1127,6 +1253,13 @@ func (p GLcharᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharˢ {
 	}
 	return GLcharˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLcharᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLenumᵖ is a pointer to a GLenum element.
 type GLenumᵖ struct {
@@ -1176,6 +1309,13 @@ func (p GLenumᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLenumᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLsizeiᵖ is a pointer to a GLsizei element.
@@ -1227,6 +1367,13 @@ func (p GLsizeiᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
 	}
 	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLsizeiᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLenumᶜᵖ is a pointer to a GLenum element.
 type GLenumᶜᵖ struct {
@@ -1276,6 +1423,13 @@ func (p GLenumᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLenumˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLenumˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLenumᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLintᵖ is a pointer to a GLint element.
@@ -1327,6 +1481,13 @@ func (p GLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
 	}
 	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLfloatᶜᵖ is a pointer to a GLfloat element.
 type GLfloatᶜᵖ struct {
@@ -1376,6 +1537,13 @@ func (p GLfloatᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLfloatᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLfloatᵖ is a pointer to a GLfloat element.
@@ -1427,6 +1595,13 @@ func (p GLfloatᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfloatˢ {
 	}
 	return GLfloatˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLfloatᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLintᶜᵖ is a pointer to a GLint element.
 type GLintᶜᵖ struct {
@@ -1476,6 +1651,13 @@ func (p GLintᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLintˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLintᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLint64ᵖ is a pointer to a GLint64 element.
@@ -1527,6 +1709,13 @@ func (p GLint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLint64ˢ {
 	}
 	return GLint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // U8ᵖ is a pointer to a uint8 element.
 type U8ᵖ struct {
@@ -1576,6 +1765,13 @@ func (p U8ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U8ˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return U8ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p U8ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // VertexArrayIdᶜᵖ is a pointer to a VertexArrayId element.
@@ -1627,6 +1823,13 @@ func (p VertexArrayIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexA
 	}
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p VertexArrayIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // VertexArrayIdᵖ is a pointer to a VertexArrayId element.
 type VertexArrayIdᵖ struct {
@@ -1676,6 +1879,13 @@ func (p VertexArrayIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) VertexArra
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return VertexArrayIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p VertexArrayIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // U16ᵖ is a pointer to a uint16 element.
@@ -1727,6 +1937,13 @@ func (p U16ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U16ˢ {
 	}
 	return U16ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p U16ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // U32ᵖ is a pointer to a uint32 element.
 type U32ᵖ struct {
@@ -1776,6 +1993,13 @@ func (p U32ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U32ˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return U32ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p U32ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Charᵖ is a pointer to a byte element.
@@ -1838,6 +2062,13 @@ func (p Charᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Charˢ {
 	}
 	return Charˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Charᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // QueryIdᶜᵖ is a pointer to a QueryId element.
 type QueryIdᶜᵖ struct {
@@ -1887,6 +2118,13 @@ func (p QueryIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p QueryIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // QueryIdᵖ is a pointer to a QueryId element.
@@ -1938,6 +2176,13 @@ func (p QueryIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) QueryIdˢ {
 	}
 	return QueryIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p QueryIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // BufferIdᶜᵖ is a pointer to a BufferId element.
 type BufferIdᶜᵖ struct {
@@ -1988,6 +2233,13 @@ func (p BufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 	}
 	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p BufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // BufferIdᵖ is a pointer to a BufferId element.
 type BufferIdᵖ struct {
@@ -2037,6 +2289,13 @@ func (p BufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) BufferIdˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return BufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p BufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLcharᶜᵖᵖ is a pointer to a GLcharᶜᵖ element.
@@ -2096,6 +2355,13 @@ func (p GLcharᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLcharᶜ�
 	}
 	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLcharᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // PipelineIdᶜᵖ is a pointer to a PipelineId element.
 type PipelineIdᶜᵖ struct {
@@ -2145,6 +2411,13 @@ func (p PipelineIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) PipelineId
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return PipelineIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p PipelineIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // PipelineIdᵖ is a pointer to a PipelineId element.
@@ -2196,6 +2469,13 @@ func (p PipelineIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) PipelineIdˢ 
 	}
 	return PipelineIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p PipelineIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // FramebufferIdᵖ is a pointer to a FramebufferId element.
 type FramebufferIdᵖ struct {
@@ -2245,6 +2525,13 @@ func (p FramebufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebuffe
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p FramebufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // ProgramIdᵖ is a pointer to a ProgramId element.
@@ -2296,6 +2583,13 @@ func (p ProgramIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ProgramIdˢ {
 	}
 	return ProgramIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p ProgramIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // RenderbufferIdᵖ is a pointer to a RenderbufferId element.
 type RenderbufferIdᵖ struct {
@@ -2345,6 +2639,13 @@ func (p RenderbufferIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Renderbuf
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p RenderbufferIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // ShaderIdᵖ is a pointer to a ShaderId element.
@@ -2396,6 +2697,13 @@ func (p ShaderIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 	}
 	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p ShaderIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // TextureIdᵖ is a pointer to a TextureId element.
 type TextureIdᵖ struct {
@@ -2445,6 +2753,13 @@ func (p TextureIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p TextureIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLubyteᵖ is a pointer to a GLubyte element.
@@ -2496,6 +2811,13 @@ func (p GLubyteᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLubyteˢ {
 	}
 	return GLubyteˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLubyteᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLuint64ᵖ is a pointer to a GLuint64 element.
 type GLuint64ᵖ struct {
@@ -2546,6 +2868,13 @@ func (p GLuint64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
 	}
 	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLuint64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLvoidᵖ is a pointer to a GLvoid element.
 type GLvoidᵖ struct {
@@ -2585,6 +2914,13 @@ func (p GLvoidᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLvoidˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLvoidˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLvoidᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLsizeiᶜᵖ is a pointer to a GLsizei element.
@@ -2635,6 +2971,13 @@ func (p GLsizeiᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLsizeiˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLsizeiˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLsizeiᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Voidᶜᵖᶜᵖ is a pointer to a Voidᶜᵖ element.
@@ -2694,6 +3037,13 @@ func (p Voidᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᶜᵖ
 	}
 	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Voidᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Voidᶜᵖᵖ is a pointer to a Voidᶜᵖ element.
 // Note: Pointers are stored differently between the application pool and internal pools.
@@ -2752,6 +3102,13 @@ func (p Voidᶜᵖᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Voidᶜᵖˢ 
 	}
 	return Voidᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Voidᶜᵖᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLubyteᶜᵖ is a pointer to a GLubyte element.
 type GLubyteᶜᵖ struct {
@@ -2801,6 +3158,13 @@ func (p GLubyteᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLubyteˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLubyteˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLubyteᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Vec2fᵖ is a pointer to a Vec2f element.
@@ -2852,6 +3216,13 @@ func (p Vec2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2fˢ {
 	}
 	return Vec2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Vec2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Vec2iᵖ is a pointer to a Vec2i element.
 type Vec2iᵖ struct {
@@ -2901,6 +3272,13 @@ func (p Vec2iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2iˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Vec2iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Vec2iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Vec2uᵖ is a pointer to a Vec2u element.
@@ -2952,6 +3330,13 @@ func (p Vec2uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec2uˢ {
 	}
 	return Vec2uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Vec2uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Vec3fᵖ is a pointer to a Vec3f element.
 type Vec3fᵖ struct {
@@ -3001,6 +3386,13 @@ func (p Vec3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Vec3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Vec3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Vec3iᵖ is a pointer to a Vec3i element.
@@ -3052,6 +3444,13 @@ func (p Vec3iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3iˢ {
 	}
 	return Vec3iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Vec3iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Vec3uᵖ is a pointer to a Vec3u element.
 type Vec3uᵖ struct {
@@ -3101,6 +3500,13 @@ func (p Vec3uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec3uˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Vec3uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Vec3uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Vec4fᵖ is a pointer to a Vec4f element.
@@ -3152,6 +3558,13 @@ func (p Vec4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4fˢ {
 	}
 	return Vec4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Vec4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Vec4iᵖ is a pointer to a Vec4i element.
 type Vec4iᵖ struct {
@@ -3201,6 +3614,13 @@ func (p Vec4iᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4iˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Vec4iˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Vec4iᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Vec4uᵖ is a pointer to a Vec4u element.
@@ -3252,6 +3672,13 @@ func (p Vec4uᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Vec4uˢ {
 	}
 	return Vec4uˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Vec4uᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLuint64ᶜᵖ is a pointer to a GLuint64 element.
 type GLuint64ᶜᵖ struct {
@@ -3301,6 +3728,13 @@ func (p GLuint64ᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLuint64ˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLuint64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLuint64ᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Mat2fᵖ is a pointer to a Mat2f element.
@@ -3352,6 +3786,13 @@ func (p Mat2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2fˢ {
 	}
 	return Mat2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Mat2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Mat2x3fᵖ is a pointer to a Mat2x3f element.
 type Mat2x3fᵖ struct {
@@ -3401,6 +3842,13 @@ func (p Mat2x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x3fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat2x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Mat2x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Mat2x4fᵖ is a pointer to a Mat2x4f element.
@@ -3452,6 +3900,13 @@ func (p Mat2x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat2x4fˢ {
 	}
 	return Mat2x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Mat2x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Mat3fᵖ is a pointer to a Mat3f element.
 type Mat3fᵖ struct {
@@ -3501,6 +3956,13 @@ func (p Mat3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Mat3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Mat3x2fᵖ is a pointer to a Mat3x2f element.
@@ -3552,6 +4014,13 @@ func (p Mat3x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x2fˢ {
 	}
 	return Mat3x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Mat3x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Mat3x4fᵖ is a pointer to a Mat3x4f element.
 type Mat3x4fᵖ struct {
@@ -3601,6 +4070,13 @@ func (p Mat3x4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat3x4fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat3x4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Mat3x4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Mat4fᵖ is a pointer to a Mat4f element.
@@ -3652,6 +4128,13 @@ func (p Mat4fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4fˢ {
 	}
 	return Mat4fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Mat4fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Mat4x2fᵖ is a pointer to a Mat4x2f element.
 type Mat4x2fᵖ struct {
@@ -3701,6 +4184,13 @@ func (p Mat4x2fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x2fˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Mat4x2fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Mat4x2fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // Mat4x3fᵖ is a pointer to a Mat4x3f element.
@@ -3752,6 +4242,13 @@ func (p Mat4x3fᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Mat4x3fˢ {
 	}
 	return Mat4x3fˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p Mat4x3fᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // FramebufferIdᶜᵖ is a pointer to a FramebufferId element.
 type FramebufferIdᶜᵖ struct {
@@ -3802,6 +4299,13 @@ func (p FramebufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Framebu
 	}
 	return FramebufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p FramebufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // RenderbufferIdᶜᵖ is a pointer to a RenderbufferId element.
 type RenderbufferIdᶜᵖ struct {
@@ -3851,6 +4355,13 @@ func (p RenderbufferIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Render
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return RenderbufferIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p RenderbufferIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLcharᶜᵖᶜᵖ is a pointer to a GLcharᶜᵖ element.
@@ -3910,6 +4421,13 @@ func (p GLcharᶜᵖᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLchar�
 	}
 	return GLcharᶜᵖˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLcharᶜᵖᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // UniformIndexᶜᵖ is a pointer to a UniformIndex element.
 type UniformIndexᶜᵖ struct {
@@ -3959,6 +4477,13 @@ func (p UniformIndexᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformI
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p UniformIndexᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // UniformIndexᵖ is a pointer to a UniformIndex element.
@@ -4010,6 +4535,13 @@ func (p UniformIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State) UniformInde
 	}
 	return UniformIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p UniformIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // ShaderIdᶜᵖ is a pointer to a ShaderId element.
 type ShaderIdᶜᵖ struct {
@@ -4059,6 +4591,13 @@ func (p ShaderIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) ShaderIdˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return ShaderIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p ShaderIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLbooleanᵖ is a pointer to a GLboolean element.
@@ -4110,6 +4649,13 @@ func (p GLbooleanᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLbooleanˢ {
 	}
 	return GLbooleanˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLbooleanᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // SamplerIdᶜᵖ is a pointer to a SamplerId element.
 type SamplerIdᶜᵖ struct {
@@ -4159,6 +4705,13 @@ func (p SamplerIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) SamplerIdˢ
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return SamplerIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p SamplerIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // SamplerIdᵖ is a pointer to a SamplerId element.
@@ -4210,6 +4763,13 @@ func (p SamplerIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) SamplerIdˢ {
 	}
 	return SamplerIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p SamplerIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // TextureIdᶜᵖ is a pointer to a TextureId element.
 type TextureIdᶜᵖ struct {
@@ -4259,6 +4819,13 @@ func (p TextureIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) TextureIdˢ
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return TextureIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p TextureIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // TransformFeedbackIdᶜᵖ is a pointer to a TransformFeedbackId element.
@@ -4310,6 +4877,13 @@ func (p TransformFeedbackIdᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) T
 	}
 	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p TransformFeedbackIdᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // TransformFeedbackIdᵖ is a pointer to a TransformFeedbackId element.
 type TransformFeedbackIdᵖ struct {
@@ -4359,6 +4933,13 @@ func (p TransformFeedbackIdᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Tran
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return TransformFeedbackIdˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p TransformFeedbackIdᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // EGLintᵖ is a pointer to a EGLint element.
@@ -4410,6 +4991,13 @@ func (p EGLintᵖ) Slice(start, end uint64, ϟs *gfxapi.State) EGLintˢ {
 	}
 	return EGLintˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p EGLintᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // Intᵖ is a pointer to a int64 element.
 type Intᵖ struct {
@@ -4459,6 +5047,13 @@ func (p Intᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Intˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return Intˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p Intᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // CGLContextObjᵖ is a pointer to a CGLContextObj element.
@@ -4518,6 +5113,13 @@ func (p CGLContextObjᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGLContext
 	}
 	return CGLContextObjˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p CGLContextObjᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // CGSConnectionIDᵖ is a pointer to a CGSConnectionID element.
 // Note: Pointers are stored differently between the application pool and internal pools.
@@ -4576,6 +5178,13 @@ func (p CGSConnectionIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSConne
 	}
 	return CGSConnectionIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p CGSConnectionIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // CGSWindowIDᵖ is a pointer to a CGSWindowID element.
 type CGSWindowIDᵖ struct {
@@ -4625,6 +5234,13 @@ func (p CGSWindowIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSWindowID�
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return CGSWindowIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p CGSWindowIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // CGSSurfaceIDᵖ is a pointer to a CGSSurfaceID element.
@@ -4676,6 +5292,13 @@ func (p CGSSurfaceIDᵖ) Slice(start, end uint64, ϟs *gfxapi.State) CGSSurfaceI
 	}
 	return CGSSurfaceIDˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p CGSSurfaceIDᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // F64ᵖ is a pointer to a float64 element.
 type F64ᵖ struct {
@@ -4725,6 +5348,13 @@ func (p F64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) F64ˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return F64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p F64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // S64ᵖ is a pointer to a int64 element.
@@ -4776,6 +5406,13 @@ func (p S64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) S64ˢ {
 	}
 	return S64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p S64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // U64ᵖ is a pointer to a uint64 element.
 type U64ᵖ struct {
@@ -4825,6 +5462,13 @@ func (p U64ᵖ) Slice(start, end uint64, ϟs *gfxapi.State) U64ˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return U64ˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p U64ᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLfixedᶜᵖ is a pointer to a GLfixed element.
@@ -4876,6 +5520,13 @@ func (p GLfixedᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
 	}
 	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLfixedᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLfixedᵖ is a pointer to a GLfixed element.
 type GLfixedᵖ struct {
@@ -4925,6 +5576,13 @@ func (p GLfixedᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLfixedˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLfixedˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLfixedᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // GLshortᶜᵖ is a pointer to a GLshort element.
@@ -4976,6 +5634,13 @@ func (p GLshortᶜᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
 	}
 	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p GLshortᶜᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // GLshortᵖ is a pointer to a GLshort element.
 type GLshortᵖ struct {
@@ -5025,6 +5690,13 @@ func (p GLshortᵖ) Slice(start, end uint64, ϟs *gfxapi.State) GLshortˢ {
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return GLshortˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p GLshortᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 // VertexBufferBindingIndexᵖ is a pointer to a VertexBufferBindingIndex element.
@@ -5076,6 +5748,13 @@ func (p VertexBufferBindingIndexᵖ) Slice(start, end uint64, ϟs *gfxapi.State)
 	}
 	return VertexBufferBindingIndexˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
 }
+func (p VertexBufferBindingIndexᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 
 // AttributeLocationᵖ is a pointer to a AttributeLocation element.
 type AttributeLocationᵖ struct {
@@ -5125,6 +5804,13 @@ func (p AttributeLocationᵖ) Slice(start, end uint64, ϟs *gfxapi.State) Attrib
 		panic(fmt.Errorf("Slice start (%d) is greater than the end (%d)", start, end))
 	}
 	return AttributeLocationˢ{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start*p.ElementSize(ϟs), Count: end - start}}
+}
+func (p AttributeLocationᵖ) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+	if p.Address != 0 {
+		return value.ObservedPointer(p.Address)
+	} else {
+		return value.AbsolutePointer(0)
+	}
 }
 
 type GLintː2ᵃ struct {
@@ -5470,7 +6156,7 @@ func (s BufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v BufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -5498,7 +6184,7 @@ func (s BufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v BufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -5681,16 +6367,15 @@ func (s CGLContextObjˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base/uint64(ϟs.Architecture.PointerSize))
 		for i := uint64(0); i < s.Count; i++ {
-			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if d.Error() != nil {
-				panic(d.Error())
-			}
-			ϟb.Push(NewCGLContextObj(v).value(ϟb, ϟa, ϟs))
-			ϟb.Store(ptr)
-			ptr += step
+			i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			ptr := NewCGLContextObj(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+			ϟb.StorePointer(dst, ptr)
+			dst++
+		}
+		if d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return s
@@ -5867,16 +6552,15 @@ func (s CGSConnectionIDˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base/uint64(ϟs.Architecture.PointerSize))
 		for i := uint64(0); i < s.Count; i++ {
-			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if d.Error() != nil {
-				panic(d.Error())
-			}
-			ϟb.Push(NewCGSConnectionID(v).value(ϟb, ϟa, ϟs))
-			ϟb.Store(ptr)
-			ptr += step
+			i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			ptr := NewCGSConnectionID(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+			ϟb.StorePointer(dst, ptr)
+			dst++
+		}
+		if d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return s
@@ -6830,7 +7514,7 @@ func (s FramebufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v FramebufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -6858,7 +7542,7 @@ func (s FramebufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v FramebufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -7366,16 +8050,15 @@ func (s GLcharᶜᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Da
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base/uint64(ϟs.Architecture.PointerSize))
 		for i := uint64(0); i < s.Count; i++ {
-			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if d.Error() != nil {
-				panic(d.Error())
-			}
-			ϟb.Push(NewGLcharᶜᵖ(v).value())
-			ϟb.Store(ptr)
-			ptr += step
+			i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			ptr := NewGLcharᶜᵖ(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+			ϟb.StorePointer(dst, ptr)
+			dst++
+		}
+		if d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return s
@@ -10919,7 +11602,7 @@ func (s ProgramIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ProgramId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -10947,7 +11630,7 @@ func (s ProgramIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ProgramId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11111,7 +11794,7 @@ func (s QueryIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v QueryId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11139,7 +11822,7 @@ func (s QueryIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v QueryId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11303,7 +11986,7 @@ func (s RenderbufferIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v RenderbufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11331,7 +12014,7 @@ func (s RenderbufferIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v RenderbufferId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11809,7 +12492,7 @@ func (s ShaderIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databa
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ShaderId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -11837,7 +12520,7 @@ func (s ShaderIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v ShaderId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -12001,7 +12684,7 @@ func (s TextureIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Datab
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v TextureId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -12029,7 +12712,7 @@ func (s TextureIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v TextureId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -14530,7 +15213,7 @@ func (s VertexArrayIdˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.D
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v VertexArrayId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -14558,7 +15241,7 @@ func (s VertexArrayIdˢ) OnWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
 		ϟb.ReserveMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root.Address)))
 		size := s.ElementSize(ϟs)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+		ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
 		for i := uint64(0); i < s.Count; i++ {
 			var v VertexArrayId
 			if ϟv := d.Uint32(); d.Error() == nil {
@@ -15005,16 +15688,15 @@ func (s Voidᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Databas
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base/uint64(ϟs.Architecture.PointerSize))
 		for i := uint64(0); i < s.Count; i++ {
-			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if d.Error() != nil {
-				panic(d.Error())
-			}
-			ϟb.Push(NewVoidᵖ(v).value())
-			ϟb.Store(ptr)
-			ptr += step
+			i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			ptr := NewVoidᵖ(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+			ϟb.StorePointer(dst, ptr)
+			dst++
+		}
+		if d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return s
@@ -15191,16 +15873,15 @@ func (s Voidᶜᵖˢ) OnRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Data
 		f(s.Range(ϟs))
 	}
 	if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-		s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-		ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+		d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base/uint64(ϟs.Architecture.PointerSize))
 		for i := uint64(0); i < s.Count; i++ {
-			v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-			if d.Error() != nil {
-				panic(d.Error())
-			}
-			ϟb.Push(NewVoidᶜᵖ(v).value())
-			ϟb.Store(ptr)
-			ptr += step
+			i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+			ptr := NewVoidᶜᵖ(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+			ϟb.StorePointer(dst, ptr)
+			dst++
+		}
+		if d.Error() != nil {
+			panic(d.Error())
 		}
 	}
 	return s

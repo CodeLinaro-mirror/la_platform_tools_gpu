@@ -50,12 +50,10 @@ type test struct {
 	expected expected
 }
 
-func (test test) check(t *testing.T, a device.Architecture, d database.Database, l log.Logger) {
-	b := builder.New(a)
+func (test test) check(t *testing.T, ca, ra device.Architecture, d database.Database, l log.Logger) {
+	b := builder.New(ra)
 	s := gfxapi.NewState()
-
-	// TODO: Test for different capture / replay architectures
-	s.Architecture = a
+	s.Architecture = ca
 
 	for _, w := range test.writes {
 		s.Memory[memory.ApplicationPool].Write(w.at.Address, w.src)
@@ -153,7 +151,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_Clone(t *testing.T) {
@@ -182,7 +180,7 @@ func TestOperationsOpCall_Clone(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdClone.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_Make(t *testing.T) {
@@ -205,7 +203,7 @@ func TestOperationsOpCall_Make(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdMake.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_Copy(t *testing.T) {
@@ -234,7 +232,7 @@ func TestOperationsOpCall_Copy(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCopy.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_CharSliceToString(t *testing.T) {
@@ -263,7 +261,7 @@ func TestOperationsOpCall_CharSliceToString(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCharsliceToString.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_CharPtrToString(t *testing.T) {
@@ -292,7 +290,7 @@ func TestOperationsOpCall_CharPtrToString(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdCharptrToString.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_Unknowns(t *testing.T) {
@@ -328,7 +326,7 @@ func TestOperationsOpCall_Unknowns(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdUnknownWriteSlice.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_SingleInputArg(t *testing.T) {
@@ -406,7 +404,7 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 			},
 			constants: []byte{'h', 'e', 'l', 'l', 'o', 0},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_3_Strings(t *testing.T) {
@@ -434,7 +432,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 				/* 0x08 */ 'w', 'o', 'r', 'l', 'd', 0x00,
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
@@ -488,7 +486,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 				opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3InArrays.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_InArrayOfStrings(t *testing.T) {
@@ -570,7 +568,95 @@ func TestOperationsOpCall_InArrayOfStrings(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfStrings.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
+}
+
+func TestOperationsOpCall_InArrayOfStrings_32bitTo64Bit(t *testing.T) {
+	d, l := database.NewInMemory(nil), log.Testing(t)
+	ca := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+	ra := device.Architecture{
+		PointerAlignment: 8,
+		PointerSize:      8,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	aRng, aID := atom.Data(ca, d, l, p(0x100000), "array")
+	bRng, bID := atom.Data(ca, d, l, p(0x200000), "of")
+	cRng, cID := atom.Data(ca, d, l, p(0x300000), "strings")
+
+	pRng, pID := atom.Data(ca, d, l, p(0x500000), []memory.Pointer{
+		p(0x300000), p(0x200000), p(0x100000), p(0x200000), p(0x300000),
+	})
+
+	test{
+		atoms: []atom.Atom{
+			// 0x100000: "array"
+			// 0x200000: "of"
+			// 0x300000: "strings"
+			// 0x500000: 0x300000
+			// 0x500004: 0x200000
+			// 0x500008: 0x100000
+			// 0x50000c: 0x200000
+			// 0x500010: 0x300000
+			NewCmdVoidInArrayOfStrings(p(0x500000), 5).
+				AddRead(aRng, aID).
+				AddRead(bRng, bID).
+				AddRead(cRng, cID).
+				AddRead(pRng, pID),
+		},
+		expected: expected{
+			// 0x00: "array"   (6 bytes)
+			// 0x08: "of"      (3 bytes)
+			// 0x10: "strings" (8 bytes)
+			// 0x18: 0x10
+			// 0x20: 0x08
+			// 0x28: 0x00
+			// 0x30: 0x08
+			// 0x38: 0x10
+			resources: []binary.ID{cID, bID, aID},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+
+				// TODO: Collate sequential reads / writes to reduce 5 Resource opcodes
+				// to one.
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
+				opcode.StoreV{Address: 0x18},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
+				opcode.Resource{ID: 0},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x20},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.Resource{ID: 1},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
+				opcode.StoreV{Address: 0x28},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
+				opcode.Resource{ID: 2},
+
+				// TODO: Resource loads below are redundant
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x30},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.Resource{ID: 1},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
+				opcode.StoreV{Address: 0x38},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
+				opcode.Resource{ID: 0},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x18},
+				opcode.PushI{DataType: protocol.TypeInt32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfStrings.ID},
+			},
+		},
+	}.check(t, ca, ra, d, l)
 }
 
 func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
@@ -693,7 +779,7 @@ func TestOperationsOpCall_SinglePointerElementRead(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidReadBool.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
@@ -730,7 +816,7 @@ func TestOperationsOpCall_MultiplePointerElementReads(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidReadPtrs.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
@@ -803,7 +889,7 @@ func TestOperationsOpCall_SinglePointerElementWrite(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidWriteBool.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
@@ -827,7 +913,7 @@ func TestOperationsOpCall_MultiplePointerElementWrites(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidWritePtrs.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_ReturnValue(t *testing.T) {
@@ -884,7 +970,7 @@ func TestOperationsOpCall_ReturnValue(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdPointer.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_3Remapped(t *testing.T) {
@@ -917,7 +1003,7 @@ func TestOperationsOpCall_3Remapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid3Remapped.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
@@ -973,7 +1059,7 @@ func TestOperationsOpCall_InArrayOfRemapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfRemapped.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
@@ -1021,7 +1107,7 @@ func TestOperationsOpCall_OutArrayOfRemapped(t *testing.T) {
 				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
@@ -1069,7 +1155,7 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 				opcode.StoreV{Address: tbase + 4*1},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }
 
 func TestOperationsOpCall_Remapped(t *testing.T) {
@@ -1107,5 +1193,5 @@ func TestOperationsOpCall_Remapped(t *testing.T) {
 				opcode.Call{FunctionID: funcInfoCmdVoid3Remapped.ID},
 			},
 		},
-	}.check(t, a, d, l)
+	}.check(t, a, a, d, l)
 }

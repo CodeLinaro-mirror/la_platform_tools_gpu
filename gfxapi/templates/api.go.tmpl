@@ -236,6 +236,20 @@
     }
     return {{$slice_ty}}{SliceInfo: SliceInfo{Root: p.Pointer, Base: p.Address + start * p.ElementSize(ϟs), Count: end-start}}
   }
+
+  {{if not (GetAnnotation $ "replay_custom_value")}}
+    func (p {{$ptr_ty}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
+      if p.Address != 0 {
+        {{if $el_is_ptr}}
+          return value.PointerIndex(p.Address / uint64(ϟs.Architecture.PointerSize))
+        {{else}}
+          return value.ObservedPointer(p.Address)
+        {{end}}
+      } else {
+        return value.AbsolutePointer(0)
+      }
+    }
+  {{end}}
 {{end}}
 
 
@@ -410,33 +424,40 @@
       f(s.Range(ϟs))
     }
     if ϟb != nil && s.Root.Pool == memory.ApplicationPool {
-      s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
-      {{if (GetAnnotation $s.To "replay_remap")}}
-        {{/* Element type has explicitly stated it needs custom remapping */}}
-        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+      {{if IsPointer ($s.To | Underlying)}}
+        {{/* Pointers need remapping to replay addresses.
+             Pointer sizes may vary between capture and replay.
+             To handle this, we store pointers in a separate table and refer to
+             these using pointer indices.
+        */}}
+        d, dst := s.Decoder(ϟs, ϟd, ϟl), value.PointerIndex(s.Base / uint64(ϟs.Architecture.PointerSize))
         for i := uint64(0); i < s.Count; i++ {
-          var v {{$el_ty}}
-          {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(d.Error())"}}
-          if key, remap := v.remap(ϟa, ϟs); remap {
-            loadRemap(ϟb, key, {{Template "Go.Replay.Type" $s.To}}, {{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
-          } else {
-            ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
-          }
-          ϟb.Store(ptr)
-          ptr += step
+          {{if (GetAnnotation $s.To "replay_remap")}}{{Error "Remappings of pointers not implemented"}}{{end}}
+          i := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
+          ptr := New{{$el_ty}}(i).value(ϟb, ϟa, ϟs).(value.Pointer)
+          ϟb.StorePointer(dst, ptr)
+          dst++
         }
-      {{else if IsPointer ($s.To | Underlying)}}
-        {{/* Pointers need remapping to replay addresses */}}
-        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
-        for i := uint64(0); i < s.Count; i++ {
-          v := binary.ReadUint(d, ϟs.Architecture.PointerSize*8)
-          if d.Error() != nil { panic(d.Error()) }
-          ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" (printf "New%s(v)" $el_ty)}})
-          ϟb.Store(ptr)
-          ptr += step
-        }
+        if d.Error() != nil { panic(d.Error()) }
       {{else}}
-        ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+        s.ReserveMemory(ϟa, ϟs, ϟd, ϟl, ϟb)
+        {{if (GetAnnotation $s.To "replay_remap")}}
+          {{/* Element type has explicitly stated it needs custom remapping */}}
+          ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(s.ElementSize(ϟs)), s.Decoder(ϟs, ϟd, ϟl)
+          for i := uint64(0); i < s.Count; i++ {
+            var v {{$el_ty}}
+            {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(d.Error())"}}
+            if key, remap := v.remap(ϟa, ϟs); remap {
+              loadRemap(ϟb, key, {{Template "Go.Replay.Type" $s.To}}, {{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
+            } else {
+              ϟb.Push({{Template "Go.Replay.Value" "Type" $s.To "Name" "v"}})
+            }
+            ϟb.Store(ptr)
+            ptr += step
+          }
+        {{else}}
+          ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
+        {{end}}
       {{end}}
     }
     return s
@@ -452,7 +473,7 @@
       {{if (GetAnnotation $s.To "replay_remap")}}
         {{/* Element type has explicitly stated it needs custom remapping */}}
         size := s.ElementSize(ϟs)
-        ptr, step, d := value.RemappedPointer(s.Base), value.RemappedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
+        ptr, step, d := value.ObservedPointer(s.Base), value.ObservedPointer(size), s.Decoder(ϟs, ϟd, ϟl)
         for i := uint64(0); i < s.Count; i++ {
           var v {{$el_ty}}
           {{Template "Go.Decode" "Name" "v" "Type" $s.To "ErrHandler" "panic(d.Error())"}}

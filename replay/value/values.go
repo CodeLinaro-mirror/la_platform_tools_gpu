@@ -149,35 +149,54 @@ func (p AbsolutePointer) Offset(offset uint64) Pointer {
 // IsValid returns true for all absolute pointers.
 func (p AbsolutePointer) IsValid() bool { return true }
 
-// RemappedPointer is a pointer that was observed at capture time.
+// ObservedPointer is a pointer that was observed at capture time.
 // Pointers of this type are remapped to an equivalent volatile address-space
 // pointer, or absolute address-space pointer before being passed to the
 // protocol.
-type RemappedPointer uint64
+type ObservedPointer uint64
 
 // Get returns the pointer type and the pointer translated to either an
 // equivalent volatile address-space pointer or absolute pointer.
-func (p RemappedPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
-	ty, val = r.TranslateRemappedPointer(uint64(p))
+func (p ObservedPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	ty, val = r.ResolveObservedPointer(p)
 	return ty, val, false
 }
 
 // Offset returns the sum of the pointer with offset.
-func (p RemappedPointer) Offset(offset uint64) Pointer {
-	return p + RemappedPointer(offset)
+func (p ObservedPointer) Offset(offset uint64) Pointer {
+	return p + ObservedPointer(offset)
 }
 
 // IsValid returns true if the pointer considered valid. Currently this is a
 // test for the pointer being greater than 0x1000 as low addresses are likely
 // to be a wrong interpretation of the value. This may change in the future.
-func (p RemappedPointer) IsValid() bool {
+func (p ObservedPointer) IsValid() bool {
 	// Anything very low in applciation address-space is extremely
 	// unlikely to be a valid pointer.
 	return p > 0x1000
 }
 
+// PointerIndex is an index to a pointer in the pointer table.
+type PointerIndex uint64
+
+// Get returns TypeVolatilePointer and the volatile address of the pointer.
+func (p PointerIndex) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	val = uint64(r.ResolvePointerIndex(p))
+	return protocol.TypeVolatilePointer, val, false
+}
+
+// Offset returns the sum of the pointer index with offset.
+func (p PointerIndex) Offset(offset uint64) Pointer {
+	return p + PointerIndex(offset)
+}
+
+// IsValid returns true.
+func (p PointerIndex) IsValid() bool {
+	return true
+}
+
 // VolatilePointer is a pointer to the volatile address-space.
-// Unlike RemappedPointer, there is no remapping.
+// Unlike ObservedPointer, there is no remapping.
 type VolatilePointer uint64
 
 // Get returns TypeVolatilePointer and the uint64 value of the pointer in
@@ -194,25 +213,25 @@ func (p VolatilePointer) Offset(offset uint64) Pointer {
 // IsValid returns true.
 func (p VolatilePointer) IsValid() bool { return true }
 
-// VolatileTemporaryPointer is a pointer to in temporary address-space.
+// TemporaryPointer is a pointer to in temporary address-space.
 // The temporary address-space sits within a reserved area of the the volatile
 // address space and its offset is calculated dynamically.
 // TODO: REMOVE
-type VolatileTemporaryPointer uint64
+type TemporaryPointer uint64
 
 // Get returns TypeVolatilePointer and the dynamically calculated offset of the
 // temporary pointer within volatile address-space.
-func (p VolatileTemporaryPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
-	return protocol.TypeVolatilePointer, r.TranslateTemporaryPointer(uint64(p)), false
+func (p TemporaryPointer) Get(r PointerResolver) (ty protocol.Type, val uint64, onStack bool) {
+	return protocol.TypeVolatilePointer, uint64(r.ResolveTemporaryPointer(p)), false
 }
 
 // Offset returns the sum of the pointer with offset.
-func (p VolatileTemporaryPointer) Offset(offset uint64) Pointer {
-	return p + VolatileTemporaryPointer(offset)
+func (p TemporaryPointer) Offset(offset uint64) Pointer {
+	return p + TemporaryPointer(offset)
 }
 
 // IsValid returns true.
-func (p VolatileTemporaryPointer) IsValid() bool { return true }
+func (p TemporaryPointer) IsValid() bool { return true }
 
 // ConstantPointer is a pointer in the constant address-space that will not be
 // altered before being passed to the protocol.

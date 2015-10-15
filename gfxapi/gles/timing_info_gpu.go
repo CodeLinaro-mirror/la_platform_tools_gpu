@@ -198,7 +198,7 @@ func (t *timingInfoGpuTransform) Flush(out atom.Writer) {
 
 	// Synchronize on a final empty post before aggregating and returning query results.
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-		b.Post(value.RemappedPointer(transientPointer.Address), 0, func(d binary.Decoder, err error) error {
+		b.Post(value.ObservedPointer(transientPointer.Address), 0, func(d binary.Decoder, err error) error {
 			t.out <- t.queries
 			close(t.out)
 			return err
@@ -263,7 +263,7 @@ func (t *timingInfoGpuTransform) appendQuery(id atom.ID, et eventType, out atom.
 func (t *timingInfoGpuTransform) checkDisjoint(checkType disjointCheckType, out atom.Writer) {
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 		NewGlGetIntegerv(GLenum_GL_GPU_DISJOINT_EXT, transientPointer).Replay(i, s, d, l, b)
-		b.Post(value.RemappedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
+		b.Post(value.ObservedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
 			if err != nil {
 				return err
 			}
@@ -308,7 +308,7 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 			// GLES results retrieval is asynchronous, depends on result availability.
 			out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 				NewGlGetQueryObjectivEXT(query.queryId, GLenum_GL_QUERY_RESULT_AVAILABLE, transientPointer).Replay(i, s, d, l, b)
-				b.Post(value.RemappedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
+				b.Post(value.ObservedPointer(transientPointer.Address), 4, func(d binary.Decoder, err error) error {
 					if err != nil {
 						return err
 					}
@@ -335,7 +335,7 @@ func (t *timingInfoGpuTransform) retrievePendingQueries(out atom.Writer) {
 			default:
 				return nil
 			}
-			b.Post(value.RemappedPointer(transientPointer.Address), 8, func(d binary.Decoder, err error) error {
+			b.Post(value.ObservedPointer(transientPointer.Address), 8, func(d binary.Decoder, err error) error {
 				if err != nil {
 					return err
 				}

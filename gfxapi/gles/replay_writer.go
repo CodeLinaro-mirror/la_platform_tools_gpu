@@ -1025,39 +1025,6 @@ func (c ContextID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State)
 func (c ThreadID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U64(uint64(c))
 }
-func (c EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c EGLContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c GLXContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c GLXDrawable) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c HDC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c CGLTexelFormatObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c CGLContextObj) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
-func (c CGSConnectionID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
-}
 func (c CGSWindowID) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.S32(int32(c))
 }
@@ -1102,9 +1069,6 @@ func (c GLintptr) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) 
 }
 func (c GLsizeiptr) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.S32(int32(c))
-}
-func (c GLDEBUGPROC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-	return Voidᵖ(c).value()
 }
 func (c GLhalf) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U16(uint16(c))
@@ -1425,7 +1389,7 @@ func (ϟa *GlDebugMessageCallbackKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageCallbackKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Callback.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.UserParam.value())
+	ϟb.Push(ϟa.UserParam.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageCallbackKHR)
 }
 
@@ -1478,7 +1442,7 @@ func (ϟa *GlDebugMessageControlKHR) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(value.U32(ϟa.Severity))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Ids.value())
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Enabled.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageControlKHR)
 }
@@ -1542,7 +1506,7 @@ func (ϟa *GlDebugMessageInsertKHR) Call(ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Severity))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Message.value())
+	ϟb.Push(ϟa.Message.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageInsertKHR)
 }
 
@@ -1703,12 +1667,12 @@ func (ϟa *GlGetDebugMessageLogKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetDebugMessageLogKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Sources.value())
-	ϟb.Push(ϟa.Types.value())
-	ϟb.Push(ϟa.Ids.value())
-	ϟb.Push(ϟa.Severities.value())
-	ϟb.Push(ϟa.Lengths.value())
-	ϟb.Push(ϟa.MessageLog.value())
+	ϟb.Push(ϟa.Sources.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Types.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Severities.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Lengths.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.MessageLog.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetDebugMessageLogKHR)
 }
 
@@ -1759,8 +1723,8 @@ func (ϟa *GlGetObjectLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetObjectLabelKHR)
 }
 
@@ -1800,10 +1764,10 @@ func (ϟa *GlGetObjectPtrLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectPtrLabelKHR().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectPtrLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Ptr.value())
+	ϟb.Push(ϟa.Ptr.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetObjectPtrLabelKHR)
 }
 
@@ -1835,7 +1799,7 @@ func (ϟa *GlGetPointervKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPointervKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPointervKHR)
 }
 
@@ -1876,7 +1840,7 @@ func (ϟa *GlGetSamplerParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (ϟa *GlGetSamplerParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIivEXT)
 }
 
@@ -1917,7 +1881,7 @@ func (ϟa *GlGetSamplerParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlGetSamplerParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIuivEXT)
 }
 
@@ -1992,7 +1956,7 @@ func (ϟa *GlGetTexParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetTexParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIivEXT)
 }
 
@@ -2067,7 +2031,7 @@ func (ϟa *GlGetTexParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlGetTexParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIuivEXT)
 }
 
@@ -2168,7 +2132,7 @@ func (ϟa *GlObjectLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlObjectLabelKHR)
 }
 
@@ -2202,9 +2166,9 @@ func (ϟa *GlObjectPtrLabelKHR) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectPtrLabelKHR().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectPtrLabelKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Ptr.value())
+	ϟb.Push(ϟa.Ptr.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlObjectPtrLabelKHR)
 }
 
@@ -2333,7 +2297,7 @@ func (ϟa *GlPushDebugGroupKHR) Call(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Message.value())
+	ϟb.Push(ϟa.Message.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPushDebugGroupKHR)
 }
 
@@ -2379,7 +2343,7 @@ func (ϟa *GlSamplerParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlSamplerParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIivEXT)
 }
 
@@ -2425,7 +2389,7 @@ func (ϟa *GlSamplerParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlSamplerParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIuivEXT)
 }
 
@@ -2590,7 +2554,7 @@ func (ϟa *GlTexParameterIivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlTexParameterIivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIivEXT)
 }
 
@@ -2663,7 +2627,7 @@ func (ϟa *GlTexParameterIuivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlTexParameterIuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIuivEXT)
 }
 
@@ -2784,7 +2748,7 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteQueries) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Queries.value())
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteQueries)
 }
 
@@ -2855,7 +2819,7 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenQueries) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Queries.value())
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenQueries)
 }
 
@@ -2891,7 +2855,7 @@ func (ϟa *GlGetQueryObjectuiv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjectuiv)
 }
 
@@ -2934,7 +2898,7 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlGetQueryiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryiv)
 }
 
@@ -3320,7 +3284,7 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Buffers.value())
+	ϟb.Push(ϟa.Buffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteBuffers)
 }
 
@@ -3358,7 +3322,7 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Buffers.value())
+	ϟb.Push(ϟa.Buffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenBuffers)
 }
 
@@ -3401,7 +3365,7 @@ func (ϟa *GlGetBufferParameteri64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlGetBufferParameteri64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBufferParameteri64v)
 }
 
@@ -3473,7 +3437,7 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetBufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBufferParameteriv)
 }
 
@@ -3519,7 +3483,7 @@ func (ϟa *GlGetBufferPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetBufferPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBufferPointerv)
 }
 
@@ -3718,7 +3682,7 @@ func (ϟa *GlDebugMessageCallback) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDebugMessageCallback) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Callback.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.UserParam.value())
+	ϟb.Push(ϟa.UserParam.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageCallback)
 }
 
@@ -3772,7 +3736,7 @@ func (ϟa *GlDebugMessageControl) Call(ϟs *gfxapi.State, ϟd database.Database,
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(value.U32(ϟa.Severity))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Ids.value())
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Enabled.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageControl)
 }
@@ -3837,7 +3801,7 @@ func (ϟa *GlDebugMessageInsert) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Severity))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Message.value())
+	ϟb.Push(ϟa.Message.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDebugMessageInsert)
 }
 
@@ -3891,12 +3855,12 @@ func (ϟa *GlGetDebugMessageLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlGetDebugMessageLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Sources.value())
-	ϟb.Push(ϟa.Types.value())
-	ϟb.Push(ϟa.Ids.value())
-	ϟb.Push(ϟa.Severities.value())
-	ϟb.Push(ϟa.Lengths.value())
-	ϟb.Push(ϟa.MessageLog.value())
+	ϟb.Push(ϟa.Sources.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Types.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Severities.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Lengths.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.MessageLog.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetDebugMessageLog)
 }
 
@@ -3948,8 +3912,8 @@ func (ϟa *GlGetObjectLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetObjectLabel)
 }
 
@@ -3990,10 +3954,10 @@ func (ϟa *GlGetObjectPtrLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetObjectPtrLabel().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetObjectPtrLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Ptr.value())
+	ϟb.Push(ϟa.Ptr.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetObjectPtrLabel)
 }
 
@@ -4026,7 +3990,7 @@ func (ϟa *GlGetPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPointerv)
 }
 
@@ -4072,7 +4036,7 @@ func (ϟa *GlObjectLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ϟb.Push(value.U32(ϟa.Identifier))
 	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlObjectLabel)
 }
 
@@ -4107,9 +4071,9 @@ func (ϟa *GlObjectPtrLabel) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke glObjectPtrLabel().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlObjectPtrLabel) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Ptr.value())
+	ϟb.Push(ϟa.Ptr.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlObjectPtrLabel)
 }
 
@@ -4176,7 +4140,7 @@ func (ϟa *GlPushDebugGroup) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Source))
 	ϟb.Push(ϟa.Id.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Message.value())
+	ϟb.Push(ϟa.Message.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPushDebugGroup)
 }
 
@@ -4336,7 +4300,7 @@ func (ϟa *GlDrawArraysIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawArraysIndirect) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
-	ϟb.Push(ϟa.Indirect.value())
+	ϟb.Push(ϟa.Indirect.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawArraysIndirect)
 }
 
@@ -4962,7 +4926,7 @@ func (ϟa *GlDrawElementsIndirect) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlDrawElementsIndirect) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.DrawMode))
 	ϟb.Push(value.U32(ϟa.IndicesType))
-	ϟb.Push(ϟa.Indirect.value())
+	ϟb.Push(ϟa.Indirect.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawElementsIndirect)
 }
 
@@ -6540,7 +6504,7 @@ func (ϟa *GlBufferStorageEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlBufferStorageEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Flag))
 	ϟb.Call(funcInfoGlBufferStorageEXT)
 }
@@ -6988,11 +6952,11 @@ func (ϟa *GlCoverFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 func (ϟa *GlCoverFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCoverFillPathInstancedNV)
 }
 
@@ -7037,11 +7001,11 @@ func (ϟa *GlCoverStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlCoverStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCoverStrokePathInstancedNV)
 }
 
@@ -7127,7 +7091,7 @@ func (ϟa *GlCoverageModulationTableNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCoverageModulationTableNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCoverageModulationTableNV)
 }
 
@@ -7170,7 +7134,7 @@ func (ϟa *GlCreatePerfQueryINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlCreatePerfQueryINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.QueryHandle.value())
+	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCreatePerfQueryINTEL)
 }
 
@@ -7195,7 +7159,7 @@ func (ϟa *GlCreateShaderProgramvEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlCreateShaderProgramvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Strings.value())
+	ϟb.Push(ϟa.Strings.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCreateShaderProgramvEXT)
 }
 
@@ -7217,7 +7181,7 @@ func (ϟa *GlDeleteFencesNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteFencesNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Fences.value())
+	ϟb.Push(ϟa.Fences.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteFencesNV)
 }
 
@@ -7261,7 +7225,7 @@ func (ϟa *GlDeletePerfMonitorsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeletePerfMonitorsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Monitors.value())
+	ϟb.Push(ϟa.Monitors.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeletePerfMonitorsAMD)
 }
 
@@ -7304,7 +7268,7 @@ func (ϟa *GlDeleteProgramPipelinesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteProgramPipelinesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pipelines.value())
+	ϟb.Push(ϟa.Pipelines.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteProgramPipelinesEXT)
 }
 
@@ -7339,7 +7303,7 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteQueriesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Queries.value())
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteQueriesEXT)
 }
 
@@ -7414,7 +7378,7 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteVertexArraysOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Arrays.value())
+	ϟb.Push(ϟa.Arrays.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteVertexArraysOES)
 }
 
@@ -7437,7 +7401,7 @@ func (ϟa *GlDepthRangeArrayfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlDepthRangeArrayfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDepthRangeArrayfvNV)
 }
 
@@ -7566,7 +7530,7 @@ func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlDiscardFramebufferEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.NumAttachments.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Attachments.value())
+	ϟb.Push(ϟa.Attachments.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDiscardFramebufferEXT)
 }
 
@@ -7968,7 +7932,7 @@ func (ϟa *GlDrawBuffersEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Bufs.value())
+	ϟb.Push(ϟa.Bufs.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawBuffersEXT)
 }
 
@@ -7990,8 +7954,8 @@ func (ϟa *GlDrawBuffersIndexedEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersIndexedEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Location.value())
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawBuffersIndexedEXT)
 }
 
@@ -8013,7 +7977,7 @@ func (ϟa *GlDrawBuffersNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffersNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Bufs.value())
+	ϟb.Push(ϟa.Bufs.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawBuffersNV)
 }
 
@@ -8709,7 +8673,7 @@ func (ϟa *GlDrawElementsInstancedBaseInstanceEXT) Call(ϟs *gfxapi.State, ϟd d
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Instancecount.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Baseinstance.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawElementsInstancedBaseInstanceEXT)
@@ -8735,7 +8699,7 @@ func (ϟa *GlDrawElementsInstancedBaseVertexBaseInstanceEXT) Call(ϟs *gfxapi.St
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Instancecount.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Basevertex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Baseinstance.value(ϟb, ϟa, ϟs))
@@ -10357,7 +10321,7 @@ func (ϟa *GlExtGetBufferPointervQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetBufferPointervQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetBufferPointervQCOM)
 }
 
@@ -10378,9 +10342,9 @@ func (ϟa *GlExtGetBuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetBuffersQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetBuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Buffers.value())
+	ϟb.Push(ϟa.Buffers.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxBuffers.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumBuffers.value())
+	ϟb.Push(ϟa.NumBuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetBuffersQCOM)
 }
 
@@ -10401,9 +10365,9 @@ func (ϟa *GlExtGetFramebuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetFramebuffersQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetFramebuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Framebuffers.value())
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxFramebuffers.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumFramebuffers.value())
+	ϟb.Push(ϟa.NumFramebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetFramebuffersQCOM)
 }
 
@@ -10430,8 +10394,8 @@ func (ϟa *GlExtGetProgramBinarySourceQCOM) Call(ϟs *gfxapi.State, ϟd database
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Shadertype))
-	ϟb.Push(ϟa.Source.value())
-	ϟb.Push(ϟa.Length.value())
+	ϟb.Push(ϟa.Source.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetProgramBinarySourceQCOM)
 }
 
@@ -10452,9 +10416,9 @@ func (ϟa *GlExtGetProgramsQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetProgramsQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetProgramsQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Programs.value())
+	ϟb.Push(ϟa.Programs.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxPrograms.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumPrograms.value())
+	ϟb.Push(ϟa.NumPrograms.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetProgramsQCOM)
 }
 
@@ -10475,9 +10439,9 @@ func (ϟa *GlExtGetRenderbuffersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetRenderbuffersQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetRenderbuffersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Renderbuffers.value())
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxRenderbuffers.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumRenderbuffers.value())
+	ϟb.Push(ϟa.NumRenderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetRenderbuffersQCOM)
 }
 
@@ -10498,9 +10462,9 @@ func (ϟa *GlExtGetShadersQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetShadersQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetShadersQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Shaders.value())
+	ϟb.Push(ϟa.Shaders.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxShaders.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumShaders.value())
+	ϟb.Push(ϟa.NumShaders.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetShadersQCOM)
 }
 
@@ -10529,7 +10493,7 @@ func (ϟa *GlExtGetTexLevelParameterivQCOM) Call(ϟs *gfxapi.State, ϟd database
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetTexLevelParameterivQCOM)
 }
 
@@ -10560,7 +10524,7 @@ func (ϟa *GlExtGetTexSubImageQCOM) Call(ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(ϟa.Depth.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Texels.value())
+	ϟb.Push(ϟa.Texels.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetTexSubImageQCOM)
 }
 
@@ -10581,9 +10545,9 @@ func (ϟa *GlExtGetTexturesQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Call builds the replay instructions to push the arguments to the stack and invoke glExtGetTexturesQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlExtGetTexturesQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Textures.value())
+	ϟb.Push(ϟa.Textures.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.MaxTextures.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumTextures.value())
+	ϟb.Push(ϟa.NumTextures.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlExtGetTexturesQCOM)
 }
 
@@ -10779,7 +10743,7 @@ func (ϟa *GlFramebufferSampleLocationsfvNV) Call(ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFramebufferSampleLocationsfvNV)
 }
 
@@ -10967,7 +10931,7 @@ func (ϟa *GlGenFencesNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenFencesNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Fences.value())
+	ϟb.Push(ϟa.Fences.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenFencesNV)
 }
 
@@ -11012,7 +10976,7 @@ func (ϟa *GlGenPerfMonitorsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenPerfMonitorsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Monitors.value())
+	ϟb.Push(ϟa.Monitors.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenPerfMonitorsAMD)
 }
 
@@ -11034,7 +10998,7 @@ func (ϟa *GlGenProgramPipelinesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenProgramPipelinesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pipelines.value())
+	ϟb.Push(ϟa.Pipelines.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenProgramPipelinesEXT)
 }
 
@@ -11072,7 +11036,7 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenQueriesEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Queries.value())
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenQueriesEXT)
 }
 
@@ -11114,7 +11078,7 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenVertexArraysOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Arrays.value())
+	ϟb.Push(ϟa.Arrays.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenVertexArraysOES)
 }
 
@@ -11159,7 +11123,7 @@ func (ϟa *GlGetBufferPointervOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetBufferPointervOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBufferPointervOES)
 }
 
@@ -11181,7 +11145,7 @@ func (ϟa *GlGetCoverageModulationTableNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetCoverageModulationTableNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Bufsize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetCoverageModulationTableNV)
 }
 
@@ -11204,8 +11168,8 @@ func (ϟa *GlGetDriverControlStringQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlGetDriverControlStringQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.DriverControl.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.DriverControlString.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.DriverControlString.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetDriverControlStringQCOM)
 }
 
@@ -11226,9 +11190,9 @@ func (ϟa *GlGetDriverControlsQCOM) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetDriverControlsQCOM().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetDriverControlsQCOM) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Num.value())
+	ϟb.Push(ϟa.Num.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.DriverControls.value())
+	ϟb.Push(ϟa.DriverControls.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetDriverControlsQCOM)
 }
 
@@ -11251,7 +11215,7 @@ func (ϟa *GlGetFenceivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (ϟa *GlGetFenceivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Fence.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFenceivNV)
 }
 
@@ -11272,7 +11236,7 @@ func (ϟa *GlGetFirstPerfQueryIdINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetFirstPerfQueryIdINTEL().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFirstPerfQueryIdINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.QueryId.value())
+	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFirstPerfQueryIdINTEL)
 }
 
@@ -11295,7 +11259,7 @@ func (ϟa *GlGetFloati_vNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetFloati_vNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFloati_vNV)
 }
 
@@ -12715,7 +12679,7 @@ func (ϟa *GlGetInteger64vAPPLE) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInteger64vAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetInteger64vAPPLE)
 }
 
@@ -12738,7 +12702,7 @@ func (ϟa *GlGetIntegeri_vEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlGetIntegeri_vEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetIntegeri_vEXT)
 }
 
@@ -12764,7 +12728,7 @@ func (ϟa *GlGetInternalformatSampleivNV) Call(ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Samples.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetInternalformatSampleivNV)
 }
 
@@ -12786,7 +12750,7 @@ func (ϟa *GlGetNextPerfQueryIdINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetNextPerfQueryIdINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NextQueryId.value())
+	ϟb.Push(ϟa.NextQueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetNextPerfQueryIdINTEL)
 }
 
@@ -12810,8 +12774,8 @@ func (ϟa *GlGetObjectLabelEXT) Call(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Object.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetObjectLabelEXT)
 }
 
@@ -12833,7 +12797,7 @@ func (ϟa *GlGetPathCommandsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Commands.value())
+	ϟb.Push(ϟa.Commands.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathCommandsNV)
 }
 
@@ -12855,7 +12819,7 @@ func (ϟa *GlGetPathCoordsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathCoordsNV)
 }
 
@@ -12877,7 +12841,7 @@ func (ϟa *GlGetPathDashArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPathDashArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.DashArray.value())
+	ϟb.Push(ϟa.DashArray.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathDashArrayNV)
 }
 
@@ -12927,7 +12891,7 @@ func (ϟa *GlGetPathMetricRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Metrics.value())
+	ϟb.Push(ϟa.Metrics.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathMetricRangeNV)
 }
 
@@ -12951,10 +12915,10 @@ func (ϟa *GlGetPathMetricsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟb.Push(value.U32(ϟa.MetricQueryMask))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Metrics.value())
+	ϟb.Push(ϟa.Metrics.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathMetricsNV)
 }
 
@@ -12977,7 +12941,7 @@ func (ϟa *GlGetPathParameterfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetPathParameterfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathParameterfvNV)
 }
 
@@ -13000,7 +12964,7 @@ func (ϟa *GlGetPathParameterivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetPathParameterivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathParameterivNV)
 }
 
@@ -13024,12 +12988,12 @@ func (ϟa *GlGetPathSpacingNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟb.Push(value.U32(ϟa.PathListMode))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.AdvanceScale.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.KerningScale.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.ReturnedSpacing.value())
+	ϟb.Push(ϟa.ReturnedSpacing.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPathSpacingNV)
 }
 
@@ -13053,14 +13017,14 @@ func (ϟa *GlGetPerfCounterInfoINTEL) Call(ϟs *gfxapi.State, ϟd database.Datab
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CounterId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CounterNameLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.CounterName.value())
+	ϟb.Push(ϟa.CounterName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CounterDescLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.CounterDesc.value())
-	ϟb.Push(ϟa.CounterOffset.value())
-	ϟb.Push(ϟa.CounterDataSize.value())
-	ϟb.Push(ϟa.CounterTypeEnum.value())
-	ϟb.Push(ϟa.CounterDataTypeEnum.value())
-	ϟb.Push(ϟa.RawCounterMaxValue.value())
+	ϟb.Push(ϟa.CounterDesc.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CounterOffset.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CounterDataSize.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CounterTypeEnum.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CounterDataTypeEnum.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.RawCounterMaxValue.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfCounterInfoINTEL)
 }
 
@@ -13084,8 +13048,8 @@ func (ϟa *GlGetPerfMonitorCounterDataAMD) Call(ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Monitor.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.DataSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
-	ϟb.Push(ϟa.BytesWritten.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BytesWritten.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorCounterDataAMD)
 }
 
@@ -13109,7 +13073,7 @@ func (ϟa *GlGetPerfMonitorCounterInfoAMD) Call(ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Counter.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorCounterInfoAMD)
 }
 
@@ -13133,8 +13097,8 @@ func (ϟa *GlGetPerfMonitorCounterStringAMD) Call(ϟs *gfxapi.State, ϟd databas
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Counter.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.CounterString.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CounterString.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorCounterStringAMD)
 }
 
@@ -13156,10 +13120,10 @@ func (ϟa *GlGetPerfMonitorCountersAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorCountersAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.NumCounters.value())
-	ϟb.Push(ϟa.MaxActiveCounters.value())
+	ϟb.Push(ϟa.NumCounters.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.MaxActiveCounters.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CounterSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Counters.value())
+	ϟb.Push(ϟa.Counters.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorCountersAMD)
 }
 
@@ -13182,8 +13146,8 @@ func (ϟa *GlGetPerfMonitorGroupStringAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State
 func (ϟa *GlGetPerfMonitorGroupStringAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.GroupString.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.GroupString.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorGroupStringAMD)
 }
 
@@ -13204,9 +13168,9 @@ func (ϟa *GlGetPerfMonitorGroupsAMD) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfMonitorGroupsAMD().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfMonitorGroupsAMD) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.NumGroups.value())
+	ϟb.Push(ϟa.NumGroups.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.GroupsSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Groups.value())
+	ϟb.Push(ϟa.Groups.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfMonitorGroupsAMD)
 }
 
@@ -13230,8 +13194,8 @@ func (ϟa *GlGetPerfQueryDataINTEL) Call(ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(ϟa.QueryHandle.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Flag.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.DataSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
-	ϟb.Push(ϟa.BytesWritten.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BytesWritten.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfQueryDataINTEL)
 }
 
@@ -13252,8 +13216,8 @@ func (ϟa *GlGetPerfQueryIdByNameINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Call builds the replay instructions to push the arguments to the stack and invoke glGetPerfQueryIdByNameINTEL().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetPerfQueryIdByNameINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.QueryName.value())
-	ϟb.Push(ϟa.QueryId.value())
+	ϟb.Push(ϟa.QueryName.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfQueryIdByNameINTEL)
 }
 
@@ -13276,11 +13240,11 @@ func (ϟa *GlGetPerfQueryInfoINTEL) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetPerfQueryInfoINTEL) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.QueryId.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.QueryNameLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.QueryName.value())
-	ϟb.Push(ϟa.DataSize.value())
-	ϟb.Push(ϟa.NoCounters.value())
-	ϟb.Push(ϟa.NoInstances.value())
-	ϟb.Push(ϟa.CapsMask.value())
+	ϟb.Push(ϟa.QueryName.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.DataSize.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.NoCounters.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.NoInstances.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.CapsMask.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetPerfQueryInfoINTEL)
 }
 
@@ -13321,9 +13285,9 @@ func (ϟa *GlGetProgramBinaryOES) Call(ϟs *gfxapi.State, ϟd database.Database,
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufferSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.BytesWritten.value())
-	ϟb.Push(ϟa.BinaryFormat.value())
-	ϟb.Push(ϟa.Binary.value())
+	ϟb.Push(ϟa.BytesWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BinaryFormat.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Binary.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramBinaryOES)
 }
 
@@ -13346,8 +13310,8 @@ func (ϟa *GlGetProgramPipelineInfoLogEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 func (ϟa *GlGetProgramPipelineInfoLogEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.InfoLog.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.InfoLog.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramPipelineInfoLogEXT)
 }
 
@@ -13370,7 +13334,7 @@ func (ϟa *GlGetProgramPipelineivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlGetProgramPipelineivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramPipelineivEXT)
 }
 
@@ -13428,10 +13392,10 @@ func (ϟa *GlGetProgramResourcefvNV) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.ProgramInterface))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PropCount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Props.value())
+	ϟb.Push(ϟa.Props.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramResourcefvNV)
 }
 
@@ -13459,7 +13423,7 @@ func (ϟa *GlGetQueryObjecti64vEXT) Call(ϟs *gfxapi.State, ϟd database.Databas
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjecti64vEXT)
 }
 
@@ -13487,7 +13451,7 @@ func (ϟa *GlGetQueryObjectivEXT) Call(ϟs *gfxapi.State, ϟd database.Database,
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjectivEXT)
 }
 
@@ -13515,7 +13479,7 @@ func (ϟa *GlGetQueryObjectui64vEXT) Call(ϟs *gfxapi.State, ϟd database.Databa
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjectui64vEXT)
 }
 
@@ -13544,7 +13508,7 @@ func (ϟa *GlGetQueryObjectuivEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjectuivEXT)
 }
 
@@ -13569,7 +13533,7 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetQueryivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryivEXT)
 }
 
@@ -13608,7 +13572,7 @@ func (ϟa *GlGetSamplerParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (ϟa *GlGetSamplerParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIivOES)
 }
 
@@ -13647,7 +13611,7 @@ func (ϟa *GlGetSamplerParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlGetSamplerParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIuivOES)
 }
 
@@ -13693,8 +13657,8 @@ func (ϟa *GlGetSyncivAPPLE) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	}
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSyncivAPPLE)
 }
 
@@ -13767,7 +13731,7 @@ func (ϟa *GlGetTexParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetTexParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIivOES)
 }
 
@@ -13840,7 +13804,7 @@ func (ϟa *GlGetTexParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlGetTexParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIuivOES)
 }
 
@@ -13922,8 +13886,8 @@ func (ϟa *GlGetTranslatedShaderSourceANGLE) Call(ϟs *gfxapi.State, ϟd databas
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Bufsize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Source.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Source.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTranslatedShaderSourceANGLE)
 }
 
@@ -13955,7 +13919,7 @@ func (ϟa *GlGetnUniformfvEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformfvEXT)
 }
 
@@ -13992,7 +13956,7 @@ func (ϟa *GlGetnUniformfvKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformfvKHR)
 }
 
@@ -14024,7 +13988,7 @@ func (ϟa *GlGetnUniformivEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformivEXT)
 }
 
@@ -14065,7 +14029,7 @@ func (ϟa *GlGetnUniformivKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformivKHR)
 }
 
@@ -14106,7 +14070,7 @@ func (ϟa *GlGetnUniformuivKHR) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformuivKHR)
 }
 
@@ -14133,7 +14097,7 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlInsertEventMarkerEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Marker.value())
+	ϟb.Push(ϟa.Marker.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlInsertEventMarkerEXT)
 }
 
@@ -14523,7 +14487,7 @@ func (ϟa *GlLabelObjectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Object.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Label.value())
+	ϟb.Push(ϟa.Label.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLabelObjectEXT)
 }
 
@@ -14733,7 +14697,7 @@ func (ϟa *GlMatrixLoad3x2fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoad3x2fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixLoad3x2fNV)
 }
 
@@ -14755,7 +14719,7 @@ func (ϟa *GlMatrixLoad3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoad3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixLoad3x3fNV)
 }
 
@@ -14777,7 +14741,7 @@ func (ϟa *GlMatrixLoadTranspose3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixLoadTranspose3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixLoadTranspose3x3fNV)
 }
 
@@ -14799,7 +14763,7 @@ func (ϟa *GlMatrixMult3x2fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMult3x2fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixMult3x2fNV)
 }
 
@@ -14821,7 +14785,7 @@ func (ϟa *GlMatrixMult3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMult3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixMult3x3fNV)
 }
 
@@ -14843,7 +14807,7 @@ func (ϟa *GlMatrixMultTranspose3x3fNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMatrixMultTranspose3x3fNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.MatrixMode))
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixMultTranspose3x3fNV)
 }
 
@@ -14865,8 +14829,8 @@ func (ϟa *GlMultiDrawArraysEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawArraysEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
-	ϟb.Push(ϟa.First.value())
-	ϟb.Push(ϟa.Count.value())
+	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Primcount.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawArraysEXT)
 }
@@ -14889,7 +14853,7 @@ func (ϟa *GlMultiDrawArraysIndirectEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawArraysIndirectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
-	ϟb.Push(ϟa.Indirect.value())
+	ϟb.Push(ϟa.Indirect.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Drawcount.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawArraysIndirectEXT)
@@ -14913,11 +14877,11 @@ func (ϟa *GlMultiDrawElementsBaseVertexEXT) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsBaseVertexEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
-	ϟb.Push(ϟa.Count.value())
+	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Primcount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Basevertex.value())
+	ϟb.Push(ϟa.Basevertex.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawElementsBaseVertexEXT)
 }
 
@@ -14939,11 +14903,11 @@ func (ϟa *GlMultiDrawElementsBaseVertexOES) Replay(ϟi atom.ID, ϟs *gfxapi.Sta
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsBaseVertexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
-	ϟb.Push(ϟa.Count.value())
+	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Primcount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Basevertex.value())
+	ϟb.Push(ϟa.Basevertex.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawElementsBaseVertexOES)
 }
 
@@ -14965,9 +14929,9 @@ func (ϟa *GlMultiDrawElementsEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultiDrawElementsEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
-	ϟb.Push(ϟa.Count.value())
+	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indices.value())
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Primcount.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawElementsEXT)
 }
@@ -14991,7 +14955,7 @@ func (ϟa *GlMultiDrawElementsIndirectEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State
 func (ϟa *GlMultiDrawElementsIndirectEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Indirect.value())
+	ϟb.Push(ϟa.Indirect.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Drawcount.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultiDrawElementsIndirectEXT)
@@ -15021,7 +14985,7 @@ func (ϟa *GlNamedFramebufferSampleLocationsfvNV) Call(ϟs *gfxapi.State, ϟd da
 	}
 	ϟb.Push(ϟa.Start.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlNamedFramebufferSampleLocationsfvNV)
 }
 
@@ -15072,10 +15036,10 @@ func (ϟa *GlPathCommandsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlPathCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCommands.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Commands.value())
+	ϟb.Push(ϟa.Commands.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCoords.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoordType))
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathCommandsNV)
 }
 
@@ -15099,7 +15063,7 @@ func (ϟa *GlPathCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCoords.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoordType))
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathCoordsNV)
 }
 
@@ -15143,7 +15107,7 @@ func (ϟa *GlPathDashArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (ϟa *GlPathDashArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.DashCount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.DashArray.value())
+	ϟb.Push(ϟa.DashArray.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathDashArrayNV)
 }
 
@@ -15168,7 +15132,7 @@ func (ϟa *GlPathGlyphIndexArrayNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlPathGlyphIndexArrayNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
-	ϟb.Push(ϟa.FontName.value())
+	ϟb.Push(ϟa.FontName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontStyle))
 	ϟb.Push(ϟa.FirstGlyphIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumGlyphs.value(ϟb, ϟa, ϟs))
@@ -15197,7 +15161,7 @@ func (ϟa *GlPathGlyphIndexRangeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // The glPathGlyphIndexRangeNV() return value will be stored on the stack.
 func (ϟa *GlPathGlyphIndexRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.FontTarget))
-	ϟb.Push(ϟa.FontName.value())
+	ϟb.Push(ϟa.FontName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontStyle))
 	ϟb.Push(ϟa.PathParameterTemplate.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.EmScale.value(ϟb, ϟa, ϟs))
@@ -15224,7 +15188,7 @@ func (ϟa *GlPathGlyphRangeNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlPathGlyphRangeNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
-	ϟb.Push(ϟa.FontName.value())
+	ϟb.Push(ϟa.FontName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontStyle))
 	ϟb.Push(ϟa.FirstGlyph.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumGlyphs.value(ϟb, ϟa, ϟs))
@@ -15253,11 +15217,11 @@ func (ϟa *GlPathGlyphsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 func (ϟa *GlPathGlyphsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
-	ϟb.Push(ϟa.FontName.value())
+	ϟb.Push(ϟa.FontName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontStyle))
 	ϟb.Push(ϟa.NumGlyphs.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Charcodes.value())
+	ϟb.Push(ϟa.Charcodes.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.HandleMissingGlyphs))
 	ϟb.Push(ϟa.PathParameterTemplate.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.EmScale.value(ϟb, ϟa, ϟs))
@@ -15286,7 +15250,7 @@ func (ϟa *GlPathMemoryGlyphIndexArrayNV) Call(ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.FirstPathName.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FontTarget))
 	ϟb.Push(ϟa.FontSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.FontData.value())
+	ϟb.Push(ϟa.FontData.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.FaceIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.FirstGlyphIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumGlyphs.value(ϟb, ϟa, ϟs))
@@ -15337,7 +15301,7 @@ func (ϟa *GlPathParameterfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlPathParameterfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathParameterfvNV)
 }
 
@@ -15383,7 +15347,7 @@ func (ϟa *GlPathParameterivNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlPathParameterivNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathParameterivNV)
 }
 
@@ -15452,7 +15416,7 @@ func (ϟa *GlPathStringNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟb.Push(ϟa.Path.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.PathString.value())
+	ϟb.Push(ϟa.PathString.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathStringNV)
 }
 
@@ -15477,10 +15441,10 @@ func (ϟa *GlPathSubCommandsNV) Call(ϟs *gfxapi.State, ϟd database.Database, �
 	ϟb.Push(ϟa.CommandStart.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.CommandsToDelete.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCommands.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Commands.value())
+	ϟb.Push(ϟa.Commands.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCoords.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoordType))
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathSubCommandsNV)
 }
 
@@ -15505,7 +15469,7 @@ func (ϟa *GlPathSubCoordsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟb.Push(ϟa.CoordStart.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCoords.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoordType))
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPathSubCoordsNV)
 }
 
@@ -15532,10 +15496,10 @@ func (ϟa *GlPointAlongPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟb.Push(ϟa.StartSegment.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumSegments.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Distance.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.X.value())
-	ϟb.Push(ϟa.Y.value())
-	ϟb.Push(ϟa.TangentX.value())
-	ϟb.Push(ϟa.TangentY.value())
+	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.TangentX.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.TangentY.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointAlongPathNV)
 }
 
@@ -15651,7 +15615,7 @@ func (ϟa *GlProgramBinaryOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.BinaryFormat))
-	ϟb.Push(ϟa.Binary.value())
+	ϟb.Push(ϟa.Binary.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BinarySize.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramBinaryOES)
 }
@@ -15722,7 +15686,7 @@ func (ϟa *GlProgramPathFragmentInputGenNV) Call(ϟs *gfxapi.State, ϟd database
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.GenMode))
 	ϟb.Push(ϟa.Components.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Coeffs.value())
+	ϟb.Push(ϟa.Coeffs.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramPathFragmentInputGenNV)
 }
 
@@ -15829,7 +15793,7 @@ func (ϟa *GlProgramUniform1fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1fvEXT)
 }
 
@@ -15936,7 +15900,7 @@ func (ϟa *GlProgramUniform1ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1ivEXT)
 }
 
@@ -16043,7 +16007,7 @@ func (ϟa *GlProgramUniform1uivEXT) Call(ϟs *gfxapi.State, ϟd database.Databas
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1uivEXT)
 }
 
@@ -16152,7 +16116,7 @@ func (ϟa *GlProgramUniform2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2fvEXT)
 }
 
@@ -16261,7 +16225,7 @@ func (ϟa *GlProgramUniform2ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2ivEXT)
 }
 
@@ -16370,7 +16334,7 @@ func (ϟa *GlProgramUniform2uivEXT) Call(ϟs *gfxapi.State, ϟd database.Databas
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2uivEXT)
 }
 
@@ -16481,7 +16445,7 @@ func (ϟa *GlProgramUniform3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3fvEXT)
 }
 
@@ -16592,7 +16556,7 @@ func (ϟa *GlProgramUniform3ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3ivEXT)
 }
 
@@ -16703,7 +16667,7 @@ func (ϟa *GlProgramUniform3uivEXT) Call(ϟs *gfxapi.State, ϟd database.Databas
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3uivEXT)
 }
 
@@ -16816,7 +16780,7 @@ func (ϟa *GlProgramUniform4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4fvEXT)
 }
 
@@ -16929,7 +16893,7 @@ func (ϟa *GlProgramUniform4ivEXT) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4ivEXT)
 }
 
@@ -17042,7 +17006,7 @@ func (ϟa *GlProgramUniform4uivEXT) Call(ϟs *gfxapi.State, ϟd database.Databas
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4uivEXT)
 }
 
@@ -17105,7 +17069,7 @@ func (ϟa *GlProgramUniformHandleui64vNV) Call(ϟs *gfxapi.State, ϟd database.D
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformHandleui64vNV)
 }
 
@@ -17162,7 +17126,7 @@ func (ϟa *GlProgramUniformMatrix2fvEXT) Call(ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2fvEXT)
 }
 
@@ -17219,7 +17183,7 @@ func (ϟa *GlProgramUniformMatrix2x3fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2x3fvEXT)
 }
 
@@ -17276,7 +17240,7 @@ func (ϟa *GlProgramUniformMatrix2x4fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2x4fvEXT)
 }
 
@@ -17333,7 +17297,7 @@ func (ϟa *GlProgramUniformMatrix3fvEXT) Call(ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3fvEXT)
 }
 
@@ -17390,7 +17354,7 @@ func (ϟa *GlProgramUniformMatrix3x2fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3x2fvEXT)
 }
 
@@ -17447,7 +17411,7 @@ func (ϟa *GlProgramUniformMatrix3x4fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3x4fvEXT)
 }
 
@@ -17504,7 +17468,7 @@ func (ϟa *GlProgramUniformMatrix4fvEXT) Call(ϟs *gfxapi.State, ϟd database.Da
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4fvEXT)
 }
 
@@ -17561,7 +17525,7 @@ func (ϟa *GlProgramUniformMatrix4x2fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4x2fvEXT)
 }
 
@@ -17618,7 +17582,7 @@ func (ϟa *GlProgramUniformMatrix4x3fvEXT) Call(ϟs *gfxapi.State, ϟd database.
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4x3fvEXT)
 }
 
@@ -17645,7 +17609,7 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPushGroupMarkerEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Marker.value())
+	ϟb.Push(ϟa.Marker.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPushGroupMarkerEXT)
 }
 
@@ -17810,7 +17774,7 @@ func (ϟa *GlReadnPixelsEXT) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlReadnPixelsEXT)
 }
 
@@ -17882,7 +17846,7 @@ func (ϟa *GlReadnPixelsKHR) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlReadnPixelsKHR)
 }
 
@@ -18129,7 +18093,7 @@ func (ϟa *GlSamplerParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlSamplerParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIivOES)
 }
 
@@ -18173,7 +18137,7 @@ func (ϟa *GlSamplerParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlSamplerParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIuivOES)
 }
 
@@ -18196,7 +18160,7 @@ func (ϟa *GlScissorArrayvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (ϟa *GlScissorArrayvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlScissorArrayvNV)
 }
 
@@ -18243,7 +18207,7 @@ func (ϟa *GlScissorIndexedvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlScissorIndexedvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlScissorIndexedvNV)
 }
 
@@ -18268,7 +18232,7 @@ func (ϟa *GlSelectPerfMonitorCountersAMD) Call(ϟs *gfxapi.State, ϟd database.
 	ϟb.Push(ϟa.Enable.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Group.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumCounters.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.CounterList.value())
+	ϟb.Push(ϟa.CounterList.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSelectPerfMonitorCountersAMD)
 }
 
@@ -18338,12 +18302,12 @@ func (ϟa *GlStencilFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlStencilFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FillMode))
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlStencilFillPathInstancedNV)
 }
 
@@ -18389,12 +18353,12 @@ func (ϟa *GlStencilStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxapi.State
 func (ϟa *GlStencilStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Reference.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlStencilStrokePathInstancedNV)
 }
 
@@ -18440,13 +18404,13 @@ func (ϟa *GlStencilThenCoverFillPathInstancedNV) Replay(ϟi atom.ID, ϟs *gfxap
 func (ϟa *GlStencilThenCoverFillPathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.FillMode))
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlStencilThenCoverFillPathInstancedNV)
 }
 
@@ -18493,13 +18457,13 @@ func (ϟa *GlStencilThenCoverStrokePathInstancedNV) Replay(ϟi atom.ID, ϟs *gfx
 func (ϟa *GlStencilThenCoverStrokePathInstancedNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.PathNameType))
-	ϟb.Push(ϟa.Paths.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PathBase.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Reference.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Mask.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.CoverMode))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlStencilThenCoverStrokePathInstancedNV)
 }
 
@@ -18850,7 +18814,7 @@ func (ϟa *GlTexParameterIivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlTexParameterIivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIivOES)
 }
 
@@ -18921,7 +18885,7 @@ func (ϟa *GlTexParameterIuivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlTexParameterIuivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIuivOES)
 }
 
@@ -19313,7 +19277,7 @@ func (ϟa *GlTransformPathNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.SrcPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.TransformType))
-	ϟb.Push(ϟa.TransformValues.value())
+	ϟb.Push(ϟa.TransformValues.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTransformPathNV)
 }
 
@@ -19366,7 +19330,7 @@ func (ϟa *GlUniformHandleui64vNV) Call(ϟs *gfxapi.State, ϟd database.Database
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformHandleui64vNV)
 }
 
@@ -19418,7 +19382,7 @@ func (ϟa *GlUniformMatrix2x3fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix2x3fvNV)
 }
 
@@ -19470,7 +19434,7 @@ func (ϟa *GlUniformMatrix2x4fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix2x4fvNV)
 }
 
@@ -19522,7 +19486,7 @@ func (ϟa *GlUniformMatrix3x2fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix3x2fvNV)
 }
 
@@ -19574,7 +19538,7 @@ func (ϟa *GlUniformMatrix3x4fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix3x4fvNV)
 }
 
@@ -19626,7 +19590,7 @@ func (ϟa *GlUniformMatrix4x2fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix4x2fvNV)
 }
 
@@ -19678,7 +19642,7 @@ func (ϟa *GlUniformMatrix4x3fvNV) Call(ϟs *gfxapi.State, ϟd database.Database
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix4x3fvNV)
 }
 
@@ -19950,7 +19914,7 @@ func (ϟa *GlViewportArrayvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlViewportArrayvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.First.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlViewportArrayvNV)
 }
 
@@ -19997,7 +19961,7 @@ func (ϟa *GlViewportIndexedfvNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlViewportIndexedfvNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.V.value())
+	ϟb.Push(ϟa.V.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlViewportIndexedfvNV)
 }
 
@@ -20050,8 +20014,8 @@ func (ϟa *GlWeightPathsNV) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlWeightPathsNV) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.ResultPath.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.NumPaths.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Paths.value())
-	ϟb.Push(ϟa.Weights.value())
+	ϟb.Push(ϟa.Paths.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Weights.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlWeightPathsNV)
 }
 
@@ -21100,7 +21064,7 @@ func (ϟa *GlClearBufferfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlClearBufferfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClearBufferfv)
 }
 
@@ -21152,7 +21116,7 @@ func (ϟa *GlClearBufferiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlClearBufferiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClearBufferiv)
 }
 
@@ -21197,7 +21161,7 @@ func (ϟa *GlClearBufferuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlClearBufferuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Buffer))
 	ϟb.Push(ϟa.Drawbuffer.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClearBufferuiv)
 }
 
@@ -21396,7 +21360,7 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteFramebuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Framebuffers.value())
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteFramebuffers)
 }
 
@@ -21431,7 +21395,7 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteRenderbuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Renderbuffers.value())
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteRenderbuffers)
 }
 
@@ -21488,7 +21452,7 @@ func (ϟa *GlDrawBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawBuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Bufs.value())
+	ϟb.Push(ϟa.Bufs.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawBuffers)
 }
 
@@ -21877,7 +21841,7 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenFramebuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Framebuffers.value())
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenFramebuffers)
 }
 
@@ -21915,7 +21879,7 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenRenderbuffers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Renderbuffers.value())
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenRenderbuffers)
 }
 
@@ -22018,7 +21982,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Call(ϟs *gfxapi.State, ϟd da
 	ϟb.Push(value.U32(ϟa.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.Attachment))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFramebufferAttachmentParameteriv)
 }
 
@@ -22061,7 +22025,7 @@ func (ϟa *GlGetFramebufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (ϟa *GlGetFramebufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFramebufferParameteriv)
 }
 
@@ -22127,7 +22091,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, 
 func (ϟa *GlGetRenderbufferParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetRenderbufferParameteriv)
 }
 
@@ -22159,7 +22123,7 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlInvalidateFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Attachments.value())
+	ϟb.Push(ϟa.Attachments.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlInvalidateFramebuffer)
 }
 
@@ -22191,7 +22155,7 @@ func (ϟa *GlInvalidateSubFramebuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 func (ϟa *GlInvalidateSubFramebuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.NumAttachments.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Attachments.value())
+	ϟb.Push(ϟa.Attachments.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.X.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Y.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Width.value(ϟb, ϟa, ϟs))
@@ -22360,7 +22324,7 @@ func (ϟa *GlReadPixels) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	ϟb.Push(ϟa.Height.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(value.U32(ϟa.Type))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlReadPixels)
 }
 
@@ -22433,7 +22397,7 @@ func (ϟa *GlReadnPixels) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 	ϟb.Push(value.U32(ϟa.Format))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Data.value())
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlReadnPixels)
 }
 
@@ -23264,7 +23228,7 @@ func (ϟa *GlCreateShaderProgramv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlCreateShaderProgramv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Strings.value())
+	ϟb.Push(ϟa.Strings.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlCreateShaderProgramv)
 	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
 		ptr, found := ϟb.Remappings[key]
@@ -23332,7 +23296,7 @@ func (ϟa *GlDeleteProgramPipelines) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteProgramPipelines) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pipelines.value())
+	ϟb.Push(ϟa.Pipelines.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteProgramPipelines)
 }
 
@@ -23481,7 +23445,7 @@ func (ϟa *GlGenProgramPipelines) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenProgramPipelines) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pipelines.value())
+	ϟb.Push(ϟa.Pipelines.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenProgramPipelines)
 }
 
@@ -23527,10 +23491,10 @@ func (ϟa *GlGetActiveAttrib) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	}
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufferSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.BufferBytesWritten.value())
-	ϟb.Push(ϟa.VectorCount.value())
-	ϟb.Push(ϟa.Type.value())
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟa.BufferBytesWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.VectorCount.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Type.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetActiveAttrib)
 }
 
@@ -23576,10 +23540,10 @@ func (ϟa *GlGetActiveUniform) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufferSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.BufferBytesWritten.value())
-	ϟb.Push(ϟa.VectorCount.value())
-	ϟb.Push(ϟa.Type.value())
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟa.BufferBytesWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.VectorCount.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Type.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetActiveUniform)
 }
 
@@ -23623,8 +23587,8 @@ func (ϟa *GlGetActiveUniformBlockName) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.UniformBlockIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufferSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.BufferBytesWritten.value())
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟa.BufferBytesWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetActiveUniformBlockName)
 }
 
@@ -23661,7 +23625,7 @@ func (ϟa *GlGetActiveUniformBlockiv) Call(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Push(ϟa.UniformBlockIndex.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ParameterName))
-	ϟb.Push(ϟa.Parameters.value())
+	ϟb.Push(ϟa.Parameters.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetActiveUniformBlockiv)
 }
 
@@ -23698,9 +23662,9 @@ func (ϟa *GlGetActiveUniformsiv) Call(ϟs *gfxapi.State, ϟd database.Database,
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.UniformCount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.UniformIndices.value())
+	ϟb.Push(ϟa.UniformIndices.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.ParameterName))
-	ϟb.Push(ϟa.Parameters.value())
+	ϟb.Push(ϟa.Parameters.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetActiveUniformsiv)
 }
 
@@ -23756,8 +23720,8 @@ func (ϟa *GlGetAttachedShaders) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufferLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.ShadersLengthWritten.value())
-	ϟb.Push(ϟa.Shaders.value())
+	ϟb.Push(ϟa.ShadersLengthWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Shaders.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetAttachedShaders)
 }
 
@@ -23857,9 +23821,9 @@ func (ϟa *GlGetProgramBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.BinaryFormat.value())
-	ϟb.Push(ϟa.Binary.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.BinaryFormat.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Binary.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramBinary)
 }
 
@@ -23911,8 +23875,8 @@ func (ϟa *GlGetProgramInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufferLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.StringLengthWritten.value())
-	ϟb.Push(ϟa.Info.value())
+	ϟb.Push(ϟa.StringLengthWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Info.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramInfoLog)
 }
 
@@ -23956,7 +23920,7 @@ func (ϟa *GlGetProgramInterfaceiv) Call(ϟs *gfxapi.State, ϟd database.Databas
 	}
 	ϟb.Push(value.U32(ϟa.ProgramInterface))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramInterfaceiv)
 }
 
@@ -23995,8 +23959,8 @@ func (ϟa *GlGetProgramPipelineInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (ϟa *GlGetProgramPipelineInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.InfoLog.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.InfoLog.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramPipelineInfoLog)
 }
 
@@ -24032,7 +23996,7 @@ func (ϟa *GlGetProgramPipelineiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetProgramPipelineiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Pipeline.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramPipelineiv)
 }
 
@@ -24158,8 +24122,8 @@ func (ϟa *GlGetProgramResourceName) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.ProgramInterface))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramResourceName)
 }
 
@@ -24205,10 +24169,10 @@ func (ϟa *GlGetProgramResourceiv) Call(ϟs *gfxapi.State, ϟd database.Database
 	ϟb.Push(value.U32(ϟa.ProgramInterface))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.PropCount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Props.value())
+	ϟb.Push(ϟa.Props.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramResourceiv)
 }
 
@@ -24256,7 +24220,7 @@ func (ϟa *GlGetProgramiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetProgramiv)
 }
 
@@ -24308,8 +24272,8 @@ func (ϟa *GlGetShaderInfoLog) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufferLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.StringLengthWritten.value())
-	ϟb.Push(ϟa.Info.value())
+	ϟb.Push(ϟa.StringLengthWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Info.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetShaderInfoLog)
 }
 
@@ -24349,8 +24313,8 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 func (ϟa *GlGetShaderPrecisionFormat) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.ShaderType))
 	ϟb.Push(value.U32(ϟa.PrecisionType))
-	ϟb.Push(ϟa.Range.value())
-	ϟb.Push(ϟa.Precision.value())
+	ϟb.Push(ϟa.Range.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Precision.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetShaderPrecisionFormat)
 }
 
@@ -24402,8 +24366,8 @@ func (ϟa *GlGetShaderSource) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufferLength.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.StringLengthWritten.value())
-	ϟb.Push(ϟa.Source.value())
+	ϟb.Push(ϟa.StringLengthWritten.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Source.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetShaderSource)
 }
 
@@ -24487,7 +24451,7 @@ func (ϟa *GlGetShaderiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetShaderiv)
 }
 
@@ -24550,8 +24514,8 @@ func (ϟa *GlGetUniformIndices) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.UniformCount.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.UniformNames.value())
-	ϟb.Push(ϟa.UniformIndices.value())
+	ϟb.Push(ϟa.UniformNames.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.UniformIndices.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetUniformIndices)
 }
 
@@ -24625,7 +24589,7 @@ func (ϟa *GlGetUniformfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetUniformfv)
 }
 
@@ -24661,7 +24625,7 @@ func (ϟa *GlGetUniformiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetUniformiv)
 }
 
@@ -24697,7 +24661,7 @@ func (ϟa *GlGetUniformuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	} else {
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetUniformuiv)
 }
 
@@ -24735,7 +24699,7 @@ func (ϟa *GlGetnUniformfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformfv)
 }
 
@@ -24777,7 +24741,7 @@ func (ϟa *GlGetnUniformiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformiv)
 }
 
@@ -24819,7 +24783,7 @@ func (ϟa *GlGetnUniformuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetnUniformuiv)
 }
 
@@ -25084,7 +25048,7 @@ func (ϟa *GlProgramBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.BinaryFormat))
-	ϟb.Push(ϟa.Binary.value())
+	ϟb.Push(ϟa.Binary.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramBinary)
 }
@@ -25236,7 +25200,7 @@ func (ϟa *GlProgramUniform1fv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1fv)
 }
 
@@ -25345,7 +25309,7 @@ func (ϟa *GlProgramUniform1iv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1iv)
 }
 
@@ -25454,7 +25418,7 @@ func (ϟa *GlProgramUniform1uiv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform1uiv)
 }
 
@@ -25565,7 +25529,7 @@ func (ϟa *GlProgramUniform2fv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2fv)
 }
 
@@ -25676,7 +25640,7 @@ func (ϟa *GlProgramUniform2iv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2iv)
 }
 
@@ -25787,7 +25751,7 @@ func (ϟa *GlProgramUniform2uiv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform2uiv)
 }
 
@@ -25900,7 +25864,7 @@ func (ϟa *GlProgramUniform3fv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3fv)
 }
 
@@ -26013,7 +25977,7 @@ func (ϟa *GlProgramUniform3iv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3iv)
 }
 
@@ -26126,7 +26090,7 @@ func (ϟa *GlProgramUniform3uiv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform3uiv)
 }
 
@@ -26241,7 +26205,7 @@ func (ϟa *GlProgramUniform4fv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4fv)
 }
 
@@ -26356,7 +26320,7 @@ func (ϟa *GlProgramUniform4iv) Call(ϟs *gfxapi.State, ϟd database.Database, �
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4iv)
 }
 
@@ -26471,7 +26435,7 @@ func (ϟa *GlProgramUniform4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniform4uiv)
 }
 
@@ -26529,7 +26493,7 @@ func (ϟa *GlProgramUniformMatrix2fv) Call(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2fv)
 }
 
@@ -26587,7 +26551,7 @@ func (ϟa *GlProgramUniformMatrix2x3fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2x3fv)
 }
 
@@ -26645,7 +26609,7 @@ func (ϟa *GlProgramUniformMatrix2x4fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix2x4fv)
 }
 
@@ -26703,7 +26667,7 @@ func (ϟa *GlProgramUniformMatrix3fv) Call(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3fv)
 }
 
@@ -26761,7 +26725,7 @@ func (ϟa *GlProgramUniformMatrix3x2fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3x2fv)
 }
 
@@ -26819,7 +26783,7 @@ func (ϟa *GlProgramUniformMatrix3x4fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix3x4fv)
 }
 
@@ -26877,7 +26841,7 @@ func (ϟa *GlProgramUniformMatrix4fv) Call(ϟs *gfxapi.State, ϟd database.Datab
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4fv)
 }
 
@@ -26935,7 +26899,7 @@ func (ϟa *GlProgramUniformMatrix4x2fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4x2fv)
 }
 
@@ -26993,7 +26957,7 @@ func (ϟa *GlProgramUniformMatrix4x3fv) Call(ϟs *gfxapi.State, ϟd database.Dat
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlProgramUniformMatrix4x3fv)
 }
 
@@ -27047,9 +27011,9 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlShaderBinary) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Shaders.value())
+	ϟb.Push(ϟa.Shaders.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.BinaryFormat))
-	ϟb.Push(ϟa.Binary.value())
+	ϟb.Push(ϟa.Binary.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BinarySize.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlShaderBinary)
 }
@@ -27106,8 +27070,8 @@ func (ϟa *GlShaderSource) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Source.value())
-	ϟb.Push(ϟa.Length.value())
+	ϟb.Push(ϟa.Source.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlShaderSource)
 }
 
@@ -27197,7 +27161,7 @@ func (ϟa *GlUniform1fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform1fv)
 }
 
@@ -27287,7 +27251,7 @@ func (ϟa *GlUniform1iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform1iv)
 }
 
@@ -27377,7 +27341,7 @@ func (ϟa *GlUniform1uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform1uiv)
 }
 
@@ -27468,7 +27432,7 @@ func (ϟa *GlUniform2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform2fv)
 }
 
@@ -27559,7 +27523,7 @@ func (ϟa *GlUniform2iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform2iv)
 }
 
@@ -27650,7 +27614,7 @@ func (ϟa *GlUniform2uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform2uiv)
 }
 
@@ -27742,7 +27706,7 @@ func (ϟa *GlUniform3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform3fv)
 }
 
@@ -27834,7 +27798,7 @@ func (ϟa *GlUniform3iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform3iv)
 }
 
@@ -27926,7 +27890,7 @@ func (ϟa *GlUniform3uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform3uiv)
 }
 
@@ -28019,7 +27983,7 @@ func (ϟa *GlUniform4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform4fv)
 }
 
@@ -28112,7 +28076,7 @@ func (ϟa *GlUniform4iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform4iv)
 }
 
@@ -28205,7 +28169,7 @@ func (ϟa *GlUniform4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log
 		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniform4uiv)
 }
 
@@ -28282,7 +28246,7 @@ func (ϟa *GlUniformMatrix2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix2fv)
 }
 
@@ -28335,7 +28299,7 @@ func (ϟa *GlUniformMatrix2x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix2x3fv)
 }
 
@@ -28388,7 +28352,7 @@ func (ϟa *GlUniformMatrix2x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix2x4fv)
 }
 
@@ -28437,7 +28401,7 @@ func (ϟa *GlUniformMatrix3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix3fv)
 }
 
@@ -28490,7 +28454,7 @@ func (ϟa *GlUniformMatrix3x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix3x2fv)
 }
 
@@ -28543,7 +28507,7 @@ func (ϟa *GlUniformMatrix3x4fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix3x4fv)
 }
 
@@ -28592,7 +28556,7 @@ func (ϟa *GlUniformMatrix4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix4fv)
 }
 
@@ -28645,7 +28609,7 @@ func (ϟa *GlUniformMatrix4x2fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix4x2fv)
 }
 
@@ -28698,7 +28662,7 @@ func (ϟa *GlUniformMatrix4x3fv) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Transpose.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlUniformMatrix4x3fv)
 }
 
@@ -28960,7 +28924,7 @@ func (ϟa *GlGetMultisamplefv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlGetMultisamplefv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Val.value())
+	ϟb.Push(ϟa.Val.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetMultisamplefv)
 }
 
@@ -30397,7 +30361,7 @@ func (ϟa *GlGetBooleani_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetBooleani_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBooleani_v)
 }
 
@@ -31803,7 +31767,7 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetBooleanv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetBooleanv)
 }
 
@@ -33150,7 +33114,7 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFloatv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFloatv)
 }
 
@@ -34466,7 +34430,7 @@ func (ϟa *GlGetInteger64i_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (ϟa *GlGetInteger64i_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetInteger64i_v)
 }
 
@@ -35783,7 +35747,7 @@ func (ϟa *GlGetInteger64v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetInteger64v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetInteger64v)
 }
 
@@ -37099,7 +37063,7 @@ func (ϟa *GlGetIntegeri_v) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetIntegeri_v) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetIntegeri_v)
 }
 
@@ -38605,7 +38569,7 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetIntegerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Param))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetIntegerv)
 }
 
@@ -38664,7 +38628,7 @@ func (ϟa *GlGetInternalformativ) Call(ϟs *gfxapi.State, ϟd database.Database,
 	ϟb.Push(value.U32(ϟa.Internalformat))
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetInternalformativ)
 }
 
@@ -38965,8 +38929,8 @@ func (ϟa *GlGetSynciv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.L
 	}
 	ϟb.Push(value.U32(ϟa.Pname))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSynciv)
 }
 
@@ -39716,7 +39680,7 @@ func (ϟa *GlDeleteSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteSamplers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Samplers.value())
+	ϟb.Push(ϟa.Samplers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteSamplers)
 }
 
@@ -39751,7 +39715,7 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteTextures) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Textures.value())
+	ϟb.Push(ϟa.Textures.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteTextures)
 }
 
@@ -39775,7 +39739,7 @@ func (ϟa *GlGenSamplers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenSamplers) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Samplers.value())
+	ϟb.Push(ϟa.Samplers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenSamplers)
 }
 
@@ -39813,7 +39777,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenTextures) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Textures.value())
+	ϟb.Push(ϟa.Textures.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenTextures)
 }
 
@@ -39890,7 +39854,7 @@ func (ϟa *GlGetSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 func (ϟa *GlGetSamplerParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIiv)
 }
 
@@ -39930,7 +39894,7 @@ func (ϟa *GlGetSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlGetSamplerParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterIuiv)
 }
 
@@ -39967,7 +39931,7 @@ func (ϟa *GlGetSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetSamplerParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameterfv)
 }
 
@@ -40004,7 +39968,7 @@ func (ϟa *GlGetSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 func (ϟa *GlGetSamplerParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetSamplerParameteriv)
 }
 
@@ -40052,7 +40016,7 @@ func (ϟa *GlGetTexLevelParameterfv) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexLevelParameterfv)
 }
 
@@ -40100,7 +40064,7 @@ func (ϟa *GlGetTexLevelParameteriv) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(ϟa.Level.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexLevelParameteriv)
 }
 
@@ -40174,7 +40138,7 @@ func (ϟa *GlGetTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlGetTexParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIiv)
 }
 
@@ -40248,7 +40212,7 @@ func (ϟa *GlGetTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlGetTexParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterIuiv)
 }
 
@@ -40356,7 +40320,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetTexParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterfv)
 }
 
@@ -40464,7 +40428,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetTexParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameteriv)
 }
 
@@ -40612,7 +40576,7 @@ func (ϟa *GlSamplerParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlSamplerParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIiv)
 }
 
@@ -40657,7 +40621,7 @@ func (ϟa *GlSamplerParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlSamplerParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterIuiv)
 }
 
@@ -40730,7 +40694,7 @@ func (ϟa *GlSamplerParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlSamplerParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameterfv)
 }
 
@@ -40803,7 +40767,7 @@ func (ϟa *GlSamplerParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlSamplerParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Sampler.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlSamplerParameteriv)
 }
 
@@ -41184,7 +41148,7 @@ func (ϟa *GlTexParameterIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 func (ϟa *GlTexParameterIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIiv)
 }
 
@@ -41256,7 +41220,7 @@ func (ϟa *GlTexParameterIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlTexParameterIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterIuiv)
 }
 
@@ -41417,7 +41381,7 @@ func (ϟa *GlTexParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlTexParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterfv)
 }
 
@@ -41580,7 +41544,7 @@ func (ϟa *GlTexParameteriv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlTexParameteriv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameteriv)
 }
 
@@ -42090,7 +42054,7 @@ func (ϟa *GlDeleteTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟ
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteTransformFeedbacks) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Ids.value())
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteTransformFeedbacks)
 }
 
@@ -42135,7 +42099,7 @@ func (ϟa *GlGenTransformFeedbacks) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenTransformFeedbacks) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Ids.value())
+	ϟb.Push(ϟa.Ids.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenTransformFeedbacks)
 }
 
@@ -42181,10 +42145,10 @@ func (ϟa *GlGetTransformFeedbackVarying) Call(ϟs *gfxapi.State, ϟd database.D
 	}
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BufSize.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Length.value())
-	ϟb.Push(ϟa.Size.value())
-	ϟb.Push(ϟa.Type.value())
-	ϟb.Push(ϟa.Name.value())
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Type.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Name.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTransformFeedbackVarying)
 }
 
@@ -42290,7 +42254,7 @@ func (ϟa *GlTransformFeedbackVaryings) Call(ϟs *gfxapi.State, ϟd database.Dat
 		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Varyings.value())
+	ϟb.Push(ϟa.Varyings.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.BufferMode))
 	ϟb.Call(funcInfoGlTransformFeedbackVaryings)
 }
@@ -42460,7 +42424,7 @@ func (ϟa *GlDeleteVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteVertexArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Arrays.value())
+	ϟb.Push(ϟa.Arrays.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteVertexArrays)
 }
 
@@ -42575,7 +42539,7 @@ func (ϟa *GlGenVertexArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenVertexArrays) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Arrays.value())
+	ϟb.Push(ϟa.Arrays.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenVertexArrays)
 }
 
@@ -42664,7 +42628,7 @@ func (ϟa *GlGetVertexAttribIiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 func (ϟa *GlGetVertexAttribIiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetVertexAttribIiv)
 }
 
@@ -42753,7 +42717,7 @@ func (ϟa *GlGetVertexAttribIuiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlGetVertexAttribIuiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetVertexAttribIuiv)
 }
 
@@ -42795,7 +42759,7 @@ func (ϟa *GlGetVertexAttribPointerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd
 func (ϟa *GlGetVertexAttribPointerv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetVertexAttribPointerv)
 }
 
@@ -42884,7 +42848,7 @@ func (ϟa *GlGetVertexAttribfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetVertexAttribfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetVertexAttribfv)
 }
 
@@ -42973,7 +42937,7 @@ func (ϟa *GlGetVertexAttribiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetVertexAttribiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetVertexAttribiv)
 }
 
@@ -43098,7 +43062,7 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib1fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib1fv)
 }
 
@@ -43180,7 +43144,7 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib2fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib2fv)
 }
 
@@ -43263,7 +43227,7 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib3fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib3fv)
 }
 
@@ -43347,7 +43311,7 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttrib4fv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttrib4fv)
 }
 
@@ -43632,7 +43596,7 @@ func (ϟa *GlVertexAttribI4iv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4iv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4iv)
 }
 
@@ -43716,7 +43680,7 @@ func (ϟa *GlVertexAttribI4uiv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlVertexAttribI4uiv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.Index.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Values.value())
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexAttribI4uiv)
 }
 
@@ -44349,7 +44313,7 @@ func (ϟa *GlGetQueryObjecti64v) Call(ϟs *gfxapi.State, ϟd database.Database, 
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjecti64v)
 }
 
@@ -44375,7 +44339,7 @@ func (ϟa *GlGetQueryObjectui64v) Call(ϟs *gfxapi.State, ϟd database.Database,
 		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.Push(value.U32(ϟa.Parameter))
-	ϟb.Push(ϟa.Value.value())
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetQueryObjectui64v)
 }
 
@@ -44751,7 +44715,7 @@ func (ϟa *GlClipPlanef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanef) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.P))
-	ϟb.Push(ϟa.Eqn.value())
+	ϟb.Push(ϟa.Eqn.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanef)
 }
 
@@ -44774,7 +44738,7 @@ func (ϟa *GlClipPlanefIMG) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanefIMG) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.P))
-	ϟb.Push(ϟa.Eqn.value())
+	ϟb.Push(ϟa.Eqn.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanefIMG)
 }
 
@@ -44797,7 +44761,7 @@ func (ϟa *GlClipPlanefOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanefOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanefOES)
 }
 
@@ -44821,7 +44785,7 @@ func (ϟa *GlClipPlanex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanex)
 }
 
@@ -44844,7 +44808,7 @@ func (ϟa *GlClipPlanexIMG) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanexIMG) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.P))
-	ϟb.Push(ϟa.Eqn.value())
+	ϟb.Push(ϟa.Eqn.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanexIMG)
 }
 
@@ -44867,7 +44831,7 @@ func (ϟa *GlClipPlanexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlClipPlanexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlClipPlanexOES)
 }
 
@@ -44996,7 +44960,7 @@ func (ϟa *GlColorPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlColorPointer)
 }
 
@@ -45041,7 +45005,7 @@ func (ϟa *GlDeleteFramebuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd d
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteFramebuffersOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Framebuffers.value())
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteFramebuffersOES)
 }
 
@@ -45064,7 +45028,7 @@ func (ϟa *GlDeleteRenderbuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd 
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDeleteRenderbuffersOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Renderbuffers.value())
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDeleteRenderbuffersOES)
 }
 
@@ -45205,7 +45169,7 @@ func (ϟa *GlDrawTexfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawTexfvOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawTexfvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawTexfvOES)
 }
 
@@ -45253,7 +45217,7 @@ func (ϟa *GlDrawTexivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawTexivOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawTexivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawTexivOES)
 }
 
@@ -45301,7 +45265,7 @@ func (ϟa *GlDrawTexsvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawTexsvOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawTexsvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawTexsvOES)
 }
 
@@ -45349,7 +45313,7 @@ func (ϟa *GlDrawTexxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Call builds the replay instructions to push the arguments to the stack and invoke glDrawTexxvOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlDrawTexxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Coords.value())
+	ϟb.Push(ϟa.Coords.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlDrawTexxvOES)
 }
 
@@ -45420,7 +45384,7 @@ func (ϟa *GlFogfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFogfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFogfv)
 }
 
@@ -45491,7 +45455,7 @@ func (ϟa *GlFogxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFogxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFogxv)
 }
 
@@ -45514,7 +45478,7 @@ func (ϟa *GlFogxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlFogxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlFogxvOES)
 }
 
@@ -45797,7 +45761,7 @@ func (ϟa *GlGenFramebuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenFramebuffersOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Framebuffers.value())
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenFramebuffersOES)
 }
 
@@ -45820,7 +45784,7 @@ func (ϟa *GlGenRenderbuffersOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGenRenderbuffersOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(ϟa.N.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Renderbuffers.value())
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGenRenderbuffersOES)
 }
 
@@ -45866,7 +45830,7 @@ func (ϟa *GlGetClipPlanef) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetClipPlanef) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetClipPlanef)
 }
 
@@ -45889,7 +45853,7 @@ func (ϟa *GlGetClipPlanefOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetClipPlanefOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetClipPlanefOES)
 }
 
@@ -45913,7 +45877,7 @@ func (ϟa *GlGetClipPlanex) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetClipPlanex) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetClipPlanex)
 }
 
@@ -45936,7 +45900,7 @@ func (ϟa *GlGetClipPlanexOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetClipPlanexOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Plane))
-	ϟb.Push(ϟa.Equation.value())
+	ϟb.Push(ϟa.Equation.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetClipPlanexOES)
 }
 
@@ -45960,7 +45924,7 @@ func (ϟa *GlGetFixedv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFixedv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFixedv)
 }
 
@@ -45983,7 +45947,7 @@ func (ϟa *GlGetFixedvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlGetFixedvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFixedvOES)
 }
 
@@ -46008,7 +45972,7 @@ func (ϟa *GlGetFramebufferAttachmentParameterivOES) Call(ϟs *gfxapi.State, ϟd
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Attachment))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetFramebufferAttachmentParameterivOES)
 }
 
@@ -46033,7 +45997,7 @@ func (ϟa *GlGetLightfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlGetLightfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetLightfv)
 }
 
@@ -46058,7 +46022,7 @@ func (ϟa *GlGetLightxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlGetLightxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetLightxv)
 }
 
@@ -46082,7 +46046,7 @@ func (ϟa *GlGetLightxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetLightxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetLightxvOES)
 }
 
@@ -46107,7 +46071,7 @@ func (ϟa *GlGetMaterialfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetMaterialfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetMaterialfv)
 }
 
@@ -46132,7 +46096,7 @@ func (ϟa *GlGetMaterialxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlGetMaterialxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetMaterialxv)
 }
 
@@ -46156,7 +46120,7 @@ func (ϟa *GlGetMaterialxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 func (ϟa *GlGetMaterialxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetMaterialxvOES)
 }
 
@@ -46180,7 +46144,7 @@ func (ϟa *GlGetRenderbufferParameterivOES) Replay(ϟi atom.ID, ϟs *gfxapi.Stat
 func (ϟa *GlGetRenderbufferParameterivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetRenderbufferParameterivOES)
 }
 
@@ -46205,7 +46169,7 @@ func (ϟa *GlGetTexEnvfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlGetTexEnvfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexEnvfv)
 }
 
@@ -46230,7 +46194,7 @@ func (ϟa *GlGetTexEnviv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlGetTexEnviv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexEnviv)
 }
 
@@ -46255,7 +46219,7 @@ func (ϟa *GlGetTexEnvxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlGetTexEnvxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexEnvxv)
 }
 
@@ -46279,7 +46243,7 @@ func (ϟa *GlGetTexEnvxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlGetTexEnvxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexEnvxvOES)
 }
 
@@ -46303,7 +46267,7 @@ func (ϟa *GlGetTexGenfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlGetTexGenfvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexGenfvOES)
 }
 
@@ -46327,7 +46291,7 @@ func (ϟa *GlGetTexGenivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlGetTexGenivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexGenivOES)
 }
 
@@ -46351,7 +46315,7 @@ func (ϟa *GlGetTexGenxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlGetTexGenxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexGenxvOES)
 }
 
@@ -46376,7 +46340,7 @@ func (ϟa *GlGetTexParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlGetTexParameterxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterxv)
 }
 
@@ -46400,7 +46364,7 @@ func (ϟa *GlGetTexParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd da
 func (ϟa *GlGetTexParameterxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlGetTexParameterxvOES)
 }
 
@@ -46496,7 +46460,7 @@ func (ϟa *GlLightModelfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLightModelfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightModelfv)
 }
 
@@ -46567,7 +46531,7 @@ func (ϟa *GlLightModelxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.D
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLightModelxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightModelxv)
 }
 
@@ -46590,7 +46554,7 @@ func (ϟa *GlLightModelxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLightModelxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightModelxvOES)
 }
 
@@ -46640,7 +46604,7 @@ func (ϟa *GlLightfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 func (ϟa *GlLightfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightfv)
 }
 
@@ -46714,7 +46678,7 @@ func (ϟa *GlLightxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Databa
 func (ϟa *GlLightxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightxv)
 }
 
@@ -46738,7 +46702,7 @@ func (ϟa *GlLightxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlLightxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Light))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLightxvOES)
 }
 
@@ -46828,7 +46792,7 @@ func (ϟa *GlLoadMatrixf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke glLoadMatrixf().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLoadMatrixf) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLoadMatrixf)
 }
 
@@ -46851,7 +46815,7 @@ func (ϟa *GlLoadMatrixx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke glLoadMatrixx().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLoadMatrixx) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLoadMatrixx)
 }
 
@@ -46873,7 +46837,7 @@ func (ϟa *GlLoadMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke glLoadMatrixxOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlLoadMatrixxOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlLoadMatrixxOES)
 }
 
@@ -46967,7 +46931,7 @@ func (ϟa *GlMaterialfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlMaterialfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMaterialfv)
 }
 
@@ -47041,7 +47005,7 @@ func (ϟa *GlMaterialxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Dat
 func (ϟa *GlMaterialxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMaterialxv)
 }
 
@@ -47065,7 +47029,7 @@ func (ϟa *GlMaterialxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlMaterialxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Face))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Param.value())
+	ϟb.Push(ϟa.Param.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMaterialxvOES)
 }
 
@@ -47090,7 +47054,7 @@ func (ϟa *GlMatrixIndexPointerOES) Call(ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixIndexPointerOES)
 }
 
@@ -47136,7 +47100,7 @@ func (ϟa *GlMultMatrixf) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultMatrixf().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultMatrixf) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultMatrixf)
 }
 
@@ -47159,7 +47123,7 @@ func (ϟa *GlMultMatrixx) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultMatrixx().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultMatrixx) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultMatrixx)
 }
 
@@ -47181,7 +47145,7 @@ func (ϟa *GlMultMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 // Call builds the replay instructions to push the arguments to the stack and invoke glMultMatrixxOES().
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlMultMatrixxOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.M.value())
+	ϟb.Push(ϟa.M.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMultMatrixxOES)
 }
 
@@ -47360,7 +47324,7 @@ func (ϟa *GlNormalPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 func (ϟa *GlNormalPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlNormalPointer)
 }
 
@@ -47518,7 +47482,7 @@ func (ϟa *GlPointParameterfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPointParameterfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointParameterfv)
 }
 
@@ -47589,7 +47553,7 @@ func (ϟa *GlPointParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPointParameterxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointParameterxv)
 }
 
@@ -47612,7 +47576,7 @@ func (ϟa *GlPointParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *GlPointParameterxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointParameterxvOES)
 }
 
@@ -47659,7 +47623,7 @@ func (ϟa *GlPointSizePointerOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlPointSizePointerOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointSizePointerOES)
 }
 
@@ -47819,8 +47783,8 @@ func (ϟa *GlQueryMatrixxOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 // The glQueryMatrixxOES() return value will be stored on the stack.
 func (ϟa *GlQueryMatrixxOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-	ϟb.Push(ϟa.Mantissa.value())
-	ϟb.Push(ϟa.Exponent.value())
+	ϟb.Push(ϟa.Mantissa.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Exponent.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlQueryMatrixxOES)
 }
 
@@ -48092,7 +48056,7 @@ func (ϟa *GlTexCoordPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexCoordPointer)
 }
 
@@ -48142,7 +48106,7 @@ func (ϟa *GlTexEnvfv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (ϟa *GlTexEnvfv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexEnvfv)
 }
 
@@ -48192,7 +48156,7 @@ func (ϟa *GlTexEnviv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (ϟa *GlTexEnviv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexEnviv)
 }
 
@@ -48266,7 +48230,7 @@ func (ϟa *GlTexEnvxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Datab
 func (ϟa *GlTexEnvxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexEnvxv)
 }
 
@@ -48290,7 +48254,7 @@ func (ϟa *GlTexEnvxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlTexEnvxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexEnvxvOES)
 }
 
@@ -48338,7 +48302,7 @@ func (ϟa *GlTexGenfvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlTexGenfvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexGenfvOES)
 }
 
@@ -48386,7 +48350,7 @@ func (ϟa *GlTexGenivOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlTexGenivOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexGenivOES)
 }
 
@@ -48434,7 +48398,7 @@ func (ϟa *GlTexGenxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 func (ϟa *GlTexGenxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Coord))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexGenxvOES)
 }
 
@@ -48508,7 +48472,7 @@ func (ϟa *GlTexParameterxv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 func (ϟa *GlTexParameterxv) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterxv)
 }
 
@@ -48532,7 +48496,7 @@ func (ϟa *GlTexParameterxvOES) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 func (ϟa *GlTexParameterxvOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.Push(value.U32(ϟa.Pname))
-	ϟb.Push(ϟa.Params.value())
+	ϟb.Push(ϟa.Params.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexParameterxvOES)
 }
 
@@ -48632,7 +48596,7 @@ func (ϟa *GlVertexPointer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexPointer)
 }
 
@@ -48657,7 +48621,7 @@ func (ϟa *GlWeightPointerOES) Call(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlWeightPointerOES)
 }
 
@@ -48683,7 +48647,7 @@ func (ϟa *GlColorPointerBounds) Call(ϟs *gfxapi.State, ϟd database.Database, 
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlColorPointerBounds)
 }
@@ -48709,7 +48673,7 @@ func (ϟa *GlNormalPointerBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd dat
 func (ϟa *GlNormalPointerBounds) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlNormalPointerBounds)
 }
@@ -48736,7 +48700,7 @@ func (ϟa *GlTexCoordPointerBounds) Call(ϟs *gfxapi.State, ϟd database.Databas
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlTexCoordPointerBounds)
 }
@@ -48763,7 +48727,7 @@ func (ϟa *GlVertexPointerBounds) Call(ϟs *gfxapi.State, ϟd database.Database,
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlVertexPointerBounds)
 }
@@ -48788,7 +48752,7 @@ func (ϟa *GlPointSizePointerOESBounds) Replay(ϟi atom.ID, ϟs *gfxapi.State, �
 func (ϟa *GlPointSizePointerOESBounds) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlPointSizePointerOESBounds)
 }
@@ -48814,7 +48778,7 @@ func (ϟa *GlMatrixIndexPointerOESBounds) Call(ϟs *gfxapi.State, ϟd database.D
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlMatrixIndexPointerOESBounds)
 }
@@ -48840,7 +48804,7 @@ func (ϟa *GlWeightPointerOESBounds) Call(ϟs *gfxapi.State, ϟd database.Databa
 	ϟb.Push(ϟa.Size.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(ϟa.Stride.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.Pointer.value())
+	ϟb.Push(ϟa.Pointer.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.Count.value(ϟb, ϟa, ϟs))
 	ϟb.Call(funcInfoGlWeightPointerOESBounds)
 }
@@ -49265,10 +49229,10 @@ func (ϟa *ContextInfo) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Data
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *ContextInfo) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Push(value.U32(ϟa.ConstantCount))
-	ϟb.Push(ϟa.ConstantNames.value())
-	ϟb.Push(ϟa.ConstantOffsets.value())
-	ϟb.Push(ϟa.ConstantSizes.value())
-	ϟb.Push(ϟa.ConstantData.value())
+	ϟb.Push(ϟa.ConstantNames.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.ConstantOffsets.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.ConstantSizes.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.ConstantData.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BackbufferWidth.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.BackbufferHeight.value(ϟb, ϟa, ϟs))
 	ϟb.Push(value.U32(ϟa.BackbufferColorFmt))
@@ -49335,606 +49299,4 @@ func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.
 // Unlike Replay(), Call() does not perform any state-mutation or memory observations to ϟs.
 func (ϟa *FlushPostBuffer) Call(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
 	ϟb.Call(funcInfoFlushPostBuffer)
-}
-func (p Voidᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Voidᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Voidᵖᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLuintᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLuintᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLcharᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLcharᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLenumᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLsizeiᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLenumᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLintᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLfloatᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLfloatᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLintᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLint64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U8ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p VertexArrayIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p VertexArrayIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U16ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U32ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Charᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p QueryIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p QueryIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p BufferIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p BufferIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLcharᶜᵖᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p PipelineIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p PipelineIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p FramebufferIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p ProgramIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p RenderbufferIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p ShaderIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p TextureIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLubyteᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLuint64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLvoidᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLsizeiᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Voidᶜᵖᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Voidᶜᵖᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLubyteᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec2fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec2iᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec2uᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec3fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec3iᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec3uᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec4fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec4iᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Vec4uᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLuint64ᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat2fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat2x3fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat2x4fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat3fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat3x2fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat3x4fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat4fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat4x2fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Mat4x3fᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p FramebufferIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p RenderbufferIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLcharᶜᵖᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p UniformIndexᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p UniformIndexᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p ShaderIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLbooleanᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p SamplerIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p SamplerIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p TextureIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p TransformFeedbackIdᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p TransformFeedbackIdᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p EGLintᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p Intᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p CGLContextObjᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p CGSConnectionIDᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p CGSWindowIDᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p CGSSurfaceIDᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p F64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p S64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p U64ᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLfixedᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLfixedᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLshortᶜᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p GLshortᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p VertexBufferBindingIndexᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
-}
-func (p AttributeLocationᵖ) value() value.Pointer {
-	if p.Address != 0 {
-		return value.RemappedPointer(p.Address)
-	} else {
-		return value.AbsolutePointer(0)
-	}
 }

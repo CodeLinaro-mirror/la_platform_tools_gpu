@@ -56,8 +56,6 @@
   {{ForEach $.Pseudonyms "DeclarePseudonymValue" | JoinWith "\n"}}
 
   {{ForEach (AllCommands $) "DeclareCommandReplay" | JoinWith "\n"}}
-
-  {{ForEach $.Pointers "PointerReplayMethods" | JoinWith "\n"}}
 {{end}}
 
 
@@ -154,7 +152,7 @@
   {{AssertType $ "Pseudonym"}}
 
   {{$u := $ | TypeOf | Underlying}}
-  {{if or (IsNumericType $u) (IsPointer $u)}}
+  {{if IsNumericType $u}}
     {{if not (GetAnnotation $ "replay_custom_value")}}
       {{$v := print (Macro "Go.Type" $.To) "(c)"}}
       func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Template "Go.Replay.Value" "Type" $.To "Name" $v}} }
@@ -262,28 +260,4 @@
       {{Template "Go.Statement" $.Statement}}
     {{end}}
   {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits additional methods used for replay generation for the Pointer type or
-  indirect type (Pseudonym) to Pointer.
--------------------------------------------------------------------------------
-*/}}
-{{define "PointerReplayMethods"}}
-  {{AssertType $ "Pointer" "Pseudonym"}}
-
-  {{$p          := $ | Underlying | Unpack             }}
-  {{$ptr_ty     := Macro "Go.Type" $                   }}
-  {{$el_ty      := Macro "Go.Type" $p.To               }}
-  {{$el_is_void := IsVoid ($p.To | Underlying | Unpack)}}
-
-  func (p {{$ptr_ty}}) value() value.Pointer {
-    if p.Address != 0 {
-      return value.RemappedPointer(p.Address)
-    } else {
-      return value.AbsolutePointer(0)
-    }
-  }
 {{end}}

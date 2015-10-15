@@ -271,13 +271,13 @@ func TestMapMemory(t *testing.T) {
 			"No mapping",
 			func(b *Builder) {
 				b.BeginAtom(10)
-				b.Push(value.RemappedPointer(0x100004))
+				b.Push(value.ObservedPointer(0x100004))
 				b.Call(FunctionInfo{123, protocol.TypeVolatilePointer, 1})
 				b.CommitAtom()
 			},
 			[]asm.Instruction{
 				asm.Label{Value: 10},
-				asm.Push{Value: value.RemappedPointer(0x100004)},
+				asm.Push{Value: value.ObservedPointer(0x100004)},
 				asm.Call{FunctionID: 123},
 			},
 		},
@@ -290,7 +290,7 @@ func TestMapMemory(t *testing.T) {
 				b.CommitAtom()
 
 				b.BeginAtom(20)
-				b.Push(value.RemappedPointer(0x100004))
+				b.Push(value.ObservedPointer(0x100004))
 				b.Call(FunctionInfo{123, protocol.TypeVoid, 1})
 				b.CommitAtom()
 			},
@@ -319,7 +319,7 @@ func TestMapMemory(t *testing.T) {
 				b.CommitAtom()
 
 				b.BeginAtom(30)
-				b.Push(value.RemappedPointer(0x100004))
+				b.Push(value.ObservedPointer(0x100004))
 				b.Call(FunctionInfo{123, protocol.TypeVoid, 1})
 				b.CommitAtom()
 			},
@@ -331,7 +331,7 @@ func TestMapMemory(t *testing.T) {
 				asm.Label{Value: 20},
 
 				asm.Label{Value: 30},
-				asm.Push{Value: value.RemappedPointer(0x100004)},
+				asm.Push{Value: value.ObservedPointer(0x100004)},
 				asm.Call{FunctionID: 123},
 			},
 		},

@@ -28,9 +28,12 @@ import (
 
 type testPtrResolver struct{}
 
-func (testPtrResolver) TranslateTemporaryPointer(ptr uint64) uint64 { return ptr }
-func (testPtrResolver) TranslateRemappedPointer(ptr uint64) (protocol.Type, uint64) {
-	return protocol.TypeVolatilePointer, ptr
+func (testPtrResolver) ResolveTemporaryPointer(value.TemporaryPointer) value.VolatilePointer { return 0 }
+func (testPtrResolver) ResolveObservedPointer(ptr value.ObservedPointer) (protocol.Type, uint64) {
+	return protocol.TypeVolatilePointer, uint64(ptr)
+}
+func (testPtrResolver) ResolvePointerIndex(value.PointerIndex) value.VolatilePointer {
+	return 0
 }
 
 func test(t *testing.T, Instructions []Instruction, expected ...interface{}) {
@@ -333,8 +336,8 @@ func TestStrcpy(t *testing.T) {
 func TestResource(t *testing.T) {
 	test(t,
 		[]Instruction{
-			Resource{10, value.RemappedPointer(0x10)},
-			Resource{20, value.RemappedPointer(0x4050607)},
+			Resource{10, value.ObservedPointer(0x10)},
+			Resource{20, value.ObservedPointer(0x4050607)},
 		},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
 		opcode.Resource{ID: 10},

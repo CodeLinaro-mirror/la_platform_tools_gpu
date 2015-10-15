@@ -3935,11 +3935,17 @@ test.Charˢ{$}
 Charᵖ : full 37 compact 19
 test.Charᵖ{$}
 
-Charᵖˢ : full 34 compact 21
-test.Charᵖˢ{$}
+Charᶜᵖ : full 40 compact 22
+test.Charᶜᵖ{$}
 
-Charᵖᵖ : full 40 compact 22
-test.Charᵖᵖ{$}
+Charᶜᵖˢ : full 37 compact 24
+test.Charᶜᵖˢ{$}
+
+Charᶜᵖᵖ : full 43 compact 25
+test.Charᶜᵖᵖ{$}
+
+Charᶜᵖᶜᵖ : full 46 compact 28
+test.Charᶜᵖᶜᵖ{$}
 
 CmdBool : full 65 compact 20
 test.CmdBool{$,Bool}
@@ -4028,11 +4034,11 @@ test.CmdVoidF32{$,Float32}
 CmdVoidF64 : full 66 compact 23
 test.CmdVoidF64{$,Float64}
 
-CmdVoidInArrayOfPointers : full 97 compact 39
-test.CmdVoidInArrayOfPointers{$,$,Int32}
-
 CmdVoidInArrayOfRemapped : full 85 compact 38
 test.CmdVoidInArrayOfRemapped{$,$}
+
+CmdVoidInArrayOfStrings : full 108 compact 38
+test.CmdVoidInArrayOfStrings{$,$,Int32}
 
 CmdVoidOutArrayOfRemapped : full 86 compact 39
 test.CmdVoidOutArrayOfRemapped{$,$}
@@ -4353,12 +4359,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1451
-Full: 150532
-Total: 149523
-Average: 103
+Count: 1453
+Full: 150637
+Total: 149626
+Average: 102
 Largest: 4837
-Compact: 46436
-Total: 45432
+Compact: 46493
+Total: 45487
 Average: 31
 Largest: 174

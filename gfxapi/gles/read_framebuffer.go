@@ -344,7 +344,7 @@ func postColorData(s *gfxapi.State, width, height int32, out atom.Writer, callba
 	imageSize := uint64(width * height * 4)
 	out.Write(atom.NoID, NewGlReadPixels(0, 0, GLsizei(width), GLsizei(height), GLenum_GL_RGBA, GLenum_GL_UNSIGNED_BYTE, memory.Tmp))
 	out.Write(atom.NoID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-		b.Post(value.RemappedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
+		b.Post(value.ObservedPointer(memory.Tmp.Address), imageSize, func(d binary.Decoder, err error) error {
 			var data []byte
 			if err == nil {
 				data = make([]byte, imageSize)

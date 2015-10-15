@@ -67,8 +67,8 @@ func (t *timingInfoCpuTransform) stopTimer(toID atom.ID, index uint8, flags serv
 
 	out.Write(toID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
 		NewStopTimer(index, 0).Replay(i, s, d, l, b) // returns a uint64 on the stack
-		b.Store(value.VolatileTemporaryPointer(0))
-		b.Post(value.VolatileTemporaryPointer(0), 8, func(d binary.Decoder, err error) error {
+		b.Store(value.TemporaryPointer(0))
+		b.Post(value.TemporaryPointer(0), 8, func(d binary.Decoder, err error) error {
 			var nanoseconds uint64
 			if err == nil {
 				nanoseconds = d.Uint64()
@@ -148,7 +148,7 @@ func (t *timingInfoCpuTransform) Flush(out atom.Writer) {
 	}
 
 	out.Write(id, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
-		b.Post(value.VolatileTemporaryPointer(0), 0, func(d binary.Decoder, err error) error {
+		b.Post(value.TemporaryPointer(0), 0, func(d binary.Decoder, err error) error {
 			if err == nil {
 				t.out <- replay.CallTiming{TimingInfo: t.timingInfo}
 			} else {
