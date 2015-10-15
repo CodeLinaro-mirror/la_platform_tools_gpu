@@ -37,11 +37,7 @@ func Connect(port int, logger log.Logger) (service.Service, schema.Message, erro
 	var socket net.Conn
 	var err error
 	if port == 0 {
-		args := []string{
-			"--rpc", "localhost:0",
-			"--shutdown_on_disconnect",
-		}
-		socket, err = process.StartAndConnect("gapis", args...)
+		socket, err = process.StartAndConnect("gapis")
 	} else {
 		socket, err = process.Connect(port)
 	}

@@ -26,11 +26,11 @@ import (
 )
 
 var (
-	http                 = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
-	rpc                  = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
-	logsPath             = flag.String("logs", "logs", "Directory to place log files")
-	localDevicePort      = flag.Int("local_gapir_port", gapir.LocalPort, "Port number of the \"gapir\" running on the local device")
-	shutdownOnDisconnect = flag.Bool("shutdown_on_disconnect", false, "Shutdown server when no connections remain")
+	http            = flag.String("http", "localhost:0", "TCP host:port of the server's HTTP listener")
+	rpc             = flag.String("rpc", "localhost:0", "TCP host:port of the server's RPC listener")
+	logsPath        = flag.String("logs", "logs", "Directory to place log files")
+	localDevicePort = flag.Int("gapir", 0, "Port number of the \"gapir\" running on the local device, 0 means start new instance")
+	persist         = flag.Bool("persist", false, "Server will keep running even when no connections remain")
 )
 
 func main() {
@@ -48,7 +48,7 @@ func main() {
 		HttpAddress:          *http,
 		RpcAddress:           *rpc,
 		LogfilePath:          gapisLogPath,
-		ShutdownOnDisconnect: *shutdownOnDisconnect,
+		ShutdownOnDisconnect: !*persist,
 		LocalPort:            *localDevicePort,
 	})
 }
