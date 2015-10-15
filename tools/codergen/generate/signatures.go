@@ -106,6 +106,9 @@ func (s *stream) stats(w io.Writer) {
 func WriteAllSignatures(w io.Writer, modules Modules) {
 	structs := []*Struct{}
 	for _, m := range modules {
+		if m.IsTest {
+			continue
+		}
 		structs = append(structs, m.Structs...)
 	}
 	sort.Sort(byID(structs))

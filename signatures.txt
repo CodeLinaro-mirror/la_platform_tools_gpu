@@ -161,12 +161,6 @@ builder.captureFramebufferDimensions{[]$}
 getCaptureFramebufferDimensions : full 70 compact 47
 builder.getCaptureFramebufferDimensions{*$}
 
-testAtom : full 114 compact 34
-builder.testAtom{[20]Uint8,String,[]Bool,~,*$,map[String]String}
-
-testStruct : full 55 compact 27
-builder.testStruct{String,*$}
-
 CubemapLevel : full 164 compact 36
 gfxapi.CubemapLevel{$,$,$,$,$,$}
 
@@ -3809,15 +3803,6 @@ protocol.ResourceInfo{String,Uint32}
 Error : full 32 compact 15
 rpc.Error{String}
 
-delay : full 29 compact 15
-rpc.delay{String}
-
-request : full 31 compact 17
-rpc.request{String}
-
-response : full 32 compact 18
-rpc.response{String}
-
 AtomRangeTimer : full 91 compact 30
 service.AtomRangeTimer{Uint64,Uint64,Uint64}
 
@@ -4320,12 +4305,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1440
-Full: 149903
-Total: 148912
+Count: 1435
+Full: 149634
+Total: 148651
 Average: 103
 Largest: 4837
-Compact: 46121
-Total: 45135
+Compact: 46002
+Total: 45024
 Average: 31
 Largest: 174
