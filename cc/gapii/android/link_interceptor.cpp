@@ -22,6 +22,7 @@
 // loaded into memory. Some code from the NDK version of the crazy
 // linker is used.
 
+#include "dlinfo.h"
 #include "dlinterceptor.h"
 
 #include <gapic/dl_loader.h>
@@ -453,25 +454,6 @@ bool ElfReloc::ApplyInterceptorRelocations(const char* name,
   return true;
 }
 
-// Call dladdr and get the error message, if error.
-bool dladdr_check(const void *addr, Dl_info *info) {
-  dlerror();   // clear error condition
-  if (dladdr(addr, info) == 0) {  // zero means error.
-    const char* error = dlerror();
-    if (error != NULL) {
-      GAPID_WARNING("dladdr error %s", error);
-    } else {
-      GAPID_WARNING("unknown dladdr error");
-    }
-    return false;
-  }
-  return true;
-}
-
-// This symbol is just used so that to identify whether the current program
-// header is for spy itself.
-static const void* me = NULL;
-
 // This callback is called by dl_iterate_phdr. It is passed the size and
 // address of the ELF program headers. A SymbolResolver object is passed as
 // 'data'. It modifies the ELF relocations for this program, so that the
@@ -498,45 +480,48 @@ int LinkInterceptorsCb(struct dl_phdr_info *info, size_t size, void *data) {
   ElfReloc elfReloc;
 
   // Identify the shared object we are looking at.
-  Dl_info dl_info;
-  if (!dladdr_check(info->dlpi_phdr, &dl_info)) {
+  gapii::DlInfo dl_info;
+  if (const char* error = gapii::DlInfo::find(info->dlpi_phdr, dl_info)) {
+    GAPID_WARNING("Could not identify the shared object '%s': %s",
+        info->dlpi_name, error);
     return kContinue;
   }
-  const char* dlname = dl_info.dli_fname;
+  const char* dlpath = dl_info.mPath;
 
-  if (gapii::DlInterceptor::isDriver(dlname)) {
-    GAPID_DEBUG("Not patching %s as it is a driver", dlname);
+  if (gapii::DlInterceptor::isDriver(dlpath)) {
+    GAPID_DEBUG("Not patching %s as it is a driver", dlpath);
     return kContinue;
   }
 
   // Identify the shared object which contains this code (i.e. the spy).
-  Dl_info dl_self;
-  if (!dladdr_check(&me, &dl_self)) {
+  gapii::DlInfo dl_self;
+  if (const char* error = gapii::DlInfo::self(dl_self)) {
+    GAPID_WARNING("Could not identify the GAPII shared object: %s", error);
     return kContinue;
-  } else if (dl_info.dli_fbase == dl_self.dli_fbase) {
+  } else if (dl_info.mAddress == dl_self.mAddress) {
     // Don't insert interceptors into ourself, that would cause a loop.
     return kContinue;
   }
 
   if (!elfView.InitUnmapped(info->dlpi_addr, info->dlpi_phdr, info->dlpi_phnum, &error)) {
-    GAPID_WARNING("%s: elfView.InitUnmapped failed", dlname);
+    GAPID_WARNING("%s: elfView.InitUnmapped failed", dlpath);
   } else if (elfView.load_bias() != info->dlpi_addr) {
     // The load_bias must match the load address, because of a bug in the NDK
     // version of the crazy linker. The only case it is not likely to match
     // is when the ELF library was embedded in a zipfile. Ironically that
     // support was written by me (anton@).
     GAPID_WARNING("%s: load bias not dlpi_addr for addr %p phdr %p bias=%x: %s",
-        dlname, info->dlpi_addr, info->dlpi_phdr, elfView.load_bias(), dlname);
+        dlpath, info->dlpi_addr, info->dlpi_phdr, elfView.load_bias(), dlpath);
   } else if (!elfReloc.Init(elfView, &error)) {
-    GAPID_WARNING("%s: elfReloc.Init failed: %s", dlname, error.c_str());
+    GAPID_WARNING("%s: elfReloc.Init failed: %s", dlpath, error.c_str());
   } else if (!elfSymbols.Init(&elfView)) {
-    GAPID_WARNING("%s: elfSymbols.Init failed", dlname);
+    GAPID_WARNING("%s: elfSymbols.Init failed", dlpath);
   } else if (!phdr_table_make_writable(info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error)) {
-    GAPID_WARNING("%s: phdr_table_make_writable failed: %s", dlname, error.c_str());
-  } else if (!elfReloc.ApplyInterceptorRelocations(dlname, elfSymbols, resolver, elfView.load_bias())) {
-    GAPID_WARNING("%s: elfReloc.ApplyInterceptorRelocations failed", dlname);
+    GAPID_WARNING("%s: phdr_table_make_writable failed: %s", dlpath, error.c_str());
+  } else if (!elfReloc.ApplyInterceptorRelocations(dlpath, elfSymbols, resolver, elfView.load_bias())) {
+    GAPID_WARNING("%s: elfReloc.ApplyInterceptorRelocations failed", dlpath);
   } else if (!phdr_table_reset_load_prot(info->dlpi_phdr, info->dlpi_phnum, elfView.load_bias(), &error)) {
-    GAPID_WARNING("%s: phdr_table_reset_load_prot failed: %s", dlname, error.c_str());
+    GAPID_WARNING("%s: phdr_table_reset_load_prot failed: %s", dlpath, error.c_str());
   }
   return kContinue;
 }

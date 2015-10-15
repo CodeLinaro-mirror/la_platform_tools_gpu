@@ -14,8 +14,8 @@
 * limitations under the License.
 */
 
-#ifndef GAPII_GLES_INTERCEPTOR_H
-#define GAPII_GLES_INTERCEPTOR_H
+#ifndef GAPII_ANDROID_DL_INTERCEPTOR_H
+#define GAPII_ANDROID_DL_INTERCEPTOR_H
 
 #include <gapic/dl_loader.h>
 
@@ -77,4 +77,4 @@ private:
 
 }  // namespace gapii
 
-#endif  // GAPII_GLES_INTERCEPTOR_H
+#endif  // GAPII_ANDROID_DL_INTERCEPTOR_H

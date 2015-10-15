@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 
+#include "dlinfo.h"
 #include "dlinterceptor.h"
 
 #include <gapic/log.h>
@@ -22,11 +23,6 @@
 #include <string>
 
 #include <dlfcn.h>
-#include <link.h>
-
-#ifndef GAPII_SO_NAME
-#error "GAPII_SO_NAME needs to be defined"
-#endif
 
 namespace {
 
@@ -77,24 +73,6 @@ bool isIn(const char* path, const char* array[]) {
         }
     }
     return false;
-}
-
-// Return value constants used by findGAPII.
-const int kContinue = 0;
-const int kFound = 1;
-
-// findGAPII when passed to dl_iterate_phdr is used to search for the GAPII
-// library path by name. data should be a pointer to a std::string that will
-// hold the resulting path.
-int findGAPII(struct dl_phdr_info *info, size_t size, void *data) {
-    if (info->dlpi_name != nullptr) {
-        GAPID_INFO("findGAPII: '%s'", info->dlpi_name);
-        if (strstr(info->dlpi_name, GAPII_SO_NAME)) {
-            *reinterpret_cast<std::string*>(data) = info->dlpi_name;
-            return kFound;
-        }
-    }
-    return kContinue;
 }
 
 }  // anonymous namespace
@@ -195,12 +173,12 @@ void* DlInterceptor::resolve(void* handle, const char* name) {
 void* DlInterceptor::getLibGAPII() {
     static std::string sGAPIIPath;
     if (sGAPIIPath.size() == 0) {
-        GAPID_INFO("Searching for GAPII library '%s' in loaded SOs...", GAPII_SO_NAME);
-        // Find the GAPII library by searching the loaded SOs.
-        // It must be loaded as it's currently executing!
-        if (dl_iterate_phdr(findGAPII, &sGAPIIPath) != kFound) {
-            GAPID_FATAL("GAPII library '%s' not found. Was the library renamed?", GAPII_SO_NAME);
+        GAPID_INFO("Searching for GAPII library...");
+        DlInfo dlinfo;
+        if (const char* error = DlInfo::self(dlinfo)) {
+            GAPID_FATAL("GAPII library path could not be found: %s", error);
         }
+        sGAPIIPath = dlinfo.mPath;
         GAPID_INFO("GAPII library found at: '%s'", sGAPIIPath.c_str());
     }
 
