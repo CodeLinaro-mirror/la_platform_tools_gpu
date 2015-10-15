@@ -254,11 +254,13 @@ func doTemplate(flags flag.FlagSet) error {
 	}
 	mainTemplate := args[1]
 	verbs.Logf("Reading api file %q\n", apiName)
-	inputDep(apiName)
 
 	verbs.Logf("Compiling api file %q\n", apiName)
 	mappings := resolver.ASTToSemantic{}
-	compiled, errs := api.Resolve(apiName, mappings)
+	compiled, errs := api.DefaultProcessor.Resolve(apiName, mappings)
+	for path := range api.DefaultProcessor.Parsed {
+		inputDep(path)
+	}
 	if err := commands.CheckErrors(apiName, errs); err != nil {
 		return err
 	}
