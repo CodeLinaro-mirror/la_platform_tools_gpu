@@ -389,6 +389,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
   {{$className  := (print "binaryClass" .Name)}}
   {{$currentClassName := (print "binaryClass" $name)}}
   type {{$className}} struct{ binary.FrozenClassBase }¶
+  ¶
   func (*{{.Name}}) Class() binary.Class {»¶
     return &{{$className}}{}¶
   «}¶
@@ -402,7 +403,7 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
     if d.Error() != nil {»¶
       return¶
    «}¶
-    old.upgrade(o)  // This upgrade() method is not code generated.¶
+    old.upgrade(o) // This upgrade() method is not code generated.¶
   «}¶
   func (*{{$className}}) New() binary.Object {»¶
     return &{{$name}}{}¶
