@@ -111,7 +111,8 @@ func doEncodeGroup(e binary.Encoder, o *Group) {
 	e.Struct(&o.Range)
 	e.Uint32(uint32(len(o.SubGroups)))
 	for i := range o.SubGroups {
-		e.Struct(&o.SubGroups[i])
+		curr := &o.SubGroups[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeGroup(d binary.Decoder, o *Group) {
@@ -120,7 +121,8 @@ func doDecodeGroup(d binary.Decoder, o *Group) {
 	if count := d.Count(); count > 0 {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
-			d.Struct(&o.SubGroups[i])
+			curr := &o.SubGroups[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -153,17 +155,19 @@ func (*List) Class() binary.Class {
 func doEncodeList(e binary.Encoder, o *List) {
 	e.Uint32(uint32(len(o.Atoms)))
 	for i := range o.Atoms {
-		e.Variant(o.Atoms[i])
+		curr := &o.Atoms[i]
+		e.Variant((*curr))
 	}
 }
 func doDecodeList(d binary.Decoder, o *List) {
 	if count := d.Count(); count > 0 {
 		o.Atoms = make([]Atom, count)
 		for i := range o.Atoms {
+			curr := &o.Atoms[i]
 			if obj := d.Variant(); obj != nil {
-				o.Atoms[i] = AtomCast(obj)
+				(*curr) = AtomCast(obj)
 			} else {
-				o.Atoms[i] = nil
+				(*curr) = nil
 			}
 		}
 	}
@@ -270,24 +274,28 @@ func (*Observations) Class() binary.Class {
 func doEncodeObservations(e binary.Encoder, o *Observations) {
 	e.Uint32(uint32(len(o.Reads)))
 	for i := range o.Reads {
-		e.Struct(&o.Reads[i])
+		curr := &o.Reads[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Writes)))
 	for i := range o.Writes {
-		e.Struct(&o.Writes[i])
+		curr := &o.Writes[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeObservations(d binary.Decoder, o *Observations) {
 	if count := d.Count(); count > 0 {
 		o.Reads = make([]Observation, count)
 		for i := range o.Reads {
-			d.Struct(&o.Reads[i])
+			curr := &o.Reads[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Writes = make([]Observation, count)
 		for i := range o.Writes {
-			d.Struct(&o.Writes[i])
+			curr := &o.Writes[i]
+			d.Struct(&(*curr))
 		}
 	}
 }

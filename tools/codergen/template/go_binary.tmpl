@@ -178,7 +178,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Encode.Slice"}}
   {{template "Go.Encode_Length" $}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 
@@ -188,7 +189,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Encode.Array"}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Encode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Encode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 
@@ -255,7 +257,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 {{define "Go.Decode.Slice"}}
   {{template "Go.Decode_Length" $}}
     for i := range {{.Name}} {»¶
-      {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+      curr := &{{.Name}}[i]¶
+      {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
     «}¶
   «}¶
 {{end}}
@@ -266,7 +269,8 @@ func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {»¶
 
 {{define "Go.Decode.Array"}}
   for i := range {{.Name}} {»¶
-    {{Call "Go.Decode" (Var .Type.ValueType .Name "[i]")}}
+    curr := &{{.Name}}[i]¶
+    {{Call "Go.Decode" (Var .Type.ValueType "(*curr)")}}
   «}¶
 {{end}}
 

@@ -15,11 +15,908 @@ var Namespace = registry.NewNamespace()
 
 func init() {
 	registry.Global.AddFallbacks(Namespace)
+	Namespace.Add((*Leaf)(nil).Class())
+	Namespace.Add((*Anonymous)(nil).Class())
+	Namespace.Add((*Array)(nil).Class())
+	Namespace.Add((*ArrayInMap)(nil).Class())
+	Namespace.Add((*ArrayOfArrays)(nil).Class())
+	Namespace.Add((*Contains)(nil).Class())
+	Namespace.Add((*Complex)(nil).Class())
+	Namespace.Add((*MapInArray)(nil).Class())
+	Namespace.Add((*MapInSlice)(nil).Class())
+	Namespace.Add((*MapKey)(nil).Class())
+	Namespace.Add((*MapKeyValue)(nil).Class())
+	Namespace.Add((*MapOfMaps)(nil).Class())
+	Namespace.Add((*MapValue)(nil).Class())
+	Namespace.Add((*Slice)(nil).Class())
+	Namespace.Add((*SliceInMap)(nil).Class())
+	Namespace.Add((*SliceOfSlices)(nil).Class())
 	Namespace.Add((*TypeA)(nil).Class())
 	Namespace.Add((*TypeB)(nil).Class())
 	Namespace.Add((*X)(nil).Class())
 	Namespace.Add((*Y)(nil).Class())
 	Namespace.Add((*X_V1)(nil).Class())
+}
+
+type binaryClassLeaf struct{}
+
+func (*Leaf) Class() binary.Class {
+	return (*binaryClassLeaf)(nil)
+}
+func doEncodeLeaf(e binary.Encoder, o *Leaf) {
+	e.Uint32(o.A)
+}
+func doDecodeLeaf(d binary.Decoder, o *Leaf) {
+	o.A = uint32(d.Uint32())
+}
+func (*binaryClassLeaf) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeLeaf(e, obj.(*Leaf))
+}
+func (*binaryClassLeaf) New() binary.Object {
+	return &Leaf{}
+}
+func (*binaryClassLeaf) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeLeaf(d, obj.(*Leaf))
+}
+func (*binaryClassLeaf) Schema() *binary.Entity { return schemaLeaf }
+
+var schemaLeaf = &binary.Entity{
+	Package:  "test",
+	Identity: "Leaf",
+	Fields: []binary.Field{
+		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassAnonymous struct{}
+
+func (*Anonymous) Class() binary.Class {
+	return (*binaryClassAnonymous)(nil)
+}
+func doEncodeAnonymous(e binary.Encoder, o *Anonymous) {
+	e.Struct(&o.Leaf)
+}
+func doDecodeAnonymous(d binary.Decoder, o *Anonymous) {
+	d.Struct(&o.Leaf)
+}
+func (*binaryClassAnonymous) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAnonymous(e, obj.(*Anonymous))
+}
+func (*binaryClassAnonymous) New() binary.Object {
+	return &Anonymous{}
+}
+func (*binaryClassAnonymous) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAnonymous(d, obj.(*Anonymous))
+}
+func (*binaryClassAnonymous) Schema() *binary.Entity { return schemaAnonymous }
+
+var schemaAnonymous = &binary.Entity{
+	Package:  "test",
+	Identity: "Anonymous",
+	Fields: []binary.Field{
+		{Declared: "", Type: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassArray struct{}
+
+func (*Array) Class() binary.Class {
+	return (*binaryClassArray)(nil)
+}
+func doEncodeArray(e binary.Encoder, o *Array) {
+	for i := range o.Leaves {
+		curr := &o.Leaves[i]
+		e.Struct(&(*curr))
+	}
+}
+func doDecodeArray(d binary.Decoder, o *Array) {
+	for i := range o.Leaves {
+		curr := &o.Leaves[i]
+		d.Struct(&(*curr))
+	}
+}
+func (*binaryClassArray) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeArray(e, obj.(*Array))
+}
+func (*binaryClassArray) New() binary.Object {
+	return &Array{}
+}
+func (*binaryClassArray) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeArray(d, obj.(*Array))
+}
+func (*binaryClassArray) Schema() *binary.Entity { return schemaArray }
+
+var schemaArray = &binary.Entity{
+	Package:  "test",
+	Identity: "Array",
+	Fields: []binary.Field{
+		{Declared: "Leaves", Type: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, Size: 3}},
+	},
+}
+
+type binaryClassArrayInMap struct{}
+
+func (*ArrayInMap) Class() binary.Class {
+	return (*binaryClassArrayInMap)(nil)
+}
+func doEncodeArrayInMap(e binary.Encoder, o *ArrayInMap) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Uint32(k)
+		for i := range v {
+			curr := &v[i]
+			e.Struct(&(*curr))
+		}
+	}
+}
+func doDecodeArrayInMap(d binary.Decoder, o *ArrayInMap) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[uint32][3]Leaf, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k uint32
+			var v [3]Leaf
+			k = uint32(d.Uint32())
+			for i := range v {
+				curr := &v[i]
+				d.Struct(&(*curr))
+			}
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassArrayInMap) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeArrayInMap(e, obj.(*ArrayInMap))
+}
+func (*binaryClassArrayInMap) New() binary.Object {
+	return &ArrayInMap{}
+}
+func (*binaryClassArrayInMap) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeArrayInMap(d, obj.(*ArrayInMap))
+}
+func (*binaryClassArrayInMap) Schema() *binary.Entity { return schemaArrayInMap }
+
+var schemaArrayInMap = &binary.Entity{
+	Package:  "test",
+	Identity: "ArrayInMap",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, Size: 3}}},
+	},
+}
+
+type binaryClassArrayOfArrays struct{}
+
+func (*ArrayOfArrays) Class() binary.Class {
+	return (*binaryClassArrayOfArrays)(nil)
+}
+func doEncodeArrayOfArrays(e binary.Encoder, o *ArrayOfArrays) {
+	for i := range o.Array {
+		curr := &o.Array[i]
+		for i := range (*curr) {
+			curr := &(*curr)[i]
+			e.Struct(&(*curr))
+		}
+	}
+}
+func doDecodeArrayOfArrays(d binary.Decoder, o *ArrayOfArrays) {
+	for i := range o.Array {
+		curr := &o.Array[i]
+		for i := range (*curr) {
+			curr := &(*curr)[i]
+			d.Struct(&(*curr))
+		}
+	}
+}
+func (*binaryClassArrayOfArrays) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeArrayOfArrays(e, obj.(*ArrayOfArrays))
+}
+func (*binaryClassArrayOfArrays) New() binary.Object {
+	return &ArrayOfArrays{}
+}
+func (*binaryClassArrayOfArrays) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeArrayOfArrays(d, obj.(*ArrayOfArrays))
+}
+func (*binaryClassArrayOfArrays) Schema() *binary.Entity { return schemaArrayOfArrays }
+
+var schemaArrayOfArrays = &binary.Entity{
+	Package:  "test",
+	Identity: "ArrayOfArrays",
+	Fields: []binary.Field{
+		{Declared: "Array", Type: &schema.Array{Alias: "", ValueType: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, Size: 3}, Size: 2}},
+	},
+}
+
+type binaryClassContains struct{}
+
+func (*Contains) Class() binary.Class {
+	return (*binaryClassContains)(nil)
+}
+func doEncodeContains(e binary.Encoder, o *Contains) {
+	e.Struct(&o.LeafField)
+}
+func doDecodeContains(d binary.Decoder, o *Contains) {
+	d.Struct(&o.LeafField)
+}
+func (*binaryClassContains) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeContains(e, obj.(*Contains))
+}
+func (*binaryClassContains) New() binary.Object {
+	return &Contains{}
+}
+func (*binaryClassContains) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeContains(d, obj.(*Contains))
+}
+func (*binaryClassContains) Schema() *binary.Entity { return schemaContains }
+
+var schemaContains = &binary.Entity{
+	Package:  "test",
+	Identity: "Contains",
+	Fields: []binary.Field{
+		{Declared: "LeafField", Type: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassComplex struct{}
+
+func (*Complex) Class() binary.Class {
+	return (*binaryClassComplex)(nil)
+}
+func doEncodeComplex(e binary.Encoder, o *Complex) {
+	e.Uint32(uint32(len(o.SliceMapArray)))
+	for i := range o.SliceMapArray {
+		curr := &o.SliceMapArray[i]
+		e.Uint32(uint32(len((*curr))))
+		for k, v := range (*curr) {
+			e.Struct(&k)
+			for i := range v {
+				curr := &v[i]
+				e.Struct(&(*curr))
+			}
+		}
+	}
+	e.Uint32(uint32(len(o.SliceArrayMap)))
+	for i := range o.SliceArrayMap {
+		curr := &o.SliceArrayMap[i]
+		for i := range (*curr) {
+			curr := &(*curr)[i]
+			e.Uint32(uint32(len((*curr))))
+			for k, v := range (*curr) {
+				e.Struct(&k)
+				e.Struct(&v)
+			}
+		}
+	}
+	for i := range o.ArraySliceMap {
+		curr := &o.ArraySliceMap[i]
+		e.Uint32(uint32(len((*curr))))
+		for i := range (*curr) {
+			curr := &(*curr)[i]
+			e.Uint32(uint32(len((*curr))))
+			for k, v := range (*curr) {
+				e.Struct(&k)
+				e.Struct(&v)
+			}
+		}
+	}
+	for i := range o.ArrayMapSlice {
+		curr := &o.ArrayMapSlice[i]
+		e.Uint32(uint32(len((*curr))))
+		for k, v := range (*curr) {
+			e.Struct(&k)
+			e.Uint32(uint32(len(v)))
+			for i := range v {
+				curr := &v[i]
+				e.Struct(&(*curr))
+			}
+		}
+	}
+	e.Uint32(uint32(len(o.MapArraySlice)))
+	for k, v := range o.MapArraySlice {
+		e.Struct(&k)
+		for i := range v {
+			curr := &v[i]
+			e.Uint32(uint32(len((*curr))))
+			for i := range (*curr) {
+				curr := &(*curr)[i]
+				e.Struct(&(*curr))
+			}
+		}
+	}
+	e.Uint32(uint32(len(o.MapSliceArray)))
+	for k, v := range o.MapSliceArray {
+		e.Struct(&k)
+		e.Uint32(uint32(len(v)))
+		for i := range v {
+			curr := &v[i]
+			for i := range (*curr) {
+				curr := &(*curr)[i]
+				e.Struct(&(*curr))
+			}
+		}
+	}
+}
+func doDecodeComplex(d binary.Decoder, o *Complex) {
+	if count := d.Count(); count > 0 {
+		o.SliceMapArray = make([]map[Contains][3]Contains, count)
+		for i := range o.SliceMapArray {
+			curr := &o.SliceMapArray[i]
+			if count := d.Count(); count > 0 {
+				(*curr) = make(map[Contains][3]Contains, count)
+				m := (*curr)
+				for i := uint32(0); i < count; i++ {
+					var k Contains
+					var v [3]Contains
+					d.Struct(&k)
+					for i := range v {
+						curr := &v[i]
+						d.Struct(&(*curr))
+					}
+					m[k] = v
+				}
+			}
+		}
+	}
+	if count := d.Count(); count > 0 {
+		o.SliceArrayMap = make([][3]map[Contains]Contains, count)
+		for i := range o.SliceArrayMap {
+			curr := &o.SliceArrayMap[i]
+			for i := range (*curr) {
+				curr := &(*curr)[i]
+				if count := d.Count(); count > 0 {
+					(*curr) = make(map[Contains]Contains, count)
+					m := (*curr)
+					for i := uint32(0); i < count; i++ {
+						var k Contains
+						var v Contains
+						d.Struct(&k)
+						d.Struct(&v)
+						m[k] = v
+					}
+				}
+			}
+		}
+	}
+	for i := range o.ArraySliceMap {
+		curr := &o.ArraySliceMap[i]
+		if count := d.Count(); count > 0 {
+			(*curr) = make([]map[Contains]Contains, count)
+			for i := range (*curr) {
+				curr := &(*curr)[i]
+				if count := d.Count(); count > 0 {
+					(*curr) = make(map[Contains]Contains, count)
+					m := (*curr)
+					for i := uint32(0); i < count; i++ {
+						var k Contains
+						var v Contains
+						d.Struct(&k)
+						d.Struct(&v)
+						m[k] = v
+					}
+				}
+			}
+		}
+	}
+	for i := range o.ArrayMapSlice {
+		curr := &o.ArrayMapSlice[i]
+		if count := d.Count(); count > 0 {
+			(*curr) = make(map[Contains][]Contains, count)
+			m := (*curr)
+			for i := uint32(0); i < count; i++ {
+				var k Contains
+				var v []Contains
+				d.Struct(&k)
+				if count := d.Count(); count > 0 {
+					v = make([]Contains, count)
+					for i := range v {
+						curr := &v[i]
+						d.Struct(&(*curr))
+					}
+				}
+				m[k] = v
+			}
+		}
+	}
+	if count := d.Count(); count > 0 {
+		o.MapArraySlice = make(map[Contains][3][]Contains, count)
+		m := o.MapArraySlice
+		for i := uint32(0); i < count; i++ {
+			var k Contains
+			var v [3][]Contains
+			d.Struct(&k)
+			for i := range v {
+				curr := &v[i]
+				if count := d.Count(); count > 0 {
+					(*curr) = make([]Contains, count)
+					for i := range (*curr) {
+						curr := &(*curr)[i]
+						d.Struct(&(*curr))
+					}
+				}
+			}
+			m[k] = v
+		}
+	}
+	if count := d.Count(); count > 0 {
+		o.MapSliceArray = make(map[Contains][][3]Contains, count)
+		m := o.MapSliceArray
+		for i := uint32(0); i < count; i++ {
+			var k Contains
+			var v [][3]Contains
+			d.Struct(&k)
+			if count := d.Count(); count > 0 {
+				v = make([][3]Contains, count)
+				for i := range v {
+					curr := &v[i]
+					for i := range (*curr) {
+						curr := &(*curr)[i]
+						d.Struct(&(*curr))
+					}
+				}
+			}
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassComplex) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeComplex(e, obj.(*Complex))
+}
+func (*binaryClassComplex) New() binary.Object {
+	return &Complex{}
+}
+func (*binaryClassComplex) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeComplex(d, obj.(*Complex))
+}
+func (*binaryClassComplex) Schema() *binary.Entity { return schemaComplex }
+
+var schemaComplex = &binary.Entity{
+	Package:  "test",
+	Identity: "Complex",
+	Fields: []binary.Field{
+		{Declared: "SliceMapArray", Type: &schema.Slice{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, Size: 3}}}},
+		{Declared: "SliceArrayMap", Type: &schema.Slice{Alias: "", ValueType: &schema.Array{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}}, Size: 3}}},
+		{Declared: "ArraySliceMap", Type: &schema.Array{Alias: "", ValueType: &schema.Slice{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}}}, Size: 3}},
+		{Declared: "ArrayMapSlice", Type: &schema.Array{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}}}, Size: 3}},
+		{Declared: "MapArraySlice", Type: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Array{Alias: "", ValueType: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}}, Size: 3}}},
+		{Declared: "MapSliceArray", Type: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, ValueType: &schema.Slice{Alias: "", ValueType: &schema.Array{Alias: "", ValueType: &schema.Struct{Entity: (*Contains)(nil).Class().Schema()}, Size: 3}}}},
+	},
+}
+
+type binaryClassMapInArray struct{}
+
+func (*MapInArray) Class() binary.Class {
+	return (*binaryClassMapInArray)(nil)
+}
+func doEncodeMapInArray(e binary.Encoder, o *MapInArray) {
+	for i := range o.Array {
+		curr := &o.Array[i]
+		e.Uint32(uint32(len((*curr))))
+		for k, v := range (*curr) {
+			e.Uint32(k)
+			e.Uint32(v)
+		}
+	}
+}
+func doDecodeMapInArray(d binary.Decoder, o *MapInArray) {
+	for i := range o.Array {
+		curr := &o.Array[i]
+		if count := d.Count(); count > 0 {
+			(*curr) = make(map[uint32]uint32, count)
+			m := (*curr)
+			for i := uint32(0); i < count; i++ {
+				var k uint32
+				var v uint32
+				k = uint32(d.Uint32())
+				v = uint32(d.Uint32())
+				m[k] = v
+			}
+		}
+	}
+}
+func (*binaryClassMapInArray) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapInArray(e, obj.(*MapInArray))
+}
+func (*binaryClassMapInArray) New() binary.Object {
+	return &MapInArray{}
+}
+func (*binaryClassMapInArray) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapInArray(d, obj.(*MapInArray))
+}
+func (*binaryClassMapInArray) Schema() *binary.Entity { return schemaMapInArray }
+
+var schemaMapInArray = &binary.Entity{
+	Package:  "test",
+	Identity: "MapInArray",
+	Fields: []binary.Field{
+		{Declared: "Array", Type: &schema.Array{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}, Size: 2}},
+	},
+}
+
+type binaryClassMapInSlice struct{}
+
+func (*MapInSlice) Class() binary.Class {
+	return (*binaryClassMapInSlice)(nil)
+}
+func doEncodeMapInSlice(e binary.Encoder, o *MapInSlice) {
+	e.Uint32(uint32(len(o.Slice)))
+	for i := range o.Slice {
+		curr := &o.Slice[i]
+		e.Uint32(uint32(len((*curr))))
+		for k, v := range (*curr) {
+			e.Uint32(k)
+			e.Uint32(v)
+		}
+	}
+}
+func doDecodeMapInSlice(d binary.Decoder, o *MapInSlice) {
+	if count := d.Count(); count > 0 {
+		o.Slice = make([]map[uint32]uint32, count)
+		for i := range o.Slice {
+			curr := &o.Slice[i]
+			if count := d.Count(); count > 0 {
+				(*curr) = make(map[uint32]uint32, count)
+				m := (*curr)
+				for i := uint32(0); i < count; i++ {
+					var k uint32
+					var v uint32
+					k = uint32(d.Uint32())
+					v = uint32(d.Uint32())
+					m[k] = v
+				}
+			}
+		}
+	}
+}
+func (*binaryClassMapInSlice) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapInSlice(e, obj.(*MapInSlice))
+}
+func (*binaryClassMapInSlice) New() binary.Object {
+	return &MapInSlice{}
+}
+func (*binaryClassMapInSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapInSlice(d, obj.(*MapInSlice))
+}
+func (*binaryClassMapInSlice) Schema() *binary.Entity { return schemaMapInSlice }
+
+var schemaMapInSlice = &binary.Entity{
+	Package:  "test",
+	Identity: "MapInSlice",
+	Fields: []binary.Field{
+		{Declared: "Slice", Type: &schema.Slice{Alias: "", ValueType: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}}},
+	},
+}
+
+type binaryClassMapKey struct{}
+
+func (*MapKey) Class() binary.Class {
+	return (*binaryClassMapKey)(nil)
+}
+func doEncodeMapKey(e binary.Encoder, o *MapKey) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Struct(&k)
+		e.Uint32(v)
+	}
+}
+func doDecodeMapKey(d binary.Decoder, o *MapKey) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[Leaf]uint32, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k Leaf
+			var v uint32
+			d.Struct(&k)
+			v = uint32(d.Uint32())
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassMapKey) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapKey(e, obj.(*MapKey))
+}
+func (*binaryClassMapKey) New() binary.Object {
+	return &MapKey{}
+}
+func (*binaryClassMapKey) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapKey(d, obj.(*MapKey))
+}
+func (*binaryClassMapKey) Schema() *binary.Entity { return schemaMapKey }
+
+var schemaMapKey = &binary.Entity{
+	Package:  "test",
+	Identity: "MapKey",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+	},
+}
+
+type binaryClassMapKeyValue struct{}
+
+func (*MapKeyValue) Class() binary.Class {
+	return (*binaryClassMapKeyValue)(nil)
+}
+func doEncodeMapKeyValue(e binary.Encoder, o *MapKeyValue) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Struct(&k)
+		e.Struct(&v)
+	}
+}
+func doDecodeMapKeyValue(d binary.Decoder, o *MapKeyValue) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[Leaf]Leaf, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k Leaf
+			var v Leaf
+			d.Struct(&k)
+			d.Struct(&v)
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassMapKeyValue) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapKeyValue(e, obj.(*MapKeyValue))
+}
+func (*binaryClassMapKeyValue) New() binary.Object {
+	return &MapKeyValue{}
+}
+func (*binaryClassMapKeyValue) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapKeyValue(d, obj.(*MapKeyValue))
+}
+func (*binaryClassMapKeyValue) Schema() *binary.Entity { return schemaMapKeyValue }
+
+var schemaMapKeyValue = &binary.Entity{
+	Package:  "test",
+	Identity: "MapKeyValue",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}},
+	},
+}
+
+type binaryClassMapOfMaps struct{}
+
+func (*MapOfMaps) Class() binary.Class {
+	return (*binaryClassMapOfMaps)(nil)
+}
+func doEncodeMapOfMaps(e binary.Encoder, o *MapOfMaps) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Uint32(k)
+		e.Uint32(uint32(len(v)))
+		for k, v := range v {
+			e.Struct(&k)
+			e.Struct(&v)
+		}
+	}
+}
+func doDecodeMapOfMaps(d binary.Decoder, o *MapOfMaps) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[uint32]map[Leaf]Leaf, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k uint32
+			var v map[Leaf]Leaf
+			k = uint32(d.Uint32())
+			if count := d.Count(); count > 0 {
+				v = make(map[Leaf]Leaf, count)
+				m := v
+				for i := uint32(0); i < count; i++ {
+					var k Leaf
+					var v Leaf
+					d.Struct(&k)
+					d.Struct(&v)
+					m[k] = v
+				}
+			}
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassMapOfMaps) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapOfMaps(e, obj.(*MapOfMaps))
+}
+func (*binaryClassMapOfMaps) New() binary.Object {
+	return &MapOfMaps{}
+}
+func (*binaryClassMapOfMaps) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapOfMaps(d, obj.(*MapOfMaps))
+}
+func (*binaryClassMapOfMaps) Schema() *binary.Entity { return schemaMapOfMaps }
+
+var schemaMapOfMaps = &binary.Entity{
+	Package:  "test",
+	Identity: "MapOfMaps",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "", KeyType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}, ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}}},
+	},
+}
+
+type binaryClassMapValue struct{}
+
+func (*MapValue) Class() binary.Class {
+	return (*binaryClassMapValue)(nil)
+}
+func doEncodeMapValue(e binary.Encoder, o *MapValue) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Uint32(k)
+		e.Struct(&v)
+	}
+}
+func doDecodeMapValue(d binary.Decoder, o *MapValue) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[uint32]Leaf, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k uint32
+			var v Leaf
+			k = uint32(d.Uint32())
+			d.Struct(&v)
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassMapValue) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeMapValue(e, obj.(*MapValue))
+}
+func (*binaryClassMapValue) New() binary.Object {
+	return &MapValue{}
+}
+func (*binaryClassMapValue) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeMapValue(d, obj.(*MapValue))
+}
+func (*binaryClassMapValue) Schema() *binary.Entity { return schemaMapValue }
+
+var schemaMapValue = &binary.Entity{
+	Package:  "test",
+	Identity: "MapValue",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}},
+	},
+}
+
+type binaryClassSlice struct{}
+
+func (*Slice) Class() binary.Class {
+	return (*binaryClassSlice)(nil)
+}
+func doEncodeSlice(e binary.Encoder, o *Slice) {
+	e.Uint32(uint32(len(o.Leaves)))
+	for i := range o.Leaves {
+		curr := &o.Leaves[i]
+		e.Struct(&(*curr))
+	}
+}
+func doDecodeSlice(d binary.Decoder, o *Slice) {
+	if count := d.Count(); count > 0 {
+		o.Leaves = make([]Leaf, count)
+		for i := range o.Leaves {
+			curr := &o.Leaves[i]
+			d.Struct(&(*curr))
+		}
+	}
+}
+func (*binaryClassSlice) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeSlice(e, obj.(*Slice))
+}
+func (*binaryClassSlice) New() binary.Object {
+	return &Slice{}
+}
+func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeSlice(d, obj.(*Slice))
+}
+func (*binaryClassSlice) Schema() *binary.Entity { return schemaSlice }
+
+var schemaSlice = &binary.Entity{
+	Package:  "test",
+	Identity: "Slice",
+	Fields: []binary.Field{
+		{Declared: "Leaves", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}},
+	},
+}
+
+type binaryClassSliceInMap struct{}
+
+func (*SliceInMap) Class() binary.Class {
+	return (*binaryClassSliceInMap)(nil)
+}
+func doEncodeSliceInMap(e binary.Encoder, o *SliceInMap) {
+	e.Uint32(uint32(len(o.M)))
+	for k, v := range o.M {
+		e.Uint32(k)
+		e.Uint32(uint32(len(v)))
+		for i := range v {
+			curr := &v[i]
+			e.Struct(&(*curr))
+		}
+	}
+}
+func doDecodeSliceInMap(d binary.Decoder, o *SliceInMap) {
+	if count := d.Count(); count > 0 {
+		o.M = make(map[uint32][]Leaf, count)
+		m := o.M
+		for i := uint32(0); i < count; i++ {
+			var k uint32
+			var v []Leaf
+			k = uint32(d.Uint32())
+			if count := d.Count(); count > 0 {
+				v = make([]Leaf, count)
+				for i := range v {
+					curr := &v[i]
+					d.Struct(&(*curr))
+				}
+			}
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassSliceInMap) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeSliceInMap(e, obj.(*SliceInMap))
+}
+func (*binaryClassSliceInMap) New() binary.Object {
+	return &SliceInMap{}
+}
+func (*binaryClassSliceInMap) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeSliceInMap(d, obj.(*SliceInMap))
+}
+func (*binaryClassSliceInMap) Schema() *binary.Entity { return schemaSliceInMap }
+
+var schemaSliceInMap = &binary.Entity{
+	Package:  "test",
+	Identity: "SliceInMap",
+	Fields: []binary.Field{
+		{Declared: "M", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}, ValueType: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}}},
+	},
+}
+
+type binaryClassSliceOfSlices struct{}
+
+func (*SliceOfSlices) Class() binary.Class {
+	return (*binaryClassSliceOfSlices)(nil)
+}
+func doEncodeSliceOfSlices(e binary.Encoder, o *SliceOfSlices) {
+	e.Uint32(uint32(len(o.Slice)))
+	for i := range o.Slice {
+		curr := &o.Slice[i]
+		e.Uint32(uint32(len((*curr))))
+		for i := range (*curr) {
+			curr := &(*curr)[i]
+			e.Struct(&(*curr))
+		}
+	}
+}
+func doDecodeSliceOfSlices(d binary.Decoder, o *SliceOfSlices) {
+	if count := d.Count(); count > 0 {
+		o.Slice = make([][]Leaf, count)
+		for i := range o.Slice {
+			curr := &o.Slice[i]
+			if count := d.Count(); count > 0 {
+				(*curr) = make([]Leaf, count)
+				for i := range (*curr) {
+					curr := &(*curr)[i]
+					d.Struct(&(*curr))
+				}
+			}
+		}
+	}
+}
+func (*binaryClassSliceOfSlices) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeSliceOfSlices(e, obj.(*SliceOfSlices))
+}
+func (*binaryClassSliceOfSlices) New() binary.Object {
+	return &SliceOfSlices{}
+}
+func (*binaryClassSliceOfSlices) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeSliceOfSlices(d, obj.(*SliceOfSlices))
+}
+func (*binaryClassSliceOfSlices) Schema() *binary.Entity { return schemaSliceOfSlices }
+
+var schemaSliceOfSlices = &binary.Entity{
+	Package:  "test",
+	Identity: "SliceOfSlices",
+	Fields: []binary.Field{
+		{Declared: "Slice", Type: &schema.Slice{Alias: "", ValueType: &schema.Slice{Alias: "", ValueType: &schema.Struct{Entity: (*Leaf)(nil).Class().Schema()}}}},
+	},
 }
 
 type binaryClassTypeA struct{}

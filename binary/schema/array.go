@@ -78,6 +78,9 @@ func (s *Slice) Representation() string {
 }
 
 func (s *Array) Subspace() *binary.Subspace {
+	if s.Size == 0 {
+		return nil
+	}
 	if s.ValueType.HasSubspace() {
 		// We don't have examples of this in the stream, so not to bothered
 		// if this isn't an efficient approach.
@@ -85,13 +88,13 @@ func (s *Array) Subspace() *binary.Subspace {
 		for i, _ := range types {
 			types[i] = s.ValueType
 		}
-		return &binary.Subspace{SubTypes: types}
+		return &binary.Subspace{Inline: true, SubTypes: types}
 	}
 	return nil
 }
 
 func (s *Array) HasSubspace() bool {
-	return s.ValueType.HasSubspace()
+	return s.Size > 0 && s.ValueType.HasSubspace()
 }
 
 func (s *Slice) String() string {

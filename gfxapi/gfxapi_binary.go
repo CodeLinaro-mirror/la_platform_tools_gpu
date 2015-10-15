@@ -76,14 +76,16 @@ func (*Cubemap) Class() binary.Class {
 func doEncodeCubemap(e binary.Encoder, o *Cubemap) {
 	e.Uint32(uint32(len(o.Levels)))
 	for i := range o.Levels {
-		e.Struct(&o.Levels[i])
+		curr := &o.Levels[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeCubemap(d binary.Decoder, o *Cubemap) {
 	if count := d.Count(); count > 0 {
 		o.Levels = make([]CubemapLevel, count)
 		for i := range o.Levels {
-			d.Struct(&o.Levels[i])
+			curr := &o.Levels[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -114,14 +116,16 @@ func (*Texture2D) Class() binary.Class {
 func doEncodeTexture2D(e binary.Encoder, o *Texture2D) {
 	e.Uint32(uint32(len(o.Levels)))
 	for i := range o.Levels {
-		e.Struct(&o.Levels[i])
+		curr := &o.Levels[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeTexture2D(d binary.Decoder, o *Texture2D) {
 	if count := d.Count(); count > 0 {
 		o.Levels = make([]image.Info, count)
 		for i := range o.Levels {
-			d.Struct(&o.Levels[i])
+			curr := &o.Levels[i]
+			d.Struct(&(*curr))
 		}
 	}
 }

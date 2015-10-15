@@ -66,7 +66,8 @@ func doEncodePayload(e binary.Encoder, o *Payload) {
 	e.Data(o.Constants)
 	e.Uint32(uint32(len(o.Resources)))
 	for i := range o.Resources {
-		e.Struct(&o.Resources[i])
+		curr := &o.Resources[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Opcodes)))
 	e.Data(o.Opcodes)
@@ -81,7 +82,8 @@ func doDecodePayload(d binary.Decoder, o *Payload) {
 	if count := d.Count(); count > 0 {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			d.Struct(&o.Resources[i])
+			curr := &o.Resources[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {

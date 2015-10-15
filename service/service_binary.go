@@ -134,7 +134,8 @@ func doEncodeCapture(e binary.Encoder, o *Capture) {
 	e.Data(o.Atoms[:20])
 	e.Uint32(uint32(len(o.Apis)))
 	for i := range o.Apis {
-		e.Data(o.Apis[i][:20])
+		curr := &o.Apis[i]
+		e.Data((*curr)[:20])
 	}
 }
 func doDecodeCapture(d binary.Decoder, o *Capture) {
@@ -143,7 +144,8 @@ func doDecodeCapture(d binary.Decoder, o *Capture) {
 	if count := d.Count(); count > 0 {
 		o.Apis = make([]ApiID, count)
 		for i := range o.Apis {
-			d.Data(o.Apis[i][:20])
+			curr := &o.Apis[i]
+			d.Data((*curr)[:20])
 		}
 	}
 }
@@ -235,15 +237,18 @@ func doEncodeMemoryInfo(e binary.Encoder, o *MemoryInfo) {
 	e.Data(o.Data)
 	e.Uint32(uint32(len(o.Reads)))
 	for i := range o.Reads {
-		e.Struct(&o.Reads[i])
+		curr := &o.Reads[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Writes)))
 	for i := range o.Writes {
-		e.Struct(&o.Writes[i])
+		curr := &o.Writes[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Observed)))
 	for i := range o.Observed {
-		e.Struct(&o.Observed[i])
+		curr := &o.Observed[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
@@ -254,19 +259,22 @@ func doDecodeMemoryInfo(d binary.Decoder, o *MemoryInfo) {
 	if count := d.Count(); count > 0 {
 		o.Reads = make(memory.RangeList, count)
 		for i := range o.Reads {
-			d.Struct(&o.Reads[i])
+			curr := &o.Reads[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Writes = make(memory.RangeList, count)
 		for i := range o.Writes {
-			d.Struct(&o.Writes[i])
+			curr := &o.Writes[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Observed = make(memory.RangeList, count)
 		for i := range o.Observed {
-			d.Struct(&o.Observed[i])
+			curr := &o.Observed[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -372,14 +380,16 @@ func (*Report) Class() binary.Class {
 func doEncodeReport(e binary.Encoder, o *Report) {
 	e.Uint32(uint32(len(o.Items)))
 	for i := range o.Items {
-		e.Struct(&o.Items[i])
+		curr := &o.Items[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeReport(d binary.Decoder, o *Report) {
 	if count := d.Count(); count > 0 {
 		o.Items = make([]ReportItem, count)
 		for i := range o.Items {
-			d.Struct(&o.Items[i])
+			curr := &o.Items[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -412,7 +422,8 @@ func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) {
 	e.String(o.Name)
 	e.Uint32(uint32(len(o.Accesses)))
 	for i := range o.Accesses {
-		e.Uint64(o.Accesses[i])
+		curr := &o.Accesses[i]
+		e.Uint64((*curr))
 	}
 }
 func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
@@ -421,7 +432,8 @@ func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) {
 	if count := d.Count(); count > 0 {
 		o.Accesses = make([]uint64, count)
 		for i := range o.Accesses {
-			o.Accesses[i] = uint64(d.Uint64())
+			curr := &o.Accesses[i]
+			(*curr) = uint64(d.Uint64())
 		}
 	}
 }
@@ -454,44 +466,52 @@ func (*Resources) Class() binary.Class {
 func doEncodeResources(e binary.Encoder, o *Resources) {
 	e.Uint32(uint32(len(o.Textures1D)))
 	for i := range o.Textures1D {
-		e.Struct(&o.Textures1D[i])
+		curr := &o.Textures1D[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Textures2D)))
 	for i := range o.Textures2D {
-		e.Struct(&o.Textures2D[i])
+		curr := &o.Textures2D[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Textures3D)))
 	for i := range o.Textures3D {
-		e.Struct(&o.Textures3D[i])
+		curr := &o.Textures3D[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.Cubemaps)))
 	for i := range o.Cubemaps {
-		e.Struct(&o.Cubemaps[i])
+		curr := &o.Cubemaps[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeResources(d binary.Decoder, o *Resources) {
 	if count := d.Count(); count > 0 {
 		o.Textures1D = make([]ResourceInfo, count)
 		for i := range o.Textures1D {
-			d.Struct(&o.Textures1D[i])
+			curr := &o.Textures1D[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Textures2D = make([]ResourceInfo, count)
 		for i := range o.Textures2D {
-			d.Struct(&o.Textures2D[i])
+			curr := &o.Textures2D[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Textures3D = make([]ResourceInfo, count)
 		for i := range o.Textures3D {
-			d.Struct(&o.Textures3D[i])
+			curr := &o.Textures3D[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.Cubemaps = make([]ResourceInfo, count)
 		for i := range o.Cubemaps {
-			d.Struct(&o.Cubemaps[i])
+			curr := &o.Cubemaps[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -525,34 +545,40 @@ func (*TimingInfo) Class() binary.Class {
 func doEncodeTimingInfo(e binary.Encoder, o *TimingInfo) {
 	e.Uint32(uint32(len(o.PerCommand)))
 	for i := range o.PerCommand {
-		e.Struct(&o.PerCommand[i])
+		curr := &o.PerCommand[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.PerDrawCall)))
 	for i := range o.PerDrawCall {
-		e.Struct(&o.PerDrawCall[i])
+		curr := &o.PerDrawCall[i]
+		e.Struct(&(*curr))
 	}
 	e.Uint32(uint32(len(o.PerFrame)))
 	for i := range o.PerFrame {
-		e.Struct(&o.PerFrame[i])
+		curr := &o.PerFrame[i]
+		e.Struct(&(*curr))
 	}
 }
 func doDecodeTimingInfo(d binary.Decoder, o *TimingInfo) {
 	if count := d.Count(); count > 0 {
 		o.PerCommand = make([]AtomTimer, count)
 		for i := range o.PerCommand {
-			d.Struct(&o.PerCommand[i])
+			curr := &o.PerCommand[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.PerDrawCall = make([]AtomRangeTimer, count)
 		for i := range o.PerDrawCall {
-			d.Struct(&o.PerDrawCall[i])
+			curr := &o.PerDrawCall[i]
+			d.Struct(&(*curr))
 		}
 	}
 	if count := d.Count(); count > 0 {
 		o.PerFrame = make([]AtomRangeTimer, count)
 		for i := range o.PerFrame {
-			d.Struct(&o.PerFrame[i])
+			curr := &o.PerFrame[i]
+			d.Struct(&(*curr))
 		}
 	}
 }
@@ -1056,8 +1082,9 @@ func (*resultGetCaptures) Class() binary.Class {
 func doEncoderesultGetCaptures(e binary.Encoder, o *resultGetCaptures) {
 	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if o.value[i] != nil {
-			e.Object(o.value[i])
+		curr := &o.value[i]
+		if (*curr) != nil {
+			e.Object((*curr))
 		} else {
 			e.Object(nil)
 		}
@@ -1067,10 +1094,11 @@ func doDecoderesultGetCaptures(d binary.Decoder, o *resultGetCaptures) {
 	if count := d.Count(); count > 0 {
 		o.value = make([]*path.Capture, count)
 		for i := range o.value {
+			curr := &o.value[i]
 			if obj := d.Object(); obj != nil {
-				o.value[i] = obj.(*path.Capture)
+				(*curr) = obj.(*path.Capture)
 			} else {
-				o.value[i] = nil
+				(*curr) = nil
 			}
 		}
 	}
@@ -1102,8 +1130,9 @@ func (*resultGetDevices) Class() binary.Class {
 func doEncoderesultGetDevices(e binary.Encoder, o *resultGetDevices) {
 	e.Uint32(uint32(len(o.value)))
 	for i := range o.value {
-		if o.value[i] != nil {
-			e.Object(o.value[i])
+		curr := &o.value[i]
+		if (*curr) != nil {
+			e.Object((*curr))
 		} else {
 			e.Object(nil)
 		}
@@ -1113,10 +1142,11 @@ func doDecoderesultGetDevices(d binary.Decoder, o *resultGetDevices) {
 	if count := d.Count(); count > 0 {
 		o.value = make([]*path.Device, count)
 		for i := range o.value {
+			curr := &o.value[i]
 			if obj := d.Object(); obj != nil {
-				o.value[i] = obj.(*path.Device)
+				(*curr) = obj.(*path.Device)
 			} else {
-				o.value[i] = nil
+				(*curr) = nil
 			}
 		}
 	}
