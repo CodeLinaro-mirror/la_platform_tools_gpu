@@ -16,9 +16,7 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"strings"
-	"time"
 
 	"android.googlesource.com/platform/tools/gpu/cc"
 	"android.googlesource.com/platform/tools/gpu/maker/config"
@@ -93,7 +91,6 @@ func init() {
 		// The native code rules
 		cc.Graph()
 		Apps.Gapir = graph.Virtual("cc:gapir")
-		graph.Creator(Apps.Gapir).DependsOn(ShutdownReplayd(), "code")
 		graph.Creator("cc:spy").DependsOn("code")
 		graph.Creator("cc:gapii").DependsOn("code")
 		// The testing rules
@@ -166,37 +163,6 @@ func PkgInfo() {
 	}).Creates(gradleAPK)
 	do.CopyFile(binAPK, gradleAPK)
 	graph.List("pkginfo").DependsOn(binAPK)
-}
-
-func ShutdownReplayd() graph.Entity {
-	e := graph.Virtual("shutdowngapir")
-	graph.NewStep(func(*graph.Step) error {
-		for _, endpoint := range []string{"localhost:9283", "localhost:9284"} {
-			const maxRetries = 10
-			for i := 0; i < maxRetries; i++ {
-				conn, err := net.Dial("tcp", endpoint)
-				if err != nil {
-					// Assume this means there is no gapir
-					break
-				}
-				defer conn.Close()
-				msg := []byte{ReplaydShutdownRequest}
-				n, err := conn.Write(msg)
-				if err != nil {
-					return fmt.Errorf("Failed to send shutdown request to Replayd %v", err)
-				}
-				if n != len(msg) {
-					return fmt.Errorf("Failed to send shutdown request to Replayd (only sent %v bytes", n)
-				}
-				if i == maxRetries-1 {
-					return fmt.Errorf("Replayd at %v did not die", endpoint)
-				}
-				time.Sleep(100 * time.Millisecond)
-			}
-		}
-		return nil
-	}).Creates(e)
-	return e
 }
 
 func GfxApi(pkg string, api string) {

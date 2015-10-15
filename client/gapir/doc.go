@@ -12,5 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package gapir contains code for communicating with a gapir server.
+// Package gapir provides helper methods and types for communicating with the
+// GAPIR service.
 package gapir

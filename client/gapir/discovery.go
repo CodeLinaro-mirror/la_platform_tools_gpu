@@ -15,16 +15,11 @@
 package gapir
 
 import (
-	"fmt"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
-	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/replay/protocol"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // discovery is used to find replay devices on the local machine and connected
@@ -36,11 +31,7 @@ type Discovery struct {
 }
 
 func NewDiscovery(db database.Database, logger log.Logger) *Discovery {
-	m := &Discovery{logger: logger}
-	go m.discoverLocalDevices(db)
-	go m.discoverAndroidDevices(db)
-
-	return m
+	return &Discovery{logger: logger}
 }
 
 func (d *Discovery) Device(id binary.ID) Device {
@@ -61,88 +52,20 @@ func (d *Discovery) Devices() []Device {
 	return d.devices
 }
 
-func (d *Discovery) discoverAndroidDevices(db database.Database) {
-	dev := &androidDevice{deviceBase{device: &service.Device{
-		Name:  "Android device",
-		Model: "Unknown",
-	}}}
+func (d *Discovery) DefaultDevice() Device {
+	d.Lock()
+	defer d.Unlock()
+	if len(d.devices) == 0 {
+		return nil
+	}
+	return d.devices[0]
+}
 
-	if err := loadDeviceConfig(dev, db, d.logger); err == nil {
-		id, err := database.Store(dev.device, db, log.Nop{})
-		if err != nil {
-			panic(err)
-		}
-		dev.id = id
-
+func (d *Discovery) AddDevice(dev *deviceBase, db database.Database, l log.Logger) {
+	if dev != nil {
 		d.Lock()
 		defer d.Unlock()
 		d.devices = append(d.devices, dev)
-	} else {
-		log.Infof(d.logger, "Failed to communicate with Android device '%s': %v", dev.Info().Name, err)
+		db.Store(dev.ID(), dev.Info(), l)
 	}
-}
-
-func (d *Discovery) discoverLocalDevices(db database.Database) {
-	dev := &localDevice{deviceBase{device: &service.Device{
-		Name:  "Local machine",
-		Model: "Unknown",
-	}}}
-
-	if err := loadDeviceConfig(dev, db, d.logger); err == nil {
-		id, err := database.Store(dev.device, db, log.Nop{})
-		if err != nil {
-			panic(err)
-		}
-		dev.id = id
-
-		d.Lock()
-		defer d.Unlock()
-		d.devices = append(d.devices, dev)
-	} else {
-		log.Warningf(d.logger, "Failed to communicate with local device '%s': %v", dev.Info().Name, err)
-	}
-}
-
-func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
-	connection, err := d.Connect()
-	if err != nil {
-		return err
-	}
-	defer connection.Close()
-
-	// Endianness has yet to be discovered - we use Little for the hand-shaking.
-	enc := flat.Encoder(endian.Writer(connection, endian.Little))
-	dec := flat.Decoder(endian.Reader(connection, endian.Little))
-
-	if enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); enc.Error() != nil {
-		return enc.Error()
-	}
-
-	protocolVersion := dec.Uint32()
-	if dec.Error() != nil {
-		return dec.Error()
-	}
-
-	td := d.Info()
-
-	switch protocolVersion {
-	case 1:
-		td.PointerSize = dec.Uint8()
-		td.PointerAlignment = dec.Uint8()
-		// TODO: Integer size
-		// TODO: Endianness
-		td.MaxMemorySize = dec.Uint64()
-		td.OS = deviceOS(dec.Uint8()).String()
-		td.Extensions = dec.String()
-		td.Renderer = dec.String()
-		td.Vendor = dec.String()
-		td.Version = dec.String()
-		if dec.Error() != nil {
-			return dec.Error()
-		}
-
-	default:
-		return fmt.Errorf("Unsupported device protocol version: %d", protocolVersion)
-	}
-	return nil
 }

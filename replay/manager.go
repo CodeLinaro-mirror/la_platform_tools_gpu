@@ -85,11 +85,6 @@ func (m *Manager) Replay(ctx Context, cfg Config, req Request, generator Generat
 	return err
 }
 
-// DeviceIDs returns the list of devices that have been discovered.
-func (m *Manager) Devices() []gapir.Device {
-	return m.discovery.Devices()
-}
-
 // Discovery returns the device discovery being used by this manager.
 func (m *Manager) Discovery() *gapir.Discovery {
 	return m.discovery

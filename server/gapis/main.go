@@ -28,11 +28,9 @@ import (
 var (
 	http                 = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
 	rpc                  = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
-	dataPath             = flag.String("data", "data", "Path to the server's data folder")
 	logsPath             = flag.String("logs", "logs", "Directory to place log files")
-	localDevicePort      = flag.Int("local_gapir_port", 9284, "Port number of the \"gapir\" running on the local device")
+	localDevicePort      = flag.Int("local_gapir_port", gapir.LocalPort, "Port number of the \"gapir\" running on the local device")
 	shutdownOnDisconnect = flag.Bool("shutdown_on_disconnect", false, "Shutdown server when no connections remain")
-	noGapir              = flag.Bool("no_gapir", false, "Never run up gapir if it can't be found")
 )
 
 func main() {
@@ -45,19 +43,12 @@ func main() {
 	}
 
 	gapisLogPath, _ := filepath.Abs(filepath.Join(*logsPath, "gapis.log"))
-	gapirLogPath, _ := filepath.Abs(filepath.Join(*logsPath, "gapir.log"))
-	dataAbsPath, _ := filepath.Abs(*dataPath)
-
-	gapir.ConfigureLocalReplayDevice(false, // disable disk-cache
-		gapir.Replayd, *localDevicePort, gapirLogPath,
-		*noGapir, // never launch
-	)
-
+	gapir.LogPath, _ = filepath.Abs(filepath.Join(*logsPath, "gapir.log"))
 	server.Run(server.Config{
 		HttpAddress:          *http,
 		RpcAddress:           *rpc,
-		DataPath:             dataAbsPath,
 		LogfilePath:          gapisLogPath,
 		ShutdownOnDisconnect: *shutdownOnDisconnect,
+		LocalPort:            *localDevicePort,
 	})
 }

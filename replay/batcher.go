@@ -70,7 +70,7 @@ func (b *batcher) run() {
 }
 
 func (b *batcher) send(requests []Request) (err error) {
-	log.Infof(b.logger, "Replaying on device: %+v", b.device.Info())
+	log.Infof(b.logger, "Replaying on device: %s", b.device.Info().Name)
 
 	c, err := service.ResolveCapture(b.context.Capture, b.database, b.logger)
 	if err != nil {

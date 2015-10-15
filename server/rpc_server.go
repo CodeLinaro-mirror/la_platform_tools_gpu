@@ -168,7 +168,7 @@ func (s rpcServer) GetCaptures(l log.Logger) ([]*path.Capture, error) {
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
 func (s rpcServer) GetDevices(l log.Logger) ([]*path.Device, error) {
-	devices := s.ReplayManager.Devices()
+	devices := s.ReplayManager.Discovery().Devices()
 	paths := make([]*path.Device, len(devices))
 	for i, d := range devices {
 		paths[i] = &path.Device{ID: d.ID()}

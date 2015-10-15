@@ -21,6 +21,7 @@ import (
 	"testing"
 	"time"
 
+	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/check"
 	"android.googlesource.com/platform/tools/gpu/client/gapir"
@@ -56,9 +57,26 @@ var (
 		-0.5, +0.5, 0.5,
 		+0.5, +0.5, 0.9,
 	}
+
+	generateReferenceImages = flag.Bool("generate", false, "generate reference images")
+	port                    = flag.Int("gapir", 0, "The port to connect to gapir on, 0 means start new instance")
+	mgr                     *replay.Manager
+	d                       database.Database
 )
 
-var generateReferenceImages = flag.Bool("generate", false, "generate reference images")
+func TestMain(m *testing.M) {
+	flag.Parse()
+	l := log.Std()
+	d = database.NewInMemory(nil)
+	mgr = replay.New(d, l)
+	if *port > 0 {
+		mgr.Discovery().AddDevice(gapir.NewDevice(gapir.LocalName, *port, l), d, l)
+	} else {
+		mgr.Discovery().AddDevice(gapir.RunLocal(l), d, l)
+	}
+	code := m.Run()
+	atexit.Exit(code)
+}
 
 func p(addr uint64) memory.Pointer {
 	return memory.Pointer{Address: addr, Pool: memory.ApplicationPool}
@@ -222,9 +240,8 @@ func initContext(a device.Architecture, d database.Database, l log.Logger, width
 }
 
 func TestClear(t *testing.T) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+	l := log.Testing(t)
+	device := mgr.Discovery().DefaultDevice()
 	atoms := initContext(device.Info().Architecture(), d, l, 64, 64, false)
 	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
@@ -260,9 +277,8 @@ func TestClear(t *testing.T) {
 }
 
 func TestDrawTriangle(t *testing.T) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+	l := log.Testing(t)
+	device := mgr.Discovery().DefaultDevice()
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 64, 64, false)
@@ -301,9 +317,8 @@ func TestDrawTriangle(t *testing.T) {
 // TestResizeRenderer checks that backbuffers can be resized without destroying
 // the current context.
 func TestResizeRenderer(t *testing.T) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+	l := log.Testing(t)
+	device := mgr.Discovery().DefaultDevice()
 	a := device.Info().Architecture()
 	vs, fs, prog, pos := gles.ShaderId(0x10), gles.ShaderId(0x20), gles.ProgramId(0x30), gles.AttributeLocation(0)
 	atoms := initContext(a, d, l, 8, 8, false) // start with a small backbuffer
@@ -334,9 +349,8 @@ func TestResizeRenderer(t *testing.T) {
 // TestPreserveBuffersOnSwap checks that when the preserveBuffersOnSwap flag is
 // set, the backbuffer is preserved between calls to eglSwapBuffers().
 func TestPreserveBuffersOnSwap(t *testing.T) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+	l := log.Testing(t)
+	device := mgr.Discovery().DefaultDevice()
 	a := device.Info().Architecture()
 	atoms := initContext(a, d, l, 64, 64, true)
 	clear := atoms.Add(
@@ -363,9 +377,8 @@ func TestPreserveBuffersOnSwap(t *testing.T) {
 
 // TestIssues tests the QueryIssues replay command with various streams.
 func TestIssues(t *testing.T) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+	l := log.Testing(t)
+	device := mgr.Discovery().DefaultDevice()
 	a := device.Info().Architecture()
 
 	done := &sync.WaitGroup{}

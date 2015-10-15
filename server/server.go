@@ -23,6 +23,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/builder"
+	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -31,9 +32,9 @@ import (
 type Config struct {
 	HttpAddress          string
 	RpcAddress           string
-	DataPath             string
 	LogfilePath          string
 	ShutdownOnDisconnect bool
+	LocalPort            int
 }
 
 const (
@@ -59,6 +60,11 @@ func Run(config Config) {
 	database := database.NewInMemory(b)
 	replayManager := replay.New(database, logger)
 	b.ReplayManager = replayManager
+	if config.LocalPort > 0 {
+		replayManager.Discovery().AddDevice(gapir.NewDevice(gapir.LocalName, config.LocalPort, logger), database, logger)
+	} else {
+		replayManager.Discovery().AddDevice(gapir.RunLocal(logger), database, logger)
+	}
 
 	// Setup the RPC listener.
 	rpc := &rpcServer{

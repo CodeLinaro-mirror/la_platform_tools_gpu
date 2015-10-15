@@ -15,24 +15,40 @@
 package replay
 
 import (
+	"flag"
 	"reflect"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/client/gapir"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/executor"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func doReplay(t *testing.T, f func(*builder.Builder)) {
-	d, l := database.NewInMemory(nil), log.Testing(t)
+var (
+	port   = flag.Int("gapir", 0, "The port to connect to gapir on, 0 means start new instance")
+	d      = database.NewInMemory(nil)
+	device gapir.Device
+)
 
-	mgr := replay.New(d, l)
-	device := gapir.FindLocalDevice(t, mgr.Discovery())
+func TestMain(m *testing.M) {
+	flag.Parse()
+	if *port > 0 {
+		device = gapir.NewDevice(gapir.LocalName, *port, log.Std())
+	} else {
+		device = gapir.RunLocal(log.Std())
+	}
+	code := m.Run()
+	atexit.Exit(code)
+}
+
+func doReplay(t *testing.T, f func(*builder.Builder)) {
+	l := log.Testing(t)
+
 	arch := device.Info().Architecture()
 
 	connection, err := device.Connect()
