@@ -80,13 +80,11 @@ export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_TEST_FLAGS="-v -x"
 
 go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
-strip $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis
 
 # Kill any existing replay daemon before running tests.
 killall gapir || true
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 --disable=code cc
-strip $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapir
 
 # Kill any existing replay daemon before running tests.
 killall gapir || true
@@ -107,7 +105,6 @@ killall gapir || true
 
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -targetos=windows --disable=code cc:gapir
-  strip $GPU_BUILD_ROOT/bin/windows-X86_64/$BUILD_FLAVOR/gapis.exe
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
   go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-X86_64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC -s" $GPU_RELATIVE_SOURCE_PATH/server/gapis
 fi
@@ -128,6 +125,10 @@ if [[ -n "$DIST_DIR" ]]; then
           rm -f $ZIP
 
           for ARTIFACT in gapis gapir; do
+            # strip does not work on OS-X!
+            if [ "$HOST_OS" != "osx-X86_64" ]; then
+              strip bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
+            fi
             zip -9rq $ZIP bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
           done
       fi
