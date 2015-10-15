@@ -7918,13 +7918,13 @@ func (ϟa *GlDrawBuffersEXT) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	requiresExtension_606_ext := ExtensionId_GL_EXT_draw_buffers                              // ExtensionId
-	DrawBuffers_607_n := ϟa.N                                                                 // GLsizei
-	DrawBuffers_607_bufs := ϟa.Bufs                                                           // GLenumᶜᵖ
-	b := DrawBuffers_607_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_607_n), ϟs) // GLenumˢ
+	requiresExtension_606_ext := ExtensionId_GL_EXT_draw_buffers // ExtensionId
+	DrawBuffers_607_n := ϟa.N                                    // GLsizei
+	DrawBuffers_607_bufs := ϟa.Bufs                              // GLenumᶜᵖ
+	DrawBuffers_607_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_607_n), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _ = requiresExtension_606_ext, DrawBuffers_607_n, DrawBuffers_607_bufs, b
+	_, _, _ = requiresExtension_606_ext, DrawBuffers_607_n, DrawBuffers_607_bufs
 	return nil
 }
 
@@ -21437,14 +21437,14 @@ func (ϟa *GlDrawBuffers) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	minRequiredVersion_1781_major := uint32(3)                                                  // u32
-	minRequiredVersion_1781_minor := uint32(0)                                                  // u32
-	DrawBuffers_1782_n := ϟa.N                                                                  // GLsizei
-	DrawBuffers_1782_bufs := ϟa.Bufs                                                            // GLenumᶜᵖ
-	b := DrawBuffers_1782_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_1782_n), ϟs) // GLenumˢ
+	minRequiredVersion_1781_major := uint32(3) // u32
+	minRequiredVersion_1781_minor := uint32(0) // u32
+	DrawBuffers_1782_n := ϟa.N                 // GLsizei
+	DrawBuffers_1782_bufs := ϟa.Bufs           // GLenumᶜᵖ
+	DrawBuffers_1782_bufs.Slice(uint64(GLsizei(int32(0))), uint64(DrawBuffers_1782_n), ϟs).OnRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.Call(ϟs, ϟd, ϟl, ϟb)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-	_, _, _, _, _ = minRequiredVersion_1781_major, minRequiredVersion_1781_minor, DrawBuffers_1782_n, DrawBuffers_1782_bufs, b
+	_, _, _, _ = minRequiredVersion_1781_major, minRequiredVersion_1781_minor, DrawBuffers_1782_n, DrawBuffers_1782_bufs
 	return nil
 }
 

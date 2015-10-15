@@ -10353,8 +10353,8 @@ inline void GlesSpy::glDrawBuffersEXT(int32_t n, uint32_t* bufs) {
         uint32_t l_requiresExtension_606_ext = ExtensionId::GL_EXT_draw_buffers;
         GLsizei l_DrawBuffers_607_n = n;
         uint32_t* l_DrawBuffers_607_bufs = bufs;
-        Slice<uint32_t> l_b = slice(l_DrawBuffers_607_bufs, (uint64_t)((GLsizei)(0)),
-                                    (uint64_t)(l_DrawBuffers_607_n));
+        read(slice(l_DrawBuffers_607_bufs, (uint64_t)((GLsizei)(0)),
+                   (uint64_t)(l_DrawBuffers_607_n)));
         observe(observations.mReads);
         mImports.glDrawBuffersEXT(n, bufs);
     } while (false);
@@ -25649,8 +25649,8 @@ inline void GlesSpy::glDrawBuffers(int32_t n, uint32_t* bufs) {
         uint32_t l_minRequiredVersion_1781_minor = 0;
         GLsizei l_DrawBuffers_1782_n = n;
         uint32_t* l_DrawBuffers_1782_bufs = bufs;
-        Slice<uint32_t> l_b = slice(l_DrawBuffers_1782_bufs, (uint64_t)((GLsizei)(0)),
-                                    (uint64_t)(l_DrawBuffers_1782_n));
+        read(slice(l_DrawBuffers_1782_bufs, (uint64_t)((GLsizei)(0)),
+                   (uint64_t)(l_DrawBuffers_1782_n)));
         observe(observations.mReads);
         mImports.glDrawBuffers(n, bufs);
     } while (false);

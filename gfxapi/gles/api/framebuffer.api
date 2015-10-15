@@ -323,7 +323,7 @@ cmd void glDrawBuffers(GLsizei n, const GLenum* bufs) {
 
 macro void DrawBuffers(GLsizei n, const GLenum* bufs) {
   // TODO
-  b := bufs[0:n]
+  read(bufs[0:n])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glFramebufferParameteri.xhtml","OpenGL ES 3.1")
