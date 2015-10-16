@@ -169,7 +169,7 @@
   {{end}}
 
   inline {{Template "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Template "C++.CallParameters" $}}) {
-    GAPID_INFO({{Template "C++.PrintfCommandCall" $}});
+    GAPID_DEBUG({{Template "C++.PrintfCommandCall" $}});
     {{if not (IsVoid $.Return.Type)}}¶
       {{Template "C++.ReturnType" $}} result = {{Template "C++.Null" (TypeOf $.Return)}};
     {{end}}
