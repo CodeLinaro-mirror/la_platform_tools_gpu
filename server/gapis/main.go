@@ -16,9 +16,7 @@ package main
 
 import (
 	"flag"
-	"os"
 	"path/filepath"
-	"runtime"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/client/gapir"
@@ -37,10 +35,6 @@ func main() {
 	defer atexit.Exit(0)
 
 	flag.Parse()
-
-	if os.Getenv("GOMAXPROCS") == "" {
-		runtime.GOMAXPROCS(runtime.NumCPU())
-	}
 
 	gapisLogPath, _ := filepath.Abs(filepath.Join(*logsPath, "gapis.log"))
 	gapir.LogPath, _ = filepath.Abs(filepath.Join(*logsPath, "gapir.log"))

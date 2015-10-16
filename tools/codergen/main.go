@@ -20,7 +20,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"runtime"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/tools/codergen/generate"
@@ -95,9 +94,6 @@ func worker(wg *sync.WaitGroup, errs *errors, tasks chan generate.Generate) {
 }
 
 func run() error {
-	if os.Getenv("GOMAXPROCS") == "" {
-		runtime.GOMAXPROCS(runtime.NumCPU())
-	}
 	flag.Usage = func() {
 		fmt.Printf(usage)
 		flag.PrintDefaults()
