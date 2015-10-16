@@ -265,7 +265,7 @@
 {{define "Go.CommandLogic"}}
   {{AssertType $ "Function"}}
 
-  ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+  ϟobservations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
   {{Template "Go.Block" $.Block}}
 {{end}}
 
@@ -399,7 +399,7 @@
 */}}
 {{define "Go.Fence"}}
   {{AssertType $ "Fence"}}
-  ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+  ϟobservations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
   {{if not (IsNil $.Statement)}}
     {{if IsCopy $.Statement}} {{/* Copies are only allowed in fences */}}
       {{Template "Go.Read" $.Statement.Dst}}.Copy({{Template "Go.Read" $.Statement.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb)

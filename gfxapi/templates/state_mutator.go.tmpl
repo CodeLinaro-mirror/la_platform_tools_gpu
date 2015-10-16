@@ -49,6 +49,7 @@
     {{if not (GetAnnotation $c "no_mutate")}}
       func (ϟa *{{Template "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) (ϟe error) {
         ϟc, ϟb := getState(ϟs), (*builder.Builder)(nil)
+        ϟobservations := ϟa.Extras().Observations()
         _, _ = ϟc, ϟb
         {{Template "Go.CommandLogic" $c}}
         return nil

@@ -407,11 +407,25 @@ func (*CmdBool) Class() binary.Class {
 	return (*binaryClassCmdBool)(nil)
 }
 func doEncodeCmdBool(e binary.Encoder, o *CmdBool) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Bool(o.Result)
 }
 func doDecodeCmdBool(d binary.Decoder, o *CmdBool) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = bool(d.Bool())
 }
 func (*binaryClassCmdBool) Encode(e binary.Encoder, obj binary.Object) {
@@ -429,7 +443,7 @@ var schemaCmdBool = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -440,11 +454,25 @@ func (*CmdCharptrToString) Class() binary.Class {
 	return (*binaryClassCmdCharptrToString)(nil)
 }
 func doEncodeCmdCharptrToString(e binary.Encoder, o *CmdCharptrToString) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.S)
 }
 func doDecodeCmdCharptrToString(d binary.Decoder, o *CmdCharptrToString) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.S)
 }
 func (*binaryClassCmdCharptrToString) Encode(e binary.Encoder, obj binary.Object) {
@@ -462,7 +490,7 @@ var schemaCmdCharptrToString = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdCharptrToString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "S", Type: &schema.Struct{Entity: (*Charᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -473,12 +501,26 @@ func (*CmdCharsliceToString) Class() binary.Class {
 	return (*binaryClassCmdCharsliceToString)(nil)
 }
 func doEncodeCmdCharsliceToString(e binary.Encoder, o *CmdCharsliceToString) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.S)
 	e.Uint32(o.Len)
 }
 func doDecodeCmdCharsliceToString(d binary.Decoder, o *CmdCharsliceToString) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.S)
 	o.Len = uint32(d.Uint32())
 }
@@ -497,7 +539,7 @@ var schemaCmdCharsliceToString = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdCharsliceToString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "S", Type: &schema.Struct{Entity: (*Charᵖ)(nil).Class().Schema()}},
 		{Declared: "Len", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -539,12 +581,26 @@ func (*CmdClone) Class() binary.Class {
 	return (*binaryClassCmdClone)(nil)
 }
 func doEncodeCmdClone(e binary.Encoder, o *CmdClone) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.Src)
 	e.Uint32(o.Cnt)
 }
 func doDecodeCmdClone(d binary.Decoder, o *CmdClone) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.Src)
 	o.Cnt = uint32(d.Uint32())
 }
@@ -563,7 +619,7 @@ var schemaCmdClone = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdClone",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Src", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -575,12 +631,26 @@ func (*CmdCopy) Class() binary.Class {
 	return (*binaryClassCmdCopy)(nil)
 }
 func doEncodeCmdCopy(e binary.Encoder, o *CmdCopy) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.Src)
 	e.Uint32(o.Cnt)
 }
 func doDecodeCmdCopy(d binary.Decoder, o *CmdCopy) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.Src)
 	o.Cnt = uint32(d.Uint32())
 }
@@ -599,7 +669,7 @@ var schemaCmdCopy = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdCopy",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Src", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -611,11 +681,25 @@ func (*CmdF32) Class() binary.Class {
 	return (*binaryClassCmdF32)(nil)
 }
 func doEncodeCmdF32(e binary.Encoder, o *CmdF32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Float32(o.Result)
 }
 func doDecodeCmdF32(d binary.Decoder, o *CmdF32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = float32(d.Float32())
 }
 func (*binaryClassCmdF32) Encode(e binary.Encoder, obj binary.Object) {
@@ -633,7 +717,7 @@ var schemaCmdF32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -644,11 +728,25 @@ func (*CmdF64) Class() binary.Class {
 	return (*binaryClassCmdF64)(nil)
 }
 func doEncodeCmdF64(e binary.Encoder, o *CmdF64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Float64(o.Result)
 }
 func doDecodeCmdF64(d binary.Decoder, o *CmdF64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = float64(d.Float64())
 }
 func (*binaryClassCmdF64) Encode(e binary.Encoder, obj binary.Object) {
@@ -666,7 +764,7 @@ var schemaCmdF64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -677,11 +775,25 @@ func (*CmdMake) Class() binary.Class {
 	return (*binaryClassCmdMake)(nil)
 }
 func doEncodeCmdMake(e binary.Encoder, o *CmdMake) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint32(o.Cnt)
 }
 func doDecodeCmdMake(d binary.Decoder, o *CmdMake) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Cnt = uint32(d.Uint32())
 }
 func (*binaryClassCmdMake) Encode(e binary.Encoder, obj binary.Object) {
@@ -699,7 +811,7 @@ var schemaCmdMake = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdMake",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -740,11 +852,25 @@ func (*CmdPointer) Class() binary.Class {
 	return (*binaryClassCmdPointer)(nil)
 }
 func doEncodeCmdPointer(e binary.Encoder, o *CmdPointer) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.Result)
 }
 func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.Result)
 }
 func (*binaryClassCmdPointer) Encode(e binary.Encoder, obj binary.Object) {
@@ -762,7 +888,7 @@ var schemaCmdPointer = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdPointer",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Struct{Entity: (*Voidᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -773,11 +899,25 @@ func (*CmdRemapped) Class() binary.Class {
 	return (*binaryClassCmdRemapped)(nil)
 }
 func doEncodeCmdRemapped(e binary.Encoder, o *CmdRemapped) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint32(uint32(o.Result))
 }
 func doDecodeCmdRemapped(d binary.Decoder, o *CmdRemapped) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = remapped(d.Uint32())
 }
 func (*binaryClassCmdRemapped) Encode(e binary.Encoder, obj binary.Object) {
@@ -795,7 +935,7 @@ var schemaCmdRemapped = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 	},
 }
@@ -806,11 +946,25 @@ func (*CmdS16) Class() binary.Class {
 	return (*binaryClassCmdS16)(nil)
 }
 func doEncodeCmdS16(e binary.Encoder, o *CmdS16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int16(o.Result)
 }
 func doDecodeCmdS16(d binary.Decoder, o *CmdS16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = int16(d.Int16())
 }
 func (*binaryClassCmdS16) Encode(e binary.Encoder, obj binary.Object) {
@@ -828,7 +982,7 @@ var schemaCmdS16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -839,11 +993,25 @@ func (*CmdS32) Class() binary.Class {
 	return (*binaryClassCmdS32)(nil)
 }
 func doEncodeCmdS32(e binary.Encoder, o *CmdS32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int32(o.Result)
 }
 func doDecodeCmdS32(d binary.Decoder, o *CmdS32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = int32(d.Int32())
 }
 func (*binaryClassCmdS32) Encode(e binary.Encoder, obj binary.Object) {
@@ -861,7 +1029,7 @@ var schemaCmdS32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -872,11 +1040,25 @@ func (*CmdS64) Class() binary.Class {
 	return (*binaryClassCmdS64)(nil)
 }
 func doEncodeCmdS64(e binary.Encoder, o *CmdS64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int64(o.Result)
 }
 func doDecodeCmdS64(d binary.Decoder, o *CmdS64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = int64(d.Int64())
 }
 func (*binaryClassCmdS64) Encode(e binary.Encoder, obj binary.Object) {
@@ -894,7 +1076,7 @@ var schemaCmdS64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -905,11 +1087,25 @@ func (*CmdS8) Class() binary.Class {
 	return (*binaryClassCmdS8)(nil)
 }
 func doEncodeCmdS8(e binary.Encoder, o *CmdS8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int8(o.Result)
 }
 func doDecodeCmdS8(d binary.Decoder, o *CmdS8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = int8(d.Int8())
 }
 func (*binaryClassCmdS8) Encode(e binary.Encoder, obj binary.Object) {
@@ -927,7 +1123,7 @@ var schemaCmdS8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -968,12 +1164,26 @@ func (*CmdSliceCasts) Class() binary.Class {
 	return (*binaryClassCmdSliceCasts)(nil)
 }
 func doEncodeCmdSliceCasts(e binary.Encoder, o *CmdSliceCasts) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.S)
 	e.Uint32(o.L)
 }
 func doDecodeCmdSliceCasts(d binary.Decoder, o *CmdSliceCasts) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.S)
 	o.L = uint32(d.Uint32())
 }
@@ -992,7 +1202,7 @@ var schemaCmdSliceCasts = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdSliceCasts",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "S", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 		{Declared: "L", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
@@ -1004,11 +1214,25 @@ func (*CmdString) Class() binary.Class {
 	return (*binaryClassCmdString)(nil)
 }
 func doEncodeCmdString(e binary.Encoder, o *CmdString) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.String(o.Result)
 }
 func doDecodeCmdString(d binary.Decoder, o *CmdString) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = string(d.String())
 }
 func (*binaryClassCmdString) Encode(e binary.Encoder, obj binary.Object) {
@@ -1026,7 +1250,7 @@ var schemaCmdString = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -1037,11 +1261,25 @@ func (*CmdU16) Class() binary.Class {
 	return (*binaryClassCmdU16)(nil)
 }
 func doEncodeCmdU16(e binary.Encoder, o *CmdU16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint16(o.Result)
 }
 func doDecodeCmdU16(d binary.Decoder, o *CmdU16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = uint16(d.Uint16())
 }
 func (*binaryClassCmdU16) Encode(e binary.Encoder, obj binary.Object) {
@@ -1059,7 +1297,7 @@ var schemaCmdU16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -1070,11 +1308,25 @@ func (*CmdU32) Class() binary.Class {
 	return (*binaryClassCmdU32)(nil)
 }
 func doEncodeCmdU32(e binary.Encoder, o *CmdU32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint32(o.Result)
 }
 func doDecodeCmdU32(d binary.Decoder, o *CmdU32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = uint32(d.Uint32())
 }
 func (*binaryClassCmdU32) Encode(e binary.Encoder, obj binary.Object) {
@@ -1092,7 +1344,7 @@ var schemaCmdU32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -1103,11 +1355,25 @@ func (*CmdU64) Class() binary.Class {
 	return (*binaryClassCmdU64)(nil)
 }
 func doEncodeCmdU64(e binary.Encoder, o *CmdU64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint64(o.Result)
 }
 func doDecodeCmdU64(d binary.Decoder, o *CmdU64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = uint64(d.Uint64())
 }
 func (*binaryClassCmdU64) Encode(e binary.Encoder, obj binary.Object) {
@@ -1125,7 +1391,7 @@ var schemaCmdU64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -1136,11 +1402,25 @@ func (*CmdU8) Class() binary.Class {
 	return (*binaryClassCmdU8)(nil)
 }
 func doEncodeCmdU8(e binary.Encoder, o *CmdU8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint8(o.Result)
 }
 func doDecodeCmdU8(d binary.Decoder, o *CmdU8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = uint8(d.Uint8())
 }
 func (*binaryClassCmdU8) Encode(e binary.Encoder, obj binary.Object) {
@@ -1158,7 +1438,7 @@ var schemaCmdU8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -1169,11 +1449,25 @@ func (*CmdUnknownRet) Class() binary.Class {
 	return (*binaryClassCmdUnknownRet)(nil)
 }
 func doEncodeCmdUnknownRet(e binary.Encoder, o *CmdUnknownRet) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int64(o.Result)
 }
 func doDecodeCmdUnknownRet(d binary.Decoder, o *CmdUnknownRet) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.Result = int64(d.Int64())
 }
 func (*binaryClassCmdUnknownRet) Encode(e binary.Encoder, obj binary.Object) {
@@ -1191,7 +1485,7 @@ var schemaCmdUnknownRet = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdUnknownRet",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -1232,11 +1526,25 @@ func (*CmdUnknownWritePtr) Class() binary.Class {
 	return (*binaryClassCmdUnknownWritePtr)(nil)
 }
 func doEncodeCmdUnknownWritePtr(e binary.Encoder, o *CmdUnknownWritePtr) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.P)
 }
 func doDecodeCmdUnknownWritePtr(d binary.Decoder, o *CmdUnknownWritePtr) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.P)
 }
 func (*binaryClassCmdUnknownWritePtr) Encode(e binary.Encoder, obj binary.Object) {
@@ -1254,7 +1562,7 @@ var schemaCmdUnknownWritePtr = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdUnknownWritePtr",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "P", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1265,11 +1573,25 @@ func (*CmdUnknownWriteSlice) Class() binary.Class {
 	return (*binaryClassCmdUnknownWriteSlice)(nil)
 }
 func doEncodeCmdUnknownWriteSlice(e binary.Encoder, o *CmdUnknownWriteSlice) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdUnknownWriteSlice(d binary.Decoder, o *CmdUnknownWriteSlice) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdUnknownWriteSlice) Encode(e binary.Encoder, obj binary.Object) {
@@ -1287,7 +1609,7 @@ var schemaCmdUnknownWriteSlice = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdUnknownWriteSlice",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1298,10 +1620,24 @@ func (*CmdVoid) Class() binary.Class {
 	return (*binaryClassCmdVoid)(nil)
 }
 func doEncodeCmdVoid(e binary.Encoder, o *CmdVoid) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 }
 func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 }
 func (*binaryClassCmdVoid) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCmdVoid(e, obj.(*CmdVoid))
@@ -1318,7 +1654,7 @@ var schemaCmdVoid = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoid",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 	},
 }
 
@@ -1358,13 +1694,27 @@ func (*CmdVoid3InArrays) Class() binary.Class {
 	return (*binaryClassCmdVoid3InArrays)(nil)
 }
 func doEncodeCmdVoid3InArrays(e binary.Encoder, o *CmdVoid3InArrays) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
 	e.Struct(&o.C)
 }
 func doDecodeCmdVoid3InArrays(d binary.Decoder, o *CmdVoid3InArrays) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 	d.Struct(&o.B)
 	d.Struct(&o.C)
@@ -1384,7 +1734,7 @@ var schemaCmdVoid3InArrays = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoid3InArrays",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 		{Declared: "B", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
 		{Declared: "C", Type: &schema.Struct{Entity: (*Intᵖ)(nil).Class().Schema()}},
@@ -1397,13 +1747,27 @@ func (*CmdVoid3Remapped) Class() binary.Class {
 	return (*binaryClassCmdVoid3Remapped)(nil)
 }
 func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint32(uint32(o.A))
 	e.Uint32(uint32(o.B))
 	e.Uint32(uint32(o.C))
 }
 func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = remapped(d.Uint32())
 	o.B = remapped(d.Uint32())
 	o.C = remapped(d.Uint32())
@@ -1423,7 +1787,7 @@ var schemaCmdVoid3Remapped = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoid3Remapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -1436,13 +1800,27 @@ func (*CmdVoid3Strings) Class() binary.Class {
 	return (*binaryClassCmdVoid3Strings)(nil)
 }
 func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.String(o.A)
 	e.String(o.B)
 	e.String(o.C)
 }
 func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = string(d.String())
 	o.B = string(d.String())
 	o.C = string(d.String())
@@ -1462,7 +1840,7 @@ var schemaCmdVoid3Strings = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoid3Strings",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -1475,11 +1853,25 @@ func (*CmdVoidBool) Class() binary.Class {
 	return (*binaryClassCmdVoidBool)(nil)
 }
 func doEncodeCmdVoidBool(e binary.Encoder, o *CmdVoidBool) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Bool(o.A)
 }
 func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = bool(d.Bool())
 }
 func (*binaryClassCmdVoidBool) Encode(e binary.Encoder, obj binary.Object) {
@@ -1497,7 +1889,7 @@ var schemaCmdVoidBool = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -1508,11 +1900,25 @@ func (*CmdVoidF32) Class() binary.Class {
 	return (*binaryClassCmdVoidF32)(nil)
 }
 func doEncodeCmdVoidF32(e binary.Encoder, o *CmdVoidF32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Float32(o.A)
 }
 func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = float32(d.Float32())
 }
 func (*binaryClassCmdVoidF32) Encode(e binary.Encoder, obj binary.Object) {
@@ -1530,7 +1936,7 @@ var schemaCmdVoidF32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -1541,11 +1947,25 @@ func (*CmdVoidF64) Class() binary.Class {
 	return (*binaryClassCmdVoidF64)(nil)
 }
 func doEncodeCmdVoidF64(e binary.Encoder, o *CmdVoidF64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Float64(o.A)
 }
 func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = float64(d.Float64())
 }
 func (*binaryClassCmdVoidF64) Encode(e binary.Encoder, obj binary.Object) {
@@ -1563,7 +1983,7 @@ var schemaCmdVoidF64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
@@ -1604,11 +2024,25 @@ func (*CmdVoidInArrayOfRemapped) Class() binary.Class {
 	return (*binaryClassCmdVoidInArrayOfRemapped)(nil)
 }
 func doEncodeCmdVoidInArrayOfRemapped(e binary.Encoder, o *CmdVoidInArrayOfRemapped) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidInArrayOfRemapped(d binary.Decoder, o *CmdVoidInArrayOfRemapped) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidInArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) {
@@ -1628,7 +2062,7 @@ var schemaCmdVoidInArrayOfRemapped = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidInArrayOfRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1639,12 +2073,26 @@ func (*CmdVoidInArrayOfStrings) Class() binary.Class {
 	return (*binaryClassCmdVoidInArrayOfStrings)(nil)
 }
 func doEncodeCmdVoidInArrayOfStrings(e binary.Encoder, o *CmdVoidInArrayOfStrings) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.Strings)
 	e.Int32(o.Count)
 }
 func doDecodeCmdVoidInArrayOfStrings(d binary.Decoder, o *CmdVoidInArrayOfStrings) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.Strings)
 	o.Count = int32(d.Int32())
 }
@@ -1665,7 +2113,7 @@ var schemaCmdVoidInArrayOfStrings = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidInArrayOfStrings",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "Strings", Type: &schema.Struct{Entity: (*Charᶜᵖᶜᵖ)(nil).Class().Schema()}},
 		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
@@ -1677,11 +2125,25 @@ func (*CmdVoidOutArrayOfRemapped) Class() binary.Class {
 	return (*binaryClassCmdVoidOutArrayOfRemapped)(nil)
 }
 func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRemapped) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRemapped) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidOutArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) {
@@ -1701,7 +2163,7 @@ var schemaCmdVoidOutArrayOfRemapped = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidOutArrayOfRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1712,11 +2174,25 @@ func (*CmdVoidOutArrayOfUnknownRemapped) Class() binary.Class {
 	return (*binaryClassCmdVoidOutArrayOfUnknownRemapped)(nil)
 }
 func doEncodeCmdVoidOutArrayOfUnknownRemapped(e binary.Encoder, o *CmdVoidOutArrayOfUnknownRemapped) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidOutArrayOfUnknownRemapped(d binary.Decoder, o *CmdVoidOutArrayOfUnknownRemapped) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Encode(e binary.Encoder, obj binary.Object) {
@@ -1736,7 +2212,7 @@ var schemaCmdVoidOutArrayOfUnknownRemapped = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidOutArrayOfUnknownRemapped",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Remappedᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1747,11 +2223,25 @@ func (*CmdVoidReadBool) Class() binary.Class {
 	return (*binaryClassCmdVoidReadBool)(nil)
 }
 func doEncodeCmdVoidReadBool(e binary.Encoder, o *CmdVoidReadBool) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadBool(d binary.Decoder, o *CmdVoidReadBool) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadBool) Encode(e binary.Encoder, obj binary.Object) {
@@ -1769,7 +2259,7 @@ var schemaCmdVoidReadBool = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1810,11 +2300,25 @@ func (*CmdVoidReadF32) Class() binary.Class {
 	return (*binaryClassCmdVoidReadF32)(nil)
 }
 func doEncodeCmdVoidReadF32(e binary.Encoder, o *CmdVoidReadF32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadF32(d binary.Decoder, o *CmdVoidReadF32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadF32) Encode(e binary.Encoder, obj binary.Object) {
@@ -1832,7 +2336,7 @@ var schemaCmdVoidReadF32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1873,11 +2377,25 @@ func (*CmdVoidReadF64) Class() binary.Class {
 	return (*binaryClassCmdVoidReadF64)(nil)
 }
 func doEncodeCmdVoidReadF64(e binary.Encoder, o *CmdVoidReadF64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadF64(d binary.Decoder, o *CmdVoidReadF64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadF64) Encode(e binary.Encoder, obj binary.Object) {
@@ -1895,7 +2413,7 @@ var schemaCmdVoidReadF64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -1906,13 +2424,27 @@ func (*CmdVoidReadPtrs) Class() binary.Class {
 	return (*binaryClassCmdVoidReadPtrs)(nil)
 }
 func doEncodeCmdVoidReadPtrs(e binary.Encoder, o *CmdVoidReadPtrs) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
 	e.Struct(&o.C)
 }
 func doDecodeCmdVoidReadPtrs(d binary.Decoder, o *CmdVoidReadPtrs) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 	d.Struct(&o.B)
 	d.Struct(&o.C)
@@ -1932,7 +2464,7 @@ var schemaCmdVoidReadPtrs = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadPtrs",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 		{Declared: "B", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 		{Declared: "C", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
@@ -1975,11 +2507,25 @@ func (*CmdVoidReadS16) Class() binary.Class {
 	return (*binaryClassCmdVoidReadS16)(nil)
 }
 func doEncodeCmdVoidReadS16(e binary.Encoder, o *CmdVoidReadS16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadS16(d binary.Decoder, o *CmdVoidReadS16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadS16) Encode(e binary.Encoder, obj binary.Object) {
@@ -1997,7 +2543,7 @@ var schemaCmdVoidReadS16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S16ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2038,11 +2584,25 @@ func (*CmdVoidReadS32) Class() binary.Class {
 	return (*binaryClassCmdVoidReadS32)(nil)
 }
 func doEncodeCmdVoidReadS32(e binary.Encoder, o *CmdVoidReadS32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadS32(d binary.Decoder, o *CmdVoidReadS32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadS32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2060,7 +2620,7 @@ var schemaCmdVoidReadS32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2101,11 +2661,25 @@ func (*CmdVoidReadS64) Class() binary.Class {
 	return (*binaryClassCmdVoidReadS64)(nil)
 }
 func doEncodeCmdVoidReadS64(e binary.Encoder, o *CmdVoidReadS64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadS64(d binary.Decoder, o *CmdVoidReadS64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadS64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2123,7 +2697,7 @@ var schemaCmdVoidReadS64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2164,11 +2738,25 @@ func (*CmdVoidReadS8) Class() binary.Class {
 	return (*binaryClassCmdVoidReadS8)(nil)
 }
 func doEncodeCmdVoidReadS8(e binary.Encoder, o *CmdVoidReadS8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadS8(d binary.Decoder, o *CmdVoidReadS8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadS8) Encode(e binary.Encoder, obj binary.Object) {
@@ -2186,7 +2774,7 @@ var schemaCmdVoidReadS8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S8ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2197,11 +2785,25 @@ func (*CmdVoidReadU16) Class() binary.Class {
 	return (*binaryClassCmdVoidReadU16)(nil)
 }
 func doEncodeCmdVoidReadU16(e binary.Encoder, o *CmdVoidReadU16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadU16(d binary.Decoder, o *CmdVoidReadU16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadU16) Encode(e binary.Encoder, obj binary.Object) {
@@ -2219,7 +2821,7 @@ var schemaCmdVoidReadU16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2230,11 +2832,25 @@ func (*CmdVoidReadU32) Class() binary.Class {
 	return (*binaryClassCmdVoidReadU32)(nil)
 }
 func doEncodeCmdVoidReadU32(e binary.Encoder, o *CmdVoidReadU32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadU32(d binary.Decoder, o *CmdVoidReadU32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadU32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2252,7 +2868,7 @@ var schemaCmdVoidReadU32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2293,11 +2909,25 @@ func (*CmdVoidReadU64) Class() binary.Class {
 	return (*binaryClassCmdVoidReadU64)(nil)
 }
 func doEncodeCmdVoidReadU64(e binary.Encoder, o *CmdVoidReadU64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadU64(d binary.Decoder, o *CmdVoidReadU64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadU64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2315,7 +2945,7 @@ var schemaCmdVoidReadU64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2326,11 +2956,25 @@ func (*CmdVoidReadU8) Class() binary.Class {
 	return (*binaryClassCmdVoidReadU8)(nil)
 }
 func doEncodeCmdVoidReadU8(e binary.Encoder, o *CmdVoidReadU8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidReadU8(d binary.Decoder, o *CmdVoidReadU8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidReadU8) Encode(e binary.Encoder, obj binary.Object) {
@@ -2348,7 +2992,7 @@ var schemaCmdVoidReadU8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidReadU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2359,11 +3003,25 @@ func (*CmdVoidS16) Class() binary.Class {
 	return (*binaryClassCmdVoidS16)(nil)
 }
 func doEncodeCmdVoidS16(e binary.Encoder, o *CmdVoidS16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int16(o.A)
 }
 func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = int16(d.Int16())
 }
 func (*binaryClassCmdVoidS16) Encode(e binary.Encoder, obj binary.Object) {
@@ -2381,7 +3039,7 @@ var schemaCmdVoidS16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -2392,11 +3050,25 @@ func (*CmdVoidS32) Class() binary.Class {
 	return (*binaryClassCmdVoidS32)(nil)
 }
 func doEncodeCmdVoidS32(e binary.Encoder, o *CmdVoidS32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int32(o.A)
 }
 func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = int32(d.Int32())
 }
 func (*binaryClassCmdVoidS32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2414,7 +3086,7 @@ var schemaCmdVoidS32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -2425,11 +3097,25 @@ func (*CmdVoidS64) Class() binary.Class {
 	return (*binaryClassCmdVoidS64)(nil)
 }
 func doEncodeCmdVoidS64(e binary.Encoder, o *CmdVoidS64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int64(o.A)
 }
 func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = int64(d.Int64())
 }
 func (*binaryClassCmdVoidS64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2447,7 +3133,7 @@ var schemaCmdVoidS64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2458,11 +3144,25 @@ func (*CmdVoidS8) Class() binary.Class {
 	return (*binaryClassCmdVoidS8)(nil)
 }
 func doEncodeCmdVoidS8(e binary.Encoder, o *CmdVoidS8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Int8(o.A)
 }
 func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = int8(d.Int8())
 }
 func (*binaryClassCmdVoidS8) Encode(e binary.Encoder, obj binary.Object) {
@@ -2480,7 +3180,7 @@ var schemaCmdVoidS8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -2491,11 +3191,25 @@ func (*CmdVoidString) Class() binary.Class {
 	return (*binaryClassCmdVoidString)(nil)
 }
 func doEncodeCmdVoidString(e binary.Encoder, o *CmdVoidString) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.String(o.A)
 }
 func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = string(d.String())
 }
 func (*binaryClassCmdVoidString) Encode(e binary.Encoder, obj binary.Object) {
@@ -2513,7 +3227,7 @@ var schemaCmdVoidString = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidString",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -2524,11 +3238,25 @@ func (*CmdVoidU16) Class() binary.Class {
 	return (*binaryClassCmdVoidU16)(nil)
 }
 func doEncodeCmdVoidU16(e binary.Encoder, o *CmdVoidU16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint16(o.A)
 }
 func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = uint16(d.Uint16())
 }
 func (*binaryClassCmdVoidU16) Encode(e binary.Encoder, obj binary.Object) {
@@ -2546,7 +3274,7 @@ var schemaCmdVoidU16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -2557,11 +3285,25 @@ func (*CmdVoidU32) Class() binary.Class {
 	return (*binaryClassCmdVoidU32)(nil)
 }
 func doEncodeCmdVoidU32(e binary.Encoder, o *CmdVoidU32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint32(o.A)
 }
 func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = uint32(d.Uint32())
 }
 func (*binaryClassCmdVoidU32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2579,7 +3321,7 @@ var schemaCmdVoidU32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -2590,11 +3332,25 @@ func (*CmdVoidU64) Class() binary.Class {
 	return (*binaryClassCmdVoidU64)(nil)
 }
 func doEncodeCmdVoidU64(e binary.Encoder, o *CmdVoidU64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint64(o.A)
 }
 func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = uint64(d.Uint64())
 }
 func (*binaryClassCmdVoidU64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2612,7 +3368,7 @@ var schemaCmdVoidU64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -2623,11 +3379,25 @@ func (*CmdVoidU8) Class() binary.Class {
 	return (*binaryClassCmdVoidU8)(nil)
 }
 func doEncodeCmdVoidU8(e binary.Encoder, o *CmdVoidU8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Uint8(o.A)
 }
 func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	o.A = uint8(d.Uint8())
 }
 func (*binaryClassCmdVoidU8) Encode(e binary.Encoder, obj binary.Object) {
@@ -2645,7 +3415,7 @@ var schemaCmdVoidU8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
@@ -2656,11 +3426,25 @@ func (*CmdVoidWriteBool) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteBool)(nil)
 }
 func doEncodeCmdVoidWriteBool(e binary.Encoder, o *CmdVoidWriteBool) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteBool(d binary.Decoder, o *CmdVoidWriteBool) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteBool) Encode(e binary.Encoder, obj binary.Object) {
@@ -2678,7 +3462,7 @@ var schemaCmdVoidWriteBool = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteBool",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2689,11 +3473,25 @@ func (*CmdVoidWriteF32) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteF32)(nil)
 }
 func doEncodeCmdVoidWriteF32(e binary.Encoder, o *CmdVoidWriteF32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteF32(d binary.Decoder, o *CmdVoidWriteF32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteF32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2711,7 +3509,7 @@ var schemaCmdVoidWriteF32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteF32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2722,11 +3520,25 @@ func (*CmdVoidWriteF64) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteF64)(nil)
 }
 func doEncodeCmdVoidWriteF64(e binary.Encoder, o *CmdVoidWriteF64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteF64(d binary.Decoder, o *CmdVoidWriteF64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteF64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2744,7 +3556,7 @@ var schemaCmdVoidWriteF64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteF64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2755,13 +3567,27 @@ func (*CmdVoidWritePtrs) Class() binary.Class {
 	return (*binaryClassCmdVoidWritePtrs)(nil)
 }
 func doEncodeCmdVoidWritePtrs(e binary.Encoder, o *CmdVoidWritePtrs) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 	e.Struct(&o.B)
 	e.Struct(&o.C)
 }
 func doDecodeCmdVoidWritePtrs(d binary.Decoder, o *CmdVoidWritePtrs) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 	d.Struct(&o.B)
 	d.Struct(&o.C)
@@ -2781,7 +3607,7 @@ var schemaCmdVoidWritePtrs = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWritePtrs",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*F32ᵖ)(nil).Class().Schema()}},
 		{Declared: "B", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 		{Declared: "C", Type: &schema.Struct{Entity: (*Boolᵖ)(nil).Class().Schema()}},
@@ -2794,11 +3620,25 @@ func (*CmdVoidWriteS16) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteS16)(nil)
 }
 func doEncodeCmdVoidWriteS16(e binary.Encoder, o *CmdVoidWriteS16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteS16(d binary.Decoder, o *CmdVoidWriteS16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteS16) Encode(e binary.Encoder, obj binary.Object) {
@@ -2816,7 +3656,7 @@ var schemaCmdVoidWriteS16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteS16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S16ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2827,11 +3667,25 @@ func (*CmdVoidWriteS32) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteS32)(nil)
 }
 func doEncodeCmdVoidWriteS32(e binary.Encoder, o *CmdVoidWriteS32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteS32(d binary.Decoder, o *CmdVoidWriteS32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteS32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2849,7 +3703,7 @@ var schemaCmdVoidWriteS32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteS32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2860,11 +3714,25 @@ func (*CmdVoidWriteS64) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteS64)(nil)
 }
 func doEncodeCmdVoidWriteS64(e binary.Encoder, o *CmdVoidWriteS64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteS64(d binary.Decoder, o *CmdVoidWriteS64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteS64) Encode(e binary.Encoder, obj binary.Object) {
@@ -2882,7 +3750,7 @@ var schemaCmdVoidWriteS64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteS64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2893,11 +3761,25 @@ func (*CmdVoidWriteS8) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteS8)(nil)
 }
 func doEncodeCmdVoidWriteS8(e binary.Encoder, o *CmdVoidWriteS8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteS8(d binary.Decoder, o *CmdVoidWriteS8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteS8) Encode(e binary.Encoder, obj binary.Object) {
@@ -2915,7 +3797,7 @@ var schemaCmdVoidWriteS8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteS8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*S8ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2926,11 +3808,25 @@ func (*CmdVoidWriteU16) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteU16)(nil)
 }
 func doEncodeCmdVoidWriteU16(e binary.Encoder, o *CmdVoidWriteU16) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteU16(d binary.Decoder, o *CmdVoidWriteU16) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteU16) Encode(e binary.Encoder, obj binary.Object) {
@@ -2948,7 +3844,7 @@ var schemaCmdVoidWriteU16 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteU16",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U16ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2959,11 +3855,25 @@ func (*CmdVoidWriteU32) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteU32)(nil)
 }
 func doEncodeCmdVoidWriteU32(e binary.Encoder, o *CmdVoidWriteU32) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteU32(d binary.Decoder, o *CmdVoidWriteU32) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteU32) Encode(e binary.Encoder, obj binary.Object) {
@@ -2981,7 +3891,7 @@ var schemaCmdVoidWriteU32 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteU32",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U32ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -2992,11 +3902,25 @@ func (*CmdVoidWriteU64) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteU64)(nil)
 }
 func doEncodeCmdVoidWriteU64(e binary.Encoder, o *CmdVoidWriteU64) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteU64(d binary.Decoder, o *CmdVoidWriteU64) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteU64) Encode(e binary.Encoder, obj binary.Object) {
@@ -3014,7 +3938,7 @@ var schemaCmdVoidWriteU64 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteU64",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U64ᵖ)(nil).Class().Schema()}},
 	},
 }
@@ -3025,11 +3949,25 @@ func (*CmdVoidWriteU8) Class() binary.Class {
 	return (*binaryClassCmdVoidWriteU8)(nil)
 }
 func doEncodeCmdVoidWriteU8(e binary.Encoder, o *CmdVoidWriteU8) {
-	e.Struct(&o.observations)
+	e.Uint32(uint32(len(o.extras)))
+	for i := range o.extras {
+		curr := &o.extras[i]
+		e.Object((*curr))
+	}
 	e.Struct(&o.A)
 }
 func doDecodeCmdVoidWriteU8(d binary.Decoder, o *CmdVoidWriteU8) {
-	d.Struct(&o.observations)
+	if count := d.Count(); count > 0 {
+		o.extras = make(atom.Extras, count)
+		for i := range o.extras {
+			curr := &o.extras[i]
+			if obj := d.Object(); obj != nil {
+				(*curr) = atom.ExtraCast(obj)
+			} else {
+				(*curr) = nil
+			}
+		}
+	}
 	d.Struct(&o.A)
 }
 func (*binaryClassCmdVoidWriteU8) Encode(e binary.Encoder, obj binary.Object) {
@@ -3047,7 +3985,7 @@ var schemaCmdVoidWriteU8 = &binary.Entity{
 	Package:  "test",
 	Identity: "CmdVoidWriteU8",
 	Fields: []binary.Field{
-		{Declared: "observations", Type: &schema.Struct{Entity: (*atom.Observations)(nil).Class().Schema()}},
+		{Declared: "extras", Type: &schema.Slice{Alias: "atom.Extras", ValueType: &schema.Interface{Name: "atom.Extra"}}},
 		{Declared: "A", Type: &schema.Struct{Entity: (*U8ᵖ)(nil).Class().Schema()}},
 	},
 }

@@ -147,7 +147,7 @@
 {{define "C++.CoderArguments"}}
   {{AssertType $ "Function"}}
 
-  observations {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
+  extras {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
 {{end}}
 
 
@@ -189,6 +189,8 @@
     } while(false);
     observe(observations.mWrites);
 ¶
+    gapic::Encodable* extrasPtrs[1] = {&observations};
+    gapic::Array<gapic::Encodable*> extras(extrasPtrs, 1);
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
     mEncoder->Variant(&coder);
     {{if GetAnnotation $ "DrawCall"}} onPostDrawCallCommand(); {{end}}

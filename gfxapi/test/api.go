@@ -3615,9 +3615,9 @@ func (s Voidˢ) String() string {
 ////////////////////////////////////////////////////////////////////////////////
 type CmdClone struct {
 	binary.Generate
-	observations atom.Observations
-	Src          U8ᵖ
-	Cnt          uint32
+	extras atom.Extras
+	Src    U8ᵖ
+	Cnt    uint32
 }
 
 func (a *CmdClone) String() string {
@@ -3628,7 +3628,7 @@ func (a *CmdClone) String() string {
 // the data id.
 // The CmdClone pointer is returned so that calls can be chained.
 func (a *CmdClone) AddRead(rng memory.Range, id binary.ID) *CmdClone {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3636,20 +3636,20 @@ func (a *CmdClone) AddRead(rng memory.Range, id binary.ID) *CmdClone {
 // the data id.
 // The CmdClone pointer is returned so that calls can be chained.
 func (a *CmdClone) AddWrite(rng memory.Range, id binary.ID) *CmdClone {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdClone) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdClone) Flags() atom.Flags                { return 0 }
-func (a *CmdClone) Observations() *atom.Observations { return &a.observations }
+func (c *CmdClone) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdClone) Flags() atom.Flags   { return 0 }
+func (a *CmdClone) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdMake
 ////////////////////////////////////////////////////////////////////////////////
 type CmdMake struct {
 	binary.Generate
-	observations atom.Observations
-	Cnt          uint32
+	extras atom.Extras
+	Cnt    uint32
 }
 
 func (a *CmdMake) String() string {
@@ -3660,7 +3660,7 @@ func (a *CmdMake) String() string {
 // the data id.
 // The CmdMake pointer is returned so that calls can be chained.
 func (a *CmdMake) AddRead(rng memory.Range, id binary.ID) *CmdMake {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3668,21 +3668,21 @@ func (a *CmdMake) AddRead(rng memory.Range, id binary.ID) *CmdMake {
 // the data id.
 // The CmdMake pointer is returned so that calls can be chained.
 func (a *CmdMake) AddWrite(rng memory.Range, id binary.ID) *CmdMake {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdMake) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdMake) Flags() atom.Flags                { return 0 }
-func (a *CmdMake) Observations() *atom.Observations { return &a.observations }
+func (c *CmdMake) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdMake) Flags() atom.Flags   { return 0 }
+func (a *CmdMake) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdCopy
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCopy struct {
 	binary.Generate
-	observations atom.Observations
-	Src          U8ᵖ
-	Cnt          uint32
+	extras atom.Extras
+	Src    U8ᵖ
+	Cnt    uint32
 }
 
 func (a *CmdCopy) String() string {
@@ -3693,7 +3693,7 @@ func (a *CmdCopy) String() string {
 // the data id.
 // The CmdCopy pointer is returned so that calls can be chained.
 func (a *CmdCopy) AddRead(rng memory.Range, id binary.ID) *CmdCopy {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3701,21 +3701,21 @@ func (a *CmdCopy) AddRead(rng memory.Range, id binary.ID) *CmdCopy {
 // the data id.
 // The CmdCopy pointer is returned so that calls can be chained.
 func (a *CmdCopy) AddWrite(rng memory.Range, id binary.ID) *CmdCopy {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdCopy) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdCopy) Flags() atom.Flags                { return 0 }
-func (a *CmdCopy) Observations() *atom.Observations { return &a.observations }
+func (c *CmdCopy) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdCopy) Flags() atom.Flags   { return 0 }
+func (a *CmdCopy) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdCharsliceToString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCharsliceToString struct {
 	binary.Generate
-	observations atom.Observations
-	S            Charᵖ
-	Len          uint32
+	extras atom.Extras
+	S      Charᵖ
+	Len    uint32
 }
 
 func (a *CmdCharsliceToString) String() string {
@@ -3726,7 +3726,7 @@ func (a *CmdCharsliceToString) String() string {
 // the data id.
 // The CmdCharsliceToString pointer is returned so that calls can be chained.
 func (a *CmdCharsliceToString) AddRead(rng memory.Range, id binary.ID) *CmdCharsliceToString {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3734,20 +3734,20 @@ func (a *CmdCharsliceToString) AddRead(rng memory.Range, id binary.ID) *CmdChars
 // the data id.
 // The CmdCharsliceToString pointer is returned so that calls can be chained.
 func (a *CmdCharsliceToString) AddWrite(rng memory.Range, id binary.ID) *CmdCharsliceToString {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdCharsliceToString) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdCharsliceToString) Flags() atom.Flags                { return 0 }
-func (a *CmdCharsliceToString) Observations() *atom.Observations { return &a.observations }
+func (c *CmdCharsliceToString) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdCharsliceToString) Flags() atom.Flags   { return 0 }
+func (a *CmdCharsliceToString) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdCharptrToString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdCharptrToString struct {
 	binary.Generate
-	observations atom.Observations
-	S            Charᵖ
+	extras atom.Extras
+	S      Charᵖ
 }
 
 func (a *CmdCharptrToString) String() string {
@@ -3758,7 +3758,7 @@ func (a *CmdCharptrToString) String() string {
 // the data id.
 // The CmdCharptrToString pointer is returned so that calls can be chained.
 func (a *CmdCharptrToString) AddRead(rng memory.Range, id binary.ID) *CmdCharptrToString {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3766,21 +3766,21 @@ func (a *CmdCharptrToString) AddRead(rng memory.Range, id binary.ID) *CmdCharptr
 // the data id.
 // The CmdCharptrToString pointer is returned so that calls can be chained.
 func (a *CmdCharptrToString) AddWrite(rng memory.Range, id binary.ID) *CmdCharptrToString {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdCharptrToString) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdCharptrToString) Flags() atom.Flags                { return 0 }
-func (a *CmdCharptrToString) Observations() *atom.Observations { return &a.observations }
+func (c *CmdCharptrToString) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdCharptrToString) Flags() atom.Flags   { return 0 }
+func (a *CmdCharptrToString) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdSliceCasts
 ////////////////////////////////////////////////////////////////////////////////
 type CmdSliceCasts struct {
 	binary.Generate
-	observations atom.Observations
-	S            U16ᵖ
-	L            uint32
+	extras atom.Extras
+	S      U16ᵖ
+	L      uint32
 }
 
 func (a *CmdSliceCasts) String() string {
@@ -3791,7 +3791,7 @@ func (a *CmdSliceCasts) String() string {
 // the data id.
 // The CmdSliceCasts pointer is returned so that calls can be chained.
 func (a *CmdSliceCasts) AddRead(rng memory.Range, id binary.ID) *CmdSliceCasts {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3799,19 +3799,19 @@ func (a *CmdSliceCasts) AddRead(rng memory.Range, id binary.ID) *CmdSliceCasts {
 // the data id.
 // The CmdSliceCasts pointer is returned so that calls can be chained.
 func (a *CmdSliceCasts) AddWrite(rng memory.Range, id binary.ID) *CmdSliceCasts {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdSliceCasts) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdSliceCasts) Flags() atom.Flags                { return 0 }
-func (a *CmdSliceCasts) Observations() *atom.Observations { return &a.observations }
+func (c *CmdSliceCasts) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdSliceCasts) Flags() atom.Flags   { return 0 }
+func (a *CmdSliceCasts) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid struct {
 	binary.Generate
-	observations atom.Observations
+	extras atom.Extras
 }
 
 func (a *CmdVoid) String() string {
@@ -3822,7 +3822,7 @@ func (a *CmdVoid) String() string {
 // the data id.
 // The CmdVoid pointer is returned so that calls can be chained.
 func (a *CmdVoid) AddRead(rng memory.Range, id binary.ID) *CmdVoid {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3830,20 +3830,20 @@ func (a *CmdVoid) AddRead(rng memory.Range, id binary.ID) *CmdVoid {
 // the data id.
 // The CmdVoid pointer is returned so that calls can be chained.
 func (a *CmdVoid) AddWrite(rng memory.Range, id binary.ID) *CmdVoid {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoid) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoid) Flags() atom.Flags                { return 0 }
-func (a *CmdVoid) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoid) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoid) Flags() atom.Flags   { return 0 }
+func (a *CmdVoid) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdUnknownRet
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownRet struct {
 	binary.Generate
-	observations atom.Observations
-	Result       int64
+	extras atom.Extras
+	Result int64
 }
 
 func (a *CmdUnknownRet) String() string {
@@ -3854,7 +3854,7 @@ func (a *CmdUnknownRet) String() string {
 // the data id.
 // The CmdUnknownRet pointer is returned so that calls can be chained.
 func (a *CmdUnknownRet) AddRead(rng memory.Range, id binary.ID) *CmdUnknownRet {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3862,20 +3862,20 @@ func (a *CmdUnknownRet) AddRead(rng memory.Range, id binary.ID) *CmdUnknownRet {
 // the data id.
 // The CmdUnknownRet pointer is returned so that calls can be chained.
 func (a *CmdUnknownRet) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownRet {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdUnknownRet) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdUnknownRet) Flags() atom.Flags                { return 0 }
-func (a *CmdUnknownRet) Observations() *atom.Observations { return &a.observations }
+func (c *CmdUnknownRet) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdUnknownRet) Flags() atom.Flags   { return 0 }
+func (a *CmdUnknownRet) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdUnknownWritePtr
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownWritePtr struct {
 	binary.Generate
-	observations atom.Observations
-	P            Intᵖ
+	extras atom.Extras
+	P      Intᵖ
 }
 
 func (a *CmdUnknownWritePtr) String() string {
@@ -3886,7 +3886,7 @@ func (a *CmdUnknownWritePtr) String() string {
 // the data id.
 // The CmdUnknownWritePtr pointer is returned so that calls can be chained.
 func (a *CmdUnknownWritePtr) AddRead(rng memory.Range, id binary.ID) *CmdUnknownWritePtr {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3894,20 +3894,20 @@ func (a *CmdUnknownWritePtr) AddRead(rng memory.Range, id binary.ID) *CmdUnknown
 // the data id.
 // The CmdUnknownWritePtr pointer is returned so that calls can be chained.
 func (a *CmdUnknownWritePtr) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownWritePtr {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdUnknownWritePtr) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdUnknownWritePtr) Flags() atom.Flags                { return 0 }
-func (a *CmdUnknownWritePtr) Observations() *atom.Observations { return &a.observations }
+func (c *CmdUnknownWritePtr) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdUnknownWritePtr) Flags() atom.Flags   { return 0 }
+func (a *CmdUnknownWritePtr) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdUnknownWriteSlice
 ////////////////////////////////////////////////////////////////////////////////
 type CmdUnknownWriteSlice struct {
 	binary.Generate
-	observations atom.Observations
-	A            Intᵖ
+	extras atom.Extras
+	A      Intᵖ
 }
 
 func (a *CmdUnknownWriteSlice) String() string {
@@ -3918,7 +3918,7 @@ func (a *CmdUnknownWriteSlice) String() string {
 // the data id.
 // The CmdUnknownWriteSlice pointer is returned so that calls can be chained.
 func (a *CmdUnknownWriteSlice) AddRead(rng memory.Range, id binary.ID) *CmdUnknownWriteSlice {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3926,20 +3926,20 @@ func (a *CmdUnknownWriteSlice) AddRead(rng memory.Range, id binary.ID) *CmdUnkno
 // the data id.
 // The CmdUnknownWriteSlice pointer is returned so that calls can be chained.
 func (a *CmdUnknownWriteSlice) AddWrite(rng memory.Range, id binary.ID) *CmdUnknownWriteSlice {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdUnknownWriteSlice) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdUnknownWriteSlice) Flags() atom.Flags                { return 0 }
-func (a *CmdUnknownWriteSlice) Observations() *atom.Observations { return &a.observations }
+func (c *CmdUnknownWriteSlice) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdUnknownWriteSlice) Flags() atom.Flags   { return 0 }
+func (a *CmdUnknownWriteSlice) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            uint8
+	extras atom.Extras
+	A      uint8
 }
 
 func (a *CmdVoidU8) String() string {
@@ -3950,7 +3950,7 @@ func (a *CmdVoidU8) String() string {
 // the data id.
 // The CmdVoidU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidU8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3958,20 +3958,20 @@ func (a *CmdVoidU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidU8 {
 // the data id.
 // The CmdVoidU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidU8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidU8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidU8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidU8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidU8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidU8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            int8
+	extras atom.Extras
+	A      int8
 }
 
 func (a *CmdVoidS8) String() string {
@@ -3982,7 +3982,7 @@ func (a *CmdVoidS8) String() string {
 // the data id.
 // The CmdVoidS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidS8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -3990,20 +3990,20 @@ func (a *CmdVoidS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidS8 {
 // the data id.
 // The CmdVoidS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidS8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidS8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidS8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidS8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidS8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidS8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            uint16
+	extras atom.Extras
+	A      uint16
 }
 
 func (a *CmdVoidU16) String() string {
@@ -4014,7 +4014,7 @@ func (a *CmdVoidU16) String() string {
 // the data id.
 // The CmdVoidU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidU16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4022,20 +4022,20 @@ func (a *CmdVoidU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidU16 {
 // the data id.
 // The CmdVoidU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidU16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidU16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidU16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidU16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidU16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidU16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            int16
+	extras atom.Extras
+	A      int16
 }
 
 func (a *CmdVoidS16) String() string {
@@ -4046,7 +4046,7 @@ func (a *CmdVoidS16) String() string {
 // the data id.
 // The CmdVoidS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidS16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4054,20 +4054,20 @@ func (a *CmdVoidS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidS16 {
 // the data id.
 // The CmdVoidS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidS16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidS16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidS16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidS16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidS16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidS16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            float32
+	extras atom.Extras
+	A      float32
 }
 
 func (a *CmdVoidF32) String() string {
@@ -4078,7 +4078,7 @@ func (a *CmdVoidF32) String() string {
 // the data id.
 // The CmdVoidF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidF32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4086,20 +4086,20 @@ func (a *CmdVoidF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidF32 {
 // the data id.
 // The CmdVoidF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidF32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidF32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidF32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidF32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidF32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidF32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            uint32
+	extras atom.Extras
+	A      uint32
 }
 
 func (a *CmdVoidU32) String() string {
@@ -4110,7 +4110,7 @@ func (a *CmdVoidU32) String() string {
 // the data id.
 // The CmdVoidU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidU32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4118,20 +4118,20 @@ func (a *CmdVoidU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidU32 {
 // the data id.
 // The CmdVoidU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidU32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidU32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidU32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidU32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidU32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidU32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            int32
+	extras atom.Extras
+	A      int32
 }
 
 func (a *CmdVoidS32) String() string {
@@ -4142,7 +4142,7 @@ func (a *CmdVoidS32) String() string {
 // the data id.
 // The CmdVoidS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidS32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4150,20 +4150,20 @@ func (a *CmdVoidS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidS32 {
 // the data id.
 // The CmdVoidS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidS32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidS32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidS32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidS32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidS32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidS32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            float64
+	extras atom.Extras
+	A      float64
 }
 
 func (a *CmdVoidF64) String() string {
@@ -4174,7 +4174,7 @@ func (a *CmdVoidF64) String() string {
 // the data id.
 // The CmdVoidF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidF64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4182,20 +4182,20 @@ func (a *CmdVoidF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidF64 {
 // the data id.
 // The CmdVoidF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidF64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidF64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidF64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidF64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidF64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidF64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidF64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            uint64
+	extras atom.Extras
+	A      uint64
 }
 
 func (a *CmdVoidU64) String() string {
@@ -4206,7 +4206,7 @@ func (a *CmdVoidU64) String() string {
 // the data id.
 // The CmdVoidU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidU64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4214,20 +4214,20 @@ func (a *CmdVoidU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidU64 {
 // the data id.
 // The CmdVoidU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidU64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidU64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidU64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidU64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidU64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidU64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidU64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            int64
+	extras atom.Extras
+	A      int64
 }
 
 func (a *CmdVoidS64) String() string {
@@ -4238,7 +4238,7 @@ func (a *CmdVoidS64) String() string {
 // the data id.
 // The CmdVoidS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidS64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4246,20 +4246,20 @@ func (a *CmdVoidS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidS64 {
 // the data id.
 // The CmdVoidS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidS64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidS64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidS64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidS64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidS64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidS64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidS64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidBool struct {
 	binary.Generate
-	observations atom.Observations
-	A            bool
+	extras atom.Extras
+	A      bool
 }
 
 func (a *CmdVoidBool) String() string {
@@ -4270,7 +4270,7 @@ func (a *CmdVoidBool) String() string {
 // the data id.
 // The CmdVoidBool pointer is returned so that calls can be chained.
 func (a *CmdVoidBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidBool {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4278,20 +4278,20 @@ func (a *CmdVoidBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidBool {
 // the data id.
 // The CmdVoidBool pointer is returned so that calls can be chained.
 func (a *CmdVoidBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidBool {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidBool) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidBool) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidBool) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidBool) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidBool) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidBool) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidString struct {
 	binary.Generate
-	observations atom.Observations
-	A            string
+	extras atom.Extras
+	A      string
 }
 
 func (a *CmdVoidString) String() string {
@@ -4302,7 +4302,7 @@ func (a *CmdVoidString) String() string {
 // the data id.
 // The CmdVoidString pointer is returned so that calls can be chained.
 func (a *CmdVoidString) AddRead(rng memory.Range, id binary.ID) *CmdVoidString {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4310,22 +4310,22 @@ func (a *CmdVoidString) AddRead(rng memory.Range, id binary.ID) *CmdVoidString {
 // the data id.
 // The CmdVoidString pointer is returned so that calls can be chained.
 func (a *CmdVoidString) AddWrite(rng memory.Range, id binary.ID) *CmdVoidString {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidString) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidString) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidString) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidString) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidString) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidString) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Strings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Strings struct {
 	binary.Generate
-	observations atom.Observations
-	A            string
-	B            string
-	C            string
+	extras atom.Extras
+	A      string
+	B      string
+	C      string
 }
 
 func (a *CmdVoid3Strings) String() string {
@@ -4336,7 +4336,7 @@ func (a *CmdVoid3Strings) String() string {
 // the data id.
 // The CmdVoid3Strings pointer is returned so that calls can be chained.
 func (a *CmdVoid3Strings) AddRead(rng memory.Range, id binary.ID) *CmdVoid3Strings {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4344,22 +4344,22 @@ func (a *CmdVoid3Strings) AddRead(rng memory.Range, id binary.ID) *CmdVoid3Strin
 // the data id.
 // The CmdVoid3Strings pointer is returned so that calls can be chained.
 func (a *CmdVoid3Strings) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Strings {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoid3Strings) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoid3Strings) Flags() atom.Flags                { return 0 }
-func (a *CmdVoid3Strings) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoid3Strings) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoid3Strings) Flags() atom.Flags   { return 0 }
+func (a *CmdVoid3Strings) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3InArrays
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3InArrays struct {
 	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
-	B            U32ᵖ
-	C            Intᵖ
+	extras atom.Extras
+	A      U8ᵖ
+	B      U32ᵖ
+	C      Intᵖ
 }
 
 func (a *CmdVoid3InArrays) String() string {
@@ -4370,7 +4370,7 @@ func (a *CmdVoid3InArrays) String() string {
 // the data id.
 // The CmdVoid3InArrays pointer is returned so that calls can be chained.
 func (a *CmdVoid3InArrays) AddRead(rng memory.Range, id binary.ID) *CmdVoid3InArrays {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4378,21 +4378,21 @@ func (a *CmdVoid3InArrays) AddRead(rng memory.Range, id binary.ID) *CmdVoid3InAr
 // the data id.
 // The CmdVoid3InArrays pointer is returned so that calls can be chained.
 func (a *CmdVoid3InArrays) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3InArrays {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoid3InArrays) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoid3InArrays) Flags() atom.Flags                { return 0 }
-func (a *CmdVoid3InArrays) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoid3InArrays) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoid3InArrays) Flags() atom.Flags   { return 0 }
+func (a *CmdVoid3InArrays) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidInArrayOfStrings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidInArrayOfStrings struct {
 	binary.Generate
-	observations atom.Observations
-	Strings      Charᶜᵖᶜᵖ
-	Count        int32
+	extras  atom.Extras
+	Strings Charᶜᵖᶜᵖ
+	Count   int32
 }
 
 func (a *CmdVoidInArrayOfStrings) String() string {
@@ -4403,7 +4403,7 @@ func (a *CmdVoidInArrayOfStrings) String() string {
 // the data id.
 // The CmdVoidInArrayOfStrings pointer is returned so that calls can be chained.
 func (a *CmdVoidInArrayOfStrings) AddRead(rng memory.Range, id binary.ID) *CmdVoidInArrayOfStrings {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4411,20 +4411,20 @@ func (a *CmdVoidInArrayOfStrings) AddRead(rng memory.Range, id binary.ID) *CmdVo
 // the data id.
 // The CmdVoidInArrayOfStrings pointer is returned so that calls can be chained.
 func (a *CmdVoidInArrayOfStrings) AddWrite(rng memory.Range, id binary.ID) *CmdVoidInArrayOfStrings {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidInArrayOfStrings) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidInArrayOfStrings) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidInArrayOfStrings) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidInArrayOfStrings) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidInArrayOfStrings) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidInArrayOfStrings) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
+	extras atom.Extras
+	A      U8ᵖ
 }
 
 func (a *CmdVoidReadU8) String() string {
@@ -4435,7 +4435,7 @@ func (a *CmdVoidReadU8) String() string {
 // the data id.
 // The CmdVoidReadU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4443,20 +4443,20 @@ func (a *CmdVoidReadU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU8 {
 // the data id.
 // The CmdVoidReadU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadU8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadU8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadU8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadU8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadU8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadU8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S8ᵖ
+	extras atom.Extras
+	A      S8ᵖ
 }
 
 func (a *CmdVoidReadS8) String() string {
@@ -4467,7 +4467,7 @@ func (a *CmdVoidReadS8) String() string {
 // the data id.
 // The CmdVoidReadS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4475,20 +4475,20 @@ func (a *CmdVoidReadS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS8 {
 // the data id.
 // The CmdVoidReadS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadS8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadS8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadS8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadS8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadS8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadS8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U16ᵖ
+	extras atom.Extras
+	A      U16ᵖ
 }
 
 func (a *CmdVoidReadU16) String() string {
@@ -4499,7 +4499,7 @@ func (a *CmdVoidReadU16) String() string {
 // the data id.
 // The CmdVoidReadU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4507,20 +4507,20 @@ func (a *CmdVoidReadU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU16
 // the data id.
 // The CmdVoidReadU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadU16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadU16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadU16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadU16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadU16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadU16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S16ᵖ
+	extras atom.Extras
+	A      S16ᵖ
 }
 
 func (a *CmdVoidReadS16) String() string {
@@ -4531,7 +4531,7 @@ func (a *CmdVoidReadS16) String() string {
 // the data id.
 // The CmdVoidReadS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4539,20 +4539,20 @@ func (a *CmdVoidReadS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS16
 // the data id.
 // The CmdVoidReadS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadS16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadS16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadS16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadS16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadS16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadS16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadF32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
+	extras atom.Extras
+	A      F32ᵖ
 }
 
 func (a *CmdVoidReadF32) String() string {
@@ -4563,7 +4563,7 @@ func (a *CmdVoidReadF32) String() string {
 // the data id.
 // The CmdVoidReadF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadF32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4571,20 +4571,20 @@ func (a *CmdVoidReadF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadF32
 // the data id.
 // The CmdVoidReadF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadF32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadF32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadF32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadF32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadF32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadF32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U32ᵖ
+	extras atom.Extras
+	A      U32ᵖ
 }
 
 func (a *CmdVoidReadU32) String() string {
@@ -4595,7 +4595,7 @@ func (a *CmdVoidReadU32) String() string {
 // the data id.
 // The CmdVoidReadU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4603,20 +4603,20 @@ func (a *CmdVoidReadU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU32
 // the data id.
 // The CmdVoidReadU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadU32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadU32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadU32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadU32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadU32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadU32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S32ᵖ
+	extras atom.Extras
+	A      S32ᵖ
 }
 
 func (a *CmdVoidReadS32) String() string {
@@ -4627,7 +4627,7 @@ func (a *CmdVoidReadS32) String() string {
 // the data id.
 // The CmdVoidReadS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4635,20 +4635,20 @@ func (a *CmdVoidReadS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS32
 // the data id.
 // The CmdVoidReadS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadS32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadS32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadS32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadS32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadS32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadS32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadF64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            F64ᵖ
+	extras atom.Extras
+	A      F64ᵖ
 }
 
 func (a *CmdVoidReadF64) String() string {
@@ -4659,7 +4659,7 @@ func (a *CmdVoidReadF64) String() string {
 // the data id.
 // The CmdVoidReadF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadF64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4667,20 +4667,20 @@ func (a *CmdVoidReadF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadF64
 // the data id.
 // The CmdVoidReadF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadF64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadF64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadF64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadF64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadF64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadF64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadF64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadU64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U64ᵖ
+	extras atom.Extras
+	A      U64ᵖ
 }
 
 func (a *CmdVoidReadU64) String() string {
@@ -4691,7 +4691,7 @@ func (a *CmdVoidReadU64) String() string {
 // the data id.
 // The CmdVoidReadU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4699,20 +4699,20 @@ func (a *CmdVoidReadU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadU64
 // the data id.
 // The CmdVoidReadU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadU64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadU64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadU64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadU64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadU64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadU64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadU64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadS64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S64ᵖ
+	extras atom.Extras
+	A      S64ᵖ
 }
 
 func (a *CmdVoidReadS64) String() string {
@@ -4723,7 +4723,7 @@ func (a *CmdVoidReadS64) String() string {
 // the data id.
 // The CmdVoidReadS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4731,20 +4731,20 @@ func (a *CmdVoidReadS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadS64
 // the data id.
 // The CmdVoidReadS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidReadS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadS64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadS64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadS64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadS64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadS64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadS64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadS64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadBool struct {
 	binary.Generate
-	observations atom.Observations
-	A            Boolᵖ
+	extras atom.Extras
+	A      Boolᵖ
 }
 
 func (a *CmdVoidReadBool) String() string {
@@ -4755,7 +4755,7 @@ func (a *CmdVoidReadBool) String() string {
 // the data id.
 // The CmdVoidReadBool pointer is returned so that calls can be chained.
 func (a *CmdVoidReadBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadBool {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4763,22 +4763,22 @@ func (a *CmdVoidReadBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadBo
 // the data id.
 // The CmdVoidReadBool pointer is returned so that calls can be chained.
 func (a *CmdVoidReadBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadBool {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadBool) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadBool) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadBool) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadBool) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadBool) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadBool) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidReadPtrs
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidReadPtrs struct {
 	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
-	B            U16ᵖ
-	C            Boolᵖ
+	extras atom.Extras
+	A      F32ᵖ
+	B      U16ᵖ
+	C      Boolᵖ
 }
 
 func (a *CmdVoidReadPtrs) String() string {
@@ -4789,7 +4789,7 @@ func (a *CmdVoidReadPtrs) String() string {
 // the data id.
 // The CmdVoidReadPtrs pointer is returned so that calls can be chained.
 func (a *CmdVoidReadPtrs) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadPtrs {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4797,20 +4797,20 @@ func (a *CmdVoidReadPtrs) AddRead(rng memory.Range, id binary.ID) *CmdVoidReadPt
 // the data id.
 // The CmdVoidReadPtrs pointer is returned so that calls can be chained.
 func (a *CmdVoidReadPtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidReadPtrs {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidReadPtrs) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidReadPtrs) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidReadPtrs) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidReadPtrs) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidReadPtrs) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidReadPtrs) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U8ᵖ
+	extras atom.Extras
+	A      U8ᵖ
 }
 
 func (a *CmdVoidWriteU8) String() string {
@@ -4821,7 +4821,7 @@ func (a *CmdVoidWriteU8) String() string {
 // the data id.
 // The CmdVoidWriteU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4829,20 +4829,20 @@ func (a *CmdVoidWriteU8) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU8
 // the data id.
 // The CmdVoidWriteU8 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteU8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteU8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteU8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteU8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteU8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteU8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS8 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S8ᵖ
+	extras atom.Extras
+	A      S8ᵖ
 }
 
 func (a *CmdVoidWriteS8) String() string {
@@ -4853,7 +4853,7 @@ func (a *CmdVoidWriteS8) String() string {
 // the data id.
 // The CmdVoidWriteS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4861,20 +4861,20 @@ func (a *CmdVoidWriteS8) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS8
 // the data id.
 // The CmdVoidWriteS8 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS8) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteS8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteS8) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteS8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteS8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteS8) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteS8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U16ᵖ
+	extras atom.Extras
+	A      U16ᵖ
 }
 
 func (a *CmdVoidWriteU16) String() string {
@@ -4885,7 +4885,7 @@ func (a *CmdVoidWriteU16) String() string {
 // the data id.
 // The CmdVoidWriteU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4893,20 +4893,20 @@ func (a *CmdVoidWriteU16) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU
 // the data id.
 // The CmdVoidWriteU16 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteU16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteU16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteU16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteU16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteU16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteU16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS16 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S16ᵖ
+	extras atom.Extras
+	A      S16ᵖ
 }
 
 func (a *CmdVoidWriteS16) String() string {
@@ -4917,7 +4917,7 @@ func (a *CmdVoidWriteS16) String() string {
 // the data id.
 // The CmdVoidWriteS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4925,20 +4925,20 @@ func (a *CmdVoidWriteS16) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS
 // the data id.
 // The CmdVoidWriteS16 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS16) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteS16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteS16) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteS16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteS16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteS16) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteS16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteF32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
+	extras atom.Extras
+	A      F32ᵖ
 }
 
 func (a *CmdVoidWriteF32) String() string {
@@ -4949,7 +4949,7 @@ func (a *CmdVoidWriteF32) String() string {
 // the data id.
 // The CmdVoidWriteF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteF32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4957,20 +4957,20 @@ func (a *CmdVoidWriteF32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteF
 // the data id.
 // The CmdVoidWriteF32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteF32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteF32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteF32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteF32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteF32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteF32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteF32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteF32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U32ᵖ
+	extras atom.Extras
+	A      U32ᵖ
 }
 
 func (a *CmdVoidWriteU32) String() string {
@@ -4981,7 +4981,7 @@ func (a *CmdVoidWriteU32) String() string {
 // the data id.
 // The CmdVoidWriteU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -4989,20 +4989,20 @@ func (a *CmdVoidWriteU32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU
 // the data id.
 // The CmdVoidWriteU32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteU32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteU32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteU32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteU32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteU32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteU32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS32 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S32ᵖ
+	extras atom.Extras
+	A      S32ᵖ
 }
 
 func (a *CmdVoidWriteS32) String() string {
@@ -5013,7 +5013,7 @@ func (a *CmdVoidWriteS32) String() string {
 // the data id.
 // The CmdVoidWriteS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5021,20 +5021,20 @@ func (a *CmdVoidWriteS32) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS
 // the data id.
 // The CmdVoidWriteS32 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS32) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteS32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteS32) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteS32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteS32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteS32) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteS32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteF64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            F64ᵖ
+	extras atom.Extras
+	A      F64ᵖ
 }
 
 func (a *CmdVoidWriteF64) String() string {
@@ -5045,7 +5045,7 @@ func (a *CmdVoidWriteF64) String() string {
 // the data id.
 // The CmdVoidWriteF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteF64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5053,20 +5053,20 @@ func (a *CmdVoidWriteF64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteF
 // the data id.
 // The CmdVoidWriteF64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteF64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteF64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteF64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteF64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteF64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteF64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteF64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteF64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteU64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            U64ᵖ
+	extras atom.Extras
+	A      U64ᵖ
 }
 
 func (a *CmdVoidWriteU64) String() string {
@@ -5077,7 +5077,7 @@ func (a *CmdVoidWriteU64) String() string {
 // the data id.
 // The CmdVoidWriteU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5085,20 +5085,20 @@ func (a *CmdVoidWriteU64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteU
 // the data id.
 // The CmdVoidWriteU64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteU64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteU64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteU64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteU64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteU64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteU64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteU64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteU64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteS64 struct {
 	binary.Generate
-	observations atom.Observations
-	A            S64ᵖ
+	extras atom.Extras
+	A      S64ᵖ
 }
 
 func (a *CmdVoidWriteS64) String() string {
@@ -5109,7 +5109,7 @@ func (a *CmdVoidWriteS64) String() string {
 // the data id.
 // The CmdVoidWriteS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5117,20 +5117,20 @@ func (a *CmdVoidWriteS64) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteS
 // the data id.
 // The CmdVoidWriteS64 pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteS64) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteS64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteS64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteS64) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteS64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteS64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteS64) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteS64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWriteBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWriteBool struct {
 	binary.Generate
-	observations atom.Observations
-	A            Boolᵖ
+	extras atom.Extras
+	A      Boolᵖ
 }
 
 func (a *CmdVoidWriteBool) String() string {
@@ -5141,7 +5141,7 @@ func (a *CmdVoidWriteBool) String() string {
 // the data id.
 // The CmdVoidWriteBool pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidWriteBool {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5149,22 +5149,22 @@ func (a *CmdVoidWriteBool) AddRead(rng memory.Range, id binary.ID) *CmdVoidWrite
 // the data id.
 // The CmdVoidWriteBool pointer is returned so that calls can be chained.
 func (a *CmdVoidWriteBool) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWriteBool {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWriteBool) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWriteBool) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWriteBool) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWriteBool) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWriteBool) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWriteBool) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidWritePtrs
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidWritePtrs struct {
 	binary.Generate
-	observations atom.Observations
-	A            F32ᵖ
-	B            U16ᵖ
-	C            Boolᵖ
+	extras atom.Extras
+	A      F32ᵖ
+	B      U16ᵖ
+	C      Boolᵖ
 }
 
 func (a *CmdVoidWritePtrs) String() string {
@@ -5175,7 +5175,7 @@ func (a *CmdVoidWritePtrs) String() string {
 // the data id.
 // The CmdVoidWritePtrs pointer is returned so that calls can be chained.
 func (a *CmdVoidWritePtrs) AddRead(rng memory.Range, id binary.ID) *CmdVoidWritePtrs {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5183,20 +5183,20 @@ func (a *CmdVoidWritePtrs) AddRead(rng memory.Range, id binary.ID) *CmdVoidWrite
 // the data id.
 // The CmdVoidWritePtrs pointer is returned so that calls can be chained.
 func (a *CmdVoidWritePtrs) AddWrite(rng memory.Range, id binary.ID) *CmdVoidWritePtrs {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidWritePtrs) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidWritePtrs) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidWritePtrs) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidWritePtrs) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidWritePtrs) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidWritePtrs) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU8 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       uint8
+	extras atom.Extras
+	Result uint8
 }
 
 func (a *CmdU8) String() string {
@@ -5207,7 +5207,7 @@ func (a *CmdU8) String() string {
 // the data id.
 // The CmdU8 pointer is returned so that calls can be chained.
 func (a *CmdU8) AddRead(rng memory.Range, id binary.ID) *CmdU8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5215,20 +5215,20 @@ func (a *CmdU8) AddRead(rng memory.Range, id binary.ID) *CmdU8 {
 // the data id.
 // The CmdU8 pointer is returned so that calls can be chained.
 func (a *CmdU8) AddWrite(rng memory.Range, id binary.ID) *CmdU8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdU8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdU8) Flags() atom.Flags                { return 0 }
-func (a *CmdU8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdU8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdU8) Flags() atom.Flags   { return 0 }
+func (a *CmdU8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS8 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       int8
+	extras atom.Extras
+	Result int8
 }
 
 func (a *CmdS8) String() string {
@@ -5239,7 +5239,7 @@ func (a *CmdS8) String() string {
 // the data id.
 // The CmdS8 pointer is returned so that calls can be chained.
 func (a *CmdS8) AddRead(rng memory.Range, id binary.ID) *CmdS8 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5247,20 +5247,20 @@ func (a *CmdS8) AddRead(rng memory.Range, id binary.ID) *CmdS8 {
 // the data id.
 // The CmdS8 pointer is returned so that calls can be chained.
 func (a *CmdS8) AddWrite(rng memory.Range, id binary.ID) *CmdS8 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdS8) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdS8) Flags() atom.Flags                { return 0 }
-func (a *CmdS8) Observations() *atom.Observations { return &a.observations }
+func (c *CmdS8) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdS8) Flags() atom.Flags   { return 0 }
+func (a *CmdS8) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU16 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       uint16
+	extras atom.Extras
+	Result uint16
 }
 
 func (a *CmdU16) String() string {
@@ -5271,7 +5271,7 @@ func (a *CmdU16) String() string {
 // the data id.
 // The CmdU16 pointer is returned so that calls can be chained.
 func (a *CmdU16) AddRead(rng memory.Range, id binary.ID) *CmdU16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5279,20 +5279,20 @@ func (a *CmdU16) AddRead(rng memory.Range, id binary.ID) *CmdU16 {
 // the data id.
 // The CmdU16 pointer is returned so that calls can be chained.
 func (a *CmdU16) AddWrite(rng memory.Range, id binary.ID) *CmdU16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdU16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdU16) Flags() atom.Flags                { return 0 }
-func (a *CmdU16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdU16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdU16) Flags() atom.Flags   { return 0 }
+func (a *CmdU16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS16 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       int16
+	extras atom.Extras
+	Result int16
 }
 
 func (a *CmdS16) String() string {
@@ -5303,7 +5303,7 @@ func (a *CmdS16) String() string {
 // the data id.
 // The CmdS16 pointer is returned so that calls can be chained.
 func (a *CmdS16) AddRead(rng memory.Range, id binary.ID) *CmdS16 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5311,20 +5311,20 @@ func (a *CmdS16) AddRead(rng memory.Range, id binary.ID) *CmdS16 {
 // the data id.
 // The CmdS16 pointer is returned so that calls can be chained.
 func (a *CmdS16) AddWrite(rng memory.Range, id binary.ID) *CmdS16 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdS16) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdS16) Flags() atom.Flags                { return 0 }
-func (a *CmdS16) Observations() *atom.Observations { return &a.observations }
+func (c *CmdS16) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdS16) Flags() atom.Flags   { return 0 }
+func (a *CmdS16) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF32 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       float32
+	extras atom.Extras
+	Result float32
 }
 
 func (a *CmdF32) String() string {
@@ -5335,7 +5335,7 @@ func (a *CmdF32) String() string {
 // the data id.
 // The CmdF32 pointer is returned so that calls can be chained.
 func (a *CmdF32) AddRead(rng memory.Range, id binary.ID) *CmdF32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5343,20 +5343,20 @@ func (a *CmdF32) AddRead(rng memory.Range, id binary.ID) *CmdF32 {
 // the data id.
 // The CmdF32 pointer is returned so that calls can be chained.
 func (a *CmdF32) AddWrite(rng memory.Range, id binary.ID) *CmdF32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdF32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdF32) Flags() atom.Flags                { return 0 }
-func (a *CmdF32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdF32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdF32) Flags() atom.Flags   { return 0 }
+func (a *CmdF32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU32 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       uint32
+	extras atom.Extras
+	Result uint32
 }
 
 func (a *CmdU32) String() string {
@@ -5367,7 +5367,7 @@ func (a *CmdU32) String() string {
 // the data id.
 // The CmdU32 pointer is returned so that calls can be chained.
 func (a *CmdU32) AddRead(rng memory.Range, id binary.ID) *CmdU32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5375,20 +5375,20 @@ func (a *CmdU32) AddRead(rng memory.Range, id binary.ID) *CmdU32 {
 // the data id.
 // The CmdU32 pointer is returned so that calls can be chained.
 func (a *CmdU32) AddWrite(rng memory.Range, id binary.ID) *CmdU32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdU32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdU32) Flags() atom.Flags                { return 0 }
-func (a *CmdU32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdU32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdU32) Flags() atom.Flags   { return 0 }
+func (a *CmdU32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS32 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       int32
+	extras atom.Extras
+	Result int32
 }
 
 func (a *CmdS32) String() string {
@@ -5399,7 +5399,7 @@ func (a *CmdS32) String() string {
 // the data id.
 // The CmdS32 pointer is returned so that calls can be chained.
 func (a *CmdS32) AddRead(rng memory.Range, id binary.ID) *CmdS32 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5407,20 +5407,20 @@ func (a *CmdS32) AddRead(rng memory.Range, id binary.ID) *CmdS32 {
 // the data id.
 // The CmdS32 pointer is returned so that calls can be chained.
 func (a *CmdS32) AddWrite(rng memory.Range, id binary.ID) *CmdS32 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdS32) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdS32) Flags() atom.Flags                { return 0 }
-func (a *CmdS32) Observations() *atom.Observations { return &a.observations }
+func (c *CmdS32) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdS32) Flags() atom.Flags   { return 0 }
+func (a *CmdS32) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF64 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       float64
+	extras atom.Extras
+	Result float64
 }
 
 func (a *CmdF64) String() string {
@@ -5431,7 +5431,7 @@ func (a *CmdF64) String() string {
 // the data id.
 // The CmdF64 pointer is returned so that calls can be chained.
 func (a *CmdF64) AddRead(rng memory.Range, id binary.ID) *CmdF64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5439,20 +5439,20 @@ func (a *CmdF64) AddRead(rng memory.Range, id binary.ID) *CmdF64 {
 // the data id.
 // The CmdF64 pointer is returned so that calls can be chained.
 func (a *CmdF64) AddWrite(rng memory.Range, id binary.ID) *CmdF64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdF64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdF64) Flags() atom.Flags                { return 0 }
-func (a *CmdF64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdF64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdF64) Flags() atom.Flags   { return 0 }
+func (a *CmdF64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU64 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       uint64
+	extras atom.Extras
+	Result uint64
 }
 
 func (a *CmdU64) String() string {
@@ -5463,7 +5463,7 @@ func (a *CmdU64) String() string {
 // the data id.
 // The CmdU64 pointer is returned so that calls can be chained.
 func (a *CmdU64) AddRead(rng memory.Range, id binary.ID) *CmdU64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5471,20 +5471,20 @@ func (a *CmdU64) AddRead(rng memory.Range, id binary.ID) *CmdU64 {
 // the data id.
 // The CmdU64 pointer is returned so that calls can be chained.
 func (a *CmdU64) AddWrite(rng memory.Range, id binary.ID) *CmdU64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdU64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdU64) Flags() atom.Flags                { return 0 }
-func (a *CmdU64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdU64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdU64) Flags() atom.Flags   { return 0 }
+func (a *CmdU64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS64 struct {
 	binary.Generate
-	observations atom.Observations
-	Result       int64
+	extras atom.Extras
+	Result int64
 }
 
 func (a *CmdS64) String() string {
@@ -5495,7 +5495,7 @@ func (a *CmdS64) String() string {
 // the data id.
 // The CmdS64 pointer is returned so that calls can be chained.
 func (a *CmdS64) AddRead(rng memory.Range, id binary.ID) *CmdS64 {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5503,20 +5503,20 @@ func (a *CmdS64) AddRead(rng memory.Range, id binary.ID) *CmdS64 {
 // the data id.
 // The CmdS64 pointer is returned so that calls can be chained.
 func (a *CmdS64) AddWrite(rng memory.Range, id binary.ID) *CmdS64 {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdS64) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdS64) Flags() atom.Flags                { return 0 }
-func (a *CmdS64) Observations() *atom.Observations { return &a.observations }
+func (c *CmdS64) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdS64) Flags() atom.Flags   { return 0 }
+func (a *CmdS64) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdBool struct {
 	binary.Generate
-	observations atom.Observations
-	Result       bool
+	extras atom.Extras
+	Result bool
 }
 
 func (a *CmdBool) String() string {
@@ -5527,7 +5527,7 @@ func (a *CmdBool) String() string {
 // the data id.
 // The CmdBool pointer is returned so that calls can be chained.
 func (a *CmdBool) AddRead(rng memory.Range, id binary.ID) *CmdBool {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5535,20 +5535,20 @@ func (a *CmdBool) AddRead(rng memory.Range, id binary.ID) *CmdBool {
 // the data id.
 // The CmdBool pointer is returned so that calls can be chained.
 func (a *CmdBool) AddWrite(rng memory.Range, id binary.ID) *CmdBool {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdBool) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdBool) Flags() atom.Flags                { return 0 }
-func (a *CmdBool) Observations() *atom.Observations { return &a.observations }
+func (c *CmdBool) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdBool) Flags() atom.Flags   { return 0 }
+func (a *CmdBool) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdString struct {
 	binary.Generate
-	observations atom.Observations
-	Result       string
+	extras atom.Extras
+	Result string
 }
 
 func (a *CmdString) String() string {
@@ -5559,7 +5559,7 @@ func (a *CmdString) String() string {
 // the data id.
 // The CmdString pointer is returned so that calls can be chained.
 func (a *CmdString) AddRead(rng memory.Range, id binary.ID) *CmdString {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5567,20 +5567,20 @@ func (a *CmdString) AddRead(rng memory.Range, id binary.ID) *CmdString {
 // the data id.
 // The CmdString pointer is returned so that calls can be chained.
 func (a *CmdString) AddWrite(rng memory.Range, id binary.ID) *CmdString {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdString) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdString) Flags() atom.Flags                { return 0 }
-func (a *CmdString) Observations() *atom.Observations { return &a.observations }
+func (c *CmdString) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdString) Flags() atom.Flags   { return 0 }
+func (a *CmdString) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdPointer
 ////////////////////////////////////////////////////////////////////////////////
 type CmdPointer struct {
 	binary.Generate
-	observations atom.Observations
-	Result       Voidᵖ
+	extras atom.Extras
+	Result Voidᵖ
 }
 
 func (a *CmdPointer) String() string {
@@ -5591,7 +5591,7 @@ func (a *CmdPointer) String() string {
 // the data id.
 // The CmdPointer pointer is returned so that calls can be chained.
 func (a *CmdPointer) AddRead(rng memory.Range, id binary.ID) *CmdPointer {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5599,22 +5599,22 @@ func (a *CmdPointer) AddRead(rng memory.Range, id binary.ID) *CmdPointer {
 // the data id.
 // The CmdPointer pointer is returned so that calls can be chained.
 func (a *CmdPointer) AddWrite(rng memory.Range, id binary.ID) *CmdPointer {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdPointer) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdPointer) Flags() atom.Flags                { return 0 }
-func (a *CmdPointer) Observations() *atom.Observations { return &a.observations }
+func (c *CmdPointer) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdPointer) Flags() atom.Flags   { return 0 }
+func (a *CmdPointer) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Remapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Remapped struct {
 	binary.Generate
-	observations atom.Observations
-	A            remapped
-	B            remapped
-	C            remapped
+	extras atom.Extras
+	A      remapped
+	B      remapped
+	C      remapped
 }
 
 func (a *CmdVoid3Remapped) String() string {
@@ -5625,7 +5625,7 @@ func (a *CmdVoid3Remapped) String() string {
 // the data id.
 // The CmdVoid3Remapped pointer is returned so that calls can be chained.
 func (a *CmdVoid3Remapped) AddRead(rng memory.Range, id binary.ID) *CmdVoid3Remapped {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5633,20 +5633,20 @@ func (a *CmdVoid3Remapped) AddRead(rng memory.Range, id binary.ID) *CmdVoid3Rema
 // the data id.
 // The CmdVoid3Remapped pointer is returned so that calls can be chained.
 func (a *CmdVoid3Remapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoid3Remapped {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoid3Remapped) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoid3Remapped) Flags() atom.Flags                { return 0 }
-func (a *CmdVoid3Remapped) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoid3Remapped) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoid3Remapped) Flags() atom.Flags   { return 0 }
+func (a *CmdVoid3Remapped) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidInArrayOfRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidInArrayOfRemapped struct {
 	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	extras atom.Extras
+	A      Remappedᵖ
 }
 
 func (a *CmdVoidInArrayOfRemapped) String() string {
@@ -5657,7 +5657,7 @@ func (a *CmdVoidInArrayOfRemapped) String() string {
 // the data id.
 // The CmdVoidInArrayOfRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidInArrayOfRemapped) AddRead(rng memory.Range, id binary.ID) *CmdVoidInArrayOfRemapped {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5665,20 +5665,20 @@ func (a *CmdVoidInArrayOfRemapped) AddRead(rng memory.Range, id binary.ID) *CmdV
 // the data id.
 // The CmdVoidInArrayOfRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidInArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoidInArrayOfRemapped {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidInArrayOfRemapped) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidInArrayOfRemapped) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidInArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidInArrayOfRemapped) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidInArrayOfRemapped) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidInArrayOfRemapped) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutArrayOfRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutArrayOfRemapped struct {
 	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	extras atom.Extras
+	A      Remappedᵖ
 }
 
 func (a *CmdVoidOutArrayOfRemapped) String() string {
@@ -5689,7 +5689,7 @@ func (a *CmdVoidOutArrayOfRemapped) String() string {
 // the data id.
 // The CmdVoidOutArrayOfRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidOutArrayOfRemapped) AddRead(rng memory.Range, id binary.ID) *CmdVoidOutArrayOfRemapped {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5697,20 +5697,20 @@ func (a *CmdVoidOutArrayOfRemapped) AddRead(rng memory.Range, id binary.ID) *Cmd
 // the data id.
 // The CmdVoidOutArrayOfRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidOutArrayOfRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoidOutArrayOfRemapped {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidOutArrayOfRemapped) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidOutArrayOfRemapped) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutArrayOfUnknownRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutArrayOfUnknownRemapped struct {
 	binary.Generate
-	observations atom.Observations
-	A            Remappedᵖ
+	extras atom.Extras
+	A      Remappedᵖ
 }
 
 func (a *CmdVoidOutArrayOfUnknownRemapped) String() string {
@@ -5721,7 +5721,7 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) String() string {
 // the data id.
 // The CmdVoidOutArrayOfUnknownRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidOutArrayOfUnknownRemapped) AddRead(rng memory.Range, id binary.ID) *CmdVoidOutArrayOfUnknownRemapped {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5729,20 +5729,20 @@ func (a *CmdVoidOutArrayOfUnknownRemapped) AddRead(rng memory.Range, id binary.I
 // the data id.
 // The CmdVoidOutArrayOfUnknownRemapped pointer is returned so that calls can be chained.
 func (a *CmdVoidOutArrayOfUnknownRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdVoidOutArrayOfUnknownRemapped {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdVoidOutArrayOfUnknownRemapped) Flags() atom.Flags                { return 0 }
-func (a *CmdVoidOutArrayOfUnknownRemapped) Observations() *atom.Observations { return &a.observations }
+func (c *CmdVoidOutArrayOfUnknownRemapped) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdVoidOutArrayOfUnknownRemapped) Flags() atom.Flags   { return 0 }
+func (a *CmdVoidOutArrayOfUnknownRemapped) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdRemapped struct {
 	binary.Generate
-	observations atom.Observations
-	Result       remapped
+	extras atom.Extras
+	Result remapped
 }
 
 func (a *CmdRemapped) String() string {
@@ -5753,7 +5753,7 @@ func (a *CmdRemapped) String() string {
 // the data id.
 // The CmdRemapped pointer is returned so that calls can be chained.
 func (a *CmdRemapped) AddRead(rng memory.Range, id binary.ID) *CmdRemapped {
-	a.observations.Reads = append(a.observations.Reads, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddRead(rng, id)
 	return a
 }
 
@@ -5761,12 +5761,12 @@ func (a *CmdRemapped) AddRead(rng memory.Range, id binary.ID) *CmdRemapped {
 // the data id.
 // The CmdRemapped pointer is returned so that calls can be chained.
 func (a *CmdRemapped) AddWrite(rng memory.Range, id binary.ID) *CmdRemapped {
-	a.observations.Writes = append(a.observations.Writes, atom.Observation{Range: rng, ID: id})
+	a.extras.GetOrAppendObservations().AddWrite(rng, id)
 	return a
 }
-func (c *CmdRemapped) API() gfxapi.ID                   { return api{}.ID() }
-func (c *CmdRemapped) Flags() atom.Flags                { return 0 }
-func (a *CmdRemapped) Observations() *atom.Observations { return &a.observations }
+func (c *CmdRemapped) API() gfxapi.ID      { return api{}.ID() }
+func (c *CmdRemapped) Flags() atom.Flags   { return 0 }
+func (a *CmdRemapped) Extras() atom.Extras { return a.extras }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Tester

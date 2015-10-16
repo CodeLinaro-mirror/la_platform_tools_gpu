@@ -74,12 +74,14 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
 	for i, a := range list.Atoms {
-		f := " "
-		switch {
-		case len(a.Observations().Reads) > 0:
-			f += "R"
-		case len(a.Observations().Writes) > 0:
-			f += "W"
+		var f string
+		if o := a.Extras().Observations(); o != nil {
+			if len(o.Reads) > 0 {
+				f += " R"
+			}
+			if len(o.Writes) > 0 {
+				f += " W"
+			}
 		}
 		fmt.Fprintf(res, "%.6d %s %s\n", i, a, f)
 	}

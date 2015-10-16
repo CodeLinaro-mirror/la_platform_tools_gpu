@@ -47,8 +47,7 @@ type Atom interface {
 	// Flags returns the flags of the atom.
 	Flags() Flags
 
-	// Observations returns all the memory observations made by the atom.
-	Observations() *Observations
+	Extras() Extras
 
 	// Mutate mutates the State using the atom.
 	Mutate(*gfxapi.State, database.Database, log.Logger) error

@@ -36,13 +36,13 @@ type atomTreeNode struct {
 
 func (n atomTreeNode) Count() int {
 	atom := n.ctx.atoms[n.item.atomIndex]
-	observations := atom.Observations()
+	observations := atom.Extras().Observations()
 	return len(observations.Reads) + len(observations.Writes)
 }
 
 func (n atomTreeNode) NodeAt(index int) gxui.TreeNode {
 	atom := n.ctx.atoms[n.item.atomIndex]
-	observations := atom.Observations()
+	observations := atom.Extras().Observations()
 	if index < len(observations.Reads) {
 		return observationTreeNode{
 			ctx: n.ctx,
@@ -73,7 +73,7 @@ func (n atomTreeNode) ItemIndex(item gxui.AdapterItem) int {
 		return i.index
 	} else {
 		atom := n.ctx.atoms[n.item.atomIndex]
-		observations := atom.Observations()
+		observations := atom.Extras().Observations()
 		return len(observations.Reads) + i.index
 	}
 }

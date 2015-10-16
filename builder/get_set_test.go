@@ -56,7 +56,7 @@ func (testAPI) GetFramebufferAttachmentSize(state *gfxapi.State, attachment gfxa
 
 func (a testAtom) API() gfxapi.ID                                          { return a.api }
 func (testAtom) Flags() atom.Flags                                         { return 0 }
-func (testAtom) Observations() *atom.Observations                          { return &atom.Observations{} }
+func (testAtom) Extras() atom.Extras                                       { return nil }
 func (testAtom) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 
 func newPathTest(t *testing.T, a *atom.List) (*path.Capture, database.Database, log.Logger) {

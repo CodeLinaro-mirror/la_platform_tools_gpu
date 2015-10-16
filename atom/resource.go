@@ -39,5 +39,5 @@ func (a *Resource) String() string {
 // Atom compliance
 func (a *Resource) API() gfxapi.ID                                                  { return gfxapi.ID{} }
 func (a *Resource) Flags() Flags                                                    { return 0 }
-func (a *Resource) Observations() *Observations                                     { return &Observations{} }
+func (a *Resource) Extras() Extras                                                  { return nil }
 func (a *Resource) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error { return nil }
