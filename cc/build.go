@@ -163,7 +163,12 @@ func (t Target) Build(env build.Environment) {
 	// TODO: using the static-lib strips symbol visibility from the
 	// dynamic-library.
 	// Investigate linker flags to use build.Files(gapiiLib)
-	cpp.MakeDynamicLibrary("spy", gapiiSource, t.Spy, env)
+	gapisSo := cpp.MakeDynamicLibrary("spy", gapiiSource, t.Spy, env)
+
+	if t.Replayd.ABI.OS == config.Android {
+		// Copy: bin/android-<abi>/<debug/release>/<gapis> -> bin/android-<abi>/<gapis>
+		cpp.MakeCopy(gapisSo, t.Spy.OutputDir.Join("..", gapisSo.Name()), t.Spy, env)
+	}
 
 	// Build gapir from the gapir static library and Main.cpp.
 	replaydSource := build.Files(ReplaydRoot.Join("main.cpp"))
