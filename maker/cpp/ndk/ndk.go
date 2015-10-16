@@ -119,13 +119,13 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		return tools.as.Exec(env, "-o", output.Absolute(), input.Absolute())
 
 	default:
-		depfile := depFileFor(output, cfg, env)
+		depfile := depFileFor(output, cfg, env).Absolute()
 
 		a := []string{
 			"--sysroot=" + tools.sysroot.Absolute(),
 			"-c", // Compile to .o
 			optFlags(cfg),
-			"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
+			"-MMD", "-MF", depfile, // Generate dependency file
 			"-fPIC", // TODO: Not required for exes
 		}
 		a = append(a, cfg.CompilerArgs...)
@@ -136,7 +136,11 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 			a = append(a, fmt.Sprintf("-D%s=%s", n, v))
 		}
 		a = append(a, input.Name(), "-o", output.Absolute())
-		return tools.cc.ExecAt(env, build.File(input.Dir()), a...)
+		dir := build.File(input.Dir())
+		if err := tools.cc.ExecAt(env, dir, a...); err != nil {
+			return err
+		}
+		return cpp.MakeDepsAbsolute(depfile, dir.Absolute(), env)
 	}
 }
 

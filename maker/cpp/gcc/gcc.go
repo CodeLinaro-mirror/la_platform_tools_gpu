@@ -114,7 +114,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		return err
 	}
 
-	depfile := depFileFor(output, cfg, env)
+	depfile := depFileFor(output, cfg, env).Absolute()
 
 	a := append([]string{
 		"-c", // Compile to .o
@@ -124,7 +124,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		"-fvisibility=hidden",
 		"-fvisibility-inlines-hidden",
 		// "-fcolor-diagnostics", clang-only
-		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
+		"-MMD", "-MF", depfile, // Generate dependency file
 	}, cfg.CompilerArgs...)
 	if cfg.ABI.OS == config.OSX {
 		a = append(a, "-stdlib=libc++")
@@ -136,7 +136,11 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		a = append(a, fmt.Sprintf("-D%s=%s", n, v))
 	}
 	a = append(a, input.Name(), "-o", output.Absolute())
-	return tools.cc.ExecAt(env, build.File(input.Dir()), a...)
+	dir := build.File(input.Dir())
+	if err := tools.cc.ExecAt(env, dir, a...); err != nil {
+		return err
+	}
+	return cpp.MakeDepsAbsolute(depfile, dir.Absolute(), env)
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
