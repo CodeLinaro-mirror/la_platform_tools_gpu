@@ -61,7 +61,7 @@ func (m *Map) EncodeValue(e binary.Encoder, value interface{}) {
 }
 
 func (m *Map) DecodeValue(d binary.Decoder) interface{} {
-	count := d.Uint32()
+	count := d.Count()
 	v := make(map[interface{}]interface{}, count)
 	for i := uint32(0); i < count; i++ {
 		k := m.KeyType.DecodeValue(d)
