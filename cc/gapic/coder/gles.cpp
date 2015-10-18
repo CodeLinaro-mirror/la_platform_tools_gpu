@@ -17,7 +17,7 @@ namespace gles {
 // Architecture:
 // gles.Architecture{$,Uint32,Uint32,Uint32,Bool}
 void Architecture::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPointerAlignment);
     e->Uint32(this->mPointerSize);
     e->Uint32(this->mIntegerSize);
@@ -120,7 +120,7 @@ void BlendState::Encode(Encoder* e) const {
     e->Uint32(this->mDstAlphaBlendFactor);
     e->Uint32(this->mBlendEquationRgb);
     e->Uint32(this->mBlendEquationAlpha);
-    e->Encode(this->mBlendColor);
+    e->Struct(this->mBlendColor);
 }
 const schema::Entity* BlendState::StaticSchema() {
     static schema::Entity entity {
@@ -159,12 +159,12 @@ const schema::Entity* U8__S::StaticSchema() {
 // Buffer:
 // gles.Buffer{$,Int32,Uint32,Uint32,Int32,$}
 void Buffer::Encode(Encoder* e) const {
-    e->Encode(this->mData);
+    e->Struct(this->mData);
     e->Int32(this->mSize);
     e->Uint32(this->mUsage);
     e->Uint32(this->mMappingAccess);
     e->Int32(this->mMappingOffset);
-    e->Encode(this->mMappingData);
+    e->Struct(this->mMappingData);
 }
 const schema::Entity* Buffer::StaticSchema() {
     static schema::Entity entity {
@@ -307,10 +307,10 @@ const schema::Entity* CGLTexelFormatObj::StaticSchema() {
 // CGLCreateContext:
 // gles.CGLCreateContext{$,$,$,$,Int64}
 void CGLCreateContext::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPix);
-    e->Encode(this->mShare);
-    e->Encode(this->mCtx);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPix);
+    e->Struct(this->mShare);
+    e->Struct(this->mCtx);
     e->Int64(this->mResult);
 }
 const schema::Entity* CGLCreateContext::StaticSchema() {
@@ -395,11 +395,11 @@ const schema::Entity* CGSSurfaceID__P::StaticSchema() {
 // CGLGetSurface:
 // gles.CGLGetSurface{$,$,$,$,$,Int64}
 void CGLGetSurface::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mCtx);
-    e->Encode(this->mCid);
-    e->Encode(this->mWid);
-    e->Encode(this->mSid);
+    e->Struct(this->mobservations);
+    e->Struct(this->mCtx);
+    e->Struct(this->mCid);
+    e->Struct(this->mWid);
+    e->Struct(this->mSid);
     e->Int64(this->mResult);
 }
 const schema::Entity* CGLGetSurface::StaticSchema() {
@@ -485,11 +485,11 @@ const schema::Entity* F64__P::StaticSchema() {
 // CGSGetSurfaceBounds:
 // gles.CGSGetSurfaceBounds{$,$,Int32,Int32,$,Int64}
 void CGSGetSurfaceBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mCid);
+    e->Struct(this->mobservations);
+    e->Struct(this->mCid);
     e->Int32(this->mWid);
     e->Int32(this->mSid);
-    e->Encode(this->mBounds);
+    e->Struct(this->mBounds);
     e->Int64(this->mResult);
 }
 const schema::Entity* CGSGetSurfaceBounds::StaticSchema() {
@@ -633,9 +633,9 @@ void Constants::Encode(Encoder* e) const {
     e->Float32(this->mMaxTextureLodBias);
     e->Int32(this->mMaxCubeMapTextureSize);
     e->Int32(this->mMaxRenderbufferSize);
-    e->Encode(this->mAliasedPointSizeRange);
-    e->Encode(this->mAliasedLineWidthRange);
-    e->Encode(this->mMultisampleLineWidthRange);
+    e->Struct(this->mAliasedPointSizeRange);
+    e->Struct(this->mAliasedLineWidthRange);
+    e->Struct(this->mMultisampleLineWidthRange);
     e->Float32(this->mMultisampleLineWidthGranularity);
     e->Int32(this->mMaxDrawBuffers);
     e->Int32(this->mMaxFramebufferWidth);
@@ -646,7 +646,7 @@ void Constants::Encode(Encoder* e) const {
     e->Float32(this->mMinFragmentInterpolationOffset);
     e->Float32(this->mMaxFragmentInterpolationOffset);
     e->Int32(this->mFragmentInterpolationOffsetBits);
-    e->Encode(this->mMaxViewportDims);
+    e->Struct(this->mMaxViewportDims);
     e->Int32(this->mMaxSampleMaskWords);
     e->Int32(this->mMaxColorTextureSamples);
     e->Int32(this->mMaxDepthTextureSamples);
@@ -661,11 +661,11 @@ void Constants::Encode(Encoder* e) const {
     e->Int32(this->mMaxElementsVertices);
     e->Int32(this->mMaxTextureBufferSize);
     e->Int32(this->mNumCompressedTextureFormats);
-    e->Encode(this->mCompressedTextureFormats);
+    e->Struct(this->mCompressedTextureFormats);
     e->Int32(this->mNumProgramBinaryFormats);
-    e->Encode(this->mProgramBinaryFormats);
+    e->Struct(this->mProgramBinaryFormats);
     e->Int32(this->mNumShaderBinaryFormats);
-    e->Encode(this->mShaderBinaryFormats);
+    e->Struct(this->mShaderBinaryFormats);
     e->Uint8(this->mShaderCompiler);
     e->Int32(this->mTextureBufferOffsetAlignment);
     e->Int32(this->mNumExtensions);
@@ -724,8 +724,8 @@ void Constants::Encode(Encoder* e) const {
     e->Int32(this->mMaxProgramTextureGatherOffset);
     e->Int32(this->mMinProgramTexelOffset);
     e->Int32(this->mMaxProgramTexelOffset);
-    e->Encode(this->mMaxComputeWorkGroupCount);
-    e->Encode(this->mMaxComputeWorkGroupSize);
+    e->Struct(this->mMaxComputeWorkGroupCount);
+    e->Struct(this->mMaxComputeWorkGroupSize);
     e->Int32(this->mMaxComputeWorkGroupInvocations);
     e->Int32(this->mMaxComputeUniformBlocks);
     e->Int32(this->mMaxComputeTextureImageUnits);
@@ -986,7 +986,7 @@ const schema::Entity* VertexAttributeValue::StaticSchema() {
 void Renderbuffer::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
     e->Uint32(this->mTexelFormat);
 }
 const schema::Entity* Renderbuffer::StaticSchema() {
@@ -1010,7 +1010,7 @@ const schema::Entity* Renderbuffer::StaticSchema() {
 void Image::Encode(Encoder* e) const {
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
     e->Uint32(this->mSize);
     e->Uint32(this->mTexelFormat);
     e->Uint32(this->mTexelType);
@@ -1081,10 +1081,10 @@ const schema::Entity* GLchar__S::StaticSchema() {
 // Shader:
 // gles.Shader{$,Bool,Bool,$,String,Uint32}
 void Shader::Encode(Encoder* e) const {
-    e->Encode(this->mBinary);
+    e->Struct(this->mBinary);
     e->Bool(this->mCompiled);
     e->Bool(this->mDeletable);
-    e->Encode(this->mInfoLog);
+    e->Struct(this->mInfoLog);
     e->String(this->mSource);
     e->Uint32(this->mType);
 }
@@ -1189,7 +1189,7 @@ void VertexAttributeArray::Encode(Encoder* e) const {
     e->Uint32(this->mType);
     e->Uint8(this->mNormalized);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Uint32(this->mRelativeOffset);
     e->Bool(this->mInteger);
     e->Uint32(this->mBinding);
@@ -1283,12 +1283,12 @@ const schema::Entity* U8__P::StaticSchema() {
 // ContextInfo:
 // gles.ContextInfo{$,Uint32,$,$,$,$,Int32,Int32,Uint32,Uint32,Uint32,Bool,Bool}
 void ContextInfo::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mConstantCount);
-    e->Encode(this->mConstantNames);
-    e->Encode(this->mConstantOffsets);
-    e->Encode(this->mConstantSizes);
-    e->Encode(this->mConstantData);
+    e->Struct(this->mConstantNames);
+    e->Struct(this->mConstantOffsets);
+    e->Struct(this->mConstantSizes);
+    e->Struct(this->mConstantData);
     e->Int32(this->mBackbufferWidth);
     e->Int32(this->mBackbufferHeight);
     e->Uint32(this->mBackbufferColorFmt);
@@ -1415,12 +1415,12 @@ const schema::Entity* EGLint__P::StaticSchema() {
 // EglCreateContext:
 // gles.EglCreateContext{$,$,$,$,$,$}
 void EglCreateContext::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mConfig);
-    e->Encode(this->mShareContext);
-    e->Encode(this->mAttribList);
-    e->Encode(this->mResult);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mConfig);
+    e->Struct(this->mShareContext);
+    e->Struct(this->mAttribList);
+    e->Struct(this->mResult);
 }
 const schema::Entity* EglCreateContext::StaticSchema() {
     static schema::Entity entity {
@@ -1443,10 +1443,10 @@ const schema::Entity* EglCreateContext::StaticSchema() {
 // EglInitialize:
 // gles.EglInitialize{$,$,$,$,Int64}
 void EglInitialize::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDpy);
-    e->Encode(this->mMajor);
-    e->Encode(this->mMinor);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDpy);
+    e->Struct(this->mMajor);
+    e->Struct(this->mMinor);
     e->Int64(this->mResult);
 }
 const schema::Entity* EglInitialize::StaticSchema() {
@@ -1469,11 +1469,11 @@ const schema::Entity* EglInitialize::StaticSchema() {
 // EglMakeCurrent:
 // gles.EglMakeCurrent{$,$,$,$,$,Int64}
 void EglMakeCurrent::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mDraw);
-    e->Encode(this->mRead);
-    e->Encode(this->mContext);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mDraw);
+    e->Struct(this->mRead);
+    e->Struct(this->mContext);
     e->Int64(this->mResult);
 }
 const schema::Entity* EglMakeCurrent::StaticSchema() {
@@ -1497,11 +1497,11 @@ const schema::Entity* EglMakeCurrent::StaticSchema() {
 // EglQuerySurface:
 // gles.EglQuerySurface{$,$,$,Int64,$,Int64}
 void EglQuerySurface::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mSurface);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mSurface);
     e->Int64(this->mAttribute);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
     e->Int64(this->mResult);
 }
 const schema::Entity* EglQuerySurface::StaticSchema() {
@@ -1540,9 +1540,9 @@ const schema::Entity* Void__P::StaticSchema() {
 // EglSwapBuffers:
 // gles.EglSwapBuffers{$,$,$,Int64}
 void EglSwapBuffers::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mSurface);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mSurface);
     e->Int64(this->mResult);
 }
 const schema::Entity* EglSwapBuffers::StaticSchema() {
@@ -2608,7 +2608,7 @@ const schema::Entity* GlBeginTransformFeedback::StaticSchema() {
 // GlBindAttribLocation:
 // gles.GlBindAttribLocation{$,Uint32,Uint32,String}
 void GlBindAttribLocation::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mLocation);
     e->String(this->mName);
@@ -2649,7 +2649,7 @@ const schema::Entity* GlBindBuffer::StaticSchema() {
 // GlBindBufferBase:
 // gles.GlBindBufferBase{$,Uint32,Uint32,Uint32}
 void GlBindBufferBase::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint32(this->mBuffer);
@@ -2673,7 +2673,7 @@ const schema::Entity* GlBindBufferBase::StaticSchema() {
 // GlBindBufferRange:
 // gles.GlBindBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
 void GlBindBufferRange::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint32(this->mBuffer);
@@ -2701,7 +2701,7 @@ const schema::Entity* GlBindBufferRange::StaticSchema() {
 // GlBindFragDataLocationEXT:
 // gles.GlBindFragDataLocationEXT{$,Uint32,Uint32,String}
 void GlBindFragDataLocationEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mColor);
     e->String(this->mName);
@@ -2725,7 +2725,7 @@ const schema::Entity* GlBindFragDataLocationEXT::StaticSchema() {
 // GlBindFragDataLocationIndexedEXT:
 // gles.GlBindFragDataLocationIndexedEXT{$,Uint32,Uint32,Uint32,String}
 void GlBindFragDataLocationIndexedEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mColorNumber);
     e->Uint32(this->mIndex);
@@ -2785,7 +2785,7 @@ const schema::Entity* GlBindFramebufferOES::StaticSchema() {
 // GlBindImageTexture:
 // gles.GlBindImageTexture{$,Uint32,Uint32,Int32,Uint8,Int32,Uint32,Uint32}
 void GlBindImageTexture::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mUnit);
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
@@ -2966,7 +2966,7 @@ const schema::Entity* GlBindVertexArrayOES::StaticSchema() {
 // GlBindVertexBuffer:
 // gles.GlBindVertexBuffer{$,Uint32,Uint32,Int32,Int32}
 void GlBindVertexBuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBindingIndex);
     e->Uint32(this->mBuffer);
     e->Int32(this->mOffset);
@@ -3037,7 +3037,7 @@ const schema::Entity* GlBlendBarrierNV::StaticSchema() {
 // GlBlendColor:
 // gles.GlBlendColor{$,Float32,Float32,Float32,Float32}
 void GlBlendColor::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mRed);
     e->Float32(this->mGreen);
     e->Float32(this->mBlue);
@@ -3129,7 +3129,7 @@ const schema::Entity* GlBlendEquationSeparateOES::StaticSchema() {
 // GlBlendEquationSeparatei:
 // gles.GlBlendEquationSeparatei{$,Uint32,Uint32,Uint32}
 void GlBlendEquationSeparatei::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
@@ -3153,7 +3153,7 @@ const schema::Entity* GlBlendEquationSeparatei::StaticSchema() {
 // GlBlendEquationSeparateiEXT:
 // gles.GlBlendEquationSeparateiEXT{$,Uint32,Uint32,Uint32}
 void GlBlendEquationSeparateiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
@@ -3177,7 +3177,7 @@ const schema::Entity* GlBlendEquationSeparateiEXT::StaticSchema() {
 // GlBlendEquationSeparateiOES:
 // gles.GlBlendEquationSeparateiOES{$,Uint32,Uint32,Uint32}
 void GlBlendEquationSeparateiOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mModeRGB);
     e->Uint32(this->mModeAlpha);
@@ -3269,7 +3269,7 @@ const schema::Entity* GlBlendFunc::StaticSchema() {
 // GlBlendFuncSeparate:
 // gles.GlBlendFuncSeparate{$,Uint32,Uint32,Uint32,Uint32}
 void GlBlendFuncSeparate::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSrcFactorRgb);
     e->Uint32(this->mDstFactorRgb);
     e->Uint32(this->mSrcFactorAlpha);
@@ -3295,7 +3295,7 @@ const schema::Entity* GlBlendFuncSeparate::StaticSchema() {
 // GlBlendFuncSeparateOES:
 // gles.GlBlendFuncSeparateOES{$,Uint32,Uint32,Uint32,Uint32}
 void GlBlendFuncSeparateOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSrcRGB);
     e->Uint32(this->mDstRGB);
     e->Uint32(this->mSrcAlpha);
@@ -3321,7 +3321,7 @@ const schema::Entity* GlBlendFuncSeparateOES::StaticSchema() {
 // GlBlendFuncSeparatei:
 // gles.GlBlendFuncSeparatei{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlBlendFuncSeparatei::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrcRGB);
     e->Uint32(this->mDstRGB);
@@ -3349,7 +3349,7 @@ const schema::Entity* GlBlendFuncSeparatei::StaticSchema() {
 // GlBlendFuncSeparateiEXT:
 // gles.GlBlendFuncSeparateiEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlBlendFuncSeparateiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrcRGB);
     e->Uint32(this->mDstRGB);
@@ -3377,7 +3377,7 @@ const schema::Entity* GlBlendFuncSeparateiEXT::StaticSchema() {
 // GlBlendFuncSeparateiOES:
 // gles.GlBlendFuncSeparateiOES{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlBlendFuncSeparateiOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrcRGB);
     e->Uint32(this->mDstRGB);
@@ -3405,7 +3405,7 @@ const schema::Entity* GlBlendFuncSeparateiOES::StaticSchema() {
 // GlBlendFunci:
 // gles.GlBlendFunci{$,Uint32,Uint32,Uint32}
 void GlBlendFunci::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
@@ -3429,7 +3429,7 @@ const schema::Entity* GlBlendFunci::StaticSchema() {
 // GlBlendFunciEXT:
 // gles.GlBlendFunciEXT{$,Uint32,Uint32,Uint32}
 void GlBlendFunciEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
@@ -3453,7 +3453,7 @@ const schema::Entity* GlBlendFunciEXT::StaticSchema() {
 // GlBlendFunciOES:
 // gles.GlBlendFunciOES{$,Uint32,Uint32,Uint32}
 void GlBlendFunciOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuf);
     e->Uint32(this->mSrc);
     e->Uint32(this->mDst);
@@ -3494,7 +3494,7 @@ const schema::Entity* GlBlendParameteriNV::StaticSchema() {
 // GlBlitFramebuffer:
 // gles.GlBlitFramebuffer{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 void GlBlitFramebuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSrcX0);
     e->Int32(this->mSrcY0);
     e->Int32(this->mSrcX1);
@@ -3532,7 +3532,7 @@ const schema::Entity* GlBlitFramebuffer::StaticSchema() {
 // GlBlitFramebufferANGLE:
 // gles.GlBlitFramebufferANGLE{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 void GlBlitFramebufferANGLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSrcX0);
     e->Int32(this->mSrcY0);
     e->Int32(this->mSrcX1);
@@ -3570,7 +3570,7 @@ const schema::Entity* GlBlitFramebufferANGLE::StaticSchema() {
 // GlBlitFramebufferNV:
 // gles.GlBlitFramebufferNV{$,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32}
 void GlBlitFramebufferNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSrcX0);
     e->Int32(this->mSrcY0);
     e->Int32(this->mSrcX1);
@@ -3608,10 +3608,10 @@ const schema::Entity* GlBlitFramebufferNV::StaticSchema() {
 // GlBufferData:
 // gles.GlBufferData{$,Uint32,Int32,$,Uint32}
 void GlBufferData::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
     e->Uint32(this->mUsage);
 }
 const schema::Entity* GlBufferData::StaticSchema() {
@@ -3649,10 +3649,10 @@ const schema::Entity* Void__CP::StaticSchema() {
 // GlBufferStorageEXT:
 // gles.GlBufferStorageEXT{$,Uint32,Int32,$,Uint32}
 void GlBufferStorageEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
     e->Uint32(this->mFlag);
 }
 const schema::Entity* GlBufferStorageEXT::StaticSchema() {
@@ -3675,11 +3675,11 @@ const schema::Entity* GlBufferStorageEXT::StaticSchema() {
 // GlBufferSubData:
 // gles.GlBufferSubData{$,Uint32,Int32,Int32,$}
 void GlBufferSubData::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mOffset);
     e->Int32(this->mSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlBufferSubData::StaticSchema() {
     static schema::Entity entity {
@@ -3751,7 +3751,7 @@ const schema::Entity* GlClear::StaticSchema() {
 // GlClearBufferfi:
 // gles.GlClearBufferfi{$,Uint32,Int32,Float32,Int32}
 void GlClearBufferfi::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuffer);
     e->Int32(this->mDrawbuffer);
     e->Float32(this->mDepth);
@@ -3777,10 +3777,10 @@ const schema::Entity* GlClearBufferfi::StaticSchema() {
 // GlClearBufferfv:
 // gles.GlClearBufferfv{$,Uint32,Int32,$}
 void GlClearBufferfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuffer);
     e->Int32(this->mDrawbuffer);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlClearBufferfv::StaticSchema() {
     static schema::Entity entity {
@@ -3801,10 +3801,10 @@ const schema::Entity* GlClearBufferfv::StaticSchema() {
 // GlClearBufferiv:
 // gles.GlClearBufferiv{$,Uint32,Int32,$}
 void GlClearBufferiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuffer);
     e->Int32(this->mDrawbuffer);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlClearBufferiv::StaticSchema() {
     static schema::Entity entity {
@@ -3825,10 +3825,10 @@ const schema::Entity* GlClearBufferiv::StaticSchema() {
 // GlClearBufferuiv:
 // gles.GlClearBufferuiv{$,Uint32,Int32,$}
 void GlClearBufferuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mBuffer);
     e->Int32(this->mDrawbuffer);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlClearBufferuiv::StaticSchema() {
     static schema::Entity entity {
@@ -3849,7 +3849,7 @@ const schema::Entity* GlClearBufferuiv::StaticSchema() {
 // GlClearColor:
 // gles.GlClearColor{$,Float32,Float32,Float32,Float32}
 void GlClearColor::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mR);
     e->Float32(this->mG);
     e->Float32(this->mB);
@@ -3875,7 +3875,7 @@ const schema::Entity* GlClearColor::StaticSchema() {
 // GlClearColorx:
 // gles.GlClearColorx{$,Int32,Int32,Int32,Int32}
 void GlClearColorx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mRed);
     e->Int32(this->mGreen);
     e->Int32(this->mBlue);
@@ -3901,7 +3901,7 @@ const schema::Entity* GlClearColorx::StaticSchema() {
 // GlClearColorxOES:
 // gles.GlClearColorxOES{$,Int32,Int32,Int32,Int32}
 void GlClearColorxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mRed);
     e->Int32(this->mGreen);
     e->Int32(this->mBlue);
@@ -4023,7 +4023,7 @@ const schema::Entity* GlClientActiveTexture::StaticSchema() {
 // GlClientWaitSync:
 // gles.GlClientWaitSync{$,Uint64,Uint32,Uint64,Uint32}
 void GlClientWaitSync::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mSyncFlags);
     e->Uint64(this->mTimeout);
@@ -4049,7 +4049,7 @@ const schema::Entity* GlClientWaitSync::StaticSchema() {
 // GlClientWaitSyncAPPLE:
 // gles.GlClientWaitSyncAPPLE{$,Uint64,Uint32,Uint64,Uint32}
 void GlClientWaitSyncAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mFlag);
     e->Uint64(this->mTimeout);
@@ -4177,7 +4177,7 @@ const schema::Entity* GlClipPlanexOES::StaticSchema() {
 // GlColor4f:
 // gles.GlColor4f{$,Float32,Float32,Float32,Float32}
 void GlColor4f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mRed);
     e->Float32(this->mGreen);
     e->Float32(this->mBlue);
@@ -4203,7 +4203,7 @@ const schema::Entity* GlColor4f::StaticSchema() {
 // GlColor4ub:
 // gles.GlColor4ub{$,Uint8,Uint8,Uint8,Uint8}
 void GlColor4ub::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint8(this->mRed);
     e->Uint8(this->mGreen);
     e->Uint8(this->mBlue);
@@ -4229,7 +4229,7 @@ const schema::Entity* GlColor4ub::StaticSchema() {
 // GlColor4x:
 // gles.GlColor4x{$,Int32,Int32,Int32,Int32}
 void GlColor4x::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mRed);
     e->Int32(this->mGreen);
     e->Int32(this->mBlue);
@@ -4255,7 +4255,7 @@ const schema::Entity* GlColor4x::StaticSchema() {
 // GlColor4xOES:
 // gles.GlColor4xOES{$,Int32,Int32,Int32,Int32}
 void GlColor4xOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mRed);
     e->Int32(this->mGreen);
     e->Int32(this->mBlue);
@@ -4281,7 +4281,7 @@ const schema::Entity* GlColor4xOES::StaticSchema() {
 // GlColorMask:
 // gles.GlColorMask{$,Uint8,Uint8,Uint8,Uint8}
 void GlColorMask::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint8(this->mRed);
     e->Uint8(this->mGreen);
     e->Uint8(this->mBlue);
@@ -4307,7 +4307,7 @@ const schema::Entity* GlColorMask::StaticSchema() {
 // GlColorMaski:
 // gles.GlColorMaski{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 void GlColorMaski::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint8(this->mR);
     e->Uint8(this->mG);
@@ -4335,7 +4335,7 @@ const schema::Entity* GlColorMaski::StaticSchema() {
 // GlColorMaskiEXT:
 // gles.GlColorMaskiEXT{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 void GlColorMaskiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint8(this->mR);
     e->Uint8(this->mG);
@@ -4363,7 +4363,7 @@ const schema::Entity* GlColorMaskiEXT::StaticSchema() {
 // GlColorMaskiOES:
 // gles.GlColorMaskiOES{$,Uint32,Uint8,Uint8,Uint8,Uint8}
 void GlColorMaskiOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint8(this->mR);
     e->Uint8(this->mG);
@@ -4391,11 +4391,11 @@ const schema::Entity* GlColorMaskiOES::StaticSchema() {
 // GlColorPointer:
 // gles.GlColorPointer{$,Int32,Uint32,Int32,$}
 void GlColorPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlColorPointer::StaticSchema() {
     static schema::Entity entity {
@@ -4417,11 +4417,11 @@ const schema::Entity* GlColorPointer::StaticSchema() {
 // GlColorPointerBounds:
 // gles.GlColorPointerBounds{$,Int32,Uint32,Int32,$,Int32}
 void GlColorPointerBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlColorPointerBounds::StaticSchema() {
@@ -4476,7 +4476,7 @@ const schema::Entity* TexturePointer::StaticSchema() {
 // GlCompressedTexImage2D:
 // gles.GlCompressedTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,$}
 void GlCompressedTexImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mFormat);
@@ -4484,7 +4484,7 @@ void GlCompressedTexImage2D::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Int32(this->mBorder);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexImage2D::StaticSchema() {
     static schema::Entity entity {
@@ -4510,7 +4510,7 @@ const schema::Entity* GlCompressedTexImage2D::StaticSchema() {
 // GlCompressedTexImage3D:
 // gles.GlCompressedTexImage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
 void GlCompressedTexImage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mInternalformat);
@@ -4519,7 +4519,7 @@ void GlCompressedTexImage3D::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Int32(this->mBorder);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexImage3D::StaticSchema() {
     static schema::Entity entity {
@@ -4546,7 +4546,7 @@ const schema::Entity* GlCompressedTexImage3D::StaticSchema() {
 // GlCompressedTexImage3DOES:
 // gles.GlCompressedTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32,$}
 void GlCompressedTexImage3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mInternalformat);
@@ -4555,7 +4555,7 @@ void GlCompressedTexImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Int32(this->mBorder);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
@@ -4582,7 +4582,7 @@ const schema::Entity* GlCompressedTexImage3DOES::StaticSchema() {
 // GlCompressedTexSubImage2D:
 // gles.GlCompressedTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 void GlCompressedTexSubImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -4591,7 +4591,7 @@ void GlCompressedTexSubImage2D::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Uint32(this->mFormat);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
@@ -4618,7 +4618,7 @@ const schema::Entity* GlCompressedTexSubImage2D::StaticSchema() {
 // GlCompressedTexSubImage3D:
 // gles.GlCompressedTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 void GlCompressedTexSubImage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -4629,7 +4629,7 @@ void GlCompressedTexSubImage3D::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint32(this->mFormat);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
@@ -4658,7 +4658,7 @@ const schema::Entity* GlCompressedTexSubImage3D::StaticSchema() {
 // GlCompressedTexSubImage3DOES:
 // gles.GlCompressedTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Int32,$}
 void GlCompressedTexSubImage3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -4669,7 +4669,7 @@ void GlCompressedTexSubImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint32(this->mFormat);
     e->Int32(this->mImageSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlCompressedTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
@@ -4698,7 +4698,7 @@ const schema::Entity* GlCompressedTexSubImage3DOES::StaticSchema() {
 // GlCopyBufferSubData:
 // gles.GlCopyBufferSubData{$,Uint32,Uint32,Int32,Int32,Int32}
 void GlCopyBufferSubData::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mReadTarget);
     e->Uint32(this->mWriteTarget);
     e->Int32(this->mReadOffset);
@@ -4726,7 +4726,7 @@ const schema::Entity* GlCopyBufferSubData::StaticSchema() {
 // GlCopyBufferSubDataNV:
 // gles.GlCopyBufferSubDataNV{$,Uint32,Uint32,Int32,Int32,Int32}
 void GlCopyBufferSubDataNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mReadTarget);
     e->Uint32(this->mWriteTarget);
     e->Int32(this->mReadOffset);
@@ -4754,7 +4754,7 @@ const schema::Entity* GlCopyBufferSubDataNV::StaticSchema() {
 // GlCopyImageSubData:
 // gles.GlCopyImageSubData{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyImageSubData::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSrcName);
     e->Uint32(this->mSrcTarget);
     e->Int32(this->mSrcLevel);
@@ -4802,7 +4802,7 @@ const schema::Entity* GlCopyImageSubData::StaticSchema() {
 // GlCopyImageSubDataEXT:
 // gles.GlCopyImageSubDataEXT{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyImageSubDataEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSrcName);
     e->Uint32(this->mSrcTarget);
     e->Int32(this->mSrcLevel);
@@ -4850,7 +4850,7 @@ const schema::Entity* GlCopyImageSubDataEXT::StaticSchema() {
 // GlCopyImageSubDataOES:
 // gles.GlCopyImageSubDataOES{$,Uint32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyImageSubDataOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSrcName);
     e->Uint32(this->mSrcTarget);
     e->Int32(this->mSrcLevel);
@@ -4915,7 +4915,7 @@ const schema::Entity* GlCopyPathNV::StaticSchema() {
 // GlCopyTexImage2D:
 // gles.GlCopyTexImage2D{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyTexImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mFormat);
@@ -4949,7 +4949,7 @@ const schema::Entity* GlCopyTexImage2D::StaticSchema() {
 // GlCopyTexSubImage2D:
 // gles.GlCopyTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyTexSubImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -4983,7 +4983,7 @@ const schema::Entity* GlCopyTexSubImage2D::StaticSchema() {
 // GlCopyTexSubImage3D:
 // gles.GlCopyTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyTexSubImage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -5019,7 +5019,7 @@ const schema::Entity* GlCopyTexSubImage3D::StaticSchema() {
 // GlCopyTexSubImage3DOES:
 // gles.GlCopyTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlCopyTexSubImage3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -5055,7 +5055,7 @@ const schema::Entity* GlCopyTexSubImage3DOES::StaticSchema() {
 // GlCopyTextureLevelsAPPLE:
 // gles.GlCopyTextureLevelsAPPLE{$,Uint32,Uint32,Int32,Int32}
 void GlCopyTextureLevelsAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDestinationTexture);
     e->Uint32(this->mSourceTexture);
     e->Int32(this->mSourceBaseLevel);
@@ -5081,14 +5081,14 @@ const schema::Entity* GlCopyTextureLevelsAPPLE::StaticSchema() {
 // GlCoverFillPathInstancedNV:
 // gles.GlCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
 void GlCoverFillPathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Uint32(this->mCoverMode);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -5130,14 +5130,14 @@ const schema::Entity* GlCoverFillPathNV::StaticSchema() {
 // GlCoverStrokePathInstancedNV:
 // gles.GlCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,$}
 void GlCoverStrokePathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Uint32(this->mCoverMode);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -5294,10 +5294,10 @@ const schema::Entity* GlCreateShader::StaticSchema() {
 // GlCreateShaderProgramv:
 // gles.GlCreateShaderProgramv{$,Uint32,Int32,$,Uint32}
 void GlCreateShaderProgramv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mCount);
-    e->Encode(this->mStrings);
+    e->Struct(this->mStrings);
     e->Uint32(this->mResult);
 }
 const schema::Entity* GlCreateShaderProgramv::StaticSchema() {
@@ -5320,10 +5320,10 @@ const schema::Entity* GlCreateShaderProgramv::StaticSchema() {
 // GlCreateShaderProgramvEXT:
 // gles.GlCreateShaderProgramvEXT{$,Uint32,Int32,$,Uint32}
 void GlCreateShaderProgramvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mCount);
-    e->Encode(this->mStrings);
+    e->Struct(this->mStrings);
     e->Uint32(this->mResult);
 }
 const schema::Entity* GlCreateShaderProgramvEXT::StaticSchema() {
@@ -5412,12 +5412,12 @@ const schema::Entity* GlDebugMessageCallbackKHR::StaticSchema() {
 // GlDebugMessageControl:
 // gles.GlDebugMessageControl{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
 void GlDebugMessageControl::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mType);
     e->Uint32(this->mSeverity);
     e->Int32(this->mCount);
-    e->Encode(this->mIds);
+    e->Struct(this->mIds);
     e->Uint8(this->mEnabled);
 }
 const schema::Entity* GlDebugMessageControl::StaticSchema() {
@@ -5442,12 +5442,12 @@ const schema::Entity* GlDebugMessageControl::StaticSchema() {
 // GlDebugMessageControlKHR:
 // gles.GlDebugMessageControlKHR{$,Uint32,Uint32,Uint32,Int32,$,Uint8}
 void GlDebugMessageControlKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mType);
     e->Uint32(this->mSeverity);
     e->Int32(this->mCount);
-    e->Encode(this->mIds);
+    e->Struct(this->mIds);
     e->Uint8(this->mEnabled);
 }
 const schema::Entity* GlDebugMessageControlKHR::StaticSchema() {
@@ -5472,13 +5472,13 @@ const schema::Entity* GlDebugMessageControlKHR::StaticSchema() {
 // GlDebugMessageInsert:
 // gles.GlDebugMessageInsert{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
 void GlDebugMessageInsert::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mType);
     e->Uint32(this->mId);
     e->Uint32(this->mSeverity);
     e->Int32(this->mLength);
-    e->Encode(this->mMessage);
+    e->Struct(this->mMessage);
 }
 const schema::Entity* GlDebugMessageInsert::StaticSchema() {
     static schema::Entity entity {
@@ -5502,13 +5502,13 @@ const schema::Entity* GlDebugMessageInsert::StaticSchema() {
 // GlDebugMessageInsertKHR:
 // gles.GlDebugMessageInsertKHR{$,Uint32,Uint32,Uint32,Uint32,Int32,$}
 void GlDebugMessageInsertKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mType);
     e->Uint32(this->mId);
     e->Uint32(this->mSeverity);
     e->Int32(this->mLength);
-    e->Encode(this->mMessage);
+    e->Struct(this->mMessage);
 }
 const schema::Entity* GlDebugMessageInsertKHR::StaticSchema() {
     static schema::Entity entity {
@@ -6038,10 +6038,10 @@ const schema::Entity* GlDepthMask::StaticSchema() {
 // GlDepthRangeArrayfvNV:
 // gles.GlDepthRangeArrayfvNV{$,Uint32,Int32,$}
 void GlDepthRangeArrayfvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirst);
     e->Int32(this->mCount);
-    e->Encode(this->mV);
+    e->Struct(this->mV);
 }
 const schema::Entity* GlDepthRangeArrayfvNV::StaticSchema() {
     static schema::Entity entity {
@@ -6062,7 +6062,7 @@ const schema::Entity* GlDepthRangeArrayfvNV::StaticSchema() {
 // GlDepthRangeIndexedfNV:
 // gles.GlDepthRangeIndexedfNV{$,Uint32,Float32,Float32}
 void GlDepthRangeIndexedfNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Float32(this->mN);
     e->Float32(this->mF);
@@ -6303,10 +6303,10 @@ const schema::Entity* GlDisableiOES::StaticSchema() {
 // GlDiscardFramebufferEXT:
 // gles.GlDiscardFramebufferEXT{$,Uint32,Int32,$}
 void GlDiscardFramebufferEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mNumAttachments);
-    e->Encode(this->mAttachments);
+    e->Struct(this->mAttachments);
 }
 const schema::Entity* GlDiscardFramebufferEXT::StaticSchema() {
     static schema::Entity entity {
@@ -6327,7 +6327,7 @@ const schema::Entity* GlDiscardFramebufferEXT::StaticSchema() {
 // GlDispatchCompute:
 // gles.GlDispatchCompute{$,Uint32,Uint32,Uint32}
 void GlDispatchCompute::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mNumGroupsX);
     e->Uint32(this->mNumGroupsY);
     e->Uint32(this->mNumGroupsZ);
@@ -6367,7 +6367,7 @@ const schema::Entity* GlDispatchComputeIndirect::StaticSchema() {
 // GlDrawArrays:
 // gles.GlDrawArrays{$,Uint32,Int32,Int32}
 void GlDrawArrays::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mFirstIndex);
     e->Int32(this->mIndicesCount);
@@ -6408,7 +6408,7 @@ const schema::Entity* GlDrawArraysIndirect::StaticSchema() {
 // GlDrawArraysInstanced:
 // gles.GlDrawArraysInstanced{$,Uint32,Int32,Int32,Int32}
 void GlDrawArraysInstanced::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mFirstIndex);
     e->Int32(this->mIndicesCount);
@@ -6434,7 +6434,7 @@ const schema::Entity* GlDrawArraysInstanced::StaticSchema() {
 // GlDrawArraysInstancedANGLE:
 // gles.GlDrawArraysInstancedANGLE{$,Uint32,Int32,Int32,Int32}
 void GlDrawArraysInstancedANGLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mFirst);
     e->Int32(this->mCount);
@@ -6460,7 +6460,7 @@ const schema::Entity* GlDrawArraysInstancedANGLE::StaticSchema() {
 // GlDrawArraysInstancedBaseInstanceEXT:
 // gles.GlDrawArraysInstancedBaseInstanceEXT{$,Uint32,Int32,Int32,Int32,Uint32}
 void GlDrawArraysInstancedBaseInstanceEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mFirst);
     e->Int32(this->mCount);
@@ -6488,7 +6488,7 @@ const schema::Entity* GlDrawArraysInstancedBaseInstanceEXT::StaticSchema() {
 // GlDrawArraysInstancedEXT:
 // gles.GlDrawArraysInstancedEXT{$,Uint32,Int32,Int32,Int32}
 void GlDrawArraysInstancedEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mStart);
     e->Int32(this->mCount);
@@ -6514,7 +6514,7 @@ const schema::Entity* GlDrawArraysInstancedEXT::StaticSchema() {
 // GlDrawArraysInstancedNV:
 // gles.GlDrawArraysInstancedNV{$,Uint32,Int32,Int32,Int32}
 void GlDrawArraysInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mFirst);
     e->Int32(this->mCount);
@@ -6574,10 +6574,10 @@ const schema::Entity* GlDrawBuffersEXT::StaticSchema() {
 // GlDrawBuffersIndexedEXT:
 // gles.GlDrawBuffersIndexedEXT{$,Int32,$,$}
 void GlDrawBuffersIndexedEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mN);
-    e->Encode(this->mLocation);
-    e->Encode(this->mIndices);
+    e->Struct(this->mLocation);
+    e->Struct(this->mIndices);
 }
 const schema::Entity* GlDrawBuffersIndexedEXT::StaticSchema() {
     static schema::Entity entity {
@@ -6630,11 +6630,11 @@ const schema::Entity* IndicesPointer::StaticSchema() {
 // GlDrawElements:
 // gles.GlDrawElements{$,Uint32,Int32,Uint32,$}
 void GlDrawElements::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
 }
 const schema::Entity* GlDrawElements::StaticSchema() {
     static schema::Entity entity {
@@ -6656,11 +6656,11 @@ const schema::Entity* GlDrawElements::StaticSchema() {
 // GlDrawElementsBaseVertex:
 // gles.GlDrawElementsBaseVertex{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsBaseVertex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBaseVertex);
 }
 const schema::Entity* GlDrawElementsBaseVertex::StaticSchema() {
@@ -6684,11 +6684,11 @@ const schema::Entity* GlDrawElementsBaseVertex::StaticSchema() {
 // GlDrawElementsBaseVertexEXT:
 // gles.GlDrawElementsBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBasevertex);
 }
 const schema::Entity* GlDrawElementsBaseVertexEXT::StaticSchema() {
@@ -6712,11 +6712,11 @@ const schema::Entity* GlDrawElementsBaseVertexEXT::StaticSchema() {
 // GlDrawElementsBaseVertexOES:
 // gles.GlDrawElementsBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsBaseVertexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBasevertex);
 }
 const schema::Entity* GlDrawElementsBaseVertexOES::StaticSchema() {
@@ -6740,10 +6740,10 @@ const schema::Entity* GlDrawElementsBaseVertexOES::StaticSchema() {
 // GlDrawElementsIndirect:
 // gles.GlDrawElementsIndirect{$,Uint32,Uint32,$}
 void GlDrawElementsIndirect::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndirect);
+    e->Struct(this->mIndirect);
 }
 const schema::Entity* GlDrawElementsIndirect::StaticSchema() {
     static schema::Entity entity {
@@ -6764,11 +6764,11 @@ const schema::Entity* GlDrawElementsIndirect::StaticSchema() {
 // GlDrawElementsInstanced:
 // gles.GlDrawElementsInstanced{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsInstanced::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstanceCount);
 }
 const schema::Entity* GlDrawElementsInstanced::StaticSchema() {
@@ -6792,11 +6792,11 @@ const schema::Entity* GlDrawElementsInstanced::StaticSchema() {
 // GlDrawElementsInstancedANGLE:
 // gles.GlDrawElementsInstancedANGLE{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsInstancedANGLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
 }
 const schema::Entity* GlDrawElementsInstancedANGLE::StaticSchema() {
@@ -6820,11 +6820,11 @@ const schema::Entity* GlDrawElementsInstancedANGLE::StaticSchema() {
 // GlDrawElementsInstancedBaseInstanceEXT:
 // gles.GlDrawElementsInstancedBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Uint32}
 void GlDrawElementsInstancedBaseInstanceEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstancecount);
     e->Uint32(this->mBaseinstance);
 }
@@ -6850,11 +6850,11 @@ const schema::Entity* GlDrawElementsInstancedBaseInstanceEXT::StaticSchema() {
 // GlDrawElementsInstancedBaseVertex:
 // gles.GlDrawElementsInstancedBaseVertex{$,Uint32,Int32,Uint32,$,Int32,Int32}
 void GlDrawElementsInstancedBaseVertex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstanceCount);
     e->Int32(this->mBaseVertex);
 }
@@ -6880,11 +6880,11 @@ const schema::Entity* GlDrawElementsInstancedBaseVertex::StaticSchema() {
 // GlDrawElementsInstancedBaseVertexBaseInstanceEXT:
 // gles.GlDrawElementsInstancedBaseVertexBaseInstanceEXT{$,Uint32,Int32,Uint32,$,Int32,Int32,Uint32}
 void GlDrawElementsInstancedBaseVertexBaseInstanceEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstancecount);
     e->Int32(this->mBasevertex);
     e->Uint32(this->mBaseinstance);
@@ -6912,11 +6912,11 @@ const schema::Entity* GlDrawElementsInstancedBaseVertexBaseInstanceEXT::StaticSc
 // GlDrawElementsInstancedBaseVertexEXT:
 // gles.GlDrawElementsInstancedBaseVertexEXT{$,Uint32,Int32,Uint32,$,Int32,Int32}
 void GlDrawElementsInstancedBaseVertexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstancecount);
     e->Int32(this->mBasevertex);
 }
@@ -6942,11 +6942,11 @@ const schema::Entity* GlDrawElementsInstancedBaseVertexEXT::StaticSchema() {
 // GlDrawElementsInstancedBaseVertexOES:
 // gles.GlDrawElementsInstancedBaseVertexOES{$,Uint32,Int32,Uint32,$,Int32,Int32}
 void GlDrawElementsInstancedBaseVertexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mInstancecount);
     e->Int32(this->mBasevertex);
 }
@@ -6972,11 +6972,11 @@ const schema::Entity* GlDrawElementsInstancedBaseVertexOES::StaticSchema() {
 // GlDrawElementsInstancedEXT:
 // gles.GlDrawElementsInstancedEXT{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsInstancedEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
 }
 const schema::Entity* GlDrawElementsInstancedEXT::StaticSchema() {
@@ -7000,11 +7000,11 @@ const schema::Entity* GlDrawElementsInstancedEXT::StaticSchema() {
 // GlDrawElementsInstancedNV:
 // gles.GlDrawElementsInstancedNV{$,Uint32,Int32,Uint32,$,Int32}
 void GlDrawElementsInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
 }
 const schema::Entity* GlDrawElementsInstancedNV::StaticSchema() {
@@ -7028,13 +7028,13 @@ const schema::Entity* GlDrawElementsInstancedNV::StaticSchema() {
 // GlDrawRangeElements:
 // gles.GlDrawRangeElements{$,Uint32,Uint32,Uint32,Int32,Uint32,$}
 void GlDrawRangeElements::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Uint32(this->mStart);
     e->Uint32(this->mEnd);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
 }
 const schema::Entity* GlDrawRangeElements::StaticSchema() {
     static schema::Entity entity {
@@ -7058,13 +7058,13 @@ const schema::Entity* GlDrawRangeElements::StaticSchema() {
 // GlDrawRangeElementsBaseVertex:
 // gles.GlDrawRangeElementsBaseVertex{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 void GlDrawRangeElementsBaseVertex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDrawMode);
     e->Uint32(this->mStart);
     e->Uint32(this->mEnd);
     e->Int32(this->mIndicesCount);
     e->Uint32(this->mIndicesType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBaseVertex);
 }
 const schema::Entity* GlDrawRangeElementsBaseVertex::StaticSchema() {
@@ -7090,13 +7090,13 @@ const schema::Entity* GlDrawRangeElementsBaseVertex::StaticSchema() {
 // GlDrawRangeElementsBaseVertexEXT:
 // gles.GlDrawRangeElementsBaseVertexEXT{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 void GlDrawRangeElementsBaseVertexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Uint32(this->mStart);
     e->Uint32(this->mEnd);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBasevertex);
 }
 const schema::Entity* GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
@@ -7122,13 +7122,13 @@ const schema::Entity* GlDrawRangeElementsBaseVertexEXT::StaticSchema() {
 // GlDrawRangeElementsBaseVertexOES:
 // gles.GlDrawRangeElementsBaseVertexOES{$,Uint32,Uint32,Uint32,Int32,Uint32,$,Int32}
 void GlDrawRangeElementsBaseVertexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Uint32(this->mStart);
     e->Uint32(this->mEnd);
     e->Int32(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mBasevertex);
 }
 const schema::Entity* GlDrawRangeElementsBaseVertexOES::StaticSchema() {
@@ -7154,7 +7154,7 @@ const schema::Entity* GlDrawRangeElementsBaseVertexOES::StaticSchema() {
 // GlDrawTexfOES:
 // gles.GlDrawTexfOES{$,Float32,Float32,Float32,Float32,Float32}
 void GlDrawTexfOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mX);
     e->Float32(this->mY);
     e->Float32(this->mZ);
@@ -7198,7 +7198,7 @@ const schema::Entity* GlDrawTexfvOES::StaticSchema() {
 // GlDrawTexiOES:
 // gles.GlDrawTexiOES{$,Int32,Int32,Int32,Int32,Int32}
 void GlDrawTexiOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -7242,7 +7242,7 @@ const schema::Entity* GlDrawTexivOES::StaticSchema() {
 // GlDrawTexsOES:
 // gles.GlDrawTexsOES{$,Int16,Int16,Int16,Int16,Int16}
 void GlDrawTexsOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int16(this->mX);
     e->Int16(this->mY);
     e->Int16(this->mZ);
@@ -7286,7 +7286,7 @@ const schema::Entity* GlDrawTexsvOES::StaticSchema() {
 // GlDrawTexxOES:
 // gles.GlDrawTexxOES{$,Int32,Int32,Int32,Int32,Int32}
 void GlDrawTexxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -7638,10 +7638,10 @@ const schema::Entity* GlExtGetBufferPointervQCOM::StaticSchema() {
 // GlExtGetBuffersQCOM:
 // gles.GlExtGetBuffersQCOM{$,$,Int32,$}
 void GlExtGetBuffersQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mBuffers);
+    e->Struct(this->mobservations);
+    e->Struct(this->mBuffers);
     e->Int32(this->mMaxBuffers);
-    e->Encode(this->mNumBuffers);
+    e->Struct(this->mNumBuffers);
 }
 const schema::Entity* GlExtGetBuffersQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7662,10 +7662,10 @@ const schema::Entity* GlExtGetBuffersQCOM::StaticSchema() {
 // GlExtGetFramebuffersQCOM:
 // gles.GlExtGetFramebuffersQCOM{$,$,Int32,$}
 void GlExtGetFramebuffersQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mFramebuffers);
+    e->Struct(this->mobservations);
+    e->Struct(this->mFramebuffers);
     e->Int32(this->mMaxFramebuffers);
-    e->Encode(this->mNumFramebuffers);
+    e->Struct(this->mNumFramebuffers);
 }
 const schema::Entity* GlExtGetFramebuffersQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7686,11 +7686,11 @@ const schema::Entity* GlExtGetFramebuffersQCOM::StaticSchema() {
 // GlExtGetProgramBinarySourceQCOM:
 // gles.GlExtGetProgramBinarySourceQCOM{$,Uint32,Uint32,$,$}
 void GlExtGetProgramBinarySourceQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mShadertype);
-    e->Encode(this->mSource);
-    e->Encode(this->mLength);
+    e->Struct(this->mSource);
+    e->Struct(this->mLength);
 }
 const schema::Entity* GlExtGetProgramBinarySourceQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7727,10 +7727,10 @@ const schema::Entity* ProgramId__P::StaticSchema() {
 // GlExtGetProgramsQCOM:
 // gles.GlExtGetProgramsQCOM{$,$,Int32,$}
 void GlExtGetProgramsQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPrograms);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPrograms);
     e->Int32(this->mMaxPrograms);
-    e->Encode(this->mNumPrograms);
+    e->Struct(this->mNumPrograms);
 }
 const schema::Entity* GlExtGetProgramsQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7766,10 +7766,10 @@ const schema::Entity* RenderbufferId__P::StaticSchema() {
 // GlExtGetRenderbuffersQCOM:
 // gles.GlExtGetRenderbuffersQCOM{$,$,Int32,$}
 void GlExtGetRenderbuffersQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mRenderbuffers);
+    e->Struct(this->mobservations);
+    e->Struct(this->mRenderbuffers);
     e->Int32(this->mMaxRenderbuffers);
-    e->Encode(this->mNumRenderbuffers);
+    e->Struct(this->mNumRenderbuffers);
 }
 const schema::Entity* GlExtGetRenderbuffersQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7805,10 +7805,10 @@ const schema::Entity* ShaderId__P::StaticSchema() {
 // GlExtGetShadersQCOM:
 // gles.GlExtGetShadersQCOM{$,$,Int32,$}
 void GlExtGetShadersQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mShaders);
+    e->Struct(this->mobservations);
+    e->Struct(this->mShaders);
     e->Int32(this->mMaxShaders);
-    e->Encode(this->mNumShaders);
+    e->Struct(this->mNumShaders);
 }
 const schema::Entity* GlExtGetShadersQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7829,12 +7829,12 @@ const schema::Entity* GlExtGetShadersQCOM::StaticSchema() {
 // GlExtGetTexLevelParameterivQCOM:
 // gles.GlExtGetTexLevelParameterivQCOM{$,Uint32,Uint32,Int32,Uint32,$}
 void GlExtGetTexLevelParameterivQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mFace);
     e->Int32(this->mLevel);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlExtGetTexLevelParameterivQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7857,7 +7857,7 @@ const schema::Entity* GlExtGetTexLevelParameterivQCOM::StaticSchema() {
 // GlExtGetTexSubImageQCOM:
 // gles.GlExtGetTexSubImageQCOM{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlExtGetTexSubImageQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -7868,7 +7868,7 @@ void GlExtGetTexSubImageQCOM::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mTexels);
+    e->Struct(this->mTexels);
 }
 const schema::Entity* GlExtGetTexSubImageQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7912,10 +7912,10 @@ const schema::Entity* TextureId__P::StaticSchema() {
 // GlExtGetTexturesQCOM:
 // gles.GlExtGetTexturesQCOM{$,$,Int32,$}
 void GlExtGetTexturesQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mTextures);
+    e->Struct(this->mobservations);
+    e->Struct(this->mTextures);
     e->Int32(this->mMaxTextures);
-    e->Encode(this->mNumTextures);
+    e->Struct(this->mNumTextures);
 }
 const schema::Entity* GlExtGetTexturesQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -7953,7 +7953,7 @@ const schema::Entity* GlExtIsProgramBinaryQCOM::StaticSchema() {
 // GlExtTexObjectStateOverrideiQCOM:
 // gles.GlExtTexObjectStateOverrideiQCOM{$,Uint32,Uint32,Int32}
 void GlExtTexObjectStateOverrideiQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -7977,7 +7977,7 @@ const schema::Entity* GlExtTexObjectStateOverrideiQCOM::StaticSchema() {
 // GlFenceSync:
 // gles.GlFenceSync{$,Uint32,Uint32,Uint64}
 void GlFenceSync::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCondition);
     e->Uint32(this->mSyncFlags);
     e->Uint64(this->mResult);
@@ -8001,7 +8001,7 @@ const schema::Entity* GlFenceSync::StaticSchema() {
 // GlFenceSyncAPPLE:
 // gles.GlFenceSyncAPPLE{$,Uint32,Uint32,Uint64}
 void GlFenceSyncAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCondition);
     e->Uint32(this->mFlag);
     e->Uint64(this->mResult);
@@ -8071,7 +8071,7 @@ const schema::Entity* GlFlush::StaticSchema() {
 // GlFlushMappedBufferRange:
 // gles.GlFlushMappedBufferRange{$,Uint32,Int32,Int32}
 void GlFlushMappedBufferRange::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
@@ -8095,7 +8095,7 @@ const schema::Entity* GlFlushMappedBufferRange::StaticSchema() {
 // GlFlushMappedBufferRangeEXT:
 // gles.GlFlushMappedBufferRangeEXT{$,Uint32,Int32,Int32}
 void GlFlushMappedBufferRangeEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
@@ -8237,7 +8237,7 @@ const schema::Entity* GlFragmentCoverageColorNV::StaticSchema() {
 // GlFramebufferParameteri:
 // gles.GlFramebufferParameteri{$,Uint32,Uint32,Int32}
 void GlFramebufferParameteri::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -8261,7 +8261,7 @@ const schema::Entity* GlFramebufferParameteri::StaticSchema() {
 // GlFramebufferRenderbuffer:
 // gles.GlFramebufferRenderbuffer{$,Uint32,Uint32,Uint32,Uint32}
 void GlFramebufferRenderbuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
     e->Uint32(this->mFramebufferAttachment);
     e->Uint32(this->mRenderbufferTarget);
@@ -8287,7 +8287,7 @@ const schema::Entity* GlFramebufferRenderbuffer::StaticSchema() {
 // GlFramebufferRenderbufferOES:
 // gles.GlFramebufferRenderbufferOES{$,Uint32,Uint32,Uint32,Uint32}
 void GlFramebufferRenderbufferOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mRenderbuffertarget);
@@ -8313,11 +8313,11 @@ const schema::Entity* GlFramebufferRenderbufferOES::StaticSchema() {
 // GlFramebufferSampleLocationsfvNV:
 // gles.GlFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
 void GlFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mStart);
     e->Int32(this->mCount);
-    e->Encode(this->mV);
+    e->Struct(this->mV);
 }
 const schema::Entity* GlFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
@@ -8339,7 +8339,7 @@ const schema::Entity* GlFramebufferSampleLocationsfvNV::StaticSchema() {
 // GlFramebufferTexture:
 // gles.GlFramebufferTexture{$,Uint32,Uint32,Uint32,Int32}
 void GlFramebufferTexture::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTexture);
@@ -8365,7 +8365,7 @@ const schema::Entity* GlFramebufferTexture::StaticSchema() {
 // GlFramebufferTexture2D:
 // gles.GlFramebufferTexture2D{$,Uint32,Uint32,Uint32,Uint32,Int32}
 void GlFramebufferTexture2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
     e->Uint32(this->mFramebufferAttachment);
     e->Uint32(this->mTextureTarget);
@@ -8393,7 +8393,7 @@ const schema::Entity* GlFramebufferTexture2D::StaticSchema() {
 // GlFramebufferTexture2DMultisampleEXT:
 // gles.GlFramebufferTexture2DMultisampleEXT{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 void GlFramebufferTexture2DMultisampleEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTextarget);
@@ -8423,7 +8423,7 @@ const schema::Entity* GlFramebufferTexture2DMultisampleEXT::StaticSchema() {
 // GlFramebufferTexture2DMultisampleIMG:
 // gles.GlFramebufferTexture2DMultisampleIMG{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 void GlFramebufferTexture2DMultisampleIMG::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTextarget);
@@ -8453,7 +8453,7 @@ const schema::Entity* GlFramebufferTexture2DMultisampleIMG::StaticSchema() {
 // GlFramebufferTexture2DOES:
 // gles.GlFramebufferTexture2DOES{$,Uint32,Uint32,Uint32,Uint32,Int32}
 void GlFramebufferTexture2DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTextarget);
@@ -8481,7 +8481,7 @@ const schema::Entity* GlFramebufferTexture2DOES::StaticSchema() {
 // GlFramebufferTexture3DOES:
 // gles.GlFramebufferTexture3DOES{$,Uint32,Uint32,Uint32,Uint32,Int32,Int32}
 void GlFramebufferTexture3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTextarget);
@@ -8511,7 +8511,7 @@ const schema::Entity* GlFramebufferTexture3DOES::StaticSchema() {
 // GlFramebufferTextureEXT:
 // gles.GlFramebufferTextureEXT{$,Uint32,Uint32,Uint32,Int32}
 void GlFramebufferTextureEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTexture);
@@ -8537,7 +8537,7 @@ const schema::Entity* GlFramebufferTextureEXT::StaticSchema() {
 // GlFramebufferTextureLayer:
 // gles.GlFramebufferTextureLayer{$,Uint32,Uint32,Uint32,Int32,Int32}
 void GlFramebufferTextureLayer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTexture);
@@ -8565,7 +8565,7 @@ const schema::Entity* GlFramebufferTextureLayer::StaticSchema() {
 // GlFramebufferTextureMultiviewOVR:
 // gles.GlFramebufferTextureMultiviewOVR{$,Uint32,Uint32,Uint32,Int32,Int32,Int32}
 void GlFramebufferTextureMultiviewOVR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTexture);
@@ -8595,7 +8595,7 @@ const schema::Entity* GlFramebufferTextureMultiviewOVR::StaticSchema() {
 // GlFramebufferTextureOES:
 // gles.GlFramebufferTextureOES{$,Uint32,Uint32,Uint32,Int32}
 void GlFramebufferTextureOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mTexture);
@@ -8637,7 +8637,7 @@ const schema::Entity* GlFrontFace::StaticSchema() {
 // GlFrustumf:
 // gles.GlFrustumf{$,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlFrustumf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mL);
     e->Float32(this->mR);
     e->Float32(this->mB);
@@ -8667,7 +8667,7 @@ const schema::Entity* GlFrustumf::StaticSchema() {
 // GlFrustumfOES:
 // gles.GlFrustumfOES{$,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlFrustumfOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mL);
     e->Float32(this->mR);
     e->Float32(this->mB);
@@ -8697,7 +8697,7 @@ const schema::Entity* GlFrustumfOES::StaticSchema() {
 // GlFrustumx:
 // gles.GlFrustumx{$,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlFrustumx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mL);
     e->Int32(this->mR);
     e->Int32(this->mB);
@@ -8727,7 +8727,7 @@ const schema::Entity* GlFrustumx::StaticSchema() {
 // GlFrustumxOES:
 // gles.GlFrustumxOES{$,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlFrustumxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mL);
     e->Int32(this->mR);
     e->Int32(this->mB);
@@ -9153,14 +9153,14 @@ const schema::Entity* GlGenerateMipmapOES::StaticSchema() {
 // GlGetActiveAttrib:
 // gles.GlGetActiveAttrib{$,Uint32,Uint32,Int32,$,$,$,$}
 void GlGetActiveAttrib::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mLocation);
     e->Int32(this->mBufferSize);
-    e->Encode(this->mBufferBytesWritten);
-    e->Encode(this->mVectorCount);
-    e->Encode(this->mType);
-    e->Encode(this->mName);
+    e->Struct(this->mBufferBytesWritten);
+    e->Struct(this->mVectorCount);
+    e->Struct(this->mType);
+    e->Struct(this->mName);
 }
 const schema::Entity* GlGetActiveAttrib::StaticSchema() {
     static schema::Entity entity {
@@ -9185,14 +9185,14 @@ const schema::Entity* GlGetActiveAttrib::StaticSchema() {
 // GlGetActiveUniform:
 // gles.GlGetActiveUniform{$,Uint32,Uint32,Int32,$,$,$,$}
 void GlGetActiveUniform::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mIndex);
     e->Int32(this->mBufferSize);
-    e->Encode(this->mBufferBytesWritten);
-    e->Encode(this->mVectorCount);
-    e->Encode(this->mType);
-    e->Encode(this->mName);
+    e->Struct(this->mBufferBytesWritten);
+    e->Struct(this->mVectorCount);
+    e->Struct(this->mType);
+    e->Struct(this->mName);
 }
 const schema::Entity* GlGetActiveUniform::StaticSchema() {
     static schema::Entity entity {
@@ -9217,12 +9217,12 @@ const schema::Entity* GlGetActiveUniform::StaticSchema() {
 // GlGetActiveUniformBlockName:
 // gles.GlGetActiveUniformBlockName{$,Uint32,Uint32,Int32,$,$}
 void GlGetActiveUniformBlockName::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mUniformBlockIndex);
     e->Int32(this->mBufferSize);
-    e->Encode(this->mBufferBytesWritten);
-    e->Encode(this->mName);
+    e->Struct(this->mBufferBytesWritten);
+    e->Struct(this->mName);
 }
 const schema::Entity* GlGetActiveUniformBlockName::StaticSchema() {
     static schema::Entity entity {
@@ -9245,11 +9245,11 @@ const schema::Entity* GlGetActiveUniformBlockName::StaticSchema() {
 // GlGetActiveUniformBlockiv:
 // gles.GlGetActiveUniformBlockiv{$,Uint32,Uint32,Uint32,$}
 void GlGetActiveUniformBlockiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mUniformBlockIndex);
     e->Uint32(this->mParameterName);
-    e->Encode(this->mParameters);
+    e->Struct(this->mParameters);
 }
 const schema::Entity* GlGetActiveUniformBlockiv::StaticSchema() {
     static schema::Entity entity {
@@ -9286,12 +9286,12 @@ const schema::Entity* UniformIndex__CP::StaticSchema() {
 // GlGetActiveUniformsiv:
 // gles.GlGetActiveUniformsiv{$,Uint32,Int32,$,Uint32,$}
 void GlGetActiveUniformsiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mUniformCount);
-    e->Encode(this->mUniformIndices);
+    e->Struct(this->mUniformIndices);
     e->Uint32(this->mParameterName);
-    e->Encode(this->mParameters);
+    e->Struct(this->mParameters);
 }
 const schema::Entity* GlGetActiveUniformsiv::StaticSchema() {
     static schema::Entity entity {
@@ -9314,11 +9314,11 @@ const schema::Entity* GlGetActiveUniformsiv::StaticSchema() {
 // GlGetAttachedShaders:
 // gles.GlGetAttachedShaders{$,Uint32,Int32,$,$}
 void GlGetAttachedShaders::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mBufferLength);
-    e->Encode(this->mShadersLengthWritten);
-    e->Encode(this->mShaders);
+    e->Struct(this->mShadersLengthWritten);
+    e->Struct(this->mShaders);
 }
 const schema::Entity* GlGetAttachedShaders::StaticSchema() {
     static schema::Entity entity {
@@ -9340,7 +9340,7 @@ const schema::Entity* GlGetAttachedShaders::StaticSchema() {
 // GlGetAttribLocation:
 // gles.GlGetAttribLocation{$,Uint32,String,Int32}
 void GlGetAttribLocation::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->String(this->mName);
     e->Int32(this->mResult);
@@ -9364,10 +9364,10 @@ const schema::Entity* GlGetAttribLocation::StaticSchema() {
 // GlGetBooleani_v:
 // gles.GlGetBooleani_v{$,Uint32,Uint32,$}
 void GlGetBooleani_v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mParam);
     e->Uint32(this->mIndex);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetBooleani_v::StaticSchema() {
     static schema::Entity entity {
@@ -9405,10 +9405,10 @@ const schema::Entity* GlGetBooleanv::StaticSchema() {
 // GlGetBufferParameteri64v:
 // gles.GlGetBufferParameteri64v{$,Uint32,Uint32,$}
 void GlGetBufferParameteri64v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetBufferParameteri64v::StaticSchema() {
     static schema::Entity entity {
@@ -9429,10 +9429,10 @@ const schema::Entity* GlGetBufferParameteri64v::StaticSchema() {
 // GlGetBufferParameteriv:
 // gles.GlGetBufferParameteriv{$,Uint32,Uint32,$}
 void GlGetBufferParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetBufferParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -9453,10 +9453,10 @@ const schema::Entity* GlGetBufferParameteriv::StaticSchema() {
 // GlGetBufferPointerv:
 // gles.GlGetBufferPointerv{$,Uint32,Uint32,$}
 void GlGetBufferPointerv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetBufferPointerv::StaticSchema() {
     static schema::Entity entity {
@@ -9477,10 +9477,10 @@ const schema::Entity* GlGetBufferPointerv::StaticSchema() {
 // GlGetBufferPointervOES:
 // gles.GlGetBufferPointervOES{$,Uint32,Uint32,$}
 void GlGetBufferPointervOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetBufferPointervOES::StaticSchema() {
     static schema::Entity entity {
@@ -9586,15 +9586,15 @@ const schema::Entity* GlGetCoverageModulationTableNV::StaticSchema() {
 // GlGetDebugMessageLog:
 // gles.GlGetDebugMessageLog{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
 void GlGetDebugMessageLog::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCount);
     e->Int32(this->mBufSize);
-    e->Encode(this->mSources);
-    e->Encode(this->mTypes);
-    e->Encode(this->mIds);
-    e->Encode(this->mSeverities);
-    e->Encode(this->mLengths);
-    e->Encode(this->mMessageLog);
+    e->Struct(this->mSources);
+    e->Struct(this->mTypes);
+    e->Struct(this->mIds);
+    e->Struct(this->mSeverities);
+    e->Struct(this->mLengths);
+    e->Struct(this->mMessageLog);
     e->Uint32(this->mResult);
 }
 const schema::Entity* GlGetDebugMessageLog::StaticSchema() {
@@ -9622,15 +9622,15 @@ const schema::Entity* GlGetDebugMessageLog::StaticSchema() {
 // GlGetDebugMessageLogKHR:
 // gles.GlGetDebugMessageLogKHR{$,Uint32,Int32,$,$,$,$,$,$,Uint32}
 void GlGetDebugMessageLogKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCount);
     e->Int32(this->mBufSize);
-    e->Encode(this->mSources);
-    e->Encode(this->mTypes);
-    e->Encode(this->mIds);
-    e->Encode(this->mSeverities);
-    e->Encode(this->mLengths);
-    e->Encode(this->mMessageLog);
+    e->Struct(this->mSources);
+    e->Struct(this->mTypes);
+    e->Struct(this->mIds);
+    e->Struct(this->mSeverities);
+    e->Struct(this->mLengths);
+    e->Struct(this->mMessageLog);
     e->Uint32(this->mResult);
 }
 const schema::Entity* GlGetDebugMessageLogKHR::StaticSchema() {
@@ -9658,11 +9658,11 @@ const schema::Entity* GlGetDebugMessageLogKHR::StaticSchema() {
 // GlGetDriverControlStringQCOM:
 // gles.GlGetDriverControlStringQCOM{$,Uint32,Int32,$,$}
 void GlGetDriverControlStringQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mDriverControl);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mDriverControlString);
+    e->Struct(this->mLength);
+    e->Struct(this->mDriverControlString);
 }
 const schema::Entity* GlGetDriverControlStringQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -9684,10 +9684,10 @@ const schema::Entity* GlGetDriverControlStringQCOM::StaticSchema() {
 // GlGetDriverControlsQCOM:
 // gles.GlGetDriverControlsQCOM{$,$,Int32,$}
 void GlGetDriverControlsQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mNum);
+    e->Struct(this->mobservations);
+    e->Struct(this->mNum);
     e->Int32(this->mSize);
-    e->Encode(this->mDriverControls);
+    e->Struct(this->mDriverControls);
 }
 const schema::Entity* GlGetDriverControlsQCOM::StaticSchema() {
     static schema::Entity entity {
@@ -9724,10 +9724,10 @@ const schema::Entity* GlGetError::StaticSchema() {
 // GlGetFenceivNV:
 // gles.GlGetFenceivNV{$,Uint32,Uint32,$}
 void GlGetFenceivNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFence);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetFenceivNV::StaticSchema() {
     static schema::Entity entity {
@@ -9798,10 +9798,10 @@ const schema::Entity* GlGetFixedvOES::StaticSchema() {
 // GlGetFloati_vNV:
 // gles.GlGetFloati_vNV{$,Uint32,Uint32,$}
 void GlGetFloati_vNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlGetFloati_vNV::StaticSchema() {
     static schema::Entity entity {
@@ -9839,7 +9839,7 @@ const schema::Entity* GlGetFloatv::StaticSchema() {
 // GlGetFragDataIndexEXT:
 // gles.GlGetFragDataIndexEXT{$,Uint32,String,Int32}
 void GlGetFragDataIndexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->String(this->mName);
     e->Int32(this->mResult);
@@ -9863,7 +9863,7 @@ const schema::Entity* GlGetFragDataIndexEXT::StaticSchema() {
 // GlGetFragDataLocation:
 // gles.GlGetFragDataLocation{$,Uint32,String,Int32}
 void GlGetFragDataLocation::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->String(this->mName);
     e->Int32(this->mResult);
@@ -9887,11 +9887,11 @@ const schema::Entity* GlGetFragDataLocation::StaticSchema() {
 // GlGetFramebufferAttachmentParameteriv:
 // gles.GlGetFramebufferAttachmentParameteriv{$,Uint32,Uint32,Uint32,$}
 void GlGetFramebufferAttachmentParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFramebufferTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetFramebufferAttachmentParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -9913,11 +9913,11 @@ const schema::Entity* GlGetFramebufferAttachmentParameteriv::StaticSchema() {
 // GlGetFramebufferAttachmentParameterivOES:
 // gles.GlGetFramebufferAttachmentParameterivOES{$,Uint32,Uint32,Uint32,$}
 void GlGetFramebufferAttachmentParameterivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAttachment);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetFramebufferAttachmentParameterivOES::StaticSchema() {
     static schema::Entity entity {
@@ -9939,10 +9939,10 @@ const schema::Entity* GlGetFramebufferAttachmentParameterivOES::StaticSchema() {
 // GlGetFramebufferParameteriv:
 // gles.GlGetFramebufferParameteriv{$,Uint32,Uint32,$}
 void GlGetFramebufferParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetFramebufferParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -10011,7 +10011,7 @@ const schema::Entity* GlGetGraphicsResetStatusKHR::StaticSchema() {
 // GlGetImageHandleNV:
 // gles.GlGetImageHandleNV{$,Uint32,Int32,Uint8,Int32,Uint32,Uint64}
 void GlGetImageHandleNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Int32(this->mLevel);
     e->Uint8(this->mLayered);
@@ -10041,10 +10041,10 @@ const schema::Entity* GlGetImageHandleNV::StaticSchema() {
 // GlGetInteger64i_v:
 // gles.GlGetInteger64i_v{$,Uint32,Uint32,$}
 void GlGetInteger64i_v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mParam);
     e->Uint32(this->mIndex);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetInteger64i_v::StaticSchema() {
     static schema::Entity entity {
@@ -10099,10 +10099,10 @@ const schema::Entity* GlGetInteger64vAPPLE::StaticSchema() {
 // GlGetIntegeri_v:
 // gles.GlGetIntegeri_v{$,Uint32,Uint32,$}
 void GlGetIntegeri_v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mParam);
     e->Uint32(this->mIndex);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetIntegeri_v::StaticSchema() {
     static schema::Entity entity {
@@ -10123,10 +10123,10 @@ const schema::Entity* GlGetIntegeri_v::StaticSchema() {
 // GlGetIntegeri_vEXT:
 // gles.GlGetIntegeri_vEXT{$,Uint32,Uint32,$}
 void GlGetIntegeri_vEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlGetIntegeri_vEXT::StaticSchema() {
     static schema::Entity entity {
@@ -10164,13 +10164,13 @@ const schema::Entity* GlGetIntegerv::StaticSchema() {
 // GlGetInternalformatSampleivNV:
 // gles.GlGetInternalformatSampleivNV{$,Uint32,Uint32,Int32,Uint32,Int32,$}
 void GlGetInternalformatSampleivNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Int32(this->mSamples);
     e->Uint32(this->mPname);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetInternalformatSampleivNV::StaticSchema() {
     static schema::Entity entity {
@@ -10194,12 +10194,12 @@ const schema::Entity* GlGetInternalformatSampleivNV::StaticSchema() {
 // GlGetInternalformativ:
 // gles.GlGetInternalformativ{$,Uint32,Uint32,Uint32,Int32,$}
 void GlGetInternalformativ::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mPname);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetInternalformativ::StaticSchema() {
     static schema::Entity entity {
@@ -10222,10 +10222,10 @@ const schema::Entity* GlGetInternalformativ::StaticSchema() {
 // GlGetLightfv:
 // gles.GlGetLightfv{$,Uint32,Uint32,$}
 void GlGetLightfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetLightfv::StaticSchema() {
     static schema::Entity entity {
@@ -10246,10 +10246,10 @@ const schema::Entity* GlGetLightfv::StaticSchema() {
 // GlGetLightxv:
 // gles.GlGetLightxv{$,Uint32,Uint32,$}
 void GlGetLightxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetLightxv::StaticSchema() {
     static schema::Entity entity {
@@ -10270,10 +10270,10 @@ const schema::Entity* GlGetLightxv::StaticSchema() {
 // GlGetLightxvOES:
 // gles.GlGetLightxvOES{$,Uint32,Uint32,$}
 void GlGetLightxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetLightxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -10294,10 +10294,10 @@ const schema::Entity* GlGetLightxvOES::StaticSchema() {
 // GlGetMaterialfv:
 // gles.GlGetMaterialfv{$,Uint32,Uint32,$}
 void GlGetMaterialfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetMaterialfv::StaticSchema() {
     static schema::Entity entity {
@@ -10318,10 +10318,10 @@ const schema::Entity* GlGetMaterialfv::StaticSchema() {
 // GlGetMaterialxv:
 // gles.GlGetMaterialxv{$,Uint32,Uint32,$}
 void GlGetMaterialxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetMaterialxv::StaticSchema() {
     static schema::Entity entity {
@@ -10342,10 +10342,10 @@ const schema::Entity* GlGetMaterialxv::StaticSchema() {
 // GlGetMaterialxvOES:
 // gles.GlGetMaterialxvOES{$,Uint32,Uint32,$}
 void GlGetMaterialxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetMaterialxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -10366,10 +10366,10 @@ const schema::Entity* GlGetMaterialxvOES::StaticSchema() {
 // GlGetMultisamplefv:
 // gles.GlGetMultisamplefv{$,Uint32,Uint32,$}
 void GlGetMultisamplefv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPname);
     e->Uint32(this->mIndex);
-    e->Encode(this->mVal);
+    e->Struct(this->mVal);
 }
 const schema::Entity* GlGetMultisamplefv::StaticSchema() {
     static schema::Entity entity {
@@ -10407,12 +10407,12 @@ const schema::Entity* GlGetNextPerfQueryIdINTEL::StaticSchema() {
 // GlGetObjectLabel:
 // gles.GlGetObjectLabel{$,Uint32,Uint32,Int32,$,$}
 void GlGetObjectLabel::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIdentifier);
     e->Uint32(this->mName);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLength);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlGetObjectLabel::StaticSchema() {
     static schema::Entity entity {
@@ -10435,12 +10435,12 @@ const schema::Entity* GlGetObjectLabel::StaticSchema() {
 // GlGetObjectLabelEXT:
 // gles.GlGetObjectLabelEXT{$,Uint32,Uint32,Int32,$,$}
 void GlGetObjectLabelEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Uint32(this->mObject);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLength);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlGetObjectLabelEXT::StaticSchema() {
     static schema::Entity entity {
@@ -10463,12 +10463,12 @@ const schema::Entity* GlGetObjectLabelEXT::StaticSchema() {
 // GlGetObjectLabelKHR:
 // gles.GlGetObjectLabelKHR{$,Uint32,Uint32,Int32,$,$}
 void GlGetObjectLabelKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIdentifier);
     e->Uint32(this->mName);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLength);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlGetObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
@@ -10491,11 +10491,11 @@ const schema::Entity* GlGetObjectLabelKHR::StaticSchema() {
 // GlGetObjectPtrLabel:
 // gles.GlGetObjectPtrLabel{$,$,Int32,$,$}
 void GlGetObjectPtrLabel::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPtr);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPtr);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLength);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlGetObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
@@ -10517,11 +10517,11 @@ const schema::Entity* GlGetObjectPtrLabel::StaticSchema() {
 // GlGetObjectPtrLabelKHR:
 // gles.GlGetObjectPtrLabelKHR{$,$,Int32,$,$}
 void GlGetObjectPtrLabelKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPtr);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPtr);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLength);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlGetObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
@@ -10594,7 +10594,7 @@ const schema::Entity* GlGetPathDashArrayNV::StaticSchema() {
 // GlGetPathLengthNV:
 // gles.GlGetPathLengthNV{$,Uint32,Int32,Int32,Float32}
 void GlGetPathLengthNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mStartSegment);
     e->Int32(this->mNumSegments);
@@ -10620,12 +10620,12 @@ const schema::Entity* GlGetPathLengthNV::StaticSchema() {
 // GlGetPathMetricRangeNV:
 // gles.GlGetPathMetricRangeNV{$,Uint32,Uint32,Int32,Int32,$}
 void GlGetPathMetricRangeNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMetricQueryMask);
     e->Uint32(this->mFirstPathName);
     e->Int32(this->mNumPaths);
     e->Int32(this->mStride);
-    e->Encode(this->mMetrics);
+    e->Struct(this->mMetrics);
 }
 const schema::Entity* GlGetPathMetricRangeNV::StaticSchema() {
     static schema::Entity entity {
@@ -10648,14 +10648,14 @@ const schema::Entity* GlGetPathMetricRangeNV::StaticSchema() {
 // GlGetPathMetricsNV:
 // gles.GlGetPathMetricsNV{$,Uint32,Int32,Uint32,$,Uint32,Int32,$}
 void GlGetPathMetricsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMetricQueryMask);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Int32(this->mStride);
-    e->Encode(this->mMetrics);
+    e->Struct(this->mMetrics);
 }
 const schema::Entity* GlGetPathMetricsNV::StaticSchema() {
     static schema::Entity entity {
@@ -10680,10 +10680,10 @@ const schema::Entity* GlGetPathMetricsNV::StaticSchema() {
 // GlGetPathParameterfvNV:
 // gles.GlGetPathParameterfvNV{$,Uint32,Uint32,$}
 void GlGetPathParameterfvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
@@ -10704,10 +10704,10 @@ const schema::Entity* GlGetPathParameterfvNV::StaticSchema() {
 // GlGetPathParameterivNV:
 // gles.GlGetPathParameterivNV{$,Uint32,Uint32,$}
 void GlGetPathParameterivNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
@@ -10728,16 +10728,16 @@ const schema::Entity* GlGetPathParameterivNV::StaticSchema() {
 // GlGetPathSpacingNV:
 // gles.GlGetPathSpacingNV{$,Uint32,Int32,Uint32,$,Uint32,Float32,Float32,Uint32,$}
 void GlGetPathSpacingNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPathListMode);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Float32(this->mAdvanceScale);
     e->Float32(this->mKerningScale);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mReturnedSpacing);
+    e->Struct(this->mReturnedSpacing);
 }
 const schema::Entity* GlGetPathSpacingNV::StaticSchema() {
     static schema::Entity entity {
@@ -10764,18 +10764,18 @@ const schema::Entity* GlGetPathSpacingNV::StaticSchema() {
 // GlGetPerfCounterInfoINTEL:
 // gles.GlGetPerfCounterInfoINTEL{$,Uint32,Uint32,Uint32,$,Uint32,$,$,$,$,$,$}
 void GlGetPerfCounterInfoINTEL::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQueryId);
     e->Uint32(this->mCounterId);
     e->Uint32(this->mCounterNameLength);
-    e->Encode(this->mCounterName);
+    e->Struct(this->mCounterName);
     e->Uint32(this->mCounterDescLength);
-    e->Encode(this->mCounterDesc);
-    e->Encode(this->mCounterOffset);
-    e->Encode(this->mCounterDataSize);
-    e->Encode(this->mCounterTypeEnum);
-    e->Encode(this->mCounterDataTypeEnum);
-    e->Encode(this->mRawCounterMaxValue);
+    e->Struct(this->mCounterDesc);
+    e->Struct(this->mCounterOffset);
+    e->Struct(this->mCounterDataSize);
+    e->Struct(this->mCounterTypeEnum);
+    e->Struct(this->mCounterDataTypeEnum);
+    e->Struct(this->mRawCounterMaxValue);
 }
 const schema::Entity* GlGetPerfCounterInfoINTEL::StaticSchema() {
     static schema::Entity entity {
@@ -10804,12 +10804,12 @@ const schema::Entity* GlGetPerfCounterInfoINTEL::StaticSchema() {
 // GlGetPerfMonitorCounterDataAMD:
 // gles.GlGetPerfMonitorCounterDataAMD{$,Uint32,Uint32,Int32,$,$}
 void GlGetPerfMonitorCounterDataAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMonitor);
     e->Uint32(this->mPname);
     e->Int32(this->mDataSize);
-    e->Encode(this->mData);
-    e->Encode(this->mBytesWritten);
+    e->Struct(this->mData);
+    e->Struct(this->mBytesWritten);
 }
 const schema::Entity* GlGetPerfMonitorCounterDataAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10832,11 +10832,11 @@ const schema::Entity* GlGetPerfMonitorCounterDataAMD::StaticSchema() {
 // GlGetPerfMonitorCounterInfoAMD:
 // gles.GlGetPerfMonitorCounterInfoAMD{$,Uint32,Uint32,Uint32,$}
 void GlGetPerfMonitorCounterInfoAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mGroup);
     e->Uint32(this->mCounter);
     e->Uint32(this->mPname);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10858,12 +10858,12 @@ const schema::Entity* GlGetPerfMonitorCounterInfoAMD::StaticSchema() {
 // GlGetPerfMonitorCounterStringAMD:
 // gles.GlGetPerfMonitorCounterStringAMD{$,Uint32,Uint32,Int32,$,$}
 void GlGetPerfMonitorCounterStringAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mGroup);
     e->Uint32(this->mCounter);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mCounterString);
+    e->Struct(this->mLength);
+    e->Struct(this->mCounterString);
 }
 const schema::Entity* GlGetPerfMonitorCounterStringAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10886,12 +10886,12 @@ const schema::Entity* GlGetPerfMonitorCounterStringAMD::StaticSchema() {
 // GlGetPerfMonitorCountersAMD:
 // gles.GlGetPerfMonitorCountersAMD{$,Uint32,$,$,Int32,$}
 void GlGetPerfMonitorCountersAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mGroup);
-    e->Encode(this->mNumCounters);
-    e->Encode(this->mMaxActiveCounters);
+    e->Struct(this->mNumCounters);
+    e->Struct(this->mMaxActiveCounters);
     e->Int32(this->mCounterSize);
-    e->Encode(this->mCounters);
+    e->Struct(this->mCounters);
 }
 const schema::Entity* GlGetPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10914,11 +10914,11 @@ const schema::Entity* GlGetPerfMonitorCountersAMD::StaticSchema() {
 // GlGetPerfMonitorGroupStringAMD:
 // gles.GlGetPerfMonitorGroupStringAMD{$,Uint32,Int32,$,$}
 void GlGetPerfMonitorGroupStringAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mGroup);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mGroupString);
+    e->Struct(this->mLength);
+    e->Struct(this->mGroupString);
 }
 const schema::Entity* GlGetPerfMonitorGroupStringAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10940,10 +10940,10 @@ const schema::Entity* GlGetPerfMonitorGroupStringAMD::StaticSchema() {
 // GlGetPerfMonitorGroupsAMD:
 // gles.GlGetPerfMonitorGroupsAMD{$,$,Int32,$}
 void GlGetPerfMonitorGroupsAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mNumGroups);
+    e->Struct(this->mobservations);
+    e->Struct(this->mNumGroups);
     e->Int32(this->mGroupsSize);
-    e->Encode(this->mGroups);
+    e->Struct(this->mGroups);
 }
 const schema::Entity* GlGetPerfMonitorGroupsAMD::StaticSchema() {
     static schema::Entity entity {
@@ -10964,12 +10964,12 @@ const schema::Entity* GlGetPerfMonitorGroupsAMD::StaticSchema() {
 // GlGetPerfQueryDataINTEL:
 // gles.GlGetPerfQueryDataINTEL{$,Uint32,Uint32,Int32,$,$}
 void GlGetPerfQueryDataINTEL::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQueryHandle);
     e->Uint32(this->mFlag);
     e->Int32(this->mDataSize);
-    e->Encode(this->mData);
-    e->Encode(this->mBytesWritten);
+    e->Struct(this->mData);
+    e->Struct(this->mBytesWritten);
 }
 const schema::Entity* GlGetPerfQueryDataINTEL::StaticSchema() {
     static schema::Entity entity {
@@ -11009,14 +11009,14 @@ const schema::Entity* GlGetPerfQueryIdByNameINTEL::StaticSchema() {
 // GlGetPerfQueryInfoINTEL:
 // gles.GlGetPerfQueryInfoINTEL{$,Uint32,Uint32,$,$,$,$,$}
 void GlGetPerfQueryInfoINTEL::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQueryId);
     e->Uint32(this->mQueryNameLength);
-    e->Encode(this->mQueryName);
-    e->Encode(this->mDataSize);
-    e->Encode(this->mNoCounters);
-    e->Encode(this->mNoInstances);
-    e->Encode(this->mCapsMask);
+    e->Struct(this->mQueryName);
+    e->Struct(this->mDataSize);
+    e->Struct(this->mNoCounters);
+    e->Struct(this->mNoInstances);
+    e->Struct(this->mCapsMask);
 }
 const schema::Entity* GlGetPerfQueryInfoINTEL::StaticSchema() {
     static schema::Entity entity {
@@ -11075,12 +11075,12 @@ const schema::Entity* GlGetPointervKHR::StaticSchema() {
 // GlGetProgramBinary:
 // gles.GlGetProgramBinary{$,Uint32,Int32,$,$,$}
 void GlGetProgramBinary::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mBinaryFormat);
-    e->Encode(this->mBinary);
+    e->Struct(this->mLength);
+    e->Struct(this->mBinaryFormat);
+    e->Struct(this->mBinary);
 }
 const schema::Entity* GlGetProgramBinary::StaticSchema() {
     static schema::Entity entity {
@@ -11103,12 +11103,12 @@ const schema::Entity* GlGetProgramBinary::StaticSchema() {
 // GlGetProgramBinaryOES:
 // gles.GlGetProgramBinaryOES{$,Uint32,Int32,$,$,$}
 void GlGetProgramBinaryOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mBufferSize);
-    e->Encode(this->mBytesWritten);
-    e->Encode(this->mBinaryFormat);
-    e->Encode(this->mBinary);
+    e->Struct(this->mBytesWritten);
+    e->Struct(this->mBinaryFormat);
+    e->Struct(this->mBinary);
 }
 const schema::Entity* GlGetProgramBinaryOES::StaticSchema() {
     static schema::Entity entity {
@@ -11131,11 +11131,11 @@ const schema::Entity* GlGetProgramBinaryOES::StaticSchema() {
 // GlGetProgramInfoLog:
 // gles.GlGetProgramInfoLog{$,Uint32,Int32,$,$}
 void GlGetProgramInfoLog::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mBufferLength);
-    e->Encode(this->mStringLengthWritten);
-    e->Encode(this->mInfo);
+    e->Struct(this->mStringLengthWritten);
+    e->Struct(this->mInfo);
 }
 const schema::Entity* GlGetProgramInfoLog::StaticSchema() {
     static schema::Entity entity {
@@ -11157,11 +11157,11 @@ const schema::Entity* GlGetProgramInfoLog::StaticSchema() {
 // GlGetProgramInterfaceiv:
 // gles.GlGetProgramInterfaceiv{$,Uint32,Uint32,Uint32,$}
 void GlGetProgramInterfaceiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetProgramInterfaceiv::StaticSchema() {
     static schema::Entity entity {
@@ -11183,11 +11183,11 @@ const schema::Entity* GlGetProgramInterfaceiv::StaticSchema() {
 // GlGetProgramPipelineInfoLog:
 // gles.GlGetProgramPipelineInfoLog{$,Uint32,Int32,$,$}
 void GlGetProgramPipelineInfoLog::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mInfoLog);
+    e->Struct(this->mLength);
+    e->Struct(this->mInfoLog);
 }
 const schema::Entity* GlGetProgramPipelineInfoLog::StaticSchema() {
     static schema::Entity entity {
@@ -11209,11 +11209,11 @@ const schema::Entity* GlGetProgramPipelineInfoLog::StaticSchema() {
 // GlGetProgramPipelineInfoLogEXT:
 // gles.GlGetProgramPipelineInfoLogEXT{$,Uint32,Int32,$,$}
 void GlGetProgramPipelineInfoLogEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mInfoLog);
+    e->Struct(this->mLength);
+    e->Struct(this->mInfoLog);
 }
 const schema::Entity* GlGetProgramPipelineInfoLogEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11235,10 +11235,10 @@ const schema::Entity* GlGetProgramPipelineInfoLogEXT::StaticSchema() {
 // GlGetProgramPipelineiv:
 // gles.GlGetProgramPipelineiv{$,Uint32,Uint32,$}
 void GlGetProgramPipelineiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetProgramPipelineiv::StaticSchema() {
     static schema::Entity entity {
@@ -11259,10 +11259,10 @@ const schema::Entity* GlGetProgramPipelineiv::StaticSchema() {
 // GlGetProgramPipelineivEXT:
 // gles.GlGetProgramPipelineivEXT{$,Uint32,Uint32,$}
 void GlGetProgramPipelineivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetProgramPipelineivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11283,7 +11283,7 @@ const schema::Entity* GlGetProgramPipelineivEXT::StaticSchema() {
 // GlGetProgramResourceIndex:
 // gles.GlGetProgramResourceIndex{$,Uint32,Uint32,String,Uint32}
 void GlGetProgramResourceIndex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->String(this->mName);
@@ -11309,7 +11309,7 @@ const schema::Entity* GlGetProgramResourceIndex::StaticSchema() {
 // GlGetProgramResourceLocation:
 // gles.GlGetProgramResourceLocation{$,Uint32,Uint32,String,Int32}
 void GlGetProgramResourceLocation::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->String(this->mName);
@@ -11335,7 +11335,7 @@ const schema::Entity* GlGetProgramResourceLocation::StaticSchema() {
 // GlGetProgramResourceLocationIndexEXT:
 // gles.GlGetProgramResourceLocationIndexEXT{$,Uint32,Uint32,String,Int32}
 void GlGetProgramResourceLocationIndexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->String(this->mName);
@@ -11361,13 +11361,13 @@ const schema::Entity* GlGetProgramResourceLocationIndexEXT::StaticSchema() {
 // GlGetProgramResourceName:
 // gles.GlGetProgramResourceName{$,Uint32,Uint32,Uint32,Int32,$,$}
 void GlGetProgramResourceName::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->Uint32(this->mIndex);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mName);
+    e->Struct(this->mLength);
+    e->Struct(this->mName);
 }
 const schema::Entity* GlGetProgramResourceName::StaticSchema() {
     static schema::Entity entity {
@@ -11391,15 +11391,15 @@ const schema::Entity* GlGetProgramResourceName::StaticSchema() {
 // GlGetProgramResourcefvNV:
 // gles.GlGetProgramResourcefvNV{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
 void GlGetProgramResourcefvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->Uint32(this->mIndex);
     e->Int32(this->mPropCount);
-    e->Encode(this->mProps);
+    e->Struct(this->mProps);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mParams);
+    e->Struct(this->mLength);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetProgramResourcefvNV::StaticSchema() {
     static schema::Entity entity {
@@ -11425,15 +11425,15 @@ const schema::Entity* GlGetProgramResourcefvNV::StaticSchema() {
 // GlGetProgramResourceiv:
 // gles.GlGetProgramResourceiv{$,Uint32,Uint32,Uint32,Int32,$,Int32,$,$}
 void GlGetProgramResourceiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mProgramInterface);
     e->Uint32(this->mIndex);
     e->Int32(this->mPropCount);
-    e->Encode(this->mProps);
+    e->Struct(this->mProps);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mParams);
+    e->Struct(this->mLength);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetProgramResourceiv::StaticSchema() {
     static schema::Entity entity {
@@ -11459,10 +11459,10 @@ const schema::Entity* GlGetProgramResourceiv::StaticSchema() {
 // GlGetProgramiv:
 // gles.GlGetProgramiv{$,Uint32,Uint32,$}
 void GlGetProgramiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetProgramiv::StaticSchema() {
     static schema::Entity entity {
@@ -11498,10 +11498,10 @@ const schema::Entity* S64__P::StaticSchema() {
 // GlGetQueryObjecti64v:
 // gles.GlGetQueryObjecti64v{$,Uint32,Uint32,$}
 void GlGetQueryObjecti64v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjecti64v::StaticSchema() {
     static schema::Entity entity {
@@ -11522,10 +11522,10 @@ const schema::Entity* GlGetQueryObjecti64v::StaticSchema() {
 // GlGetQueryObjecti64vEXT:
 // gles.GlGetQueryObjecti64vEXT{$,Uint32,Uint32,$}
 void GlGetQueryObjecti64vEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjecti64vEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11546,10 +11546,10 @@ const schema::Entity* GlGetQueryObjecti64vEXT::StaticSchema() {
 // GlGetQueryObjectivEXT:
 // gles.GlGetQueryObjectivEXT{$,Uint32,Uint32,$}
 void GlGetQueryObjectivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjectivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11585,10 +11585,10 @@ const schema::Entity* U64__P::StaticSchema() {
 // GlGetQueryObjectui64v:
 // gles.GlGetQueryObjectui64v{$,Uint32,Uint32,$}
 void GlGetQueryObjectui64v::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjectui64v::StaticSchema() {
     static schema::Entity entity {
@@ -11609,10 +11609,10 @@ const schema::Entity* GlGetQueryObjectui64v::StaticSchema() {
 // GlGetQueryObjectui64vEXT:
 // gles.GlGetQueryObjectui64vEXT{$,Uint32,Uint32,$}
 void GlGetQueryObjectui64vEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjectui64vEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11633,10 +11633,10 @@ const schema::Entity* GlGetQueryObjectui64vEXT::StaticSchema() {
 // GlGetQueryObjectuiv:
 // gles.GlGetQueryObjectuiv{$,Uint32,Uint32,$}
 void GlGetQueryObjectuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjectuiv::StaticSchema() {
     static schema::Entity entity {
@@ -11657,10 +11657,10 @@ const schema::Entity* GlGetQueryObjectuiv::StaticSchema() {
 // GlGetQueryObjectuivEXT:
 // gles.GlGetQueryObjectuivEXT{$,Uint32,Uint32,$}
 void GlGetQueryObjectuivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mQuery);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryObjectuivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11681,10 +11681,10 @@ const schema::Entity* GlGetQueryObjectuivEXT::StaticSchema() {
 // GlGetQueryiv:
 // gles.GlGetQueryiv{$,Uint32,Uint32,$}
 void GlGetQueryiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryiv::StaticSchema() {
     static schema::Entity entity {
@@ -11705,10 +11705,10 @@ const schema::Entity* GlGetQueryiv::StaticSchema() {
 // GlGetQueryivEXT:
 // gles.GlGetQueryivEXT{$,Uint32,Uint32,$}
 void GlGetQueryivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetQueryivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11729,10 +11729,10 @@ const schema::Entity* GlGetQueryivEXT::StaticSchema() {
 // GlGetRenderbufferParameteriv:
 // gles.GlGetRenderbufferParameteriv{$,Uint32,Uint32,$}
 void GlGetRenderbufferParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetRenderbufferParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -11753,10 +11753,10 @@ const schema::Entity* GlGetRenderbufferParameteriv::StaticSchema() {
 // GlGetRenderbufferParameterivOES:
 // gles.GlGetRenderbufferParameterivOES{$,Uint32,Uint32,$}
 void GlGetRenderbufferParameterivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetRenderbufferParameterivOES::StaticSchema() {
     static schema::Entity entity {
@@ -11777,10 +11777,10 @@ const schema::Entity* GlGetRenderbufferParameterivOES::StaticSchema() {
 // GlGetSamplerParameterIiv:
 // gles.GlGetSamplerParameterIiv{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
@@ -11801,10 +11801,10 @@ const schema::Entity* GlGetSamplerParameterIiv::StaticSchema() {
 // GlGetSamplerParameterIivEXT:
 // gles.GlGetSamplerParameterIivEXT{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11825,10 +11825,10 @@ const schema::Entity* GlGetSamplerParameterIivEXT::StaticSchema() {
 // GlGetSamplerParameterIivOES:
 // gles.GlGetSamplerParameterIivOES{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
@@ -11849,10 +11849,10 @@ const schema::Entity* GlGetSamplerParameterIivOES::StaticSchema() {
 // GlGetSamplerParameterIuiv:
 // gles.GlGetSamplerParameterIuiv{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
@@ -11873,10 +11873,10 @@ const schema::Entity* GlGetSamplerParameterIuiv::StaticSchema() {
 // GlGetSamplerParameterIuivEXT:
 // gles.GlGetSamplerParameterIuivEXT{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIuivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -11897,10 +11897,10 @@ const schema::Entity* GlGetSamplerParameterIuivEXT::StaticSchema() {
 // GlGetSamplerParameterIuivOES:
 // gles.GlGetSamplerParameterIuivOES{$,Uint32,Uint32,$}
 void GlGetSamplerParameterIuivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
@@ -11921,10 +11921,10 @@ const schema::Entity* GlGetSamplerParameterIuivOES::StaticSchema() {
 // GlGetSamplerParameterfv:
 // gles.GlGetSamplerParameterfv{$,Uint32,Uint32,$}
 void GlGetSamplerParameterfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
@@ -11945,10 +11945,10 @@ const schema::Entity* GlGetSamplerParameterfv::StaticSchema() {
 // GlGetSamplerParameteriv:
 // gles.GlGetSamplerParameteriv{$,Uint32,Uint32,$}
 void GlGetSamplerParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -11969,11 +11969,11 @@ const schema::Entity* GlGetSamplerParameteriv::StaticSchema() {
 // GlGetShaderInfoLog:
 // gles.GlGetShaderInfoLog{$,Uint32,Int32,$,$}
 void GlGetShaderInfoLog::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShader);
     e->Int32(this->mBufferLength);
-    e->Encode(this->mStringLengthWritten);
-    e->Encode(this->mInfo);
+    e->Struct(this->mStringLengthWritten);
+    e->Struct(this->mInfo);
 }
 const schema::Entity* GlGetShaderInfoLog::StaticSchema() {
     static schema::Entity entity {
@@ -11995,11 +11995,11 @@ const schema::Entity* GlGetShaderInfoLog::StaticSchema() {
 // GlGetShaderPrecisionFormat:
 // gles.GlGetShaderPrecisionFormat{$,Uint32,Uint32,$,$}
 void GlGetShaderPrecisionFormat::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShaderType);
     e->Uint32(this->mPrecisionType);
-    e->Encode(this->mRange);
-    e->Encode(this->mPrecision);
+    e->Struct(this->mRange);
+    e->Struct(this->mPrecision);
 }
 const schema::Entity* GlGetShaderPrecisionFormat::StaticSchema() {
     static schema::Entity entity {
@@ -12021,11 +12021,11 @@ const schema::Entity* GlGetShaderPrecisionFormat::StaticSchema() {
 // GlGetShaderSource:
 // gles.GlGetShaderSource{$,Uint32,Int32,$,$}
 void GlGetShaderSource::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShader);
     e->Int32(this->mBufferLength);
-    e->Encode(this->mStringLengthWritten);
-    e->Encode(this->mSource);
+    e->Struct(this->mStringLengthWritten);
+    e->Struct(this->mSource);
 }
 const schema::Entity* GlGetShaderSource::StaticSchema() {
     static schema::Entity entity {
@@ -12047,10 +12047,10 @@ const schema::Entity* GlGetShaderSource::StaticSchema() {
 // GlGetShaderiv:
 // gles.GlGetShaderiv{$,Uint32,Uint32,$}
 void GlGetShaderiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShader);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlGetShaderiv::StaticSchema() {
     static schema::Entity entity {
@@ -12088,10 +12088,10 @@ const schema::Entity* GlGetString::StaticSchema() {
 // GlGetStringi:
 // gles.GlGetStringi{$,Uint32,Uint32,$}
 void GlGetStringi::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mName);
     e->Uint32(this->mIndex);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlGetStringi::StaticSchema() {
     static schema::Entity entity {
@@ -12112,12 +12112,12 @@ const schema::Entity* GlGetStringi::StaticSchema() {
 // GlGetSynciv:
 // gles.GlGetSynciv{$,Uint64,Uint32,Int32,$,$}
 void GlGetSynciv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mPname);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mValues);
+    e->Struct(this->mLength);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetSynciv::StaticSchema() {
     static schema::Entity entity {
@@ -12140,12 +12140,12 @@ const schema::Entity* GlGetSynciv::StaticSchema() {
 // GlGetSyncivAPPLE:
 // gles.GlGetSyncivAPPLE{$,Uint64,Uint32,Int32,$,$}
 void GlGetSyncivAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mPname);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mValues);
+    e->Struct(this->mLength);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetSyncivAPPLE::StaticSchema() {
     static schema::Entity entity {
@@ -12168,10 +12168,10 @@ const schema::Entity* GlGetSyncivAPPLE::StaticSchema() {
 // GlGetTexEnvfv:
 // gles.GlGetTexEnvfv{$,Uint32,Uint32,$}
 void GlGetTexEnvfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexEnvfv::StaticSchema() {
     static schema::Entity entity {
@@ -12192,10 +12192,10 @@ const schema::Entity* GlGetTexEnvfv::StaticSchema() {
 // GlGetTexEnviv:
 // gles.GlGetTexEnviv{$,Uint32,Uint32,$}
 void GlGetTexEnviv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexEnviv::StaticSchema() {
     static schema::Entity entity {
@@ -12216,10 +12216,10 @@ const schema::Entity* GlGetTexEnviv::StaticSchema() {
 // GlGetTexEnvxv:
 // gles.GlGetTexEnvxv{$,Uint32,Uint32,$}
 void GlGetTexEnvxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexEnvxv::StaticSchema() {
     static schema::Entity entity {
@@ -12240,10 +12240,10 @@ const schema::Entity* GlGetTexEnvxv::StaticSchema() {
 // GlGetTexEnvxvOES:
 // gles.GlGetTexEnvxvOES{$,Uint32,Uint32,$}
 void GlGetTexEnvxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexEnvxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -12264,10 +12264,10 @@ const schema::Entity* GlGetTexEnvxvOES::StaticSchema() {
 // GlGetTexGenfvOES:
 // gles.GlGetTexGenfvOES{$,Uint32,Uint32,$}
 void GlGetTexGenfvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexGenfvOES::StaticSchema() {
     static schema::Entity entity {
@@ -12288,10 +12288,10 @@ const schema::Entity* GlGetTexGenfvOES::StaticSchema() {
 // GlGetTexGenivOES:
 // gles.GlGetTexGenivOES{$,Uint32,Uint32,$}
 void GlGetTexGenivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexGenivOES::StaticSchema() {
     static schema::Entity entity {
@@ -12312,10 +12312,10 @@ const schema::Entity* GlGetTexGenivOES::StaticSchema() {
 // GlGetTexGenxvOES:
 // gles.GlGetTexGenxvOES{$,Uint32,Uint32,$}
 void GlGetTexGenxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexGenxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -12336,11 +12336,11 @@ const schema::Entity* GlGetTexGenxvOES::StaticSchema() {
 // GlGetTexLevelParameterfv:
 // gles.GlGetTexLevelParameterfv{$,Uint32,Int32,Uint32,$}
 void GlGetTexLevelParameterfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexLevelParameterfv::StaticSchema() {
     static schema::Entity entity {
@@ -12362,11 +12362,11 @@ const schema::Entity* GlGetTexLevelParameterfv::StaticSchema() {
 // GlGetTexLevelParameteriv:
 // gles.GlGetTexLevelParameteriv{$,Uint32,Int32,Uint32,$}
 void GlGetTexLevelParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexLevelParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -12388,10 +12388,10 @@ const schema::Entity* GlGetTexLevelParameteriv::StaticSchema() {
 // GlGetTexParameterIiv:
 // gles.GlGetTexParameterIiv{$,Uint32,Uint32,$}
 void GlGetTexParameterIiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
@@ -12412,10 +12412,10 @@ const schema::Entity* GlGetTexParameterIiv::StaticSchema() {
 // GlGetTexParameterIivEXT:
 // gles.GlGetTexParameterIivEXT{$,Uint32,Uint32,$}
 void GlGetTexParameterIivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -12436,10 +12436,10 @@ const schema::Entity* GlGetTexParameterIivEXT::StaticSchema() {
 // GlGetTexParameterIivOES:
 // gles.GlGetTexParameterIivOES{$,Uint32,Uint32,$}
 void GlGetTexParameterIivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
@@ -12460,10 +12460,10 @@ const schema::Entity* GlGetTexParameterIivOES::StaticSchema() {
 // GlGetTexParameterIuiv:
 // gles.GlGetTexParameterIuiv{$,Uint32,Uint32,$}
 void GlGetTexParameterIuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
@@ -12484,10 +12484,10 @@ const schema::Entity* GlGetTexParameterIuiv::StaticSchema() {
 // GlGetTexParameterIuivEXT:
 // gles.GlGetTexParameterIuivEXT{$,Uint32,Uint32,$}
 void GlGetTexParameterIuivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -12508,10 +12508,10 @@ const schema::Entity* GlGetTexParameterIuivEXT::StaticSchema() {
 // GlGetTexParameterIuivOES:
 // gles.GlGetTexParameterIuivOES{$,Uint32,Uint32,$}
 void GlGetTexParameterIuivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
@@ -12532,10 +12532,10 @@ const schema::Entity* GlGetTexParameterIuivOES::StaticSchema() {
 // GlGetTexParameterfv:
 // gles.GlGetTexParameterfv{$,Uint32,Uint32,$}
 void GlGetTexParameterfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetTexParameterfv::StaticSchema() {
     static schema::Entity entity {
@@ -12556,10 +12556,10 @@ const schema::Entity* GlGetTexParameterfv::StaticSchema() {
 // GlGetTexParameteriv:
 // gles.GlGetTexParameteriv{$,Uint32,Uint32,$}
 void GlGetTexParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetTexParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -12580,10 +12580,10 @@ const schema::Entity* GlGetTexParameteriv::StaticSchema() {
 // GlGetTexParameterxv:
 // gles.GlGetTexParameterxv{$,Uint32,Uint32,$}
 void GlGetTexParameterxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterxv::StaticSchema() {
     static schema::Entity entity {
@@ -12604,10 +12604,10 @@ const schema::Entity* GlGetTexParameterxv::StaticSchema() {
 // GlGetTexParameterxvOES:
 // gles.GlGetTexParameterxvOES{$,Uint32,Uint32,$}
 void GlGetTexParameterxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetTexParameterxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -12645,7 +12645,7 @@ const schema::Entity* GlGetTextureHandleNV::StaticSchema() {
 // GlGetTextureSamplerHandleNV:
 // gles.GlGetTextureSamplerHandleNV{$,Uint32,Uint32,Uint64}
 void GlGetTextureSamplerHandleNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mSampler);
     e->Uint64(this->mResult);
@@ -12669,14 +12669,14 @@ const schema::Entity* GlGetTextureSamplerHandleNV::StaticSchema() {
 // GlGetTransformFeedbackVarying:
 // gles.GlGetTransformFeedbackVarying{$,Uint32,Uint32,Int32,$,$,$,$}
 void GlGetTransformFeedbackVarying::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mIndex);
     e->Int32(this->mBufSize);
-    e->Encode(this->mLength);
-    e->Encode(this->mSize);
-    e->Encode(this->mType);
-    e->Encode(this->mName);
+    e->Struct(this->mLength);
+    e->Struct(this->mSize);
+    e->Struct(this->mType);
+    e->Struct(this->mName);
 }
 const schema::Entity* GlGetTransformFeedbackVarying::StaticSchema() {
     static schema::Entity entity {
@@ -12701,11 +12701,11 @@ const schema::Entity* GlGetTransformFeedbackVarying::StaticSchema() {
 // GlGetTranslatedShaderSourceANGLE:
 // gles.GlGetTranslatedShaderSourceANGLE{$,Uint32,Int32,$,$}
 void GlGetTranslatedShaderSourceANGLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShader);
     e->Int32(this->mBufsize);
-    e->Encode(this->mLength);
-    e->Encode(this->mSource);
+    e->Struct(this->mLength);
+    e->Struct(this->mSource);
 }
 const schema::Entity* GlGetTranslatedShaderSourceANGLE::StaticSchema() {
     static schema::Entity entity {
@@ -12727,7 +12727,7 @@ const schema::Entity* GlGetTranslatedShaderSourceANGLE::StaticSchema() {
 // GlGetUniformBlockIndex:
 // gles.GlGetUniformBlockIndex{$,Uint32,String,Uint32}
 void GlGetUniformBlockIndex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->String(this->mUniformBlockName);
     e->Uint32(this->mResult);
@@ -12766,11 +12766,11 @@ const schema::Entity* UniformIndex__P::StaticSchema() {
 // GlGetUniformIndices:
 // gles.GlGetUniformIndices{$,Uint32,Int32,$,$}
 void GlGetUniformIndices::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mUniformCount);
-    e->Encode(this->mUniformNames);
-    e->Encode(this->mUniformIndices);
+    e->Struct(this->mUniformNames);
+    e->Struct(this->mUniformIndices);
 }
 const schema::Entity* GlGetUniformIndices::StaticSchema() {
     static schema::Entity entity {
@@ -12792,7 +12792,7 @@ const schema::Entity* GlGetUniformIndices::StaticSchema() {
 // GlGetUniformLocation:
 // gles.GlGetUniformLocation{$,Uint32,String,Int32}
 void GlGetUniformLocation::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->String(this->mName);
     e->Int32(this->mResult);
@@ -12816,10 +12816,10 @@ const schema::Entity* GlGetUniformLocation::StaticSchema() {
 // GlGetUniformfv:
 // gles.GlGetUniformfv{$,Uint32,Int32,$}
 void GlGetUniformfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetUniformfv::StaticSchema() {
     static schema::Entity entity {
@@ -12840,10 +12840,10 @@ const schema::Entity* GlGetUniformfv::StaticSchema() {
 // GlGetUniformiv:
 // gles.GlGetUniformiv{$,Uint32,Int32,$}
 void GlGetUniformiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetUniformiv::StaticSchema() {
     static schema::Entity entity {
@@ -12864,10 +12864,10 @@ const schema::Entity* GlGetUniformiv::StaticSchema() {
 // GlGetUniformuiv:
 // gles.GlGetUniformuiv{$,Uint32,Int32,$}
 void GlGetUniformuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetUniformuiv::StaticSchema() {
     static schema::Entity entity {
@@ -12888,10 +12888,10 @@ const schema::Entity* GlGetUniformuiv::StaticSchema() {
 // GlGetVertexAttribIiv:
 // gles.GlGetVertexAttribIiv{$,Uint32,Uint32,$}
 void GlGetVertexAttribIiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetVertexAttribIiv::StaticSchema() {
     static schema::Entity entity {
@@ -12912,10 +12912,10 @@ const schema::Entity* GlGetVertexAttribIiv::StaticSchema() {
 // GlGetVertexAttribIuiv:
 // gles.GlGetVertexAttribIuiv{$,Uint32,Uint32,$}
 void GlGetVertexAttribIuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetVertexAttribIuiv::StaticSchema() {
     static schema::Entity entity {
@@ -12936,10 +12936,10 @@ const schema::Entity* GlGetVertexAttribIuiv::StaticSchema() {
 // GlGetVertexAttribPointerv:
 // gles.GlGetVertexAttribPointerv{$,Uint32,Uint32,$}
 void GlGetVertexAttribPointerv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mPname);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlGetVertexAttribPointerv::StaticSchema() {
     static schema::Entity entity {
@@ -12960,10 +12960,10 @@ const schema::Entity* GlGetVertexAttribPointerv::StaticSchema() {
 // GlGetVertexAttribfv:
 // gles.GlGetVertexAttribfv{$,Uint32,Uint32,$}
 void GlGetVertexAttribfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetVertexAttribfv::StaticSchema() {
     static schema::Entity entity {
@@ -12984,10 +12984,10 @@ const schema::Entity* GlGetVertexAttribfv::StaticSchema() {
 // GlGetVertexAttribiv:
 // gles.GlGetVertexAttribiv{$,Uint32,Uint32,$}
 void GlGetVertexAttribiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetVertexAttribiv::StaticSchema() {
     static schema::Entity entity {
@@ -13008,11 +13008,11 @@ const schema::Entity* GlGetVertexAttribiv::StaticSchema() {
 // GlGetnUniformfv:
 // gles.GlGetnUniformfv{$,Uint32,Int32,Int32,$}
 void GlGetnUniformfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetnUniformfv::StaticSchema() {
     static schema::Entity entity {
@@ -13034,11 +13034,11 @@ const schema::Entity* GlGetnUniformfv::StaticSchema() {
 // GlGetnUniformfvEXT:
 // gles.GlGetnUniformfvEXT{$,Uint32,Int32,Int32,$}
 void GlGetnUniformfvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetnUniformfvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -13060,11 +13060,11 @@ const schema::Entity* GlGetnUniformfvEXT::StaticSchema() {
 // GlGetnUniformfvKHR:
 // gles.GlGetnUniformfvKHR{$,Uint32,Int32,Int32,$}
 void GlGetnUniformfvKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetnUniformfvKHR::StaticSchema() {
     static schema::Entity entity {
@@ -13086,11 +13086,11 @@ const schema::Entity* GlGetnUniformfvKHR::StaticSchema() {
 // GlGetnUniformiv:
 // gles.GlGetnUniformiv{$,Uint32,Int32,Int32,$}
 void GlGetnUniformiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetnUniformiv::StaticSchema() {
     static schema::Entity entity {
@@ -13112,11 +13112,11 @@ const schema::Entity* GlGetnUniformiv::StaticSchema() {
 // GlGetnUniformivEXT:
 // gles.GlGetnUniformivEXT{$,Uint32,Int32,Int32,$}
 void GlGetnUniformivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetnUniformivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -13138,11 +13138,11 @@ const schema::Entity* GlGetnUniformivEXT::StaticSchema() {
 // GlGetnUniformivKHR:
 // gles.GlGetnUniformivKHR{$,Uint32,Int32,Int32,$}
 void GlGetnUniformivKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetnUniformivKHR::StaticSchema() {
     static schema::Entity entity {
@@ -13164,11 +13164,11 @@ const schema::Entity* GlGetnUniformivKHR::StaticSchema() {
 // GlGetnUniformuiv:
 // gles.GlGetnUniformuiv{$,Uint32,Int32,Int32,$}
 void GlGetnUniformuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlGetnUniformuiv::StaticSchema() {
     static schema::Entity entity {
@@ -13190,11 +13190,11 @@ const schema::Entity* GlGetnUniformuiv::StaticSchema() {
 // GlGetnUniformuivKHR:
 // gles.GlGetnUniformuivKHR{$,Uint32,Int32,Int32,$}
 void GlGetnUniformuivKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mBufSize);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlGetnUniformuivKHR::StaticSchema() {
     static schema::Entity entity {
@@ -13250,7 +13250,7 @@ const schema::Entity* GlInsertEventMarkerEXT::StaticSchema() {
 // GlInterpolatePathsNV:
 // gles.GlInterpolatePathsNV{$,Uint32,Uint32,Uint32,Float32}
 void GlInterpolatePathsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mResultPath);
     e->Uint32(this->mPathA);
     e->Uint32(this->mPathB);
@@ -13276,10 +13276,10 @@ const schema::Entity* GlInterpolatePathsNV::StaticSchema() {
 // GlInvalidateFramebuffer:
 // gles.GlInvalidateFramebuffer{$,Uint32,Int32,$}
 void GlInvalidateFramebuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mCount);
-    e->Encode(this->mAttachments);
+    e->Struct(this->mAttachments);
 }
 const schema::Entity* GlInvalidateFramebuffer::StaticSchema() {
     static schema::Entity entity {
@@ -13300,10 +13300,10 @@ const schema::Entity* GlInvalidateFramebuffer::StaticSchema() {
 // GlInvalidateSubFramebuffer:
 // gles.GlInvalidateSubFramebuffer{$,Uint32,Int32,$,Int32,Int32,Int32,Int32}
 void GlInvalidateSubFramebuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mNumAttachments);
-    e->Encode(this->mAttachments);
+    e->Struct(this->mAttachments);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -13366,7 +13366,7 @@ const schema::Entity* GlIsEnabled::StaticSchema() {
 // GlIsEnabledi:
 // gles.GlIsEnabledi{$,Uint32,Uint32,Uint8}
 void GlIsEnabledi::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
@@ -13390,7 +13390,7 @@ const schema::Entity* GlIsEnabledi::StaticSchema() {
 // GlIsEnablediEXT:
 // gles.GlIsEnablediEXT{$,Uint32,Uint32,Uint8}
 void GlIsEnablediEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
@@ -13414,7 +13414,7 @@ const schema::Entity* GlIsEnablediEXT::StaticSchema() {
 // GlIsEnablediNV:
 // gles.GlIsEnablediNV{$,Uint32,Uint32,Uint8}
 void GlIsEnablediNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
@@ -13438,7 +13438,7 @@ const schema::Entity* GlIsEnablediNV::StaticSchema() {
 // GlIsEnablediOES:
 // gles.GlIsEnablediOES{$,Uint32,Uint32,Uint8}
 void GlIsEnablediOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mIndex);
     e->Uint8(this->mResult);
@@ -13547,7 +13547,7 @@ const schema::Entity* GlIsPathNV::StaticSchema() {
 // GlIsPointInFillPathNV:
 // gles.GlIsPointInFillPathNV{$,Uint32,Uint32,Float32,Float32,Uint8}
 void GlIsPointInFillPathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mMask);
     e->Float32(this->mX);
@@ -13575,7 +13575,7 @@ const schema::Entity* GlIsPointInFillPathNV::StaticSchema() {
 // GlIsPointInStrokePathNV:
 // gles.GlIsPointInStrokePathNV{$,Uint32,Float32,Float32,Uint8}
 void GlIsPointInStrokePathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Float32(this->mX);
     e->Float32(this->mY);
@@ -13873,11 +13873,11 @@ const schema::Entity* GlIsVertexArrayOES::StaticSchema() {
 // GlLabelObjectEXT:
 // gles.GlLabelObjectEXT{$,Uint32,Uint32,Int32,$}
 void GlLabelObjectEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Uint32(this->mObject);
     e->Int32(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlLabelObjectEXT::StaticSchema() {
     static schema::Entity entity {
@@ -14001,7 +14001,7 @@ const schema::Entity* GlLightModelxvOES::StaticSchema() {
 // GlLightf:
 // gles.GlLightf{$,Uint32,Uint32,Float32}
 void GlLightf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
@@ -14025,10 +14025,10 @@ const schema::Entity* GlLightf::StaticSchema() {
 // GlLightfv:
 // gles.GlLightfv{$,Uint32,Uint32,$}
 void GlLightfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlLightfv::StaticSchema() {
     static schema::Entity entity {
@@ -14049,7 +14049,7 @@ const schema::Entity* GlLightfv::StaticSchema() {
 // GlLightx:
 // gles.GlLightx{$,Uint32,Uint32,Int32}
 void GlLightx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -14073,7 +14073,7 @@ const schema::Entity* GlLightx::StaticSchema() {
 // GlLightxOES:
 // gles.GlLightxOES{$,Uint32,Uint32,Int32}
 void GlLightxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -14097,10 +14097,10 @@ const schema::Entity* GlLightxOES::StaticSchema() {
 // GlLightxv:
 // gles.GlLightxv{$,Uint32,Uint32,$}
 void GlLightxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlLightxv::StaticSchema() {
     static schema::Entity entity {
@@ -14121,10 +14121,10 @@ const schema::Entity* GlLightxv::StaticSchema() {
 // GlLightxvOES:
 // gles.GlLightxvOES{$,Uint32,Uint32,$}
 void GlLightxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLight);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlLightxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -14368,10 +14368,10 @@ const schema::Entity* GlMakeTextureHandleResidentNV::StaticSchema() {
 // GlMapBufferOES:
 // gles.GlMapBufferOES{$,Uint32,Uint32,$}
 void GlMapBufferOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mAccess);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlMapBufferOES::StaticSchema() {
     static schema::Entity entity {
@@ -14392,12 +14392,12 @@ const schema::Entity* GlMapBufferOES::StaticSchema() {
 // GlMapBufferRange:
 // gles.GlMapBufferRange{$,Uint32,Int32,Int32,Uint32,$}
 void GlMapBufferRange::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
     e->Uint32(this->mAccess);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlMapBufferRange::StaticSchema() {
     static schema::Entity entity {
@@ -14420,12 +14420,12 @@ const schema::Entity* GlMapBufferRange::StaticSchema() {
 // GlMapBufferRangeEXT:
 // gles.GlMapBufferRangeEXT{$,Uint32,Int32,Int32,Uint32,$}
 void GlMapBufferRangeEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mOffset);
     e->Int32(this->mLength);
     e->Uint32(this->mAccess);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlMapBufferRangeEXT::StaticSchema() {
     static schema::Entity entity {
@@ -14448,7 +14448,7 @@ const schema::Entity* GlMapBufferRangeEXT::StaticSchema() {
 // GlMaterialf:
 // gles.GlMaterialf{$,Uint32,Uint32,Float32}
 void GlMaterialf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
@@ -14472,10 +14472,10 @@ const schema::Entity* GlMaterialf::StaticSchema() {
 // GlMaterialfv:
 // gles.GlMaterialfv{$,Uint32,Uint32,$}
 void GlMaterialfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlMaterialfv::StaticSchema() {
     static schema::Entity entity {
@@ -14496,7 +14496,7 @@ const schema::Entity* GlMaterialfv::StaticSchema() {
 // GlMaterialx:
 // gles.GlMaterialx{$,Uint32,Uint32,Int32}
 void GlMaterialx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -14520,7 +14520,7 @@ const schema::Entity* GlMaterialx::StaticSchema() {
 // GlMaterialxOES:
 // gles.GlMaterialxOES{$,Uint32,Uint32,Int32}
 void GlMaterialxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -14544,10 +14544,10 @@ const schema::Entity* GlMaterialxOES::StaticSchema() {
 // GlMaterialxv:
 // gles.GlMaterialxv{$,Uint32,Uint32,$}
 void GlMaterialxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlMaterialxv::StaticSchema() {
     static schema::Entity entity {
@@ -14568,10 +14568,10 @@ const schema::Entity* GlMaterialxv::StaticSchema() {
 // GlMaterialxvOES:
 // gles.GlMaterialxvOES{$,Uint32,Uint32,$}
 void GlMaterialxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlMaterialxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -14592,11 +14592,11 @@ const schema::Entity* GlMaterialxvOES::StaticSchema() {
 // GlMatrixIndexPointerOES:
 // gles.GlMatrixIndexPointerOES{$,Int32,Uint32,Int32,$}
 void GlMatrixIndexPointerOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlMatrixIndexPointerOES::StaticSchema() {
     static schema::Entity entity {
@@ -14618,11 +14618,11 @@ const schema::Entity* GlMatrixIndexPointerOES::StaticSchema() {
 // GlMatrixIndexPointerOESBounds:
 // gles.GlMatrixIndexPointerOESBounds{$,Int32,Uint32,Int32,$,Int32}
 void GlMatrixIndexPointerOESBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlMatrixIndexPointerOESBounds::StaticSchema() {
@@ -14876,10 +14876,10 @@ const schema::Entity* GlMultMatrixxOES::StaticSchema() {
 // GlMultiDrawArraysEXT:
 // gles.GlMultiDrawArraysEXT{$,Uint32,$,$,Int32}
 void GlMultiDrawArraysEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
-    e->Encode(this->mFirst);
-    e->Encode(this->mCount);
+    e->Struct(this->mFirst);
+    e->Struct(this->mCount);
     e->Int32(this->mPrimcount);
 }
 const schema::Entity* GlMultiDrawArraysEXT::StaticSchema() {
@@ -14902,9 +14902,9 @@ const schema::Entity* GlMultiDrawArraysEXT::StaticSchema() {
 // GlMultiDrawArraysIndirectEXT:
 // gles.GlMultiDrawArraysIndirectEXT{$,Uint32,$,Int32,Int32}
 void GlMultiDrawArraysIndirectEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
-    e->Encode(this->mIndirect);
+    e->Struct(this->mIndirect);
     e->Int32(this->mDrawcount);
     e->Int32(this->mStride);
 }
@@ -14943,13 +14943,13 @@ const schema::Entity* Void__CP__CP::StaticSchema() {
 // GlMultiDrawElementsBaseVertexEXT:
 // gles.GlMultiDrawElementsBaseVertexEXT{$,Uint32,$,Uint32,$,Int32,$}
 void GlMultiDrawElementsBaseVertexEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
-    e->Encode(this->mCount);
+    e->Struct(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
-    e->Encode(this->mBasevertex);
+    e->Struct(this->mBasevertex);
 }
 const schema::Entity* GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
     static schema::Entity entity {
@@ -14973,13 +14973,13 @@ const schema::Entity* GlMultiDrawElementsBaseVertexEXT::StaticSchema() {
 // GlMultiDrawElementsBaseVertexOES:
 // gles.GlMultiDrawElementsBaseVertexOES{$,Uint32,$,Uint32,$,Int32,$}
 void GlMultiDrawElementsBaseVertexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
-    e->Encode(this->mCount);
+    e->Struct(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
-    e->Encode(this->mBasevertex);
+    e->Struct(this->mBasevertex);
 }
 const schema::Entity* GlMultiDrawElementsBaseVertexOES::StaticSchema() {
     static schema::Entity entity {
@@ -15003,11 +15003,11 @@ const schema::Entity* GlMultiDrawElementsBaseVertexOES::StaticSchema() {
 // GlMultiDrawElementsEXT:
 // gles.GlMultiDrawElementsEXT{$,Uint32,$,Uint32,$,Int32}
 void GlMultiDrawElementsEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
-    e->Encode(this->mCount);
+    e->Struct(this->mCount);
     e->Uint32(this->mType);
-    e->Encode(this->mIndices);
+    e->Struct(this->mIndices);
     e->Int32(this->mPrimcount);
 }
 const schema::Entity* GlMultiDrawElementsEXT::StaticSchema() {
@@ -15031,10 +15031,10 @@ const schema::Entity* GlMultiDrawElementsEXT::StaticSchema() {
 // GlMultiDrawElementsIndirectEXT:
 // gles.GlMultiDrawElementsIndirectEXT{$,Uint32,Uint32,$,Int32,Int32}
 void GlMultiDrawElementsIndirectEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMode);
     e->Uint32(this->mType);
-    e->Encode(this->mIndirect);
+    e->Struct(this->mIndirect);
     e->Int32(this->mDrawcount);
     e->Int32(this->mStride);
 }
@@ -15059,7 +15059,7 @@ const schema::Entity* GlMultiDrawElementsIndirectEXT::StaticSchema() {
 // GlMultiTexCoord4f:
 // gles.GlMultiTexCoord4f{$,Uint32,Float32,Float32,Float32,Float32}
 void GlMultiTexCoord4f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Float32(this->mV0);
     e->Float32(this->mV1);
@@ -15087,7 +15087,7 @@ const schema::Entity* GlMultiTexCoord4f::StaticSchema() {
 // GlMultiTexCoord4x:
 // gles.GlMultiTexCoord4x{$,Uint32,Int32,Int32,Int32,Int32}
 void GlMultiTexCoord4x::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Int32(this->mV0);
     e->Int32(this->mV1);
@@ -15115,7 +15115,7 @@ const schema::Entity* GlMultiTexCoord4x::StaticSchema() {
 // GlMultiTexCoord4xOES:
 // gles.GlMultiTexCoord4xOES{$,Uint32,Int32,Int32,Int32,Int32}
 void GlMultiTexCoord4xOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Int32(this->mV0);
     e->Int32(this->mV1);
@@ -15143,11 +15143,11 @@ const schema::Entity* GlMultiTexCoord4xOES::StaticSchema() {
 // GlNamedFramebufferSampleLocationsfvNV:
 // gles.GlNamedFramebufferSampleLocationsfvNV{$,Uint32,Uint32,Int32,$}
 void GlNamedFramebufferSampleLocationsfvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFramebuffer);
     e->Uint32(this->mStart);
     e->Int32(this->mCount);
-    e->Encode(this->mV);
+    e->Struct(this->mV);
 }
 const schema::Entity* GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
     static schema::Entity entity {
@@ -15169,7 +15169,7 @@ const schema::Entity* GlNamedFramebufferSampleLocationsfvNV::StaticSchema() {
 // GlNormal3f:
 // gles.GlNormal3f{$,Float32,Float32,Float32}
 void GlNormal3f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mNx);
     e->Float32(this->mNy);
     e->Float32(this->mNz);
@@ -15193,7 +15193,7 @@ const schema::Entity* GlNormal3f::StaticSchema() {
 // GlNormal3x:
 // gles.GlNormal3x{$,Int32,Int32,Int32}
 void GlNormal3x::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNx);
     e->Int32(this->mNy);
     e->Int32(this->mNz);
@@ -15217,7 +15217,7 @@ const schema::Entity* GlNormal3x::StaticSchema() {
 // GlNormal3xOES:
 // gles.GlNormal3xOES{$,Int32,Int32,Int32}
 void GlNormal3xOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNx);
     e->Int32(this->mNy);
     e->Int32(this->mNz);
@@ -15241,10 +15241,10 @@ const schema::Entity* GlNormal3xOES::StaticSchema() {
 // GlNormalPointer:
 // gles.GlNormalPointer{$,Uint32,Int32,$}
 void GlNormalPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlNormalPointer::StaticSchema() {
     static schema::Entity entity {
@@ -15265,10 +15265,10 @@ const schema::Entity* GlNormalPointer::StaticSchema() {
 // GlNormalPointerBounds:
 // gles.GlNormalPointerBounds{$,Uint32,Int32,$,Int32}
 void GlNormalPointerBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlNormalPointerBounds::StaticSchema() {
@@ -15291,11 +15291,11 @@ const schema::Entity* GlNormalPointerBounds::StaticSchema() {
 // GlObjectLabel:
 // gles.GlObjectLabel{$,Uint32,Uint32,Int32,$}
 void GlObjectLabel::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIdentifier);
     e->Uint32(this->mName);
     e->Int32(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlObjectLabel::StaticSchema() {
     static schema::Entity entity {
@@ -15317,11 +15317,11 @@ const schema::Entity* GlObjectLabel::StaticSchema() {
 // GlObjectLabelKHR:
 // gles.GlObjectLabelKHR{$,Uint32,Uint32,Int32,$}
 void GlObjectLabelKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIdentifier);
     e->Uint32(this->mName);
     e->Int32(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlObjectLabelKHR::StaticSchema() {
     static schema::Entity entity {
@@ -15343,10 +15343,10 @@ const schema::Entity* GlObjectLabelKHR::StaticSchema() {
 // GlObjectPtrLabel:
 // gles.GlObjectPtrLabel{$,$,Int32,$}
 void GlObjectPtrLabel::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPtr);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPtr);
     e->Int32(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlObjectPtrLabel::StaticSchema() {
     static schema::Entity entity {
@@ -15367,10 +15367,10 @@ const schema::Entity* GlObjectPtrLabel::StaticSchema() {
 // GlObjectPtrLabelKHR:
 // gles.GlObjectPtrLabelKHR{$,$,Int32,$}
 void GlObjectPtrLabelKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mPtr);
+    e->Struct(this->mobservations);
+    e->Struct(this->mPtr);
     e->Int32(this->mLength);
-    e->Encode(this->mLabel);
+    e->Struct(this->mLabel);
 }
 const schema::Entity* GlObjectPtrLabelKHR::StaticSchema() {
     static schema::Entity entity {
@@ -15391,7 +15391,7 @@ const schema::Entity* GlObjectPtrLabelKHR::StaticSchema() {
 // GlOrthof:
 // gles.GlOrthof{$,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlOrthof::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mL);
     e->Float32(this->mR);
     e->Float32(this->mB);
@@ -15421,7 +15421,7 @@ const schema::Entity* GlOrthof::StaticSchema() {
 // GlOrthofOES:
 // gles.GlOrthofOES{$,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlOrthofOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mL);
     e->Float32(this->mR);
     e->Float32(this->mB);
@@ -15451,7 +15451,7 @@ const schema::Entity* GlOrthofOES::StaticSchema() {
 // GlOrthox:
 // gles.GlOrthox{$,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlOrthox::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mL);
     e->Int32(this->mR);
     e->Int32(this->mB);
@@ -15481,7 +15481,7 @@ const schema::Entity* GlOrthox::StaticSchema() {
 // GlOrthoxOES:
 // gles.GlOrthoxOES{$,Int32,Int32,Int32,Int32,Int32,Int32}
 void GlOrthoxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mL);
     e->Int32(this->mR);
     e->Int32(this->mB);
@@ -15562,13 +15562,13 @@ const schema::Entity* GlPatchParameteriOES::StaticSchema() {
 // GlPathCommandsNV:
 // gles.GlPathCommandsNV{$,Uint32,Int32,$,Int32,Uint32,$}
 void GlPathCommandsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mNumCommands);
-    e->Encode(this->mCommands);
+    e->Struct(this->mCommands);
     e->Int32(this->mNumCoords);
     e->Uint32(this->mCoordType);
-    e->Encode(this->mCoords);
+    e->Struct(this->mCoords);
 }
 const schema::Entity* GlPathCommandsNV::StaticSchema() {
     static schema::Entity entity {
@@ -15592,11 +15592,11 @@ const schema::Entity* GlPathCommandsNV::StaticSchema() {
 // GlPathCoordsNV:
 // gles.GlPathCoordsNV{$,Uint32,Int32,Uint32,$}
 void GlPathCoordsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mNumCoords);
     e->Uint32(this->mCoordType);
-    e->Encode(this->mCoords);
+    e->Struct(this->mCoords);
 }
 const schema::Entity* GlPathCoordsNV::StaticSchema() {
     static schema::Entity entity {
@@ -15634,10 +15634,10 @@ const schema::Entity* GlPathCoverDepthFuncNV::StaticSchema() {
 // GlPathDashArrayNV:
 // gles.GlPathDashArrayNV{$,Uint32,Int32,$}
 void GlPathDashArrayNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mDashCount);
-    e->Encode(this->mDashArray);
+    e->Struct(this->mDashArray);
 }
 const schema::Entity* GlPathDashArrayNV::StaticSchema() {
     static schema::Entity entity {
@@ -15658,10 +15658,10 @@ const schema::Entity* GlPathDashArrayNV::StaticSchema() {
 // GlPathGlyphIndexArrayNV:
 // gles.GlPathGlyphIndexArrayNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Float32,Uint32}
 void GlPathGlyphIndexArrayNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirstPathName);
     e->Uint32(this->mFontTarget);
-    e->Encode(this->mFontName);
+    e->Struct(this->mFontName);
     e->Uint32(this->mFontStyle);
     e->Uint32(this->mFirstGlyphIndex);
     e->Int32(this->mNumGlyphs);
@@ -15694,9 +15694,9 @@ const schema::Entity* GlPathGlyphIndexArrayNV::StaticSchema() {
 // GlPathGlyphIndexRangeNV:
 // gles.GlPathGlyphIndexRangeNV{$,Uint32,$,Uint32,Uint32,Float32,Uint32,Uint32}
 void GlPathGlyphIndexRangeNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFontTarget);
-    e->Encode(this->mFontName);
+    e->Struct(this->mFontName);
     e->Uint32(this->mFontStyle);
     e->Uint32(this->mPathParameterTemplate);
     e->Float32(this->mEmScale);
@@ -15726,10 +15726,10 @@ const schema::Entity* GlPathGlyphIndexRangeNV::StaticSchema() {
 // GlPathGlyphRangeNV:
 // gles.GlPathGlyphRangeNV{$,Uint32,Uint32,$,Uint32,Uint32,Int32,Uint32,Uint32,Float32}
 void GlPathGlyphRangeNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirstPathName);
     e->Uint32(this->mFontTarget);
-    e->Encode(this->mFontName);
+    e->Struct(this->mFontName);
     e->Uint32(this->mFontStyle);
     e->Uint32(this->mFirstGlyph);
     e->Int32(this->mNumGlyphs);
@@ -15762,14 +15762,14 @@ const schema::Entity* GlPathGlyphRangeNV::StaticSchema() {
 // GlPathGlyphsNV:
 // gles.GlPathGlyphsNV{$,Uint32,Uint32,$,Uint32,Int32,Uint32,$,Uint32,Uint32,Float32}
 void GlPathGlyphsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirstPathName);
     e->Uint32(this->mFontTarget);
-    e->Encode(this->mFontName);
+    e->Struct(this->mFontName);
     e->Uint32(this->mFontStyle);
     e->Int32(this->mNumGlyphs);
     e->Uint32(this->mType);
-    e->Encode(this->mCharcodes);
+    e->Struct(this->mCharcodes);
     e->Uint32(this->mHandleMissingGlyphs);
     e->Uint32(this->mPathParameterTemplate);
     e->Float32(this->mEmScale);
@@ -15800,11 +15800,11 @@ const schema::Entity* GlPathGlyphsNV::StaticSchema() {
 // GlPathMemoryGlyphIndexArrayNV:
 // gles.GlPathMemoryGlyphIndexArrayNV{$,Uint32,Uint32,Int32,$,Int32,Uint32,Int32,Uint32,Float32,Uint32}
 void GlPathMemoryGlyphIndexArrayNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirstPathName);
     e->Uint32(this->mFontTarget);
     e->Int32(this->mFontSize);
-    e->Encode(this->mFontData);
+    e->Struct(this->mFontData);
     e->Int32(this->mFaceIndex);
     e->Uint32(this->mFirstGlyphIndex);
     e->Int32(this->mNumGlyphs);
@@ -15838,7 +15838,7 @@ const schema::Entity* GlPathMemoryGlyphIndexArrayNV::StaticSchema() {
 // GlPathParameterfNV:
 // gles.GlPathParameterfNV{$,Uint32,Uint32,Float32}
 void GlPathParameterfNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
     e->Float32(this->mValue);
@@ -15862,10 +15862,10 @@ const schema::Entity* GlPathParameterfNV::StaticSchema() {
 // GlPathParameterfvNV:
 // gles.GlPathParameterfvNV{$,Uint32,Uint32,$}
 void GlPathParameterfvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlPathParameterfvNV::StaticSchema() {
     static schema::Entity entity {
@@ -15886,7 +15886,7 @@ const schema::Entity* GlPathParameterfvNV::StaticSchema() {
 // GlPathParameteriNV:
 // gles.GlPathParameteriNV{$,Uint32,Uint32,Int32}
 void GlPathParameteriNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
@@ -15910,10 +15910,10 @@ const schema::Entity* GlPathParameteriNV::StaticSchema() {
 // GlPathParameterivNV:
 // gles.GlPathParameterivNV{$,Uint32,Uint32,$}
 void GlPathParameterivNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mPname);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlPathParameterivNV::StaticSchema() {
     static schema::Entity entity {
@@ -15951,7 +15951,7 @@ const schema::Entity* GlPathStencilDepthOffsetNV::StaticSchema() {
 // GlPathStencilFuncNV:
 // gles.GlPathStencilFuncNV{$,Uint32,Int32,Uint32}
 void GlPathStencilFuncNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFunc);
     e->Int32(this->mRef);
     e->Uint32(this->mMask);
@@ -15975,11 +15975,11 @@ const schema::Entity* GlPathStencilFuncNV::StaticSchema() {
 // GlPathStringNV:
 // gles.GlPathStringNV{$,Uint32,Uint32,Int32,$}
 void GlPathStringNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mFormat);
     e->Int32(this->mLength);
-    e->Encode(this->mPathString);
+    e->Struct(this->mPathString);
 }
 const schema::Entity* GlPathStringNV::StaticSchema() {
     static schema::Entity entity {
@@ -16001,15 +16001,15 @@ const schema::Entity* GlPathStringNV::StaticSchema() {
 // GlPathSubCommandsNV:
 // gles.GlPathSubCommandsNV{$,Uint32,Int32,Int32,Int32,$,Int32,Uint32,$}
 void GlPathSubCommandsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mCommandStart);
     e->Int32(this->mCommandsToDelete);
     e->Int32(this->mNumCommands);
-    e->Encode(this->mCommands);
+    e->Struct(this->mCommands);
     e->Int32(this->mNumCoords);
     e->Uint32(this->mCoordType);
-    e->Encode(this->mCoords);
+    e->Struct(this->mCoords);
 }
 const schema::Entity* GlPathSubCommandsNV::StaticSchema() {
     static schema::Entity entity {
@@ -16035,12 +16035,12 @@ const schema::Entity* GlPathSubCommandsNV::StaticSchema() {
 // GlPathSubCoordsNV:
 // gles.GlPathSubCoordsNV{$,Uint32,Int32,Int32,Uint32,$}
 void GlPathSubCoordsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mCoordStart);
     e->Int32(this->mNumCoords);
     e->Uint32(this->mCoordType);
-    e->Encode(this->mCoords);
+    e->Struct(this->mCoords);
 }
 const schema::Entity* GlPathSubCoordsNV::StaticSchema() {
     static schema::Entity entity {
@@ -16095,15 +16095,15 @@ const schema::Entity* GlPixelStorei::StaticSchema() {
 // GlPointAlongPathNV:
 // gles.GlPointAlongPathNV{$,Uint32,Int32,Int32,Float32,$,$,$,$,Uint8}
 void GlPointAlongPathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mStartSegment);
     e->Int32(this->mNumSegments);
     e->Float32(this->mDistance);
-    e->Encode(this->mX);
-    e->Encode(this->mY);
-    e->Encode(this->mTangentX);
-    e->Encode(this->mTangentY);
+    e->Struct(this->mX);
+    e->Struct(this->mY);
+    e->Struct(this->mTangentX);
+    e->Struct(this->mTangentY);
     e->Uint8(this->mResult);
 }
 const schema::Entity* GlPointAlongPathNV::StaticSchema() {
@@ -16249,10 +16249,10 @@ const schema::Entity* GlPointSize::StaticSchema() {
 // GlPointSizePointerOES:
 // gles.GlPointSizePointerOES{$,Uint32,Int32,$}
 void GlPointSizePointerOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlPointSizePointerOES::StaticSchema() {
     static schema::Entity entity {
@@ -16273,10 +16273,10 @@ const schema::Entity* GlPointSizePointerOES::StaticSchema() {
 // GlPointSizePointerOESBounds:
 // gles.GlPointSizePointerOESBounds{$,Uint32,Int32,$,Int32}
 void GlPointSizePointerOESBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlPointSizePointerOESBounds::StaticSchema() {
@@ -16459,7 +16459,7 @@ const schema::Entity* GlPopMatrix::StaticSchema() {
 // GlPrimitiveBoundingBox:
 // gles.GlPrimitiveBoundingBox{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlPrimitiveBoundingBox::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mMinX);
     e->Float32(this->mMinY);
     e->Float32(this->mMinZ);
@@ -16493,7 +16493,7 @@ const schema::Entity* GlPrimitiveBoundingBox::StaticSchema() {
 // GlPrimitiveBoundingBoxEXT:
 // gles.GlPrimitiveBoundingBoxEXT{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlPrimitiveBoundingBoxEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mMinX);
     e->Float32(this->mMinY);
     e->Float32(this->mMinZ);
@@ -16527,7 +16527,7 @@ const schema::Entity* GlPrimitiveBoundingBoxEXT::StaticSchema() {
 // GlPrimitiveBoundingBoxOES:
 // gles.GlPrimitiveBoundingBoxOES{$,Float32,Float32,Float32,Float32,Float32,Float32,Float32,Float32}
 void GlPrimitiveBoundingBoxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mMinX);
     e->Float32(this->mMinY);
     e->Float32(this->mMinZ);
@@ -16561,10 +16561,10 @@ const schema::Entity* GlPrimitiveBoundingBoxOES::StaticSchema() {
 // GlProgramBinary:
 // gles.GlProgramBinary{$,Uint32,Uint32,$,Int32}
 void GlProgramBinary::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mBinaryFormat);
-    e->Encode(this->mBinary);
+    e->Struct(this->mBinary);
     e->Int32(this->mLength);
 }
 const schema::Entity* GlProgramBinary::StaticSchema() {
@@ -16587,10 +16587,10 @@ const schema::Entity* GlProgramBinary::StaticSchema() {
 // GlProgramBinaryOES:
 // gles.GlProgramBinaryOES{$,Uint32,Uint32,$,Int32}
 void GlProgramBinaryOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mBinaryFormat);
-    e->Encode(this->mBinary);
+    e->Struct(this->mBinary);
     e->Int32(this->mBinarySize);
 }
 const schema::Entity* GlProgramBinaryOES::StaticSchema() {
@@ -16613,7 +16613,7 @@ const schema::Entity* GlProgramBinaryOES::StaticSchema() {
 // GlProgramParameteri:
 // gles.GlProgramParameteri{$,Uint32,Uint32,Int32}
 void GlProgramParameteri::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
@@ -16637,7 +16637,7 @@ const schema::Entity* GlProgramParameteri::StaticSchema() {
 // GlProgramParameteriEXT:
 // gles.GlProgramParameteriEXT{$,Uint32,Uint32,Int32}
 void GlProgramParameteriEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mPname);
     e->Int32(this->mValue);
@@ -16661,12 +16661,12 @@ const schema::Entity* GlProgramParameteriEXT::StaticSchema() {
 // GlProgramPathFragmentInputGenNV:
 // gles.GlProgramPathFragmentInputGenNV{$,Uint32,Int32,Uint32,Int32,$}
 void GlProgramPathFragmentInputGenNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mGenMode);
     e->Int32(this->mComponents);
-    e->Encode(this->mCoeffs);
+    e->Struct(this->mCoeffs);
 }
 const schema::Entity* GlProgramPathFragmentInputGenNV::StaticSchema() {
     static schema::Entity entity {
@@ -16689,7 +16689,7 @@ const schema::Entity* GlProgramPathFragmentInputGenNV::StaticSchema() {
 // GlProgramUniform1f:
 // gles.GlProgramUniform1f{$,Uint32,Int32,Float32}
 void GlProgramUniform1f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
@@ -16713,7 +16713,7 @@ const schema::Entity* GlProgramUniform1f::StaticSchema() {
 // GlProgramUniform1fEXT:
 // gles.GlProgramUniform1fEXT{$,Uint32,Int32,Float32}
 void GlProgramUniform1fEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mV0);
@@ -16737,11 +16737,11 @@ const schema::Entity* GlProgramUniform1fEXT::StaticSchema() {
 // GlProgramUniform1fv:
 // gles.GlProgramUniform1fv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform1fv::StaticSchema() {
     static schema::Entity entity {
@@ -16763,11 +16763,11 @@ const schema::Entity* GlProgramUniform1fv::StaticSchema() {
 // GlProgramUniform1fvEXT:
 // gles.GlProgramUniform1fvEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform1fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -16789,7 +16789,7 @@ const schema::Entity* GlProgramUniform1fvEXT::StaticSchema() {
 // GlProgramUniform1i:
 // gles.GlProgramUniform1i{$,Uint32,Int32,Int32}
 void GlProgramUniform1i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
@@ -16813,7 +16813,7 @@ const schema::Entity* GlProgramUniform1i::StaticSchema() {
 // GlProgramUniform1iEXT:
 // gles.GlProgramUniform1iEXT{$,Uint32,Int32,Int32}
 void GlProgramUniform1iEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mV0);
@@ -16837,11 +16837,11 @@ const schema::Entity* GlProgramUniform1iEXT::StaticSchema() {
 // GlProgramUniform1iv:
 // gles.GlProgramUniform1iv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform1iv::StaticSchema() {
     static schema::Entity entity {
@@ -16863,11 +16863,11 @@ const schema::Entity* GlProgramUniform1iv::StaticSchema() {
 // GlProgramUniform1ivEXT:
 // gles.GlProgramUniform1ivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1ivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform1ivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -16889,7 +16889,7 @@ const schema::Entity* GlProgramUniform1ivEXT::StaticSchema() {
 // GlProgramUniform1ui:
 // gles.GlProgramUniform1ui{$,Uint32,Int32,Uint32}
 void GlProgramUniform1ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
@@ -16913,7 +16913,7 @@ const schema::Entity* GlProgramUniform1ui::StaticSchema() {
 // GlProgramUniform1uiEXT:
 // gles.GlProgramUniform1uiEXT{$,Uint32,Int32,Uint32}
 void GlProgramUniform1uiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mV0);
@@ -16937,11 +16937,11 @@ const schema::Entity* GlProgramUniform1uiEXT::StaticSchema() {
 // GlProgramUniform1uiv:
 // gles.GlProgramUniform1uiv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform1uiv::StaticSchema() {
     static schema::Entity entity {
@@ -16963,11 +16963,11 @@ const schema::Entity* GlProgramUniform1uiv::StaticSchema() {
 // GlProgramUniform1uivEXT:
 // gles.GlProgramUniform1uivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform1uivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform1uivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -16989,7 +16989,7 @@ const schema::Entity* GlProgramUniform1uivEXT::StaticSchema() {
 // GlProgramUniform2f:
 // gles.GlProgramUniform2f{$,Uint32,Int32,Float32,Float32}
 void GlProgramUniform2f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
@@ -17015,7 +17015,7 @@ const schema::Entity* GlProgramUniform2f::StaticSchema() {
 // GlProgramUniform2fEXT:
 // gles.GlProgramUniform2fEXT{$,Uint32,Int32,Float32,Float32}
 void GlProgramUniform2fEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mV0);
@@ -17041,11 +17041,11 @@ const schema::Entity* GlProgramUniform2fEXT::StaticSchema() {
 // GlProgramUniform2fv:
 // gles.GlProgramUniform2fv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform2fv::StaticSchema() {
     static schema::Entity entity {
@@ -17067,11 +17067,11 @@ const schema::Entity* GlProgramUniform2fv::StaticSchema() {
 // GlProgramUniform2fvEXT:
 // gles.GlProgramUniform2fvEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform2fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17093,7 +17093,7 @@ const schema::Entity* GlProgramUniform2fvEXT::StaticSchema() {
 // GlProgramUniform2i:
 // gles.GlProgramUniform2i{$,Uint32,Int32,Int32,Int32}
 void GlProgramUniform2i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
@@ -17119,7 +17119,7 @@ const schema::Entity* GlProgramUniform2i::StaticSchema() {
 // GlProgramUniform2iEXT:
 // gles.GlProgramUniform2iEXT{$,Uint32,Int32,Int32,Int32}
 void GlProgramUniform2iEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mV0);
@@ -17145,11 +17145,11 @@ const schema::Entity* GlProgramUniform2iEXT::StaticSchema() {
 // GlProgramUniform2iv:
 // gles.GlProgramUniform2iv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform2iv::StaticSchema() {
     static schema::Entity entity {
@@ -17171,11 +17171,11 @@ const schema::Entity* GlProgramUniform2iv::StaticSchema() {
 // GlProgramUniform2ivEXT:
 // gles.GlProgramUniform2ivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2ivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform2ivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17197,7 +17197,7 @@ const schema::Entity* GlProgramUniform2ivEXT::StaticSchema() {
 // GlProgramUniform2ui:
 // gles.GlProgramUniform2ui{$,Uint32,Int32,Uint32,Uint32}
 void GlProgramUniform2ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
@@ -17223,7 +17223,7 @@ const schema::Entity* GlProgramUniform2ui::StaticSchema() {
 // GlProgramUniform2uiEXT:
 // gles.GlProgramUniform2uiEXT{$,Uint32,Int32,Uint32,Uint32}
 void GlProgramUniform2uiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mV0);
@@ -17249,11 +17249,11 @@ const schema::Entity* GlProgramUniform2uiEXT::StaticSchema() {
 // GlProgramUniform2uiv:
 // gles.GlProgramUniform2uiv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform2uiv::StaticSchema() {
     static schema::Entity entity {
@@ -17275,11 +17275,11 @@ const schema::Entity* GlProgramUniform2uiv::StaticSchema() {
 // GlProgramUniform2uivEXT:
 // gles.GlProgramUniform2uivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform2uivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform2uivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17301,7 +17301,7 @@ const schema::Entity* GlProgramUniform2uivEXT::StaticSchema() {
 // GlProgramUniform3f:
 // gles.GlProgramUniform3f{$,Uint32,Int32,Float32,Float32,Float32}
 void GlProgramUniform3f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
@@ -17329,7 +17329,7 @@ const schema::Entity* GlProgramUniform3f::StaticSchema() {
 // GlProgramUniform3fEXT:
 // gles.GlProgramUniform3fEXT{$,Uint32,Int32,Float32,Float32,Float32}
 void GlProgramUniform3fEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mV0);
@@ -17357,11 +17357,11 @@ const schema::Entity* GlProgramUniform3fEXT::StaticSchema() {
 // GlProgramUniform3fv:
 // gles.GlProgramUniform3fv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform3fv::StaticSchema() {
     static schema::Entity entity {
@@ -17383,11 +17383,11 @@ const schema::Entity* GlProgramUniform3fv::StaticSchema() {
 // GlProgramUniform3fvEXT:
 // gles.GlProgramUniform3fvEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform3fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17409,7 +17409,7 @@ const schema::Entity* GlProgramUniform3fvEXT::StaticSchema() {
 // GlProgramUniform3i:
 // gles.GlProgramUniform3i{$,Uint32,Int32,Int32,Int32,Int32}
 void GlProgramUniform3i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
@@ -17437,7 +17437,7 @@ const schema::Entity* GlProgramUniform3i::StaticSchema() {
 // GlProgramUniform3iEXT:
 // gles.GlProgramUniform3iEXT{$,Uint32,Int32,Int32,Int32,Int32}
 void GlProgramUniform3iEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mV0);
@@ -17465,11 +17465,11 @@ const schema::Entity* GlProgramUniform3iEXT::StaticSchema() {
 // GlProgramUniform3iv:
 // gles.GlProgramUniform3iv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform3iv::StaticSchema() {
     static schema::Entity entity {
@@ -17491,11 +17491,11 @@ const schema::Entity* GlProgramUniform3iv::StaticSchema() {
 // GlProgramUniform3ivEXT:
 // gles.GlProgramUniform3ivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3ivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform3ivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17517,7 +17517,7 @@ const schema::Entity* GlProgramUniform3ivEXT::StaticSchema() {
 // GlProgramUniform3ui:
 // gles.GlProgramUniform3ui{$,Uint32,Int32,Uint32,Uint32,Uint32}
 void GlProgramUniform3ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
@@ -17545,7 +17545,7 @@ const schema::Entity* GlProgramUniform3ui::StaticSchema() {
 // GlProgramUniform3uiEXT:
 // gles.GlProgramUniform3uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32}
 void GlProgramUniform3uiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mV0);
@@ -17573,11 +17573,11 @@ const schema::Entity* GlProgramUniform3uiEXT::StaticSchema() {
 // GlProgramUniform3uiv:
 // gles.GlProgramUniform3uiv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform3uiv::StaticSchema() {
     static schema::Entity entity {
@@ -17599,11 +17599,11 @@ const schema::Entity* GlProgramUniform3uiv::StaticSchema() {
 // GlProgramUniform3uivEXT:
 // gles.GlProgramUniform3uivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform3uivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform3uivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17625,7 +17625,7 @@ const schema::Entity* GlProgramUniform3uivEXT::StaticSchema() {
 // GlProgramUniform4f:
 // gles.GlProgramUniform4f{$,Uint32,Int32,Float32,Float32,Float32,Float32}
 void GlProgramUniform4f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
@@ -17655,7 +17655,7 @@ const schema::Entity* GlProgramUniform4f::StaticSchema() {
 // GlProgramUniform4fEXT:
 // gles.GlProgramUniform4fEXT{$,Uint32,Int32,Float32,Float32,Float32,Float32}
 void GlProgramUniform4fEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Float32(this->mV0);
@@ -17685,11 +17685,11 @@ const schema::Entity* GlProgramUniform4fEXT::StaticSchema() {
 // GlProgramUniform4fv:
 // gles.GlProgramUniform4fv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform4fv::StaticSchema() {
     static schema::Entity entity {
@@ -17711,11 +17711,11 @@ const schema::Entity* GlProgramUniform4fv::StaticSchema() {
 // GlProgramUniform4fvEXT:
 // gles.GlProgramUniform4fvEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform4fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17737,7 +17737,7 @@ const schema::Entity* GlProgramUniform4fvEXT::StaticSchema() {
 // GlProgramUniform4i:
 // gles.GlProgramUniform4i{$,Uint32,Int32,Int32,Int32,Int32,Int32}
 void GlProgramUniform4i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
@@ -17767,7 +17767,7 @@ const schema::Entity* GlProgramUniform4i::StaticSchema() {
 // GlProgramUniform4iEXT:
 // gles.GlProgramUniform4iEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32}
 void GlProgramUniform4iEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mV0);
@@ -17797,11 +17797,11 @@ const schema::Entity* GlProgramUniform4iEXT::StaticSchema() {
 // GlProgramUniform4iv:
 // gles.GlProgramUniform4iv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform4iv::StaticSchema() {
     static schema::Entity entity {
@@ -17823,11 +17823,11 @@ const schema::Entity* GlProgramUniform4iv::StaticSchema() {
 // GlProgramUniform4ivEXT:
 // gles.GlProgramUniform4ivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4ivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform4ivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17849,7 +17849,7 @@ const schema::Entity* GlProgramUniform4ivEXT::StaticSchema() {
 // GlProgramUniform4ui:
 // gles.GlProgramUniform4ui{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
 void GlProgramUniform4ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
@@ -17879,7 +17879,7 @@ const schema::Entity* GlProgramUniform4ui::StaticSchema() {
 // GlProgramUniform4uiEXT:
 // gles.GlProgramUniform4uiEXT{$,Uint32,Int32,Uint32,Uint32,Uint32,Uint32}
 void GlProgramUniform4uiEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint32(this->mV0);
@@ -17909,11 +17909,11 @@ const schema::Entity* GlProgramUniform4uiEXT::StaticSchema() {
 // GlProgramUniform4uiv:
 // gles.GlProgramUniform4uiv{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniform4uiv::StaticSchema() {
     static schema::Entity entity {
@@ -17935,11 +17935,11 @@ const schema::Entity* GlProgramUniform4uiv::StaticSchema() {
 // GlProgramUniform4uivEXT:
 // gles.GlProgramUniform4uivEXT{$,Uint32,Int32,Int32,$}
 void GlProgramUniform4uivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniform4uivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -17961,7 +17961,7 @@ const schema::Entity* GlProgramUniform4uivEXT::StaticSchema() {
 // GlProgramUniformHandleui64NV:
 // gles.GlProgramUniformHandleui64NV{$,Uint32,Int32,Uint64}
 void GlProgramUniformHandleui64NV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Uint64(this->mValue);
@@ -17985,11 +17985,11 @@ const schema::Entity* GlProgramUniformHandleui64NV::StaticSchema() {
 // GlProgramUniformHandleui64vNV:
 // gles.GlProgramUniformHandleui64vNV{$,Uint32,Int32,Int32,$}
 void GlProgramUniformHandleui64vNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
@@ -18011,12 +18011,12 @@ const schema::Entity* GlProgramUniformHandleui64vNV::StaticSchema() {
 // GlProgramUniformMatrix2fv:
 // gles.GlProgramUniformMatrix2fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
@@ -18039,12 +18039,12 @@ const schema::Entity* GlProgramUniformMatrix2fv::StaticSchema() {
 // GlProgramUniformMatrix2fvEXT:
 // gles.GlProgramUniformMatrix2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix2fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18067,12 +18067,12 @@ const schema::Entity* GlProgramUniformMatrix2fvEXT::StaticSchema() {
 // GlProgramUniformMatrix2x3fv:
 // gles.GlProgramUniformMatrix2x3fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2x3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
@@ -18095,12 +18095,12 @@ const schema::Entity* GlProgramUniformMatrix2x3fv::StaticSchema() {
 // GlProgramUniformMatrix2x3fvEXT:
 // gles.GlProgramUniformMatrix2x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2x3fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18123,12 +18123,12 @@ const schema::Entity* GlProgramUniformMatrix2x3fvEXT::StaticSchema() {
 // GlProgramUniformMatrix2x4fv:
 // gles.GlProgramUniformMatrix2x4fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2x4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
@@ -18151,12 +18151,12 @@ const schema::Entity* GlProgramUniformMatrix2x4fv::StaticSchema() {
 // GlProgramUniformMatrix2x4fvEXT:
 // gles.GlProgramUniformMatrix2x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix2x4fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18179,12 +18179,12 @@ const schema::Entity* GlProgramUniformMatrix2x4fvEXT::StaticSchema() {
 // GlProgramUniformMatrix3fv:
 // gles.GlProgramUniformMatrix3fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
@@ -18207,12 +18207,12 @@ const schema::Entity* GlProgramUniformMatrix3fv::StaticSchema() {
 // GlProgramUniformMatrix3fvEXT:
 // gles.GlProgramUniformMatrix3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix3fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18235,12 +18235,12 @@ const schema::Entity* GlProgramUniformMatrix3fvEXT::StaticSchema() {
 // GlProgramUniformMatrix3x2fv:
 // gles.GlProgramUniformMatrix3x2fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3x2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
@@ -18263,12 +18263,12 @@ const schema::Entity* GlProgramUniformMatrix3x2fv::StaticSchema() {
 // GlProgramUniformMatrix3x2fvEXT:
 // gles.GlProgramUniformMatrix3x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3x2fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18291,12 +18291,12 @@ const schema::Entity* GlProgramUniformMatrix3x2fvEXT::StaticSchema() {
 // GlProgramUniformMatrix3x4fv:
 // gles.GlProgramUniformMatrix3x4fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3x4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
@@ -18319,12 +18319,12 @@ const schema::Entity* GlProgramUniformMatrix3x4fv::StaticSchema() {
 // GlProgramUniformMatrix3x4fvEXT:
 // gles.GlProgramUniformMatrix3x4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix3x4fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18347,12 +18347,12 @@ const schema::Entity* GlProgramUniformMatrix3x4fvEXT::StaticSchema() {
 // GlProgramUniformMatrix4fv:
 // gles.GlProgramUniformMatrix4fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
@@ -18375,12 +18375,12 @@ const schema::Entity* GlProgramUniformMatrix4fv::StaticSchema() {
 // GlProgramUniformMatrix4fvEXT:
 // gles.GlProgramUniformMatrix4fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix4fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18403,12 +18403,12 @@ const schema::Entity* GlProgramUniformMatrix4fvEXT::StaticSchema() {
 // GlProgramUniformMatrix4x2fv:
 // gles.GlProgramUniformMatrix4x2fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4x2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
@@ -18431,12 +18431,12 @@ const schema::Entity* GlProgramUniformMatrix4x2fv::StaticSchema() {
 // GlProgramUniformMatrix4x2fvEXT:
 // gles.GlProgramUniformMatrix4x2fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4x2fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18459,12 +18459,12 @@ const schema::Entity* GlProgramUniformMatrix4x2fvEXT::StaticSchema() {
 // GlProgramUniformMatrix4x3fv:
 // gles.GlProgramUniformMatrix4x3fv{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4x3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlProgramUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
@@ -18487,12 +18487,12 @@ const schema::Entity* GlProgramUniformMatrix4x3fv::StaticSchema() {
 // GlProgramUniformMatrix4x3fvEXT:
 // gles.GlProgramUniformMatrix4x3fvEXT{$,Uint32,Int32,Int32,Uint8,$}
 void GlProgramUniformMatrix4x3fvEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18515,11 +18515,11 @@ const schema::Entity* GlProgramUniformMatrix4x3fvEXT::StaticSchema() {
 // GlPushDebugGroup:
 // gles.GlPushDebugGroup{$,Uint32,Uint32,Int32,$}
 void GlPushDebugGroup::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mId);
     e->Int32(this->mLength);
-    e->Encode(this->mMessage);
+    e->Struct(this->mMessage);
 }
 const schema::Entity* GlPushDebugGroup::StaticSchema() {
     static schema::Entity entity {
@@ -18541,11 +18541,11 @@ const schema::Entity* GlPushDebugGroup::StaticSchema() {
 // GlPushDebugGroupKHR:
 // gles.GlPushDebugGroupKHR{$,Uint32,Uint32,Int32,$}
 void GlPushDebugGroupKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSource);
     e->Uint32(this->mId);
     e->Int32(this->mLength);
-    e->Encode(this->mMessage);
+    e->Struct(this->mMessage);
 }
 const schema::Entity* GlPushDebugGroupKHR::StaticSchema() {
     static schema::Entity entity {
@@ -18616,9 +18616,9 @@ const schema::Entity* GlQueryCounterEXT::StaticSchema() {
 // GlQueryMatrixxOES:
 // gles.GlQueryMatrixxOES{$,$,$,Uint32}
 void GlQueryMatrixxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mMantissa);
-    e->Encode(this->mExponent);
+    e->Struct(this->mobservations);
+    e->Struct(this->mMantissa);
+    e->Struct(this->mExponent);
     e->Uint32(this->mResult);
 }
 const schema::Entity* GlQueryMatrixxOES::StaticSchema() {
@@ -18706,14 +18706,14 @@ const schema::Entity* GlReadBufferNV::StaticSchema() {
 // GlReadPixels:
 // gles.GlReadPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlReadPixels::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
     e->Int32(this->mHeight);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlReadPixels::StaticSchema() {
     static schema::Entity entity {
@@ -18738,7 +18738,7 @@ const schema::Entity* GlReadPixels::StaticSchema() {
 // GlReadnPixels:
 // gles.GlReadnPixels{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 void GlReadnPixels::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -18746,7 +18746,7 @@ void GlReadnPixels::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
     e->Int32(this->mBufSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlReadnPixels::StaticSchema() {
     static schema::Entity entity {
@@ -18772,7 +18772,7 @@ const schema::Entity* GlReadnPixels::StaticSchema() {
 // GlReadnPixelsEXT:
 // gles.GlReadnPixelsEXT{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 void GlReadnPixelsEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -18780,7 +18780,7 @@ void GlReadnPixelsEXT::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
     e->Int32(this->mBufSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlReadnPixelsEXT::StaticSchema() {
     static schema::Entity entity {
@@ -18806,7 +18806,7 @@ const schema::Entity* GlReadnPixelsEXT::StaticSchema() {
 // GlReadnPixelsKHR:
 // gles.GlReadnPixelsKHR{$,Int32,Int32,Int32,Int32,Uint32,Uint32,Int32,$}
 void GlReadnPixelsKHR::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -18814,7 +18814,7 @@ void GlReadnPixelsKHR::Encode(Encoder* e) const {
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
     e->Int32(this->mBufSize);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlReadnPixelsKHR::StaticSchema() {
     static schema::Entity entity {
@@ -18855,7 +18855,7 @@ const schema::Entity* GlReleaseShaderCompiler::StaticSchema() {
 // GlRenderbufferStorage:
 // gles.GlRenderbufferStorage{$,Uint32,Uint32,Int32,Int32}
 void GlRenderbufferStorage::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mFormat);
     e->Int32(this->mWidth);
@@ -18881,7 +18881,7 @@ const schema::Entity* GlRenderbufferStorage::StaticSchema() {
 // GlRenderbufferStorageMultisample:
 // gles.GlRenderbufferStorageMultisample{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisample::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mFormat);
@@ -18909,7 +18909,7 @@ const schema::Entity* GlRenderbufferStorageMultisample::StaticSchema() {
 // GlRenderbufferStorageMultisampleANGLE:
 // gles.GlRenderbufferStorageMultisampleANGLE{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisampleANGLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -18937,7 +18937,7 @@ const schema::Entity* GlRenderbufferStorageMultisampleANGLE::StaticSchema() {
 // GlRenderbufferStorageMultisampleAPPLE:
 // gles.GlRenderbufferStorageMultisampleAPPLE{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisampleAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -18965,7 +18965,7 @@ const schema::Entity* GlRenderbufferStorageMultisampleAPPLE::StaticSchema() {
 // GlRenderbufferStorageMultisampleEXT:
 // gles.GlRenderbufferStorageMultisampleEXT{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisampleEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -18993,7 +18993,7 @@ const schema::Entity* GlRenderbufferStorageMultisampleEXT::StaticSchema() {
 // GlRenderbufferStorageMultisampleIMG:
 // gles.GlRenderbufferStorageMultisampleIMG{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisampleIMG::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -19021,7 +19021,7 @@ const schema::Entity* GlRenderbufferStorageMultisampleIMG::StaticSchema() {
 // GlRenderbufferStorageMultisampleNV:
 // gles.GlRenderbufferStorageMultisampleNV{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlRenderbufferStorageMultisampleNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -19049,7 +19049,7 @@ const schema::Entity* GlRenderbufferStorageMultisampleNV::StaticSchema() {
 // GlRenderbufferStorageOES:
 // gles.GlRenderbufferStorageOES{$,Uint32,Uint32,Int32,Int32}
 void GlRenderbufferStorageOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Int32(this->mWidth);
@@ -19120,7 +19120,7 @@ const schema::Entity* GlResumeTransformFeedback::StaticSchema() {
 // GlRotatef:
 // gles.GlRotatef{$,Float32,Float32,Float32,Float32}
 void GlRotatef::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mAngle);
     e->Float32(this->mX);
     e->Float32(this->mY);
@@ -19146,7 +19146,7 @@ const schema::Entity* GlRotatef::StaticSchema() {
 // GlRotatex:
 // gles.GlRotatex{$,Int32,Int32,Int32,Int32}
 void GlRotatex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mAngle);
     e->Int32(this->mX);
     e->Int32(this->mY);
@@ -19172,7 +19172,7 @@ const schema::Entity* GlRotatex::StaticSchema() {
 // GlRotatexOES:
 // gles.GlRotatexOES{$,Int32,Int32,Int32,Int32}
 void GlRotatexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mAngle);
     e->Int32(this->mX);
     e->Int32(this->mY);
@@ -19266,10 +19266,10 @@ const schema::Entity* GlSampleMaski::StaticSchema() {
 // GlSamplerParameterIiv:
 // gles.GlSamplerParameterIiv{$,Uint32,Uint32,$}
 void GlSamplerParameterIiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIiv::StaticSchema() {
     static schema::Entity entity {
@@ -19290,10 +19290,10 @@ const schema::Entity* GlSamplerParameterIiv::StaticSchema() {
 // GlSamplerParameterIivEXT:
 // gles.GlSamplerParameterIivEXT{$,Uint32,Uint32,$}
 void GlSamplerParameterIivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -19314,10 +19314,10 @@ const schema::Entity* GlSamplerParameterIivEXT::StaticSchema() {
 // GlSamplerParameterIivOES:
 // gles.GlSamplerParameterIivOES{$,Uint32,Uint32,$}
 void GlSamplerParameterIivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIivOES::StaticSchema() {
     static schema::Entity entity {
@@ -19338,10 +19338,10 @@ const schema::Entity* GlSamplerParameterIivOES::StaticSchema() {
 // GlSamplerParameterIuiv:
 // gles.GlSamplerParameterIuiv{$,Uint32,Uint32,$}
 void GlSamplerParameterIuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIuiv::StaticSchema() {
     static schema::Entity entity {
@@ -19362,10 +19362,10 @@ const schema::Entity* GlSamplerParameterIuiv::StaticSchema() {
 // GlSamplerParameterIuivEXT:
 // gles.GlSamplerParameterIuivEXT{$,Uint32,Uint32,$}
 void GlSamplerParameterIuivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -19386,10 +19386,10 @@ const schema::Entity* GlSamplerParameterIuivEXT::StaticSchema() {
 // GlSamplerParameterIuivOES:
 // gles.GlSamplerParameterIuivOES{$,Uint32,Uint32,$}
 void GlSamplerParameterIuivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
@@ -19410,7 +19410,7 @@ const schema::Entity* GlSamplerParameterIuivOES::StaticSchema() {
 // GlSamplerParameterf:
 // gles.GlSamplerParameterf{$,Uint32,Uint32,Float32}
 void GlSamplerParameterf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
@@ -19434,10 +19434,10 @@ const schema::Entity* GlSamplerParameterf::StaticSchema() {
 // GlSamplerParameterfv:
 // gles.GlSamplerParameterfv{$,Uint32,Uint32,$}
 void GlSamplerParameterfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameterfv::StaticSchema() {
     static schema::Entity entity {
@@ -19458,7 +19458,7 @@ const schema::Entity* GlSamplerParameterfv::StaticSchema() {
 // GlSamplerParameteri:
 // gles.GlSamplerParameteri{$,Uint32,Uint32,Int32}
 void GlSamplerParameteri::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -19482,10 +19482,10 @@ const schema::Entity* GlSamplerParameteri::StaticSchema() {
 // GlSamplerParameteriv:
 // gles.GlSamplerParameteriv{$,Uint32,Uint32,$}
 void GlSamplerParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mSampler);
     e->Uint32(this->mPname);
-    e->Encode(this->mParam);
+    e->Struct(this->mParam);
 }
 const schema::Entity* GlSamplerParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -19506,7 +19506,7 @@ const schema::Entity* GlSamplerParameteriv::StaticSchema() {
 // GlScalef:
 // gles.GlScalef{$,Float32,Float32,Float32}
 void GlScalef::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mX);
     e->Float32(this->mY);
     e->Float32(this->mZ);
@@ -19530,7 +19530,7 @@ const schema::Entity* GlScalef::StaticSchema() {
 // GlScalex:
 // gles.GlScalex{$,Int32,Int32,Int32}
 void GlScalex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -19554,7 +19554,7 @@ const schema::Entity* GlScalex::StaticSchema() {
 // GlScalexOES:
 // gles.GlScalexOES{$,Int32,Int32,Int32}
 void GlScalexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -19578,7 +19578,7 @@ const schema::Entity* GlScalexOES::StaticSchema() {
 // GlScissor:
 // gles.GlScissor{$,Int32,Int32,Int32,Int32}
 void GlScissor::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -19604,10 +19604,10 @@ const schema::Entity* GlScissor::StaticSchema() {
 // GlScissorArrayvNV:
 // gles.GlScissorArrayvNV{$,Uint32,Int32,$}
 void GlScissorArrayvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirst);
     e->Int32(this->mCount);
-    e->Encode(this->mV);
+    e->Struct(this->mV);
 }
 const schema::Entity* GlScissorArrayvNV::StaticSchema() {
     static schema::Entity entity {
@@ -19628,7 +19628,7 @@ const schema::Entity* GlScissorArrayvNV::StaticSchema() {
 // GlScissorIndexedNV:
 // gles.GlScissorIndexedNV{$,Uint32,Int32,Int32,Int32,Int32}
 void GlScissorIndexedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Int32(this->mLeft);
     e->Int32(this->mBottom);
@@ -19673,12 +19673,12 @@ const schema::Entity* GlScissorIndexedvNV::StaticSchema() {
 // GlSelectPerfMonitorCountersAMD:
 // gles.GlSelectPerfMonitorCountersAMD{$,Uint32,Uint8,Uint32,Int32,$}
 void GlSelectPerfMonitorCountersAMD::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mMonitor);
     e->Uint8(this->mEnable);
     e->Uint32(this->mGroup);
     e->Int32(this->mNumCounters);
-    e->Encode(this->mCounterList);
+    e->Struct(this->mCounterList);
 }
 const schema::Entity* GlSelectPerfMonitorCountersAMD::StaticSchema() {
     static schema::Entity entity {
@@ -19749,11 +19749,11 @@ const schema::Entity* ShaderId__CP::StaticSchema() {
 // GlShaderBinary:
 // gles.GlShaderBinary{$,Int32,$,Uint32,$,Int32}
 void GlShaderBinary::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mCount);
-    e->Encode(this->mShaders);
+    e->Struct(this->mShaders);
     e->Uint32(this->mBinaryFormat);
-    e->Encode(this->mBinary);
+    e->Struct(this->mBinary);
     e->Int32(this->mBinarySize);
 }
 const schema::Entity* GlShaderBinary::StaticSchema() {
@@ -19777,11 +19777,11 @@ const schema::Entity* GlShaderBinary::StaticSchema() {
 // GlShaderSource:
 // gles.GlShaderSource{$,Uint32,Int32,$,$}
 void GlShaderSource::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mShader);
     e->Int32(this->mCount);
-    e->Encode(this->mSource);
-    e->Encode(this->mLength);
+    e->Struct(this->mSource);
+    e->Struct(this->mLength);
 }
 const schema::Entity* GlShaderSource::StaticSchema() {
     static schema::Entity entity {
@@ -19803,7 +19803,7 @@ const schema::Entity* GlShaderSource::StaticSchema() {
 // GlStartTilingQCOM:
 // gles.GlStartTilingQCOM{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlStartTilingQCOM::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mX);
     e->Uint32(this->mY);
     e->Uint32(this->mWidth);
@@ -19831,15 +19831,15 @@ const schema::Entity* GlStartTilingQCOM::StaticSchema() {
 // GlStencilFillPathInstancedNV:
 // gles.GlStencilFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,$}
 void GlStencilFillPathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Uint32(this->mFillMode);
     e->Uint32(this->mMask);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlStencilFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -19865,7 +19865,7 @@ const schema::Entity* GlStencilFillPathInstancedNV::StaticSchema() {
 // GlStencilFillPathNV:
 // gles.GlStencilFillPathNV{$,Uint32,Uint32,Uint32}
 void GlStencilFillPathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mFillMode);
     e->Uint32(this->mMask);
@@ -19889,7 +19889,7 @@ const schema::Entity* GlStencilFillPathNV::StaticSchema() {
 // GlStencilFunc:
 // gles.GlStencilFunc{$,Uint32,Int32,Uint32}
 void GlStencilFunc::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFunc);
     e->Int32(this->mRef);
     e->Uint32(this->mMask);
@@ -19913,7 +19913,7 @@ const schema::Entity* GlStencilFunc::StaticSchema() {
 // GlStencilFuncSeparate:
 // gles.GlStencilFuncSeparate{$,Uint32,Uint32,Int32,Uint32}
 void GlStencilFuncSeparate::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mFunction);
     e->Int32(this->mReferenceValue);
@@ -19972,7 +19972,7 @@ const schema::Entity* GlStencilMaskSeparate::StaticSchema() {
 // GlStencilOp:
 // gles.GlStencilOp{$,Uint32,Uint32,Uint32}
 void GlStencilOp::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFail);
     e->Uint32(this->mZfail);
     e->Uint32(this->mZpass);
@@ -19996,7 +19996,7 @@ const schema::Entity* GlStencilOp::StaticSchema() {
 // GlStencilOpSeparate:
 // gles.GlStencilOpSeparate{$,Uint32,Uint32,Uint32,Uint32}
 void GlStencilOpSeparate::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFace);
     e->Uint32(this->mStencilFail);
     e->Uint32(this->mStencilPassDepthFail);
@@ -20022,15 +20022,15 @@ const schema::Entity* GlStencilOpSeparate::StaticSchema() {
 // GlStencilStrokePathInstancedNV:
 // gles.GlStencilStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,$}
 void GlStencilStrokePathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Int32(this->mReference);
     e->Uint32(this->mMask);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlStencilStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -20056,7 +20056,7 @@ const schema::Entity* GlStencilStrokePathInstancedNV::StaticSchema() {
 // GlStencilStrokePathNV:
 // gles.GlStencilStrokePathNV{$,Uint32,Int32,Uint32}
 void GlStencilStrokePathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mReference);
     e->Uint32(this->mMask);
@@ -20080,16 +20080,16 @@ const schema::Entity* GlStencilStrokePathNV::StaticSchema() {
 // GlStencilThenCoverFillPathInstancedNV:
 // gles.GlStencilThenCoverFillPathInstancedNV{$,Int32,Uint32,$,Uint32,Uint32,Uint32,Uint32,Uint32,$}
 void GlStencilThenCoverFillPathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Uint32(this->mFillMode);
     e->Uint32(this->mMask);
     e->Uint32(this->mCoverMode);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -20116,7 +20116,7 @@ const schema::Entity* GlStencilThenCoverFillPathInstancedNV::StaticSchema() {
 // GlStencilThenCoverFillPathNV:
 // gles.GlStencilThenCoverFillPathNV{$,Uint32,Uint32,Uint32,Uint32}
 void GlStencilThenCoverFillPathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Uint32(this->mFillMode);
     e->Uint32(this->mMask);
@@ -20142,16 +20142,16 @@ const schema::Entity* GlStencilThenCoverFillPathNV::StaticSchema() {
 // GlStencilThenCoverStrokePathInstancedNV:
 // gles.GlStencilThenCoverStrokePathInstancedNV{$,Int32,Uint32,$,Uint32,Int32,Uint32,Uint32,Uint32,$}
 void GlStencilThenCoverStrokePathInstancedNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mNumPaths);
     e->Uint32(this->mPathNameType);
-    e->Encode(this->mPaths);
+    e->Struct(this->mPaths);
     e->Uint32(this->mPathBase);
     e->Int32(this->mReference);
     e->Uint32(this->mMask);
     e->Uint32(this->mCoverMode);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
     static schema::Entity entity {
@@ -20178,7 +20178,7 @@ const schema::Entity* GlStencilThenCoverStrokePathInstancedNV::StaticSchema() {
 // GlStencilThenCoverStrokePathNV:
 // gles.GlStencilThenCoverStrokePathNV{$,Uint32,Int32,Uint32,Uint32}
 void GlStencilThenCoverStrokePathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPath);
     e->Int32(this->mReference);
     e->Uint32(this->mMask);
@@ -20238,7 +20238,7 @@ const schema::Entity* GlTestFenceNV::StaticSchema() {
 // GlTexBuffer:
 // gles.GlTexBuffer{$,Uint32,Uint32,Uint32}
 void GlTexBuffer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20262,7 +20262,7 @@ const schema::Entity* GlTexBuffer::StaticSchema() {
 // GlTexBufferEXT:
 // gles.GlTexBufferEXT{$,Uint32,Uint32,Uint32}
 void GlTexBufferEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20286,7 +20286,7 @@ const schema::Entity* GlTexBufferEXT::StaticSchema() {
 // GlTexBufferOES:
 // gles.GlTexBufferOES{$,Uint32,Uint32,Uint32}
 void GlTexBufferOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20310,7 +20310,7 @@ const schema::Entity* GlTexBufferOES::StaticSchema() {
 // GlTexBufferRange:
 // gles.GlTexBufferRange{$,Uint32,Uint32,Uint32,Int32,Int32}
 void GlTexBufferRange::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20338,7 +20338,7 @@ const schema::Entity* GlTexBufferRange::StaticSchema() {
 // GlTexBufferRangeEXT:
 // gles.GlTexBufferRangeEXT{$,Uint32,Uint32,Uint32,Int32,Int32}
 void GlTexBufferRangeEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20366,7 +20366,7 @@ const schema::Entity* GlTexBufferRangeEXT::StaticSchema() {
 // GlTexBufferRangeOES:
 // gles.GlTexBufferRangeOES{$,Uint32,Uint32,Uint32,Int32,Int32}
 void GlTexBufferRangeOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mInternalformat);
     e->Uint32(this->mBuffer);
@@ -20394,11 +20394,11 @@ const schema::Entity* GlTexBufferRangeOES::StaticSchema() {
 // GlTexCoordPointer:
 // gles.GlTexCoordPointer{$,Int32,Uint32,Int32,$}
 void GlTexCoordPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlTexCoordPointer::StaticSchema() {
     static schema::Entity entity {
@@ -20420,11 +20420,11 @@ const schema::Entity* GlTexCoordPointer::StaticSchema() {
 // GlTexCoordPointerBounds:
 // gles.GlTexCoordPointerBounds{$,Int32,Uint32,Int32,$,Int32}
 void GlTexCoordPointerBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlTexCoordPointerBounds::StaticSchema() {
@@ -20448,7 +20448,7 @@ const schema::Entity* GlTexCoordPointerBounds::StaticSchema() {
 // GlTexEnvf:
 // gles.GlTexEnvf{$,Uint32,Uint32,Float32}
 void GlTexEnvf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
@@ -20472,10 +20472,10 @@ const schema::Entity* GlTexEnvf::StaticSchema() {
 // GlTexEnvfv:
 // gles.GlTexEnvfv{$,Uint32,Uint32,$}
 void GlTexEnvfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexEnvfv::StaticSchema() {
     static schema::Entity entity {
@@ -20496,7 +20496,7 @@ const schema::Entity* GlTexEnvfv::StaticSchema() {
 // GlTexEnvi:
 // gles.GlTexEnvi{$,Uint32,Uint32,Int32}
 void GlTexEnvi::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -20520,10 +20520,10 @@ const schema::Entity* GlTexEnvi::StaticSchema() {
 // GlTexEnviv:
 // gles.GlTexEnviv{$,Uint32,Uint32,$}
 void GlTexEnviv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexEnviv::StaticSchema() {
     static schema::Entity entity {
@@ -20544,7 +20544,7 @@ const schema::Entity* GlTexEnviv::StaticSchema() {
 // GlTexEnvx:
 // gles.GlTexEnvx{$,Uint32,Uint32,Int32}
 void GlTexEnvx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -20568,7 +20568,7 @@ const schema::Entity* GlTexEnvx::StaticSchema() {
 // GlTexEnvxOES:
 // gles.GlTexEnvxOES{$,Uint32,Uint32,Int32}
 void GlTexEnvxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -20592,10 +20592,10 @@ const schema::Entity* GlTexEnvxOES::StaticSchema() {
 // GlTexEnvxv:
 // gles.GlTexEnvxv{$,Uint32,Uint32,$}
 void GlTexEnvxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexEnvxv::StaticSchema() {
     static schema::Entity entity {
@@ -20616,10 +20616,10 @@ const schema::Entity* GlTexEnvxv::StaticSchema() {
 // GlTexEnvxvOES:
 // gles.GlTexEnvxvOES{$,Uint32,Uint32,$}
 void GlTexEnvxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexEnvxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -20640,7 +20640,7 @@ const schema::Entity* GlTexEnvxvOES::StaticSchema() {
 // GlTexGenfOES:
 // gles.GlTexGenfOES{$,Uint32,Uint32,Float32}
 void GlTexGenfOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
     e->Float32(this->mParam);
@@ -20664,10 +20664,10 @@ const schema::Entity* GlTexGenfOES::StaticSchema() {
 // GlTexGenfvOES:
 // gles.GlTexGenfvOES{$,Uint32,Uint32,$}
 void GlTexGenfvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexGenfvOES::StaticSchema() {
     static schema::Entity entity {
@@ -20688,7 +20688,7 @@ const schema::Entity* GlTexGenfvOES::StaticSchema() {
 // GlTexGeniOES:
 // gles.GlTexGeniOES{$,Uint32,Uint32,Int32}
 void GlTexGeniOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -20712,10 +20712,10 @@ const schema::Entity* GlTexGeniOES::StaticSchema() {
 // GlTexGenivOES:
 // gles.GlTexGenivOES{$,Uint32,Uint32,$}
 void GlTexGenivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexGenivOES::StaticSchema() {
     static schema::Entity entity {
@@ -20736,7 +20736,7 @@ const schema::Entity* GlTexGenivOES::StaticSchema() {
 // GlTexGenxOES:
 // gles.GlTexGenxOES{$,Uint32,Uint32,Int32}
 void GlTexGenxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -20760,10 +20760,10 @@ const schema::Entity* GlTexGenxOES::StaticSchema() {
 // GlTexGenxvOES:
 // gles.GlTexGenxvOES{$,Uint32,Uint32,$}
 void GlTexGenxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mCoord);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexGenxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -20784,7 +20784,7 @@ const schema::Entity* GlTexGenxvOES::StaticSchema() {
 // GlTexImage2D:
 // gles.GlTexImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mInternalFormat);
@@ -20793,7 +20793,7 @@ void GlTexImage2D::Encode(Encoder* e) const {
     e->Int32(this->mBorder);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlTexImage2D::StaticSchema() {
     static schema::Entity entity {
@@ -20820,7 +20820,7 @@ const schema::Entity* GlTexImage2D::StaticSchema() {
 // GlTexImage3D:
 // gles.GlTexImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexImage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mInternalformat);
@@ -20830,7 +20830,7 @@ void GlTexImage3D::Encode(Encoder* e) const {
     e->Int32(this->mBorder);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlTexImage3D::StaticSchema() {
     static schema::Entity entity {
@@ -20858,7 +20858,7 @@ const schema::Entity* GlTexImage3D::StaticSchema() {
 // GlTexImage3DOES:
 // gles.GlTexImage3DOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexImage3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Uint32(this->mInternalformat);
@@ -20868,7 +20868,7 @@ void GlTexImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mBorder);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mPixels);
+    e->Struct(this->mPixels);
 }
 const schema::Entity* GlTexImage3DOES::StaticSchema() {
     static schema::Entity entity {
@@ -20896,7 +20896,7 @@ const schema::Entity* GlTexImage3DOES::StaticSchema() {
 // GlTexPageCommitmentEXT:
 // gles.GlTexPageCommitmentEXT{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint8}
 void GlTexPageCommitmentEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -20932,10 +20932,10 @@ const schema::Entity* GlTexPageCommitmentEXT::StaticSchema() {
 // GlTexParameterIiv:
 // gles.GlTexParameterIiv{$,Uint32,Uint32,$}
 void GlTexParameterIiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIiv::StaticSchema() {
     static schema::Entity entity {
@@ -20956,10 +20956,10 @@ const schema::Entity* GlTexParameterIiv::StaticSchema() {
 // GlTexParameterIivEXT:
 // gles.GlTexParameterIivEXT{$,Uint32,Uint32,$}
 void GlTexParameterIivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -20980,10 +20980,10 @@ const schema::Entity* GlTexParameterIivEXT::StaticSchema() {
 // GlTexParameterIivOES:
 // gles.GlTexParameterIivOES{$,Uint32,Uint32,$}
 void GlTexParameterIivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIivOES::StaticSchema() {
     static schema::Entity entity {
@@ -21004,10 +21004,10 @@ const schema::Entity* GlTexParameterIivOES::StaticSchema() {
 // GlTexParameterIuiv:
 // gles.GlTexParameterIuiv{$,Uint32,Uint32,$}
 void GlTexParameterIuiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIuiv::StaticSchema() {
     static schema::Entity entity {
@@ -21028,10 +21028,10 @@ const schema::Entity* GlTexParameterIuiv::StaticSchema() {
 // GlTexParameterIuivEXT:
 // gles.GlTexParameterIuivEXT{$,Uint32,Uint32,$}
 void GlTexParameterIuivEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIuivEXT::StaticSchema() {
     static schema::Entity entity {
@@ -21052,10 +21052,10 @@ const schema::Entity* GlTexParameterIuivEXT::StaticSchema() {
 // GlTexParameterIuivOES:
 // gles.GlTexParameterIuivOES{$,Uint32,Uint32,$}
 void GlTexParameterIuivOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterIuivOES::StaticSchema() {
     static schema::Entity entity {
@@ -21076,7 +21076,7 @@ const schema::Entity* GlTexParameterIuivOES::StaticSchema() {
 // GlTexParameterf:
 // gles.GlTexParameterf{$,Uint32,Uint32,Float32}
 void GlTexParameterf::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
     e->Float32(this->mValue);
@@ -21100,10 +21100,10 @@ const schema::Entity* GlTexParameterf::StaticSchema() {
 // GlTexParameterfv:
 // gles.GlTexParameterfv{$,Uint32,Uint32,$}
 void GlTexParameterfv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterfv::StaticSchema() {
     static schema::Entity entity {
@@ -21124,7 +21124,7 @@ const schema::Entity* GlTexParameterfv::StaticSchema() {
 // GlTexParameteri:
 // gles.GlTexParameteri{$,Uint32,Uint32,Int32}
 void GlTexParameteri::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mParameter);
     e->Int32(this->mValue);
@@ -21148,10 +21148,10 @@ const schema::Entity* GlTexParameteri::StaticSchema() {
 // GlTexParameteriv:
 // gles.GlTexParameteriv{$,Uint32,Uint32,$}
 void GlTexParameteriv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameteriv::StaticSchema() {
     static schema::Entity entity {
@@ -21172,7 +21172,7 @@ const schema::Entity* GlTexParameteriv::StaticSchema() {
 // GlTexParameterx:
 // gles.GlTexParameterx{$,Uint32,Uint32,Int32}
 void GlTexParameterx::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -21196,7 +21196,7 @@ const schema::Entity* GlTexParameterx::StaticSchema() {
 // GlTexParameterxOES:
 // gles.GlTexParameterxOES{$,Uint32,Uint32,Int32}
 void GlTexParameterxOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
     e->Int32(this->mParam);
@@ -21220,10 +21220,10 @@ const schema::Entity* GlTexParameterxOES::StaticSchema() {
 // GlTexParameterxv:
 // gles.GlTexParameterxv{$,Uint32,Uint32,$}
 void GlTexParameterxv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterxv::StaticSchema() {
     static schema::Entity entity {
@@ -21244,10 +21244,10 @@ const schema::Entity* GlTexParameterxv::StaticSchema() {
 // GlTexParameterxvOES:
 // gles.GlTexParameterxvOES{$,Uint32,Uint32,$}
 void GlTexParameterxvOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Uint32(this->mPname);
-    e->Encode(this->mParams);
+    e->Struct(this->mParams);
 }
 const schema::Entity* GlTexParameterxvOES::StaticSchema() {
     static schema::Entity entity {
@@ -21268,7 +21268,7 @@ const schema::Entity* GlTexParameterxvOES::StaticSchema() {
 // GlTexStorage1DEXT:
 // gles.GlTexStorage1DEXT{$,Uint32,Int32,Uint32,Int32}
 void GlTexStorage1DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
     e->Uint32(this->mFormat);
@@ -21294,7 +21294,7 @@ const schema::Entity* GlTexStorage1DEXT::StaticSchema() {
 // GlTexStorage2D:
 // gles.GlTexStorage2D{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlTexStorage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
     e->Uint32(this->mInternalformat);
@@ -21322,7 +21322,7 @@ const schema::Entity* GlTexStorage2D::StaticSchema() {
 // GlTexStorage2DEXT:
 // gles.GlTexStorage2DEXT{$,Uint32,Int32,Uint32,Int32,Int32}
 void GlTexStorage2DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
     e->Uint32(this->mFormat);
@@ -21350,7 +21350,7 @@ const schema::Entity* GlTexStorage2DEXT::StaticSchema() {
 // GlTexStorage2DMultisample:
 // gles.GlTexStorage2DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Uint8}
 void GlTexStorage2DMultisample::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -21380,7 +21380,7 @@ const schema::Entity* GlTexStorage2DMultisample::StaticSchema() {
 // GlTexStorage3D:
 // gles.GlTexStorage3D{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
 void GlTexStorage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
     e->Uint32(this->mInternalformat);
@@ -21410,7 +21410,7 @@ const schema::Entity* GlTexStorage3D::StaticSchema() {
 // GlTexStorage3DEXT:
 // gles.GlTexStorage3DEXT{$,Uint32,Int32,Uint32,Int32,Int32,Int32}
 void GlTexStorage3DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
     e->Uint32(this->mFormat);
@@ -21440,7 +21440,7 @@ const schema::Entity* GlTexStorage3DEXT::StaticSchema() {
 // GlTexStorage3DMultisample:
 // gles.GlTexStorage3DMultisample{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
 void GlTexStorage3DMultisample::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -21472,7 +21472,7 @@ const schema::Entity* GlTexStorage3DMultisample::StaticSchema() {
 // GlTexStorage3DMultisampleOES:
 // gles.GlTexStorage3DMultisampleOES{$,Uint32,Int32,Uint32,Int32,Int32,Int32,Uint8}
 void GlTexStorage3DMultisampleOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mSamples);
     e->Uint32(this->mInternalformat);
@@ -21504,7 +21504,7 @@ const schema::Entity* GlTexStorage3DMultisampleOES::StaticSchema() {
 // GlTexSubImage2D:
 // gles.GlTexSubImage2D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexSubImage2D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -21513,7 +21513,7 @@ void GlTexSubImage2D::Encode(Encoder* e) const {
     e->Int32(this->mHeight);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlTexSubImage2D::StaticSchema() {
     static schema::Entity entity {
@@ -21540,7 +21540,7 @@ const schema::Entity* GlTexSubImage2D::StaticSchema() {
 // GlTexSubImage3D:
 // gles.GlTexSubImage3D{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexSubImage3D::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -21551,7 +21551,7 @@ void GlTexSubImage3D::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlTexSubImage3D::StaticSchema() {
     static schema::Entity entity {
@@ -21580,7 +21580,7 @@ const schema::Entity* GlTexSubImage3D::StaticSchema() {
 // GlTexSubImage3DOES:
 // gles.GlTexSubImage3DOES{$,Uint32,Int32,Int32,Int32,Int32,Int32,Int32,Int32,Uint32,Uint32,$}
 void GlTexSubImage3DOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevel);
     e->Int32(this->mXoffset);
@@ -21591,7 +21591,7 @@ void GlTexSubImage3DOES::Encode(Encoder* e) const {
     e->Int32(this->mDepth);
     e->Uint32(this->mFormat);
     e->Uint32(this->mType);
-    e->Encode(this->mPixels);
+    e->Struct(this->mPixels);
 }
 const schema::Entity* GlTexSubImage3DOES::StaticSchema() {
     static schema::Entity entity {
@@ -21620,7 +21620,7 @@ const schema::Entity* GlTexSubImage3DOES::StaticSchema() {
 // GlTextureStorage1DEXT:
 // gles.GlTextureStorage1DEXT{$,Uint32,Uint32,Int32,Uint32,Int32}
 void GlTextureStorage1DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
@@ -21648,7 +21648,7 @@ const schema::Entity* GlTextureStorage1DEXT::StaticSchema() {
 // GlTextureStorage2DEXT:
 // gles.GlTextureStorage2DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32}
 void GlTextureStorage2DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
@@ -21678,7 +21678,7 @@ const schema::Entity* GlTextureStorage2DEXT::StaticSchema() {
 // GlTextureStorage3DEXT:
 // gles.GlTextureStorage3DEXT{$,Uint32,Uint32,Int32,Uint32,Int32,Int32,Int32}
 void GlTextureStorage3DEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mTarget);
     e->Int32(this->mLevels);
@@ -21710,7 +21710,7 @@ const schema::Entity* GlTextureStorage3DEXT::StaticSchema() {
 // GlTextureViewEXT:
 // gles.GlTextureViewEXT{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlTextureViewEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mTarget);
     e->Uint32(this->mOrigtexture);
@@ -21744,7 +21744,7 @@ const schema::Entity* GlTextureViewEXT::StaticSchema() {
 // GlTextureViewOES:
 // gles.GlTextureViewOES{$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlTextureViewOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mTexture);
     e->Uint32(this->mTarget);
     e->Uint32(this->mOrigtexture);
@@ -21778,10 +21778,10 @@ const schema::Entity* GlTextureViewOES::StaticSchema() {
 // GlTransformFeedbackVaryings:
 // gles.GlTransformFeedbackVaryings{$,Uint32,Int32,$,Uint32}
 void GlTransformFeedbackVaryings::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Int32(this->mCount);
-    e->Encode(this->mVaryings);
+    e->Struct(this->mVaryings);
     e->Uint32(this->mBufferMode);
 }
 const schema::Entity* GlTransformFeedbackVaryings::StaticSchema() {
@@ -21804,11 +21804,11 @@ const schema::Entity* GlTransformFeedbackVaryings::StaticSchema() {
 // GlTransformPathNV:
 // gles.GlTransformPathNV{$,Uint32,Uint32,Uint32,$}
 void GlTransformPathNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mResultPath);
     e->Uint32(this->mSrcPath);
     e->Uint32(this->mTransformType);
-    e->Encode(this->mTransformValues);
+    e->Struct(this->mTransformValues);
 }
 const schema::Entity* GlTransformPathNV::StaticSchema() {
     static schema::Entity entity {
@@ -21830,7 +21830,7 @@ const schema::Entity* GlTransformPathNV::StaticSchema() {
 // GlTranslatef:
 // gles.GlTranslatef{$,Float32,Float32,Float32}
 void GlTranslatef::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Float32(this->mX);
     e->Float32(this->mY);
     e->Float32(this->mZ);
@@ -21854,7 +21854,7 @@ const schema::Entity* GlTranslatef::StaticSchema() {
 // GlTranslatex:
 // gles.GlTranslatex{$,Int32,Int32,Int32}
 void GlTranslatex::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -21878,7 +21878,7 @@ const schema::Entity* GlTranslatex::StaticSchema() {
 // GlTranslatexOES:
 // gles.GlTranslatexOES{$,Int32,Int32,Int32}
 void GlTranslatexOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mZ);
@@ -21919,10 +21919,10 @@ const schema::Entity* GlUniform1f::StaticSchema() {
 // GlUniform1fv:
 // gles.GlUniform1fv{$,Int32,Int32,$}
 void GlUniform1fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform1fv::StaticSchema() {
     static schema::Entity entity {
@@ -21960,10 +21960,10 @@ const schema::Entity* GlUniform1i::StaticSchema() {
 // GlUniform1iv:
 // gles.GlUniform1iv{$,Int32,Int32,$}
 void GlUniform1iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform1iv::StaticSchema() {
     static schema::Entity entity {
@@ -22001,10 +22001,10 @@ const schema::Entity* GlUniform1ui::StaticSchema() {
 // GlUniform1uiv:
 // gles.GlUniform1uiv{$,Int32,Int32,$}
 void GlUniform1uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform1uiv::StaticSchema() {
     static schema::Entity entity {
@@ -22025,7 +22025,7 @@ const schema::Entity* GlUniform1uiv::StaticSchema() {
 // GlUniform2f:
 // gles.GlUniform2f{$,Int32,Float32,Float32}
 void GlUniform2f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -22049,10 +22049,10 @@ const schema::Entity* GlUniform2f::StaticSchema() {
 // GlUniform2fv:
 // gles.GlUniform2fv{$,Int32,Int32,$}
 void GlUniform2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform2fv::StaticSchema() {
     static schema::Entity entity {
@@ -22073,7 +22073,7 @@ const schema::Entity* GlUniform2fv::StaticSchema() {
 // GlUniform2i:
 // gles.GlUniform2i{$,Int32,Int32,Int32}
 void GlUniform2i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
     e->Int32(this->mValue1);
@@ -22097,10 +22097,10 @@ const schema::Entity* GlUniform2i::StaticSchema() {
 // GlUniform2iv:
 // gles.GlUniform2iv{$,Int32,Int32,$}
 void GlUniform2iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform2iv::StaticSchema() {
     static schema::Entity entity {
@@ -22121,7 +22121,7 @@ const schema::Entity* GlUniform2iv::StaticSchema() {
 // GlUniform2ui:
 // gles.GlUniform2ui{$,Int32,Uint32,Uint32}
 void GlUniform2ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
     e->Uint32(this->mValue1);
@@ -22145,10 +22145,10 @@ const schema::Entity* GlUniform2ui::StaticSchema() {
 // GlUniform2uiv:
 // gles.GlUniform2uiv{$,Int32,Int32,$}
 void GlUniform2uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform2uiv::StaticSchema() {
     static schema::Entity entity {
@@ -22169,7 +22169,7 @@ const schema::Entity* GlUniform2uiv::StaticSchema() {
 // GlUniform3f:
 // gles.GlUniform3f{$,Int32,Float32,Float32,Float32}
 void GlUniform3f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -22195,10 +22195,10 @@ const schema::Entity* GlUniform3f::StaticSchema() {
 // GlUniform3fv:
 // gles.GlUniform3fv{$,Int32,Int32,$}
 void GlUniform3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform3fv::StaticSchema() {
     static schema::Entity entity {
@@ -22219,7 +22219,7 @@ const schema::Entity* GlUniform3fv::StaticSchema() {
 // GlUniform3i:
 // gles.GlUniform3i{$,Int32,Int32,Int32,Int32}
 void GlUniform3i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
     e->Int32(this->mValue1);
@@ -22245,10 +22245,10 @@ const schema::Entity* GlUniform3i::StaticSchema() {
 // GlUniform3iv:
 // gles.GlUniform3iv{$,Int32,Int32,$}
 void GlUniform3iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform3iv::StaticSchema() {
     static schema::Entity entity {
@@ -22269,7 +22269,7 @@ const schema::Entity* GlUniform3iv::StaticSchema() {
 // GlUniform3ui:
 // gles.GlUniform3ui{$,Int32,Uint32,Uint32,Uint32}
 void GlUniform3ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
     e->Uint32(this->mValue1);
@@ -22295,10 +22295,10 @@ const schema::Entity* GlUniform3ui::StaticSchema() {
 // GlUniform3uiv:
 // gles.GlUniform3uiv{$,Int32,Int32,$}
 void GlUniform3uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform3uiv::StaticSchema() {
     static schema::Entity entity {
@@ -22319,7 +22319,7 @@ const schema::Entity* GlUniform3uiv::StaticSchema() {
 // GlUniform4f:
 // gles.GlUniform4f{$,Int32,Float32,Float32,Float32,Float32}
 void GlUniform4f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -22347,10 +22347,10 @@ const schema::Entity* GlUniform4f::StaticSchema() {
 // GlUniform4fv:
 // gles.GlUniform4fv{$,Int32,Int32,$}
 void GlUniform4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform4fv::StaticSchema() {
     static schema::Entity entity {
@@ -22371,7 +22371,7 @@ const schema::Entity* GlUniform4fv::StaticSchema() {
 // GlUniform4i:
 // gles.GlUniform4i{$,Int32,Int32,Int32,Int32,Int32}
 void GlUniform4i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mValue0);
     e->Int32(this->mValue1);
@@ -22399,10 +22399,10 @@ const schema::Entity* GlUniform4i::StaticSchema() {
 // GlUniform4iv:
 // gles.GlUniform4iv{$,Int32,Int32,$}
 void GlUniform4iv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform4iv::StaticSchema() {
     static schema::Entity entity {
@@ -22423,7 +22423,7 @@ const schema::Entity* GlUniform4iv::StaticSchema() {
 // GlUniform4ui:
 // gles.GlUniform4ui{$,Int32,Uint32,Uint32,Uint32,Uint32}
 void GlUniform4ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Uint32(this->mValue0);
     e->Uint32(this->mValue1);
@@ -22451,10 +22451,10 @@ const schema::Entity* GlUniform4ui::StaticSchema() {
 // GlUniform4uiv:
 // gles.GlUniform4uiv{$,Int32,Int32,$}
 void GlUniform4uiv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniform4uiv::StaticSchema() {
     static schema::Entity entity {
@@ -22475,7 +22475,7 @@ const schema::Entity* GlUniform4uiv::StaticSchema() {
 // GlUniformBlockBinding:
 // gles.GlUniformBlockBinding{$,Uint32,Uint32,Uint32}
 void GlUniformBlockBinding::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mProgram);
     e->Uint32(this->mUniformBlockIndex);
     e->Uint32(this->mUniformBlockBinding);
@@ -22516,10 +22516,10 @@ const schema::Entity* GlUniformHandleui64NV::StaticSchema() {
 // GlUniformHandleui64vNV:
 // gles.GlUniformHandleui64vNV{$,Int32,Int32,$}
 void GlUniformHandleui64vNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformHandleui64vNV::StaticSchema() {
     static schema::Entity entity {
@@ -22540,11 +22540,11 @@ const schema::Entity* GlUniformHandleui64vNV::StaticSchema() {
 // GlUniformMatrix2fv:
 // gles.GlUniformMatrix2fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix2fv::StaticSchema() {
     static schema::Entity entity {
@@ -22566,11 +22566,11 @@ const schema::Entity* GlUniformMatrix2fv::StaticSchema() {
 // GlUniformMatrix2x3fv:
 // gles.GlUniformMatrix2x3fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix2x3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix2x3fv::StaticSchema() {
     static schema::Entity entity {
@@ -22592,11 +22592,11 @@ const schema::Entity* GlUniformMatrix2x3fv::StaticSchema() {
 // GlUniformMatrix2x3fvNV:
 // gles.GlUniformMatrix2x3fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix2x3fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix2x3fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22618,11 +22618,11 @@ const schema::Entity* GlUniformMatrix2x3fvNV::StaticSchema() {
 // GlUniformMatrix2x4fv:
 // gles.GlUniformMatrix2x4fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix2x4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix2x4fv::StaticSchema() {
     static schema::Entity entity {
@@ -22644,11 +22644,11 @@ const schema::Entity* GlUniformMatrix2x4fv::StaticSchema() {
 // GlUniformMatrix2x4fvNV:
 // gles.GlUniformMatrix2x4fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix2x4fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix2x4fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22670,11 +22670,11 @@ const schema::Entity* GlUniformMatrix2x4fvNV::StaticSchema() {
 // GlUniformMatrix3fv:
 // gles.GlUniformMatrix3fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix3fv::StaticSchema() {
     static schema::Entity entity {
@@ -22696,11 +22696,11 @@ const schema::Entity* GlUniformMatrix3fv::StaticSchema() {
 // GlUniformMatrix3x2fv:
 // gles.GlUniformMatrix3x2fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix3x2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix3x2fv::StaticSchema() {
     static schema::Entity entity {
@@ -22722,11 +22722,11 @@ const schema::Entity* GlUniformMatrix3x2fv::StaticSchema() {
 // GlUniformMatrix3x2fvNV:
 // gles.GlUniformMatrix3x2fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix3x2fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix3x2fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22748,11 +22748,11 @@ const schema::Entity* GlUniformMatrix3x2fvNV::StaticSchema() {
 // GlUniformMatrix3x4fv:
 // gles.GlUniformMatrix3x4fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix3x4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix3x4fv::StaticSchema() {
     static schema::Entity entity {
@@ -22774,11 +22774,11 @@ const schema::Entity* GlUniformMatrix3x4fv::StaticSchema() {
 // GlUniformMatrix3x4fvNV:
 // gles.GlUniformMatrix3x4fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix3x4fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix3x4fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22800,11 +22800,11 @@ const schema::Entity* GlUniformMatrix3x4fvNV::StaticSchema() {
 // GlUniformMatrix4fv:
 // gles.GlUniformMatrix4fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix4fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix4fv::StaticSchema() {
     static schema::Entity entity {
@@ -22826,11 +22826,11 @@ const schema::Entity* GlUniformMatrix4fv::StaticSchema() {
 // GlUniformMatrix4x2fv:
 // gles.GlUniformMatrix4x2fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix4x2fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix4x2fv::StaticSchema() {
     static schema::Entity entity {
@@ -22852,11 +22852,11 @@ const schema::Entity* GlUniformMatrix4x2fv::StaticSchema() {
 // GlUniformMatrix4x2fvNV:
 // gles.GlUniformMatrix4x2fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix4x2fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix4x2fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22878,11 +22878,11 @@ const schema::Entity* GlUniformMatrix4x2fvNV::StaticSchema() {
 // GlUniformMatrix4x3fv:
 // gles.GlUniformMatrix4x3fv{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix4x3fv::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValues);
+    e->Struct(this->mValues);
 }
 const schema::Entity* GlUniformMatrix4x3fv::StaticSchema() {
     static schema::Entity entity {
@@ -22904,11 +22904,11 @@ const schema::Entity* GlUniformMatrix4x3fv::StaticSchema() {
 // GlUniformMatrix4x3fvNV:
 // gles.GlUniformMatrix4x3fvNV{$,Int32,Int32,Uint8,$}
 void GlUniformMatrix4x3fvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mLocation);
     e->Int32(this->mCount);
     e->Uint8(this->mTranspose);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
 }
 const schema::Entity* GlUniformMatrix4x3fvNV::StaticSchema() {
     static schema::Entity entity {
@@ -22980,7 +22980,7 @@ const schema::Entity* GlUseProgram::StaticSchema() {
 // GlUseProgramStages:
 // gles.GlUseProgramStages{$,Uint32,Uint32,Uint32}
 void GlUseProgramStages::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Uint32(this->mStages);
     e->Uint32(this->mProgram);
@@ -23004,7 +23004,7 @@ const schema::Entity* GlUseProgramStages::StaticSchema() {
 // GlUseProgramStagesEXT:
 // gles.GlUseProgramStagesEXT{$,Uint32,Uint32,Uint32}
 void GlUseProgramStagesEXT::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mPipeline);
     e->Uint32(this->mStages);
     e->Uint32(this->mProgram);
@@ -23110,7 +23110,7 @@ const schema::Entity* GlVertexAttrib1fv::StaticSchema() {
 // GlVertexAttrib2f:
 // gles.GlVertexAttrib2f{$,Uint32,Float32,Float32}
 void GlVertexAttrib2f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -23151,7 +23151,7 @@ const schema::Entity* GlVertexAttrib2fv::StaticSchema() {
 // GlVertexAttrib3f:
 // gles.GlVertexAttrib3f{$,Uint32,Float32,Float32,Float32}
 void GlVertexAttrib3f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -23194,7 +23194,7 @@ const schema::Entity* GlVertexAttrib3fv::StaticSchema() {
 // GlVertexAttrib4f:
 // gles.GlVertexAttrib4f{$,Uint32,Float32,Float32,Float32,Float32}
 void GlVertexAttrib4f::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLocation);
     e->Float32(this->mValue0);
     e->Float32(this->mValue1);
@@ -23324,7 +23324,7 @@ const schema::Entity* GlVertexAttribDivisorNV::StaticSchema() {
 // GlVertexAttribFormat:
 // gles.GlVertexAttribFormat{$,Uint32,Int32,Uint32,Uint8,Uint32}
 void GlVertexAttribFormat::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
@@ -23352,7 +23352,7 @@ const schema::Entity* GlVertexAttribFormat::StaticSchema() {
 // GlVertexAttribI4i:
 // gles.GlVertexAttribI4i{$,Uint32,Int32,Int32,Int32,Int32}
 void GlVertexAttribI4i::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Int32(this->mX);
     e->Int32(this->mY);
@@ -23397,7 +23397,7 @@ const schema::Entity* GlVertexAttribI4iv::StaticSchema() {
 // GlVertexAttribI4ui:
 // gles.GlVertexAttribI4ui{$,Uint32,Uint32,Uint32,Uint32,Uint32}
 void GlVertexAttribI4ui::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Uint32(this->mX);
     e->Uint32(this->mY);
@@ -23442,7 +23442,7 @@ const schema::Entity* GlVertexAttribI4uiv::StaticSchema() {
 // GlVertexAttribIFormat:
 // gles.GlVertexAttribIFormat{$,Uint32,Int32,Uint32,Uint32}
 void GlVertexAttribIFormat::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
@@ -23468,12 +23468,12 @@ const schema::Entity* GlVertexAttribIFormat::StaticSchema() {
 // GlVertexAttribIPointer:
 // gles.GlVertexAttribIPointer{$,Uint32,Int32,Uint32,Int32,$}
 void GlVertexAttribIPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLocation);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlVertexAttribIPointer::StaticSchema() {
     static schema::Entity entity {
@@ -23496,13 +23496,13 @@ const schema::Entity* GlVertexAttribIPointer::StaticSchema() {
 // GlVertexAttribPointer:
 // gles.GlVertexAttribPointer{$,Uint32,Int32,Uint32,Uint8,Int32,$}
 void GlVertexAttribPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mLocation);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Uint8(this->mNormalized);
     e->Int32(this->mStride);
-    e->Encode(this->mData);
+    e->Struct(this->mData);
 }
 const schema::Entity* GlVertexAttribPointer::StaticSchema() {
     static schema::Entity entity {
@@ -23543,11 +23543,11 @@ const schema::Entity* GlVertexBindingDivisor::StaticSchema() {
 // GlVertexPointer:
 // gles.GlVertexPointer{$,Int32,Uint32,Int32,$}
 void GlVertexPointer::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlVertexPointer::StaticSchema() {
     static schema::Entity entity {
@@ -23569,11 +23569,11 @@ const schema::Entity* GlVertexPointer::StaticSchema() {
 // GlVertexPointerBounds:
 // gles.GlVertexPointerBounds{$,Int32,Uint32,Int32,$,Int32}
 void GlVertexPointerBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlVertexPointerBounds::StaticSchema() {
@@ -23597,7 +23597,7 @@ const schema::Entity* GlVertexPointerBounds::StaticSchema() {
 // GlViewport:
 // gles.GlViewport{$,Int32,Int32,Int32,Int32}
 void GlViewport::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mX);
     e->Int32(this->mY);
     e->Int32(this->mWidth);
@@ -23623,10 +23623,10 @@ const schema::Entity* GlViewport::StaticSchema() {
 // GlViewportArrayvNV:
 // gles.GlViewportArrayvNV{$,Uint32,Int32,$}
 void GlViewportArrayvNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mFirst);
     e->Int32(this->mCount);
-    e->Encode(this->mV);
+    e->Struct(this->mV);
 }
 const schema::Entity* GlViewportArrayvNV::StaticSchema() {
     static schema::Entity entity {
@@ -23647,7 +23647,7 @@ const schema::Entity* GlViewportArrayvNV::StaticSchema() {
 // GlViewportIndexedfNV:
 // gles.GlViewportIndexedfNV{$,Uint32,Float32,Float32,Float32,Float32}
 void GlViewportIndexedfNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mIndex);
     e->Float32(this->mX);
     e->Float32(this->mY);
@@ -23692,7 +23692,7 @@ const schema::Entity* GlViewportIndexedfvNV::StaticSchema() {
 // GlWaitSync:
 // gles.GlWaitSync{$,Uint64,Uint32,Uint64}
 void GlWaitSync::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mSyncFlags);
     e->Uint64(this->mTimeout);
@@ -23716,7 +23716,7 @@ const schema::Entity* GlWaitSync::StaticSchema() {
 // GlWaitSyncAPPLE:
 // gles.GlWaitSyncAPPLE{$,Uint64,Uint32,Uint64}
 void GlWaitSyncAPPLE::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint64(this->mSync);
     e->Uint32(this->mFlag);
     e->Uint64(this->mTimeout);
@@ -23740,11 +23740,11 @@ const schema::Entity* GlWaitSyncAPPLE::StaticSchema() {
 // GlWeightPathsNV:
 // gles.GlWeightPathsNV{$,Uint32,Int32,$,$}
 void GlWeightPathsNV::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Uint32(this->mResultPath);
     e->Int32(this->mNumPaths);
-    e->Encode(this->mPaths);
-    e->Encode(this->mWeights);
+    e->Struct(this->mPaths);
+    e->Struct(this->mWeights);
 }
 const schema::Entity* GlWeightPathsNV::StaticSchema() {
     static schema::Entity entity {
@@ -23766,11 +23766,11 @@ const schema::Entity* GlWeightPathsNV::StaticSchema() {
 // GlWeightPointerOES:
 // gles.GlWeightPointerOES{$,Int32,Uint32,Int32,$}
 void GlWeightPointerOES::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
 }
 const schema::Entity* GlWeightPointerOES::StaticSchema() {
     static schema::Entity entity {
@@ -23792,11 +23792,11 @@ const schema::Entity* GlWeightPointerOES::StaticSchema() {
 // GlWeightPointerOESBounds:
 // gles.GlWeightPointerOESBounds{$,Int32,Uint32,Int32,$,Int32}
 void GlWeightPointerOESBounds::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
+    e->Struct(this->mobservations);
     e->Int32(this->mSize);
     e->Uint32(this->mType);
     e->Int32(this->mStride);
-    e->Encode(this->mPointer);
+    e->Struct(this->mPointer);
     e->Int32(this->mCount);
 }
 const schema::Entity* GlWeightPointerOESBounds::StaticSchema() {
@@ -23820,12 +23820,12 @@ const schema::Entity* GlWeightPointerOESBounds::StaticSchema() {
 // GlXCreateContext:
 // gles.GlXCreateContext{$,$,$,$,Bool,$}
 void GlXCreateContext::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDpy);
-    e->Encode(this->mVis);
-    e->Encode(this->mShareList);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDpy);
+    e->Struct(this->mVis);
+    e->Struct(this->mShareList);
     e->Bool(this->mDirect);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlXCreateContext::StaticSchema() {
     static schema::Entity entity {
@@ -23848,13 +23848,13 @@ const schema::Entity* GlXCreateContext::StaticSchema() {
 // GlXCreateNewContext:
 // gles.GlXCreateNewContext{$,$,$,Uint32,$,Bool,$}
 void GlXCreateNewContext::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mFbconfig);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mFbconfig);
     e->Uint32(this->mType);
-    e->Encode(this->mShared);
+    e->Struct(this->mShared);
     e->Bool(this->mDirect);
-    e->Encode(this->mResult);
+    e->Struct(this->mResult);
 }
 const schema::Entity* GlXCreateNewContext::StaticSchema() {
     static schema::Entity entity {
@@ -23878,11 +23878,11 @@ const schema::Entity* GlXCreateNewContext::StaticSchema() {
 // GlXMakeContextCurrent:
 // gles.GlXMakeContextCurrent{$,$,$,$,$,Int64}
 void GlXMakeContextCurrent::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mDraw);
-    e->Encode(this->mRead);
-    e->Encode(this->mCtx);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mDraw);
+    e->Struct(this->mRead);
+    e->Struct(this->mCtx);
     e->Int64(this->mResult);
 }
 const schema::Entity* GlXMakeContextCurrent::StaticSchema() {
@@ -23906,10 +23906,10 @@ const schema::Entity* GlXMakeContextCurrent::StaticSchema() {
 // GlXMakeCurrent:
 // gles.GlXMakeCurrent{$,$,$,$,Int64}
 void GlXMakeCurrent::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mDrawable);
-    e->Encode(this->mCtx);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mDrawable);
+    e->Struct(this->mCtx);
     e->Int64(this->mResult);
 }
 const schema::Entity* GlXMakeCurrent::StaticSchema() {
@@ -23947,11 +23947,11 @@ const schema::Entity* Int__P::StaticSchema() {
 // GlXQueryDrawable:
 // gles.GlXQueryDrawable{$,$,$,Int64,$,Int64}
 void GlXQueryDrawable::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mDisplay);
-    e->Encode(this->mDraw);
+    e->Struct(this->mobservations);
+    e->Struct(this->mDisplay);
+    e->Struct(this->mDraw);
     e->Int64(this->mAttribute);
-    e->Encode(this->mValue);
+    e->Struct(this->mValue);
     e->Int64(this->mResult);
 }
 const schema::Entity* GlXQueryDrawable::StaticSchema() {
@@ -25397,11 +25397,11 @@ const schema::Entity* WglCreateContext::StaticSchema() {
 // WglCreateContextAttribsARB:
 // gles.WglCreateContextAttribsARB{$,$,$,$,$}
 void WglCreateContextAttribsARB::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mHdc);
-    e->Encode(this->mHShareContext);
-    e->Encode(this->mAttribList);
-    e->Encode(this->mResult);
+    e->Struct(this->mobservations);
+    e->Struct(this->mHdc);
+    e->Struct(this->mHShareContext);
+    e->Struct(this->mAttribList);
+    e->Struct(this->mResult);
 }
 const schema::Entity* WglCreateContextAttribsARB::StaticSchema() {
     static schema::Entity entity {
@@ -25423,9 +25423,9 @@ const schema::Entity* WglCreateContextAttribsARB::StaticSchema() {
 // WglMakeCurrent:
 // gles.WglMakeCurrent{$,$,$,Int64}
 void WglMakeCurrent::Encode(Encoder* e) const {
-    e->Encode(this->mobservations);
-    e->Encode(this->mHdc);
-    e->Encode(this->mHglrc);
+    e->Struct(this->mobservations);
+    e->Struct(this->mHdc);
+    e->Struct(this->mHglrc);
     e->Int64(this->mResult);
 }
 const schema::Entity* WglMakeCurrent::StaticSchema() {

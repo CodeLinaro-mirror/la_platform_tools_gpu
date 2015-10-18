@@ -129,7 +129,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Primitive"}}e->{{Call "Cpp.Method" .Type.Method}}({{.Name}});{{end}}
-{{define "Cpp.Encode.Struct"}}e->Encode({{.Name}});{{end}}
+{{define "Cpp.Encode.Struct"}}e->Struct({{.Name}});{{end}}
 {{define "Cpp.Encode.Pointer"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Interface"}}e->Object({{.Name}});{{end}}
 {{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
@@ -140,7 +140,10 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Slice"}}
-  e->Encode({{.Name}});¶
+  e->Uint32({{.Name}}.size());¶
+  for (auto v : {{.Name}}) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType "v")}}¶
+  «}
 {{end}}
 
 {{define "Cpp.Encode.Array#uint8"}}
@@ -148,7 +151,9 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{end}}
 
 {{define "Cpp.Encode.Array"}}
-  e->Array({{.Name}}, {{.Type.Size}});¶
+  for (int i = 0; i < {{.Type.Size}}; i++) {»¶
+    {{Call "Cpp.Encode" (Var .Type.ValueType .Name "[i]")}}¶
+  «}
 {{end}}
 
 {{define "Cpp.Encode.Map"}}GAPID_FATAL("C++ map encoding not supported");{{end}}
