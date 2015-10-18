@@ -63,9 +63,10 @@ func Serve(r io.Reader, w io.Writer, c io.Closer, mtu int, l log.Logger, handler
 		res := handler(val)
 
 		// Encode the call result
-		if e.Object(res); e.Error() != nil {
-			log.Errorf(l, "Error encoding result for %T: %v", val, d.Error())
-			e.Object(NewError("Failed to encode call result. Reason: %v", d.Error()))
+		e.Object(res)
+		if err := e.Error(); err != nil {
+			log.Errorf(l, "Error encoding result for %+v: %v", val, err)
+			e.Object(NewError("Failed to encode call result. Reason: %v", err))
 			return
 		}
 	})

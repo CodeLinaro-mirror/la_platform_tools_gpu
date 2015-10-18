@@ -16,6 +16,7 @@ package cyclic
 
 import (
 	"fmt"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -92,6 +93,15 @@ func (r *repeat) Format(f fmt.State, c rune) {
 	} else {
 		fmt.Fprintf(f, "(%d repeat element shouldn't exist for %"+string(c)+")", r.count, repeatSub)
 	}
+}
+
+// String returns a description of the substack.
+func (s substack) String() string {
+	parts := make([]string, len(s.stack))
+	for i, t := range s.stack {
+		parts[i] = fmt.Sprintf("(%d): %v", i, t)
+	}
+	return strings.Join(parts, "\n")
 }
 
 // pushStruct pushes the sub-types needed to decode a struct described

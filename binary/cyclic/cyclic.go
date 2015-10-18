@@ -137,7 +137,8 @@ func (d *decoder) doStruct(t binary.SubspaceType, obj binary.Object) {
 	entity := d.substack.pushExpectStruct(t)
 	if entity == nil {
 		d.SetError(
-			fmt.Errorf("Struct() decoder expected %T got %s %v", obj, t, t))
+			fmt.Errorf("Struct() decoder expected %T %v got %s %v. Substack:\n%v",
+				obj, obj.Class().Schema().Identity, t, t, d.substack.String()))
 	} else {
 		if u := d.Lookup(entity); u == nil {
 			d.SetError(fmt.Errorf("Unknown type %v signature %q", t, entity.Signature()))
