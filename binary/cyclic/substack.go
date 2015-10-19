@@ -113,8 +113,6 @@ func entityForStruct(t binary.SubspaceType) *binary.Entity {
 
 func (s *substack) pushRepeatIfNeeded(t binary.SubspaceType) binary.SubspaceType {
 	if r, ok := t.(*repeat); ok {
-		fmt.Printf("Push repeat for %v count %d repetition %v replaces %v\n",
-			r.repeats, r.count, r.repetition(), r.replaces())
 		s.pushSubTypes(r.repetition())
 		return r.replaces()
 	}
