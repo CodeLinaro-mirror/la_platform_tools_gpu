@@ -118,11 +118,11 @@ protected:
     // slice is observed as a read operation.
     inline std::string string(const Slice<char>& slice);
 
-    // Called after any command annotated with @DrawCall
-    virtual void onPostDrawCallCommand() {};
+    // onPostDrawCall is after any command annotated with @DrawCall
+    inline virtual void onPostDrawCall() {}
 
-    // Called before any command annotated with @EndOfFrame
-    virtual void onPreEndOfFrameCommand() {};
+    // onPreEndOfFrame is before any command annotated with @EndOfFrame
+    inline virtual void onPreEndOfFrame() {}
 
     // The output stream encoder.
     EncoderSPtr mEncoder;

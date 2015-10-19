@@ -38,8 +38,8 @@ public:
     Bool glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
     Bool glXMakeCurrent(void* display, GLXDrawable drawable, GLXContext ctx);
 
-    void onPostDrawCallCommand();
-    void onPreEndOfFrameCommand();
+    void onPostDrawCall() override;
+    void onPreEndOfFrame() override;
 
     inline void RegisterSymbol(const std::string& name, void* symbol) {
         mSymbols.emplace(name, symbol);
