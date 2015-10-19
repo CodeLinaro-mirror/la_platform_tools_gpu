@@ -19,9 +19,11 @@
 
 #include "slice.h"
 
+#include <gapic/scratch_allocator.h>
 #include <gapic/encoder.h>
 #include <gapic/interval_list.h>
 #include <gapic/mutex.h>
+#include <gapic/vector.h>
 
 #include <gapic/coder/memory.h>
 #include <gapic/coder/atom.h>
@@ -31,12 +33,13 @@
 #include <memory>
 #include <string>
 #include <unordered_set>
-#include <vector>
 
 namespace gapii {
 
 class SpyBase {
 public:
+    SpyBase();
+
     void init(std::shared_ptr<gapic::Encoder> encoder);
 
     // lock must be called before invoking any command.
@@ -59,7 +62,7 @@ protected:
 
     // observe observes all the pending memory observations, returning the list of observations made.
     // The list of pending memory observations is cleared on returning.
-    void observe(gapic::Array<Observation>& observations);
+    void observe(gapic::Vector<Observation>& observations);
 
     // read observes the memory for the given slice as a read operation.
     template <typename T>
@@ -126,6 +129,9 @@ protected:
 
     // The output stream encoder.
     EncoderSPtr mEncoder;
+
+    // Used for allocations that only need to live for as long as the atom call.
+    gapic::ScratchAllocator mScratch;
 
 private:
     // writes a value to i'th element in the slice dst.

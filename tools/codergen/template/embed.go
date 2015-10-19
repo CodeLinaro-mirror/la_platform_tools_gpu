@@ -86,7 +86,7 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Type.Pointer"}}{{Call "Cpp.Type" .Type}}*{{end}}
 {{define "Cpp.Type.Array.Alias"}}{{TrimPackage .Alias}}{{end}}
 {{define "Cpp.Type.Array"}}{{Call "Cpp.Type" .ValueType}}*{{end}}
-{{define "Cpp.Type.Slice"}}Array<{{Call "Cpp.Type" .ValueType}}>{{end}}
+{{define "Cpp.Type.Slice"}}gapic::Vector<{{Call "Cpp.Type" .ValueType}}>{{end}}
 {{define "Cpp.Type.Map"}}std::unordered_map<{{Call "Cpp.Type" .KeyType}},{{Call "Cpp.Type" .ValueType}}>*{{end}}
 
 {{define "Cpp.Method#ID"}}Id{{end}}
@@ -135,12 +135,12 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "Cpp.Encode.Variant"}}e->Variant({{.Name}});{{end}}
 
 {{define "Cpp.Encode.Slice#uint8"}}
-  e->Uint32({{.Name}}.size());¶
-  e->Data({{.Name}}.data(), {{.Name}}.size());
+  e->Uint32({{.Name}}.count());¶
+  e->Data({{.Name}}.data(), {{.Name}}.count());
 {{end}}
 
 {{define "Cpp.Encode.Slice"}}
-  e->Uint32({{.Name}}.size());¶
+  e->Uint32({{.Name}}.count());¶
   for (auto v : {{.Name}}) {»¶
     {{Call "Cpp.Encode" (Var .Type.ValueType "v")}}¶
   «}
@@ -222,14 +222,15 @@ const cpp_binary_tmpl = `// Copyright (C) 2014 The Android Open Source Project
   #define {{template "HeaderGuard" .}}¶
   ¶
   {{if and (File.Directive "Schema" true) (len .Structs)}}
-    #include "gapic/schema.h"¶
+    #include <gapic/schema.h>¶
+    #include <gapic/vector.h>¶
     {{range .Structs}}
       {{range .Fields}}
         {{Call "Cpp.Include" .Type}}
       {{end}}
     {{end}}
     {{range $namespace := .Includes}}
-      #include "gapic/coder/{{$namespace}}.h"¶
+      #include <gapic/coder/{{$namespace}}.h>¶
     {{end}}
   {{end}}
   namespace gapic {¶

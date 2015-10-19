@@ -7,8 +7,9 @@
 #ifndef GAPIC_CODER_ATOM_H
 #define GAPIC_CODER_ATOM_H
 
-#include "gapic/schema.h"
-#include "gapic/coder/memory.h"
+#include <gapic/schema.h>
+#include <gapic/vector.h>
+#include <gapic/coder/memory.h>
 namespace gapic {
 
 class Encodable;
@@ -19,15 +20,15 @@ namespace atom {
     class FramebufferObservation: public Encodable {
     public:
         FramebufferObservation() = default;
-        FramebufferObservation(uint32_t Width, uint32_t Height, Array<uint8_t> Data) :
+        FramebufferObservation(uint32_t Width, uint32_t Height, gapic::Vector<uint8_t> Data) :
             mWidth(Width),
             mHeight(Height),
             mData(Data) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mWidth);
             e->Uint32(this->mHeight);
-            e->Uint32(this->mData.size());
-            e->Data(this->mData.data(), this->mData.size());
+            e->Uint32(this->mData.count());
+            e->Data(this->mData.data(), this->mData.count());
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
@@ -35,7 +36,7 @@ namespace atom {
         static const schema::Entity* StaticSchema();
         uint32_t mWidth;
         uint32_t mHeight;
-        Array<uint8_t> mData;
+        gapic::Vector<uint8_t> mData;
     };
 
     class Range: public Encodable {
@@ -59,14 +60,14 @@ namespace atom {
     class Group: public Encodable {
     public:
         Group() = default;
-        Group(char* Name, Range Range, Array<Group> SubGroups) :
+        Group(char* Name, Range Range, gapic::Vector<Group> SubGroups) :
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
         virtual void Encode(Encoder* e) const{
             e->String(this->mName);
             e->Struct(this->mRange);
-            e->Uint32(this->mSubGroups.size());
+            e->Uint32(this->mSubGroups.count());
             for (auto v : this->mSubGroups) {
                 e->Struct(v);
             }
@@ -77,16 +78,16 @@ namespace atom {
         static const schema::Entity* StaticSchema();
         char* mName;
         Range mRange;
-        Array<Group> mSubGroups;
+        gapic::Vector<Group> mSubGroups;
     };
 
     class List: public Encodable {
     public:
         List() = default;
-        List(Array<gapic::Encodable*> Atoms) :
+        List(gapic::Vector<gapic::Encodable*> Atoms) :
             mAtoms(Atoms) {}
         virtual void Encode(Encoder* e) const{
-            e->Uint32(this->mAtoms.size());
+            e->Uint32(this->mAtoms.count());
             for (auto v : this->mAtoms) {
                 e->Variant(v);
             }
@@ -95,7 +96,7 @@ namespace atom {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        Array<gapic::Encodable*> mAtoms;
+        gapic::Vector<gapic::Encodable*> mAtoms;
     };
 
     class Metadata: public Encodable {
@@ -140,15 +141,15 @@ namespace atom {
     class Observations: public Encodable {
     public:
         Observations() = default;
-        Observations(Array<Observation> Reads, Array<Observation> Writes) :
+        Observations(gapic::Vector<Observation> Reads, gapic::Vector<Observation> Writes) :
             mReads(Reads),
             mWrites(Writes) {}
         virtual void Encode(Encoder* e) const{
-            e->Uint32(this->mReads.size());
+            e->Uint32(this->mReads.count());
             for (auto v : this->mReads) {
                 e->Struct(v);
             }
-            e->Uint32(this->mWrites.size());
+            e->Uint32(this->mWrites.count());
             for (auto v : this->mWrites) {
                 e->Struct(v);
             }
@@ -157,27 +158,27 @@ namespace atom {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        Array<Observation> mReads;
-        Array<Observation> mWrites;
+        gapic::Vector<Observation> mReads;
+        gapic::Vector<Observation> mWrites;
     };
 
     class Resource: public Encodable {
     public:
         Resource() = default;
-        Resource(gapic::Id ID, Array<uint8_t> Data) :
+        Resource(gapic::Id ID, gapic::Vector<uint8_t> Data) :
             mID(ID),
             mData(Data) {}
         virtual void Encode(Encoder* e) const{
             e->Data(this->mID, 20);
-            e->Uint32(this->mData.size());
-            e->Data(this->mData.data(), this->mData.size());
+            e->Uint32(this->mData.count());
+            e->Data(this->mData.data(), this->mData.count());
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
         gapic::Id mID;
-        Array<uint8_t> mData;
+        gapic::Vector<uint8_t> mData;
     };
 
 

@@ -62,6 +62,8 @@
     {{ForEach (AllCommands $) "MethodDefinitions" | JoinWith "\n"}}
 ¶
   «protected:»
+    static const size_t kMaxExtras = 16; // Per atom
+¶
     {{Template "ApiClassnames.Imports"}} mImports;
 ¶
     // Globals
@@ -147,7 +149,7 @@
 {{define "C++.CoderArguments"}}
   {{AssertType $ "Function"}}
 
-  extras {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
+  mScratch.vector<gapic::Encodable*>(kMaxExtras) {{range $i, $p := $.FullParameters}}, {{Template "C++.CoderArgument" $p}}{{end}}
 {{end}}
 
 
@@ -189,11 +191,11 @@
     } while(false);
     observe(observations.mWrites);
 ¶
-    gapic::Encodable* extrasPtrs[1] = {&observations};
-    gapic::Array<gapic::Encodable*> extras(extrasPtrs, 1);
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
+    coder.mextras.append(&observations);
     mEncoder->Variant(&coder);
     {{if GetAnnotation $ "DrawCall"}} onPostDrawCall(); {{end}}
+    mScratch.reset();
     {{if not (IsVoid $.Return.Type)}}¶
       return result;
     {{end}}

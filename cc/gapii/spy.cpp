@@ -319,7 +319,7 @@ void Spy::observeFramebuffer() {
     if (data != nullptr) {
         mImports.glReadPixels(0, 0, int32_t(w), int32_t(h),
                 GLenum::GL_RGBA, GLenum::GL_UNSIGNED_BYTE, data);
-        gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Array<uint8_t>(data, size));
+        gapic::coder::atom::FramebufferObservation coder(w, h, gapic::Vector<uint8_t>(data, size));
         mEncoder->Variant(&coder);
         delete [] data;
     } else {
