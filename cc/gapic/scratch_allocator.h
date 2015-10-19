@@ -17,6 +17,7 @@
 #ifndef GAPIC_SCRATCH_ALLOCATOR_H
 #define GAPIC_SCRATCH_ALLOCATOR_H
 
+#include "map.h"
 #include "vector.h"
 
 namespace gapic {
@@ -44,7 +45,11 @@ public:
 
     // vector returns a gapic::Vector with the specified maximum capacity.
     template<typename T>
-    inline Vector<T> vector(size_t capacity = 4);
+    inline Vector<T> vector(size_t capacity);
+
+    // map returns a gapic::Map with the specified maximum capacity.
+    template<typename K, typename V>
+    inline Map<K, V> map(size_t capacity);
 
 private:
     ScratchAllocator() = delete;
@@ -90,9 +95,16 @@ inline T* ScratchAllocator::create(size_t count /* = 1 */) {
 }
 
 template<typename T>
-inline Vector<T> ScratchAllocator::vector(size_t capacity /* = 4 */) {
+inline Vector<T> ScratchAllocator::vector(size_t capacity) {
     T* first = create<T>(capacity);
     return Vector<T>(first, 0, capacity);
+}
+
+template<typename K, typename V>
+inline Map<K, V> ScratchAllocator::map(size_t capacity) {
+    typedef typename Map<K, V>::Entry T;
+    T* first = create<T>(capacity);
+    return Map<K, V>(first, capacity);
 }
 
 } // namespace gapic

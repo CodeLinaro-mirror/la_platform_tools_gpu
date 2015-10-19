@@ -9,8 +9,9 @@
 
 #include <gapic/schema.h>
 #include <gapic/vector.h>
-#include <gapic/coder/atom.h>
 #include <gapic/coder/memory.h>
+#include <gapic/coder/gles.h>
+#include <gapic/map.h>
 namespace gapic {
 
 class Encodable;
@@ -21,7 +22,7 @@ namespace gles {
     class Architecture: public Encodable {
     public:
         Architecture() = default;
-        Architecture(gapic::Vector<gapic::Encodable*> extras, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
+        Architecture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
             mextras(extras),
             mPointerAlignment(PointerAlignment),
             mPointerSize(PointerSize),
@@ -295,7 +296,7 @@ namespace gles {
     class CGLCreateContext: public Encodable {
     public:
         CGLCreateContext() = default;
-        CGLCreateContext(gapic::Vector<gapic::Encodable*> extras, CGLTexelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
+        CGLCreateContext(const gapic::Vector<gapic::Encodable*>& extras, CGLTexelFormatObj Pix, CGLContextObj Share, CGLContextObj__P Ctx, int64_t Result) :
             mextras(extras),
             mPix(Pix),
             mShare(Share),
@@ -316,7 +317,7 @@ namespace gles {
     class CGLFlushDrawable: public Encodable {
     public:
         CGLFlushDrawable() = default;
-        CGLFlushDrawable(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, int64_t Result) :
+        CGLFlushDrawable(const gapic::Vector<gapic::Encodable*>& extras, CGLContextObj Ctx, int64_t Result) :
             mextras(extras),
             mCtx(Ctx),
             mResult(Result) {}
@@ -385,7 +386,7 @@ namespace gles {
     class CGLGetSurface: public Encodable {
     public:
         CGLGetSurface() = default;
-        CGLGetSurface(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, CGSConnectionID__P Cid, CGSWindowID__P Wid, CGSSurfaceID__P Sid, int64_t Result) :
+        CGLGetSurface(const gapic::Vector<gapic::Encodable*>& extras, CGLContextObj Ctx, CGSConnectionID__P Cid, CGSWindowID__P Wid, CGSSurfaceID__P Sid, int64_t Result) :
             mextras(extras),
             mCtx(Ctx),
             mCid(Cid),
@@ -408,7 +409,7 @@ namespace gles {
     class CGLSetCurrentContext: public Encodable {
     public:
         CGLSetCurrentContext() = default;
-        CGLSetCurrentContext(gapic::Vector<gapic::Encodable*> extras, CGLContextObj Ctx, int64_t Result) :
+        CGLSetCurrentContext(const gapic::Vector<gapic::Encodable*>& extras, CGLContextObj Ctx, int64_t Result) :
             mextras(extras),
             mCtx(Ctx),
             mResult(Result) {}
@@ -477,7 +478,7 @@ namespace gles {
     class CGSGetSurfaceBounds: public Encodable {
     public:
         CGSGetSurfaceBounds() = default;
-        CGSGetSurfaceBounds(gapic::Vector<gapic::Encodable*> extras, CGSConnectionID Cid, int32_t Wid, int32_t Sid, F64__P Bounds, int64_t Result) :
+        CGSGetSurfaceBounds(const gapic::Vector<gapic::Encodable*>& extras, CGSConnectionID Cid, int32_t Wid, int32_t Sid, F64__P Bounds, int64_t Result) :
             mextras(extras),
             mCid(Cid),
             mWid(Wid),
@@ -943,7 +944,52 @@ namespace gles {
         int32_t mHeight;
     };
 
-    // Can't encode RasterizerState contains maps: gles.RasterizerState{Uint8,Uint32,Float32,Float32,Uint8,Uint8,Uint8,Uint8,map[Uint32]Uint32,$,$,Uint32,Uint32,Float32,Float32,Float32,Float32,Uint8}
+    class RasterizerState: public Encodable {
+    public:
+        RasterizerState() = default;
+        RasterizerState(uint8_t DepthMask, uint32_t DepthTestFunction, float DepthNear, float DepthFar, uint8_t ColorMaskRed, uint8_t ColorMaskGreen, uint8_t ColorMaskBlue, uint8_t ColorMaskAlpha, const gapic::Map<uint32_t, uint32_t>& StencilMask, Rect Viewport, Rect Scissor, uint32_t FrontFace, uint32_t CullFace, float LineWidth, float PolygonOffsetFactor, float PolygonOffsetUnits, float SampleCoverageValue, uint8_t SampleCoverageInvert) :
+            mDepthMask(DepthMask),
+            mDepthTestFunction(DepthTestFunction),
+            mDepthNear(DepthNear),
+            mDepthFar(DepthFar),
+            mColorMaskRed(ColorMaskRed),
+            mColorMaskGreen(ColorMaskGreen),
+            mColorMaskBlue(ColorMaskBlue),
+            mColorMaskAlpha(ColorMaskAlpha),
+            mStencilMask(StencilMask),
+            mViewport(Viewport),
+            mScissor(Scissor),
+            mFrontFace(FrontFace),
+            mCullFace(CullFace),
+            mLineWidth(LineWidth),
+            mPolygonOffsetFactor(PolygonOffsetFactor),
+            mPolygonOffsetUnits(PolygonOffsetUnits),
+            mSampleCoverageValue(SampleCoverageValue),
+            mSampleCoverageInvert(SampleCoverageInvert) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        uint8_t mDepthMask;
+        uint32_t mDepthTestFunction;
+        float mDepthNear;
+        float mDepthFar;
+        uint8_t mColorMaskRed;
+        uint8_t mColorMaskGreen;
+        uint8_t mColorMaskBlue;
+        uint8_t mColorMaskAlpha;
+        gapic::Map<uint32_t, uint32_t> mStencilMask;
+        Rect mViewport;
+        Rect mScissor;
+        uint32_t mFrontFace;
+        uint32_t mCullFace;
+        float mLineWidth;
+        float mPolygonOffsetFactor;
+        float mPolygonOffsetUnits;
+        float mSampleCoverageValue;
+        uint8_t mSampleCoverageInvert;
+    };
 
     class VertexAttributeValue: public Encodable {
     public:
@@ -960,7 +1006,24 @@ namespace gles {
         U8__S mValue;
     };
 
-    // Can't encode TextureUnit contains maps: gles.TextureUnit{map[Uint32]Uint32}
+    class TextureUnit: public Encodable {
+    public:
+        TextureUnit() = default;
+        TextureUnit(const gapic::Map<uint32_t, uint32_t>& Bindings) :
+            mBindings(Bindings) {}
+        virtual void Encode(Encoder* e) const{
+            e->Uint32(this->mBindings.count());
+            for (auto v : this->mBindings) {
+                e->Uint32(v.key);
+                e->Uint32(v.value);
+            }
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, uint32_t> mBindings;
+    };
 
     class Renderbuffer: public Encodable {
     public:
@@ -1004,9 +1067,65 @@ namespace gles {
         uint32_t mTexelType;
     };
 
-    // Can't encode CubemapLevel contains maps: gles.CubemapLevel{map[Uint32]$}
+    class CubemapLevel: public Encodable {
+    public:
+        CubemapLevel() = default;
+        CubemapLevel(const gapic::Map<uint32_t, Image>& Faces) :
+            mFaces(Faces) {}
+        virtual void Encode(Encoder* e) const{
+            e->Uint32(this->mFaces.count());
+            for (auto v : this->mFaces) {
+                e->Uint32(v.key);
+                e->Struct(v.value);
+            }
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, Image> mFaces;
+    };
 
-    // Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+    class Texture: public Encodable {
+    public:
+        Texture() = default;
+        Texture(uint32_t ID, uint32_t Kind, uint32_t TexelFormat, uint32_t TexelType, const gapic::Map<int32_t, Image>& Texture2D, const gapic::Map<int32_t, CubemapLevel>& Cubemap, uint32_t MagFilter, uint32_t MinFilter, uint32_t WrapS, uint32_t WrapT, uint32_t SwizzleR, uint32_t SwizzleG, uint32_t SwizzleB, uint32_t SwizzleA, float MaxAnisotropy) :
+            mID(ID),
+            mKind(Kind),
+            mTexelFormat(TexelFormat),
+            mTexelType(TexelType),
+            mTexture2D(Texture2D),
+            mCubemap(Cubemap),
+            mMagFilter(MagFilter),
+            mMinFilter(MinFilter),
+            mWrapS(WrapS),
+            mWrapT(WrapT),
+            mSwizzleR(SwizzleR),
+            mSwizzleG(SwizzleG),
+            mSwizzleB(SwizzleB),
+            mSwizzleA(SwizzleA),
+            mMaxAnisotropy(MaxAnisotropy) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        uint32_t mID;
+        uint32_t mKind;
+        uint32_t mTexelFormat;
+        uint32_t mTexelType;
+        gapic::Map<int32_t, Image> mTexture2D;
+        gapic::Map<int32_t, CubemapLevel> mCubemap;
+        uint32_t mMagFilter;
+        uint32_t mMinFilter;
+        uint32_t mWrapS;
+        uint32_t mWrapT;
+        uint32_t mSwizzleR;
+        uint32_t mSwizzleG;
+        uint32_t mSwizzleB;
+        uint32_t mSwizzleA;
+        float mMaxAnisotropy;
+    };
 
     class FramebufferAttachmentInfo: public Encodable {
     public:
@@ -1027,7 +1146,24 @@ namespace gles {
         uint32_t mCubeMapFace;
     };
 
-    // Can't encode Framebuffer contains maps: gles.Framebuffer{map[Uint32]$}
+    class Framebuffer: public Encodable {
+    public:
+        Framebuffer() = default;
+        Framebuffer(const gapic::Map<uint32_t, FramebufferAttachmentInfo>& Attachments) :
+            mAttachments(Attachments) {}
+        virtual void Encode(Encoder* e) const{
+            e->Uint32(this->mAttachments.count());
+            for (auto v : this->mAttachments) {
+                e->Uint32(v.key);
+                e->Struct(v.value);
+            }
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, FramebufferAttachmentInfo> mAttachments;
+    };
 
     class GLchar__S: public Encodable {
     public:
@@ -1109,7 +1245,30 @@ namespace gles {
         U8__S mValue;
     };
 
-    // Can't encode Program contains maps: gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
+    class Program: public Encodable {
+    public:
+        Program() = default;
+        Program(const gapic::Map<uint32_t, uint32_t>& Shaders, bool Linked, U8__S Binary, const gapic::Map<char*, uint32_t>& AttributeBindings, const gapic::Map<int32_t, VertexAttribute>& Attributes, const gapic::Map<int32_t, Uniform>& Uniforms, GLchar__S InfoLog) :
+            mShaders(Shaders),
+            mLinked(Linked),
+            mBinary(Binary),
+            mAttributeBindings(AttributeBindings),
+            mAttributes(Attributes),
+            mUniforms(Uniforms),
+            mInfoLog(InfoLog) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, uint32_t> mShaders;
+        bool mLinked;
+        U8__S mBinary;
+        gapic::Map<char*, uint32_t> mAttributeBindings;
+        gapic::Map<int32_t, VertexAttribute> mAttributes;
+        gapic::Map<int32_t, Uniform> mUniforms;
+        GLchar__S mInfoLog;
+    };
 
     class VertexBufferBinding: public Encodable {
     public:
@@ -1174,7 +1333,31 @@ namespace gles {
         uint32_t mBinding;
     };
 
-    // Can't encode VertexArray contains maps: gles.VertexArray{map[Uint32]*$,map[Uint32]*$}
+    class VertexArray: public Encodable {
+    public:
+        VertexArray() = default;
+        VertexArray(const gapic::Map<uint32_t, VertexBufferBinding*>& VertexBufferBindings, const gapic::Map<uint32_t, VertexAttributeArray*>& VertexAttributeArrays) :
+            mVertexBufferBindings(VertexBufferBindings),
+            mVertexAttributeArrays(VertexAttributeArrays) {}
+        virtual void Encode(Encoder* e) const{
+            e->Uint32(this->mVertexBufferBindings.count());
+            for (auto v : this->mVertexBufferBindings) {
+                e->Uint32(v.key);
+                e->Object(v.value);
+            }
+            e->Uint32(this->mVertexAttributeArrays.count());
+            for (auto v : this->mVertexAttributeArrays) {
+                e->Uint32(v.key);
+                e->Object(v.value);
+            }
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, VertexBufferBinding*> mVertexBufferBindings;
+        gapic::Map<uint32_t, VertexAttributeArray*> mVertexAttributeArrays;
+    };
 
     class Query: public Encodable {
     public:
@@ -1187,9 +1370,79 @@ namespace gles {
         static const schema::Entity* StaticSchema();
     };
 
-    // Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
+    class Objects: public Encodable {
+    public:
+        Objects() = default;
+        Objects(const gapic::Map<uint32_t, Renderbuffer*>& Renderbuffers, const gapic::Map<uint32_t, Texture*>& Textures, const gapic::Map<uint32_t, Framebuffer*>& Framebuffers, const gapic::Map<uint32_t, Buffer*>& Buffers, const gapic::Map<uint32_t, Shader*>& Shaders, const gapic::Map<uint32_t, Program*>& Programs, const gapic::Map<uint32_t, VertexArray*>& VertexArrays, const gapic::Map<uint32_t, Query*>& Queries) :
+            mRenderbuffers(Renderbuffers),
+            mTextures(Textures),
+            mFramebuffers(Framebuffers),
+            mBuffers(Buffers),
+            mShaders(Shaders),
+            mPrograms(Programs),
+            mVertexArrays(VertexArrays),
+            mQueries(Queries) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<uint32_t, Renderbuffer*> mRenderbuffers;
+        gapic::Map<uint32_t, Texture*> mTextures;
+        gapic::Map<uint32_t, Framebuffer*> mFramebuffers;
+        gapic::Map<uint32_t, Buffer*> mBuffers;
+        gapic::Map<uint32_t, Shader*> mShaders;
+        gapic::Map<uint32_t, Program*> mPrograms;
+        gapic::Map<uint32_t, VertexArray*> mVertexArrays;
+        gapic::Map<uint32_t, Query*> mQueries;
+    };
 
-    // Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
+    class Context: public Encodable {
+    public:
+        Context() = default;
+        Context(uint32_t Identifier, ContextCreationInfo Info, BlendState Blending, RasterizerState Rasterizing, ClearState Clearing, const gapic::Map<uint32_t, uint32_t>& BoundFramebuffers, const gapic::Map<uint32_t, uint32_t>& BoundRenderbuffers, const gapic::Map<uint32_t, uint32_t>& BoundBuffers, uint32_t BoundProgram, uint32_t BoundVertexArray, const gapic::Map<uint32_t, VertexAttributeValue>& VertexAttributes, const gapic::Map<uint32_t, TextureUnit*>& TextureUnits, uint32_t ActiveTextureUnit, const gapic::Map<uint32_t, bool>& Capabilities, uint32_t GenerateMipmapHint, const gapic::Map<uint32_t, int32_t>& PixelStorage, Objects Instances, Constants Constants) :
+            mIdentifier(Identifier),
+            mInfo(Info),
+            mBlending(Blending),
+            mRasterizing(Rasterizing),
+            mClearing(Clearing),
+            mBoundFramebuffers(BoundFramebuffers),
+            mBoundRenderbuffers(BoundRenderbuffers),
+            mBoundBuffers(BoundBuffers),
+            mBoundProgram(BoundProgram),
+            mBoundVertexArray(BoundVertexArray),
+            mVertexAttributes(VertexAttributes),
+            mTextureUnits(TextureUnits),
+            mActiveTextureUnit(ActiveTextureUnit),
+            mCapabilities(Capabilities),
+            mGenerateMipmapHint(GenerateMipmapHint),
+            mPixelStorage(PixelStorage),
+            mInstances(Instances),
+            mConstants(Constants) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        uint32_t mIdentifier;
+        ContextCreationInfo mInfo;
+        BlendState mBlending;
+        RasterizerState mRasterizing;
+        ClearState mClearing;
+        gapic::Map<uint32_t, uint32_t> mBoundFramebuffers;
+        gapic::Map<uint32_t, uint32_t> mBoundRenderbuffers;
+        gapic::Map<uint32_t, uint32_t> mBoundBuffers;
+        uint32_t mBoundProgram;
+        uint32_t mBoundVertexArray;
+        gapic::Map<uint32_t, VertexAttributeValue> mVertexAttributes;
+        gapic::Map<uint32_t, TextureUnit*> mTextureUnits;
+        uint32_t mActiveTextureUnit;
+        gapic::Map<uint32_t, bool> mCapabilities;
+        uint32_t mGenerateMipmapHint;
+        gapic::Map<uint32_t, int32_t> mPixelStorage;
+        Objects mInstances;
+        Constants mConstants;
+    };
 
     class GLenum__P: public Encodable {
     public:
@@ -1239,7 +1492,7 @@ namespace gles {
     class ContextInfo: public Encodable {
     public:
         ContextInfo() = default;
-        ContextInfo(gapic::Vector<gapic::Encodable*> extras, uint32_t ConstantCount, GLenum__P ConstantNames, U32__P ConstantOffsets, U32__P ConstantSizes, U8__P ConstantData, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
+        ContextInfo(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ConstantCount, GLenum__P ConstantNames, U32__P ConstantOffsets, U32__P ConstantSizes, U8__P ConstantData, int32_t BackbufferWidth, int32_t BackbufferHeight, uint32_t BackbufferColorFmt, uint32_t BackbufferDepthFmt, uint32_t BackbufferStencilFmt, bool ResetViewportScissor, bool PreserveBuffersOnSwap) :
             mextras(extras),
             mConstantCount(ConstantCount),
             mConstantNames(ConstantNames),
@@ -1366,7 +1619,7 @@ namespace gles {
     class EglCreateContext: public Encodable {
     public:
         EglCreateContext() = default;
-        EglCreateContext(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLint__P AttribList, EGLContext Result) :
+        EglCreateContext(const gapic::Vector<gapic::Encodable*>& extras, EGLDisplay Display, EGLConfig Config, EGLContext ShareContext, EGLint__P AttribList, EGLContext Result) :
             mextras(extras),
             mDisplay(Display),
             mConfig(Config),
@@ -1389,7 +1642,7 @@ namespace gles {
     class EglInitialize: public Encodable {
     public:
         EglInitialize() = default;
-        EglInitialize(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Dpy, EGLint__P Major, EGLint__P Minor, int64_t Result) :
+        EglInitialize(const gapic::Vector<gapic::Encodable*>& extras, EGLDisplay Dpy, EGLint__P Major, EGLint__P Minor, int64_t Result) :
             mextras(extras),
             mDpy(Dpy),
             mMajor(Major),
@@ -1410,7 +1663,7 @@ namespace gles {
     class EglMakeCurrent: public Encodable {
     public:
         EglMakeCurrent() = default;
-        EglMakeCurrent(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, int64_t Result) :
+        EglMakeCurrent(const gapic::Vector<gapic::Encodable*>& extras, EGLDisplay Display, EGLSurface Draw, EGLSurface Read, EGLContext Context, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
@@ -1433,7 +1686,7 @@ namespace gles {
     class EglQuerySurface: public Encodable {
     public:
         EglQuerySurface() = default;
-        EglQuerySurface(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, EGLSurface Surface, int64_t Attribute, EGLint__P Value, int64_t Result) :
+        EglQuerySurface(const gapic::Vector<gapic::Encodable*>& extras, EGLDisplay Display, EGLSurface Surface, int64_t Attribute, EGLint__P Value, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mSurface(Surface),
@@ -1471,7 +1724,7 @@ namespace gles {
     class EglSwapBuffers: public Encodable {
     public:
         EglSwapBuffers() = default;
-        EglSwapBuffers(gapic::Vector<gapic::Encodable*> extras, EGLDisplay Display, Void__P Surface, int64_t Result) :
+        EglSwapBuffers(const gapic::Vector<gapic::Encodable*>& extras, EGLDisplay Display, Void__P Surface, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mSurface(Surface),
@@ -1505,7 +1758,7 @@ namespace gles {
     class FlushPostBuffer: public Encodable {
     public:
         FlushPostBuffer() = default;
-        FlushPostBuffer(gapic::Vector<gapic::Encodable*> extras) :
+        FlushPostBuffer(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -2306,7 +2559,7 @@ namespace gles {
     class GlActiveShaderProgram: public Encodable {
     public:
         GlActiveShaderProgram() = default;
-        GlActiveShaderProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Program) :
+        GlActiveShaderProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Program) :
             mextras(extras),
             mPipeline(Pipeline),
             mProgram(Program) {}
@@ -2330,7 +2583,7 @@ namespace gles {
     class GlActiveShaderProgramEXT: public Encodable {
     public:
         GlActiveShaderProgramEXT() = default;
-        GlActiveShaderProgramEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Program) :
+        GlActiveShaderProgramEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Program) :
             mextras(extras),
             mPipeline(Pipeline),
             mProgram(Program) {}
@@ -2354,7 +2607,7 @@ namespace gles {
     class GlActiveTexture: public Encodable {
     public:
         GlActiveTexture() = default;
-        GlActiveTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit) :
+        GlActiveTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Unit) :
             mextras(extras),
             mUnit(Unit) {}
         virtual void Encode(Encoder* e) const{
@@ -2375,7 +2628,7 @@ namespace gles {
     class GlAlphaFunc: public Encodable {
     public:
         GlAlphaFunc() = default;
-        GlAlphaFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, float Ref) :
+        GlAlphaFunc(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, float Ref) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
@@ -2399,7 +2652,7 @@ namespace gles {
     class GlAlphaFuncQCOM: public Encodable {
     public:
         GlAlphaFuncQCOM() = default;
-        GlAlphaFuncQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, float Ref) :
+        GlAlphaFuncQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, float Ref) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
@@ -2423,7 +2676,7 @@ namespace gles {
     class GlAlphaFuncx: public Encodable {
     public:
         GlAlphaFuncx() = default;
-        GlAlphaFuncx(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref) :
+        GlAlphaFuncx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, int32_t Ref) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
@@ -2447,7 +2700,7 @@ namespace gles {
     class GlAlphaFuncxOES: public Encodable {
     public:
         GlAlphaFuncxOES() = default;
-        GlAlphaFuncxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref) :
+        GlAlphaFuncxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, int32_t Ref) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref) {}
@@ -2471,7 +2724,7 @@ namespace gles {
     class GlApplyFramebufferAttachmentCMAAINTEL: public Encodable {
     public:
         GlApplyFramebufferAttachmentCMAAINTEL() = default;
-        GlApplyFramebufferAttachmentCMAAINTEL(gapic::Vector<gapic::Encodable*> extras) :
+        GlApplyFramebufferAttachmentCMAAINTEL(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -2489,7 +2742,7 @@ namespace gles {
     class GlAttachShader: public Encodable {
     public:
         GlAttachShader() = default;
-        GlAttachShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shader) :
+        GlAttachShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Shader) :
             mextras(extras),
             mProgram(Program),
             mShader(Shader) {}
@@ -2513,7 +2766,7 @@ namespace gles {
     class GlBeginConditionalRenderNV: public Encodable {
     public:
         GlBeginConditionalRenderNV() = default;
-        GlBeginConditionalRenderNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Id, uint32_t Mode) :
+        GlBeginConditionalRenderNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Id, uint32_t Mode) :
             mextras(extras),
             mId(Id),
             mMode(Mode) {}
@@ -2537,7 +2790,7 @@ namespace gles {
     class GlBeginPerfMonitorAMD: public Encodable {
     public:
         GlBeginPerfMonitorAMD() = default;
-        GlBeginPerfMonitorAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor) :
+        GlBeginPerfMonitorAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Monitor) :
             mextras(extras),
             mMonitor(Monitor) {}
         virtual void Encode(Encoder* e) const{
@@ -2558,7 +2811,7 @@ namespace gles {
     class GlBeginPerfQueryINTEL: public Encodable {
     public:
         GlBeginPerfQueryINTEL() = default;
-        GlBeginPerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+        GlBeginPerfQueryINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryHandle) :
             mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
@@ -2579,7 +2832,7 @@ namespace gles {
     class GlBeginQuery: public Encodable {
     public:
         GlBeginQuery() = default;
-        GlBeginQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Query) :
+        GlBeginQuery(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Query) :
             mextras(extras),
             mTarget(Target),
             mQuery(Query) {}
@@ -2603,7 +2856,7 @@ namespace gles {
     class GlBeginQueryEXT: public Encodable {
     public:
         GlBeginQueryEXT() = default;
-        GlBeginQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Query) :
+        GlBeginQueryEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Query) :
             mextras(extras),
             mTarget(Target),
             mQuery(Query) {}
@@ -2627,7 +2880,7 @@ namespace gles {
     class GlBeginTransformFeedback: public Encodable {
     public:
         GlBeginTransformFeedback() = default;
-        GlBeginTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t PrimitiveMode) :
+        GlBeginTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras, uint32_t PrimitiveMode) :
             mextras(extras),
             mPrimitiveMode(PrimitiveMode) {}
         virtual void Encode(Encoder* e) const{
@@ -2648,7 +2901,7 @@ namespace gles {
     class GlBindAttribLocation: public Encodable {
     public:
         GlBindAttribLocation() = default;
-        GlBindAttribLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Location, char* Name) :
+        GlBindAttribLocation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Location, char* Name) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -2667,7 +2920,7 @@ namespace gles {
     class GlBindBuffer: public Encodable {
     public:
         GlBindBuffer() = default;
-        GlBindBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Buffer) :
+        GlBindBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Buffer) :
             mextras(extras),
             mTarget(Target),
             mBuffer(Buffer) {}
@@ -2691,7 +2944,7 @@ namespace gles {
     class GlBindBufferBase: public Encodable {
     public:
         GlBindBufferBase() = default;
-        GlBindBufferBase(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint32_t Buffer) :
+        GlBindBufferBase(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint32_t Buffer) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -2710,7 +2963,7 @@ namespace gles {
     class GlBindBufferRange: public Encodable {
     public:
         GlBindBufferRange() = default;
-        GlBindBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint32_t Buffer, int32_t Offset, int32_t Size) :
+        GlBindBufferRange(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint32_t Buffer, int32_t Offset, int32_t Size) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -2733,7 +2986,7 @@ namespace gles {
     class GlBindFragDataLocationEXT: public Encodable {
     public:
         GlBindFragDataLocationEXT() = default;
-        GlBindFragDataLocationEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Color, char* Name) :
+        GlBindFragDataLocationEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Color, char* Name) :
             mextras(extras),
             mProgram(Program),
             mColor(Color),
@@ -2752,7 +3005,7 @@ namespace gles {
     class GlBindFragDataLocationIndexedEXT: public Encodable {
     public:
         GlBindFragDataLocationIndexedEXT() = default;
-        GlBindFragDataLocationIndexedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ColorNumber, uint32_t Index, char* Name) :
+        GlBindFragDataLocationIndexedEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ColorNumber, uint32_t Index, char* Name) :
             mextras(extras),
             mProgram(Program),
             mColorNumber(ColorNumber),
@@ -2773,7 +3026,7 @@ namespace gles {
     class GlBindFramebuffer: public Encodable {
     public:
         GlBindFramebuffer() = default;
-        GlBindFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Framebuffer) :
+        GlBindFramebuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Framebuffer) :
             mextras(extras),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
@@ -2797,7 +3050,7 @@ namespace gles {
     class GlBindFramebufferOES: public Encodable {
     public:
         GlBindFramebufferOES() = default;
-        GlBindFramebufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Framebuffer) :
+        GlBindFramebufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Framebuffer) :
             mextras(extras),
             mTarget(Target),
             mFramebuffer(Framebuffer) {}
@@ -2821,7 +3074,7 @@ namespace gles {
     class GlBindImageTexture: public Encodable {
     public:
         GlBindImageTexture() = default;
-        GlBindImageTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Access, uint32_t Format) :
+        GlBindImageTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Unit, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Access, uint32_t Format) :
             mextras(extras),
             mUnit(Unit),
             mTexture(Texture),
@@ -2848,7 +3101,7 @@ namespace gles {
     class GlBindProgramPipeline: public Encodable {
     public:
         GlBindProgramPipeline() = default;
-        GlBindProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+        GlBindProgramPipeline(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline) :
             mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
@@ -2869,7 +3122,7 @@ namespace gles {
     class GlBindProgramPipelineEXT: public Encodable {
     public:
         GlBindProgramPipelineEXT() = default;
-        GlBindProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+        GlBindProgramPipelineEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline) :
             mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
@@ -2890,7 +3143,7 @@ namespace gles {
     class GlBindRenderbuffer: public Encodable {
     public:
         GlBindRenderbuffer() = default;
-        GlBindRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Renderbuffer) :
+        GlBindRenderbuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Renderbuffer) :
             mextras(extras),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
@@ -2914,7 +3167,7 @@ namespace gles {
     class GlBindRenderbufferOES: public Encodable {
     public:
         GlBindRenderbufferOES() = default;
-        GlBindRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Renderbuffer) :
+        GlBindRenderbufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Renderbuffer) :
             mextras(extras),
             mTarget(Target),
             mRenderbuffer(Renderbuffer) {}
@@ -2938,7 +3191,7 @@ namespace gles {
     class GlBindSampler: public Encodable {
     public:
         GlBindSampler() = default;
-        GlBindSampler(gapic::Vector<gapic::Encodable*> extras, uint32_t Unit, uint32_t Sampler) :
+        GlBindSampler(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Unit, uint32_t Sampler) :
             mextras(extras),
             mUnit(Unit),
             mSampler(Sampler) {}
@@ -2962,7 +3215,7 @@ namespace gles {
     class GlBindTexture: public Encodable {
     public:
         GlBindTexture() = default;
-        GlBindTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Texture) :
+        GlBindTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Texture) :
             mextras(extras),
             mTarget(Target),
             mTexture(Texture) {}
@@ -2986,7 +3239,7 @@ namespace gles {
     class GlBindTransformFeedback: public Encodable {
     public:
         GlBindTransformFeedback() = default;
-        GlBindTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Id) :
+        GlBindTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Id) :
             mextras(extras),
             mTarget(Target),
             mId(Id) {}
@@ -3010,7 +3263,7 @@ namespace gles {
     class GlBindVertexArray: public Encodable {
     public:
         GlBindVertexArray() = default;
-        GlBindVertexArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+        GlBindVertexArray(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array) :
             mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
@@ -3031,7 +3284,7 @@ namespace gles {
     class GlBindVertexArrayOES: public Encodable {
     public:
         GlBindVertexArrayOES() = default;
-        GlBindVertexArrayOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+        GlBindVertexArrayOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array) :
             mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
@@ -3052,7 +3305,7 @@ namespace gles {
     class GlBindVertexBuffer: public Encodable {
     public:
         GlBindVertexBuffer() = default;
-        GlBindVertexBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t BindingIndex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
+        GlBindVertexBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t BindingIndex, uint32_t Buffer, int32_t Offset, int32_t Stride) :
             mextras(extras),
             mBindingIndex(BindingIndex),
             mBuffer(Buffer),
@@ -3073,7 +3326,7 @@ namespace gles {
     class GlBlendBarrier: public Encodable {
     public:
         GlBlendBarrier() = default;
-        GlBlendBarrier(gapic::Vector<gapic::Encodable*> extras) :
+        GlBlendBarrier(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -3091,7 +3344,7 @@ namespace gles {
     class GlBlendBarrierKHR: public Encodable {
     public:
         GlBlendBarrierKHR() = default;
-        GlBlendBarrierKHR(gapic::Vector<gapic::Encodable*> extras) :
+        GlBlendBarrierKHR(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -3109,7 +3362,7 @@ namespace gles {
     class GlBlendBarrierNV: public Encodable {
     public:
         GlBlendBarrierNV() = default;
-        GlBlendBarrierNV(gapic::Vector<gapic::Encodable*> extras) :
+        GlBlendBarrierNV(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -3127,7 +3380,7 @@ namespace gles {
     class GlBlendColor: public Encodable {
     public:
         GlBlendColor() = default;
-        GlBlendColor(gapic::Vector<gapic::Encodable*> extras, float Red, float Green, float Blue, float Alpha) :
+        GlBlendColor(const gapic::Vector<gapic::Encodable*>& extras, float Red, float Green, float Blue, float Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -3148,7 +3401,7 @@ namespace gles {
     class GlBlendEquation: public Encodable {
     public:
         GlBlendEquation() = default;
-        GlBlendEquation(gapic::Vector<gapic::Encodable*> extras, uint32_t Equation) :
+        GlBlendEquation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Equation) :
             mextras(extras),
             mEquation(Equation) {}
         virtual void Encode(Encoder* e) const{
@@ -3169,7 +3422,7 @@ namespace gles {
     class GlBlendEquationOES: public Encodable {
     public:
         GlBlendEquationOES() = default;
-        GlBlendEquationOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+        GlBlendEquationOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode) :
             mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
@@ -3190,7 +3443,7 @@ namespace gles {
     class GlBlendEquationSeparate: public Encodable {
     public:
         GlBlendEquationSeparate() = default;
-        GlBlendEquationSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Rgb, uint32_t Alpha) :
+        GlBlendEquationSeparate(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Rgb, uint32_t Alpha) :
             mextras(extras),
             mRgb(Rgb),
             mAlpha(Alpha) {}
@@ -3214,7 +3467,7 @@ namespace gles {
     class GlBlendEquationSeparateOES: public Encodable {
     public:
         GlBlendEquationSeparateOES() = default;
-        GlBlendEquationSeparateOES(gapic::Vector<gapic::Encodable*> extras, uint32_t ModeRGB, uint32_t ModeAlpha) :
+        GlBlendEquationSeparateOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ModeRGB, uint32_t ModeAlpha) :
             mextras(extras),
             mModeRGB(ModeRGB),
             mModeAlpha(ModeAlpha) {}
@@ -3238,7 +3491,7 @@ namespace gles {
     class GlBlendEquationSeparatei: public Encodable {
     public:
         GlBlendEquationSeparatei() = default;
-        GlBlendEquationSeparatei(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+        GlBlendEquationSeparatei(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
             mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
@@ -3257,7 +3510,7 @@ namespace gles {
     class GlBlendEquationSeparateiEXT: public Encodable {
     public:
         GlBlendEquationSeparateiEXT() = default;
-        GlBlendEquationSeparateiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+        GlBlendEquationSeparateiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
             mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
@@ -3276,7 +3529,7 @@ namespace gles {
     class GlBlendEquationSeparateiOES: public Encodable {
     public:
         GlBlendEquationSeparateiOES() = default;
-        GlBlendEquationSeparateiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
+        GlBlendEquationSeparateiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t ModeRGB, uint32_t ModeAlpha) :
             mextras(extras),
             mBuf(Buf),
             mModeRGB(ModeRGB),
@@ -3295,7 +3548,7 @@ namespace gles {
     class GlBlendEquationi: public Encodable {
     public:
         GlBlendEquationi() = default;
-        GlBlendEquationi(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+        GlBlendEquationi(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Mode) :
             mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
@@ -3319,7 +3572,7 @@ namespace gles {
     class GlBlendEquationiEXT: public Encodable {
     public:
         GlBlendEquationiEXT() = default;
-        GlBlendEquationiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+        GlBlendEquationiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Mode) :
             mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
@@ -3343,7 +3596,7 @@ namespace gles {
     class GlBlendEquationiOES: public Encodable {
     public:
         GlBlendEquationiOES() = default;
-        GlBlendEquationiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Mode) :
+        GlBlendEquationiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Mode) :
             mextras(extras),
             mBuf(Buf),
             mMode(Mode) {}
@@ -3367,7 +3620,7 @@ namespace gles {
     class GlBlendFunc: public Encodable {
     public:
         GlBlendFunc() = default;
-        GlBlendFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcFactor, uint32_t DstFactor) :
+        GlBlendFunc(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcFactor, uint32_t DstFactor) :
             mextras(extras),
             mSrcFactor(SrcFactor),
             mDstFactor(DstFactor) {}
@@ -3391,7 +3644,7 @@ namespace gles {
     class GlBlendFuncSeparate: public Encodable {
     public:
         GlBlendFuncSeparate() = default;
-        GlBlendFuncSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcFactorRgb, uint32_t DstFactorRgb, uint32_t SrcFactorAlpha, uint32_t DstFactorAlpha) :
+        GlBlendFuncSeparate(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcFactorRgb, uint32_t DstFactorRgb, uint32_t SrcFactorAlpha, uint32_t DstFactorAlpha) :
             mextras(extras),
             mSrcFactorRgb(SrcFactorRgb),
             mDstFactorRgb(DstFactorRgb),
@@ -3412,7 +3665,7 @@ namespace gles {
     class GlBlendFuncSeparateOES: public Encodable {
     public:
         GlBlendFuncSeparateOES() = default;
-        GlBlendFuncSeparateOES(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+        GlBlendFuncSeparateOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
             mextras(extras),
             mSrcRGB(SrcRGB),
             mDstRGB(DstRGB),
@@ -3433,7 +3686,7 @@ namespace gles {
     class GlBlendFuncSeparatei: public Encodable {
     public:
         GlBlendFuncSeparatei() = default;
-        GlBlendFuncSeparatei(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+        GlBlendFuncSeparatei(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
             mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
@@ -3456,7 +3709,7 @@ namespace gles {
     class GlBlendFuncSeparateiEXT: public Encodable {
     public:
         GlBlendFuncSeparateiEXT() = default;
-        GlBlendFuncSeparateiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+        GlBlendFuncSeparateiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
             mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
@@ -3479,7 +3732,7 @@ namespace gles {
     class GlBlendFuncSeparateiOES: public Encodable {
     public:
         GlBlendFuncSeparateiOES() = default;
-        GlBlendFuncSeparateiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
+        GlBlendFuncSeparateiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t SrcRGB, uint32_t DstRGB, uint32_t SrcAlpha, uint32_t DstAlpha) :
             mextras(extras),
             mBuf(Buf),
             mSrcRGB(SrcRGB),
@@ -3502,7 +3755,7 @@ namespace gles {
     class GlBlendFunci: public Encodable {
     public:
         GlBlendFunci() = default;
-        GlBlendFunci(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+        GlBlendFunci(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
             mextras(extras),
             mBuf(Buf),
             mSrc(Src),
@@ -3521,7 +3774,7 @@ namespace gles {
     class GlBlendFunciEXT: public Encodable {
     public:
         GlBlendFunciEXT() = default;
-        GlBlendFunciEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+        GlBlendFunciEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
             mextras(extras),
             mBuf(Buf),
             mSrc(Src),
@@ -3540,7 +3793,7 @@ namespace gles {
     class GlBlendFunciOES: public Encodable {
     public:
         GlBlendFunciOES() = default;
-        GlBlendFunciOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
+        GlBlendFunciOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buf, uint32_t Src, uint32_t Dst) :
             mextras(extras),
             mBuf(Buf),
             mSrc(Src),
@@ -3559,7 +3812,7 @@ namespace gles {
     class GlBlendParameteriNV: public Encodable {
     public:
         GlBlendParameteriNV() = default;
-        GlBlendParameteriNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+        GlBlendParameteriNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mPname(Pname),
             mValue(Value) {}
@@ -3583,7 +3836,7 @@ namespace gles {
     class GlBlitFramebuffer: public Encodable {
     public:
         GlBlitFramebuffer() = default;
-        GlBlitFramebuffer(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+        GlBlitFramebuffer(const gapic::Vector<gapic::Encodable*>& extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
             mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
@@ -3616,7 +3869,7 @@ namespace gles {
     class GlBlitFramebufferANGLE: public Encodable {
     public:
         GlBlitFramebufferANGLE() = default;
-        GlBlitFramebufferANGLE(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+        GlBlitFramebufferANGLE(const gapic::Vector<gapic::Encodable*>& extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
             mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
@@ -3649,7 +3902,7 @@ namespace gles {
     class GlBlitFramebufferNV: public Encodable {
     public:
         GlBlitFramebufferNV() = default;
-        GlBlitFramebufferNV(gapic::Vector<gapic::Encodable*> extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
+        GlBlitFramebufferNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t SrcX0, int32_t SrcY0, int32_t SrcX1, int32_t SrcY1, int32_t DstX0, int32_t DstY0, int32_t DstX1, int32_t DstY1, uint32_t Mask, uint32_t Filter) :
             mextras(extras),
             mSrcX0(SrcX0),
             mSrcY0(SrcY0),
@@ -3682,7 +3935,7 @@ namespace gles {
     class GlBufferData: public Encodable {
     public:
         GlBufferData() = default;
-        GlBufferData(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Size, BufferDataPointer Data, uint32_t Usage) :
+        GlBufferData(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Size, BufferDataPointer Data, uint32_t Usage) :
             mextras(extras),
             mTarget(Target),
             mSize(Size),
@@ -3718,7 +3971,7 @@ namespace gles {
     class GlBufferStorageEXT: public Encodable {
     public:
         GlBufferStorageEXT() = default;
-        GlBufferStorageEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Size, Void__CP Data, uint32_t Flag) :
+        GlBufferStorageEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Size, Void__CP Data, uint32_t Flag) :
             mextras(extras),
             mTarget(Target),
             mSize(Size),
@@ -3739,7 +3992,7 @@ namespace gles {
     class GlBufferSubData: public Encodable {
     public:
         GlBufferSubData() = default;
-        GlBufferSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Size, BufferDataPointer Data) :
+        GlBufferSubData(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Offset, int32_t Size, BufferDataPointer Data) :
             mextras(extras),
             mTarget(Target),
             mOffset(Offset),
@@ -3760,7 +4013,7 @@ namespace gles {
     class GlCheckFramebufferStatus: public Encodable {
     public:
         GlCheckFramebufferStatus() = default;
-        GlCheckFramebufferStatus(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Result) :
+        GlCheckFramebufferStatus(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Result) :
             mextras(extras),
             mTarget(Target),
             mResult(Result) {}
@@ -3784,7 +4037,7 @@ namespace gles {
     class GlCheckFramebufferStatusOES: public Encodable {
     public:
         GlCheckFramebufferStatusOES() = default;
-        GlCheckFramebufferStatusOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Result) :
+        GlCheckFramebufferStatusOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Result) :
             mextras(extras),
             mTarget(Target),
             mResult(Result) {}
@@ -3808,7 +4061,7 @@ namespace gles {
     class GlClear: public Encodable {
     public:
         GlClear() = default;
-        GlClear(gapic::Vector<gapic::Encodable*> extras, uint32_t Mask) :
+        GlClear(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mask) :
             mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
@@ -3829,7 +4082,7 @@ namespace gles {
     class GlClearBufferfi: public Encodable {
     public:
         GlClearBufferfi() = default;
-        GlClearBufferfi(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, float Depth, int32_t Stencil) :
+        GlClearBufferfi(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buffer, int32_t Drawbuffer, float Depth, int32_t Stencil) :
             mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
@@ -3850,7 +4103,7 @@ namespace gles {
     class GlClearBufferfv: public Encodable {
     public:
         GlClearBufferfv() = default;
-        GlClearBufferfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLfloat__CP Value) :
+        GlClearBufferfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buffer, int32_t Drawbuffer, GLfloat__CP Value) :
             mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
@@ -3869,7 +4122,7 @@ namespace gles {
     class GlClearBufferiv: public Encodable {
     public:
         GlClearBufferiv() = default;
-        GlClearBufferiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLint__CP Value) :
+        GlClearBufferiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buffer, int32_t Drawbuffer, GLint__CP Value) :
             mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
@@ -3888,7 +4141,7 @@ namespace gles {
     class GlClearBufferuiv: public Encodable {
     public:
         GlClearBufferuiv() = default;
-        GlClearBufferuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, int32_t Drawbuffer, GLuint__CP Value) :
+        GlClearBufferuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buffer, int32_t Drawbuffer, GLuint__CP Value) :
             mextras(extras),
             mBuffer(Buffer),
             mDrawbuffer(Drawbuffer),
@@ -3907,7 +4160,7 @@ namespace gles {
     class GlClearColor: public Encodable {
     public:
         GlClearColor() = default;
-        GlClearColor(gapic::Vector<gapic::Encodable*> extras, float R, float G, float B, float A) :
+        GlClearColor(const gapic::Vector<gapic::Encodable*>& extras, float R, float G, float B, float A) :
             mextras(extras),
             mR(R),
             mG(G),
@@ -3928,7 +4181,7 @@ namespace gles {
     class GlClearColorx: public Encodable {
     public:
         GlClearColorx() = default;
-        GlClearColorx(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+        GlClearColorx(const gapic::Vector<gapic::Encodable*>& extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -3949,7 +4202,7 @@ namespace gles {
     class GlClearColorxOES: public Encodable {
     public:
         GlClearColorxOES() = default;
-        GlClearColorxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+        GlClearColorxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -3970,7 +4223,7 @@ namespace gles {
     class GlClearDepthf: public Encodable {
     public:
         GlClearDepthf() = default;
-        GlClearDepthf(gapic::Vector<gapic::Encodable*> extras, float Depth) :
+        GlClearDepthf(const gapic::Vector<gapic::Encodable*>& extras, float Depth) :
             mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
@@ -3991,7 +4244,7 @@ namespace gles {
     class GlClearDepthfOES: public Encodable {
     public:
         GlClearDepthfOES() = default;
-        GlClearDepthfOES(gapic::Vector<gapic::Encodable*> extras, float Depth) :
+        GlClearDepthfOES(const gapic::Vector<gapic::Encodable*>& extras, float Depth) :
             mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
@@ -4012,7 +4265,7 @@ namespace gles {
     class GlClearDepthx: public Encodable {
     public:
         GlClearDepthx() = default;
-        GlClearDepthx(gapic::Vector<gapic::Encodable*> extras, int32_t Depth) :
+        GlClearDepthx(const gapic::Vector<gapic::Encodable*>& extras, int32_t Depth) :
             mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
@@ -4033,7 +4286,7 @@ namespace gles {
     class GlClearDepthxOES: public Encodable {
     public:
         GlClearDepthxOES() = default;
-        GlClearDepthxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Depth) :
+        GlClearDepthxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Depth) :
             mextras(extras),
             mDepth(Depth) {}
         virtual void Encode(Encoder* e) const{
@@ -4054,7 +4307,7 @@ namespace gles {
     class GlClearStencil: public Encodable {
     public:
         GlClearStencil() = default;
-        GlClearStencil(gapic::Vector<gapic::Encodable*> extras, int32_t Stencil) :
+        GlClearStencil(const gapic::Vector<gapic::Encodable*>& extras, int32_t Stencil) :
             mextras(extras),
             mStencil(Stencil) {}
         virtual void Encode(Encoder* e) const{
@@ -4075,7 +4328,7 @@ namespace gles {
     class GlClientActiveTexture: public Encodable {
     public:
         GlClientActiveTexture() = default;
-        GlClientActiveTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture) :
+        GlClientActiveTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture) :
             mextras(extras),
             mTexture(Texture) {}
         virtual void Encode(Encoder* e) const{
@@ -4096,7 +4349,7 @@ namespace gles {
     class GlClientWaitSync: public Encodable {
     public:
         GlClientWaitSync() = default;
-        GlClientWaitSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout, uint32_t Result) :
+        GlClientWaitSync(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout, uint32_t Result) :
             mextras(extras),
             mSync(Sync),
             mSyncFlags(SyncFlags),
@@ -4117,7 +4370,7 @@ namespace gles {
     class GlClientWaitSyncAPPLE: public Encodable {
     public:
         GlClientWaitSyncAPPLE() = default;
-        GlClientWaitSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout, uint32_t Result) :
+        GlClientWaitSyncAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout, uint32_t Result) :
             mextras(extras),
             mSync(Sync),
             mFlag(Flag),
@@ -4138,7 +4391,7 @@ namespace gles {
     class GlClipPlanef: public Encodable {
     public:
         GlClipPlanef() = default;
-        GlClipPlanef(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfloat__CP Eqn) :
+        GlClipPlanef(const gapic::Vector<gapic::Encodable*>& extras, uint32_t P, GLfloat__CP Eqn) :
             mextras(extras),
             mP(P),
             mEqn(Eqn) {}
@@ -4162,7 +4415,7 @@ namespace gles {
     class GlClipPlanefIMG: public Encodable {
     public:
         GlClipPlanefIMG() = default;
-        GlClipPlanefIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfloat__CP Eqn) :
+        GlClipPlanefIMG(const gapic::Vector<gapic::Encodable*>& extras, uint32_t P, GLfloat__CP Eqn) :
             mextras(extras),
             mP(P),
             mEqn(Eqn) {}
@@ -4186,7 +4439,7 @@ namespace gles {
     class GlClipPlanefOES: public Encodable {
     public:
         GlClipPlanefOES() = default;
-        GlClipPlanefOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__CP Equation) :
+        GlClipPlanefOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfloat__CP Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -4210,7 +4463,7 @@ namespace gles {
     class GlClipPlanex: public Encodable {
     public:
         GlClipPlanex() = default;
-        GlClipPlanex(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__CP Equation) :
+        GlClipPlanex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfixed__CP Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -4234,7 +4487,7 @@ namespace gles {
     class GlClipPlanexIMG: public Encodable {
     public:
         GlClipPlanexIMG() = default;
-        GlClipPlanexIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t P, GLfixed__CP Eqn) :
+        GlClipPlanexIMG(const gapic::Vector<gapic::Encodable*>& extras, uint32_t P, GLfixed__CP Eqn) :
             mextras(extras),
             mP(P),
             mEqn(Eqn) {}
@@ -4258,7 +4511,7 @@ namespace gles {
     class GlClipPlanexOES: public Encodable {
     public:
         GlClipPlanexOES() = default;
-        GlClipPlanexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__CP Equation) :
+        GlClipPlanexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfixed__CP Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -4282,7 +4535,7 @@ namespace gles {
     class GlColor4f: public Encodable {
     public:
         GlColor4f() = default;
-        GlColor4f(gapic::Vector<gapic::Encodable*> extras, float Red, float Green, float Blue, float Alpha) :
+        GlColor4f(const gapic::Vector<gapic::Encodable*>& extras, float Red, float Green, float Blue, float Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -4303,7 +4556,7 @@ namespace gles {
     class GlColor4ub: public Encodable {
     public:
         GlColor4ub() = default;
-        GlColor4ub(gapic::Vector<gapic::Encodable*> extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
+        GlColor4ub(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -4324,7 +4577,7 @@ namespace gles {
     class GlColor4x: public Encodable {
     public:
         GlColor4x() = default;
-        GlColor4x(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+        GlColor4x(const gapic::Vector<gapic::Encodable*>& extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -4345,7 +4598,7 @@ namespace gles {
     class GlColor4xOES: public Encodable {
     public:
         GlColor4xOES() = default;
-        GlColor4xOES(gapic::Vector<gapic::Encodable*> extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
+        GlColor4xOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Red, int32_t Green, int32_t Blue, int32_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -4366,7 +4619,7 @@ namespace gles {
     class GlColorMask: public Encodable {
     public:
         GlColorMask() = default;
-        GlColorMask(gapic::Vector<gapic::Encodable*> extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
+        GlColorMask(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Red, uint8_t Green, uint8_t Blue, uint8_t Alpha) :
             mextras(extras),
             mRed(Red),
             mGreen(Green),
@@ -4387,7 +4640,7 @@ namespace gles {
     class GlColorMaski: public Encodable {
     public:
         GlColorMaski() = default;
-        GlColorMaski(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+        GlColorMaski(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
             mextras(extras),
             mIndex(Index),
             mR(R),
@@ -4410,7 +4663,7 @@ namespace gles {
     class GlColorMaskiEXT: public Encodable {
     public:
         GlColorMaskiEXT() = default;
-        GlColorMaskiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+        GlColorMaskiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
             mextras(extras),
             mIndex(Index),
             mR(R),
@@ -4433,7 +4686,7 @@ namespace gles {
     class GlColorMaskiOES: public Encodable {
     public:
         GlColorMaskiOES() = default;
-        GlColorMaskiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
+        GlColorMaskiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint8_t R, uint8_t G, uint8_t B, uint8_t A) :
             mextras(extras),
             mIndex(Index),
             mR(R),
@@ -4456,7 +4709,7 @@ namespace gles {
     class GlColorPointer: public Encodable {
     public:
         GlColorPointer() = default;
-        GlColorPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlColorPointer(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -4477,7 +4730,7 @@ namespace gles {
     class GlColorPointerBounds: public Encodable {
     public:
         GlColorPointerBounds() = default;
-        GlColorPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlColorPointerBounds(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -4500,7 +4753,7 @@ namespace gles {
     class GlCompileShader: public Encodable {
     public:
         GlCompileShader() = default;
-        GlCompileShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader) :
+        GlCompileShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader) :
             mextras(extras),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
@@ -4536,7 +4789,7 @@ namespace gles {
     class GlCompressedTexImage2D: public Encodable {
     public:
         GlCompressedTexImage2D() = default;
-        GlCompressedTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t Width, int32_t Height, int32_t Border, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4565,7 +4818,7 @@ namespace gles {
     class GlCompressedTexImage3D: public Encodable {
     public:
         GlCompressedTexImage3D() = default;
-        GlCompressedTexImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexImage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4596,7 +4849,7 @@ namespace gles {
     class GlCompressedTexImage3DOES: public Encodable {
     public:
         GlCompressedTexImage3DOES() = default;
-        GlCompressedTexImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexImage3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4627,7 +4880,7 @@ namespace gles {
     class GlCompressedTexSubImage2D: public Encodable {
     public:
         GlCompressedTexSubImage2D() = default;
-        GlCompressedTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexSubImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4658,7 +4911,7 @@ namespace gles {
     class GlCompressedTexSubImage3D: public Encodable {
     public:
         GlCompressedTexSubImage3D() = default;
-        GlCompressedTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexSubImage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4693,7 +4946,7 @@ namespace gles {
     class GlCompressedTexSubImage3DOES: public Encodable {
     public:
         GlCompressedTexSubImage3DOES() = default;
-        GlCompressedTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
+        GlCompressedTexSubImage3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, int32_t ImageSize, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4728,7 +4981,7 @@ namespace gles {
     class GlCopyBufferSubData: public Encodable {
     public:
         GlCopyBufferSubData() = default;
-        GlCopyBufferSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
+        GlCopyBufferSubData(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
             mextras(extras),
             mReadTarget(ReadTarget),
             mWriteTarget(WriteTarget),
@@ -4751,7 +5004,7 @@ namespace gles {
     class GlCopyBufferSubDataNV: public Encodable {
     public:
         GlCopyBufferSubDataNV() = default;
-        GlCopyBufferSubDataNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
+        GlCopyBufferSubDataNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ReadTarget, uint32_t WriteTarget, int32_t ReadOffset, int32_t WriteOffset, int32_t Size) :
             mextras(extras),
             mReadTarget(ReadTarget),
             mWriteTarget(WriteTarget),
@@ -4774,7 +5027,7 @@ namespace gles {
     class GlCopyImageSubData: public Encodable {
     public:
         GlCopyImageSubData() = default;
-        GlCopyImageSubData(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+        GlCopyImageSubData(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
             mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
@@ -4817,7 +5070,7 @@ namespace gles {
     class GlCopyImageSubDataEXT: public Encodable {
     public:
         GlCopyImageSubDataEXT() = default;
-        GlCopyImageSubDataEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+        GlCopyImageSubDataEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
             mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
@@ -4860,7 +5113,7 @@ namespace gles {
     class GlCopyImageSubDataOES: public Encodable {
     public:
         GlCopyImageSubDataOES() = default;
-        GlCopyImageSubDataOES(gapic::Vector<gapic::Encodable*> extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
+        GlCopyImageSubDataOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t SrcName, uint32_t SrcTarget, int32_t SrcLevel, int32_t SrcX, int32_t SrcY, int32_t SrcZ, uint32_t DstName, uint32_t DstTarget, int32_t DstLevel, int32_t DstX, int32_t DstY, int32_t DstZ, int32_t SrcWidth, int32_t SrcHeight, int32_t SrcDepth) :
             mextras(extras),
             mSrcName(SrcName),
             mSrcTarget(SrcTarget),
@@ -4903,7 +5156,7 @@ namespace gles {
     class GlCopyPathNV: public Encodable {
     public:
         GlCopyPathNV() = default;
-        GlCopyPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t SrcPath) :
+        GlCopyPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ResultPath, uint32_t SrcPath) :
             mextras(extras),
             mResultPath(ResultPath),
             mSrcPath(SrcPath) {}
@@ -4927,7 +5180,7 @@ namespace gles {
     class GlCopyTexImage2D: public Encodable {
     public:
         GlCopyTexImage2D() = default;
-        GlCopyTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
+        GlCopyTexImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Format, int32_t X, int32_t Y, int32_t Width, int32_t Height, int32_t Border) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4956,7 +5209,7 @@ namespace gles {
     class GlCopyTexSubImage2D: public Encodable {
     public:
         GlCopyTexSubImage2D() = default;
-        GlCopyTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlCopyTexSubImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -4985,7 +5238,7 @@ namespace gles {
     class GlCopyTexSubImage3D: public Encodable {
     public:
         GlCopyTexSubImage3D() = default;
-        GlCopyTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlCopyTexSubImage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -5016,7 +5269,7 @@ namespace gles {
     class GlCopyTexSubImage3DOES: public Encodable {
     public:
         GlCopyTexSubImage3DOES() = default;
-        GlCopyTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlCopyTexSubImage3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -5047,7 +5300,7 @@ namespace gles {
     class GlCopyTextureLevelsAPPLE: public Encodable {
     public:
         GlCopyTextureLevelsAPPLE() = default;
-        GlCopyTextureLevelsAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t DestinationTexture, uint32_t SourceTexture, int32_t SourceBaseLevel, int32_t SourceLevelCount) :
+        GlCopyTextureLevelsAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DestinationTexture, uint32_t SourceTexture, int32_t SourceBaseLevel, int32_t SourceLevelCount) :
             mextras(extras),
             mDestinationTexture(DestinationTexture),
             mSourceTexture(SourceTexture),
@@ -5068,7 +5321,7 @@ namespace gles {
     class GlCoverFillPathInstancedNV: public Encodable {
     public:
         GlCoverFillPathInstancedNV() = default;
-        GlCoverFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlCoverFillPathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -5095,7 +5348,7 @@ namespace gles {
     class GlCoverFillPathNV: public Encodable {
     public:
         GlCoverFillPathNV() = default;
-        GlCoverFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t CoverMode) :
+        GlCoverFillPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t CoverMode) :
             mextras(extras),
             mPath(Path),
             mCoverMode(CoverMode) {}
@@ -5119,7 +5372,7 @@ namespace gles {
     class GlCoverStrokePathInstancedNV: public Encodable {
     public:
         GlCoverStrokePathInstancedNV() = default;
-        GlCoverStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlCoverStrokePathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -5146,7 +5399,7 @@ namespace gles {
     class GlCoverStrokePathNV: public Encodable {
     public:
         GlCoverStrokePathNV() = default;
-        GlCoverStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t CoverMode) :
+        GlCoverStrokePathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t CoverMode) :
             mextras(extras),
             mPath(Path),
             mCoverMode(CoverMode) {}
@@ -5170,7 +5423,7 @@ namespace gles {
     class GlCoverageMaskNV: public Encodable {
     public:
         GlCoverageMaskNV() = default;
-        GlCoverageMaskNV(gapic::Vector<gapic::Encodable*> extras, uint8_t Mask) :
+        GlCoverageMaskNV(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Mask) :
             mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
@@ -5191,7 +5444,7 @@ namespace gles {
     class GlCoverageModulationNV: public Encodable {
     public:
         GlCoverageModulationNV() = default;
-        GlCoverageModulationNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Components) :
+        GlCoverageModulationNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Components) :
             mextras(extras),
             mComponents(Components) {}
         virtual void Encode(Encoder* e) const{
@@ -5212,7 +5465,7 @@ namespace gles {
     class GlCoverageModulationTableNV: public Encodable {
     public:
         GlCoverageModulationTableNV() = default;
-        GlCoverageModulationTableNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLfloat__CP V) :
+        GlCoverageModulationTableNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLfloat__CP V) :
             mextras(extras),
             mN(N),
             mV(V) {}
@@ -5236,7 +5489,7 @@ namespace gles {
     class GlCoverageOperationNV: public Encodable {
     public:
         GlCoverageOperationNV() = default;
-        GlCoverageOperationNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Operation) :
+        GlCoverageOperationNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Operation) :
             mextras(extras),
             mOperation(Operation) {}
         virtual void Encode(Encoder* e) const{
@@ -5257,7 +5510,7 @@ namespace gles {
     class GlCreatePerfQueryINTEL: public Encodable {
     public:
         GlCreatePerfQueryINTEL() = default;
-        GlCreatePerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, GLuint__P QueryHandle) :
+        GlCreatePerfQueryINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryId, GLuint__P QueryHandle) :
             mextras(extras),
             mQueryId(QueryId),
             mQueryHandle(QueryHandle) {}
@@ -5281,7 +5534,7 @@ namespace gles {
     class GlCreateProgram: public Encodable {
     public:
         GlCreateProgram() = default;
-        GlCreateProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+        GlCreateProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Result) :
             mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
@@ -5302,7 +5555,7 @@ namespace gles {
     class GlCreateShader: public Encodable {
     public:
         GlCreateShader() = default;
-        GlCreateShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Result) :
+        GlCreateShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, uint32_t Result) :
             mextras(extras),
             mType(Type),
             mResult(Result) {}
@@ -5326,7 +5579,7 @@ namespace gles {
     class GlCreateShaderProgramv: public Encodable {
     public:
         GlCreateShaderProgramv() = default;
-        GlCreateShaderProgramv(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Count, GLchar__CP__CP Strings, uint32_t Result) :
+        GlCreateShaderProgramv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Count, GLchar__CP__CP Strings, uint32_t Result) :
             mextras(extras),
             mType(Type),
             mCount(Count),
@@ -5347,7 +5600,7 @@ namespace gles {
     class GlCreateShaderProgramvEXT: public Encodable {
     public:
         GlCreateShaderProgramvEXT() = default;
-        GlCreateShaderProgramvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Count, GLchar__CP__P Strings, uint32_t Result) :
+        GlCreateShaderProgramvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Count, GLchar__CP__P Strings, uint32_t Result) :
             mextras(extras),
             mType(Type),
             mCount(Count),
@@ -5368,7 +5621,7 @@ namespace gles {
     class GlCullFace: public Encodable {
     public:
         GlCullFace() = default;
-        GlCullFace(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+        GlCullFace(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode) :
             mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
@@ -5389,7 +5642,7 @@ namespace gles {
     class GlCurrentPaletteMatrixOES: public Encodable {
     public:
         GlCurrentPaletteMatrixOES() = default;
-        GlCurrentPaletteMatrixOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Matrixpaletteindex) :
+        GlCurrentPaletteMatrixOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Matrixpaletteindex) :
             mextras(extras),
             mMatrixpaletteindex(Matrixpaletteindex) {}
         virtual void Encode(Encoder* e) const{
@@ -5410,7 +5663,7 @@ namespace gles {
     class GlDebugMessageCallback: public Encodable {
     public:
         GlDebugMessageCallback() = default;
-        GlDebugMessageCallback(gapic::Vector<gapic::Encodable*> extras, GLDEBUGPROC Callback, Void__CP UserParam) :
+        GlDebugMessageCallback(const gapic::Vector<gapic::Encodable*>& extras, GLDEBUGPROC Callback, Void__CP UserParam) :
             mextras(extras),
             mCallback(Callback),
             mUserParam(UserParam) {}
@@ -5434,7 +5687,7 @@ namespace gles {
     class GlDebugMessageCallbackKHR: public Encodable {
     public:
         GlDebugMessageCallbackKHR() = default;
-        GlDebugMessageCallbackKHR(gapic::Vector<gapic::Encodable*> extras, GLDEBUGPROC Callback, Void__CP UserParam) :
+        GlDebugMessageCallbackKHR(const gapic::Vector<gapic::Encodable*>& extras, GLDEBUGPROC Callback, Void__CP UserParam) :
             mextras(extras),
             mCallback(Callback),
             mUserParam(UserParam) {}
@@ -5458,7 +5711,7 @@ namespace gles {
     class GlDebugMessageControl: public Encodable {
     public:
         GlDebugMessageControl() = default;
-        GlDebugMessageControl(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
+        GlDebugMessageControl(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
             mextras(extras),
             mSource(Source),
             mType(Type),
@@ -5483,7 +5736,7 @@ namespace gles {
     class GlDebugMessageControlKHR: public Encodable {
     public:
         GlDebugMessageControlKHR() = default;
-        GlDebugMessageControlKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
+        GlDebugMessageControlKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Type, uint32_t Severity, int32_t Count, GLuint__CP Ids, uint8_t Enabled) :
             mextras(extras),
             mSource(Source),
             mType(Type),
@@ -5508,7 +5761,7 @@ namespace gles {
     class GlDebugMessageInsert: public Encodable {
     public:
         GlDebugMessageInsert() = default;
-        GlDebugMessageInsert(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
+        GlDebugMessageInsert(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
             mextras(extras),
             mSource(Source),
             mType(Type),
@@ -5533,7 +5786,7 @@ namespace gles {
     class GlDebugMessageInsertKHR: public Encodable {
     public:
         GlDebugMessageInsertKHR() = default;
-        GlDebugMessageInsertKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
+        GlDebugMessageInsertKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Type, uint32_t Id, uint32_t Severity, int32_t Length, GLchar__CP Message) :
             mextras(extras),
             mSource(Source),
             mType(Type),
@@ -5558,7 +5811,7 @@ namespace gles {
     class GlDeleteBuffers: public Encodable {
     public:
         GlDeleteBuffers() = default;
-        GlDeleteBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, BufferId__CP Buffers) :
+        GlDeleteBuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, BufferId__CP Buffers) :
             mextras(extras),
             mCount(Count),
             mBuffers(Buffers) {}
@@ -5582,7 +5835,7 @@ namespace gles {
     class GlDeleteFencesNV: public Encodable {
     public:
         GlDeleteFencesNV() = default;
-        GlDeleteFencesNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Fences) :
+        GlDeleteFencesNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__CP Fences) :
             mextras(extras),
             mN(N),
             mFences(Fences) {}
@@ -5606,7 +5859,7 @@ namespace gles {
     class GlDeleteFramebuffers: public Encodable {
     public:
         GlDeleteFramebuffers() = default;
-        GlDeleteFramebuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, FramebufferId__CP Framebuffers) :
+        GlDeleteFramebuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, FramebufferId__CP Framebuffers) :
             mextras(extras),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
@@ -5630,7 +5883,7 @@ namespace gles {
     class GlDeleteFramebuffersOES: public Encodable {
     public:
         GlDeleteFramebuffersOES() = default;
-        GlDeleteFramebuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Framebuffers) :
+        GlDeleteFramebuffersOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__CP Framebuffers) :
             mextras(extras),
             mN(N),
             mFramebuffers(Framebuffers) {}
@@ -5654,7 +5907,7 @@ namespace gles {
     class GlDeletePathsNV: public Encodable {
     public:
         GlDeletePathsNV() = default;
-        GlDeletePathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Range) :
+        GlDeletePathsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t Range) :
             mextras(extras),
             mPath(Path),
             mRange(Range) {}
@@ -5678,7 +5931,7 @@ namespace gles {
     class GlDeletePerfMonitorsAMD: public Encodable {
     public:
         GlDeletePerfMonitorsAMD() = default;
-        GlDeletePerfMonitorsAMD(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Monitors) :
+        GlDeletePerfMonitorsAMD(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__P Monitors) :
             mextras(extras),
             mN(N),
             mMonitors(Monitors) {}
@@ -5702,7 +5955,7 @@ namespace gles {
     class GlDeletePerfQueryINTEL: public Encodable {
     public:
         GlDeletePerfQueryINTEL() = default;
-        GlDeletePerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+        GlDeletePerfQueryINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryHandle) :
             mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
@@ -5723,7 +5976,7 @@ namespace gles {
     class GlDeleteProgram: public Encodable {
     public:
         GlDeleteProgram() = default;
-        GlDeleteProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+        GlDeleteProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program) :
             mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
@@ -5759,7 +6012,7 @@ namespace gles {
     class GlDeleteProgramPipelines: public Encodable {
     public:
         GlDeleteProgramPipelines() = default;
-        GlDeleteProgramPipelines(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__CP Pipelines) :
+        GlDeleteProgramPipelines(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, PipelineId__CP Pipelines) :
             mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
@@ -5783,7 +6036,7 @@ namespace gles {
     class GlDeleteProgramPipelinesEXT: public Encodable {
     public:
         GlDeleteProgramPipelinesEXT() = default;
-        GlDeleteProgramPipelinesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__CP Pipelines) :
+        GlDeleteProgramPipelinesEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, PipelineId__CP Pipelines) :
             mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
@@ -5822,7 +6075,7 @@ namespace gles {
     class GlDeleteQueries: public Encodable {
     public:
         GlDeleteQueries() = default;
-        GlDeleteQueries(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__CP Queries) :
+        GlDeleteQueries(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, QueryId__CP Queries) :
             mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
@@ -5846,7 +6099,7 @@ namespace gles {
     class GlDeleteQueriesEXT: public Encodable {
     public:
         GlDeleteQueriesEXT() = default;
-        GlDeleteQueriesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__CP Queries) :
+        GlDeleteQueriesEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, QueryId__CP Queries) :
             mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
@@ -5885,7 +6138,7 @@ namespace gles {
     class GlDeleteRenderbuffers: public Encodable {
     public:
         GlDeleteRenderbuffers() = default;
-        GlDeleteRenderbuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, RenderbufferId__CP Renderbuffers) :
+        GlDeleteRenderbuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, RenderbufferId__CP Renderbuffers) :
             mextras(extras),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
@@ -5909,7 +6162,7 @@ namespace gles {
     class GlDeleteRenderbuffersOES: public Encodable {
     public:
         GlDeleteRenderbuffersOES() = default;
-        GlDeleteRenderbuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__CP Renderbuffers) :
+        GlDeleteRenderbuffersOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__CP Renderbuffers) :
             mextras(extras),
             mN(N),
             mRenderbuffers(Renderbuffers) {}
@@ -5948,7 +6201,7 @@ namespace gles {
     class GlDeleteSamplers: public Encodable {
     public:
         GlDeleteSamplers() = default;
-        GlDeleteSamplers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, SamplerId__CP Samplers) :
+        GlDeleteSamplers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, SamplerId__CP Samplers) :
             mextras(extras),
             mCount(Count),
             mSamplers(Samplers) {}
@@ -5972,7 +6225,7 @@ namespace gles {
     class GlDeleteShader: public Encodable {
     public:
         GlDeleteShader() = default;
-        GlDeleteShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader) :
+        GlDeleteShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader) :
             mextras(extras),
             mShader(Shader) {}
         virtual void Encode(Encoder* e) const{
@@ -5993,7 +6246,7 @@ namespace gles {
     class GlDeleteSync: public Encodable {
     public:
         GlDeleteSync() = default;
-        GlDeleteSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync) :
+        GlDeleteSync(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync) :
             mextras(extras),
             mSync(Sync) {}
         virtual void Encode(Encoder* e) const{
@@ -6014,7 +6267,7 @@ namespace gles {
     class GlDeleteSyncAPPLE: public Encodable {
     public:
         GlDeleteSyncAPPLE() = default;
-        GlDeleteSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync) :
+        GlDeleteSyncAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync) :
             mextras(extras),
             mSync(Sync) {}
         virtual void Encode(Encoder* e) const{
@@ -6050,7 +6303,7 @@ namespace gles {
     class GlDeleteTextures: public Encodable {
     public:
         GlDeleteTextures() = default;
-        GlDeleteTextures(gapic::Vector<gapic::Encodable*> extras, int32_t Count, TextureId__CP Textures) :
+        GlDeleteTextures(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, TextureId__CP Textures) :
             mextras(extras),
             mCount(Count),
             mTextures(Textures) {}
@@ -6089,7 +6342,7 @@ namespace gles {
     class GlDeleteTransformFeedbacks: public Encodable {
     public:
         GlDeleteTransformFeedbacks() = default;
-        GlDeleteTransformFeedbacks(gapic::Vector<gapic::Encodable*> extras, int32_t N, TransformFeedbackId__CP Ids) :
+        GlDeleteTransformFeedbacks(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, TransformFeedbackId__CP Ids) :
             mextras(extras),
             mN(N),
             mIds(Ids) {}
@@ -6128,7 +6381,7 @@ namespace gles {
     class GlDeleteVertexArrays: public Encodable {
     public:
         GlDeleteVertexArrays() = default;
-        GlDeleteVertexArrays(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__CP Arrays) :
+        GlDeleteVertexArrays(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, VertexArrayId__CP Arrays) :
             mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
@@ -6152,7 +6405,7 @@ namespace gles {
     class GlDeleteVertexArraysOES: public Encodable {
     public:
         GlDeleteVertexArraysOES() = default;
-        GlDeleteVertexArraysOES(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__CP Arrays) :
+        GlDeleteVertexArraysOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, VertexArrayId__CP Arrays) :
             mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
@@ -6176,7 +6429,7 @@ namespace gles {
     class GlDepthFunc: public Encodable {
     public:
         GlDepthFunc() = default;
-        GlDepthFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Function) :
+        GlDepthFunc(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Function) :
             mextras(extras),
             mFunction(Function) {}
         virtual void Encode(Encoder* e) const{
@@ -6197,7 +6450,7 @@ namespace gles {
     class GlDepthMask: public Encodable {
     public:
         GlDepthMask() = default;
-        GlDepthMask(gapic::Vector<gapic::Encodable*> extras, uint8_t Enabled) :
+        GlDepthMask(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Enabled) :
             mextras(extras),
             mEnabled(Enabled) {}
         virtual void Encode(Encoder* e) const{
@@ -6218,7 +6471,7 @@ namespace gles {
     class GlDepthRangeArrayfvNV: public Encodable {
     public:
         GlDepthRangeArrayfvNV() = default;
-        GlDepthRangeArrayfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLfloat__CP V) :
+        GlDepthRangeArrayfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t First, int32_t Count, GLfloat__CP V) :
             mextras(extras),
             mFirst(First),
             mCount(Count),
@@ -6237,7 +6490,7 @@ namespace gles {
     class GlDepthRangeIndexedfNV: public Encodable {
     public:
         GlDepthRangeIndexedfNV() = default;
-        GlDepthRangeIndexedfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, float N, float F) :
+        GlDepthRangeIndexedfNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, float N, float F) :
             mextras(extras),
             mIndex(Index),
             mN(N),
@@ -6256,7 +6509,7 @@ namespace gles {
     class GlDepthRangef: public Encodable {
     public:
         GlDepthRangef() = default;
-        GlDepthRangef(gapic::Vector<gapic::Encodable*> extras, float Near, float Far) :
+        GlDepthRangef(const gapic::Vector<gapic::Encodable*>& extras, float Near, float Far) :
             mextras(extras),
             mNear(Near),
             mFar(Far) {}
@@ -6280,7 +6533,7 @@ namespace gles {
     class GlDepthRangefOES: public Encodable {
     public:
         GlDepthRangefOES() = default;
-        GlDepthRangefOES(gapic::Vector<gapic::Encodable*> extras, float N, float F) :
+        GlDepthRangefOES(const gapic::Vector<gapic::Encodable*>& extras, float N, float F) :
             mextras(extras),
             mN(N),
             mF(F) {}
@@ -6304,7 +6557,7 @@ namespace gles {
     class GlDepthRangex: public Encodable {
     public:
         GlDepthRangex() = default;
-        GlDepthRangex(gapic::Vector<gapic::Encodable*> extras, int32_t N, int32_t F) :
+        GlDepthRangex(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, int32_t F) :
             mextras(extras),
             mN(N),
             mF(F) {}
@@ -6328,7 +6581,7 @@ namespace gles {
     class GlDepthRangexOES: public Encodable {
     public:
         GlDepthRangexOES() = default;
-        GlDepthRangexOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, int32_t F) :
+        GlDepthRangexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, int32_t F) :
             mextras(extras),
             mN(N),
             mF(F) {}
@@ -6352,7 +6605,7 @@ namespace gles {
     class GlDetachShader: public Encodable {
     public:
         GlDetachShader() = default;
-        GlDetachShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shader) :
+        GlDetachShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Shader) :
             mextras(extras),
             mProgram(Program),
             mShader(Shader) {}
@@ -6376,7 +6629,7 @@ namespace gles {
     class GlDisable: public Encodable {
     public:
         GlDisable() = default;
-        GlDisable(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability) :
+        GlDisable(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Capability) :
             mextras(extras),
             mCapability(Capability) {}
         virtual void Encode(Encoder* e) const{
@@ -6397,7 +6650,7 @@ namespace gles {
     class GlDisableClientState: public Encodable {
     public:
         GlDisableClientState() = default;
-        GlDisableClientState(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+        GlDisableClientState(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array) :
             mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
@@ -6418,7 +6671,7 @@ namespace gles {
     class GlDisableDriverControlQCOM: public Encodable {
     public:
         GlDisableDriverControlQCOM() = default;
-        GlDisableDriverControlQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl) :
+        GlDisableDriverControlQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DriverControl) :
             mextras(extras),
             mDriverControl(DriverControl) {}
         virtual void Encode(Encoder* e) const{
@@ -6439,7 +6692,7 @@ namespace gles {
     class GlDisableVertexAttribArray: public Encodable {
     public:
         GlDisableVertexAttribArray() = default;
-        GlDisableVertexAttribArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Location) :
+        GlDisableVertexAttribArray(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location) :
             mextras(extras),
             mLocation(Location) {}
         virtual void Encode(Encoder* e) const{
@@ -6460,7 +6713,7 @@ namespace gles {
     class GlDisablei: public Encodable {
     public:
         GlDisablei() = default;
-        GlDisablei(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlDisablei(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -6484,7 +6737,7 @@ namespace gles {
     class GlDisableiEXT: public Encodable {
     public:
         GlDisableiEXT() = default;
-        GlDisableiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlDisableiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -6508,7 +6761,7 @@ namespace gles {
     class GlDisableiNV: public Encodable {
     public:
         GlDisableiNV() = default;
-        GlDisableiNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlDisableiNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -6532,7 +6785,7 @@ namespace gles {
     class GlDisableiOES: public Encodable {
     public:
         GlDisableiOES() = default;
-        GlDisableiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlDisableiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -6556,7 +6809,7 @@ namespace gles {
     class GlDiscardFramebufferEXT: public Encodable {
     public:
         GlDiscardFramebufferEXT() = default;
-        GlDiscardFramebufferEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments) :
+        GlDiscardFramebufferEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments) :
             mextras(extras),
             mTarget(Target),
             mNumAttachments(NumAttachments),
@@ -6575,7 +6828,7 @@ namespace gles {
     class GlDispatchCompute: public Encodable {
     public:
         GlDispatchCompute() = default;
-        GlDispatchCompute(gapic::Vector<gapic::Encodable*> extras, uint32_t NumGroupsX, uint32_t NumGroupsY, uint32_t NumGroupsZ) :
+        GlDispatchCompute(const gapic::Vector<gapic::Encodable*>& extras, uint32_t NumGroupsX, uint32_t NumGroupsY, uint32_t NumGroupsZ) :
             mextras(extras),
             mNumGroupsX(NumGroupsX),
             mNumGroupsY(NumGroupsY),
@@ -6594,7 +6847,7 @@ namespace gles {
     class GlDispatchComputeIndirect: public Encodable {
     public:
         GlDispatchComputeIndirect() = default;
-        GlDispatchComputeIndirect(gapic::Vector<gapic::Encodable*> extras, int32_t Indirect) :
+        GlDispatchComputeIndirect(const gapic::Vector<gapic::Encodable*>& extras, int32_t Indirect) :
             mextras(extras),
             mIndirect(Indirect) {}
         virtual void Encode(Encoder* e) const{
@@ -6615,7 +6868,7 @@ namespace gles {
     class GlDrawArrays: public Encodable {
     public:
         GlDrawArrays() = default;
-        GlDrawArrays(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount) :
+        GlDrawArrays(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount) :
             mextras(extras),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
@@ -6634,7 +6887,7 @@ namespace gles {
     class GlDrawArraysIndirect: public Encodable {
     public:
         GlDrawArraysIndirect() = default;
-        GlDrawArraysIndirect(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, Void__CP Indirect) :
+        GlDrawArraysIndirect(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, Void__CP Indirect) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndirect(Indirect) {}
@@ -6658,7 +6911,7 @@ namespace gles {
     class GlDrawArraysInstanced: public Encodable {
     public:
         GlDrawArraysInstanced() = default;
-        GlDrawArraysInstanced(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount, int32_t InstanceCount) :
+        GlDrawArraysInstanced(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t FirstIndex, int32_t IndicesCount, int32_t InstanceCount) :
             mextras(extras),
             mDrawMode(DrawMode),
             mFirstIndex(FirstIndex),
@@ -6679,7 +6932,7 @@ namespace gles {
     class GlDrawArraysInstancedANGLE: public Encodable {
     public:
         GlDrawArraysInstancedANGLE() = default;
-        GlDrawArraysInstancedANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
+        GlDrawArraysInstancedANGLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mFirst(First),
@@ -6700,7 +6953,7 @@ namespace gles {
     class GlDrawArraysInstancedBaseInstanceEXT: public Encodable {
     public:
         GlDrawArraysInstancedBaseInstanceEXT() = default;
-        GlDrawArraysInstancedBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Instancecount, uint32_t Baseinstance) :
+        GlDrawArraysInstancedBaseInstanceEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Instancecount, uint32_t Baseinstance) :
             mextras(extras),
             mMode(Mode),
             mFirst(First),
@@ -6723,7 +6976,7 @@ namespace gles {
     class GlDrawArraysInstancedEXT: public Encodable {
     public:
         GlDrawArraysInstancedEXT() = default;
-        GlDrawArraysInstancedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Start, int32_t Count, int32_t Primcount) :
+        GlDrawArraysInstancedEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Start, int32_t Count, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mStart(Start),
@@ -6744,7 +6997,7 @@ namespace gles {
     class GlDrawArraysInstancedNV: public Encodable {
     public:
         GlDrawArraysInstancedNV() = default;
-        GlDrawArraysInstancedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
+        GlDrawArraysInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t First, int32_t Count, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mFirst(First),
@@ -6765,7 +7018,7 @@ namespace gles {
     class GlDrawBuffers: public Encodable {
     public:
         GlDrawBuffers() = default;
-        GlDrawBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+        GlDrawBuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLenum__CP Bufs) :
             mextras(extras),
             mN(N),
             mBufs(Bufs) {}
@@ -6789,7 +7042,7 @@ namespace gles {
     class GlDrawBuffersEXT: public Encodable {
     public:
         GlDrawBuffersEXT() = default;
-        GlDrawBuffersEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+        GlDrawBuffersEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLenum__CP Bufs) :
             mextras(extras),
             mN(N),
             mBufs(Bufs) {}
@@ -6813,7 +7066,7 @@ namespace gles {
     class GlDrawBuffersIndexedEXT: public Encodable {
     public:
         GlDrawBuffersIndexedEXT() = default;
-        GlDrawBuffersIndexedEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Location, GLint__CP Indices) :
+        GlDrawBuffersIndexedEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLenum__CP Location, GLint__CP Indices) :
             mextras(extras),
             mN(N),
             mLocation(Location),
@@ -6832,7 +7085,7 @@ namespace gles {
     class GlDrawBuffersNV: public Encodable {
     public:
         GlDrawBuffersNV() = default;
-        GlDrawBuffersNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLenum__CP Bufs) :
+        GlDrawBuffersNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLenum__CP Bufs) :
             mextras(extras),
             mN(N),
             mBufs(Bufs) {}
@@ -6871,7 +7124,7 @@ namespace gles {
     class GlDrawElements: public Encodable {
     public:
         GlDrawElements() = default;
-        GlDrawElements(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
+        GlDrawElements(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
@@ -6892,7 +7145,7 @@ namespace gles {
     class GlDrawElementsBaseVertex: public Encodable {
     public:
         GlDrawElementsBaseVertex() = default;
-        GlDrawElementsBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
+        GlDrawElementsBaseVertex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
@@ -6915,7 +7168,7 @@ namespace gles {
     class GlDrawElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsBaseVertexEXT() = default;
-        GlDrawElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+        GlDrawElementsBaseVertexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -6938,7 +7191,7 @@ namespace gles {
     class GlDrawElementsBaseVertexOES: public Encodable {
     public:
         GlDrawElementsBaseVertexOES() = default;
-        GlDrawElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+        GlDrawElementsBaseVertexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -6961,7 +7214,7 @@ namespace gles {
     class GlDrawElementsIndirect: public Encodable {
     public:
         GlDrawElementsIndirect() = default;
-        GlDrawElementsIndirect(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t IndicesType, Void__CP Indirect) :
+        GlDrawElementsIndirect(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, uint32_t IndicesType, Void__CP Indirect) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndicesType(IndicesType),
@@ -6980,7 +7233,7 @@ namespace gles {
     class GlDrawElementsInstanced: public Encodable {
     public:
         GlDrawElementsInstanced() = default;
-        GlDrawElementsInstanced(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount) :
+        GlDrawElementsInstanced(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
@@ -7003,7 +7256,7 @@ namespace gles {
     class GlDrawElementsInstancedANGLE: public Encodable {
     public:
         GlDrawElementsInstancedANGLE() = default;
-        GlDrawElementsInstancedANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+        GlDrawElementsInstancedANGLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7026,7 +7279,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseInstanceEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseInstanceEXT() = default;
-        GlDrawElementsInstancedBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, uint32_t Baseinstance) :
+        GlDrawElementsInstancedBaseInstanceEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, uint32_t Baseinstance) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7051,7 +7304,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertex: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertex() = default;
-        GlDrawElementsInstancedBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount, int32_t BaseVertex) :
+        GlDrawElementsInstancedBaseVertex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t InstanceCount, int32_t BaseVertex) :
             mextras(extras),
             mDrawMode(DrawMode),
             mIndicesCount(IndicesCount),
@@ -7076,7 +7329,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexBaseInstanceEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexBaseInstanceEXT() = default;
-        GlDrawElementsInstancedBaseVertexBaseInstanceEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex, uint32_t Baseinstance) :
+        GlDrawElementsInstancedBaseVertexBaseInstanceEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, Void__CP Indices, int32_t Instancecount, int32_t Basevertex, uint32_t Baseinstance) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7103,7 +7356,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexEXT: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexEXT() = default;
-        GlDrawElementsInstancedBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
+        GlDrawElementsInstancedBaseVertexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7128,7 +7381,7 @@ namespace gles {
     class GlDrawElementsInstancedBaseVertexOES: public Encodable {
     public:
         GlDrawElementsInstancedBaseVertexOES() = default;
-        GlDrawElementsInstancedBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
+        GlDrawElementsInstancedBaseVertexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Instancecount, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7153,7 +7406,7 @@ namespace gles {
     class GlDrawElementsInstancedEXT: public Encodable {
     public:
         GlDrawElementsInstancedEXT() = default;
-        GlDrawElementsInstancedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+        GlDrawElementsInstancedEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7176,7 +7429,7 @@ namespace gles {
     class GlDrawElementsInstancedNV: public Encodable {
     public:
         GlDrawElementsInstancedNV() = default;
-        GlDrawElementsInstancedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
+        GlDrawElementsInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -7199,7 +7452,7 @@ namespace gles {
     class GlDrawRangeElements: public Encodable {
     public:
         GlDrawRangeElements() = default;
-        GlDrawRangeElements(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
+        GlDrawRangeElements(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices) :
             mextras(extras),
             mDrawMode(DrawMode),
             mStart(Start),
@@ -7224,7 +7477,7 @@ namespace gles {
     class GlDrawRangeElementsBaseVertex: public Encodable {
     public:
         GlDrawRangeElementsBaseVertex() = default;
-        GlDrawRangeElementsBaseVertex(gapic::Vector<gapic::Encodable*> extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
+        GlDrawRangeElementsBaseVertex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DrawMode, uint32_t Start, uint32_t End, int32_t IndicesCount, uint32_t IndicesType, IndicesPointer Indices, int32_t BaseVertex) :
             mextras(extras),
             mDrawMode(DrawMode),
             mStart(Start),
@@ -7251,7 +7504,7 @@ namespace gles {
     class GlDrawRangeElementsBaseVertexEXT: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexEXT() = default;
-        GlDrawRangeElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+        GlDrawRangeElementsBaseVertexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mStart(Start),
@@ -7278,7 +7531,7 @@ namespace gles {
     class GlDrawRangeElementsBaseVertexOES: public Encodable {
     public:
         GlDrawRangeElementsBaseVertexOES() = default;
-        GlDrawRangeElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
+        GlDrawRangeElementsBaseVertexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, uint32_t Start, uint32_t End, int32_t Count, uint32_t Type, IndicesPointer Indices, int32_t Basevertex) :
             mextras(extras),
             mMode(Mode),
             mStart(Start),
@@ -7305,7 +7558,7 @@ namespace gles {
     class GlDrawTexfOES: public Encodable {
     public:
         GlDrawTexfOES() = default;
-        GlDrawTexfOES(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z, float Width, float Height) :
+        GlDrawTexfOES(const gapic::Vector<gapic::Encodable*>& extras, float X, float Y, float Z, float Width, float Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -7328,7 +7581,7 @@ namespace gles {
     class GlDrawTexfvOES: public Encodable {
     public:
         GlDrawTexfvOES() = default;
-        GlDrawTexfvOES(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP Coords) :
+        GlDrawTexfvOES(const gapic::Vector<gapic::Encodable*>& extras, GLfloat__CP Coords) :
             mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
@@ -7349,7 +7602,7 @@ namespace gles {
     class GlDrawTexiOES: public Encodable {
     public:
         GlDrawTexiOES() = default;
-        GlDrawTexiOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+        GlDrawTexiOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -7372,7 +7625,7 @@ namespace gles {
     class GlDrawTexivOES: public Encodable {
     public:
         GlDrawTexivOES() = default;
-        GlDrawTexivOES(gapic::Vector<gapic::Encodable*> extras, GLint__CP Coords) :
+        GlDrawTexivOES(const gapic::Vector<gapic::Encodable*>& extras, GLint__CP Coords) :
             mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
@@ -7393,7 +7646,7 @@ namespace gles {
     class GlDrawTexsOES: public Encodable {
     public:
         GlDrawTexsOES() = default;
-        GlDrawTexsOES(gapic::Vector<gapic::Encodable*> extras, int16_t X, int16_t Y, int16_t Z, int16_t Width, int16_t Height) :
+        GlDrawTexsOES(const gapic::Vector<gapic::Encodable*>& extras, int16_t X, int16_t Y, int16_t Z, int16_t Width, int16_t Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -7416,7 +7669,7 @@ namespace gles {
     class GlDrawTexsvOES: public Encodable {
     public:
         GlDrawTexsvOES() = default;
-        GlDrawTexsvOES(gapic::Vector<gapic::Encodable*> extras, GLshort__CP Coords) :
+        GlDrawTexsvOES(const gapic::Vector<gapic::Encodable*>& extras, GLshort__CP Coords) :
             mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
@@ -7437,7 +7690,7 @@ namespace gles {
     class GlDrawTexxOES: public Encodable {
     public:
         GlDrawTexxOES() = default;
-        GlDrawTexxOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
+        GlDrawTexxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z, int32_t Width, int32_t Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -7460,7 +7713,7 @@ namespace gles {
     class GlDrawTexxvOES: public Encodable {
     public:
         GlDrawTexxvOES() = default;
-        GlDrawTexxvOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP Coords) :
+        GlDrawTexxvOES(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__CP Coords) :
             mextras(extras),
             mCoords(Coords) {}
         virtual void Encode(Encoder* e) const{
@@ -7481,7 +7734,7 @@ namespace gles {
     class GlEGLImageTargetRenderbufferStorageOES: public Encodable {
     public:
         GlEGLImageTargetRenderbufferStorageOES() = default;
-        GlEGLImageTargetRenderbufferStorageOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, GLeglImageOES Image) :
+        GlEGLImageTargetRenderbufferStorageOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, GLeglImageOES Image) :
             mextras(extras),
             mTarget(Target),
             mImage(Image) {}
@@ -7505,7 +7758,7 @@ namespace gles {
     class GlEGLImageTargetTexture2DOES: public Encodable {
     public:
         GlEGLImageTargetTexture2DOES() = default;
-        GlEGLImageTargetTexture2DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, GLeglImageOES Image) :
+        GlEGLImageTargetTexture2DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, GLeglImageOES Image) :
             mextras(extras),
             mTarget(Target),
             mImage(Image) {}
@@ -7529,7 +7782,7 @@ namespace gles {
     class GlEnable: public Encodable {
     public:
         GlEnable() = default;
-        GlEnable(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability) :
+        GlEnable(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Capability) :
             mextras(extras),
             mCapability(Capability) {}
         virtual void Encode(Encoder* e) const{
@@ -7550,7 +7803,7 @@ namespace gles {
     class GlEnableClientState: public Encodable {
     public:
         GlEnableClientState() = default;
-        GlEnableClientState(gapic::Vector<gapic::Encodable*> extras, uint32_t Array) :
+        GlEnableClientState(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array) :
             mextras(extras),
             mArray(Array) {}
         virtual void Encode(Encoder* e) const{
@@ -7571,7 +7824,7 @@ namespace gles {
     class GlEnableDriverControlQCOM: public Encodable {
     public:
         GlEnableDriverControlQCOM() = default;
-        GlEnableDriverControlQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl) :
+        GlEnableDriverControlQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DriverControl) :
             mextras(extras),
             mDriverControl(DriverControl) {}
         virtual void Encode(Encoder* e) const{
@@ -7592,7 +7845,7 @@ namespace gles {
     class GlEnableVertexAttribArray: public Encodable {
     public:
         GlEnableVertexAttribArray() = default;
-        GlEnableVertexAttribArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Location) :
+        GlEnableVertexAttribArray(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location) :
             mextras(extras),
             mLocation(Location) {}
         virtual void Encode(Encoder* e) const{
@@ -7613,7 +7866,7 @@ namespace gles {
     class GlEnablei: public Encodable {
     public:
         GlEnablei() = default;
-        GlEnablei(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlEnablei(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -7637,7 +7890,7 @@ namespace gles {
     class GlEnableiEXT: public Encodable {
     public:
         GlEnableiEXT() = default;
-        GlEnableiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlEnableiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -7661,7 +7914,7 @@ namespace gles {
     class GlEnableiNV: public Encodable {
     public:
         GlEnableiNV() = default;
-        GlEnableiNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlEnableiNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -7685,7 +7938,7 @@ namespace gles {
     class GlEnableiOES: public Encodable {
     public:
         GlEnableiOES() = default;
-        GlEnableiOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index) :
+        GlEnableiOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index) {}
@@ -7709,7 +7962,7 @@ namespace gles {
     class GlEndConditionalRenderNV: public Encodable {
     public:
         GlEndConditionalRenderNV() = default;
-        GlEndConditionalRenderNV(gapic::Vector<gapic::Encodable*> extras) :
+        GlEndConditionalRenderNV(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -7727,7 +7980,7 @@ namespace gles {
     class GlEndPerfMonitorAMD: public Encodable {
     public:
         GlEndPerfMonitorAMD() = default;
-        GlEndPerfMonitorAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor) :
+        GlEndPerfMonitorAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Monitor) :
             mextras(extras),
             mMonitor(Monitor) {}
         virtual void Encode(Encoder* e) const{
@@ -7748,7 +8001,7 @@ namespace gles {
     class GlEndPerfQueryINTEL: public Encodable {
     public:
         GlEndPerfQueryINTEL() = default;
-        GlEndPerfQueryINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle) :
+        GlEndPerfQueryINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryHandle) :
             mextras(extras),
             mQueryHandle(QueryHandle) {}
         virtual void Encode(Encoder* e) const{
@@ -7769,7 +8022,7 @@ namespace gles {
     class GlEndQuery: public Encodable {
     public:
         GlEndQuery() = default;
-        GlEndQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+        GlEndQuery(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target) :
             mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
@@ -7790,7 +8043,7 @@ namespace gles {
     class GlEndQueryEXT: public Encodable {
     public:
         GlEndQueryEXT() = default;
-        GlEndQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+        GlEndQueryEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target) :
             mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
@@ -7811,7 +8064,7 @@ namespace gles {
     class GlEndTilingQCOM: public Encodable {
     public:
         GlEndTilingQCOM() = default;
-        GlEndTilingQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t PreserveMask) :
+        GlEndTilingQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t PreserveMask) :
             mextras(extras),
             mPreserveMask(PreserveMask) {}
         virtual void Encode(Encoder* e) const{
@@ -7832,7 +8085,7 @@ namespace gles {
     class GlEndTransformFeedback: public Encodable {
     public:
         GlEndTransformFeedback() = default;
-        GlEndTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+        GlEndTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -7865,7 +8118,7 @@ namespace gles {
     class GlExtGetBufferPointervQCOM: public Encodable {
     public:
         GlExtGetBufferPointervQCOM() = default;
-        GlExtGetBufferPointervQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, Void__P__P Params) :
+        GlExtGetBufferPointervQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, Void__P__P Params) :
             mextras(extras),
             mTarget(Target),
             mParams(Params) {}
@@ -7889,7 +8142,7 @@ namespace gles {
     class GlExtGetBuffersQCOM: public Encodable {
     public:
         GlExtGetBuffersQCOM() = default;
-        GlExtGetBuffersQCOM(gapic::Vector<gapic::Encodable*> extras, BufferId__P Buffers, int32_t MaxBuffers, GLint__P NumBuffers) :
+        GlExtGetBuffersQCOM(const gapic::Vector<gapic::Encodable*>& extras, BufferId__P Buffers, int32_t MaxBuffers, GLint__P NumBuffers) :
             mextras(extras),
             mBuffers(Buffers),
             mMaxBuffers(MaxBuffers),
@@ -7908,7 +8161,7 @@ namespace gles {
     class GlExtGetFramebuffersQCOM: public Encodable {
     public:
         GlExtGetFramebuffersQCOM() = default;
-        GlExtGetFramebuffersQCOM(gapic::Vector<gapic::Encodable*> extras, FramebufferId__P Framebuffers, int32_t MaxFramebuffers, GLint__P NumFramebuffers) :
+        GlExtGetFramebuffersQCOM(const gapic::Vector<gapic::Encodable*>& extras, FramebufferId__P Framebuffers, int32_t MaxFramebuffers, GLint__P NumFramebuffers) :
             mextras(extras),
             mFramebuffers(Framebuffers),
             mMaxFramebuffers(MaxFramebuffers),
@@ -7927,7 +8180,7 @@ namespace gles {
     class GlExtGetProgramBinarySourceQCOM: public Encodable {
     public:
         GlExtGetProgramBinarySourceQCOM() = default;
-        GlExtGetProgramBinarySourceQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Shadertype, GLchar__P Source, GLint__P Length) :
+        GlExtGetProgramBinarySourceQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Shadertype, GLchar__P Source, GLint__P Length) :
             mextras(extras),
             mProgram(Program),
             mShadertype(Shadertype),
@@ -7963,7 +8216,7 @@ namespace gles {
     class GlExtGetProgramsQCOM: public Encodable {
     public:
         GlExtGetProgramsQCOM() = default;
-        GlExtGetProgramsQCOM(gapic::Vector<gapic::Encodable*> extras, ProgramId__P Programs, int32_t MaxPrograms, GLint__P NumPrograms) :
+        GlExtGetProgramsQCOM(const gapic::Vector<gapic::Encodable*>& extras, ProgramId__P Programs, int32_t MaxPrograms, GLint__P NumPrograms) :
             mextras(extras),
             mPrograms(Programs),
             mMaxPrograms(MaxPrograms),
@@ -7997,7 +8250,7 @@ namespace gles {
     class GlExtGetRenderbuffersQCOM: public Encodable {
     public:
         GlExtGetRenderbuffersQCOM() = default;
-        GlExtGetRenderbuffersQCOM(gapic::Vector<gapic::Encodable*> extras, RenderbufferId__P Renderbuffers, int32_t MaxRenderbuffers, GLint__P NumRenderbuffers) :
+        GlExtGetRenderbuffersQCOM(const gapic::Vector<gapic::Encodable*>& extras, RenderbufferId__P Renderbuffers, int32_t MaxRenderbuffers, GLint__P NumRenderbuffers) :
             mextras(extras),
             mRenderbuffers(Renderbuffers),
             mMaxRenderbuffers(MaxRenderbuffers),
@@ -8031,7 +8284,7 @@ namespace gles {
     class GlExtGetShadersQCOM: public Encodable {
     public:
         GlExtGetShadersQCOM() = default;
-        GlExtGetShadersQCOM(gapic::Vector<gapic::Encodable*> extras, ShaderId__P Shaders, int32_t MaxShaders, GLint__P NumShaders) :
+        GlExtGetShadersQCOM(const gapic::Vector<gapic::Encodable*>& extras, ShaderId__P Shaders, int32_t MaxShaders, GLint__P NumShaders) :
             mextras(extras),
             mShaders(Shaders),
             mMaxShaders(MaxShaders),
@@ -8050,7 +8303,7 @@ namespace gles {
     class GlExtGetTexLevelParameterivQCOM: public Encodable {
     public:
         GlExtGetTexLevelParameterivQCOM() = default;
-        GlExtGetTexLevelParameterivQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Face, int32_t Level, uint32_t Pname, GLint__P Params) :
+        GlExtGetTexLevelParameterivQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Face, int32_t Level, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTexture(Texture),
             mFace(Face),
@@ -8073,7 +8326,7 @@ namespace gles {
     class GlExtGetTexSubImageQCOM: public Encodable {
     public:
         GlExtGetTexSubImageQCOM() = default;
-        GlExtGetTexSubImageQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, Void__P Texels) :
+        GlExtGetTexSubImageQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, Void__P Texels) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -8123,7 +8376,7 @@ namespace gles {
     class GlExtGetTexturesQCOM: public Encodable {
     public:
         GlExtGetTexturesQCOM() = default;
-        GlExtGetTexturesQCOM(gapic::Vector<gapic::Encodable*> extras, TextureId__P Textures, int32_t MaxTextures, GLint__P NumTextures) :
+        GlExtGetTexturesQCOM(const gapic::Vector<gapic::Encodable*>& extras, TextureId__P Textures, int32_t MaxTextures, GLint__P NumTextures) :
             mextras(extras),
             mTextures(Textures),
             mMaxTextures(MaxTextures),
@@ -8142,7 +8395,7 @@ namespace gles {
     class GlExtIsProgramBinaryQCOM: public Encodable {
     public:
         GlExtIsProgramBinaryQCOM() = default;
-        GlExtIsProgramBinaryQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint8_t Result) :
+        GlExtIsProgramBinaryQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint8_t Result) :
             mextras(extras),
             mProgram(Program),
             mResult(Result) {}
@@ -8166,7 +8419,7 @@ namespace gles {
     class GlExtTexObjectStateOverrideiQCOM: public Encodable {
     public:
         GlExtTexObjectStateOverrideiQCOM() = default;
-        GlExtTexObjectStateOverrideiQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlExtTexObjectStateOverrideiQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -8185,7 +8438,7 @@ namespace gles {
     class GlFenceSync: public Encodable {
     public:
         GlFenceSync() = default;
-        GlFenceSync(gapic::Vector<gapic::Encodable*> extras, uint32_t Condition, uint32_t SyncFlags, uint64_t Result) :
+        GlFenceSync(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Condition, uint32_t SyncFlags, uint64_t Result) :
             mextras(extras),
             mCondition(Condition),
             mSyncFlags(SyncFlags),
@@ -8204,7 +8457,7 @@ namespace gles {
     class GlFenceSyncAPPLE: public Encodable {
     public:
         GlFenceSyncAPPLE() = default;
-        GlFenceSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Condition, uint32_t Flag, uint64_t Result) :
+        GlFenceSyncAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Condition, uint32_t Flag, uint64_t Result) :
             mextras(extras),
             mCondition(Condition),
             mFlag(Flag),
@@ -8223,7 +8476,7 @@ namespace gles {
     class GlFinish: public Encodable {
     public:
         GlFinish() = default;
-        GlFinish(gapic::Vector<gapic::Encodable*> extras) :
+        GlFinish(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -8241,7 +8494,7 @@ namespace gles {
     class GlFinishFenceNV: public Encodable {
     public:
         GlFinishFenceNV() = default;
-        GlFinishFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence) :
+        GlFinishFenceNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fence) :
             mextras(extras),
             mFence(Fence) {}
         virtual void Encode(Encoder* e) const{
@@ -8262,7 +8515,7 @@ namespace gles {
     class GlFlush: public Encodable {
     public:
         GlFlush() = default;
-        GlFlush(gapic::Vector<gapic::Encodable*> extras) :
+        GlFlush(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -8280,7 +8533,7 @@ namespace gles {
     class GlFlushMappedBufferRange: public Encodable {
     public:
         GlFlushMappedBufferRange() = default;
-        GlFlushMappedBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length) :
+        GlFlushMappedBufferRange(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Offset, int32_t Length) :
             mextras(extras),
             mTarget(Target),
             mOffset(Offset),
@@ -8299,7 +8552,7 @@ namespace gles {
     class GlFlushMappedBufferRangeEXT: public Encodable {
     public:
         GlFlushMappedBufferRangeEXT() = default;
-        GlFlushMappedBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length) :
+        GlFlushMappedBufferRangeEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Offset, int32_t Length) :
             mextras(extras),
             mTarget(Target),
             mOffset(Offset),
@@ -8318,7 +8571,7 @@ namespace gles {
     class GlFogf: public Encodable {
     public:
         GlFogf() = default;
-        GlFogf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+        GlFogf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, float Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -8342,7 +8595,7 @@ namespace gles {
     class GlFogfv: public Encodable {
     public:
         GlFogfv() = default;
-        GlFogfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+        GlFogfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -8366,7 +8619,7 @@ namespace gles {
     class GlFogx: public Encodable {
     public:
         GlFogx() = default;
-        GlFogx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlFogx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -8390,7 +8643,7 @@ namespace gles {
     class GlFogxOES: public Encodable {
     public:
         GlFogxOES() = default;
-        GlFogxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlFogxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -8414,7 +8667,7 @@ namespace gles {
     class GlFogxv: public Encodable {
     public:
         GlFogxv() = default;
-        GlFogxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+        GlFogxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -8438,7 +8691,7 @@ namespace gles {
     class GlFogxvOES: public Encodable {
     public:
         GlFogxvOES() = default;
-        GlFogxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+        GlFogxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -8462,7 +8715,7 @@ namespace gles {
     class GlFragmentCoverageColorNV: public Encodable {
     public:
         GlFragmentCoverageColorNV() = default;
-        GlFragmentCoverageColorNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Color) :
+        GlFragmentCoverageColorNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Color) :
             mextras(extras),
             mColor(Color) {}
         virtual void Encode(Encoder* e) const{
@@ -8483,7 +8736,7 @@ namespace gles {
     class GlFramebufferParameteri: public Encodable {
     public:
         GlFramebufferParameteri() = default;
-        GlFramebufferParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlFramebufferParameteri(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -8502,7 +8755,7 @@ namespace gles {
     class GlFramebufferRenderbuffer: public Encodable {
     public:
         GlFramebufferRenderbuffer() = default;
-        GlFramebufferRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t RenderbufferTarget, uint32_t Renderbuffer) :
+        GlFramebufferRenderbuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t RenderbufferTarget, uint32_t Renderbuffer) :
             mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
@@ -8523,7 +8776,7 @@ namespace gles {
     class GlFramebufferRenderbufferOES: public Encodable {
     public:
         GlFramebufferRenderbufferOES() = default;
-        GlFramebufferRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Renderbuffertarget, uint32_t Renderbuffer) :
+        GlFramebufferRenderbufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Renderbuffertarget, uint32_t Renderbuffer) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8544,7 +8797,7 @@ namespace gles {
     class GlFramebufferSampleLocationsfvNV: public Encodable {
     public:
         GlFramebufferSampleLocationsfvNV() = default;
-        GlFramebufferSampleLocationsfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Start, int32_t Count, GLfloat__CP V) :
+        GlFramebufferSampleLocationsfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Start, int32_t Count, GLfloat__CP V) :
             mextras(extras),
             mTarget(Target),
             mStart(Start),
@@ -8565,7 +8818,7 @@ namespace gles {
     class GlFramebufferTexture: public Encodable {
     public:
         GlFramebufferTexture() = default;
-        GlFramebufferTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+        GlFramebufferTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8586,7 +8839,7 @@ namespace gles {
     class GlFramebufferTexture2D: public Encodable {
     public:
         GlFramebufferTexture2D() = default;
-        GlFramebufferTexture2D(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
+        GlFramebufferTexture2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FramebufferTarget, uint32_t FramebufferAttachment, uint32_t TextureTarget, uint32_t Texture, int32_t Level) :
             mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mFramebufferAttachment(FramebufferAttachment),
@@ -8609,7 +8862,7 @@ namespace gles {
     class GlFramebufferTexture2DMultisampleEXT: public Encodable {
     public:
         GlFramebufferTexture2DMultisampleEXT() = default;
-        GlFramebufferTexture2DMultisampleEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
+        GlFramebufferTexture2DMultisampleEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8634,7 +8887,7 @@ namespace gles {
     class GlFramebufferTexture2DMultisampleIMG: public Encodable {
     public:
         GlFramebufferTexture2DMultisampleIMG() = default;
-        GlFramebufferTexture2DMultisampleIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
+        GlFramebufferTexture2DMultisampleIMG(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Samples) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8659,7 +8912,7 @@ namespace gles {
     class GlFramebufferTexture2DOES: public Encodable {
     public:
         GlFramebufferTexture2DOES() = default;
-        GlFramebufferTexture2DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level) :
+        GlFramebufferTexture2DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8682,7 +8935,7 @@ namespace gles {
     class GlFramebufferTexture3DOES: public Encodable {
     public:
         GlFramebufferTexture3DOES() = default;
-        GlFramebufferTexture3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Zoffset) :
+        GlFramebufferTexture3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Textarget, uint32_t Texture, int32_t Level, int32_t Zoffset) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8707,7 +8960,7 @@ namespace gles {
     class GlFramebufferTextureEXT: public Encodable {
     public:
         GlFramebufferTextureEXT() = default;
-        GlFramebufferTextureEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+        GlFramebufferTextureEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8728,7 +8981,7 @@ namespace gles {
     class GlFramebufferTextureLayer: public Encodable {
     public:
         GlFramebufferTextureLayer() = default;
-        GlFramebufferTextureLayer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t Layer) :
+        GlFramebufferTextureLayer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t Layer) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8751,7 +9004,7 @@ namespace gles {
     class GlFramebufferTextureMultiviewOVR: public Encodable {
     public:
         GlFramebufferTextureMultiviewOVR() = default;
-        GlFramebufferTextureMultiviewOVR(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t BaseViewIndex, int32_t NumViews) :
+        GlFramebufferTextureMultiviewOVR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level, int32_t BaseViewIndex, int32_t NumViews) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8776,7 +9029,7 @@ namespace gles {
     class GlFramebufferTextureOES: public Encodable {
     public:
         GlFramebufferTextureOES() = default;
-        GlFramebufferTextureOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
+        GlFramebufferTextureOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Texture, int32_t Level) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -8797,7 +9050,7 @@ namespace gles {
     class GlFrontFace: public Encodable {
     public:
         GlFrontFace() = default;
-        GlFrontFace(gapic::Vector<gapic::Encodable*> extras, uint32_t Orientation) :
+        GlFrontFace(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Orientation) :
             mextras(extras),
             mOrientation(Orientation) {}
         virtual void Encode(Encoder* e) const{
@@ -8818,7 +9071,7 @@ namespace gles {
     class GlFrustumf: public Encodable {
     public:
         GlFrustumf() = default;
-        GlFrustumf(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+        GlFrustumf(const gapic::Vector<gapic::Encodable*>& extras, float L, float R, float B, float T, float N, float F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -8843,7 +9096,7 @@ namespace gles {
     class GlFrustumfOES: public Encodable {
     public:
         GlFrustumfOES() = default;
-        GlFrustumfOES(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+        GlFrustumfOES(const gapic::Vector<gapic::Encodable*>& extras, float L, float R, float B, float T, float N, float F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -8868,7 +9121,7 @@ namespace gles {
     class GlFrustumx: public Encodable {
     public:
         GlFrustumx() = default;
-        GlFrustumx(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+        GlFrustumx(const gapic::Vector<gapic::Encodable*>& extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -8893,7 +9146,7 @@ namespace gles {
     class GlFrustumxOES: public Encodable {
     public:
         GlFrustumxOES() = default;
-        GlFrustumxOES(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+        GlFrustumxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -8918,7 +9171,7 @@ namespace gles {
     class GlGenBuffers: public Encodable {
     public:
         GlGenBuffers() = default;
-        GlGenBuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, BufferId__P Buffers) :
+        GlGenBuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, BufferId__P Buffers) :
             mextras(extras),
             mCount(Count),
             mBuffers(Buffers) {}
@@ -8942,7 +9195,7 @@ namespace gles {
     class GlGenFencesNV: public Encodable {
     public:
         GlGenFencesNV() = default;
-        GlGenFencesNV(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Fences) :
+        GlGenFencesNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__P Fences) :
             mextras(extras),
             mN(N),
             mFences(Fences) {}
@@ -8966,7 +9219,7 @@ namespace gles {
     class GlGenFramebuffers: public Encodable {
     public:
         GlGenFramebuffers() = default;
-        GlGenFramebuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, FramebufferId__P Framebuffers) :
+        GlGenFramebuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, FramebufferId__P Framebuffers) :
             mextras(extras),
             mCount(Count),
             mFramebuffers(Framebuffers) {}
@@ -8990,7 +9243,7 @@ namespace gles {
     class GlGenFramebuffersOES: public Encodable {
     public:
         GlGenFramebuffersOES() = default;
-        GlGenFramebuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Framebuffers) :
+        GlGenFramebuffersOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__P Framebuffers) :
             mextras(extras),
             mN(N),
             mFramebuffers(Framebuffers) {}
@@ -9014,7 +9267,7 @@ namespace gles {
     class GlGenPathsNV: public Encodable {
     public:
         GlGenPathsNV() = default;
-        GlGenPathsNV(gapic::Vector<gapic::Encodable*> extras, int32_t Range, uint32_t Result) :
+        GlGenPathsNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Range, uint32_t Result) :
             mextras(extras),
             mRange(Range),
             mResult(Result) {}
@@ -9038,7 +9291,7 @@ namespace gles {
     class GlGenPerfMonitorsAMD: public Encodable {
     public:
         GlGenPerfMonitorsAMD() = default;
-        GlGenPerfMonitorsAMD(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Monitors) :
+        GlGenPerfMonitorsAMD(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__P Monitors) :
             mextras(extras),
             mN(N),
             mMonitors(Monitors) {}
@@ -9077,7 +9330,7 @@ namespace gles {
     class GlGenProgramPipelines: public Encodable {
     public:
         GlGenProgramPipelines() = default;
-        GlGenProgramPipelines(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__P Pipelines) :
+        GlGenProgramPipelines(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, PipelineId__P Pipelines) :
             mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
@@ -9101,7 +9354,7 @@ namespace gles {
     class GlGenProgramPipelinesEXT: public Encodable {
     public:
         GlGenProgramPipelinesEXT() = default;
-        GlGenProgramPipelinesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t N, PipelineId__P Pipelines) :
+        GlGenProgramPipelinesEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, PipelineId__P Pipelines) :
             mextras(extras),
             mN(N),
             mPipelines(Pipelines) {}
@@ -9140,7 +9393,7 @@ namespace gles {
     class GlGenQueries: public Encodable {
     public:
         GlGenQueries() = default;
-        GlGenQueries(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__P Queries) :
+        GlGenQueries(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, QueryId__P Queries) :
             mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
@@ -9164,7 +9417,7 @@ namespace gles {
     class GlGenQueriesEXT: public Encodable {
     public:
         GlGenQueriesEXT() = default;
-        GlGenQueriesEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Count, QueryId__P Queries) :
+        GlGenQueriesEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, QueryId__P Queries) :
             mextras(extras),
             mCount(Count),
             mQueries(Queries) {}
@@ -9188,7 +9441,7 @@ namespace gles {
     class GlGenRenderbuffers: public Encodable {
     public:
         GlGenRenderbuffers() = default;
-        GlGenRenderbuffers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, RenderbufferId__P Renderbuffers) :
+        GlGenRenderbuffers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, RenderbufferId__P Renderbuffers) :
             mextras(extras),
             mCount(Count),
             mRenderbuffers(Renderbuffers) {}
@@ -9212,7 +9465,7 @@ namespace gles {
     class GlGenRenderbuffersOES: public Encodable {
     public:
         GlGenRenderbuffersOES() = default;
-        GlGenRenderbuffersOES(gapic::Vector<gapic::Encodable*> extras, int32_t N, GLuint__P Renderbuffers) :
+        GlGenRenderbuffersOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, GLuint__P Renderbuffers) :
             mextras(extras),
             mN(N),
             mRenderbuffers(Renderbuffers) {}
@@ -9251,7 +9504,7 @@ namespace gles {
     class GlGenSamplers: public Encodable {
     public:
         GlGenSamplers() = default;
-        GlGenSamplers(gapic::Vector<gapic::Encodable*> extras, int32_t Count, SamplerId__P Samplers) :
+        GlGenSamplers(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, SamplerId__P Samplers) :
             mextras(extras),
             mCount(Count),
             mSamplers(Samplers) {}
@@ -9275,7 +9528,7 @@ namespace gles {
     class GlGenTextures: public Encodable {
     public:
         GlGenTextures() = default;
-        GlGenTextures(gapic::Vector<gapic::Encodable*> extras, int32_t Count, TextureId__P Textures) :
+        GlGenTextures(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, TextureId__P Textures) :
             mextras(extras),
             mCount(Count),
             mTextures(Textures) {}
@@ -9314,7 +9567,7 @@ namespace gles {
     class GlGenTransformFeedbacks: public Encodable {
     public:
         GlGenTransformFeedbacks() = default;
-        GlGenTransformFeedbacks(gapic::Vector<gapic::Encodable*> extras, int32_t N, TransformFeedbackId__P Ids) :
+        GlGenTransformFeedbacks(const gapic::Vector<gapic::Encodable*>& extras, int32_t N, TransformFeedbackId__P Ids) :
             mextras(extras),
             mN(N),
             mIds(Ids) {}
@@ -9353,7 +9606,7 @@ namespace gles {
     class GlGenVertexArrays: public Encodable {
     public:
         GlGenVertexArrays() = default;
-        GlGenVertexArrays(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__P Arrays) :
+        GlGenVertexArrays(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, VertexArrayId__P Arrays) :
             mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
@@ -9377,7 +9630,7 @@ namespace gles {
     class GlGenVertexArraysOES: public Encodable {
     public:
         GlGenVertexArraysOES() = default;
-        GlGenVertexArraysOES(gapic::Vector<gapic::Encodable*> extras, int32_t Count, VertexArrayId__P Arrays) :
+        GlGenVertexArraysOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, VertexArrayId__P Arrays) :
             mextras(extras),
             mCount(Count),
             mArrays(Arrays) {}
@@ -9401,7 +9654,7 @@ namespace gles {
     class GlGenerateMipmap: public Encodable {
     public:
         GlGenerateMipmap() = default;
-        GlGenerateMipmap(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+        GlGenerateMipmap(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target) :
             mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
@@ -9422,7 +9675,7 @@ namespace gles {
     class GlGenerateMipmapOES: public Encodable {
     public:
         GlGenerateMipmapOES() = default;
-        GlGenerateMipmapOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target) :
+        GlGenerateMipmapOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target) :
             mextras(extras),
             mTarget(Target) {}
         virtual void Encode(Encoder* e) const{
@@ -9443,7 +9696,7 @@ namespace gles {
     class GlGetActiveAttrib: public Encodable {
     public:
         GlGetActiveAttrib() = default;
-        GlGetActiveAttrib(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Location, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
+        GlGetActiveAttrib(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Location, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -9470,7 +9723,7 @@ namespace gles {
     class GlGetActiveUniform: public Encodable {
     public:
         GlGetActiveUniform() = default;
-        GlGetActiveUniform(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Index, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
+        GlGetActiveUniform(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Index, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLint__P VectorCount, GLenum__P Type, GLchar__P Name) :
             mextras(extras),
             mProgram(Program),
             mIndex(Index),
@@ -9497,7 +9750,7 @@ namespace gles {
     class GlGetActiveUniformBlockName: public Encodable {
     public:
         GlGetActiveUniformBlockName() = default;
-        GlGetActiveUniformBlockName(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLchar__P Name) :
+        GlGetActiveUniformBlockName(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t UniformBlockIndex, int32_t BufferSize, GLsizei__P BufferBytesWritten, GLchar__P Name) :
             mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
@@ -9520,7 +9773,7 @@ namespace gles {
     class GlGetActiveUniformBlockiv: public Encodable {
     public:
         GlGetActiveUniformBlockiv() = default;
-        GlGetActiveUniformBlockiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t ParameterName, GLint__P Parameters) :
+        GlGetActiveUniformBlockiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t ParameterName, GLint__P Parameters) :
             mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
@@ -9556,7 +9809,7 @@ namespace gles {
     class GlGetActiveUniformsiv: public Encodable {
     public:
         GlGetActiveUniformsiv() = default;
-        GlGetActiveUniformsiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t UniformCount, UniformIndex__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
+        GlGetActiveUniformsiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t UniformCount, UniformIndex__CP UniformIndices, uint32_t ParameterName, GLint__P Parameters) :
             mextras(extras),
             mProgram(Program),
             mUniformCount(UniformCount),
@@ -9579,7 +9832,7 @@ namespace gles {
     class GlGetAttachedShaders: public Encodable {
     public:
         GlGetAttachedShaders() = default;
-        GlGetAttachedShaders(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferLength, GLsizei__P ShadersLengthWritten, ShaderId__P Shaders) :
+        GlGetAttachedShaders(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t BufferLength, GLsizei__P ShadersLengthWritten, ShaderId__P Shaders) :
             mextras(extras),
             mProgram(Program),
             mBufferLength(BufferLength),
@@ -9600,7 +9853,7 @@ namespace gles {
     class GlGetAttribLocation: public Encodable {
     public:
         GlGetAttribLocation() = default;
-        GlGetAttribLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+        GlGetAttribLocation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mName(Name),
@@ -9619,7 +9872,7 @@ namespace gles {
     class GlGetBooleani_v: public Encodable {
     public:
         GlGetBooleani_v() = default;
-        GlGetBooleani_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLboolean__P Values) :
+        GlGetBooleani_v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, uint32_t Index, GLboolean__P Values) :
             mextras(extras),
             mParam(Param),
             mIndex(Index),
@@ -9638,7 +9891,7 @@ namespace gles {
     class GlGetBooleanv: public Encodable {
     public:
         GlGetBooleanv() = default;
-        GlGetBooleanv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLboolean__P Values) :
+        GlGetBooleanv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, GLboolean__P Values) :
             mextras(extras),
             mParam(Param),
             mValues(Values) {}
@@ -9662,7 +9915,7 @@ namespace gles {
     class GlGetBufferParameteri64v: public Encodable {
     public:
         GlGetBufferParameteri64v() = default;
-        GlGetBufferParameteri64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint64__P Params) :
+        GlGetBufferParameteri64v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint64__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -9681,7 +9934,7 @@ namespace gles {
     class GlGetBufferParameteriv: public Encodable {
     public:
         GlGetBufferParameteriv() = default;
-        GlGetBufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+        GlGetBufferParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -9700,7 +9953,7 @@ namespace gles {
     class GlGetBufferPointerv: public Encodable {
     public:
         GlGetBufferPointerv() = default;
-        GlGetBufferPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
+        GlGetBufferPointerv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -9719,7 +9972,7 @@ namespace gles {
     class GlGetBufferPointervOES: public Encodable {
     public:
         GlGetBufferPointervOES() = default;
-        GlGetBufferPointervOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
+        GlGetBufferPointervOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, Void__P__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -9738,7 +9991,7 @@ namespace gles {
     class GlGetClipPlanef: public Encodable {
     public:
         GlGetClipPlanef() = default;
-        GlGetClipPlanef(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__P Equation) :
+        GlGetClipPlanef(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfloat__P Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -9762,7 +10015,7 @@ namespace gles {
     class GlGetClipPlanefOES: public Encodable {
     public:
         GlGetClipPlanefOES() = default;
-        GlGetClipPlanefOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfloat__P Equation) :
+        GlGetClipPlanefOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfloat__P Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -9786,7 +10039,7 @@ namespace gles {
     class GlGetClipPlanex: public Encodable {
     public:
         GlGetClipPlanex() = default;
-        GlGetClipPlanex(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__P Equation) :
+        GlGetClipPlanex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfixed__P Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -9810,7 +10063,7 @@ namespace gles {
     class GlGetClipPlanexOES: public Encodable {
     public:
         GlGetClipPlanexOES() = default;
-        GlGetClipPlanexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Plane, GLfixed__P Equation) :
+        GlGetClipPlanexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Plane, GLfixed__P Equation) :
             mextras(extras),
             mPlane(Plane),
             mEquation(Equation) {}
@@ -9834,7 +10087,7 @@ namespace gles {
     class GlGetCoverageModulationTableNV: public Encodable {
     public:
         GlGetCoverageModulationTableNV() = default;
-        GlGetCoverageModulationTableNV(gapic::Vector<gapic::Encodable*> extras, int32_t Bufsize, GLfloat__P V) :
+        GlGetCoverageModulationTableNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Bufsize, GLfloat__P V) :
             mextras(extras),
             mBufsize(Bufsize),
             mV(V) {}
@@ -9858,7 +10111,7 @@ namespace gles {
     class GlGetDebugMessageLog: public Encodable {
     public:
         GlGetDebugMessageLog() = default;
-        GlGetDebugMessageLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
+        GlGetDebugMessageLog(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
             mextras(extras),
             mCount(Count),
             mBufSize(BufSize),
@@ -9889,7 +10142,7 @@ namespace gles {
     class GlGetDebugMessageLogKHR: public Encodable {
     public:
         GlGetDebugMessageLogKHR() = default;
-        GlGetDebugMessageLogKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
+        GlGetDebugMessageLogKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Count, int32_t BufSize, GLenum__P Sources, GLenum__P Types, GLuint__P Ids, GLenum__P Severities, GLsizei__P Lengths, GLchar__P MessageLog, uint32_t Result) :
             mextras(extras),
             mCount(Count),
             mBufSize(BufSize),
@@ -9920,7 +10173,7 @@ namespace gles {
     class GlGetDriverControlStringQCOM: public Encodable {
     public:
         GlGetDriverControlStringQCOM() = default;
-        GlGetDriverControlStringQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t DriverControl, int32_t BufSize, GLsizei__P Length, GLchar__P DriverControlString) :
+        GlGetDriverControlStringQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t DriverControl, int32_t BufSize, GLsizei__P Length, GLchar__P DriverControlString) :
             mextras(extras),
             mDriverControl(DriverControl),
             mBufSize(BufSize),
@@ -9941,7 +10194,7 @@ namespace gles {
     class GlGetDriverControlsQCOM: public Encodable {
     public:
         GlGetDriverControlsQCOM() = default;
-        GlGetDriverControlsQCOM(gapic::Vector<gapic::Encodable*> extras, GLint__P Num, int32_t Size, GLuint__P DriverControls) :
+        GlGetDriverControlsQCOM(const gapic::Vector<gapic::Encodable*>& extras, GLint__P Num, int32_t Size, GLuint__P DriverControls) :
             mextras(extras),
             mNum(Num),
             mSize(Size),
@@ -9960,7 +10213,7 @@ namespace gles {
     class GlGetError: public Encodable {
     public:
         GlGetError() = default;
-        GlGetError(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+        GlGetError(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Result) :
             mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
@@ -9981,7 +10234,7 @@ namespace gles {
     class GlGetFenceivNV: public Encodable {
     public:
         GlGetFenceivNV() = default;
-        GlGetFenceivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint32_t Pname, GLint__P Params) :
+        GlGetFenceivNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fence, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mFence(Fence),
             mPname(Pname),
@@ -10000,7 +10253,7 @@ namespace gles {
     class GlGetFirstPerfQueryIdINTEL: public Encodable {
     public:
         GlGetFirstPerfQueryIdINTEL() = default;
-        GlGetFirstPerfQueryIdINTEL(gapic::Vector<gapic::Encodable*> extras, GLuint__P QueryId) :
+        GlGetFirstPerfQueryIdINTEL(const gapic::Vector<gapic::Encodable*>& extras, GLuint__P QueryId) :
             mextras(extras),
             mQueryId(QueryId) {}
         virtual void Encode(Encoder* e) const{
@@ -10021,7 +10274,7 @@ namespace gles {
     class GlGetFixedv: public Encodable {
     public:
         GlGetFixedv() = default;
-        GlGetFixedv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__P Params) :
+        GlGetFixedv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -10045,7 +10298,7 @@ namespace gles {
     class GlGetFixedvOES: public Encodable {
     public:
         GlGetFixedvOES() = default;
-        GlGetFixedvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__P Params) :
+        GlGetFixedvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -10069,7 +10322,7 @@ namespace gles {
     class GlGetFloati_vNV: public Encodable {
     public:
         GlGetFloati_vNV() = default;
-        GlGetFloati_vNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, GLfloat__P Data) :
+        GlGetFloati_vNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, GLfloat__P Data) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -10088,7 +10341,7 @@ namespace gles {
     class GlGetFloatv: public Encodable {
     public:
         GlGetFloatv() = default;
-        GlGetFloatv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLfloat__P Values) :
+        GlGetFloatv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, GLfloat__P Values) :
             mextras(extras),
             mParam(Param),
             mValues(Values) {}
@@ -10112,7 +10365,7 @@ namespace gles {
     class GlGetFragDataIndexEXT: public Encodable {
     public:
         GlGetFragDataIndexEXT() = default;
-        GlGetFragDataIndexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+        GlGetFragDataIndexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mName(Name),
@@ -10131,7 +10384,7 @@ namespace gles {
     class GlGetFragDataLocation: public Encodable {
     public:
         GlGetFragDataLocation() = default;
-        GlGetFragDataLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+        GlGetFragDataLocation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mName(Name),
@@ -10150,7 +10403,7 @@ namespace gles {
     class GlGetFramebufferAttachmentParameteriv: public Encodable {
     public:
         GlGetFramebufferAttachmentParameteriv() = default;
-        GlGetFramebufferAttachmentParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t FramebufferTarget, uint32_t Attachment, uint32_t Parameter, GLint__P Value) :
+        GlGetFramebufferAttachmentParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FramebufferTarget, uint32_t Attachment, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mFramebufferTarget(FramebufferTarget),
             mAttachment(Attachment),
@@ -10171,7 +10424,7 @@ namespace gles {
     class GlGetFramebufferAttachmentParameterivOES: public Encodable {
     public:
         GlGetFramebufferAttachmentParameterivOES() = default;
-        GlGetFramebufferAttachmentParameterivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Attachment, uint32_t Pname, GLint__P Params) :
+        GlGetFramebufferAttachmentParameterivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Attachment, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mAttachment(Attachment),
@@ -10192,7 +10445,7 @@ namespace gles {
     class GlGetFramebufferParameteriv: public Encodable {
     public:
         GlGetFramebufferParameteriv() = default;
-        GlGetFramebufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetFramebufferParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -10211,7 +10464,7 @@ namespace gles {
     class GlGetGraphicsResetStatus: public Encodable {
     public:
         GlGetGraphicsResetStatus() = default;
-        GlGetGraphicsResetStatus(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+        GlGetGraphicsResetStatus(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Result) :
             mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
@@ -10232,7 +10485,7 @@ namespace gles {
     class GlGetGraphicsResetStatusEXT: public Encodable {
     public:
         GlGetGraphicsResetStatusEXT() = default;
-        GlGetGraphicsResetStatusEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+        GlGetGraphicsResetStatusEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Result) :
             mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
@@ -10253,7 +10506,7 @@ namespace gles {
     class GlGetGraphicsResetStatusKHR: public Encodable {
     public:
         GlGetGraphicsResetStatusKHR() = default;
-        GlGetGraphicsResetStatusKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Result) :
+        GlGetGraphicsResetStatusKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Result) :
             mextras(extras),
             mResult(Result) {}
         virtual void Encode(Encoder* e) const{
@@ -10274,7 +10527,7 @@ namespace gles {
     class GlGetImageHandleNV: public Encodable {
     public:
         GlGetImageHandleNV() = default;
-        GlGetImageHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Format, uint64_t Result) :
+        GlGetImageHandleNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, int32_t Level, uint8_t Layered, int32_t Layer, uint32_t Format, uint64_t Result) :
             mextras(extras),
             mTexture(Texture),
             mLevel(Level),
@@ -10299,7 +10552,7 @@ namespace gles {
     class GlGetInteger64i_v: public Encodable {
     public:
         GlGetInteger64i_v() = default;
-        GlGetInteger64i_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLint64__P Values) :
+        GlGetInteger64i_v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, uint32_t Index, GLint64__P Values) :
             mextras(extras),
             mParam(Param),
             mIndex(Index),
@@ -10318,7 +10571,7 @@ namespace gles {
     class GlGetInteger64v: public Encodable {
     public:
         GlGetInteger64v() = default;
-        GlGetInteger64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLint64__P Values) :
+        GlGetInteger64v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, GLint64__P Values) :
             mextras(extras),
             mParam(Param),
             mValues(Values) {}
@@ -10342,7 +10595,7 @@ namespace gles {
     class GlGetInteger64vAPPLE: public Encodable {
     public:
         GlGetInteger64vAPPLE() = default;
-        GlGetInteger64vAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLint64__P Params) :
+        GlGetInteger64vAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLint64__P Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -10366,7 +10619,7 @@ namespace gles {
     class GlGetIntegeri_v: public Encodable {
     public:
         GlGetIntegeri_v() = default;
-        GlGetIntegeri_v(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, uint32_t Index, GLint__P Values) :
+        GlGetIntegeri_v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, uint32_t Index, GLint__P Values) :
             mextras(extras),
             mParam(Param),
             mIndex(Index),
@@ -10385,7 +10638,7 @@ namespace gles {
     class GlGetIntegeri_vEXT: public Encodable {
     public:
         GlGetIntegeri_vEXT() = default;
-        GlGetIntegeri_vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, GLint__P Data) :
+        GlGetIntegeri_vEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, GLint__P Data) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -10404,7 +10657,7 @@ namespace gles {
     class GlGetIntegerv: public Encodable {
     public:
         GlGetIntegerv() = default;
-        GlGetIntegerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLint__P Values) :
+        GlGetIntegerv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, GLint__P Values) :
             mextras(extras),
             mParam(Param),
             mValues(Values) {}
@@ -10428,7 +10681,7 @@ namespace gles {
     class GlGetInternalformatSampleivNV: public Encodable {
     public:
         GlGetInternalformatSampleivNV() = default;
-        GlGetInternalformatSampleivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, int32_t Samples, uint32_t Pname, int32_t BufSize, GLint__P Params) :
+        GlGetInternalformatSampleivNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, int32_t Samples, uint32_t Pname, int32_t BufSize, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -10453,7 +10706,7 @@ namespace gles {
     class GlGetInternalformativ: public Encodable {
     public:
         GlGetInternalformativ() = default;
-        GlGetInternalformativ(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Pname, int32_t BufSize, GLint__P Params) :
+        GlGetInternalformativ(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Pname, int32_t BufSize, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -10476,7 +10729,7 @@ namespace gles {
     class GlGetLightfv: public Encodable {
     public:
         GlGetLightfv() = default;
-        GlGetLightfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfloat__P Params) :
+        GlGetLightfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -10495,7 +10748,7 @@ namespace gles {
     class GlGetLightxv: public Encodable {
     public:
         GlGetLightxv() = default;
-        GlGetLightxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+        GlGetLightxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -10514,7 +10767,7 @@ namespace gles {
     class GlGetLightxvOES: public Encodable {
     public:
         GlGetLightxvOES() = default;
-        GlGetLightxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
+        GlGetLightxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -10533,7 +10786,7 @@ namespace gles {
     class GlGetMaterialfv: public Encodable {
     public:
         GlGetMaterialfv() = default;
-        GlGetMaterialfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfloat__P Params) :
+        GlGetMaterialfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -10552,7 +10805,7 @@ namespace gles {
     class GlGetMaterialxv: public Encodable {
     public:
         GlGetMaterialxv() = default;
-        GlGetMaterialxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+        GlGetMaterialxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -10571,7 +10824,7 @@ namespace gles {
     class GlGetMaterialxvOES: public Encodable {
     public:
         GlGetMaterialxvOES() = default;
-        GlGetMaterialxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
+        GlGetMaterialxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -10590,7 +10843,7 @@ namespace gles {
     class GlGetMultisamplefv: public Encodable {
     public:
         GlGetMultisamplefv() = default;
-        GlGetMultisamplefv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, uint32_t Index, GLfloat__P Val) :
+        GlGetMultisamplefv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, uint32_t Index, GLfloat__P Val) :
             mextras(extras),
             mPname(Pname),
             mIndex(Index),
@@ -10609,7 +10862,7 @@ namespace gles {
     class GlGetNextPerfQueryIdINTEL: public Encodable {
     public:
         GlGetNextPerfQueryIdINTEL() = default;
-        GlGetNextPerfQueryIdINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, GLuint__P NextQueryId) :
+        GlGetNextPerfQueryIdINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryId, GLuint__P NextQueryId) :
             mextras(extras),
             mQueryId(QueryId),
             mNextQueryId(NextQueryId) {}
@@ -10633,7 +10886,7 @@ namespace gles {
     class GlGetObjectLabel: public Encodable {
     public:
         GlGetObjectLabel() = default;
-        GlGetObjectLabel(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+        GlGetObjectLabel(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
             mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
@@ -10656,7 +10909,7 @@ namespace gles {
     class GlGetObjectLabelEXT: public Encodable {
     public:
         GlGetObjectLabelEXT() = default;
-        GlGetObjectLabelEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Object, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+        GlGetObjectLabelEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, uint32_t Object, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
             mextras(extras),
             mType(Type),
             mObject(Object),
@@ -10679,7 +10932,7 @@ namespace gles {
     class GlGetObjectLabelKHR: public Encodable {
     public:
         GlGetObjectLabelKHR() = default;
-        GlGetObjectLabelKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+        GlGetObjectLabelKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Identifier, uint32_t Name, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
             mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
@@ -10702,7 +10955,7 @@ namespace gles {
     class GlGetObjectPtrLabel: public Encodable {
     public:
         GlGetObjectPtrLabel() = default;
-        GlGetObjectPtrLabel(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+        GlGetObjectPtrLabel(const gapic::Vector<gapic::Encodable*>& extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
             mextras(extras),
             mPtr(Ptr),
             mBufSize(BufSize),
@@ -10723,7 +10976,7 @@ namespace gles {
     class GlGetObjectPtrLabelKHR: public Encodable {
     public:
         GlGetObjectPtrLabelKHR() = default;
-        GlGetObjectPtrLabelKHR(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
+        GlGetObjectPtrLabelKHR(const gapic::Vector<gapic::Encodable*>& extras, Void__CP Ptr, int32_t BufSize, GLsizei__P Length, GLchar__P Label) :
             mextras(extras),
             mPtr(Ptr),
             mBufSize(BufSize),
@@ -10744,7 +10997,7 @@ namespace gles {
     class GlGetPathCommandsNV: public Encodable {
     public:
         GlGetPathCommandsNV() = default;
-        GlGetPathCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLubyte__P Commands) :
+        GlGetPathCommandsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, GLubyte__P Commands) :
             mextras(extras),
             mPath(Path),
             mCommands(Commands) {}
@@ -10768,7 +11021,7 @@ namespace gles {
     class GlGetPathCoordsNV: public Encodable {
     public:
         GlGetPathCoordsNV() = default;
-        GlGetPathCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLfloat__P Coords) :
+        GlGetPathCoordsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, GLfloat__P Coords) :
             mextras(extras),
             mPath(Path),
             mCoords(Coords) {}
@@ -10792,7 +11045,7 @@ namespace gles {
     class GlGetPathDashArrayNV: public Encodable {
     public:
         GlGetPathDashArrayNV() = default;
-        GlGetPathDashArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, GLfloat__P DashArray) :
+        GlGetPathDashArrayNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, GLfloat__P DashArray) :
             mextras(extras),
             mPath(Path),
             mDashArray(DashArray) {}
@@ -10816,7 +11069,7 @@ namespace gles {
     class GlGetPathLengthNV: public Encodable {
     public:
         GlGetPathLengthNV() = default;
-        GlGetPathLengthNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Result) :
+        GlGetPathLengthNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Result) :
             mextras(extras),
             mPath(Path),
             mStartSegment(StartSegment),
@@ -10837,7 +11090,7 @@ namespace gles {
     class GlGetPathMetricRangeNV: public Encodable {
     public:
         GlGetPathMetricRangeNV() = default;
-        GlGetPathMetricRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MetricQueryMask, uint32_t FirstPathName, int32_t NumPaths, int32_t Stride, GLfloat__P Metrics) :
+        GlGetPathMetricRangeNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MetricQueryMask, uint32_t FirstPathName, int32_t NumPaths, int32_t Stride, GLfloat__P Metrics) :
             mextras(extras),
             mMetricQueryMask(MetricQueryMask),
             mFirstPathName(FirstPathName),
@@ -10860,7 +11113,7 @@ namespace gles {
     class GlGetPathMetricsNV: public Encodable {
     public:
         GlGetPathMetricsNV() = default;
-        GlGetPathMetricsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MetricQueryMask, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Stride, GLfloat__P Metrics) :
+        GlGetPathMetricsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MetricQueryMask, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Stride, GLfloat__P Metrics) :
             mextras(extras),
             mMetricQueryMask(MetricQueryMask),
             mNumPaths(NumPaths),
@@ -10887,7 +11140,7 @@ namespace gles {
     class GlGetPathParameterfvNV: public Encodable {
     public:
         GlGetPathParameterfvNV() = default;
-        GlGetPathParameterfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLfloat__P Value) :
+        GlGetPathParameterfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, GLfloat__P Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -10906,7 +11159,7 @@ namespace gles {
     class GlGetPathParameterivNV: public Encodable {
     public:
         GlGetPathParameterivNV() = default;
-        GlGetPathParameterivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLint__P Value) :
+        GlGetPathParameterivNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, GLint__P Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -10925,7 +11178,7 @@ namespace gles {
     class GlGetPathSpacingNV: public Encodable {
     public:
         GlGetPathSpacingNV() = default;
-        GlGetPathSpacingNV(gapic::Vector<gapic::Encodable*> extras, uint32_t PathListMode, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, float AdvanceScale, float KerningScale, uint32_t TransformType, GLfloat__P ReturnedSpacing) :
+        GlGetPathSpacingNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t PathListMode, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, float AdvanceScale, float KerningScale, uint32_t TransformType, GLfloat__P ReturnedSpacing) :
             mextras(extras),
             mPathListMode(PathListMode),
             mNumPaths(NumPaths),
@@ -10956,7 +11209,7 @@ namespace gles {
     class GlGetPerfCounterInfoINTEL: public Encodable {
     public:
         GlGetPerfCounterInfoINTEL() = default;
-        GlGetPerfCounterInfoINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, uint32_t CounterId, uint32_t CounterNameLength, GLchar__P CounterName, uint32_t CounterDescLength, GLchar__P CounterDesc, GLuint__P CounterOffset, GLuint__P CounterDataSize, GLuint__P CounterTypeEnum, GLuint__P CounterDataTypeEnum, GLuint64__P RawCounterMaxValue) :
+        GlGetPerfCounterInfoINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryId, uint32_t CounterId, uint32_t CounterNameLength, GLchar__P CounterName, uint32_t CounterDescLength, GLchar__P CounterDesc, GLuint__P CounterOffset, GLuint__P CounterDataSize, GLuint__P CounterTypeEnum, GLuint__P CounterDataTypeEnum, GLuint64__P RawCounterMaxValue) :
             mextras(extras),
             mQueryId(QueryId),
             mCounterId(CounterId),
@@ -10991,7 +11244,7 @@ namespace gles {
     class GlGetPerfMonitorCounterDataAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterDataAMD() = default;
-        GlGetPerfMonitorCounterDataAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor, uint32_t Pname, int32_t DataSize, GLuint__P Data, GLint__P BytesWritten) :
+        GlGetPerfMonitorCounterDataAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Monitor, uint32_t Pname, int32_t DataSize, GLuint__P Data, GLint__P BytesWritten) :
             mextras(extras),
             mMonitor(Monitor),
             mPname(Pname),
@@ -11014,7 +11267,7 @@ namespace gles {
     class GlGetPerfMonitorCounterInfoAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterInfoAMD() = default;
-        GlGetPerfMonitorCounterInfoAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, uint32_t Counter, uint32_t Pname, Void__P Data) :
+        GlGetPerfMonitorCounterInfoAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Group, uint32_t Counter, uint32_t Pname, Void__P Data) :
             mextras(extras),
             mGroup(Group),
             mCounter(Counter),
@@ -11035,7 +11288,7 @@ namespace gles {
     class GlGetPerfMonitorCounterStringAMD: public Encodable {
     public:
         GlGetPerfMonitorCounterStringAMD() = default;
-        GlGetPerfMonitorCounterStringAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, uint32_t Counter, int32_t BufSize, GLsizei__P Length, GLchar__P CounterString) :
+        GlGetPerfMonitorCounterStringAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Group, uint32_t Counter, int32_t BufSize, GLsizei__P Length, GLchar__P CounterString) :
             mextras(extras),
             mGroup(Group),
             mCounter(Counter),
@@ -11058,7 +11311,7 @@ namespace gles {
     class GlGetPerfMonitorCountersAMD: public Encodable {
     public:
         GlGetPerfMonitorCountersAMD() = default;
-        GlGetPerfMonitorCountersAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, GLint__P NumCounters, GLint__P MaxActiveCounters, int32_t CounterSize, GLuint__P Counters) :
+        GlGetPerfMonitorCountersAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Group, GLint__P NumCounters, GLint__P MaxActiveCounters, int32_t CounterSize, GLuint__P Counters) :
             mextras(extras),
             mGroup(Group),
             mNumCounters(NumCounters),
@@ -11081,7 +11334,7 @@ namespace gles {
     class GlGetPerfMonitorGroupStringAMD: public Encodable {
     public:
         GlGetPerfMonitorGroupStringAMD() = default;
-        GlGetPerfMonitorGroupStringAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Group, int32_t BufSize, GLsizei__P Length, GLchar__P GroupString) :
+        GlGetPerfMonitorGroupStringAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Group, int32_t BufSize, GLsizei__P Length, GLchar__P GroupString) :
             mextras(extras),
             mGroup(Group),
             mBufSize(BufSize),
@@ -11102,7 +11355,7 @@ namespace gles {
     class GlGetPerfMonitorGroupsAMD: public Encodable {
     public:
         GlGetPerfMonitorGroupsAMD() = default;
-        GlGetPerfMonitorGroupsAMD(gapic::Vector<gapic::Encodable*> extras, GLint__P NumGroups, int32_t GroupsSize, GLuint__P Groups) :
+        GlGetPerfMonitorGroupsAMD(const gapic::Vector<gapic::Encodable*>& extras, GLint__P NumGroups, int32_t GroupsSize, GLuint__P Groups) :
             mextras(extras),
             mNumGroups(NumGroups),
             mGroupsSize(GroupsSize),
@@ -11121,7 +11374,7 @@ namespace gles {
     class GlGetPerfQueryDataINTEL: public Encodable {
     public:
         GlGetPerfQueryDataINTEL() = default;
-        GlGetPerfQueryDataINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryHandle, uint32_t Flag, int32_t DataSize, GLvoid__P Data, GLuint__P BytesWritten) :
+        GlGetPerfQueryDataINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryHandle, uint32_t Flag, int32_t DataSize, GLvoid__P Data, GLuint__P BytesWritten) :
             mextras(extras),
             mQueryHandle(QueryHandle),
             mFlag(Flag),
@@ -11144,7 +11397,7 @@ namespace gles {
     class GlGetPerfQueryIdByNameINTEL: public Encodable {
     public:
         GlGetPerfQueryIdByNameINTEL() = default;
-        GlGetPerfQueryIdByNameINTEL(gapic::Vector<gapic::Encodable*> extras, GLchar__P QueryName, GLuint__P QueryId) :
+        GlGetPerfQueryIdByNameINTEL(const gapic::Vector<gapic::Encodable*>& extras, GLchar__P QueryName, GLuint__P QueryId) :
             mextras(extras),
             mQueryName(QueryName),
             mQueryId(QueryId) {}
@@ -11168,7 +11421,7 @@ namespace gles {
     class GlGetPerfQueryInfoINTEL: public Encodable {
     public:
         GlGetPerfQueryInfoINTEL() = default;
-        GlGetPerfQueryInfoINTEL(gapic::Vector<gapic::Encodable*> extras, uint32_t QueryId, uint32_t QueryNameLength, GLchar__P QueryName, GLuint__P DataSize, GLuint__P NoCounters, GLuint__P NoInstances, GLuint__P CapsMask) :
+        GlGetPerfQueryInfoINTEL(const gapic::Vector<gapic::Encodable*>& extras, uint32_t QueryId, uint32_t QueryNameLength, GLchar__P QueryName, GLuint__P DataSize, GLuint__P NoCounters, GLuint__P NoInstances, GLuint__P CapsMask) :
             mextras(extras),
             mQueryId(QueryId),
             mQueryNameLength(QueryNameLength),
@@ -11195,7 +11448,7 @@ namespace gles {
     class GlGetPointerv: public Encodable {
     public:
         GlGetPointerv() = default;
-        GlGetPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, Void__P__P Params) :
+        GlGetPointerv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, Void__P__P Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -11219,7 +11472,7 @@ namespace gles {
     class GlGetPointervKHR: public Encodable {
     public:
         GlGetPointervKHR() = default;
-        GlGetPointervKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, Void__P__P Params) :
+        GlGetPointervKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, Void__P__P Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -11243,7 +11496,7 @@ namespace gles {
     class GlGetProgramBinary: public Encodable {
     public:
         GlGetProgramBinary() = default;
-        GlGetProgramBinary(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufSize, GLsizei__P Length, GLenum__P BinaryFormat, Void__P Binary) :
+        GlGetProgramBinary(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t BufSize, GLsizei__P Length, GLenum__P BinaryFormat, Void__P Binary) :
             mextras(extras),
             mProgram(Program),
             mBufSize(BufSize),
@@ -11266,7 +11519,7 @@ namespace gles {
     class GlGetProgramBinaryOES: public Encodable {
     public:
         GlGetProgramBinaryOES() = default;
-        GlGetProgramBinaryOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferSize, GLsizei__P BytesWritten, GLenum__P BinaryFormat, Void__P Binary) :
+        GlGetProgramBinaryOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t BufferSize, GLsizei__P BytesWritten, GLenum__P BinaryFormat, Void__P Binary) :
             mextras(extras),
             mProgram(Program),
             mBufferSize(BufferSize),
@@ -11289,7 +11542,7 @@ namespace gles {
     class GlGetProgramInfoLog: public Encodable {
     public:
         GlGetProgramInfoLog() = default;
-        GlGetProgramInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
+        GlGetProgramInfoLog(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
             mextras(extras),
             mProgram(Program),
             mBufferLength(BufferLength),
@@ -11310,7 +11563,7 @@ namespace gles {
     class GlGetProgramInterfaceiv: public Encodable {
     public:
         GlGetProgramInterfaceiv() = default;
-        GlGetProgramInterfaceiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Pname, GLint__P Params) :
+        GlGetProgramInterfaceiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11331,7 +11584,7 @@ namespace gles {
     class GlGetProgramPipelineInfoLog: public Encodable {
     public:
         GlGetProgramPipelineInfoLog() = default;
-        GlGetProgramPipelineInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
+        GlGetProgramPipelineInfoLog(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
             mextras(extras),
             mPipeline(Pipeline),
             mBufSize(BufSize),
@@ -11352,7 +11605,7 @@ namespace gles {
     class GlGetProgramPipelineInfoLogEXT: public Encodable {
     public:
         GlGetProgramPipelineInfoLogEXT() = default;
-        GlGetProgramPipelineInfoLogEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
+        GlGetProgramPipelineInfoLogEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, int32_t BufSize, GLsizei__P Length, GLchar__P InfoLog) :
             mextras(extras),
             mPipeline(Pipeline),
             mBufSize(BufSize),
@@ -11373,7 +11626,7 @@ namespace gles {
     class GlGetProgramPipelineiv: public Encodable {
     public:
         GlGetProgramPipelineiv() = default;
-        GlGetProgramPipelineiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
+        GlGetProgramPipelineiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mPipeline(Pipeline),
             mPname(Pname),
@@ -11392,7 +11645,7 @@ namespace gles {
     class GlGetProgramPipelineivEXT: public Encodable {
     public:
         GlGetProgramPipelineivEXT() = default;
-        GlGetProgramPipelineivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
+        GlGetProgramPipelineivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mPipeline(Pipeline),
             mPname(Pname),
@@ -11411,7 +11664,7 @@ namespace gles {
     class GlGetProgramResourceIndex: public Encodable {
     public:
         GlGetProgramResourceIndex() = default;
-        GlGetProgramResourceIndex(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, uint32_t Result) :
+        GlGetProgramResourceIndex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, char* Name, uint32_t Result) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11432,7 +11685,7 @@ namespace gles {
     class GlGetProgramResourceLocation: public Encodable {
     public:
         GlGetProgramResourceLocation() = default;
-        GlGetProgramResourceLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
+        GlGetProgramResourceLocation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11453,7 +11706,7 @@ namespace gles {
     class GlGetProgramResourceLocationIndexEXT: public Encodable {
     public:
         GlGetProgramResourceLocationIndexEXT() = default;
-        GlGetProgramResourceLocationIndexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
+        GlGetProgramResourceLocationIndexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11474,7 +11727,7 @@ namespace gles {
     class GlGetProgramResourceName: public Encodable {
     public:
         GlGetProgramResourceName() = default;
-        GlGetProgramResourceName(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLchar__P Name) :
+        GlGetProgramResourceName(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLchar__P Name) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11499,7 +11752,7 @@ namespace gles {
     class GlGetProgramResourcefvNV: public Encodable {
     public:
         GlGetProgramResourcefvNV() = default;
-        GlGetProgramResourcefvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLfloat__P Params) :
+        GlGetProgramResourcefvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLfloat__P Params) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11528,7 +11781,7 @@ namespace gles {
     class GlGetProgramResourceiv: public Encodable {
     public:
         GlGetProgramResourceiv() = default;
-        GlGetProgramResourceiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLint__P Params) :
+        GlGetProgramResourceiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t ProgramInterface, uint32_t Index, int32_t PropCount, GLenum__CP Props, int32_t BufSize, GLsizei__P Length, GLint__P Params) :
             mextras(extras),
             mProgram(Program),
             mProgramInterface(ProgramInterface),
@@ -11557,7 +11810,7 @@ namespace gles {
     class GlGetProgramiv: public Encodable {
     public:
         GlGetProgramiv() = default;
-        GlGetProgramiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Parameter, GLint__P Value) :
+        GlGetProgramiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mProgram(Program),
             mParameter(Parameter),
@@ -11591,7 +11844,7 @@ namespace gles {
     class GlGetQueryObjecti64v: public Encodable {
     public:
         GlGetQueryObjecti64v() = default;
-        GlGetQueryObjecti64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, S64__P Value) :
+        GlGetQueryObjecti64v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, S64__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11610,7 +11863,7 @@ namespace gles {
     class GlGetQueryObjecti64vEXT: public Encodable {
     public:
         GlGetQueryObjecti64vEXT() = default;
-        GlGetQueryObjecti64vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLint64__P Value) :
+        GlGetQueryObjecti64vEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, GLint64__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11629,7 +11882,7 @@ namespace gles {
     class GlGetQueryObjectivEXT: public Encodable {
     public:
         GlGetQueryObjectivEXT() = default;
-        GlGetQueryObjectivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLint__P Value) :
+        GlGetQueryObjectivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11663,7 +11916,7 @@ namespace gles {
     class GlGetQueryObjectui64v: public Encodable {
     public:
         GlGetQueryObjectui64v() = default;
-        GlGetQueryObjectui64v(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, U64__P Value) :
+        GlGetQueryObjectui64v(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, U64__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11682,7 +11935,7 @@ namespace gles {
     class GlGetQueryObjectui64vEXT: public Encodable {
     public:
         GlGetQueryObjectui64vEXT() = default;
-        GlGetQueryObjectui64vEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint64__P Value) :
+        GlGetQueryObjectui64vEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, GLuint64__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11701,7 +11954,7 @@ namespace gles {
     class GlGetQueryObjectuiv: public Encodable {
     public:
         GlGetQueryObjectuiv() = default;
-        GlGetQueryObjectuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
+        GlGetQueryObjectuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11720,7 +11973,7 @@ namespace gles {
     class GlGetQueryObjectuivEXT: public Encodable {
     public:
         GlGetQueryObjectuivEXT() = default;
-        GlGetQueryObjectuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
+        GlGetQueryObjectuivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Parameter, GLuint__P Value) :
             mextras(extras),
             mQuery(Query),
             mParameter(Parameter),
@@ -11739,7 +11992,7 @@ namespace gles {
     class GlGetQueryiv: public Encodable {
     public:
         GlGetQueryiv() = default;
-        GlGetQueryiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+        GlGetQueryiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -11758,7 +12011,7 @@ namespace gles {
     class GlGetQueryivEXT: public Encodable {
     public:
         GlGetQueryivEXT() = default;
-        GlGetQueryivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
+        GlGetQueryivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -11777,7 +12030,7 @@ namespace gles {
     class GlGetRenderbufferParameteriv: public Encodable {
     public:
         GlGetRenderbufferParameteriv() = default;
-        GlGetRenderbufferParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
+        GlGetRenderbufferParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -11796,7 +12049,7 @@ namespace gles {
     class GlGetRenderbufferParameterivOES: public Encodable {
     public:
         GlGetRenderbufferParameterivOES() = default;
-        GlGetRenderbufferParameterivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetRenderbufferParameterivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -11815,7 +12068,7 @@ namespace gles {
     class GlGetSamplerParameterIiv: public Encodable {
     public:
         GlGetSamplerParameterIiv() = default;
-        GlGetSamplerParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+        GlGetSamplerParameterIiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11834,7 +12087,7 @@ namespace gles {
     class GlGetSamplerParameterIivEXT: public Encodable {
     public:
         GlGetSamplerParameterIivEXT() = default;
-        GlGetSamplerParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+        GlGetSamplerParameterIivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11853,7 +12106,7 @@ namespace gles {
     class GlGetSamplerParameterIivOES: public Encodable {
     public:
         GlGetSamplerParameterIivOES() = default;
-        GlGetSamplerParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+        GlGetSamplerParameterIivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11872,7 +12125,7 @@ namespace gles {
     class GlGetSamplerParameterIuiv: public Encodable {
     public:
         GlGetSamplerParameterIuiv() = default;
-        GlGetSamplerParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+        GlGetSamplerParameterIuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11891,7 +12144,7 @@ namespace gles {
     class GlGetSamplerParameterIuivEXT: public Encodable {
     public:
         GlGetSamplerParameterIuivEXT() = default;
-        GlGetSamplerParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+        GlGetSamplerParameterIuivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11910,7 +12163,7 @@ namespace gles {
     class GlGetSamplerParameterIuivOES: public Encodable {
     public:
         GlGetSamplerParameterIuivOES() = default;
-        GlGetSamplerParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
+        GlGetSamplerParameterIuivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11929,7 +12182,7 @@ namespace gles {
     class GlGetSamplerParameterfv: public Encodable {
     public:
         GlGetSamplerParameterfv() = default;
-        GlGetSamplerParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLfloat__P Params) :
+        GlGetSamplerParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11948,7 +12201,7 @@ namespace gles {
     class GlGetSamplerParameteriv: public Encodable {
     public:
         GlGetSamplerParameteriv() = default;
-        GlGetSamplerParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
+        GlGetSamplerParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -11967,7 +12220,7 @@ namespace gles {
     class GlGetShaderInfoLog: public Encodable {
     public:
         GlGetShaderInfoLog() = default;
-        GlGetShaderInfoLog(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
+        GlGetShaderInfoLog(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Info) :
             mextras(extras),
             mShader(Shader),
             mBufferLength(BufferLength),
@@ -11988,7 +12241,7 @@ namespace gles {
     class GlGetShaderPrecisionFormat: public Encodable {
     public:
         GlGetShaderPrecisionFormat() = default;
-        GlGetShaderPrecisionFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t ShaderType, uint32_t PrecisionType, GLint__P Range, GLint__P Precision) :
+        GlGetShaderPrecisionFormat(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ShaderType, uint32_t PrecisionType, GLint__P Range, GLint__P Precision) :
             mextras(extras),
             mShaderType(ShaderType),
             mPrecisionType(PrecisionType),
@@ -12009,7 +12262,7 @@ namespace gles {
     class GlGetShaderSource: public Encodable {
     public:
         GlGetShaderSource() = default;
-        GlGetShaderSource(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Source) :
+        GlGetShaderSource(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, int32_t BufferLength, GLsizei__P StringLengthWritten, GLchar__P Source) :
             mextras(extras),
             mShader(Shader),
             mBufferLength(BufferLength),
@@ -12030,7 +12283,7 @@ namespace gles {
     class GlGetShaderiv: public Encodable {
     public:
         GlGetShaderiv() = default;
-        GlGetShaderiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, uint32_t Parameter, GLint__P Value) :
+        GlGetShaderiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, uint32_t Parameter, GLint__P Value) :
             mextras(extras),
             mShader(Shader),
             mParameter(Parameter),
@@ -12049,7 +12302,7 @@ namespace gles {
     class GlGetString: public Encodable {
     public:
         GlGetString() = default;
-        GlGetString(gapic::Vector<gapic::Encodable*> extras, uint32_t Param, GLubyte__CP Result) :
+        GlGetString(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Param, GLubyte__CP Result) :
             mextras(extras),
             mParam(Param),
             mResult(Result) {}
@@ -12073,7 +12326,7 @@ namespace gles {
     class GlGetStringi: public Encodable {
     public:
         GlGetStringi() = default;
-        GlGetStringi(gapic::Vector<gapic::Encodable*> extras, uint32_t Name, uint32_t Index, GLubyte__CP Result) :
+        GlGetStringi(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Name, uint32_t Index, GLubyte__CP Result) :
             mextras(extras),
             mName(Name),
             mIndex(Index),
@@ -12092,7 +12345,7 @@ namespace gles {
     class GlGetSynciv: public Encodable {
     public:
         GlGetSynciv() = default;
-        GlGetSynciv(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
+        GlGetSynciv(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
             mextras(extras),
             mSync(Sync),
             mPname(Pname),
@@ -12115,7 +12368,7 @@ namespace gles {
     class GlGetSyncivAPPLE: public Encodable {
     public:
         GlGetSyncivAPPLE() = default;
-        GlGetSyncivAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
+        GlGetSyncivAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t Pname, int32_t BufSize, GLsizei__P Length, GLint__P Values) :
             mextras(extras),
             mSync(Sync),
             mPname(Pname),
@@ -12138,7 +12391,7 @@ namespace gles {
     class GlGetTexEnvfv: public Encodable {
     public:
         GlGetTexEnvfv() = default;
-        GlGetTexEnvfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__P Params) :
+        GlGetTexEnvfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12157,7 +12410,7 @@ namespace gles {
     class GlGetTexEnviv: public Encodable {
     public:
         GlGetTexEnviv() = default;
-        GlGetTexEnviv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetTexEnviv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12176,7 +12429,7 @@ namespace gles {
     class GlGetTexEnvxv: public Encodable {
     public:
         GlGetTexEnvxv() = default;
-        GlGetTexEnvxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+        GlGetTexEnvxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12195,7 +12448,7 @@ namespace gles {
     class GlGetTexEnvxvOES: public Encodable {
     public:
         GlGetTexEnvxvOES() = default;
-        GlGetTexEnvxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+        GlGetTexEnvxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12214,7 +12467,7 @@ namespace gles {
     class GlGetTexGenfvOES: public Encodable {
     public:
         GlGetTexGenfvOES() = default;
-        GlGetTexGenfvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfloat__P Params) :
+        GlGetTexGenfvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -12233,7 +12486,7 @@ namespace gles {
     class GlGetTexGenivOES: public Encodable {
     public:
         GlGetTexGenivOES() = default;
-        GlGetTexGenivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLint__P Params) :
+        GlGetTexGenivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -12252,7 +12505,7 @@ namespace gles {
     class GlGetTexGenxvOES: public Encodable {
     public:
         GlGetTexGenxvOES() = default;
-        GlGetTexGenxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfixed__P Params) :
+        GlGetTexGenxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -12271,7 +12524,7 @@ namespace gles {
     class GlGetTexLevelParameterfv: public Encodable {
     public:
         GlGetTexLevelParameterfv() = default;
-        GlGetTexLevelParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Pname, GLfloat__P Params) :
+        GlGetTexLevelParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -12292,7 +12545,7 @@ namespace gles {
     class GlGetTexLevelParameteriv: public Encodable {
     public:
         GlGetTexLevelParameteriv() = default;
-        GlGetTexLevelParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Pname, GLint__P Params) :
+        GlGetTexLevelParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -12313,7 +12566,7 @@ namespace gles {
     class GlGetTexParameterIiv: public Encodable {
     public:
         GlGetTexParameterIiv() = default;
-        GlGetTexParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetTexParameterIiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12332,7 +12585,7 @@ namespace gles {
     class GlGetTexParameterIivEXT: public Encodable {
     public:
         GlGetTexParameterIivEXT() = default;
-        GlGetTexParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetTexParameterIivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12351,7 +12604,7 @@ namespace gles {
     class GlGetTexParameterIivOES: public Encodable {
     public:
         GlGetTexParameterIivOES() = default;
-        GlGetTexParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
+        GlGetTexParameterIivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12370,7 +12623,7 @@ namespace gles {
     class GlGetTexParameterIuiv: public Encodable {
     public:
         GlGetTexParameterIuiv() = default;
-        GlGetTexParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+        GlGetTexParameterIuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12389,7 +12642,7 @@ namespace gles {
     class GlGetTexParameterIuivEXT: public Encodable {
     public:
         GlGetTexParameterIuivEXT() = default;
-        GlGetTexParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+        GlGetTexParameterIuivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12408,7 +12661,7 @@ namespace gles {
     class GlGetTexParameterIuivOES: public Encodable {
     public:
         GlGetTexParameterIuivOES() = default;
-        GlGetTexParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
+        GlGetTexParameterIuivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12427,7 +12680,7 @@ namespace gles {
     class GlGetTexParameterfv: public Encodable {
     public:
         GlGetTexParameterfv() = default;
-        GlGetTexParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLfloat__P Values) :
+        GlGetTexParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLfloat__P Values) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -12446,7 +12699,7 @@ namespace gles {
     class GlGetTexParameteriv: public Encodable {
     public:
         GlGetTexParameteriv() = default;
-        GlGetTexParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
+        GlGetTexParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, GLint__P Values) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -12465,7 +12718,7 @@ namespace gles {
     class GlGetTexParameterxv: public Encodable {
     public:
         GlGetTexParameterxv() = default;
-        GlGetTexParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+        GlGetTexParameterxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12484,7 +12737,7 @@ namespace gles {
     class GlGetTexParameterxvOES: public Encodable {
     public:
         GlGetTexParameterxvOES() = default;
-        GlGetTexParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
+        GlGetTexParameterxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__P Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -12503,7 +12756,7 @@ namespace gles {
     class GlGetTextureHandleNV: public Encodable {
     public:
         GlGetTextureHandleNV() = default;
-        GlGetTextureHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint64_t Result) :
+        GlGetTextureHandleNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint64_t Result) :
             mextras(extras),
             mTexture(Texture),
             mResult(Result) {}
@@ -12527,7 +12780,7 @@ namespace gles {
     class GlGetTextureSamplerHandleNV: public Encodable {
     public:
         GlGetTextureSamplerHandleNV() = default;
-        GlGetTextureSamplerHandleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Sampler, uint64_t Result) :
+        GlGetTextureSamplerHandleNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Sampler, uint64_t Result) :
             mextras(extras),
             mTexture(Texture),
             mSampler(Sampler),
@@ -12546,7 +12799,7 @@ namespace gles {
     class GlGetTransformFeedbackVarying: public Encodable {
     public:
         GlGetTransformFeedbackVarying() = default;
-        GlGetTransformFeedbackVarying(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLsizei__P Size, GLenum__P Type, GLchar__P Name) :
+        GlGetTransformFeedbackVarying(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Index, int32_t BufSize, GLsizei__P Length, GLsizei__P Size, GLenum__P Type, GLchar__P Name) :
             mextras(extras),
             mProgram(Program),
             mIndex(Index),
@@ -12573,7 +12826,7 @@ namespace gles {
     class GlGetTranslatedShaderSourceANGLE: public Encodable {
     public:
         GlGetTranslatedShaderSourceANGLE() = default;
-        GlGetTranslatedShaderSourceANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t Bufsize, GLsizei__P Length, GLchar__P Source) :
+        GlGetTranslatedShaderSourceANGLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, int32_t Bufsize, GLsizei__P Length, GLchar__P Source) :
             mextras(extras),
             mShader(Shader),
             mBufsize(Bufsize),
@@ -12594,7 +12847,7 @@ namespace gles {
     class GlGetUniformBlockIndex: public Encodable {
     public:
         GlGetUniformBlockIndex() = default;
-        GlGetUniformBlockIndex(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* UniformBlockName, uint32_t Result) :
+        GlGetUniformBlockIndex(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, char* UniformBlockName, uint32_t Result) :
             mextras(extras),
             mProgram(Program),
             mUniformBlockName(UniformBlockName),
@@ -12628,7 +12881,7 @@ namespace gles {
     class GlGetUniformIndices: public Encodable {
     public:
         GlGetUniformIndices() = default;
-        GlGetUniformIndices(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, UniformIndex__P UniformIndices) :
+        GlGetUniformIndices(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t UniformCount, GLchar__CP__CP UniformNames, UniformIndex__P UniformIndices) :
             mextras(extras),
             mProgram(Program),
             mUniformCount(UniformCount),
@@ -12649,7 +12902,7 @@ namespace gles {
     class GlGetUniformLocation: public Encodable {
     public:
         GlGetUniformLocation() = default;
-        GlGetUniformLocation(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, char* Name, int32_t Result) :
+        GlGetUniformLocation(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, char* Name, int32_t Result) :
             mextras(extras),
             mProgram(Program),
             mName(Name),
@@ -12668,7 +12921,7 @@ namespace gles {
     class GlGetUniformfv: public Encodable {
     public:
         GlGetUniformfv() = default;
-        GlGetUniformfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLfloat__P Values) :
+        GlGetUniformfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, GLfloat__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12687,7 +12940,7 @@ namespace gles {
     class GlGetUniformiv: public Encodable {
     public:
         GlGetUniformiv() = default;
-        GlGetUniformiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLint__P Values) :
+        GlGetUniformiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, GLint__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12706,7 +12959,7 @@ namespace gles {
     class GlGetUniformuiv: public Encodable {
     public:
         GlGetUniformuiv() = default;
-        GlGetUniformuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, GLuint__P Values) :
+        GlGetUniformuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, GLuint__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12725,7 +12978,7 @@ namespace gles {
     class GlGetVertexAttribIiv: public Encodable {
     public:
         GlGetVertexAttribIiv() = default;
-        GlGetVertexAttribIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
+        GlGetVertexAttribIiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mIndex(Index),
             mPname(Pname),
@@ -12744,7 +12997,7 @@ namespace gles {
     class GlGetVertexAttribIuiv: public Encodable {
     public:
         GlGetVertexAttribIuiv() = default;
-        GlGetVertexAttribIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLuint__P Params) :
+        GlGetVertexAttribIuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Pname, GLuint__P Params) :
             mextras(extras),
             mIndex(Index),
             mPname(Pname),
@@ -12763,7 +13016,7 @@ namespace gles {
     class GlGetVertexAttribPointerv: public Encodable {
     public:
         GlGetVertexAttribPointerv() = default;
-        GlGetVertexAttribPointerv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, Void__P__P Pointer) :
+        GlGetVertexAttribPointerv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Pname, Void__P__P Pointer) :
             mextras(extras),
             mIndex(Index),
             mPname(Pname),
@@ -12782,7 +13035,7 @@ namespace gles {
     class GlGetVertexAttribfv: public Encodable {
     public:
         GlGetVertexAttribfv() = default;
-        GlGetVertexAttribfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLfloat__P Params) :
+        GlGetVertexAttribfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Pname, GLfloat__P Params) :
             mextras(extras),
             mIndex(Index),
             mPname(Pname),
@@ -12801,7 +13054,7 @@ namespace gles {
     class GlGetVertexAttribiv: public Encodable {
     public:
         GlGetVertexAttribiv() = default;
-        GlGetVertexAttribiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
+        GlGetVertexAttribiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Pname, GLint__P Params) :
             mextras(extras),
             mIndex(Index),
             mPname(Pname),
@@ -12820,7 +13073,7 @@ namespace gles {
     class GlGetnUniformfv: public Encodable {
     public:
         GlGetnUniformfv() = default;
-        GlGetnUniformfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Values) :
+        GlGetnUniformfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12841,7 +13094,7 @@ namespace gles {
     class GlGetnUniformfvEXT: public Encodable {
     public:
         GlGetnUniformfvEXT() = default;
-        GlGetnUniformfvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
+        GlGetnUniformfvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12862,7 +13115,7 @@ namespace gles {
     class GlGetnUniformfvKHR: public Encodable {
     public:
         GlGetnUniformfvKHR() = default;
-        GlGetnUniformfvKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
+        GlGetnUniformfvKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLfloat__P Params) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12883,7 +13136,7 @@ namespace gles {
     class GlGetnUniformiv: public Encodable {
     public:
         GlGetnUniformiv() = default;
-        GlGetnUniformiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Values) :
+        GlGetnUniformiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12904,7 +13157,7 @@ namespace gles {
     class GlGetnUniformivEXT: public Encodable {
     public:
         GlGetnUniformivEXT() = default;
-        GlGetnUniformivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
+        GlGetnUniformivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12925,7 +13178,7 @@ namespace gles {
     class GlGetnUniformivKHR: public Encodable {
     public:
         GlGetnUniformivKHR() = default;
-        GlGetnUniformivKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
+        GlGetnUniformivKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLint__P Params) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12946,7 +13199,7 @@ namespace gles {
     class GlGetnUniformuiv: public Encodable {
     public:
         GlGetnUniformuiv() = default;
-        GlGetnUniformuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Values) :
+        GlGetnUniformuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12967,7 +13220,7 @@ namespace gles {
     class GlGetnUniformuivKHR: public Encodable {
     public:
         GlGetnUniformuivKHR() = default;
-        GlGetnUniformuivKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Params) :
+        GlGetnUniformuivKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t BufSize, GLuint__P Params) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -12988,7 +13241,7 @@ namespace gles {
     class GlHint: public Encodable {
     public:
         GlHint() = default;
-        GlHint(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Mode) :
+        GlHint(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Mode) :
             mextras(extras),
             mTarget(Target),
             mMode(Mode) {}
@@ -13012,7 +13265,7 @@ namespace gles {
     class GlInsertEventMarkerEXT: public Encodable {
     public:
         GlInsertEventMarkerEXT() = default;
-        GlInsertEventMarkerEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Length, GLchar__CP Marker) :
+        GlInsertEventMarkerEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t Length, GLchar__CP Marker) :
             mextras(extras),
             mLength(Length),
             mMarker(Marker) {}
@@ -13036,7 +13289,7 @@ namespace gles {
     class GlInterpolatePathsNV: public Encodable {
     public:
         GlInterpolatePathsNV() = default;
-        GlInterpolatePathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t PathA, uint32_t PathB, float Weight) :
+        GlInterpolatePathsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ResultPath, uint32_t PathA, uint32_t PathB, float Weight) :
             mextras(extras),
             mResultPath(ResultPath),
             mPathA(PathA),
@@ -13057,7 +13310,7 @@ namespace gles {
     class GlInvalidateFramebuffer: public Encodable {
     public:
         GlInvalidateFramebuffer() = default;
-        GlInvalidateFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Count, GLenum__CP Attachments) :
+        GlInvalidateFramebuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Count, GLenum__CP Attachments) :
             mextras(extras),
             mTarget(Target),
             mCount(Count),
@@ -13076,7 +13329,7 @@ namespace gles {
     class GlInvalidateSubFramebuffer: public Encodable {
     public:
         GlInvalidateSubFramebuffer() = default;
-        GlInvalidateSubFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlInvalidateSubFramebuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t NumAttachments, GLenum__CP Attachments, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mNumAttachments(NumAttachments),
@@ -13103,7 +13356,7 @@ namespace gles {
     class GlIsBuffer: public Encodable {
     public:
         GlIsBuffer() = default;
-        GlIsBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Buffer, uint8_t Result) :
+        GlIsBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Buffer, uint8_t Result) :
             mextras(extras),
             mBuffer(Buffer),
             mResult(Result) {}
@@ -13127,7 +13380,7 @@ namespace gles {
     class GlIsEnabled: public Encodable {
     public:
         GlIsEnabled() = default;
-        GlIsEnabled(gapic::Vector<gapic::Encodable*> extras, uint32_t Capability, uint8_t Result) :
+        GlIsEnabled(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Capability, uint8_t Result) :
             mextras(extras),
             mCapability(Capability),
             mResult(Result) {}
@@ -13151,7 +13404,7 @@ namespace gles {
     class GlIsEnabledi: public Encodable {
     public:
         GlIsEnabledi() = default;
-        GlIsEnabledi(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+        GlIsEnabledi(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -13170,7 +13423,7 @@ namespace gles {
     class GlIsEnablediEXT: public Encodable {
     public:
         GlIsEnablediEXT() = default;
-        GlIsEnablediEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+        GlIsEnablediEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -13189,7 +13442,7 @@ namespace gles {
     class GlIsEnablediNV: public Encodable {
     public:
         GlIsEnablediNV() = default;
-        GlIsEnablediNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+        GlIsEnablediNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -13208,7 +13461,7 @@ namespace gles {
     class GlIsEnablediOES: public Encodable {
     public:
         GlIsEnablediOES() = default;
-        GlIsEnablediOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Index, uint8_t Result) :
+        GlIsEnablediOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Index, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mIndex(Index),
@@ -13227,7 +13480,7 @@ namespace gles {
     class GlIsFenceNV: public Encodable {
     public:
         GlIsFenceNV() = default;
-        GlIsFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint8_t Result) :
+        GlIsFenceNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fence, uint8_t Result) :
             mextras(extras),
             mFence(Fence),
             mResult(Result) {}
@@ -13251,7 +13504,7 @@ namespace gles {
     class GlIsFramebuffer: public Encodable {
     public:
         GlIsFramebuffer() = default;
-        GlIsFramebuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint8_t Result) :
+        GlIsFramebuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Framebuffer, uint8_t Result) :
             mextras(extras),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
@@ -13275,7 +13528,7 @@ namespace gles {
     class GlIsFramebufferOES: public Encodable {
     public:
         GlIsFramebufferOES() = default;
-        GlIsFramebufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint8_t Result) :
+        GlIsFramebufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Framebuffer, uint8_t Result) :
             mextras(extras),
             mFramebuffer(Framebuffer),
             mResult(Result) {}
@@ -13299,7 +13552,7 @@ namespace gles {
     class GlIsImageHandleResidentNV: public Encodable {
     public:
         GlIsImageHandleResidentNV() = default;
-        GlIsImageHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint8_t Result) :
+        GlIsImageHandleResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle, uint8_t Result) :
             mextras(extras),
             mHandle(Handle),
             mResult(Result) {}
@@ -13323,7 +13576,7 @@ namespace gles {
     class GlIsPathNV: public Encodable {
     public:
         GlIsPathNV() = default;
-        GlIsPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint8_t Result) :
+        GlIsPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint8_t Result) :
             mextras(extras),
             mPath(Path),
             mResult(Result) {}
@@ -13347,7 +13600,7 @@ namespace gles {
     class GlIsPointInFillPathNV: public Encodable {
     public:
         GlIsPointInFillPathNV() = default;
-        GlIsPointInFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Mask, float X, float Y, uint8_t Result) :
+        GlIsPointInFillPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Mask, float X, float Y, uint8_t Result) :
             mextras(extras),
             mPath(Path),
             mMask(Mask),
@@ -13370,7 +13623,7 @@ namespace gles {
     class GlIsPointInStrokePathNV: public Encodable {
     public:
         GlIsPointInStrokePathNV() = default;
-        GlIsPointInStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, float X, float Y, uint8_t Result) :
+        GlIsPointInStrokePathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, float X, float Y, uint8_t Result) :
             mextras(extras),
             mPath(Path),
             mX(X),
@@ -13391,7 +13644,7 @@ namespace gles {
     class GlIsProgram: public Encodable {
     public:
         GlIsProgram() = default;
-        GlIsProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint8_t Result) :
+        GlIsProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint8_t Result) :
             mextras(extras),
             mProgram(Program),
             mResult(Result) {}
@@ -13415,7 +13668,7 @@ namespace gles {
     class GlIsProgramPipeline: public Encodable {
     public:
         GlIsProgramPipeline() = default;
-        GlIsProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint8_t Result) :
+        GlIsProgramPipeline(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint8_t Result) :
             mextras(extras),
             mPipeline(Pipeline),
             mResult(Result) {}
@@ -13439,7 +13692,7 @@ namespace gles {
     class GlIsProgramPipelineEXT: public Encodable {
     public:
         GlIsProgramPipelineEXT() = default;
-        GlIsProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint8_t Result) :
+        GlIsProgramPipelineEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint8_t Result) :
             mextras(extras),
             mPipeline(Pipeline),
             mResult(Result) {}
@@ -13463,7 +13716,7 @@ namespace gles {
     class GlIsQuery: public Encodable {
     public:
         GlIsQuery() = default;
-        GlIsQuery(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint8_t Result) :
+        GlIsQuery(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint8_t Result) :
             mextras(extras),
             mQuery(Query),
             mResult(Result) {}
@@ -13487,7 +13740,7 @@ namespace gles {
     class GlIsQueryEXT: public Encodable {
     public:
         GlIsQueryEXT() = default;
-        GlIsQueryEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint8_t Result) :
+        GlIsQueryEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint8_t Result) :
             mextras(extras),
             mQuery(Query),
             mResult(Result) {}
@@ -13511,7 +13764,7 @@ namespace gles {
     class GlIsRenderbuffer: public Encodable {
     public:
         GlIsRenderbuffer() = default;
-        GlIsRenderbuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Renderbuffer, uint8_t Result) :
+        GlIsRenderbuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Renderbuffer, uint8_t Result) :
             mextras(extras),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
@@ -13535,7 +13788,7 @@ namespace gles {
     class GlIsRenderbufferOES: public Encodable {
     public:
         GlIsRenderbufferOES() = default;
-        GlIsRenderbufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Renderbuffer, uint8_t Result) :
+        GlIsRenderbufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Renderbuffer, uint8_t Result) :
             mextras(extras),
             mRenderbuffer(Renderbuffer),
             mResult(Result) {}
@@ -13559,7 +13812,7 @@ namespace gles {
     class GlIsSampler: public Encodable {
     public:
         GlIsSampler() = default;
-        GlIsSampler(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint8_t Result) :
+        GlIsSampler(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint8_t Result) :
             mextras(extras),
             mSampler(Sampler),
             mResult(Result) {}
@@ -13583,7 +13836,7 @@ namespace gles {
     class GlIsShader: public Encodable {
     public:
         GlIsShader() = default;
-        GlIsShader(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, uint8_t Result) :
+        GlIsShader(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, uint8_t Result) :
             mextras(extras),
             mShader(Shader),
             mResult(Result) {}
@@ -13607,7 +13860,7 @@ namespace gles {
     class GlIsSync: public Encodable {
     public:
         GlIsSync() = default;
-        GlIsSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint8_t Result) :
+        GlIsSync(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint8_t Result) :
             mextras(extras),
             mSync(Sync),
             mResult(Result) {}
@@ -13631,7 +13884,7 @@ namespace gles {
     class GlIsSyncAPPLE: public Encodable {
     public:
         GlIsSyncAPPLE() = default;
-        GlIsSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint8_t Result) :
+        GlIsSyncAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint8_t Result) :
             mextras(extras),
             mSync(Sync),
             mResult(Result) {}
@@ -13655,7 +13908,7 @@ namespace gles {
     class GlIsTexture: public Encodable {
     public:
         GlIsTexture() = default;
-        GlIsTexture(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint8_t Result) :
+        GlIsTexture(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint8_t Result) :
             mextras(extras),
             mTexture(Texture),
             mResult(Result) {}
@@ -13679,7 +13932,7 @@ namespace gles {
     class GlIsTextureHandleResidentNV: public Encodable {
     public:
         GlIsTextureHandleResidentNV() = default;
-        GlIsTextureHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint8_t Result) :
+        GlIsTextureHandleResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle, uint8_t Result) :
             mextras(extras),
             mHandle(Handle),
             mResult(Result) {}
@@ -13703,7 +13956,7 @@ namespace gles {
     class GlIsTransformFeedback: public Encodable {
     public:
         GlIsTransformFeedback() = default;
-        GlIsTransformFeedback(gapic::Vector<gapic::Encodable*> extras, uint32_t Id, uint8_t Result) :
+        GlIsTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Id, uint8_t Result) :
             mextras(extras),
             mId(Id),
             mResult(Result) {}
@@ -13727,7 +13980,7 @@ namespace gles {
     class GlIsVertexArray: public Encodable {
     public:
         GlIsVertexArray() = default;
-        GlIsVertexArray(gapic::Vector<gapic::Encodable*> extras, uint32_t Array, uint8_t Result) :
+        GlIsVertexArray(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array, uint8_t Result) :
             mextras(extras),
             mArray(Array),
             mResult(Result) {}
@@ -13751,7 +14004,7 @@ namespace gles {
     class GlIsVertexArrayOES: public Encodable {
     public:
         GlIsVertexArrayOES() = default;
-        GlIsVertexArrayOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Array, uint8_t Result) :
+        GlIsVertexArrayOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Array, uint8_t Result) :
             mextras(extras),
             mArray(Array),
             mResult(Result) {}
@@ -13775,7 +14028,7 @@ namespace gles {
     class GlLabelObjectEXT: public Encodable {
     public:
         GlLabelObjectEXT() = default;
-        GlLabelObjectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, uint32_t Object, int32_t Length, GLchar__CP Label) :
+        GlLabelObjectEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, uint32_t Object, int32_t Length, GLchar__CP Label) :
             mextras(extras),
             mType(Type),
             mObject(Object),
@@ -13796,7 +14049,7 @@ namespace gles {
     class GlLightModelf: public Encodable {
     public:
         GlLightModelf() = default;
-        GlLightModelf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+        GlLightModelf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, float Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -13820,7 +14073,7 @@ namespace gles {
     class GlLightModelfv: public Encodable {
     public:
         GlLightModelfv() = default;
-        GlLightModelfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+        GlLightModelfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -13844,7 +14097,7 @@ namespace gles {
     class GlLightModelx: public Encodable {
     public:
         GlLightModelx() = default;
-        GlLightModelx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlLightModelx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -13868,7 +14121,7 @@ namespace gles {
     class GlLightModelxOES: public Encodable {
     public:
         GlLightModelxOES() = default;
-        GlLightModelxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlLightModelxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -13892,7 +14145,7 @@ namespace gles {
     class GlLightModelxv: public Encodable {
     public:
         GlLightModelxv() = default;
-        GlLightModelxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+        GlLightModelxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -13916,7 +14169,7 @@ namespace gles {
     class GlLightModelxvOES: public Encodable {
     public:
         GlLightModelxvOES() = default;
-        GlLightModelxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Param) :
+        GlLightModelxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -13940,7 +14193,7 @@ namespace gles {
     class GlLightf: public Encodable {
     public:
         GlLightf() = default;
-        GlLightf(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, float Param) :
+        GlLightf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, float Param) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -13959,7 +14212,7 @@ namespace gles {
     class GlLightfv: public Encodable {
     public:
         GlLightfv() = default;
-        GlLightfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfloat__CP Params) :
+        GlLightfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -13978,7 +14231,7 @@ namespace gles {
     class GlLightx: public Encodable {
     public:
         GlLightx() = default;
-        GlLightx(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, int32_t Param) :
+        GlLightx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -13997,7 +14250,7 @@ namespace gles {
     class GlLightxOES: public Encodable {
     public:
         GlLightxOES() = default;
-        GlLightxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, int32_t Param) :
+        GlLightxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -14016,7 +14269,7 @@ namespace gles {
     class GlLightxv: public Encodable {
     public:
         GlLightxv() = default;
-        GlLightxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+        GlLightxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -14035,7 +14288,7 @@ namespace gles {
     class GlLightxvOES: public Encodable {
     public:
         GlLightxvOES() = default;
-        GlLightxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
+        GlLightxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Light, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mLight(Light),
             mPname(Pname),
@@ -14054,7 +14307,7 @@ namespace gles {
     class GlLineWidth: public Encodable {
     public:
         GlLineWidth() = default;
-        GlLineWidth(gapic::Vector<gapic::Encodable*> extras, float Width) :
+        GlLineWidth(const gapic::Vector<gapic::Encodable*>& extras, float Width) :
             mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
@@ -14075,7 +14328,7 @@ namespace gles {
     class GlLineWidthx: public Encodable {
     public:
         GlLineWidthx() = default;
-        GlLineWidthx(gapic::Vector<gapic::Encodable*> extras, int32_t Width) :
+        GlLineWidthx(const gapic::Vector<gapic::Encodable*>& extras, int32_t Width) :
             mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
@@ -14096,7 +14349,7 @@ namespace gles {
     class GlLineWidthxOES: public Encodable {
     public:
         GlLineWidthxOES() = default;
-        GlLineWidthxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Width) :
+        GlLineWidthxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Width) :
             mextras(extras),
             mWidth(Width) {}
         virtual void Encode(Encoder* e) const{
@@ -14117,7 +14370,7 @@ namespace gles {
     class GlLinkProgram: public Encodable {
     public:
         GlLinkProgram() = default;
-        GlLinkProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+        GlLinkProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program) :
             mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
@@ -14138,7 +14391,7 @@ namespace gles {
     class GlLoadIdentity: public Encodable {
     public:
         GlLoadIdentity() = default;
-        GlLoadIdentity(gapic::Vector<gapic::Encodable*> extras) :
+        GlLoadIdentity(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -14156,7 +14409,7 @@ namespace gles {
     class GlLoadMatrixf: public Encodable {
     public:
         GlLoadMatrixf() = default;
-        GlLoadMatrixf(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP M) :
+        GlLoadMatrixf(const gapic::Vector<gapic::Encodable*>& extras, GLfloat__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14177,7 +14430,7 @@ namespace gles {
     class GlLoadMatrixx: public Encodable {
     public:
         GlLoadMatrixx() = default;
-        GlLoadMatrixx(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+        GlLoadMatrixx(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14198,7 +14451,7 @@ namespace gles {
     class GlLoadMatrixxOES: public Encodable {
     public:
         GlLoadMatrixxOES() = default;
-        GlLoadMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+        GlLoadMatrixxOES(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14219,7 +14472,7 @@ namespace gles {
     class GlLoadPaletteFromModelViewMatrixOES: public Encodable {
     public:
         GlLoadPaletteFromModelViewMatrixOES() = default;
-        GlLoadPaletteFromModelViewMatrixOES(gapic::Vector<gapic::Encodable*> extras) :
+        GlLoadPaletteFromModelViewMatrixOES(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -14237,7 +14490,7 @@ namespace gles {
     class GlLogicOp: public Encodable {
     public:
         GlLogicOp() = default;
-        GlLogicOp(gapic::Vector<gapic::Encodable*> extras, uint32_t Opcode) :
+        GlLogicOp(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Opcode) :
             mextras(extras),
             mOpcode(Opcode) {}
         virtual void Encode(Encoder* e) const{
@@ -14258,7 +14511,7 @@ namespace gles {
     class GlMakeImageHandleNonResidentNV: public Encodable {
     public:
         GlMakeImageHandleNonResidentNV() = default;
-        GlMakeImageHandleNonResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+        GlMakeImageHandleNonResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle) :
             mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
@@ -14279,7 +14532,7 @@ namespace gles {
     class GlMakeImageHandleResidentNV: public Encodable {
     public:
         GlMakeImageHandleResidentNV() = default;
-        GlMakeImageHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle, uint32_t Access) :
+        GlMakeImageHandleResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle, uint32_t Access) :
             mextras(extras),
             mHandle(Handle),
             mAccess(Access) {}
@@ -14303,7 +14556,7 @@ namespace gles {
     class GlMakeTextureHandleNonResidentNV: public Encodable {
     public:
         GlMakeTextureHandleNonResidentNV() = default;
-        GlMakeTextureHandleNonResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+        GlMakeTextureHandleNonResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle) :
             mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
@@ -14324,7 +14577,7 @@ namespace gles {
     class GlMakeTextureHandleResidentNV: public Encodable {
     public:
         GlMakeTextureHandleResidentNV() = default;
-        GlMakeTextureHandleResidentNV(gapic::Vector<gapic::Encodable*> extras, uint64_t Handle) :
+        GlMakeTextureHandleResidentNV(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Handle) :
             mextras(extras),
             mHandle(Handle) {}
         virtual void Encode(Encoder* e) const{
@@ -14345,7 +14598,7 @@ namespace gles {
     class GlMapBufferOES: public Encodable {
     public:
         GlMapBufferOES() = default;
-        GlMapBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Access, Void__P Result) :
+        GlMapBufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Access, Void__P Result) :
             mextras(extras),
             mTarget(Target),
             mAccess(Access),
@@ -14364,7 +14617,7 @@ namespace gles {
     class GlMapBufferRange: public Encodable {
     public:
         GlMapBufferRange() = default;
-        GlMapBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
+        GlMapBufferRange(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
             mextras(extras),
             mTarget(Target),
             mOffset(Offset),
@@ -14387,7 +14640,7 @@ namespace gles {
     class GlMapBufferRangeEXT: public Encodable {
     public:
         GlMapBufferRangeEXT() = default;
-        GlMapBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
+        GlMapBufferRangeEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Offset, int32_t Length, uint32_t Access, Void__P Result) :
             mextras(extras),
             mTarget(Target),
             mOffset(Offset),
@@ -14410,7 +14663,7 @@ namespace gles {
     class GlMaterialf: public Encodable {
     public:
         GlMaterialf() = default;
-        GlMaterialf(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, float Param) :
+        GlMaterialf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, float Param) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14429,7 +14682,7 @@ namespace gles {
     class GlMaterialfv: public Encodable {
     public:
         GlMaterialfv() = default;
-        GlMaterialfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfloat__CP Params) :
+        GlMaterialfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14448,7 +14701,7 @@ namespace gles {
     class GlMaterialx: public Encodable {
     public:
         GlMaterialx() = default;
-        GlMaterialx(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, int32_t Param) :
+        GlMaterialx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14467,7 +14720,7 @@ namespace gles {
     class GlMaterialxOES: public Encodable {
     public:
         GlMaterialxOES() = default;
-        GlMaterialxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, int32_t Param) :
+        GlMaterialxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14486,7 +14739,7 @@ namespace gles {
     class GlMaterialxv: public Encodable {
     public:
         GlMaterialxv() = default;
-        GlMaterialxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+        GlMaterialxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14505,7 +14758,7 @@ namespace gles {
     class GlMaterialxvOES: public Encodable {
     public:
         GlMaterialxvOES() = default;
-        GlMaterialxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
+        GlMaterialxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Pname, GLfixed__CP Param) :
             mextras(extras),
             mFace(Face),
             mPname(Pname),
@@ -14524,7 +14777,7 @@ namespace gles {
     class GlMatrixIndexPointerOES: public Encodable {
     public:
         GlMatrixIndexPointerOES() = default;
-        GlMatrixIndexPointerOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlMatrixIndexPointerOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -14545,7 +14798,7 @@ namespace gles {
     class GlMatrixIndexPointerOESBounds: public Encodable {
     public:
         GlMatrixIndexPointerOESBounds() = default;
-        GlMatrixIndexPointerOESBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlMatrixIndexPointerOESBounds(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -14568,7 +14821,7 @@ namespace gles {
     class GlMatrixLoad3x2fNV: public Encodable {
     public:
         GlMatrixLoad3x2fNV() = default;
-        GlMatrixLoad3x2fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixLoad3x2fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14592,7 +14845,7 @@ namespace gles {
     class GlMatrixLoad3x3fNV: public Encodable {
     public:
         GlMatrixLoad3x3fNV() = default;
-        GlMatrixLoad3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixLoad3x3fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14616,7 +14869,7 @@ namespace gles {
     class GlMatrixLoadTranspose3x3fNV: public Encodable {
     public:
         GlMatrixLoadTranspose3x3fNV() = default;
-        GlMatrixLoadTranspose3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixLoadTranspose3x3fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14640,7 +14893,7 @@ namespace gles {
     class GlMatrixMode: public Encodable {
     public:
         GlMatrixMode() = default;
-        GlMatrixMode(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+        GlMatrixMode(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode) :
             mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
@@ -14661,7 +14914,7 @@ namespace gles {
     class GlMatrixMult3x2fNV: public Encodable {
     public:
         GlMatrixMult3x2fNV() = default;
-        GlMatrixMult3x2fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixMult3x2fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14685,7 +14938,7 @@ namespace gles {
     class GlMatrixMult3x3fNV: public Encodable {
     public:
         GlMatrixMult3x3fNV() = default;
-        GlMatrixMult3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixMult3x3fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14709,7 +14962,7 @@ namespace gles {
     class GlMatrixMultTranspose3x3fNV: public Encodable {
     public:
         GlMatrixMultTranspose3x3fNV() = default;
-        GlMatrixMultTranspose3x3fNV(gapic::Vector<gapic::Encodable*> extras, uint32_t MatrixMode, GLfloat__CP M) :
+        GlMatrixMultTranspose3x3fNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MatrixMode, GLfloat__CP M) :
             mextras(extras),
             mMatrixMode(MatrixMode),
             mM(M) {}
@@ -14733,7 +14986,7 @@ namespace gles {
     class GlMemoryBarrier: public Encodable {
     public:
         GlMemoryBarrier() = default;
-        GlMemoryBarrier(gapic::Vector<gapic::Encodable*> extras, uint32_t Barriers) :
+        GlMemoryBarrier(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Barriers) :
             mextras(extras),
             mBarriers(Barriers) {}
         virtual void Encode(Encoder* e) const{
@@ -14754,7 +15007,7 @@ namespace gles {
     class GlMemoryBarrierByRegion: public Encodable {
     public:
         GlMemoryBarrierByRegion() = default;
-        GlMemoryBarrierByRegion(gapic::Vector<gapic::Encodable*> extras, uint32_t Barriers) :
+        GlMemoryBarrierByRegion(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Barriers) :
             mextras(extras),
             mBarriers(Barriers) {}
         virtual void Encode(Encoder* e) const{
@@ -14775,7 +15028,7 @@ namespace gles {
     class GlMinSampleShading: public Encodable {
     public:
         GlMinSampleShading() = default;
-        GlMinSampleShading(gapic::Vector<gapic::Encodable*> extras, float Value) :
+        GlMinSampleShading(const gapic::Vector<gapic::Encodable*>& extras, float Value) :
             mextras(extras),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
@@ -14796,7 +15049,7 @@ namespace gles {
     class GlMinSampleShadingOES: public Encodable {
     public:
         GlMinSampleShadingOES() = default;
-        GlMinSampleShadingOES(gapic::Vector<gapic::Encodable*> extras, float Value) :
+        GlMinSampleShadingOES(const gapic::Vector<gapic::Encodable*>& extras, float Value) :
             mextras(extras),
             mValue(Value) {}
         virtual void Encode(Encoder* e) const{
@@ -14817,7 +15070,7 @@ namespace gles {
     class GlMultMatrixf: public Encodable {
     public:
         GlMultMatrixf() = default;
-        GlMultMatrixf(gapic::Vector<gapic::Encodable*> extras, GLfloat__CP M) :
+        GlMultMatrixf(const gapic::Vector<gapic::Encodable*>& extras, GLfloat__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14838,7 +15091,7 @@ namespace gles {
     class GlMultMatrixx: public Encodable {
     public:
         GlMultMatrixx() = default;
-        GlMultMatrixx(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+        GlMultMatrixx(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14859,7 +15112,7 @@ namespace gles {
     class GlMultMatrixxOES: public Encodable {
     public:
         GlMultMatrixxOES() = default;
-        GlMultMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__CP M) :
+        GlMultMatrixxOES(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__CP M) :
             mextras(extras),
             mM(M) {}
         virtual void Encode(Encoder* e) const{
@@ -14880,7 +15133,7 @@ namespace gles {
     class GlMultiDrawArraysEXT: public Encodable {
     public:
         GlMultiDrawArraysEXT() = default;
-        GlMultiDrawArraysEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLint__CP First, GLsizei__CP Count, int32_t Primcount) :
+        GlMultiDrawArraysEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, GLint__CP First, GLsizei__CP Count, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mFirst(First),
@@ -14901,7 +15154,7 @@ namespace gles {
     class GlMultiDrawArraysIndirectEXT: public Encodable {
     public:
         GlMultiDrawArraysIndirectEXT() = default;
-        GlMultiDrawArraysIndirectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
+        GlMultiDrawArraysIndirectEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
             mextras(extras),
             mMode(Mode),
             mIndirect(Indirect),
@@ -14937,7 +15190,7 @@ namespace gles {
     class GlMultiDrawElementsBaseVertexEXT: public Encodable {
     public:
         GlMultiDrawElementsBaseVertexEXT() = default;
-        GlMultiDrawElementsBaseVertexEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
+        GlMultiDrawElementsBaseVertexEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -14962,7 +15215,7 @@ namespace gles {
     class GlMultiDrawElementsBaseVertexOES: public Encodable {
     public:
         GlMultiDrawElementsBaseVertexOES() = default;
-        GlMultiDrawElementsBaseVertexOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
+        GlMultiDrawElementsBaseVertexOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount, GLint__CP Basevertex) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -14987,7 +15240,7 @@ namespace gles {
     class GlMultiDrawElementsEXT: public Encodable {
     public:
         GlMultiDrawElementsEXT() = default;
-        GlMultiDrawElementsEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount) :
+        GlMultiDrawElementsEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, GLsizei__CP Count, uint32_t Type, Void__CP__CP Indices, int32_t Primcount) :
             mextras(extras),
             mMode(Mode),
             mCount(Count),
@@ -15010,7 +15263,7 @@ namespace gles {
     class GlMultiDrawElementsIndirectEXT: public Encodable {
     public:
         GlMultiDrawElementsIndirectEXT() = default;
-        GlMultiDrawElementsIndirectEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode, uint32_t Type, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
+        GlMultiDrawElementsIndirectEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode, uint32_t Type, Void__CP Indirect, int32_t Drawcount, int32_t Stride) :
             mextras(extras),
             mMode(Mode),
             mType(Type),
@@ -15033,7 +15286,7 @@ namespace gles {
     class GlMultiTexCoord4f: public Encodable {
     public:
         GlMultiTexCoord4f() = default;
-        GlMultiTexCoord4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, float V0, float V1, float V2, float V3) :
+        GlMultiTexCoord4f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, float V0, float V1, float V2, float V3) :
             mextras(extras),
             mTarget(Target),
             mV0(V0),
@@ -15056,7 +15309,7 @@ namespace gles {
     class GlMultiTexCoord4x: public Encodable {
     public:
         GlMultiTexCoord4x() = default;
-        GlMultiTexCoord4x(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+        GlMultiTexCoord4x(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
             mextras(extras),
             mTexture(Texture),
             mV0(V0),
@@ -15079,7 +15332,7 @@ namespace gles {
     class GlMultiTexCoord4xOES: public Encodable {
     public:
         GlMultiTexCoord4xOES() = default;
-        GlMultiTexCoord4xOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+        GlMultiTexCoord4xOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
             mextras(extras),
             mTexture(Texture),
             mV0(V0),
@@ -15102,7 +15355,7 @@ namespace gles {
     class GlNamedFramebufferSampleLocationsfvNV: public Encodable {
     public:
         GlNamedFramebufferSampleLocationsfvNV() = default;
-        GlNamedFramebufferSampleLocationsfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Framebuffer, uint32_t Start, int32_t Count, GLfloat__CP V) :
+        GlNamedFramebufferSampleLocationsfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Framebuffer, uint32_t Start, int32_t Count, GLfloat__CP V) :
             mextras(extras),
             mFramebuffer(Framebuffer),
             mStart(Start),
@@ -15123,7 +15376,7 @@ namespace gles {
     class GlNormal3f: public Encodable {
     public:
         GlNormal3f() = default;
-        GlNormal3f(gapic::Vector<gapic::Encodable*> extras, float Nx, float Ny, float Nz) :
+        GlNormal3f(const gapic::Vector<gapic::Encodable*>& extras, float Nx, float Ny, float Nz) :
             mextras(extras),
             mNx(Nx),
             mNy(Ny),
@@ -15142,7 +15395,7 @@ namespace gles {
     class GlNormal3x: public Encodable {
     public:
         GlNormal3x() = default;
-        GlNormal3x(gapic::Vector<gapic::Encodable*> extras, int32_t Nx, int32_t Ny, int32_t Nz) :
+        GlNormal3x(const gapic::Vector<gapic::Encodable*>& extras, int32_t Nx, int32_t Ny, int32_t Nz) :
             mextras(extras),
             mNx(Nx),
             mNy(Ny),
@@ -15161,7 +15414,7 @@ namespace gles {
     class GlNormal3xOES: public Encodable {
     public:
         GlNormal3xOES() = default;
-        GlNormal3xOES(gapic::Vector<gapic::Encodable*> extras, int32_t Nx, int32_t Ny, int32_t Nz) :
+        GlNormal3xOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Nx, int32_t Ny, int32_t Nz) :
             mextras(extras),
             mNx(Nx),
             mNy(Ny),
@@ -15180,7 +15433,7 @@ namespace gles {
     class GlNormalPointer: public Encodable {
     public:
         GlNormalPointer() = default;
-        GlNormalPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlNormalPointer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mType(Type),
             mStride(Stride),
@@ -15199,7 +15452,7 @@ namespace gles {
     class GlNormalPointerBounds: public Encodable {
     public:
         GlNormalPointerBounds() = default;
-        GlNormalPointerBounds(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlNormalPointerBounds(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mType(Type),
             mStride(Stride),
@@ -15220,7 +15473,7 @@ namespace gles {
     class GlObjectLabel: public Encodable {
     public:
         GlObjectLabel() = default;
-        GlObjectLabel(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
+        GlObjectLabel(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
             mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
@@ -15241,7 +15494,7 @@ namespace gles {
     class GlObjectLabelKHR: public Encodable {
     public:
         GlObjectLabelKHR() = default;
-        GlObjectLabelKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
+        GlObjectLabelKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Identifier, uint32_t Name, int32_t Length, GLchar__CP Label) :
             mextras(extras),
             mIdentifier(Identifier),
             mName(Name),
@@ -15262,7 +15515,7 @@ namespace gles {
     class GlObjectPtrLabel: public Encodable {
     public:
         GlObjectPtrLabel() = default;
-        GlObjectPtrLabel(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
+        GlObjectPtrLabel(const gapic::Vector<gapic::Encodable*>& extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
             mextras(extras),
             mPtr(Ptr),
             mLength(Length),
@@ -15281,7 +15534,7 @@ namespace gles {
     class GlObjectPtrLabelKHR: public Encodable {
     public:
         GlObjectPtrLabelKHR() = default;
-        GlObjectPtrLabelKHR(gapic::Vector<gapic::Encodable*> extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
+        GlObjectPtrLabelKHR(const gapic::Vector<gapic::Encodable*>& extras, Void__CP Ptr, int32_t Length, GLchar__CP Label) :
             mextras(extras),
             mPtr(Ptr),
             mLength(Length),
@@ -15300,7 +15553,7 @@ namespace gles {
     class GlOrthof: public Encodable {
     public:
         GlOrthof() = default;
-        GlOrthof(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+        GlOrthof(const gapic::Vector<gapic::Encodable*>& extras, float L, float R, float B, float T, float N, float F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -15325,7 +15578,7 @@ namespace gles {
     class GlOrthofOES: public Encodable {
     public:
         GlOrthofOES() = default;
-        GlOrthofOES(gapic::Vector<gapic::Encodable*> extras, float L, float R, float B, float T, float N, float F) :
+        GlOrthofOES(const gapic::Vector<gapic::Encodable*>& extras, float L, float R, float B, float T, float N, float F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -15350,7 +15603,7 @@ namespace gles {
     class GlOrthox: public Encodable {
     public:
         GlOrthox() = default;
-        GlOrthox(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+        GlOrthox(const gapic::Vector<gapic::Encodable*>& extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -15375,7 +15628,7 @@ namespace gles {
     class GlOrthoxOES: public Encodable {
     public:
         GlOrthoxOES() = default;
-        GlOrthoxOES(gapic::Vector<gapic::Encodable*> extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
+        GlOrthoxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t L, int32_t R, int32_t B, int32_t T, int32_t N, int32_t F) :
             mextras(extras),
             mL(L),
             mR(R),
@@ -15400,7 +15653,7 @@ namespace gles {
     class GlPatchParameteri: public Encodable {
     public:
         GlPatchParameteri() = default;
-        GlPatchParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+        GlPatchParameteri(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mPname(Pname),
             mValue(Value) {}
@@ -15424,7 +15677,7 @@ namespace gles {
     class GlPatchParameteriEXT: public Encodable {
     public:
         GlPatchParameteriEXT() = default;
-        GlPatchParameteriEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+        GlPatchParameteriEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mPname(Pname),
             mValue(Value) {}
@@ -15448,7 +15701,7 @@ namespace gles {
     class GlPatchParameteriOES: public Encodable {
     public:
         GlPatchParameteriOES() = default;
-        GlPatchParameteriOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Value) :
+        GlPatchParameteriOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mPname(Pname),
             mValue(Value) {}
@@ -15472,7 +15725,7 @@ namespace gles {
     class GlPathCommandsNV: public Encodable {
     public:
         GlPathCommandsNV() = default;
-        GlPathCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+        GlPathCommandsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
             mextras(extras),
             mPath(Path),
             mNumCommands(NumCommands),
@@ -15497,7 +15750,7 @@ namespace gles {
     class GlPathCoordsNV: public Encodable {
     public:
         GlPathCoordsNV() = default;
-        GlPathCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+        GlPathCoordsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
             mextras(extras),
             mPath(Path),
             mNumCoords(NumCoords),
@@ -15518,7 +15771,7 @@ namespace gles {
     class GlPathCoverDepthFuncNV: public Encodable {
     public:
         GlPathCoverDepthFuncNV() = default;
-        GlPathCoverDepthFuncNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Func) :
+        GlPathCoverDepthFuncNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func) :
             mextras(extras),
             mFunc(Func) {}
         virtual void Encode(Encoder* e) const{
@@ -15539,7 +15792,7 @@ namespace gles {
     class GlPathDashArrayNV: public Encodable {
     public:
         GlPathDashArrayNV() = default;
-        GlPathDashArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t DashCount, GLfloat__CP DashArray) :
+        GlPathDashArrayNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t DashCount, GLfloat__CP DashArray) :
             mextras(extras),
             mPath(Path),
             mDashCount(DashCount),
@@ -15558,7 +15811,7 @@ namespace gles {
     class GlPathGlyphIndexArrayNV: public Encodable {
     public:
         GlPathGlyphIndexArrayNV() = default;
-        GlPathGlyphIndexArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
+        GlPathGlyphIndexArrayNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
             mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
@@ -15589,7 +15842,7 @@ namespace gles {
     class GlPathGlyphIndexRangeNV: public Encodable {
     public:
         GlPathGlyphIndexRangeNV() = default;
-        GlPathGlyphIndexRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t PathParameterTemplate, float EmScale, uint32_t BaseAndCount, uint32_t Result) :
+        GlPathGlyphIndexRangeNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t PathParameterTemplate, float EmScale, uint32_t BaseAndCount, uint32_t Result) :
             mextras(extras),
             mFontTarget(FontTarget),
             mFontName(FontName),
@@ -15616,7 +15869,7 @@ namespace gles {
     class GlPathGlyphRangeNV: public Encodable {
     public:
         GlPathGlyphRangeNV() = default;
-        GlPathGlyphRangeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyph, int32_t NumGlyphs, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
+        GlPathGlyphRangeNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, uint32_t FirstGlyph, int32_t NumGlyphs, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
             mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
@@ -15647,7 +15900,7 @@ namespace gles {
     class GlPathGlyphsNV: public Encodable {
     public:
         GlPathGlyphsNV() = default;
-        GlPathGlyphsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, int32_t NumGlyphs, uint32_t Type, Void__CP Charcodes, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
+        GlPathGlyphsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FirstPathName, uint32_t FontTarget, Void__CP FontName, uint32_t FontStyle, int32_t NumGlyphs, uint32_t Type, Void__CP Charcodes, uint32_t HandleMissingGlyphs, uint32_t PathParameterTemplate, float EmScale) :
             mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
@@ -15680,7 +15933,7 @@ namespace gles {
     class GlPathMemoryGlyphIndexArrayNV: public Encodable {
     public:
         GlPathMemoryGlyphIndexArrayNV() = default;
-        GlPathMemoryGlyphIndexArrayNV(gapic::Vector<gapic::Encodable*> extras, uint32_t FirstPathName, uint32_t FontTarget, int32_t FontSize, Void__CP FontData, int32_t FaceIndex, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
+        GlPathMemoryGlyphIndexArrayNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t FirstPathName, uint32_t FontTarget, int32_t FontSize, Void__CP FontData, int32_t FaceIndex, uint32_t FirstGlyphIndex, int32_t NumGlyphs, uint32_t PathParameterTemplate, float EmScale, uint32_t Result) :
             mextras(extras),
             mFirstPathName(FirstPathName),
             mFontTarget(FontTarget),
@@ -15713,7 +15966,7 @@ namespace gles {
     class GlPathParameterfNV: public Encodable {
     public:
         GlPathParameterfNV() = default;
-        GlPathParameterfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, float Value) :
+        GlPathParameterfNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, float Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -15732,7 +15985,7 @@ namespace gles {
     class GlPathParameterfvNV: public Encodable {
     public:
         GlPathParameterfvNV() = default;
-        GlPathParameterfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLfloat__CP Value) :
+        GlPathParameterfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, GLfloat__CP Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -15751,7 +16004,7 @@ namespace gles {
     class GlPathParameteriNV: public Encodable {
     public:
         GlPathParameteriNV() = default;
-        GlPathParameteriNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, int32_t Value) :
+        GlPathParameteriNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -15770,7 +16023,7 @@ namespace gles {
     class GlPathParameterivNV: public Encodable {
     public:
         GlPathParameterivNV() = default;
-        GlPathParameterivNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Pname, GLint__CP Value) :
+        GlPathParameterivNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Pname, GLint__CP Value) :
             mextras(extras),
             mPath(Path),
             mPname(Pname),
@@ -15789,7 +16042,7 @@ namespace gles {
     class GlPathStencilDepthOffsetNV: public Encodable {
     public:
         GlPathStencilDepthOffsetNV() = default;
-        GlPathStencilDepthOffsetNV(gapic::Vector<gapic::Encodable*> extras, float Factor, float Units) :
+        GlPathStencilDepthOffsetNV(const gapic::Vector<gapic::Encodable*>& extras, float Factor, float Units) :
             mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
@@ -15813,7 +16066,7 @@ namespace gles {
     class GlPathStencilFuncNV: public Encodable {
     public:
         GlPathStencilFuncNV() = default;
-        GlPathStencilFuncNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
+        GlPathStencilFuncNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref),
@@ -15832,7 +16085,7 @@ namespace gles {
     class GlPathStringNV: public Encodable {
     public:
         GlPathStringNV() = default;
-        GlPathStringNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t Format, int32_t Length, Void__CP PathString) :
+        GlPathStringNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t Format, int32_t Length, Void__CP PathString) :
             mextras(extras),
             mPath(Path),
             mFormat(Format),
@@ -15853,7 +16106,7 @@ namespace gles {
     class GlPathSubCommandsNV: public Encodable {
     public:
         GlPathSubCommandsNV() = default;
-        GlPathSubCommandsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t CommandStart, int32_t CommandsToDelete, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+        GlPathSubCommandsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t CommandStart, int32_t CommandsToDelete, int32_t NumCommands, GLubyte__CP Commands, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
             mextras(extras),
             mPath(Path),
             mCommandStart(CommandStart),
@@ -15882,7 +16135,7 @@ namespace gles {
     class GlPathSubCoordsNV: public Encodable {
     public:
         GlPathSubCoordsNV() = default;
-        GlPathSubCoordsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t CoordStart, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
+        GlPathSubCoordsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t CoordStart, int32_t NumCoords, uint32_t CoordType, Void__CP Coords) :
             mextras(extras),
             mPath(Path),
             mCoordStart(CoordStart),
@@ -15905,7 +16158,7 @@ namespace gles {
     class GlPauseTransformFeedback: public Encodable {
     public:
         GlPauseTransformFeedback() = default;
-        GlPauseTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+        GlPauseTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -15923,7 +16176,7 @@ namespace gles {
     class GlPixelStorei: public Encodable {
     public:
         GlPixelStorei() = default;
-        GlPixelStorei(gapic::Vector<gapic::Encodable*> extras, uint32_t Parameter, int32_t Value) :
+        GlPixelStorei(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Parameter, int32_t Value) :
             mextras(extras),
             mParameter(Parameter),
             mValue(Value) {}
@@ -15947,7 +16200,7 @@ namespace gles {
     class GlPointAlongPathNV: public Encodable {
     public:
         GlPointAlongPathNV() = default;
-        GlPointAlongPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Distance, GLfloat__P X, GLfloat__P Y, GLfloat__P TangentX, GLfloat__P TangentY, uint8_t Result) :
+        GlPointAlongPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t StartSegment, int32_t NumSegments, float Distance, GLfloat__P X, GLfloat__P Y, GLfloat__P TangentX, GLfloat__P TangentY, uint8_t Result) :
             mextras(extras),
             mPath(Path),
             mStartSegment(StartSegment),
@@ -15978,7 +16231,7 @@ namespace gles {
     class GlPointParameterf: public Encodable {
     public:
         GlPointParameterf() = default;
-        GlPointParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, float Param) :
+        GlPointParameterf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, float Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -16002,7 +16255,7 @@ namespace gles {
     class GlPointParameterfv: public Encodable {
     public:
         GlPointParameterfv() = default;
-        GlPointParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfloat__CP Params) :
+        GlPointParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -16026,7 +16279,7 @@ namespace gles {
     class GlPointParameterx: public Encodable {
     public:
         GlPointParameterx() = default;
-        GlPointParameterx(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlPointParameterx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -16050,7 +16303,7 @@ namespace gles {
     class GlPointParameterxOES: public Encodable {
     public:
         GlPointParameterxOES() = default;
-        GlPointParameterxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, int32_t Param) :
+        GlPointParameterxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mPname(Pname),
             mParam(Param) {}
@@ -16074,7 +16327,7 @@ namespace gles {
     class GlPointParameterxv: public Encodable {
     public:
         GlPointParameterxv() = default;
-        GlPointParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Params) :
+        GlPointParameterxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -16098,7 +16351,7 @@ namespace gles {
     class GlPointParameterxvOES: public Encodable {
     public:
         GlPointParameterxvOES() = default;
-        GlPointParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Pname, GLfixed__CP Params) :
+        GlPointParameterxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mPname(Pname),
             mParams(Params) {}
@@ -16122,7 +16375,7 @@ namespace gles {
     class GlPointSize: public Encodable {
     public:
         GlPointSize() = default;
-        GlPointSize(gapic::Vector<gapic::Encodable*> extras, float Size) :
+        GlPointSize(const gapic::Vector<gapic::Encodable*>& extras, float Size) :
             mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
@@ -16143,7 +16396,7 @@ namespace gles {
     class GlPointSizePointerOES: public Encodable {
     public:
         GlPointSizePointerOES() = default;
-        GlPointSizePointerOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlPointSizePointerOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mType(Type),
             mStride(Stride),
@@ -16162,7 +16415,7 @@ namespace gles {
     class GlPointSizePointerOESBounds: public Encodable {
     public:
         GlPointSizePointerOESBounds() = default;
-        GlPointSizePointerOESBounds(gapic::Vector<gapic::Encodable*> extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlPointSizePointerOESBounds(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mType(Type),
             mStride(Stride),
@@ -16183,7 +16436,7 @@ namespace gles {
     class GlPointSizex: public Encodable {
     public:
         GlPointSizex() = default;
-        GlPointSizex(gapic::Vector<gapic::Encodable*> extras, int32_t Size) :
+        GlPointSizex(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size) :
             mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
@@ -16204,7 +16457,7 @@ namespace gles {
     class GlPointSizexOES: public Encodable {
     public:
         GlPointSizexOES() = default;
-        GlPointSizexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size) :
+        GlPointSizexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size) :
             mextras(extras),
             mSize(Size) {}
         virtual void Encode(Encoder* e) const{
@@ -16225,7 +16478,7 @@ namespace gles {
     class GlPolygonModeNV: public Encodable {
     public:
         GlPolygonModeNV() = default;
-        GlPolygonModeNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Mode) :
+        GlPolygonModeNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Mode) :
             mextras(extras),
             mFace(Face),
             mMode(Mode) {}
@@ -16249,7 +16502,7 @@ namespace gles {
     class GlPolygonOffset: public Encodable {
     public:
         GlPolygonOffset() = default;
-        GlPolygonOffset(gapic::Vector<gapic::Encodable*> extras, float ScaleFactor, float Units) :
+        GlPolygonOffset(const gapic::Vector<gapic::Encodable*>& extras, float ScaleFactor, float Units) :
             mextras(extras),
             mScaleFactor(ScaleFactor),
             mUnits(Units) {}
@@ -16273,7 +16526,7 @@ namespace gles {
     class GlPolygonOffsetx: public Encodable {
     public:
         GlPolygonOffsetx() = default;
-        GlPolygonOffsetx(gapic::Vector<gapic::Encodable*> extras, int32_t Factor, int32_t Units) :
+        GlPolygonOffsetx(const gapic::Vector<gapic::Encodable*>& extras, int32_t Factor, int32_t Units) :
             mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
@@ -16297,7 +16550,7 @@ namespace gles {
     class GlPolygonOffsetxOES: public Encodable {
     public:
         GlPolygonOffsetxOES() = default;
-        GlPolygonOffsetxOES(gapic::Vector<gapic::Encodable*> extras, int32_t Factor, int32_t Units) :
+        GlPolygonOffsetxOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Factor, int32_t Units) :
             mextras(extras),
             mFactor(Factor),
             mUnits(Units) {}
@@ -16321,7 +16574,7 @@ namespace gles {
     class GlPopDebugGroup: public Encodable {
     public:
         GlPopDebugGroup() = default;
-        GlPopDebugGroup(gapic::Vector<gapic::Encodable*> extras) :
+        GlPopDebugGroup(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -16339,7 +16592,7 @@ namespace gles {
     class GlPopDebugGroupKHR: public Encodable {
     public:
         GlPopDebugGroupKHR() = default;
-        GlPopDebugGroupKHR(gapic::Vector<gapic::Encodable*> extras) :
+        GlPopDebugGroupKHR(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -16357,7 +16610,7 @@ namespace gles {
     class GlPopGroupMarkerEXT: public Encodable {
     public:
         GlPopGroupMarkerEXT() = default;
-        GlPopGroupMarkerEXT(gapic::Vector<gapic::Encodable*> extras) :
+        GlPopGroupMarkerEXT(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -16375,7 +16628,7 @@ namespace gles {
     class GlPopMatrix: public Encodable {
     public:
         GlPopMatrix() = default;
-        GlPopMatrix(gapic::Vector<gapic::Encodable*> extras) :
+        GlPopMatrix(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -16393,7 +16646,7 @@ namespace gles {
     class GlPrimitiveBoundingBox: public Encodable {
     public:
         GlPrimitiveBoundingBox() = default;
-        GlPrimitiveBoundingBox(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+        GlPrimitiveBoundingBox(const gapic::Vector<gapic::Encodable*>& extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
             mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
@@ -16422,7 +16675,7 @@ namespace gles {
     class GlPrimitiveBoundingBoxEXT: public Encodable {
     public:
         GlPrimitiveBoundingBoxEXT() = default;
-        GlPrimitiveBoundingBoxEXT(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+        GlPrimitiveBoundingBoxEXT(const gapic::Vector<gapic::Encodable*>& extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
             mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
@@ -16451,7 +16704,7 @@ namespace gles {
     class GlPrimitiveBoundingBoxOES: public Encodable {
     public:
         GlPrimitiveBoundingBoxOES() = default;
-        GlPrimitiveBoundingBoxOES(gapic::Vector<gapic::Encodable*> extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
+        GlPrimitiveBoundingBoxOES(const gapic::Vector<gapic::Encodable*>& extras, float MinX, float MinY, float MinZ, float MinW, float MaxX, float MaxY, float MaxZ, float MaxW) :
             mextras(extras),
             mMinX(MinX),
             mMinY(MinY),
@@ -16480,7 +16733,7 @@ namespace gles {
     class GlProgramBinary: public Encodable {
     public:
         GlProgramBinary() = default;
-        GlProgramBinary(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t Length) :
+        GlProgramBinary(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t Length) :
             mextras(extras),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
@@ -16501,7 +16754,7 @@ namespace gles {
     class GlProgramBinaryOES: public Encodable {
     public:
         GlProgramBinaryOES() = default;
-        GlProgramBinaryOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
+        GlProgramBinaryOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
             mextras(extras),
             mProgram(Program),
             mBinaryFormat(BinaryFormat),
@@ -16522,7 +16775,7 @@ namespace gles {
     class GlProgramParameteri: public Encodable {
     public:
         GlProgramParameteri() = default;
-        GlProgramParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Pname, int32_t Value) :
+        GlProgramParameteri(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mProgram(Program),
             mPname(Pname),
@@ -16541,7 +16794,7 @@ namespace gles {
     class GlProgramParameteriEXT: public Encodable {
     public:
         GlProgramParameteriEXT() = default;
-        GlProgramParameteriEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t Pname, int32_t Value) :
+        GlProgramParameteriEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t Pname, int32_t Value) :
             mextras(extras),
             mProgram(Program),
             mPname(Pname),
@@ -16560,7 +16813,7 @@ namespace gles {
     class GlProgramPathFragmentInputGenNV: public Encodable {
     public:
         GlProgramPathFragmentInputGenNV() = default;
-        GlProgramPathFragmentInputGenNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t GenMode, int32_t Components, GLfloat__CP Coeffs) :
+        GlProgramPathFragmentInputGenNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t GenMode, int32_t Components, GLfloat__CP Coeffs) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16583,7 +16836,7 @@ namespace gles {
     class GlProgramUniform1f: public Encodable {
     public:
         GlProgramUniform1f() = default;
-        GlProgramUniform1f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0) :
+        GlProgramUniform1f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float Value0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16602,7 +16855,7 @@ namespace gles {
     class GlProgramUniform1fEXT: public Encodable {
     public:
         GlProgramUniform1fEXT() = default;
-        GlProgramUniform1fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0) :
+        GlProgramUniform1fEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float V0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16621,7 +16874,7 @@ namespace gles {
     class GlProgramUniform1fv: public Encodable {
     public:
         GlProgramUniform1fv() = default;
-        GlProgramUniform1fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlProgramUniform1fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16642,7 +16895,7 @@ namespace gles {
     class GlProgramUniform1fvEXT: public Encodable {
     public:
         GlProgramUniform1fvEXT() = default;
-        GlProgramUniform1fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+        GlProgramUniform1fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16663,7 +16916,7 @@ namespace gles {
     class GlProgramUniform1i: public Encodable {
     public:
         GlProgramUniform1i() = default;
-        GlProgramUniform1i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0) :
+        GlProgramUniform1i(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Value0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16682,7 +16935,7 @@ namespace gles {
     class GlProgramUniform1iEXT: public Encodable {
     public:
         GlProgramUniform1iEXT() = default;
-        GlProgramUniform1iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0) :
+        GlProgramUniform1iEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t V0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16701,7 +16954,7 @@ namespace gles {
     class GlProgramUniform1iv: public Encodable {
     public:
         GlProgramUniform1iv() = default;
-        GlProgramUniform1iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlProgramUniform1iv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16722,7 +16975,7 @@ namespace gles {
     class GlProgramUniform1ivEXT: public Encodable {
     public:
         GlProgramUniform1ivEXT() = default;
-        GlProgramUniform1ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+        GlProgramUniform1ivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16743,7 +16996,7 @@ namespace gles {
     class GlProgramUniform1ui: public Encodable {
     public:
         GlProgramUniform1ui() = default;
-        GlProgramUniform1ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0) :
+        GlProgramUniform1ui(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t Value0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16762,7 +17015,7 @@ namespace gles {
     class GlProgramUniform1uiEXT: public Encodable {
     public:
         GlProgramUniform1uiEXT() = default;
-        GlProgramUniform1uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0) :
+        GlProgramUniform1uiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t V0) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16781,7 +17034,7 @@ namespace gles {
     class GlProgramUniform1uiv: public Encodable {
     public:
         GlProgramUniform1uiv() = default;
-        GlProgramUniform1uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlProgramUniform1uiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16802,7 +17055,7 @@ namespace gles {
     class GlProgramUniform1uivEXT: public Encodable {
     public:
         GlProgramUniform1uivEXT() = default;
-        GlProgramUniform1uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+        GlProgramUniform1uivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16823,7 +17076,7 @@ namespace gles {
     class GlProgramUniform2f: public Encodable {
     public:
         GlProgramUniform2f() = default;
-        GlProgramUniform2f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1) :
+        GlProgramUniform2f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float Value0, float Value1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16844,7 +17097,7 @@ namespace gles {
     class GlProgramUniform2fEXT: public Encodable {
     public:
         GlProgramUniform2fEXT() = default;
-        GlProgramUniform2fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1) :
+        GlProgramUniform2fEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float V0, float V1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16865,7 +17118,7 @@ namespace gles {
     class GlProgramUniform2fv: public Encodable {
     public:
         GlProgramUniform2fv() = default;
-        GlProgramUniform2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlProgramUniform2fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16886,7 +17139,7 @@ namespace gles {
     class GlProgramUniform2fvEXT: public Encodable {
     public:
         GlProgramUniform2fvEXT() = default;
-        GlProgramUniform2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+        GlProgramUniform2fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16907,7 +17160,7 @@ namespace gles {
     class GlProgramUniform2i: public Encodable {
     public:
         GlProgramUniform2i() = default;
-        GlProgramUniform2i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1) :
+        GlProgramUniform2i(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16928,7 +17181,7 @@ namespace gles {
     class GlProgramUniform2iEXT: public Encodable {
     public:
         GlProgramUniform2iEXT() = default;
-        GlProgramUniform2iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1) :
+        GlProgramUniform2iEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16949,7 +17202,7 @@ namespace gles {
     class GlProgramUniform2iv: public Encodable {
     public:
         GlProgramUniform2iv() = default;
-        GlProgramUniform2iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlProgramUniform2iv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16970,7 +17223,7 @@ namespace gles {
     class GlProgramUniform2ivEXT: public Encodable {
     public:
         GlProgramUniform2ivEXT() = default;
-        GlProgramUniform2ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+        GlProgramUniform2ivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -16991,7 +17244,7 @@ namespace gles {
     class GlProgramUniform2ui: public Encodable {
     public:
         GlProgramUniform2ui() = default;
-        GlProgramUniform2ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1) :
+        GlProgramUniform2ui(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17012,7 +17265,7 @@ namespace gles {
     class GlProgramUniform2uiEXT: public Encodable {
     public:
         GlProgramUniform2uiEXT() = default;
-        GlProgramUniform2uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1) :
+        GlProgramUniform2uiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17033,7 +17286,7 @@ namespace gles {
     class GlProgramUniform2uiv: public Encodable {
     public:
         GlProgramUniform2uiv() = default;
-        GlProgramUniform2uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlProgramUniform2uiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17054,7 +17307,7 @@ namespace gles {
     class GlProgramUniform2uivEXT: public Encodable {
     public:
         GlProgramUniform2uivEXT() = default;
-        GlProgramUniform2uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+        GlProgramUniform2uivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17075,7 +17328,7 @@ namespace gles {
     class GlProgramUniform3f: public Encodable {
     public:
         GlProgramUniform3f() = default;
-        GlProgramUniform3f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2) :
+        GlProgramUniform3f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17098,7 +17351,7 @@ namespace gles {
     class GlProgramUniform3fEXT: public Encodable {
     public:
         GlProgramUniform3fEXT() = default;
-        GlProgramUniform3fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1, float V2) :
+        GlProgramUniform3fEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float V0, float V1, float V2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17121,7 +17374,7 @@ namespace gles {
     class GlProgramUniform3fv: public Encodable {
     public:
         GlProgramUniform3fv() = default;
-        GlProgramUniform3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlProgramUniform3fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17142,7 +17395,7 @@ namespace gles {
     class GlProgramUniform3fvEXT: public Encodable {
     public:
         GlProgramUniform3fvEXT() = default;
-        GlProgramUniform3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+        GlProgramUniform3fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17163,7 +17416,7 @@ namespace gles {
     class GlProgramUniform3i: public Encodable {
     public:
         GlProgramUniform3i() = default;
-        GlProgramUniform3i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
+        GlProgramUniform3i(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17186,7 +17439,7 @@ namespace gles {
     class GlProgramUniform3iEXT: public Encodable {
     public:
         GlProgramUniform3iEXT() = default;
-        GlProgramUniform3iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2) :
+        GlProgramUniform3iEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17209,7 +17462,7 @@ namespace gles {
     class GlProgramUniform3iv: public Encodable {
     public:
         GlProgramUniform3iv() = default;
-        GlProgramUniform3iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlProgramUniform3iv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17230,7 +17483,7 @@ namespace gles {
     class GlProgramUniform3ivEXT: public Encodable {
     public:
         GlProgramUniform3ivEXT() = default;
-        GlProgramUniform3ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+        GlProgramUniform3ivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17251,7 +17504,7 @@ namespace gles {
     class GlProgramUniform3ui: public Encodable {
     public:
         GlProgramUniform3ui() = default;
-        GlProgramUniform3ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
+        GlProgramUniform3ui(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17274,7 +17527,7 @@ namespace gles {
     class GlProgramUniform3uiEXT: public Encodable {
     public:
         GlProgramUniform3uiEXT() = default;
-        GlProgramUniform3uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2) :
+        GlProgramUniform3uiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17297,7 +17550,7 @@ namespace gles {
     class GlProgramUniform3uiv: public Encodable {
     public:
         GlProgramUniform3uiv() = default;
-        GlProgramUniform3uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlProgramUniform3uiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17318,7 +17571,7 @@ namespace gles {
     class GlProgramUniform3uivEXT: public Encodable {
     public:
         GlProgramUniform3uivEXT() = default;
-        GlProgramUniform3uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+        GlProgramUniform3uivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17339,7 +17592,7 @@ namespace gles {
     class GlProgramUniform4f: public Encodable {
     public:
         GlProgramUniform4f() = default;
-        GlProgramUniform4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
+        GlProgramUniform4f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17364,7 +17617,7 @@ namespace gles {
     class GlProgramUniform4fEXT: public Encodable {
     public:
         GlProgramUniform4fEXT() = default;
-        GlProgramUniform4fEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, float V0, float V1, float V2, float V3) :
+        GlProgramUniform4fEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, float V0, float V1, float V2, float V3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17389,7 +17642,7 @@ namespace gles {
     class GlProgramUniform4fv: public Encodable {
     public:
         GlProgramUniform4fv() = default;
-        GlProgramUniform4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlProgramUniform4fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17410,7 +17663,7 @@ namespace gles {
     class GlProgramUniform4fvEXT: public Encodable {
     public:
         GlProgramUniform4fvEXT() = default;
-        GlProgramUniform4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
+        GlProgramUniform4fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17431,7 +17684,7 @@ namespace gles {
     class GlProgramUniform4i: public Encodable {
     public:
         GlProgramUniform4i() = default;
-        GlProgramUniform4i(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
+        GlProgramUniform4i(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17456,7 +17709,7 @@ namespace gles {
     class GlProgramUniform4iEXT: public Encodable {
     public:
         GlProgramUniform4iEXT() = default;
-        GlProgramUniform4iEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
+        GlProgramUniform4iEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t V0, int32_t V1, int32_t V2, int32_t V3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17481,7 +17734,7 @@ namespace gles {
     class GlProgramUniform4iv: public Encodable {
     public:
         GlProgramUniform4iv() = default;
-        GlProgramUniform4iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlProgramUniform4iv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17502,7 +17755,7 @@ namespace gles {
     class GlProgramUniform4ivEXT: public Encodable {
     public:
         GlProgramUniform4ivEXT() = default;
-        GlProgramUniform4ivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
+        GlProgramUniform4ivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17523,7 +17776,7 @@ namespace gles {
     class GlProgramUniform4ui: public Encodable {
     public:
         GlProgramUniform4ui() = default;
-        GlProgramUniform4ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
+        GlProgramUniform4ui(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17548,7 +17801,7 @@ namespace gles {
     class GlProgramUniform4uiEXT: public Encodable {
     public:
         GlProgramUniform4uiEXT() = default;
-        GlProgramUniform4uiEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2, uint32_t V3) :
+        GlProgramUniform4uiEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint32_t V0, uint32_t V1, uint32_t V2, uint32_t V3) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17573,7 +17826,7 @@ namespace gles {
     class GlProgramUniform4uiv: public Encodable {
     public:
         GlProgramUniform4uiv() = default;
-        GlProgramUniform4uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlProgramUniform4uiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17594,7 +17847,7 @@ namespace gles {
     class GlProgramUniform4uivEXT: public Encodable {
     public:
         GlProgramUniform4uivEXT() = default;
-        GlProgramUniform4uivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
+        GlProgramUniform4uivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17615,7 +17868,7 @@ namespace gles {
     class GlProgramUniformHandleui64NV: public Encodable {
     public:
         GlProgramUniformHandleui64NV() = default;
-        GlProgramUniformHandleui64NV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, uint64_t Value) :
+        GlProgramUniformHandleui64NV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, uint64_t Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17634,7 +17887,7 @@ namespace gles {
     class GlProgramUniformHandleui64vNV: public Encodable {
     public:
         GlProgramUniformHandleui64vNV() = default;
-        GlProgramUniformHandleui64vNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, GLuint64__CP Values) :
+        GlProgramUniformHandleui64vNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, GLuint64__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17655,7 +17908,7 @@ namespace gles {
     class GlProgramUniformMatrix2fv: public Encodable {
     public:
         GlProgramUniformMatrix2fv() = default;
-        GlProgramUniformMatrix2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix2fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17678,7 +17931,7 @@ namespace gles {
     class GlProgramUniformMatrix2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2fvEXT() = default;
-        GlProgramUniformMatrix2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix2fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17701,7 +17954,7 @@ namespace gles {
     class GlProgramUniformMatrix2x3fv: public Encodable {
     public:
         GlProgramUniformMatrix2x3fv() = default;
-        GlProgramUniformMatrix2x3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix2x3fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17724,7 +17977,7 @@ namespace gles {
     class GlProgramUniformMatrix2x3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2x3fvEXT() = default;
-        GlProgramUniformMatrix2x3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix2x3fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17747,7 +18000,7 @@ namespace gles {
     class GlProgramUniformMatrix2x4fv: public Encodable {
     public:
         GlProgramUniformMatrix2x4fv() = default;
-        GlProgramUniformMatrix2x4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix2x4fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17770,7 +18023,7 @@ namespace gles {
     class GlProgramUniformMatrix2x4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix2x4fvEXT() = default;
-        GlProgramUniformMatrix2x4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix2x4fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17793,7 +18046,7 @@ namespace gles {
     class GlProgramUniformMatrix3fv: public Encodable {
     public:
         GlProgramUniformMatrix3fv() = default;
-        GlProgramUniformMatrix3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix3fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17816,7 +18069,7 @@ namespace gles {
     class GlProgramUniformMatrix3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3fvEXT() = default;
-        GlProgramUniformMatrix3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix3fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17839,7 +18092,7 @@ namespace gles {
     class GlProgramUniformMatrix3x2fv: public Encodable {
     public:
         GlProgramUniformMatrix3x2fv() = default;
-        GlProgramUniformMatrix3x2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix3x2fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17862,7 +18115,7 @@ namespace gles {
     class GlProgramUniformMatrix3x2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3x2fvEXT() = default;
-        GlProgramUniformMatrix3x2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix3x2fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17885,7 +18138,7 @@ namespace gles {
     class GlProgramUniformMatrix3x4fv: public Encodable {
     public:
         GlProgramUniformMatrix3x4fv() = default;
-        GlProgramUniformMatrix3x4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix3x4fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17908,7 +18161,7 @@ namespace gles {
     class GlProgramUniformMatrix3x4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix3x4fvEXT() = default;
-        GlProgramUniformMatrix3x4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix3x4fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17931,7 +18184,7 @@ namespace gles {
     class GlProgramUniformMatrix4fv: public Encodable {
     public:
         GlProgramUniformMatrix4fv() = default;
-        GlProgramUniformMatrix4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix4fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17954,7 +18207,7 @@ namespace gles {
     class GlProgramUniformMatrix4fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4fvEXT() = default;
-        GlProgramUniformMatrix4fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix4fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -17977,7 +18230,7 @@ namespace gles {
     class GlProgramUniformMatrix4x2fv: public Encodable {
     public:
         GlProgramUniformMatrix4x2fv() = default;
-        GlProgramUniformMatrix4x2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix4x2fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -18000,7 +18253,7 @@ namespace gles {
     class GlProgramUniformMatrix4x2fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4x2fvEXT() = default;
-        GlProgramUniformMatrix4x2fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix4x2fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -18023,7 +18276,7 @@ namespace gles {
     class GlProgramUniformMatrix4x3fv: public Encodable {
     public:
         GlProgramUniformMatrix4x3fv() = default;
-        GlProgramUniformMatrix4x3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlProgramUniformMatrix4x3fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -18046,7 +18299,7 @@ namespace gles {
     class GlProgramUniformMatrix4x3fvEXT: public Encodable {
     public:
         GlProgramUniformMatrix4x3fvEXT() = default;
-        GlProgramUniformMatrix4x3fvEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlProgramUniformMatrix4x3fvEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mProgram(Program),
             mLocation(Location),
@@ -18069,7 +18322,7 @@ namespace gles {
     class GlPushDebugGroup: public Encodable {
     public:
         GlPushDebugGroup() = default;
-        GlPushDebugGroup(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
+        GlPushDebugGroup(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
             mextras(extras),
             mSource(Source),
             mId(Id),
@@ -18090,7 +18343,7 @@ namespace gles {
     class GlPushDebugGroupKHR: public Encodable {
     public:
         GlPushDebugGroupKHR() = default;
-        GlPushDebugGroupKHR(gapic::Vector<gapic::Encodable*> extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
+        GlPushDebugGroupKHR(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Source, uint32_t Id, int32_t Length, GLchar__CP Message) :
             mextras(extras),
             mSource(Source),
             mId(Id),
@@ -18111,7 +18364,7 @@ namespace gles {
     class GlPushGroupMarkerEXT: public Encodable {
     public:
         GlPushGroupMarkerEXT() = default;
-        GlPushGroupMarkerEXT(gapic::Vector<gapic::Encodable*> extras, int32_t Length, GLchar__CP Marker) :
+        GlPushGroupMarkerEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t Length, GLchar__CP Marker) :
             mextras(extras),
             mLength(Length),
             mMarker(Marker) {}
@@ -18135,7 +18388,7 @@ namespace gles {
     class GlPushMatrix: public Encodable {
     public:
         GlPushMatrix() = default;
-        GlPushMatrix(gapic::Vector<gapic::Encodable*> extras) :
+        GlPushMatrix(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -18153,7 +18406,7 @@ namespace gles {
     class GlQueryCounterEXT: public Encodable {
     public:
         GlQueryCounterEXT() = default;
-        GlQueryCounterEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Query, uint32_t Target) :
+        GlQueryCounterEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Query, uint32_t Target) :
             mextras(extras),
             mQuery(Query),
             mTarget(Target) {}
@@ -18177,7 +18430,7 @@ namespace gles {
     class GlQueryMatrixxOES: public Encodable {
     public:
         GlQueryMatrixxOES() = default;
-        GlQueryMatrixxOES(gapic::Vector<gapic::Encodable*> extras, GLfixed__P Mantissa, GLint__P Exponent, uint32_t Result) :
+        GlQueryMatrixxOES(const gapic::Vector<gapic::Encodable*>& extras, GLfixed__P Mantissa, GLint__P Exponent, uint32_t Result) :
             mextras(extras),
             mMantissa(Mantissa),
             mExponent(Exponent),
@@ -18196,7 +18449,7 @@ namespace gles {
     class GlRasterSamplesEXT: public Encodable {
     public:
         GlRasterSamplesEXT() = default;
-        GlRasterSamplesEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Samples, uint8_t Fixedsamplelocations) :
+        GlRasterSamplesEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Samples, uint8_t Fixedsamplelocations) :
             mextras(extras),
             mSamples(Samples),
             mFixedsamplelocations(Fixedsamplelocations) {}
@@ -18220,7 +18473,7 @@ namespace gles {
     class GlReadBuffer: public Encodable {
     public:
         GlReadBuffer() = default;
-        GlReadBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Src) :
+        GlReadBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Src) :
             mextras(extras),
             mSrc(Src) {}
         virtual void Encode(Encoder* e) const{
@@ -18241,7 +18494,7 @@ namespace gles {
     class GlReadBufferIndexedEXT: public Encodable {
     public:
         GlReadBufferIndexedEXT() = default;
-        GlReadBufferIndexedEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Src, int32_t Index) :
+        GlReadBufferIndexedEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Src, int32_t Index) :
             mextras(extras),
             mSrc(Src),
             mIndex(Index) {}
@@ -18265,7 +18518,7 @@ namespace gles {
     class GlReadBufferNV: public Encodable {
     public:
         GlReadBufferNV() = default;
-        GlReadBufferNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+        GlReadBufferNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode) :
             mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
@@ -18286,7 +18539,7 @@ namespace gles {
     class GlReadPixels: public Encodable {
     public:
         GlReadPixels() = default;
-        GlReadPixels(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__P Data) :
+        GlReadPixels(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, Void__P Data) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -18313,7 +18566,7 @@ namespace gles {
     class GlReadnPixels: public Encodable {
     public:
         GlReadnPixels() = default;
-        GlReadnPixels(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+        GlReadnPixels(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -18342,7 +18595,7 @@ namespace gles {
     class GlReadnPixelsEXT: public Encodable {
     public:
         GlReadnPixelsEXT() = default;
-        GlReadnPixelsEXT(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+        GlReadnPixelsEXT(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -18371,7 +18624,7 @@ namespace gles {
     class GlReadnPixelsKHR: public Encodable {
     public:
         GlReadnPixelsKHR() = default;
-        GlReadnPixelsKHR(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
+        GlReadnPixelsKHR(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, int32_t BufSize, Void__P Data) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -18400,7 +18653,7 @@ namespace gles {
     class GlReleaseShaderCompiler: public Encodable {
     public:
         GlReleaseShaderCompiler() = default;
-        GlReleaseShaderCompiler(gapic::Vector<gapic::Encodable*> extras) :
+        GlReleaseShaderCompiler(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -18418,7 +18671,7 @@ namespace gles {
     class GlRenderbufferStorage: public Encodable {
     public:
         GlRenderbufferStorage() = default;
-        GlRenderbufferStorage(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Format, int32_t Width, int32_t Height) :
+        GlRenderbufferStorage(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Format, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mFormat(Format),
@@ -18439,7 +18692,7 @@ namespace gles {
     class GlRenderbufferStorageMultisample: public Encodable {
     public:
         GlRenderbufferStorageMultisample() = default;
-        GlRenderbufferStorageMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Format, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisample(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Format, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18462,7 +18715,7 @@ namespace gles {
     class GlRenderbufferStorageMultisampleANGLE: public Encodable {
     public:
         GlRenderbufferStorageMultisampleANGLE() = default;
-        GlRenderbufferStorageMultisampleANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisampleANGLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18485,7 +18738,7 @@ namespace gles {
     class GlRenderbufferStorageMultisampleAPPLE: public Encodable {
     public:
         GlRenderbufferStorageMultisampleAPPLE() = default;
-        GlRenderbufferStorageMultisampleAPPLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisampleAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18508,7 +18761,7 @@ namespace gles {
     class GlRenderbufferStorageMultisampleEXT: public Encodable {
     public:
         GlRenderbufferStorageMultisampleEXT() = default;
-        GlRenderbufferStorageMultisampleEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisampleEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18531,7 +18784,7 @@ namespace gles {
     class GlRenderbufferStorageMultisampleIMG: public Encodable {
     public:
         GlRenderbufferStorageMultisampleIMG() = default;
-        GlRenderbufferStorageMultisampleIMG(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisampleIMG(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18554,7 +18807,7 @@ namespace gles {
     class GlRenderbufferStorageMultisampleNV: public Encodable {
     public:
         GlRenderbufferStorageMultisampleNV() = default;
-        GlRenderbufferStorageMultisampleNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageMultisampleNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -18577,7 +18830,7 @@ namespace gles {
     class GlRenderbufferStorageOES: public Encodable {
     public:
         GlRenderbufferStorageOES() = default;
-        GlRenderbufferStorageOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlRenderbufferStorageOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -18598,7 +18851,7 @@ namespace gles {
     class GlResolveDepthValuesNV: public Encodable {
     public:
         GlResolveDepthValuesNV() = default;
-        GlResolveDepthValuesNV(gapic::Vector<gapic::Encodable*> extras) :
+        GlResolveDepthValuesNV(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -18616,7 +18869,7 @@ namespace gles {
     class GlResolveMultisampleFramebufferAPPLE: public Encodable {
     public:
         GlResolveMultisampleFramebufferAPPLE() = default;
-        GlResolveMultisampleFramebufferAPPLE(gapic::Vector<gapic::Encodable*> extras) :
+        GlResolveMultisampleFramebufferAPPLE(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -18634,7 +18887,7 @@ namespace gles {
     class GlResumeTransformFeedback: public Encodable {
     public:
         GlResumeTransformFeedback() = default;
-        GlResumeTransformFeedback(gapic::Vector<gapic::Encodable*> extras) :
+        GlResumeTransformFeedback(const gapic::Vector<gapic::Encodable*>& extras) :
             mextras(extras) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mextras.count());
@@ -18652,7 +18905,7 @@ namespace gles {
     class GlRotatef: public Encodable {
     public:
         GlRotatef() = default;
-        GlRotatef(gapic::Vector<gapic::Encodable*> extras, float Angle, float X, float Y, float Z) :
+        GlRotatef(const gapic::Vector<gapic::Encodable*>& extras, float Angle, float X, float Y, float Z) :
             mextras(extras),
             mAngle(Angle),
             mX(X),
@@ -18673,7 +18926,7 @@ namespace gles {
     class GlRotatex: public Encodable {
     public:
         GlRotatex() = default;
-        GlRotatex(gapic::Vector<gapic::Encodable*> extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+        GlRotatex(const gapic::Vector<gapic::Encodable*>& extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mAngle(Angle),
             mX(X),
@@ -18694,7 +18947,7 @@ namespace gles {
     class GlRotatexOES: public Encodable {
     public:
         GlRotatexOES() = default;
-        GlRotatexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
+        GlRotatexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Angle, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mAngle(Angle),
             mX(X),
@@ -18715,7 +18968,7 @@ namespace gles {
     class GlSampleCoverage: public Encodable {
     public:
         GlSampleCoverage() = default;
-        GlSampleCoverage(gapic::Vector<gapic::Encodable*> extras, float Value, uint8_t Invert) :
+        GlSampleCoverage(const gapic::Vector<gapic::Encodable*>& extras, float Value, uint8_t Invert) :
             mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
@@ -18739,7 +18992,7 @@ namespace gles {
     class GlSampleCoveragex: public Encodable {
     public:
         GlSampleCoveragex() = default;
-        GlSampleCoveragex(gapic::Vector<gapic::Encodable*> extras, int32_t Value, uint8_t Invert) :
+        GlSampleCoveragex(const gapic::Vector<gapic::Encodable*>& extras, int32_t Value, uint8_t Invert) :
             mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
@@ -18763,7 +19016,7 @@ namespace gles {
     class GlSampleCoveragexOES: public Encodable {
     public:
         GlSampleCoveragexOES() = default;
-        GlSampleCoveragexOES(gapic::Vector<gapic::Encodable*> extras, int32_t Value, uint8_t Invert) :
+        GlSampleCoveragexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Value, uint8_t Invert) :
             mextras(extras),
             mValue(Value),
             mInvert(Invert) {}
@@ -18787,7 +19040,7 @@ namespace gles {
     class GlSampleMaski: public Encodable {
     public:
         GlSampleMaski() = default;
-        GlSampleMaski(gapic::Vector<gapic::Encodable*> extras, uint32_t MaskNumber, uint32_t Mask) :
+        GlSampleMaski(const gapic::Vector<gapic::Encodable*>& extras, uint32_t MaskNumber, uint32_t Mask) :
             mextras(extras),
             mMaskNumber(MaskNumber),
             mMask(Mask) {}
@@ -18811,7 +19064,7 @@ namespace gles {
     class GlSamplerParameterIiv: public Encodable {
     public:
         GlSamplerParameterIiv() = default;
-        GlSamplerParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+        GlSamplerParameterIiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18830,7 +19083,7 @@ namespace gles {
     class GlSamplerParameterIivEXT: public Encodable {
     public:
         GlSamplerParameterIivEXT() = default;
-        GlSamplerParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+        GlSamplerParameterIivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18849,7 +19102,7 @@ namespace gles {
     class GlSamplerParameterIivOES: public Encodable {
     public:
         GlSamplerParameterIivOES() = default;
-        GlSamplerParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+        GlSamplerParameterIivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18868,7 +19121,7 @@ namespace gles {
     class GlSamplerParameterIuiv: public Encodable {
     public:
         GlSamplerParameterIuiv() = default;
-        GlSamplerParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+        GlSamplerParameterIuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18887,7 +19140,7 @@ namespace gles {
     class GlSamplerParameterIuivEXT: public Encodable {
     public:
         GlSamplerParameterIuivEXT() = default;
-        GlSamplerParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+        GlSamplerParameterIuivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18906,7 +19159,7 @@ namespace gles {
     class GlSamplerParameterIuivOES: public Encodable {
     public:
         GlSamplerParameterIuivOES() = default;
-        GlSamplerParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
+        GlSamplerParameterIuivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLuint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18925,7 +19178,7 @@ namespace gles {
     class GlSamplerParameterf: public Encodable {
     public:
         GlSamplerParameterf() = default;
-        GlSamplerParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, float Param) :
+        GlSamplerParameterf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, float Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18944,7 +19197,7 @@ namespace gles {
     class GlSamplerParameterfv: public Encodable {
     public:
         GlSamplerParameterfv() = default;
-        GlSamplerParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLfloat__CP Param) :
+        GlSamplerParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLfloat__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18963,7 +19216,7 @@ namespace gles {
     class GlSamplerParameteri: public Encodable {
     public:
         GlSamplerParameteri() = default;
-        GlSamplerParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, int32_t Param) :
+        GlSamplerParameteri(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -18982,7 +19235,7 @@ namespace gles {
     class GlSamplerParameteriv: public Encodable {
     public:
         GlSamplerParameteriv() = default;
-        GlSamplerParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
+        GlSamplerParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Sampler, uint32_t Pname, GLint__CP Param) :
             mextras(extras),
             mSampler(Sampler),
             mPname(Pname),
@@ -19001,7 +19254,7 @@ namespace gles {
     class GlScalef: public Encodable {
     public:
         GlScalef() = default;
-        GlScalef(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z) :
+        GlScalef(const gapic::Vector<gapic::Encodable*>& extras, float X, float Y, float Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -19020,7 +19273,7 @@ namespace gles {
     class GlScalex: public Encodable {
     public:
         GlScalex() = default;
-        GlScalex(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+        GlScalex(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -19039,7 +19292,7 @@ namespace gles {
     class GlScalexOES: public Encodable {
     public:
         GlScalexOES() = default;
-        GlScalexOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+        GlScalexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -19058,7 +19311,7 @@ namespace gles {
     class GlScissor: public Encodable {
     public:
         GlScissor() = default;
-        GlScissor(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlScissor(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -19079,7 +19332,7 @@ namespace gles {
     class GlScissorArrayvNV: public Encodable {
     public:
         GlScissorArrayvNV() = default;
-        GlScissorArrayvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLint__CP V) :
+        GlScissorArrayvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t First, int32_t Count, GLint__CP V) :
             mextras(extras),
             mFirst(First),
             mCount(Count),
@@ -19098,7 +19351,7 @@ namespace gles {
     class GlScissorIndexedNV: public Encodable {
     public:
         GlScissorIndexedNV() = default;
-        GlScissorIndexedNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Left, int32_t Bottom, int32_t Width, int32_t Height) :
+        GlScissorIndexedNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, int32_t Left, int32_t Bottom, int32_t Width, int32_t Height) :
             mextras(extras),
             mIndex(Index),
             mLeft(Left),
@@ -19121,7 +19374,7 @@ namespace gles {
     class GlScissorIndexedvNV: public Encodable {
     public:
         GlScissorIndexedvNV() = default;
-        GlScissorIndexedvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLint__CP V) :
+        GlScissorIndexedvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, GLint__CP V) :
             mextras(extras),
             mIndex(Index),
             mV(V) {}
@@ -19145,7 +19398,7 @@ namespace gles {
     class GlSelectPerfMonitorCountersAMD: public Encodable {
     public:
         GlSelectPerfMonitorCountersAMD() = default;
-        GlSelectPerfMonitorCountersAMD(gapic::Vector<gapic::Encodable*> extras, uint32_t Monitor, uint8_t Enable, uint32_t Group, int32_t NumCounters, GLuint__P CounterList) :
+        GlSelectPerfMonitorCountersAMD(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Monitor, uint8_t Enable, uint32_t Group, int32_t NumCounters, GLuint__P CounterList) :
             mextras(extras),
             mMonitor(Monitor),
             mEnable(Enable),
@@ -19168,7 +19421,7 @@ namespace gles {
     class GlSetFenceNV: public Encodable {
     public:
         GlSetFenceNV() = default;
-        GlSetFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint32_t Condition) :
+        GlSetFenceNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fence, uint32_t Condition) :
             mextras(extras),
             mFence(Fence),
             mCondition(Condition) {}
@@ -19192,7 +19445,7 @@ namespace gles {
     class GlShadeModel: public Encodable {
     public:
         GlShadeModel() = default;
-        GlShadeModel(gapic::Vector<gapic::Encodable*> extras, uint32_t Mode) :
+        GlShadeModel(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mode) :
             mextras(extras),
             mMode(Mode) {}
         virtual void Encode(Encoder* e) const{
@@ -19228,7 +19481,7 @@ namespace gles {
     class GlShaderBinary: public Encodable {
     public:
         GlShaderBinary() = default;
-        GlShaderBinary(gapic::Vector<gapic::Encodable*> extras, int32_t Count, ShaderId__CP Shaders, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
+        GlShaderBinary(const gapic::Vector<gapic::Encodable*>& extras, int32_t Count, ShaderId__CP Shaders, uint32_t BinaryFormat, Void__CP Binary, int32_t BinarySize) :
             mextras(extras),
             mCount(Count),
             mShaders(Shaders),
@@ -19251,7 +19504,7 @@ namespace gles {
     class GlShaderSource: public Encodable {
     public:
         GlShaderSource() = default;
-        GlShaderSource(gapic::Vector<gapic::Encodable*> extras, uint32_t Shader, int32_t Count, GLchar__CP__CP Source, GLint__CP Length) :
+        GlShaderSource(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Shader, int32_t Count, GLchar__CP__CP Source, GLint__CP Length) :
             mextras(extras),
             mShader(Shader),
             mCount(Count),
@@ -19272,7 +19525,7 @@ namespace gles {
     class GlStartTilingQCOM: public Encodable {
     public:
         GlStartTilingQCOM() = default;
-        GlStartTilingQCOM(gapic::Vector<gapic::Encodable*> extras, uint32_t X, uint32_t Y, uint32_t Width, uint32_t Height, uint32_t PreserveMask) :
+        GlStartTilingQCOM(const gapic::Vector<gapic::Encodable*>& extras, uint32_t X, uint32_t Y, uint32_t Width, uint32_t Height, uint32_t PreserveMask) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -19295,7 +19548,7 @@ namespace gles {
     class GlStencilFillPathInstancedNV: public Encodable {
     public:
         GlStencilFillPathInstancedNV() = default;
-        GlStencilFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlStencilFillPathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -19324,7 +19577,7 @@ namespace gles {
     class GlStencilFillPathNV: public Encodable {
     public:
         GlStencilFillPathNV() = default;
-        GlStencilFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t FillMode, uint32_t Mask) :
+        GlStencilFillPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t FillMode, uint32_t Mask) :
             mextras(extras),
             mPath(Path),
             mFillMode(FillMode),
@@ -19343,7 +19596,7 @@ namespace gles {
     class GlStencilFunc: public Encodable {
     public:
         GlStencilFunc() = default;
-        GlStencilFunc(gapic::Vector<gapic::Encodable*> extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
+        GlStencilFunc(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Func, int32_t Ref, uint32_t Mask) :
             mextras(extras),
             mFunc(Func),
             mRef(Ref),
@@ -19362,7 +19615,7 @@ namespace gles {
     class GlStencilFuncSeparate: public Encodable {
     public:
         GlStencilFuncSeparate() = default;
-        GlStencilFuncSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Function, int32_t ReferenceValue, uint32_t Mask) :
+        GlStencilFuncSeparate(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Function, int32_t ReferenceValue, uint32_t Mask) :
             mextras(extras),
             mFace(Face),
             mFunction(Function),
@@ -19383,7 +19636,7 @@ namespace gles {
     class GlStencilMask: public Encodable {
     public:
         GlStencilMask() = default;
-        GlStencilMask(gapic::Vector<gapic::Encodable*> extras, uint32_t Mask) :
+        GlStencilMask(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Mask) :
             mextras(extras),
             mMask(Mask) {}
         virtual void Encode(Encoder* e) const{
@@ -19404,7 +19657,7 @@ namespace gles {
     class GlStencilMaskSeparate: public Encodable {
     public:
         GlStencilMaskSeparate() = default;
-        GlStencilMaskSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t Mask) :
+        GlStencilMaskSeparate(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t Mask) :
             mextras(extras),
             mFace(Face),
             mMask(Mask) {}
@@ -19428,7 +19681,7 @@ namespace gles {
     class GlStencilOp: public Encodable {
     public:
         GlStencilOp() = default;
-        GlStencilOp(gapic::Vector<gapic::Encodable*> extras, uint32_t Fail, uint32_t Zfail, uint32_t Zpass) :
+        GlStencilOp(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fail, uint32_t Zfail, uint32_t Zpass) :
             mextras(extras),
             mFail(Fail),
             mZfail(Zfail),
@@ -19447,7 +19700,7 @@ namespace gles {
     class GlStencilOpSeparate: public Encodable {
     public:
         GlStencilOpSeparate() = default;
-        GlStencilOpSeparate(gapic::Vector<gapic::Encodable*> extras, uint32_t Face, uint32_t StencilFail, uint32_t StencilPassDepthFail, uint32_t StencilPassDepthPass) :
+        GlStencilOpSeparate(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Face, uint32_t StencilFail, uint32_t StencilPassDepthFail, uint32_t StencilPassDepthPass) :
             mextras(extras),
             mFace(Face),
             mStencilFail(StencilFail),
@@ -19468,7 +19721,7 @@ namespace gles {
     class GlStencilStrokePathInstancedNV: public Encodable {
     public:
         GlStencilStrokePathInstancedNV() = default;
-        GlStencilStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlStencilStrokePathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -19497,7 +19750,7 @@ namespace gles {
     class GlStencilStrokePathNV: public Encodable {
     public:
         GlStencilStrokePathNV() = default;
-        GlStencilStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Reference, uint32_t Mask) :
+        GlStencilStrokePathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t Reference, uint32_t Mask) :
             mextras(extras),
             mPath(Path),
             mReference(Reference),
@@ -19516,7 +19769,7 @@ namespace gles {
     class GlStencilThenCoverFillPathInstancedNV: public Encodable {
     public:
         GlStencilThenCoverFillPathInstancedNV() = default;
-        GlStencilThenCoverFillPathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlStencilThenCoverFillPathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -19547,7 +19800,7 @@ namespace gles {
     class GlStencilThenCoverFillPathNV: public Encodable {
     public:
         GlStencilThenCoverFillPathNV() = default;
-        GlStencilThenCoverFillPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode) :
+        GlStencilThenCoverFillPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, uint32_t FillMode, uint32_t Mask, uint32_t CoverMode) :
             mextras(extras),
             mPath(Path),
             mFillMode(FillMode),
@@ -19568,7 +19821,7 @@ namespace gles {
     class GlStencilThenCoverStrokePathInstancedNV: public Encodable {
     public:
         GlStencilThenCoverStrokePathInstancedNV() = default;
-        GlStencilThenCoverStrokePathInstancedNV(gapic::Vector<gapic::Encodable*> extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlStencilThenCoverStrokePathInstancedNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t NumPaths, uint32_t PathNameType, Void__CP Paths, uint32_t PathBase, int32_t Reference, uint32_t Mask, uint32_t CoverMode, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mNumPaths(NumPaths),
             mPathNameType(PathNameType),
@@ -19599,7 +19852,7 @@ namespace gles {
     class GlStencilThenCoverStrokePathNV: public Encodable {
     public:
         GlStencilThenCoverStrokePathNV() = default;
-        GlStencilThenCoverStrokePathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Path, int32_t Reference, uint32_t Mask, uint32_t CoverMode) :
+        GlStencilThenCoverStrokePathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Path, int32_t Reference, uint32_t Mask, uint32_t CoverMode) :
             mextras(extras),
             mPath(Path),
             mReference(Reference),
@@ -19620,7 +19873,7 @@ namespace gles {
     class GlSubpixelPrecisionBiasNV: public Encodable {
     public:
         GlSubpixelPrecisionBiasNV() = default;
-        GlSubpixelPrecisionBiasNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Xbits, uint32_t Ybits) :
+        GlSubpixelPrecisionBiasNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Xbits, uint32_t Ybits) :
             mextras(extras),
             mXbits(Xbits),
             mYbits(Ybits) {}
@@ -19644,7 +19897,7 @@ namespace gles {
     class GlTestFenceNV: public Encodable {
     public:
         GlTestFenceNV() = default;
-        GlTestFenceNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Fence, uint8_t Result) :
+        GlTestFenceNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Fence, uint8_t Result) :
             mextras(extras),
             mFence(Fence),
             mResult(Result) {}
@@ -19668,7 +19921,7 @@ namespace gles {
     class GlTexBuffer: public Encodable {
     public:
         GlTexBuffer() = default;
-        GlTexBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+        GlTexBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19687,7 +19940,7 @@ namespace gles {
     class GlTexBufferEXT: public Encodable {
     public:
         GlTexBufferEXT() = default;
-        GlTexBufferEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+        GlTexBufferEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19706,7 +19959,7 @@ namespace gles {
     class GlTexBufferOES: public Encodable {
     public:
         GlTexBufferOES() = default;
-        GlTexBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
+        GlTexBufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19725,7 +19978,7 @@ namespace gles {
     class GlTexBufferRange: public Encodable {
     public:
         GlTexBufferRange() = default;
-        GlTexBufferRange(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+        GlTexBufferRange(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19748,7 +20001,7 @@ namespace gles {
     class GlTexBufferRangeEXT: public Encodable {
     public:
         GlTexBufferRangeEXT() = default;
-        GlTexBufferRangeEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+        GlTexBufferRangeEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19771,7 +20024,7 @@ namespace gles {
     class GlTexBufferRangeOES: public Encodable {
     public:
         GlTexBufferRangeOES() = default;
-        GlTexBufferRangeOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
+        GlTexBufferRangeOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Internalformat, uint32_t Buffer, int32_t Offset, int32_t Size) :
             mextras(extras),
             mTarget(Target),
             mInternalformat(Internalformat),
@@ -19794,7 +20047,7 @@ namespace gles {
     class GlTexCoordPointer: public Encodable {
     public:
         GlTexCoordPointer() = default;
-        GlTexCoordPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlTexCoordPointer(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -19815,7 +20068,7 @@ namespace gles {
     class GlTexCoordPointerBounds: public Encodable {
     public:
         GlTexCoordPointerBounds() = default;
-        GlTexCoordPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlTexCoordPointerBounds(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -19838,7 +20091,7 @@ namespace gles {
     class GlTexEnvf: public Encodable {
     public:
         GlTexEnvf() = default;
-        GlTexEnvf(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, float Param) :
+        GlTexEnvf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, float Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19857,7 +20110,7 @@ namespace gles {
     class GlTexEnvfv: public Encodable {
     public:
         GlTexEnvfv() = default;
-        GlTexEnvfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
+        GlTexEnvfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19876,7 +20129,7 @@ namespace gles {
     class GlTexEnvi: public Encodable {
     public:
         GlTexEnvi() = default;
-        GlTexEnvi(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlTexEnvi(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19895,7 +20148,7 @@ namespace gles {
     class GlTexEnviv: public Encodable {
     public:
         GlTexEnviv() = default;
-        GlTexEnviv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+        GlTexEnviv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19914,7 +20167,7 @@ namespace gles {
     class GlTexEnvx: public Encodable {
     public:
         GlTexEnvx() = default;
-        GlTexEnvx(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlTexEnvx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19933,7 +20186,7 @@ namespace gles {
     class GlTexEnvxOES: public Encodable {
     public:
         GlTexEnvxOES() = default;
-        GlTexEnvxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlTexEnvxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19952,7 +20205,7 @@ namespace gles {
     class GlTexEnvxv: public Encodable {
     public:
         GlTexEnvxv() = default;
-        GlTexEnvxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+        GlTexEnvxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19971,7 +20224,7 @@ namespace gles {
     class GlTexEnvxvOES: public Encodable {
     public:
         GlTexEnvxvOES() = default;
-        GlTexEnvxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+        GlTexEnvxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -19990,7 +20243,7 @@ namespace gles {
     class GlTexGenfOES: public Encodable {
     public:
         GlTexGenfOES() = default;
-        GlTexGenfOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, float Param) :
+        GlTexGenfOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, float Param) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20009,7 +20262,7 @@ namespace gles {
     class GlTexGenfvOES: public Encodable {
     public:
         GlTexGenfvOES() = default;
-        GlTexGenfvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfloat__CP Params) :
+        GlTexGenfvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20028,7 +20281,7 @@ namespace gles {
     class GlTexGeniOES: public Encodable {
     public:
         GlTexGeniOES() = default;
-        GlTexGeniOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
+        GlTexGeniOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20047,7 +20300,7 @@ namespace gles {
     class GlTexGenivOES: public Encodable {
     public:
         GlTexGenivOES() = default;
-        GlTexGenivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLint__CP Params) :
+        GlTexGenivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20066,7 +20319,7 @@ namespace gles {
     class GlTexGenxOES: public Encodable {
     public:
         GlTexGenxOES() = default;
-        GlTexGenxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
+        GlTexGenxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20085,7 +20338,7 @@ namespace gles {
     class GlTexGenxvOES: public Encodable {
     public:
         GlTexGenxvOES() = default;
-        GlTexGenxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Coord, uint32_t Pname, GLfixed__CP Params) :
+        GlTexGenxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Coord, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mCoord(Coord),
             mPname(Pname),
@@ -20104,7 +20357,7 @@ namespace gles {
     class GlTexImage2D: public Encodable {
     public:
         GlTexImage2D() = default;
-        GlTexImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t InternalFormat, int32_t Width, int32_t Height, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
+        GlTexImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t InternalFormat, int32_t Width, int32_t Height, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20135,7 +20388,7 @@ namespace gles {
     class GlTexImage3D: public Encodable {
     public:
         GlTexImage3D() = default;
-        GlTexImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
+        GlTexImage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20168,7 +20421,7 @@ namespace gles {
     class GlTexImage3DOES: public Encodable {
     public:
         GlTexImage3DOES() = default;
-        GlTexImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
+        GlTexImage3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, int32_t Border, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20201,7 +20454,7 @@ namespace gles {
     class GlTexPageCommitmentEXT: public Encodable {
     public:
         GlTexPageCommitmentEXT() = default;
-        GlTexPageCommitmentEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint8_t Commit) :
+        GlTexPageCommitmentEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint8_t Commit) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20232,7 +20485,7 @@ namespace gles {
     class GlTexParameterIiv: public Encodable {
     public:
         GlTexParameterIiv() = default;
-        GlTexParameterIiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+        GlTexParameterIiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20251,7 +20504,7 @@ namespace gles {
     class GlTexParameterIivEXT: public Encodable {
     public:
         GlTexParameterIivEXT() = default;
-        GlTexParameterIivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+        GlTexParameterIivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20270,7 +20523,7 @@ namespace gles {
     class GlTexParameterIivOES: public Encodable {
     public:
         GlTexParameterIivOES() = default;
-        GlTexParameterIivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+        GlTexParameterIivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20289,7 +20542,7 @@ namespace gles {
     class GlTexParameterIuiv: public Encodable {
     public:
         GlTexParameterIuiv() = default;
-        GlTexParameterIuiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+        GlTexParameterIuiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20308,7 +20561,7 @@ namespace gles {
     class GlTexParameterIuivEXT: public Encodable {
     public:
         GlTexParameterIuivEXT() = default;
-        GlTexParameterIuivEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+        GlTexParameterIuivEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20327,7 +20580,7 @@ namespace gles {
     class GlTexParameterIuivOES: public Encodable {
     public:
         GlTexParameterIuivOES() = default;
-        GlTexParameterIuivOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
+        GlTexParameterIuivOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLuint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20346,7 +20599,7 @@ namespace gles {
     class GlTexParameterf: public Encodable {
     public:
         GlTexParameterf() = default;
-        GlTexParameterf(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, float Value) :
+        GlTexParameterf(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, float Value) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -20365,7 +20618,7 @@ namespace gles {
     class GlTexParameterfv: public Encodable {
     public:
         GlTexParameterfv() = default;
-        GlTexParameterfv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
+        GlTexParameterfv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfloat__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20384,7 +20637,7 @@ namespace gles {
     class GlTexParameteri: public Encodable {
     public:
         GlTexParameteri() = default;
-        GlTexParameteri(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Parameter, int32_t Value) :
+        GlTexParameteri(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Parameter, int32_t Value) :
             mextras(extras),
             mTarget(Target),
             mParameter(Parameter),
@@ -20403,7 +20656,7 @@ namespace gles {
     class GlTexParameteriv: public Encodable {
     public:
         GlTexParameteriv() = default;
-        GlTexParameteriv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
+        GlTexParameteriv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLint__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20422,7 +20675,7 @@ namespace gles {
     class GlTexParameterx: public Encodable {
     public:
         GlTexParameterx() = default;
-        GlTexParameterx(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlTexParameterx(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20441,7 +20694,7 @@ namespace gles {
     class GlTexParameterxOES: public Encodable {
     public:
         GlTexParameterxOES() = default;
-        GlTexParameterxOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, int32_t Param) :
+        GlTexParameterxOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, int32_t Param) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20460,7 +20713,7 @@ namespace gles {
     class GlTexParameterxv: public Encodable {
     public:
         GlTexParameterxv() = default;
-        GlTexParameterxv(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+        GlTexParameterxv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20479,7 +20732,7 @@ namespace gles {
     class GlTexParameterxvOES: public Encodable {
     public:
         GlTexParameterxvOES() = default;
-        GlTexParameterxvOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
+        GlTexParameterxvOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint32_t Pname, GLfixed__CP Params) :
             mextras(extras),
             mTarget(Target),
             mPname(Pname),
@@ -20498,7 +20751,7 @@ namespace gles {
     class GlTexStorage1DEXT: public Encodable {
     public:
         GlTexStorage1DEXT() = default;
-        GlTexStorage1DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
+        GlTexStorage1DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
             mextras(extras),
             mTarget(Target),
             mLevels(Levels),
@@ -20519,7 +20772,7 @@ namespace gles {
     class GlTexStorage2D: public Encodable {
     public:
         GlTexStorage2D() = default;
-        GlTexStorage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height) :
+        GlTexStorage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mLevels(Levels),
@@ -20542,7 +20795,7 @@ namespace gles {
     class GlTexStorage2DEXT: public Encodable {
     public:
         GlTexStorage2DEXT() = default;
-        GlTexStorage2DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
+        GlTexStorage2DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
             mextras(extras),
             mTarget(Target),
             mLevels(Levels),
@@ -20565,7 +20818,7 @@ namespace gles {
     class GlTexStorage2DMultisample: public Encodable {
     public:
         GlTexStorage2DMultisample() = default;
-        GlTexStorage2DMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, uint8_t Fixedsamplelocations) :
+        GlTexStorage2DMultisample(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, uint8_t Fixedsamplelocations) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -20590,7 +20843,7 @@ namespace gles {
     class GlTexStorage3D: public Encodable {
     public:
         GlTexStorage3D() = default;
-        GlTexStorage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth) :
+        GlTexStorage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Levels, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth) :
             mextras(extras),
             mTarget(Target),
             mLevels(Levels),
@@ -20615,7 +20868,7 @@ namespace gles {
     class GlTexStorage3DEXT: public Encodable {
     public:
         GlTexStorage3DEXT() = default;
-        GlTexStorage3DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
+        GlTexStorage3DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
             mextras(extras),
             mTarget(Target),
             mLevels(Levels),
@@ -20640,7 +20893,7 @@ namespace gles {
     class GlTexStorage3DMultisample: public Encodable {
     public:
         GlTexStorage3DMultisample() = default;
-        GlTexStorage3DMultisample(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
+        GlTexStorage3DMultisample(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -20667,7 +20920,7 @@ namespace gles {
     class GlTexStorage3DMultisampleOES: public Encodable {
     public:
         GlTexStorage3DMultisampleOES() = default;
-        GlTexStorage3DMultisampleOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
+        GlTexStorage3DMultisampleOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Samples, uint32_t Internalformat, int32_t Width, int32_t Height, int32_t Depth, uint8_t Fixedsamplelocations) :
             mextras(extras),
             mTarget(Target),
             mSamples(Samples),
@@ -20694,7 +20947,7 @@ namespace gles {
     class GlTexSubImage2D: public Encodable {
     public:
         GlTexSubImage2D() = default;
-        GlTexSubImage2D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, TexturePointer Data) :
+        GlTexSubImage2D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Width, int32_t Height, uint32_t Format, uint32_t Type, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20725,7 +20978,7 @@ namespace gles {
     class GlTexSubImage3D: public Encodable {
     public:
         GlTexSubImage3D() = default;
-        GlTexSubImage3D(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Data) :
+        GlTexSubImage3D(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Data) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20760,7 +21013,7 @@ namespace gles {
     class GlTexSubImage3DOES: public Encodable {
     public:
         GlTexSubImage3DOES() = default;
-        GlTexSubImage3DOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
+        GlTexSubImage3DOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, int32_t Level, int32_t Xoffset, int32_t Yoffset, int32_t Zoffset, int32_t Width, int32_t Height, int32_t Depth, uint32_t Format, uint32_t Type, TexturePointer Pixels) :
             mextras(extras),
             mTarget(Target),
             mLevel(Level),
@@ -20795,7 +21048,7 @@ namespace gles {
     class GlTextureStorage1DEXT: public Encodable {
     public:
         GlTextureStorage1DEXT() = default;
-        GlTextureStorage1DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
+        GlTextureStorage1DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width) :
             mextras(extras),
             mTexture(Texture),
             mTarget(Target),
@@ -20818,7 +21071,7 @@ namespace gles {
     class GlTextureStorage2DEXT: public Encodable {
     public:
         GlTextureStorage2DEXT() = default;
-        GlTextureStorage2DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
+        GlTextureStorage2DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height) :
             mextras(extras),
             mTexture(Texture),
             mTarget(Target),
@@ -20843,7 +21096,7 @@ namespace gles {
     class GlTextureStorage3DEXT: public Encodable {
     public:
         GlTextureStorage3DEXT() = default;
-        GlTextureStorage3DEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
+        GlTextureStorage3DEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Target, int32_t Levels, uint32_t Format, int32_t Width, int32_t Height, int32_t Depth) :
             mextras(extras),
             mTexture(Texture),
             mTarget(Target),
@@ -20870,7 +21123,7 @@ namespace gles {
     class GlTextureViewEXT: public Encodable {
     public:
         GlTextureViewEXT() = default;
-        GlTextureViewEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
+        GlTextureViewEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
             mextras(extras),
             mTexture(Texture),
             mTarget(Target),
@@ -20899,7 +21152,7 @@ namespace gles {
     class GlTextureViewOES: public Encodable {
     public:
         GlTextureViewOES() = default;
-        GlTextureViewOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
+        GlTextureViewOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Texture, uint32_t Target, uint32_t Origtexture, uint32_t Internalformat, uint32_t Minlevel, uint32_t Numlevels, uint32_t Minlayer, uint32_t Numlayers) :
             mextras(extras),
             mTexture(Texture),
             mTarget(Target),
@@ -20928,7 +21181,7 @@ namespace gles {
     class GlTransformFeedbackVaryings: public Encodable {
     public:
         GlTransformFeedbackVaryings() = default;
-        GlTransformFeedbackVaryings(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, int32_t Count, GLchar__CP__CP Varyings, uint32_t BufferMode) :
+        GlTransformFeedbackVaryings(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, int32_t Count, GLchar__CP__CP Varyings, uint32_t BufferMode) :
             mextras(extras),
             mProgram(Program),
             mCount(Count),
@@ -20949,7 +21202,7 @@ namespace gles {
     class GlTransformPathNV: public Encodable {
     public:
         GlTransformPathNV() = default;
-        GlTransformPathNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, uint32_t SrcPath, uint32_t TransformType, GLfloat__CP TransformValues) :
+        GlTransformPathNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ResultPath, uint32_t SrcPath, uint32_t TransformType, GLfloat__CP TransformValues) :
             mextras(extras),
             mResultPath(ResultPath),
             mSrcPath(SrcPath),
@@ -20970,7 +21223,7 @@ namespace gles {
     class GlTranslatef: public Encodable {
     public:
         GlTranslatef() = default;
-        GlTranslatef(gapic::Vector<gapic::Encodable*> extras, float X, float Y, float Z) :
+        GlTranslatef(const gapic::Vector<gapic::Encodable*>& extras, float X, float Y, float Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -20989,7 +21242,7 @@ namespace gles {
     class GlTranslatex: public Encodable {
     public:
         GlTranslatex() = default;
-        GlTranslatex(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+        GlTranslatex(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -21008,7 +21261,7 @@ namespace gles {
     class GlTranslatexOES: public Encodable {
     public:
         GlTranslatexOES() = default;
-        GlTranslatexOES(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Z) :
+        GlTranslatexOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Z) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -21027,7 +21280,7 @@ namespace gles {
     class GlUniform1f: public Encodable {
     public:
         GlUniform1f() = default;
-        GlUniform1f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value) :
+        GlUniform1f(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, float Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -21051,7 +21304,7 @@ namespace gles {
     class GlUniform1fv: public Encodable {
     public:
         GlUniform1fv() = default;
-        GlUniform1fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlUniform1fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21070,7 +21323,7 @@ namespace gles {
     class GlUniform1i: public Encodable {
     public:
         GlUniform1i() = default;
-        GlUniform1i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value) :
+        GlUniform1i(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -21094,7 +21347,7 @@ namespace gles {
     class GlUniform1iv: public Encodable {
     public:
         GlUniform1iv() = default;
-        GlUniform1iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlUniform1iv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21113,7 +21366,7 @@ namespace gles {
     class GlUniform1ui: public Encodable {
     public:
         GlUniform1ui() = default;
-        GlUniform1ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0) :
+        GlUniform1ui(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, uint32_t Value0) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0) {}
@@ -21137,7 +21390,7 @@ namespace gles {
     class GlUniform1uiv: public Encodable {
     public:
         GlUniform1uiv() = default;
-        GlUniform1uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlUniform1uiv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21156,7 +21409,7 @@ namespace gles {
     class GlUniform2f: public Encodable {
     public:
         GlUniform2f() = default;
-        GlUniform2f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1) :
+        GlUniform2f(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, float Value0, float Value1) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21175,7 +21428,7 @@ namespace gles {
     class GlUniform2fv: public Encodable {
     public:
         GlUniform2fv() = default;
-        GlUniform2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlUniform2fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21194,7 +21447,7 @@ namespace gles {
     class GlUniform2i: public Encodable {
     public:
         GlUniform2i() = default;
-        GlUniform2i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1) :
+        GlUniform2i(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Value0, int32_t Value1) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21213,7 +21466,7 @@ namespace gles {
     class GlUniform2iv: public Encodable {
     public:
         GlUniform2iv() = default;
-        GlUniform2iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlUniform2iv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21232,7 +21485,7 @@ namespace gles {
     class GlUniform2ui: public Encodable {
     public:
         GlUniform2ui() = default;
-        GlUniform2ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1) :
+        GlUniform2ui(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, uint32_t Value0, uint32_t Value1) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21251,7 +21504,7 @@ namespace gles {
     class GlUniform2uiv: public Encodable {
     public:
         GlUniform2uiv() = default;
-        GlUniform2uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlUniform2uiv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21270,7 +21523,7 @@ namespace gles {
     class GlUniform3f: public Encodable {
     public:
         GlUniform3f() = default;
-        GlUniform3f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1, float Value2) :
+        GlUniform3f(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, float Value0, float Value1, float Value2) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21291,7 +21544,7 @@ namespace gles {
     class GlUniform3fv: public Encodable {
     public:
         GlUniform3fv() = default;
-        GlUniform3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlUniform3fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21310,7 +21563,7 @@ namespace gles {
     class GlUniform3i: public Encodable {
     public:
         GlUniform3i() = default;
-        GlUniform3i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
+        GlUniform3i(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21331,7 +21584,7 @@ namespace gles {
     class GlUniform3iv: public Encodable {
     public:
         GlUniform3iv() = default;
-        GlUniform3iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlUniform3iv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21350,7 +21603,7 @@ namespace gles {
     class GlUniform3ui: public Encodable {
     public:
         GlUniform3ui() = default;
-        GlUniform3ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
+        GlUniform3ui(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21371,7 +21624,7 @@ namespace gles {
     class GlUniform3uiv: public Encodable {
     public:
         GlUniform3uiv() = default;
-        GlUniform3uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlUniform3uiv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21390,7 +21643,7 @@ namespace gles {
     class GlUniform4f: public Encodable {
     public:
         GlUniform4f() = default;
-        GlUniform4f(gapic::Vector<gapic::Encodable*> extras, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
+        GlUniform4f(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, float Value0, float Value1, float Value2, float Value3) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21413,7 +21666,7 @@ namespace gles {
     class GlUniform4fv: public Encodable {
     public:
         GlUniform4fv() = default;
-        GlUniform4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
+        GlUniform4fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21432,7 +21685,7 @@ namespace gles {
     class GlUniform4i: public Encodable {
     public:
         GlUniform4i() = default;
-        GlUniform4i(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
+        GlUniform4i(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Value0, int32_t Value1, int32_t Value2, int32_t Value3) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21455,7 +21708,7 @@ namespace gles {
     class GlUniform4iv: public Encodable {
     public:
         GlUniform4iv() = default;
-        GlUniform4iv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLint__CP Values) :
+        GlUniform4iv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21474,7 +21727,7 @@ namespace gles {
     class GlUniform4ui: public Encodable {
     public:
         GlUniform4ui() = default;
-        GlUniform4ui(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
+        GlUniform4ui(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, uint32_t Value0, uint32_t Value1, uint32_t Value2, uint32_t Value3) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -21497,7 +21750,7 @@ namespace gles {
     class GlUniform4uiv: public Encodable {
     public:
         GlUniform4uiv() = default;
-        GlUniform4uiv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint__CP Values) :
+        GlUniform4uiv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLuint__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21516,7 +21769,7 @@ namespace gles {
     class GlUniformBlockBinding: public Encodable {
     public:
         GlUniformBlockBinding() = default;
-        GlUniformBlockBinding(gapic::Vector<gapic::Encodable*> extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t UniformBlockBinding) :
+        GlUniformBlockBinding(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program, uint32_t UniformBlockIndex, uint32_t UniformBlockBinding) :
             mextras(extras),
             mProgram(Program),
             mUniformBlockIndex(UniformBlockIndex),
@@ -21535,7 +21788,7 @@ namespace gles {
     class GlUniformHandleui64NV: public Encodable {
     public:
         GlUniformHandleui64NV() = default;
-        GlUniformHandleui64NV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, uint64_t Value) :
+        GlUniformHandleui64NV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, uint64_t Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -21559,7 +21812,7 @@ namespace gles {
     class GlUniformHandleui64vNV: public Encodable {
     public:
         GlUniformHandleui64vNV() = default;
-        GlUniformHandleui64vNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, GLuint64__CP Value) :
+        GlUniformHandleui64vNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, GLuint64__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21578,7 +21831,7 @@ namespace gles {
     class GlUniformMatrix2fv: public Encodable {
     public:
         GlUniformMatrix2fv() = default;
-        GlUniformMatrix2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix2fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21599,7 +21852,7 @@ namespace gles {
     class GlUniformMatrix2x3fv: public Encodable {
     public:
         GlUniformMatrix2x3fv() = default;
-        GlUniformMatrix2x3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix2x3fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21620,7 +21873,7 @@ namespace gles {
     class GlUniformMatrix2x3fvNV: public Encodable {
     public:
         GlUniformMatrix2x3fvNV() = default;
-        GlUniformMatrix2x3fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix2x3fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21641,7 +21894,7 @@ namespace gles {
     class GlUniformMatrix2x4fv: public Encodable {
     public:
         GlUniformMatrix2x4fv() = default;
-        GlUniformMatrix2x4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix2x4fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21662,7 +21915,7 @@ namespace gles {
     class GlUniformMatrix2x4fvNV: public Encodable {
     public:
         GlUniformMatrix2x4fvNV() = default;
-        GlUniformMatrix2x4fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix2x4fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21683,7 +21936,7 @@ namespace gles {
     class GlUniformMatrix3fv: public Encodable {
     public:
         GlUniformMatrix3fv() = default;
-        GlUniformMatrix3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix3fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21704,7 +21957,7 @@ namespace gles {
     class GlUniformMatrix3x2fv: public Encodable {
     public:
         GlUniformMatrix3x2fv() = default;
-        GlUniformMatrix3x2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix3x2fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21725,7 +21978,7 @@ namespace gles {
     class GlUniformMatrix3x2fvNV: public Encodable {
     public:
         GlUniformMatrix3x2fvNV() = default;
-        GlUniformMatrix3x2fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix3x2fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21746,7 +21999,7 @@ namespace gles {
     class GlUniformMatrix3x4fv: public Encodable {
     public:
         GlUniformMatrix3x4fv() = default;
-        GlUniformMatrix3x4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix3x4fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21767,7 +22020,7 @@ namespace gles {
     class GlUniformMatrix3x4fvNV: public Encodable {
     public:
         GlUniformMatrix3x4fvNV() = default;
-        GlUniformMatrix3x4fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix3x4fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21788,7 +22041,7 @@ namespace gles {
     class GlUniformMatrix4fv: public Encodable {
     public:
         GlUniformMatrix4fv() = default;
-        GlUniformMatrix4fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix4fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21809,7 +22062,7 @@ namespace gles {
     class GlUniformMatrix4x2fv: public Encodable {
     public:
         GlUniformMatrix4x2fv() = default;
-        GlUniformMatrix4x2fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix4x2fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21830,7 +22083,7 @@ namespace gles {
     class GlUniformMatrix4x2fvNV: public Encodable {
     public:
         GlUniformMatrix4x2fvNV() = default;
-        GlUniformMatrix4x2fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix4x2fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21851,7 +22104,7 @@ namespace gles {
     class GlUniformMatrix4x3fv: public Encodable {
     public:
         GlUniformMatrix4x3fv() = default;
-        GlUniformMatrix4x3fv(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
+        GlUniformMatrix4x3fv(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Values) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21872,7 +22125,7 @@ namespace gles {
     class GlUniformMatrix4x3fvNV: public Encodable {
     public:
         GlUniformMatrix4x3fvNV() = default;
-        GlUniformMatrix4x3fvNV(gapic::Vector<gapic::Encodable*> extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
+        GlUniformMatrix4x3fvNV(const gapic::Vector<gapic::Encodable*>& extras, int32_t Location, int32_t Count, uint8_t Transpose, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mCount(Count),
@@ -21893,7 +22146,7 @@ namespace gles {
     class GlUnmapBuffer: public Encodable {
     public:
         GlUnmapBuffer() = default;
-        GlUnmapBuffer(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint8_t Result) :
+        GlUnmapBuffer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mResult(Result) {}
@@ -21917,7 +22170,7 @@ namespace gles {
     class GlUnmapBufferOES: public Encodable {
     public:
         GlUnmapBufferOES() = default;
-        GlUnmapBufferOES(gapic::Vector<gapic::Encodable*> extras, uint32_t Target, uint8_t Result) :
+        GlUnmapBufferOES(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Target, uint8_t Result) :
             mextras(extras),
             mTarget(Target),
             mResult(Result) {}
@@ -21941,7 +22194,7 @@ namespace gles {
     class GlUseProgram: public Encodable {
     public:
         GlUseProgram() = default;
-        GlUseProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+        GlUseProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program) :
             mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
@@ -21962,7 +22215,7 @@ namespace gles {
     class GlUseProgramStages: public Encodable {
     public:
         GlUseProgramStages() = default;
-        GlUseProgramStages(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
+        GlUseProgramStages(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
             mextras(extras),
             mPipeline(Pipeline),
             mStages(Stages),
@@ -21981,7 +22234,7 @@ namespace gles {
     class GlUseProgramStagesEXT: public Encodable {
     public:
         GlUseProgramStagesEXT() = default;
-        GlUseProgramStagesEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
+        GlUseProgramStagesEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline, uint32_t Stages, uint32_t Program) :
             mextras(extras),
             mPipeline(Pipeline),
             mStages(Stages),
@@ -22000,7 +22253,7 @@ namespace gles {
     class GlValidateProgram: public Encodable {
     public:
         GlValidateProgram() = default;
-        GlValidateProgram(gapic::Vector<gapic::Encodable*> extras, uint32_t Program) :
+        GlValidateProgram(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Program) :
             mextras(extras),
             mProgram(Program) {}
         virtual void Encode(Encoder* e) const{
@@ -22021,7 +22274,7 @@ namespace gles {
     class GlValidateProgramPipeline: public Encodable {
     public:
         GlValidateProgramPipeline() = default;
-        GlValidateProgramPipeline(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+        GlValidateProgramPipeline(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline) :
             mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
@@ -22042,7 +22295,7 @@ namespace gles {
     class GlValidateProgramPipelineEXT: public Encodable {
     public:
         GlValidateProgramPipelineEXT() = default;
-        GlValidateProgramPipelineEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Pipeline) :
+        GlValidateProgramPipelineEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Pipeline) :
             mextras(extras),
             mPipeline(Pipeline) {}
         virtual void Encode(Encoder* e) const{
@@ -22063,7 +22316,7 @@ namespace gles {
     class GlVertexAttrib1f: public Encodable {
     public:
         GlVertexAttrib1f() = default;
-        GlVertexAttrib1f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0) :
+        GlVertexAttrib1f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, float Value0) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0) {}
@@ -22087,7 +22340,7 @@ namespace gles {
     class GlVertexAttrib1fv: public Encodable {
     public:
         GlVertexAttrib1fv() = default;
-        GlVertexAttrib1fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+        GlVertexAttrib1fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -22111,7 +22364,7 @@ namespace gles {
     class GlVertexAttrib2f: public Encodable {
     public:
         GlVertexAttrib2f() = default;
-        GlVertexAttrib2f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1) :
+        GlVertexAttrib2f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, float Value0, float Value1) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -22130,7 +22383,7 @@ namespace gles {
     class GlVertexAttrib2fv: public Encodable {
     public:
         GlVertexAttrib2fv() = default;
-        GlVertexAttrib2fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+        GlVertexAttrib2fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -22154,7 +22407,7 @@ namespace gles {
     class GlVertexAttrib3f: public Encodable {
     public:
         GlVertexAttrib3f() = default;
-        GlVertexAttrib3f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1, float Value2) :
+        GlVertexAttrib3f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, float Value0, float Value1, float Value2) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -22175,7 +22428,7 @@ namespace gles {
     class GlVertexAttrib3fv: public Encodable {
     public:
         GlVertexAttrib3fv() = default;
-        GlVertexAttrib3fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+        GlVertexAttrib3fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -22199,7 +22452,7 @@ namespace gles {
     class GlVertexAttrib4f: public Encodable {
     public:
         GlVertexAttrib4f() = default;
-        GlVertexAttrib4f(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, float Value0, float Value1, float Value2, float Value3) :
+        GlVertexAttrib4f(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, float Value0, float Value1, float Value2, float Value3) :
             mextras(extras),
             mLocation(Location),
             mValue0(Value0),
@@ -22222,7 +22475,7 @@ namespace gles {
     class GlVertexAttrib4fv: public Encodable {
     public:
         GlVertexAttrib4fv() = default;
-        GlVertexAttrib4fv(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, GLfloat__CP Value) :
+        GlVertexAttrib4fv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, GLfloat__CP Value) :
             mextras(extras),
             mLocation(Location),
             mValue(Value) {}
@@ -22246,7 +22499,7 @@ namespace gles {
     class GlVertexAttribBinding: public Encodable {
     public:
         GlVertexAttribBinding() = default;
-        GlVertexAttribBinding(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t BindingIndex) :
+        GlVertexAttribBinding(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t BindingIndex) :
             mextras(extras),
             mIndex(Index),
             mBindingIndex(BindingIndex) {}
@@ -22270,7 +22523,7 @@ namespace gles {
     class GlVertexAttribDivisor: public Encodable {
     public:
         GlVertexAttribDivisor() = default;
-        GlVertexAttribDivisor(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+        GlVertexAttribDivisor(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Divisor) :
             mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
@@ -22294,7 +22547,7 @@ namespace gles {
     class GlVertexAttribDivisorANGLE: public Encodable {
     public:
         GlVertexAttribDivisorANGLE() = default;
-        GlVertexAttribDivisorANGLE(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+        GlVertexAttribDivisorANGLE(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Divisor) :
             mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
@@ -22318,7 +22571,7 @@ namespace gles {
     class GlVertexAttribDivisorEXT: public Encodable {
     public:
         GlVertexAttribDivisorEXT() = default;
-        GlVertexAttribDivisorEXT(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+        GlVertexAttribDivisorEXT(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Divisor) :
             mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
@@ -22342,7 +22595,7 @@ namespace gles {
     class GlVertexAttribDivisorNV: public Encodable {
     public:
         GlVertexAttribDivisorNV() = default;
-        GlVertexAttribDivisorNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t Divisor) :
+        GlVertexAttribDivisorNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t Divisor) :
             mextras(extras),
             mIndex(Index),
             mDivisor(Divisor) {}
@@ -22366,7 +22619,7 @@ namespace gles {
     class GlVertexAttribFormat: public Encodable {
     public:
         GlVertexAttribFormat() = default;
-        GlVertexAttribFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
+        GlVertexAttribFormat(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, int32_t Size, uint32_t Type, uint8_t Normalized, uint32_t Relativeoffset) :
             mextras(extras),
             mIndex(Index),
             mSize(Size),
@@ -22389,7 +22642,7 @@ namespace gles {
     class GlVertexAttribI4i: public Encodable {
     public:
         GlVertexAttribI4i() = default;
-        GlVertexAttribI4i(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t X, int32_t Y, int32_t Z, int32_t W) :
+        GlVertexAttribI4i(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, int32_t X, int32_t Y, int32_t Z, int32_t W) :
             mextras(extras),
             mIndex(Index),
             mX(X),
@@ -22412,7 +22665,7 @@ namespace gles {
     class GlVertexAttribI4iv: public Encodable {
     public:
         GlVertexAttribI4iv() = default;
-        GlVertexAttribI4iv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLint__CP Values) :
+        GlVertexAttribI4iv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, GLint__CP Values) :
             mextras(extras),
             mIndex(Index),
             mValues(Values) {}
@@ -22436,7 +22689,7 @@ namespace gles {
     class GlVertexAttribI4ui: public Encodable {
     public:
         GlVertexAttribI4ui() = default;
-        GlVertexAttribI4ui(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, uint32_t X, uint32_t Y, uint32_t Z, uint32_t W) :
+        GlVertexAttribI4ui(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, uint32_t X, uint32_t Y, uint32_t Z, uint32_t W) :
             mextras(extras),
             mIndex(Index),
             mX(X),
@@ -22459,7 +22712,7 @@ namespace gles {
     class GlVertexAttribI4uiv: public Encodable {
     public:
         GlVertexAttribI4uiv() = default;
-        GlVertexAttribI4uiv(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLuint__CP Values) :
+        GlVertexAttribI4uiv(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, GLuint__CP Values) :
             mextras(extras),
             mIndex(Index),
             mValues(Values) {}
@@ -22483,7 +22736,7 @@ namespace gles {
     class GlVertexAttribIFormat: public Encodable {
     public:
         GlVertexAttribIFormat() = default;
-        GlVertexAttribIFormat(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
+        GlVertexAttribIFormat(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, int32_t Size, uint32_t Type, uint32_t Relativeoffset) :
             mextras(extras),
             mIndex(Index),
             mSize(Size),
@@ -22504,7 +22757,7 @@ namespace gles {
     class GlVertexAttribIPointer: public Encodable {
     public:
         GlVertexAttribIPointer() = default;
-        GlVertexAttribIPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, int32_t Size, uint32_t Type, int32_t Stride, VertexPointer Data) :
+        GlVertexAttribIPointer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, int32_t Size, uint32_t Type, int32_t Stride, VertexPointer Data) :
             mextras(extras),
             mLocation(Location),
             mSize(Size),
@@ -22527,7 +22780,7 @@ namespace gles {
     class GlVertexAttribPointer: public Encodable {
     public:
         GlVertexAttribPointer() = default;
-        GlVertexAttribPointer(gapic::Vector<gapic::Encodable*> extras, uint32_t Location, int32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, VertexPointer Data) :
+        GlVertexAttribPointer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Location, int32_t Size, uint32_t Type, uint8_t Normalized, int32_t Stride, VertexPointer Data) :
             mextras(extras),
             mLocation(Location),
             mSize(Size),
@@ -22552,7 +22805,7 @@ namespace gles {
     class GlVertexBindingDivisor: public Encodable {
     public:
         GlVertexBindingDivisor() = default;
-        GlVertexBindingDivisor(gapic::Vector<gapic::Encodable*> extras, uint32_t BindingIndex, uint32_t Divisor) :
+        GlVertexBindingDivisor(const gapic::Vector<gapic::Encodable*>& extras, uint32_t BindingIndex, uint32_t Divisor) :
             mextras(extras),
             mBindingIndex(BindingIndex),
             mDivisor(Divisor) {}
@@ -22576,7 +22829,7 @@ namespace gles {
     class GlVertexPointer: public Encodable {
     public:
         GlVertexPointer() = default;
-        GlVertexPointer(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlVertexPointer(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -22597,7 +22850,7 @@ namespace gles {
     class GlVertexPointerBounds: public Encodable {
     public:
         GlVertexPointerBounds() = default;
-        GlVertexPointerBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlVertexPointerBounds(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -22620,7 +22873,7 @@ namespace gles {
     class GlViewport: public Encodable {
     public:
         GlViewport() = default;
-        GlViewport(gapic::Vector<gapic::Encodable*> extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
+        GlViewport(const gapic::Vector<gapic::Encodable*>& extras, int32_t X, int32_t Y, int32_t Width, int32_t Height) :
             mextras(extras),
             mX(X),
             mY(Y),
@@ -22641,7 +22894,7 @@ namespace gles {
     class GlViewportArrayvNV: public Encodable {
     public:
         GlViewportArrayvNV() = default;
-        GlViewportArrayvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t First, int32_t Count, GLfloat__CP V) :
+        GlViewportArrayvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t First, int32_t Count, GLfloat__CP V) :
             mextras(extras),
             mFirst(First),
             mCount(Count),
@@ -22660,7 +22913,7 @@ namespace gles {
     class GlViewportIndexedfNV: public Encodable {
     public:
         GlViewportIndexedfNV() = default;
-        GlViewportIndexedfNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, float X, float Y, float W, float H) :
+        GlViewportIndexedfNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, float X, float Y, float W, float H) :
             mextras(extras),
             mIndex(Index),
             mX(X),
@@ -22683,7 +22936,7 @@ namespace gles {
     class GlViewportIndexedfvNV: public Encodable {
     public:
         GlViewportIndexedfvNV() = default;
-        GlViewportIndexedfvNV(gapic::Vector<gapic::Encodable*> extras, uint32_t Index, GLfloat__CP V) :
+        GlViewportIndexedfvNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Index, GLfloat__CP V) :
             mextras(extras),
             mIndex(Index),
             mV(V) {}
@@ -22707,7 +22960,7 @@ namespace gles {
     class GlWaitSync: public Encodable {
     public:
         GlWaitSync() = default;
-        GlWaitSync(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout) :
+        GlWaitSync(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t SyncFlags, uint64_t Timeout) :
             mextras(extras),
             mSync(Sync),
             mSyncFlags(SyncFlags),
@@ -22726,7 +22979,7 @@ namespace gles {
     class GlWaitSyncAPPLE: public Encodable {
     public:
         GlWaitSyncAPPLE() = default;
-        GlWaitSyncAPPLE(gapic::Vector<gapic::Encodable*> extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout) :
+        GlWaitSyncAPPLE(const gapic::Vector<gapic::Encodable*>& extras, uint64_t Sync, uint32_t Flag, uint64_t Timeout) :
             mextras(extras),
             mSync(Sync),
             mFlag(Flag),
@@ -22745,7 +22998,7 @@ namespace gles {
     class GlWeightPathsNV: public Encodable {
     public:
         GlWeightPathsNV() = default;
-        GlWeightPathsNV(gapic::Vector<gapic::Encodable*> extras, uint32_t ResultPath, int32_t NumPaths, GLuint__CP Paths, GLfloat__CP Weights) :
+        GlWeightPathsNV(const gapic::Vector<gapic::Encodable*>& extras, uint32_t ResultPath, int32_t NumPaths, GLuint__CP Paths, GLfloat__CP Weights) :
             mextras(extras),
             mResultPath(ResultPath),
             mNumPaths(NumPaths),
@@ -22766,7 +23019,7 @@ namespace gles {
     class GlWeightPointerOES: public Encodable {
     public:
         GlWeightPointerOES() = default;
-        GlWeightPointerOES(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
+        GlWeightPointerOES(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -22787,7 +23040,7 @@ namespace gles {
     class GlWeightPointerOESBounds: public Encodable {
     public:
         GlWeightPointerOESBounds() = default;
-        GlWeightPointerOESBounds(gapic::Vector<gapic::Encodable*> extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
+        GlWeightPointerOESBounds(const gapic::Vector<gapic::Encodable*>& extras, int32_t Size, uint32_t Type, int32_t Stride, Void__CP Pointer, int32_t Count) :
             mextras(extras),
             mSize(Size),
             mType(Type),
@@ -22810,7 +23063,7 @@ namespace gles {
     class GlXCreateContext: public Encodable {
     public:
         GlXCreateContext() = default;
-        GlXCreateContext(gapic::Vector<gapic::Encodable*> extras, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
+        GlXCreateContext(const gapic::Vector<gapic::Encodable*>& extras, Void__P Dpy, Void__P Vis, GLXContext ShareList, bool Direct, GLXContext Result) :
             mextras(extras),
             mDpy(Dpy),
             mVis(Vis),
@@ -22833,7 +23086,7 @@ namespace gles {
     class GlXCreateNewContext: public Encodable {
     public:
         GlXCreateNewContext() = default;
-        GlXCreateNewContext(gapic::Vector<gapic::Encodable*> extras, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
+        GlXCreateNewContext(const gapic::Vector<gapic::Encodable*>& extras, Void__P Display, Void__P Fbconfig, uint32_t Type, GLXContext Shared, bool Direct, GLXContext Result) :
             mextras(extras),
             mDisplay(Display),
             mFbconfig(Fbconfig),
@@ -22858,7 +23111,7 @@ namespace gles {
     class GlXMakeContextCurrent: public Encodable {
     public:
         GlXMakeContextCurrent() = default;
-        GlXMakeContextCurrent(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
+        GlXMakeContextCurrent(const gapic::Vector<gapic::Encodable*>& extras, Void__P Display, GLXDrawable Draw, GLXDrawable Read, GLXContext Ctx, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
@@ -22881,7 +23134,7 @@ namespace gles {
     class GlXMakeCurrent: public Encodable {
     public:
         GlXMakeCurrent() = default;
-        GlXMakeCurrent(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
+        GlXMakeCurrent(const gapic::Vector<gapic::Encodable*>& extras, Void__P Display, GLXDrawable Drawable, GLXContext Ctx, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mDrawable(Drawable),
@@ -22917,7 +23170,7 @@ namespace gles {
     class GlXQueryDrawable: public Encodable {
     public:
         GlXQueryDrawable() = default;
-        GlXQueryDrawable(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
+        GlXQueryDrawable(const gapic::Vector<gapic::Encodable*>& extras, Void__P Display, GLXDrawable Draw, int64_t Attribute, Int__P Value, int64_t Result) :
             mextras(extras),
             mDisplay(Display),
             mDraw(Draw),
@@ -22940,7 +23193,7 @@ namespace gles {
     class GlXSwapBuffers: public Encodable {
     public:
         GlXSwapBuffers() = default;
-        GlXSwapBuffers(gapic::Vector<gapic::Encodable*> extras, Void__P Display, GLXDrawable Drawable) :
+        GlXSwapBuffers(const gapic::Vector<gapic::Encodable*>& extras, Void__P Display, GLXDrawable Drawable) :
             mextras(extras),
             mDisplay(Display),
             mDrawable(Drawable) {}
@@ -23543,7 +23796,7 @@ namespace gles {
     class ReplayBindRenderer: public Encodable {
     public:
         ReplayBindRenderer() = default;
-        ReplayBindRenderer(gapic::Vector<gapic::Encodable*> extras, uint32_t Id) :
+        ReplayBindRenderer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Id) :
             mextras(extras),
             mId(Id) {}
         virtual void Encode(Encoder* e) const{
@@ -23564,7 +23817,7 @@ namespace gles {
     class ReplayCreateRenderer: public Encodable {
     public:
         ReplayCreateRenderer() = default;
-        ReplayCreateRenderer(gapic::Vector<gapic::Encodable*> extras, uint32_t Id) :
+        ReplayCreateRenderer(const gapic::Vector<gapic::Encodable*>& extras, uint32_t Id) :
             mextras(extras),
             mId(Id) {}
         virtual void Encode(Encoder* e) const{
@@ -23630,7 +23883,7 @@ namespace gles {
     class StartTimer: public Encodable {
     public:
         StartTimer() = default;
-        StartTimer(gapic::Vector<gapic::Encodable*> extras, uint8_t Index) :
+        StartTimer(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Index) :
             mextras(extras),
             mIndex(Index) {}
         virtual void Encode(Encoder* e) const{
@@ -23648,12 +23901,35 @@ namespace gles {
         uint8_t mIndex;
     };
 
-    // Can't encode State contains maps: gles.State{Uint32,Uint64,map[Uint64]*$,map[$]*$,map[$]*$,map[$]*$,map[$]*$}
+    class State: public Encodable {
+    public:
+        State() = default;
+        State(uint32_t NextContextID, uint64_t CurrentThread, const gapic::Map<uint64_t, Context*>& Contexts, const gapic::Map<EGLContext, Context*>& EGLContexts, const gapic::Map<GLXContext, Context*>& GLXContexts, const gapic::Map<HGLRC, Context*>& WGLContexts, const gapic::Map<CGLContextObj, Context*>& CGLContexts) :
+            mNextContextID(NextContextID),
+            mCurrentThread(CurrentThread),
+            mContexts(Contexts),
+            mEGLContexts(EGLContexts),
+            mGLXContexts(GLXContexts),
+            mWGLContexts(WGLContexts),
+            mCGLContexts(CGLContexts) {}
+        virtual void Encode(Encoder* e) const;
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        uint32_t mNextContextID;
+        uint64_t mCurrentThread;
+        gapic::Map<uint64_t, Context*> mContexts;
+        gapic::Map<EGLContext, Context*> mEGLContexts;
+        gapic::Map<GLXContext, Context*> mGLXContexts;
+        gapic::Map<HGLRC, Context*> mWGLContexts;
+        gapic::Map<CGLContextObj, Context*> mCGLContexts;
+    };
 
     class StopTimer: public Encodable {
     public:
         StopTimer() = default;
-        StopTimer(gapic::Vector<gapic::Encodable*> extras, uint8_t Index, uint64_t Result) :
+        StopTimer(const gapic::Vector<gapic::Encodable*>& extras, uint8_t Index, uint64_t Result) :
             mextras(extras),
             mIndex(Index),
             mResult(Result) {}
@@ -23677,7 +23953,7 @@ namespace gles {
     class SwitchThread: public Encodable {
     public:
         SwitchThread() = default;
-        SwitchThread(gapic::Vector<gapic::Encodable*> extras, uint64_t ThreadID) :
+        SwitchThread(const gapic::Vector<gapic::Encodable*>& extras, uint64_t ThreadID) :
             mextras(extras),
             mThreadID(ThreadID) {}
         virtual void Encode(Encoder* e) const{
@@ -24433,7 +24709,7 @@ namespace gles {
     class WglCreateContext: public Encodable {
     public:
         WglCreateContext() = default;
-        WglCreateContext(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC Result) :
+        WglCreateContext(const gapic::Vector<gapic::Encodable*>& extras, HDC Hdc, HGLRC Result) :
             mextras(extras),
             mHdc(Hdc),
             mResult(Result) {}
@@ -24457,7 +24733,7 @@ namespace gles {
     class WglCreateContextAttribsARB: public Encodable {
     public:
         WglCreateContextAttribsARB() = default;
-        WglCreateContextAttribsARB(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC HShareContext, Int__P AttribList, HGLRC Result) :
+        WglCreateContextAttribsARB(const gapic::Vector<gapic::Encodable*>& extras, HDC Hdc, HGLRC HShareContext, Int__P AttribList, HGLRC Result) :
             mextras(extras),
             mHdc(Hdc),
             mHShareContext(HShareContext),
@@ -24478,7 +24754,7 @@ namespace gles {
     class WglMakeCurrent: public Encodable {
     public:
         WglMakeCurrent() = default;
-        WglMakeCurrent(gapic::Vector<gapic::Encodable*> extras, HDC Hdc, HGLRC Hglrc, int64_t Result) :
+        WglMakeCurrent(const gapic::Vector<gapic::Encodable*>& extras, HDC Hdc, HGLRC Hglrc, int64_t Result) :
             mextras(extras),
             mHdc(Hdc),
             mHglrc(Hglrc),
@@ -24497,7 +24773,7 @@ namespace gles {
     class WglSwapBuffers: public Encodable {
     public:
         WglSwapBuffers() = default;
-        WglSwapBuffers(gapic::Vector<gapic::Encodable*> extras, HDC Hdc) :
+        WglSwapBuffers(const gapic::Vector<gapic::Encodable*>& extras, HDC Hdc) :
             mextras(extras),
             mHdc(Hdc) {}
         virtual void Encode(Encoder* e) const{

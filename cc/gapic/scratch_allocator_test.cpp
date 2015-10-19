@@ -72,5 +72,27 @@ TEST_F(ScratchAllocatorTest, Vectors) {
     }
 }
 
+TEST_F(ScratchAllocatorTest, Maps) {
+    ScratchAllocator sa(0x1000);
+    auto m = sa.map<int, I*>(3);
+
+    for (auto e : m) {
+        FAIL() << "Empty map should not interate.";
+    }
+
+    m.set(2, sa.create<A>());
+    m.set(4, sa.create<B>());
+    m.set(8, sa.create<C>());
+
+    int keys[3] = {2, 4, 8};
+    Type types[3] = {TypeA, TypeB, TypeC};
+    int i = 0;
+    for (auto e : m) {
+        EXPECT_EQ(keys[i], e.key);
+        EXPECT_EQ(types[i], e.value->getType());
+        i++;
+    }
+}
+
 } // namespace test
 } // namespace gapic

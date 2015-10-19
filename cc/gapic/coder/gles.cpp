@@ -5,8 +5,8 @@
 
 
 
-#include "gapic/schema.h"
 #include "gles.h"
+#include <gapic/schema.h>
 namespace gapic {
 
 class Encodable;
@@ -974,7 +974,61 @@ const schema::Entity* Rect::StaticSchema() {
     return &entity;
 }
 
-// Can't encode RasterizerState contains maps: gles.RasterizerState{Uint8,Uint32,Float32,Float32,Uint8,Uint8,Uint8,Uint8,map[Uint32]Uint32,$,$,Uint32,Uint32,Float32,Float32,Float32,Float32,Uint8}
+// RasterizerState:
+// gles.RasterizerState{Uint8,Uint32,Float32,Float32,Uint8,Uint8,Uint8,Uint8,map[Uint32]Uint32,$,$,Uint32,Uint32,Float32,Float32,Float32,Float32,Uint8}
+void RasterizerState::Encode(Encoder* e) const {
+    e->Uint8(this->mDepthMask);
+    e->Uint32(this->mDepthTestFunction);
+    e->Float32(this->mDepthNear);
+    e->Float32(this->mDepthFar);
+    e->Uint8(this->mColorMaskRed);
+    e->Uint8(this->mColorMaskGreen);
+    e->Uint8(this->mColorMaskBlue);
+    e->Uint8(this->mColorMaskAlpha);
+    e->Uint32(this->mStencilMask.count());
+    for (auto v : this->mStencilMask) {
+        e->Uint32(v.key);
+        e->Uint32(v.value);
+    }
+    e->Struct(this->mViewport);
+    e->Struct(this->mScissor);
+    e->Uint32(this->mFrontFace);
+    e->Uint32(this->mCullFace);
+    e->Float32(this->mLineWidth);
+    e->Float32(this->mPolygonOffsetFactor);
+    e->Float32(this->mPolygonOffsetUnits);
+    e->Float32(this->mSampleCoverageValue);
+    e->Uint8(this->mSampleCoverageInvert);
+}
+const schema::Entity* RasterizerState::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "RasterizerState",
+        "",
+        {
+            schema::Field{"DepthMask", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"DepthTestFunction", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"DepthNear", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"DepthFar", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"ColorMaskRed", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"ColorMaskGreen", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"ColorMaskBlue", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"ColorMaskAlpha", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+            schema::Field{"StencilMask", new schema::Map{"GLenumːGLuintᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"GLuint", schema::Primitive::Uint32}}},
+            schema::Field{"Viewport", new schema::Struct{ Rect::StaticSchema()}},
+            schema::Field{"Scissor", new schema::Struct{ Rect::StaticSchema()}},
+            schema::Field{"FrontFace", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"CullFace", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"LineWidth", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"PolygonOffsetFactor", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"PolygonOffsetUnits", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"SampleCoverageValue", new schema::Primitive{"GLfloat", schema::Primitive::Float32}},
+            schema::Field{"SampleCoverageInvert", new schema::Primitive{"GLboolean", schema::Primitive::Uint8}},
+        },
+    };
+    return &entity;
+}
 
 // VertexAttributeValue:
 // gles.VertexAttributeValue{$}
@@ -991,7 +1045,20 @@ const schema::Entity* VertexAttributeValue::StaticSchema() {
     return &entity;
 }
 
-// Can't encode TextureUnit contains maps: gles.TextureUnit{map[Uint32]Uint32}
+// TextureUnit:
+// gles.TextureUnit{map[Uint32]Uint32}
+const schema::Entity* TextureUnit::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "TextureUnit",
+        "",
+        {
+            schema::Field{"Bindings", new schema::Map{"GLenumːTextureIdᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"TextureId", schema::Primitive::Uint32}}},
+        },
+    };
+    return &entity;
+}
 
 // Renderbuffer:
 // gles.Renderbuffer{Int32,Int32,$,Uint32}
@@ -1045,9 +1112,74 @@ const schema::Entity* Image::StaticSchema() {
     return &entity;
 }
 
-// Can't encode CubemapLevel contains maps: gles.CubemapLevel{map[Uint32]$}
+// CubemapLevel:
+// gles.CubemapLevel{map[Uint32]$}
+const schema::Entity* CubemapLevel::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "CubemapLevel",
+        "",
+        {
+            schema::Field{"Faces", new schema::Map{"GLenumːImageᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Struct{ Image::StaticSchema()}}},
+        },
+    };
+    return &entity;
+}
 
-// Can't encode Texture contains maps: gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+// Texture:
+// gles.Texture{Uint32,Uint32,Uint32,Uint32,map[Int32]$,map[Int32]$,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Uint32,Float32}
+void Texture::Encode(Encoder* e) const {
+    e->Uint32(this->mID);
+    e->Uint32(this->mKind);
+    e->Uint32(this->mTexelFormat);
+    e->Uint32(this->mTexelType);
+    e->Uint32(this->mTexture2D.count());
+    for (auto v : this->mTexture2D) {
+        e->Int32(v.key);
+        e->Struct(v.value);
+    }
+    e->Uint32(this->mCubemap.count());
+    for (auto v : this->mCubemap) {
+        e->Int32(v.key);
+        e->Struct(v.value);
+    }
+    e->Uint32(this->mMagFilter);
+    e->Uint32(this->mMinFilter);
+    e->Uint32(this->mWrapS);
+    e->Uint32(this->mWrapT);
+    e->Uint32(this->mSwizzleR);
+    e->Uint32(this->mSwizzleG);
+    e->Uint32(this->mSwizzleB);
+    e->Uint32(this->mSwizzleA);
+    e->Float32(this->mMaxAnisotropy);
+}
+const schema::Entity* Texture::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Texture",
+        "",
+        {
+            schema::Field{"ID", new schema::Primitive{"TextureId", schema::Primitive::Uint32}},
+            schema::Field{"Kind", new schema::Primitive{"TextureKind", schema::Primitive::Uint32}},
+            schema::Field{"TexelFormat", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"TexelType", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"Texture2D", new schema::Map{"GLintːImageᵐ", new schema::Primitive{"GLint", schema::Primitive::Int32}, new schema::Struct{ Image::StaticSchema()}}},
+            schema::Field{"Cubemap", new schema::Map{"GLintːCubemapLevelᵐ", new schema::Primitive{"GLint", schema::Primitive::Int32}, new schema::Struct{ CubemapLevel::StaticSchema()}}},
+            schema::Field{"MagFilter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"MinFilter", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"WrapS", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"WrapT", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"SwizzleR", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"SwizzleG", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"SwizzleB", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"SwizzleA", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"MaxAnisotropy", new schema::Primitive{"float32", schema::Primitive::Float32}},
+        },
+    };
+    return &entity;
+}
 
 // FramebufferAttachmentInfo:
 // gles.FramebufferAttachmentInfo{Uint32,Uint32,Int32,Uint32}
@@ -1073,7 +1205,20 @@ const schema::Entity* FramebufferAttachmentInfo::StaticSchema() {
     return &entity;
 }
 
-// Can't encode Framebuffer contains maps: gles.Framebuffer{map[Uint32]$}
+// Framebuffer:
+// gles.Framebuffer{map[Uint32]$}
+const schema::Entity* Framebuffer::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Framebuffer",
+        "",
+        {
+            schema::Field{"Attachments", new schema::Map{"GLenumːFramebufferAttachmentInfoᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Struct{ FramebufferAttachmentInfo::StaticSchema()}}},
+        },
+    };
+    return &entity;
+}
 
 // GLcharˢ:
 // gles.GLcharˢ{$}
@@ -1152,7 +1297,51 @@ const schema::Entity* Uniform::StaticSchema() {
     return &entity;
 }
 
-// Can't encode Program contains maps: gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
+// Program:
+// gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
+void Program::Encode(Encoder* e) const {
+    e->Uint32(this->mShaders.count());
+    for (auto v : this->mShaders) {
+        e->Uint32(v.key);
+        e->Uint32(v.value);
+    }
+    e->Bool(this->mLinked);
+    e->Struct(this->mBinary);
+    e->Uint32(this->mAttributeBindings.count());
+    for (auto v : this->mAttributeBindings) {
+        e->String(v.key);
+        e->Uint32(v.value);
+    }
+    e->Uint32(this->mAttributes.count());
+    for (auto v : this->mAttributes) {
+        e->Int32(v.key);
+        e->Struct(v.value);
+    }
+    e->Uint32(this->mUniforms.count());
+    for (auto v : this->mUniforms) {
+        e->Int32(v.key);
+        e->Struct(v.value);
+    }
+    e->Struct(this->mInfoLog);
+}
+const schema::Entity* Program::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Program",
+        "",
+        {
+            schema::Field{"Shaders", new schema::Map{"GLenumːShaderIdᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"ShaderId", schema::Primitive::Uint32}}},
+            schema::Field{"Linked", new schema::Primitive{"bool", schema::Primitive::Bool}},
+            schema::Field{"Binary", new schema::Struct{ U8__S::StaticSchema()}},
+            schema::Field{"AttributeBindings", new schema::Map{"StringːAttributeLocationᵐ", new schema::Primitive{"string", schema::Primitive::String}, new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}}},
+            schema::Field{"Attributes", new schema::Map{"S32ːVertexAttributeᵐ", new schema::Primitive{"int32", schema::Primitive::Int32}, new schema::Struct{ VertexAttribute::StaticSchema()}}},
+            schema::Field{"Uniforms", new schema::Map{"UniformLocationːUniformᵐ", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}, new schema::Struct{ Uniform::StaticSchema()}}},
+            schema::Field{"InfoLog", new schema::Struct{ GLchar__S::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
 
 // VertexBufferBinding:
 // gles.VertexBufferBinding{Uint32,Int32,Int32,Uint32}
@@ -1227,7 +1416,21 @@ const schema::Entity* VertexAttributeArray::StaticSchema() {
     return &entity;
 }
 
-// Can't encode VertexArray contains maps: gles.VertexArray{map[Uint32]*$,map[Uint32]*$}
+// VertexArray:
+// gles.VertexArray{map[Uint32]*$,map[Uint32]*$}
+const schema::Entity* VertexArray::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "VertexArray",
+        "",
+        {
+            schema::Field{"VertexBufferBindings", new schema::Map{"VertexBufferBindingIndexːVertexBufferBindingʳᵐ", new schema::Primitive{"VertexBufferBindingIndex", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ VertexBufferBinding::StaticSchema()} }}},
+            schema::Field{"VertexAttributeArrays", new schema::Map{"AttributeLocationːVertexAttributeArrayʳᵐ", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ VertexAttributeArray::StaticSchema()} }}},
+        },
+    };
+    return &entity;
+}
 
 // Query:
 // gles.Query{}
@@ -1243,9 +1446,149 @@ const schema::Entity* Query::StaticSchema() {
     return &entity;
 }
 
-// Can't encode Objects contains maps: gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
+// Objects:
+// gles.Objects{map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$,map[Uint32]*$}
+void Objects::Encode(Encoder* e) const {
+    e->Uint32(this->mRenderbuffers.count());
+    for (auto v : this->mRenderbuffers) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mTextures.count());
+    for (auto v : this->mTextures) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mFramebuffers.count());
+    for (auto v : this->mFramebuffers) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mBuffers.count());
+    for (auto v : this->mBuffers) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mShaders.count());
+    for (auto v : this->mShaders) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mPrograms.count());
+    for (auto v : this->mPrograms) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mVertexArrays.count());
+    for (auto v : this->mVertexArrays) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mQueries.count());
+    for (auto v : this->mQueries) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+}
+const schema::Entity* Objects::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Objects",
+        "",
+        {
+            schema::Field{"Renderbuffers", new schema::Map{"RenderbufferIdːRenderbufferʳᵐ", new schema::Primitive{"RenderbufferId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Renderbuffer::StaticSchema()} }}},
+            schema::Field{"Textures", new schema::Map{"TextureIdːTextureʳᵐ", new schema::Primitive{"TextureId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Texture::StaticSchema()} }}},
+            schema::Field{"Framebuffers", new schema::Map{"FramebufferIdːFramebufferʳᵐ", new schema::Primitive{"FramebufferId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Framebuffer::StaticSchema()} }}},
+            schema::Field{"Buffers", new schema::Map{"BufferIdːBufferʳᵐ", new schema::Primitive{"BufferId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Buffer::StaticSchema()} }}},
+            schema::Field{"Shaders", new schema::Map{"ShaderIdːShaderʳᵐ", new schema::Primitive{"ShaderId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Shader::StaticSchema()} }}},
+            schema::Field{"Programs", new schema::Map{"ProgramIdːProgramʳᵐ", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Program::StaticSchema()} }}},
+            schema::Field{"VertexArrays", new schema::Map{"VertexArrayIdːVertexArrayʳᵐ", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ VertexArray::StaticSchema()} }}},
+            schema::Field{"Queries", new schema::Map{"QueryIdːQueryʳᵐ", new schema::Primitive{"QueryId", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ Query::StaticSchema()} }}},
+        },
+    };
+    return &entity;
+}
 
-// Can't encode Context contains maps: gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
+// Context:
+// gles.Context{Uint32,$,$,$,$,map[Uint32]Uint32,map[Uint32]Uint32,map[Uint32]Uint32,Uint32,Uint32,map[Uint32]$,map[Uint32]*$,Uint32,map[Uint32]Bool,Uint32,map[Uint32]Int32,$,$}
+void Context::Encode(Encoder* e) const {
+    e->Uint32(this->mIdentifier);
+    e->Struct(this->mInfo);
+    e->Struct(this->mBlending);
+    e->Struct(this->mRasterizing);
+    e->Struct(this->mClearing);
+    e->Uint32(this->mBoundFramebuffers.count());
+    for (auto v : this->mBoundFramebuffers) {
+        e->Uint32(v.key);
+        e->Uint32(v.value);
+    }
+    e->Uint32(this->mBoundRenderbuffers.count());
+    for (auto v : this->mBoundRenderbuffers) {
+        e->Uint32(v.key);
+        e->Uint32(v.value);
+    }
+    e->Uint32(this->mBoundBuffers.count());
+    for (auto v : this->mBoundBuffers) {
+        e->Uint32(v.key);
+        e->Uint32(v.value);
+    }
+    e->Uint32(this->mBoundProgram);
+    e->Uint32(this->mBoundVertexArray);
+    e->Uint32(this->mVertexAttributes.count());
+    for (auto v : this->mVertexAttributes) {
+        e->Uint32(v.key);
+        e->Struct(v.value);
+    }
+    e->Uint32(this->mTextureUnits.count());
+    for (auto v : this->mTextureUnits) {
+        e->Uint32(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mActiveTextureUnit);
+    e->Uint32(this->mCapabilities.count());
+    for (auto v : this->mCapabilities) {
+        e->Uint32(v.key);
+        e->Bool(v.value);
+    }
+    e->Uint32(this->mGenerateMipmapHint);
+    e->Uint32(this->mPixelStorage.count());
+    for (auto v : this->mPixelStorage) {
+        e->Uint32(v.key);
+        e->Int32(v.value);
+    }
+    e->Struct(this->mInstances);
+    e->Struct(this->mConstants);
+}
+const schema::Entity* Context::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "Context",
+        "",
+        {
+            schema::Field{"Identifier", new schema::Primitive{"ContextID", schema::Primitive::Uint32}},
+            schema::Field{"Info", new schema::Struct{ ContextCreationInfo::StaticSchema()}},
+            schema::Field{"Blending", new schema::Struct{ BlendState::StaticSchema()}},
+            schema::Field{"Rasterizing", new schema::Struct{ RasterizerState::StaticSchema()}},
+            schema::Field{"Clearing", new schema::Struct{ ClearState::StaticSchema()}},
+            schema::Field{"BoundFramebuffers", new schema::Map{"GLenumːFramebufferIdᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"FramebufferId", schema::Primitive::Uint32}}},
+            schema::Field{"BoundRenderbuffers", new schema::Map{"GLenumːRenderbufferIdᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"RenderbufferId", schema::Primitive::Uint32}}},
+            schema::Field{"BoundBuffers", new schema::Map{"GLenumːBufferIdᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"BufferId", schema::Primitive::Uint32}}},
+            schema::Field{"BoundProgram", new schema::Primitive{"ProgramId", schema::Primitive::Uint32}},
+            schema::Field{"BoundVertexArray", new schema::Primitive{"VertexArrayId", schema::Primitive::Uint32}},
+            schema::Field{"VertexAttributes", new schema::Map{"AttributeLocationːVertexAttributeValueᵐ", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}, new schema::Struct{ VertexAttributeValue::StaticSchema()}}},
+            schema::Field{"TextureUnits", new schema::Map{"GLenumːTextureUnitʳᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Pointer{ new schema::Struct{ TextureUnit::StaticSchema()} }}},
+            schema::Field{"ActiveTextureUnit", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"Capabilities", new schema::Map{"GLenumːboolᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"bool", schema::Primitive::Bool}}},
+            schema::Field{"GenerateMipmapHint", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"PixelStorage", new schema::Map{"GLenumːGLintᵐ", new schema::Primitive{"GLenum", schema::Primitive::Uint32}, new schema::Primitive{"GLint", schema::Primitive::Int32}}},
+            schema::Field{"Instances", new schema::Struct{ Objects::StaticSchema()}},
+            schema::Field{"Constants", new schema::Struct{ Constants::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
 
 // GLenumᵖ:
 // gles.GLenumᵖ{$}
@@ -26440,7 +26783,55 @@ const schema::Entity* StartTimer::StaticSchema() {
     return &entity;
 }
 
-// Can't encode State contains maps: gles.State{Uint32,Uint64,map[Uint64]*$,map[$]*$,map[$]*$,map[$]*$,map[$]*$}
+// State:
+// gles.State{Uint32,Uint64,map[Uint64]*$,map[$]*$,map[$]*$,map[$]*$,map[$]*$}
+void State::Encode(Encoder* e) const {
+    e->Uint32(this->mNextContextID);
+    e->Uint64(this->mCurrentThread);
+    e->Uint32(this->mContexts.count());
+    for (auto v : this->mContexts) {
+        e->Uint64(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mEGLContexts.count());
+    for (auto v : this->mEGLContexts) {
+        e->Struct(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mGLXContexts.count());
+    for (auto v : this->mGLXContexts) {
+        e->Struct(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mWGLContexts.count());
+    for (auto v : this->mWGLContexts) {
+        e->Struct(v.key);
+        e->Object(v.value);
+    }
+    e->Uint32(this->mCGLContexts.count());
+    for (auto v : this->mCGLContexts) {
+        e->Struct(v.key);
+        e->Object(v.value);
+    }
+}
+const schema::Entity* State::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "State",
+        "",
+        {
+            schema::Field{"NextContextID", new schema::Primitive{"ContextID", schema::Primitive::Uint32}},
+            schema::Field{"CurrentThread", new schema::Primitive{"ThreadID", schema::Primitive::Uint64}},
+            schema::Field{"Contexts", new schema::Map{"ThreadIDːContextʳᵐ", new schema::Primitive{"ThreadID", schema::Primitive::Uint64}, new schema::Pointer{ new schema::Struct{ Context::StaticSchema()} }}},
+            schema::Field{"EGLContexts", new schema::Map{"EGLContextːContextʳᵐ", new schema::Struct{ EGLContext::StaticSchema()}, new schema::Pointer{ new schema::Struct{ Context::StaticSchema()} }}},
+            schema::Field{"GLXContexts", new schema::Map{"GLXContextːContextʳᵐ", new schema::Struct{ GLXContext::StaticSchema()}, new schema::Pointer{ new schema::Struct{ Context::StaticSchema()} }}},
+            schema::Field{"WGLContexts", new schema::Map{"HGLRCːContextʳᵐ", new schema::Struct{ HGLRC::StaticSchema()}, new schema::Pointer{ new schema::Struct{ Context::StaticSchema()} }}},
+            schema::Field{"CGLContexts", new schema::Map{"CGLContextObjːContextʳᵐ", new schema::Struct{ CGLContextObj::StaticSchema()}, new schema::Pointer{ new schema::Struct{ Context::StaticSchema()} }}},
+        },
+    };
+    return &entity;
+}
 
 // StopTimer:
 // gles.StopTimer{[]?,Uint8,Uint64}

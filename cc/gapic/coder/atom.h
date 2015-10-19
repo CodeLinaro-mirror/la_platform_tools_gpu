@@ -9,6 +9,7 @@
 
 #include <gapic/schema.h>
 #include <gapic/vector.h>
+#include <gapic/coder/atom.h>
 #include <gapic/coder/memory.h>
 namespace gapic {
 
@@ -20,7 +21,7 @@ namespace atom {
     class FramebufferObservation: public Encodable {
     public:
         FramebufferObservation() = default;
-        FramebufferObservation(uint32_t Width, uint32_t Height, gapic::Vector<uint8_t> Data) :
+        FramebufferObservation(uint32_t Width, uint32_t Height, const gapic::Vector<uint8_t>& Data) :
             mWidth(Width),
             mHeight(Height),
             mData(Data) {}
@@ -60,7 +61,7 @@ namespace atom {
     class Group: public Encodable {
     public:
         Group() = default;
-        Group(char* Name, Range Range, gapic::Vector<Group> SubGroups) :
+        Group(char* Name, Range Range, const gapic::Vector<Group>& SubGroups) :
             mName(Name),
             mRange(Range),
             mSubGroups(SubGroups) {}
@@ -84,7 +85,7 @@ namespace atom {
     class List: public Encodable {
     public:
         List() = default;
-        List(gapic::Vector<gapic::Encodable*> Atoms) :
+        List(const gapic::Vector<gapic::Encodable*>& Atoms) :
             mAtoms(Atoms) {}
         virtual void Encode(Encoder* e) const{
             e->Uint32(this->mAtoms.count());
@@ -141,7 +142,7 @@ namespace atom {
     class Observations: public Encodable {
     public:
         Observations() = default;
-        Observations(gapic::Vector<Observation> Reads, gapic::Vector<Observation> Writes) :
+        Observations(const gapic::Vector<Observation>& Reads, const gapic::Vector<Observation>& Writes) :
             mReads(Reads),
             mWrites(Writes) {}
         virtual void Encode(Encoder* e) const{
@@ -165,7 +166,7 @@ namespace atom {
     class Resource: public Encodable {
     public:
         Resource() = default;
-        Resource(gapic::Id ID, gapic::Vector<uint8_t> Data) :
+        Resource(gapic::Id ID, const gapic::Vector<uint8_t>& Data) :
             mID(ID),
             mData(Data) {}
         virtual void Encode(Encoder* e) const{

@@ -8,7 +8,6 @@
 #define GAPIC_CODER_MEMORY_H
 
 #include <gapic/schema.h>
-#include <gapic/vector.h>
 namespace gapic {
 
 class Encodable;
