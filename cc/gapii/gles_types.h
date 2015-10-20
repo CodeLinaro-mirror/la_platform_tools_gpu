@@ -5958,6 +5958,18 @@ struct VertexAttributeValue {
 typedef std::unordered_map<AttributeLocation, VertexAttributeValue>
         AttributeLocationToVertexAttributeValue;
 
+struct VertexAttribute {
+    inline VertexAttribute() : mName(""), mVectorCount(0), mType(0) {}
+    inline VertexAttribute(std::string Name, GLint VectorCount, uint32_t Type)
+        : mName(Name), mVectorCount(VectorCount), mType(Type) {}
+
+    std::string mName;
+    GLint mVectorCount;
+    uint32_t mType;
+};
+
+typedef std::unordered_map<AttributeLocation, VertexAttribute> AttributeLocationToVertexAttribute;
+
 struct Buffer {
     inline Buffer()
         : mData(Slice<uint8_t>()),
@@ -6306,25 +6318,14 @@ typedef std::unordered_map<uint32_t, ShaderId> GLenumToShaderId;
 
 typedef std::unordered_map<std::string, AttributeLocation> StringToAttributeLocation;
 
-struct VertexAttribute {
-    inline VertexAttribute() : mName(Slice<char>()), mVectorCount(0), mType(0) {}
-    inline VertexAttribute(Slice<char> Name, int32_t VectorCount, uint32_t Type)
-        : mName(Name), mVectorCount(VectorCount), mType(Type) {}
-
-    Slice<char> mName;
-    int32_t mVectorCount;
-    uint32_t mType;
-};
-
-typedef std::unordered_map<int32_t, VertexAttribute> S32ToVertexAttribute;
-
 struct Uniform {
-    inline Uniform() : mName(""), mType(0), mValue(Slice<uint8_t>()) {}
-    inline Uniform(std::string Name, uint32_t Type, Slice<uint8_t> Value)
-        : mName(Name), mType(Type), mValue(Value) {}
+    inline Uniform() : mName(""), mType(0), mVectorCount(0), mValue(Slice<uint8_t>()) {}
+    inline Uniform(std::string Name, uint32_t Type, GLint VectorCount, Slice<uint8_t> Value)
+        : mName(Name), mType(Type), mVectorCount(VectorCount), mValue(Value) {}
 
     std::string mName;
     uint32_t mType;
+    GLint mVectorCount;
     Slice<uint8_t> mValue;
 };
 
@@ -6336,12 +6337,13 @@ struct Program {
           mLinked(false),
           mBinary(Slice<uint8_t>()),
           mAttributeBindings(StringToAttributeLocation()),
-          mAttributes(S32ToVertexAttribute()),
+          mAttributes(AttributeLocationToVertexAttribute()),
           mUniforms(UniformLocationToUniform()),
           mInfoLog(Slice<GLchar>()) {}
     inline Program(GLenumToShaderId Shaders, bool Linked, Slice<uint8_t> Binary,
-                   StringToAttributeLocation AttributeBindings, S32ToVertexAttribute Attributes,
-                   UniformLocationToUniform Uniforms, Slice<GLchar> InfoLog)
+                   StringToAttributeLocation AttributeBindings,
+                   AttributeLocationToVertexAttribute Attributes, UniformLocationToUniform Uniforms,
+                   Slice<GLchar> InfoLog)
         : mShaders(Shaders),
           mLinked(Linked),
           mBinary(Binary),
@@ -6354,7 +6356,7 @@ struct Program {
     bool mLinked;
     Slice<uint8_t> mBinary;
     StringToAttributeLocation mAttributeBindings;
-    S32ToVertexAttribute mAttributes;
+    AttributeLocationToVertexAttribute mAttributes;
     UniformLocationToUniform mUniforms;
     Slice<GLchar> mInfoLog;
 };

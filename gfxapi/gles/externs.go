@@ -273,3 +273,25 @@ func (e externs) stateVariableSize(v GLenum) int32 {
 		return 0
 	}
 }
+
+func (e externs) resolveAttributesAndUniforms(p *Program, pid ProgramId) {
+	for _, extra := range e.a.Extras() {
+		if pi, ok := extra.(*ProgramInfo); ok {
+			for l, a := range pi.Attributes {
+				p.Attributes[l] = VertexAttribute{Name: a.Name, VectorCount: a.VectorCount, Type: a.Type}
+				if e.b != nil {
+					// Force the attribute to use the capture-observed location for replay.
+					NewGlBindAttribLocation(pid, l, a.Name).Replay(atom.NoID, e.s, e.d, e.l, e.b)
+				}
+			}
+			for l, u := range pi.Uniforms {
+				p.Uniforms[l] = Uniform{Name: u.Name, VectorCount: u.VectorCount, Type: u.Type}
+			}
+			return
+		}
+	}
+	log.W(e.l, "%T missing ProgramInfo extra. Found extras:", e.a)
+	for _, extra := range e.a.Extras() {
+		log.W(e.l, "%T", extra)
+	}
+}

@@ -20,6 +20,7 @@ var Namespace = registry.NewNamespace()
 func init() {
 	registry.Global.AddFallbacks(Namespace)
 	Namespace.Add((*Architecture)(nil).Class())
+	Namespace.Add((*AttributeInfo)(nil).Class())
 	Namespace.Add((*SliceInfo)(nil).Class())
 	Namespace.Add((*AttributeLocationˢ)(nil).Class())
 	Namespace.Add((*AttributeLocationᵖ)(nil).Class())
@@ -1119,6 +1120,8 @@ func init() {
 	Namespace.Add((*Mat4x3fᵖ)(nil).Class())
 	Namespace.Add((*PipelineIdˢ)(nil).Class())
 	Namespace.Add((*ProgramIdˢ)(nil).Class())
+	Namespace.Add((*UniformInfo)(nil).Class())
+	Namespace.Add((*ProgramInfo)(nil).Class())
 	Namespace.Add((*QueryIdˢ)(nil).Class())
 	Namespace.Add((*RenderbufferIdˢ)(nil).Class())
 	Namespace.Add((*ReplayBindRenderer)(nil).Class())
@@ -1237,6 +1240,42 @@ var schemaArchitecture = &binary.Entity{
 		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 		{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
+
+type binaryClassAttributeInfo struct{}
+
+func (*AttributeInfo) Class() binary.Class {
+	return (*binaryClassAttributeInfo)(nil)
+}
+func doEncodeAttributeInfo(e binary.Encoder, o *AttributeInfo) {
+	e.String(o.Name)
+	e.Int32(int32(o.VectorCount))
+	e.Uint32(uint32(o.Type))
+}
+func doDecodeAttributeInfo(d binary.Decoder, o *AttributeInfo) {
+	o.Name = string(d.String())
+	o.VectorCount = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+}
+func (*binaryClassAttributeInfo) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeAttributeInfo(e, obj.(*AttributeInfo))
+}
+func (*binaryClassAttributeInfo) New() binary.Object {
+	return &AttributeInfo{}
+}
+func (*binaryClassAttributeInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeAttributeInfo(d, obj.(*AttributeInfo))
+}
+func (*binaryClassAttributeInfo) Schema() *binary.Entity { return schemaAttributeInfo }
+
+var schemaAttributeInfo = &binary.Entity{
+	Package:  "gles",
+	Identity: "AttributeInfo",
+	Fields: []binary.Field{
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "VectorCount", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
 
@@ -3502,13 +3541,13 @@ func (*VertexAttribute) Class() binary.Class {
 	return (*binaryClassVertexAttribute)(nil)
 }
 func doEncodeVertexAttribute(e binary.Encoder, o *VertexAttribute) {
-	e.Struct(&o.Name)
-	e.Int32(o.VectorCount)
+	e.String(o.Name)
+	e.Int32(int32(o.VectorCount))
 	e.Uint32(uint32(o.Type))
 }
 func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) {
-	d.Struct(&o.Name)
-	o.VectorCount = int32(d.Int32())
+	o.Name = string(d.String())
+	o.VectorCount = GLint(d.Int32())
 	o.Type = GLenum(d.Uint32())
 }
 func (*binaryClassVertexAttribute) Encode(e binary.Encoder, obj binary.Object) {
@@ -3526,8 +3565,8 @@ var schemaVertexAttribute = &binary.Entity{
 	Package:  "gles",
 	Identity: "VertexAttribute",
 	Fields: []binary.Field{
-		{Declared: "Name", Type: &schema.Struct{Entity: (*Charˢ)(nil).Class().Schema()}},
-		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "VectorCount", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
 	},
 }
@@ -3540,11 +3579,13 @@ func (*Uniform) Class() binary.Class {
 func doEncodeUniform(e binary.Encoder, o *Uniform) {
 	e.String(o.Name)
 	e.Uint32(uint32(o.Type))
+	e.Int32(int32(o.VectorCount))
 	e.Struct(&o.Value)
 }
 func doDecodeUniform(d binary.Decoder, o *Uniform) {
 	o.Name = string(d.String())
 	o.Type = GLenum(d.Uint32())
+	o.VectorCount = GLint(d.Int32())
 	d.Struct(&o.Value)
 }
 func (*binaryClassUniform) Encode(e binary.Encoder, obj binary.Object) {
@@ -3564,6 +3605,7 @@ var schemaUniform = &binary.Entity{
 	Fields: []binary.Field{
 		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+		{Declared: "VectorCount", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
 		{Declared: "Value", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 	},
 }
@@ -3588,7 +3630,7 @@ func doEncodeProgram(e binary.Encoder, o *Program) {
 	}
 	e.Uint32(uint32(len(o.Attributes)))
 	for k, v := range o.Attributes {
-		e.Int32(k)
+		e.Uint32(uint32(k))
 		e.Struct(&v)
 	}
 	e.Uint32(uint32(len(o.Uniforms)))
@@ -3624,12 +3666,12 @@ func doDecodeProgram(d binary.Decoder, o *Program) {
 		}
 	}
 	if count := d.Count(); count > 0 {
-		o.Attributes = make(S32ːVertexAttributeᵐ, count)
+		o.Attributes = make(AttributeLocationːVertexAttributeᵐ, count)
 		m := o.Attributes
 		for i := uint32(0); i < count; i++ {
-			var k int32
+			var k AttributeLocation
 			var v VertexAttribute
-			k = int32(d.Int32())
+			k = AttributeLocation(d.Uint32())
 			d.Struct(&v)
 			m[k] = v
 		}
@@ -3666,7 +3708,7 @@ var schemaProgram = &binary.Entity{
 		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 		{Declared: "Binary", Type: &schema.Struct{Entity: (*U8ˢ)(nil).Class().Schema()}},
 		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
-		{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*VertexAttribute)(nil).Class().Schema()}}},
+		{Declared: "Attributes", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*VertexAttribute)(nil).Class().Schema()}}},
 		{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*Uniform)(nil).Class().Schema()}}},
 		{Declared: "InfoLog", Type: &schema.Struct{Entity: (*GLcharˢ)(nil).Class().Schema()}},
 	},
@@ -58571,6 +58613,103 @@ var schemaProgramIdˢ = &binary.Entity{
 	Identity: "ProgramIdˢ",
 	Fields: []binary.Field{
 		{Declared: "", Type: &schema.Struct{Entity: (*SliceInfo)(nil).Class().Schema()}},
+	},
+}
+
+type binaryClassUniformInfo struct{}
+
+func (*UniformInfo) Class() binary.Class {
+	return (*binaryClassUniformInfo)(nil)
+}
+func doEncodeUniformInfo(e binary.Encoder, o *UniformInfo) {
+	e.String(o.Name)
+	e.Int32(int32(o.VectorCount))
+	e.Uint32(uint32(o.Type))
+}
+func doDecodeUniformInfo(d binary.Decoder, o *UniformInfo) {
+	o.Name = string(d.String())
+	o.VectorCount = GLint(d.Int32())
+	o.Type = GLenum(d.Uint32())
+}
+func (*binaryClassUniformInfo) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeUniformInfo(e, obj.(*UniformInfo))
+}
+func (*binaryClassUniformInfo) New() binary.Object {
+	return &UniformInfo{}
+}
+func (*binaryClassUniformInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeUniformInfo(d, obj.(*UniformInfo))
+}
+func (*binaryClassUniformInfo) Schema() *binary.Entity { return schemaUniformInfo }
+
+var schemaUniformInfo = &binary.Entity{
+	Package:  "gles",
+	Identity: "UniformInfo",
+	Fields: []binary.Field{
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "VectorCount", Type: &schema.Primitive{Name: "GLint", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "GLenum", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassProgramInfo struct{}
+
+func (*ProgramInfo) Class() binary.Class {
+	return (*binaryClassProgramInfo)(nil)
+}
+func doEncodeProgramInfo(e binary.Encoder, o *ProgramInfo) {
+	e.Uint32(uint32(len(o.Uniforms)))
+	for k, v := range o.Uniforms {
+		e.Int32(int32(k))
+		e.Struct(&v)
+	}
+	e.Uint32(uint32(len(o.Attributes)))
+	for k, v := range o.Attributes {
+		e.Uint32(uint32(k))
+		e.Struct(&v)
+	}
+}
+func doDecodeProgramInfo(d binary.Decoder, o *ProgramInfo) {
+	if count := d.Count(); count > 0 {
+		o.Uniforms = make(map[UniformLocation]UniformInfo, count)
+		m := o.Uniforms
+		for i := uint32(0); i < count; i++ {
+			var k UniformLocation
+			var v UniformInfo
+			k = UniformLocation(d.Int32())
+			d.Struct(&v)
+			m[k] = v
+		}
+	}
+	if count := d.Count(); count > 0 {
+		o.Attributes = make(map[AttributeLocation]AttributeInfo, count)
+		m := o.Attributes
+		for i := uint32(0); i < count; i++ {
+			var k AttributeLocation
+			var v AttributeInfo
+			k = AttributeLocation(d.Uint32())
+			d.Struct(&v)
+			m[k] = v
+		}
+	}
+}
+func (*binaryClassProgramInfo) Encode(e binary.Encoder, obj binary.Object) {
+	doEncodeProgramInfo(e, obj.(*ProgramInfo))
+}
+func (*binaryClassProgramInfo) New() binary.Object {
+	return &ProgramInfo{}
+}
+func (*binaryClassProgramInfo) DecodeTo(d binary.Decoder, obj binary.Object) {
+	doDecodeProgramInfo(d, obj.(*ProgramInfo))
+}
+func (*binaryClassProgramInfo) Schema() *binary.Entity { return schemaProgramInfo }
+
+var schemaProgramInfo = &binary.Entity{
+	Package:  "gles",
+	Identity: "ProgramInfo",
+	Fields: []binary.Field{
+		{Declared: "Uniforms", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Entity: (*UniformInfo)(nil).Class().Schema()}}},
+		{Declared: "Attributes", Type: &schema.Map{Alias: "", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Struct{Entity: (*AttributeInfo)(nil).Class().Schema()}}},
 	},
 }
 

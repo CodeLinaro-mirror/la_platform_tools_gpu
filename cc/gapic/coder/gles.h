@@ -40,6 +40,27 @@ namespace gles {
         bool mLittleEndian;
     };
 
+    class AttributeInfo: public Encodable {
+    public:
+        AttributeInfo() = default;
+        AttributeInfo(char* Name, int32_t VectorCount, uint32_t Type) :
+            mName(Name),
+            mVectorCount(VectorCount),
+            mType(Type) {}
+        virtual void Encode(Encoder* e) const{
+            e->String(this->mName);
+            e->Int32(this->mVectorCount);
+            e->Uint32(this->mType);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        char* mName;
+        int32_t mVectorCount;
+        uint32_t mType;
+    };
+
     class SliceInfo: public Encodable {
     public:
         SliceInfo() = default;
@@ -1206,12 +1227,12 @@ namespace gles {
     class VertexAttribute: public Encodable {
     public:
         VertexAttribute() = default;
-        VertexAttribute(Char__S Name, int32_t VectorCount, uint32_t Type) :
+        VertexAttribute(char* Name, int32_t VectorCount, uint32_t Type) :
             mName(Name),
             mVectorCount(VectorCount),
             mType(Type) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mName);
+            e->String(this->mName);
             e->Int32(this->mVectorCount);
             e->Uint32(this->mType);
         }
@@ -1219,7 +1240,7 @@ namespace gles {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        Char__S mName;
+        char* mName;
         int32_t mVectorCount;
         uint32_t mType;
     };
@@ -1227,28 +1248,26 @@ namespace gles {
     class Uniform: public Encodable {
     public:
         Uniform() = default;
-        Uniform(char* Name, uint32_t Type, U8__S Value) :
+        Uniform(char* Name, uint32_t Type, int32_t VectorCount, U8__S Value) :
             mName(Name),
             mType(Type),
+            mVectorCount(VectorCount),
             mValue(Value) {}
-        virtual void Encode(Encoder* e) const{
-            e->String(this->mName);
-            e->Uint32(this->mType);
-            e->Struct(this->mValue);
-        }
+        virtual void Encode(Encoder* e) const;
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
         char* mName;
         uint32_t mType;
+        int32_t mVectorCount;
         U8__S mValue;
     };
 
     class Program: public Encodable {
     public:
         Program() = default;
-        Program(const gapic::Map<uint32_t, uint32_t>& Shaders, bool Linked, U8__S Binary, const gapic::Map<char*, uint32_t>& AttributeBindings, const gapic::Map<int32_t, VertexAttribute>& Attributes, const gapic::Map<int32_t, Uniform>& Uniforms, GLchar__S InfoLog) :
+        Program(const gapic::Map<uint32_t, uint32_t>& Shaders, bool Linked, U8__S Binary, const gapic::Map<char*, uint32_t>& AttributeBindings, const gapic::Map<uint32_t, VertexAttribute>& Attributes, const gapic::Map<int32_t, Uniform>& Uniforms, GLchar__S InfoLog) :
             mShaders(Shaders),
             mLinked(Linked),
             mBinary(Binary),
@@ -1265,7 +1284,7 @@ namespace gles {
         bool mLinked;
         U8__S mBinary;
         gapic::Map<char*, uint32_t> mAttributeBindings;
-        gapic::Map<int32_t, VertexAttribute> mAttributes;
+        gapic::Map<uint32_t, VertexAttribute> mAttributes;
         gapic::Map<int32_t, Uniform> mUniforms;
         GLchar__S mInfoLog;
     };
@@ -23761,6 +23780,53 @@ namespace gles {
         }
         static const schema::Entity* StaticSchema();
         SliceInfo mSliceInfo;
+    };
+
+    class UniformInfo: public Encodable {
+    public:
+        UniformInfo() = default;
+        UniformInfo(char* Name, int32_t VectorCount, uint32_t Type) :
+            mName(Name),
+            mVectorCount(VectorCount),
+            mType(Type) {}
+        virtual void Encode(Encoder* e) const{
+            e->String(this->mName);
+            e->Int32(this->mVectorCount);
+            e->Uint32(this->mType);
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        char* mName;
+        int32_t mVectorCount;
+        uint32_t mType;
+    };
+
+    class ProgramInfo: public Encodable {
+    public:
+        ProgramInfo() = default;
+        ProgramInfo(const gapic::Map<int32_t, UniformInfo>& Uniforms, const gapic::Map<uint32_t, AttributeInfo>& Attributes) :
+            mUniforms(Uniforms),
+            mAttributes(Attributes) {}
+        virtual void Encode(Encoder* e) const{
+            e->Uint32(this->mUniforms.count());
+            for (auto v : this->mUniforms) {
+                e->Int32(v.key);
+                e->Struct(v.value);
+            }
+            e->Uint32(this->mAttributes.count());
+            for (auto v : this->mAttributes) {
+                e->Uint32(v.key);
+                e->Struct(v.value);
+            }
+        }
+        virtual const schema::Entity* Schema() const {
+            return StaticSchema();
+        }
+        static const schema::Entity* StaticSchema();
+        gapic::Map<int32_t, UniformInfo> mUniforms;
+        gapic::Map<uint32_t, AttributeInfo> mAttributes;
     };
 
     class QueryId__S: public Encodable {

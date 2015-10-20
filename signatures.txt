@@ -173,6 +173,9 @@ gfxapi.Texture2D{[]$}
 Architecture : full 140 compact 28
 gles.Architecture{[]?,Uint32,Uint32,Uint32,Bool}
 
+AttributeInfo : full 70 compact 26
+gles.AttributeInfo{String,Int32,Uint32}
+
 AttributeLocationˢ : full 44 compact 31
 gles.AttributeLocationˢ{$}
 
@@ -3335,8 +3338,11 @@ gles.ProgramIdˢ{$}
 ProgramIdᵖ : full 42 compact 24
 gles.ProgramIdᵖ{$}
 
-Program : full 313 compact 36
-gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
+ProgramInfo : full 113 compact 29
+gles.ProgramInfo{map[Int32]$,map[Uint32]$}
+
+Program : full 339 compact 36
+gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Uint32]$,map[Int32]$,$}
 
 QueryIdˢ : full 34 compact 21
 gles.QueryIdˢ{$}
@@ -3476,8 +3482,11 @@ gles.UniformIndexᵖ{$}
 UniformIndexᶜᵖ : full 48 compact 30
 gles.UniformIndexᶜᵖ{$}
 
-Uniform : full 58 compact 21
-gles.Uniform{String,Uint32,$}
+UniformInfo : full 68 compact 24
+gles.UniformInfo{String,Int32,Uint32}
+
+Uniform : full 77 compact 22
+gles.Uniform{String,Uint32,Int32,$}
 
 Vec2f : full 38 compact 18
 gles.Vec2f{[2]Float32}
@@ -3605,8 +3614,8 @@ gles.VertexAttributeArray{Bool,Int32,Uint32,Uint8,Int32,$,Uint32,Bool,Uint32}
 VertexAttributeValue : full 45 compact 32
 gles.VertexAttributeValue{$}
 
-VertexAttribute : full 73 compact 29
-gles.VertexAttribute{$,Int32,Uint32}
+VertexAttribute : full 72 compact 28
+gles.VertexAttribute{String,Int32,Uint32}
 
 VertexBufferBindingIndexˢ : full 51 compact 38
 gles.VertexBufferBindingIndexˢ{$}
@@ -4359,12 +4368,12 @@ resultUseResource : full 29 compact 27
 test.resultUseResource{}
 
 Schema stats:
-Count: 1453
-Full: 149637
-Total: 148626
+Count: 1456
+Full: 149933
+Total: 148921
 Average: 102
 Largest: 4837
-Compact: 46493
-Total: 45487
+Compact: 46573
+Total: 45566
 Average: 31
 Largest: 174

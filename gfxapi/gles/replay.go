@@ -157,11 +157,7 @@ func (a api) Replay(
 		}
 	}
 
-	transforms.Add(
-		readFramebuffer,
-		injector,
-		remapAttributes(),
-	)
+	transforms.Add(readFramebuffer, injector)
 
 	// Device-dependent transforms.
 	if c, err := compat(device, d, l); err == nil {

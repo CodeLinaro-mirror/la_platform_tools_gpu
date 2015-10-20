@@ -43,6 +43,23 @@ const schema::Entity* Architecture::StaticSchema() {
     return &entity;
 }
 
+// AttributeInfo:
+// gles.AttributeInfo{String,Int32,Uint32}
+const schema::Entity* AttributeInfo::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "AttributeInfo",
+        "",
+        {
+            schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"VectorCount", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+        },
+    };
+    return &entity;
+}
+
 // SliceInfo:
 // gles.SliceInfo{$,Uint64,Uint64}
 const schema::Entity* SliceInfo::StaticSchema() {
@@ -1264,7 +1281,7 @@ const schema::Entity* Shader::StaticSchema() {
 }
 
 // VertexAttribute:
-// gles.VertexAttribute{$,Int32,Uint32}
+// gles.VertexAttribute{String,Int32,Uint32}
 const schema::Entity* VertexAttribute::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1272,8 +1289,8 @@ const schema::Entity* VertexAttribute::StaticSchema() {
         "VertexAttribute",
         "",
         {
-            schema::Field{"Name", new schema::Struct{ Char__S::StaticSchema()}},
-            schema::Field{"VectorCount", new schema::Primitive{"int32", schema::Primitive::Int32}},
+            schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"VectorCount", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
         },
     };
@@ -1281,7 +1298,13 @@ const schema::Entity* VertexAttribute::StaticSchema() {
 }
 
 // Uniform:
-// gles.Uniform{String,Uint32,$}
+// gles.Uniform{String,Uint32,Int32,$}
+void Uniform::Encode(Encoder* e) const {
+    e->String(this->mName);
+    e->Uint32(this->mType);
+    e->Int32(this->mVectorCount);
+    e->Struct(this->mValue);
+}
 const schema::Entity* Uniform::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1291,6 +1314,7 @@ const schema::Entity* Uniform::StaticSchema() {
         {
             schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
             schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+            schema::Field{"VectorCount", new schema::Primitive{"GLint", schema::Primitive::Int32}},
             schema::Field{"Value", new schema::Struct{ U8__S::StaticSchema()}},
         },
     };
@@ -1298,7 +1322,7 @@ const schema::Entity* Uniform::StaticSchema() {
 }
 
 // Program:
-// gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Int32]$,map[Int32]$,$}
+// gles.Program{map[Uint32]Uint32,Bool,$,map[String]Uint32,map[Uint32]$,map[Int32]$,$}
 void Program::Encode(Encoder* e) const {
     e->Uint32(this->mShaders.count());
     for (auto v : this->mShaders) {
@@ -1314,7 +1338,7 @@ void Program::Encode(Encoder* e) const {
     }
     e->Uint32(this->mAttributes.count());
     for (auto v : this->mAttributes) {
-        e->Int32(v.key);
+        e->Uint32(v.key);
         e->Struct(v.value);
     }
     e->Uint32(this->mUniforms.count());
@@ -1335,7 +1359,7 @@ const schema::Entity* Program::StaticSchema() {
             schema::Field{"Linked", new schema::Primitive{"bool", schema::Primitive::Bool}},
             schema::Field{"Binary", new schema::Struct{ U8__S::StaticSchema()}},
             schema::Field{"AttributeBindings", new schema::Map{"StringːAttributeLocationᵐ", new schema::Primitive{"string", schema::Primitive::String}, new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}}},
-            schema::Field{"Attributes", new schema::Map{"S32ːVertexAttributeᵐ", new schema::Primitive{"int32", schema::Primitive::Int32}, new schema::Struct{ VertexAttribute::StaticSchema()}}},
+            schema::Field{"Attributes", new schema::Map{"AttributeLocationːVertexAttributeᵐ", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}, new schema::Struct{ VertexAttribute::StaticSchema()}}},
             schema::Field{"Uniforms", new schema::Map{"UniformLocationːUniformᵐ", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}, new schema::Struct{ Uniform::StaticSchema()}}},
             schema::Field{"InfoLog", new schema::Struct{ GLchar__S::StaticSchema()}},
         },
@@ -26655,6 +26679,39 @@ const schema::Entity* ProgramId__S::StaticSchema() {
         "",
         {
             schema::Field{"", new schema::Struct{ SliceInfo::StaticSchema()}},
+        },
+    };
+    return &entity;
+}
+
+// UniformInfo:
+// gles.UniformInfo{String,Int32,Uint32}
+const schema::Entity* UniformInfo::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "UniformInfo",
+        "",
+        {
+            schema::Field{"Name", new schema::Primitive{"string", schema::Primitive::String}},
+            schema::Field{"VectorCount", new schema::Primitive{"GLint", schema::Primitive::Int32}},
+            schema::Field{"Type", new schema::Primitive{"GLenum", schema::Primitive::Uint32}},
+        },
+    };
+    return &entity;
+}
+
+// ProgramInfo:
+// gles.ProgramInfo{map[Int32]$,map[Uint32]$}
+const schema::Entity* ProgramInfo::StaticSchema() {
+    static schema::Entity entity {
+        "gles",
+        "",
+        "ProgramInfo",
+        "",
+        {
+            schema::Field{"Uniforms", new schema::Map{"", new schema::Primitive{"UniformLocation", schema::Primitive::Int32}, new schema::Struct{ UniformInfo::StaticSchema()}}},
+            schema::Field{"Attributes", new schema::Map{"", new schema::Primitive{"AttributeLocation", schema::Primitive::Uint32}, new schema::Struct{ AttributeInfo::StaticSchema()}}},
         },
     };
     return &entity;

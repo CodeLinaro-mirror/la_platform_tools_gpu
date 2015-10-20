@@ -72,6 +72,7 @@
     {{end}}
 ¶
     #include "{{Global "API"}}_state_externs.inl"
+    #include "{{Global "API"}}_extras.inl"
   };
 ¶
   // Inline methods
@@ -193,6 +194,7 @@
 ¶
     gapic::coder::{{Global "API"}}::{{Title .Name}} coder({{Template "C++.CoderArguments" $}});
     coder.mextras.append(&observations);
+    addExtras(coder);
     mEncoder->Variant(&coder);
     {{if GetAnnotation $ "DrawCall"}} onPostDrawCall(); {{end}}
     mScratch.reset();

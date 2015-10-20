@@ -820,11 +820,9 @@ cmd GLboolean glIsShader(ShaderId shader) {
 @Doc("https://www.khronos.org/opengles/sdk/docs/man32/html/glLinkProgram.xhtml","OpenGL ES 3.2")
 cmd void glLinkProgram(ProgramId program) {
   minRequiredVersion(2, 0)
-
-  //for s in (program.Shaders) {
-  // TODO: use(s.Binary)
-  //}
-  // TODO: program.Binary < ?
+  ctx := GetContext()
+  p := ctx.Instances.Programs[program]
+  resolveAttributesAndUniforms(p, program)
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man31/html/glMemoryBarrier.xhtml","OpenGL ES 3.1")
@@ -911,13 +909,17 @@ cmd void glProgramBinary(ProgramId   program,
 }
 
 macro void ProgramBinary(ProgramId program, GLenum binaryFormat, const void* binary, GLsizei length) {
+  ctx := GetContext()
+  p := ctx.Instances.Programs[program]
   switch (binaryFormat) {
+    case GL_Z400_BINARY_AMD: {
+      read(binary[0:length])
+      resolveAttributesAndUniforms(p, program)
+    }
     default: {
       glErrorInvalidEnum(binaryFormat)
     }
   }
-  // TODO
-  read(binary[0:length])
 }
 
 @Doc("https://www.khronos.org/opengles/sdk/docs/man3/html/glProgramParameteri.xhtml","OpenGL ES 3.0")

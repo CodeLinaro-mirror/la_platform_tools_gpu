@@ -17,8 +17,11 @@
 template<typename T> T inline min(T a, T b) { return (a < b) ? a : b; }
 template<typename T> T inline max(T a, T b) { return (a > b) ? a : b; }
 
-template<typename T> inline void mapMemory(const T&) {}
-template<typename T> inline void unmapMemory(const T&) {}
+// Externs not implemented in GAPII.
+template <typename T> inline void mapMemory(const T&) {}
+template <typename T> inline void unmapMemory(const T&) {}
+template <typename T> inline void resolveAttributesAndUniforms(const T&, int32_t) {}
+
 
 inline uint32_t minIndex(const uint8_t* indices, uint32_t indices_type, uint32_t offset, uint32_t count) {
     uint32_t v = ~(uint32_t)0;

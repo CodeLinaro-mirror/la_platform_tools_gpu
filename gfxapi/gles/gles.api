@@ -46,6 +46,8 @@ extern void unmapMemory(any slice)
 
 extern u32 pixelSize(GLenum format, GLenum type)
 extern s32 stateVariableSize(GLenum v)
+extern void resolveAttributesAndUniforms(ref!Program program, ProgramId programID)
+
 macro void minRequiredVersion(u32 major, u32 minor) {  }
 macro void supportsBits(GLbitfield seenBits, GLbitfield validBits) {  }
 macro void requiresExtension(ExtensionId ext) {  }
@@ -405,8 +407,8 @@ class Shader {
 
 @internal
 class VertexAttribute {
-  char[] Name
-  s32    VectorCount
+  string Name
+  GLint  VectorCount
   GLenum Type
 }
 
@@ -433,18 +435,19 @@ class VertexAttribute {
 class Uniform {
   string Name
   GLenum Type
+  GLint  VectorCount
   u8[]   Value
 }
 
 @internal
 class Program {
-  map!(GLenum, ShaderId)          Shaders
-  bool                            Linked
-  u8[]                            Binary
-  map!(string, AttributeLocation) AttributeBindings
-  map!(s32, VertexAttribute)      Attributes
-  map!(UniformLocation, Uniform)  Uniforms
-  GLchar[]                        InfoLog
+  map!(GLenum, ShaderId)                   Shaders
+  bool                                     Linked
+  u8[]                                     Binary
+  map!(string, AttributeLocation)          AttributeBindings
+  map!(AttributeLocation, VertexAttribute) Attributes
+  map!(UniformLocation, Uniform)           Uniforms
+  GLchar[]                                 InfoLog
 }
 
 @internal

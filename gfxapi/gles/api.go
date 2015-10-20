@@ -15966,6 +15966,26 @@ func (m AttributeLocationːVertexAttributeValueᵐ) Range() []VertexAttributeVal
 	return values
 }
 
+type AttributeLocationːVertexAttributeᵐ map[AttributeLocation]VertexAttribute
+
+func (m AttributeLocationːVertexAttributeᵐ) Get(key AttributeLocation) VertexAttribute {
+	return m[key]
+}
+func (m AttributeLocationːVertexAttributeᵐ) Contains(key AttributeLocation) bool {
+	_, ok := m[key]
+	return ok
+}
+func (m AttributeLocationːVertexAttributeᵐ) Delete(key AttributeLocation) {
+	delete(m, key)
+}
+func (m AttributeLocationːVertexAttributeᵐ) Range() []VertexAttribute {
+	values := make([]VertexAttribute, 0, len(m))
+	for _, value := range m {
+		values = append(values, value)
+	}
+	return values
+}
+
 type BufferIdːBufferʳᵐ map[BufferId](*Buffer)
 
 func (m BufferIdːBufferʳᵐ) Get(key BufferId) *Buffer {
@@ -16404,26 +16424,6 @@ func (m RenderbufferIdːRenderbufferʳᵐ) Delete(key RenderbufferId) {
 }
 func (m RenderbufferIdːRenderbufferʳᵐ) Range() [](*Renderbuffer) {
 	values := make([](*Renderbuffer), 0, len(m))
-	for _, value := range m {
-		values = append(values, value)
-	}
-	return values
-}
-
-type S32ːVertexAttributeᵐ map[int32]VertexAttribute
-
-func (m S32ːVertexAttributeᵐ) Get(key int32) VertexAttribute {
-	return m[key]
-}
-func (m S32ːVertexAttributeᵐ) Contains(key int32) bool {
-	_, ok := m[key]
-	return ok
-}
-func (m S32ːVertexAttributeᵐ) Delete(key int32) {
-	delete(m, key)
-}
-func (m S32ːVertexAttributeᵐ) Range() []VertexAttribute {
-	values := make([]VertexAttribute, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
 	}
@@ -49064,8 +49064,8 @@ type Shader struct {
 ////////////////////////////////////////////////////////////////////////////////
 type VertexAttribute struct {
 	binary.Generate
-	Name        Charˢ
-	VectorCount int32
+	Name        string
+	VectorCount GLint
 	Type        GLenum
 }
 
@@ -49074,9 +49074,10 @@ type VertexAttribute struct {
 ////////////////////////////////////////////////////////////////////////////////
 type Uniform struct {
 	binary.Generate
-	Name  string
-	Type  GLenum
-	Value U8ˢ
+	Name        string
+	Type        GLenum
+	VectorCount GLint
+	Value       U8ˢ
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49088,7 +49089,7 @@ type Program struct {
 	Linked            bool
 	Binary            U8ˢ
 	AttributeBindings StringːAttributeLocationᵐ
-	Attributes        S32ːVertexAttributeᵐ
+	Attributes        AttributeLocationːVertexAttributeᵐ
 	Uniforms          UniformLocationːUniformᵐ
 	InfoLog           GLcharˢ
 }
