@@ -77,7 +77,7 @@ func getTools(cfg cpp.Config) (*tools, error) {
 		return nil, fmt.Errorf("NDK gnu-libstdc++ for version %s not found", cfg.ABI.Version)
 	}
 	arch := fmt.Sprintf("arch-%s", cfg.ABI.Architecture)
-	bin := Paths.NDK.Join("toolchains", cfg.ABI.Toolchain+"-"+cfg.ABI.Version, "prebuilt", system, "bin")
+	bin := Paths.GCC.Join(cfg.ABI.ToolchainRoot(), cfg.ABI.Toolchain + "-" + cfg.ABI.Version, "bin")
 	if !bin.Exists() {
 		return nil, fmt.Errorf("NDK toolchain for %s version %s not found (%s)", cfg.ABI.Name, cfg.ABI.Version, bin.Absolute())
 	}

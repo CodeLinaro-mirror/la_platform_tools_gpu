@@ -14,7 +14,10 @@
 
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 var (
 	ABIs = []*ABI{
@@ -95,6 +98,14 @@ type ABI struct {
 
 func (a *ABI) String() string {
 	return a.Name
+}
+
+func (a *ABI) ToolchainRoot() string {
+	i := strings.Index(a.Toolchain, "-")
+	if i < 0 {
+		return a.Toolchain
+	}
+	return a.Toolchain[:i]
 }
 
 func GetABI(os *OS, arch *Architecture) *ABI {
