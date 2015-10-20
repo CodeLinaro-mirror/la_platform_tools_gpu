@@ -35,6 +35,20 @@ var abiToSo = map[string]string{
 	"arm64-v8a":   "android-arm64",
 }
 
+// BuildFlavor is an enumerator of build types of the GAPII library
+type BuildFlavor int
+
+const (
+	// MostRecentBuild represents the most recently built version of GAPII.
+	MostRecentBuild BuildFlavor = iota
+
+	// DebugBuild represents the build of GAPII with no optimisations and verbose logging.
+	DebugBuild
+
+	// ReleaseBuild represents the build of GAPII with full optimisations and minimal logging.
+	ReleaseBuild
+)
+
 func getSoName(a *adb.Action) (string, error) {
 	abi := a.Package.ABI
 	if abi == "" {
@@ -47,24 +61,29 @@ func getSoName(a *adb.Action) (string, error) {
 	return so, nil
 }
 
-func getSoPath(a *adb.Action, debug bool) (string, error) {
+func getSoPath(a *adb.Action, flavor BuildFlavor) (string, error) {
 	// TODO: decide how we are going to find the so's
 	gopath := filepath.SplitList(os.Getenv("GOPATH"))[0]
 	soName, err := getSoName(a)
 	if err != nil {
 		return "", err
 	}
-	flavor := "release"
-	if debug {
-		flavor = "debug"
+	switch flavor {
+	case MostRecentBuild:
+		return filepath.Join(gopath, "bin", soName, "libgapii.so"), nil
+	case DebugBuild:
+		return filepath.Join(gopath, "bin", soName, "debug", "libgapii.so"), nil
+	case ReleaseBuild:
+		return filepath.Join(gopath, "bin", soName, "release", "libgapii.so"), nil
+	default:
+		panic(fmt.Errorf("Unknown build flavor %v", flavor))
 	}
-	return filepath.Join(gopath, "bin", soName, flavor, "libgapii.so"), nil
 }
 
 // AdbStart launches an activity on an android device with the gapii tracer
 // enabled. Gapii will attempt to connect back on the specified host port to
 // write the trace.
-func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, debug bool) error {
+func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, flavor BuildFlavor) error {
 	p := a.Package
 	d := p.Device
 	enforced, err := d.SELinuxEnforcing()
@@ -88,7 +107,7 @@ func AdbStart(l log.Logger, a *adb.Action, spyport adb.Port, debug bool) error {
 		}()
 	}
 
-	gapiiPath, err := getSoPath(a, debug)
+	gapiiPath, err := getSoPath(a, flavor)
 	if err != nil {
 		log.Errorf(l, "Failed finding gapii: %s", err)
 		return err

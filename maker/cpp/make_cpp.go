@@ -231,19 +231,16 @@ func MakeRunTest(test build.File, cfg Config) {
 	}
 }
 
-// Add a make step to copy a file from "src" to "dest". The copy only
-// happens on the host OS.
+// Add a make step to copy a file from "src" to "dest".
 func MakeCopy(src build.File, dest build.File, cfg Config, env build.Environment) {
 	logger := env.Logger
-	if cfg.ABI.OS == config.HostOS {
-		makeStep(cfg.Name, dest, build.Files(src), env.ForceBuild,
-			func(*graph.Step) error {
-				log.Infof(logger, "Copying %s -> %s", src, dest)
-				if err := src.CopyTo(dest); err != nil {
-					log.Errorf(logger, "Copy failed: %v", err)
-					// Error delibrately suppressed
-				}
-				return nil
-			}).AlwaysRun()
-	}
+	makeStep(cfg.Name, dest, build.Files(src), env.ForceBuild,
+		func(*graph.Step) error {
+			log.Infof(logger, "Copying %s -> %s", src, dest)
+			if err := src.CopyTo(dest); err != nil {
+				log.Errorf(logger, "Copy failed: %v", err)
+				// Error delibrately suppressed
+			}
+			return nil
+		}).AlwaysRun()
 }

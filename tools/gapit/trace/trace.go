@@ -38,7 +38,7 @@ var (
 	spyport       = verb.Flags.Int("i", 9286, "gapii TCP port to connect to")
 	duration      = verb.Flags.Duration("d", 0, "duration to trace for")
 	output        = verb.Flags.String("out", "", "the file to generate")
-	debug         = verb.Flags.Bool("debug", false, "use the debug spy .so")
+	flavor        = verb.Flags.String("flavor", "most-recent", "the flavor of GAPII to use. One of: <debug, release, most-recent>")
 	local         = verb.Flags.Bool("local", false, "capture a local program instead of using ADB")
 	observeFrames = verb.Flags.Uint("observeFrames", 0, "capture the framebuffer every n frames (0 to disable)")
 	observeDraws  = verb.Flags.Uint("observeDraws", 0, "capture the framebuffer every n draws (0 to disable)")
@@ -87,6 +87,19 @@ func captureLocal(flags flag.FlagSet, logger log.Logger, options gapii.Options) 
 	return capture(logger, options, out)
 }
 
+func parseFlavor(str string) gapii.BuildFlavor {
+	switch strings.TrimSpace(str) {
+	case "d", "dbg", "debug":
+		return gapii.DebugBuild
+	case "r", "rel", "release":
+		return gapii.ReleaseBuild
+	case "m", "mr", "recent", "most-recent":
+		return gapii.MostRecentBuild
+	default:
+		panic(fmt.Errorf("Unrecognised build flavor '%s'", str))
+	}
+}
+
 func captureADB(flags flag.FlagSet, logger log.Logger, options gapii.Options) error {
 	activity := flags.Arg(0)
 	d, err := getDevice(logger, *device)
@@ -116,7 +129,7 @@ func captureADB(flags flag.FlagSet, logger log.Logger, options gapii.Options) er
 		out = name + ".gfxtrace"
 	}
 
-	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport), *debug)
+	err = gapii.AdbStart(logger, a, adb.TCPPort(*spyport), parseFlavor(*flavor))
 	if err != nil {
 		return err
 	}
