@@ -15,9 +15,8 @@
 package cyclic
 
 import (
-	"fmt"
-
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/errors"
 )
 
 // Control represents a control block in a stream.
@@ -40,6 +39,6 @@ func (c *Control) read(d *decoder) {
 	case 0:
 		c.Mode = binary.Mode(d.Uint32())
 	default:
-		d.SetError(fmt.Errorf("Invalid control block version %d", version))
+		d.SetError(errors.Newf("Invalid control block version %d", version))
 	}
 }
