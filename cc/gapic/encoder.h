@@ -51,6 +51,10 @@ public:
     inline uint32_t size() const { return mData != nullptr ? mSize : mVector.size(); }
     inline const T& operator[](uint32_t index) const { GAPID_ASSERT(index < size()); return data()[index]; }
     inline std::vector<T>& vector() { GAPID_ASSERT(mData == nullptr); return mVector; }
+
+    // Support for range-based for looping
+    inline const T* begin() const { return data(); }
+    inline const T* end() const { return data() + size(); }
 private:
     std::vector<T> mVector;
     const T* mData;
@@ -96,22 +100,7 @@ public:
     void Encode(const std::string& v) { String(v); }
     void Encode(const gapic::Id& id) { Id(id); }
 
-    template <class T>
-    void Encode(const Array<T>& arr) {
-        Uint32(arr.size());
-        for (int i = 0; i < arr.size(); ++i) {
-            Encode(arr[i]);
-        }
-    }
-
-    template <class T>
-    void Array(const T* array, uint32_t size) {
-        for (int i = 0; i < size; ++i) {
-            Encode(array[i]);
-        }
-    }
-
-    void Encode(const Encodable& obj);
+    void Struct(const Encodable& obj);
     void Variant(const Encodable* obj);
     void Object(const Encodable* obj);
 
