@@ -113,8 +113,6 @@ func entityForStruct(t binary.SubspaceType) *binary.Entity {
 
 func (s *substack) pushRepeatIfNeeded(t binary.SubspaceType) binary.SubspaceType {
 	if r, ok := t.(*repeat); ok {
-		fmt.Printf("Push repeat for %v count %d repetition %v replaces %v\n",
-			r.repeats, r.count, r.repetition(), r.replaces())
 		s.pushSubTypes(r.repetition())
 		return r.replaces()
 	}
@@ -181,7 +179,6 @@ func (s *substack) pushCount(count uint32) error {
 // is returned if the stack is empty.
 func (s *substack) popType() (binary.SubspaceType, error) {
 	if len(s.stack) == 0 {
-		panic(fmt.Errorf("Pop on empty subtype Entity stack"))
 		return nil, fmt.Errorf("Pop on empty subtype Entity stack")
 	}
 	head := s.stack[len(s.stack)-1]
