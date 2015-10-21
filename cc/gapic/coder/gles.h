@@ -100,16 +100,19 @@ namespace gles {
     class AttributeLocation__P: public Encodable {
     public:
         AttributeLocation__P() = default;
-        AttributeLocation__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        AttributeLocation__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Color: public Encodable {
@@ -197,16 +200,19 @@ namespace gles {
     class BufferDataPointer: public Encodable {
     public:
         BufferDataPointer() = default;
-        BufferDataPointer(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        BufferDataPointer(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class BufferId__S: public Encodable {
@@ -227,46 +233,55 @@ namespace gles {
     class BufferId__P: public Encodable {
     public:
         BufferId__P() = default;
-        BufferId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        BufferId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class BufferId__CP: public Encodable {
     public:
         BufferId__CP() = default;
-        BufferId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        BufferId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGLContextObj: public Encodable {
     public:
         CGLContextObj() = default;
-        CGLContextObj(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGLContextObj(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGLContextObj__S: public Encodable {
@@ -287,31 +302,37 @@ namespace gles {
     class CGLContextObj__P: public Encodable {
     public:
         CGLContextObj__P() = default;
-        CGLContextObj__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGLContextObj__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGLTexelFormatObj: public Encodable {
     public:
         CGLTexelFormatObj() = default;
-        CGLTexelFormatObj(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGLTexelFormatObj(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGLCreateContext: public Encodable {
@@ -362,46 +383,55 @@ namespace gles {
     class CGSConnectionID__P: public Encodable {
     public:
         CGSConnectionID__P() = default;
-        CGSConnectionID__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGSConnectionID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGSWindowID__P: public Encodable {
     public:
         CGSWindowID__P() = default;
-        CGSWindowID__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGSWindowID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGSSurfaceID__P: public Encodable {
     public:
         CGSSurfaceID__P() = default;
-        CGSSurfaceID__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGSSurfaceID__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGLGetSurface: public Encodable {
@@ -454,16 +484,19 @@ namespace gles {
     class CGSConnectionID: public Encodable {
     public:
         CGSConnectionID() = default;
-        CGSConnectionID(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        CGSConnectionID(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGSConnectionID__S: public Encodable {
@@ -484,16 +517,19 @@ namespace gles {
     class F64__P: public Encodable {
     public:
         F64__P() = default;
-        F64__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        F64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class CGSGetSurfaceBounds: public Encodable {
@@ -567,16 +603,19 @@ namespace gles {
     class Char__P: public Encodable {
     public:
         Char__P() = default;
-        Char__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Char__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class ClearState: public Encodable {
@@ -1311,16 +1350,19 @@ namespace gles {
     class VertexPointer: public Encodable {
     public:
         VertexPointer() = default;
-        VertexPointer(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        VertexPointer(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class VertexAttributeArray: public Encodable {
@@ -1466,46 +1508,55 @@ namespace gles {
     class GLenum__P: public Encodable {
     public:
         GLenum__P() = default;
-        GLenum__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLenum__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class U32__P: public Encodable {
     public:
         U32__P() = default;
-        U32__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        U32__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class U8__P: public Encodable {
     public:
         U8__P() = default;
-        U8__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        U8__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class ContextInfo: public Encodable {
@@ -1548,61 +1599,73 @@ namespace gles {
     class EGLConfig: public Encodable {
     public:
         EGLConfig() = default;
-        EGLConfig(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        EGLConfig(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EGLContext: public Encodable {
     public:
         EGLContext() = default;
-        EGLContext(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        EGLContext(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EGLDisplay: public Encodable {
     public:
         EGLDisplay() = default;
-        EGLDisplay(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        EGLDisplay(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EGLSurface: public Encodable {
     public:
         EGLSurface() = default;
-        EGLSurface(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        EGLSurface(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EGLint__S: public Encodable {
@@ -1623,16 +1686,19 @@ namespace gles {
     class EGLint__P: public Encodable {
     public:
         EGLint__P() = default;
-        EGLint__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        EGLint__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EglCreateContext: public Encodable {
@@ -1728,16 +1794,19 @@ namespace gles {
     class Void__P: public Encodable {
     public:
         Void__P() = default;
-        Void__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Void__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class EglSwapBuffers: public Encodable {
@@ -1810,76 +1879,91 @@ namespace gles {
     class FramebufferId__P: public Encodable {
     public:
         FramebufferId__P() = default;
-        FramebufferId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        FramebufferId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class FramebufferId__CP: public Encodable {
     public:
         FramebufferId__CP() = default;
-        FramebufferId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        FramebufferId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLDEBUGPROC: public Encodable {
     public:
         GLDEBUGPROC() = default;
-        GLDEBUGPROC(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLDEBUGPROC(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLXContext: public Encodable {
     public:
         GLXContext() = default;
-        GLXContext(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLXContext(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLXDrawable: public Encodable {
     public:
         GLXDrawable() = default;
-        GLXDrawable(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLXDrawable(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLboolean__S: public Encodable {
@@ -1900,46 +1984,55 @@ namespace gles {
     class GLboolean__P: public Encodable {
     public:
         GLboolean__P() = default;
-        GLboolean__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLboolean__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLchar__P: public Encodable {
     public:
         GLchar__P() = default;
-        GLchar__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLchar__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLchar__CP: public Encodable {
     public:
         GLchar__CP() = default;
-        GLchar__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLchar__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLchar__CP__S: public Encodable {
@@ -1960,46 +2053,55 @@ namespace gles {
     class GLchar__CP__P: public Encodable {
     public:
         GLchar__CP__P() = default;
-        GLchar__CP__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLchar__CP__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLchar__CP__CP: public Encodable {
     public:
         GLchar__CP__CP() = default;
-        GLchar__CP__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLchar__CP__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLeglImageOES: public Encodable {
     public:
         GLeglImageOES() = default;
-        GLeglImageOES(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLeglImageOES(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLenum__S: public Encodable {
@@ -2020,16 +2122,19 @@ namespace gles {
     class GLenum__CP: public Encodable {
     public:
         GLenum__CP() = default;
-        GLenum__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLenum__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLfixed__S: public Encodable {
@@ -2050,31 +2155,37 @@ namespace gles {
     class GLfixed__P: public Encodable {
     public:
         GLfixed__P() = default;
-        GLfixed__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLfixed__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLfixed__CP: public Encodable {
     public:
         GLfixed__CP() = default;
-        GLfixed__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLfixed__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLfloat__2__A: public Encodable {
@@ -2131,31 +2242,37 @@ namespace gles {
     class GLfloat__P: public Encodable {
     public:
         GLfloat__P() = default;
-        GLfloat__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLfloat__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLfloat__CP: public Encodable {
     public:
         GLfloat__CP() = default;
-        GLfloat__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLfloat__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLint64__S: public Encodable {
@@ -2176,16 +2293,19 @@ namespace gles {
     class GLint64__P: public Encodable {
     public:
         GLint64__P() = default;
-        GLint64__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLint64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLint__2__A: public Encodable {
@@ -2242,31 +2362,37 @@ namespace gles {
     class GLint__P: public Encodable {
     public:
         GLint__P() = default;
-        GLint__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLint__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLint__CP: public Encodable {
     public:
         GLint__CP() = default;
-        GLint__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLint__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLshort__S: public Encodable {
@@ -2287,31 +2413,37 @@ namespace gles {
     class GLshort__P: public Encodable {
     public:
         GLshort__P() = default;
-        GLshort__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLshort__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLshort__CP: public Encodable {
     public:
         GLshort__CP() = default;
-        GLshort__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLshort__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLsizei__S: public Encodable {
@@ -2332,31 +2464,37 @@ namespace gles {
     class GLsizei__P: public Encodable {
     public:
         GLsizei__P() = default;
-        GLsizei__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLsizei__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLsizei__CP: public Encodable {
     public:
         GLsizei__CP() = default;
-        GLsizei__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLsizei__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLubyte__S: public Encodable {
@@ -2377,31 +2515,37 @@ namespace gles {
     class GLubyte__P: public Encodable {
     public:
         GLubyte__P() = default;
-        GLubyte__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLubyte__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLubyte__CP: public Encodable {
     public:
         GLubyte__CP() = default;
-        GLubyte__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLubyte__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLuint64__S: public Encodable {
@@ -2422,31 +2566,37 @@ namespace gles {
     class GLuint64__P: public Encodable {
     public:
         GLuint64__P() = default;
-        GLuint64__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLuint64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLuint64__CP: public Encodable {
     public:
         GLuint64__CP() = default;
-        GLuint64__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLuint64__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLuint__2__A: public Encodable {
@@ -2518,31 +2668,37 @@ namespace gles {
     class GLuint__P: public Encodable {
     public:
         GLuint__P() = default;
-        GLuint__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLuint__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLuint__CP: public Encodable {
     public:
         GLuint__CP() = default;
-        GLuint__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLuint__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GLvoid__S: public Encodable {
@@ -2563,16 +2719,19 @@ namespace gles {
     class GLvoid__P: public Encodable {
     public:
         GLvoid__P() = default;
-        GLvoid__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        GLvoid__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlActiveShaderProgram: public Encodable {
@@ -3975,16 +4134,19 @@ namespace gles {
     class Void__CP: public Encodable {
     public:
         Void__CP() = default;
-        Void__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Void__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlBufferStorageEXT: public Encodable {
@@ -4793,16 +4955,19 @@ namespace gles {
     class TexturePointer: public Encodable {
     public:
         TexturePointer() = default;
-        TexturePointer(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        TexturePointer(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlCompressedTexImage2D: public Encodable {
@@ -6016,16 +6181,19 @@ namespace gles {
     class PipelineId__CP: public Encodable {
     public:
         PipelineId__CP() = default;
-        PipelineId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        PipelineId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteProgramPipelines: public Encodable {
@@ -6079,16 +6247,19 @@ namespace gles {
     class QueryId__CP: public Encodable {
     public:
         QueryId__CP() = default;
-        QueryId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        QueryId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteQueries: public Encodable {
@@ -6142,16 +6313,19 @@ namespace gles {
     class RenderbufferId__CP: public Encodable {
     public:
         RenderbufferId__CP() = default;
-        RenderbufferId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        RenderbufferId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteRenderbuffers: public Encodable {
@@ -6205,16 +6379,19 @@ namespace gles {
     class SamplerId__CP: public Encodable {
     public:
         SamplerId__CP() = default;
-        SamplerId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        SamplerId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteSamplers: public Encodable {
@@ -6307,16 +6484,19 @@ namespace gles {
     class TextureId__CP: public Encodable {
     public:
         TextureId__CP() = default;
-        TextureId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        TextureId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteTextures: public Encodable {
@@ -6346,16 +6526,19 @@ namespace gles {
     class TransformFeedbackId__CP: public Encodable {
     public:
         TransformFeedbackId__CP() = default;
-        TransformFeedbackId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        TransformFeedbackId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteTransformFeedbacks: public Encodable {
@@ -6385,16 +6568,19 @@ namespace gles {
     class VertexArrayId__CP: public Encodable {
     public:
         VertexArrayId__CP() = default;
-        VertexArrayId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        VertexArrayId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDeleteVertexArrays: public Encodable {
@@ -7128,16 +7314,19 @@ namespace gles {
     class IndicesPointer: public Encodable {
     public:
         IndicesPointer() = default;
-        IndicesPointer(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        IndicesPointer(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlDrawElements: public Encodable {
@@ -8122,16 +8311,19 @@ namespace gles {
     class Void__P__P: public Encodable {
     public:
         Void__P__P() = default;
-        Void__P__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Void__P__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlExtGetBufferPointervQCOM: public Encodable {
@@ -8220,16 +8412,19 @@ namespace gles {
     class ProgramId__P: public Encodable {
     public:
         ProgramId__P() = default;
-        ProgramId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        ProgramId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlExtGetProgramsQCOM: public Encodable {
@@ -8254,16 +8449,19 @@ namespace gles {
     class RenderbufferId__P: public Encodable {
     public:
         RenderbufferId__P() = default;
-        RenderbufferId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        RenderbufferId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlExtGetRenderbuffersQCOM: public Encodable {
@@ -8288,16 +8486,19 @@ namespace gles {
     class ShaderId__P: public Encodable {
     public:
         ShaderId__P() = default;
-        ShaderId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        ShaderId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlExtGetShadersQCOM: public Encodable {
@@ -8380,16 +8581,19 @@ namespace gles {
     class TextureId__P: public Encodable {
     public:
         TextureId__P() = default;
-        TextureId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        TextureId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlExtGetTexturesQCOM: public Encodable {
@@ -9334,16 +9538,19 @@ namespace gles {
     class PipelineId__P: public Encodable {
     public:
         PipelineId__P() = default;
-        PipelineId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        PipelineId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGenProgramPipelines: public Encodable {
@@ -9397,16 +9604,19 @@ namespace gles {
     class QueryId__P: public Encodable {
     public:
         QueryId__P() = default;
-        QueryId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        QueryId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGenQueries: public Encodable {
@@ -9508,16 +9718,19 @@ namespace gles {
     class SamplerId__P: public Encodable {
     public:
         SamplerId__P() = default;
-        SamplerId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        SamplerId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGenSamplers: public Encodable {
@@ -9571,16 +9784,19 @@ namespace gles {
     class TransformFeedbackId__P: public Encodable {
     public:
         TransformFeedbackId__P() = default;
-        TransformFeedbackId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        TransformFeedbackId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGenTransformFeedbacks: public Encodable {
@@ -9610,16 +9826,19 @@ namespace gles {
     class VertexArrayId__P: public Encodable {
     public:
         VertexArrayId__P() = default;
-        VertexArrayId__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        VertexArrayId__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGenVertexArrays: public Encodable {
@@ -9813,16 +10032,19 @@ namespace gles {
     class UniformIndex__CP: public Encodable {
     public:
         UniformIndex__CP() = default;
-        UniformIndex__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        UniformIndex__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGetActiveUniformsiv: public Encodable {
@@ -11848,16 +12070,19 @@ namespace gles {
     class S64__P: public Encodable {
     public:
         S64__P() = default;
-        S64__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        S64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGetQueryObjecti64v: public Encodable {
@@ -11920,16 +12145,19 @@ namespace gles {
     class U64__P: public Encodable {
     public:
         U64__P() = default;
-        U64__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        U64__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGetQueryObjectui64v: public Encodable {
@@ -12885,16 +13113,19 @@ namespace gles {
     class UniformIndex__P: public Encodable {
     public:
         UniformIndex__P() = default;
-        UniformIndex__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        UniformIndex__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlGetUniformIndices: public Encodable {
@@ -15194,16 +15425,19 @@ namespace gles {
     class Void__CP__CP: public Encodable {
     public:
         Void__CP__CP() = default;
-        Void__CP__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Void__CP__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlMultiDrawElementsBaseVertexEXT: public Encodable {
@@ -19485,16 +19719,19 @@ namespace gles {
     class ShaderId__CP: public Encodable {
     public:
         ShaderId__CP() = default;
-        ShaderId__CP(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        ShaderId__CP(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlShaderBinary: public Encodable {
@@ -23174,16 +23411,19 @@ namespace gles {
     class Int__P: public Encodable {
     public:
         Int__P() = default;
-        Int__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Int__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class GlXQueryDrawable: public Encodable {
@@ -23236,31 +23476,37 @@ namespace gles {
     class HDC: public Encodable {
     public:
         HDC() = default;
-        HDC(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        HDC(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class HGLRC: public Encodable {
     public:
         HGLRC() = default;
-        HGLRC(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        HGLRC(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Int__S: public Encodable {
@@ -23330,16 +23576,19 @@ namespace gles {
     class Mat2f__P: public Encodable {
     public:
         Mat2f__P() = default;
-        Mat2f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat2f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec3f: public Encodable {
@@ -23394,16 +23643,19 @@ namespace gles {
     class Mat2x3f__P: public Encodable {
     public:
         Mat2x3f__P() = default;
-        Mat2x3f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat2x3f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec4f: public Encodable {
@@ -23458,16 +23710,19 @@ namespace gles {
     class Mat2x4f__P: public Encodable {
     public:
         Mat2x4f__P() = default;
-        Mat2x4f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat2x4f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat3f: public Encodable {
@@ -23505,16 +23760,19 @@ namespace gles {
     class Mat3f__P: public Encodable {
     public:
         Mat3f__P() = default;
-        Mat3f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat3f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat3x2f: public Encodable {
@@ -23552,16 +23810,19 @@ namespace gles {
     class Mat3x2f__P: public Encodable {
     public:
         Mat3x2f__P() = default;
-        Mat3x2f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat3x2f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat3x4f: public Encodable {
@@ -23599,16 +23860,19 @@ namespace gles {
     class Mat3x4f__P: public Encodable {
     public:
         Mat3x4f__P() = default;
-        Mat3x4f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat3x4f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat4f: public Encodable {
@@ -23646,16 +23910,19 @@ namespace gles {
     class Mat4f__P: public Encodable {
     public:
         Mat4f__P() = default;
-        Mat4f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat4f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat4x2f: public Encodable {
@@ -23693,16 +23960,19 @@ namespace gles {
     class Mat4x2f__P: public Encodable {
     public:
         Mat4x2f__P() = default;
-        Mat4x2f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat4x2f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Mat4x3f: public Encodable {
@@ -23740,16 +24010,19 @@ namespace gles {
     class Mat4x3f__P: public Encodable {
     public:
         Mat4x3f__P() = default;
-        Mat4x3f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Mat4x3f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class PipelineId__S: public Encodable {
@@ -24085,16 +24358,19 @@ namespace gles {
     class U16__P: public Encodable {
     public:
         U16__P() = default;
-        U16__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        U16__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class U32__S: public Encodable {
@@ -24211,16 +24487,19 @@ namespace gles {
     class Vec2f__P: public Encodable {
     public:
         Vec2f__P() = default;
-        Vec2f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec2f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec2i: public Encodable {
@@ -24258,16 +24537,19 @@ namespace gles {
     class Vec2i__P: public Encodable {
     public:
         Vec2i__P() = default;
-        Vec2i__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec2i__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec2u: public Encodable {
@@ -24305,16 +24587,19 @@ namespace gles {
     class Vec2u__P: public Encodable {
     public:
         Vec2u__P() = default;
-        Vec2u__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec2u__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec3f__2__A: public Encodable {
@@ -24386,16 +24671,19 @@ namespace gles {
     class Vec3f__P: public Encodable {
     public:
         Vec3f__P() = default;
-        Vec3f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec3f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec3i: public Encodable {
@@ -24433,16 +24721,19 @@ namespace gles {
     class Vec3i__P: public Encodable {
     public:
         Vec3i__P() = default;
-        Vec3i__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec3i__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec3u: public Encodable {
@@ -24480,16 +24771,19 @@ namespace gles {
     class Vec3u__P: public Encodable {
     public:
         Vec3u__P() = default;
-        Vec3u__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec3u__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec4f__2__A: public Encodable {
@@ -24561,16 +24855,19 @@ namespace gles {
     class Vec4f__P: public Encodable {
     public:
         Vec4f__P() = default;
-        Vec4f__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec4f__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec4i: public Encodable {
@@ -24608,16 +24905,19 @@ namespace gles {
     class Vec4i__P: public Encodable {
     public:
         Vec4i__P() = default;
-        Vec4i__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec4i__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Vec4u: public Encodable {
@@ -24655,16 +24955,19 @@ namespace gles {
     class Vec4u__P: public Encodable {
     public:
         Vec4u__P() = default;
-        Vec4u__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Vec4u__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class VertexArrayId__S: public Encodable {
@@ -24700,16 +25003,19 @@ namespace gles {
     class VertexBufferBindingIndex__P: public Encodable {
     public:
         VertexBufferBindingIndex__P() = default;
-        VertexBufferBindingIndex__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        VertexBufferBindingIndex__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class Void__S: public Encodable {
@@ -24760,16 +25066,19 @@ namespace gles {
     class Void__CP__P: public Encodable {
     public:
         Void__CP__P() = default;
-        Void__CP__P(memory::Pointer Pointer) :
-            mPointer(Pointer) {}
+        Void__CP__P(uint64_t Address, uint32_t Pool) :
+            mAddress(Address),
+            mPool(Pool) {}
         virtual void Encode(Encoder* e) const{
-            e->Struct(this->mPointer);
+            e->Uint64(this->mAddress);
+            e->Uint32(this->mPool);
         }
         virtual const schema::Entity* Schema() const {
             return StaticSchema();
         }
         static const schema::Entity* StaticSchema();
-        memory::Pointer mPointer;
+        uint64_t mAddress;
+        uint32_t mPool;
     };
 
     class WglCreateContext: public Encodable {

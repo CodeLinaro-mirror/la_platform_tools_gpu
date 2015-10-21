@@ -56,5 +56,5 @@ func (v VertexAttributeArray) MemoryRange(first, last int) memory.Range {
 		stride = size
 	}
 	count := (last - first) + 1
-	return v.Pointer.Range(uint64(size + (count-1)*stride))
+	return memory.Pointer(v.Pointer).Range(uint64(size + (count-1)*stride))
 }

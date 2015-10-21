@@ -1351,10 +1351,12 @@ func (*AttributeLocationᵖ) Class() binary.Class {
 	return (*binaryClassAttributeLocationᵖ)(nil)
 }
 func doEncodeAttributeLocationᵖ(e binary.Encoder, o *AttributeLocationᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeAttributeLocationᵖ(d binary.Decoder, o *AttributeLocationᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassAttributeLocationᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeAttributeLocationᵖ(e, obj.(*AttributeLocationᵖ))
@@ -1371,7 +1373,8 @@ var schemaAttributeLocationᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "AttributeLocationᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1543,10 +1546,12 @@ func (*BufferDataPointer) Class() binary.Class {
 	return (*binaryClassBufferDataPointer)(nil)
 }
 func doEncodeBufferDataPointer(e binary.Encoder, o *BufferDataPointer) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeBufferDataPointer(d binary.Decoder, o *BufferDataPointer) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassBufferDataPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferDataPointer(e, obj.(*BufferDataPointer))
@@ -1563,7 +1568,8 @@ var schemaBufferDataPointer = &binary.Entity{
 	Package:  "gles",
 	Identity: "BufferDataPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1603,10 +1609,12 @@ func (*BufferIdᵖ) Class() binary.Class {
 	return (*binaryClassBufferIdᵖ)(nil)
 }
 func doEncodeBufferIdᵖ(e binary.Encoder, o *BufferIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeBufferIdᵖ(d binary.Decoder, o *BufferIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassBufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferIdᵖ(e, obj.(*BufferIdᵖ))
@@ -1623,7 +1631,8 @@ var schemaBufferIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "BufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1633,10 +1642,12 @@ func (*BufferIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassBufferIdᶜᵖ)(nil)
 }
 func doEncodeBufferIdᶜᵖ(e binary.Encoder, o *BufferIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeBufferIdᶜᵖ(d binary.Decoder, o *BufferIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassBufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeBufferIdᶜᵖ(e, obj.(*BufferIdᶜᵖ))
@@ -1653,7 +1664,8 @@ var schemaBufferIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "BufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1663,10 +1675,12 @@ func (*CGLContextObj) Class() binary.Class {
 	return (*binaryClassCGLContextObj)(nil)
 }
 func doEncodeCGLContextObj(e binary.Encoder, o *CGLContextObj) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGLContextObj(d binary.Decoder, o *CGLContextObj) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGLContextObj) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLContextObj(e, obj.(*CGLContextObj))
@@ -1683,7 +1697,8 @@ var schemaCGLContextObj = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGLContextObj",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1723,10 +1738,12 @@ func (*CGLContextObjᵖ) Class() binary.Class {
 	return (*binaryClassCGLContextObjᵖ)(nil)
 }
 func doEncodeCGLContextObjᵖ(e binary.Encoder, o *CGLContextObjᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGLContextObjᵖ(d binary.Decoder, o *CGLContextObjᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGLContextObjᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLContextObjᵖ(e, obj.(*CGLContextObjᵖ))
@@ -1743,7 +1760,8 @@ var schemaCGLContextObjᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGLContextObjᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1753,10 +1771,12 @@ func (*CGLTexelFormatObj) Class() binary.Class {
 	return (*binaryClassCGLTexelFormatObj)(nil)
 }
 func doEncodeCGLTexelFormatObj(e binary.Encoder, o *CGLTexelFormatObj) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGLTexelFormatObj(d binary.Decoder, o *CGLTexelFormatObj) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGLTexelFormatObj) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGLTexelFormatObj(e, obj.(*CGLTexelFormatObj))
@@ -1773,7 +1793,8 @@ var schemaCGLTexelFormatObj = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGLTexelFormatObj",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1889,10 +1910,12 @@ func (*CGSConnectionIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSConnectionIDᵖ)(nil)
 }
 func doEncodeCGSConnectionIDᵖ(e binary.Encoder, o *CGSConnectionIDᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGSConnectionIDᵖ(d binary.Decoder, o *CGSConnectionIDᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGSConnectionIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSConnectionIDᵖ(e, obj.(*CGSConnectionIDᵖ))
@@ -1909,7 +1932,8 @@ var schemaCGSConnectionIDᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGSConnectionIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1919,10 +1943,12 @@ func (*CGSWindowIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSWindowIDᵖ)(nil)
 }
 func doEncodeCGSWindowIDᵖ(e binary.Encoder, o *CGSWindowIDᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGSWindowIDᵖ(d binary.Decoder, o *CGSWindowIDᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGSWindowIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSWindowIDᵖ(e, obj.(*CGSWindowIDᵖ))
@@ -1939,7 +1965,8 @@ var schemaCGSWindowIDᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGSWindowIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1949,10 +1976,12 @@ func (*CGSSurfaceIDᵖ) Class() binary.Class {
 	return (*binaryClassCGSSurfaceIDᵖ)(nil)
 }
 func doEncodeCGSSurfaceIDᵖ(e binary.Encoder, o *CGSSurfaceIDᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGSSurfaceIDᵖ(d binary.Decoder, o *CGSSurfaceIDᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGSSurfaceIDᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSSurfaceIDᵖ(e, obj.(*CGSSurfaceIDᵖ))
@@ -1969,7 +1998,8 @@ var schemaCGSSurfaceIDᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGSSurfaceIDᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2088,10 +2118,12 @@ func (*CGSConnectionID) Class() binary.Class {
 	return (*binaryClassCGSConnectionID)(nil)
 }
 func doEncodeCGSConnectionID(e binary.Encoder, o *CGSConnectionID) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCGSConnectionID(d binary.Decoder, o *CGSConnectionID) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCGSConnectionID) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCGSConnectionID(e, obj.(*CGSConnectionID))
@@ -2108,7 +2140,8 @@ var schemaCGSConnectionID = &binary.Entity{
 	Package:  "gles",
 	Identity: "CGSConnectionID",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2148,10 +2181,12 @@ func (*F64ᵖ) Class() binary.Class {
 	return (*binaryClassF64ᵖ)(nil)
 }
 func doEncodeF64ᵖ(e binary.Encoder, o *F64ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassF64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeF64ᵖ(e, obj.(*F64ᵖ))
@@ -2168,7 +2203,8 @@ var schemaF64ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "F64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2327,10 +2363,12 @@ func (*Charᵖ) Class() binary.Class {
 	return (*binaryClassCharᵖ)(nil)
 }
 func doEncodeCharᵖ(e binary.Encoder, o *Charᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeCharᵖ(d binary.Decoder, o *Charᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassCharᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeCharᵖ(e, obj.(*Charᵖ))
@@ -2347,7 +2385,8 @@ var schemaCharᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Charᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -3759,10 +3798,12 @@ func (*VertexPointer) Class() binary.Class {
 	return (*binaryClassVertexPointer)(nil)
 }
 func doEncodeVertexPointer(e binary.Encoder, o *VertexPointer) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVertexPointer(d binary.Decoder, o *VertexPointer) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVertexPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexPointer(e, obj.(*VertexPointer))
@@ -3779,7 +3820,8 @@ var schemaVertexPointer = &binary.Entity{
 	Package:  "gles",
 	Identity: "VertexPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4360,10 +4402,12 @@ func (*GLenumᵖ) Class() binary.Class {
 	return (*binaryClassGLenumᵖ)(nil)
 }
 func doEncodeGLenumᵖ(e binary.Encoder, o *GLenumᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLenumᵖ(d binary.Decoder, o *GLenumᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLenumᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLenumᵖ(e, obj.(*GLenumᵖ))
@@ -4380,7 +4424,8 @@ var schemaGLenumᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLenumᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4390,10 +4435,12 @@ func (*U32ᵖ) Class() binary.Class {
 	return (*binaryClassU32ᵖ)(nil)
 }
 func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU32ᵖ(e, obj.(*U32ᵖ))
@@ -4410,7 +4457,8 @@ var schemaU32ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "U32ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4420,10 +4468,12 @@ func (*U8ᵖ) Class() binary.Class {
 	return (*binaryClassU8ᵖ)(nil)
 }
 func doEncodeU8ᵖ(e binary.Encoder, o *U8ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU8ᵖ(e, obj.(*U8ᵖ))
@@ -4440,7 +4490,8 @@ var schemaU8ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "U8ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4530,10 +4581,12 @@ func (*EGLConfig) Class() binary.Class {
 	return (*binaryClassEGLConfig)(nil)
 }
 func doEncodeEGLConfig(e binary.Encoder, o *EGLConfig) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeEGLConfig(d binary.Decoder, o *EGLConfig) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassEGLConfig) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLConfig(e, obj.(*EGLConfig))
@@ -4550,7 +4603,8 @@ var schemaEGLConfig = &binary.Entity{
 	Package:  "gles",
 	Identity: "EGLConfig",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4560,10 +4614,12 @@ func (*EGLContext) Class() binary.Class {
 	return (*binaryClassEGLContext)(nil)
 }
 func doEncodeEGLContext(e binary.Encoder, o *EGLContext) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeEGLContext(d binary.Decoder, o *EGLContext) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassEGLContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLContext(e, obj.(*EGLContext))
@@ -4580,7 +4636,8 @@ var schemaEGLContext = &binary.Entity{
 	Package:  "gles",
 	Identity: "EGLContext",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4590,10 +4647,12 @@ func (*EGLDisplay) Class() binary.Class {
 	return (*binaryClassEGLDisplay)(nil)
 }
 func doEncodeEGLDisplay(e binary.Encoder, o *EGLDisplay) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeEGLDisplay(d binary.Decoder, o *EGLDisplay) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassEGLDisplay) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLDisplay(e, obj.(*EGLDisplay))
@@ -4610,7 +4669,8 @@ var schemaEGLDisplay = &binary.Entity{
 	Package:  "gles",
 	Identity: "EGLDisplay",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4620,10 +4680,12 @@ func (*EGLSurface) Class() binary.Class {
 	return (*binaryClassEGLSurface)(nil)
 }
 func doEncodeEGLSurface(e binary.Encoder, o *EGLSurface) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeEGLSurface(d binary.Decoder, o *EGLSurface) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassEGLSurface) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLSurface(e, obj.(*EGLSurface))
@@ -4640,7 +4702,8 @@ var schemaEGLSurface = &binary.Entity{
 	Package:  "gles",
 	Identity: "EGLSurface",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4680,10 +4743,12 @@ func (*EGLintᵖ) Class() binary.Class {
 	return (*binaryClassEGLintᵖ)(nil)
 }
 func doEncodeEGLintᵖ(e binary.Encoder, o *EGLintᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeEGLintᵖ(d binary.Decoder, o *EGLintᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassEGLintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeEGLintᵖ(e, obj.(*EGLintᵖ))
@@ -4700,7 +4765,8 @@ var schemaEGLintᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "EGLintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -4943,10 +5009,12 @@ func (*Voidᵖ) Class() binary.Class {
 	return (*binaryClassVoidᵖ)(nil)
 }
 func doEncodeVoidᵖ(e binary.Encoder, o *Voidᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVoidᵖ(d binary.Decoder, o *Voidᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVoidᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖ(e, obj.(*Voidᵖ))
@@ -4963,7 +5031,8 @@ var schemaVoidᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Voidᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5130,10 +5199,12 @@ func (*FramebufferIdᵖ) Class() binary.Class {
 	return (*binaryClassFramebufferIdᵖ)(nil)
 }
 func doEncodeFramebufferIdᵖ(e binary.Encoder, o *FramebufferIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeFramebufferIdᵖ(d binary.Decoder, o *FramebufferIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassFramebufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferIdᵖ(e, obj.(*FramebufferIdᵖ))
@@ -5150,7 +5221,8 @@ var schemaFramebufferIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "FramebufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5160,10 +5232,12 @@ func (*FramebufferIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassFramebufferIdᶜᵖ)(nil)
 }
 func doEncodeFramebufferIdᶜᵖ(e binary.Encoder, o *FramebufferIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeFramebufferIdᶜᵖ(d binary.Decoder, o *FramebufferIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassFramebufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeFramebufferIdᶜᵖ(e, obj.(*FramebufferIdᶜᵖ))
@@ -5180,7 +5254,8 @@ var schemaFramebufferIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "FramebufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5190,10 +5265,12 @@ func (*GLDEBUGPROC) Class() binary.Class {
 	return (*binaryClassGLDEBUGPROC)(nil)
 }
 func doEncodeGLDEBUGPROC(e binary.Encoder, o *GLDEBUGPROC) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLDEBUGPROC(d binary.Decoder, o *GLDEBUGPROC) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLDEBUGPROC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLDEBUGPROC(e, obj.(*GLDEBUGPROC))
@@ -5210,7 +5287,8 @@ var schemaGLDEBUGPROC = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLDEBUGPROC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5220,10 +5298,12 @@ func (*GLXContext) Class() binary.Class {
 	return (*binaryClassGLXContext)(nil)
 }
 func doEncodeGLXContext(e binary.Encoder, o *GLXContext) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLXContext(d binary.Decoder, o *GLXContext) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLXContext) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLXContext(e, obj.(*GLXContext))
@@ -5240,7 +5320,8 @@ var schemaGLXContext = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLXContext",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5250,10 +5331,12 @@ func (*GLXDrawable) Class() binary.Class {
 	return (*binaryClassGLXDrawable)(nil)
 }
 func doEncodeGLXDrawable(e binary.Encoder, o *GLXDrawable) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLXDrawable(d binary.Decoder, o *GLXDrawable) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLXDrawable) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLXDrawable(e, obj.(*GLXDrawable))
@@ -5270,7 +5353,8 @@ var schemaGLXDrawable = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLXDrawable",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5310,10 +5394,12 @@ func (*GLbooleanᵖ) Class() binary.Class {
 	return (*binaryClassGLbooleanᵖ)(nil)
 }
 func doEncodeGLbooleanᵖ(e binary.Encoder, o *GLbooleanᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLbooleanᵖ(d binary.Decoder, o *GLbooleanᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLbooleanᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLbooleanᵖ(e, obj.(*GLbooleanᵖ))
@@ -5330,7 +5416,8 @@ var schemaGLbooleanᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLbooleanᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5340,10 +5427,12 @@ func (*GLcharᵖ) Class() binary.Class {
 	return (*binaryClassGLcharᵖ)(nil)
 }
 func doEncodeGLcharᵖ(e binary.Encoder, o *GLcharᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLcharᵖ(d binary.Decoder, o *GLcharᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLcharᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᵖ(e, obj.(*GLcharᵖ))
@@ -5360,7 +5449,8 @@ var schemaGLcharᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLcharᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5370,10 +5460,12 @@ func (*GLcharᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLcharᶜᵖ)(nil)
 }
 func doEncodeGLcharᶜᵖ(e binary.Encoder, o *GLcharᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLcharᶜᵖ(d binary.Decoder, o *GLcharᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLcharᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖ(e, obj.(*GLcharᶜᵖ))
@@ -5390,7 +5482,8 @@ var schemaGLcharᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLcharᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5430,10 +5523,12 @@ func (*GLcharᶜᵖᵖ) Class() binary.Class {
 	return (*binaryClassGLcharᶜᵖᵖ)(nil)
 }
 func doEncodeGLcharᶜᵖᵖ(e binary.Encoder, o *GLcharᶜᵖᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLcharᶜᵖᵖ(d binary.Decoder, o *GLcharᶜᵖᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLcharᶜᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖᵖ(e, obj.(*GLcharᶜᵖᵖ))
@@ -5450,7 +5545,8 @@ var schemaGLcharᶜᵖᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLcharᶜᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5460,10 +5556,12 @@ func (*GLcharᶜᵖᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLcharᶜᵖᶜᵖ)(nil)
 }
 func doEncodeGLcharᶜᵖᶜᵖ(e binary.Encoder, o *GLcharᶜᵖᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLcharᶜᵖᶜᵖ(d binary.Decoder, o *GLcharᶜᵖᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLcharᶜᵖᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLcharᶜᵖᶜᵖ(e, obj.(*GLcharᶜᵖᶜᵖ))
@@ -5480,7 +5578,8 @@ var schemaGLcharᶜᵖᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLcharᶜᵖᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5490,10 +5589,12 @@ func (*GLeglImageOES) Class() binary.Class {
 	return (*binaryClassGLeglImageOES)(nil)
 }
 func doEncodeGLeglImageOES(e binary.Encoder, o *GLeglImageOES) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLeglImageOES(d binary.Decoder, o *GLeglImageOES) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLeglImageOES) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLeglImageOES(e, obj.(*GLeglImageOES))
@@ -5510,7 +5611,8 @@ var schemaGLeglImageOES = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLeglImageOES",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5550,10 +5652,12 @@ func (*GLenumᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLenumᶜᵖ)(nil)
 }
 func doEncodeGLenumᶜᵖ(e binary.Encoder, o *GLenumᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLenumᶜᵖ(d binary.Decoder, o *GLenumᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLenumᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLenumᶜᵖ(e, obj.(*GLenumᶜᵖ))
@@ -5570,7 +5674,8 @@ var schemaGLenumᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLenumᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5610,10 +5715,12 @@ func (*GLfixedᵖ) Class() binary.Class {
 	return (*binaryClassGLfixedᵖ)(nil)
 }
 func doEncodeGLfixedᵖ(e binary.Encoder, o *GLfixedᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLfixedᵖ(d binary.Decoder, o *GLfixedᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLfixedᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfixedᵖ(e, obj.(*GLfixedᵖ))
@@ -5630,7 +5737,8 @@ var schemaGLfixedᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLfixedᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5640,10 +5748,12 @@ func (*GLfixedᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLfixedᶜᵖ)(nil)
 }
 func doEncodeGLfixedᶜᵖ(e binary.Encoder, o *GLfixedᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLfixedᶜᵖ(d binary.Decoder, o *GLfixedᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLfixedᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfixedᶜᵖ(e, obj.(*GLfixedᶜᵖ))
@@ -5660,7 +5770,8 @@ var schemaGLfixedᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLfixedᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5778,10 +5889,12 @@ func (*GLfloatᵖ) Class() binary.Class {
 	return (*binaryClassGLfloatᵖ)(nil)
 }
 func doEncodeGLfloatᵖ(e binary.Encoder, o *GLfloatᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLfloatᵖ(d binary.Decoder, o *GLfloatᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLfloatᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatᵖ(e, obj.(*GLfloatᵖ))
@@ -5798,7 +5911,8 @@ var schemaGLfloatᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLfloatᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5808,10 +5922,12 @@ func (*GLfloatᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLfloatᶜᵖ)(nil)
 }
 func doEncodeGLfloatᶜᵖ(e binary.Encoder, o *GLfloatᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLfloatᶜᵖ(d binary.Decoder, o *GLfloatᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLfloatᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLfloatᶜᵖ(e, obj.(*GLfloatᶜᵖ))
@@ -5828,7 +5944,8 @@ var schemaGLfloatᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLfloatᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -5868,10 +5985,12 @@ func (*GLint64ᵖ) Class() binary.Class {
 	return (*binaryClassGLint64ᵖ)(nil)
 }
 func doEncodeGLint64ᵖ(e binary.Encoder, o *GLint64ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLint64ᵖ(d binary.Decoder, o *GLint64ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLint64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLint64ᵖ(e, obj.(*GLint64ᵖ))
@@ -5888,7 +6007,8 @@ var schemaGLint64ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLint64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6006,10 +6126,12 @@ func (*GLintᵖ) Class() binary.Class {
 	return (*binaryClassGLintᵖ)(nil)
 }
 func doEncodeGLintᵖ(e binary.Encoder, o *GLintᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLintᵖ(d binary.Decoder, o *GLintᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintᵖ(e, obj.(*GLintᵖ))
@@ -6026,7 +6148,8 @@ var schemaGLintᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6036,10 +6159,12 @@ func (*GLintᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLintᶜᵖ)(nil)
 }
 func doEncodeGLintᶜᵖ(e binary.Encoder, o *GLintᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLintᶜᵖ(d binary.Decoder, o *GLintᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLintᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLintᶜᵖ(e, obj.(*GLintᶜᵖ))
@@ -6056,7 +6181,8 @@ var schemaGLintᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLintᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6096,10 +6222,12 @@ func (*GLshortᵖ) Class() binary.Class {
 	return (*binaryClassGLshortᵖ)(nil)
 }
 func doEncodeGLshortᵖ(e binary.Encoder, o *GLshortᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLshortᵖ(d binary.Decoder, o *GLshortᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLshortᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLshortᵖ(e, obj.(*GLshortᵖ))
@@ -6116,7 +6244,8 @@ var schemaGLshortᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLshortᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6126,10 +6255,12 @@ func (*GLshortᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLshortᶜᵖ)(nil)
 }
 func doEncodeGLshortᶜᵖ(e binary.Encoder, o *GLshortᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLshortᶜᵖ(d binary.Decoder, o *GLshortᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLshortᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLshortᶜᵖ(e, obj.(*GLshortᶜᵖ))
@@ -6146,7 +6277,8 @@ var schemaGLshortᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLshortᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6186,10 +6318,12 @@ func (*GLsizeiᵖ) Class() binary.Class {
 	return (*binaryClassGLsizeiᵖ)(nil)
 }
 func doEncodeGLsizeiᵖ(e binary.Encoder, o *GLsizeiᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLsizeiᵖ(d binary.Decoder, o *GLsizeiᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLsizeiᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLsizeiᵖ(e, obj.(*GLsizeiᵖ))
@@ -6206,7 +6340,8 @@ var schemaGLsizeiᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLsizeiᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6216,10 +6351,12 @@ func (*GLsizeiᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLsizeiᶜᵖ)(nil)
 }
 func doEncodeGLsizeiᶜᵖ(e binary.Encoder, o *GLsizeiᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLsizeiᶜᵖ(d binary.Decoder, o *GLsizeiᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLsizeiᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLsizeiᶜᵖ(e, obj.(*GLsizeiᶜᵖ))
@@ -6236,7 +6373,8 @@ var schemaGLsizeiᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLsizeiᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6276,10 +6414,12 @@ func (*GLubyteᵖ) Class() binary.Class {
 	return (*binaryClassGLubyteᵖ)(nil)
 }
 func doEncodeGLubyteᵖ(e binary.Encoder, o *GLubyteᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLubyteᵖ(d binary.Decoder, o *GLubyteᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLubyteᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLubyteᵖ(e, obj.(*GLubyteᵖ))
@@ -6296,7 +6436,8 @@ var schemaGLubyteᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLubyteᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6306,10 +6447,12 @@ func (*GLubyteᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLubyteᶜᵖ)(nil)
 }
 func doEncodeGLubyteᶜᵖ(e binary.Encoder, o *GLubyteᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLubyteᶜᵖ(d binary.Decoder, o *GLubyteᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLubyteᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLubyteᶜᵖ(e, obj.(*GLubyteᶜᵖ))
@@ -6326,7 +6469,8 @@ var schemaGLubyteᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLubyteᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6366,10 +6510,12 @@ func (*GLuint64ᵖ) Class() binary.Class {
 	return (*binaryClassGLuint64ᵖ)(nil)
 }
 func doEncodeGLuint64ᵖ(e binary.Encoder, o *GLuint64ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLuint64ᵖ(d binary.Decoder, o *GLuint64ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLuint64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuint64ᵖ(e, obj.(*GLuint64ᵖ))
@@ -6386,7 +6532,8 @@ var schemaGLuint64ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLuint64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6396,10 +6543,12 @@ func (*GLuint64ᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLuint64ᶜᵖ)(nil)
 }
 func doEncodeGLuint64ᶜᵖ(e binary.Encoder, o *GLuint64ᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLuint64ᶜᵖ(d binary.Decoder, o *GLuint64ᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLuint64ᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuint64ᶜᵖ(e, obj.(*GLuint64ᶜᵖ))
@@ -6416,7 +6565,8 @@ var schemaGLuint64ᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLuint64ᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6564,10 +6714,12 @@ func (*GLuintᵖ) Class() binary.Class {
 	return (*binaryClassGLuintᵖ)(nil)
 }
 func doEncodeGLuintᵖ(e binary.Encoder, o *GLuintᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLuintᵖ(d binary.Decoder, o *GLuintᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLuintᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintᵖ(e, obj.(*GLuintᵖ))
@@ -6584,7 +6736,8 @@ var schemaGLuintᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLuintᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6594,10 +6747,12 @@ func (*GLuintᶜᵖ) Class() binary.Class {
 	return (*binaryClassGLuintᶜᵖ)(nil)
 }
 func doEncodeGLuintᶜᵖ(e binary.Encoder, o *GLuintᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLuintᶜᵖ(d binary.Decoder, o *GLuintᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLuintᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLuintᶜᵖ(e, obj.(*GLuintᶜᵖ))
@@ -6614,7 +6769,8 @@ var schemaGLuintᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLuintᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6654,10 +6810,12 @@ func (*GLvoidᵖ) Class() binary.Class {
 	return (*binaryClassGLvoidᵖ)(nil)
 }
 func doEncodeGLvoidᵖ(e binary.Encoder, o *GLvoidᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeGLvoidᵖ(d binary.Decoder, o *GLvoidᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassGLvoidᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeGLvoidᵖ(e, obj.(*GLvoidᵖ))
@@ -6674,7 +6832,8 @@ var schemaGLvoidᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "GLvoidᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -9946,10 +10105,12 @@ func (*Voidᶜᵖ) Class() binary.Class {
 	return (*binaryClassVoidᶜᵖ)(nil)
 }
 func doEncodeVoidᶜᵖ(e binary.Encoder, o *Voidᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVoidᶜᵖ(d binary.Decoder, o *Voidᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVoidᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖ(e, obj.(*Voidᶜᵖ))
@@ -9966,7 +10127,8 @@ var schemaVoidᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Voidᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -11935,10 +12097,12 @@ func (*TexturePointer) Class() binary.Class {
 	return (*binaryClassTexturePointer)(nil)
 }
 func doEncodeTexturePointer(e binary.Encoder, o *TexturePointer) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeTexturePointer(d binary.Decoder, o *TexturePointer) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassTexturePointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTexturePointer(e, obj.(*TexturePointer))
@@ -11955,7 +12119,8 @@ var schemaTexturePointer = &binary.Entity{
 	Package:  "gles",
 	Identity: "TexturePointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14715,10 +14880,12 @@ func (*PipelineIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassPipelineIdᶜᵖ)(nil)
 }
 func doEncodePipelineIdᶜᵖ(e binary.Encoder, o *PipelineIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodePipelineIdᶜᵖ(d binary.Decoder, o *PipelineIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassPipelineIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePipelineIdᶜᵖ(e, obj.(*PipelineIdᶜᵖ))
@@ -14735,7 +14902,8 @@ var schemaPipelineIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "PipelineIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14849,10 +15017,12 @@ func (*QueryIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassQueryIdᶜᵖ)(nil)
 }
 func doEncodeQueryIdᶜᵖ(e binary.Encoder, o *QueryIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeQueryIdᶜᵖ(d binary.Decoder, o *QueryIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassQueryIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQueryIdᶜᵖ(e, obj.(*QueryIdᶜᵖ))
@@ -14869,7 +15039,8 @@ var schemaQueryIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "QueryIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14979,10 +15150,12 @@ func (*RenderbufferIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassRenderbufferIdᶜᵖ)(nil)
 }
 func doEncodeRenderbufferIdᶜᵖ(e binary.Encoder, o *RenderbufferIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeRenderbufferIdᶜᵖ(d binary.Decoder, o *RenderbufferIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassRenderbufferIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbufferIdᶜᵖ(e, obj.(*RenderbufferIdᶜᵖ))
@@ -14999,7 +15172,8 @@ var schemaRenderbufferIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "RenderbufferIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15111,10 +15285,12 @@ func (*SamplerIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassSamplerIdᶜᵖ)(nil)
 }
 func doEncodeSamplerIdᶜᵖ(e binary.Encoder, o *SamplerIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeSamplerIdᶜᵖ(d binary.Decoder, o *SamplerIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassSamplerIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSamplerIdᶜᵖ(e, obj.(*SamplerIdᶜᵖ))
@@ -15131,7 +15307,8 @@ var schemaSamplerIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "SamplerIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15332,10 +15509,12 @@ func (*TextureIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassTextureIdᶜᵖ)(nil)
 }
 func doEncodeTextureIdᶜᵖ(e binary.Encoder, o *TextureIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeTextureIdᶜᵖ(d binary.Decoder, o *TextureIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassTextureIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureIdᶜᵖ(e, obj.(*TextureIdᶜᵖ))
@@ -15352,7 +15531,8 @@ var schemaTextureIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "TextureIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15412,10 +15592,12 @@ func (*TransformFeedbackIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassTransformFeedbackIdᶜᵖ)(nil)
 }
 func doEncodeTransformFeedbackIdᶜᵖ(e binary.Encoder, o *TransformFeedbackIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeTransformFeedbackIdᶜᵖ(d binary.Decoder, o *TransformFeedbackIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassTransformFeedbackIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTransformFeedbackIdᶜᵖ(e, obj.(*TransformFeedbackIdᶜᵖ))
@@ -15434,7 +15616,8 @@ var schemaTransformFeedbackIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "TransformFeedbackIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15496,10 +15679,12 @@ func (*VertexArrayIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassVertexArrayIdᶜᵖ)(nil)
 }
 func doEncodeVertexArrayIdᶜᵖ(e binary.Encoder, o *VertexArrayIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVertexArrayIdᶜᵖ(d binary.Decoder, o *VertexArrayIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVertexArrayIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArrayIdᶜᵖ(e, obj.(*VertexArrayIdᶜᵖ))
@@ -15516,7 +15701,8 @@ var schemaVertexArrayIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "VertexArrayIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -17226,10 +17412,12 @@ func (*IndicesPointer) Class() binary.Class {
 	return (*binaryClassIndicesPointer)(nil)
 }
 func doEncodeIndicesPointer(e binary.Encoder, o *IndicesPointer) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeIndicesPointer(d binary.Decoder, o *IndicesPointer) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassIndicesPointer) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIndicesPointer(e, obj.(*IndicesPointer))
@@ -17246,7 +17434,8 @@ var schemaIndicesPointer = &binary.Entity{
 	Package:  "gles",
 	Identity: "IndicesPointer",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -19623,10 +19812,12 @@ func (*Voidᵖᵖ) Class() binary.Class {
 	return (*binaryClassVoidᵖᵖ)(nil)
 }
 func doEncodeVoidᵖᵖ(e binary.Encoder, o *Voidᵖᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVoidᵖᵖ(d binary.Decoder, o *Voidᵖᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVoidᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᵖᵖ(e, obj.(*Voidᵖᵖ))
@@ -19643,7 +19834,8 @@ var schemaVoidᵖᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Voidᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -19871,10 +20063,12 @@ func (*ProgramIdᵖ) Class() binary.Class {
 	return (*binaryClassProgramIdᵖ)(nil)
 }
 func doEncodeProgramIdᵖ(e binary.Encoder, o *ProgramIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeProgramIdᵖ(d binary.Decoder, o *ProgramIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassProgramIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeProgramIdᵖ(e, obj.(*ProgramIdᵖ))
@@ -19891,7 +20085,8 @@ var schemaProgramIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "ProgramIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -19954,10 +20149,12 @@ func (*RenderbufferIdᵖ) Class() binary.Class {
 	return (*binaryClassRenderbufferIdᵖ)(nil)
 }
 func doEncodeRenderbufferIdᵖ(e binary.Encoder, o *RenderbufferIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeRenderbufferIdᵖ(d binary.Decoder, o *RenderbufferIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassRenderbufferIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeRenderbufferIdᵖ(e, obj.(*RenderbufferIdᵖ))
@@ -19974,7 +20171,8 @@ var schemaRenderbufferIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "RenderbufferIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -20039,10 +20237,12 @@ func (*ShaderIdᵖ) Class() binary.Class {
 	return (*binaryClassShaderIdᵖ)(nil)
 }
 func doEncodeShaderIdᵖ(e binary.Encoder, o *ShaderIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeShaderIdᵖ(d binary.Decoder, o *ShaderIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassShaderIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShaderIdᵖ(e, obj.(*ShaderIdᵖ))
@@ -20059,7 +20259,8 @@ var schemaShaderIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "ShaderIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -20262,10 +20463,12 @@ func (*TextureIdᵖ) Class() binary.Class {
 	return (*binaryClassTextureIdᵖ)(nil)
 }
 func doEncodeTextureIdᵖ(e binary.Encoder, o *TextureIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeTextureIdᵖ(d binary.Decoder, o *TextureIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassTextureIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTextureIdᵖ(e, obj.(*TextureIdᵖ))
@@ -20282,7 +20485,8 @@ var schemaTextureIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "TextureIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -22585,10 +22789,12 @@ func (*PipelineIdᵖ) Class() binary.Class {
 	return (*binaryClassPipelineIdᵖ)(nil)
 }
 func doEncodePipelineIdᵖ(e binary.Encoder, o *PipelineIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodePipelineIdᵖ(d binary.Decoder, o *PipelineIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassPipelineIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodePipelineIdᵖ(e, obj.(*PipelineIdᵖ))
@@ -22605,7 +22811,8 @@ var schemaPipelineIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "PipelineIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -22717,10 +22924,12 @@ func (*QueryIdᵖ) Class() binary.Class {
 	return (*binaryClassQueryIdᵖ)(nil)
 }
 func doEncodeQueryIdᵖ(e binary.Encoder, o *QueryIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeQueryIdᵖ(d binary.Decoder, o *QueryIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassQueryIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeQueryIdᵖ(e, obj.(*QueryIdᵖ))
@@ -22737,7 +22946,8 @@ var schemaQueryIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "QueryIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -22947,10 +23157,12 @@ func (*SamplerIdᵖ) Class() binary.Class {
 	return (*binaryClassSamplerIdᵖ)(nil)
 }
 func doEncodeSamplerIdᵖ(e binary.Encoder, o *SamplerIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeSamplerIdᵖ(d binary.Decoder, o *SamplerIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassSamplerIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeSamplerIdᵖ(e, obj.(*SamplerIdᵖ))
@@ -22967,7 +23179,8 @@ var schemaSamplerIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "SamplerIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -23077,10 +23290,12 @@ func (*TransformFeedbackIdᵖ) Class() binary.Class {
 	return (*binaryClassTransformFeedbackIdᵖ)(nil)
 }
 func doEncodeTransformFeedbackIdᵖ(e binary.Encoder, o *TransformFeedbackIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeTransformFeedbackIdᵖ(d binary.Decoder, o *TransformFeedbackIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassTransformFeedbackIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeTransformFeedbackIdᵖ(e, obj.(*TransformFeedbackIdᵖ))
@@ -23097,7 +23312,8 @@ var schemaTransformFeedbackIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "TransformFeedbackIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -23159,10 +23375,12 @@ func (*VertexArrayIdᵖ) Class() binary.Class {
 	return (*binaryClassVertexArrayIdᵖ)(nil)
 }
 func doEncodeVertexArrayIdᵖ(e binary.Encoder, o *VertexArrayIdᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVertexArrayIdᵖ(d binary.Decoder, o *VertexArrayIdᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVertexArrayIdᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexArrayIdᵖ(e, obj.(*VertexArrayIdᵖ))
@@ -23179,7 +23397,8 @@ var schemaVertexArrayIdᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "VertexArrayIdᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -23632,10 +23851,12 @@ func (*UniformIndexᶜᵖ) Class() binary.Class {
 	return (*binaryClassUniformIndexᶜᵖ)(nil)
 }
 func doEncodeUniformIndexᶜᵖ(e binary.Encoder, o *UniformIndexᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeUniformIndexᶜᵖ(d binary.Decoder, o *UniformIndexᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassUniformIndexᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniformIndexᶜᵖ(e, obj.(*UniformIndexᶜᵖ))
@@ -23652,7 +23873,8 @@ var schemaUniformIndexᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "UniformIndexᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -28743,10 +28965,12 @@ func (*S64ᵖ) Class() binary.Class {
 	return (*binaryClassS64ᵖ)(nil)
 }
 func doEncodeS64ᵖ(e binary.Encoder, o *S64ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeS64ᵖ(d binary.Decoder, o *S64ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassS64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeS64ᵖ(e, obj.(*S64ᵖ))
@@ -28763,7 +28987,8 @@ var schemaS64ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "S64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -28934,10 +29159,12 @@ func (*U64ᵖ) Class() binary.Class {
 	return (*binaryClassU64ᵖ)(nil)
 }
 func doEncodeU64ᵖ(e binary.Encoder, o *U64ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeU64ᵖ(d binary.Decoder, o *U64ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassU64ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU64ᵖ(e, obj.(*U64ᵖ))
@@ -28954,7 +29181,8 @@ var schemaU64ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "U64ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -31586,10 +31814,12 @@ func (*UniformIndexᵖ) Class() binary.Class {
 	return (*binaryClassUniformIndexᵖ)(nil)
 }
 func doEncodeUniformIndexᵖ(e binary.Encoder, o *UniformIndexᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeUniformIndexᵖ(d binary.Decoder, o *UniformIndexᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassUniformIndexᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeUniformIndexᵖ(e, obj.(*UniformIndexᵖ))
@@ -31606,7 +31836,8 @@ var schemaUniformIndexᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "UniformIndexᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -37103,10 +37334,12 @@ func (*Voidᶜᵖᶜᵖ) Class() binary.Class {
 	return (*binaryClassVoidᶜᵖᶜᵖ)(nil)
 }
 func doEncodeVoidᶜᵖᶜᵖ(e binary.Encoder, o *Voidᶜᵖᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVoidᶜᵖᶜᵖ(d binary.Decoder, o *Voidᶜᵖᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVoidᶜᵖᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖᶜᵖ(e, obj.(*Voidᶜᵖᶜᵖ))
@@ -37123,7 +37356,8 @@ var schemaVoidᶜᵖᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Voidᶜᵖᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -47979,10 +48213,12 @@ func (*ShaderIdᶜᵖ) Class() binary.Class {
 	return (*binaryClassShaderIdᶜᵖ)(nil)
 }
 func doEncodeShaderIdᶜᵖ(e binary.Encoder, o *ShaderIdᶜᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeShaderIdᶜᵖ(d binary.Decoder, o *ShaderIdᶜᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassShaderIdᶜᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeShaderIdᶜᵖ(e, obj.(*ShaderIdᶜᵖ))
@@ -47999,7 +48235,8 @@ var schemaShaderIdᶜᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "ShaderIdᶜᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57361,10 +57598,12 @@ func (*Intᵖ) Class() binary.Class {
 	return (*binaryClassIntᵖ)(nil)
 }
 func doEncodeIntᵖ(e binary.Encoder, o *Intᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeIntᵖ(e, obj.(*Intᵖ))
@@ -57381,7 +57620,8 @@ var schemaIntᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Intᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57500,10 +57740,12 @@ func (*HDC) Class() binary.Class {
 	return (*binaryClassHDC)(nil)
 }
 func doEncodeHDC(e binary.Encoder, o *HDC) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeHDC(d binary.Decoder, o *HDC) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassHDC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHDC(e, obj.(*HDC))
@@ -57520,7 +57762,8 @@ var schemaHDC = &binary.Entity{
 	Package:  "gles",
 	Identity: "HDC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57530,10 +57773,12 @@ func (*HGLRC) Class() binary.Class {
 	return (*binaryClassHGLRC)(nil)
 }
 func doEncodeHGLRC(e binary.Encoder, o *HGLRC) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeHGLRC(d binary.Decoder, o *HGLRC) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassHGLRC) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeHGLRC(e, obj.(*HGLRC))
@@ -57550,7 +57795,8 @@ var schemaHGLRC = &binary.Entity{
 	Package:  "gles",
 	Identity: "HGLRC",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57692,10 +57938,12 @@ func (*Mat2fᵖ) Class() binary.Class {
 	return (*binaryClassMat2fᵖ)(nil)
 }
 func doEncodeMat2fᵖ(e binary.Encoder, o *Mat2fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat2fᵖ(d binary.Decoder, o *Mat2fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2fᵖ(e, obj.(*Mat2fᵖ))
@@ -57712,7 +57960,8 @@ var schemaMat2fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57824,10 +58073,12 @@ func (*Mat2x3fᵖ) Class() binary.Class {
 	return (*binaryClassMat2x3fᵖ)(nil)
 }
 func doEncodeMat2x3fᵖ(e binary.Encoder, o *Mat2x3fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat2x3fᵖ(d binary.Decoder, o *Mat2x3fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat2x3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x3fᵖ(e, obj.(*Mat2x3fᵖ))
@@ -57844,7 +58095,8 @@ var schemaMat2x3fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat2x3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -57956,10 +58208,12 @@ func (*Mat2x4fᵖ) Class() binary.Class {
 	return (*binaryClassMat2x4fᵖ)(nil)
 }
 func doEncodeMat2x4fᵖ(e binary.Encoder, o *Mat2x4fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat2x4fᵖ(d binary.Decoder, o *Mat2x4fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat2x4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat2x4fᵖ(e, obj.(*Mat2x4fᵖ))
@@ -57976,7 +58230,8 @@ var schemaMat2x4fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat2x4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58052,10 +58307,12 @@ func (*Mat3fᵖ) Class() binary.Class {
 	return (*binaryClassMat3fᵖ)(nil)
 }
 func doEncodeMat3fᵖ(e binary.Encoder, o *Mat3fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat3fᵖ(d binary.Decoder, o *Mat3fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3fᵖ(e, obj.(*Mat3fᵖ))
@@ -58072,7 +58329,8 @@ var schemaMat3fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58148,10 +58406,12 @@ func (*Mat3x2fᵖ) Class() binary.Class {
 	return (*binaryClassMat3x2fᵖ)(nil)
 }
 func doEncodeMat3x2fᵖ(e binary.Encoder, o *Mat3x2fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat3x2fᵖ(d binary.Decoder, o *Mat3x2fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat3x2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x2fᵖ(e, obj.(*Mat3x2fᵖ))
@@ -58168,7 +58428,8 @@ var schemaMat3x2fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat3x2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58244,10 +58505,12 @@ func (*Mat3x4fᵖ) Class() binary.Class {
 	return (*binaryClassMat3x4fᵖ)(nil)
 }
 func doEncodeMat3x4fᵖ(e binary.Encoder, o *Mat3x4fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat3x4fᵖ(d binary.Decoder, o *Mat3x4fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat3x4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat3x4fᵖ(e, obj.(*Mat3x4fᵖ))
@@ -58264,7 +58527,8 @@ var schemaMat3x4fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat3x4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58340,10 +58604,12 @@ func (*Mat4fᵖ) Class() binary.Class {
 	return (*binaryClassMat4fᵖ)(nil)
 }
 func doEncodeMat4fᵖ(e binary.Encoder, o *Mat4fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat4fᵖ(d binary.Decoder, o *Mat4fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4fᵖ(e, obj.(*Mat4fᵖ))
@@ -58360,7 +58626,8 @@ var schemaMat4fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58436,10 +58703,12 @@ func (*Mat4x2fᵖ) Class() binary.Class {
 	return (*binaryClassMat4x2fᵖ)(nil)
 }
 func doEncodeMat4x2fᵖ(e binary.Encoder, o *Mat4x2fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat4x2fᵖ(d binary.Decoder, o *Mat4x2fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat4x2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x2fᵖ(e, obj.(*Mat4x2fᵖ))
@@ -58456,7 +58725,8 @@ var schemaMat4x2fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat4x2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -58532,10 +58802,12 @@ func (*Mat4x3fᵖ) Class() binary.Class {
 	return (*binaryClassMat4x3fᵖ)(nil)
 }
 func doEncodeMat4x3fᵖ(e binary.Encoder, o *Mat4x3fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeMat4x3fᵖ(d binary.Decoder, o *Mat4x3fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassMat4x3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeMat4x3fᵖ(e, obj.(*Mat4x3fᵖ))
@@ -58552,7 +58824,8 @@ var schemaMat4x3fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Mat4x3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -59355,10 +59628,12 @@ func (*U16ᵖ) Class() binary.Class {
 	return (*binaryClassU16ᵖ)(nil)
 }
 func doEncodeU16ᵖ(e binary.Encoder, o *U16ᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeU16ᵖ(e, obj.(*U16ᵖ))
@@ -59375,7 +59650,8 @@ var schemaU16ᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "U16ᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -59613,10 +59889,12 @@ func (*Vec2fᵖ) Class() binary.Class {
 	return (*binaryClassVec2fᵖ)(nil)
 }
 func doEncodeVec2fᵖ(e binary.Encoder, o *Vec2fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec2fᵖ(d binary.Decoder, o *Vec2fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec2fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2fᵖ(e, obj.(*Vec2fᵖ))
@@ -59633,7 +59911,8 @@ var schemaVec2fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec2fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -59709,10 +59988,12 @@ func (*Vec2iᵖ) Class() binary.Class {
 	return (*binaryClassVec2iᵖ)(nil)
 }
 func doEncodeVec2iᵖ(e binary.Encoder, o *Vec2iᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec2iᵖ(d binary.Decoder, o *Vec2iᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec2iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2iᵖ(e, obj.(*Vec2iᵖ))
@@ -59729,7 +60010,8 @@ var schemaVec2iᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec2iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -59805,10 +60087,12 @@ func (*Vec2uᵖ) Class() binary.Class {
 	return (*binaryClassVec2uᵖ)(nil)
 }
 func doEncodeVec2uᵖ(e binary.Encoder, o *Vec2uᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec2uᵖ(d binary.Decoder, o *Vec2uᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec2uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec2uᵖ(e, obj.(*Vec2uᵖ))
@@ -59825,7 +60109,8 @@ var schemaVec2uᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec2uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -59973,10 +60258,12 @@ func (*Vec3fᵖ) Class() binary.Class {
 	return (*binaryClassVec3fᵖ)(nil)
 }
 func doEncodeVec3fᵖ(e binary.Encoder, o *Vec3fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec3fᵖ(d binary.Decoder, o *Vec3fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec3fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3fᵖ(e, obj.(*Vec3fᵖ))
@@ -59993,7 +60280,8 @@ var schemaVec3fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec3fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60069,10 +60357,12 @@ func (*Vec3iᵖ) Class() binary.Class {
 	return (*binaryClassVec3iᵖ)(nil)
 }
 func doEncodeVec3iᵖ(e binary.Encoder, o *Vec3iᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec3iᵖ(d binary.Decoder, o *Vec3iᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec3iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3iᵖ(e, obj.(*Vec3iᵖ))
@@ -60089,7 +60379,8 @@ var schemaVec3iᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec3iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60165,10 +60456,12 @@ func (*Vec3uᵖ) Class() binary.Class {
 	return (*binaryClassVec3uᵖ)(nil)
 }
 func doEncodeVec3uᵖ(e binary.Encoder, o *Vec3uᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec3uᵖ(d binary.Decoder, o *Vec3uᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec3uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec3uᵖ(e, obj.(*Vec3uᵖ))
@@ -60185,7 +60478,8 @@ var schemaVec3uᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec3uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60333,10 +60627,12 @@ func (*Vec4fᵖ) Class() binary.Class {
 	return (*binaryClassVec4fᵖ)(nil)
 }
 func doEncodeVec4fᵖ(e binary.Encoder, o *Vec4fᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec4fᵖ(d binary.Decoder, o *Vec4fᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec4fᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4fᵖ(e, obj.(*Vec4fᵖ))
@@ -60353,7 +60649,8 @@ var schemaVec4fᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec4fᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60429,10 +60726,12 @@ func (*Vec4iᵖ) Class() binary.Class {
 	return (*binaryClassVec4iᵖ)(nil)
 }
 func doEncodeVec4iᵖ(e binary.Encoder, o *Vec4iᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec4iᵖ(d binary.Decoder, o *Vec4iᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec4iᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4iᵖ(e, obj.(*Vec4iᵖ))
@@ -60449,7 +60748,8 @@ var schemaVec4iᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec4iᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60525,10 +60825,12 @@ func (*Vec4uᵖ) Class() binary.Class {
 	return (*binaryClassVec4uᵖ)(nil)
 }
 func doEncodeVec4uᵖ(e binary.Encoder, o *Vec4uᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVec4uᵖ(d binary.Decoder, o *Vec4uᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVec4uᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVec4uᵖ(e, obj.(*Vec4uᵖ))
@@ -60545,7 +60847,8 @@ var schemaVec4uᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Vec4uᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60617,10 +60920,12 @@ func (*VertexBufferBindingIndexᵖ) Class() binary.Class {
 	return (*binaryClassVertexBufferBindingIndexᵖ)(nil)
 }
 func doEncodeVertexBufferBindingIndexᵖ(e binary.Encoder, o *VertexBufferBindingIndexᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVertexBufferBindingIndexᵖ(d binary.Decoder, o *VertexBufferBindingIndexᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVertexBufferBindingIndexᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVertexBufferBindingIndexᵖ(e, obj.(*VertexBufferBindingIndexᵖ))
@@ -60639,7 +60944,8 @@ var schemaVertexBufferBindingIndexᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "VertexBufferBindingIndexᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -60739,10 +61045,12 @@ func (*Voidᶜᵖᵖ) Class() binary.Class {
 	return (*binaryClassVoidᶜᵖᵖ)(nil)
 }
 func doEncodeVoidᶜᵖᵖ(e binary.Encoder, o *Voidᶜᵖᵖ) {
-	e.Struct(&o.Pointer)
+	e.Uint64(o.Address)
+	e.Uint32(uint32(o.Pool))
 }
 func doDecodeVoidᶜᵖᵖ(d binary.Decoder, o *Voidᶜᵖᵖ) {
-	d.Struct(&o.Pointer)
+	o.Address = uint64(d.Uint64())
+	o.Pool = memory.PoolID(d.Uint32())
 }
 func (*binaryClassVoidᶜᵖᵖ) Encode(e binary.Encoder, obj binary.Object) {
 	doEncodeVoidᶜᵖᵖ(e, obj.(*Voidᶜᵖᵖ))
@@ -60759,7 +61067,8 @@ var schemaVoidᶜᵖᵖ = &binary.Entity{
 	Package:  "gles",
 	Identity: "Voidᶜᵖᵖ",
 	Fields: []binary.Field{
-		{Declared: "", Type: &schema.Struct{Entity: (*memory.Pointer)(nil).Class().Schema()}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 

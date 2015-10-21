@@ -93,7 +93,7 @@ const schema::Entity* AttributeLocation__S::StaticSchema() {
 }
 
 // AttributeLocationᵖ:
-// gles.AttributeLocationᵖ{$}
+// gles.AttributeLocationᵖ{Uint64,Uint32}
 const schema::Entity* AttributeLocation__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -101,7 +101,8 @@ const schema::Entity* AttributeLocation__P::StaticSchema() {
         "AttributeLocationᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -205,7 +206,7 @@ const schema::Entity* Buffer::StaticSchema() {
 }
 
 // BufferDataPointer:
-// gles.BufferDataPointer{$}
+// gles.BufferDataPointer{Uint64,Uint32}
 const schema::Entity* BufferDataPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -213,7 +214,8 @@ const schema::Entity* BufferDataPointer::StaticSchema() {
         "BufferDataPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -235,7 +237,7 @@ const schema::Entity* BufferId__S::StaticSchema() {
 }
 
 // BufferIdᵖ:
-// gles.BufferIdᵖ{$}
+// gles.BufferIdᵖ{Uint64,Uint32}
 const schema::Entity* BufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -243,14 +245,15 @@ const schema::Entity* BufferId__P::StaticSchema() {
         "BufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // BufferIdᶜᵖ:
-// gles.BufferIdᶜᵖ{$}
+// gles.BufferIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* BufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -258,14 +261,15 @@ const schema::Entity* BufferId__CP::StaticSchema() {
         "BufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // CGLContextObj:
-// gles.CGLContextObj{$}
+// gles.CGLContextObj{Uint64,Uint32}
 const schema::Entity* CGLContextObj::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -273,7 +277,8 @@ const schema::Entity* CGLContextObj::StaticSchema() {
         "CGLContextObj",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -295,7 +300,7 @@ const schema::Entity* CGLContextObj__S::StaticSchema() {
 }
 
 // CGLContextObjᵖ:
-// gles.CGLContextObjᵖ{$}
+// gles.CGLContextObjᵖ{Uint64,Uint32}
 const schema::Entity* CGLContextObj__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -303,14 +308,15 @@ const schema::Entity* CGLContextObj__P::StaticSchema() {
         "CGLContextObjᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // CGLTexelFormatObj:
-// gles.CGLTexelFormatObj{$}
+// gles.CGLTexelFormatObj{Uint64,Uint32}
 const schema::Entity* CGLTexelFormatObj::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -318,7 +324,8 @@ const schema::Entity* CGLTexelFormatObj::StaticSchema() {
         "CGLTexelFormatObj",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -371,7 +378,7 @@ const schema::Entity* CGLFlushDrawable::StaticSchema() {
 }
 
 // CGSConnectionIDᵖ:
-// gles.CGSConnectionIDᵖ{$}
+// gles.CGSConnectionIDᵖ{Uint64,Uint32}
 const schema::Entity* CGSConnectionID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -379,14 +386,15 @@ const schema::Entity* CGSConnectionID__P::StaticSchema() {
         "CGSConnectionIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // CGSWindowIDᵖ:
-// gles.CGSWindowIDᵖ{$}
+// gles.CGSWindowIDᵖ{Uint64,Uint32}
 const schema::Entity* CGSWindowID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -394,14 +402,15 @@ const schema::Entity* CGSWindowID__P::StaticSchema() {
         "CGSWindowIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // CGSSurfaceIDᵖ:
-// gles.CGSSurfaceIDᵖ{$}
+// gles.CGSSurfaceIDᵖ{Uint64,Uint32}
 const schema::Entity* CGSSurfaceID__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -409,7 +418,8 @@ const schema::Entity* CGSSurfaceID__P::StaticSchema() {
         "CGSSurfaceIDᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -464,7 +474,7 @@ const schema::Entity* CGLSetCurrentContext::StaticSchema() {
 }
 
 // CGSConnectionID:
-// gles.CGSConnectionID{$}
+// gles.CGSConnectionID{Uint64,Uint32}
 const schema::Entity* CGSConnectionID::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -472,7 +482,8 @@ const schema::Entity* CGSConnectionID::StaticSchema() {
         "CGSConnectionID",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -494,7 +505,7 @@ const schema::Entity* CGSConnectionID__S::StaticSchema() {
 }
 
 // F64ᵖ:
-// gles.F64ᵖ{$}
+// gles.F64ᵖ{Uint64,Uint32}
 const schema::Entity* F64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -502,7 +513,8 @@ const schema::Entity* F64__P::StaticSchema() {
         "F64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -585,7 +597,7 @@ const schema::Entity* Char__S::StaticSchema() {
 }
 
 // Charᵖ:
-// gles.Charᵖ{$}
+// gles.Charᵖ{Uint64,Uint32}
 const schema::Entity* Char__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -593,7 +605,8 @@ const schema::Entity* Char__P::StaticSchema() {
         "Charᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1392,7 +1405,7 @@ const schema::Entity* VertexBufferBinding::StaticSchema() {
 }
 
 // VertexPointer:
-// gles.VertexPointer{$}
+// gles.VertexPointer{Uint64,Uint32}
 const schema::Entity* VertexPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1400,7 +1413,8 @@ const schema::Entity* VertexPointer::StaticSchema() {
         "VertexPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1615,7 +1629,7 @@ const schema::Entity* Context::StaticSchema() {
 }
 
 // GLenumᵖ:
-// gles.GLenumᵖ{$}
+// gles.GLenumᵖ{Uint64,Uint32}
 const schema::Entity* GLenum__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1623,14 +1637,15 @@ const schema::Entity* GLenum__P::StaticSchema() {
         "GLenumᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // U32ᵖ:
-// gles.U32ᵖ{$}
+// gles.U32ᵖ{Uint64,Uint32}
 const schema::Entity* U32__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1638,14 +1653,15 @@ const schema::Entity* U32__P::StaticSchema() {
         "U32ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // U8ᵖ:
-// gles.U8ᵖ{$}
+// gles.U8ᵖ{Uint64,Uint32}
 const schema::Entity* U8__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1653,7 +1669,8 @@ const schema::Entity* U8__P::StaticSchema() {
         "U8ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1705,7 +1722,7 @@ const schema::Entity* ContextInfo::StaticSchema() {
 }
 
 // EGLConfig:
-// gles.EGLConfig{$}
+// gles.EGLConfig{Uint64,Uint32}
 const schema::Entity* EGLConfig::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1713,14 +1730,15 @@ const schema::Entity* EGLConfig::StaticSchema() {
         "EGLConfig",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // EGLContext:
-// gles.EGLContext{$}
+// gles.EGLContext{Uint64,Uint32}
 const schema::Entity* EGLContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1728,14 +1746,15 @@ const schema::Entity* EGLContext::StaticSchema() {
         "EGLContext",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // EGLDisplay:
-// gles.EGLDisplay{$}
+// gles.EGLDisplay{Uint64,Uint32}
 const schema::Entity* EGLDisplay::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1743,14 +1762,15 @@ const schema::Entity* EGLDisplay::StaticSchema() {
         "EGLDisplay",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // EGLSurface:
-// gles.EGLSurface{$}
+// gles.EGLSurface{Uint64,Uint32}
 const schema::Entity* EGLSurface::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1758,7 +1778,8 @@ const schema::Entity* EGLSurface::StaticSchema() {
         "EGLSurface",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1780,7 +1801,7 @@ const schema::Entity* EGLint__S::StaticSchema() {
 }
 
 // EGLintᵖ:
-// gles.EGLintᵖ{$}
+// gles.EGLintᵖ{Uint64,Uint32}
 const schema::Entity* EGLint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1788,7 +1809,8 @@ const schema::Entity* EGLint__P::StaticSchema() {
         "EGLintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -1917,7 +1939,7 @@ const schema::Entity* EglQuerySurface::StaticSchema() {
 }
 
 // Voidᵖ:
-// gles.Voidᵖ{$}
+// gles.Voidᵖ{Uint64,Uint32}
 const schema::Entity* Void__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -1925,7 +1947,8 @@ const schema::Entity* Void__P::StaticSchema() {
         "Voidᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2004,7 +2027,7 @@ const schema::Entity* FramebufferId__S::StaticSchema() {
 }
 
 // FramebufferIdᵖ:
-// gles.FramebufferIdᵖ{$}
+// gles.FramebufferIdᵖ{Uint64,Uint32}
 const schema::Entity* FramebufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2012,14 +2035,15 @@ const schema::Entity* FramebufferId__P::StaticSchema() {
         "FramebufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // FramebufferIdᶜᵖ:
-// gles.FramebufferIdᶜᵖ{$}
+// gles.FramebufferIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* FramebufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2027,14 +2051,15 @@ const schema::Entity* FramebufferId__CP::StaticSchema() {
         "FramebufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLDEBUGPROC:
-// gles.GLDEBUGPROC{$}
+// gles.GLDEBUGPROC{Uint64,Uint32}
 const schema::Entity* GLDEBUGPROC::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2042,14 +2067,15 @@ const schema::Entity* GLDEBUGPROC::StaticSchema() {
         "GLDEBUGPROC",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLXContext:
-// gles.GLXContext{$}
+// gles.GLXContext{Uint64,Uint32}
 const schema::Entity* GLXContext::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2057,14 +2083,15 @@ const schema::Entity* GLXContext::StaticSchema() {
         "GLXContext",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLXDrawable:
-// gles.GLXDrawable{$}
+// gles.GLXDrawable{Uint64,Uint32}
 const schema::Entity* GLXDrawable::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2072,7 +2099,8 @@ const schema::Entity* GLXDrawable::StaticSchema() {
         "GLXDrawable",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2094,7 +2122,7 @@ const schema::Entity* GLboolean__S::StaticSchema() {
 }
 
 // GLbooleanᵖ:
-// gles.GLbooleanᵖ{$}
+// gles.GLbooleanᵖ{Uint64,Uint32}
 const schema::Entity* GLboolean__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2102,14 +2130,15 @@ const schema::Entity* GLboolean__P::StaticSchema() {
         "GLbooleanᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLcharᵖ:
-// gles.GLcharᵖ{$}
+// gles.GLcharᵖ{Uint64,Uint32}
 const schema::Entity* GLchar__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2117,14 +2146,15 @@ const schema::Entity* GLchar__P::StaticSchema() {
         "GLcharᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLcharᶜᵖ:
-// gles.GLcharᶜᵖ{$}
+// gles.GLcharᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLchar__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2132,7 +2162,8 @@ const schema::Entity* GLchar__CP::StaticSchema() {
         "GLcharᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2154,7 +2185,7 @@ const schema::Entity* GLchar__CP__S::StaticSchema() {
 }
 
 // GLcharᶜᵖᵖ:
-// gles.GLcharᶜᵖᵖ{$}
+// gles.GLcharᶜᵖᵖ{Uint64,Uint32}
 const schema::Entity* GLchar__CP__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2162,14 +2193,15 @@ const schema::Entity* GLchar__CP__P::StaticSchema() {
         "GLcharᶜᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLcharᶜᵖᶜᵖ:
-// gles.GLcharᶜᵖᶜᵖ{$}
+// gles.GLcharᶜᵖᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLchar__CP__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2177,14 +2209,15 @@ const schema::Entity* GLchar__CP__CP::StaticSchema() {
         "GLcharᶜᵖᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLeglImageOES:
-// gles.GLeglImageOES{$}
+// gles.GLeglImageOES{Uint64,Uint32}
 const schema::Entity* GLeglImageOES::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2192,7 +2225,8 @@ const schema::Entity* GLeglImageOES::StaticSchema() {
         "GLeglImageOES",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2214,7 +2248,7 @@ const schema::Entity* GLenum__S::StaticSchema() {
 }
 
 // GLenumᶜᵖ:
-// gles.GLenumᶜᵖ{$}
+// gles.GLenumᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLenum__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2222,7 +2256,8 @@ const schema::Entity* GLenum__CP::StaticSchema() {
         "GLenumᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2244,7 +2279,7 @@ const schema::Entity* GLfixed__S::StaticSchema() {
 }
 
 // GLfixedᵖ:
-// gles.GLfixedᵖ{$}
+// gles.GLfixedᵖ{Uint64,Uint32}
 const schema::Entity* GLfixed__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2252,14 +2287,15 @@ const schema::Entity* GLfixed__P::StaticSchema() {
         "GLfixedᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLfixedᶜᵖ:
-// gles.GLfixedᶜᵖ{$}
+// gles.GLfixedᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLfixed__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2267,7 +2303,8 @@ const schema::Entity* GLfixed__CP::StaticSchema() {
         "GLfixedᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2319,7 +2356,7 @@ const schema::Entity* GLfloat__4__A::StaticSchema() {
 }
 
 // GLfloatᵖ:
-// gles.GLfloatᵖ{$}
+// gles.GLfloatᵖ{Uint64,Uint32}
 const schema::Entity* GLfloat__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2327,14 +2364,15 @@ const schema::Entity* GLfloat__P::StaticSchema() {
         "GLfloatᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLfloatᶜᵖ:
-// gles.GLfloatᶜᵖ{$}
+// gles.GLfloatᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLfloat__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2342,7 +2380,8 @@ const schema::Entity* GLfloat__CP::StaticSchema() {
         "GLfloatᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2364,7 +2403,7 @@ const schema::Entity* GLint64__S::StaticSchema() {
 }
 
 // GLint64ᵖ:
-// gles.GLint64ᵖ{$}
+// gles.GLint64ᵖ{Uint64,Uint32}
 const schema::Entity* GLint64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2372,7 +2411,8 @@ const schema::Entity* GLint64__P::StaticSchema() {
         "GLint64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2424,7 +2464,7 @@ const schema::Entity* GLint__4__A::StaticSchema() {
 }
 
 // GLintᵖ:
-// gles.GLintᵖ{$}
+// gles.GLintᵖ{Uint64,Uint32}
 const schema::Entity* GLint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2432,14 +2472,15 @@ const schema::Entity* GLint__P::StaticSchema() {
         "GLintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLintᶜᵖ:
-// gles.GLintᶜᵖ{$}
+// gles.GLintᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLint__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2447,7 +2488,8 @@ const schema::Entity* GLint__CP::StaticSchema() {
         "GLintᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2469,7 +2511,7 @@ const schema::Entity* GLshort__S::StaticSchema() {
 }
 
 // GLshortᵖ:
-// gles.GLshortᵖ{$}
+// gles.GLshortᵖ{Uint64,Uint32}
 const schema::Entity* GLshort__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2477,14 +2519,15 @@ const schema::Entity* GLshort__P::StaticSchema() {
         "GLshortᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLshortᶜᵖ:
-// gles.GLshortᶜᵖ{$}
+// gles.GLshortᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLshort__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2492,7 +2535,8 @@ const schema::Entity* GLshort__CP::StaticSchema() {
         "GLshortᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2514,7 +2558,7 @@ const schema::Entity* GLsizei__S::StaticSchema() {
 }
 
 // GLsizeiᵖ:
-// gles.GLsizeiᵖ{$}
+// gles.GLsizeiᵖ{Uint64,Uint32}
 const schema::Entity* GLsizei__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2522,14 +2566,15 @@ const schema::Entity* GLsizei__P::StaticSchema() {
         "GLsizeiᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLsizeiᶜᵖ:
-// gles.GLsizeiᶜᵖ{$}
+// gles.GLsizeiᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLsizei__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2537,7 +2582,8 @@ const schema::Entity* GLsizei__CP::StaticSchema() {
         "GLsizeiᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2559,7 +2605,7 @@ const schema::Entity* GLubyte__S::StaticSchema() {
 }
 
 // GLubyteᵖ:
-// gles.GLubyteᵖ{$}
+// gles.GLubyteᵖ{Uint64,Uint32}
 const schema::Entity* GLubyte__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2567,14 +2613,15 @@ const schema::Entity* GLubyte__P::StaticSchema() {
         "GLubyteᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLubyteᶜᵖ:
-// gles.GLubyteᶜᵖ{$}
+// gles.GLubyteᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLubyte__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2582,7 +2629,8 @@ const schema::Entity* GLubyte__CP::StaticSchema() {
         "GLubyteᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2604,7 +2652,7 @@ const schema::Entity* GLuint64__S::StaticSchema() {
 }
 
 // GLuint64ᵖ:
-// gles.GLuint64ᵖ{$}
+// gles.GLuint64ᵖ{Uint64,Uint32}
 const schema::Entity* GLuint64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2612,14 +2660,15 @@ const schema::Entity* GLuint64__P::StaticSchema() {
         "GLuint64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLuint64ᶜᵖ:
-// gles.GLuint64ᶜᵖ{$}
+// gles.GLuint64ᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLuint64__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2627,7 +2676,8 @@ const schema::Entity* GLuint64__CP::StaticSchema() {
         "GLuint64ᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2694,7 +2744,7 @@ const schema::Entity* GLuint__S::StaticSchema() {
 }
 
 // GLuintᵖ:
-// gles.GLuintᵖ{$}
+// gles.GLuintᵖ{Uint64,Uint32}
 const schema::Entity* GLuint__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2702,14 +2752,15 @@ const schema::Entity* GLuint__P::StaticSchema() {
         "GLuintᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // GLuintᶜᵖ:
-// gles.GLuintᶜᵖ{$}
+// gles.GLuintᶜᵖ{Uint64,Uint32}
 const schema::Entity* GLuint__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2717,7 +2768,8 @@ const schema::Entity* GLuint__CP::StaticSchema() {
         "GLuintᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -2739,7 +2791,7 @@ const schema::Entity* GLvoid__S::StaticSchema() {
 }
 
 // GLvoidᵖ:
-// gles.GLvoidᵖ{$}
+// gles.GLvoidᵖ{Uint64,Uint32}
 const schema::Entity* GLvoid__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -2747,7 +2799,8 @@ const schema::Entity* GLvoid__P::StaticSchema() {
         "GLvoidᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -4098,7 +4151,7 @@ const schema::Entity* GlBufferData::StaticSchema() {
 }
 
 // Voidᶜᵖ:
-// gles.Voidᶜᵖ{$}
+// gles.Voidᶜᵖ{Uint64,Uint32}
 const schema::Entity* Void__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -4106,7 +4159,8 @@ const schema::Entity* Void__CP::StaticSchema() {
         "Voidᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -4988,7 +5042,7 @@ const schema::Entity* GlCompileShader::StaticSchema() {
 }
 
 // TexturePointer:
-// gles.TexturePointer{$}
+// gles.TexturePointer{Uint64,Uint32}
 const schema::Entity* TexturePointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -4996,7 +5050,8 @@ const schema::Entity* TexturePointer::StaticSchema() {
         "TexturePointer",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6265,7 +6320,7 @@ const schema::Entity* GlDeleteProgram::StaticSchema() {
 }
 
 // PipelineIdᶜᵖ:
-// gles.PipelineIdᶜᵖ{$}
+// gles.PipelineIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* PipelineId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6273,7 +6328,8 @@ const schema::Entity* PipelineId__CP::StaticSchema() {
         "PipelineIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6314,7 +6370,7 @@ const schema::Entity* GlDeleteProgramPipelinesEXT::StaticSchema() {
 }
 
 // QueryIdᶜᵖ:
-// gles.QueryIdᶜᵖ{$}
+// gles.QueryIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* QueryId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6322,7 +6378,8 @@ const schema::Entity* QueryId__CP::StaticSchema() {
         "QueryIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6363,7 +6420,7 @@ const schema::Entity* GlDeleteQueriesEXT::StaticSchema() {
 }
 
 // RenderbufferIdᶜᵖ:
-// gles.RenderbufferIdᶜᵖ{$}
+// gles.RenderbufferIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* RenderbufferId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6371,7 +6428,8 @@ const schema::Entity* RenderbufferId__CP::StaticSchema() {
         "RenderbufferIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6412,7 +6470,7 @@ const schema::Entity* GlDeleteRenderbuffersOES::StaticSchema() {
 }
 
 // SamplerIdᶜᵖ:
-// gles.SamplerIdᶜᵖ{$}
+// gles.SamplerIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* SamplerId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6420,7 +6478,8 @@ const schema::Entity* SamplerId__CP::StaticSchema() {
         "SamplerIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6492,7 +6551,7 @@ const schema::Entity* GlDeleteSyncAPPLE::StaticSchema() {
 }
 
 // TextureIdᶜᵖ:
-// gles.TextureIdᶜᵖ{$}
+// gles.TextureIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* TextureId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6500,7 +6559,8 @@ const schema::Entity* TextureId__CP::StaticSchema() {
         "TextureIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6524,7 +6584,7 @@ const schema::Entity* GlDeleteTextures::StaticSchema() {
 }
 
 // TransformFeedbackIdᶜᵖ:
-// gles.TransformFeedbackIdᶜᵖ{$}
+// gles.TransformFeedbackIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* TransformFeedbackId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6532,7 +6592,8 @@ const schema::Entity* TransformFeedbackId__CP::StaticSchema() {
         "TransformFeedbackIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -6556,7 +6617,7 @@ const schema::Entity* GlDeleteTransformFeedbacks::StaticSchema() {
 }
 
 // VertexArrayIdᶜᵖ:
-// gles.VertexArrayIdᶜᵖ{$}
+// gles.VertexArrayIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* VertexArrayId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -6564,7 +6625,8 @@ const schema::Entity* VertexArrayId__CP::StaticSchema() {
         "VertexArrayIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -7247,7 +7309,7 @@ const schema::Entity* GlDrawBuffersNV::StaticSchema() {
 }
 
 // IndicesPointer:
-// gles.IndicesPointer{$}
+// gles.IndicesPointer{Uint64,Uint32}
 const schema::Entity* IndicesPointer::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -7255,7 +7317,8 @@ const schema::Entity* IndicesPointer::StaticSchema() {
         "IndicesPointer",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -8304,7 +8367,7 @@ const schema::Entity* GlEndTransformFeedback::StaticSchema() {
 }
 
 // Voidᵖᵖ:
-// gles.Voidᵖᵖ{$}
+// gles.Voidᵖᵖ{Uint64,Uint32}
 const schema::Entity* Void__P__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -8312,7 +8375,8 @@ const schema::Entity* Void__P__P::StaticSchema() {
         "Voidᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -8419,7 +8483,7 @@ const schema::Entity* GlExtGetProgramBinarySourceQCOM::StaticSchema() {
 }
 
 // ProgramIdᵖ:
-// gles.ProgramIdᵖ{$}
+// gles.ProgramIdᵖ{Uint64,Uint32}
 const schema::Entity* ProgramId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -8427,7 +8491,8 @@ const schema::Entity* ProgramId__P::StaticSchema() {
         "ProgramIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -8461,7 +8526,7 @@ const schema::Entity* GlExtGetProgramsQCOM::StaticSchema() {
 }
 
 // RenderbufferIdᵖ:
-// gles.RenderbufferIdᵖ{$}
+// gles.RenderbufferIdᵖ{Uint64,Uint32}
 const schema::Entity* RenderbufferId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -8469,7 +8534,8 @@ const schema::Entity* RenderbufferId__P::StaticSchema() {
         "RenderbufferIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -8503,7 +8569,7 @@ const schema::Entity* GlExtGetRenderbuffersQCOM::StaticSchema() {
 }
 
 // ShaderIdᵖ:
-// gles.ShaderIdᵖ{$}
+// gles.ShaderIdᵖ{Uint64,Uint32}
 const schema::Entity* ShaderId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -8511,7 +8577,8 @@ const schema::Entity* ShaderId__P::StaticSchema() {
         "ShaderIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -8619,7 +8686,7 @@ const schema::Entity* GlExtGetTexSubImageQCOM::StaticSchema() {
 }
 
 // TextureIdᵖ:
-// gles.TextureIdᵖ{$}
+// gles.TextureIdᵖ{Uint64,Uint32}
 const schema::Entity* TextureId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -8627,7 +8694,8 @@ const schema::Entity* TextureId__P::StaticSchema() {
         "TextureIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -9653,7 +9721,7 @@ const schema::Entity* GlGenPerfMonitorsAMD::StaticSchema() {
 }
 
 // PipelineIdᵖ:
-// gles.PipelineIdᵖ{$}
+// gles.PipelineIdᵖ{Uint64,Uint32}
 const schema::Entity* PipelineId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -9661,7 +9729,8 @@ const schema::Entity* PipelineId__P::StaticSchema() {
         "PipelineIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -9702,7 +9771,7 @@ const schema::Entity* GlGenProgramPipelinesEXT::StaticSchema() {
 }
 
 // QueryIdᵖ:
-// gles.QueryIdᵖ{$}
+// gles.QueryIdᵖ{Uint64,Uint32}
 const schema::Entity* QueryId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -9710,7 +9779,8 @@ const schema::Entity* QueryId__P::StaticSchema() {
         "QueryIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -9785,7 +9855,7 @@ const schema::Entity* GlGenRenderbuffersOES::StaticSchema() {
 }
 
 // SamplerIdᵖ:
-// gles.SamplerIdᵖ{$}
+// gles.SamplerIdᵖ{Uint64,Uint32}
 const schema::Entity* SamplerId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -9793,7 +9863,8 @@ const schema::Entity* SamplerId__P::StaticSchema() {
         "SamplerIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -9834,7 +9905,7 @@ const schema::Entity* GlGenTextures::StaticSchema() {
 }
 
 // TransformFeedbackIdᵖ:
-// gles.TransformFeedbackIdᵖ{$}
+// gles.TransformFeedbackIdᵖ{Uint64,Uint32}
 const schema::Entity* TransformFeedbackId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -9842,7 +9913,8 @@ const schema::Entity* TransformFeedbackId__P::StaticSchema() {
         "TransformFeedbackIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -9866,7 +9938,7 @@ const schema::Entity* GlGenTransformFeedbacks::StaticSchema() {
 }
 
 // VertexArrayIdᵖ:
-// gles.VertexArrayIdᵖ{$}
+// gles.VertexArrayIdᵖ{Uint64,Uint32}
 const schema::Entity* VertexArrayId__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -9874,7 +9946,8 @@ const schema::Entity* VertexArrayId__P::StaticSchema() {
         "VertexArrayIdᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -10077,7 +10150,7 @@ const schema::Entity* GlGetActiveUniformBlockiv::StaticSchema() {
 }
 
 // UniformIndexᶜᵖ:
-// gles.UniformIndexᶜᵖ{$}
+// gles.UniformIndexᶜᵖ{Uint64,Uint32}
 const schema::Entity* UniformIndex__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -10085,7 +10158,8 @@ const schema::Entity* UniformIndex__CP::StaticSchema() {
         "UniformIndexᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -12490,7 +12564,7 @@ const schema::Entity* GlGetProgramiv::StaticSchema() {
 }
 
 // S64ᵖ:
-// gles.S64ᵖ{$}
+// gles.S64ᵖ{Uint64,Uint32}
 const schema::Entity* S64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -12498,7 +12572,8 @@ const schema::Entity* S64__P::StaticSchema() {
         "S64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -12586,7 +12661,7 @@ const schema::Entity* GlGetQueryObjectivEXT::StaticSchema() {
 }
 
 // U64ᵖ:
-// gles.U64ᵖ{$}
+// gles.U64ᵖ{Uint64,Uint32}
 const schema::Entity* U64__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -12594,7 +12669,8 @@ const schema::Entity* U64__P::StaticSchema() {
         "U64ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -13905,7 +13981,7 @@ const schema::Entity* GlGetUniformBlockIndex::StaticSchema() {
 }
 
 // UniformIndexᵖ:
-// gles.UniformIndexᵖ{$}
+// gles.UniformIndexᵖ{Uint64,Uint32}
 const schema::Entity* UniformIndex__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -13913,7 +13989,8 @@ const schema::Entity* UniformIndex__P::StaticSchema() {
         "UniformIndexᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -16223,7 +16300,7 @@ const schema::Entity* GlMultiDrawArraysIndirectEXT::StaticSchema() {
 }
 
 // Voidᶜᵖᶜᵖ:
-// gles.Voidᶜᵖᶜᵖ{$}
+// gles.Voidᶜᵖᶜᵖ{Uint64,Uint32}
 const schema::Entity* Void__CP__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -16231,7 +16308,8 @@ const schema::Entity* Void__CP__CP::StaticSchema() {
         "Voidᶜᵖᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -21482,7 +21560,7 @@ const schema::Entity* GlShadeModel::StaticSchema() {
 }
 
 // ShaderIdᶜᵖ:
-// gles.ShaderIdᶜᵖ{$}
+// gles.ShaderIdᶜᵖ{Uint64,Uint32}
 const schema::Entity* ShaderId__CP::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -21490,7 +21568,8 @@ const schema::Entity* ShaderId__CP::StaticSchema() {
         "ShaderIdᶜᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26097,7 +26176,7 @@ const schema::Entity* GlXMakeCurrent::StaticSchema() {
 }
 
 // Intᵖ:
-// gles.Intᵖ{$}
+// gles.Intᵖ{Uint64,Uint32}
 const schema::Entity* Int__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26105,7 +26184,8 @@ const schema::Entity* Int__P::StaticSchema() {
         "Intᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26160,7 +26240,7 @@ const schema::Entity* GlXSwapBuffers::StaticSchema() {
 }
 
 // HDC:
-// gles.HDC{$}
+// gles.HDC{Uint64,Uint32}
 const schema::Entity* HDC::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26168,14 +26248,15 @@ const schema::Entity* HDC::StaticSchema() {
         "HDC",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
 }
 
 // HGLRC:
-// gles.HGLRC{$}
+// gles.HGLRC{Uint64,Uint32}
 const schema::Entity* HGLRC::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26183,7 +26264,8 @@ const schema::Entity* HGLRC::StaticSchema() {
         "HGLRC",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26250,7 +26332,7 @@ const schema::Entity* Mat2f__S::StaticSchema() {
 }
 
 // Mat2fᵖ:
-// gles.Mat2fᵖ{$}
+// gles.Mat2fᵖ{Uint64,Uint32}
 const schema::Entity* Mat2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26258,7 +26340,8 @@ const schema::Entity* Mat2f__P::StaticSchema() {
         "Mat2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26310,7 +26393,7 @@ const schema::Entity* Mat2x3f__S::StaticSchema() {
 }
 
 // Mat2x3fᵖ:
-// gles.Mat2x3fᵖ{$}
+// gles.Mat2x3fᵖ{Uint64,Uint32}
 const schema::Entity* Mat2x3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26318,7 +26401,8 @@ const schema::Entity* Mat2x3f__P::StaticSchema() {
         "Mat2x3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26370,7 +26454,7 @@ const schema::Entity* Mat2x4f__S::StaticSchema() {
 }
 
 // Mat2x4fᵖ:
-// gles.Mat2x4fᵖ{$}
+// gles.Mat2x4fᵖ{Uint64,Uint32}
 const schema::Entity* Mat2x4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26378,7 +26462,8 @@ const schema::Entity* Mat2x4f__P::StaticSchema() {
         "Mat2x4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26415,7 +26500,7 @@ const schema::Entity* Mat3f__S::StaticSchema() {
 }
 
 // Mat3fᵖ:
-// gles.Mat3fᵖ{$}
+// gles.Mat3fᵖ{Uint64,Uint32}
 const schema::Entity* Mat3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26423,7 +26508,8 @@ const schema::Entity* Mat3f__P::StaticSchema() {
         "Mat3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26460,7 +26546,7 @@ const schema::Entity* Mat3x2f__S::StaticSchema() {
 }
 
 // Mat3x2fᵖ:
-// gles.Mat3x2fᵖ{$}
+// gles.Mat3x2fᵖ{Uint64,Uint32}
 const schema::Entity* Mat3x2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26468,7 +26554,8 @@ const schema::Entity* Mat3x2f__P::StaticSchema() {
         "Mat3x2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26505,7 +26592,7 @@ const schema::Entity* Mat3x4f__S::StaticSchema() {
 }
 
 // Mat3x4fᵖ:
-// gles.Mat3x4fᵖ{$}
+// gles.Mat3x4fᵖ{Uint64,Uint32}
 const schema::Entity* Mat3x4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26513,7 +26600,8 @@ const schema::Entity* Mat3x4f__P::StaticSchema() {
         "Mat3x4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26550,7 +26638,7 @@ const schema::Entity* Mat4f__S::StaticSchema() {
 }
 
 // Mat4fᵖ:
-// gles.Mat4fᵖ{$}
+// gles.Mat4fᵖ{Uint64,Uint32}
 const schema::Entity* Mat4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26558,7 +26646,8 @@ const schema::Entity* Mat4f__P::StaticSchema() {
         "Mat4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26595,7 +26684,7 @@ const schema::Entity* Mat4x2f__S::StaticSchema() {
 }
 
 // Mat4x2fᵖ:
-// gles.Mat4x2fᵖ{$}
+// gles.Mat4x2fᵖ{Uint64,Uint32}
 const schema::Entity* Mat4x2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26603,7 +26692,8 @@ const schema::Entity* Mat4x2f__P::StaticSchema() {
         "Mat4x2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26640,7 +26730,7 @@ const schema::Entity* Mat4x3f__S::StaticSchema() {
 }
 
 // Mat4x3fᵖ:
-// gles.Mat4x3fᵖ{$}
+// gles.Mat4x3fᵖ{Uint64,Uint32}
 const schema::Entity* Mat4x3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26648,7 +26738,8 @@ const schema::Entity* Mat4x3f__P::StaticSchema() {
         "Mat4x3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -26969,7 +27060,7 @@ const schema::Entity* U16__S::StaticSchema() {
 }
 
 // U16ᵖ:
-// gles.U16ᵖ{$}
+// gles.U16ᵖ{Uint64,Uint32}
 const schema::Entity* U16__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -26977,7 +27068,8 @@ const schema::Entity* U16__P::StaticSchema() {
         "U16ᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27089,7 +27181,7 @@ const schema::Entity* Vec2f__S::StaticSchema() {
 }
 
 // Vec2fᵖ:
-// gles.Vec2fᵖ{$}
+// gles.Vec2fᵖ{Uint64,Uint32}
 const schema::Entity* Vec2f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27097,7 +27189,8 @@ const schema::Entity* Vec2f__P::StaticSchema() {
         "Vec2fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27134,7 +27227,7 @@ const schema::Entity* Vec2i__S::StaticSchema() {
 }
 
 // Vec2iᵖ:
-// gles.Vec2iᵖ{$}
+// gles.Vec2iᵖ{Uint64,Uint32}
 const schema::Entity* Vec2i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27142,7 +27235,8 @@ const schema::Entity* Vec2i__P::StaticSchema() {
         "Vec2iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27179,7 +27273,7 @@ const schema::Entity* Vec2u__S::StaticSchema() {
 }
 
 // Vec2uᵖ:
-// gles.Vec2uᵖ{$}
+// gles.Vec2uᵖ{Uint64,Uint32}
 const schema::Entity* Vec2u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27187,7 +27281,8 @@ const schema::Entity* Vec2u__P::StaticSchema() {
         "Vec2uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27254,7 +27349,7 @@ const schema::Entity* Vec3f__S::StaticSchema() {
 }
 
 // Vec3fᵖ:
-// gles.Vec3fᵖ{$}
+// gles.Vec3fᵖ{Uint64,Uint32}
 const schema::Entity* Vec3f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27262,7 +27357,8 @@ const schema::Entity* Vec3f__P::StaticSchema() {
         "Vec3fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27299,7 +27395,7 @@ const schema::Entity* Vec3i__S::StaticSchema() {
 }
 
 // Vec3iᵖ:
-// gles.Vec3iᵖ{$}
+// gles.Vec3iᵖ{Uint64,Uint32}
 const schema::Entity* Vec3i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27307,7 +27403,8 @@ const schema::Entity* Vec3i__P::StaticSchema() {
         "Vec3iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27344,7 +27441,7 @@ const schema::Entity* Vec3u__S::StaticSchema() {
 }
 
 // Vec3uᵖ:
-// gles.Vec3uᵖ{$}
+// gles.Vec3uᵖ{Uint64,Uint32}
 const schema::Entity* Vec3u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27352,7 +27449,8 @@ const schema::Entity* Vec3u__P::StaticSchema() {
         "Vec3uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27419,7 +27517,7 @@ const schema::Entity* Vec4f__S::StaticSchema() {
 }
 
 // Vec4fᵖ:
-// gles.Vec4fᵖ{$}
+// gles.Vec4fᵖ{Uint64,Uint32}
 const schema::Entity* Vec4f__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27427,7 +27525,8 @@ const schema::Entity* Vec4f__P::StaticSchema() {
         "Vec4fᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27464,7 +27563,7 @@ const schema::Entity* Vec4i__S::StaticSchema() {
 }
 
 // Vec4iᵖ:
-// gles.Vec4iᵖ{$}
+// gles.Vec4iᵖ{Uint64,Uint32}
 const schema::Entity* Vec4i__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27472,7 +27571,8 @@ const schema::Entity* Vec4i__P::StaticSchema() {
         "Vec4iᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27509,7 +27609,7 @@ const schema::Entity* Vec4u__S::StaticSchema() {
 }
 
 // Vec4uᵖ:
-// gles.Vec4uᵖ{$}
+// gles.Vec4uᵖ{Uint64,Uint32}
 const schema::Entity* Vec4u__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27517,7 +27617,8 @@ const schema::Entity* Vec4u__P::StaticSchema() {
         "Vec4uᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27554,7 +27655,7 @@ const schema::Entity* VertexBufferBindingIndex__S::StaticSchema() {
 }
 
 // VertexBufferBindingIndexᵖ:
-// gles.VertexBufferBindingIndexᵖ{$}
+// gles.VertexBufferBindingIndexᵖ{Uint64,Uint32}
 const schema::Entity* VertexBufferBindingIndex__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27562,7 +27663,8 @@ const schema::Entity* VertexBufferBindingIndex__P::StaticSchema() {
         "VertexBufferBindingIndexᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
@@ -27614,7 +27716,7 @@ const schema::Entity* Void__CP__S::StaticSchema() {
 }
 
 // Voidᶜᵖᵖ:
-// gles.Voidᶜᵖᵖ{$}
+// gles.Voidᶜᵖᵖ{Uint64,Uint32}
 const schema::Entity* Void__CP__P::StaticSchema() {
     static schema::Entity entity {
         "gles",
@@ -27622,7 +27724,8 @@ const schema::Entity* Void__CP__P::StaticSchema() {
         "Voidᶜᵖᵖ",
         "",
         {
-            schema::Field{"", new schema::Struct{ memory::Pointer::StaticSchema()}},
+            schema::Field{"Address", new schema::Primitive{"uint64", schema::Primitive::Uint64}},
+            schema::Field{"Pool", new schema::Primitive{"memory.PoolID", schema::Primitive::Uint32}},
         },
     };
     return &entity;
