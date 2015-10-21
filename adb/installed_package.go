@@ -64,7 +64,8 @@ func (p *InstalledPackage) String() string {
 func (p *InstalledPackage) wrapPropName() string {
 	name := "wrap." + p.Name
 	if len(name) > maxPropName {
-		name = name[:maxPropName]
+		// The property name must not end in dot
+		name = strings.TrimRight(name[:maxPropName], ".")
 	}
 	return name
 }
