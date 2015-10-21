@@ -16,6 +16,5 @@ package ndk
 
 const (
 	ndkAndroidVersion = 21
-	ndkBuildTools     = "20.0.0"
 	minSdkVersion     = 18
 )

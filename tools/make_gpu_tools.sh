@@ -23,6 +23,7 @@ fi
 
 run_integration_tests=0
 use_xvfb=0
+build_pkginfo_apk=1
 
 BUILD_NUMBER="SNAPSHOT-"`date "+%Y-%m-%dT%H:%M:%S%z"`
 BUILD_FLAVOR="release"
@@ -38,6 +39,7 @@ function show_help {
   echo "  -f <release|debug> Sets the build flavor."
   echo "  -h    Show this message."
   echo "  -i    Run integration tests."
+  echo "  -p    Do NOT build the pkginfo APK."
   echo "  -w    Do NOT cross-compile the server for Windows."
   echo "  -x    Start an Xvfb-randr server for running integration tests"
   echo "        without an X server."
@@ -55,6 +57,8 @@ while getopts "b:d:f:h?iwx" opt; do
         exit 0
         ;;
     i)  run_integration_tests=1
+        ;;
+    p)  build_pkginfo_apk=0
         ;;
     w)  crosscompile_windows=0
         ;;
@@ -102,6 +106,10 @@ if [ ! -z $XVFB_PID ]; then
 fi
 
 killall gapir || true
+
+if [ $build_pkginfo_apk -eq 1 ]; then
+  go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 --disable=code pkginfo
+fi
 
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/make.go -f -v=1 -targetos=windows --disable=code cc:gapir

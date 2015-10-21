@@ -18,8 +18,6 @@ import (
 	"flag"
 	"strings"
 
-	"os"
-
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/maker/build"
 	"android.googlesource.com/platform/tools/gpu/maker/config"
@@ -382,41 +380,40 @@ func Graph() {
 			}).Build(env)
 		}
 	}
-	if os.Getenv("ANDROID_NDK_ROOT") != "" {
-		// A bit of the Android crazy linker from the NDK. This is used to
-		// relink the program to use spy interceptors on non-rooted devices.
-		crazy := CCRoot.Join("ndk", "crazy_linker", "src")
-		crazy_source := build.FileSet{
-			crazy.Join("crazy_linker_elf_symbols.cpp"),
-			crazy.Join("crazy_linker_elf_view.cpp"),
-			crazy.Join("crazy_linker_error.cpp"),
-			crazy.Join("linker_phdr.cpp"),
-		}
 
-		app_glue := CCRoot.Join("ndk", "native_app_glue")
-
-		android_target := Target{
-			GapicTests: cpp.Config{
-				Toolchain: ndk.EXE,
-				Libraries: build.FileSet{"log", "android", "z", "m"},
-			},
-			GapirTests: cpp.Config{
-				Toolchain: ndk.EXE,
-				Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
-			},
-			Replayd: cpp.Config{
-				Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
-				IncludeSearchPaths: build.FileSet{app_glue.Join()},
-				AdditionalSources:  build.FileSet{app_glue.Join("android_native_app_glue.c")},
-			},
-			Spy: cpp.Config{
-				Libraries:          build.FileSet{"log", "z", "m", "dl"},
-				IncludeSearchPaths: build.FileSet{crazy},
-				AdditionalSources: crazy_source.Append(
-					GapiiRoot.Join("android", "link_interceptor.cpp")),
-			},
-		}
-		base(ndk.APK, config.GetABI(config.Android, config.Arm)).Extend(android_target).Build(env)
-		base(ndk.APK, config.GetABI(config.Android, config.Arm64)).Extend(android_target).Build(env)
+	// A bit of the Android crazy linker from the NDK. This is used to
+	// relink the program to use spy interceptors on non-rooted devices.
+	crazy := CCRoot.Join("ndk", "crazy_linker", "src")
+	crazy_source := build.FileSet{
+		crazy.Join("crazy_linker_elf_symbols.cpp"),
+		crazy.Join("crazy_linker_elf_view.cpp"),
+		crazy.Join("crazy_linker_error.cpp"),
+		crazy.Join("linker_phdr.cpp"),
 	}
+
+	app_glue := CCRoot.Join("ndk", "native_app_glue")
+
+	android_target := Target{
+		GapicTests: cpp.Config{
+			Toolchain: ndk.EXE,
+			Libraries: build.FileSet{"log", "android", "z", "m"},
+		},
+		GapirTests: cpp.Config{
+			Toolchain: ndk.EXE,
+			Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
+		},
+		Replayd: cpp.Config{
+			Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
+			IncludeSearchPaths: build.FileSet{app_glue.Join()},
+			AdditionalSources:  build.FileSet{app_glue.Join("android_native_app_glue.c")},
+		},
+		Spy: cpp.Config{
+			Libraries:          build.FileSet{"log", "z", "m", "dl"},
+			IncludeSearchPaths: build.FileSet{crazy},
+			AdditionalSources: crazy_source.Append(
+				GapiiRoot.Join("android", "link_interceptor.cpp")),
+		},
+	}
+	base(ndk.APK, config.GetABI(config.Android, config.Arm)).Extend(android_target).Build(env)
+	base(ndk.APK, config.GetABI(config.Android, config.Arm64)).Extend(android_target).Build(env)
 }

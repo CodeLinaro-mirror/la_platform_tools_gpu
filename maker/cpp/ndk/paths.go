@@ -24,8 +24,6 @@ import (
 
 // Settings for the particular SDK/NDK build/platform we're using.
 const (
-	ndkEnvVar  = "ANDROID_NDK_ROOT"
-	sdkEnvVar  = "ANDROID_HOME"
 	javaEnvVar = "JAVA_HOME"
 )
 
@@ -34,6 +32,7 @@ const (
 var Paths = struct {
 	NDK        build.File // The Android NDK root directory.
 	SDK        build.File // The Android SDK root directory.
+	GCC        build.File // The Android NDK gcc directory.
 	Jarsigner  build.File // The jarsigner executable path.
 	AAPT       build.File // The Android SDK aapt executable path.
 	Zipalign   build.File // The Android SDK zipalign executable path.
@@ -53,14 +52,25 @@ func resolveEnvVarDir(env string) (build.File, error) {
 }
 
 func init() {
-	// Uses the system environment variables to find all the NDK, SDK
-	// and Java directories and executables required by the NDK toolchain.
+	// Uses the system environment variable to find the Java directory and the
+	// prebuilts to find the NDK/SDK toolchain.
 
-	var err error
-	// Resolve root directories from environment variables
-	Paths.NDK, err = resolveEnvVarDir(ndkEnvVar)
-	if err != nil {
-		// NDK not set, disable android ta
+	// Resolve the prebuilt SDK & NDK directories.
+	Paths.SDK = build.RepoRoot.Path.Join("prebuilts", "fullsdk")
+	Paths.NDK = build.RepoRoot.Path.Join("prebuilts", "ndk", "current")
+	ndkBuildTools := ""
+	switch config.HostOS {
+	case config.Linux:
+		Paths.GCC = build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86")
+		ndkBuildTools = fmt.Sprintf("%v-linux", ndkAndroidVersion)
+
+	case config.OSX:
+		Paths.GCC = build.RepoRoot.Path.Join("prebuilts", "gcc", "darwin-x86")
+		ndkBuildTools = fmt.Sprintf("%v-darwin", ndkAndroidVersion)
+	}
+
+	if !Paths.NDK.Exists() || !Paths.SDK.Exists() || !Paths.GCC.Exists() {
+		// NDK not found, disable android ta
 		for _, abi := range config.ABIs {
 			if abi.OS == config.Android {
 				abi.Disabled = true
@@ -68,10 +78,8 @@ func init() {
 		}
 		return
 	}
-	Paths.SDK, err = resolveEnvVarDir(sdkEnvVar)
-	if err != nil {
-		panic(err)
-	}
+
+	// Resolve Java root directory from environment variable.
 	java, err := resolveEnvVarDir(javaEnvVar)
 	if err != nil {
 		panic(err)

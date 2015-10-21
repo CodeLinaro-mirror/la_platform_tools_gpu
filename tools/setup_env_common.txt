@@ -14,3 +14,6 @@ GPU_RELATIVE_SOURCE_PATH=android.googlesource.com/platform/tools/gpu
 
 # Add the tools we build to the path.
 export PATH=$GPU_BUILD_ROOT/bin:$PATH
+
+# Use the prebuilts SDK.
+export ANDROID_HOME=$REPO_ROOT/prebuilts/fullsdk
