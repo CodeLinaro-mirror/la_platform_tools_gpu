@@ -179,7 +179,6 @@ func (s *substack) pushCount(count uint32) error {
 // is returned if the stack is empty.
 func (s *substack) popType() (binary.SubspaceType, error) {
 	if len(s.stack) == 0 {
-		panic(fmt.Errorf("Pop on empty subtype Entity stack"))
 		return nil, fmt.Errorf("Pop on empty subtype Entity stack")
 	}
 	head := s.stack[len(s.stack)-1]
